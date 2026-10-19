@@ -1,0 +1,1589 @@
+{
+  "status": "AC29_SHARED_GROUP_CREATE_INSTALLED_SAVED_REOPENED_AUDIT_PASS",
+  "nativeOperationCodeRevision": "51acd9db7f0a8da4cb5d22f01722abd5ae79f248",
+  "nativeCommand": "AddOn.TapirCommand.CreateNativeGroupV1",
+  "groupId": "fc0ee2e1-4351-4ae9-8039-e4234d7036e5",
+  "memberGuids": [
+    "6d8fd777-f320-43c8-84ce-4d4bc7d65351",
+    "c8df0060-9629-4827-91d2-8448667abff3"
+  ],
+  "baselineGuidCount": 188,
+  "finalGuidCount": 188,
+  "allPhysicalGuidGeometryAndMaterialsPreserved": true,
+  "unchangedSemanticSHA256": "822f3f843cb43dfea36edfedcaeff0ef8a51d685fed57290c1b8d91af100623c",
+  "otherColumnGroupsUnchanged": true,
+  "originalColumnGroupRootRecords": 80,
+  "sourceFacts": {
+    "6d8fd777-f320-43c8-84ce-4d4bc7d65351": {
+      "anchor": {
+        "x": 2315.35,
+        "y": 1315.35,
+        "z": 0
+      },
+      "childGuids": [
+        "2730679d-ebb8-4b49-83d7-848fbf71442c"
+      ],
+      "solid": {
+        "children": [
+          {
+            "BREP": [
+              {
+                "bodyProperties": {
+                  "closed": true,
+                  "curved": false,
+                  "status": 1793,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  "vertexCoordinates": "ABSOLUTE_PROJECT_XYZ_METERS"
+                },
+                "edges": [
+                  {
+                    "endpoints": [
+                      [
+                        -0.125,
+                        -0.125,
+                        0
+                      ],
+                      [
+                        -0.125,
+                        -0.125,
+                        3
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        -0.125,
+                        -0.125,
+                        0
+                      ],
+                      [
+                        -0.125,
+                        0.125,
+                        0
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        -0.125,
+                        -0.125,
+                        0
+                      ],
+                      [
+                        0.125,
+                        -0.125,
+                        0
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        -0.125,
+                        -0.125,
+                        3
+                      ],
+                      [
+                        -0.125,
+                        0.125,
+                        3
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        -0.125,
+                        -0.125,
+                        3
+                      ],
+                      [
+                        0.125,
+                        -0.125,
+                        3
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        -0.125,
+                        0.125,
+                        0
+                      ],
+                      [
+                        -0.125,
+                        0.125,
+                        3
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        -0.125,
+                        0.125,
+                        0
+                      ],
+                      [
+                        0.125,
+                        0.125,
+                        0
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        -0.125,
+                        0.125,
+                        3
+                      ],
+                      [
+                        0.125,
+                        0.125,
+                        3
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        0.125,
+                        -0.125,
+                        0
+                      ],
+                      [
+                        0.125,
+                        -0.125,
+                        3
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        0.125,
+                        -0.125,
+                        0
+                      ],
+                      [
+                        0.125,
+                        0.125,
+                        0
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        0.125,
+                        -0.125,
+                        3
+                      ],
+                      [
+                        0.125,
+                        0.125,
+                        3
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        0.125,
+                        0.125,
+                        0
+                      ],
+                      [
+                        0.125,
+                        0.125,
+                        3
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  }
+                ],
+                "faces": [
+                  {
+                    "geometry": [
+                      [
+                        [
+                          -0.125,
+                          -0.125,
+                          0
+                        ],
+                        [
+                          -0.125,
+                          -0.125,
+                          3
+                        ],
+                        [
+                          -0.125,
+                          0.125,
+                          3
+                        ],
+                        [
+                          -0.125,
+                          0.125,
+                          0
+                        ]
+                      ],
+                      []
+                    ],
+                    "normal": [
+                      -1,
+                      0,
+                      0
+                    ],
+                    "properties": {
+                      "materialId": {
+                        "attribute": {
+                          "attributeIndex": 99,
+                          "attributeType": 5,
+                          "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                          "name": "Краска - Светло-Серая",
+                          "nativeField": "API_UmatType.mater.head.index"
+                        },
+                        "attributeIndex": 99,
+                        "color": {
+                          "b": 0.658823529,
+                          "g": 0.658823529,
+                          "r": 0.658823529
+                        },
+                        "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                        "name": "Краска - Светло-Серая",
+                        "nativeMaterialType": 0,
+                        "source": "attribute",
+                        "texture": {
+                          "missing": false,
+                          "name": "",
+                          "rotation": 0,
+                          "xSize": 0,
+                          "ySize": 0
+                        },
+                        "transparencyPercent": 0
+                      },
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "geometry": [
+                      [
+                        [
+                          -0.125,
+                          -0.125,
+                          0
+                        ],
+                        [
+                          -0.125,
+                          0.125,
+                          0
+                        ],
+                        [
+                          0.125,
+                          0.125,
+                          0
+                        ],
+                        [
+                          0.125,
+                          -0.125,
+                          0
+                        ]
+                      ],
+                      []
+                    ],
+                    "normal": [
+                      0,
+                      0,
+                      -1
+                    ],
+                    "properties": {
+                      "materialId": {
+                        "attribute": {
+                          "attributeIndex": 99,
+                          "attributeType": 5,
+                          "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                          "name": "Краска - Светло-Серая",
+                          "nativeField": "API_UmatType.mater.head.index"
+                        },
+                        "attributeIndex": 99,
+                        "color": {
+                          "b": 0.658823529,
+                          "g": 0.658823529,
+                          "r": 0.658823529
+                        },
+                        "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                        "name": "Краска - Светло-Серая",
+                        "nativeMaterialType": 0,
+                        "source": "attribute",
+                        "texture": {
+                          "missing": false,
+                          "name": "",
+                          "rotation": 0,
+                          "xSize": 0,
+                          "ySize": 0
+                        },
+                        "transparencyPercent": 0
+                      },
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "geometry": [
+                      [
+                        [
+                          -0.125,
+                          -0.125,
+                          0
+                        ],
+                        [
+                          0.125,
+                          -0.125,
+                          0
+                        ],
+                        [
+                          0.125,
+                          -0.125,
+                          3
+                        ],
+                        [
+                          -0.125,
+                          -0.125,
+                          3
+                        ]
+                      ],
+                      []
+                    ],
+                    "normal": [
+                      0,
+                      -1,
+                      0
+                    ],
+                    "properties": {
+                      "materialId": {
+                        "attribute": {
+                          "attributeIndex": 99,
+                          "attributeType": 5,
+                          "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                          "name": "Краска - Светло-Серая",
+                          "nativeField": "API_UmatType.mater.head.index"
+                        },
+                        "attributeIndex": 99,
+                        "color": {
+                          "b": 0.658823529,
+                          "g": 0.658823529,
+                          "r": 0.658823529
+                        },
+                        "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                        "name": "Краска - Светло-Серая",
+                        "nativeMaterialType": 0,
+                        "source": "attribute",
+                        "texture": {
+                          "missing": false,
+                          "name": "",
+                          "rotation": 0,
+                          "xSize": 0,
+                          "ySize": 0
+                        },
+                        "transparencyPercent": 0
+                      },
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "geometry": [
+                      [
+                        [
+                          -0.125,
+                          -0.125,
+                          3
+                        ],
+                        [
+                          0.125,
+                          -0.125,
+                          3
+                        ],
+                        [
+                          0.125,
+                          0.125,
+                          3
+                        ],
+                        [
+                          -0.125,
+                          0.125,
+                          3
+                        ]
+                      ],
+                      []
+                    ],
+                    "normal": [
+                      0,
+                      0,
+                      1
+                    ],
+                    "properties": {
+                      "materialId": {
+                        "attribute": {
+                          "attributeIndex": 99,
+                          "attributeType": 5,
+                          "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                          "name": "Краска - Светло-Серая",
+                          "nativeField": "API_UmatType.mater.head.index"
+                        },
+                        "attributeIndex": 99,
+                        "color": {
+                          "b": 0.658823529,
+                          "g": 0.658823529,
+                          "r": 0.658823529
+                        },
+                        "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                        "name": "Краска - Светло-Серая",
+                        "nativeMaterialType": 0,
+                        "source": "attribute",
+                        "texture": {
+                          "missing": false,
+                          "name": "",
+                          "rotation": 0,
+                          "xSize": 0,
+                          "ySize": 0
+                        },
+                        "transparencyPercent": 0
+                      },
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "geometry": [
+                      [
+                        [
+                          -0.125,
+                          0.125,
+                          0
+                        ],
+                        [
+                          -0.125,
+                          0.125,
+                          3
+                        ],
+                        [
+                          0.125,
+                          0.125,
+                          3
+                        ],
+                        [
+                          0.125,
+                          0.125,
+                          0
+                        ]
+                      ],
+                      []
+                    ],
+                    "normal": [
+                      0,
+                      1,
+                      0
+                    ],
+                    "properties": {
+                      "materialId": {
+                        "attribute": {
+                          "attributeIndex": 99,
+                          "attributeType": 5,
+                          "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                          "name": "Краска - Светло-Серая",
+                          "nativeField": "API_UmatType.mater.head.index"
+                        },
+                        "attributeIndex": 99,
+                        "color": {
+                          "b": 0.658823529,
+                          "g": 0.658823529,
+                          "r": 0.658823529
+                        },
+                        "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                        "name": "Краска - Светло-Серая",
+                        "nativeMaterialType": 0,
+                        "source": "attribute",
+                        "texture": {
+                          "missing": false,
+                          "name": "",
+                          "rotation": 0,
+                          "xSize": 0,
+                          "ySize": 0
+                        },
+                        "transparencyPercent": 0
+                      },
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "geometry": [
+                      [
+                        [
+                          0.125,
+                          -0.125,
+                          0
+                        ],
+                        [
+                          0.125,
+                          0.125,
+                          0
+                        ],
+                        [
+                          0.125,
+                          0.125,
+                          3
+                        ],
+                        [
+                          0.125,
+                          -0.125,
+                          3
+                        ]
+                      ],
+                      []
+                    ],
+                    "normal": [
+                      1,
+                      0,
+                      0
+                    ],
+                    "properties": {
+                      "materialId": {
+                        "attribute": {
+                          "attributeIndex": 99,
+                          "attributeType": 5,
+                          "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                          "name": "Краска - Светло-Серая",
+                          "nativeField": "API_UmatType.mater.head.index"
+                        },
+                        "attributeIndex": 99,
+                        "color": {
+                          "b": 0.658823529,
+                          "g": 0.658823529,
+                          "r": 0.658823529
+                        },
+                        "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                        "name": "Краска - Светло-Серая",
+                        "nativeMaterialType": 0,
+                        "source": "attribute",
+                        "texture": {
+                          "missing": false,
+                          "name": "",
+                          "rotation": 0,
+                          "xSize": 0,
+                          "ySize": 0
+                        },
+                        "transparencyPercent": 0
+                      },
+                      "nativeStatus": 0
+                    }
+                  }
+                ],
+                "relativeVertices": [
+                  [
+                    -0.125,
+                    -0.125,
+                    0
+                  ],
+                  [
+                    -0.125,
+                    -0.125,
+                    3
+                  ],
+                  [
+                    -0.125,
+                    0.125,
+                    0
+                  ],
+                  [
+                    -0.125,
+                    0.125,
+                    3
+                  ],
+                  [
+                    0.125,
+                    -0.125,
+                    0
+                  ],
+                  [
+                    0.125,
+                    -0.125,
+                    3
+                  ],
+                  [
+                    0.125,
+                    0.125,
+                    0
+                  ],
+                  [
+                    0.125,
+                    0.125,
+                    3
+                  ]
+                ]
+              }
+            ],
+            "material": {
+              "api": "ACAPI_Element_Get",
+              "buildingMaterial": {
+                "attributeIndex": 59,
+                "attributeType": 12,
+                "defaultSurface": {
+                  "attributeIndex": 99,
+                  "attributeType": 5,
+                  "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                  "name": "Краска - Светло-Серая",
+                  "nativeField": "buildingMaterial.cutMaterial"
+                },
+                "guid": "922C639B-9875-48DF-A3FC-E0A8AC5F2839",
+                "name": "ОБЩИЙ - КОНСТРУКЦИОННЫЙ МАТЕРИАЛ",
+                "nativeField": "columnSegment.assemblySegmentData"
+              },
+              "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+              "endsMaterial": {
+                "attributeIndex": 0,
+                "attributeType": 5,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source",
+                "nativeField": "columnSegment.endsMaterial",
+                "overridden": false
+              },
+              "extrusionSurfaceMaterial": {
+                "attributeIndex": 0,
+                "attributeType": 5,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source",
+                "nativeField": "columnSegment.extrusionSurfaceMaterial",
+                "overridden": false
+              },
+              "structureType": 0
+            },
+            "type": "ColumnSegment"
+          }
+        ],
+        "rootBREP": [],
+        "rootMaterial": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "source": "SEGMENT_ATTRIBUTES"
+        },
+        "story": 0,
+        "type": "Column"
+      },
+      "type": "Column",
+      "typed": {
+        "details": {
+          "axisRotationAngle": 0,
+          "bottomOffset": 0,
+          "buildingMaterialId": {
+            "guid": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+          },
+          "circleBased": false,
+          "coreAnchor": "Center",
+          "coverFill": {
+            "backgroundPen": -1,
+            "fillId": {
+              "guid": "1D87AE9A-3C74-4A1A-BE7C-56B7651F0F3C"
+            },
+            "foregroundPen": 88,
+            "orientationComesFrom3D": false,
+            "transformation": {
+              "origin": {
+                "x": 0,
+                "y": 0
+              },
+              "xAxis": {
+                "x": 1,
+                "y": 0
+              },
+              "yAxis": {
+                "x": 0,
+                "y": 1
+              }
+            },
+            "transformationType": "Global",
+            "use": true,
+            "useFromSurface": false
+          },
+          "cutFillBackgroundPen": {
+            "overridden": false
+          },
+          "cutFillPen": {
+            "overridden": false
+          },
+          "depth": 0.25,
+          "height": 3,
+          "isFlipped": false,
+          "isSlanted": false,
+          "isWidthAndHeightLinked": false,
+          "origin": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "relativeTopStory": 0,
+          "slantAngle": 1.570796327,
+          "slantDirectionAngle": 0,
+          "topOffset": -0.2,
+          "width": 0.25,
+          "wrapping": false,
+          "zCoordinate": 0
+        },
+        "floorIndex": 0,
+        "type": "Column"
+      }
+    },
+    "c8df0060-9629-4827-91d2-8448667abff3": {
+      "anchor": {
+        "x": 2340.35,
+        "y": 1315.35,
+        "z": 0
+      },
+      "childGuids": [
+        "9c675a15-8b2b-4ed1-a89b-b684dce705aa"
+      ],
+      "solid": {
+        "children": [
+          {
+            "BREP": [
+              {
+                "bodyProperties": {
+                  "closed": true,
+                  "curved": false,
+                  "status": 1793,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  "vertexCoordinates": "ABSOLUTE_PROJECT_XYZ_METERS"
+                },
+                "edges": [
+                  {
+                    "endpoints": [
+                      [
+                        -0.125,
+                        -0.125,
+                        0
+                      ],
+                      [
+                        -0.125,
+                        -0.125,
+                        3
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        -0.125,
+                        -0.125,
+                        0
+                      ],
+                      [
+                        -0.125,
+                        0.125,
+                        0
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        -0.125,
+                        -0.125,
+                        0
+                      ],
+                      [
+                        0.125,
+                        -0.125,
+                        0
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        -0.125,
+                        -0.125,
+                        3
+                      ],
+                      [
+                        -0.125,
+                        0.125,
+                        3
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        -0.125,
+                        -0.125,
+                        3
+                      ],
+                      [
+                        0.125,
+                        -0.125,
+                        3
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        -0.125,
+                        0.125,
+                        0
+                      ],
+                      [
+                        -0.125,
+                        0.125,
+                        3
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        -0.125,
+                        0.125,
+                        0
+                      ],
+                      [
+                        0.125,
+                        0.125,
+                        0
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        -0.125,
+                        0.125,
+                        3
+                      ],
+                      [
+                        0.125,
+                        0.125,
+                        3
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        0.125,
+                        -0.125,
+                        0
+                      ],
+                      [
+                        0.125,
+                        -0.125,
+                        3
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        0.125,
+                        -0.125,
+                        0
+                      ],
+                      [
+                        0.125,
+                        0.125,
+                        0
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        0.125,
+                        -0.125,
+                        3
+                      ],
+                      [
+                        0.125,
+                        0.125,
+                        3
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "endpoints": [
+                      [
+                        0.125,
+                        0.125,
+                        0
+                      ],
+                      [
+                        0.125,
+                        0.125,
+                        3
+                      ]
+                    ],
+                    "properties": {
+                      "nativeStatus": 0
+                    }
+                  }
+                ],
+                "faces": [
+                  {
+                    "geometry": [
+                      [
+                        [
+                          -0.125,
+                          -0.125,
+                          0
+                        ],
+                        [
+                          -0.125,
+                          -0.125,
+                          3
+                        ],
+                        [
+                          -0.125,
+                          0.125,
+                          3
+                        ],
+                        [
+                          -0.125,
+                          0.125,
+                          0
+                        ]
+                      ],
+                      []
+                    ],
+                    "normal": [
+                      -1,
+                      0,
+                      0
+                    ],
+                    "properties": {
+                      "materialId": {
+                        "attribute": {
+                          "attributeIndex": 99,
+                          "attributeType": 5,
+                          "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                          "name": "Краска - Светло-Серая",
+                          "nativeField": "API_UmatType.mater.head.index"
+                        },
+                        "attributeIndex": 99,
+                        "color": {
+                          "b": 0.658823529,
+                          "g": 0.658823529,
+                          "r": 0.658823529
+                        },
+                        "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                        "name": "Краска - Светло-Серая",
+                        "nativeMaterialType": 0,
+                        "source": "attribute",
+                        "texture": {
+                          "missing": false,
+                          "name": "",
+                          "rotation": 0,
+                          "xSize": 0,
+                          "ySize": 0
+                        },
+                        "transparencyPercent": 0
+                      },
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "geometry": [
+                      [
+                        [
+                          -0.125,
+                          -0.125,
+                          0
+                        ],
+                        [
+                          -0.125,
+                          0.125,
+                          0
+                        ],
+                        [
+                          0.125,
+                          0.125,
+                          0
+                        ],
+                        [
+                          0.125,
+                          -0.125,
+                          0
+                        ]
+                      ],
+                      []
+                    ],
+                    "normal": [
+                      0,
+                      0,
+                      -1
+                    ],
+                    "properties": {
+                      "materialId": {
+                        "attribute": {
+                          "attributeIndex": 99,
+                          "attributeType": 5,
+                          "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                          "name": "Краска - Светло-Серая",
+                          "nativeField": "API_UmatType.mater.head.index"
+                        },
+                        "attributeIndex": 99,
+                        "color": {
+                          "b": 0.658823529,
+                          "g": 0.658823529,
+                          "r": 0.658823529
+                        },
+                        "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                        "name": "Краска - Светло-Серая",
+                        "nativeMaterialType": 0,
+                        "source": "attribute",
+                        "texture": {
+                          "missing": false,
+                          "name": "",
+                          "rotation": 0,
+                          "xSize": 0,
+                          "ySize": 0
+                        },
+                        "transparencyPercent": 0
+                      },
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "geometry": [
+                      [
+                        [
+                          -0.125,
+                          -0.125,
+                          0
+                        ],
+                        [
+                          0.125,
+                          -0.125,
+                          0
+                        ],
+                        [
+                          0.125,
+                          -0.125,
+                          3
+                        ],
+                        [
+                          -0.125,
+                          -0.125,
+                          3
+                        ]
+                      ],
+                      []
+                    ],
+                    "normal": [
+                      0,
+                      -1,
+                      0
+                    ],
+                    "properties": {
+                      "materialId": {
+                        "attribute": {
+                          "attributeIndex": 99,
+                          "attributeType": 5,
+                          "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                          "name": "Краска - Светло-Серая",
+                          "nativeField": "API_UmatType.mater.head.index"
+                        },
+                        "attributeIndex": 99,
+                        "color": {
+                          "b": 0.658823529,
+                          "g": 0.658823529,
+                          "r": 0.658823529
+                        },
+                        "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                        "name": "Краска - Светло-Серая",
+                        "nativeMaterialType": 0,
+                        "source": "attribute",
+                        "texture": {
+                          "missing": false,
+                          "name": "",
+                          "rotation": 0,
+                          "xSize": 0,
+                          "ySize": 0
+                        },
+                        "transparencyPercent": 0
+                      },
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "geometry": [
+                      [
+                        [
+                          -0.125,
+                          -0.125,
+                          3
+                        ],
+                        [
+                          0.125,
+                          -0.125,
+                          3
+                        ],
+                        [
+                          0.125,
+                          0.125,
+                          3
+                        ],
+                        [
+                          -0.125,
+                          0.125,
+                          3
+                        ]
+                      ],
+                      []
+                    ],
+                    "normal": [
+                      0,
+                      0,
+                      1
+                    ],
+                    "properties": {
+                      "materialId": {
+                        "attribute": {
+                          "attributeIndex": 99,
+                          "attributeType": 5,
+                          "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                          "name": "Краска - Светло-Серая",
+                          "nativeField": "API_UmatType.mater.head.index"
+                        },
+                        "attributeIndex": 99,
+                        "color": {
+                          "b": 0.658823529,
+                          "g": 0.658823529,
+                          "r": 0.658823529
+                        },
+                        "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                        "name": "Краска - Светло-Серая",
+                        "nativeMaterialType": 0,
+                        "source": "attribute",
+                        "texture": {
+                          "missing": false,
+                          "name": "",
+                          "rotation": 0,
+                          "xSize": 0,
+                          "ySize": 0
+                        },
+                        "transparencyPercent": 0
+                      },
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "geometry": [
+                      [
+                        [
+                          -0.125,
+                          0.125,
+                          0
+                        ],
+                        [
+                          -0.125,
+                          0.125,
+                          3
+                        ],
+                        [
+                          0.125,
+                          0.125,
+                          3
+                        ],
+                        [
+                          0.125,
+                          0.125,
+                          0
+                        ]
+                      ],
+                      []
+                    ],
+                    "normal": [
+                      0,
+                      1,
+                      0
+                    ],
+                    "properties": {
+                      "materialId": {
+                        "attribute": {
+                          "attributeIndex": 99,
+                          "attributeType": 5,
+                          "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                          "name": "Краска - Светло-Серая",
+                          "nativeField": "API_UmatType.mater.head.index"
+                        },
+                        "attributeIndex": 99,
+                        "color": {
+                          "b": 0.658823529,
+                          "g": 0.658823529,
+                          "r": 0.658823529
+                        },
+                        "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                        "name": "Краска - Светло-Серая",
+                        "nativeMaterialType": 0,
+                        "source": "attribute",
+                        "texture": {
+                          "missing": false,
+                          "name": "",
+                          "rotation": 0,
+                          "xSize": 0,
+                          "ySize": 0
+                        },
+                        "transparencyPercent": 0
+                      },
+                      "nativeStatus": 0
+                    }
+                  },
+                  {
+                    "geometry": [
+                      [
+                        [
+                          0.125,
+                          -0.125,
+                          0
+                        ],
+                        [
+                          0.125,
+                          0.125,
+                          0
+                        ],
+                        [
+                          0.125,
+                          0.125,
+                          3
+                        ],
+                        [
+                          0.125,
+                          -0.125,
+                          3
+                        ]
+                      ],
+                      []
+                    ],
+                    "normal": [
+                      1,
+                      0,
+                      0
+                    ],
+                    "properties": {
+                      "materialId": {
+                        "attribute": {
+                          "attributeIndex": 99,
+                          "attributeType": 5,
+                          "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                          "name": "Краска - Светло-Серая",
+                          "nativeField": "API_UmatType.mater.head.index"
+                        },
+                        "attributeIndex": 99,
+                        "color": {
+                          "b": 0.658823529,
+                          "g": 0.658823529,
+                          "r": 0.658823529
+                        },
+                        "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                        "name": "Краска - Светло-Серая",
+                        "nativeMaterialType": 0,
+                        "source": "attribute",
+                        "texture": {
+                          "missing": false,
+                          "name": "",
+                          "rotation": 0,
+                          "xSize": 0,
+                          "ySize": 0
+                        },
+                        "transparencyPercent": 0
+                      },
+                      "nativeStatus": 0
+                    }
+                  }
+                ],
+                "relativeVertices": [
+                  [
+                    -0.125,
+                    -0.125,
+                    0
+                  ],
+                  [
+                    -0.125,
+                    -0.125,
+                    3
+                  ],
+                  [
+                    -0.125,
+                    0.125,
+                    0
+                  ],
+                  [
+                    -0.125,
+                    0.125,
+                    3
+                  ],
+                  [
+                    0.125,
+                    -0.125,
+                    0
+                  ],
+                  [
+                    0.125,
+                    -0.125,
+                    3
+                  ],
+                  [
+                    0.125,
+                    0.125,
+                    0
+                  ],
+                  [
+                    0.125,
+                    0.125,
+                    3
+                  ]
+                ]
+              }
+            ],
+            "material": {
+              "api": "ACAPI_Element_Get",
+              "buildingMaterial": {
+                "attributeIndex": 59,
+                "attributeType": 12,
+                "defaultSurface": {
+                  "attributeIndex": 99,
+                  "attributeType": 5,
+                  "guid": "AA8293BC-6153-4A9E-8CBF-795E3887E333",
+                  "name": "Краска - Светло-Серая",
+                  "nativeField": "buildingMaterial.cutMaterial"
+                },
+                "guid": "922C639B-9875-48DF-A3FC-E0A8AC5F2839",
+                "name": "ОБЩИЙ - КОНСТРУКЦИОННЫЙ МАТЕРИАЛ",
+                "nativeField": "columnSegment.assemblySegmentData"
+              },
+              "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+              "endsMaterial": {
+                "attributeIndex": 0,
+                "attributeType": 5,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source",
+                "nativeField": "columnSegment.endsMaterial",
+                "overridden": false
+              },
+              "extrusionSurfaceMaterial": {
+                "attributeIndex": 0,
+                "attributeType": 5,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source",
+                "nativeField": "columnSegment.extrusionSurfaceMaterial",
+                "overridden": false
+              },
+              "structureType": 0
+            },
+            "type": "ColumnSegment"
+          }
+        ],
+        "rootBREP": [],
+        "rootMaterial": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "source": "SEGMENT_ATTRIBUTES"
+        },
+        "story": 0,
+        "type": "Column"
+      },
+      "type": "Column",
+      "typed": {
+        "details": {
+          "axisRotationAngle": 0,
+          "bottomOffset": 0,
+          "buildingMaterialId": {
+            "guid": "922C639B-9875-48DF-A3FC-E0A8AC5F2839"
+          },
+          "circleBased": false,
+          "coreAnchor": "Center",
+          "coverFill": {
+            "backgroundPen": -1,
+            "fillId": {
+              "guid": "1D87AE9A-3C74-4A1A-BE7C-56B7651F0F3C"
+            },
+            "foregroundPen": 88,
+            "orientationComesFrom3D": false,
+            "transformation": {
+              "origin": {
+                "x": 0,
+                "y": 0
+              },
+              "xAxis": {
+                "x": 1,
+                "y": 0
+              },
+              "yAxis": {
+                "x": 0,
+                "y": 1
+              }
+            },
+            "transformationType": "Global",
+            "use": true,
+            "useFromSurface": false
+          },
+          "cutFillBackgroundPen": {
+            "overridden": false
+          },
+          "cutFillPen": {
+            "overridden": false
+          },
+          "depth": 0.25,
+          "height": 3,
+          "isFlipped": false,
+          "isSlanted": false,
+          "isWidthAndHeightLinked": false,
+          "origin": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "relativeTopStory": 0,
+          "slantAngle": 1.570796327,
+          "slantDirectionAngle": 0,
+          "topOffset": -0.2,
+          "width": 0.25,
+          "wrapping": false,
+          "zCoordinate": 0
+        },
+        "floorIndex": 0,
+        "type": "Column"
+      }
+    }
+  },
+  "nativeCalls": [
+    {
+      "command": "AddOn.TapirCommand.CreateNativeGroupV1",
+      "elapsedSeconds": 0.05334390001371503
+    },
+    {
+      "command": "SaveProject",
+      "elapsedSeconds": 3.6591518000350334
+    }
+  ],
+  "savedSHA256": "186c14bd71667de482687ce95b822518dd50a7caeab169a8e7bf6cbaf933fb81",
+  "sourceSnapshotSHA256": "439cb4c35b7daf336ea0cdeff4b694a3a976fd99fb5e3753f2c44b05bdf1e330",
+  "originalPLNSHA256": "3a74d7cb17e460378eacfa8f933aeae29a5ca39fbf2bc73633115c9fee728750",
+  "protectedAncestorsUnchanged": true,
+  "sceneStates": [
+    [
+      "SharedGroupCreate20261020V1",
+      "PASS"
+    ],
+    [
+      "SharedGroupCreateSave20261020V1",
+      "PASS"
+    ]
+  ],
+  "stepStates": [
+    [
+      "SharedGroupCreate20261020V1",
+      "operation",
+      "PASS"
+    ],
+    [
+      "SharedGroupCreateSave20261020V1",
+      "operation",
+      "PASS"
+    ]
+  ],
+  "sqliteQuickCheck": "ok",
+  "realCloseConfirmed": true,
+  "reopenVerified": true,
+  "verificationNativeWrites": 0,
+  "priorAcceptedOperationsNotRepeated": true
+}
