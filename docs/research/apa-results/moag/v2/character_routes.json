@@ -5642,12 +5642,12 @@
         },
         {
           "id": "RT050-D",
-          "label": "Участок у кабельных шахт под растительным покровом",
+          "label": "Участок доступа к кабельным шахтам",
           "global_level": null,
           "local_stratum": "cable-shaft-vine-area",
           "source_page_id": "B2-127",
           "movement_method": "STAIR",
-          "observed_constraint": "Тонкие усики проникают в кабельные шахты; точная геометрия и глубина спуска неизвестны.",
+          "observed_constraint": "Герои спускаются по узкой лестнице к участку кабельных шахт; усики живого дерева проникают в шахты только как состояние конкретной сцены для рендера. Точную геометрию и глубину спуска не описано.",
           "existing_graph_node": null,
           "relative_xy": null,
           "absolute_z_m": null
@@ -5703,7 +5703,7 @@
       ],
       "constraints": [],
       "identity_hypotheses": [],
-      "notes": "Спуск от узкой решётчатой лестницы — фактически пройденный локальный переход; точная конечная отметка неизвестна. Не считать будущий подъём на Верхний уровень пройденным. p128 confirms the destination freight hangars are the earlier robot-loading hangars; movement from L2 to L3 is a narrative gap, then a corridor leads to captain-bridge doors."
+      "notes": "Спуск от узкой решётчатой лестницы к кабельным шахтам — фактически пройденный локальный переход; точная конечная отметка неизвестна. Небольшой тупик — пространственное свидетельство. Баррикада из поваленных пекарей, укрытие людей и проникшие в шахты усики живого дерева — детали конкретного боевого рендера, а не постоянная планировка/отделка. Не считать будущий подъём на Верхний уровень пройденным. p128 confirms the destination freight hangars are the earlier robot-loading hangars; movement from L2 to L3 is a narrative gap, then a corridor leads to captain-bridge doors."
     },
     {
       "id": "RT-051",
