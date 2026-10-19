@@ -455,6 +455,27 @@
       "url": "https://loveread.ec/read_book.php?id=53370&p=35",
       "medium": "literary_text",
       "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-040",
+      "section": "Книга II, LoveRead p40, постраничная проверка",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=40",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-041",
+      "section": "Книга II, LoveRead p41, постраничная проверка",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=41",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-042",
+      "section": "Книга II, LoveRead p42, постраничная проверка",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=42",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
     }
   ],
   "nodes": [
@@ -2659,6 +2680,44 @@
       },
       "geometry_gate": "NOT_AUTHORIZED",
       "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "CORE-ENERGY-ACCESS-STEPS",
+      "label": "Локальные ступени выхода из кольцевой энергетической галереи",
+      "level": 3,
+      "type": "vertical_access",
+      "source_ids": [
+        "LR-B2-040"
+      ],
+      "text_basis": "Эмму подталкивают по ступеням вверх от галереи к защищённой двери, точное число ступеней неизвестно.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-MEDICAL-ROOM",
+      "label": "Медицинский диагностический отсек Третьего уровня",
+      "level": 3,
+      "type": "medical_room",
+      "source_ids": [
+        "LR-B2-042"
+      ],
+      "text_basis": "Коля и Эмма самостоятельно пользуются диагностикой: каталка автоматически въезжает в круглое отверстие сканера, рядом голографический экран результатов; координаты неизвестны.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
     }
   ],
   "edges": [
@@ -4606,6 +4665,54 @@
         "LR-B2-034"
       ],
       "claim": "Из галереи персонажи наблюдают прозрачную вертикальную колбу энергомодуля, но её высота и диаметр неизвестны.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E163",
+      "from": "CORE-ENERGY-GALLERY",
+      "to": "CORE-ENERGY-ACCESS-STEPS",
+      "type": "ascends_to",
+      "source_ids": [
+        "LR-B2-040"
+      ],
+      "claim": "От кольцевой галереи при эвакуации поднимаются по ступеням к защищённой двери.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E164",
+      "from": "CORE-ENERGY-ACCESS-STEPS",
+      "to": "L3-ENERGY-GATE",
+      "type": "leads_to",
+      "source_ids": [
+        "LR-B2-040"
+      ],
+      "claim": "Локальные ступени выводят к закрываемой входной двери энергоотсека.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E165",
+      "from": "L3",
+      "to": "L3-MEDICAL-ROOM",
+      "type": "contains",
+      "source_ids": [
+        "LR-B2-042"
+      ],
+      "claim": "Медицинское диагностическое помещение, фактически посещённое героями на Третьем.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E166",
+      "from": "L3-BRIDGE",
+      "to": "L3-MEDICAL-ROOM",
+      "type": "reachable_via_third_corridors",
+      "source_ids": [
+        "LR-B2-042"
+      ],
+      "claim": "После событий у энергомодуля герои идут по третьему уровню к медицинскому отсеку; непосредственная смежная дверь с рубкой не доказана.",
       "state": "TEXT_DIRECT",
       "metric": null
     }
