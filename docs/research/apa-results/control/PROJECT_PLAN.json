@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 191,
+  "revision": 192,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2509,6 +2509,20 @@
       "kind": "REVIEW",
       "verification": "AUDIT_READBACK_VERIFIED",
       "scope": "Installedselected orthogonal namedaxes, nonuniformpitch and sparsepairs; oneMoveElementsbatch3Column,182->188GUID, exactaxis->GUIDmapping/readback/materials/guardedsave/nativeclose/reopen. Oldacceptedoperations notrepeated, CI2SUCCESS."
+    },
+    "ART-P70-A11-S17-GROUP-RECEIPT-20261020": {
+      "id": "ART-P70-A11-S17-GROUP-RECEIPT-20261020",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/3e20da6c8447749bc2db7e09247a012a98f6b396/docs/evidence/apa-ac29-shared-group-create-20261020/README_RU.md",
+      "kind": "RECEIPT",
+      "verification": "INSTALLED_SHARED_GROUP_CREATE_SAVED_REOPENED_PASS",
+      "scope": "OneactualCreateNativeGroupV1 throughsharedselector/registry/SceneWriter, exact2Column membershipGUIDfc0ee2e1, all188physicalGUID/BREP/materials retained, otherColumnGroupsunchanged, guardedsave/snapshot/nativeclose/reopen. Installed299preparedcatalog296contractsunchanged, CI9SUCCESS."
+    },
+    "ART-P70-A11-S17-GROUP-AUDIT-20261020": {
+      "id": "ART-P70-A11-S17-GROUP-AUDIT-20261020",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/3e20da6c8447749bc2db7e09247a012a98f6b396/docs/evidence/apa-ac29-shared-group-create-20261020/independent-audit.json",
+      "kind": "REVIEW",
+      "verification": "AUDIT_READBACK_VERIFIED",
+      "scope": "OneactualCreateNativeGroupV1 throughsharedselector/registry/SceneWriter, exact2Column membershipGUIDfc0ee2e1, all188physicalGUID/BREP/materials retained, otherColumnGroupsunchanged, guardedsave/snapshot/nativeclose/reopen. Installed299preparedcatalog296contractsunchanged, CI9SUCCESS."
     }
   },
   "tasks": {
@@ -5104,7 +5118,8 @@
         "APA-P70.A11.S14",
         "APA-P70.A11.S15",
         "APA-P70.A11.S16",
-        "APA-P70.A11.S17"
+        "APA-P70.A11.S17",
+        "APA-P70.A11.S18"
       ],
       "inputs": [
         "ART-APA-HIGHLEVEL-PR34",
@@ -5308,7 +5323,8 @@
         "2026-10-19 S13/PR180 installed accepted mass selector into current APA, preserved296contracts and30+4reads, combinedcatalog298; existingRouter/SceneWriter/registry retained. Native group32 LIVE receipt179 reused; individual MoveElements(copy=true) shared registry remains next S14.",
         "2026-10-19 S14/PR181 installed nativeindividualColumnLINEARcopy accepted and published; CI8success; no repeatLIVE. S15 finite diagonal line endpoints/count is next newcapability.",
         "2026-10-20 S15/PR183 installed finite diagonal line accepted/published. S16 selectednamedaxes with irregularpitch is next newfunction; oldcopy/grid not repeated.",
-        "2026-10-20 S16/PR184 selectednamedaxisintersections installed/published; S17 sharednativegroupcreation is nextfunction, reuseexisting SDKcommand."
+        "2026-10-20 S16/PR184 selectednamedaxisintersections installed/published; S17 sharednativegroupcreation is nextfunction, reuseexisting SDKcommand.",
+        "2026-10-20 S17/PR185 sharednativegroupcreate installed/published. NextS18 nativeungroup edits acceptedgroup innewcopy, no recreatinggroup."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
       "owner": null,
@@ -6156,7 +6172,7 @@
       "action_id": "APA-P70.A11",
       "title": "Создание нативной группы через общий selector/registry/SceneWriter",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 0,
       "work_key": "ac29-shared-native-group-create",
       "depends_on": [
@@ -6169,11 +6185,44 @@
         "ART-P70-A11-S16-AXES-RECEIPT-20261020",
         "ART-P70-A11-S16-AXES-AUDIT-20261020"
       ],
-      "outputs": [],
+      "outputs": [
+        "PR185 installedsharednativegroupcreate accepted: groupfc0ee2e1 from2existingColumn, physical188unchanged, savedSHA186c14bd. Published3e20da6c. No priorcopy/grid/line/axes native repetition; CI9SUCCESS."
+      ],
       "acceptance": "Reuse actual existing CreateNativeGroupV1 SDKcontract. Request -> currentselector/capabilitydiscovery -> sameRouter/registry/SceneWriter. Group actual verified ungrouped same-story roots, exactmembers andallphysicalGUID/geometry/materials retained; one necessary safe-copy LIVE with guardedSave/snapshot/reopen. Existinggroupclone/copy scenarios not repeated. NoAPXchange or newexecutor.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [
+        "ART-P70-A11-S17-GROUP-RECEIPT-20261020",
+        "ART-P70-A11-S17-GROUP-AUDIT-20261020"
+      ],
+      "blocked_reason": null
+    },
+    "APA-P70.A11.S18": {
+      "id": "APA-P70.A11.S18",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Редактирование групп: нативная разгруппировка через общий selector/registry",
+      "kind": "INTEGRATION",
+      "status": "IN_PROGRESS",
+      "priority": 0,
+      "work_key": "ac29-shared-native-group-ungroup",
+      "depends_on": [
+        "APA-P70.A11.S17"
+      ],
+      "related": [
+        "APA-P70.A11.S03"
+      ],
+      "inputs": [
+        "ART-P70-A11-S17-GROUP-RECEIPT-20261020",
+        "ART-P70-A11-S17-GROUP-AUDIT-20261020"
+      ],
+      "outputs": [],
+      "acceptance": "ReuseactualUngroupNativeGroupV1 contract with exactflatColumnmembers; existingselector/capability/Router/registry/SceneWriter, preserveallphysicalGUID/geometry/materials andothergroups. One newnativeungroup in freshcopy ofacceptedgroup snapshot,guardedSave/exactsnapshot/reopen. Neverrecreateacceptedgroup or repeatoldcopies/grid.",
       "owner": "apa-mass-integration-20261019",
-      "lease_until": "2026-10-20T03:21:42Z",
-      "claim_ref": "APA-RUN-20261020-NATIVE-GROUP-CREATE",
+      "lease_until": "2026-10-20T03:33:39Z",
+      "claim_ref": "APA-RUN-20261020-NATIVE-UNGROUP",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
@@ -6473,7 +6522,8 @@
         "APA-P70.A11.S14",
         "APA-P70.A11.S15",
         "APA-P70.A11.S16",
-        "APA-P70.A11.S17"
+        "APA-P70.A11.S17",
+        "APA-P70.A11.S18"
       ],
       "artifact_ids": [
         "ART-APA-FULL-CYCLE",
@@ -7247,9 +7297,21 @@
         "APA-P10.A01.S03",
         "APA-P50.A02.S01"
       ],
+      "readiness": "SUFFICIENT",
+      "readiness_evidence_ids": [
+        "ART-P70-A11-S17-GROUP-AUDIT-20261020"
+      ],
+      "note": "New groupcreation function installed/published185, one newnativeacceptance with exactsavedreopen. Nativephysicalmodificationpermission remains membershiponly."
+    },
+    "APA-P70.A11.S18": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
       "readiness": "GAP",
       "readiness_evidence_ids": [],
-      "note": "ExistingSDKcommands/source and prior159receipt available; close sharedregistry/selector gap. No repeatedresearch or prioracceptedcopy/gridLIVE."
+      "note": "ActualSDKcontract and existing157/159 source available; reusecomplete188GUID group snapshot andcurrentsharedscope. No newresearch or dependency/APX install."
     }
   },
   "component_catalog": {
