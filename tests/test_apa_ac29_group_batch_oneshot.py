@@ -46,6 +46,22 @@ class GroupBatchGates(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'NO_REPLAY'): G.execute(self.state)
             api.assert_not_called()
 
+    def test_plan_json_roundtrip_preserves_tuple_geometry_before_lease(self):
+        plan=dict(preview=dict(offsets=[(25,0,0)]),
+                  sourceProof=dict(vertices=[(1.25,2.5,0)]))
+        write_new_json(self.state/'plan.json',plan)
+        with patch.object(G,'build_plan',return_value=plan), \
+             patch.object(G,'ScratchWriteLease',side_effect=RuntimeError('LEASE_SENTINEL')):
+            with self.assertRaisesRegex(RuntimeError,'LEASE_SENTINEL'):G.execute(self.state)
+        self.assertFalse((self.state/'attempted.json').exists())
+
+    def test_real_plan_value_drift_still_stops_before_lease(self):
+        write_new_json(self.state/'plan.json',dict(offsets=[(25,0,0)]))
+        with patch.object(G,'build_plan',return_value=dict(offsets=[(26,0,0)])), \
+             patch.object(G,'ScratchWriteLease') as lease:
+            with self.assertRaisesRegex(ValueError,'CURRENT_PLAN_DRIFT'):G.execute(self.state)
+            lease.assert_not_called()
+
     def test_safe01_proof_drift_blocks_every_new_batch(self):
         with patch.object(G,'safe01_gate',return_value='b'*64),patch.object(G,'prepare_api') as api:
             with self.assertRaisesRegex(ValueError,'SAFE01_PROOF_DRIFT'):G.execute(self.state)

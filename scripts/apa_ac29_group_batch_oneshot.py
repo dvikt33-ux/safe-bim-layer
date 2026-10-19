@@ -235,7 +235,10 @@ def execute(state):
     state = Path(state).resolve()
     m = manifest_for(state, initial=True)
     planned = read(state / "plan.json")
-    need(build_plan(state) == planned, "GROUP_BATCH_CURRENT_PLAN_DRIFT")
+    # The pinned plan has crossed JSON: tuples in native geometry become arrays.
+    # Compare the complete canonical content, retaining every field and value.
+    need(R.canonical(build_plan(state)) == R.canonical(planned),
+         "GROUP_BATCH_CURRENT_PLAN_DRIFT")
     lease = ScratchWriteLease(m["scratch"], state, m["scratchInitialSHA256"])
     lease.acquire()
     write_new_json(state / "attempted.json", dict(schema=SCHEMA, status="ONE_SHOT_RESERVED",
