@@ -1808,6 +1808,321 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-111",
+      "page_id": "B1-022",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=22",
+      "station_id": "MOAG",
+      "narrative_mode": "MOVEMENT",
+      "locator_hint": "около внешнего круга, три прохода",
+      "spatial_assertion": "Внешний круг Третьего уровня соединяется с развилкой из трёх проходов; герои выбирают средний.",
+      "feature_refs": [
+        "L3-OUTER",
+        "L3-ISOLATION-TRIDENT"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-112",
+      "page_id": "B1-022",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=22",
+      "station_id": "MOAG",
+      "narrative_mode": "STORAGE",
+      "locator_hint": "полки во всю длину стены, свёртки в голубых пакетах",
+      "spatial_assertion": "Средний коридор выводит к складу белья; стеллажи вдоль стен, упаковки одеял, полотенец и простыней.",
+      "feature_refs": [
+        "L3-STORE",
+        "L3-ISOLATION-TRIDENT"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-113",
+      "page_id": "B1-022",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=22",
+      "station_id": "MOAG",
+      "narrative_mode": "ROUTE",
+      "locator_hint": "дверь изолятора и центральный коридор",
+      "spatial_assertion": "От складской развилки существует путь к центральному проходу и помещению изоляции с раздвижной дверью.",
+      "feature_refs": [
+        "L3-ISOLATION-CELL",
+        "L3-ISOLATION-TRIDENT"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-114",
+      "page_id": "B1-022",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=22",
+      "station_id": "MOAG",
+      "narrative_mode": "LOGISTICS",
+      "locator_hint": "круглая площадка, ящики, роботы-погрузчики",
+      "spatial_assertion": "Маленькая круглая площадка складирования у лифта: контейнеры, ответвление погрузочного коридора.",
+      "feature_refs": [
+        "L3-LIFT-PLATFORM"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-115",
+      "page_id": "B1-023",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=23",
+      "station_id": "MOAG",
+      "narrative_mode": "VERTICAL",
+      "locator_hint": "остановили лифт, сняли потолочный люк",
+      "spatial_assertion": "Лифт можно остановить вручную; в потолке кабины предусмотрен квадратный технический люк на крышу.",
+      "feature_refs": [
+        "LINK-LIFT-SHAFT"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-116",
+      "page_id": "B1-023",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=23",
+      "station_id": "MOAG",
+      "narrative_mode": "VERTICAL",
+      "locator_hint": "верёвочная лестница с крыши лифта к стене",
+      "spatial_assertion": "С крыши остановленной кабины переходят по подвешенной лестнице к боковому отверстию шахты, затем спускаются на Нижний.",
+      "feature_refs": [
+        "LINK-LIFT-SHAFT",
+        "L1-LIFT-SHAFT-EXIT"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-117",
+      "page_id": "B1-023",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=23",
+      "station_id": "MOAG",
+      "narrative_mode": "ROUTE",
+      "locator_hint": "после спуска слышен шум мусорки",
+      "spatial_assertion": "Выход из вертикального пути расположен в слышимости перерабатывающего цеха; точная горизонтальная дальность неизвестна.",
+      "feature_refs": [
+        "L1-LIFT-SHAFT-EXIT",
+        "L1-RECYCLING"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-118",
+      "page_id": "B1-024",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=24",
+      "station_id": "MOAG",
+      "narrative_mode": "TECHNICAL_INTERIOR",
+      "locator_hint": "медицинский сканер — белая труба",
+      "spatial_assertion": "На Втором уровне действует медицинский сканер: белая цилиндрическая труба с жёлтой подсветкой и каталкой.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-119",
+      "page_id": "B1-024",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=24",
+      "station_id": "MOAG",
+      "narrative_mode": "MEP",
+      "locator_hint": "три стиральных машины встроены в стену",
+      "spatial_assertion": "В типовом жилом помещении три стиральные машины в стене мокрой зоны, отдельная машинка на каждого жильца; положение труб не названо.",
+      "feature_refs": [
+        "L2-WET-LAUNDRY",
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-120",
+      "page_id": "B1-024",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=24",
+      "station_id": "MOAG",
+      "narrative_mode": "INTERIOR",
+      "locator_hint": "пульт температуры в стене душа",
+      "spatial_assertion": "Душ имеет влагостойкую настенную сенсорную панель для регулирования температуры и полки с гигиеническими средствами.",
+      "feature_refs": [
+        "L2-WET-LAUNDRY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-121",
+      "page_id": "B1-025",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=25",
+      "station_id": "MOAG",
+      "narrative_mode": "CHILDCARE",
+      "locator_hint": "игровая с большим ковром, шкафом",
+      "spatial_assertion": "В младшем отделении сада просторная игровая, ковёр, шкаф с кубиками, планшет и голографические игрушки; санитарный узел в доступе.",
+      "feature_refs": [
+        "L2-NURSERY",
+        "L2-INFANT-PLAY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-122",
+      "page_id": "B1-025",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=25",
+      "station_id": "MOAG",
+      "narrative_mode": "USER_DESIRE_NOT_FACT",
+      "locator_hint": "мечта Эммы о садах и магазинах на Третьем",
+      "spatial_assertion": "Воображаемое сходство Третьего уровня со Вторым — желание персонажа, не существующий интерьер Верхнего.",
+      "feature_refs": [
+        "L3"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-123",
+      "page_id": "B1-026",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=26",
+      "station_id": "MOAG",
+      "narrative_mode": "ROUTE",
+      "locator_hint": "площадка тут же за дверью",
+      "spatial_assertion": "От игровой младшего отделения непосредственный выход к детской прогулочной площадке.",
+      "feature_refs": [
+        "L2-INFANT-PLAY",
+        "L2-INFANT-YARD"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-124",
+      "page_id": "B1-026",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=26",
+      "station_id": "MOAG",
+      "narrative_mode": "SURFACES",
+      "locator_hint": "прогулочная площадка, резиновое покрытие, низкие горки",
+      "spatial_assertion": "Детская площадка: резиновое покрытие, песочница с обработанным песком, качалки, горки и невысокая ограда с растениями.",
+      "feature_refs": [
+        "L2-INFANT-YARD"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-125",
+      "page_id": "B1-026",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=26",
+      "station_id": "MOAG",
+      "narrative_mode": "VERTICAL_LOGISTICS",
+      "locator_hint": "новорождённых привезли на лифте",
+      "spatial_assertion": "Кувезы с младенцами прибывают на Второй уровень на лифте; пока нельзя выводить конкретный канал от лаборатории на Третьем.",
+      "feature_refs": [
+        "L2-NURSERY",
+        "L2-INFANT-NEW"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-126",
+      "page_id": "B1-026",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=26",
+      "station_id": "MOAG",
+      "narrative_mode": "ROOM_COUNT",
+      "locator_hint": "две отдельные комнаты для младенцев",
+      "spatial_assertion": "После доставки дети распределены в две комнаты с игрушками и манежами, отделённые от комнат годовалых.",
+      "feature_refs": [
+        "L2-INFANT-NEW"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-127",
+      "page_id": "B1-027",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=27",
+      "station_id": "MOAG",
+      "narrative_mode": "HOUSE_PLAN",
+      "locator_hint": "спальня Маши через стену от спальни Таис",
+      "spatial_assertion": "В Темной базе спальня Маши находится через общую стену от спальни Таис; двери обеих оставлены открытыми ради тепла.",
+      "feature_refs": [
+        "L1-BASE-SLEEP",
+        "L1-TEMNAYA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-128",
+      "page_id": "B1-027",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=27",
+      "station_id": "MOAG",
+      "narrative_mode": "THERMAL",
+      "locator_hint": "двери спален оставляют открытыми",
+      "spatial_assertion": "Передача тепла из общей зоны к спальным комнатам обеспечивается через открытые дверные проёмы.",
+      "feature_refs": [
+        "L1-BASE-COMMON",
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-129",
+      "page_id": "B1-027",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=27",
+      "station_id": "MOAG",
+      "narrative_mode": "MOVEMENT",
+      "locator_hint": "от библиотеки к соседней каюте Ильи",
+      "spatial_assertion": "Библиотека Второго и каюта Ильи доступны друг от друга по общим коридорам; расстояние и принадлежность к кольцу неизвестны.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
