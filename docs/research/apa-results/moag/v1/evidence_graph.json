@@ -4597,18 +4597,6 @@
       "metric": null
     },
     {
-      "id": "E157",
-      "from": "CORE-ENERGY",
-      "to": "CORE-ENERGY-SHAFT",
-      "type": "contains",
-      "source_ids": [
-        "LR-B2-034"
-      ],
-      "claim": "Центральный энергомодуль размещается внутри круглого вертикального объёма, проходящего по центру станции.",
-      "state": "TEXT_DIRECT",
-      "metric": null
-    },
-    {
       "id": "E158",
       "from": "CORE-ENERGY-SHAFT",
       "to": "CORE-ENERGY-GALLERY",
