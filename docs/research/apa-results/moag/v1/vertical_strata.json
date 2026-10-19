@@ -92,7 +92,7 @@
       "node_refs": [
         "SUB-LOWER-WELL"
       ],
-      "global_level": 1,
+      "global_level": null,
       "deck_index": null,
       "contiguous_deck": "UNKNOWN",
       "claimed_footprint_rank": null
