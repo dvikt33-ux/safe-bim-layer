@@ -1255,12 +1255,12 @@
       "id": "B1-114",
       "page_number": 114,
       "url": "https://loveread.ec/read_book.php?id=48197&p=114",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 6,
+      "notes": "Финальный эпизод: проход от производственного цеха к рубке, широкая короткая лестница с белыми ступенями и серым ограждением, двойные овальные двери, полукруглый пульт, окно на Землю и система командования.",
+      "verification_method": "manual reading of full text-bearing page",
+      "full_page_review_date": "2026-10-19"
     }
   ]
 }
