@@ -10676,6 +10676,34 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-681",
+      "page_id": "B3-027",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=27",
+      "station_id": "MOAG",
+      "narrative_mode": "CHARACTER_KNOWN_STATION_COMPARISON",
+      "locator_hint": "Эмма сравнивает чужую капитанскую рубку с хорошо знакомой рубкой МОАГа.",
+      "spatial_assertion": "Эмма отмечает, что в отличие от капитанской рубки другой станции, в рубке МОАГа были удобные диваны или кресла. Это подтверждает мебельное оснащение рубки МОАГа без размеров и точного взаимного расположения предметов.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-682",
+      "page_id": "B3-027",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=27",
+      "station_id": "MOAG",
+      "narrative_mode": "CHARACTER_KNOWN_STATION_COMPARISON",
+      "locator_hint": "Эмма узнаёт овальный стол с голографическими узорами в кухне другой станции.",
+      "spatial_assertion": "Эмма вспоминает, что на МОАГе тоже были похожие овальные столы с голографическими узорами. Свидетельство подтверждает тип мебели/визуальный мотив, но не локализует такой стол в кухне МОАГа.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
