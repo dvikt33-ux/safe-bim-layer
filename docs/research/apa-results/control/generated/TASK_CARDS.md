@@ -1532,7 +1532,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P70.A11.S14
 - Related, check before duplicating: APA-P70.A11.S03
 - Acceptance: Explicit SI start/end/count and verified prototype anchor -> existing mass selector -> oneMoveElements(copy=true) batch through existing registry/SceneWriter. Preserve source geometry and all existing groups; automatic newcontract tests and one meaningful diagonal-line LIVE in a new saved copy, exact targets/GUID/readback, guardedSave/snapshot/reopen. Never rerun acceptedgroup8x4/individualLINEAR proof.
-- Owner/lease: apa-mass-integration-20261019 / 2026-10-19T23:12:28Z
+- Owner/lease: apa-mass-integration-20261019 / 2026-10-20T03:07:26Z
 - Requires owner approval: False
 - Source inputs: [ART-P70-A11-S14-COPY-RECEIPT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/README_RU.md), [ART-P70-A11-S14-COPY-AUDIT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/independent-audit.json)
 - Existing V2 runs: none
