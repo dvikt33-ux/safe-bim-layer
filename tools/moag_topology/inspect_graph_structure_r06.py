@@ -155,8 +155,8 @@ def project(graph, fragments, bounds, r06):
         "spatial_area_volume_profiles": area_profiles,
         "area_and_volume_accounting": {
             "profile_count": len(area_profiles),
-            "area_bearing": budget["area_profiles"],
-            "failed_interval_checks": budget["area_check_failures"],
+            "area_bearing": budget["with_area"],
+            "failed_interval_checks": budget["fails"],
             "source_model_separates": ["FOOTPRINT", "USABLE_FLOOR", "CLEAR_VOLUME"],
             "never_sum_all_profiles": True,
             "disjoint_budget_results": r06["area_volume"].get("level_allocation_budgets", []),
