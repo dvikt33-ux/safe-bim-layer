@@ -1,6 +1,6 @@
 {
   "schema": "APA-MOAG-TOPOLOGY-SNAPSHOT/0.1",
-  "source_blob_sha": "f4862c509735441a8117ae99b6eb1cfc3bbaf016",
+  "source_blob_sha": "b09a07b9892f4f9d91549078b0067604a4b57223",
   "derived_from": "docs/research/apa-results/moag/v1/evidence_graph.json",
   "status": "GRAPH_ONLY_NO_COORDINATES",
   "space_refs": [
@@ -576,7 +576,17 @@
     },
     {
       "id": "CORE-ENERGY-ACCESS",
-      "label": "Узкий защищённый проход к энергомодулю за Детским блоком Третьего",
+      "label": "Логический маршрут допуска к энергокамере (не дополнительный коридор)",
+      "level": 3
+    },
+    {
+      "id": "CORE-ENERGY-ACCESS-STEPS",
+      "label": "Локальные ступени выхода из кольцевой энергетической галереи",
+      "level": 3
+    },
+    {
+      "id": "L3-MEDICAL-ROOM",
+      "label": "Медицинский диагностический отсек Третьего уровня",
       "level": 3
     }
   ],
@@ -2145,16 +2155,6 @@
       ]
     },
     {
-      "id": "E157",
-      "from": "CORE-ENERGY",
-      "to": "CORE-ENERGY-SHAFT",
-      "relation": "contains",
-      "state": "TEXT_DIRECT",
-      "source_ids": [
-        "LR-B2-034"
-      ]
-    },
-    {
       "id": "E158",
       "from": "CORE-ENERGY-SHAFT",
       "to": "CORE-ENERGY-GALLERY",
@@ -2200,6 +2200,56 @@
       "to": "CORE-ENERGY",
       "relation": "overlooks_transparent_energy_column",
       "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E163",
+      "from": "CORE-ENERGY-GALLERY",
+      "to": "CORE-ENERGY-ACCESS-STEPS",
+      "relation": "ascends_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-040"
+      ]
+    },
+    {
+      "id": "E164",
+      "from": "CORE-ENERGY-ACCESS-STEPS",
+      "to": "L3-ENERGY-GATE",
+      "relation": "leads_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-040"
+      ]
+    },
+    {
+      "id": "E165",
+      "from": "L3",
+      "to": "L3-MEDICAL-ROOM",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-042"
+      ]
+    },
+    {
+      "id": "E166",
+      "from": "L3-BRIDGE",
+      "to": "L3-MEDICAL-ROOM",
+      "relation": "reachable_via_third_corridors",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-042"
+      ]
+    },
+    {
+      "id": "E167",
+      "from": "CORE-ENERGY-ACCESS",
+      "to": "L3-ENERGY-APPROACH",
+      "relation": "alias_to_physical_corridor",
+      "state": "TOPOLOGY_INFERRED",
       "source_ids": [
         "LR-B2-034"
       ]
