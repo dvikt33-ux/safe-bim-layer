@@ -2254,6 +2254,85 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-138",
+      "page_id": "B1-032",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=32",
+      "station_id": "MOAG",
+      "narrative_mode": "THIRD_LEVEL_LOGISTICS",
+      "locator_hint": "лифты Д и Е самые дальние",
+      "spatial_assertion": "Лифты Д и Е на третьем уровне отмечены как самые удаленные от грузоприёмной платформы; направление неизвестно.",
+      "feature_refs": [
+        "L3-LIFTS-DE",
+        "L3-CARGO-RECEIVING"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-139",
+      "page_id": "B1-032",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=32",
+      "station_id": "MOAG",
+      "narrative_mode": "LEVEL_CLASSIFICATION",
+      "locator_hint": "Первый уровень это мы, Второй дети, Третий мёртвые",
+      "spatial_assertion": "Архив робота делит людей по трем именованным уровням, подтверждает существование Первого в информационной структуре при отсутствии части датчиков.",
+      "feature_refs": [
+        "L1",
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-140",
+      "page_id": "B1-033",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=33",
+      "station_id": "UNRESOLVED_OBJECT",
+      "narrative_mode": "HISTORIC_PHOTO_UNCERTAINTY",
+      "locator_hint": "фотографии людей у крейсера в ангаре",
+      "spatial_assertion": "На старом коммуникаторе есть фотографии персонала в коридоре и на ступенях крейсера в некотором ангаре; не доказано, что сфотографирован конкретный ангар МОАГа.",
+      "feature_refs": [],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-141",
+      "page_id": "B1-034",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=34",
+      "station_id": "MOAG",
+      "narrative_mode": "HOLOGRAM_UNCERTAINTY",
+      "locator_hint": "голографическая модель орбитальных станций",
+      "spatial_assertion": "Учебная голограмма Земли содержит модели разных станций с иллюминаторами; без идентификации не является обмером корпуса МОАГа.",
+      "feature_refs": [],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-142",
+      "page_id": "B1-034",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=34",
+      "station_id": "MOAG",
+      "narrative_mode": "STATION_TYPE",
+      "locator_hint": "шесть робототехнических станций D15 M9",
+      "spatial_assertion": "Книга характеризует МОАГ как производственную станцию робототехнического класса; это функция, а не геометрические размеры.",
+      "feature_refs": [
+        "L3-PRODUCTION"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
