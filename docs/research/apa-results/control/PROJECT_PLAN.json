@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 184,
+  "revision": 185,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2432,6 +2432,13 @@
       "kind": "CODE",
       "verification": "SOURCE_READ_LIVE_NOT_RUN",
       "scope": "Reuse group/grid/native verifier donors from exact4ef970a1cef798aafbece4649af926b9f8f4e57a through original Router/SceneWriter; save/reopen not yet accepted."
+    },
+    "ART-P70-A11-S12-GROUP32-LIVE-20261019": {
+      "id": "ART-P70-A11-S12-GROUP32-LIVE-20261019",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/0041bdb3e9ef3a82763083c70689a52f0c36d9e1/docs/evidence/apa-ac29-native-massops-integration-20261019/live03/README_RU.md",
+      "kind": "RECEIPT",
+      "verification": "LIVE_GROUP32_GUI_REOPEN_AND_INDEPENDENT_NATIVE_SQLITE_READBACK_VERIFIED",
+      "scope": "44->172GUID;32groups/64Column/64segments;oneClone/oneSave;source44semanticBREP preserved; savedSHA b6b44dc1a811ec4e77864177f3cef57e701e1f63126c16bc64b6a5d82a89c478. Stops reconciled read-only without clone replay;121offline testsPASS; CI IN_PROGRESS, installed stable integration remains next task."
     }
   },
   "tasks": {
@@ -5022,7 +5029,8 @@
         "APA-P70.A04.S01",
         "APA-P70.A04.S03",
         "APA-P70.A11.S11",
-        "APA-P70.A11.S12"
+        "APA-P70.A11.S12",
+        "APA-P70.A11.S13"
       ],
       "inputs": [
         "ART-APA-HIGHLEVEL-PR34",
@@ -5221,7 +5229,8 @@
         "PR109 13139d6cd03340bff7fbde5ccac5735929843b7a exact PR107 base. Explicit authorized SaveAs copy preserves unsaved state and source savedPLN bytes. Exact4e6cdf PR107 runtime293commands:Shell extrusion4to4.5m native parameter/BREP/profile/frame/contour/typedmaterials/GUID/story/IFCID retention LIVE_PASS; Rail0.07to0.17m and18 dependent baluster bottoms +0.10m, but one nested Object bmatRail/bmatFixing37to36 causes RailingPARTIAL. Explicit approved restoration via existing GDLsetter:APIERR_NOTSUPPORTED(-2130312313),all409signatures/128params unchanged,no retry. CW scalarheight NoError/noeffect, originalUNKNOWN independently reconciled;new source rejects scalar and implements explicit bounded native contour/pattern memo. New84841037512024d1a2df5832453968422c1046575fd461a3c7555745ed3289ba fullRelease BUILD_PASS_NOT_INSTALLED:existing18contracts,zero newcommandnames;CW/Railingmemo,Extrudedtilts/Revolvedscalar subset,MEPElbow/Branch andTransitionangleDegrees. SameDynamicCommands/SceneWriter/SQLite; independent geometry/material callbacks and GDLbefore/after typedreadback. ExistingDependencyImpact nativefact slice346nodes472edges/materialimpact4; parent/root/declaredowner distinct.409GUIDs retained,20BREPchanges+1material-onlysignature,314outsideRailing/Shell andprevious258unchanged. Save thennew-process original-runtime independent409readback;originalAPX/registration restoredbyteexact. Pending exactPR104approval unchanged/notreasked. Nooffline tests/testworkflowdispatch/quantitycalls. IFCexport,positiveMEP,current3Drawinglinks,Opening107postclose andnewmemoLIVE remainNOT_VERIFIED. Next owner-aware native Railing material recovery; exactbinaryapproval then bounded CWmemo native trial. S03PARTIAL, historicalDONE retained, no duplicate tasks.",
         "Publication metadata clarification only:current gap-register-after-scope-erratum.json supersedes ambiguous inherited historical top-level counters. Native409copy changed by2confirmedparameter effects/4mutation attempts;ShellLIVE,RailingmaterialdriftPARTIAL,CWnoeffect. Historical snapshots and all prior evidence retained. CAS revision179to180;claim remains released;no new functional work, native writes or tests.",
         "After PR109: establish actual native Railing symbol/material owner and supported recovery without replaying failed nested-Object setter; strengthen compound MODIFY acceptance defaults, extend existing CW/Shell/MEP contracts. No new APX or model writes without exact approval; no offline tests.",
-        "PR111 61f56376e37755cfb4a15db29071970525297904 exactPR109base. Initial preapproval checkpoint retained separately; userthenapproved exact71b8529a8da39a478d5a1bc8a370ea97bf63fdc39e4801e793aa36e214074fa4 read-onlycycle. Candidateidentity/source106393a verified,runtime293commands,2extendedexistingcommands CALLABLE_VERIFIED:actualgeneratedObject RailingRailowner,parent/root,Objectandowner128AddPars,rootRailmemo,selectedlibrarymaster/parameterscriptsprivate. ActualsettingsownerabsentfromphysicalrootRailmemo;storedmemo flags1donotoverrideevaluatedDisabled/Child. Top-levelscriptsdelegate tomacros,no fixingruleproof. Bothmaterials36,expectedGUID37;NOT_RESTORED,BLOCKED,no setterretryorDisabledwrite. Newtypedownerfacts inexistingDependencyImpact:352nodes482edges,134observedRailimpacts. DefaultcompoundMODIFYfull BREP/material/GDL/ownership/dependent/beforeproofs;existingSQLiteintentretained,oldtargetfailureproofmatched,legacyunscopedscopeNOT_VERIFIED. OriginalAPX restored8f5a9341and77registrationvaluesbyteexact,newprocessoriginalruntime264commands. Unexpectedtestcopy savedbytechangeafterUIexit afcbdaaea880to0a9c01419823,causeNOT_VERIFIED,noexplicitSaveAPI/nativeMutationcommand. Independentoriginalruntime409signatures/128GDLmatchPR109;bothfilecheckpointsprivate,noblindrollback,sourcePLNunchanged. OverallpersistencePARTIAL; qualifyclosebehaviorbefore anynextnativewrite. Nooffline tests/workflowdispatch/quantitycall/newexecutor/graph/commandnames. CWbounds,newExtruded/RevolvedfieldsBUILDonly;publicmaterialrecoveryroute notAC29qualified. ExactPR104approvalseparatependingnotreasked. Nextsaved-fileprovenance,publicsettingsowner/macrodiagnosis,thenseparatelyapproved2materialrecovery. A11.S03PARTIAL;historicalDONE/evidenceretained."
+        "PR111 61f56376e37755cfb4a15db29071970525297904 exactPR109base. Initial preapproval checkpoint retained separately; userthenapproved exact71b8529a8da39a478d5a1bc8a370ea97bf63fdc39e4801e793aa36e214074fa4 read-onlycycle. Candidateidentity/source106393a verified,runtime293commands,2extendedexistingcommands CALLABLE_VERIFIED:actualgeneratedObject RailingRailowner,parent/root,Objectandowner128AddPars,rootRailmemo,selectedlibrarymaster/parameterscriptsprivate. ActualsettingsownerabsentfromphysicalrootRailmemo;storedmemo flags1donotoverrideevaluatedDisabled/Child. Top-levelscriptsdelegate tomacros,no fixingruleproof. Bothmaterials36,expectedGUID37;NOT_RESTORED,BLOCKED,no setterretryorDisabledwrite. Newtypedownerfacts inexistingDependencyImpact:352nodes482edges,134observedRailimpacts. DefaultcompoundMODIFYfull BREP/material/GDL/ownership/dependent/beforeproofs;existingSQLiteintentretained,oldtargetfailureproofmatched,legacyunscopedscopeNOT_VERIFIED. OriginalAPX restored8f5a9341and77registrationvaluesbyteexact,newprocessoriginalruntime264commands. Unexpectedtestcopy savedbytechangeafterUIexit afcbdaaea880to0a9c01419823,causeNOT_VERIFIED,noexplicitSaveAPI/nativeMutationcommand. Independentoriginalruntime409signatures/128GDLmatchPR109;bothfilecheckpointsprivate,noblindrollback,sourcePLNunchanged. OverallpersistencePARTIAL; qualifyclosebehaviorbefore anynextnativewrite. Nooffline tests/workflowdispatch/quantitycall/newexecutor/graph/commandnames. CWbounds,newExtruded/RevolvedfieldsBUILDonly;publicmaterialrecoveryroute notAC29qualified. ExactPR104approvalseparatependingnotreasked. Nextsaved-fileprovenance,publicsettingsowner/macrodiagnosis,thenseparatelyapproved2materialrecovery. A11.S03PARTIAL;historicalDONE/evidenceretained.",
+        "2026-10-19 PR179 published LIVE32native groups,44->172GUID,oneClone/oneSave,realGUIreopen; source44semanticBREP/materials preserved; corrected JSON tuple equality and dump-local material pools. S12 accepted, S13 installed APA integration pending; overall S03 remainsPARTIAL."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
       "owner": null,
@@ -5477,7 +5486,8 @@
         "ART-P70-A11-S03-NATIVEOWNER-PERSISTENCE-20261015",
         "ART-P70-A11-S03-NATIVEOWNER-ACCEPTANCE-20261015",
         "ART-P70-A11-S03-NATIVEOWNER-SOURCES-20261015",
-        "ART-P70-A11-S11-SAFE01-LIVE-20261019"
+        "ART-P70-A11-S11-SAFE01-LIVE-20261019",
+        "ART-P70-A11-S12-GROUP32-LIVE-20261019"
       ],
       "blocked_reason": null
     },
@@ -5899,7 +5909,7 @@
       "action_id": "APA-P70.A11",
       "title": "Завершить native группы/сетки и единый mass-request selector с сохранением и reopen",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 0,
       "work_key": "ac29-native-group-grid-selector-persistence",
       "depends_on": [
@@ -5913,12 +5923,45 @@
         "ART-P70-A11-S12-GROUPGRID-SOURCE-20261019"
       ],
       "outputs": [
-        "Existing #172/#174 donor integration, same auto selector and SceneWriter, scoped native group evidence, saved snapshot/reopen"
+        "Existing #172/#174 donor integration, same auto selector and SceneWriter, scoped native group evidence, saved snapshot/reopen",
+        "PR179 head0041bdb3e9ef3a82763083c70689a52f0c36d9e1: LIVE saved/reopened32groups and172GUID; full source44geometry/material semantics preserved; actual Clone0.3005511s/Save2.5871763s; no replay. Existing two single-segment Column group only. Installed stable update is separate S13."
       ],
       "acceptance": "One source-qualified existing group, deterministic placements, runtime discovery, exact independent BREP/GUID/group ownership and collision preflight, one native clone, guarded save/snapshot and real reopen on safe copy; no offline->LIVE promotion, no retries or unverified group types.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [
+        "ART-P70-A11-S12-GROUP32-LIVE-20261019"
+      ],
+      "blocked_reason": null
+    },
+    "APA-P70.A11.S13": {
+      "id": "APA-P70.A11.S13",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Подключить принятый mass-request/native-group путь к установленному APA с сохранением 30+4 маршрутов",
+      "kind": "INTEGRATION",
+      "status": "IN_PROGRESS",
+      "priority": 0,
+      "work_key": "ac29-installed-mass-selector-preserve-sidecar34",
+      "depends_on": [
+        "APA-P70.A11.S12"
+      ],
+      "related": [
+        "APA-P70.A11.S03"
+      ],
+      "inputs": [
+        "ART-P70-A11-S12-GROUP32-LIVE-20261019",
+        "ART-P70-A11-S11-SAFE01-LIVE-20261019"
+      ],
+      "outputs": [
+        "Additive staged update of existing installed APA, exact backups/readback; no duplicate Router or dependency installation"
+      ],
+      "acceptance": "Preserve current installed core and read-only30/semantic4 registrations; integrate accepted mass selector through same entrypoint/registry, test staged installed bytes, runtime capability discovery and meaningful read-only route in actual accepted project. No unsupported native group/axis/boolean capability claims; bounded existing group LIVE acceptance reused.",
       "owner": "apa-mass-integration-20261019",
-      "lease_until": "2026-10-19T20:24:32Z",
-      "claim_ref": "APA-RUN-20261019-GROUPGRID-INTEGRATION",
+      "lease_until": "2026-10-19T22:11:19Z",
+      "claim_ref": "APA-RUN-20261019-INSTALLED-MASS-SELECTOR",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
@@ -6213,7 +6256,8 @@
         "APA-P70.A11.S09",
         "APA-P70.A11.S10",
         "APA-P70.A11.S11",
-        "APA-P70.A11.S12"
+        "APA-P70.A11.S12",
+        "APA-P70.A11.S13"
       ],
       "artifact_ids": [
         "ART-APA-FULL-CYCLE",
@@ -6927,9 +6971,23 @@
         "APA-P10.A01.S03",
         "APA-P50.A02.S01"
       ],
+      "readiness": "SUFFICIENT",
+      "readiness_evidence_ids": [
+        "ART-P70-A11-S12-GROUP32-LIVE-20261019"
+      ],
+      "note": "Accepted exact32group scope in PR179, real saved-copy reopen and independent native/SQLite audit. Other group types/installed core are separate residuals; CI IN_PROGRESS not CI_PASS."
+    },
+    "APA-P70.A11.S13": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
       "readiness": "GAP",
-      "readiness_evidence_ids": [],
-      "note": "Reuse existing inspected PR source and published receipts. No new research required for existing command routing. LIVE evidence applies only to its exact accepted scope."
+      "readiness_evidence_ids": [
+        "ART-P70-A11-S12-GROUP32-LIVE-20261019"
+      ],
+      "note": "Use accepted179 donor and existing installed code; inspect exact current hashes, preserve all34sidecar registrations; no new research or reinstall."
     }
   },
   "component_catalog": {
