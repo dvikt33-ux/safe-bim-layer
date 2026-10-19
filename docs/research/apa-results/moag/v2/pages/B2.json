@@ -694,34 +694,34 @@
       "id": "B2-063",
       "page_number": 63,
       "url": "https://loveread.ec/read_book.php?id=53370&p=63",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MIXED_MOAG_OTHER_VESSEL",
+      "recorded_spatial_hints": 1,
+      "notes": "Страница разделена границей глав: в начале продолжается сцена Эммы на Втором уровне МОАГа, затем начинается глава 5 и внешняя сцена Таис и Фёдора на Земле. Внешняя космоплощадка и её здания не относятся к МОАГу.",
+      "verification_method": "Full primary LoveRead page read in Opera; chapter boundaries checked against the table of contents; external vs station memory separated",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-064",
       "page_number": 64,
       "url": "https://loveread.ec/read_book.php?id=53370&p=64",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "OTHER_SHIP_NOT_MOAG",
+      "recorded_spatial_hints": 1,
+      "notes": "Земная линия Таис и Фёдора на космодроме. Единственное станционное свидетельство — память Таис о тесной старой каюте на Первом уровне, коричневом одеяле, узкой кровати и печке с электронным пламенем; память сохранена отдельно как REMOTE_EVIDENCE.",
+      "verification_method": "Full primary LoveRead page read in Opera; chapter boundaries checked against the table of contents; external vs station memory separated",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-065",
       "page_number": 65,
       "url": "https://loveread.ec/read_book.php?id=53370&p=65",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "OTHER_SHIP_NOT_MOAG",
+      "recorded_spatial_hints": 0,
+      "notes": "Продолжение сцены на земном космодроме: внешний грузовой терминал, тележки, здание, конвейеры и утилизатор. Это архитектура и оборудование иного объекта, исключённые из реконструкции МОАГа.",
+      "verification_method": "Full primary LoveRead page read in Opera; chapter boundaries checked against the table of contents; external vs station memory separated",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-066",

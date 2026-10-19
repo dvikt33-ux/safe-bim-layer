@@ -15,19 +15,26 @@
       "B2-059",
       "B2-060",
       "B2-061",
-      "B2-062"
+      "B2-062",
+      "B2-063",
+      "B2-064",
+      "B2-065"
     ],
     "external_screened_page_ids": [
       "B2-052",
       "B2-056",
       "B2-057",
       "B2-058",
-      "B2-059"
+      "B2-059",
+      "B2-063",
+      "B2-064",
+      "B2-065"
     ],
     "remote_evidence_page_ids": [
       "B2-052",
       "B2-053",
-      "B2-057"
+      "B2-057",
+      "B2-064"
     ],
     "uncertain_page_ids": []
   },
@@ -220,7 +227,7 @@
       "title": "Эмма. Много хлопот с детьми",
       "page_span": {
         "start": 59,
-        "end": 62
+        "end": 63
       },
       "chapter_classification": "STATION",
       "screening_status": "CONTEXT_SCREENED_BEFORE_STRUCTURED_EXTRACTION",
@@ -228,7 +235,8 @@
         "B2-059",
         "B2-060",
         "B2-061",
-        "B2-062"
+        "B2-062",
+        "B2-063"
       ],
       "scenes": [
         {
@@ -249,6 +257,10 @@
             {
               "page_id": "B2-062",
               "fragment": "глава 4, каюта, кухня и окончание главы"
+            },
+            {
+              "page_id": "B2-063",
+              "fragment": "продолжение сцены на Втором уровне до заголовка главы 5"
             }
           ],
           "classification": "STATION",
@@ -264,7 +276,68 @@
           "station_relevance": "детские помещения и мебель, оконность Второго, участок Зелёной магистрали, столовая и бытовое оборудование"
         }
       ],
-      "screening_caveat": "Page 59 is split at the chapter-4 heading: the Earth landing is the end of chapter 3; the Emma/nursery scene begins chapter 4. The nightmare on p62 is explicitly a dream and is excluded from physical-space evidence."
+      "screening_caveat": "Page 59 is split at the chapter-4 heading; p63 continues the station scene through Emma and Kolya's cabin and ends at the chapter-5 heading."
+    },
+    {
+      "id": "B2-PART2-CH5",
+      "book_id": "B2",
+      "part_number": 2,
+      "chapter_number": 5,
+      "title": "Таис. Космодром",
+      "page_span": {
+        "start": 63,
+        "end": 65
+      },
+      "chapter_classification": "MIXED",
+      "screening_status": "CONTEXT_SCREENED_BEFORE_STRUCTURED_EXTRACTION",
+      "screened_pages": [
+        "B2-063",
+        "B2-064",
+        "B2-065"
+      ],
+      "scenes": [
+        {
+          "id": "B2P2C5-S1",
+          "page_fragments": [
+            {
+              "page_id": "B2-064",
+              "fragment": "воспоминание Таис об одной старой каюте на Первом уровне МОАГа"
+            }
+          ],
+          "classification": "REMOTE_EVIDENCE",
+          "physical_location": "Земля, космодром; воспоминание о МОАГе",
+          "characters": [
+            "Таис"
+          ],
+          "station_relevance": "Краткое воспоминание о старой каюте на Первом уровне: коричневое одеяло, узкая кровать и печка с электронным пламенем. Не переносить окружающий земной терминал на станцию.",
+          "screened_out_material": "текущая земная линия космодрома вне фрагмента воспоминания"
+        },
+        {
+          "id": "B2P2C5-S2",
+          "page_fragments": [
+            {
+              "page_id": "B2-063",
+              "fragment": "от заголовка главы 5 до конца страницы"
+            },
+            {
+              "page_id": "B2-064",
+              "fragment": "текущая сцена на Земле вне фрагмента воспоминания о МОАГе"
+            },
+            {
+              "page_id": "B2-065",
+              "fragment": "вся текущая сцена на земном космодроме"
+            }
+          ],
+          "classification": "EXTERNAL",
+          "physical_location": "Земля: посадочная площадка и космодром",
+          "characters": [
+            "Таис",
+            "Фёдор"
+          ],
+          "screened_out_material": "модуль крейсера «Иминуя», бетонная площадка, чужое здание с тремя этажами, грузовые тележки, конвейеры, поезд и утилизатор не являются объектами МОАГа."
+        }
+      ],
+      "screening_caveat": "Chapter 5 begins on p63 after the final station fragment of chapter 4; p64 contains a short memory of MOAG's First-level cabin, retained as REMOTE_EVIDENCE amid the external Earth scene."
     }
   ],
   "character_location_events": [
@@ -558,6 +631,19 @@
       "arrival_event": "остается следить, чтобы дети не катались на магнитных досках на узкой Зелёной дорожке",
       "source": [
         "B2-060"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Таис",
+      "story_time": "B2, часть 2, глава 5, p63–65",
+      "current_location": "Земля, территория космодрома; на p64 вспоминает старую каюту МОАГа",
+      "departure_event": "после посадки покидает район спасательного модуля и движется по космодрому с Фёдором",
+      "arrival_event": "воспоминание о Первом уровне не является физическим возвращением на станцию",
+      "source": [
+        "B2-063",
+        "B2-064",
+        "B2-065"
       ],
       "confidence": "DIRECT_TEXT"
     }

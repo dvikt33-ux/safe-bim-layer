@@ -7902,6 +7902,20 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-483",
+      "page_id": "B2-064",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=64",
+      "station_id": "MOAG",
+      "narrative_mode": "MEMORY_OLD_FIRST_LEVEL_CABIN",
+      "locator_hint": "воспоминание Таис об их старой каюте на Первом уровне",
+      "spatial_assertion": "Таис вспоминает старую неуютную каюту на Первом уровне, где жили дети подземелья: коричневое одеяло, узкая кровать и печка с электронными языками пламени. Это память о меблировке и предметах, без размеров помещения, плана или точной идентификации существующего узла графа.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
