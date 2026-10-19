@@ -343,7 +343,14 @@ A candidate research S-ID must still satisfy its own dependencies and claim gate
 
 ### APA-P70.A11.S19 — Перемещение целой нативной группы через общий selector/registry
 
-- Готовность исследования: **GAP**
+- Готовность исследования: **SUFFICIENT**
 - Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
 - Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
 - Использовать источники (ветка/файл/PR): [ART-P70-A11-S18-UNGROUP-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/8a95c9e6bb3af95d9a38a27bc1009aeec04b615e/docs/evidence/apa-ac29-shared-ungroup-20261020/README_RU.md), [ART-P70-A11-S18-UNGROUP-AUDIT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/8a95c9e6bb3af95d9a38a27bc1009aeec04b615e/docs/evidence/apa-ac29-shared-ungroup-20261020/independent-audit.json), [ART-P70-A11-S17-GROUP-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/3e20da6c8447749bc2db7e09247a012a98f6b396/docs/evidence/apa-ac29-shared-group-create-20261020/README_RU.md)
+
+### APA-P70.A11.S20 — Готовая лёгкая DXF интеграция: recover/audit, XREF/hash, MINSERT и единицы через общий Router
+
+- Готовность исследования: **GAP**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S20-DXF-READY-SOURCE-20261020](https://github.com/dvikt33-ux/safe-bim-layer/pull/163)
