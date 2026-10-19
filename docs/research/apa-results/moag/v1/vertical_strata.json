@@ -1,0 +1,134 @@
+{
+  "schema": "APA-MOAG-VERTICAL-STRATA/0.1",
+  "status": "SOURCE_GROUNDED_RELATIVE_ELEVATIONS_ONLY",
+  "scope": "Внутренние высотные отметки Первого (Нижнего) глобального уровня МОАГа",
+  "global_level_hierarchy": {
+    "known_global_levels": [
+      1,
+      2,
+      3
+    ],
+    "nested_local_strata_not_extra_global_levels": true,
+    "absolute_datum_m": null
+  },
+  "inequalities": [
+    {
+      "id": "Z01",
+      "higher": "L1-BASES",
+      "lower": "SUB-LOWER-WELL",
+      "relation": "above",
+      "source_ids": [
+        "B1-04"
+      ],
+      "proof": "Боковой выход вертикального спуска к обитаемому Нижнему находится выше неизвестного нижнего колодца",
+      "state": "TEXT_DIRECT",
+      "numeric_delta_m": null
+    },
+    {
+      "id": "Z02",
+      "higher": "L1-CIRCULAR-UPPER-WALK",
+      "lower": "L1-CIRCULAR-HALL",
+      "relation": "above_floor",
+      "source_ids": [
+        "B1-17"
+      ],
+      "proof": "Верхний мостик круглого зала находится почти под потолком над основным полом",
+      "state": "TEXT_DIRECT",
+      "numeric_delta_m": null
+    },
+    {
+      "id": "Z03",
+      "higher": "L1-OPERATORS",
+      "lower": "L1-ANGAR",
+      "relation": "above_floor",
+      "source_ids": [
+        "B2-14"
+      ],
+      "proof": "Операторские кабины расположены почти под потолком ангара, доступ по металлическим лестницам",
+      "state": "TEXT_DIRECT",
+      "numeric_delta_m": null
+    },
+    {
+      "id": "Z04",
+      "higher": "L1-BASE-SLEEP",
+      "lower": "L1-BASE-COMMON",
+      "relation": "upper_sleeper_access_exists",
+      "source_ids": [
+        "B1-10"
+      ],
+      "proof": "В Темной базе есть лестница, ведущая в спальню, но все спальни не обязательно выше общей",
+      "state": "TOPOLOGY_INFERRED",
+      "numeric_delta_m": null
+    },
+    {
+      "id": "Z05",
+      "higher": "L1-CIRCULAR-HALL",
+      "lower": "L1-HALL-STEPS",
+      "relation": "local_step_change_requires_check",
+      "source_ids": [
+        "B1-17"
+      ],
+      "proof": "Несколько ступеней спуска к залу; этот тип связи не означает отдельный этаж и не устанавливает знак высот без геометрического направления",
+      "state": "RECHECK_REQUIRED",
+      "numeric_delta_m": null
+    }
+  ],
+  "zones": [
+    {
+      "id": "S-L1-1",
+      "label": "Основной обитаемый пояс баз Первого уровня",
+      "node_refs": [
+        "L1-BASES",
+        "L1-INNER"
+      ],
+      "global_level": 1,
+      "deck_index": null,
+      "contiguous_deck": "UNKNOWN",
+      "claimed_footprint_rank": null
+    },
+    {
+      "id": "S-L1-2",
+      "label": "Неизвестные помещения ниже обитаемого пояса",
+      "node_refs": [
+        "SUB-LOWER-WELL"
+      ],
+      "global_level": 1,
+      "deck_index": null,
+      "contiguous_deck": "UNKNOWN",
+      "claimed_footprint_rank": null
+    },
+    {
+      "id": "S-L1-3",
+      "label": "Основной ангарный пол Нижнего блока",
+      "node_refs": [
+        "L1-HANGAR-ZONE",
+        "L1-ANGAR-HALL",
+        "L1-ANGAR"
+      ],
+      "global_level": 1,
+      "deck_index": null,
+      "contiguous_deck": "UNKNOWN",
+      "claimed_footprint_rank": null
+    },
+    {
+      "id": "S-L1-4",
+      "label": "Верхние частичные галереи в ангарных/технических объёмах",
+      "node_refs": [
+        "L1-CIRCULAR-UPPER-WALK",
+        "L1-OPERATORS"
+      ],
+      "global_level": 1,
+      "deck_index": null,
+      "contiguous_deck": "PARTIAL_LOCAL_ONLY",
+      "claimed_footprint_rank": null
+    }
+  ],
+  "unproven": [
+    "Четыре сплошных этажа в Нижнем блоке",
+    "Второй этаж Первого уровня перекрывает полный диаметр",
+    "Самая большая площадь связана с самым нижним ярусом",
+    "Высоты и абсолютные отметки всех ярусов",
+    "Установленное прямое соединение между нижним колодцем и ангарным сектором"
+  ],
+  "geometry_write_authorized": false
+}
