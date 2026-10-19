@@ -10410,6 +10410,34 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-662",
+      "page_id": "B2-135",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=135",
+      "station_id": "MOAG",
+      "narrative_mode": "MOAG_REMOTE_VIEW",
+      "locator_hint": "Удалённый вид станции из окна корабля после эвакуации.",
+      "spatial_assertion": "Станция уже пуста и необитаема; это фактическое состояние к моменту отлёта. Внешняя форма, размеры и детали корпуса на странице не уточняются.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-663",
+      "page_id": "B2-135",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=135",
+      "station_id": "MOAG",
+      "narrative_mode": "NOT_YET_PERFORMED",
+      "locator_hint": "Обсуждение будущего уничтожения станции после отхода кораблей.",
+      "spatial_assertion": "Ник сообщает о намерении взорвать станцию, как только группа отойдёт на безопасное расстояние; событие на странице ещё не выполнено.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
