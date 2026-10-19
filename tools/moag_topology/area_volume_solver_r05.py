@@ -208,6 +208,7 @@ def solve(bounds,graph,parameter_changes=None,area_overrides=None,candidates=Non
     # A placement choice must be checked against source-level and area domain.
     # Area narrows candidate list but does NOT create geographical coordinates.
     ranked=[]
+    levels={x["id"]:x["global_level"] for x in bounds["profiles"]}
     for candidate in candidates or []:
         if not isinstance(candidate,dict) or not {"id","assignments"}.issubset(candidate):
             raise ValueError("BAD_PLACEMENT_CANDIDATE")
@@ -218,6 +219,9 @@ def solve(bounds,graph,parameter_changes=None,area_overrides=None,candidates=Non
                 raise ValueError("UNRECOGNIZED_CANDIDATE_PLACEMENT")
             child=effective[entity]
             host=effective[target]
+            if levels[entity] is not None and levels[target] is not None and levels[entity]!=levels[target]:
+                failures.append({"id":entity,"host":target,"reason":"KNOWN_GLOBAL_LEVEL_CONFLICT"})
+                continue
             if "min_area_m2" not in child or "max_area_m2" not in host:
                 failures.append({"id":entity,"host":target,"reason":"NOT_A_FLOOR_AREA"})
                 continue
