@@ -34,6 +34,10 @@ from apa_ac29_hotlink_batch_verifier import (
     batch_parameters, parse_batch_response, installed_batch_verifier
 )
 import apa_ac29_hotlink_oneshot as HOTLINK
+from apa_ac29_save_isolation import (
+    ScratchWriteLease, preserve_guarded_save, stage_readonly_reopen,
+    sha256 as file_sha,
+)
 
 SCHEMA = "APA_AC29_HOTLINK_BATCH_V1"
 AUTH = "USER_APPROVED_AC29_HOTLINK_BATCH_DISPOSABLE_20261018"
@@ -104,6 +108,7 @@ def validate_stage(state, *, allow_plan=False):
     manifest = read(Path(state) / "manifest.json")
     need(manifest.get("schema") == SCHEMA and
          manifest.get("status") == "STAGED_NO_MODEL_WRITES" and
+         manifest.get("snapshotVerificationOnly") is not True and
          not (Path(state) / "attempted.json").exists() and
          not (Path(state) / "batch-scenewriter.sqlite").exists() and
          all(Path(manifest[k]).is_file() for k in ("source", "module", "scratch")) and
@@ -225,6 +230,12 @@ def execute(state):
                           computed["prototypeSettings"]) ==
              planned["batchParameters"],
          "HOTLINK_BATCH_NATIVE_BREP_OR_PLAN_CHANGED_BEFORE_DISPATCH")
+    # Cross-process cooperative reservation keyed by the SCRATCH path, not
+    # by this job's state folder. It persists for evidence on any UNKNOWN.
+    # It cannot prevent unrelated Archicad writes; SHA+snapshot handles those.
+    lease = ScratchWriteLease(manifest["scratch"], state,
+                             manifest["scratchInitialSHA256"])
+    lease.acquire()
     # Durable one-shot intent exists BEFORE any native model write. A timeout
     # or half-success is forensic state; never resend the batch.
     save_new(state / "attempted.json", {
@@ -315,19 +326,34 @@ def execute(state):
             return {"status": "HOTLINK_BATCH_PRE_SAVE_READBACK_PASS"}
         def after_save(reply, _):
             need(reply == {"success": True} and save_guard.new_saved_sha and
+                 lease.verify() and
                  digest(manifest["scratch"]) == save_guard.new_saved_sha and
                  digest(manifest["source"]) == manifest["sourceSHA256"] and
                  digest(manifest["module"]) == manifest["moduleSHA256"],
                  "HOTLINK_BATCH_GUARDED_SAVE_NOT_CONFIRMED")
-            return {"status": "HOTLINK_BATCH_NATIVE_SAVED_PASS",
-                    "savedSHA256": save_guard.new_saved_sha}
+            # Preserve the exact bytes DURING the guarded SaveProject callback,
+            # not after the task has returned to a parallel Archicad session.
+            snap = preserve_guarded_save(
+                manifest["scratch"], state / "guarded-save.snapshot",
+                save_guard.new_saved_sha, {
+                    manifest["source"]: manifest["sourceSHA256"],
+                    manifest["module"]: manifest["moduleSHA256"],
+                })
+            save_new(state / "guarded-snapshot.json", snap)
+            return {"status": "HOTLINK_BATCH_SAVED_AND_PINNED_SNAPSHOT_PASS",
+                    "savedSHA256": save_guard.new_saved_sha,
+                    "snapshotSHA256": snap["snapshotSHA256"]}
         saved = router.execute(
             writer, SAVE_SCENE, router.prepare("SaveProject", {}),
             [], signatures, manifest["scratchInitialSHA256"],
             AUTH, "PROJECT", after_save, verify_before=before_save)
         need(saved.get("status") == "PASS" and
-             api.calls["SaveProject"] == 1 and api.write_attempts == 2,
-             "HOTLINK_BATCH_EXACT_TWO_NATIVE_OPERATIONS_REQUIRED")
+             api.calls["SaveProject"] == 1 and api.write_attempts == 2 and
+             lease.verify() and
+             file_sha(state / "guarded-save.snapshot") ==
+                 save_guard.new_saved_sha and
+             file_sha(manifest["scratch"]) == save_guard.new_saved_sha,
+             "HOTLINK_BATCH_TWO_WRITES_AND_PINNED_SAVE_SNAPSHOT_REQUIRED")
         receipt = {"schema": SCHEMA,
                    "status": "BATCH_NATIVE_SAVED_PENDING_REAL_REOPEN",
                    "at": utc(), "nodeGuid": manifest["nodeGuid"],
@@ -341,6 +367,10 @@ def execute(state):
                    "sourceSHA256": manifest["sourceSHA256"],
                    "moduleSHA256": manifest["moduleSHA256"],
                    "savedSHA256": save_guard.new_saved_sha,
+                   "guardedSnapshotSHA256": save_guard.new_saved_sha,
+                   "guardedSnapshotReceiptSHA256":
+                       file_sha(state / "guarded-snapshot.json"),
+                   "cooperativeLeaseSHA256": lease.lock_sha,
                    "afterGuidSetSHA256": RUN.digest(new_ids),
                    "afterBrepSHA256": after_brep,
                    "nativeBatchCalls": 1, "saveCalls": 1,
@@ -358,9 +388,42 @@ def execute(state):
         raise
 
 
+def confirm_open_snapshot(state):
+    """First prove the snapshot was actually opened, BEFORE GUI close."""
+    state = Path(state).resolve()
+    manifest, receipt = read(state / "manifest.json"), read(state / "saved.json")
+    need(manifest.get("snapshotVerificationOnly") is True and
+         not (state / "opened-before-close.json").exists() and
+         file_sha(manifest["scratch"]) == receipt["savedSHA256"] and
+         file_sha(manifest["source"]) == receipt["sourceSHA256"] and
+         file_sha(manifest["module"]) == receipt["moduleSHA256"],
+         "HOTLINK_SNAPSHOT_FIRST_OPEN_IMMUTABLE_BYTES_REQUIRED")
+    api, _ = prepare_api(manifest, state, for_write=False,
+                         saved_sha=receipt["savedSHA256"])
+    guids, fingerprint, _, _ = probe_native(manifest, api)
+    need(len(guids) == receipt["afterGuidCount"] and
+         RUN.digest(guids) == receipt["afterGuidSetSHA256"] and
+         fingerprint == receipt["afterBrepSHA256"] and
+         api.write_attempts == 0,
+         "HOTLINK_SNAPSHOT_FIRST_GUI_OPEN_NATIVE_BREP_DRIFT")
+    record = {"schema": SCHEMA,
+              "status": "SNAPSHOT_GUI_OPEN_NATIVE_READBACK_PASS",
+              "snapshotSHA256": receipt["savedSHA256"],
+              "guidSetSHA256": RUN.digest(guids),
+              "nativeWrites": 0, "at": utc()}
+    save_new(state / "opened-before-close.json", record)
+    return record
+
+
 def check_closed(state):
     state = Path(state).resolve()
     receipt, manifest = read(state / "saved.json"), read(state / "manifest.json")
+    if manifest.get("snapshotVerificationOnly") is True:
+        first_open = read(state / "opened-before-close.json")
+        need(first_open["status"] == "SNAPSHOT_GUI_OPEN_NATIVE_READBACK_PASS" and
+             first_open["snapshotSHA256"] == receipt["savedSHA256"] and
+             first_open["guidSetSHA256"] == receipt["afterGuidSetSHA256"],
+             "HOTLINK_SNAPSHOT_GUI_OPEN_REQUIRED_BEFORE_REAL_CLOSE")
     need(receipt["status"] == "BATCH_NATIVE_SAVED_PENDING_REAL_REOPEN" and
          not (state / "closed.json").exists() and
          digest(manifest["scratch"]) == receipt["savedSHA256"],
@@ -387,6 +450,16 @@ def verify_reopen(state):
     state = Path(state).resolve()
     manifest, receipt = read(state / "manifest.json"), read(state / "saved.json")
     closed = read(state / "closed.json")
+    if manifest.get("snapshotVerificationOnly") is True:
+        first_open = read(state / "opened-before-close.json")
+        provenance = read(state / "snapshot-provenance.json")
+        need(first_open["status"] == "SNAPSHOT_GUI_OPEN_NATIVE_READBACK_PASS" and
+             first_open["guidSetSHA256"] == receipt["afterGuidSetSHA256"] and
+             provenance["status"] == "SNAPSHOT_ONLY_READBACK_NO_MODEL_WRITES" and
+             provenance["sourceSavedSHA256"] == receipt["savedSHA256"] and
+             all(file_sha(Path(provenance["parent"]) / name) == checksum
+                 for name, checksum in provenance["parentHashes"].items()),
+             "HOTLINK_SNAPSHOT_REOPEN_PARENT_CHAIN_OR_PREVIOUS_OPEN_DRIFT")
     need(not (state / "reopened.json").exists() and
          closed["status"] == "NATIVE_NO_OPEN_PROJECT_CONFIRMED" and
          closed["scratchSHA256"] == receipt["savedSHA256"] and
@@ -452,7 +525,8 @@ def verify_reopen(state):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     mode = p.add_mutually_exclusive_group(required=True)
-    for command in ("stage", "plan", "execute", "check-closed", "verify-reopen"):
+    for command in ("stage", "plan", "execute", "check-closed",
+                    "verify-reopen", "stage-snapshot-reopen", "confirm-open-snapshot"):
         mode.add_argument("--" + command, action="store_true")
     p.add_argument("--source-pln")
     p.add_argument("--module-pln")
@@ -463,18 +537,33 @@ def main():
     p.add_argument("--count", type=int)
     p.add_argument("--gap", type=float)
     p.add_argument("--port", type=int, default=19726)
+    p.add_argument("--snapshot-pln")
+    p.add_argument("--snapshot-state")
+    p.add_argument("--reopen-port", type=int)
     args = p.parse_args()
     if args.stage:
         need(all((args.source_pln, args.module_pln, args.scratch_pln,
                   args.node_guid, args.prototype_guid)) and
-             args.count is not None and args.gap is not None,
+             args.count is not None and args.gap is not None and
+             not any((args.snapshot_pln, args.snapshot_state, args.reopen_port)),
              "HOTLINK_BATCH_STAGE_ALL_EXPLICIT_INPUTS_REQUIRED")
         out = unique_stage(args.source_pln, args.module_pln, args.scratch_pln,
                            args.state_dir, args.node_guid, args.prototype_guid,
                            args.count, args.gap, args.port)
+    elif args.stage_snapshot_reopen:
+        need(all((args.snapshot_pln, args.snapshot_state)) and
+             args.reopen_port is not None and
+             not any((args.source_pln, args.module_pln, args.scratch_pln,
+                      args.node_guid, args.prototype_guid)) and
+             args.count is None and args.gap is None,
+             "HOTLINK_BATCH_SNAPSHOT_RECOVERY_EXPLICIT_CLEAN_TARGET_REQUIRED")
+        out = stage_readonly_reopen(
+            args.state_dir, args.snapshot_pln, args.snapshot_state,
+            args.reopen_port)
     else:
         need(not any((args.source_pln, args.module_pln, args.scratch_pln,
-                      args.node_guid, args.prototype_guid)) and
+                      args.node_guid, args.prototype_guid, args.snapshot_pln,
+                      args.snapshot_state, args.reopen_port)) and
              args.count is None and args.gap is None,
              "HOTLINK_BATCH_REUSE_ONLY_STAGED_MANIFEST")
         if args.plan:
@@ -483,6 +572,8 @@ def main():
             out = execute(args.state_dir)
         elif args.check_closed:
             out = check_closed(args.state_dir)
+        elif args.confirm_open_snapshot:
+            out = confirm_open_snapshot(args.state_dir)
         else:
             out = verify_reopen(args.state_dir)
     print(json.dumps(out, ensure_ascii=False, indent=2))
