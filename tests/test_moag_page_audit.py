@@ -13,12 +13,13 @@ def deep(x):
     return copy.deepcopy(x)
 
 class TestPageAudit(unittest.TestCase):
-    def test_expected_412_pages_and_twenty_five_read(self):
+    def test_expected_412_pages_and_monotonic_progress(self):
         d=m.check()
         self.assertEqual(d["total_indexed_pages"],412)
-        self.assertEqual(d["coverage"]["REVIEWED_FULL_PAGE"],25)
-        self.assertEqual(d["coverage"]["NOT_REVIEWED"],387)
-        self.assertEqual(d["observations"],110)
+        self.assertGreaterEqual(d["coverage"]["REVIEWED_FULL_PAGE"],25)
+        self.assertEqual(sum(d["coverage"].values()),412)
+        self.assertEqual(d["coverage"]["NOT_REVIEWED"],412-d["coverage"]["REVIEWED_FULL_PAGE"])
+        self.assertGreaterEqual(d["observations"],110)
         self.assertFalse(d["full_corpus_claim"])
         self.assertFalse(d["geometry_authorized"])
 
