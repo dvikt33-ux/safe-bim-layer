@@ -8744,6 +8744,20 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-542",
+      "page_id": "B2-095",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=95",
+      "station_id": "MOAG",
+      "narrative_mode": "REMOTE_EVIDENCE_CHILDCARE_AND_LEVEL_MEMORY",
+      "locator_hint": "Земной разговор о роботах-детях; Таис противопоставляет воспитание на Земле своему детству на станции и вспоминает жизнь на Первом уровне",
+      "spatial_assertion": "Таис говорит, что на станции детей воспитывали роботы, электронные няни и учителя; она и Фёдор жили на Первом уровне и с трудом добывали еду. Это дистанционное свидетельство об уходе за детьми и их прежнем уровне проживания, но не описание помещений, размещения или планировки Первого уровня.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
