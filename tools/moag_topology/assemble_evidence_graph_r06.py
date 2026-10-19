@@ -346,6 +346,30 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
     if context_physical_components > after_physical_components:
         raise ValueError("CONTEXT_OVERLAY_BROKE_SPATIAL_GRAPH")
     physical_only = [sorted(n for n in members if n in kinds) for members in component_members]
+    source_physical = {x["id"]: x for x in physical}
+    safe_referents = {x["new_physical_id"]: x["source_concept_id"]
+                      for x in reference_promotions}
+    uncertain_referents = {x["new_physical_id"]: x["source_concept_id"]
+                          for x in review_promotions}
+    isolated_queue = []
+    for members, p in zip(component_members, physical_only):
+        if len(members) != 1 or len(p) != 1:
+            continue
+        n = source_physical[p[0]]
+        provenance = n.get("source_ids") or n.get("source_observation_ids") or []
+        crosswalk = safe_referents.get(n["id"])
+        review = uncertain_referents.get(n["id"])
+        isolated_queue.append({
+            "physical_index_id": n["id"], "name": n["name"], "kind": n["kind"],
+            "source_ids": provenance,
+            "crosswalk_to_existing_concept": crosswalk,
+            "identity_review_concept": review,
+            "priority": ("P1_VALIDATE_EXISTING_REFERENT" if crosswalk else
+                         "P2_RECHECK_SOURCE_AND_LINK" if provenance else
+                         "P3_CLASSIFY_NONROOM_OR_GLOBAL_HULL"),
+            "status": "SOURCE_LOOKUP_REQUIRED_NOT_AUTO_CONNECTED"
+        })
+    isolated_queue.sort(key=lambda x:(x["priority"], x["physical_index_id"]))
     all_kinds = defaultdict(int)
     for e in edges:
         all_kinds[e["type"]] += 1
@@ -377,6 +401,7 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
             "isolated_physical_indices": sum(len(p) == 1 and len(members) == 1
                                              for members, p in zip(component_members, physical_only)),
             "route_only_components": sum(not p for p in physical_only),
+            "unconnected_index_research_tasks": len(isolated_queue),
             "route_bridge_events": sum(e["joins_components"] for e in edges
                                        if e["type"].startswith(("ROUTE_", "OBSERVED_"))),
             "physical_fragment_bridge_events": len(physical_bridges),
@@ -417,6 +442,7 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         "identity_hypotheses_not_merged": prior["topology"]["identity_hypotheses"],
         "negative_identity_constraints": prior["topology"]["identity_exclusions"],
         "narrative_gaps": gaps, "research_frontiers_not_edges": frontiers,
+        "unconnected_index_source_review_queue": isolated_queue,
         "vertical_partial_order": verticals,
         "new_level_candidates": resolved,
         "area_volume": {
