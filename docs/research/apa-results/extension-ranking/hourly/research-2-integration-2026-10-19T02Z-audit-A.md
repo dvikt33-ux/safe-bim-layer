@@ -1,0 +1,13 @@
+# APA №2 02Z — контрааудит А: исходники, версии, лицензии
+
+**Повторная собственная ревизия**, не внешняя независимая приёмка. Контракты 01–30 повторно сопоставлены с первичными файлами и SHA. Никаких runtime-тестов.
+
+**AC29:** [официальная Python документация версии 29](https://archicadapi.graphisoft.com/archicadPythonPackage/archicad.releases.ac29.html) содержит GetAttributesByType, GetBuildingMaterialAttributes, GetAttributesIndices, GetNavigatorItemTree, GetPublisherSetNames и GetProductInfo. [SDK29 tag 29.3100](https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/group___attribute.html#L409) содержит Attribute_GetClassificationItems/GetPropertyValuesByGuid/IsAvailable/IsVisible. В Python GetClassificationsOfElements принимает ElementId, а не AttributeId. **Решение:** reuse Python для инвентаризации, SDK attribute classification/property DEFER. Graphisoft EULA, local build5101 ABI NOT_VERIFIED.
+
+**Tapir:** [NavigatorCommands.cpp 1.5.9](https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/NavigatorCommands.cpp#L63) имеет опасный default: selectedNavigatorItemIds пустой оставляет selectedLinksPtr=nullptr; без publisherSetName дерево выбирает первый set. Локальная сборка с обозначением 1.5.10 не идентифицирована. Upstream Tapir MIT; не объявлять локальный бинарник проверенным.
+
+**IfcOpenShell:** pinned tag ifcopenshell-python-0.8.5: classification blob df36eb97, cost blob 875594f1, sequence blob 518d5816. LGPL-3+; Windows wheel runtime не проверен. Existing [APA B2](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-ac29-ifc-artifacts-b2-20261018/scripts/apa_ifc_artifacts_b2.py#L85) уже использует exact 0.8.5, private IFC copy и SHA. Второй IFC provider запрещён.
+
+**bSDD:** bsdd.py blob fbc14cc3, pyproject blob 17fa72f3, Python>=3.10, LGPL-3+, requests/pydantic/typing-extensions. [OpenAPI buildingSMART](https://github.com/buildingSMART/bSDD/blob/master/Documentation/bSDD%20OpenAPI.yaml#L293) blob aa76b54e: Dictionary/v1 по умолчанию исключает тестовые словари; wrapper со строкой "False" фактически включает их. Class/v1 по умолчанию не включает свойства, wrapper включает. Использовать explicit bool, Class/Properties/v1 с pagination, Property/v5; dictionary licenseUrl и isPrivate — обязательный gate. Лицензия документации MIT не гарантирует права словарей.
+
+**Доказательность:** SOURCE-проверки — подтверждённые сигнатуры, не offline/build/live. Нет импортов в локальный Archicad, SDK компиляции, сетевого bSDD запроса, замеров или независимой инженерной приёмки. **Аудит А: PASS_SOURCE, RUNTIME_NOT_VERIFIED.** Ошибки default/None guards требуют отрицательных fixtures перед подключением.
