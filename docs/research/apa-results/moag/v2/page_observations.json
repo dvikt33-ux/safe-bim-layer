@@ -8184,6 +8184,34 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-502",
+      "page_id": "B2-077",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=77",
+      "station_id": "MOAG",
+      "narrative_mode": "POWER_CABLE_SHAFT_ROUTE",
+      "locator_hint": "обход пауков через узкие шахты с кабелями электроснабжения и выход к третьему туннелю",
+      "spatial_assertion": "В продолжающейся станционной сцене Эмма и Коля выбирают обход через узкие шахты, в которых проложены кабели электроснабжения; Коля знает маршрут и ориентир «третий туннель». Проход рассчитан на людей в скафандрах, но считается слишком тесным для пауков. Связь с конкретным этажом и размеры не указаны.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-503",
+      "page_id": "B2-079",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=79",
+      "station_id": "MOAG",
+      "narrative_mode": "REMOTE_STATION_UTILITY_COMPARISON",
+      "locator_hint": "Таис сравнивает холодную воду земного дома с удобствами на станции",
+      "spatial_assertion": "В земной сцене Таис говорит, что на станции вода горячая, есть душ и ароматная пена. Это удалённое функциональное свидетельство о санитарно-бытовом обслуживании станции; точное расположение ванной, план и размеры не названы.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
