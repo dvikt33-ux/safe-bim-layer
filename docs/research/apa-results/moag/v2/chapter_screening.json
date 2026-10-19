@@ -4,7 +4,6 @@
   "scope": {
     "total_pages": 412,
     "screened_page_ids": [
-      "B3-004",
       "B2-051",
       "B2-052",
       "B2-053",
@@ -72,7 +71,9 @@
       "B2-141",
       "B2-142",
       "B2-143",
-      "B2-144"
+      "B2-144",
+      "B3-004",
+      "B3-005"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -96,7 +97,8 @@
       "B2-089",
       "B2-095",
       "B2-142",
-      "B2-143"
+      "B2-143",
+      "B3-005"
     ],
     "remote_evidence_page_ids": [
       "B2-052",
@@ -116,10 +118,10 @@
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B3-004",
-      "context_reviewed_page_count": 69,
+      "as_of_page_id": "B3-005",
+      "context_reviewed_page_count": 70,
       "full_evidence_page_count": 233,
-      "external_excluded_page_count": 22,
+      "external_excluded_page_count": 23,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
       "justified_reopen_event_count": 5,
@@ -1422,7 +1424,8 @@
       "chapter_classification": "REMOTE_EVIDENCE",
       "screening_status": "ONE_PASS_IN_PROGRESS",
       "screened_pages": [
-        "B3-004"
+        "B3-004",
+        "B3-005"
       ],
       "scenes": [
         {
@@ -1448,6 +1451,10 @@
             {
               "page_id": "B3-004",
               "fragment": "Остальной фрагмент главы описывает катер, корабль и чужую планету."
+            },
+            {
+              "page_id": "B3-005",
+              "fragment": "Продолжение описания катеров и быта «Дракона»; новых сведений о МОАГе нет."
             }
           ],
           "classification": "EXTERNAL",
