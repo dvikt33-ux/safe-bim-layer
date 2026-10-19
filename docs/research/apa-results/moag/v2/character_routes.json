@@ -1658,6 +1658,211 @@
       "constraints": [],
       "identity_hypotheses": [],
       "notes": "От выхода на Втором до начала следующей главы на Нижнем пропущен подробный маршрут. Нельзя придумывать конкретный лифт или общую вентиляционную шахту; сегмент RT014-B условно фиксирует смену уровня, метод подъёма/спуска не описан."
+    },
+    {
+      "id": "RT-015",
+      "title": "Эмма, Коля, Вовик: закрытый Нижний → ангар → круглый зал → верхняя пультовая",
+      "participants": [
+        "Эмма",
+        "Коля",
+        "Вовик"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-074",
+        "B1-075",
+        "B1-076"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT015-A",
+          "label": "Из обитаемой базы к трубе закрытого Нижнего",
+          "global_level": 1,
+          "local_stratum": "base-access",
+          "source_page_id": "B1-074",
+          "movement_method": "WALK",
+          "observed_constraint": "Из обитаемой базы к трубе закрытого Нижнего",
+          "existing_graph_node": "L1-BASES",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT015-B",
+          "label": "Спуск по трубе на локальную нижнюю отметку",
+          "global_level": null,
+          "local_stratum": "sealed-tube",
+          "source_page_id": "B1-074",
+          "movement_method": "DROP_DOWN",
+          "observed_constraint": "Спуск по трубе на локальную нижнюю отметку",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT015-C",
+          "label": "Двустворчатая звёздная дверь",
+          "global_level": 1,
+          "local_stratum": "sealed-gate",
+          "source_page_id": "B1-074",
+          "movement_method": "DOOR",
+          "observed_constraint": "Двустворчатая звёздная дверь",
+          "existing_graph_node": "L1-SEALED",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT015-D",
+          "label": "Три ответвления за дверью",
+          "global_level": 1,
+          "local_stratum": "three-way-fork",
+          "source_page_id": "B1-074",
+          "movement_method": "WALK",
+          "observed_constraint": "Три ответвления за дверью",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT015-E",
+          "label": "Дугообразные коридоры со старыми каютами",
+          "global_level": 1,
+          "local_stratum": "old-cabins",
+          "source_page_id": "B1-074",
+          "movement_method": "WALK",
+          "observed_constraint": "Дугообразные коридоры со старыми каютами",
+          "existing_graph_node": "L1-OLD-PROF-CABINS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT015-F",
+          "label": "Кладовые, ангарный коридор",
+          "global_level": 1,
+          "local_stratum": "old-hangar-route",
+          "source_page_id": "B1-074",
+          "movement_method": "WALK",
+          "observed_constraint": "Кладовые, ангарный коридор",
+          "existing_graph_node": "L1-OLD-FREIGHT-HANGAR",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT015-G",
+          "label": "Открытый ангар с заражёнными",
+          "global_level": 1,
+          "local_stratum": "first-hangar",
+          "source_page_id": "B1-075",
+          "movement_method": "WALK",
+          "observed_constraint": "Открытый ангар с заражёнными",
+          "existing_graph_node": "L1-ANGAR-HALL",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT015-H",
+          "label": "Обход и спуск на пару ступеней к другому залу",
+          "global_level": 1,
+          "local_stratum": "lower-steps",
+          "source_page_id": "B1-075",
+          "movement_method": "CLIMB_DOWN",
+          "observed_constraint": "Обход и спуск на пару ступеней к другому залу",
+          "existing_graph_node": "L1-HALL-STEPS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT015-I",
+          "label": "Круглый высокий зал с тележками",
+          "global_level": 1,
+          "local_stratum": "tall-hall-floor",
+          "source_page_id": "B1-076",
+          "movement_method": "WALK",
+          "observed_constraint": "Круглый высокий зал с тележками",
+          "existing_graph_node": "L1-CIRCULAR-HALL",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT015-J",
+          "label": "Подъём по остаткам лестницы",
+          "global_level": 1,
+          "local_stratum": "gallery-access",
+          "source_page_id": "B1-076",
+          "movement_method": "CLIMB_UP",
+          "observed_constraint": "Подъём по остаткам лестницы",
+          "existing_graph_node": "L1-CIRCULAR-STAIRS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT015-K",
+          "label": "Верхний полукруглый мостик и дверь",
+          "global_level": 1,
+          "local_stratum": "upper-gallery",
+          "source_page_id": "B1-076",
+          "movement_method": "WALK",
+          "observed_constraint": "Верхний полукруглый мостик и дверь",
+          "existing_graph_node": "L1-CIRCULAR-UPPER-WALK",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT015-L",
+          "label": "Пультовая ручного управления шлюзами",
+          "global_level": 1,
+          "local_stratum": "control-room",
+          "source_page_id": "B1-076",
+          "movement_method": "DOOR",
+          "observed_constraint": "Пультовая ручного управления шлюзами",
+          "existing_graph_node": "L1-CIRCULAR-CONTROL",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT015-M",
+          "label": "Многодверная жилая комнатка с водой",
+          "global_level": 1,
+          "local_stratum": "service-quarters",
+          "source_page_id": "B1-076",
+          "movement_method": "DOOR",
+          "observed_constraint": "Многодверная жилая комнатка с водой",
+          "existing_graph_node": "L1-CIRCULAR-QUARTERS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT015-A",
+          "lower": "RT015-B",
+          "source_page_id": "B1-074",
+          "claim": "Труба опускается относительно обитаемой части Нижнего."
+        },
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT015-G",
+          "lower": "RT015-H",
+          "source_page_id": "B1-075",
+          "claim": "Локальный спуск на пару ступеней перед круглым залом."
+        },
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT015-K",
+          "lower": "RT015-I",
+          "source_page_id": "B1-076",
+          "claim": "Полукруглый мостик под потолком выше пола зала."
+        }
+      ],
+      "identity_hypotheses": [
+        {
+          "candidate": "RT015-C",
+          "may_match": "SUB-SEALED-DOOR",
+          "status": "UNVERIFIED_SAME_DOOR"
+        }
+      ],
+      "notes": "Физически пройденные помещения не объединять с неосмотренными схемами p78; абсолютные Z и XY неизвестны."
     }
   ]
 }
