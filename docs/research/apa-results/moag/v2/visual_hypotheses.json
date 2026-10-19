@@ -44,8 +44,10 @@
       "proposed_claim": "Полная жилая палуба Второго уровня разбита на два сплошных этажа",
       "station": "MOAG",
       "status": "INSUFFICIENT_EVIDENCE",
-      "checked_against_pages": [],
-      "textual_finding": "Приподнятая галерея над площадью не доказывает непрерывную вторую плиту",
+      "checked_against_pages": [
+        "B1-056"
+      ],
+      "textual_finding": "На странице B1-056 прямо указаны ДВА этажа жилого блока, огибающего Зеленую магистраль: каюты 2-й этаж, магазины/игровые/туннели 1-й. Однако гипотеза о двух СПЛОШНЫХ палубах всего диаметра Второго остаётся недоказанной.",
       "adopt_as_geometry": false
     },
     {
@@ -81,6 +83,19 @@
       "status": "REJECTED_AS_METRIC_EVIDENCE",
       "checked_against_pages": [],
       "textual_finding": "Иллюстрация без масштаба и проверки ракурса не даёт допустимого метрического обмера.",
+      "adopt_as_geometry": false
+    },
+    {
+      "id": "VH-008",
+      "name": "Двухэтажный кольцевой жилой блок Второго",
+      "visual_source": "BOOK_I_PAGE_056_TEXT",
+      "proposed_claim": "Локальная внутренняя структура: верхние каюты над торгово-игровым этажом кольцевого блока",
+      "station": "MOAG",
+      "status": "TEXT_SUPPORTED_LOCAL_ONLY",
+      "checked_against_pages": [
+        "B1-056"
+      ],
+      "textual_finding": "Прямая авторская фраза о 1-м и 2-м этажах жилого блока вокруг Зеленой магистрали.",
       "adopt_as_geometry": false
     }
   ]
