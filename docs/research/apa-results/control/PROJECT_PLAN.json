@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 193,
+  "revision": 194,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2537,6 +2537,27 @@
       "kind": "REVIEW",
       "verification": "AUDIT_READBACK_VERIFIED",
       "scope": "ActualUngroupNativeGroupV1 throughsharedselector/registry/SceneWriter; exact2members released, all188GUID/BREP/materials preserved,80Column membershiprecords withonly2authorizedchanges, guardedsave/snapshot/nativeclose/reopen. Installed,CI9SUCCESS,groupcreationnotrepeated."
+    },
+    "ART-P70-A11-S19-MOVE-RECEIPT-20261020": {
+      "id": "ART-P70-A11-S19-MOVE-RECEIPT-20261020",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/426ea870ef6e2fce60a6354a3c6f335906100e18/docs/evidence/apa-ac29-shared-group-move-20261020/README_RU.md",
+      "kind": "RECEIPT",
+      "verification": "INSTALLED_SHARED_GROUP_MOVE_SAVED_REOPENED_PASS",
+      "scope": "OneactualMoveNativeGroupV1 ofexisting2Columngroup,ownedscope4GUID/184retained;all188GUID/membershipsretained,exact[500,100,0]translation/shape/materials/collision,guardedSave/snapshot/nativeclose/reopen; installed,CI9SUCCESS onc980code. No groupcreationrepeat."
+    },
+    "ART-P70-A11-S19-MOVE-AUDIT-20261020": {
+      "id": "ART-P70-A11-S19-MOVE-AUDIT-20261020",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/426ea870ef6e2fce60a6354a3c6f335906100e18/docs/evidence/apa-ac29-shared-group-move-20261020/independent-audit.json",
+      "kind": "REVIEW",
+      "verification": "AUDIT_READBACK_VERIFIED",
+      "scope": "OneactualMoveNativeGroupV1 ofexisting2Columngroup,ownedscope4GUID/184retained;all188GUID/membershipsretained,exact[500,100,0]translation/shape/materials/collision,guardedSave/snapshot/nativeclose/reopen; installed,CI9SUCCESS onc980code. No groupcreationrepeat."
+    },
+    "ART-P70-A11-S20-DXF-READY-SOURCE-20261020": {
+      "id": "ART-P70-A11-S20-DXF-READY-SOURCE-20261020",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/163",
+      "kind": "REVIEW",
+      "verification": "RANKED_CATALOG_SOURCE_REVIEWED_NOT_IMPLEMENTATION",
+      "scope": "Ready existingezdxf candidate: reuseinstalled1.4.5 in V1venv. New sourceDXF preflight: recover/audit,XREF existence/hash,MINSERTcounts andunits. ExistingIFC schema/IDS commands notduplicated."
     }
   },
   "tasks": {
@@ -5134,7 +5155,8 @@
         "APA-P70.A11.S16",
         "APA-P70.A11.S17",
         "APA-P70.A11.S18",
-        "APA-P70.A11.S19"
+        "APA-P70.A11.S19",
+        "APA-P70.A11.S20"
       ],
       "inputs": [
         "ART-APA-HIGHLEVEL-PR34",
@@ -5340,7 +5362,8 @@
         "2026-10-20 S15/PR183 installed finite diagonal line accepted/published. S16 selectednamedaxes with irregularpitch is next newfunction; oldcopy/grid not repeated.",
         "2026-10-20 S16/PR184 selectednamedaxisintersections installed/published; S17 sharednativegroupcreation is nextfunction, reuseexisting SDKcommand.",
         "2026-10-20 S17/PR185 sharednativegroupcreate installed/published. NextS18 nativeungroup edits acceptedgroup innewcopy, no recreatinggroup.",
-        "2026-10-20 S18/PR186 nativeungroup installed/published; S19 nativewholegroup move next. Existingacceptedgroup snapshot reused, no recreation."
+        "2026-10-20 S18/PR186 nativeungroup installed/published; S19 nativewholegroup move next. Existingacceptedgroup snapshot reused, no recreation.",
+        "2026-10-20 S19/PR188 wholegroupmove installed/published. Five newnativecapabilities S15..S19 acceptedonceeach; S20 ready DXFadapter from163 next independentthin integration usingexistingvenv."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
       "owner": null,
@@ -6254,7 +6277,7 @@
       "action_id": "APA-P70.A11",
       "title": "Перемещение целой нативной группы через общий selector/registry",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 0,
       "work_key": "ac29-shared-native-group-move",
       "depends_on": [
@@ -6268,11 +6291,43 @@
         "ART-P70-A11-S18-UNGROUP-AUDIT-20261020",
         "ART-P70-A11-S17-GROUP-RECEIPT-20261020"
       ],
-      "outputs": [],
+      "outputs": [
+        "PR188 nativewholegroupmove installed/accepted,published426ea870. Groupfc0ee2e1 unchanged, exactnewtargets,188GUID,4moved/184retained, savedSHAebbd0574. CI9SUCCESS onexecutedc980code; no repeatedacceptedoperations."
+      ],
       "acceptance": "ReuseactualMoveNativeGroupV1 contract,one horizontal translation ofsourceverifiedflatColumngroup. Scopeincludesmembersandownedsegments; keepallGUIDs/membership/fulltypedshape/materials,verifyexacttranslatedanchorsandcollision-freefootprint,retainedmodelunchanged. One safe-copyLIVE fromexistinggroup snapshot,guardedsave/snapshot/reopen; no group recreation or previousscenario repeat.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [
+        "ART-P70-A11-S19-MOVE-RECEIPT-20261020",
+        "ART-P70-A11-S19-MOVE-AUDIT-20261020"
+      ],
+      "blocked_reason": null
+    },
+    "APA-P70.A11.S20": {
+      "id": "APA-P70.A11.S20",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Готовая лёгкая DXF интеграция: recover/audit, XREF/hash, MINSERT и единицы через общий Router",
+      "kind": "INTEGRATION",
+      "status": "IN_PROGRESS",
+      "priority": 1,
+      "work_key": "existing-ezdxf-dxf-source-preflight",
+      "depends_on": [
+        "APA-P70.A11.S13"
+      ],
+      "related": [
+        "APA-P70.A11.S03"
+      ],
+      "inputs": [
+        "ART-P70-A11-S20-DXF-READY-SOURCE-20261020"
+      ],
+      "outputs": [],
+      "acceptance": "One realadapter onexistingRouter/registry, reuseinstalledezdxf1.4.5 andexistingV1venv, preserve30+4commands/all296contracts. Sourcehashbefore/after,failclosedonparse/audit/unknownunits/missingoroutsideXREF; noDXFrepairwrite, noPLN/APX/nativecalls. Automaticcontract checks andone realmanufacturerDXF safe-copy operation; publish/install/report. No duplicatedIDS/schema/geometry engines.",
       "owner": "apa-mass-integration-20261019",
-      "lease_until": "2026-10-20T03:43:18Z",
-      "claim_ref": "APA-RUN-20261020-NATIVE-GROUP-MOVE",
+      "lease_until": "2026-10-20T03:54:49Z",
+      "claim_ref": "APA-RUN-20261020-DXF-PREFLIGHT",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
@@ -6574,7 +6629,8 @@
         "APA-P70.A11.S16",
         "APA-P70.A11.S17",
         "APA-P70.A11.S18",
-        "APA-P70.A11.S19"
+        "APA-P70.A11.S19",
+        "APA-P70.A11.S20"
       ],
       "artifact_ids": [
         "ART-APA-FULL-CYCLE",
@@ -7372,9 +7428,21 @@
         "APA-P10.A01.S03",
         "APA-P50.A02.S01"
       ],
+      "readiness": "SUFFICIENT",
+      "readiness_evidence_ids": [
+        "ART-P70-A11-S19-MOVE-AUDIT-20261020"
+      ],
+      "note": "Installedwholegroupmove withone actualoperation/save/reopen accepted; sourcecodeCI9SUCCESS pinnedseparatelyfromdocshead."
+    },
+    "APA-P70.A11.S20": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
       "readiness": "GAP",
       "readiness_evidence_ids": [],
-      "note": "ExistingSDKMoveNativeGroupV1 and acceptedgroup snapshot available. Reuse currentregistry and one-shotcaller; no newresearch/APX/dependencies."
+      "note": "Ready163candidate andactualinstalledezdxf/vendor/C1adapter available; no lengthyresearch or dependencyduplication. DXFsourceanalysis only, noautomaticBIMinference."
     }
   },
   "component_catalog": {
