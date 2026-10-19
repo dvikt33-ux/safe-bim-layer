@@ -3023,6 +3023,343 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-185",
+      "page_id": "B1-051",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=51",
+      "station_id": "MOAG",
+      "narrative_mode": "INTERIOR",
+      "locator_hint": "из спальни к мойке и столу",
+      "spatial_assertion": "Спальня связана через общий проход с раковиной для мытья посуды; все собираются в общем помещении.",
+      "feature_refs": [
+        "L1-BASE-COMMON",
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-186",
+      "page_id": "B1-052",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=52",
+      "station_id": "MOAG",
+      "narrative_mode": "TWO_TABLES",
+      "locator_hint": "отдельно готовят и едят",
+      "spatial_assertion": "В общем зале два функционально разных стола: для приготовления пищи с плиткой и для приёма еды.",
+      "feature_refs": [
+        "L1-BASE-COMMON-COOK-TABLE",
+        "L1-BASE-COMMON-DINE-TABLE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-187",
+      "page_id": "B1-053",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=53",
+      "station_id": "MOAG",
+      "narrative_mode": "LOCAL_STAIRS",
+      "locator_hint": "Валёк около лестницы в спальню, Таис спрыгнула с верхних перекладин",
+      "spatial_assertion": "Лестница к спальне Валька и верхние перекладины спальни Таис подтверждают дополнительные вертикальные подходы из общего сектора.",
+      "feature_refs": [
+        "L1-BASE-SLEEP",
+        "L1-DARK-UPPER-PERIMETER"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-188",
+      "page_id": "B1-053",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=53",
+      "station_id": "MOAG",
+      "narrative_mode": "HYPOTHESIS_UNKNOWN_FUNCTION",
+      "locator_hint": "герои полагают, что за звездной дверью могут быть грузовые ангары",
+      "spatial_assertion": "Назначение закрытого отсека за дверью с эмблемой станции неизвестно; гипотеза персонажей об ангарах не доказана.",
+      "feature_refs": [
+        "SUB-SEALED-DOOR"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-189",
+      "page_id": "B1-054",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=54",
+      "station_id": "MOAG",
+      "narrative_mode": "WALL_SURFACE",
+      "locator_hint": "потолок серый низкий, рифлёный пластик",
+      "spatial_assertion": "В одной спальне Темной базы низкий серый потолок покрыт рифлёным пластиком; у Коли матрас на полу, у Эммы кровать и табурет.",
+      "feature_refs": [
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-190",
+      "page_id": "B1-055",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=55",
+      "station_id": "MOAG",
+      "narrative_mode": "SECURITY_DOORS",
+      "locator_hint": "две закрытые двери: внешняя и на Темную базу",
+      "spatial_assertion": "Жилая база отделена от опасного сектора двумя последовательно расположенными прочными дверями, между ними коридор.",
+      "feature_refs": [
+        "L1-BASE-OUTER-GATE",
+        "L1-BASE-INNER-GATE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-191",
+      "page_id": "B1-055",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=55",
+      "station_id": "MOAG",
+      "narrative_mode": "STORAGE_USE",
+      "locator_hint": "дальний конец коридора, маленькие кладовки",
+      "spatial_assertion": "В конце коридора к базам расположены узкие кладовые со стеллажами и простым механическим запиранием; одну используют как временный изолятор.",
+      "feature_refs": [
+        "L1-BASE-CORRIDOR-STORES"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-192",
+      "page_id": "B1-056",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=56",
+      "station_id": "MOAG",
+      "narrative_mode": "TWO_STOREY_RING",
+      "locator_hint": "жилой блок огибал Зелёную правильным кругом",
+      "spatial_assertion": "На Втором уровне отдельный кольцевой жилой блок имеет два локальных этажа; каюты находятся на втором.",
+      "feature_refs": [
+        "L2-RESIDENTIAL-RING",
+        "L2-RESIDENTIAL-UPPER",
+        "L2-GREEN"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-193",
+      "page_id": "B1-056",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=56",
+      "station_id": "MOAG",
+      "narrative_mode": "GROUND_PUBLIC_RING",
+      "locator_hint": "магазины игровые и туннели на первом этаже",
+      "spatial_assertion": "На первом этаже кольцевого жилого блока магазины, игровые комнаты и туннели к Оранжевой магистрали; это не доказательство всей глобальной двухпалубности Второго.",
+      "feature_refs": [
+        "L2-RESIDENTIAL-LOWER",
+        "L2-ORANGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-194",
+      "page_id": "B1-056",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=56",
+      "station_id": "MOAG",
+      "narrative_mode": "VENT_ROUTE",
+      "locator_hint": "Оранжевая затем коридор и Коля у вентиляционного лаза",
+      "spatial_assertion": "Эмма пересекает Оранжевую магистраль, входит в выбранный коридор и встречает Колю у вентиляционного отверстия.",
+      "feature_refs": [
+        "L2-ORANGE",
+        "L1-VENT"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-195",
+      "page_id": "B1-057",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=57",
+      "station_id": "MOAG",
+      "narrative_mode": "LOWER_ACCESS",
+      "locator_hint": "Эмма пролезает в шахту ногами вперёд",
+      "spatial_assertion": "Из вентиляционного доступа на Втором Эмма и Коля спускаются в холодный Нижний и затем идут к базе.",
+      "feature_refs": [
+        "L1-VENT",
+        "L1-BASES"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-196",
+      "page_id": "B1-057",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=57",
+      "station_id": "MOAG",
+      "narrative_mode": "ROOM_STAIRS",
+      "locator_hint": "из общего зала поднимается в спальню Таис",
+      "spatial_assertion": "Эмма достигает общей комнаты Темной и поднимается в отдельную спальню Таис и Фёдора.",
+      "feature_refs": [
+        "L1-BASE-COMMON",
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-197",
+      "page_id": "B1-058",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=58",
+      "station_id": "MOAG",
+      "narrative_mode": "HYGIENE",
+      "locator_hint": "из спальни в душ; горячая вода ограничена",
+      "spatial_assertion": "Душевая находится в доступе от спальни и общего коридора; запас горячей воды ограничен.",
+      "feature_refs": [
+        "L1-BASE-WET",
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-198",
+      "page_id": "B1-058",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=58",
+      "station_id": "MOAG",
+      "narrative_mode": "WASTE_INCINERATOR",
+      "locator_hint": "вакуумные контейнеры и конвейер лучевой печи",
+      "spatial_assertion": "Мусор упакован в вакуумные контейнеры, по конвейеру передаётся к горячему устью лучевой печи через роботизированный захват.",
+      "feature_refs": [
+        "L1-RECYCLING"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-199",
+      "page_id": "B1-059",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=59",
+      "station_id": "MOAG",
+      "narrative_mode": "HATCH_TRANSIT",
+      "locator_hint": "мусорка, лестница, железный люк, маленький тёмный переход",
+      "spatial_assertion": "Дети проходят из мусорки по железной лестнице в люк Третьего и небольшой тёмный коридор перед кодовой дверью.",
+      "feature_refs": [
+        "L1-STAIR-UP",
+        "L3-UP-ACCESS-LOBBY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-200",
+      "page_id": "B1-059",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=59",
+      "station_id": "MOAG",
+      "narrative_mode": "CIRCULATION_NETWORK",
+      "locator_hint": "белый ход от внутреннего круга к внешнему",
+      "spatial_assertion": "После выхода на Третий белый коридор идёт от внутреннего круга к внешнему; на развилке становится широким для погрузчиков, справа ангарная/шлюзовая группа, дальше производство.",
+      "feature_refs": [
+        "L3-INNER",
+        "L3-OUTER",
+        "L3-SERVICE",
+        "L3-DOCK",
+        "L3-PRODUCTION"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-201",
+      "page_id": "B1-059",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=59",
+      "station_id": "MOAG",
+      "narrative_mode": "STORES",
+      "locator_hint": "два соседних склада с бельём, обувью и одеждой",
+      "spatial_assertion": "На маршруте к внутреннему управляемому сектору несколько складских помещений со стеллажами и предметами личного снабжения.",
+      "feature_refs": [
+        "L3-STORE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-202",
+      "page_id": "B1-060",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=60",
+      "station_id": "MOAG",
+      "narrative_mode": "INNER_GATE",
+      "locator_hint": "опускающаяся вниз створка с треугольниками",
+      "spatial_assertion": "В криволинейной стене внутреннего круга Третьего широкая одинарная дверь опускается вниз; её поверхность покрыта белым пластиком с геометрической эмблемой.",
+      "feature_refs": [
+        "L3-INNER-SECTOR-GATE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-203",
+      "page_id": "B1-060",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=60",
+      "station_id": "MOAG",
+      "narrative_mode": "CHILD_LAB_ACCESS",
+      "locator_hint": "надпись справа, двойные двери, проход под аркой",
+      "spatial_assertion": "За закрытым сектором справа висит голографический указатель «Детский блок»; следующие широкие двойные двери и узкая арка ведут в зал кувезов.",
+      "feature_refs": [
+        "L3-CHILD-LAB-ENTRANCE",
+        "L3-CHILD-LAB"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-204",
+      "page_id": "B1-060",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=60",
+      "station_id": "MOAG",
+      "narrative_mode": "LAB_EQUIPMENT",
+      "locator_hint": "большой полутёмный зал с кувезами",
+      "spatial_assertion": "Внутри высокий зал с непрозрачными цилиндрическими кувезами, технологическими трубками, тонкими проводами и индивидуальными голографическими экранами.",
+      "feature_refs": [
+        "L3-CHILD-LAB"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
