@@ -7230,6 +7230,167 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-441",
+      "page_id": "B2-043",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=43",
+      "station_id": "MOAG",
+      "narrative_mode": "STATION_OBJECT_OR_EXCLUSION",
+      "locator_hint": "опасные двери, ползущие многоножки",
+      "spatial_assertion": "Открывающиеся двери и наползающие механизмы являются сном Таис и не могут определять реальный план какой-либо части МОАГа.",
+      "feature_refs": [],
+      "evidence_class": "DREAM_NONFACT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-442",
+      "page_id": "B2-043",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=43",
+      "station_id": "MOAG",
+      "narrative_mode": "STATION_OBJECT_OR_EXCLUSION",
+      "locator_hint": "за овальным окном виден большой округлый борт МОАГа",
+      "spatial_assertion": "Округлый внешний борт станции виден через овальное окно другого крейсера; это непосредственное наблюдение внешнего вида без размера, ракурса и метрической геометрии.",
+      "feature_refs": [
+        "L1",
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-443",
+      "page_id": "B2-044",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=44",
+      "station_id": "UNRESOLVED_OBJECT",
+      "narrative_mode": "STATION_OBJECT_OR_EXCLUSION",
+      "locator_hint": "спуск через квадратное отверстие, шлюзы крейсера",
+      "spatial_assertion": "Шахта с квадратным отверстием в полу, ремонтный коридор с серверными стенами, кладовая и шлюз относятся к крейсеру Иминуя, не МОАГу.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-444",
+      "page_id": "B2-045",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=45",
+      "station_id": "UNRESOLVED_OBJECT",
+      "narrative_mode": "STATION_OBJECT_OR_EXCLUSION",
+      "locator_hint": "квадратный пищевой робот Грум в крейсере",
+      "spatial_assertion": "Кухонный агрегат со шкафчиками, матовым пластиковым фасадом и внутренним пищевым автоматом относится к крейсеру Иминуя, не физической станции МОАГ.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-445",
+      "page_id": "B2-046",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=46",
+      "station_id": "MOAG",
+      "narrative_mode": "STATION_OBJECT_OR_EXCLUSION",
+      "locator_hint": "из чужого крейсера виден край станции, овальные огни",
+      "spatial_assertion": "При непосредственном наблюдении из чужого крейсера на внешней стороне МОАГа видны светящиеся овальные периферийные элементы и ряд окон верхнего объёма; точный глобальный контур не измерен.",
+      "feature_refs": [
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-446",
+      "page_id": "B2-046",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=46",
+      "station_id": "MOAG",
+      "narrative_mode": "STATION_OBJECT_OR_EXCLUSION",
+      "locator_hint": "несколько шлюзовых камер для катеров",
+      "spatial_assertion": "На внешнем борту МОАГа видно несколько отдельных шлюзовых камер, связанных с катерами; не доказано, какие именно внутренние ангары каждой соответствуют.",
+      "feature_refs": [
+        "L1-BOAT-LOCK",
+        "L1-HANGAR-ZONE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-447",
+      "page_id": "B2-046",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=46",
+      "station_id": "MOAG",
+      "narrative_mode": "STATION_OBJECT_OR_EXCLUSION",
+      "locator_hint": "во время атаки свет на верхнем уровне гаснет, поле тает",
+      "spatial_assertion": "Внешнее силовое поле ослабевает, отдельные освещённые окна Третьего временно гаснут, станция меняет ориентацию при манёврах; это эксплуатационное состояние, не постоянный фасад.",
+      "feature_refs": [
+        "CORE-ENERGY",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-448",
+      "page_id": "B2-046",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=46",
+      "station_id": "MOAG",
+      "narrative_mode": "STATION_OBJECT_OR_EXCLUSION",
+      "locator_hint": "все лифты заблокировали, включая грузовые",
+      "spatial_assertion": "При атаке доступ к Третьему ограничивают, отключая пассажирские и грузовые лифты; Эмма и Коля всё же используют доступную пассажирскую кабину для спуска на Второй до её окончательной блокировки.",
+      "feature_refs": [
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-449",
+      "page_id": "B2-047",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=47",
+      "station_id": "MOAG",
+      "narrative_mode": "STATION_OBJECT_OR_EXCLUSION",
+      "locator_hint": "Коля нажал кнопку, кабина погасла",
+      "spatial_assertion": "После прибытия со Третьего на Второй Коля блокирует конкретный пассажирский лифт: двери закрываются и свет панели выключается.",
+      "feature_refs": [
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-450",
+      "page_id": "B2-047",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=47",
+      "station_id": "MOAG",
+      "narrative_mode": "STATION_OBJECT_OR_EXCLUSION",
+      "locator_hint": "близнецы сидели прямо на перилах галереи возле каюты",
+      "spatial_assertion": "В жилой зоне Второго возле двери каюты есть физическая галерея с ограждением, на котором сидят близнецы; отметка галереи относительно уровня входа из сцены не измерена.",
+      "feature_refs": [
+        "L2-GALLERY",
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
