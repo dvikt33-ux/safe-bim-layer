@@ -1631,6 +1631,59 @@
         }
       ],
       "chapter_end_confirmed": true
+    },
+    {
+      "id": "B3-PART1-CH10",
+      "book_id": "B3",
+      "part_number": 1,
+      "chapter_number": 10,
+      "title": "Эмма. Хозяйка станции",
+      "page_span": {
+        "start": 25,
+        "end": 26
+      },
+      "chapter_classification": "MIXED",
+      "screening_status": "ONE_PASS_IN_PROGRESS",
+      "screened_pages": [
+        "B3-025",
+        "B3-026"
+      ],
+      "scenes": [
+        {
+          "id": "B3P1C10-S1",
+          "page_fragments": [
+            {
+              "page_id": "B3-025",
+              "fragment": "Земной текст главы 9 перед заголовком пропущен. В конце страницы появляется только заголовок главы 10; содержательная сцена начинается на p26."
+            }
+          ],
+          "classification": "EXTERNAL",
+          "physical_location": "Земля, глава 9; глава 10 начинается на следующей странице.",
+          "characters": [
+            "Таис",
+            "Фёдор"
+          ],
+          "screened_out_material": "Сцена на Земле пропущена по правилу пользователя."
+        },
+        {
+          "id": "B3P1C10-S2",
+          "page_fragments": [
+            {
+              "page_id": "B3-026",
+              "fragment": "На другой станции Эмма сравнивает устройство центральных кольцевых коридоров: на МОАГе центральных колец несколько. Все наблюдаемые проходы и рубка сцены относятся к другой станции."
+            }
+          ],
+          "classification": "REMOTE_EVIDENCE",
+          "physical_location": "Другая станция; знание структуры МОАГа сообщается Эммой напрямую.",
+          "characters": [
+            "Эмма",
+            "Ник",
+            "Жак"
+          ],
+          "station_relevance": "Подтверждены несколько центральных круговых коридоров МОАГа; чужая станция и маршрут по ней исключены."
+        }
+      ],
+      "chapter_end_confirmed": false
     }
   ],
   "character_location_events": [
