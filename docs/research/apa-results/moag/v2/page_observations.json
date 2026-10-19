@@ -10522,6 +10522,20 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-670",
+      "page_id": "B3-011",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=11",
+      "station_id": "OTHER_STATION_NOT_MOAG",
+      "narrative_mode": "OTHER_STATION_OPERATIONAL_EXCLUSION",
+      "locator_hint": "Другая станция на экране крейсера: раскрытие шлюза, огни, вращение/движение и захваченный катер.",
+      "spatial_assertion": "Сигнальная станция, атакуемая в главе 4, приходит в движение и вращается; в её капсуле энергомодуля живой металл перепрограммирован чипом, корни дерева гибнут. Это иной объект; не переносить на МОАГ его динамику, компоновку энергомодуля или режим ловушки.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
