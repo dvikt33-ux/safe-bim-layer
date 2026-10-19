@@ -1,6 +1,6 @@
 {
   "schema": "APA-MOAG-TOPOLOGY-SNAPSHOT/0.1",
-  "source_blob_sha": "dc7f18f2c6491fbacce61e8a7d6c8ca07bfc4d45",
+  "source_blob_sha": "8e15e0ca4b9338193af4d3a91cce4abbe3d8e575",
   "derived_from": "docs/research/apa-results/moag/v1/evidence_graph.json",
   "status": "GRAPH_ONLY_NO_COORDINATES",
   "space_refs": [
@@ -208,6 +208,41 @@
       "id": "CORE-ENERGY",
       "label": "Центральный энергомодуль",
       "level": null
+    },
+    {
+      "id": "L1-ANGAR-ADJ",
+      "label": "Соседний ангар Нижнего уровня",
+      "level": 1
+    },
+    {
+      "id": "L1-OPERATORS-ADJ",
+      "label": "Диспетчерская соседнего ангара",
+      "level": 1
+    },
+    {
+      "id": "L1-ANGAR-OTHER",
+      "label": "Дополнительные заброшенные ангары",
+      "level": 1
+    },
+    {
+      "id": "L3-FREIGHT-LIFTS",
+      "label": "Грузовые лифты Третьего уровня",
+      "level": 3
+    },
+    {
+      "id": "L3-CARGO-HALL",
+      "label": "Просторный грузовой зал у производства",
+      "level": 3
+    },
+    {
+      "id": "L3-SUIT-ALCOVE",
+      "label": "Отсек со скафандрами",
+      "level": 3
+    },
+    {
+      "id": "L3-WORKSHOP-DOOR",
+      "label": "Белые двери производственного цеха",
+      "level": 3
     }
   ],
   "relationships": [
@@ -652,6 +687,106 @@
       "state": "TEXT_DIRECT",
       "source_ids": [
         "B1-06"
+      ]
+    },
+    {
+      "id": "E45",
+      "from": "L1-HANGAR-ZONE",
+      "to": "L1-ANGAR-ADJ",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-15"
+      ]
+    },
+    {
+      "id": "E46",
+      "from": "L1-ANGAR-HALL",
+      "to": "L1-ANGAR-ADJ",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-15"
+      ]
+    },
+    {
+      "id": "E47",
+      "from": "L1-ANGAR-ADJ",
+      "to": "L1-OPERATORS-ADJ",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-15"
+      ]
+    },
+    {
+      "id": "E48",
+      "from": "L1-OPERATORS",
+      "to": "L1-OPERATORS-ADJ",
+      "relation": "internally_connected",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-15"
+      ]
+    },
+    {
+      "id": "E49",
+      "from": "L1-ANGAR-ADJ",
+      "to": "L1-ANGAR",
+      "relation": "craft_movement_via_hall",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-15"
+      ]
+    },
+    {
+      "id": "E50",
+      "from": "L1-HANGAR-ZONE",
+      "to": "L1-ANGAR-OTHER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-15"
+      ]
+    },
+    {
+      "id": "E51",
+      "from": "L3-FREIGHT-LIFTS",
+      "to": "L3-BRIDGE",
+      "relation": "corridor_near",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B2-13"
+      ]
+    },
+    {
+      "id": "E52",
+      "from": "L3-CARGO-HALL",
+      "to": "L3-WORKSHOP-DOOR",
+      "relation": "adjoins",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-13"
+      ]
+    },
+    {
+      "id": "E53",
+      "from": "L3-WORKSHOP-DOOR",
+      "to": "L3-PRODUCTION",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-13"
+      ]
+    },
+    {
+      "id": "E54",
+      "from": "L3-CARGO-HALL",
+      "to": "L3-SUIT-ALCOVE",
+      "relation": "near",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B2-13"
       ]
     }
   ],
