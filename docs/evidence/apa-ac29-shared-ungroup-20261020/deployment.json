@@ -1,0 +1,35 @@
+{
+  "status": "INSTALLED_SHARED_NATIVE_UNGROUP",
+  "sourceCodeRevision": "9113a249e16dafaae78d9178b1234bf5097f9c7f",
+  "files": {
+    "scripts/archicad_project_accelerator.py": {
+      "beforeSHA256": "48f157eab16650542a429b8313662ffcb407f827e905ce302190069408054b7f",
+      "afterSHA256": "e2658ed386a76762060a105f3093b57aff23687620cf289cc0afb4d9d584da2d"
+    },
+    "scripts/apa_ac29_dynamic_native_verifiers.py": {
+      "beforeSHA256": "e42b5abf721e593c4d3371c9663438fecbfb0299ec9f1f6c46f27e554f333f98",
+      "afterSHA256": "d9bc8c3ae50a996f0a6661c8a360645c9bd7aaf45a3d8c9b8a7bb547a7f742ea"
+    },
+    "scripts/apa_ac29_group_create_oneshot.py": {
+      "beforeSHA256": "5ee7cda0c29e1b207f14689f9d3bbd267f056eb6cf453b1b8135e675ca6a0472",
+      "afterSHA256": "206aa6a7f0c229fd2f6891a3c688bee23f74f02a3b6b46c7707fcd1899f7c29f"
+    },
+    "scripts/apa_ac29_native_group_ungroup.py": {
+      "beforeSHA256": null,
+      "afterSHA256": "f8ec32589aec1639beef82ec2ac360cb26d1f7dd2583899708a308fbd916e4c8"
+    },
+    "schemas/accelerator/native-group-ungroup.json": {
+      "beforeSHA256": null,
+      "afterSHA256": "19fb1ee32ac08f74be1632e1ddc5390adb2b48bd72825fa31f5b24ca1d91d126"
+    }
+  },
+  "backupRetainedLocally": true,
+  "all296OriginalContractsPreserved": true,
+  "fileCommands": 30,
+  "semanticCommands": 4,
+  "nativeWrites": 0,
+  "APXChanged": false,
+  "dependencyInstallation": false,
+  "defaultFactoryUnchanged": true,
+  "newContractAttachedByExistingSelector": true
+}
