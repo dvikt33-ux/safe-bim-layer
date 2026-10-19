@@ -16,6 +16,7 @@ class SceneScreeningTests(unittest.TestCase):
         self.assertEqual(out["screened_pages_in_package"], 5)
         self.assertEqual(out["chapters"], 2)
         self.assertEqual(out["scenes"], 3)
+        self.assertEqual(out["character_location_events"], 18)
         self.assertTrue(out["full_page_audits_are_separate"])
         self.assertFalse(out["native_write_authorized"])
 

@@ -63,11 +63,12 @@ def check(root=BASE):
                 raise ValueError("external scene lacks reproducible exclusion basis " + sid)
             if scene["classification"] == "REMOTE_EVIDENCE" and not scene.get("station_relevance"):
                 raise ValueError("remote evidence lacks station relevance " + sid)
-        for event in chapter.get("character_location_events", []):
-            if not all(event.get(key) for key in ("character_id", "story_time", "current_location", "departure_event", "arrival_event", "source", "confidence")):
-                raise ValueError("incomplete character-location event " + cid)
-            if not set(event["source"]) <= set(chapter_pages):
-                raise ValueError("character event references page outside screened chapter " + cid)
+    events = screen.get("character_location_events", [])
+    for event in events:
+        if not all(event.get(key) for key in ("character_id", "story_time", "current_location", "departure_event", "arrival_event", "source", "confidence")):
+            raise ValueError("incomplete character-location event " + str(event.get("character_id", "<unknown>")))
+        if not set(event["source"]) <= set(pages):
+            raise ValueError("character event references unknown page " + str(event["character_id"]))
     if not chapter_ids or not scene_ids:
         raise ValueError("no chapter or scene screening records")
     return {
@@ -75,7 +76,7 @@ def check(root=BASE):
         "screened_pages_in_package": len(screened),
         "chapters": len(chapter_ids),
         "scenes": len(scene_ids),
-        "character_location_events": sum(len(c.get("character_location_events", [])) for c in screen["chapters"]),
+        "character_location_events": len(events),
         "full_page_audits_are_separate": True,
         "native_write_authorized": False,
     }
