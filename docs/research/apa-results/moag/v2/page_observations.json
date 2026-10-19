@@ -3360,6 +3360,387 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-205",
+      "page_id": "B1-071",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=71",
+      "station_id": "MOAG",
+      "narrative_mode": "ARCHIVE",
+      "locator_hint": "19 июня подготовленные коридоры и ангары",
+      "spatial_assertion": "Согласно архиву капитана, заражённых направили с верхних уровней вниз в заранее запертые шлюзовые коридоры и отсеки с челноками спецназа.",
+      "feature_refs": [
+        "L1-SEALED",
+        "L1-OLD-FREIGHT-HANGAR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-206",
+      "page_id": "B1-071",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=71",
+      "station_id": "MOAG",
+      "narrative_mode": "ARCHIVE",
+      "locator_hint": "напряжение на электронных замках",
+      "spatial_assertion": "В замках закрытых нижних отсеков после запирания повышалось напряжение, препятствуя попыткам открытия внешней электроникой.",
+      "feature_refs": [
+        "L1-SEALED"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-207",
+      "page_id": "B1-071",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=71",
+      "station_id": "MOAG",
+      "narrative_mode": "HISTORIC_OPERATIONS",
+      "locator_hint": "производство хорошо изолировано от жилых",
+      "spatial_assertion": "В период катастрофы производство станции было отделено от жилых отсеков и сохраняло работоспособность.",
+      "feature_refs": [
+        "L3-PRODUCTION"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-208",
+      "page_id": "B1-071",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=71",
+      "station_id": "MOAG",
+      "narrative_mode": "HISTORIC_PHASE",
+      "locator_hint": "после отлёта появились роботы",
+      "spatial_assertion": "По просмотру архивной записи Фёдор сообщает о более позднем прибытии роботов, изменении программ ИИ и автоматизации; конструктив станции не объявляется новым.",
+      "feature_refs": [
+        "L1",
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-209",
+      "page_id": "B1-072",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=72",
+      "station_id": "MOAG",
+      "narrative_mode": "BASE_RESIDENTIAL",
+      "locator_hint": "Валёк на кровати, матрас Коли",
+      "spatial_assertion": "База включает отдельные места для сна и доступную спальню заболевшего; новых величин не приведено.",
+      "feature_refs": [
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-210",
+      "page_id": "B1-073",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=73",
+      "station_id": "MOAG",
+      "narrative_mode": "BASE_WET",
+      "locator_hint": "из спальни к душу",
+      "spatial_assertion": "Из зоны спален Темной базы есть доступ в душевую; индивидуальный санузел в каждой спальне не доказан.",
+      "feature_refs": [
+        "L1-BASE-SLEEP",
+        "L1-BASE-WET"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-211",
+      "page_id": "B1-073",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=73",
+      "station_id": "MOAG",
+      "narrative_mode": "UNVERIFIED_INTERPRETATION",
+      "locator_hint": "за дверью, возможно, челноки",
+      "spatial_assertion": "Герои предполагают, но не наблюдают наличие челноков за запечатанной дверью.",
+      "feature_refs": [
+        "L1-SEALED"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-212",
+      "page_id": "B1-074",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=74",
+      "station_id": "MOAG",
+      "narrative_mode": "LOWER_ACCESS",
+      "locator_hint": "по трубе, затем прыжок вниз",
+      "spatial_assertion": "От жилых нижних баз путь к запечатанной двустворчатой двери проходит через трубу и спуск без известной абсолютной отметки.",
+      "feature_refs": [
+        "L1-BASES",
+        "L1-SEALED"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-213",
+      "page_id": "B1-074",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=74",
+      "station_id": "MOAG",
+      "narrative_mode": "SEALED_CORRIDORS",
+      "locator_hint": "три прохода, коридоры полукругом",
+      "spatial_assertion": "Сразу за открытой звёздной дверью трёхлучевая развилка; далее холодные дугообразные коридоры.",
+      "feature_refs": [
+        "L1-SEALED"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-214",
+      "page_id": "B1-074",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=74",
+      "station_id": "MOAG",
+      "narrative_mode": "CREW_CABINS",
+      "locator_hint": "кровати без матрасов, пустые каюты",
+      "spatial_assertion": "В закрытом секторе старые обитаемые ранее каюты с кроватями, столами, стульями и отключёнными планшетами.",
+      "feature_refs": [
+        "L1-OLD-PROF-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-215",
+      "page_id": "B1-074",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=74",
+      "station_id": "MOAG",
+      "narrative_mode": "STORES_AND_NETWORKS",
+      "locator_hint": "склады, ангарные створки, трубы",
+      "spatial_assertion": "По маршруту есть склады, ангарные двери, а в коридорах открыто проложены инженерные трубы.",
+      "feature_refs": [
+        "L1-OLD-FREIGHT-HANGAR",
+        "L1-ENG-CABLE-NICHES"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-216",
+      "page_id": "B1-075",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=75",
+      "station_id": "MOAG",
+      "narrative_mode": "HANGAR",
+      "locator_hint": "широкий коридор, опущенные створки",
+      "spatial_assertion": "Широкий коридор приводит к открытому ангару, где находятся спящие заражённые; створки опущены до пола.",
+      "feature_refs": [
+        "L1-ANGAR-HALL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-217",
+      "page_id": "B1-075",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=75",
+      "station_id": "MOAG",
+      "narrative_mode": "LOCAL_VERTICAL",
+      "locator_hint": "свернул и спустился на пару ступенек",
+      "spatial_assertion": "Перед следующим круглым залом имеется локальный двухступенчатый спуск, без отдельного глобального этажа.",
+      "feature_refs": [
+        "L1-HALL-STEPS",
+        "L1-CIRCULAR-HALL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-218",
+      "page_id": "B1-075",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=75",
+      "station_id": "MOAG",
+      "narrative_mode": "CIRCULAR_HALL",
+      "locator_hint": "рифлёный железный пол",
+      "spatial_assertion": "Круглый зал имеет рифлёное металлическое покрытие и связан коридором с сетью бывших ангаров.",
+      "feature_refs": [
+        "L1-CIRCULAR-HALL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-219",
+      "page_id": "B1-076",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=76",
+      "station_id": "MOAG",
+      "narrative_mode": "TALL_HALL",
+      "locator_hint": "грузовые тележки, высокий ангарный зал",
+      "spatial_assertion": "Круглый зал высокий, содержит грузовые тележки; видимых челноков нет.",
+      "feature_refs": [
+        "L1-CIRCULAR-HALL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-220",
+      "page_id": "B1-076",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=76",
+      "station_id": "MOAG",
+      "narrative_mode": "LOCAL_GALLERY",
+      "locator_hint": "полукруглый мостик под потолком",
+      "spatial_assertion": "На локальный полукруглый мостик под потолком ведут сохранившиеся фрагменты лестницы; мостик занимает часть периметра зала.",
+      "feature_refs": [
+        "L1-CIRCULAR-UPPER-WALK",
+        "L1-CIRCULAR-STAIRS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-221",
+      "page_id": "B1-076",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=76",
+      "station_id": "MOAG",
+      "narrative_mode": "CONTROL_SPACE",
+      "locator_hint": "проём из мостика, пульты ручного управления",
+      "spatial_assertion": "Мостик приводит через запертую дверь в помещение с пультами, предположительно управления шлюзами.",
+      "feature_refs": [
+        "L1-CIRCULAR-CONTROL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-222",
+      "page_id": "B1-076",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=76",
+      "station_id": "MOAG",
+      "narrative_mode": "CONTROL_QUARTERS",
+      "locator_hint": "следующая дверь, многодверная жилкомната",
+      "spatial_assertion": "Из пультовой через следующую дверь попадают в жилую комнату с водой, встроенной раковиной, лучевой печью и техническими приборами.",
+      "feature_refs": [
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-223",
+      "page_id": "B1-076",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=76",
+      "station_id": "MOAG",
+      "narrative_mode": "ENVIRONMENT",
+      "locator_hint": "очень холодно, по ощущению около десяти градусов",
+      "spatial_assertion": "Холод описан как ощущение персонажа, а не измеренная температура инженерной системы.",
+      "feature_refs": [
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-224",
+      "page_id": "B1-077",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=77",
+      "station_id": "MOAG",
+      "narrative_mode": "HISTORIC_SEALED",
+      "locator_hint": "закрытая часть Нижнего, родительские списки",
+      "spatial_assertion": "Персонажи обсуждают исторически закрытую часть Нижнего, но не обследуют все её комнаты.",
+      "feature_refs": [
+        "L1-SEALED"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-225",
+      "page_id": "B1-078",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=78",
+      "station_id": "MOAG",
+      "narrative_mode": "MEDIATED_PLAN",
+      "locator_hint": "схемы Верхнего: каюты и зал отдыха",
+      "spatial_assertion": "Планшетный план помогает идентифицировать взрослые каюты и круглый зал отдыха; положение без координат.",
+      "feature_refs": [
+        "L3-ADULT-RETREAT-SUITE",
+        "L3-REST",
+        "L3-ARCHIVE-PLAN-SET"
+      ],
+      "evidence_class": "MEDIATED_IMAGE_UNVERIFIED",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-226",
+      "page_id": "B1-078",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=78",
+      "station_id": "MOAG",
+      "narrative_mode": "MEDIATED_PLAN",
+      "locator_hint": "рубка в другой половине внутреннего круга",
+      "spatial_assertion": "Фёдор по схеме указывает на командную рубку в другой половине внутреннего круга, ближе к производству.",
+      "feature_refs": [
+        "L3-INNER",
+        "L3-BRIDGE",
+        "L3-PRODUCTION"
+      ],
+      "evidence_class": "MEDIATED_IMAGE_UNVERIFIED",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-227",
+      "page_id": "B1-078",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=78",
+      "station_id": "MOAG",
+      "narrative_mode": "MEDIATED_PLAN",
+      "locator_hint": "каюта → детский блок → лифт вниз",
+      "spatial_assertion": "Фёдор описывает по электронной схеме ещё не пройденный маршрут из взрослой каюты в Детский блок и к лифту на Второй.",
+      "feature_refs": [
+        "L3-ADULT-RETREAT-SUITE",
+        "L3-CHILD-LAB"
+      ],
+      "evidence_class": "MEDIATED_IMAGE_UNVERIFIED",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
