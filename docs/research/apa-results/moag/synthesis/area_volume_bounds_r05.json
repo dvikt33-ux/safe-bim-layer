@@ -4584,5 +4584,78 @@
       "treat_as_same_host_vertical_block": true
     }
   ],
-  "level_area_budget_interpretation": "Selected listed major compartments are treated as independent allocation zones solely for this explicit hypothesis. Disable/edit groups when book identity or overlap is uncertain. Never blindly sum every concept or child room."
+  "level_area_budget_interpretation": "Selected listed major compartments are treated as independent allocation zones solely for this explicit hypothesis. Disable/edit groups when book identity or overlap is uncertain. Never blindly sum every concept or child room.",
+  "local_floor_area_multipliers": {
+    "M-L2-RES-001": {
+      "min": 1,
+      "max": 2,
+      "layers_reported": 2,
+      "reason": "Two locally distinct residential/storey layers; precise continuity of upper floor unknown",
+      "source_ids": [
+        "P-484"
+      ]
+    },
+    "M-L1-AH-OLD-001": {
+      "min": 1,
+      "max": 1.25,
+      "layers_reported": null,
+      "reason": "Raised control room is partial, not an entire upper deck",
+      "source_ids": [
+        "P-313"
+      ]
+    },
+    "M-L1-CH-001": {
+      "min": 1,
+      "max": 1.25,
+      "layers_reported": null,
+      "reason": "Upper internal bridge is a partial mezzanine",
+      "source_ids": [
+        "P-220"
+      ]
+    },
+    "M-L1-FH-001": {
+      "min": 1,
+      "max": 1.25,
+      "layers_reported": null,
+      "reason": "Raised small-craft operator control",
+      "source_ids": [
+        "P-365"
+      ]
+    },
+    "M-L1-FH-002": {
+      "min": 1,
+      "max": 1.25,
+      "layers_reported": null,
+      "reason": "Adjacent raised operator control",
+      "source_ids": [
+        "P-369"
+      ]
+    },
+    "MOAG-G-0036": {
+      "min": 1,
+      "max": 1.2,
+      "layers_reported": null,
+      "reason": "Upper gallery around round rest hall is partial not a new global floor",
+      "source_ids": [
+        "P-580"
+      ]
+    }
+  },
+  "usable_floor_accounting": {
+    "default_ratio": [
+      1,
+      1
+    ],
+    "default_note": "single local floor equivalent in working model, editable if evidence of internal storey appears",
+    "skip_roles": [
+      "LEVEL_ENVELOPE_AREA_PROJECT_SCENARIO",
+      "VERTICAL_CORE_SECTION",
+      "VOID_CROSS_SECTION_NOT_FLOOR",
+      "SHAFT_PATH_SECTION",
+      "UTILITY_SYSTEM_MAY_NOT_BE_ROOM",
+      "SHAFT_OR_STAIR_PATH_AREA",
+      "SHAFT_GROUP_NO_FLOOR_ADDITIVITY"
+    ],
+    "negative_constraint": "A high clear volume cannot be counted as multiple full floors just because its ceiling is tall"
+  }
 }
