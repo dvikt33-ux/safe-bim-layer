@@ -628,34 +628,34 @@
       "id": "B3-057",
       "page_number": 57,
       "url": "https://loveread.ec/read_book.php?id=58610&p=57",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "OTHER_STATION_NOT_MOAG",
+      "recorded_spatial_hints": 0,
+      "notes": "Перед заголовком части III, главы 4 земной фрагмент предыдущей главы пропущен. После заголовка начинается сцена на другой станции; новых пространственных сведений о МОАГе на этой странице нет.",
+      "verification_method": "Земной фрагмент до заголовка главы 4 не анализировался; станционная часть однократно проверена на прямые сведения о МОАГе.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B3-058",
       "page_number": 58,
       "url": "https://loveread.ec/read_book.php?id=58610&p=58",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "NON_MOAG_OR_RETROSPECTIVE",
+      "recorded_spatial_hints": 0,
+      "notes": "Продолжение сцены на другой станции. Эмма упоминает гибель МОАГа и свою привязанность к Мартину/Лоньке, но новых пространственных или конструктивных сведений о МОАГе нет; коридоры, шахты и лестница здесь относятся к чужому объекту.",
+      "verification_method": "Однократно прочитана станционная страница; эмоциональное воспоминание отделено от пространственных свидетельств.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B3-059",
       "page_number": 59,
       "url": "https://loveread.ec/read_book.php?id=58610&p=59",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG_REMOTE_EVIDENCE",
+      "recorded_spatial_hints": 2,
+      "notes": "Эмма прямо сравнивает рубку другой станции с МОАГом: совпадают монитор, кресла и цвет ковра. Питер утверждает, что интеллект каждой станции способен проецировать себя в робота; это согласуется с воплощением Мартина-МОАГа. Капитанская рубка, коридоры, погибшие защитники, оружие Второго уровня и применение орудий принадлежат другому объекту.",
+      "verification_method": "Одна страница прочитана один раз через Opera; прямые сравнения с МОАГом отделены от маршрута и состояния другой станции.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B3-060",
