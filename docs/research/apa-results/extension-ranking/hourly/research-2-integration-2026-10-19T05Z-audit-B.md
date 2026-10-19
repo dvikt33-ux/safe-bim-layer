@@ -1,0 +1,3 @@
+# APA 05Z / Counteraudit B — integration graph and duplication
+
+Nine paths reuse the existing APA Router, BIM Graph, SceneWriter and official JSON interfaces. No second model writer is needed. Graphisoft property and attribute reads must preserve errors and GUIDs. IFC sequence reads must not recalculate or rewrite the source. Publisher set names are not evidence of an output file. IFC MEP exported port relations are not proof of native connection quality. PR173 batch evidence is not an independent final acceptance. PR175 documents a subsequent scratch-file change with unknown cause. All new paths remain SOURCE only; no runtime actions or speed benchmarks were performed.
