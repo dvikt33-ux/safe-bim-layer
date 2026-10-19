@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 185,
+  "revision": 186,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2439,6 +2439,13 @@
       "kind": "RECEIPT",
       "verification": "LIVE_GROUP32_GUI_REOPEN_AND_INDEPENDENT_NATIVE_SQLITE_READBACK_VERIFIED",
       "scope": "44->172GUID;32groups/64Column/64segments;oneClone/oneSave;source44semanticBREP preserved; savedSHA b6b44dc1a811ec4e77864177f3cef57e701e1f63126c16bc64b6a5d82a89c478. Stops reconciled read-only without clone replay;121offline testsPASS; CI IN_PROGRESS, installed stable integration remains next task."
+    },
+    "ART-P70-A11-S12-GROUP32-AUDIT-20261019": {
+      "id": "ART-P70-A11-S12-GROUP32-AUDIT-20261019",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/0041bdb3e9ef3a82763083c70689a52f0c36d9e1/docs/evidence/apa-ac29-native-massops-integration-20261019/live03/independent-audit.json",
+      "kind": "REVIEW",
+      "verification": "AUDIT_READBACK_VERIFIED",
+      "scope": "Independent current native172GUID/group32 readback; original44fullgeometry/material semantics equal; SQLite mode=ro2scenesPASS/quick_checkok; rawtrace exactly1Clone1Save. Narrow accepted native group contract only; installed adapter pending S13."
     }
   },
   "tasks": {
@@ -5932,7 +5939,8 @@
       "claim_ref": null,
       "requires_approval": false,
       "evidence": [
-        "ART-P70-A11-S12-GROUP32-LIVE-20261019"
+        "ART-P70-A11-S12-GROUP32-LIVE-20261019",
+        "ART-P70-A11-S12-GROUP32-AUDIT-20261019"
       ],
       "blocked_reason": null
     },
@@ -6973,7 +6981,7 @@
       ],
       "readiness": "SUFFICIENT",
       "readiness_evidence_ids": [
-        "ART-P70-A11-S12-GROUP32-LIVE-20261019"
+        "ART-P70-A11-S12-GROUP32-AUDIT-20261019"
       ],
       "note": "Accepted exact32group scope in PR179, real saved-copy reopen and independent native/SQLite audit. Other group types/installed core are separate residuals; CI IN_PROGRESS not CI_PASS."
     },
