@@ -1,6 +1,6 @@
 {
   "schema": "APA-MOAG-TOPOLOGY-SNAPSHOT/0.1",
-  "source_blob_sha": "a14657145de66bbec28191334af6f04951dfbbbb",
+  "source_blob_sha": "eee6333cb8a8ae93ee03d1d8001c018bee90ccc5",
   "derived_from": "docs/research/apa-results/moag/v1/evidence_graph.json",
   "status": "GRAPH_ONLY_NO_COORDINATES",
   "space_refs": [
@@ -472,6 +472,76 @@
     {
       "id": "L3-UP-ACCESS-LOBBY",
       "label": "Тёмный служебный переход после люка с Нижнего",
+      "level": 3
+    },
+    {
+      "id": "L3-REST-UPPER-GALLERY",
+      "label": "Периметральная верхняя галерея круглого зала отдыха",
+      "level": 3
+    },
+    {
+      "id": "L3-REST-UPPER-STAIRS",
+      "label": "Лестница на галерею Третьего зала отдыха",
+      "level": 3
+    },
+    {
+      "id": "L3-REST-GALLERY-DEADEND",
+      "label": "Тупиковые коридоры и ДНК-двери верхней галереи",
+      "level": 3
+    },
+    {
+      "id": "L3-UPPER-VENT-ESCAPE",
+      "label": "Низкая вентиляция Третьего для скрытого спуска",
+      "level": 3
+    },
+    {
+      "id": "L2-VENT-LOW-GRILLE",
+      "label": "Вентиляционная решётка Второго около пола",
+      "level": 2
+    },
+    {
+      "id": "L1-RETURN-FORK",
+      "label": "Двухпутная развилка возвращения к Нижним базам",
+      "level": 1
+    },
+    {
+      "id": "L1-OVAL-PAINTED",
+      "label": "Художественно расписанный интерьер Овальной базы",
+      "level": 1
+    },
+    {
+      "id": "L3-ADULT-RETREAT-SUITE",
+      "label": "Взрослая каюта за дверью с проверкой ДНК",
+      "level": 3
+    },
+    {
+      "id": "L3-ADULT-RETREAT-LIVING",
+      "label": "Просторная общая комната взрослой каюты",
+      "level": 3
+    },
+    {
+      "id": "L3-ADULT-RETREAT-WET",
+      "label": "Ванная взрослой каюты с коричневой плиткой",
+      "level": 3
+    },
+    {
+      "id": "L3-ADULT-RETREAT-BED",
+      "label": "Спальня взрослой каюты с широкой кроватью",
+      "level": 3
+    },
+    {
+      "id": "L3-DNA-HUMAN-LOCKS",
+      "label": "Переоборудованные дверные замки внутреннего круга",
+      "level": 3
+    },
+    {
+      "id": "L3-ARCHIVE-PLAN-SET",
+      "label": "Архивный видеокомплекс в каюте штурмана",
+      "level": 3
+    },
+    {
+      "id": "L3-STAFF-FOOD-STORES",
+      "label": "Кладовая провизии вне закрытого внутреннего круга",
       "level": 3
     }
   ],
@@ -1658,6 +1728,196 @@
       "source_ids": [
         "LR-B1-059"
       ]
+    },
+    {
+      "id": "E119",
+      "from": "L3-REST",
+      "to": "L3-REST-UPPER-GALLERY",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-61"
+      ]
+    },
+    {
+      "id": "E120",
+      "from": "L3-REST",
+      "to": "L3-REST-UPPER-STAIRS",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-61"
+      ]
+    },
+    {
+      "id": "E121",
+      "from": "L3-REST-UPPER-STAIRS",
+      "to": "L3-REST-UPPER-GALLERY",
+      "relation": "stairs_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-61"
+      ]
+    },
+    {
+      "id": "E122",
+      "from": "L3-REST-UPPER-GALLERY",
+      "to": "L3-REST-GALLERY-DEADEND",
+      "relation": "branches_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-61"
+      ]
+    },
+    {
+      "id": "E123",
+      "from": "L3-REST-UPPER-GALLERY",
+      "to": "L3-REST",
+      "relation": "above_floor",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-61"
+      ]
+    },
+    {
+      "id": "E124",
+      "from": "L3-REST-GALLERY-DEADEND",
+      "to": "L3-UPPER-VENT-ESCAPE",
+      "relation": "route_with_turns_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-63"
+      ]
+    },
+    {
+      "id": "E125",
+      "from": "L3-UPPER-VENT-ESCAPE",
+      "to": "L2-VENT-LOW-GRILLE",
+      "relation": "vertical_duct_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-64"
+      ]
+    },
+    {
+      "id": "E126",
+      "from": "L2-VENT-LOW-GRILLE",
+      "to": "L2-CABINS",
+      "relation": "tunnel_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-64"
+      ]
+    },
+    {
+      "id": "E127",
+      "from": "L1-RETURN-FORK",
+      "to": "L1-BASES",
+      "relation": "right_short_left_long",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-65"
+      ]
+    },
+    {
+      "id": "E128",
+      "from": "L1-OVAL",
+      "to": "L1-OVAL-PAINTED",
+      "relation": "interior_has",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-65"
+      ]
+    },
+    {
+      "id": "E129",
+      "from": "L3-REST-GALLERY-DEADEND",
+      "to": "L3-ADULT-RETREAT-SUITE",
+      "relation": "biometric_door_to",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "LR-B1-067"
+      ]
+    },
+    {
+      "id": "E130",
+      "from": "L3-ADULT-RETREAT-SUITE",
+      "to": "L3-ADULT-RETREAT-LIVING",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-067"
+      ]
+    },
+    {
+      "id": "E131",
+      "from": "L3-ADULT-RETREAT-SUITE",
+      "to": "L3-ADULT-RETREAT-WET",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-067"
+      ]
+    },
+    {
+      "id": "E132",
+      "from": "L3-ADULT-RETREAT-SUITE",
+      "to": "L3-ADULT-RETREAT-BED",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-068"
+      ]
+    },
+    {
+      "id": "E133",
+      "from": "L3-ADULT-RETREAT-LIVING",
+      "to": "L3-ADULT-RETREAT-WET",
+      "relation": "door_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-067"
+      ]
+    },
+    {
+      "id": "E134",
+      "from": "L3-ADULT-RETREAT-LIVING",
+      "to": "L3-ADULT-RETREAT-BED",
+      "relation": "door_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-067"
+      ]
+    },
+    {
+      "id": "E135",
+      "from": "L3-INNER",
+      "to": "L3-DNA-HUMAN-LOCKS",
+      "relation": "historic_access_control",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-070"
+      ]
+    },
+    {
+      "id": "E136",
+      "from": "L3-INNER",
+      "to": "L3-STAFF-FOOD-STORES",
+      "relation": "historic_supply_expedition",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "LR-B1-070"
+      ]
+    },
+    {
+      "id": "E137",
+      "from": "L3-ADULT-RETREAT-LIVING",
+      "to": "L3-ARCHIVE-PLAN-SET",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-069"
+      ]
     }
   ],
   "construction_dag": [
@@ -1720,5 +1980,6 @@
     "apa_native_execute": false,
     "scene_writer_write": false
   },
-  "instructions": "Graph only. Do not issue CreateWalls/CreateSlabs or other native operations without independently accepted geometry and SceneWriter authorization."
+  "instructions": "Graph only. Do not issue CreateWalls/CreateSlabs or other native operations without independently accepted geometry and SceneWriter authorization.",
+  "station_identity_ref": "docs/research/apa-results/moag/v2/station_identity.json"
 }
