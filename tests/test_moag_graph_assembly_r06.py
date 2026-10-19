@@ -93,6 +93,18 @@ class EvidenceGraphR06Tests(unittest.TestCase):
             right = "ROUTE::" + gap["route_id"] + "::" + gap["to"]
             self.assertNotIn((left, right), all_links)
 
+    def test_gaps_generate_research_frontiers_not_new_passages(self):
+        r = self.result
+        frontiers = r["research_frontiers_not_edges"]
+        self.assertEqual(len(frontiers), r["counts"]["narrative_gaps"])
+        self.assertTrue(all(x["source_pages"] and
+                            x["status"] == "RESEARCH_FRONTIER_NOT_AN_ADDED_GRAPH_EDGE"
+                            for x in frontiers))
+        self.assertTrue(all(x["priority"].startswith(("P1_", "P2_"))
+                            for x in frontiers))
+        self.assertFalse(any(e["type"] == "RESEARCH_FRONTIER_NOT_AN_ADDED_GRAPH_EDGE"
+                             for e in r["typed_evidence_edges"]))
+
     def test_multilevel_ventilation_alias_keeps_conflict_visible(self):
         items = self.result["route_location_review"]
         self.assertTrue(any(x["code"] == "MULTILEVEL_ALIAS_REVIEW"
