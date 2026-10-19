@@ -6794,6 +6794,74 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-414",
+      "page_id": "B2-033",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=33",
+      "station_id": "MOAG",
+      "narrative_mode": "THIRD_SECURITY_PATROL",
+      "locator_hint": "к цеху, кладовке пятнадцатых и обратно к рубке",
+      "spatial_assertion": "Герои действительно осмотрели доступный проход у цеха и кладовку с охранными роботами на Третьем, после вернулись в рубку.",
+      "feature_refs": [
+        "L3-PRODUCTION",
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-415",
+      "page_id": "B2-033",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=33",
+      "station_id": "MOAG",
+      "narrative_mode": "UNINSPECTED_BLOCKS",
+      "locator_hint": "Детский блок, цех и энергомодуль остались непроверенными",
+      "spatial_assertion": "Оставшиеся без осмотра зоны Третьего прямо названы: энергомодуль, Детский блок, производственный цех; отсутствие опасности или оборудования за их дверями не подтверждено.",
+      "feature_refs": [
+        "CORE-ENERGY",
+        "L3-CHILD-LAB",
+        "L3-PRODUCTION"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-416",
+      "page_id": "B2-033",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=33",
+      "station_id": "MOAG",
+      "narrative_mode": "BLACKOUT_THIRD_10_MIN",
+      "locator_hint": "Мартин сообщил о выключении на десять минут",
+      "spatial_assertion": "Обычное освещение Третьего в сюжете отключают приблизительно на десять минут; это смена режима эксплуатации, не физическая перестройка.",
+      "feature_refs": [
+        "L3",
+        "CORE-ENERGY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-417",
+      "page_id": "B2-033",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=33",
+      "station_id": "MOAG",
+      "narrative_mode": "BRIDGE_GLAZING",
+      "locator_hint": "за стеклянными дверьми рубки темные коридоры",
+      "spatial_assertion": "У рубки Третьего остеклённые двери в сторону общего коридора; через них видна темнота при отключении освещения.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
