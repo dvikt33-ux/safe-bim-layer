@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed validation for chapter-first MOAG scene screening records."""
+"""Fail-closed validation for one-pass MOAG page/scene screening records."""
 from __future__ import annotations
 import json
 from pathlib import Path

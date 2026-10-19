@@ -79,7 +79,8 @@
       "reopen_reasons": {
         "B2-077": "точно локализовать границу главы 9 на странице, разделённой между главами 8 и 9; страница повторно открывалась дважды",
         "B2-079": "получить полный текст после усечения вывода; одно повторное открытие"
-      }
+      },
+      "character_location_event_count": 36
     }
   },
   "method": "ONE_PASS: classify each page fragment and extract all relevant evidence during the same single reading. Use prior-page context and identify chapter/scene boundaries inline when headings appear. Do not pre-screen an entire chapter before rereading; reopens require a recorded concrete reason.",
@@ -1111,6 +1112,17 @@
         "B2-078",
         "B2-079",
         "B2-080"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Эмма",
+      "story_time": "B2, часть 2, глава 10, p81",
+      "current_location": "МОАГ, Второй уровень: закрытый внутренний круг",
+      "departure_event": "возвращается на внутренний круг через туннель №2",
+      "arrival_event": "оказывается в закрытом внутреннем круге Второго уровня",
+      "source": [
+        "B2-081"
       ],
       "confidence": "DIRECT_TEXT"
     }
