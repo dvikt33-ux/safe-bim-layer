@@ -1,17 +1,17 @@
 {
   "active": [
-    "APA-P70.A11.S03"
+    "APA-P70.A11.S13"
   ],
-  "artifact_count": 343,
+  "artifact_count": 377,
   "counts": {
     "BLOCKED": 13,
     "CLAIMED": 0,
-    "DISPATCHABLE_NOW": 17,
-    "DONE_PUBLISHED": 27,
+    "DISPATCHABLE_NOW": 18,
+    "DONE_PUBLISHED": 29,
     "EXPIRED_LEASES": 0,
     "HELD_BY_DEPENDENCIES": 33,
     "IN_PROGRESS": 1,
-    "PARTIAL": 16,
+    "PARTIAL": 17,
     "READY": 34,
     "SUPERSEDED": 0
   },
@@ -88,21 +88,21 @@
         "total": 1
       },
       {
-        "done": 2,
+        "done": 4,
         "id": "APA-P70.A11",
         "status": "IN_PROGRESS",
         "title": "v3.1: пакетная интеграция, взаимодействие и системные проверки",
-        "total": 10
+        "total": 13
       }
     ],
     "active": [
-      "APA-P70.A11.S03"
+      "APA-P70.A11.S13"
     ],
-    "done": 16,
+    "done": 18,
     "next_eligible": "APA-P70.A02.S02",
     "plan_id": "APA-P70",
     "status": "IN_PROGRESS",
-    "total": 39
+    "total": 42
   },
   "dispatchable": {
     "BUILD": [
@@ -115,7 +115,9 @@
       "APA-P50.A01.S01"
     ],
     "CONTROL": [],
-    "INTEGRATION": [],
+    "INTEGRATION": [
+      "APA-P70.A11.S03"
+    ],
     "RESEARCH": [
       "APA-P10.A01.S01",
       "APA-P10.A01.S02",
@@ -169,13 +171,13 @@
     "APA-P70.A11.S04",
     "APA-P70.A11.S05"
   ],
-  "known_published_v2_runs": 57,
+  "known_published_v2_runs": 62,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 174,
+  "plan_revision": 186,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_lookahead": {
-    "linked_product_substeps": 39,
+    "linked_product_substeps": 42,
     "next_eligible_research": [
       "APA-P50.A01.S01",
       "APA-P50.A02.S01"
@@ -202,7 +204,7 @@
   },
   "schema": "APA_PROJECT_CONTROLLER_STATE_V1",
   "source_plan": "docs/research/apa-results/control/PROJECT_PLAN.json",
-  "task_count": 91,
+  "task_count": 94,
   "topic_count": 16,
   "topics": {
     "ARCHITECTURE": {
@@ -293,8 +295,8 @@
       ]
     },
     "PRODUCT_DEVELOPMENT": {
-      "done": 16,
-      "ready": 1,
+      "done": 18,
+      "ready": 2,
       "task_ids": [
         "APA-P70.A01.S01",
         "APA-P70.A01.S02",
@@ -334,7 +336,10 @@
         "APA-P70.A11.S07",
         "APA-P70.A11.S08",
         "APA-P70.A11.S09",
-        "APA-P70.A11.S10"
+        "APA-P70.A11.S10",
+        "APA-P70.A11.S11",
+        "APA-P70.A11.S12",
+        "APA-P70.A11.S13"
       ]
     },
     "PUBLISHER": {
