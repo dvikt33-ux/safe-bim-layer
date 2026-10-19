@@ -68,7 +68,8 @@
       "B2-133",
       "B2-134",
       "B2-135",
-      "B2-141"
+      "B2-141",
+      "B2-142"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -90,7 +91,8 @@
       "B2-080",
       "B2-088",
       "B2-089",
-      "B2-095"
+      "B2-095",
+      "B2-142"
     ],
     "remote_evidence_page_ids": [
       "B2-052",
@@ -108,10 +110,10 @@
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B2-141",
-      "context_reviewed_page_count": 65,
+      "as_of_page_id": "B2-142",
+      "context_reviewed_page_count": 66,
       "full_evidence_page_count": 231,
-      "external_excluded_page_count": 20,
+      "external_excluded_page_count": 21,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
       "justified_reopen_event_count": 5,
@@ -1337,10 +1339,11 @@
         "start": 141,
         "end": 144
       },
-      "chapter_classification": "REMOTE_EVIDENCE",
+      "chapter_classification": "MIXED",
       "screening_status": "ONE_PASS_IN_PROGRESS",
       "screened_pages": [
-        "B2-141"
+        "B2-141",
+        "B2-142"
       ],
       "scenes": [
         {
@@ -1358,6 +1361,23 @@
             "Ник"
           ],
           "station_relevance": "Относительное свидетельство: корабль меньше МОАГа; абсолютные размеры станции не заданы."
+        },
+        {
+          "id": "B2P3C12-S2",
+          "page_fragments": [
+            {
+              "page_id": "B2-142",
+              "fragment": "Продолжение сцены на крейсере «Дракон»; сведений о МОАГе нет."
+            }
+          ],
+          "classification": "EXTERNAL",
+          "physical_location": "Крейсер «Дракон», коридоры и столовая.",
+          "characters": [
+            "Эмма",
+            "Ник",
+            "Жак"
+          ],
+          "screened_out_material": "Интерьер и быт другого корабля не относятся к реконструкции МОАГа."
         }
       ]
     }
