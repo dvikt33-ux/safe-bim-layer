@@ -28,6 +28,11 @@ R03_SPATIAL = {"RELATIVE_HEIGHT_OR_LEVEL"}
 MULTILEVEL_KINDS = {"utility", "stair", "shaft", "technical_route",
                     "hatch", "hatch_group", "elevator", "technical"}
 GAP = "NARRATIVE_GAP"
+BRIDGES = SYNTH / "explicit_spatial_bridges_r06.json"
+R03_CONNECTING_RELATIONS = {
+    "HAS_INTERNAL_UPPER_ROOM", "CONNECTS_FLOOR_TO_UPPER_ROOM",
+    "HAS_UPPER_GALLERY", "CONNECTS_FLOOR_TO", "CONNECTS_UPPER_TO_LOWER"
+}
 
 
 class Components:
@@ -62,9 +67,11 @@ class Components:
 
 
 def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=None,
-             anchors=None, variants=None):
+             anchors=None, variants=None, explicit_bridges=None):
     if routes.get("schema") is None or not isinstance(routes.get("routes"), list):
         raise ValueError("BAD_ROUTE_LEDGER")
+    if explicit_bridges is None:
+        explicit_bridges = json.loads(BRIDGES.read_text(encoding="utf-8"))
     prior = r05.run(graph, fragments, bounds, parameters, area_overrides,
                     anchors, variants)
     level = {}
@@ -130,6 +137,7 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         joined = uf.union(a, b) if connect else False
         edge = {"id": eid, "from": a, "to": b, "type": kind,
                 "source_ids": sources, "joins_components": joined,
+                "connects_evidence_graph": connect,
                 "metric_geometry_proven": False}
         if detail is not None:
             edge["detail"] = detail
@@ -149,16 +157,61 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
             continue
         add(e["from"], e["to"], e["id"], "R04_QUALITATIVE_ASSOCIATION",
             e["source_ids"], detail=e["semantic_class"])
+    after_r04_physical_components = len({uf.root(node) for node in kinds})
     for e in graph["derived_r03_relationships"]:
         if e["semantic_class"] not in R03_SPATIAL or e["evidence_state"] == "HYPOTHESIS":
             continue
-        add(e["from"], e["to"], e["id"], "R03_RELATIVE_VERTICAL_EVIDENCE",
-            e["source_observation_ids"], connect=False, detail=e["semantic_class"])
+        connecting = e["relation"] in R03_CONNECTING_RELATIONS
+        add(e["from"], e["to"], e["id"],
+            "R03_RECORDED_INTERNAL_SPACE_RELATION" if connecting
+            else "R03_RELATIVE_VERTICAL_EVIDENCE",
+            e["source_observation_ids"], connect=connecting,
+            detail={"semantic_class": e["semantic_class"], "relation": e["relation"]})
     for e in fragments["typed_edges"]:
         if e["relation"] not in topology.TOPOLOGICAL or e.get("certainty") == "HYPOTHESIS":
             continue
         add(e["from"], e["to"], e["id"], "R05_QUALITATIVE_ASSOCIATION",
             e["source_ids"], detail=e["relation"])
+    after_r03_physical_components = len({uf.root(node) for node in kinds})
+    if explicit_bridges.get("schema") != "APA-MOAG-EXPLICIT-SPATIAL-BRIDGES-R06/0.1":
+        raise ValueError("BAD_SPATIAL_BRIDGE_SCHEMA")
+    records = {x["id"]: x for x in graph["observations"]}
+    if len(records) != len(graph["observations"]):
+        raise ValueError("DUPLICATE_OBSERVATION_IDENTIFIER")
+    allowed = {"LOCAL_STAIR_ACCESS", "LOCAL_STAIR_IN_HANGAR",
+               "EQUIPMENT_INSIDE_WORKSHOP", "LOCAL_STAIR_FROM_GALLERY",
+               "ROUTE_VIA_UNMODELED_TUNNEL"}
+    for e in explicit_bridges["typed_edges"]:
+        if e["relation"] not in allowed or e["from"] not in kinds or e["to"] not in kinds:
+            raise ValueError("UNSUPPORTED_EXPLICIT_SPATIAL_LINK")
+        if e["from"] == e["to"] or e.get("certainty") != "DIRECT_TEXT_REVIEWED":
+            raise ValueError("INVALID_EXPLICIT_SPATIAL_CLAIM")
+        source_ids = e.get("source_ids") or []
+        if not all(s in records and records[s]["station"] == "MOAG"
+                   and records[s]["evidence_class"] == "DIRECT_TEXT"
+                   for s in source_ids):
+            raise ValueError("EXPLICIT_LINK_SOURCE_NOT_VERIFIED")
+        if not level[e["from"]] & level[e["to"]]:
+            raise ValueError("EXPLICIT_LINK_DISJOINT_LEVELS")
+        add(e["from"], e["to"], e["id"], "R06_OBSERVATION_DERIVED_SPACE_LINK",
+            source_ids, detail={"relation": e["relation"], "explanation": e["explanation"]})
+    after_explicit_physical_components = len({uf.root(node) for node in kinds})
+    reference_promotions = []
+    review_promotions = []
+    for n in graph["indexed_source_entities"]:
+        target = n.get("promoted_physical_entity_id")
+        if not target:
+            continue
+        if target not in kinds:
+            raise ValueError("DANGLING_PROMOTION_TARGET")
+        promotion = {"source_concept_id": n["id"], "new_physical_id": target,
+                     "source_ids": n.get("source_ids", []),
+                     "status": n.get("promotion_verdict"),
+                     "not_a_physical_connection": True}
+        if n.get("promotion_verdict") == "PROVISIONAL_EXPLICIT_DESCRIPTION":
+            reference_promotions.append(promotion)
+        else:
+            review_promotions.append(promotion)
     before_routes = len(uf.groups())
     before_physical_components = len({uf.root(node) for node in kinds})
     level_suggestions = defaultdict(list)
@@ -291,6 +344,13 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         "counts": {
             "physical_indices": len(physical), "route_occurrences": len(route_steps),
             "route_ledgers": len(route_groups), "before_routes_components": before_routes,
+            "after_r04_physical_components": after_r04_physical_components,
+            "after_r03_physical_components": after_r03_physical_components,
+            "after_explicit_physical_components": after_explicit_physical_components,
+            "r03_local_relation_component_reductions": after_r04_physical_components - after_r03_physical_components,
+            "r06_explicit_link_component_reductions": after_r03_physical_components - after_explicit_physical_components,
+            "reference_promotion_crosswalks": len(reference_promotions),
+            "promotions_needing_identity_review": len(review_promotions),
             "after_routes_components": len(component_members),
             "before_routes_physical_components": before_physical_components,
             "after_routes_physical_components": after_physical_components,
@@ -320,6 +380,9 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         "bridge_events": bridges,
         "physical_fragment_bridge_events": physical_bridges,
         "route_location_review": conflicts,
+        "reference_promotion_crosswalks_not_spatial_links": reference_promotions,
+        "promotion_identity_review_queue": review_promotions,
+        "deferred_spatial_hypotheses_not_linked": explicit_bridges.get("deferred_hypotheses", []),
         "identity_hypotheses_not_merged": prior["topology"]["identity_hypotheses"],
         "negative_identity_constraints": prior["topology"]["identity_exclusions"],
         "narrative_gaps": gaps, "research_frontiers_not_edges": frontiers,
@@ -347,7 +410,7 @@ def trace_between(result, start, goal):
     graph = defaultdict(list)
     for edge in result["typed_evidence_edges"]:
         # Vertical ordering is not access and does not fuse places.
-        if edge["type"] == "R03_RELATIVE_VERTICAL_EVIDENCE":
+        if not edge.get("connects_evidence_graph", False):
             continue
         graph[edge["from"]].append((edge["to"], edge))
         graph[edge["to"]].append((edge["from"], edge))
@@ -381,6 +444,7 @@ def main():
     ap.add_argument("--graph", type=Path, default=SYNTH / "full_indexed_parametric_graph_r04.json")
     ap.add_argument("--fragments", type=Path, default=SYNTH / "progressive_fragments_r05.json")
     ap.add_argument("--routes", type=Path, default=ROUTES)
+    ap.add_argument("--bridges", type=Path, default=BRIDGES)
     ap.add_argument("--bounds", type=Path, default=SYNTH / "area_volume_bounds_r05.json")
     ap.add_argument("--anchors", type=Path)
     ap.add_argument("--r04-parameters", type=Path)
@@ -392,7 +456,8 @@ def main():
     read = lambda p: json.loads(p.read_text(encoding="utf-8")) if p else None
     result = assemble(read(arg.graph), read(arg.fragments), read(arg.routes),
                       read(arg.bounds), read(arg.r04_parameters),
-                      read(arg.area_overrides), read(arg.anchors), read(arg.variants))
+                      read(arg.area_overrides), read(arg.anchors), read(arg.variants),
+                      read(arg.bridges))
     if arg.between:
         result["requested_evidence_trace"] = trace_between(result, *arg.between)
     payload = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False) + "\n"
