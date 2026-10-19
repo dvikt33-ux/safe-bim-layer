@@ -5484,6 +5484,137 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-334",
+      "page_id": "B2-007",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=7",
+      "station_id": "MOAG",
+      "narrative_mode": "NURSERY_DOORS",
+      "locator_hint": "автоматически раздвижная дверь сада",
+      "spatial_assertion": "Вход в детский сад Второго через автоматически раздвижные двери.",
+      "feature_refs": [
+        "L2-NURSERY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-335",
+      "page_id": "B2-007",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=7",
+      "station_id": "MOAG",
+      "narrative_mode": "INFANT_ROOM",
+      "locator_hint": "самая младшая группа, раковина и пеленальный стол",
+      "spatial_assertion": "В детском саду отдельная небольшая комната новорождённых с раковиной и пеленальным столом; работают роботы-няньки.",
+      "feature_refs": [
+        "L2-NURSERY",
+        "L2-INFANT-NEW"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-336",
+      "page_id": "B2-007",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=7",
+      "station_id": "MOAG",
+      "narrative_mode": "BRIDGE_SERVER",
+      "locator_hint": "белая узкая стена с диодами — главный сервер",
+      "spatial_assertion": "В капитанской рубке Третьего физический главный сервер станции встроен в узкую белую панель-стену с индикаторами и кнопками.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-337",
+      "page_id": "B2-007",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=7",
+      "station_id": "MOAG",
+      "narrative_mode": "BRIDGE_TABLE",
+      "locator_hint": "большой овальный стол-монитор",
+      "spatial_assertion": "Большой овальный пультовый стол рубки с рабочей столешницей-монитором размещён вплотную к узкой стене-серверу.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-338",
+      "page_id": "B2-008",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=8",
+      "station_id": "MOAG",
+      "narrative_mode": "L3_BRIDGE_ROUTE",
+      "locator_hint": "из каюты через зал отдыха и коридор",
+      "spatial_assertion": "Путь от взрослой каюты к командной рубке физически проходит через большой круглый зал отдыха Третьего и короткий коридор.",
+      "feature_refs": [
+        "L3-ADULT-RETREAT-SUITE",
+        "L3-REST",
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-339",
+      "page_id": "B2-008",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=8",
+      "station_id": "MOAG",
+      "narrative_mode": "BRIDGE_DOUBLE_DOORS",
+      "locator_hint": "двойные полупрозрачные двери",
+      "spatial_assertion": "Вход в рубку оборудован двойными полупрозрачными дверями; после смены управления двери автоматически открываются, это временное состояние доступа.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-340",
+      "page_id": "B2-008",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=8",
+      "station_id": "MOAG",
+      "narrative_mode": "BRIDGE_FURNITURE",
+      "locator_hint": "кресло, диван за спиной и мониторы",
+      "spatial_assertion": "У овального стола в рубке установлено рабочее кресло; за ним диван, рядом дополнительные мониторы.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-341",
+      "page_id": "B2-008",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=8",
+      "station_id": "MOAG",
+      "narrative_mode": "LOCK_OPERATION",
+      "locator_hint": "двери не запираются после смены власти",
+      "spatial_assertion": "После принятия управления выжившими ограничение доступа к рубке снято: замки работают иначе, геометрия дверного проёма не меняется.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
