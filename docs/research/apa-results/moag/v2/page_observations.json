@@ -6112,6 +6112,270 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-372",
+      "page_id": "B2-017",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=17",
+      "station_id": "MOAG",
+      "narrative_mode": "CAPTAIN_BRIDGE_EXIT",
+      "locator_hint": "двойные полупрозрачные двери рубки открываются",
+      "spatial_assertion": "Из капитанской рубки Третьего Эмма и Коля выходят через автоматически раздвигающиеся полупрозрачные двери в соседний коридор.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-373",
+      "page_id": "B2-017",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=17",
+      "station_id": "MOAG",
+      "narrative_mode": "VERTICAL_ROUTE",
+      "locator_hint": "лифт доставил вниз за несколько секунд",
+      "spatial_assertion": "После выхода из рубки персонажи спускаются лифтом к запираемому нижнему ангарному сектору, но текст не устанавливает общую шахту с ранее описанными лифтами.",
+      "feature_refs": [
+        "L3-BRIDGE",
+        "L1-SEALED"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-374",
+      "page_id": "B2-017",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=17",
+      "station_id": "MOAG",
+      "narrative_mode": "LOWER_GATE_CURRENT",
+      "locator_hint": "коля открывает программным ключом новую дверь",
+      "spatial_assertion": "Электронные створки прохода к нижним ангарам открываются программным ключом, выданным Фёдором; это состояние дверной системы после модернизации.",
+      "feature_refs": [
+        "L1-SEALED"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-375",
+      "page_id": "B2-017",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=17",
+      "station_id": "MOAG",
+      "narrative_mode": "HANGAR_REENTRY",
+      "locator_hint": "длинный коридор с кровавой надписью к ангару",
+      "spatial_assertion": "За нижней дверью Эмма проходит по знакомому широкому коридору с исторической настенной надписью к ангарному проему и находящимся внутри катерам.",
+      "feature_refs": [
+        "L1-OLD-FREIGHT-HANGAR",
+        "L1-ANGAR-HALL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-376",
+      "page_id": "B2-018",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=18",
+      "station_id": "MOAG",
+      "narrative_mode": "HANGAR_UPPER_CONTROL",
+      "locator_hint": "близнец спускается по железной лесенке сверху",
+      "spatial_assertion": "В используемом военном ангаре нижнего уровня операторская часть доступна по железной лестнице, ведёт к помещению выше пола ангара.",
+      "feature_refs": [
+        "L1-OPERATORS",
+        "L1-ANGAR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-377",
+      "page_id": "B2-018",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=18",
+      "station_id": "MOAG",
+      "narrative_mode": "POST_FLIGHT_CHECK",
+      "locator_hint": "осматривают катера, пол, проёмы, лестницу",
+      "spatial_assertion": "После возвращения катеров персонажи осматривают ангарное пространство вокруг техники, включая стены, пол, дверной проем и лестницу в операторскую.",
+      "feature_refs": [
+        "L1-ANGAR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-378",
+      "page_id": "B2-019",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=19",
+      "station_id": "MOAG",
+      "narrative_mode": "THIRD_ADULT_QUARTERS",
+      "locator_hint": "спальня со шкафом, смежная комната с диваном",
+      "spatial_assertion": "На Третьем жилая группа взрослых содержит отдельную спальню Таис со шкафом и соседнее помещение с диваном, использовавшееся Фёдором.",
+      "feature_refs": [
+        "L3-ADULT-RETREAT-SUITE",
+        "L3-ADULT-RETREAT-BED"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-379",
+      "page_id": "B2-019",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=19",
+      "station_id": "MOAG",
+      "narrative_mode": "SECOND_NEIGHBOR_BEDROOM",
+      "locator_hint": "от Зеленой к соседней спальне",
+      "spatial_assertion": "На Втором Эмма из коридора рядом с Зелёной магистралью проходит к спальне Коли через лёгкую дверь; точный план этого маршрута не дан.",
+      "feature_refs": [
+        "L2-GREEN",
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-380",
+      "page_id": "B2-019",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=19",
+      "station_id": "MOAG",
+      "narrative_mode": "NOT_YET_BUILT",
+      "locator_hint": "на завтра проделаем проход",
+      "spatial_assertion": "Устройство прямого прохода к старым нижним ангарам и запирание дальних проёмов обсуждаются как будущие работы, а не уже выполненная перепланировка.",
+      "feature_refs": [
+        "L1-SEALED",
+        "L1-OLD-FREIGHT-HANGAR"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-381",
+      "page_id": "B2-020",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=20",
+      "station_id": "MOAG",
+      "narrative_mode": "CRAFT_CABIN_LAYOUT",
+      "locator_hint": "катер с прозрачным люком, креслом, шлемом и сенсорами",
+      "spatial_assertion": "Малый одноместный катер в нижнем ангаре имеет прозрачную закрывающуюся крышку, кресло пилота, локальную вентиляцию, сенсоры на панели и систему голографической проекции в шлеме. Это описание техники, а не помещение станции.",
+      "feature_refs": [
+        "L1-ANGAR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-382",
+      "page_id": "B2-020",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=20",
+      "station_id": "MOAG",
+      "narrative_mode": "CRAFT_TEST_CLEARANCE",
+      "locator_hint": "подняться на полметра от пола, не ударить потолок",
+      "spatial_assertion": "Во время проверки боевой катер поднимают на 0,5 м от пола ангара; числовое значение задаёт траекторию транспорта, но НЕ высоту зала, минимальный зазор от потолка остаётся неизвестным.",
+      "feature_refs": [
+        "L1-ANGAR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-383",
+      "page_id": "B2-020",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=20",
+      "station_id": "MOAG",
+      "narrative_mode": "OPERATOR_REMOTE_CONTROL",
+      "locator_hint": "Гоша остаётся в диспетчерской и управляет шлюзами",
+      "spatial_assertion": "На время подготовки к вылету отдельная операторская комната при нижнем ангаре используется для связи пилотов, открытия и закрытия шлюзов.",
+      "feature_refs": [
+        "L1-OPERATORS",
+        "L1-BOAT-LOCK"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-384",
+      "page_id": "B2-021",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=21",
+      "station_id": "MOAG",
+      "narrative_mode": "AIRLOCK_VOLUME",
+      "locator_hint": "шлюзовая камера почти такая же просторная, как ангар",
+      "spatial_assertion": "Перед наружным выходом малых катеров находится отдельная герметичная шлюзовая камера, по описанию Таис близкая по пространственному размеру к ангару; точное соотношение и площадь не измерены.",
+      "feature_refs": [
+        "L1-ANGAR",
+        "L1-BOAT-LOCK"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-385",
+      "page_id": "B2-021",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=21",
+      "station_id": "MOAG",
+      "narrative_mode": "AIRLOCK_ATMOSPHERE",
+      "locator_hint": "за закрытой дверью откачивается воздух",
+      "spatial_assertion": "При шлюзовании боевых катеров двери между ангаром и шлюзовой камерой закрываются, затем из камеры откачивается воздух.",
+      "feature_refs": [
+        "L1-BOAT-LOCK"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-386",
+      "page_id": "B2-021",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=21",
+      "station_id": "MOAG",
+      "narrative_mode": "AIRLOCK_APERTURE",
+      "locator_hint": "круглое выходное отверстие с треугольными створками",
+      "spatial_assertion": "Наружный проём нижней шлюзовой камеры круглый, перекрывается несколькими раздвижными треугольными створками; число створок и радиус не указаны.",
+      "feature_refs": [
+        "L1-BOAT-LOCK"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-387",
+      "page_id": "B2-021",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=21",
+      "station_id": "MOAG",
+      "narrative_mode": "AIRLOCK_EXTERNAL_VIEW",
+      "locator_hint": "при вылете с этой стороны станции Землю не видно",
+      "spatial_assertion": "Из конкретного нижнего шлюзового выхода при описанном направлении полёта Земля в поле зрения персонажа отсутствует; это ограничение наблюдения, не подтверждённый азимут наружного проёма.",
+      "feature_refs": [
+        "L1-BOAT-LOCK"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
