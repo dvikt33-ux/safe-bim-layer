@@ -461,6 +461,7 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         "new_level_candidates": resolved,
         "area_volume": {
             "status": prior["status"], "counts": area["counts"],
+            "level_allocation_budgets": area["level_allocation_budgets"],
             "failed_checks": [c for c in area["checks"] if c["status"] == "FAIL"],
             "compared_variants": prior["compared_variants"],
             "variation_summary": prior["variation_summary"]
