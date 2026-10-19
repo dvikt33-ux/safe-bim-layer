@@ -29,6 +29,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_moag_*.py -v
       - name: Validate site-page coverage and hypotheses
         run: python tools/moag_topology/page_audit.py
+      - name: Validate ordered multi-level character routes
+        run: python tools/moag_topology/routes_audit.py
       - name: Validate snapshot cannot execute native writes
         run: |
           python tools/moag_topology/validate.py docs/research/apa-results/moag/v1/evidence_graph.json --mode snapshot --out moag-snapshot.json
