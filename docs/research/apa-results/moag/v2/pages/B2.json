@@ -78,23 +78,23 @@
       "id": "B2-007",
       "page_number": 7,
       "url": "https://loveread.ec/read_book.php?id=53370&p=7",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 9,
+      "notes": "Детский сад Второго: автоматическая входная дверь, отдельная комната новорожденных, раковина и пеленальный стол, роботы-няньки. Рубка Третьего: большой овальный управляющий стол с монитором непосредственно примыкает к узкой белой серверной стене с многочисленными световыми индикаторами. Физическая локализация основного сервера МОАГа подтверждена.",
+      "verification_method": "Full primary LoveRead page literary text reviewed, source-typed facts and direct routes",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-008",
       "page_number": 8,
       "url": "https://loveread.ec/read_book.php?id=53370&p=8",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 8,
+      "notes": "На Третьем от жилой каюты Таис и Фёдора путь в рубку пролегает через большой зал отдыха, затем по коридору к двойным полупрозрачным дверям. Двери после смены управления автоматически открываются и не запираются. В рубке управляющий овальный стол, мониторы, рабочее кресло и диван позади. Роботы стоят у грузовых шлюзов: эксплуатационное размещение.",
+      "verification_method": "Full primary LoveRead page literary text reviewed, source-typed facts and direct routes",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-009",
