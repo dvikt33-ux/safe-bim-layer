@@ -2640,6 +2640,25 @@
       },
       "geometry_gate": "NOT_AUTHORIZED",
       "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "CORE-ENERGY-ACCESS",
+      "label": "Узкий защищённый проход к энергомодулю за Детским блоком Третьего",
+      "level": 3,
+      "type": "corridor",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "text_basis": "За помещением с кувезами узкий тёмный коридор с единственной запертой дверью к центральному энергомодулю.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
     }
   ],
   "edges": [
@@ -4491,6 +4510,102 @@
         "LR-B2-034"
       ],
       "claim": "Галерея окружает центральную колбу.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E155",
+      "from": "L3-CHILD-LAB",
+      "to": "CORE-ENERGY-ACCESS",
+      "type": "behind_child_block_not_door",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Внутри Третьего проход к энергомодулю располагается непосредственно за Детским блоком, доступ по отдельному коридору.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E156",
+      "from": "CORE-ENERGY-ACCESS",
+      "to": "CORE-ENERGY-GALLERY",
+      "type": "single_locked_door_to",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Из узкого полутёмного коридора через одну запираемую дверь герои входят в круглое помещение энергомодуля на кольцевую галерею.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E157",
+      "from": "CORE-ENERGY",
+      "to": "CORE-ENERGY-SHAFT",
+      "type": "contains",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Центральный энергомодуль размещается внутри круглого вертикального объёма, проходящего по центру станции.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E158",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "CORE-ENERGY-GALLERY",
+      "type": "gallery_at_upper_access",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Галерея с металлическими перилами расположена на высоте входа с Третьего и огибает круглый объём.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E159",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L1",
+      "type": "vertical_extent_in_level_no_access_proven",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Центральный объём охватывает Нижний уровень; прямая дверь на этот уровень из центральной шахты пока не доказана.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E160",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L2",
+      "type": "vertical_extent_in_level_no_access_proven",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Центральный объём охватывает Второй уровень; наличие доступного выхода из шахты на Второй не доказано.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E161",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L3",
+      "type": "vertical_extent_in_level_no_access_proven",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Центральный объём выходит на Третий уровень; подтверждена галерея с отдельным запираемым входом.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E162",
+      "from": "CORE-ENERGY-GALLERY",
+      "to": "CORE-ENERGY",
+      "type": "overlooks_transparent_energy_column",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Из галереи персонажи наблюдают прозрачную вертикальную колбу энергомодуля, но её высота и диаметр неизвестны.",
       "state": "TEXT_DIRECT",
       "metric": null
     }
