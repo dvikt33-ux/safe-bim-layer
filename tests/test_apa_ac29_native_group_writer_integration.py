@@ -26,6 +26,21 @@ class NoApiWrites:
 
 
 class GroupWriterScope(unittest.TestCase):
+    def test_material_pool_renumbering_preserves_complete_material_semantics(self):
+        from apa_ac29_native_group_clone_verifier import materialized_solid,same_native_fact
+        def solid(i):return dict(rootBREP=[],children=[dict(BREP=[dict(faces=[dict(properties=dict(materialId=i,nativeStatus=0))])])])
+        def model(i,guid='same'):return dict(materials=[dict(id=i,modelMaterialIndex=i,attribute=dict(guid=guid),texture=dict(name='t'),color=dict(r=.5))])
+        self.assertTrue(same_native_fact(materialized_solid(solid(1),model(1)),materialized_solid(solid(4),model(4))))
+        self.assertFalse(same_native_fact(materialized_solid(solid(1),model(1)),materialized_solid(solid(4),model(4,'changed'))))
+        changed=model(4);changed['materials'][0]['texture']['name']='different'
+        self.assertFalse(same_native_fact(materialized_solid(solid(1),model(1)),materialized_solid(solid(4),changed)))
+
+    def test_missing_material_pool_reference_fails_closed(self):
+        from apa_ac29_native_group_clone_verifier import materialized_solid
+        solid=dict(rootBREP=[dict(faces=[dict(properties=dict(materialId=5))])])
+        with self.assertRaisesRegex(ValueError,'UNRESOLVED_NATIVE_FACE_MATERIAL'):
+            materialized_solid(solid,dict(materials=[]))
+
     def test_persisted_native_geometry_retains_all_tuple_values(self):
         import json
         from apa_ac29_native_group_clone_verifier import same_native_fact

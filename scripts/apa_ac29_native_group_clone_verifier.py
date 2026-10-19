@@ -12,6 +12,7 @@ from __future__ import annotations
 import math
 import re
 import json
+import copy
 
 import apa_ac29_multi_prototype_native_copy as M
 from apa_ac29_dynamic_write_scopes import NativeVerifier
@@ -31,6 +32,33 @@ def same_native_fact(current, pinned):
         return json.dumps(value, sort_keys=True, ensure_ascii=False,
                           separators=(",", ":"), allow_nan=False)
     return canonical(current) == canonical(pinned)
+
+
+def materialized_solid(solid, native):
+    """Resolve dump-local API_Umat IDs to their complete material records.
+
+    ModelDumpCommands.cpp exports p.iumat as face.materialId and resolves it
+    through API_UmatID into materials[]. Its pool number can change on reopen.
+    Keep attribute identity, color, transparency, texture and every other field.
+    """
+    rows = native.get("materials")
+    require(isinstance(rows,list), "GROUP_WRITER_NATIVE_MATERIAL_POOL_REQUIRED")
+    pool = {r.get("id"):r for r in rows if isinstance(r,dict)}
+    require(len(pool) == len(rows) and None not in pool,
+            "GROUP_WRITER_NATIVE_MATERIAL_POOL_INVALID")
+    result = copy.deepcopy(solid)
+    bodies = list(result.get("rootBREP",[]))
+    for child in result.get("children",[]):
+        bodies.extend(child.get("BREP",[]))
+    for body in bodies:
+        for face in body["faces"]:
+            properties = face["properties"]
+            index = properties.get("materialId")
+            require(type(index) is int and index in pool,
+                    "GROUP_WRITER_UNRESOLVED_NATIVE_FACE_MATERIAL")
+            properties["materialId"] = {k:v for k,v in pool[index].items()
+                                        if k not in {"id","modelMaterialIndex"}}
+    return result
 
 
 def group_member_ids(api, group_id):
@@ -143,6 +171,7 @@ def verify_before(*, api, command, parameters, affected, native_before):
                 "solid": v["solid"]} for k, v in sources.items()
         },
         "sourceNativeGuidCount": len(nodes),
+        "sourceMaterials": copy.deepcopy(native_before.get("materials")),
         "collisionProof": clearance
     }
 
@@ -222,7 +251,9 @@ def verify_after(*, api, command, parameters, native_response, before_guids,
                 if all(M.SINGLE.almost(current[guid]["anchor"][k], point[k])
                        for k in ("x", "y", "z"))
                 and same_native_fact(current[guid]["typed"], source["typed"])
-                and same_native_fact(current[guid]["solid"], source["solid"])
+                and same_native_fact(materialized_solid(current[guid]["solid"], native_after),
+                                     materialized_solid(source["solid"],
+                                         {"materials":source_proof.get("sourceMaterials",native_before.get("materials"))}))
             ]
             require(len(candidates) == 1 and candidates[0] not in matched,
                     "GROUP_WRITER_TRANSLATED_BREP_OR_ATTRIBUTES_MISMATCH")
@@ -247,6 +278,8 @@ def verify_after(*, api, command, parameters, native_response, before_guids,
         "newGroupGuids": source_groups,
         "groupCopyCount": number_of_groups,
         "originalGroupUnchanged": True,
+        "faceMaterialSemanticsVerified": True,
+        "materialPoolResolution": "COMPLETE_RECORD_EXCEPT_DUMP_LOCAL_POOL_NUMBERS",
         "allNativeRootsAndChildrenVerified": True
     }
 

@@ -89,6 +89,44 @@ class GroupBatchGates(unittest.TestCase):
             self.assertNotIn('run_auto_optimized_native_task',code)
             self.assertNotIn('router.prepare(V.CMD',code)
 
+    def test_save_only_continuation_binds_original_writer_and_never_clones(self):
+        from types import SimpleNamespace
+        from unittest.mock import Mock
+        h='c'*64
+        api=SimpleNamespace(write_attempts=0,calls={'SaveProject':0})
+        guard=SimpleNamespace(new_saved_sha=h,enable_after_verified_copy=Mock())
+        lease=SimpleNamespace(lock_sha=h,verify=lambda:True)
+        router=Mock()
+        def save(writer,scene,*args,**kwargs):
+            self.assertIs(writer,original_writer)
+            self.assertEqual(scene,G.SAVE_SCENE)
+            api.calls['SaveProject']=1;api.write_attempts=1
+            return dict(status='PASS')
+        router.execute.side_effect=save
+        m=dict(self.m,groupCount=32);planned=dict(baselineGuids=['old'])
+        original_writer=object()
+        with patch.object(G.R,'SceneWriter',return_value=original_writer) as factory, \
+             patch.object(G,'verify_group_model',return_value=(['old','new'],{},{})), \
+             patch.object(G,'fingerprint',return_value=h), \
+             patch.object(G.C,'retained_geometry_signatures',return_value={}), \
+             patch.object(G,'sha256',return_value=h):
+            result=G.save_verified_batch(self.state,m,planned,api,guard,router,lease,{})
+        factory.assert_called_once()
+        self.assertEqual(result['saveCalls'],1)
+        self.assertEqual(api.calls,{'SaveProject':1})
+
+    def test_historical_pool_requires_exact_original_source_solid(self):
+        native=dict(elements=[dict(guid='old')])
+        planned=dict(baselineGuids=['old'],sourceProof=dict(sourceFacts={'old':dict(anchor={},solid=dict(v=1))}))
+        folder=self.state/'trace-write';folder.mkdir()
+        (folder/'raw.jsonl').write_text('\n'.join(json.dumps(r) for r in [dict(command='GetModelDumpV1',response={}),dict(command=G.V.CMD)]),encoding='utf8')
+        with patch.object(G.C.G,'normalize_dump',return_value=native), \
+             patch.object(G,'fingerprint',return_value='b'*64), \
+             patch.object(G.V.M,'owned_children',return_value=[]), \
+             patch.object(G.V.M,'solid_fingerprint',return_value=dict(v=2)):
+            with self.assertRaisesRegex(ValueError,'SOURCE_FACTS_DRIFT'):
+                G.original_plan_native(self.state,dict(baselineBrepSHA256='b'*64),planned)
+
     def test_missing_instance_command_stops_before_model_or_group_reads(self):
         with patch.object(G,'prepare_api',return_value=(object(),None)), \
              patch.object(G,'router_for',side_effect=ValueError('COMMAND_NOT_REGISTERED')), \

@@ -436,8 +436,14 @@ def verify_reopen(state):
     api, _ = prepare_api(m, state, execute=False, saved_sha=saved["savedSHA256"])
     _, runtime = router_for(api)
     need(runtime == read(state / "plan.json")["runtimeIdentity"], "GROUP_BATCH_REOPEN_RUNTIME_DRIFT")
-    ids, native, proof = verify_group_model(m, api, read(state / "plan.json"),
-        saved["nativeResponse"], read(state / "baseline-native.json"))
+    planned = read(state / "plan.json")
+    baseline = read(state / "baseline-native.json")
+    if "sourceMaterials" not in planned["sourceProof"]:
+        # Historical receipt: recover its pool from the exact native dump made
+        # BEFORE the one Clone. Never map live local IDs through an older dump.
+        baseline = original_plan_native(state, m, planned)
+    ids, native, proof = verify_group_model(m, api, planned,
+        saved["nativeResponse"], baseline)
     need(len(ids) == saved["finalGuidCount"] and R.digest(ids) == saved["finalGuidSetSHA256"]
          and fingerprint(native) == saved["finalBrepSHA256"] and api.write_attempts == 0,
          "GROUP_BATCH_REOPEN_FULL_NATIVE_BREP_OR_GUID_DRIFT")
@@ -446,6 +452,24 @@ def verify_reopen(state):
                   verificationNativeWrites=0)
     write_new_json(state / "reopened.json", result)
     return result
+
+
+def original_plan_native(state, manifest, planned):
+    rows = [json.loads(r) for r in (Path(state)/"trace-write"/"raw.jsonl").read_text(encoding="utf8").splitlines()]
+    clone_indices = [i for i,r in enumerate(rows) if r["command"] == V.CMD]
+    need(len(clone_indices) == 1, "GROUP_BATCH_ORIGINAL_PLAN_SINGLE_CLONE_REQUIRED")
+    candidates = [r["response"] for r in rows[:clone_indices[0]] if r["command"] == "GetModelDumpV1"]
+    need(bool(candidates), "GROUP_BATCH_ORIGINAL_PLAN_NATIVE_DUMP_REQUIRED")
+    native = C.G.normalize_dump(candidates[-1])
+    nodes = {r["guid"].lower():r for r in native["elements"]}
+    need(sorted(nodes) == planned["baselineGuids"] and fingerprint(native) == manifest["baselineBrepSHA256"],
+         "GROUP_BATCH_ORIGINAL_PLAN_NATIVE_GUID_BREP_DRIFT")
+    for guid,fact in planned["sourceProof"]["sourceFacts"].items():
+        solid = V.M.solid_fingerprint(nodes[guid],V.M.owned_children(nodes,guid,"Column"),
+                                     fact["anchor"],parent_guid=guid)
+        need(V.same_native_fact(solid,fact["solid"]),
+             "GROUP_BATCH_ORIGINAL_PLAN_SOURCE_FACTS_DRIFT")
+    return native
 
 
 def main():

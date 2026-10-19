@@ -64,7 +64,7 @@ def synthetic(native_offsets):
     src_anchor = [{"x": 0, "y": 0, "z": 0}, {"x": 0, "y": 2, "z": 0}]
     source_facts = {
         members[k]: dict(anchor=src_anchor[k], typed=f"typed-{k}",
-                         solid=f"solid-{k}")
+                         solid=dict(rootBREP=[],children=[],syntheticFamily=k))
         for k in range(2)
     }
     for index, shift in enumerate(native_offsets):
@@ -77,7 +77,7 @@ def synthetic(native_offsets):
                     "y": src_anchor[k]["y"] + shift["dy"],
                     "z": src_anchor[k]["z"] + shift["dz"],
                 },
-                typed=f"typed-{k}", solid=f"solid-{k}",
+                typed=f"typed-{k}", solid=dict(rootBREP=[],children=[],syntheticFamily=k),
                 source=({"guid": parent},
                         [(new_children[2*index+k], {"guid": new_children[2*index+k]})]))
     after = old | set(new_roots) | set(new_children)
@@ -101,7 +101,7 @@ def synthetic(native_offsets):
     nodes = [{"guid": g} for g in sorted(after)]
     return dict(groups=groups, columns=column_rows, source=source, members=members,
                 before=old, after=after, params=params, proof=proof,
-                native=reply, model={"elements": nodes})
+                native=reply, model={"elements": nodes,"materials":[]})
 
 
 def audited_postflight(data):
@@ -114,7 +114,7 @@ def audited_postflight(data):
             api=object(), command=VERIFY.CMD,
             parameters=data["params"], native_response=data["native"],
             before_guids=data["before"], after_guids=data["after"],
-            affected=[], native_before={"elements": []},
+            affected=[], native_before={"elements": [],"materials":[]},
             native_after=data["model"], source_proof=data["proof"]
         )
 
