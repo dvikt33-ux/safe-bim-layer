@@ -309,12 +309,12 @@
       "id": "B2-028",
       "page_number": 28,
       "url": "https://loveread.ec/read_book.php?id=53370&p=28",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 2,
+      "notes": "В сцене МОАГа Эмма сопровождает Женю к действующему лифту Третьего, отправляет её на Второй и сама возвращается в командную рубку. Далее другая глава описывает чужой крейсер Гильдии: его коридоры и встроенные в стены электронные платы НЕ являются частью МОАГа.",
+      "verification_method": "Full literary page read; shift of POV and distinct hostile cruiser explicitly excluded",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-029",
