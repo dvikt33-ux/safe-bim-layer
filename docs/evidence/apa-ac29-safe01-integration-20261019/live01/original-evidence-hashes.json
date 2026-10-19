@@ -1,0 +1,24 @@
+{
+  "execution-state": {
+    "attempted.json": "02064c13921309ca03bc25abb85b3927102fa12857f7e5a54b1202db3f8e0e92",
+    "batch-scenewriter.sqlite": "0cdeef621fd4cc9a0ba88618e108628ba862b7b8a468a662b679d7009865999c",
+    "controlled-drift-proof.json": "8ffdc0a420025a83ddb4685537533a12de6c2bc888970c5875a8ad1f293e6a8e",
+    "guarded-save.snapshot": "d471eaafb858960d47b6bf4df48864ab24d36c1667d7bf00bd1c437ba7b64a99",
+    "guarded-snapshot.json": "c76681eaa3f2ee90dec7f5d6ed3f4281cd1d205e693a387133890e9acce3dda9",
+    "manifest.json": "9cac59be7f04a3164db4fcf4374f9272614907050408f2fffaaeb2806a69099e",
+    "plan.json": "04ef5d40147ed4e3e1bb66661838502ae6ee4b15a7eeb29ebee90a6d4adb5ffe",
+    "saved.json": "cd3a85cae64a53cb70acb4ba7a7671926e284313673aaedea27066c7a957082c"
+  },
+  "snapshot-state": {
+    "attempted.json": "02064c13921309ca03bc25abb85b3927102fa12857f7e5a54b1202db3f8e0e92",
+    "batch-scenewriter.sqlite": "0cdeef621fd4cc9a0ba88618e108628ba862b7b8a468a662b679d7009865999c",
+    "closed.json": "d62d2779c2e74b69a16747b6c5b45dbcbb8f592ec3347a204ecb98d3822897b4",
+    "guarded-snapshot.json": "c76681eaa3f2ee90dec7f5d6ed3f4281cd1d205e693a387133890e9acce3dda9",
+    "manifest.json": "77b0b95b06302863fcc1ac8d87c92a1bc52b92b9687b38edc734e34e4cb17d6b",
+    "opened-before-close.json": "de55ac9fa956f871e975eb3b7a4d9210192e24883b0bc948e14819d89a5fb7ec",
+    "plan.json": "04ef5d40147ed4e3e1bb66661838502ae6ee4b15a7eeb29ebee90a6d4adb5ffe",
+    "reopened.json": "b80402ef0d064e5af8e56dd02377c0165180c78fbc1e1b422df3273718f05844",
+    "saved.json": "cd3a85cae64a53cb70acb4ba7a7671926e284313673aaedea27066c7a957082c",
+    "snapshot-provenance.json": "64d2082296db5c492ff510e039f2fa73dc174afa2fab79b9b2ae6c8e9309c8d3"
+  }
+}

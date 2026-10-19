@@ -1,0 +1,29 @@
+{
+  "status": "EXACTLY_ONE_NATIVE_BATCH_AND_ONE_SAVE",
+  "commands": {
+    "API.IsAddOnCommandAvailable": 4,
+    "API.GetProductInfo": 2,
+    "GetProjectInfo": 10,
+    "GetAddOnVersion": 12,
+    "GetHotlinks": 4,
+    "GetAllElements": 8,
+    "GetModelDumpV1": 9,
+    "GetDetailsOfElements": 10,
+    "GetStories": 8,
+    "CreateHotlinkInstances": 1,
+    "SaveProject": 1
+  },
+  "writes": [
+    {
+      "command": "CreateHotlinkInstances",
+      "parametersHash": "abb883e86e52ba19ce3accc8567e6f013432ad8dfa8283c077dc5ceaeeec7516",
+      "elapsedSeconds": 0.4180005000089295
+    },
+    {
+      "command": "SaveProject",
+      "parametersHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "elapsedSeconds": 2.251592199958395
+    }
+  ],
+  "automaticReplay": false
+}

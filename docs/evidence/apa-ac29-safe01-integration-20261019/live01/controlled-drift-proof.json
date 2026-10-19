@@ -1,0 +1,14 @@
+{
+  "changedScratchSHA256": "98ad2144792309c208818bfdb2a5aba407c9de1f266c34abda5b00b564343acc",
+  "guiClosedBeforeSimulation": true,
+  "moduleUnchanged": true,
+  "nativeCloseError": 4001,
+  "nativeReplay": false,
+  "nativeWrites": 0,
+  "rejection": "HOTLINK_BATCH_PERSISTED_SCRATCH_REQUIRED_BEFORE_GUI_CLOSE",
+  "savedSHA256": "d471eaafb858960d47b6bf4df48864ab24d36c1667d7bf00bd1c437ba7b64a99",
+  "simulation": "Only closed disposable scratch replaced by earlier valid source bytes",
+  "snapshotSHA256": "d471eaafb858960d47b6bf4df48864ab24d36c1667d7bf00bd1c437ba7b64a99",
+  "sourceUnchanged": true,
+  "status": "CONTROLLED_LATE_SCRATCH_DRIFT_REJECTED_SNAPSHOT_INTACT"
+}
