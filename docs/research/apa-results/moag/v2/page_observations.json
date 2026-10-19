@@ -8436,6 +8436,76 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-520",
+      "page_id": "B2-084",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=84",
+      "station_id": "MOAG",
+      "narrative_mode": "WINDOWLESS_FIRST_FLOOR_LIBRARY",
+      "locator_hint": "маленькая библиотека на «первом этаже», куда раньше собирались жители",
+      "spatial_assertion": "Коля сообщает о маленькой библиотеке на первом этаже, в которой нет окна. Не приравнивать её к большой библиотеке с овальным окном, описанной в B1 p20: идентичность и соотношение уровней не подтверждены.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-521",
+      "page_id": "B2-084",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=84",
+      "station_id": "MOAG",
+      "narrative_mode": "TEMPORARY_CHILD_MOVEMENT_RESTRICTION",
+      "locator_hint": "безопасная галерея и спуск к «первому этажу»/Главной площади",
+      "spatial_assertion": "Во время нападения детям разрешено передвигаться только по галерее; вниз к первому этажу и Главной площади спускаются только старшие. Это временное правило безопасности и подтверждает относительное движение вниз от галереи, но не отождествление с конкретным из трёх глобальных уровней.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-522",
+      "page_id": "B2-084",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=84",
+      "station_id": "MOAG",
+      "narrative_mode": "CABIN_SLEEPING_ARRANGEMENT",
+      "locator_hint": "комната Сони с двумя креслами, сдвинутыми в подобие кровати",
+      "spatial_assertion": "Макса устраивают спать в комнате Сони на двух креслах, придвинутых друг к другу. Подтверждена локальная расстановка мебели для ночёвки, но не отдельная спальня или размеры комнаты сверх описания.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-523",
+      "page_id": "B2-084",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=84",
+      "station_id": "MOAG",
+      "narrative_mode": "INFANT_WASHING_FIXTURE",
+      "locator_hint": "купание младенцев в раковине",
+      "spatial_assertion": "Девочки-младенцы помещаются в раковину, где их быстро моют. Это подтверждает использование раковины для ухода за детьми в сцене, но не её размер, тип или точное помещение каюты.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-524",
+      "page_id": "B2-084",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=84",
+      "station_id": "MOAG",
+      "narrative_mode": "TEMPORARY_ROUTE_POLICY",
+      "locator_hint": "указание перемещаться только по галерее во время угрозы",
+      "spatial_assertion": "Правило передвижения по безопасной галерее действует при простреливаемых коридорах и угрозе на Оранжевой магистрали. Это состояние сцены, не постоянная блокировка архитектурного доступа.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }

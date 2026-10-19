@@ -925,12 +925,12 @@
       "id": "B2-084",
       "page_number": 84,
       "url": "https://loveread.ec/read_book.php?id=53370&p=84",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 5,
+      "notes": "Глава 10, МОАГ, Второй уровень. Временное правило эвакуационной безопасности разрешает детям передвигаться только по галерее; спуск к «первому этажу» и Главной площади разрешён лишь старшим. Коля сообщает о маленькой библиотеке на первом этаже без окна; не отождествлять её с большой библиотекой с овальным окном на Втором из B1 p20. Макса укладывают в комнате Сони на двух придвинутых креслах; младенцы моются в раковине. Уровень и геометрия помещений не назначены сверх прямого текста.",
+      "verification_method": "Single full-page primary-source read in Opera; scene, memory and temporary safety restrictions classified inline",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-085",
