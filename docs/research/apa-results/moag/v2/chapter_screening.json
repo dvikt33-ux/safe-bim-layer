@@ -67,7 +67,8 @@
       "B2-128",
       "B2-133",
       "B2-134",
-      "B2-135"
+      "B2-135",
+      "B2-141"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -102,13 +103,14 @@
       "B2-086",
       "B2-087",
       "B2-088",
-      "B2-089"
+      "B2-089",
+      "B2-141"
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B2-135",
-      "context_reviewed_page_count": 64,
-      "full_evidence_page_count": 230,
+      "as_of_page_id": "B2-141",
+      "context_reviewed_page_count": 65,
+      "full_evidence_page_count": 231,
       "external_excluded_page_count": 20,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
@@ -1322,6 +1324,40 @@
             "Ник"
           ],
           "station_relevance": "Подтверждены пустое состояние МОАГа и его удалённый вид; силуэт и габариты не описаны. Взрыв — план на будущее."
+        }
+      ]
+    },
+    {
+      "id": "B2-PART3-CH12",
+      "book_id": "B2",
+      "part_number": 3,
+      "chapter_number": 12,
+      "title": "Эмма. Крейсер «Дракон»",
+      "page_span": {
+        "start": 141,
+        "end": 144
+      },
+      "chapter_classification": "REMOTE_EVIDENCE",
+      "screening_status": "ONE_PASS_IN_PROGRESS",
+      "screened_pages": [
+        "B2-141"
+      ],
+      "scenes": [
+        {
+          "id": "B2P3C12-S1",
+          "page_fragments": [
+            {
+              "page_id": "B2-141",
+              "fragment": "После заголовка главы 12 начинается сцена на крейсере; он описан как небольшой по сравнению со станцией. Предшествующий земной фрагмент относится к главе 11 и пропущен."
+            }
+          ],
+          "classification": "REMOTE_EVIDENCE",
+          "physical_location": "Крейсер «Дракон»; МОАГ упомянут только для сравнения размера.",
+          "characters": [
+            "Эмма",
+            "Ник"
+          ],
+          "station_relevance": "Относительное свидетельство: корабль меньше МОАГа; абсолютные размеры станции не заданы."
         }
       ]
     }
