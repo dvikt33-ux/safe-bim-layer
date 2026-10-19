@@ -3741,6 +3741,320 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-228",
+      "page_id": "B1-079",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=79",
+      "station_id": "MOAG",
+      "narrative_mode": "ARCHIVE_3_LEVEL_PLANS",
+      "locator_hint": "вместе с записью подробные карты всех трех уровней",
+      "spatial_assertion": "Фёдор скопировал с планшета архивные подробные карты всех трёх глобальных уровней станции; факт существования карт подтверждён, метрическая достоверность файла не проверена.",
+      "feature_refs": [
+        "L3-ARCHIVE-PLAN-SET"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-229",
+      "page_id": "B1-079",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=79",
+      "station_id": "MOAG",
+      "narrative_mode": "ADULT_RETREAT_PASSAGE",
+      "locator_hint": "маленький коридорчик, кладовка, зеркало, белая дверь с ДНК",
+      "spatial_assertion": "Внутри защищённого взрослого блока есть малый проход с кладовкой и прямоугольным зеркалом; боковая дверь с ДНК-контролем открывается сдвигом в стену.",
+      "feature_refs": [
+        "L3-ADULT-RETREAT-SUITE",
+        "L3-DNA-HUMAN-LOCKS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-230",
+      "page_id": "B1-079",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=79",
+      "station_id": "MOAG",
+      "narrative_mode": "CHILD_BLOCK_SHORTCUT",
+      "locator_hint": "рядом стеклянная дверь с кувезами, направо лифт",
+      "spatial_assertion": "Непосредственно после отдельного выхода из взрослой каюты герои видят застеклённый проём с кувезами Детского блока и рядом проход к лифту; ранее маршрут был известен только по карте.",
+      "feature_refs": [
+        "L3-CHILD-LAB",
+        "L3-ADULT-RETREAT-SUITE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-231",
+      "page_id": "B1-079",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=79",
+      "station_id": "MOAG",
+      "narrative_mode": "DNA_RESTRICTED_LIFT",
+      "locator_hint": "прозрачная кабинка с белым полом, средняя кнопка",
+      "spatial_assertion": "Небольшая прозрачная кабина лифта с белым полом, полупрозрачными кнопками и ДНК-допуском соединяет Третий и Второй; спуск занимает примерно полминуты по сцене.",
+      "feature_refs": [
+        "L3-CHILD-LAB",
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-232",
+      "page_id": "B1-079",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=79",
+      "station_id": "MOAG",
+      "narrative_mode": "SCHOOL_CIRCULATION",
+      "locator_hint": "после лифта длинный тоннель к экзаменационным классам",
+      "spatial_assertion": "От выхода лифта Второго через поворот и длинный освещённый туннель можно выйти к школьному сектору с экзаменационными комнатами и к Оранжевой магистрали.",
+      "feature_refs": [
+        "L2-SCHOOL",
+        "L2-ORANGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-233",
+      "page_id": "B1-079",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=79",
+      "station_id": "MOAG",
+      "narrative_mode": "TEMPORARY_ROBOT_CORDON",
+      "locator_hint": "роботы перегородили доступ во внутренний круг",
+      "spatial_assertion": "У Оранжевой магистрали роботы временно перекрывают проход к внутреннему кругу, детским каютам и Зелёной магистрали; это не постоянная стена.",
+      "feature_refs": [
+        "L2-ORANGE",
+        "L2-GREEN"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-234",
+      "page_id": "B1-080",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=80",
+      "station_id": "MOAG",
+      "narrative_mode": "ORANGE_SIDE_TUNNELS",
+      "locator_hint": "отступили в боковой туннель и обратно на Оранжевую",
+      "spatial_assertion": "Оранжевая магистраль имеет примыкающий боковой коридор, в котором персонажи укрываются, затем возвращаются к тому же фронту; направления поворотов относительны.",
+      "feature_refs": [
+        "L2-ORANGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-235",
+      "page_id": "B1-080",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=80",
+      "station_id": "MOAG",
+      "narrative_mode": "LOWER_LOCK_BREACH",
+      "locator_hint": "Дон сообщает что открыли дверь Нижнего",
+      "spatial_assertion": "Робот сообщает об открытии одной двери Нижнего уровня, после чего заражённые появились на Втором; конкретный маршрут между уровнями пока не реконструирован.",
+      "feature_refs": [
+        "L1-SEALED",
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-236",
+      "page_id": "B1-080",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=80",
+      "station_id": "MOAG",
+      "narrative_mode": "INNER_RING_DEFENSE",
+      "locator_hint": "туннельные решетки у входа во внутренний круг",
+      "spatial_assertion": "На туннелях к внутреннему кругу Второго имеются закрываемые решётки; наличие физического проёма подтверждено, время его закрытия меняется по сюжету.",
+      "feature_refs": [
+        "L2-GREEN",
+        "L2-ORANGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-237",
+      "page_id": "B1-081",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=81",
+      "station_id": "MOAG",
+      "narrative_mode": "ENERGY_GRILLE_EVENT",
+      "locator_hint": "решётки опустились с шипением",
+      "spatial_assertion": "Во время нападения срабатывают энергетические решётки, разделяя защищённые туннели внутреннего круга и опасную часть Второго; событие в фазе нападения, не первоначальная планировка.",
+      "feature_refs": [
+        "L2-GREEN",
+        "L2-ORANGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-238",
+      "page_id": "B1-081",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=81",
+      "station_id": "MOAG",
+      "narrative_mode": "OLD_KITCHEN_AUTOMATION",
+      "locator_hint": "чайник, кофеварка, тостер, хлебопечка в углу",
+      "spatial_assertion": "В старой жилой комнате закрытого Нижнего в углу размещён крупный комплекс приготовления напитков/еды, подключённый к водопроводу; сохранил локальное автоматическое управление.",
+      "feature_refs": [
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-239",
+      "page_id": "B1-082",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=82",
+      "station_id": "MOAG",
+      "narrative_mode": "ADJACENT_MINILAB",
+      "locator_hint": "Вовик зовет из соседней комнаты, компьютеры",
+      "spatial_assertion": "Непосредственно смежная комната при старом жилом отсеке используется как мини-лаборатория с компьютерами и специальной аппаратурой; точные размеры и функция до закрытия неизвестны.",
+      "feature_refs": [
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-240",
+      "page_id": "B1-082",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=82",
+      "station_id": "MOAG",
+      "narrative_mode": "HISTORIC_HANGAR_CONTROL",
+      "locator_hint": "помещение при рубке приема грузовых крейсеров",
+      "spatial_assertion": "Коля по документам идентифицирует оставленные нижние каюты/рубки как бывший центр управления грузовыми ангарами, принимавшими крейсеры.",
+      "feature_refs": [
+        "L1-CIRCULAR-CONTROL",
+        "L1-OLD-FREIGHT-HANGAR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-241",
+      "page_id": "B1-082",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=82",
+      "station_id": "MOAG",
+      "narrative_mode": "LEGACY_COMM_LINK",
+      "locator_hint": "отдельная ветка связи с письмами",
+      "spatial_assertion": "Старый комплекс имел выделенную связь для приема/отправления сообщений по расписанию; факт функционального канала следует из найденных писем.",
+      "feature_refs": [
+        "L1-CIRCULAR-CONTROL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-242",
+      "page_id": "B1-082",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=82",
+      "station_id": "MOAG",
+      "narrative_mode": "BATHROOM_FIXTURES",
+      "locator_hint": "кнопка, выдвижной туалет, дезинфекция, раковина",
+      "spatial_assertion": "В смежном санитарном помещении старой жилой группы Нижнего стеновая панель выпускает автоматический унитаз, есть раковина, зеркало и тёплая вода.",
+      "feature_refs": [
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-243",
+      "page_id": "B1-083",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=83",
+      "station_id": "MOAG",
+      "narrative_mode": "HISTORIC_OPERATION_RELOCATION",
+      "locator_hint": "старые грузовые ангары закрыли после новых на Третьем",
+      "spatial_assertion": "По историческим письмам/чтению Коли нижние грузовые ангары прекратили использовать после открытия новых грузовых ангаров Третьего; это смена функции внутри одного корабля.",
+      "feature_refs": [
+        "L1-OLD-FREIGHT-HANGAR",
+        "L3-CARGO-HALL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-244",
+      "page_id": "B1-083",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=83",
+      "station_id": "MOAG",
+      "narrative_mode": "SMALL_OLD_LOUNGE",
+      "locator_hint": "Эмма лежит на кушетке, обитой искусственной кожей",
+      "spatial_assertion": "В старой жилой комнате закрытого Нижнего есть кушетка с искусственно-кожаной обивкой.",
+      "feature_refs": [
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-245",
+      "page_id": "B1-084",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=84",
+      "station_id": "MOAG",
+      "narrative_mode": "CLOSED_CONTROL_FURNISHING",
+      "locator_hint": "несколько кресел у стола и пара лампочек",
+      "spatial_assertion": "В закрытой служебной жилой зоне несколько кожаных кресел с подлокотниками и откидывающимися спинками, локальное освещение над столом и шкаф с высокой полкой.",
+      "feature_refs": [
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-246",
+      "page_id": "B1-084",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=84",
+      "station_id": "MOAG",
+      "narrative_mode": "SMALL_GREEN_PARK",
+      "locator_hint": "совет в небольшом парке среди кадочных елей и лимонов",
+      "spatial_assertion": "На Втором в отдельном озеленённом общественном пространстве имеются расположенные по кругу диваны, небольшие лимонные и еловые деревца в кадках; привязка к Главной площади не доказана.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
