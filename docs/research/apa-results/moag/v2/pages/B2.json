@@ -287,23 +287,23 @@
       "id": "B2-026",
       "page_number": 26,
       "url": "https://loveread.ec/read_book.php?id=53370&p=26",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 7,
+      "notes": "В командной рубке Третьего обсуждают повреждение роботов и изучают чипы; рядом с жилыми каютами находится отдельный детский лабораторный блок с кувезами. Героиня Соня выходит из рубки и проходит по общим коридорам. При перегрузке энергомодуля на семь минут отключается обычный свет в коридорах Третьего; в рубке автоматически включаются резервные круглые встроенные светильники. В поисках ребёнка Эмма выходит в тёмный коридор в сторону высоких закрытых дверей производства.",
+      "verification_method": "Entire literary page read including dialogues, route turns and state of emergency lighting; no inferred identity",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-027",
       "page_number": 27,
       "url": "https://loveread.ec/read_book.php?id=53370&p=27",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 8,
+      "notes": "Эмма идёт из рубки по тёмным коридорам Третьего, минует два поворота и достигает широкого коридора к главным лифтам с мягким напольным покрытием. Далее движется до закрытых ворот производственного цеха, возле них обнаруживает девочку Женю, после чего возвращается в капитанскую рубку тем же коридорным районом. После восстановления питания основное освещение включается. Отрицательные сведения: происхождение девочки по сцене не подтверждено, не считать её комнату/создание частью геометрии.",
+      "verification_method": "Entire literary page read including dialogues, route turns and state of emergency lighting; no inferred identity",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-028",
