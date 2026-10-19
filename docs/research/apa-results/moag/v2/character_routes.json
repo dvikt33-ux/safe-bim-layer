@@ -5599,7 +5599,8 @@
       ],
       "book": "B2",
       "site_pages": [
-        "B2-127"
+        "B2-127",
+        "B2-128"
       ],
       "route_kind": "OBSERVED_CHARACTER_ROUTE",
       "nodes": [
@@ -5662,11 +5663,47 @@
           "existing_graph_node": null,
           "relative_xy": null,
           "absolute_z_m": null
+        },
+        {
+          "id": "RT050-F",
+          "label": "Неустановленный переход со Второго на Третий уровень",
+          "global_level": null,
+          "local_stratum": "second-to-third-route-method-unresolved",
+          "source_page_id": "B2-128",
+          "movement_method": "NARRATIVE_GAP",
+          "observed_constraint": "Персонажи направляются на Третий и выходят рядом с грузовыми ангарами; лифт/лестница/иной путь не назван.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT050-G",
+          "label": "Знакомые грузовые ангары на Третьем уровне",
+          "global_level": 3,
+          "local_stratum": "third-level-robot-loading-hangars",
+          "source_page_id": "B2-128",
+          "movement_method": "NARRATIVE_GAP",
+          "observed_constraint": "Это те же ангары, где ранее грузили роботов; сейчас повреждены контейнеры, двери и обшивка.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT050-H",
+          "label": "Коридор от грузовой зоны к дверям капитанской рубки",
+          "global_level": 3,
+          "local_stratum": "third-freight-to-captain-bridge-corridor",
+          "source_page_id": "B2-128",
+          "movement_method": "WALK",
+          "observed_constraint": "Зачищаемый коридор приводит к знакомым открытым стеклянным дверям капитанской рубки; дистанция не описана.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
         }
       ],
       "constraints": [],
       "identity_hypotheses": [],
-      "notes": "Спуск от узкой решётчатой лестницы — фактически пройденный локальный переход; точная конечная отметка неизвестна. Не считать будущий подъём на Верхний уровень пройденным."
+      "notes": "Спуск от узкой решётчатой лестницы — фактически пройденный локальный переход; точная конечная отметка неизвестна. Не считать будущий подъём на Верхний уровень пройденным. p128 confirms the destination freight hangars are the earlier robot-loading hangars; movement from L2 to L3 is a narrative gap, then a corridor leads to captain-bridge doors."
     }
   ],
   "notes": "undefined Дополнен RT-043 по B2 p90: наблюдаемая бытовая последовательность внутри жилого помещения; точный уровень и идентичность с RT-042 не установлены. Добавлен RT-044 по p91 с эпизодическим отклонением в детскую каюту; геометрия переходов и уровень не установлены. Добавлен RT-045 для переговоров и ухода через туннель №8; точные уровни, трасса от библиотеки и судьба Дины не выводятся. Добавлен RT-046 по p94: Дина возвращается, а группа поднимается в жилую каюту; вертикальная трасса и уровень неизвестны."
