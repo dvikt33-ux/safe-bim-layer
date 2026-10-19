@@ -5623,7 +5623,7 @@
           "local_stratum": "second-level-battle-corridor-dead-end",
           "source_page_id": "B2-127",
           "movement_method": "WALK",
-          "observed_constraint": "Небольшой тупик в коридоре — постоянное пространственное свидетельство; баррикада из опрокинутых пекарей относится только к рендеру боевого эпизода. Позиция относительно лифта не описана.",
+          "observed_constraint": "Небольшой тупик в коридоре — пространственное свидетельство; баррикада из опрокинутых пекарей относится только к рендеру боевого эпизода. Позиция относительно лифта не описана.",
           "existing_graph_node": null,
           "relative_xy": null,
           "absolute_z_m": null
@@ -5783,6 +5783,97 @@
       "constraints": [],
       "identity_hypotheses": [],
       "notes": "Переход от предыдущей локации к дверям цеха не описан. Известна внутренняя связь: главный круглый зал и расходящиеся помещения; далее путь через упаковочные контейнеры и полукруглый проём к человекоподобному производству. Уровень цеха неизвестен."
+    },
+    {
+      "id": "RT-052",
+      "title": "Производственный цех → лифт на Первый уровень → полукруглый коридор → кладовые",
+      "participants": [
+        "Эмма",
+        "Ник",
+        "Колька"
+      ],
+      "book": "B2",
+      "site_pages": [
+        "B2-134"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT052-A",
+          "label": "Выход из производственного цеха и неизвестный путь к лифту",
+          "global_level": 1,
+          "local_stratum": "factory-exit-to-lift-gap",
+          "source_page_id": "B2-134",
+          "movement_method": "NARRATIVE_GAP",
+          "observed_constraint": "Эмма покидает цех и бежит к лифту; трасса между цехом и лифтом не описана.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT052-B",
+          "label": "Лифт и прибытие на Первый уровень",
+          "global_level": 1,
+          "local_stratum": "first-level-lift-arrival-unverified-car",
+          "source_page_id": "B2-134",
+          "movement_method": "ELEVATOR",
+          "observed_constraint": "Эмма добирается до лифта и оказывается на Первом; конкретная кабина/шахта не установлена.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT052-C",
+          "label": "Коридор Первого уровня с обломками роботов",
+          "global_level": 1,
+          "local_stratum": "first-level-debris-corridor",
+          "source_page_id": "B2-134",
+          "movement_method": "WALK",
+          "observed_constraint": "Коридор заполнен обломками после боя.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT052-D",
+          "label": "Раскрытые двери ангарного отсека",
+          "global_level": 1,
+          "local_stratum": "open-hangar-compartment-doors-unresolved",
+          "source_page_id": "B2-134",
+          "movement_method": "DOOR",
+          "observed_constraint": "Двери открыты и выводят в широкий полукруглый коридор; идентичность отсека не установлена.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT052-E",
+          "label": "Широкий полукруглый коридор к бывшим жилым отсекам",
+          "global_level": 1,
+          "local_stratum": "first-level-semicircular-corridor-residential",
+          "source_page_id": "B2-134",
+          "movement_method": "WALK",
+          "observed_constraint": "Коридор ведёт к бывшим жилым отсекам.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT052-F",
+          "label": "Проём и кладовые",
+          "global_level": 1,
+          "local_stratum": "first-level-stores-opening",
+          "source_page_id": "B2-134",
+          "movement_method": "WALK",
+          "observed_constraint": "Через проём Эмма попадает в кладовые; Колька укрыт под полкой.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "От цеха к лифту остаётся текстовый пробел; не соединять конкретную лифтовую шахту. Связь полукруглого коридора с ангарным отсеком и бывшими жилыми зонами подтверждена; точную идентичность ангара не выводить."
     }
   ],
   "notes": "undefined Дополнен RT-043 по B2 p90: наблюдаемая бытовая последовательность внутри жилого помещения; точный уровень и идентичность с RT-042 не установлены. Добавлен RT-044 по p91 с эпизодическим отклонением в детскую каюту; геометрия переходов и уровень не установлены. Добавлен RT-045 для переговоров и ухода через туннель №8; точные уровни, трасса от библиотеки и судьба Дины не выводятся. Добавлен RT-046 по p94: Дина возвращается, а группа поднимается в жилую каюту; вертикальная трасса и уровень неизвестны."
