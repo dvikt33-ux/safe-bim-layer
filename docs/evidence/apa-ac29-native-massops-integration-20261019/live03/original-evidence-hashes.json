@@ -1,0 +1,22 @@
+{
+  "attempted.json": "a57c055a39cba9b0b4c17669ce5edc9a126f5898c0876ab9900b0b430b6d3ffd",
+  "baseline-native.json": "6284490aa9ba0d61ab8f20bda3e1b5cc2cd2f27c7ed50074aebae481c66561fe",
+  "batch-scenewriter.sqlite": "7f5e03df344bc2b486ed35e7be4e2a2610a71a643f21bb6d348f4bf7d4df5eaf",
+  "closed.json": "f71ba679599fa07f5f1a3851d8e5b4ffe4109de97e588d1abef44d6f18204b1c",
+  "completed-clone-reconciliation.json": "805d8ef2a992c6594cfb19643abc8d4c2dceaeef9f99b1a5118b2ea8adc6eb55",
+  "current-plan-diagnostic.json": "084aae41c2968201430314cc12fbc3de1e7ed55272a70fcd072222eaf9ecdd0e",
+  "failed.json": "f65635570af5a42d647e66ba1b51c3636a65a07e4dca90cf65343c5325937f76",
+  "guarded-snapshot.json": "10857cf3d7aea7fa0bc446f6395fc059f474eae67de0aeadda0c7df66bbe8427",
+  "independent-final-audit.json": "8b3f601c3914e873821f3c00328e5445ca607ca5e2990e69c949831a8a1e1afe",
+  "manifest.json": "2cac26e308684675a8b03ef92ca5d45989ccdd044cfe8f5137bd528d00e7067d",
+  "manual-presave-nameerror-continuation.json": "150fdd6fbf84244bc40d22f455f042796c65b7ea274052657162d2958aab7e16",
+  "plan.json": "c7650c7ad8ecec3bf01afe9cd7e80e9759b53c99b8944f89f157e9ccdcc1e600",
+  "readonly-reconciliation.json": "b01784b1140fb2477f9b8c192eb8f7b75cc58a336485497373b1be6f378fdac8",
+  "reconciled-save-attempted.json": "31ba33a6c458f7713b3ca40008180ea908f95478a16a2ae5cfaf556053909e8d",
+  "reopened.json": "7f217d9d6c11d853297a62e0812534c57530ecdad215b46c7af6ee83eefda80b",
+  "saved.json": "2aeda4ec55433bed80f6ce98660e2f9783250313a0dc2ffd3374db5f7514c048",
+  "trace-read/dispatch.jsonl": "3c5ab4abe84debcf5f6184bf5bc0142bfcaa1ea98f7d16e9770da0dd7701ac91",
+  "trace-read/raw.jsonl": "75e357cf0e80c234579ee4d4691a0adfa4d5303c23194a3d4a4c9fbe3d162af5",
+  "trace-write/dispatch.jsonl": "aa81b1e24b37c46472269c88f85ed6b8bc7e777f04d0ac7bf737db63b76423ad",
+  "trace-write/raw.jsonl": "af482a8c9133f726e469593c80f2b024f6c70dd4461be388c4d1d4da29b1926e"
+}

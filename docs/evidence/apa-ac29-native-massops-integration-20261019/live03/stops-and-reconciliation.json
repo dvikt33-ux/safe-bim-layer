@@ -1,0 +1,34 @@
+{
+  "materialPoolFix": "RESOLVE_COMPLETE_MATERIAL_FROM_ITS_OWN_NATIVE_DUMP_NOT_HISTORICAL_POOL",
+  "originalFailure": {
+    "automaticReplay": false,
+    "error": "GROUP_WRITER_TRANSLATED_BREP_OR_ATTRIBUTES_MISMATCH",
+    "nativeMutationMayHaveOccurred": true,
+    "schema": "APA_AC29_NATIVE_GROUP_BATCH_V1",
+    "status": "UNKNOWN_NO_REPLAY_READONLY_RECONCILIATION_REQUIRED"
+  },
+  "presaveContinuation": {
+    "automaticReplay": false,
+    "nativeSaveSceneCount": 0,
+    "nativeSaveTraceCount": 0,
+    "onlyReadOnlyTraceAppended": true,
+    "originalSaveAttemptMarkerSHA256": "31ba33a6c458f7713b3ca40008180ea908f95478a16a2ae5cfaf556053909e8d",
+    "sealedTracePrefixVerified": true,
+    "status": "EXPLICIT_CONTINUATION_BEFORE_ANY_SAVE_DISPATCH"
+  },
+  "reconciliation": {
+    "automaticReplay": false,
+    "finalBrepSHA256": "e1a3018e128491322413ee4f7b582a8a8b95e1f9d5c20899eca28f07c1b1b495",
+    "finalGuidSetSHA256": "3c9efe184b2f5ac9518cd3e57b0f2af0994e477fae64de2c255dfa1b12750310",
+    "nativeWrites": 0,
+    "originalAttemptSHA256": "a57c055a39cba9b0b4c17669ce5edc9a126f5898c0876ab9900b0b430b6d3ffd",
+    "originalFailureSHA256": "f65635570af5a42d647e66ba1b51c3636a65a07e4dca90cf65343c5325937f76",
+    "originalLeaseSHA256": "bcd2774dbdb61cb78c86b3dd0d9c79b20d83cff69b6f9f20b2bc7e29a9529442",
+    "planSHA256": "c7650c7ad8ecec3bf01afe9cd7e80e9759b53c99b8944f89f157e9ccdcc1e600",
+    "sourceSHA256": "3a74d7cb17e460378eacfa8f933aeae29a5ca39fbf2bc73633115c9fee728750",
+    "sqliteSHA256": "c5f8b8cabbf1c278ac44e4921af3a841e4a25c5eb989537f488113ec7c070f2d",
+    "status": "COMPLETED_CLONE_FULL_NATIVE_READONLY_RECONCILED",
+    "traceSHA256": "48936d803113aa27c96e4b3c62f90f7082e47a1843e7dac6b8f624b0cf4a8401"
+  },
+  "resolution": "ONE_ALREADY_PASS_CLONE_READONLY_RECONCILED_THEN_ONE_SAVE_AND_REAL_GUI_REOPEN"
+}
