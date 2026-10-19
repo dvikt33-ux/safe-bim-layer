@@ -79,6 +79,15 @@ class ProgressiveSpatialTests(unittest.TestCase):
         hypotheses={(e["from"],e["to"]) for e in result["identity_hypotheses"]}
         self.assertIn(("M-L2-LIB-NOWINDOW-001","M-L2-LIB-MEETING-001"),hypotheses)
 
+    def test_source_graph_and_fragments_merge_with_provenance(self):
+        r=MOD.solve(self.g,self.f)
+        self.assertGreater(r["counts"]["base_graph_qualitative_links"],100)
+        self.assertGreater(r["counts"]["new_links_that_joined_fragments"],0)
+        self.assertEqual(r["counts"]["new_links_that_joined_fragments"],len(r["bridge_events"]))
+        self.assertTrue(all(e["source_ids"] for e in r["bridge_events"]))
+        self.assertTrue(all(e["result"]=="QUALITATIVE_FRAGMENTS_FUSED_COORDINATES_STILL_UNKNOWN" for e in r["bridge_events"]))
+        self.assertFalse(r["gates"]["planar_embedding_unique"])
+
     def test_no_source_claims_metric_uniqueness(self):
         result=MOD.solve(self.g,self.f)
         self.assertFalse(result["gates"]["metric_coordinates_known"])
