@@ -1002,12 +1002,12 @@
       "id": "B2-091",
       "page_number": 91,
       "url": "https://loveread.ec/read_book.php?id=53370&p=91",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 3,
+      "notes": "Глава 12, утренняя сцена на МОАГе. Сход старших созывают в малой библиотеке, но герои не доходят туда на этой странице; не отождествлять автоматически с библиотекой p84. Эмма и Колька идут по галерее с переносками; у лестницы к Зелёной магистрали драка детей. Эмма временно запирает одного мальчика в первой свободной детской каюте: одна спальня, кровать без матраса, большой молчащий монитор, ванная с туалетом и водой; плотная металлопластиковая дверь с цифровым замком, которым нельзя открыть изнутри без планшета. Упоминание детских кают относится к существующей системе замков; новые правила изоляции остаются предложением персонажей. Колька проходит через Главную площадь к парку; в парке тяжёлые прямоугольные цветочные горшки, папоротники, горошек и китайские розы; несколько горшков перевёрнуты. Уровень каюты и точные расстояния не заданы.",
+      "verification_method": "Single full-page primary-source read in Opera; observed station movement, cabin hardware and park planting separated from proposed child-discipline rules",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-092",
