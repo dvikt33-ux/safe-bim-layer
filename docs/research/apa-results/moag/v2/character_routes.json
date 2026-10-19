@@ -798,8 +798,8 @@
           "local_stratum": "freight-hall-floor",
           "source_page_id": "B1-44",
           "movement_method": "WALK",
-          "observed_constraint": "Прямой широкий коридор с резиновым полом, высокими воротами ангаров, низкими подсвеченными указателями и неработающими потолочными лампами.",
-          "existing_graph_node": "L1-ANGAR-HALL",
+          "observed_constraint": "Прямой широкий коридор с резиновым полом, высокими воротами ангаров, низкими подсвеченными указателями и неработающими потолочными лампами. Совпадение с другими ангарными коридорами ещё не установлено.",
+          "existing_graph_node": null,
           "relative_xy": null,
           "absolute_z_m": null
         },
