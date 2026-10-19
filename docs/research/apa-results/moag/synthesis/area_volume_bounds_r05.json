@@ -2640,11 +2640,20 @@
         "P-096"
       ],
       "global_level": 1,
-      "area_role": "GLOBAL_ENVELOPE_CALCULATED_BY_DIAMETER",
-      "bounds": null,
+      "area_role": "LEVEL_ENVELOPE_AREA_PROJECT_SCENARIO",
+      "bounds": {
+        "min_module2": null,
+        "max_module2": null,
+        "min_height_in_human_modules": null,
+        "max_height_in_human_modules": null,
+        "editable_area_min_m2": 300000,
+        "editable_area_max_m2": 2400000,
+        "editable_height_min_m": 12,
+        "editable_height_max_m": 450
+      },
       "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
-      "allow_manual_revision": false,
-      "notes": null
+      "allow_manual_revision": true,
+      "notes": "Adjustable broad level envelope range, not floor sum; structural height covers voids and local galleries, not repeated global floors"
     },
     {
       "id": "M-STA-L2-001",
@@ -2657,11 +2666,20 @@
         "P-096"
       ],
       "global_level": 2,
-      "area_role": "GLOBAL_ENVELOPE_CALCULATED_BY_DIAMETER",
-      "bounds": null,
+      "area_role": "LEVEL_ENVELOPE_AREA_PROJECT_SCENARIO",
+      "bounds": {
+        "min_module2": null,
+        "max_module2": null,
+        "min_height_in_human_modules": null,
+        "max_height_in_human_modules": null,
+        "editable_area_min_m2": 120000,
+        "editable_area_max_m2": 1200000,
+        "editable_height_min_m": 8,
+        "editable_height_max_m": 250
+      },
       "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
-      "allow_manual_revision": false,
-      "notes": null
+      "allow_manual_revision": true,
+      "notes": "Adjustable broad level envelope range, not floor sum; structural height covers voids and local galleries, not repeated global floors"
     },
     {
       "id": "M-STA-L3-001",
@@ -2673,11 +2691,20 @@
         "P-200"
       ],
       "global_level": 3,
-      "area_role": "GLOBAL_ENVELOPE_CALCULATED_BY_DIAMETER",
-      "bounds": null,
+      "area_role": "LEVEL_ENVELOPE_AREA_PROJECT_SCENARIO",
+      "bounds": {
+        "min_module2": null,
+        "max_module2": null,
+        "min_height_in_human_modules": null,
+        "max_height_in_human_modules": null,
+        "editable_area_min_m2": 80000,
+        "editable_area_max_m2": 700000,
+        "editable_height_min_m": 8,
+        "editable_height_max_m": 300
+      },
       "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
-      "allow_manual_revision": false,
-      "notes": null
+      "allow_manual_revision": true,
+      "notes": "Adjustable broad level envelope range, not floor sum; structural height covers voids and local galleries, not repeated global floors"
     },
     {
       "id": "M-STA-CORE-001",
@@ -4504,8 +4531,19 @@
   ],
   "applicability": {
     "all_indexed_ids": 197,
-    "area_applicable": 154,
-    "not_applicable": 43
+    "area_applicable": 157,
+    "not_applicable": 40
   },
-  "geometry_gate": false
+  "geometry_gate": false,
+  "global_accounting": {
+    "level_envelopes": [
+      "M-STA-L1-001",
+      "M-STA-L2-001",
+      "M-STA-L3-001"
+    ],
+    "gross_area_definition": "projected area of occupied block envelope, not sum of partitions nor false solid disk",
+    "level_local_galleries": "additional usable floor within same vertical block, not additional global storeys",
+    "voids": "vertical core void subtract from usable floor where cut, not from all envelope projections",
+    "no_auto_sum_of_groups": "groups represent containers and overlap child rooms; sum only explicitly disjoint interiors"
+  }
 }
