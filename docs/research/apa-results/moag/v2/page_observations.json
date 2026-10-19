@@ -7391,6 +7391,169 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-451",
+      "page_id": "B2-048",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=48",
+      "station_id": "MOAG",
+      "narrative_mode": "LIBRARY_MEETING_LAYOUT",
+      "locator_hint": "стеллажи, проход, круглый стол и стулья",
+      "spatial_assertion": "Библиотека Второго уровня имеет книжные стеллажи, узкие проходы между ними и большой низкий круглый стол с сидячими местами, используемый для собраний.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-452",
+      "page_id": "B2-048",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=48",
+      "station_id": "MOAG",
+      "narrative_mode": "LIBRARY_ACCESS",
+      "locator_hint": "собрались участники из разных групп",
+      "spatial_assertion": "Библиотека доступна жителям Второго и ранее Нижнего для общего собрания; самостоятельный точный маршрут от каждой базы к ней не описан.",
+      "feature_refs": [
+        "L2",
+        "L1-OVAL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-453",
+      "page_id": "B2-049",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=49",
+      "station_id": "MOAG",
+      "narrative_mode": "PROPOSED_SYSTEM_SHUTDOWN",
+      "locator_hint": "предложили отключить электронные блоки кафе",
+      "spatial_assertion": "Персонажи обсуждают отключение ресторанов и роботов, но техническое выполнение на странице не установлено; эти функции не удалять из исторической модели.",
+      "feature_refs": [
+        "L2-CAFE"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-454",
+      "page_id": "B2-050",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=50",
+      "station_id": "MOAG",
+      "narrative_mode": "LIFT_RETURN_TO_THIRD",
+      "locator_hint": "тем же лифтом, на котором спустились",
+      "spatial_assertion": "Эмма и другие старшие фактически поднимаются со Второго на Третий в той же кабине, на которой Эмма и Коля прежде спустились.",
+      "feature_refs": [
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-455",
+      "page_id": "B2-050",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=50",
+      "station_id": "MOAG",
+      "narrative_mode": "BRIDGE_AUTOMATIC_ACCESS",
+      "locator_hint": "сомкнутые двери и сенсорная панель",
+      "spatial_assertion": "Капитанская рубка оборудована плотно закрывающимися створками и внешней сенсорной панелью доступа.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-456",
+      "page_id": "B2-050",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=50",
+      "station_id": "MOAG",
+      "narrative_mode": "WHITE_INTELLIGENCE_SERVER",
+      "locator_hint": "большой белый сервер за мониторной зоной",
+      "spatial_assertion": "Внутри капитанской рубки физически стоит большой белый сервер, который текст прямо связывает с интеллектом Моага-Мартина; отличен от центрального энергомодуля станции.",
+      "feature_refs": [
+        "L3-BRIDGE",
+        "CORE-ENERGY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-457",
+      "page_id": "B2-050",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=50",
+      "station_id": "MOAG",
+      "narrative_mode": "BRIDGE_AND_CREW_WINDOWS",
+      "locator_hint": "здесь окно, в жилом отсеке другое панорамное",
+      "spatial_assertion": "Окно рубки позволяет наблюдать часть внешнего космоса; в жилом отсеке Третьего есть ещё одно панорамное окно. Их нельзя объединять в один проём.",
+      "feature_refs": [
+        "L3-BRIDGE",
+        "L3-CREW"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-458",
+      "page_id": "B2-051",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=51",
+      "station_id": "MOAG",
+      "narrative_mode": "SERVER_LIFE_SUPPORT_EMERGENCY",
+      "locator_hint": "жизнеобеспечение тормозит, голограмма погасла",
+      "spatial_assertion": "В период вирусной атаки нарушена связь управления роботами и жизнеобеспечением, исчезает голограмма рубки; авария оборудования не создаёт новую геометрию.",
+      "feature_refs": [
+        "L3-BRIDGE",
+        "CORE-ENERGY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-459",
+      "page_id": "B2-051",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=51",
+      "station_id": "MOAG",
+      "narrative_mode": "SHIELD_LOSS_STORY_PHASE",
+      "locator_hint": "станция вздрагивает, поле исчезло",
+      "spatial_assertion": "Внешняя защита МОАГа ослабевает при нарушении серверного управления, возникают механические толчки от попаданий; это сюжетно-временное состояние оболочки.",
+      "feature_refs": [
+        "CORE-ENERGY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-460",
+      "page_id": "B2-052",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=52",
+      "station_id": "UNRESOLVED_OBJECT",
+      "narrative_mode": "ALIEN_CONSOLE_EXCLUSION",
+      "locator_hint": "стол Иминуи и четыре процессора",
+      "spatial_assertion": "Четыре процессора, внутристенные скрытые платы, стол управления и узкая техническая рубка находятся на чужом крейсере Иминуя; не переносить в МОАГ.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
