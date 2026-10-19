@@ -136,6 +136,38 @@ def preserve_guarded_save(project_path, snapshot_path, saved_sha,
             "automaticReplay": False, "modelWrites": 0}
 
 
+def verify_snapshot_evidence(state, manifest, saved):
+    """Check the saved receipt's seal before trusting snapshot provenance.
+
+    Hashes detect drift; they are not cryptographic signatures or protection
+    against an actor rewriting the entire evidence chain.
+    """
+    state = Path(state).resolve()
+    proof_path = state / "guarded-snapshot.json"
+    require(saved.get("schema") == "APA_AC29_HOTLINK_BATCH_V1" and
+            saved.get("status") == "BATCH_NATIVE_SAVED_PENDING_REAL_REOPEN" and
+            _SHA.fullmatch(saved.get("savedSHA256") or "") and
+            saved.get("guardedSnapshotSHA256") == saved["savedSHA256"] and
+            sha256(proof_path) == saved.get("guardedSnapshotReceiptSHA256"),
+            "APA_SAVE_REOPEN_SEALED_SNAPSHOT_RECEIPT_DRIFT")
+    proof = json.loads(proof_path.read_text(encoding="utf-8"))
+    protected = {str(Path(manifest[key]).resolve()): manifest[key + "SHA256"]
+                 for key in ("source", "module")}
+    require(proof.get("schema") == "APA_SAVE_EXACT_SNAPSHOT_V1" and
+            proof.get("status") == "BYTE_EXACT_GUARDED_SAVE_SNAPSHOT_CAPTURED" and
+            proof.get("savedSHA256") == proof.get("snapshotSHA256") ==
+                saved["savedSHA256"] and
+            Path(proof["snapshot"]).resolve() == state / "guarded-save.snapshot" and
+            Path(proof["source"]).resolve() == Path(manifest["scratch"]).resolve() and
+            proof.get("protectedSHA256") == protected and
+            all(saved.get(key + "SHA256") == manifest[key + "SHA256"]
+                for key in ("source", "module")) and
+            sha256(state / "guarded-save.snapshot") == saved["savedSHA256"] and
+            all(sha256(path) == checksum for path, checksum in protected.items()),
+            "APA_SAVE_REOPEN_SNAPSHOT_OR_PROTECTED_PROVENANCE_DRIFT")
+    return proof
+
+
 def stage_readonly_reopen(parent_state, fresh_copy, fresh_state, port):
     """Create a new immutable verification-only binding for *saved* bytes.
 
@@ -165,6 +197,8 @@ def stage_readonly_reopen(parent_state, fresh_copy, fresh_state, port):
             saved["sourceSHA256"] == manifest["sourceSHA256"] and
             saved["moduleSHA256"] == manifest["moduleSHA256"],
             "APA_SAVE_REOPEN_SIGNED_GUARDED_SAVE_CHAIN_REQUIRED")
+    # Reject changed proof bytes BEFORE creating a new PLN/state. Reading a
+    # self-consistent JSON proof alone does not validate its saved-receipt seal.
     original = Path(manifest["scratch"]).resolve()
     snapshot = Path(snap["snapshot"]).resolve()
     source = Path(manifest["source"]).resolve()
@@ -183,6 +217,7 @@ def stage_readonly_reopen(parent_state, fresh_copy, fresh_state, port):
             sha256(parent / "saved.json") and
             sha256(parent / "batch-scenewriter.sqlite"),
             "APA_SAVE_REOPEN_SOURCE_PROVENANCE_DRIFT")
+    verify_snapshot_evidence(parent, manifest, saved)
 
     # Before touching target files, pin the original evidence hashes.
     hashes = {name: sha256(parent / name) for name in
@@ -199,6 +234,10 @@ def stage_readonly_reopen(parent_state, fresh_copy, fresh_state, port):
         require(sha256(new_state / name) == hashes[name] and
                 sha256(parent / name) == hashes[name],
                 "APA_SAVE_REOPEN_PARENT_EVIDENCE_CHANGED_DURING_STAGE")
+    require(all(sha256(parent / name) == checksum
+                for name, checksum in hashes.items()) and
+            all(sha256(path) == checksum for path, checksum in protected.items()),
+            "APA_SAVE_REOPEN_PARENT_CHANGED_BEFORE_BINDING")
     derived = {**manifest, "scratch": str(new_pln), "port": port,
                "snapshotVerificationOnly": True,
                "parentStatePath": str(parent),

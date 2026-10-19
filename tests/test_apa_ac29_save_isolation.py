@@ -235,6 +235,55 @@ class SaveIsolationTests(unittest.TestCase):
             S.stage_readonly_reopen(
                 self.parent, target, self.base / "state2", 19727)
 
+    def test_changed_snapshot_receipt_rejected_before_any_target_creation(self):
+        self._saved_parent()
+        proof_path = self.parent / "guarded-snapshot.json"
+        proof = json.loads(proof_path.read_text(encoding="utf8"))
+        proof["atUTC"] = "altered after saved receipt was sealed"
+        proof_path.write_text(json.dumps(proof), encoding="utf8")
+        target, state = self.base / "reopen.pln", self.base / "state2"
+        with self.assertRaisesRegex(ValueError, "SEALED_SNAPSHOT_RECEIPT_DRIFT"):
+            S.stage_readonly_reopen(self.parent, target, state, 19727)
+        self.assertFalse(target.exists())
+        self.assertFalse(state.exists())
+
+    def test_derived_chain_checks_copied_ledger_before_native_read(self):
+        _, receipt, _ = self._saved_parent()
+        state = self.base / "state2"
+        S.stage_readonly_reopen(self.parent, self.base / "reopen.pln", state, 19727)
+        self.assertEqual(B.verify_guarded_snapshot_chain(state, receipt)["status"],
+                         "GUARDED_SAVE_SNAPSHOT_SHA_RECHECK_PASS")
+        (state / "batch-scenewriter.sqlite").write_bytes(b"replaced ledger")
+        with self.assertRaisesRegex(ValueError, "COPIED_EVIDENCE_DRIFT"):
+            B.verify_guarded_snapshot_chain(state, receipt)
+
+    def test_derived_chain_rejects_modified_target_manifest(self):
+        _, receipt, _ = self._saved_parent()
+        state = self.base / "state2"
+        S.stage_readonly_reopen(self.parent, self.base / "reopen.pln", state, 19727)
+        path = state / "manifest.json"
+        manifest = json.loads(path.read_text(encoding="utf8"))
+        manifest["nodeGuid"] = "00000000-0000-4000-8000-000000000001"
+        path.write_text(json.dumps(manifest), encoding="utf8")
+        with self.assertRaisesRegex(ValueError, "DERIVED_MANIFEST_DRIFT"):
+            B.verify_guarded_snapshot_chain(state, receipt)
+
+    def test_new_pinned_receipt_cannot_downgrade_to_legacy(self):
+        _, receipt, _ = self._saved_parent()
+        receipt.pop("guardedSnapshotSHA256")
+        with self.assertRaisesRegex(ValueError, "CANNOT_DOWNGRADE_TO_LEGACY"):
+            B.verify_guarded_snapshot_chain(self.parent, receipt)
+
+    def test_derived_chain_rejects_parent_drift_before_first_open(self):
+        _, receipt, _ = self._saved_parent()
+        state = self.base / "state2"
+        S.stage_readonly_reopen(self.parent, self.base / "reopen.pln", state, 19727)
+        (self.parent / "plan.json").write_text("{}", encoding="utf8")
+        with patch.object(B, "prepare_api") as native:
+            with self.assertRaisesRegex(ValueError, "COPIED_EVIDENCE_DRIFT"):
+                B.confirm_open_snapshot(state)
+            native.assert_not_called()
+
     def test_derivation_requires_manifest_saved_receipt_concordance(self):
         self._saved_parent()
         receipt = json.loads(

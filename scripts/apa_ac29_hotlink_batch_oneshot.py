@@ -36,7 +36,7 @@ from apa_ac29_hotlink_batch_verifier import (
 import apa_ac29_hotlink_oneshot as HOTLINK
 from apa_ac29_save_isolation import (
     ScratchWriteLease, preserve_guarded_save, stage_readonly_reopen,
-    sha256 as file_sha,
+    sha256 as file_sha, verify_snapshot_evidence, copy_exclusive,
 )
 
 SCHEMA = "APA_AC29_HOTLINK_BATCH_V1"
@@ -87,8 +87,9 @@ def unique_stage(source, module, scratch, state, node_guid,
          node_guid.lower() != prototype_guid.lower(),
          "HOTLINK_BATCH_EXPLICIT_EXISTING_NODE_AND_ROOT_REQUIRED")
     original_sha, module_sha = digest(source), digest(module)
-    shutil.copy2(source, scratch)
-    need(digest(scratch) == original_sha and digest(module) == module_sha,
+    copy_exclusive(source, scratch)
+    need(digest(scratch) == original_sha and digest(source) == original_sha and
+         digest(module) == module_sha,
          "HOTLINK_BATCH_SOURCE_COPY_HASH_NOT_EXACT")
     state.mkdir(exist_ok=False)
     manifest = {"schema": SCHEMA, "status": "STAGED_NO_MODEL_WRITES",
@@ -390,10 +391,39 @@ def execute(state):
 
 def verify_guarded_snapshot_chain(state, receipt):
     """Verify snapshot bytes and receipt independently of the active PLN."""
+    state = Path(state).resolve()
+    manifest = read(state / "manifest.json")
+    if manifest.get("snapshotVerificationOnly") is True:
+        provenance = read(state / "snapshot-provenance.json")
+        parent = Path(manifest["parentStatePath"]).resolve()
+        hashes = provenance.get("parentHashes", {})
+        names = {"manifest.json", "plan.json", "saved.json", "attempted.json",
+                 "batch-scenewriter.sqlite", "guarded-snapshot.json"}
+        need(provenance.get("status") == "SNAPSHOT_ONLY_READBACK_NO_MODEL_WRITES" and
+             Path(provenance["parent"]).resolve() == parent and
+             set(hashes) == names and
+             provenance.get("newVerificationPLN") == manifest["scratch"] and
+             provenance.get("newPort") == manifest["port"] and
+             provenance.get("sourceSavedSHA256") == receipt["savedSHA256"] and
+             all(file_sha(parent / name) == checksum for name, checksum in hashes.items()) and
+             all(file_sha(state / name) == hashes[name] for name in names - {"manifest.json"}),
+             "HOTLINK_BATCH_SNAPSHOT_PARENT_OR_COPIED_EVIDENCE_DRIFT")
+        original = read(parent / "manifest.json")
+        expected = {**original, "scratch": manifest["scratch"], "port": manifest["port"],
+                    "snapshotVerificationOnly": True, "parentStatePath": str(parent),
+                    "parentManifestSHA256": hashes["manifest.json"],
+                    "parentSavedReceiptSHA256": hashes["saved.json"],
+                    "parentLedgerSHA256": hashes["batch-scenewriter.sqlite"],
+                    "verifiedSourceSnapshotSHA256": receipt["savedSHA256"]}
+        need(manifest == expected, "HOTLINK_BATCH_SNAPSHOT_DERIVED_MANIFEST_DRIFT")
+        verify_snapshot_evidence(parent, original, receipt)
+        return {"status": "GUARDED_SAVE_SNAPSHOT_SHA_RECHECK_PASS",
+                "savedSHA256": receipt["savedSHA256"]}
     if "guardedSnapshotSHA256" not in receipt:
         # Backward compatibility with the already accepted PR #173 receipts.
+        need(not (state / "guarded-snapshot.json").exists(),
+             "HOTLINK_BATCH_PINNED_SNAPSHOT_CANNOT_DOWNGRADE_TO_LEGACY")
         return {"status": "LEGACY_SAVE_WITHOUT_PINNED_SNAPSHOT"}
-    state = Path(state).resolve()
     proof = read(state / "guarded-snapshot.json")
     need(proof.get("status") == "BYTE_EXACT_GUARDED_SAVE_SNAPSHOT_CAPTURED" and
          proof.get("savedSHA256") == proof.get("snapshotSHA256") ==
@@ -402,6 +432,7 @@ def verify_guarded_snapshot_chain(state, receipt):
              receipt["guardedSnapshotReceiptSHA256"] and
          file_sha(Path(proof["snapshot"])) == receipt["savedSHA256"],
          "HOTLINK_BATCH_GUARDED_SNAPSHOT_EVIDENCE_OR_BYTES_CHANGED")
+    verify_snapshot_evidence(state, manifest, receipt)
     return {"status": "GUARDED_SAVE_SNAPSHOT_SHA_RECHECK_PASS",
             "savedSHA256": receipt["savedSHA256"]}
 
