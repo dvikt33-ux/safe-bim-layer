@@ -10,6 +10,10 @@ on:
       - "scripts/archicad_project_accelerator.py"
       - "tests/test_apa_ac29_mass_request.py"
       - "tests/test_apa_ac29_group_batch_oneshot.py"
+      - "scripts/apa_install_mass_selector.py"
+      - "scripts/apa_ac29_installed_*.py"
+      - "schemas/accelerator/installed-group-copy.json"
+      - "tests/test_apa_ac29_installed_mass_selector.py"
       - ".github/workflows/apa-ac29-mass-request-integration.yml"
 permissions:
   contents: read
@@ -31,7 +35,7 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
-          $suites = @('save_isolation','hotlink_batch_geometry','hotlink_batch_writer','native_group_grid','native_group_writer_integration','group_grid_live_8x4','group_scenewriter_sqlite_audit','group_strategy_integration','mass_request','group_batch_oneshot')
+          $suites = @('save_isolation','hotlink_batch_geometry','hotlink_batch_writer','native_group_grid','native_group_writer_integration','group_grid_live_8x4','group_scenewriter_sqlite_audit','group_strategy_integration','mass_request','group_batch_oneshot','installed_mass_selector')
           foreach ($suite in $suites) {
             python -m unittest discover -s tests -p "test_apa_ac29_$suite.py" -v
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

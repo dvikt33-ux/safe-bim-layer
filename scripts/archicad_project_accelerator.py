@@ -280,6 +280,9 @@ def prepare_auto_optimized_native_task(router, intent, planner_python=None):
     intent uses the same DynamicCommands and SceneWriter native-task graph.
     No live model reads, native writes or runtime registration inference.
     """
+    if isinstance(intent, dict) and intent.get('schemaVersion') in {'apa-native-mass-request/1','apa-native-group-auto/1'}:
+        from apa_ac29_installed_group_provider import attach
+        attach(router)
     if isinstance(intent, dict) and intent.get('schemaVersion') == 'apa-native-mass-request/1':
         from apa_ac29_mass_request import prepare_mass_request
         return prepare_mass_request(router, intent)
@@ -323,6 +326,8 @@ def prepare_current_runtime_group_native_task(router, writer, intent):
         raise ValueError('APA_GROUP_RUNTIME_REQUIRES_VERIFIED_GROUP_TASK')
     binding = writer.guarded_binding()
     archicad29(writer.api)
+    from apa_ac29_installed_group_provider import verify_runtime
+    verify_runtime(writer.api)
     candidate = prepare_auto_optimized_native_task(router, intent)
     requested = candidate['requiredRuntimeCommands']
     checked = []

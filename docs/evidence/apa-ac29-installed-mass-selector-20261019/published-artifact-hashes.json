@@ -1,0 +1,10 @@
+{
+  "ci-checks.json": "f18481c82a2a50addc37650c7e3451c1868fc5cf86ecdc5590a6cac7c03d0ae8",
+  "deployment.json": "fd8771944771d69f0010f5303fe79e651359871069997ec00cb00d8dbc71b143",
+  "local-tests.json": "47e985fa7157f9f89ccd6962bc284c531dc75c977e0a970bf5591fa1c62aafe5",
+  "native-readonly-call-audit.json": "92f69c98df96279103a721a0fdb713278c8af5d12a58b9d5c8c4eaba803cb823",
+  "native-readonly-qualification.json": "811d6616c38887233a94f03fae267244e5c2d0ec045c60c03c0e614ec19dc9b6",
+  "original-296-contracts.json": "f02cb0127e194ae47cea1d538813e5bbc1d860ec9ee5529e0dc7044a4db92c10",
+  "README_RU.md": "2758b1ddb6769ba4fce2255c0229a7ae0569616aebe88c5d3619ad5e38b0c895",
+  "stage-smoke.json": "2d3d967746cfc6341bbc2af0efd4f432b88a496f19a3c3b8f29f7e08831d0893"
+}

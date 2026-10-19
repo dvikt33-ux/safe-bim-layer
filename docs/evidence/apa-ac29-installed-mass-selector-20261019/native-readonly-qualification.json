@@ -1,0 +1,161 @@
+{
+  "status": "INSTALLED_MASS_SELECTOR_CURRENT_AC29_READONLY_QUALIFICATION_PASS",
+  "catalogCommands": 298,
+  "fileCommands": [
+    "AddOn.APADXFGeometryC1.DXFClosedContours",
+    "AddOn.APADXFGeometryC1.DXFRepeatedAssemblies",
+    "AddOn.APADXFGeometryC1.DXFWorldPaths",
+    "AddOn.APAExternalReadOnly.DXFVectors",
+    "AddOn.APAExternalReadOnly.IDSValidate",
+    "AddOn.APAExternalReadOnly.IFCClash",
+    "AddOn.APAExternalReadOnly.IFCDiff",
+    "AddOn.APAExternalReadOnly.IFCQuantities",
+    "AddOn.APAExternalReadOnly.PDFVectors",
+    "AddOn.APAHighDensityReadOnlyV2.DXFBlockInsertions",
+    "AddOn.APAHighDensityReadOnlyV2.DXFDimensionEntities",
+    "AddOn.APAHighDensityReadOnlyV2.DXFLayerInventory",
+    "AddOn.APAHighDensityReadOnlyV2.DXFTextAnnotations",
+    "AddOn.APAHighDensityReadOnlyV2.IFCClassificationCoverage",
+    "AddOn.APAHighDensityReadOnlyV2.IFCGeoReferenceAudit",
+    "AddOn.APAHighDensityReadOnlyV2.IFCGlobalIdAudit",
+    "AddOn.APAHighDensityReadOnlyV2.IFCOpeningRelations",
+    "AddOn.APAHighDensityReadOnlyV2.IFCPortRelations",
+    "AddOn.APAHighDensityReadOnlyV2.IFCPropertySetCoverage",
+    "AddOn.APAHighDensityReadOnlyV2.IFCSchemaInventory",
+    "AddOn.APAHighDensityReadOnlyV2.IFCSpatialRelations",
+    "AddOn.APAIFCArtifactsB2.IFCBCFIssues",
+    "AddOn.APAIFCArtifactsB2.IFCCSVExport",
+    "AddOn.APAIFCArtifactsB2.IFCExtractElements",
+    "AddOn.APAIFCGeometryB3.IFCGeometryBounds",
+    "AddOn.APAIFCGeometryB3.IFCGeometryGLB",
+    "AddOn.APAIFCGeometryB3.IFCGeometryOBJ",
+    "AddOn.APAIFCReportsB1.IDSReportODS",
+    "AddOn.APAIFCReportsB1.IFCSchemaValidate",
+    "AddOn.APAIFCReportsB1.IFCSelect"
+  ],
+  "semanticCommands": [
+    "AddOn.APASemantic.OpenBIMSegments",
+    "AddOn.APASemantic.PDFPageRaster",
+    "AddOn.APASemantic.PDFPaths",
+    "AddOn.APASemantic.RasterFloorplan"
+  ],
+  "runtime": {
+    "contract": "APA_NATIVE_RUNTIME_IDENTITY_V1",
+    "buildIdentity": "6a9ebc59bf9b03c6243f8609ed9a58ffe0ad0bf38389cdfd42dd3f6540c711dc",
+    "sourceRevision": "a6b8cea99adcd04b18737f6596d5a294306164b2",
+    "sdkMajor": 29,
+    "developerId": 826567491,
+    "localId": 368333322,
+    "stairSolverPolicy": "DETACHED_DIAGNOSTIC_READONLY_NO_SETTER_OR_SOLVER",
+    "nativeModelWrites": 0
+  },
+  "currentGuidCount": 172,
+  "guidSetSHA256": "3c9efe184b2f5ac9518cd3e57b0f2af0994e477fae64de2c255dfa1b12750310",
+  "savedPLNSHA256": "b6b44dc1a811ec4e77864177f3cef57e701e1f63126c16bc64b6a5d82a89c478",
+  "sourcePLNSHA256": "3a74d7cb17e460378eacfa8f933aeae29a5ca39fbf2bc73633115c9fee728750",
+  "sourceGroup": "40d5303f-18ca-4117-9de0-e06bfd8e64b9",
+  "sourceMemberGuids": [
+    "8513e799-460a-4830-88d1-7197a30893e4",
+    "a457ec9e-e034-4abe-af5c-a7d2ecb689dc"
+  ],
+  "sourceNativeFactsSHA256": "e5d4c6b62f90d0f4f30fc1314e32bd6bf7e03ff5b76bbbcac2589f7863976f14",
+  "routes": [
+    {
+      "layout": {
+        "mode": "LINEAR",
+        "count": 2,
+        "start": {
+          "dx": 275,
+          "dy": 0,
+          "dz": 0
+        },
+        "step": {
+          "dx": 25,
+          "dy": 0,
+          "dz": 0
+        }
+      },
+      "status": "ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED",
+      "selectedCommand": "AddOn.TapirCommand.CloneNativeGroupV1",
+      "contractSHA256": "a7640e1f2f8cedbc84a9ebce5dd5950d68b41efa31719f8289d90ed432c87376",
+      "runtimeRegisteredCommands": [
+        "AddOn.TapirCommand.CloneNativeGroupV1"
+      ],
+      "groupedTargetCount": 4,
+      "collisionProof": {
+        "status": "MULTI_COPY_ALL_NATIVE_BREP_AABB_CLEAR_PASS",
+        "evaluatedSolidBoxes": 4
+      },
+      "executionPermission": false
+    },
+    {
+      "layout": {
+        "mode": "GRID",
+        "columns": 2,
+        "rows": 2,
+        "stepX": 25,
+        "stepY": 8,
+        "startDx": 275,
+        "startDy": 0
+      },
+      "status": "ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED",
+      "selectedCommand": "AddOn.TapirCommand.CloneNativeGroupV1",
+      "contractSHA256": "a7640e1f2f8cedbc84a9ebce5dd5950d68b41efa31719f8289d90ed432c87376",
+      "runtimeRegisteredCommands": [
+        "AddOn.TapirCommand.CloneNativeGroupV1"
+      ],
+      "groupedTargetCount": 8,
+      "collisionProof": {
+        "status": "MULTI_COPY_ALL_NATIVE_BREP_AABB_CLEAR_PASS",
+        "evaluatedSolidBoxes": 8
+      },
+      "executionPermission": false
+    },
+    {
+      "layout": {
+        "mode": "AXIS_INTERSECTIONS",
+        "sourceRef": "https://github.com/dvikt33-ux/safe-bim-layer/pull/179",
+        "X": [
+          {
+            "id": "X1",
+            "coordinate": 575.35
+          },
+          {
+            "id": "X2",
+            "coordinate": 605.35
+          }
+        ],
+        "Y": [
+          {
+            "id": "Y1",
+            "coordinate": 302.65
+          }
+        ],
+        "reference": {
+          "x": 300.35,
+          "y": 302.65,
+          "z": 0
+        },
+        "requiresNativeAxisObjects": false
+      },
+      "status": "ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED",
+      "selectedCommand": "AddOn.TapirCommand.CloneNativeGroupV1",
+      "contractSHA256": "a7640e1f2f8cedbc84a9ebce5dd5950d68b41efa31719f8289d90ed432c87376",
+      "runtimeRegisteredCommands": [
+        "AddOn.TapirCommand.CloneNativeGroupV1"
+      ],
+      "groupedTargetCount": 4,
+      "collisionProof": {
+        "status": "MULTI_COPY_ALL_NATIVE_BREP_AABB_CLEAR_PASS",
+        "evaluatedSolidBoxes": 4
+      },
+      "executionPermission": false
+    }
+  ],
+  "nativeWrites": 0,
+  "saveCalls": 0,
+  "automaticNativeExecution": false,
+  "localSchemaContractsVerified": true,
+  "codeOrigin": "ACTUAL_INSTALLED_APA_ROOT",
+  "executedSourceRevision": "650b076963c4660fa903362588037c14aad1418e"
+}

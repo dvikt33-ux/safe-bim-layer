@@ -1,0 +1,271 @@
+{
+  "schema": "APA_INSTALLED_GROUP_CONTRACTS_V1",
+  "commands": {
+    "GetNativeGroupMembersV1": {
+      "version": "29",
+      "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+      "implementationSource": "archicad-addon/Sources/NativeGroupCommands.inc",
+      "implementationSHA256": "f915d0a2f6127e489eacebd242f72fcab3c409ce07ea7290efa3fb38175d0528",
+      "category": "Native SDK group readback",
+      "description": "Read actual nested native group member GUIDs independently.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "type": "object",
+            "properties": {
+              "guid": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "guid"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "groupId"
+        ],
+        "additionalProperties": false
+      },
+      "returns": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "nativeModelWrites": {
+                "const": 0
+              },
+              "groupId": {
+                "type": "object",
+                "properties": {
+                  "guid": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "guid"
+                ],
+                "additionalProperties": false
+              },
+              "memberIds": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "guid": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "guid"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "nativeModelWrites",
+              "groupId",
+              "memberIds"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "error": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "integer"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "message"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "error"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "CloneNativeGroupV1": {
+      "version": "29",
+      "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+      "implementationSource": "archicad-addon/Sources/NativeGroupCommands.inc",
+      "implementationSHA256": "f915d0a2f6127e489eacebd242f72fcab3c409ce07ea7290efa3fb38175d0528",
+      "category": "Native SDK group operation",
+      "description": "Clone a verified whole native group at source-qualified offsets; one high-level bridge request with nested SDK edit calls and rollback on failed group readback.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "type": "object",
+            "properties": {
+              "guid": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "guid"
+            ],
+            "additionalProperties": false
+          },
+          "sourceRef": {
+            "type": "string",
+            "minLength": 8
+          },
+          "translations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dx": {
+                  "type": "number"
+                },
+                "dy": {
+                  "type": "number"
+                },
+                "dz": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "dx",
+                "dy",
+                "dz"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "maxItems": 32
+          }
+        },
+        "required": [
+          "groupId",
+          "sourceRef",
+          "translations"
+        ],
+        "additionalProperties": false
+      },
+      "returns": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "nativeModelWrites": {
+                "type": "integer"
+              },
+              "sourceGroupId": {
+                "type": "object",
+                "properties": {
+                  "guid": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "guid"
+                ],
+                "additionalProperties": false
+              },
+              "newGroupIds": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "guid": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "guid"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "createdElements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "elementId": {
+                      "type": "object",
+                      "properties": {
+                        "guid": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "guid"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "elementId"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "nativeModelWrites",
+              "sourceGroupId",
+              "newGroupIds",
+              "createdElements"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "error": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "integer"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "message"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "error"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "operationKind": "CREATE",
+      "impact": "MODEL"
+    }
+  },
+  "acceptedRuntime": {
+    "buildIdentity": "6a9ebc59bf9b03c6243f8609ed9a58ffe0ad0bf38389cdfd42dd3f6540c711dc",
+    "contract": "APA_NATIVE_RUNTIME_IDENTITY_V1",
+    "developerId": 826567491,
+    "localId": 368333322,
+    "nativeModelWrites": 0,
+    "sdkMajor": 29,
+    "sourceRevision": "a6b8cea99adcd04b18737f6596d5a294306164b2",
+    "stairSolverPolicy": "DETACHED_DIAGNOSTIC_READONLY_NO_SETTER_OR_SOLVER"
+  }
+}

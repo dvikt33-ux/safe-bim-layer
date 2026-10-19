@@ -1,0 +1,46 @@
+{
+  "sourceSHA": "650b076963c4660fa903362588037c14aad1418e",
+  "status": "ALL_8_CHECKS_SUCCESS",
+  "checks": [
+    {
+      "link": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/39302389504/job/118230675431",
+      "name": "existing-native-route (3.11)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/39302389504/job/118230674911",
+      "name": "existing-native-route (3.12)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/39302389430/job/118230648154",
+      "name": "integration (ubuntu-latest)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/39302389350/job/118230645728",
+      "name": "focused-group-first",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/39302389605/job/118230648433",
+      "name": "costed-strategy-planner",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/39302389397/job/118230647415",
+      "name": "offline-contracts (windows-latest)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/39302389591/job/118230647980",
+      "name": "auto-strategy-select",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/39302389430/job/118230647776",
+      "name": "integration (windows-latest)",
+      "state": "SUCCESS"
+    }
+  ]
+}
