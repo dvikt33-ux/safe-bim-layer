@@ -1,0 +1,1113 @@
+{
+  "schema": "APA-MOAG-PROGRESSIVE-FRAGMENTS-R05/0.1",
+  "date": "2026-10-20",
+  "purpose": "Add missing physical referents from previously reviewed pages as unplaced fragments",
+  "physical_entities": [
+    {
+      "id": "M-L2-DINING-001",
+      "name": "Столовая детской группы",
+      "global_level": 2,
+      "kind": "room",
+      "source_ids": [
+        "P-478"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-LIB-OVAL-001",
+      "name": "Библиотека с большим овальным окном",
+      "global_level": 2,
+      "kind": "library",
+      "source_ids": [
+        "P-488"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-LIB-NOWINDOW-001",
+      "name": "Малая библиотека без окна",
+      "global_level": 2,
+      "kind": "library",
+      "source_ids": [
+        "P-520"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-LIB-MEETING-001",
+      "name": "Библиотека собраний со стеклянными дверями",
+      "global_level": 2,
+      "kind": "library",
+      "source_ids": [
+        "P-535",
+        "P-537",
+        "P-545"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-LIB-GLASS-DOOR-001",
+      "name": "Стеклянный вход в библиотеку собраний",
+      "global_level": 2,
+      "kind": "door",
+      "source_ids": [
+        "P-535"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-CONFERENCE-002",
+      "name": "Второй конференц-зал",
+      "global_level": 2,
+      "kind": "room",
+      "source_ids": [
+        "P-494"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-OVAL-STORE-001",
+      "name": "Широкая овальная кладовая с пультом",
+      "global_level": 2,
+      "kind": "room",
+      "source_ids": [
+        "P-494",
+        "P-495"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-OVAL-STORE-ROOM-002",
+      "name": "Дальнее помещение за овальной кладовой",
+      "global_level": 2,
+      "kind": "room",
+      "source_ids": [
+        "P-495"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-TUNNEL-002",
+      "name": "Туннель №2",
+      "global_level": 2,
+      "kind": "tunnel",
+      "source_ids": [
+        "P-504"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-TUNNEL-008",
+      "name": "Туннель №8",
+      "global_level": 2,
+      "kind": "tunnel",
+      "source_ids": [
+        "P-538",
+        "P-540"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-FOOD-STORES-OUT-001",
+      "name": "Продовольственные склады за Оранжевой",
+      "global_level": 2,
+      "kind": "space_group",
+      "source_ids": [
+        "P-506"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-WATER-RESERVOIR-001",
+      "name": "Независимый резервуар Второго",
+      "global_level": 2,
+      "kind": "technical",
+      "source_ids": [
+        "P-509"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-EMMA-SUITE-001",
+      "name": "Каюта с тремя спальнями Эммы",
+      "global_level": null,
+      "kind": "suite",
+      "source_ids": [
+        "P-507",
+        "P-511"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-EMMA-KITCHEN-001",
+      "name": "Кухня каюты Эммы",
+      "global_level": null,
+      "kind": "room",
+      "source_ids": [
+        "P-507",
+        "P-511"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-EMMA-LIVING-001",
+      "name": "Гостиная каюты Эммы",
+      "global_level": null,
+      "kind": "room",
+      "source_ids": [
+        "P-507",
+        "P-511"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-EMMA-BEDROOMS-001",
+      "name": "Группа трёх спален каюты",
+      "global_level": null,
+      "kind": "space_group",
+      "source_ids": [
+        "P-511"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-EMMA-BATH-001",
+      "name": "Ванная каюты",
+      "global_level": null,
+      "kind": "room",
+      "source_ids": [
+        "P-511"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-FREE-SUITE-001",
+      "name": "Свободная каюта с цифровым замком",
+      "global_level": null,
+      "kind": "suite",
+      "source_ids": [
+        "P-533"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-FREE-BED-001",
+      "name": "Спальня свободной каюты",
+      "global_level": null,
+      "kind": "room",
+      "source_ids": [
+        "P-533"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-FREE-BATH-001",
+      "name": "Ванная свободной каюты",
+      "global_level": null,
+      "kind": "room",
+      "source_ids": [
+        "P-533"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-PLAY-OUT-001",
+      "name": "Дальние игровые площадки за Оранжевой",
+      "global_level": 2,
+      "kind": "space_group",
+      "source_ids": [
+        "P-505"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-DEADEND-001",
+      "name": "Тупик у кабельной лестницы",
+      "global_level": 2,
+      "kind": "corridor",
+      "source_ids": [
+        "P-633"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-GRILLE-STAIR-001",
+      "name": "Лестница вниз у тупика",
+      "global_level": 2,
+      "kind": "stair",
+      "source_ids": [
+        "P-633",
+        "P-634"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L2-GRILLE-DOOR-001",
+      "name": "Кодовая решётка у лестницы",
+      "global_level": 2,
+      "kind": "door",
+      "source_ids": [
+        "P-633",
+        "P-634"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L3-ARMORY-001",
+      "name": "Кладовая оружия за белыми дверями",
+      "global_level": 3,
+      "kind": "room",
+      "source_ids": [
+        "P-498"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L3-BRIDGE-GLASS-DOOR-001",
+      "name": "Стеклянные двери капитанской рубки",
+      "global_level": 3,
+      "kind": "door",
+      "source_ids": [
+        "P-499",
+        "P-643"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L3-PRODUCTION-ROUND-001",
+      "name": "Главный круглый производственный зал",
+      "global_level": 3,
+      "kind": "industrial_hall",
+      "source_ids": [
+        "P-646",
+        "P-647"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L3-PRODUCTION-RADIAL-001",
+      "name": "Веер производственных помещений",
+      "global_level": 3,
+      "kind": "space_group",
+      "source_ids": [
+        "P-646",
+        "P-648"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L3-PRODUCTION-VESSEL-001",
+      "name": "Колба живого металла в круглом зале",
+      "global_level": 3,
+      "kind": "equipment",
+      "source_ids": [
+        "P-647"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L3-PRODUCTION-HUMANOID-001",
+      "name": "Зона изготовления человекоподобных роботов",
+      "global_level": 3,
+      "kind": "space_group",
+      "source_ids": [
+        "P-649"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L3-CABLE-HATCH-001",
+      "name": "Первый люк в кабельные ходы",
+      "global_level": 3,
+      "kind": "hatch",
+      "source_ids": [
+        "P-671"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L3-CABLE-HATCH-002",
+      "name": "Второй люк в кабельные ходы",
+      "global_level": 3,
+      "kind": "hatch",
+      "source_ids": [
+        "P-671"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L3-COMMS-HATCHES-001",
+      "name": "Ремонтные люки к внешней связи",
+      "global_level": 3,
+      "kind": "hatch_group",
+      "source_ids": [
+        "P-674"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L1-SEMICIRC-CORRIDOR-001",
+      "name": "Широкий полукруглый коридор у ангаров",
+      "global_level": 1,
+      "kind": "corridor",
+      "source_ids": [
+        "P-656",
+        "P-657"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L1-SEMICIRC-STORES-001",
+      "name": "Кладовые от полукруглого коридора",
+      "global_level": 1,
+      "kind": "space_group",
+      "source_ids": [
+        "P-657",
+        "P-658"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L1-STARSHIP-HANGAR-001",
+      "name": "Ангар со звездолётом",
+      "global_level": 1,
+      "kind": "hangar",
+      "source_ids": [
+        "P-611",
+        "P-612",
+        "P-614"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L1-STARSHIP-LOCK-001",
+      "name": "Шлюз звездолётного ангара",
+      "global_level": 1,
+      "kind": "airlock",
+      "source_ids": [
+        "P-612",
+        "P-613",
+        "P-621",
+        "P-622"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L1-STARSHIP-INNER-DOOR-001",
+      "name": "Внутренние двери звездолётного ангара",
+      "global_level": 1,
+      "kind": "door",
+      "source_ids": [
+        "P-612"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L1-STARSHIP-OUTER-GATE-001",
+      "name": "Круглый большой внешний выход шлюза",
+      "global_level": 1,
+      "kind": "gate",
+      "source_ids": [
+        "P-613"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L3-OLD-ISOLATION-ROOM-001",
+      "name": "Комната бывшей изоляции под сортировку роботов",
+      "global_level": 3,
+      "kind": "room",
+      "source_ids": [
+        "P-571",
+        "P-572"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-L3-SMALL-STORES-ARC-001",
+      "name": "Полукруглый ряд маленьких кладовок",
+      "global_level": 3,
+      "kind": "space_group",
+      "source_ids": [
+        "P-570"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-STA-CABLE-CRAWL-001",
+      "name": "Узкая ветвящаяся кабельная шахта",
+      "global_level": null,
+      "kind": "technical_route",
+      "source_ids": [
+        "P-559",
+        "P-560",
+        "P-561",
+        "P-562"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    },
+    {
+      "id": "M-STA-CABLE-HATCH-001",
+      "name": "Овальная крышка шахты",
+      "global_level": null,
+      "kind": "hatch",
+      "source_ids": [
+        "P-559"
+      ],
+      "geometry_authorized": false,
+      "xy": null,
+      "z_m": null,
+      "dimensions_m": null,
+      "identity": "SEPARATE_CANDIDATE_UNLESS_PROVEN_SAME"
+    }
+  ],
+  "typed_edges": [
+    {
+      "id": "MOAG-R05-001",
+      "from": "M-L2-EMMA-SUITE-001",
+      "to": "M-L2-EMMA-KITCHEN-001",
+      "relation": "CONTAINS_SPACE",
+      "level_policy": "INHERIT_IF_KNOWN",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-511"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-002",
+      "from": "M-L2-EMMA-SUITE-001",
+      "to": "M-L2-EMMA-LIVING-001",
+      "relation": "CONTAINS_SPACE",
+      "level_policy": "INHERIT_IF_KNOWN",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-511"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-003",
+      "from": "M-L2-EMMA-SUITE-001",
+      "to": "M-L2-EMMA-BEDROOMS-001",
+      "relation": "CONTAINS_SPACE",
+      "level_policy": "INHERIT_IF_KNOWN",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-511"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-004",
+      "from": "M-L2-EMMA-SUITE-001",
+      "to": "M-L2-EMMA-BATH-001",
+      "relation": "CONTAINS_SPACE",
+      "level_policy": "INHERIT_IF_KNOWN",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-511"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-005",
+      "from": "M-L2-FREE-SUITE-001",
+      "to": "M-L2-FREE-BED-001",
+      "relation": "CONTAINS_SPACE",
+      "level_policy": "INHERIT_IF_KNOWN",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-533"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-006",
+      "from": "M-L2-FREE-SUITE-001",
+      "to": "M-L2-FREE-BATH-001",
+      "relation": "CONTAINS_SPACE",
+      "level_policy": "INHERIT_IF_KNOWN",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-533"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-007",
+      "from": "M-L2-LIB-MEETING-001",
+      "to": "M-L2-LIB-GLASS-DOOR-001",
+      "relation": "CONTAINS_ACCESS",
+      "level_policy": "SAME_LEVEL",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-535"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-008",
+      "from": "M-L2-LIB-OVAL-001",
+      "to": "M-L2-LIB-NOWINDOW-001",
+      "relation": "NOT_SAME_AS",
+      "level_policy": "NO_LEVEL_INFERENCE",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-488",
+        "P-520"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-009",
+      "from": "M-L2-LIB-NOWINDOW-001",
+      "to": "M-L2-LIB-MEETING-001",
+      "relation": "POSSIBLY_SAME_AS",
+      "level_policy": "NO_LEVEL_INFERENCE",
+      "certainty": "HYPOTHESIS",
+      "source_ids": [
+        "P-520",
+        "P-535"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-010",
+      "from": "M-L2-TUNNEL-002",
+      "to": "M-L2-ORANGE-001",
+      "relation": "CONNECTS_ROUTE",
+      "level_policy": "SAME_LEVEL",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-504"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-011",
+      "from": "M-L2-TUNNEL-008",
+      "to": "M-L2-ORANGE-001",
+      "relation": "CONNECTS_ROUTE",
+      "level_policy": "SAME_LEVEL",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-538"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-012",
+      "from": "M-L2-TUNNEL-002",
+      "to": "M-L2-TUNNEL-008",
+      "relation": "NOT_SAME_AS",
+      "level_policy": "NO_LEVEL_INFERENCE",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-504",
+        "P-538"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-013",
+      "from": "M-L2-FOOD-STORES-OUT-001",
+      "to": "M-L2-ORANGE-001",
+      "relation": "BEYOND_RING",
+      "level_policy": "SAME_LEVEL",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-506"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-014",
+      "from": "M-L2-PLAY-OUT-001",
+      "to": "M-L2-ORANGE-001",
+      "relation": "BEYOND_RING",
+      "level_policy": "SAME_LEVEL",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-505"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-015",
+      "from": "M-L2-DEADEND-001",
+      "to": "M-L2-GRILLE-STAIR-001",
+      "relation": "ROUTE_TO",
+      "level_policy": "SAME_LEVEL",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-633"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-016",
+      "from": "M-L2-GRILLE-STAIR-001",
+      "to": "M-L2-GRILLE-DOOR-001",
+      "relation": "GATED_BY",
+      "level_policy": "SAME_LEVEL",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-634"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-017",
+      "from": "M-L3-PRODUCTION-ROUND-001",
+      "to": "M-L3-PRODUCTION-RADIAL-001",
+      "relation": "RADIALLY_BRANCHES_TO",
+      "level_policy": "SAME_LEVEL",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-646"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-018",
+      "from": "M-L3-PRODUCTION-ROUND-001",
+      "to": "M-L3-PRODUCTION-VESSEL-001",
+      "relation": "CONTAINS_EQUIPMENT",
+      "level_policy": "INHERIT_IF_KNOWN",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-647"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-019",
+      "from": "M-L3-PRODUCTION-RADIAL-001",
+      "to": "M-L3-PRODUCTION-HUMANOID-001",
+      "relation": "ROUTE_VIA_PASSAGE",
+      "level_policy": "SAME_LEVEL",
+      "certainty": "ROUTE_NOT_WALL_ADJACENCY",
+      "source_ids": [
+        "P-649"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-020",
+      "from": "M-L3-PRODUCTION-ROUND-001",
+      "to": "M-STA-CORE-001",
+      "relation": "NOT_PROVEN_SAME",
+      "level_policy": "NO_LEVEL_INFERENCE",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-647",
+        "P-418"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-021",
+      "from": "M-L3-PRODUCTION-ROUND-001",
+      "to": "M-L1-CH-001",
+      "relation": "NOT_SAME_AS",
+      "level_policy": "NO_LEVEL_INFERENCE",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-647",
+        "P-220"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-022",
+      "from": "M-L3-CABLE-HATCH-001",
+      "to": "M-L3-CABLE-HATCH-002",
+      "relation": "NOT_SAME_AS",
+      "level_policy": "NO_LEVEL_INFERENCE",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-671"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-023",
+      "from": "M-L1-STARSHIP-HANGAR-001",
+      "to": "M-L1-STARSHIP-INNER-DOOR-001",
+      "relation": "HAS_DOOR",
+      "level_policy": "SAME_LEVEL",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-612"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-024",
+      "from": "M-L1-STARSHIP-HANGAR-001",
+      "to": "M-L1-STARSHIP-LOCK-001",
+      "relation": "CONNECTS_VIA_PORTAL",
+      "level_policy": "SAME_LEVEL",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-612"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-025",
+      "from": "M-L1-STARSHIP-LOCK-001",
+      "to": "M-L1-STARSHIP-OUTER-GATE-001",
+      "relation": "HAS_EXTERNAL_GATE",
+      "level_policy": "SAME_LEVEL",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-613"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-026",
+      "from": "M-L1-SEMICIRC-CORRIDOR-001",
+      "to": "M-L1-SEMICIRC-STORES-001",
+      "relation": "OPENING_ROUTE_TO",
+      "level_policy": "SAME_LEVEL",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-657"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-027",
+      "from": "M-STA-CABLE-CRAWL-001",
+      "to": "M-STA-CABLE-HATCH-001",
+      "relation": "HAS_HATCH",
+      "level_policy": "INHERIT_IF_KNOWN",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-559"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-028",
+      "from": "M-STA-CABLE-CRAWL-001",
+      "to": "MOAG-G-0014",
+      "relation": "ROUTE_REACHES_GARBAGE",
+      "level_policy": "NO_LEVEL_INFERENCE",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-562"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-029",
+      "from": "M-L3-BRIDGE-GLASS-DOOR-001",
+      "to": "MOAG-G-0033",
+      "relation": "DOOR_OF",
+      "level_policy": "SAME_LEVEL",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-499",
+        "P-643"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-030",
+      "from": "M-L3-PRODUCTION-ROUND-001",
+      "to": "MOAG-G-0039",
+      "relation": "PART_OF_SECTOR",
+      "level_policy": "INHERIT_IF_KNOWN",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-646"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-031",
+      "from": "M-L2-CONFERENCE-002",
+      "to": "M-L2-OVAL-STORE-001",
+      "relation": "BRANCHES_FROM_SHARED_FORK",
+      "level_policy": "SAME_LEVEL",
+      "certainty": "ROUTE_NOT_WALL_ADJACENCY",
+      "source_ids": [
+        "P-494"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-032",
+      "from": "M-L2-OVAL-STORE-001",
+      "to": "M-L2-OVAL-STORE-ROOM-002",
+      "relation": "DOOR_TO_OTHER_ROOM",
+      "level_policy": "SAME_LEVEL",
+      "certainty": "DIRECT_TEXT",
+      "source_ids": [
+        "P-495"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    },
+    {
+      "id": "MOAG-R05-033",
+      "from": "M-L3-SMALL-STORES-ARC-001",
+      "to": "M-L3-OLD-ISOLATION-ROOM-001",
+      "relation": "NOT_PROVEN_NEAR",
+      "level_policy": "NO_LEVEL_INFERENCE",
+      "certainty": "NON_LINK_PROHIBIT_GUESS",
+      "source_ids": [
+        "P-570",
+        "P-571"
+      ],
+      "direction_frame": null,
+      "metric": null,
+      "geometry_authorized": false
+    }
+  ],
+  "source_direct_unindexed_total": 191,
+  "source_direct_now_indexed_from_unindexed": 44,
+  "not_all_direct_observations_define_physical_entities": true,
+  "gates": {
+    "new_pages_read": false,
+    "XY_solved": false,
+    "unique_geometry": false,
+    "apa_write": false,
+    "canonical_dimensions": false
+  }
+}
