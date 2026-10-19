@@ -1,6 +1,6 @@
 {
   "schema": "APA-MOAG-TOPOLOGY-SNAPSHOT/0.1",
-  "source_blob_sha": "15c176b3bae9289808b3d66a5ed9487a3bc62a33",
+  "source_blob_sha": "a14657145de66bbec28191334af6f04951dfbbbb",
   "derived_from": "docs/research/apa-results/moag/v1/evidence_graph.json",
   "status": "GRAPH_ONLY_NO_COORDINATES",
   "space_refs": [
@@ -1462,7 +1462,7 @@
     {
       "id": "E99",
       "from": "L1-STRAIGHT-FREIGHT",
-      "to": "L1-HANGAR-HALL",
+      "to": "L1-ANGAR-HALL",
       "relation": "possibly_same_sector",
       "state": "RECHECK_REQUIRED",
       "source_ids": [
