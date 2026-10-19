@@ -1408,6 +1408,256 @@
       ],
       "identity_hypotheses": [],
       "notes": "Кувезный зал лежит ЗА ВНУТРЕННЕЙ КРУГОВОЙ СТЕНОЙ и последовательными дверями. Факт строгого совпадения с геометрическим центром станции не доказан. Правая сторона определяется движением из внутреннего кольца к наружному."
+    },
+    {
+      "id": "RT-013",
+      "title": "Побег с верхнего яруса Третьего через вентиляцию на Второй",
+      "participants": [
+        "Эмма",
+        "Коля",
+        "Илья",
+        "Таис",
+        "Фёдор"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-061",
+        "B1-062",
+        "B1-063",
+        "B1-064"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT013-A",
+          "label": "Большой круглый зал отдыха",
+          "global_level": 3,
+          "local_stratum": "round-lounge-floor",
+          "source_page_id": "B1-061",
+          "movement_method": "WALK",
+          "observed_constraint": "От кувезного блока дети перебегают в зал с диванами и журнальными столами.",
+          "existing_graph_node": "L3-REST",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT013-B",
+          "label": "Металлическая лестница вверх",
+          "global_level": 3,
+          "local_stratum": "lounge-upper-stair",
+          "source_page_id": "B1-061",
+          "movement_method": "CLIMB_UP",
+          "observed_constraint": "Поднимаются по металлическим ступеням наверх.",
+          "existing_graph_node": "L3-REST-UPPER-STAIRS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT013-C",
+          "label": "Круговая галерея под верхом зала",
+          "global_level": 3,
+          "local_stratum": "lounge-mezzanine",
+          "source_page_id": "B1-061",
+          "movement_method": "WALK",
+          "observed_constraint": "Галерея огибает весь круглый зал.",
+          "existing_graph_node": "L3-REST-UPPER-GALLERY",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT013-D",
+          "label": "Тупиковый Т-образный коридор с ДНК-дверями",
+          "global_level": 3,
+          "local_stratum": "upper-deadend",
+          "source_page_id": "B1-061",
+          "movement_method": "WALK",
+          "observed_constraint": "Илья пробегает первый верхний коридор и обнаруживает тупик; позже Таис и Федор задерживаются у биометрической двери.",
+          "existing_graph_node": "L3-REST-GALLERY-DEADEND",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT013-E",
+          "label": "Возвращение на галерею и вниз в проход",
+          "global_level": 3,
+          "local_stratum": "gallery-return",
+          "source_page_id": "B1-061",
+          "movement_method": "CLIMB_DOWN",
+          "observed_constraint": "Эмма, Коля и Илья бегут с галереи обратно по лестнице.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT013-F",
+          "label": "Низкий полутёмный коридор к наружной кольцевой сети",
+          "global_level": 3,
+          "local_stratum": "upper-low-corridor",
+          "source_page_id": "B1-063",
+          "movement_method": "RUN",
+          "observed_constraint": "Трое бегут по низкому коридору и пытаются выйти к светлому проходу внешнего круга.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT013-G",
+          "label": "Снятая вентиляционная решётка",
+          "global_level": 3,
+          "local_stratum": "upper-duct-inlet",
+          "source_page_id": "B1-063",
+          "movement_method": "CRAWL",
+          "observed_constraint": "Коля открывает низкий прямоугольный вентиляционный люк магнитной отверткой.",
+          "existing_graph_node": "L3-UPPER-VENT-ESCAPE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT013-H",
+          "label": "Вертикальный сброс внутри вентиляции",
+          "global_level": null,
+          "local_stratum": "between-3-and-2",
+          "source_page_id": "B1-063",
+          "movement_method": "DROP_DOWN",
+          "observed_constraint": "После близкого поворота Эмма свешивает ноги и спускается в вертикальную шахту.",
+          "existing_graph_node": "L3-UPPER-VENT-ESCAPE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT013-I",
+          "label": "Низкий вентиляционный выход Второго",
+          "global_level": 2,
+          "local_stratum": "low-wall-grille",
+          "source_page_id": "B1-064",
+          "movement_method": "CRAWL",
+          "observed_constraint": "Через решётку, расположенную рядом с полом Второго, дети выходят на прорезиненную дорожку.",
+          "existing_graph_node": "L2-VENT-LOW-GRILLE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT013-J",
+          "label": "Коридор у автомата какао",
+          "global_level": 2,
+          "local_stratum": "second-residential-walkway",
+          "source_page_id": "B1-064",
+          "movement_method": "WALK",
+          "observed_constraint": "После безопасного выхода отдыхают на резиновой дорожке; рядом автомат напитков.",
+          "existing_graph_node": "L2",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT013-C",
+          "lower": "RT013-A",
+          "source_page_id": "B1-061",
+          "claim": "Галерея третьего уровня расположена выше пола круглого зала"
+        },
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT013-G",
+          "lower": "RT013-I",
+          "source_page_id": "B1-063",
+          "claim": "Из вентиляции Третьего спускаются к выходу на Втором уровне"
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Зал отдыха отождествляется по кругу, диванам и стеклянным столам; маршруты героев расходятся. Таис и Фёдор остаются в верхней части, а Эмма и Коля выходят по вентиляции. Точная высота верхнего этажа неизвестна."
+    },
+    {
+      "id": "RT-014",
+      "title": "Возвращение Коли и Эммы от вентиляции Второго к Нижним базам через двустороннюю развилку",
+      "participants": [
+        "Эмма",
+        "Коля"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-064",
+        "B1-065"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT014-A",
+          "label": "Безопасный коридор Второго после вентиляции",
+          "global_level": 2,
+          "local_stratum": "rubber-promenade",
+          "source_page_id": "B1-064",
+          "movement_method": "WALK",
+          "observed_constraint": "У выхода из шахты рядом автомат какао.",
+          "existing_graph_node": "L2-VENT-LOW-GRILLE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT014-B",
+          "label": "Переходы и спуск с Второго на Нижний",
+          "global_level": null,
+          "local_stratum": "between-2-and-1",
+          "source_page_id": "B1-065",
+          "movement_method": "WALK",
+          "observed_constraint": "Между сценой на Втором и началом следующей части на Нижнем произошёл неописанный переход: механизм смены уровня неизвестен.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT014-C",
+          "label": "Холодный проход и низкий проём",
+          "global_level": 1,
+          "local_stratum": "lower-service",
+          "source_page_id": "B1-065",
+          "movement_method": "WALK",
+          "observed_constraint": "Идут по однотипным поворотам, пригибаются под низким проёмом.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT014-D",
+          "label": "Развилка вправо и влево",
+          "global_level": 1,
+          "local_stratum": "lower-fork",
+          "source_page_id": "B1-065",
+          "movement_method": "WALK",
+          "observed_constraint": "Правая ветка к базам короче, левая длиннее; выбор исходно справа, но предупреждают о Диких.",
+          "existing_graph_node": "L1-RETURN-FORK",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT014-E",
+          "label": "Длинная ветка в обход опасного участка",
+          "global_level": 1,
+          "local_stratum": "lower-long-return",
+          "source_page_id": "B1-065",
+          "movement_method": "WALK",
+          "observed_constraint": "По предупреждению жительницы Овальной базы выбирают более длинный маршрут.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT014-F",
+          "label": "Внешняя дверь района баз",
+          "global_level": 1,
+          "local_stratum": "base-approach",
+          "source_page_id": "B1-065",
+          "movement_method": "WALK",
+          "observed_constraint": "Идут к дверям баз, не встречая Диких.",
+          "existing_graph_node": "L1-BASE-OUTER-GATE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "От выхода на Втором до начала следующей главы на Нижнем пропущен подробный маршрут. Нельзя придумывать конкретный лифт или общую вентиляционную шахту; сегмент RT014-B условно фиксирует смену уровня, метод подъёма/спуска не описан."
     }
   ]
 }
