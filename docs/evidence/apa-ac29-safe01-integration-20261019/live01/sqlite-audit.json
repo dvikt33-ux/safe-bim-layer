@@ -1,0 +1,27 @@
+{
+  "status": "INDEPENDENT_SQLITE_READONLY_AUDIT_PASS",
+  "sqliteSHA256": "0cdeef621fd4cc9a0ba88618e108628ba862b7b8a468a662b679d7009865999c",
+  "scenes": [
+    {
+      "sceneId": "HotlinkBatchCreate20261018V1",
+      "state": "PASS"
+    },
+    {
+      "sceneId": "HotlinkBatchSave20261018V1",
+      "state": "PASS"
+    }
+  ],
+  "steps": [
+    {
+      "sceneId": "HotlinkBatchCreate20261018V1",
+      "stepId": "operation",
+      "state": "PASS"
+    },
+    {
+      "sceneId": "HotlinkBatchSave20261018V1",
+      "stepId": "operation",
+      "state": "PASS"
+    }
+  ],
+  "modelWrites": 0
+}
