@@ -6862,6 +6862,166 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-418",
+      "page_id": "B2-034",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=34",
+      "station_id": "MOAG",
+      "narrative_mode": "CORE_CENTER",
+      "locator_hint": "по центру станции, соединяя три уровня",
+      "spatial_assertion": "Фактическое наблюдение Эммы: круглое помещение энергомодуля проходит по центру МОАГа и пространственно объединяет все три глобальных уровня; это не означает три открытых входа.",
+      "feature_refs": [
+        "CORE-ENERGY",
+        "CORE-ENERGY-SHAFT"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-419",
+      "page_id": "B2-034",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=34",
+      "station_id": "MOAG",
+      "narrative_mode": "THIRD_ENTRANCE",
+      "locator_hint": "за детскими кувезами, отдельный коридор и дверь",
+      "spatial_assertion": "От внутреннего круга Третьего за Детским блоком ведёт узкий полутёмный коридор с одной защищённой дверью в помещение энергомодуля.",
+      "feature_refs": [
+        "L3-CHILD-LAB",
+        "CORE-ENERGY-ACCESS",
+        "CORE-ENERGY-GALLERY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-420",
+      "page_id": "B2-034",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=34",
+      "station_id": "MOAG",
+      "narrative_mode": "RING_GALLERY",
+      "locator_hint": "галерея с металлическими блестящими перилами",
+      "spatial_assertion": "Верхняя точка входа имеет круговую галерею с металлическими перилами вдоль края центрального объёма.",
+      "feature_refs": [
+        "CORE-ENERGY-GALLERY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-421",
+      "page_id": "B2-034",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=34",
+      "station_id": "MOAG",
+      "narrative_mode": "RELATIVE_DEPTH_TEXT_ONLY",
+      "locator_hint": "стены уходят вниз на полтора десятка метров",
+      "spatial_assertion": "От галереи стенки центрального помещения уходят вниз приблизительно на 15 метров по субъективному наблюдению; это ограничение приблизительной глубины, не абсолютный Z или высота каждого уровня.",
+      "feature_refs": [
+        "CORE-ENERGY-SHAFT"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-422",
+      "page_id": "B2-034",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=34",
+      "station_id": "MOAG",
+      "narrative_mode": "ENERGY_COLUMN",
+      "locator_hint": "прозрачная колба с жидкостью и кристаллами",
+      "spatial_assertion": "Внутри центрального объёма находится прозрачная колба с голубоватой жидкостью и светящимися включениями.",
+      "feature_refs": [
+        "CORE-ENERGY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-423",
+      "page_id": "B2-034",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=34",
+      "station_id": "MOAG",
+      "narrative_mode": "ACCESS_PERMISSION",
+      "locator_hint": "Мартин не имеет доступа к замку",
+      "spatial_assertion": "Интеллект Мартин в этой фазе не управляет входной дверью энергомодуля; для прохода Эмма взламывает локальную электронную панель.",
+      "feature_refs": [
+        "CORE-ENERGY-ACCESS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-424",
+      "page_id": "B2-035",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=35",
+      "station_id": "MOAG",
+      "narrative_mode": "ENERGY_CABLES",
+      "locator_hint": "кабели разных цветов, пол круглой галереи",
+      "spatial_assertion": "К энергомодулю подходят длинные толстые разноцветные кабели над круговой галереей; их конструктивная трасса вне зала не установлена.",
+      "feature_refs": [
+        "CORE-ENERGY",
+        "CORE-ENERGY-GALLERY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-425",
+      "page_id": "B2-035",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=35",
+      "station_id": "MOAG",
+      "narrative_mode": "CIRCULAR_GALLERY_FULL",
+      "locator_hint": "галерея огибала энергомодуль правильным кругом",
+      "spatial_assertion": "В сцене обнаружена непрерывная локальная круговая галерея вокруг центрального модуля, но форма остальных помещений на Третьем из этого не выводится.",
+      "feature_refs": [
+        "CORE-ENERGY-GALLERY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-426",
+      "page_id": "B2-035",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=35",
+      "station_id": "UNRESOLVED_OBJECT",
+      "narrative_mode": "GUILD_CRUISER_SWITCH",
+      "locator_hint": "после смены главы чужая сервисная рубка",
+      "spatial_assertion": "Техническая рубка наладчиков с квадратным отверстием находится внутри крейсера Гильдии, не МОАГа; запрет включения её в граф станции.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-427",
+      "page_id": "B2-036",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=36",
+      "station_id": "UNRESOLVED_OBJECT",
+      "narrative_mode": "GUILD_CRUISER_NOT_MOAG",
+      "locator_hint": "Иминyя объявляет крейсер-андроид",
+      "spatial_assertion": "Санузел, служебная кухонная ниша, матовые двери и серверная рубка описаны на борту крейсера Иминуя, отдельного физического объекта.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
