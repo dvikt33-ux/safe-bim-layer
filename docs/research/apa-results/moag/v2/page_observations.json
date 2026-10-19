@@ -10760,6 +10760,48 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-687",
+      "page_id": "B3-044",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=44",
+      "station_id": "MOAG",
+      "narrative_mode": "CHARACTER_KNOWN_AI_ARCHITECTURE",
+      "locator_hint": "Эмма вспоминает способ существования Мартина-МОАГа рядом с детьми.",
+      "spatial_assertion": "Мартин-МОАГ присматривал за детьми и выбрал существовать в теле одного из роботов, хотя мог остаться нематериальным интеллектом. Это подтверждает физическое воплощение интеллекта станции в роботе и функцию заботы; точное местоположение тела не указано.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-688",
+      "page_id": "B3-045",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=45",
+      "station_id": "MOAG_COVER_STORY_NOT_FACT",
+      "narrative_mode": "DELIBERATE_FALSE_COVER_STORY",
+      "locator_hint": "Эмма заявляет на суде, что прибыла со станции МОАГа с мирной миссией.",
+      "spatial_assertion": "Эмма ранее прямо решила выдумать легенду, чтобы выиграть время; её слова о прибытии со станции МОАГа и мирной миссии — намеренная ложь, не свидетельство о маршруте, присутствии или цели МОАГа.",
+      "feature_refs": [],
+      "evidence_class": "CHARACTER_STATED_FALSEHOOD",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-689",
+      "page_id": "B3-043",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=43",
+      "station_id": "OTHER_STATION_NOT_MOAG",
+      "narrative_mode": "OTHER_STATION_LAYOUT_AND_POPULATION_EXCLUSION",
+      "locator_hint": "На чужой станции — взрослые и дети, широкая кольцевая магистраль и центральные центры управления.",
+      "spatial_assertion": "Эмма прямо отличает эту станцию от МОАГа: здесь живут взрослые и дети; в центре одностанционного объекта находятся центры управления. Население и компоновка центрального уровня относятся только к чужой станции и не переносятся на МОАГ.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
