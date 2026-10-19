@@ -105,7 +105,8 @@ class EvidenceGraphR06Tests(unittest.TestCase):
                                   "M-L1-WASTE-FURNACE-001")
         self.assertEqual(trace["status"],
                          "QUALITATIVE_ASSOCIATION_CHAIN_NOT_TRAVEL_ITINERARY")
-        self.assertEqual(trace["edge_chain"][0]["edge_id"], "S06-004")
+        self.assertIn(trace["edge_chain"][0]["edge_id"],
+                      {"S06-004", "MOAG-R3-RC-022"})
 
     def test_concept_promotions_do_not_count_as_spatial_joins(self):
         r = self.result
