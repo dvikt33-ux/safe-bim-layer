@@ -1,0 +1,719 @@
+{
+  "schema": "APA-MOAG-TOPOLOGY-SNAPSHOT/0.1",
+  "source_blob_sha": "dc7f18f2c6491fbacce61e8a7d6c8ca07bfc4d45",
+  "derived_from": "docs/research/apa-results/moag/v1/evidence_graph.json",
+  "status": "GRAPH_ONLY_NO_COORDINATES",
+  "space_refs": [
+    {
+      "id": "L1",
+      "label": "Первый / Нижний уровень",
+      "level": 1
+    },
+    {
+      "id": "L2",
+      "label": "Второй / детский уровень",
+      "level": 2
+    },
+    {
+      "id": "L3",
+      "label": "Третий / верхний уровень",
+      "level": 3
+    },
+    {
+      "id": "L1-INNER",
+      "label": "Внутренний малый круг",
+      "level": 1
+    },
+    {
+      "id": "L1-OUTER",
+      "label": "Внешний круг",
+      "level": 1
+    },
+    {
+      "id": "L1-BASES",
+      "label": "Район бывших баз спецподразделения",
+      "level": 1
+    },
+    {
+      "id": "L1-HANGAR-ZONE",
+      "label": "Ангарный сектор",
+      "level": 1
+    },
+    {
+      "id": "L1-TEMNAYA",
+      "label": "Темная база",
+      "level": 1
+    },
+    {
+      "id": "L1-OVAL",
+      "label": "Овальная база",
+      "level": 1
+    },
+    {
+      "id": "L1-WILD",
+      "label": "База диких",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-COMMON",
+      "label": "Общее помещение Темной базы",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-SLEEP",
+      "label": "Спальные комнаты Темной базы",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-WET",
+      "label": "Душевая/ванная Темной базы",
+      "level": 1
+    },
+    {
+      "id": "L1-RECYCLING",
+      "label": "Цех сортировки/переработки отходов",
+      "level": 1
+    },
+    {
+      "id": "L1-STAIR-UP",
+      "label": "Крутая служебная лестница на Третий уровень",
+      "level": 1
+    },
+    {
+      "id": "L1-VENT",
+      "label": "Вентиляция и скрытые лазы",
+      "level": 1
+    },
+    {
+      "id": "L1-ANGAR-HALL",
+      "label": "Магистральный коридор ангаров",
+      "level": 1
+    },
+    {
+      "id": "L1-ANGAR",
+      "label": "Ангар с двумя одноместными катерами",
+      "level": 1
+    },
+    {
+      "id": "L1-OPERATORS",
+      "label": "Операторские кабины ангара",
+      "level": 1
+    },
+    {
+      "id": "L1-BOAT-LOCK",
+      "label": "Шлюз катеров Нижнего уровня",
+      "level": 1
+    },
+    {
+      "id": "L1-SEALED",
+      "label": "Запечатанная/неисследованная часть",
+      "level": 1
+    },
+    {
+      "id": "L2-GREEN",
+      "label": "Внутренняя Зелёная магистраль",
+      "level": 2
+    },
+    {
+      "id": "L2-ORANGE",
+      "label": "Оранжевая магистраль",
+      "level": 2
+    },
+    {
+      "id": "L2-PLAZA",
+      "label": "Главная площадь",
+      "level": 2
+    },
+    {
+      "id": "L2-GALLERY",
+      "label": "Жилая галерея над Главной площадью",
+      "level": 2
+    },
+    {
+      "id": "L2-CABINS",
+      "label": "Детские каюты",
+      "level": 2
+    },
+    {
+      "id": "L2-CAFE",
+      "label": "Кафе и магазины",
+      "level": 2
+    },
+    {
+      "id": "L2-T06",
+      "label": "Шестые туннели",
+      "level": 2
+    },
+    {
+      "id": "L2-T17",
+      "label": "Семнадцатые туннели",
+      "level": 2
+    },
+    {
+      "id": "L2-SCHOOL",
+      "label": "Школа / экзаменационный блок",
+      "level": 2
+    },
+    {
+      "id": "L3-INNER",
+      "label": "Внутренний круг Верхнего уровня",
+      "level": 3
+    },
+    {
+      "id": "L3-OUTER",
+      "label": "Внешний круг Верхнего уровня",
+      "level": 3
+    },
+    {
+      "id": "L3-BRIDGE",
+      "label": "Капитанская рубка",
+      "level": 3
+    },
+    {
+      "id": "L3-CREW",
+      "label": "Каюты персонала",
+      "level": 3
+    },
+    {
+      "id": "L3-CHILD-LAB",
+      "label": "Детский блок / кувезы",
+      "level": 3
+    },
+    {
+      "id": "L3-REST",
+      "label": "Круглый зал отдыха",
+      "level": 3
+    },
+    {
+      "id": "L3-STORE",
+      "label": "Склады, включая постельное бельё",
+      "level": 3
+    },
+    {
+      "id": "L3-DOCK",
+      "label": "Шлюзы и ангары грузовых крейсеров",
+      "level": 3
+    },
+    {
+      "id": "L3-PRODUCTION",
+      "label": "Производственные отсеки",
+      "level": 3
+    },
+    {
+      "id": "L3-SERVICE",
+      "label": "Коридоры для роботов-погрузчиков",
+      "level": 3
+    },
+    {
+      "id": "CORE-ENERGY",
+      "label": "Центральный энергомодуль",
+      "level": null
+    }
+  ],
+  "relationships": [
+    {
+      "id": "E01",
+      "from": "L1",
+      "to": "L1-INNER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E02",
+      "from": "L1",
+      "to": "L1-OUTER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E03",
+      "from": "L1",
+      "to": "L1-BASES",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06",
+        "B2-01"
+      ]
+    },
+    {
+      "id": "E04",
+      "from": "L1",
+      "to": "L1-HANGAR-ZONE",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-14"
+      ]
+    },
+    {
+      "id": "E05",
+      "from": "L1",
+      "to": "L1-RECYCLING",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E06",
+      "from": "L1",
+      "to": "L1-SEALED",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E07",
+      "from": "L1-BASES",
+      "to": "L1-TEMNAYA",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-10"
+      ]
+    },
+    {
+      "id": "E08",
+      "from": "L1-BASES",
+      "to": "L1-OVAL",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E09",
+      "from": "L1-BASES",
+      "to": "L1-WILD",
+      "relation": "includes",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B1-10"
+      ]
+    },
+    {
+      "id": "E10",
+      "from": "L1-BASES",
+      "to": "L1-INNER",
+      "relation": "links_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E11",
+      "from": "L1-TEMNAYA",
+      "to": "L1-BASE-COMMON",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-13"
+      ]
+    },
+    {
+      "id": "E12",
+      "from": "L1-TEMNAYA",
+      "to": "L1-BASE-SLEEP",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-10",
+        "B1-13"
+      ]
+    },
+    {
+      "id": "E13",
+      "from": "L1-TEMNAYA",
+      "to": "L1-BASE-WET",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-02"
+      ]
+    },
+    {
+      "id": "E14",
+      "from": "L1-BASE-COMMON",
+      "to": "L1-BASE-SLEEP",
+      "relation": "stairs_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-10"
+      ]
+    },
+    {
+      "id": "E15",
+      "from": "L1-BASES",
+      "to": "L2-CABINS",
+      "relation": "under",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E16",
+      "from": "L1-RECYCLING",
+      "to": "L1-STAIR-UP",
+      "relation": "behind_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E17",
+      "from": "L1-STAIR-UP",
+      "to": "L3-OUTER",
+      "relation": "connects_vertical",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B1-14"
+      ]
+    },
+    {
+      "id": "E18",
+      "from": "L1-VENT",
+      "to": "L2-ORANGE",
+      "relation": "connects_vertical",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B1-02",
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E19",
+      "from": "L1-HANGAR-ZONE",
+      "to": "L1-ANGAR-HALL",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-14"
+      ]
+    },
+    {
+      "id": "E20",
+      "from": "L1-ANGAR-HALL",
+      "to": "L1-ANGAR",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-14"
+      ]
+    },
+    {
+      "id": "E21",
+      "from": "L1-ANGAR",
+      "to": "L1-OPERATORS",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-14"
+      ]
+    },
+    {
+      "id": "E22",
+      "from": "L1-ANGAR",
+      "to": "L1-BOAT-LOCK",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-14"
+      ]
+    },
+    {
+      "id": "E23",
+      "from": "L1-BASES",
+      "to": "L1-HANGAR-ZONE",
+      "relation": "separate_sector",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-14"
+      ]
+    },
+    {
+      "id": "E24",
+      "from": "L2",
+      "to": "L2-GREEN",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E25",
+      "from": "L2",
+      "to": "L2-ORANGE",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E26",
+      "from": "L2",
+      "to": "L2-PLAZA",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-03"
+      ]
+    },
+    {
+      "id": "E27",
+      "from": "L2-ORANGE",
+      "to": "L2-GREEN",
+      "relation": "tunnel_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E28",
+      "from": "L2-GREEN",
+      "to": "L2-PLAZA",
+      "relation": "adjoins",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E29",
+      "from": "L2-GALLERY",
+      "to": "L2-PLAZA",
+      "relation": "overlooks",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-03"
+      ]
+    },
+    {
+      "id": "E30",
+      "from": "L2-GALLERY",
+      "to": "L2-CABINS",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-03"
+      ]
+    },
+    {
+      "id": "E31",
+      "from": "L2-GREEN",
+      "to": "L2-T06",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E32",
+      "from": "L2-ORANGE",
+      "to": "L2-T17",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E33",
+      "from": "L2-T06",
+      "to": "L2-CAFE",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E34",
+      "from": "L3",
+      "to": "L3-INNER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-15"
+      ]
+    },
+    {
+      "id": "E35",
+      "from": "L3",
+      "to": "L3-OUTER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E36",
+      "from": "L3-INNER",
+      "to": "L3-BRIDGE",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E37",
+      "from": "L3-INNER",
+      "to": "L3-CREW",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E38",
+      "from": "L3-INNER",
+      "to": "L3-CHILD-LAB",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-15"
+      ]
+    },
+    {
+      "id": "E39",
+      "from": "L3-INNER",
+      "to": "L3-REST",
+      "relation": "route_to",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B1-15"
+      ]
+    },
+    {
+      "id": "E40",
+      "from": "L3-OUTER",
+      "to": "L3-SERVICE",
+      "relation": "branches_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-14"
+      ]
+    },
+    {
+      "id": "E41",
+      "from": "L3-SERVICE",
+      "to": "L3-DOCK",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-14"
+      ]
+    },
+    {
+      "id": "E42",
+      "from": "L3-SERVICE",
+      "to": "L3-PRODUCTION",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-14"
+      ]
+    },
+    {
+      "id": "E43",
+      "from": "L1-VENT",
+      "to": "L3-INNER",
+      "relation": "aligned_with",
+      "state": "RECHECK_REQUIRED",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E44",
+      "from": "L1-INNER",
+      "to": "L2-GREEN",
+      "relation": "same_ring_logic",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    }
+  ],
+  "construction_dag": [
+    {
+      "id": "P0_evidence",
+      "depends_on": []
+    },
+    {
+      "id": "P1_topology",
+      "depends_on": [
+        "P0_evidence"
+      ]
+    },
+    {
+      "id": "P2_schematic_skeleton",
+      "depends_on": [
+        "P1_topology"
+      ]
+    },
+    {
+      "id": "P3_geometric_constraints",
+      "depends_on": [
+        "P2_schematic_skeleton"
+      ]
+    },
+    {
+      "id": "P4_structural_frame",
+      "depends_on": [
+        "P3_geometric_constraints"
+      ]
+    },
+    {
+      "id": "P5_walls_slabs_partitions",
+      "depends_on": [
+        "P4_structural_frame"
+      ]
+    },
+    {
+      "id": "P6_openings",
+      "depends_on": [
+        "P5_walls_slabs_partitions"
+      ]
+    },
+    {
+      "id": "P7_finishes",
+      "depends_on": [
+        "P6_openings"
+      ]
+    },
+    {
+      "id": "P8_mep_and_equipment",
+      "depends_on": [
+        "P7_finishes"
+      ]
+    }
+  ],
+  "gates": {
+    "graph_validated": true,
+    "geometry_approved": false,
+    "apa_native_execute": false,
+    "scene_writer_write": false
+  },
+  "instructions": "Graph only. Do not issue CreateWalls/CreateSlabs or other native operations without independently accepted geometry and SceneWriter authorization."
+}
