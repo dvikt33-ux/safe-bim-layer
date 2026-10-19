@@ -1585,12 +1585,12 @@
       "id": "B2-144",
       "page_number": 144,
       "url": "https://loveread.ec/read_book.php?id=53370&p=144",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "REMOTE_EVIDENCE",
+      "recorded_spatial_hints": 1,
+      "notes": "Глава 12 на крейсере «Дракон»; внутренние детали чужого корабля исключены. В удалённом воспоминании Эммы о МОАГе подтверждено, что станция взорвалась, роботы погибли, Мартин прекратил существование. Это состояние после события, не геометрическое описание.",
+      "verification_method": "Одна полная страница прочитана через Opera; сохранён только относящийся к МОАГу фрагмент, остальные детали крейсера исключены.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-145",
