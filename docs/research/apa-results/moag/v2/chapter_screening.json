@@ -22,7 +22,10 @@
       "B2-066",
       "B2-067",
       "B2-068",
-      "B2-069"
+      "B2-069",
+      "B2-070",
+      "B2-071",
+      "B2-072"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -34,13 +37,16 @@
       "B2-064",
       "B2-065",
       "B2-066",
-      "B2-069"
+      "B2-069",
+      "B2-070",
+      "B2-072"
     ],
     "remote_evidence_page_ids": [
       "B2-052",
       "B2-053",
       "B2-057",
-      "B2-064"
+      "B2-064",
+      "B2-071"
     ],
     "uncertain_page_ids": []
   },
@@ -400,6 +406,72 @@
         }
       ],
       "screening_caveat": "Pages 66 and 69 split chapter boundaries: p66 starts with the end of Taïs and Fedor's Earth scene before chapter 6; p69 ends chapter 6 before chapter 7 begins on the Earth scrapyard."
+    },
+    {
+      "id": "B2-PART2-CH7",
+      "book_id": "B2",
+      "part_number": 2,
+      "chapter_number": 7,
+      "title": "Таис. Здесь всё ненастоящее",
+      "page_span": {
+        "start": 69,
+        "end": 72
+      },
+      "chapter_classification": "MIXED",
+      "screening_status": "CONTEXT_SCREENED",
+      "screened_pages": [
+        "B2-069",
+        "B2-070",
+        "B2-071",
+        "B2-072"
+      ],
+      "scenes": [
+        {
+          "id": "B2P2C7-S1",
+          "page_fragments": [
+            {
+              "page_id": "B2-069",
+              "fragment": "земная сцена после заголовка главы 7"
+            },
+            {
+              "page_id": "B2-070",
+              "fragment": "весь литературный текст"
+            },
+            {
+              "page_id": "B2-071",
+              "fragment": "земная сцена Свалки и кладбища роботов"
+            },
+            {
+              "page_id": "B2-072",
+              "fragment": "земная сцена Свалки и подхода к Песчаным холмам"
+            }
+          ],
+          "classification": "EXTERNAL",
+          "physical_location": "Земля, остров Саб: Свалка и кладбище старых роботов",
+          "characters": [
+            "Таис",
+            "Фёдор"
+          ],
+          "station_relevance": "станционная архитектура в сцене не наблюдается",
+          "screened_out_material": "земные корабельные корпуса и обшивка, Свалка, кладбище роботов и людей, поселение и пауки-роботы не относятся к геометрии МОАГа"
+        },
+        {
+          "id": "B2P2C7-S2",
+          "page_fragments": [
+            {
+              "page_id": "B2-071",
+              "fragment": "сравнение старых Донов-12/15 на Земле с их продолжающейся службой на станции"
+            }
+          ],
+          "classification": "REMOTE_EVIDENCE",
+          "physical_location": "Земля, кладбище старых роботов; станция только упоминается",
+          "characters": [
+            "Таис"
+          ],
+          "station_relevance": "Доны-12/15 на станции воспитывают детей, убирают, учат, кормят и защищают; функциональное свидетельство без числа, размещения или геометрии"
+        }
+      ],
+      "screening_caveat": "p69 делится: глава 6 заканчивается станционной сценой, глава 7 начинается земной сценой; глава 8 начинается на p73."
     }
   ],
   "character_location_events": [
@@ -745,6 +817,34 @@
       "arrival_event": "следит, чтобы дети не входили в зону обстрела",
       "source": [
         "B2-067"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Таис",
+      "story_time": "B2, часть 2, глава 7, p69–72",
+      "current_location": "Земля, остров Саб: Свалка и кладбище старых роботов",
+      "departure_event": "продолжает путь по земной Свалке вместе с Фёдором и Варом",
+      "arrival_event": "перемещается к Песчаным холмам, уклоняясь от пауков-роботов",
+      "source": [
+        "B2-069",
+        "B2-070",
+        "B2-071",
+        "B2-072"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Фёдор",
+      "story_time": "B2, часть 2, глава 7, p69–72",
+      "current_location": "Земля, остров Саб: Свалка и кладбище старых роботов",
+      "departure_event": "продолжает путь по земной Свалке вместе с Таис и Варом",
+      "arrival_event": "ведёт Таис и Вара на магнитной доске к Песчаным холмам",
+      "source": [
+        "B2-069",
+        "B2-070",
+        "B2-071",
+        "B2-072"
       ],
       "confidence": "DIRECT_TEXT"
     }

@@ -4334,7 +4334,7 @@
       "nodes": [
         {
           "id": "RT040-A",
-          "label": "Каюта во круглом двухэтажном корпусе Второго",
+          "label": "Каюта в круглом двухэтажном корпусе Второго",
           "global_level": 2,
           "local_stratum": "residential-cabin-ring",
           "source_page_id": "B2-066",
@@ -4362,7 +4362,7 @@
           "global_level": 2,
           "local_stratum": "local-stair",
           "source_page_id": "B2-066",
-          "movement_method": "STAIRS",
+          "movement_method": "CLIMB_DOWN",
           "observed_constraint": "Коля спускается по лестнице и оказывается у девочек на площади; высота и точное положение лестницы неизвестны.",
           "existing_graph_node": "L2-PLAZA",
           "relative_xy": null,

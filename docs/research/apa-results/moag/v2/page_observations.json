@@ -8044,6 +8044,20 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-492",
+      "page_id": "B2-071",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=71",
+      "station_id": "MOAG",
+      "narrative_mode": "REMOTE_STATION_ROBOT_USE",
+      "locator_hint": "рассказ Таис о донах-12 и донах-15 на земной свалке",
+      "spatial_assertion": "В земной сцене Таис вспоминает, что Доны-12 и Доны-15 продолжают служить на станции: воспитывают детей, убирают, учат, кормят и защищают. Это подтверждает функции роботов в станционной среде, но не их число, точное размещение или форму помещений.",
+      "feature_refs": [],
+      "evidence_class": "REMOTE_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }

@@ -771,34 +771,34 @@
       "id": "B2-070",
       "page_number": 70,
       "url": "https://loveread.ec/read_book.php?id=53370&p=70",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "EXTERNAL",
+      "recorded_spatial_hints": 0,
+      "notes": "Полностью прочитанная земная сцена на Свалке: спрессованные корпуса и обшивка кораблей, металлические груды, переходы по балкам; эти формы не связываются с внешностью МОАГа.",
+      "verification_method": "Full primary LoveRead page read in Opera; chapter 7 context screened through next heading at p73; station/external evidence separated",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-071",
       "page_number": 71,
       "url": "https://loveread.ec/read_book.php?id=53370&p=71",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "REMOTE_EVIDENCE",
+      "recorded_spatial_hints": 1,
+      "notes": "Земная сцена кладбища старых роботов; удалённое свидетельство: Доны-12/15 продолжают служить на станции, включая уход за детьми, уборку, обучение, кормление и защиту. Это функция роботов, не геометрия станции.",
+      "verification_method": "Full primary LoveRead page read in Opera; chapter 7 context screened through next heading at p73; station/external evidence separated",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-072",
       "page_number": 72,
       "url": "https://loveread.ec/read_book.php?id=53370&p=72",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "EXTERNAL",
+      "recorded_spatial_hints": 0,
+      "notes": "Полностью прочитанная земная сцена: кладбище людей, роботы-пауки, каменные Песчаные холмы и столбы-блокираторы. Станционная архитектура отсутствует.",
+      "verification_method": "Full primary LoveRead page read in Opera; chapter 7 context screened through next heading at p73; station/external evidence separated",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-073",
