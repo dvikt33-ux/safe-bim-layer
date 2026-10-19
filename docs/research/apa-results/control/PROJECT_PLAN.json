@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 188,
+  "revision": 189,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -6074,7 +6074,7 @@
       "outputs": [],
       "acceptance": "Explicit SI start/end/count and verified prototype anchor -> existing mass selector -> oneMoveElements(copy=true) batch through existing registry/SceneWriter. Preserve source geometry and all existing groups; automatic newcontract tests and one meaningful diagonal-line LIVE in a new saved copy, exact targets/GUID/readback, guardedSave/snapshot/reopen. Never rerun acceptedgroup8x4/individualLINEAR proof.",
       "owner": "apa-mass-integration-20261019",
-      "lease_until": "2026-10-19T23:12:28Z",
+      "lease_until": "2026-10-20T03:07:26Z",
       "claim_ref": "APA-RUN-20261019-FINITE-LINE",
       "requires_approval": false,
       "evidence": [],
