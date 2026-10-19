@@ -249,6 +249,32 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
             resolved.append({"target": target, "inferred_global_level": next(iter(possible)),
                              "supporting_route_witnesses": witnesses,
                              "status": "PROVISIONAL_INFERENCE_NOT_AUTHORITATIVE_XY"})
+    # Unresolved gaps become a source-review queue, never inferred passages.
+    route_by_id = {r["id"]: r for r in route_groups}
+    frontiers = []
+    for gap in gaps:
+        route = route_by_id[gap["route_id"]]
+        steps = route["nodes"]
+        idx = next(i for i, s in enumerate(steps) if s["id"] == gap["from"])
+        def nearest_mapped(items):
+            for step in items:
+                alias = step.get("existing_graph_node")
+                if alias is not None:
+                    target = aliases.get(alias, alias)
+                    if target in kinds:
+                        return target
+            return None
+        left = nearest_mapped(reversed(steps[:idx + 1]))
+        right = nearest_mapped(steps[idx + 1:])
+        different_islands = bool(left and right and uf.root(left) != uf.root(right))
+        frontiers.append({
+            "route_id": gap["route_id"], "gap_between": [gap["from"], gap["to"]],
+            "left_indexed_witness": left, "right_indexed_witness": right,
+            "source_pages": gap["source_pages"],
+            "priority": ("P1_DISCONNECTED_KNOWN_ENDPOINTS" if different_islands
+                         else "P2_GAP_RECHECK_WITH_CONTEXT"),
+            "status": "RESEARCH_FRONTIER_NOT_AN_ADDED_GRAPH_EDGE"
+        })
     component_members = uf.groups()
     after_physical_components = len({uf.root(node) for node in kinds})
     physical_only = [sorted(n for n in members if n in kinds) for members in component_members]
@@ -275,7 +301,9 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
             "route_bridge_events": sum(e["joins_components"] for e in edges
                                        if e["type"].startswith(("ROUTE_", "OBSERVED_"))),
             "physical_fragment_bridge_events": len(physical_bridges),
-            "narrative_gaps": len(gaps), "vertical_order_constraints": len(verticals),
+            "narrative_gaps": len(gaps), "frontiers_for_targeted_review": len(frontiers),
+            "high_priority_disconnected_frontiers": sum(x["priority"].startswith("P1_") for x in frontiers),
+            "vertical_order_constraints": len(verticals),
             "crosswalk_review_conflicts": len(conflicts),
             "inferred_route_level_candidates": len(resolved),
             "source_backed_edges_by_class": dict(sorted(all_kinds.items())),
@@ -294,7 +322,8 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         "route_location_review": conflicts,
         "identity_hypotheses_not_merged": prior["topology"]["identity_hypotheses"],
         "negative_identity_constraints": prior["topology"]["identity_exclusions"],
-        "narrative_gaps": gaps, "vertical_partial_order": verticals,
+        "narrative_gaps": gaps, "research_frontiers_not_edges": frontiers,
+        "vertical_partial_order": verticals,
         "new_level_candidates": resolved,
         "area_volume": {
             "status": prior["status"], "counts": area["counts"],
