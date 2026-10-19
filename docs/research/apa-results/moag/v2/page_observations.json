@@ -1,0 +1,318 @@
+{
+  "schema": "APA-MOAG-PAGE-OBSERVATIONS/1",
+  "date": "2026-10-19",
+  "scope": "Only pages marked REVIEWED_FULL_PAGE in page ledgers. Site page != print book page.",
+  "copyright": "Spatial paraphrases and short navigational hints only, without reproducing book content.",
+  "observations": [
+    {
+      "id": "P-001",
+      "page_id": "B1-001",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=1",
+      "station_id": "MOAG",
+      "narrative_mode": "CHARACTER_MOVEMENT",
+      "locator_hint": "Оранжевая магистраль → семнадцатые туннели",
+      "spatial_assertion": "Маршрут погони проходит около Оранжевой магистрали и 17-х туннелей.",
+      "feature_refs": [
+        "L2-ORANGE",
+        "L2-T17"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-002",
+      "page_id": "B1-001",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=1",
+      "station_id": "MOAG",
+      "narrative_mode": "ENVIRONMENT_DESCRIPTION",
+      "locator_hint": "узкий коридор, круглые лампочки, мягкий поворот",
+      "spatial_assertion": "Узкий коридор второго уровня имеет покрытие из мягкой резины, ряд маленьких круглых светильников; трасса криволинейная.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-003",
+      "page_id": "B1-001",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=1",
+      "station_id": "MOAG",
+      "narrative_mode": "MOVEMENT_AND_ENGINEERING",
+      "locator_hint": "туннели B и F, тепловые датчики",
+      "spatial_assertion": "В туннелях B/F временно отключены датчики температуры/движения; отдельные слепые проходы используются скрытно.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-004",
+      "page_id": "B1-001",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=1",
+      "station_id": "MOAG",
+      "narrative_mode": "MOVEMENT_AND_ENGINEERING",
+      "locator_hint": "люки вентиляции, решётки, туннель",
+      "spatial_assertion": "Слепой коридор ведёт к вентиляционным люкам; роботы могут завинчивать решетки, датчики и блокировать путь.",
+      "feature_refs": [
+        "L1-VENT",
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-005",
+      "page_id": "B1-001",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=1",
+      "station_id": "MOAG",
+      "narrative_mode": "MOVEMENT",
+      "locator_hint": "двойная развилка, поворот направо, квадратный лаз",
+      "spatial_assertion": "Героиня проходит несколько поворотов, двойную развилку и достигает квадратного вентиляционного люка почти у пола; точный абсолютный азимут не установлен.",
+      "feature_refs": [
+        "L1-VENT",
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-006",
+      "page_id": "B1-001",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=1",
+      "station_id": "MOAG",
+      "narrative_mode": "ACCESS_DESCRIPTION",
+      "locator_hint": "лифт и комната Последних распоряжений",
+      "spatial_assertion": "После сопровождаемого перехода на третий уровень лифт ведёт к белому коридору со звукопоглощающей облицовкой, затем к комнате распоряжений.",
+      "feature_refs": [
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-007",
+      "page_id": "B2-001",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=1",
+      "station_id": "MOAG",
+      "narrative_mode": "INTERIOR",
+      "locator_hint": "Шереметьевская каюта, диван, широкая кровать",
+      "spatial_assertion": "Каюта на Третьем имеет диван около мониторов и широкую двухместную кровать; помещения отремонтированы лонами.",
+      "feature_refs": [
+        "L3-CREW"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-008",
+      "page_id": "B2-001",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=1",
+      "station_id": "MOAG",
+      "narrative_mode": "CHARACTER_REFLECTION",
+      "locator_hint": "узкие койки прежних спецназовских баз",
+      "spatial_assertion": "Нижние базы раньше служили спецназу; бывшие койки там уже и скромнее, чем на Третьем. Это историческая функция помещений.",
+      "feature_refs": [
+        "L1-BASES",
+        "L1-HANGAR-ZONE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-009",
+      "page_id": "B2-001",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=1",
+      "station_id": "MOAG",
+      "narrative_mode": "OPERATIONAL_STATE",
+      "locator_hint": "Нижний заблокирован, свет выключен",
+      "spatial_assertion": "К началу второй книги Нижний блок вновь изолировали и погасили свет после событий первой; признак состояния ПО ВРЕМЕНИ, не постоянной планировки.",
+      "feature_refs": [
+        "L1-SEALED"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-010",
+      "page_id": "B2-001",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=1",
+      "station_id": "MOAG",
+      "narrative_mode": "ROUTE_AND_STORAGE",
+      "locator_hint": "правый отсек недалеко от шлюза номер три",
+      "spatial_assertion": "Оружейные запасы и ракеты найдены в правом отсеке недалеко от шлюза №3; относительное «правый» зависит от пути движения.",
+      "feature_refs": [
+        "L3-DOCK"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-011",
+      "page_id": "B2-001",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=1",
+      "station_id": "MOAG",
+      "narrative_mode": "VERTICAL_MOVEMENT",
+      "locator_hint": "каждый день поднимается в капитанскую рубку, возвращается вниз",
+      "spatial_assertion": "Эмма находится на втором уровне для отдыха и поднимается к рабочему месту в рубке третьего уровня.",
+      "feature_refs": [
+        "L2",
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-012",
+      "page_id": "B3-001",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=1",
+      "station_id": "MOAG_MEMORY_ONLY",
+      "narrative_mode": "CHARACTER_MEMORY",
+      "locator_hint": "это вам не нижний уровень станции",
+      "spatial_assertion": "На Земле Таис вспоминает добычу еды на Нижнем уровне МОАГа, без нового планового размещения.",
+      "feature_refs": [
+        "L1"
+      ],
+      "evidence_class": "MEMORY_NOT_SPATIAL",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-013",
+      "page_id": "B4-001",
+      "citation_url": "https://loveread.ec/read_book.php?id=63971&p=1",
+      "station_id": "THIRD_STATION_NOT_MOAG",
+      "narrative_mode": "NARRATION",
+      "locator_hint": "Третья станция, интеллект Питер",
+      "spatial_assertion": "Структура и интерьер станционных ярусов в начале книги IV относятся к другому объекту и запрещены к переносу на МОАГ.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-014",
+      "page_id": "B1-114",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=114",
+      "station_id": "MOAG",
+      "narrative_mode": "ROUTE",
+      "locator_hint": "высокие белые двери цехов, напротив лестница",
+      "spatial_assertion": "Против производственных дверей через широкий проход коридора — короткая широкая лестница на площадку входа в рубку.",
+      "feature_refs": [
+        "L3-PRODUCTION",
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-015",
+      "page_id": "B1-114",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=114",
+      "station_id": "MOAG",
+      "narrative_mode": "GEOMETRIC_DESCRIPTION",
+      "locator_hint": "ступени белые, поручни серые",
+      "spatial_assertion": "У входа в рубку белые ступени и серые поручни. Подтверждён локальный вертикальный перепад, не самостоятельный этаж.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-016",
+      "page_id": "B1-114",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=114",
+      "station_id": "MOAG",
+      "narrative_mode": "PORTAL",
+      "locator_hint": "двойные овальные двери, сенсорное подтверждение личности",
+      "spatial_assertion": "После лестницы находится овальный двустворчатый вход с биометрическим подтверждением личности.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-017",
+      "page_id": "B1-114",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=114",
+      "station_id": "MOAG",
+      "narrative_mode": "ROOM_INTERIOR",
+      "locator_hint": "пульты управления высоким полукругом",
+      "spatial_assertion": "В рубке управляющие пульты организованы полукругом, есть голубые голографические экраны.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-018",
+      "page_id": "B1-114",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=114",
+      "station_id": "MOAG",
+      "narrative_mode": "FENESTRATION",
+      "locator_hint": "полукруглое широкое окно, за ним Земля",
+      "spatial_assertion": "Из рубки через широкое полукруглое окно видна Земля. Положение относительно внешнего корпуса требует проверки модели.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-019",
+      "page_id": "B1-114",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=114",
+      "station_id": "MOAG",
+      "narrative_mode": "FUNCTIONAL_LOCATION",
+      "locator_hint": "рубка около ангаров с производством",
+      "spatial_assertion": "Оператор указывает связь рубки и производственно-ангарного сектора; подтверждено пройденным маршрутом.",
+      "feature_refs": [
+        "L3-BRIDGE",
+        "L3-PRODUCTION",
+        "L3-DOCK"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    }
+  ]
+}
