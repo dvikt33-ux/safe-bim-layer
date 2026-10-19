@@ -7067,6 +7067,169 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-431",
+      "page_id": "B2-039",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=39",
+      "station_id": "MOAG",
+      "narrative_mode": "MEMORY_SPATIAL",
+      "locator_hint": "мяч из детского парка попал в панель на Главной площади",
+      "spatial_assertion": "В воспоминании Эммы голографическая панель правил расположена на Главной площади Второго; рядом в доступности игрового мяча — детский парк. Расстояние неизвестно.",
+      "feature_refs": [
+        "L2-PLAZA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-432",
+      "page_id": "B2-040",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=40",
+      "station_id": "MOAG",
+      "narrative_mode": "STAIRS_UP_FROM_CORE_GALLERY",
+      "locator_hint": "Коля заставляет Эмму подняться по ступенькам к двери",
+      "spatial_assertion": "Из круговой галереи энергомодуля к входной двери есть локальный подъём по ступеням. Число ступеней и перепад отметок не сообщены.",
+      "feature_refs": [
+        "CORE-ENERGY-GALLERY",
+        "CORE-ENERGY-ACCESS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-433",
+      "page_id": "B2-040",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=40",
+      "station_id": "MOAG",
+      "narrative_mode": "AUTONOMOUS_LOCK_STATE",
+      "locator_hint": "двери автономны и закрываются вручную",
+      "spatial_assertion": "Входную электронную дверь энергомодуля после атаки закрывают местным управлением; Мартин не управляет её автоматическим закрытием.",
+      "feature_refs": [
+        "CORE-ENERGY-ACCESS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-434",
+      "page_id": "B2-040",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=40",
+      "station_id": "MOAG",
+      "narrative_mode": "OUTER_CORE_CORRIDOR",
+      "locator_hint": "после дверей паразиты расползаются в коридоре",
+      "spatial_assertion": "За дверью центрального энергомодуля расположен отдельный соединительный коридор; после закрытия части вредоносных устройств остаются снаружи.",
+      "feature_refs": [
+        "L3-ENERGY-APPROACH"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-435",
+      "page_id": "B2-041",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=41",
+      "station_id": "MOAG",
+      "narrative_mode": "CORE_TO_BRIDGE_CORRIDOR",
+      "locator_hint": "длинный белый коридор ведёт к капитанской рубке",
+      "spatial_assertion": "От выхода из энергомодуля к командной рубке Третьего существует связный длинный белый коридор.",
+      "feature_refs": [
+        "L3-ENERGY-APPROACH",
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-436",
+      "page_id": "B2-041",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=41",
+      "station_id": "MOAG",
+      "narrative_mode": "ROBOT_NICHE",
+      "locator_hint": "небольшая ниша у поворота, стояли пятеро пятнадцатых",
+      "spatial_assertion": "В коридорной сети на пути к рубке есть ниша для нескольких охранных андроидов; точные размеры не названы.",
+      "feature_refs": [
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-437",
+      "page_id": "B2-041",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=41",
+      "station_id": "MOAG",
+      "narrative_mode": "BRIDGE_DOOR_DENSITY",
+      "locator_hint": "плотные двери рубки без щелей",
+      "spatial_assertion": "Плотные двери капитанской рубки Третьего сохраняют изоляцию при нападении микромеханизмов по сюжету.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-438",
+      "page_id": "B2-041",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=41",
+      "station_id": "MOAG",
+      "narrative_mode": "MANUAL_LIFE_SUPPORT",
+      "locator_hint": "жизнеобеспечение и поле работают вручную",
+      "spatial_assertion": "Система жизнеобеспечения и внешняя защита переведены в ручной режим; автоматизация изменена без создания новой сети комнат.",
+      "feature_refs": [
+        "CORE-ENERGY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-439",
+      "page_id": "B2-042",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=42",
+      "station_id": "MOAG",
+      "narrative_mode": "MEDICAL_SCANNER",
+      "locator_hint": "каталка сама заехала в круглый зев сканера",
+      "spatial_assertion": "Медицинский отсек Третьего содержит автоматическую диагностическую установку с подвижной каталкой и круглым входом в аппарат; рядом голографический экран управления.",
+      "feature_refs": [
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-440",
+      "page_id": "B2-042",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=42",
+      "station_id": "MOAG",
+      "narrative_mode": "MEDICAL_SCAN_ROUTE",
+      "locator_hint": "Эмма с Колей пришли в медотсек, затем к жилой каюте",
+      "spatial_assertion": "Эмма и Коля физически проходят из рубки в медотсек, затем возвращаются к жилому сектору; дальнейший спуск на Второй на этой странице только планируется.",
+      "feature_refs": [
+        "L3-BRIDGE",
+        "L3-CREW"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
