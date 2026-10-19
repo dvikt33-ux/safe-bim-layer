@@ -2199,6 +2199,243 @@
       "constraints": [],
       "identity_hypotheses": [],
       "notes": "Один глобальный уровень 2. Открытая решетка — временное состояние. Обратная эвакуация ещё не подтверждена. Сегмент до старта спасения NARRATIVE_GAP."
+    },
+    {
+      "id": "RT-019",
+      "title": "Таис отвлекает стаю: от школьных классов через пекарню и Оранжевую обратно под защитную решетку",
+      "participants": [
+        "Таис"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-094",
+        "B1-095"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT019-A",
+          "label": "Школьная раздевалка и стойки магнитных досок",
+          "global_level": 2,
+          "local_stratum": "second-magnetic-route",
+          "source_page_id": "B1-094",
+          "movement_method": "WALK",
+          "observed_constraint": "Школьная раздевалка и стойки магнитных досок",
+          "existing_graph_node": "L2-SCHOOL",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT019-B",
+          "label": "Выезд на магнитной доске из дверей школьных классов",
+          "global_level": 2,
+          "local_stratum": "second-magnetic-route",
+          "source_page_id": "B1-094",
+          "movement_method": "MAGNETIC_BOARD",
+          "observed_constraint": "Выезд на магнитной доске из дверей школьных классов",
+          "existing_graph_node": "L2-SCHOOL",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT019-C",
+          "label": "Прямой туннель и два последовательных поворота",
+          "global_level": 2,
+          "local_stratum": "second-magnetic-route",
+          "source_page_id": "B1-094",
+          "movement_method": "MAGNETIC_BOARD",
+          "observed_constraint": "Прямой туннель и два последовательных поворота",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT019-D",
+          "label": "Проезд мимо пекарни и автоматизированных дверей",
+          "global_level": 2,
+          "local_stratum": "second-magnetic-route",
+          "source_page_id": "B1-094",
+          "movement_method": "MAGNETIC_BOARD",
+          "observed_constraint": "Проезд мимо пекарни и автоматизированных дверей",
+          "existing_graph_node": "L2-CAFE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT019-E",
+          "label": "Боковые туннели удлинённой траектории отвлечения",
+          "global_level": 2,
+          "local_stratum": "second-magnetic-route",
+          "source_page_id": "B1-095",
+          "movement_method": "MAGNETIC_BOARD",
+          "observed_constraint": "Боковые туннели удлинённой траектории отвлечения",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT019-F",
+          "label": "Два правых поворота к Оранжевой",
+          "global_level": 2,
+          "local_stratum": "second-magnetic-route",
+          "source_page_id": "B1-095",
+          "movement_method": "MAGNETIC_BOARD",
+          "observed_constraint": "Два правых поворота к Оранжевой",
+          "existing_graph_node": "L2-ORANGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT019-G",
+          "label": "Оранжевая и следующий защищённый туннель",
+          "global_level": 2,
+          "local_stratum": "second-magnetic-route",
+          "source_page_id": "B1-095",
+          "movement_method": "MAGNETIC_BOARD",
+          "observed_constraint": "Оранжевая и следующий защищённый туннель",
+          "existing_graph_node": "L2-ORANGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT019-H",
+          "label": "Открытая энергетическая решётка",
+          "global_level": 2,
+          "local_stratum": "second-magnetic-route",
+          "source_page_id": "B1-095",
+          "movement_method": "MAGNETIC_BOARD",
+          "observed_constraint": "Открытая энергетическая решётка",
+          "existing_graph_node": "L2-RESIDENTIAL-RING",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT019-I",
+          "label": "Ряд скамеек за решёткой, конечная точка",
+          "global_level": 2,
+          "local_stratum": "second-magnetic-route",
+          "source_page_id": "B1-095",
+          "movement_method": "MAGNETIC_BOARD",
+          "observed_constraint": "Ряд скамеек за решёткой, конечная точка",
+          "existing_graph_node": "L2-RESIDENTIAL-RING",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "Абсолютные направления неизвестны, право/лево заданы направлением движения Таис. Посещение пекарни — проезд мимо, не вход внутрь. Длина маршрута и радиусы поворотов не определены."
+    },
+    {
+      "id": "RT-020",
+      "title": "Таис, Фёдор и Егор: грузовой продуктовый лифт Второй → Третий → Второй",
+      "participants": [
+        "Таис",
+        "Фёдор",
+        "Егор"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-096"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT020-A",
+          "label": "Район столовой/доставки продуктов Второго",
+          "global_level": 2,
+          "local_stratum": "second-magnetic-route",
+          "source_page_id": "B1-096",
+          "movement_method": "WALK",
+          "observed_constraint": "Район столовой/доставки продуктов Второго",
+          "existing_graph_node": "L2",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT020-B",
+          "label": "Грузовой продуктовый лифт, посадка",
+          "global_level": 2,
+          "local_stratum": "second-magnetic-route",
+          "source_page_id": "B1-096",
+          "movement_method": "WALK",
+          "observed_constraint": "Грузовой продуктовый лифт, посадка",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT020-C",
+          "label": "Подъём грузовым лифтом на Третий",
+          "global_level": null,
+          "local_stratum": "between-second-and-third",
+          "source_page_id": "B1-096",
+          "movement_method": "ELEVATOR_UP",
+          "observed_constraint": "Подъём грузовым лифтом на Третий",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT020-D",
+          "label": "Белый коридор Третьего, встреча около левого поворота",
+          "global_level": 3,
+          "local_stratum": "third-service-route",
+          "source_page_id": "B1-096",
+          "movement_method": "WALK",
+          "observed_constraint": "Белый коридор Третьего, встреча около левого поворота",
+          "existing_graph_node": "L3",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT020-E",
+          "label": "Возврат к грузовому лифту с отключённым роботом",
+          "global_level": 3,
+          "local_stratum": "third-service-route",
+          "source_page_id": "B1-096",
+          "movement_method": "WALK",
+          "observed_constraint": "Возврат к грузовому лифту с отключённым роботом",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT020-F",
+          "label": "Спуск тем же лифтом на Второй",
+          "global_level": null,
+          "local_stratum": "between-second-and-third",
+          "source_page_id": "B1-096",
+          "movement_method": "ELEVATOR_DOWN",
+          "observed_constraint": "Спуск тем же лифтом на Второй",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT020-G",
+          "label": "Второй уровень, площадка разгрузки",
+          "global_level": 2,
+          "local_stratum": "second-magnetic-route",
+          "source_page_id": "B1-096",
+          "movement_method": "WALK",
+          "observed_constraint": "Второй уровень, площадка разгрузки",
+          "existing_graph_node": "L2",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT020-D",
+          "lower": "RT020-G",
+          "source_page_id": "B1-096",
+          "claim": "Один продуктовый лифт обслуживает Третий и Второй с подтверждённым подъёмом и спуском."
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Грузовой лифт нельзя автоматически отождествлять с пассажирским ДНК-лифтом RT-016. Количество и длина шахт без метрических доказательств не определены."
     }
   ]
 }
