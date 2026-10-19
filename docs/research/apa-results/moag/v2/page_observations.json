@@ -8562,6 +8562,20 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-529",
+      "page_id": "B2-088",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=88",
+      "station_id": "MOAG",
+      "narrative_mode": "REMOTE_EVIDENCE_CHARACTER_ORIGIN",
+      "locator_hint": "Земная сцена: Таис вспоминает Мартина-Моага; Вар объясняет, что дети всю жизнь провели на орбите",
+      "spatial_assertion": "В земной сцене Таис связывает Мартина-Моага со своими снами, а Вар объясняет, что Таис и Фёдор всю жизнь провели на орбите. Это дистанционный контекст происхождения и идентичности персонажей, без описания расположения, планировки, маршрутов или геометрии МОАГа.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
