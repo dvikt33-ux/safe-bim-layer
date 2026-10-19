@@ -271,6 +271,7 @@ def installed_verifiers():
     from apa_ac29_existing_create_verifiers import extended_verifiers
     from apa_ac29_existing_modify_verifiers import existing_slab_modify_verifiers
     from apa_ac29_native_group_clone_verifier import installed_group_clone_verifiers
+    from apa_ac29_native_copy_verifier import installed_copy_verifiers
     checked = {
         "VerifiedNativeColumns": NativeVerifier(
             verifier_id="VerifiedNativeColumns", command="CreateColumns",
@@ -281,7 +282,7 @@ def installed_verifiers():
             before=verify_translation_before,after=verify_translation_after)
     }
     for extra in (extended_verifiers(), existing_slab_modify_verifiers(),
-                  installed_group_clone_verifiers()):
+                  installed_group_clone_verifiers(), installed_copy_verifiers()):
         check(not set(checked).intersection(extra),
               "APA_NATIVE_REGISTRY_VERIFIER_ID_COLLISION")
         checked.update(extra)

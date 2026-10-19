@@ -133,9 +133,9 @@ def manifest_for(state, *, initial=False):
     return m
 
 
-def prepare_api(m, state, *, execute, saved_sha=None):
+def prepare_api(m, state, *, execute, saved_sha=None, authorization_ref=AUTH):
     R.bind_authorized_saved_copy(m["port"], m["scratch"], Path(m["scratch"]).stem,
-                                 saved_sha or m["scratchInitialSHA256"], AUTH)
+                                 saved_sha or m["scratchInitialSHA256"], authorization_ref)
     def bounded(command, params):
         if command == V.CMD:
             return R.tapir(R.PORT, "CloneNativeGroupV1", params, timeout=120)
@@ -145,7 +145,7 @@ def prepare_api(m, state, *, execute, saved_sha=None):
         return A.native_transport(command, params)
     guard = GuardedSaveTransport(bounded, R.bind_authorized_saved_copy,
         m["scratch"], m["source"], lambda: sha256(m["scratch"]), lambda: sha256(m["source"]),
-        Path(m["scratch"]).stem, m["port"], AUTH)
+        Path(m["scratch"]).stem, m["port"], authorization_ref)
     folder = Path(state) / ("trace-write" if execute else "trace-read")
     folder.mkdir(exist_ok=True)
     return A.EvidenceAPI(guard, folder, execute=execute), guard
