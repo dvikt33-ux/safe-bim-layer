@@ -82,6 +82,61 @@ class EvidenceGraphR06Tests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "UNKNOWN_TRACE_ENDPOINT"):
             MOD.trace_between(self.result, "NOT-AN-INDEX", b)
 
+    def test_source_proven_r03_internal_links_are_not_ignored(self):
+        r = self.result
+        e = {x["id"]: x for x in r["typed_evidence_edges"]}
+        for id in ["MOAG-R3-RC-009", "MOAG-R3-RC-010",
+                   "MOAG-R3-RC-011", "MOAG-R3-RC-017",
+                   "MOAG-R3-RC-019", "MOAG-R3-RC-023",
+                   "MOAG-R3-RC-025"]:
+            self.assertTrue(e[id]["connects_evidence_graph"], id)
+            self.assertFalse(e[id]["metric_geometry_proven"])
+        self.assertGreater(r["counts"]["r03_local_relation_component_reductions"], 0)
+
+    def test_curated_stairs_and_workshop_relation_reduce_disconnected_islands(self):
+        r = self.result
+        curated = [x for x in r["typed_evidence_edges"]
+                   if x["type"] == "R06_OBSERVATION_DERIVED_SPACE_LINK"]
+        self.assertEqual(len(curated), 6)
+        self.assertGreater(r["counts"]["r06_explicit_link_component_reductions"], 0)
+        self.assertTrue(all(x["source_ids"] and not x["metric_geometry_proven"]
+                            for x in curated))
+        trace = MOD.trace_between(r, "M-L1-WASTE-001",
+                                  "M-L1-WASTE-FURNACE-001")
+        self.assertEqual(trace["status"],
+                         "QUALITATIVE_ASSOCIATION_CHAIN_NOT_TRAVEL_ITINERARY")
+        self.assertEqual(trace["edge_chain"][0]["edge_id"], "S06-004")
+
+    def test_concept_promotions_do_not_count_as_spatial_joins(self):
+        r = self.result
+        self.assertEqual(r["counts"]["reference_promotion_crosswalks"], 17)
+        self.assertEqual(r["counts"]["promotions_needing_identity_review"], 5)
+        self.assertTrue(all(x["not_a_physical_connection"]
+            for x in r["reference_promotion_crosswalks_not_spatial_links"]))
+        self.assertNotIn("M-L1-CG-001", {x["new_physical_id"]
+            for x in r["reference_promotion_crosswalks_not_spatial_links"]})
+        self.assertIn("M-L1-CG-001", {x["new_physical_id"]
+            for x in r["promotion_identity_review_queue"]})
+
+    def test_unsourced_or_cross_level_curated_stitch_is_rejected(self):
+        base = json.loads((BASE / "synthesis/explicit_spatial_bridges_r06.json")
+                          .read_text(encoding="utf-8"))
+        invalid = copy.deepcopy(base)
+        invalid["typed_edges"][0]["source_ids"] = ["UNREAD-PAGE"]
+        with self.assertRaisesRegex(ValueError, "EXPLICIT_LINK_SOURCE_NOT_VERIFIED"):
+            MOD.assemble(self.graph, self.fragments, self.routes,
+                         self.bounds, explicit_bridges=invalid)
+        invalid = copy.deepcopy(base)
+        invalid["typed_edges"][0]["to"] = "M-L3-CG-001"
+        with self.assertRaisesRegex(ValueError, "EXPLICIT_LINK_DISJOINT_LEVELS"):
+            MOD.assemble(self.graph, self.fragments, self.routes,
+                         self.bounds, explicit_bridges=invalid)
+        invalid = copy.deepcopy(base)
+        invalid["typed_edges"][0]["relation"] = "REMOTE_OPERATOR_IS_DIRECT_DOOR"
+        with self.assertRaisesRegex(ValueError, "UNSUPPORTED_EXPLICIT_SPATIAL_LINK"):
+            MOD.assemble(self.graph, self.fragments, self.routes,
+                         self.bounds, explicit_bridges=invalid)
+
     def test_narrative_gap_is_not_connected_across_unseen_route(self):
         r = self.result
         self.assertGreater(r["counts"]["narrative_gaps"], 0)
