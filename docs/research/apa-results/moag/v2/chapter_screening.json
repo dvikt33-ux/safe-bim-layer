@@ -1705,6 +1705,49 @@
         }
       ],
       "chapter_end_confirmed": true
+    },
+    {
+      "id": "B3-PART2-CH4",
+      "book_id": "B3",
+      "part_number": 2,
+      "chapter_number": 4,
+      "title": "Эмма. Спуск на нижний уровень",
+      "page_span": {
+        "start": 34,
+        "end": 35
+      },
+      "chapter_classification": "MIXED",
+      "screening_status": "ONE_PASS_COMPLETE",
+      "screened_pages": [
+        "B3-034",
+        "B3-035"
+      ],
+      "scenes": [
+        {
+          "id": "B3P2C4-S1",
+          "page_fragments": [
+            {
+              "page_id": "B3-034",
+              "fragment": "После пропущенного земного фрагмента на p34 начинается глава Эммы на станции «Инкогнито»; круглый цех, люк и оборудование относятся к ней, сведений о МОАГе нет."
+            },
+            {
+              "page_id": "B3-035",
+              "fragment": "Эмма узнаёт знакомое прорезиненное покрытие пола, подтверждая свой опыт на МОАГе. Люк, труба и карта описывают только другую станцию."
+            }
+          ],
+          "classification": "REMOTE_EVIDENCE",
+          "physical_location": "Станция «Инкогнито»; сравнительное свидетельство о МОАГе дано Эммой по опыту.",
+          "characters": [
+            "Эмма",
+            "Ник",
+            "Жак",
+            "Саманта",
+            "Френси"
+          ],
+          "station_relevance": "Повторно подтверждено прорезиненное покрытие пола МОАГа; пространственная схема чужого Нижнего уровня исключена."
+        }
+      ],
+      "chapter_end_confirmed": true
     }
   ],
   "character_location_events": [
