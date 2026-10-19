@@ -6454,6 +6454,72 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-393",
+      "page_id": "B2-025",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=25",
+      "station_id": "MOAG",
+      "narrative_mode": "L2_L3_ELEVATOR_TRAVEL",
+      "locator_hint": "из жилых кают Второго через лифт в Верхний",
+      "spatial_assertion": "Эмма, Коля и Соня физически поднимаются лифтом со Второго на Третий и выходят в светлый, тихий коридор.",
+      "feature_refs": [
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-394",
+      "page_id": "B2-025",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=25",
+      "station_id": "MOAG",
+      "narrative_mode": "UPPER_BRIDGE_OVAL_CONSOLE",
+      "locator_hint": "овальный стол и большая голограмма",
+      "spatial_assertion": "В капитанской рубке Третьего имеются овальный рабочий стол-монитор, кресла и голографическое отображение станции.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-395",
+      "page_id": "B2-025",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=25",
+      "station_id": "MOAG",
+      "narrative_mode": "STORY_PHASE_CHILD_ACCESS",
+      "locator_hint": "прежде запрет посещения Третьего детям",
+      "spatial_assertion": "В историческом режиме дети Второго не посещали Третий; после смены управления это ограничение доступа перестало действовать, геометрия лифтов не изменилась.",
+      "feature_refs": [
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-396",
+      "page_id": "B2-025",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=25",
+      "station_id": "MOAG",
+      "narrative_mode": "L3_CLEANING_FAILURE",
+      "locator_hint": "роботы-уборщики не работают, вирус повредил платы",
+      "spatial_assertion": "Сервисные роботы-уборщики Третьего вышли из строя из-за повреждения электроники; это режим оборудования, не перепланировка.",
+      "feature_refs": [
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
