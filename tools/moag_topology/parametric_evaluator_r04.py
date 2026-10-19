@@ -19,7 +19,7 @@ def positive(value, name, *, allow_zero=False):
         raise ValueError(f"NONPOSITIVE_{name}")
     return float(value)
 
-def evaluate(graph, changes, authored_rectangles=None):
+def evaluate(graph, changes, authored_rectangles=None, entity_overrides=None):
     """Pure offline evaluator; no speculative metric values are inserted."""
     if graph.get("schema") != "APA-MOAG-FULL-INDEXED-PARAMETRIC-GRAPH/0.4":
         raise ValueError("GRAPH_SCHEMA_MISMATCH")
@@ -31,6 +31,42 @@ def evaluate(graph, changes, authored_rectangles=None):
         if not params[k].get("editable", False):
             raise ValueError("SOURCE_OBSERVATION_READONLY: " + k)
         values[k] = value
+    # Optional geometry edits by a permanent station-object index.
+    # Known major envelopes feed the SAME named source-of-truth parameters
+    # used by all existing constraints. All other entries stay explicit,
+    # unapproved hypotheses rather than disappearing into a render.
+    indexed_ids={n["id"] for n in graph["indexed_source_entities"]+graph["indexed_r03_entities"]}
+    bindings={
+        "M-STA-L1-001":{"diameter_m":"lower_level_diameter_m"},
+        "M-STA-L2-001":{"diameter_m":"children_level_diameter_m"},
+        "M-STA-L3-001":{"diameter_m":"upper_level_diameter_m"},
+        "M-L1-FH-001":{"length_m":"fighter_hangar_1_clear_length_m","width_m":"fighter_hangar_1_clear_width_m","height_m":"fighter_hangar_1_clear_height_m"},
+        "M-L1-FH-002":{"length_m":"fighter_hangar_2_clear_length_m","width_m":"fighter_hangar_2_clear_width_m","height_m":"fighter_hangar_2_clear_height_m"},
+        "M-L1-FH-LOCK-001":{"length_m":"fighter_airlock_clear_length_m","width_m":"fighter_airlock_clear_width_m","height_m":"fighter_airlock_clear_height_m"},
+        "M-L1-CG-001":{"length_m":"lower_old_cargo_hangar_clear_length_m","width_m":"lower_old_cargo_hangar_clear_width_m","height_m":"lower_old_cargo_hangar_clear_height_m"},
+        "M-L3-CG-001":{"length_m":"upper_cargo_hangar_clear_length_m","width_m":"upper_cargo_hangar_clear_width_m","height_m":"upper_cargo_hangar_clear_height_m"},
+        "V-CARGO-CRUISER-001":{"length_m":"cargo_cruiser_length_m","width_m":"cargo_cruiser_width_m","height_m":"cargo_cruiser_height_m"},
+        "M-L1-CH-001":{"height_m":"lower_round_hall_clear_height_m"},
+    }
+    entity_overrides={} if entity_overrides is None else entity_overrides
+    if not isinstance(entity_overrides,dict):
+        raise ValueError("ENTITY_OVERRIDES_MUST_BE_DICTIONARY")
+    permitted={"length_m","width_m","height_m","diameter_m","local_z_m","origin_x_m","origin_y_m","orientation_deg"}
+    for eid,dimensions in entity_overrides.items():
+        if eid not in indexed_ids:
+            raise ValueError("UNRECOGNIZED_PHYSICAL_INDEX: "+eid)
+        if not isinstance(dimensions,dict) or not dimensions or set(dimensions)-permitted:
+            raise ValueError("INVALID_ENTITY_DIMENSION_SHAPE: "+eid)
+        for field,value in dimensions.items():
+            if type(value) not in (int,float) or not math.isfinite(value):
+                raise ValueError("NONFINITE_ENTITY_DIMENSION: "+eid)
+            if field in {"length_m","width_m","height_m","diameter_m"} and value<=0:
+                raise ValueError("NONPOSITIVE_ENTITY_DIMENSION: "+eid)
+            bound=bindings.get(eid,{}).get(field)
+            if bound:
+                if bound in changes and abs(changes[bound]-value)>EPS:
+                    raise ValueError("CONFLICTING_NAMED_AND_INDEXED_PARAMETER: "+eid+" "+bound)
+                values[bound]=float(value)
     for k, v in values.items():
         if v is not None:
             if k in {"cargo_cruisers_simultaneous_in_hangar","upper_cruisers_simultaneous_in_hangar_count"}:
@@ -146,6 +182,8 @@ def evaluate(graph, changes, authored_rectangles=None):
             "counts":{"rules":len(statuses),"failed":failures,"unevaluable":pending,
                       "passed":len(statuses)-failures-pending},
             "parameter_values":values,"rules":statuses,"movement_what_if":timing,
+            "entity_geometry_overrides":entity_overrides,
+            "unbound_indexed_geometry_ids":[eid for eid in entity_overrides if eid not in bindings],
             "apa_geometric_readonly_check":apa,
             "gates":{"geometry_approved":False,"archicad_written":False,
                       "no_unverified_metric_claims":True}}
@@ -155,12 +193,14 @@ def main():
     p.add_argument("--graph",type=Path,default=GRAPH)
     p.add_argument("--overrides",type=Path)
     p.add_argument("--apa-rectangles",type=Path)
+    p.add_argument("--entity-overrides",type=Path,help="JSON object keyed by each permanent space index")
     p.add_argument("--out",type=Path)
     args=p.parse_args()
     graph=json.loads(args.graph.read_text(encoding="utf-8"))
     overrides=json.loads(args.overrides.read_text(encoding="utf-8")) if args.overrides else {}
     rects=json.loads(args.apa_rectangles.read_text(encoding="utf-8")) if args.apa_rectangles else None
-    result=evaluate(graph,overrides,rects)
+    entity=json.loads(args.entity_overrides.read_text(encoding="utf-8")) if args.entity_overrides else None
+    result=evaluate(graph,overrides,rects,entity)
     output=json.dumps(result,ensure_ascii=False,indent=2,allow_nan=False)+"\n"
     if args.out:
         args.out.write_text(output,encoding="utf-8")
