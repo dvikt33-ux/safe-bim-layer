@@ -85,10 +85,12 @@ class RegistryCoverage(unittest.TestCase):
         self.assertTrue(existing <= actual, "Previously verified native handlers must remain installed")
         self.assertEqual(actual-existing,
                          {("AddOn.TapirCommand.CloneNativeGroupV1","CREATE"),
-                          ("MoveElements","CREATE")},
-                         "Only reviewed group-clone and standalone batch-copy verifiers may extend the registry")
+                          ("MoveElements","CREATE"),
+                          ("AddOn.TapirCommand.CreateNativeGroupV1","MODIFY")},
+                         "Only explicitly reviewed clone, copy and group membership verifiers may extend the registry")
         self.assertIn("VerifiedNativeGroupClone", available)
         self.assertIn("VerifiedNativeBatchCopy", available)
+        self.assertIn("VerifiedNativeGroupCreate", available)
 
     def test_strict_basic_source_all_three_families(self):
         for command,params in [
