@@ -1,0 +1,171 @@
+{
+  "schema": "APA-MOAG-DERIVED-CHECKS/1",
+  "created": "2026-10-19",
+  "source_counts": {
+    "observations": 690,
+    "routes": 52,
+    "route_steps": 378,
+    "graph_nodes": 117,
+    "graph_edges": 166,
+    "room_rows": 107,
+    "vertical_constraints": 6
+  },
+  "checks": [
+    {
+      "id": "CHK-01",
+      "name": "Unique source graph node IDs",
+      "pass": true,
+      "actual": 117
+    },
+    {
+      "id": "CHK-02",
+      "name": "All original edge endpoints exist",
+      "pass": true,
+      "actual": 0
+    },
+    {
+      "id": "CHK-03",
+      "name": "All unique observation feature refs map to graph nodes",
+      "pass": true,
+      "actual": 0
+    },
+    {
+      "id": "CHK-04",
+      "name": "Route node count reconciles to 378",
+      "pass": true,
+      "actual": 378
+    },
+    {
+      "id": "CHK-05",
+      "name": "Route mapping count reconciles to 214 plus 164",
+      "pass": true,
+      "actual": {
+        "MAPPED_TO_EXISTING_GRAPH_NODE": 214,
+        "VERTICAL_TRANSITION_UNMAPPED": 30,
+        "LOCATION_STEP_UNMAPPED": 91,
+        "PASSAGE_OR_SHAFT_MOVEMENT_UNMAPPED": 12,
+        "OPENING_OR_DOOR_STEP_UNMAPPED": 17,
+        "NARRATIVE_GAP_UNRESOLVED": 10,
+        "TRANSPORT_OR_OBJECT_EVENT_UNMAPPED": 4
+      }
+    },
+    {
+      "id": "CHK-06",
+      "name": "All 690 source observation IDs retained once",
+      "pass": true,
+      "actual": 690
+    },
+    {
+      "id": "CHK-07",
+      "name": "No coordinates or dimensions added",
+      "pass": true,
+      "actual": "null"
+    },
+    {
+      "id": "CHK-08",
+      "name": "Exactly three global levels",
+      "pass": true,
+      "actual": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "CHK-09",
+      "name": "No source graph question silently lost",
+      "pass": true,
+      "actual": 15
+    },
+    {
+      "id": "CHK-10",
+      "name": "Original 6 vertical inequalities preserved",
+      "pass": true,
+      "actual": 6
+    },
+    {
+      "id": "CHK-11",
+      "name": "No cycles in the containment/includes subgraph",
+      "pass": true,
+      "actual": "0 cycle paths"
+    },
+    {
+      "id": "CHK-12",
+      "name": "No duplicate node labels in source graph",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "id": "CHK-13",
+      "name": "All source graph coordinates/orientations/dimensions null",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "id": "CHK-14",
+      "name": "Route audit includes per-step adjacency, vertical, and room-creation dispositions",
+      "pass": true,
+      "actual": 378
+    }
+  ],
+  "acceptance": "STRUCTURAL_CHECKS_ONLY; no independent human semantic acceptance or BIM geometry approval.",
+  "source_state": {
+    "node_states": {
+      "TEXT_DIRECT": 116,
+      "TOPOLOGY_INFERRED": 1
+    },
+    "edge_states": {
+      "TEXT_DIRECT": 152,
+      "TOPOLOGY_INFERRED": 12,
+      "RECHECK_REQUIRED": 2
+    },
+    "containment_relation_types": [
+      "contains",
+      "includes"
+    ],
+    "coordinate_fields_all_null": true,
+    "duplicate_labels": []
+  },
+  "all_checks_pass": true,
+  "independent_recheck": {
+    "method": "Second pass parses the serialized derived outputs and compares record counts, cross references, list completeness, and conservative geometry flags against the source files; no source books reread.",
+    "results": [
+      {
+        "id": "IR-01",
+        "pass": true,
+        "actual": "117 nodes / 166 edges"
+      },
+      {
+        "id": "IR-02",
+        "pass": true,
+        "actual": 690
+      },
+      {
+        "id": "IR-03",
+        "pass": true,
+        "actual": 378
+      },
+      {
+        "id": "IR-04",
+        "pass": true,
+        "actual": 107
+      },
+      {
+        "id": "IR-05",
+        "pass": true,
+        "actual": 6
+      },
+      {
+        "id": "IR-06",
+        "pass": true,
+        "actual": 15
+      },
+      {
+        "id": "IR-07",
+        "pass": true,
+        "actual": "all machine checks pass"
+      }
+    ],
+    "pass": true
+  }
+}
