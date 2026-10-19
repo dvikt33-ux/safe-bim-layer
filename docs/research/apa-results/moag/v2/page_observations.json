@@ -6376,6 +6376,84 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-388",
+      "page_id": "B2-022",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=22",
+      "station_id": "MOAG",
+      "narrative_mode": "STATION_FIELD_COMMUNICATION",
+      "locator_hint": "Иминуя требует отключить силовое поле станции",
+      "spatial_assertion": "В фазе нападения на МОАГ действует силовое защитное поле, по каналам связи звучит требование противника отключить его; новое инженерное оборудование внутри станции не указано.",
+      "feature_refs": [
+        "CORE-ENERGY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-389",
+      "page_id": "B2-023",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=23",
+      "station_id": "UNRESOLVED_OBJECT",
+      "narrative_mode": "EXCLUDED_FOREIGN_CRUISER",
+      "locator_hint": "белый шлюз, коридор вражеского крейсера",
+      "spatial_assertion": "Описанные белый шлюз и узкий холодный коридор принадлежат чужому крейсеру Гильдии, а не МОАГу: запрещено переносить эту геометрию на нашу станцию.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-390",
+      "page_id": "B2-024",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=24",
+      "station_id": "MOAG",
+      "narrative_mode": "L2_CABIN_FAMILY",
+      "locator_hint": "спальня Эммы, коридор, кухня Коли",
+      "spatial_assertion": "Жилая группа Эммы и Коли на Втором содержит связанные внутренним коридором помещения для сна и кухонную зону; новых габаритов не дано.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-391",
+      "page_id": "B2-024",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=24",
+      "station_id": "MOAG",
+      "narrative_mode": "BOOK_REPRODUCTION_SERVICE",
+      "locator_hint": "программа копирования страниц и прошивки книг",
+      "spatial_assertion": "В библиотечном хозяйстве Второго уровня действует оборудование для копирования страниц и переплёта восстановленных бумажных книг; конкретный производственный отсек по сцене не установлен.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-392",
+      "page_id": "B2-024",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=24",
+      "station_id": "MOAG",
+      "narrative_mode": "BOOK_RECYCLING_OPERATION",
+      "locator_hint": "старые экземпляры отправляли в лучевую печь",
+      "spatial_assertion": "После изготовления восстановленного экземпляра старый бумажный экземпляр направляется на утилизацию в лучевой печи; расположение печи относительно библиотеки не определено.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
