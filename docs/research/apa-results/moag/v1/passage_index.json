@@ -539,6 +539,58 @@
       ],
       "verification": "TEXT_SEEN",
       "absolute_coordinates": false
+    },
+    {
+      "id": "EV-034",
+      "source_id": "B1-17",
+      "locator_hint": "Коля обнаруживает металлический мостик под потолком, остаток лестницы",
+      "observation_type": "character_movement_and_narration",
+      "paraphrase": "В круглом зале есть верхний полукруглый мостик по половине зала и повреждённый лестничный подъём.",
+      "node_refs": [
+        "L1-CIRCULAR-HALL",
+        "L1-CIRCULAR-UPPER-WALK",
+        "L1-CIRCULAR-STAIRS"
+      ],
+      "edge_refs": [
+        "E66",
+        "E67",
+        "E68",
+        "E71"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-035",
+      "source_id": "B1-17",
+      "locator_hint": "За дверью с мостика найдена комната с пультами ручного управления шлюзами",
+      "observation_type": "character_movement_and_narration",
+      "paraphrase": "Верхняя галерея приводит к отдельному техническому помещению с органами ручного управления шлюзами.",
+      "node_refs": [
+        "L1-CIRCULAR-UPPER-WALK",
+        "L1-CIRCULAR-CONTROL"
+      ],
+      "edge_refs": [
+        "E69"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-036",
+      "source_id": "B1-17",
+      "locator_hint": "Из помещения управления далее в жилую комнату за второй дверью",
+      "observation_type": "character_movement_and_narration",
+      "paraphrase": "Жилая комнатка связана дверью с операторской; раковина в столе, лучевая печь, приборы, кожаный диван.",
+      "node_refs": [
+        "L1-CIRCULAR-CONTROL",
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "edge_refs": [
+        "E70"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
     }
   ]
 }
