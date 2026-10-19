@@ -329,7 +329,14 @@ A candidate research S-ID must still satisfy its own dependencies and claim gate
 
 ### APA-P70.A11.S17 — Создание нативной группы через общий selector/registry/SceneWriter
 
-- Готовность исследования: **GAP**
+- Готовность исследования: **SUFFICIENT**
 - Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
 - Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
 - Использовать источники (ветка/файл/PR): [ART-P70-A11-S16-AXES-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/09133e81a13098dc53fbe2e385bb30a3bcdbf27a/docs/evidence/apa-ac29-selected-axes-20261020/README_RU.md), [ART-P70-A11-S16-AXES-AUDIT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/09133e81a13098dc53fbe2e385bb30a3bcdbf27a/docs/evidence/apa-ac29-selected-axes-20261020/independent-audit.json)
+
+### APA-P70.A11.S18 — Редактирование групп: нативная разгруппировка через общий selector/registry
+
+- Готовность исследования: **GAP**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S17-GROUP-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/3e20da6c8447749bc2db7e09247a012a98f6b396/docs/evidence/apa-ac29-shared-group-create-20261020/README_RU.md), [ART-P70-A11-S17-GROUP-AUDIT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/3e20da6c8447749bc2db7e09247a012a98f6b396/docs/evidence/apa-ac29-shared-group-create-20261020/independent-audit.json)

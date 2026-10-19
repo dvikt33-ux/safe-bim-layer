@@ -11,7 +11,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | ---: |
 | BLOCKED | 13 |
 | CLAIMED | 0 |
-| DONE_PUBLISHED | 33 |
+| DONE_PUBLISHED | 34 |
 | IN_PROGRESS | 1 |
 | PARTIAL | 17 |
 | READY | 34 |
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| APA-P70.A11.S17 | apa-mass-integration-20261019 | 2026-10-20T03:21:42Z | ac29-shared-native-group-create |
+| APA-P70.A11.S18 | apa-mass-integration-20261019 | 2026-10-20T03:33:39Z | ac29-shared-native-group-ungroup |
 
 ## CONTROL — 0 ready
 
