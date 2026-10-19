@@ -2664,13 +2664,13 @@
     },
     {
       "id": "CORE-ENERGY-ACCESS",
-      "label": "Узкий защищённый проход к энергомодулю за Детским блоком Третьего",
+      "label": "Логический маршрут допуска к энергокамере (не дополнительный коридор)",
       "level": 3,
-      "type": "corridor",
+      "type": "logical_access",
       "source_ids": [
         "LR-B2-034"
       ],
-      "text_basis": "За помещением с кувезами узкий тёмный коридор с единственной запертой дверью к центральному энергомодулю.",
+      "text_basis": "Составной навигационный узел старых маршрутов: L3-ENERGY-APPROACH (единственный физический узкий коридор) + L3-ENERGY-GATE (единственная защищенная дверь). Не создавать отдельное помещение CORE-ENERGY-ACCESS или дублирующий коридор в BIM.",
       "position": {
         "x": null,
         "y": null,
@@ -2679,7 +2679,7 @@
         "dimension_m": null
       },
       "geometry_gate": "NOT_AUTHORIZED",
-      "state": "TEXT_DIRECT"
+      "state": "TOPOLOGY_INFERRED"
     },
     {
       "id": "CORE-ENERGY-ACCESS-STEPS",
@@ -4702,6 +4702,18 @@
       ],
       "claim": "После событий у энергомодуля герои идут по третьему уровню к медицинскому отсеку; непосредственная смежная дверь с рубкой не доказана.",
       "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E167",
+      "from": "CORE-ENERGY-ACCESS",
+      "to": "L3-ENERGY-APPROACH",
+      "type": "alias_to_physical_corridor",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "CORE-ENERGY-ACCESS сохраняется как логический маршрутный идентификатор и не обозначает вторую физическую коридорную полость; физическое помещение L3-ENERGY-APPROACH.",
+      "state": "TOPOLOGY_INFERRED",
       "metric": null
     }
   ],
