@@ -125,7 +125,7 @@
         "B2-083": "первичный ответ по странице обрезался; адресно прочитаны последние десять абзацев и подтверждён конец страницы",
         "B2-088": "Первый ответ по p88 был обрезан ограничением вывода; выполнен один адресный компактный текстовый запрос для восстановления полного текста этой же страницы."
       },
-      "character_location_event_count": 56
+      "character_location_event_count": 57
     }
   },
   "method": "ONE_PASS: classify each page fragment and extract all relevant evidence during the same single reading. Use prior-page context and identify chapter/scene boundaries inline when headings appear. Do not pre-screen an entire chapter before rereading; reopens require a recorded concrete reason.",
@@ -1988,6 +1988,17 @@
       "arrival_event": "влетают в шлюз семейного корабля Ника; дальнейшее сопровождение Эммы к детям только планируется",
       "source": [
         "B2-135"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Эмма",
+      "story_time": "B2, часть 3, глава 10, p134",
+      "current_location": "МОАГ, Первый уровень, кладовые рядом с бывшими жилыми отсеками",
+      "departure_event": "из производственного цеха через неописанный путь достигает лифта и прибывает на Первый уровень",
+      "arrival_event": "проходит от дверей неустановленного ангарного отсека по широкому полукруглому коридору в кладовые, где находит Кольку",
+      "source": [
+        "B2-134"
       ],
       "confidence": "DIRECT_TEXT"
     }
