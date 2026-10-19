@@ -3224,6 +3224,77 @@
       "constraints": [],
       "identity_hypotheses": [],
       "notes": "Реальная последовательность подтверждена, размеры и направление перехода не установлены; состояние открытости двери зависит от фазы."
+    },
+    {
+      "id": "RT-029",
+      "title": "Экспедиция к катерам: восстановленный коридор Нижнего → входная дверь ангаров",
+      "participants": [
+        "Фёдор",
+        "Таис",
+        "Эмма",
+        "Егор",
+        "Гоша",
+        "Тоша"
+      ],
+      "book": "B2",
+      "site_pages": [
+        "B2-011",
+        "B2-012"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT029-A",
+          "label": "Прибытие отряда по работающему лифту в жилой район Нижнего",
+          "global_level": 1,
+          "local_stratum": "lower-sealed-approach",
+          "source_page_id": "B2-011",
+          "movement_method": "WALK",
+          "observed_constraint": "Прибытие отряда по работающему лифту в жилой район Нижнего",
+          "existing_graph_node": "L1",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT029-B",
+          "label": "Широкий длинный восстановленный коридор с новым покрытием",
+          "global_level": 1,
+          "local_stratum": "lower-sealed-approach",
+          "source_page_id": "B2-011",
+          "movement_method": "WALK",
+          "observed_constraint": "Широкий длинный восстановленный коридор с новым покрытием",
+          "existing_graph_node": "L1",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT029-C",
+          "label": "Подход к двустворчатой двери старого закрытого сектора",
+          "global_level": 1,
+          "local_stratum": "lower-sealed-approach",
+          "source_page_id": "B2-012",
+          "movement_method": "WALK",
+          "observed_constraint": "Подход к двустворчатой двери старого закрытого сектора",
+          "existing_graph_node": "L1-SEALED",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT029-D",
+          "label": "Перед новой электронно блокируемой дверью",
+          "global_level": 1,
+          "local_stratum": "lower-sealed-approach",
+          "source_page_id": "B2-012",
+          "movement_method": "WALK",
+          "observed_constraint": "Перед новой электронно блокируемой дверью",
+          "existing_graph_node": "L1-SEALED",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "Маршрут действительно пройден только до двери; безопасная постоянная трасса в ангары с катерами пока не существует как доказанный факт. Отделка и электронный замок — изменения после событий первой книги."
     }
   ]
 }
