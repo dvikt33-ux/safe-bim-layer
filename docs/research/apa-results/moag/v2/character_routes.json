@@ -5397,7 +5397,8 @@
       ],
       "book": "B2",
       "site_pages": [
-        "B2-114"
+        "B2-114",
+        "B2-115"
       ],
       "route_kind": "OBSERVED_CHARACTER_ROUTE",
       "nodes": [
@@ -5469,6 +5470,30 @@
           "source_page_id": "B2-114",
           "movement_method": "WALK",
           "observed_constraint": "После развилки герои выходят в знакомый коридор; точная стыковка не дана.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT049-G",
+          "label": "Короткий коридор и знакомая площадка",
+          "global_level": 1,
+          "local_stratum": "short-corridor-familiar-platform",
+          "source_page_id": "B2-115",
+          "movement_method": "RUN",
+          "observed_constraint": "После столкновения Эмма бежит через короткий коридор и проход к знакомой площадке; конфигурация неизвестна.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT049-H",
+          "label": "Двери ангаров со спящей стаей",
+          "global_level": 1,
+          "local_stratum": "coded-sliding-doors-to-hibernation-hangars",
+          "source_page_id": "B2-115",
+          "movement_method": "DOOR",
+          "observed_constraint": "Флешка с кодом входит в паз, двери расходятся в стороны; за ними тёмные ангары со спящей стаей.",
           "existing_graph_node": null,
           "relative_xy": null,
           "absolute_z_m": null
