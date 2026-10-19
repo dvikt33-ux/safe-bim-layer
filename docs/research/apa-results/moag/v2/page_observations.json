@@ -5253,6 +5253,237 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-320",
+      "page_id": "B2-002",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=2",
+      "station_id": "MOAG",
+      "narrative_mode": "CONTROL_PHASE",
+      "locator_hint": "Основная рубка Третьего функционирует под управлением выживших; сило",
+      "spatial_assertion": "Основная рубка Третьего функционирует под управлением выживших; силовое поле станции включено.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-321",
+      "page_id": "B2-002",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=2",
+      "station_id": "MOAG",
+      "narrative_mode": "SUPPLY_CHANGE",
+      "locator_hint": "В позднем эксплуатационном состоянии грузовые рейсы прекращены; это ",
+      "spatial_assertion": "В позднем эксплуатационном состоянии грузовые рейсы прекращены; это не доказывает демонтажа ангаров.",
+      "feature_refs": [
+        "L3-DOCK"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-322",
+      "page_id": "B2-003",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=3",
+      "station_id": "MOAG",
+      "narrative_mode": "THIRD_CARGO_STORES",
+      "locator_hint": "Продуктовые склады и отдельные хранилища на Третьем доступны для фак",
+      "spatial_assertion": "Продуктовые склады и отдельные хранилища на Третьем доступны для фактической описи.",
+      "feature_refs": [
+        "L3-STORE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-323",
+      "page_id": "B2-003",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=3",
+      "station_id": "MOAG",
+      "narrative_mode": "HISTORIC_LOCK_CHANGE",
+      "locator_hint": "После смены управления многие замки служебных помещений Третьего отк",
+      "spatial_assertion": "После смены управления многие замки служебных помещений Третьего открыты по распоряжению Фёдора.",
+      "feature_refs": [
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-324",
+      "page_id": "B2-004",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=4",
+      "station_id": "MOAG",
+      "narrative_mode": "DISK_SHAPE",
+      "locator_hint": "Нарративная характеристика физического объекта: станция имеет общую ",
+      "spatial_assertion": "Нарративная характеристика физического объекта: станция имеет общую форму гигантского диска. Точный радиус и профиль не названы.",
+      "feature_refs": [
+        "L1",
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-325",
+      "page_id": "B2-004",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=4",
+      "station_id": "MOAG",
+      "narrative_mode": "CLOSED_RING_CORRIDORS",
+      "locator_hint": "Основные коридоры станции замыкаются кольцами; это подтверждение общ",
+      "spatial_assertion": "Основные коридоры станции замыкаются кольцами; это подтверждение общей кольцевой организации без единого установленного радиуса.",
+      "feature_refs": [
+        "L3-INNER",
+        "L3-OUTER"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-326",
+      "page_id": "B2-004",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=4",
+      "station_id": "MOAG",
+      "narrative_mode": "PRODUCTION_DOORS",
+      "locator_hint": "Третий: высокие серые двустворчатые двери производства находятся у ш",
+      "spatial_assertion": "Третий: высокие серые двустворчатые двери производства находятся у шлюзов, на противоположной от кают стороне.",
+      "feature_refs": [
+        "L3-PRODUCTION",
+        "L3-DOCK",
+        "L3-CREW"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-327",
+      "page_id": "B2-004",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=4",
+      "station_id": "MOAG",
+      "narrative_mode": "PRODUCTION_ACCESS_LIMIT",
+      "locator_hint": "Внешняя система запирания производственных дверей не открывается обы",
+      "spatial_assertion": "Внешняя система запирания производственных дверей не открывается обычными кодами; у Мартина нет наблюдения за цехом, не доказано отсутствие скрытых датчиков.",
+      "feature_refs": [
+        "L3-PRODUCTION"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-328",
+      "page_id": "B2-004",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=4",
+      "station_id": "MOAG",
+      "narrative_mode": "STORES_SHORTCUT",
+      "locator_hint": "После кладовых продуктов, одежды, игрушек и посуды узкий коридор вед",
+      "spatial_assertion": "После кладовых продуктов, одежды, игрушек и посуды узкий коридор ведёт к внутреннему кольцу с каютами.",
+      "feature_refs": [
+        "L3-STORE",
+        "L3-INNER"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-329",
+      "page_id": "B2-004",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=4",
+      "station_id": "MOAG",
+      "narrative_mode": "CARGO_LIFTS",
+      "locator_hint": "Робот перемещает пустые грузовые тележки к лифтовому сектору Третьег",
+      "spatial_assertion": "Робот перемещает пустые грузовые тележки к лифтовому сектору Третьего; это логистический путь без точной трассы.",
+      "feature_refs": [
+        "L3-FREIGHT-LIFTS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-330",
+      "page_id": "B2-005",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=5",
+      "station_id": "MOAG",
+      "narrative_mode": "EMMA_LEVEL_COMMUTE",
+      "locator_hint": "Эмма спускается на лифте из рубки Третьего в свою жилую каюту Второг",
+      "spatial_assertion": "Эмма спускается на лифте из рубки Третьего в свою жилую каюту Второго; шахта не отождествляется автоматически с продуктовым лифтом.",
+      "feature_refs": [
+        "L3-BRIDGE",
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-331",
+      "page_id": "B2-006",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=6",
+      "station_id": "MOAG",
+      "narrative_mode": "ORANGE_MAGNETIC_CIRCUIT",
+      "locator_hint": "На Втором по Оранжевой магистрали Эмма совершает на магнитной доске ",
+      "spatial_assertion": "На Втором по Оранжевой магистрали Эмма совершает на магнитной доске несколько полных кругов; это сильное подтверждение замкнутого кольца именно этой магистрали.",
+      "feature_refs": [
+        "L2-ORANGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-332",
+      "page_id": "B2-006",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=6",
+      "station_id": "MOAG",
+      "narrative_mode": "KINDERGARTEN_BOARD_PARKING",
+      "locator_hint": "У ответвления от Оранжевой магистрали к детскому саду есть закреплён",
+      "spatial_assertion": "У ответвления от Оранжевой магистрали к детскому саду есть закреплённые держатели для магнитных досок.",
+      "feature_refs": [
+        "L2-ORANGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-333",
+      "page_id": "B2-006",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=6",
+      "station_id": "MOAG",
+      "narrative_mode": "NURSERY_CURRENT",
+      "locator_hint": "На Втором функционируют ясли для новорождённых и площадки старших де",
+      "spatial_assertion": "На Втором функционируют ясли для новорождённых и площадки старших детей, в позднем эксплуатационном состоянии обслуживаются людьми.",
+      "feature_refs": [
+        "L2-NURSERY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
