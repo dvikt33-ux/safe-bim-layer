@@ -4565,13 +4565,14 @@
     },
     {
       "id": "RT-042",
-      "title": "Эмма: туннель №2 → закрытый внутренний круг Второго",
+      "title": "Эмма: туннель №2 → внутренний круг → каюта → галерея/лестница → скамейка у прохода в туннель",
       "participants": [
         "Эмма"
       ],
       "book": "B2",
       "site_pages": [
-        "B2-081"
+        "B2-081",
+        "B2-082"
       ],
       "route_kind": "OBSERVED_CHARACTER_ROUTE",
       "nodes": [
@@ -4598,11 +4599,59 @@
           "existing_graph_node": null,
           "relative_xy": null,
           "absolute_z_m": null
+        },
+        {
+          "id": "RT042-C",
+          "label": "Каюта Эммы: кухня, три спальни, ванная и гостиная",
+          "global_level": 2,
+          "local_stratum": "emma-cabin",
+          "source_page_id": "B2-082",
+          "movement_method": "WALK",
+          "observed_constraint": "Эмма возвращается в каюту после туннеля №2; страница не описывает точный путь внутри внутреннего круга.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT042-D",
+          "label": "Галерея и лестничный участок Второго уровня",
+          "global_level": 2,
+          "local_stratum": "gallery-stair-segment",
+          "source_page_id": "B2-082",
+          "movement_method": "WALK",
+          "observed_constraint": "Эмма выходит на галерею и движется по лестничному участку; направление по вертикали и точное соединение уровней не установлены.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT042-E",
+          "label": "Скамейка, под которой прячется Макс",
+          "global_level": 2,
+          "local_stratum": "bench-location-unresolved",
+          "source_page_id": "B2-082",
+          "movement_method": "WALK",
+          "observed_constraint": "Эмма находит Макса под скамейкой. Не отождествлять её автоматически с Главной площадью или парком.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT042-F",
+          "label": "Проход в туннель и соседняя огнестойкая скамейка",
+          "global_level": 2,
+          "local_stratum": "tunnel-approach-and-bench",
+          "source_page_id": "B2-082",
+          "movement_method": "WALK",
+          "observed_constraint": "Макс направляется к проходу в туннель; по словам Эммы, ещё два шага вывели бы его в зону обстрела. Это моментная дистанционная оценка, не размерный параметр.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
         }
       ],
       "constraints": [],
       "identity_hypotheses": [],
-      "notes": "Подтверждено только возвращение через туннель №2 во внутренний круг. Связь с RT-041 или точная начальная точка предыдущего маршрута не выведена; во время сцены доступные участки магистралей ограничены пауками."
+      "notes": "Подтверждено только возвращение через туннель №2 во внутренний круг. Связь с RT-041 или точная начальная точка предыдущего маршрута не выведена; во время сцены доступные участки магистралей ограничены пауками. На p82 маршрут продолжен через каюту, галерею и лестничный участок к скамейке и опасному проходу в туннель; точная идентичность скамейки и геометрия не установлены. Пожаростойкость зафиксирована только для обстрелянной соседней скамьи."
     }
   ]
 }

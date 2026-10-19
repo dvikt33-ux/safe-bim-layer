@@ -903,12 +903,12 @@
       "id": "B2-082",
       "page_number": 82,
       "url": "https://loveread.ec/read_book.php?id=53370&p=82",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 6,
+      "notes": "Глава 10, МОАГ, Второй уровень. Коля сообщает по схемам уровня о собственном водяном резервуаре, отдельном от Первого и Третьего; наличие и положение кладовой — только его предположение. В каюте названы кухня, три спальни, ванная и гостиная с диваном. Эмма выходит через галерею и лестничный участок к скамейке, где находит Макса до его выхода к проходу в туннель. Соседняя скамейка загорается от обстрела и самостоятельно гаснет благодаря огнезащитной обработке; детали не становятся общей спецификацией станции.",
+      "verification_method": "Single full-page primary-source read in Opera; station, dream and physical-scene evidence classified together",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-083",

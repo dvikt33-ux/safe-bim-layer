@@ -34,7 +34,8 @@
       "B2-078",
       "B2-079",
       "B2-080",
-      "B2-081"
+      "B2-081",
+      "B2-082"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -65,9 +66,9 @@
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B2-081",
-      "context_reviewed_page_count": 31,
-      "full_evidence_page_count": 197,
+      "as_of_page_id": "B2-082",
+      "context_reviewed_page_count": 32,
+      "full_evidence_page_count": 198,
       "external_excluded_page_count": 17,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 2,
@@ -80,7 +81,7 @@
         "B2-077": "точно локализовать границу главы 9 на странице, разделённой между главами 8 и 9; страница повторно открывалась дважды",
         "B2-079": "получить полный текст после усечения вывода; одно повторное открытие"
       },
-      "character_location_event_count": 36
+      "character_location_event_count": 38
     }
   },
   "method": "ONE_PASS: classify each page fragment and extract all relevant evidence during the same single reading. Use prior-page context and identify chapter/scene boundaries inline when headings appear. Do not pre-screen an entire chapter before rereading; reopens require a recorded concrete reason.",
@@ -654,12 +655,13 @@
       "title": "Эмма. Интуиция",
       "page_span": {
         "start": 81,
-        "end": 81
+        "end": 82
       },
       "chapter_classification": "STATION",
       "screening_status": "ONE_PASS_IN_PROGRESS",
       "screened_pages": [
-        "B2-081"
+        "B2-081",
+        "B2-082"
       ],
       "scenes": [
         {
@@ -668,6 +670,10 @@
             {
               "page_id": "B2-081",
               "fragment": "после заголовка главы 10: возвращение Эммы на Второй уровень МОАГа"
+            },
+            {
+              "page_id": "B2-082",
+              "fragment": "продолжение главы 10: выход Эммы из каюты через галерею и лестницу к скамейке; спасение Макса от обстрела у прохода в туннель"
             }
           ],
           "classification": "STATION",
@@ -681,8 +687,9 @@
           "station_relevance": "доступность туннелей, устройство внутреннего круга, размещение площадей/детских площадок и разделение пищевого снабжения; эпизодическое блокирование магистралей пауками сохраняется как состояние сцены"
         }
       ],
-      "screening_caveat": "Глава 10 началась на p81; end=81 в page_span обозначает покрытый на данный момент фрагмент, а не подтверждённый конец главы. Продолжать постраничную разметку.",
-      "chapter_end_confirmed": false
+      "screening_caveat": "Глава 10 открыта на p81 и продолжается на p82. page_span.end — последняя обработанная страница, конец главы пока не найден.",
+      "chapter_end_confirmed": false,
+      "station_relevance": "схемы уровня и отдельный водяной резервуар, планировка каюты, галерея/лестница, скамьи с огнезащитной обработкой и временно опасный подход к туннелю; кладовая остаётся гипотезой персонажа"
     }
   ],
   "character_location_events": [
@@ -1123,6 +1130,28 @@
       "arrival_event": "оказывается в закрытом внутреннем круге Второго уровня",
       "source": [
         "B2-081"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Эмма",
+      "story_time": "B2, часть 2, глава 10, p82",
+      "current_location": "МОАГ, Второй уровень: от каюты через галерею и лестницу к скамейке у прохода в туннель",
+      "departure_event": "просыпается в каюте, выходит искать Макса на галерею и лестницу",
+      "arrival_event": "находит Макса под скамейкой до его выхода в опасную зону у туннеля, укрывает его и возвращается в безопасное место",
+      "source": [
+        "B2-082"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Макс",
+      "story_time": "B2, часть 2, глава 10, p82",
+      "current_location": "МОАГ, Второй уровень: скамейка у галереи и прохода в туннель",
+      "departure_event": "самовольно уходит из каюты через галерею",
+      "arrival_event": "идёт к проходу в туннель, Эмма останавливает его до выхода в зону обстрела и укрывает",
+      "source": [
+        "B2-082"
       ],
       "confidence": "DIRECT_TEXT"
     }
