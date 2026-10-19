@@ -23,6 +23,8 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Validate all node and edge evidence
         run: python tools/moag_topology/validate.py docs/research/apa-results/moag/v1/evidence_graph.json --mode verify
+      - name: Validate full 412-page ledger and visual evidence boundaries
+        run: python tools/moag_topology/page_audit.py
       - name: Run fail-closed topology tests
         run: python -m unittest discover -s tests -p test_moag_*.py -v
       - name: Validate snapshot cannot execute native writes
