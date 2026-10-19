@@ -69,7 +69,8 @@
       "B2-134",
       "B2-135",
       "B2-141",
-      "B2-142"
+      "B2-142",
+      "B2-143"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -92,7 +93,8 @@
       "B2-088",
       "B2-089",
       "B2-095",
-      "B2-142"
+      "B2-142",
+      "B2-143"
     ],
     "remote_evidence_page_ids": [
       "B2-052",
@@ -110,10 +112,10 @@
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B2-142",
-      "context_reviewed_page_count": 66,
+      "as_of_page_id": "B2-143",
+      "context_reviewed_page_count": 67,
       "full_evidence_page_count": 231,
-      "external_excluded_page_count": 21,
+      "external_excluded_page_count": 22,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
       "justified_reopen_event_count": 5,
@@ -1343,7 +1345,8 @@
       "screening_status": "ONE_PASS_IN_PROGRESS",
       "screened_pages": [
         "B2-141",
-        "B2-142"
+        "B2-142",
+        "B2-143"
       ],
       "scenes": [
         {
@@ -1368,6 +1371,10 @@
             {
               "page_id": "B2-142",
               "fragment": "Продолжение сцены на крейсере «Дракон»; сведений о МОАГе нет."
+            },
+            {
+              "page_id": "B2-143",
+              "fragment": "Разговор на крейсере касается земных событий и других станций; новых сведений о МОАГе нет."
             }
           ],
           "classification": "EXTERNAL",
