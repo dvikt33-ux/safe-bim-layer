@@ -8,8 +8,8 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 ## Краткая сводка
 
 - План: APA-P70 — Разработка APA — полный цикл проектирования и выпуска
-- Статус: **IN_PROGRESS**; завершено 18/42 подзадач.
-- Сейчас: APA-P70.A11.S13
+- Статус: **IN_PROGRESS**; завершено 19/43 подзадач.
+- Сейчас: APA-P70.A11.S14
 - Следующая доступная: APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами
 
 ## Этапы → задачи
@@ -26,7 +26,7 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 | APA-P70.A08 — Сквозная приёмка и расширение без переписывания ядра | PARTIAL | 1/5 |
 | APA-P70.A09 — Геометрия и точность после приёмки ядра | DONE_PUBLISHED | 1/1 |
 | APA-P70.A10 — Измеримое ускорение стабильных операций | WAITING | 0/1 |
-| APA-P70.A11 — v3.1: пакетная интеграция, взаимодействие и системные проверки | IN_PROGRESS | 4/13 |
+| APA-P70.A11 — v3.1: пакетная интеграция, взаимодействие и системные проверки | IN_PROGRESS | 5/14 |
 
 ## Подзадачи и следующий шаг
 
@@ -144,5 +144,7 @@ requires_approval tasks are not dispatchable until separate owner approval is re
   - Источники/ветки: [ART-P70-A11-S03-SAFE01-SOURCE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/pull/175)
 - **APA-P70.A11.S12 [DONE_PUBLISHED]** Завершить native группы/сетки и единый mass-request selector с сохранением и reopen; исследования: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
   - Источники/ветки: [ART-P70-A11-S11-SAFE01-LIVE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/d2d63d8045974bf5d6c49a77da1e013d4f9f7725/docs/evidence/apa-ac29-safe01-integration-20261019/live01/README_RU.md), [ART-P70-A11-S12-GROUPGRID-SOURCE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/pull/174)
-- **APA-P70.A11.S13 [IN_PROGRESS]** Подключить принятый mass-request/native-group путь к установленному APA с сохранением 30+4 маршрутов; исследования: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- **APA-P70.A11.S13 [DONE_PUBLISHED]** Подключить принятый mass-request/native-group путь к установленному APA с сохранением 30+4 маршрутов; исследования: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
   - Источники/ветки: [ART-P70-A11-S12-GROUP32-LIVE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/0041bdb3e9ef3a82763083c70689a52f0c36d9e1/docs/evidence/apa-ac29-native-massops-integration-20261019/live03/README_RU.md), [ART-P70-A11-S11-SAFE01-LIVE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/d2d63d8045974bf5d6c49a77da1e013d4f9f7725/docs/evidence/apa-ac29-safe01-integration-20261019/live01/README_RU.md)
+- **APA-P70.A11.S14 [IN_PROGRESS]** Довести индивидуальное native пакетное копирование через общий selector/registry и сохранённую копию; исследования: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+  - Источники/ветки: [ART-P70-A11-S13-INSTALLED-SELECTOR-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/14a8922b2f0affd84205908ea8d7503d984348c1/docs/evidence/apa-ac29-installed-mass-selector-20261019/README_RU.md), [ART-P70-A11-S14-MULTICOPY-SOURCE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/pull/143)

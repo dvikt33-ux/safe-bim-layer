@@ -301,7 +301,14 @@ A candidate research S-ID must still satisfy its own dependencies and claim gate
 
 ### APA-P70.A11.S13 — Подключить принятый mass-request/native-group путь к установленному APA с сохранением 30+4 маршрутов
 
-- Готовность исследования: **GAP**
+- Готовность исследования: **SUFFICIENT**
 - Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
 - Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
 - Использовать источники (ветка/файл/PR): [ART-P70-A11-S12-GROUP32-LIVE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/0041bdb3e9ef3a82763083c70689a52f0c36d9e1/docs/evidence/apa-ac29-native-massops-integration-20261019/live03/README_RU.md), [ART-P70-A11-S11-SAFE01-LIVE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/d2d63d8045974bf5d6c49a77da1e013d4f9f7725/docs/evidence/apa-ac29-safe01-integration-20261019/live01/README_RU.md)
+
+### APA-P70.A11.S14 — Довести индивидуальное native пакетное копирование через общий selector/registry и сохранённую копию
+
+- Готовность исследования: **GAP**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S13-INSTALLED-SELECTOR-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/14a8922b2f0affd84205908ea8d7503d984348c1/docs/evidence/apa-ac29-installed-mass-selector-20261019/README_RU.md), [ART-P70-A11-S14-MULTICOPY-SOURCE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/pull/143)

@@ -11,7 +11,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | ---: |
 | BLOCKED | 13 |
 | CLAIMED | 0 |
-| DONE_PUBLISHED | 29 |
+| DONE_PUBLISHED | 30 |
 | IN_PROGRESS | 1 |
 | PARTIAL | 17 |
 | READY | 34 |
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| APA-P70.A11.S13 | apa-mass-integration-20261019 | 2026-10-19T22:11:19Z | ac29-installed-mass-selector-preserve-sidecar34 |
+| APA-P70.A11.S14 | apa-mass-integration-20261019 | 2026-10-19T22:32:28Z | ac29-mass-selector-native-move-copy-shared-registry |
 
 ## CONTROL — 0 ready
 
