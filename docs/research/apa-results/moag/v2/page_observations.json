@@ -8534,6 +8534,20 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-527",
+      "page_id": "B2-086",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=86",
+      "station_id": "UNRESOLVED_OBJECT",
+      "narrative_mode": "REMOTE_STATION_NETWORK_HISTORY",
+      "locator_hint": "Вар сообщает, что Торговая гильдия владела половиной производственных станций",
+      "spatial_assertion": "В земном рассказе Вара Торговая гильдия названа владельцем половины производственных станций. Это общее, вложенное историческое сообщение, не привязанное к МОАГу; голографические изображения на странице показывают земные объекты. Не переносить их типологию, форму или геометрию на станцию.",
+      "feature_refs": [],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }

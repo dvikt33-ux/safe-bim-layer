@@ -947,12 +947,12 @@
       "id": "B2-086",
       "page_number": 86,
       "url": "https://loveread.ec/read_book.php?id=53370&p=86",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "REMOTE_EVIDENCE",
+      "recorded_spatial_hints": 1,
+      "notes": "Глава 11, земная сцена на острове Саб. Вар продолжает исторический рассказ о станциях; упоминание, что Торговая гильдия владела половиной производственных станций, отмечено как общий дистанционный контекст без атрибуции МОАГу. Голографические записи показывают земные поселения и роботизированный город, не станцию и не её геометрию.",
+      "verification_method": "Single full-page primary-source read in Opera; external holographic material and remote station-network reference distinguished inline",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-087",

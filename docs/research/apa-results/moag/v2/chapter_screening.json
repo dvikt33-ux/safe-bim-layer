@@ -38,7 +38,8 @@
       "B2-082",
       "B2-083",
       "B2-084",
-      "B2-085"
+      "B2-085",
+      "B2-086"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -66,13 +67,14 @@
       "B2-064",
       "B2-071",
       "B2-079",
-      "B2-085"
+      "B2-085",
+      "B2-086"
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B2-085",
-      "context_reviewed_page_count": 35,
-      "full_evidence_page_count": 201,
+      "as_of_page_id": "B2-086",
+      "context_reviewed_page_count": 36,
+      "full_evidence_page_count": 202,
       "external_excluded_page_count": 17,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 3,
@@ -720,13 +722,14 @@
       "title": "Таис. Все, что рассказывал Вар",
       "page_span": {
         "start": 85,
-        "end": 85
+        "end": 86
       },
       "chapter_end_confirmed": false,
       "chapter_classification": "REMOTE_EVIDENCE",
       "screening_status": "ONE_PASS_IN_PROGRESS",
       "screened_pages": [
-        "B2-085"
+        "B2-085",
+        "B2-086"
       ],
       "scenes": [
         {
@@ -735,6 +738,10 @@
             {
               "page_id": "B2-085",
               "fragment": "после заголовка главы 11: земная сцена у Найды; Вар пересказывает легенду и общую историю станций"
+            },
+            {
+              "page_id": "B2-086",
+              "fragment": "продолжение рассказа Вара: общая история производственных станций и голографические записи земных мест"
             }
           ],
           "classification": "REMOTE_EVIDENCE",
@@ -747,7 +754,8 @@
           "station_relevance": "легенда и общий исторический рассказ упоминают станции, их назначение и технологии; конкретное устройство МОАГа, его план и геометрия не описаны"
         }
       ],
-      "screening_caveat": "Глава 11 началась на p85; end=85 фиксирует пока единственную обработанную страницу, а не конец главы."
+      "screening_caveat": "Глава 11 открыта на p85 и продолжается на p86; конец главы не установлен.",
+      "station_relevance": "упоминание владения частью производственных станций относится к общей истории/легенде, не подтверждает конфигурацию МОАГа; голографические изображения относятся к Земле"
     }
   ],
   "character_location_events": [
@@ -1163,7 +1171,8 @@
         "B2-078",
         "B2-079",
         "B2-080",
-        "B2-085"
+        "B2-085",
+        "B2-086"
       ],
       "confidence": "DIRECT_TEXT"
     },
@@ -1178,7 +1187,8 @@
         "B2-078",
         "B2-079",
         "B2-080",
-        "B2-085"
+        "B2-085",
+        "B2-086"
       ],
       "confidence": "DIRECT_TEXT"
     },
