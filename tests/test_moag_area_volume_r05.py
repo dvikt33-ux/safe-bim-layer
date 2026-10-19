@@ -94,6 +94,19 @@ class AreaVolumeR05(unittest.TestCase):
         self.assertTrue(by["valid_area_not_geometry"]["admissible_by_area"])
         self.assertFalse(by["valid_area_not_geometry"]["geometry_proven"])
 
+    def test_major_spaces_raise_level_minimum_without_fabricating_area(self):
+        r=MOD.solve(self.bounds,self.graph,area_overrides={
+            "M-STA-L1-001":{"min_area_m2":1000}})
+        self.assertEqual(r["counts"]["fails"],0)
+        lower=r["per_index"]["M-STA-L1-001"]
+        self.assertGreater(lower["min_area_m2"],1000)
+        lower_budget=next(x for x in r["level_allocation_budgets"]
+                          if x["id"]=="L1-DISJOINT-01")
+        self.assertGreaterEqual(lower["min_area_m2"],
+                                lower_budget["min_member_footprints_m2"])
+        self.assertIsNone(lower["chosen_area_m2"])
+        self.assertFalse(r["gates"]["geometry_unique"])
+
     def test_multiple_individually_fitting_halls_can_overfill_one_level(self):
         demo=dict(self.demo)
         demo["lower_level_diameter_m"]=700
