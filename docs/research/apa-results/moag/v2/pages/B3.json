@@ -122,12 +122,12 @@
       "id": "B3-011",
       "page_number": 11,
       "url": "https://loveread.ec/read_book.php?id=58610&p=11",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "OTHER_STATION_NOT_MOAG",
+      "recorded_spatial_hints": 2,
+      "notes": "Продолжение главы 4: описана другая станция, на которую нацелился катер Люка. Её огни загораются, корпус быстро приходит в движение/вращается, затем гаснет; Люк попадает в ловушку. По достоверному диалогу злоумышленники находят капсулу с живым металлом в энергомодуле и перепрограммируют его, гибнут корни дерева. Это другая станция, не МОАГ; всё устройство и события исключены из геометрии МОАГа.",
+      "verification_method": "Однажды прочитана через Opera; после границы главы 4 извлечены только исключающие сведения о другой станции.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B3-012",
