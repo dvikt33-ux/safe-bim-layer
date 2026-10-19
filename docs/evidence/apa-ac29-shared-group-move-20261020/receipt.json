@@ -1,0 +1,105 @@
+{
+  "automaticReplay": false,
+  "finalBrepSHA256": "5e080820617f0f70aca01fb21dff54d20acec6fc7d37a3b5b8efa95389be7111",
+  "finalGuidCount": 188,
+  "finalGuidSetSHA256": "0c9ed79a586370ebb6bc30f053c59c1b65dbe0485c4b6cc1ff245f913150e389",
+  "finalSemanticSHA256": "2cce2c6fbc9699664ae536bba0f950a99d5436cb7e68389dfadffa27f7044b3d",
+  "groupCreateCalls": 0,
+  "groupMoveCalls": 1,
+  "nativeGroupCommand": "AddOn.TapirCommand.MoveNativeGroupV1",
+  "nativeReadback": {
+    "allColumnGroupsUnchanged": true,
+    "groupId": "fc0ee2e1-4351-4ae9-8039-e4234d7036e5",
+    "mapping": [
+      {
+        "childGuids": [
+          "2730679d-ebb8-4b49-83d7-848fbf71442c"
+        ],
+        "guid": "6d8fd777-f320-43c8-84ce-4d4bc7d65351",
+        "target": {
+          "x": 2815.35,
+          "y": 1415.35,
+          "z": 0
+        }
+      },
+      {
+        "childGuids": [
+          "9c675a15-8b2b-4ed1-a89b-b684dce705aa"
+        ],
+        "guid": "c8df0060-9629-4827-91d2-8448667abff3",
+        "target": {
+          "x": 2840.35,
+          "y": 1415.35,
+          "z": 0
+        }
+      }
+    ],
+    "memberGuids": [
+      "6d8fd777-f320-43c8-84ce-4d4bc7d65351",
+      "c8df0060-9629-4827-91d2-8448667abff3"
+    ],
+    "physicalGuidCount": 188,
+    "retainedModelPreserved": true,
+    "status": "NATIVE_GROUP_MOVE_SHARED_REGISTRY_READBACK_PASS",
+    "translatedShapeAndMaterialsPreserved": true
+  },
+  "nativeResponse": {
+    "groupId": {
+      "guid": "FC0EE2E1-4351-4AE9-8039-E4234D7036E5"
+    },
+    "movedMembers": [
+      {
+        "guid": "6D8FD777-F320-43C8-84CE-4D4BC7D65351"
+      },
+      {
+        "guid": "C8DF0060-9629-4827-91D2-8448667ABFF3"
+      }
+    ],
+    "nativeModelWrites": 2
+  },
+  "reopenVerified": true,
+  "reopenedReadback": {
+    "allColumnGroupsUnchanged": true,
+    "groupId": "fc0ee2e1-4351-4ae9-8039-e4234d7036e5",
+    "mapping": [
+      {
+        "childGuids": [
+          "2730679d-ebb8-4b49-83d7-848fbf71442c"
+        ],
+        "guid": "6d8fd777-f320-43c8-84ce-4d4bc7d65351",
+        "target": {
+          "x": 2815.35,
+          "y": 1415.35,
+          "z": 0
+        }
+      },
+      {
+        "childGuids": [
+          "9c675a15-8b2b-4ed1-a89b-b684dce705aa"
+        ],
+        "guid": "c8df0060-9629-4827-91d2-8448667abff3",
+        "target": {
+          "x": 2840.35,
+          "y": 1415.35,
+          "z": 0
+        }
+      }
+    ],
+    "memberGuids": [
+      "6d8fd777-f320-43c8-84ce-4d4bc7d65351",
+      "c8df0060-9629-4827-91d2-8448667abff3"
+    ],
+    "physicalGuidCount": 188,
+    "retainedModelPreserved": true,
+    "status": "NATIVE_GROUP_MOVE_SHARED_REGISTRY_READBACK_PASS",
+    "translatedShapeAndMaterialsPreserved": true
+  },
+  "saveCalls": 1,
+  "savedSHA256": "ebbd057418099a0823e2dd58a9765fd25ab6e41de6524253ad0785764c288187",
+  "schema": "APA_AC29_SHARED_GROUP_CREATE_ONESHOT_V1",
+  "snapshotReceiptSHA256": "4359090561c2ee708d8e530fef7e690f20ad66fd1c5f702fc141f7ff1d50b5c2",
+  "sourceUnchanged": true,
+  "status": "LIVE_SHARED_NATIVE_GROUP_MOVE_SAVED_REOPENED_PASS",
+  "ungroupCalls": 0,
+  "verificationNativeWrites": 0
+}
