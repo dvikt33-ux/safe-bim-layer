@@ -10718,6 +10718,48 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-684",
+      "page_id": "B3-039",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=39",
+      "station_id": "MOAG",
+      "narrative_mode": "CHARACTER_KNOWN_STATION_COMPARISON",
+      "locator_hint": "Эмма узнаёт на чужой станции признаки Второго уровня МОАГа.",
+      "spatial_assertion": "Эмма прямо сообщает, что на Втором уровне МОАГа такие же цвет прорезиненного покрытия, лампы и разметка коридоров, как на другом объекте. Это достоверные материалы и визуальные ориентиры для МОАГа; конфигурация чужих коридоров не переносится.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-685",
+      "page_id": "B3-040",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=40",
+      "station_id": "MOAG",
+      "narrative_mode": "CHARACTER_KNOWN_STATION_ENGINEERING",
+      "locator_hint": "Эмма описывает сходство станционных систем и вспоминает работу интеллект-системы уровня МОАГа.",
+      "spatial_assertion": "Эмма знает работу интеллект-системы уровня МОАГа и говорит, что системы этой станции устроены так же, поэтому программное обеспечение и взлом кодов сработают. Это подтверждает сходство программной/инженерной архитектуры управления уровнем МОАГа, но не размещение серверов в конкретном помещении.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-686",
+      "page_id": "B3-040",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=40",
+      "station_id": "OTHER_STATION_NOT_MOAG",
+      "narrative_mode": "OTHER_STATION_ENGINEERING_EXCLUSION",
+      "locator_hint": "Малые серверы жизнеобеспечения возле входа во внутренний уровень другой станции.",
+      "spatial_assertion": "На чужой станции малые серверы жизнеобеспечения уровня находятся около входа во внутренний уровень; панель содержит разъемы и чипы памяти. Это конкретная локализация чужого объекта, её нельзя автоматически переносить на МОАГ, хотя сходство систем подтверждено отдельно в P-685.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
