@@ -1495,6 +1495,319 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-092",
+      "page_id": "B1-018",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=18",
+      "station_id": "MOAG",
+      "narrative_mode": "FOUNTAIN_ACCESS",
+      "locator_hint": "Эмма идёт к фонтану и умывается",
+      "spatial_assertion": "На Главной площади фонтан находится на доступном пешеходам уровне, у него открытая водная чаша.",
+      "feature_refs": [
+        "L2-PLAZA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-093",
+      "page_id": "B1-018",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=18",
+      "station_id": "MOAG",
+      "narrative_mode": "ELECTRICAL_EQUIPMENT",
+      "locator_hint": "самодельная печка — спираль на железной панели",
+      "spatial_assertion": "Нижняя Темная база использует электроплиту из открытой спирали и железной панели, подключённую проводом к розетке; без газового или открытого топлива.",
+      "feature_refs": [
+        "L1-BASE-COMMON"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-094",
+      "page_id": "B1-018",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=18",
+      "station_id": "MOAG",
+      "narrative_mode": "KITCHEN_FURNITURE",
+      "locator_hint": "большая кружка из нержавейки и электрочайник",
+      "spatial_assertion": "Бытовая зона Темной оборудована электрочайником, металлической посудой и импровизированной плитой, без полной кухни Второго уровня.",
+      "feature_refs": [
+        "L1-BASE-COMMON"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-095",
+      "page_id": "B1-018",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=18",
+      "station_id": "MOAG",
+      "narrative_mode": "ROOM_ACCESS",
+      "locator_hint": "Таис из общей комнаты уходит в свою спальню",
+      "spatial_assertion": "Жилые спальни Темной базы отделены от общего помещения и имеют собственные двери; отдельно упоминается спальня Валька.",
+      "feature_refs": [
+        "L1-BASE-COMMON",
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-096",
+      "page_id": "B1-019",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=19",
+      "station_id": "MOAG",
+      "narrative_mode": "RING_TOPOLOGY",
+      "locator_hint": "главные коридоры и шахты всех уровней совпадают",
+      "spatial_assertion": "По реплике Фёдора главные коридоры и вентиляционные шахты трёх глобальных уровней совпадают по общей планировочной логике, без равенства радиусов.",
+      "feature_refs": [
+        "L1-INNER",
+        "L1-OUTER",
+        "L1-VENT",
+        "L2-GREEN",
+        "L2-ORANGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-097",
+      "page_id": "B1-019",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=19",
+      "station_id": "MOAG",
+      "narrative_mode": "ROOM_VERTICAL_STACKING",
+      "locator_hint": "базы находятся там, где сверху детские каюты",
+      "spatial_assertion": "Нижние базы занимают район под жилыми каютами Второго, который охватывает одно малое внутреннее кольцо.",
+      "feature_refs": [
+        "L1-BASES",
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-098",
+      "page_id": "B1-019",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=19",
+      "station_id": "MOAG",
+      "narrative_mode": "ZONE_DIVISION",
+      "locator_hint": "половину Нижнего не исследовали",
+      "spatial_assertion": "Исследована только часть кольцевой сети Нижнего; из обитаемых баз вход в противоположный сектор тогда не найден.",
+      "feature_refs": [
+        "L1-SEALED",
+        "L1-BASES"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-099",
+      "page_id": "B1-019",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=19",
+      "station_id": "MOAG",
+      "narrative_mode": "FUNCTIONAL_LOCATION",
+      "locator_hint": "Изоляция на другой стороне уровня",
+      "spatial_assertion": "Таис уточняет, что комнаты Изоляции расположены на другой стороне Верхнего уровня относительно найденного помещения у Последних распоряжений; направление пока не установлено.",
+      "feature_refs": [
+        "L3"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-100",
+      "page_id": "B1-019",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=19",
+      "station_id": "MOAG",
+      "narrative_mode": "ROOM_ADJACENCY",
+      "locator_hint": "рядом с Последними распоряжениями, через стену инъекции, дальше крематорий",
+      "spatial_assertion": "На Третьем уровне существует связанная группа: помещение рядом с Последними распоряжениями; зал инъекций прямо через стену от этой зоны; далее крематорий. Точные дверные связи НЕ указаны.",
+      "feature_refs": [
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-101",
+      "page_id": "B1-019",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=19",
+      "station_id": "MOAG",
+      "narrative_mode": "CHARACTER_USE_OF_MAP",
+      "locator_hint": "на планшете красные точки над различными помещениями",
+      "spatial_assertion": "Планшет отображает положение объектов и тепловые точки Третьего; снимок является отображением живой системы, а не геометрическим обмером.",
+      "feature_refs": [
+        "L3"
+      ],
+      "evidence_class": "MEDIATED_IMAGE_UNVERIFIED",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-102",
+      "page_id": "B1-020",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=20",
+      "station_id": "MOAG",
+      "narrative_mode": "HEATER_AND_VENT",
+      "locator_hint": "обогреватель черный, экран имитирует огонь",
+      "spatial_assertion": "Черный электрический нагреватель общей комнаты Темной выдаёт горячий воздух через нижнее отверстие, на верхнем экране имитируется огонь.",
+      "feature_refs": [
+        "L1-BASE-COMMON"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-103",
+      "page_id": "B1-020",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=20",
+      "station_id": "MOAG",
+      "narrative_mode": "LIBRARY_AND_WINDOW",
+      "locator_hint": "бумажная библиотека, окно в полстены полукругом",
+      "spatial_assertion": "На Втором уровне есть малая библиотека бумажных справочников с панорамным полукруглым иллюминатором, занимающим около половины стены и направленным в космос.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-104",
+      "page_id": "B1-020",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=20",
+      "station_id": "MOAG",
+      "narrative_mode": "GROUPED_BEDROOMS",
+      "locator_hint": "из спальни Валька слышны голоса",
+      "spatial_assertion": "В Темной базе помещение Валька отделено от общего коридора дверью, через которую слышны разговоры; важно для акустики и пути подхода.",
+      "feature_refs": [
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-105",
+      "page_id": "B1-020",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=20",
+      "station_id": "MOAG",
+      "narrative_mode": "OTHER_BASE_RESIDENTS",
+      "locator_hint": "Овальная база, три девочки и один мальчик",
+      "spatial_assertion": "Овальная — самостоятельное жилое поселение, минимум четыре постоянных жителя на данной стадии; не основание для точного количества помещений.",
+      "feature_refs": [
+        "L1-OVAL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-106",
+      "page_id": "B1-021",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=21",
+      "station_id": "MOAG",
+      "narrative_mode": "FOOD_WASTE_PROCESS",
+      "locator_hint": "сортировка отходов: пластик/пища/детали/бытовой мусор",
+      "spatial_assertion": "В мусорном цехе различаются отдельные технологические ветви пластика, пищевых отходов и технического оборудования; выход пластика на повторное использование, пищевых остатков — на удобрения.",
+      "feature_refs": [
+        "L1-RECYCLING"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-107",
+      "page_id": "B1-021",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=21",
+      "station_id": "MOAG",
+      "narrative_mode": "PRODUCTION_SYSTEM",
+      "locator_hint": "просторный цех с конвейерами, сортировщиками, печью",
+      "spatial_assertion": "На Нижнем мусорка — большое производственное пространство с механическими конвейерами, роботами-сортировщиками и лазерным уничтожением предметов, шумное и загрязненное.",
+      "feature_refs": [
+        "L1-RECYCLING"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-108",
+      "page_id": "B1-021",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=21",
+      "station_id": "MOAG",
+      "narrative_mode": "PROCESSING_PLANT_ROUTE",
+      "locator_hint": "в конце цеха горячая печь, рядом маленькая дверь",
+      "spatial_assertion": "В дальнем конце перерабатывающего цеха находится горячая печь; возле неё обход сортирующих манипуляторов и дверь в узкий служебный закуток.",
+      "feature_refs": [
+        "L1-RECYCLING",
+        "L1-STAIR-UP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-109",
+      "page_id": "B1-021",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=21",
+      "station_id": "MOAG",
+      "narrative_mode": "VERTICAL_ROUTE",
+      "locator_hint": "вертикальная лестница, квадратный люк в потолке",
+      "spatial_assertion": "Из служебного узкого закутка за цехом по вертикальной лестнице проходят через квадратный люк в потолке в темный верхний переход.",
+      "feature_refs": [
+        "L1-STAIR-UP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-110",
+      "page_id": "B1-021",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=21",
+      "station_id": "MOAG",
+      "narrative_mode": "SECURE_GATE_TO_THIRD",
+      "locator_hint": "прямоугольная дверь с кодом, за ней белый коридор",
+      "spatial_assertion": "После верхнего люка на Третий уровень ведёт раздвижная кодовая дверь; за ней длинный ярко освещённый белый коридор.",
+      "feature_refs": [
+        "L1-STAIR-UP",
+        "L3-OUTER"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
