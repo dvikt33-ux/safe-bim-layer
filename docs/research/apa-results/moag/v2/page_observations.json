@@ -7022,6 +7022,51 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-428",
+      "page_id": "B2-037",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=37",
+      "station_id": "UNRESOLVED_OBJECT",
+      "narrative_mode": "FOREIGN_CRUISER_EXCLUSION",
+      "locator_hint": "рубка и пищевой агрегат Иминуи",
+      "spatial_assertion": "Пищевой агрегат, санузел и рубка относятся к чужому крейсеру Иминуя, не к МОАГу.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-429",
+      "page_id": "B2-038",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=38",
+      "station_id": "UNRESOLVED_OBJECT",
+      "narrative_mode": "FOREIGN_CRUISER_EXCLUSION",
+      "locator_hint": "душевая и служебные коридоры крейсера",
+      "spatial_assertion": "Кабинет управления, душевая и прилегающая коридорная сеть принадлежат крейсеру Иминуя, не станции МОАГ.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-430",
+      "page_id": "B2-038",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=38",
+      "station_id": "MOAG_MEMORY_ONLY",
+      "narrative_mode": "MOAG_LIGHTING_MEMORY",
+      "locator_hint": "двух обитаемых уровнях выключали свет как ночью",
+      "spatial_assertion": "Героиня вспоминает автоматическое ночное выключение освещения двух обитаемых уровней МОАГа; это историческое эксплуатационное состояние.",
+      "feature_refs": [
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "MEMORY_NOT_SPATIAL",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
