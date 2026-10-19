@@ -3945,6 +3945,81 @@
       ],
       "identity_hypotheses": [],
       "notes": "Ступени, герметичная дверь и медотсек физически пройдены; `global_level=3` обозначает верхнюю зону, не точный Z. Проход в медотсек связан маршрутом, но точная ориентация неизвестна."
+    },
+    {
+      "id": "RT-036",
+      "title": "Эмма и Коля: Третий → пассажирский лифт → жилая галерея Второго, блокировка лифта",
+      "participants": [
+        "Эмма",
+        "Коля"
+      ],
+      "book": "B2",
+      "site_pages": [
+        "B2-046",
+        "B2-047"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT036-A",
+          "label": "Третий: подход к небольшому пассажирскому лифту",
+          "global_level": 3,
+          "local_stratum": "living-lift-landing",
+          "source_page_id": "B2-046",
+          "movement_method": "WALK",
+          "observed_constraint": "Третий: подход к небольшому пассажирскому лифту",
+          "existing_graph_node": "L3",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT036-B",
+          "label": "Посадка и спуск лифтом на Второй",
+          "global_level": null,
+          "local_stratum": "between-third-and-second",
+          "source_page_id": "B2-046",
+          "movement_method": "ELEVATOR_DOWN",
+          "observed_constraint": "Посадка и спуск лифтом на Второй",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT036-C",
+          "label": "Выход из лифта на Втором, блокировка шахты через пульт",
+          "global_level": 2,
+          "local_stratum": "living-lift-landing",
+          "source_page_id": "B2-047",
+          "movement_method": "DOOR",
+          "observed_constraint": "Выход из лифта на Втором, блокировка шахты через пульт",
+          "existing_graph_node": "L2",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT036-D",
+          "label": "У двери жилой каюты Второго, рядом галерея с перилами",
+          "global_level": 2,
+          "local_stratum": "living-lift-landing",
+          "source_page_id": "B2-047",
+          "movement_method": "WALK",
+          "observed_constraint": "У двери жилой каюты Второго, рядом галерея с перилами",
+          "existing_graph_node": "L2-GALLERY",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT036-A",
+          "lower": "RT036-C",
+          "source_page_id": "B2-047",
+          "claim": "Физический спуск между глобальными уровнями 3 и 2; точная шахта и координаты не определены."
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Не утверждать, что лифт идентичен прозрачной ДНК-кабине p79 B1 либо продуктовому лифту p96 B1. Блокировка после прибытия — сюжетное состояние."
     }
   ]
 }
