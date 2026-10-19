@@ -5704,6 +5704,85 @@
       "constraints": [],
       "identity_hypotheses": [],
       "notes": "Спуск от узкой решётчатой лестницы — фактически пройденный локальный переход; точная конечная отметка неизвестна. Не считать будущий подъём на Верхний уровень пройденным. p128 confirms the destination freight hangars are the earlier robot-loading hangars; movement from L2 to L3 is a narrative gap, then a corridor leads to captain-bridge doors."
+    },
+    {
+      "id": "RT-051",
+      "title": "Производственный цех: двойные двери → главный круглый зал → расходящиеся помещения → линия человекоподобных роботов",
+      "participants": [
+        "Эмма",
+        "Ник",
+        "Жак"
+      ],
+      "book": "B2",
+      "site_pages": [
+        "B2-133"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT051-A",
+          "label": "Двойные двери цеха",
+          "global_level": null,
+          "local_stratum": "factory-double-metalplastic-doors",
+          "source_page_id": "B2-133",
+          "movement_method": "DOOR",
+          "observed_constraint": "Гладкие блестящие створки без видимого замка/окна; усики дерева входят в стык и раскрывают двери.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT051-B",
+          "label": "Главный круглый зал с центральной колбой",
+          "global_level": null,
+          "local_stratum": "factory-central-round-hall-living-metal-vessel",
+          "source_page_id": "B2-133",
+          "movement_method": "WALK",
+          "observed_constraint": "В центральной точке стоит прозрачная пузатая колба с синей подвижной жидкостью.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT051-C",
+          "label": "Просторные помещения, расходящиеся веером",
+          "global_level": null,
+          "local_stratum": "factory-radial-production-rooms",
+          "source_page_id": "B2-133",
+          "movement_method": "WALK",
+          "observed_constraint": "За дверями комнаты расходятся веером от главного круглого зала.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT051-D",
+          "label": "Ряд пластиковых упаковочных контейнеров и полукруглый проход",
+          "global_level": null,
+          "local_stratum": "factory-packaging-row-semicircular-opening",
+          "source_page_id": "B2-133",
+          "movement_method": "WALK",
+          "observed_constraint": "Эмма проходит вдоль контейнеров и через полукруглый проём.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT051-E",
+          "label": "Зона изготовления человекоподобных роботов",
+          "global_level": null,
+          "local_stratum": "factory-humanoid-production-room",
+          "source_page_id": "B2-133",
+          "movement_method": "WALK",
+          "observed_constraint": "За проёмом большие ёмкости с телесными компонентами; более подробная конфигурация неизвестна.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "Переход от предыдущей локации к дверям цеха не описан. Известна внутренняя связь: главный круглый зал и расходящиеся помещения; далее путь через упаковочные контейнеры и полукруглый проём к человекоподобному производству. Уровень цеха неизвестен."
     }
   ],
   "notes": "undefined Дополнен RT-043 по B2 p90: наблюдаемая бытовая последовательность внутри жилого помещения; точный уровень и идентичность с RT-042 не установлены. Добавлен RT-044 по p91 с эпизодическим отклонением в детскую каюту; геометрия переходов и уровень не установлены. Добавлен RT-045 для переговоров и ухода через туннель №8; точные уровни, трасса от библиотеки и судьба Дины не выводятся. Добавлен RT-046 по p94: Дина возвращается, а группа поднимается в жилую каюту; вертикальная трасса и уровень неизвестны."
