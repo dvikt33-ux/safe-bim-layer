@@ -3639,6 +3639,97 @@
       "constraints": [],
       "identity_hypotheses": [],
       "notes": "Регистрируется только траектория катеров, Гоша — параллельный оператор шлюза из верхней диспетчерской и потому не является маршрутной точкой пилотов. Размер шлюза сравнивается с ангаром в тексте, абсолютные метры отсутствуют. Землю при этом выходе не видели; внешний азимут не доказан."
+    },
+    {
+      "id": "RT-033",
+      "title": "Эмма на Третьем: капитанская рубка → два поворота → коридор главных лифтов → дверь производства → обратно в рубку",
+      "participants": [
+        "Эмма",
+        "Женя"
+      ],
+      "book": "B2",
+      "site_pages": [
+        "B2-026",
+        "B2-027"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT033-A",
+          "label": "Эмма выходит из капитанской рубки при аварийном освещении",
+          "global_level": 3,
+          "local_stratum": "third-upper-public-route",
+          "source_page_id": "B2-026",
+          "movement_method": "DOOR",
+          "observed_constraint": "Эмма выходит из капитанской рубки при аварийном освещении",
+          "existing_graph_node": "L3-BRIDGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT033-B",
+          "label": "Два последовательных поворота в темных общих коридорах",
+          "global_level": 3,
+          "local_stratum": "third-upper-public-route",
+          "source_page_id": "B2-027",
+          "movement_method": "WALK",
+          "observed_constraint": "Два последовательных поворота в темных общих коридорах",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT033-C",
+          "label": "Широкий мягкий коридор с направлением к главным лифтам",
+          "global_level": 3,
+          "local_stratum": "third-upper-public-route",
+          "source_page_id": "B2-027",
+          "movement_method": "WALK",
+          "observed_constraint": "Широкий мягкий коридор с направлением к главным лифтам",
+          "existing_graph_node": "L3-FREIGHT-LIFTS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT033-D",
+          "label": "Закрытые производственные двери в конце доступного коридора",
+          "global_level": 3,
+          "local_stratum": "third-upper-public-route",
+          "source_page_id": "B2-027",
+          "movement_method": "WALK",
+          "observed_constraint": "Закрытые производственные двери в конце доступного коридора",
+          "existing_graph_node": "L3-PRODUCTION",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT033-E",
+          "label": "Встреча с девочкой у цеха и возврат по тому же району",
+          "global_level": 3,
+          "local_stratum": "third-upper-public-route",
+          "source_page_id": "B2-027",
+          "movement_method": "WALK",
+          "observed_constraint": "Встреча с девочкой у цеха и возврат по тому же району",
+          "existing_graph_node": "L3-PRODUCTION",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT033-F",
+          "label": "Возвращение Эммы с девочкой в капитанскую рубку",
+          "global_level": 3,
+          "local_stratum": "third-upper-public-route",
+          "source_page_id": "B2-027",
+          "movement_method": "DOOR",
+          "observed_constraint": "Возвращение Эммы с девочкой в капитанскую рубку",
+          "existing_graph_node": "L3-BRIDGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "Персонаж Женя присоединяется только у двери цеха, не проходила исходный сегмент. Ориентация двух поворотов по плану неизвестна. Свет меняется во времени, маршрут не перемещает конструктив."
     }
   ]
 }
