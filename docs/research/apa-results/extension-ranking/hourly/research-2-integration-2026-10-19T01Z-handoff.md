@@ -1,0 +1,5 @@
+# APA №2 01Z — ворота, вопросы и передача №3
+Цепи ≤3 внешних звена: APA Router→Tapir→LibraryParts JSON; APA IFC sidecar→IfcOpenShell util.system/validate/sequence/cost→JSON QA; APA C1→ezdxf→DXF JSON; APA SceneWriter→Tapir Hotlink→native readback. Без второго исполнителя.
+SOURCE (этот цикл): pinned code/schema/license. OFFLINE: positive/negative fixtures, 2×3 MINSERT→6 cells, 3 IFC MEP, GUID duplicate/invalid, 4D 3 tasks, 5D zero/missing/units, SHA. BUILD: Windows11 Python3.11/3.12 или SDK29 C++ ABI. INSTALLED: runtime hash/version/manifest. LIVE: отдельное разрешение, scratch PLN, GUID/BREP before-after. ACCEPTED: независимая приёмка и rollback. 8GB VRAM/48GB RAM — не измерялись; IFC tools CPU-first, ограничить размер IFC/JSON, без GPU claims.
+№1: готовый JSON .libpack dependencies? MEP IFC2X3/IFC4 owner fixtures? XCLIP→JSON provenance? ifcbench Windows license? 4D/5D negative fixtures?
+№3: приоритеты Tapir LibraryParts 96, IFC validate 95, MEP util.system 94, MINSERT 92, B3 units 88, libpack SDK 81, 5D guards 77. PR173 acceptance проверить отдельно, LIVE не повторять.

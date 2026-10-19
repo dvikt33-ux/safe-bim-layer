@@ -1,3 +1,3 @@
-# APA AC29 research-2 integration 2026-10-19 01Z
+# APA AC29 — Research 2, 2026-10-19 01Z
 
-SOURCE research; details in appendices. No live actions.
+30 SOURCE checks; two independent audits; ten integration candidates. See companion files: checks-01-03 through checks-28-30, matrix, audit-A, audit-B, handoff. No runtime changes.

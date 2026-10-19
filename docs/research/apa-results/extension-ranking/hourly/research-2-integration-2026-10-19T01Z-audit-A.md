@@ -1,0 +1,3 @@
+# APA №2 01Z — контрааудит A: исходники, версии, лицензии
+Повторное чтение: Tapir 1.5.9 `command_definitions.js` (250 команд), `LibraryCommands.cpp` и `MEPCommands.cpp`, LICENSE MIT; Graphisoft SDK29 tag 29.3100, EULA; IfcOpenShell 0.8.5 util.system/validate/sequence/cost, LGPL-3.0-or-later; ezdxf v1.4.5, MIT. SDK30 не использован. Локальный Tapir 1.5.10/APX SHA/MEP entitlement НЕ проверены. Наличие в теге ≠ наличие в локальном runtime. ifcbench 0.0.1: GitHub license=null, LICENSE 404, runner `bin/python` (не Windows Scripts). Нет оснований к установке.
+Вердикт SOURCE_CONFIRMED_PARTIAL; 30 SOURCE чтений, без новых OFFLINE/BUILD/INSTALLED/LIVE/ACCEPTED. MODEL_MODE_NOT_VERIFIABLE.

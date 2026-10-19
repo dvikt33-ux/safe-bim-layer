@@ -1,0 +1,4 @@
+# APA №2 01Z — контрааудит Б: монтажный граф и дублирование
+Прямо сверены APA PR165 `_ifc_ports`, PR168 `analyze`, PR170 `execute`, PR173 receipt/native-calls. IFC MEP owner/peer — только через готовый util.system; новый BIM Graph/Router не нужен. MINSERT `multi_insert` даёт дочерние primitives, но один parent не даёт шесть `repeatedAssemblies`; это отдельный пробел C1. PR173 LIVE saved/reopened подтверждён файлом, но `originalBatchScratchAccepted=false`: не ACCEPTED и не повод повторять native call.
+Сравнение: Library Tapir inventory vs SDK29 adapter — выбрать Tapir для списка, SDK только для отсутствующих dependencies/UnID. DXF C1 vs Frontend/XCLIP — C1 для WCS, Frontend лишь после provenance adapter. 4D/5D util APIs vs свой scheduler/cost engine — только util.
+Вердикт REUSE_FIRST / ADAPTER_MINIMAL / NO_SECOND_WRITER. Ускорение не измерялось.
