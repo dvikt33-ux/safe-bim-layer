@@ -3821,6 +3821,130 @@
       "constraints": [],
       "identity_hypotheses": [],
       "notes": "Галерея расположена у входа с Третьего, ниже расположен шахтообразный объём. Примерно 15 м вниз по наблюдению — не доказательство точной этажности. Форма ядра не задаёт форму всех этажей."
+    },
+    {
+      "id": "RT-035",
+      "title": "Эмма и Коля: энергомодуль → ступени к закрываемой двери → коридор с охранной нишей → рубка → медицинский сканер",
+      "participants": [
+        "Эмма",
+        "Коля"
+      ],
+      "book": "B2",
+      "site_pages": [
+        "B2-040",
+        "B2-041",
+        "B2-042"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT035-A",
+          "label": "Круговая галерея энергомодуля",
+          "global_level": 3,
+          "local_stratum": "upper-third-technical-to-command",
+          "source_page_id": "B2-040",
+          "movement_method": "WALK",
+          "observed_constraint": "Круговая галерея энергомодуля",
+          "existing_graph_node": "CORE-ENERGY-GALLERY",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT035-B",
+          "label": "Подъём по ступеням вверх к двери центрального объёма",
+          "global_level": 3,
+          "local_stratum": "upper-third-technical-to-command",
+          "source_page_id": "B2-040",
+          "movement_method": "CLIMB_UP",
+          "observed_constraint": "Подъём по ступеням вверх к двери центрального объёма",
+          "existing_graph_node": "CORE-ENERGY-ACCESS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT035-C",
+          "label": "Закрытие автономной раздвижной двери",
+          "global_level": 3,
+          "local_stratum": "upper-third-technical-to-command",
+          "source_page_id": "B2-040",
+          "movement_method": "DOOR",
+          "observed_constraint": "Закрытие автономной раздвижной двери",
+          "existing_graph_node": "CORE-ENERGY-ACCESS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT035-D",
+          "label": "Длинный белый коридор к капитанской рубке",
+          "global_level": 3,
+          "local_stratum": "upper-third-technical-to-command",
+          "source_page_id": "B2-041",
+          "movement_method": "WALK",
+          "observed_constraint": "Длинный белый коридор к капитанской рубке",
+          "existing_graph_node": "L3-ENERGY-APPROACH",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT035-E",
+          "label": "Поворот с нишей для охранных андроидов",
+          "global_level": 3,
+          "local_stratum": "upper-third-technical-to-command",
+          "source_page_id": "B2-041",
+          "movement_method": "WALK",
+          "observed_constraint": "Поворот с нишей для охранных андроидов",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT035-F",
+          "label": "Капитанская рубка с плотными дверями",
+          "global_level": 3,
+          "local_stratum": "upper-third-technical-to-command",
+          "source_page_id": "B2-041",
+          "movement_method": "DOOR",
+          "observed_constraint": "Капитанская рубка с плотными дверями",
+          "existing_graph_node": "L3-BRIDGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT035-G",
+          "label": "Проход в медотсек к диагностическому сканеру",
+          "global_level": 3,
+          "local_stratum": "upper-third-technical-to-command",
+          "source_page_id": "B2-042",
+          "movement_method": "WALK",
+          "observed_constraint": "Проход в медотсек к диагностическому сканеру",
+          "existing_graph_node": "L3",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT035-H",
+          "label": "После обследования выход к жилому сектору",
+          "global_level": 3,
+          "local_stratum": "upper-third-technical-to-command",
+          "source_page_id": "B2-042",
+          "movement_method": "WALK",
+          "observed_constraint": "После обследования выход к жилому сектору",
+          "existing_graph_node": "L3-CREW",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT035-B",
+          "lower": "RT035-A",
+          "source_page_id": "B2-040",
+          "claim": "Небольшой, но неизвестный подъём по ступеням от кольцевой галереи к двери; нет численного значения и отдельного глобального этажа."
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Ступени, герметичная дверь и медотсек физически пройдены; `global_level=3` обозначает верхнюю зону, не точный Z. Проход в медотсек связан маршрутом, но точная ориентация неизвестна."
     }
   ]
 }
