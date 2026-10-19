@@ -224,6 +224,55 @@
       "url": "https://loveread.ec/read_book.php?id=48197&p=34",
       "medium": "literary_text",
       "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-044",
+      "section": "Книга I, веб-страница 44 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=44",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-045",
+      "section": "Книга I, веб-страница 45 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=45",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-046",
+      "section": "Книга I, веб-страница 46 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=46",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-047",
+      "section": "Книга I, веб-страница 47 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=47",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-048",
+      "section": "Книга I, веб-страница 48 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=48",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-049",
+      "section": "Книга I, веб-страница 49 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=49",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-050",
+      "section": "Книга I, веб-страница 50 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=50",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
     }
   ],
   "nodes": [
@@ -1723,6 +1772,101 @@
       },
       "geometry_gate": "NOT_AUTHORIZED",
       "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-DARK-UPPER-PERIMETER",
+      "label": "Узкая галерея по периметру общего помещения Темной базы",
+      "level": 1,
+      "type": "circulation",
+      "source_ids": [
+        "LR-B1-049"
+      ],
+      "text_basis": "Галерея огибает ВСЮ общую комнату; дети сидят ниже неё; по галерее Таис идёт к собственной спальне.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-STRAIGHT-FREIGHT",
+      "label": "Отдельный широкий ПРЯМОЙ грузовой коридор",
+      "level": 1,
+      "type": "circulation",
+      "source_ids": [
+        "LR-B1-044"
+      ],
+      "text_basis": "Резиновое покрытие, большие ворота ангаров, низкие навигационные лампы и неработающее потолочное освещение. Нельзя автоматически отождествлять с другим ангарным проходом.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-ENG-CABLE-NICHES",
+      "label": "Узкие коммуникационные ниши с трубами и разноцветными кабелями",
+      "level": 1,
+      "type": "utility",
+      "source_ids": [
+        "LR-B1-045"
+      ],
+      "text_basis": "За сорванной панелью находятся трубы и толстые разноцветные кабели, путь ползком через два узких лаза.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "LINK-LIFT-L2-L1",
+      "label": "Официальный лифт между Вторым и Нижним",
+      "level": null,
+      "type": "vertical_route",
+      "source_ids": [
+        "LR-B1-047"
+      ],
+      "text_basis": "Некоторые штатные лифты непосредственно доезжают до Нижнего; Лон сопровождает детей с продуктами.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-DARK-ENTRY-DOOR",
+      "label": "Двухстворчатая стальная дверь внешней границы Темной базы",
+      "level": 1,
+      "type": "portal",
+      "source_ids": [
+        "LR-B1-045"
+      ],
+      "text_basis": "Дверь с двумя треугольниками, кодовым замком, отделяет тёплую жилую базу от холодных коридоров.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
     }
   ],
   "edges": [
@@ -2808,6 +2952,114 @@
       "claim": "Герой указывает, что Д и Е — самые дальние от платформы приемки грузов; геометрическая дистанция/направление не задана.",
       "state": "TEXT_DIRECT",
       "metric": null
+    },
+    {
+      "id": "E91",
+      "from": "L1-BASE-COMMON",
+      "to": "L1-DARK-UPPER-PERIMETER",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-049"
+      ],
+      "claim": "Верхняя узкая галерея идёт вдоль всего периметра общего помещения Темной.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E92",
+      "from": "L1-DARK-UPPER-PERIMETER",
+      "to": "L1-BASE-SLEEP",
+      "type": "access_to",
+      "source_ids": [
+        "LR-B1-050"
+      ],
+      "claim": "Таис проходит по галерее от общего помещения к собственной спальне.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E93",
+      "from": "L1-DARK-UPPER-PERIMETER",
+      "to": "L1-BASE-COMMON",
+      "type": "above_floor",
+      "source_ids": [
+        "LR-B1-049"
+      ],
+      "claim": "Под галереей сидят дети; значит она расположена выше основной отметки общего пола.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E94",
+      "from": "L1-ENG-CABLE-NICHES",
+      "to": "L1-STRAIGHT-FREIGHT",
+      "type": "route_to",
+      "source_ids": [
+        "LR-B1-044"
+      ],
+      "claim": "Из узких инженерных ниш выход в прямой широкий грузовой проход.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E95",
+      "from": "L1-DARK-ENTRY-DOOR",
+      "to": "L1-ENG-CABLE-NICHES",
+      "type": "path_with_corridors_to",
+      "source_ids": [
+        "LR-B1-045"
+      ],
+      "claim": "Эмма вернулась из ниш к наружной двери базы через технические коридоры; прямого соприкосновения нет.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E96",
+      "from": "L1-BASES",
+      "to": "L1-DARK-ENTRY-DOOR",
+      "type": "access_to",
+      "source_ids": [
+        "LR-B1-045"
+      ],
+      "claim": "Вход с технического коридора в обитаемые базы с кодовым замком.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E97",
+      "from": "L2",
+      "to": "LINK-LIFT-L2-L1",
+      "type": "elevator_to",
+      "source_ids": [
+        "LR-B1-047"
+      ],
+      "claim": "Из жилого Второго уровня доступен лифт вниз до Нижнего.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E98",
+      "from": "LINK-LIFT-L2-L1",
+      "to": "L1",
+      "type": "elevator_to",
+      "source_ids": [
+        "LR-B1-047"
+      ],
+      "claim": "Лифт прибывает в тёмный коридор Нижнего.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E99",
+      "from": "L1-STRAIGHT-FREIGHT",
+      "to": "L1-HANGAR-HALL",
+      "type": "possibly_same_sector",
+      "source_ids": [
+        "LR-B1-044"
+      ],
+      "claim": "Не доказано тождество двух ангарных коридоров; запрет на слияние по одному описанию.",
+      "state": "RECHECK_REQUIRED",
+      "metric": null
     }
   ],
   "questions": [
@@ -2875,6 +3127,16 @@
       "id": "Q13",
       "priority": "HIGH",
       "text": "Установить старую нумерацию баз станции (в замках названы 3 и 4), отличать её от трёх нынешних поселений; проверить были ли базы 1 и 2 и число исходных палуб Нижнего."
+    },
+    {
+      "id": "Q13",
+      "priority": "BLOCKER",
+      "text": "Определить соотношение галереи общего помещения Темной базы, короткой лестницы у ванной, дверей отдельных спален и длинной внешней лестницы. Верхний ярус доказан, число полноценных палуб не доказано."
+    },
+    {
+      "id": "Q14",
+      "priority": "HIGH",
+      "text": "Проверить: прямой грузовой коридор Эммы и ранее встреченный полукруглый ангарный переход — разные участки или общая система? Не выводить автоматом прохождение от внутреннего к внешнему кольцу."
     }
   ]
 }
