@@ -5043,15 +5043,16 @@
     },
     {
       "id": "RT-048",
-      "title": "Выход группы к решётке перед разведкой Третьего уровня",
+      "title": "Разведка: решётка у туннеля → кабельная шахта → мусорный отсек → Третий уровень и капитанская рубка",
       "participants": [
         "Эмма",
         "Колька",
-        "Егор"
+        "Егор (открыл/закрыл решётку перед проходом)"
       ],
       "book": "B2",
       "site_pages": [
-        "B2-105"
+        "B2-105",
+        "B2-106"
       ],
       "route_kind": "OBSERVED_CHARACTER_ROUTE",
       "nodes": [
@@ -5069,12 +5070,96 @@
         },
         {
           "id": "RT048-B",
-          "label": "Решётка с неустановленной идентичностью",
+          "label": "Решётка у туннеля с неустановленной идентичностью",
           "global_level": null,
-          "local_stratum": "grate-identity-unresolved",
-          "source_page_id": "B2-105",
+          "local_stratum": "tunnel-grate-identity-unresolved",
+          "source_page_id": "B2-106",
+          "movement_method": "DOOR",
+          "observed_constraint": "Егор помогает открыть/закрыть решётку на p105; на p106 Эмма и Колька проходят через поднявшуюся решётку. Номер не указан; не объединять с туннелем №8.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT048-C",
+          "label": "Узкая овальная крышка входа в кабельную шахту",
+          "global_level": null,
+          "local_stratum": "cable-shaft-entry-lid-unresolved",
+          "source_page_id": "B2-106",
+          "movement_method": "DOOR",
+          "observed_constraint": "Крышка вставлена в пазы, её отталкивают и поднимают, затем возвращают на место.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT048-D",
+          "label": "Разветвлённая кабельная шахта внутри стен",
+          "global_level": null,
+          "local_stratum": "wall-cable-shaft-network-unresolved",
+          "source_page_id": "B2-106",
+          "movement_method": "CRAWL",
+          "observed_constraint": "Узкий душный канал, толстые изолированные провода; путь пересекает несколько помещений почти прямо к мусорному отсеку. Сама сеть разветвляется.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT048-E",
+          "label": "Мусорный отсек и зона сортировки",
+          "global_level": null,
+          "local_stratum": "waste-processing-unresolved-level",
+          "source_page_id": "B2-106",
+          "movement_method": "CRAWL",
+          "observed_constraint": "Кабельный проход выводит к месту сортировки мусора; точка выхода внутри отсека не задана.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT048-F",
+          "label": "Лестница и герметичный люк наверх",
+          "global_level": null,
+          "local_stratum": "waste-to-upper-level-ladder-hatch",
+          "source_page_id": "B2-106",
+          "movement_method": "LADDER_UP",
+          "observed_constraint": "Металлическая лестница ведёт к тяжёлому люку, который герметично закрывается после прохода.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT048-G",
+          "label": "Коридор Третьего уровня за замком",
+          "global_level": 3,
+          "local_stratum": "third-level-corridor-entry-unresolved",
+          "source_page_id": "B2-106",
+          "movement_method": "DOOR",
+          "observed_constraint": "Колька открывает замок, и они входят в коридор Третьего уровня; конкретная дверь/узел не измерены.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT048-H",
+          "label": "Коридор рядом с серебристыми дверями лифта",
+          "global_level": 3,
+          "local_stratum": "third-level-lift-corridor",
+          "source_page_id": "B2-106",
           "movement_method": "WALK",
-          "observed_constraint": "Группа торопится к решётке; Егор помогает открыть и закрыть её. Не объединять с туннелем №8 без подтверждения.",
+          "observed_constraint": "По пути к рубке персонажи проходят мимо серебристых дверей лифта.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT048-I",
+          "label": "Коридор со стеклянными дверями капитанской рубки",
+          "global_level": 3,
+          "local_stratum": "captain-bridge-corridor",
+          "source_page_id": "B2-106",
+          "movement_method": "TURN_AND_CRAWL",
+          "observed_constraint": "Короткий поворот выводит в знакомый коридор; герои приближаются к распахнутым дверям на четвереньках. Поворот/дистанция не уточнены.",
           "existing_graph_node": null,
           "relative_xy": null,
           "absolute_z_m": null
@@ -5082,7 +5167,7 @@
       ],
       "constraints": [],
       "identity_hypotheses": [],
-      "notes": "Путь к решётке остаётся narrative gap; разведка Третьего уровня на этой странице только запланирована."
+      "notes": "Фактически пройденный маршрут после подхода к решётке. Идентичность туннеля не связана с №8; промежуточная трасса от отправной точки на Втором не описана. Третий уровень подтверждён текстом. Не назначать размеры или координаты."
     }
   ],
   "notes": "undefined Дополнен RT-043 по B2 p90: наблюдаемая бытовая последовательность внутри жилого помещения; точный уровень и идентичность с RT-042 не установлены. Добавлен RT-044 по p91 с эпизодическим отклонением в детскую каюту; геометрия переходов и уровень не установлены. Добавлен RT-045 для переговоров и ухода через туннель №8; точные уровни, трасса от библиотеки и судьба Дины не выводятся. Добавлен RT-046 по p94: Дина возвращается, а группа поднимается в жилую каюту; вертикальная трасса и уровень неизвестны."
