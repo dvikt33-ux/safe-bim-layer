@@ -1552,12 +1552,12 @@
       "id": "B2-141",
       "page_number": 141,
       "url": "https://loveread.ec/read_book.php?id=53370&p=141",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "REMOTE_EVIDENCE",
+      "recorded_spatial_hints": 1,
+      "notes": "Страница разделена: земной фрагмент главы 11 до заголовка главы 12 пропущен по правилу пользователя. После заголовка начинается сцена на крейсере «Дракон»; зафиксировано только сравнение его размера со станцией — корабль назван меньшим. Остальное устройство корабля исключено из модели МОАГа.",
+      "verification_method": "Однажды прочитан фрагмент страницы после заголовка главы 12 через Opera; земной фрагмент перед заголовком не анализировался.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-142",
