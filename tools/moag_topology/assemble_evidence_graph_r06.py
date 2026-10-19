@@ -167,12 +167,13 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
             else "R03_RELATIVE_VERTICAL_EVIDENCE",
             e["source_observation_ids"], connect=connecting,
             detail={"semantic_class": e["semantic_class"], "relation": e["relation"]})
+    after_r03_physical_components = len({uf.root(node) for node in kinds})
     for e in fragments["typed_edges"]:
         if e["relation"] not in topology.TOPOLOGICAL or e.get("certainty") == "HYPOTHESIS":
             continue
         add(e["from"], e["to"], e["id"], "R05_QUALITATIVE_ASSOCIATION",
             e["source_ids"], detail=e["relation"])
-    after_r03_physical_components = len({uf.root(node) for node in kinds})
+    after_r05_physical_components = len({uf.root(node) for node in kinds})
     if explicit_bridges.get("schema") != "APA-MOAG-EXPLICIT-SPATIAL-BRIDGES-R06/0.1":
         raise ValueError("BAD_SPATIAL_BRIDGE_SCHEMA")
     records = {x["id"]: x for x in graph["observations"]}
@@ -346,9 +347,11 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
             "route_ledgers": len(route_groups), "before_routes_components": before_routes,
             "after_r04_physical_components": after_r04_physical_components,
             "after_r03_physical_components": after_r03_physical_components,
+            "after_r05_physical_components": after_r05_physical_components,
             "after_explicit_physical_components": after_explicit_physical_components,
             "r03_local_relation_component_reductions": after_r04_physical_components - after_r03_physical_components,
-            "r06_explicit_link_component_reductions": after_r03_physical_components - after_explicit_physical_components,
+            "r05_typed_link_component_reductions": after_r03_physical_components - after_r05_physical_components,
+            "r06_explicit_link_component_reductions": after_r05_physical_components - after_explicit_physical_components,
             "reference_promotion_crosswalks": len(reference_promotions),
             "promotions_needing_identity_review": len(review_promotions),
             "after_routes_components": len(component_members),
