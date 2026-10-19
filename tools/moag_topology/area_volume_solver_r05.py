@@ -195,6 +195,10 @@ def solve(bounds,graph,parameter_changes=None,area_overrides=None,candidates=Non
         if "min_area_m2" not in parent or any("min_area_m2" not in e for e in members):
             raise ValueError("NON_AREA_MEMBER_IN_DISJOINT_BUDGET")
         member_min=sum(e["min_area_m2"] for e in members)
+        # Propagate necessary footprint lower bound from non-overlapping major zones.
+        # Does not assert that this allocation hypothesis is canonical geometry.
+        parent["min_area_m2"]=max(parent["min_area_m2"],member_min)
+        parent["clear_volume_bounds_m3"][0]=parent["min_area_m2"]*parent["min_height_m"]
         allocated=sum(e["chosen_area_m2"] if e["chosen_area_m2"] is not None else e["min_area_m2"]
                       for e in members)
         host_ceiling=parent["chosen_area_m2"] if parent["chosen_area_m2"] is not None else parent["max_area_m2"]
