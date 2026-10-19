@@ -1,3 +1,9 @@
+# APA AC29 — очередь 19.10.2026 22Z
+
+[Аудит №3](hourly/audit-2026-10-19-22.md): 30 SOURCE-проверок в [A](hourly/audit-2026-10-19-22-A.md), [B](hourly/audit-2026-10-19-22-B.md), [C](hourly/audit-2026-10-19-22-C.md); два контрааудита. [№1: 8 новых готовых решений](hourly/audit-2026-10-19-22-tasks-1.md); [№2: 8 способов подключения](hourly/audit-2026-10-19-22-tasks-2.md). №1 21Z/22Z и №2 22Z по проверенным путям не найдены; 19Z/21Z старые аудиты частично опубликованы. Новых OFFLINE/BUILD/INSTALLED/LIVE/ACCEPTED=0. MODEL_MODE_NOT_VERIFIABLE.
+
+---
+
 # APA AC29 — очередь 19.10.2026 20Z
 [Аудит №3](hourly/audit-2026-10-19-20.md): 30 SOURCE, два контрааудита. [№1: 8 готовых решений](hourly/audit-2026-10-19-20-tasks-1.md); [№2: 8 способов подключения](hourly/audit-2026-10-19-20-tasks-2.md). 19Z PARTIAL, не ACCEPTED. Новых OFFLINE/BUILD/INSTALLED/LIVE/ACCEPTED=0.
 
