@@ -55,7 +55,8 @@
       "B2-105",
       "B2-106",
       "B2-107",
-      "B2-108"
+      "B2-108",
+      "B2-113"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -94,9 +95,9 @@
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B2-108",
-      "context_reviewed_page_count": 52,
-      "full_evidence_page_count": 218,
+      "as_of_page_id": "B2-113",
+      "context_reviewed_page_count": 53,
+      "full_evidence_page_count": 219,
       "external_excluded_page_count": 20,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
@@ -1117,6 +1118,41 @@
       ],
       "screening_caveat": "B2 p105 совмещает конец внешней главы 1 части 3 и начало станционной главы 2; внешний фрагмент не анализировался.",
       "station_relevance": "Станционный фрагмент начинается после заголовка главы 2."
+    },
+    {
+      "id": "B2-PART3-CH04",
+      "book_id": "B2",
+      "part_number": 3,
+      "chapter_number": 4,
+      "title": "Эмма. Еще одна охота",
+      "page_span": {
+        "start": 113,
+        "end": 114
+      },
+      "chapter_end_confirmed": true,
+      "chapter_classification": "STATION",
+      "screening_status": "ONE_PASS_IN_PROGRESS",
+      "screened_pages": [
+        "B2-113"
+      ],
+      "scenes": [
+        {
+          "id": "B2P3C04-S1",
+          "page_fragments": [
+            {
+              "page_id": "B2-113",
+              "fragment": "После заголовка главы 4: Эмма и Колька покидают каюту через узкую белую дверь, проходят к лифту, останавливают его, выходят в шахту и спускаются по кабелю к вентиляционному люку и старому ходу к базам у ангаров."
+            }
+          ],
+          "classification": "STATION",
+          "physical_location": "МОАГ: каюта на Третьем уровне, коридор с кувезами, лифтовая шахта, вентиляционный ход, прежние базы возле заброшенных ангаров (уровень конечной точки не уточнён).",
+          "characters": [
+            "Эмма",
+            "Колька"
+          ],
+          "station_relevance": "Фактический маршрут от каюты через коридор/лифт в шахту и вентиляционный люк; силовой кабель и скобы временно используются для спуска. Старый ход выводит к базам около ангаров; точный уровень не установлен."
+        }
+      ]
     }
   ],
   "character_location_events": [
