@@ -2943,6 +2943,210 @@
       ],
       "identity_hypotheses": [],
       "notes": "Фёдор соединяется с Таис у выхода трубной шахты на p109. Трубный канал не приравнивается всем ранее описанным вентиляционным шахтам. Возврат заканчивается у ворот; дальнейшая доставка на Третий описана, но способ вертикального транспорта не указан."
+    },
+    {
+      "id": "RT-025",
+      "title": "Таис: продовольственные склады Третьего → короткий коридор → внутренний круг кают",
+      "participants": [
+        "Таис"
+      ],
+      "book": "B2",
+      "site_pages": [
+        "B2-003",
+        "B2-004"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT025-A",
+          "label": "Складская зона Третьего с доступными комнатами",
+          "global_level": 3,
+          "local_stratum": "third-ring-circulation",
+          "source_page_id": "B2-003",
+          "movement_method": "WALK",
+          "observed_constraint": "Складская зона Третьего с доступными комнатами",
+          "existing_graph_node": "L3-STORE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT025-B",
+          "label": "Соседние кладовые одежды, игрушек и посуды",
+          "global_level": 3,
+          "local_stratum": "third-ring-circulation",
+          "source_page_id": "B2-004",
+          "movement_method": "WALK",
+          "observed_constraint": "Соседние кладовые одежды, игрушек и посуды",
+          "existing_graph_node": "L3-STORE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT025-C",
+          "label": "Узкий служебный коридор от кладовых",
+          "global_level": 3,
+          "local_stratum": "third-ring-circulation",
+          "source_page_id": "B2-004",
+          "movement_method": "WALK",
+          "observed_constraint": "Узкий служебный коридор от кладовых",
+          "existing_graph_node": "L3-SERVICE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT025-D",
+          "label": "Внутренний круг жилых кают Третьего",
+          "global_level": 3,
+          "local_stratum": "third-ring-circulation",
+          "source_page_id": "B2-004",
+          "movement_method": "WALK",
+          "observed_constraint": "Внутренний круг жилых кают Третьего",
+          "existing_graph_node": "L3-INNER",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "Связь кладовых с внутренним кругом физически пройдена. Узкий коридор не даёт абсолютной ориентации сектора на плане."
+    },
+    {
+      "id": "RT-026",
+      "title": "Эмма: командная рубка Третьего → лифт → жилые каюты Второго",
+      "participants": [
+        "Эмма"
+      ],
+      "book": "B2",
+      "site_pages": [
+        "B2-005"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT026-A",
+          "label": "Командная рубка Третьего",
+          "global_level": 3,
+          "local_stratum": "third-ring-circulation",
+          "source_page_id": "B2-005",
+          "movement_method": "WALK",
+          "observed_constraint": "Командная рубка Третьего",
+          "existing_graph_node": "L3-BRIDGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT026-B",
+          "label": "Лифт спуска с Третьего на Второй, кабина не описана",
+          "global_level": null,
+          "local_stratum": "interlevel-unknown-height",
+          "source_page_id": "B2-005",
+          "movement_method": "ELEVATOR_DOWN",
+          "observed_constraint": "Лифт спуска с Третьего на Второй, кабина не описана",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT026-C",
+          "label": "Зона жилых кают Второго",
+          "global_level": 2,
+          "local_stratum": "second-ring-circulation",
+          "source_page_id": "B2-005",
+          "movement_method": "WALK",
+          "observed_constraint": "Зона жилых кают Второго",
+          "existing_graph_node": "L2-CABINS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT026-A",
+          "lower": "RT026-C",
+          "source_page_id": "B2-005",
+          "claim": "Пройден межуровневый спуск лифтом из командной зоны Третьего к жилой зоне Второго."
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Не доказывает совпадения с грузовым продуктовым лифтом или отдельным пассажирским ДНК-лифтом из книги I."
+    },
+    {
+      "id": "RT-027",
+      "title": "Эмма: каюта Второго → Оранжевая кольцевая магистраль на магнитной доске → вход к детскому саду",
+      "participants": [
+        "Эмма"
+      ],
+      "book": "B2",
+      "site_pages": [
+        "B2-006"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT027-A",
+          "label": "Домашняя каюта Второго, утренний выход",
+          "global_level": 2,
+          "local_stratum": "second-ring-circulation",
+          "source_page_id": "B2-006",
+          "movement_method": "WALK",
+          "observed_constraint": "Домашняя каюта Второго, утренний выход",
+          "existing_graph_node": "L2-CABINS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT027-B",
+          "label": "Переход вниз к Оранжевой магистрали; тип внутреннего спуска неизвестен",
+          "global_level": 2,
+          "local_stratum": "second-ring-circulation",
+          "source_page_id": "B2-006",
+          "movement_method": "WALK",
+          "observed_constraint": "Переход вниз к Оранжевой магистрали; тип внутреннего спуска неизвестен",
+          "existing_graph_node": "L2-ORANGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT027-C",
+          "label": "Кольцевое движение на магнитной доске по Оранжевой, более одного полного оборота",
+          "global_level": 2,
+          "local_stratum": "second-ring-circulation",
+          "source_page_id": "B2-006",
+          "movement_method": "MAGNETIC_BOARD",
+          "observed_constraint": "Кольцевое движение на магнитной доске по Оранжевой, более одного полного оборота",
+          "existing_graph_node": "L2-ORANGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT027-D",
+          "label": "Поворот от Оранжевой к площадкам детского сада, парковка досок",
+          "global_level": 2,
+          "local_stratum": "second-ring-circulation",
+          "source_page_id": "B2-006",
+          "movement_method": "MAGNETIC_BOARD",
+          "observed_constraint": "Поворот от Оранжевой к площадкам детского сада, парковка досок",
+          "existing_graph_node": "L2-ORANGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT027-E",
+          "label": "Остановка у специальных держателей для досок",
+          "global_level": 2,
+          "local_stratum": "second-ring-circulation",
+          "source_page_id": "B2-006",
+          "movement_method": "WALK",
+          "observed_constraint": "Остановка у специальных держателей для досок",
+          "existing_graph_node": "L2-ORANGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "Текст подтверждает именно полный цикл по Оранжевой магистрали; центр, радиус и абсолютный азимут не установлены. Локальный спуск не считать отдельным глобальным этажом."
     }
   ]
 }
