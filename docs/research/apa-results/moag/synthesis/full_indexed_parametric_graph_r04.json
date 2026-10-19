@@ -28023,6 +28023,102 @@
       "epistemic_status": "UNKNOWN_CANON",
       "note": "class not established as regular dock visitor",
       "editable": true
+    },
+    "upper_service_cruiser_length_m": {
+      "id": "P-R04-UPPER_SERVICE_CRUISER_LENGTH_M",
+      "value": null,
+      "unit": "m",
+      "epistemic_status": "PROJECT_EDITABLE_NOT_STORY_FACT",
+      "note": "Independent ship class for upper dock; no automatic match with lower cargo cruiser",
+      "editable": true
+    },
+    "upper_service_cruiser_width_m": {
+      "id": "P-R04-UPPER_SERVICE_CRUISER_WIDTH_M",
+      "value": null,
+      "unit": "m",
+      "epistemic_status": "PROJECT_EDITABLE_NOT_STORY_FACT",
+      "note": "Upper visiting cruiser design scenario",
+      "editable": true
+    },
+    "upper_service_cruiser_height_m": {
+      "id": "P-R04-UPPER_SERVICE_CRUISER_HEIGHT_M",
+      "value": null,
+      "unit": "m",
+      "epistemic_status": "PROJECT_EDITABLE_NOT_STORY_FACT",
+      "note": "Upper visiting cruiser design scenario",
+      "editable": true
+    },
+    "upper_cruisers_simultaneous_in_hangar_count": {
+      "id": "P-R04-UPPER_CRUISERS_SIMULTANEOUS_IN_HANGAR_COUNT",
+      "value": null,
+      "unit": "count",
+      "epistemic_status": "PROJECT_EDITABLE_NOT_STORY_FACT",
+      "note": "Hypothetical simultaneous count for single upper hangar",
+      "editable": true
+    },
+    "upper_cargo_hangar_clear_length_m": {
+      "id": "P-R04-UPPER_CARGO_HANGAR_CLEAR_LENGTH_M",
+      "value": null,
+      "unit": "m",
+      "epistemic_status": "PROJECT_EDITABLE_NOT_STORY_FACT",
+      "note": "Upper cargo/dock complex needs actual bay contour later",
+      "editable": true
+    },
+    "upper_cargo_hangar_clear_width_m": {
+      "id": "P-R04-UPPER_CARGO_HANGAR_CLEAR_WIDTH_M",
+      "value": null,
+      "unit": "m",
+      "epistemic_status": "PROJECT_EDITABLE_NOT_STORY_FACT",
+      "note": "Upper cargo/dock complex needs actual bay contour later",
+      "editable": true
+    },
+    "upper_cargo_hangar_clear_height_m": {
+      "id": "P-R04-UPPER_CARGO_HANGAR_CLEAR_HEIGHT_M",
+      "value": null,
+      "unit": "m",
+      "epistemic_status": "PROJECT_EDITABLE_NOT_STORY_FACT",
+      "note": "Monumental upper dock height, not residential story",
+      "editable": true
+    },
+    "children_gallery_above_plaza_m": {
+      "id": "P-R04-CHILDREN_GALLERY_ABOVE_PLAZA_M",
+      "value": null,
+      "unit": "m",
+      "epistemic_status": "PROJECT_EDITABLE_NOT_STORY_FACT",
+      "note": "Local children residential gallery rise from plaza",
+      "editable": true
+    },
+    "children_to_upper_lift_vertical_delta_m": {
+      "id": "P-R04-CHILDREN_TO_UPPER_LIFT_VERTICAL_DELTA_M",
+      "value": null,
+      "unit": "m",
+      "epistemic_status": "PROJECT_EDITABLE_NOT_STORY_FACT",
+      "note": "Lift passenger elevation delta; not block structural height",
+      "editable": true
+    },
+    "lower_round_hall_clear_height_m": {
+      "id": "P-R04-LOWER_ROUND_HALL_CLEAR_HEIGHT_M",
+      "value": null,
+      "unit": "m",
+      "epistemic_status": "PROJECT_EDITABLE_NOT_STORY_FACT",
+      "note": "Circular hall roof above main floor",
+      "editable": true
+    },
+    "lower_round_hall_bridge_z_above_floor_m": {
+      "id": "P-R04-LOWER_ROUND_HALL_BRIDGE_Z_ABOVE_FLOOR_M",
+      "value": null,
+      "unit": "m",
+      "epistemic_status": "PROJECT_EDITABLE_NOT_STORY_FACT",
+      "note": "Local upper walkway z above floor",
+      "editable": true
+    },
+    "lower_round_hall_bridge_headroom_m": {
+      "id": "P-R04-LOWER_ROUND_HALL_BRIDGE_HEADROOM_M",
+      "value": null,
+      "unit": "m",
+      "epistemic_status": "PROJECT_EDITABLE_NOT_STORY_FACT",
+      "note": "Hypothetical clearance above the bridge",
+      "editable": true
     }
   },
   "rules": [
@@ -28145,6 +28241,80 @@
       "rule": "R014",
       "type": "volume_does_not_approve_geometry",
       "epistemic": "PERMANENT_GATE"
+    },
+    {
+      "rule": "R015",
+      "type": "cargo_cruiser_capacity_area_min",
+      "hostLength": "upper_cargo_hangar_clear_length_m",
+      "hostWidth": "upper_cargo_hangar_clear_width_m",
+      "craftLength": "upper_service_cruiser_length_m",
+      "craftWidth": "upper_service_cruiser_width_m",
+      "count": "upper_cruisers_simultaneous_in_hangar_count",
+      "clearance": "technical_clearance_each_side_m",
+      "epistemic": "USER_SCENARIO_COUNT_NOT_CANON"
+    },
+    {
+      "rule": "R016",
+      "type": "min_with_clearance",
+      "host": "upper_cargo_hangar_clear_height_m",
+      "craft": "upper_service_cruiser_height_m",
+      "clearance": "technical_clearance_each_side_m",
+      "epistemic": "FUNCTIONAL_DESIGN"
+    },
+    {
+      "rule": "R017",
+      "type": "enclosure_diameter_necessary",
+      "diameter": "upper_level_diameter_m",
+      "length": "upper_cargo_hangar_clear_length_m",
+      "width": "upper_cargo_hangar_clear_width_m",
+      "epistemic": "HYPOTHETICAL_CIRCULAR_GLOBAL_ENVELOPE_NOT_EXACT_HULL"
+    },
+    {
+      "rule": "R018",
+      "type": "enclosure_diameter_necessary",
+      "diameter": "lower_level_diameter_m",
+      "length": "lower_old_cargo_hangar_clear_length_m",
+      "width": "lower_old_cargo_hangar_clear_width_m",
+      "epistemic": "HYPOTHETICAL_CIRCULAR_GLOBAL_ENVELOPE_NOT_EXACT_HULL"
+    },
+    {
+      "rule": "R019",
+      "type": "stair_duration_feasible",
+      "height": "children_gallery_above_plaza_m",
+      "speed": "assumed_stair_ascend_vertical_speed_mps",
+      "total_time_s": 30,
+      "epistemic": "TEXT_TIME_P486_DESIGN_SPEED_ASSUMPTION"
+    },
+    {
+      "rule": "R020",
+      "type": "elevator_duration_feasible",
+      "height": "children_to_upper_lift_vertical_delta_m",
+      "speed": "assumed_elevator_speed_mps",
+      "nontravel": "assumed_lift_nontravel_time_s",
+      "total_time_s": 30,
+      "epistemic": "TEXT_TIME_P231_DESIGN_LIFT_KINEMATICS"
+    },
+    {
+      "rule": "R021",
+      "type": "mez_clearance",
+      "hostHeight": "lower_round_hall_clear_height_m",
+      "floorZ": "lower_round_hall_bridge_z_above_floor_m",
+      "roomHeight": "lower_round_hall_bridge_headroom_m",
+      "epistemic": "P220_ROUND_HALL_PARTIAL_BRIDGE_CLEARANCE"
+    },
+    {
+      "rule": "R022",
+      "type": "gt",
+      "left": "upper_level_total_structural_height_m",
+      "right": "upper_cargo_hangar_clear_height_m",
+      "epistemic": "UPPER_MUST_CONTAIN_UPPER_CARGO_HANGAR"
+    },
+    {
+      "rule": "R023",
+      "type": "gt",
+      "left": "lower_level_total_structural_height_m",
+      "right": "lower_old_cargo_hangar_clear_height_m",
+      "epistemic": "LOWER_MUST_CONTAIN_OLD_CARGO_HANGAR"
     }
   ],
   "frame": {
