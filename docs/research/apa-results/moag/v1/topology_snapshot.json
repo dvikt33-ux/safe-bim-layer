@@ -1,6 +1,6 @@
 {
   "schema": "APA-MOAG-TOPOLOGY-SNAPSHOT/0.1",
-  "source_blob_sha": "0590b45c26fb6270eab93ec97edb53bb65a6ed57",
+  "source_blob_sha": "9f740795129f92641b326ea4b3eb336d3b1a1397",
   "derived_from": "docs/research/apa-results/moag/v1/evidence_graph.json",
   "status": "GRAPH_ONLY_NO_COORDINATES",
   "space_refs": [
@@ -363,6 +363,26 @@
       "id": "L2-INFANT-NEW",
       "label": "Комнаты для новорождённых",
       "level": 2
+    },
+    {
+      "id": "L1-BASES-HISTORIC-NUMBERS",
+      "label": "Старые военно-служебные базы №3 и №4 (надписи замков)",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-REMOTE-BED",
+      "label": "Удалённая маленькая спальня Ильи и Кати",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-KIDS-SLEEP",
+      "label": "Спальня Маши с тремя младшими детьми",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-KITCHEN-WATER",
+      "label": "Водозабор и место мытья посуды на Темной базе",
+      "level": 1
     }
   ],
   "relationships": [
@@ -1217,6 +1237,46 @@
       "state": "TEXT_DIRECT",
       "source_ids": [
         "LR-B1-026"
+      ]
+    },
+    {
+      "id": "E86",
+      "from": "L1-BASES",
+      "to": "L1-BASES-HISTORIC-NUMBERS",
+      "relation": "historic_naming",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-028"
+      ]
+    },
+    {
+      "id": "E87",
+      "from": "L1-TEMNAYA",
+      "to": "L1-BASE-REMOTE-BED",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-028"
+      ]
+    },
+    {
+      "id": "E88",
+      "from": "L1-TEMNAYA",
+      "to": "L1-BASE-KIDS-SLEEP",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-028"
+      ]
+    },
+    {
+      "id": "E89",
+      "from": "L1-BASE-COMMON",
+      "to": "L1-BASE-KITCHEN-WATER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-029"
       ]
     }
   ],
