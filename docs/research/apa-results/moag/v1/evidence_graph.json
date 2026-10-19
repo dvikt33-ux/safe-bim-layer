@@ -203,6 +203,27 @@
       "url": "https://loveread.ec/read_book.php?id=48197&p=31",
       "medium": "literary_text",
       "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-032",
+      "section": "Книга I, веб-страница 32",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=32",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-033",
+      "section": "Книга I, веб-страница 33",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=33",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-034",
+      "section": "Книга I, веб-страница 34",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=34",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
     }
   ],
   "nodes": [
@@ -1664,6 +1685,44 @@
       },
       "geometry_gate": "NOT_AUTHORIZED",
       "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-LIFTS-DE",
+      "label": "Лифты Д и Е у отдалённых коридоров Третьего",
+      "level": 3,
+      "type": "vertical_route",
+      "source_ids": [
+        "LR-B1-032"
+      ],
+      "text_basis": "Лифты с буквами Д и Е расположены в коридорах, наиболее удалённых от платформы приёмки грузов, относительно других названных лифтов.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-CARGO-RECEIVING",
+      "label": "Платформа приёмки грузов Третьего",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-032"
+      ],
+      "text_basis": "Логистическая грузоприёмная платформа является опорной точкой для сравнения положения лифтов Д и Е.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
     }
   ],
   "edges": [
@@ -2735,6 +2794,18 @@
         "LR-B1-029"
       ],
       "claim": "Кран для набора воды и мытья посуды в бытовой общей зоне Темной базы.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E90",
+      "from": "L3-LIFTS-DE",
+      "to": "L3-CARGO-RECEIVING",
+      "type": "farthest_lifts_from",
+      "source_ids": [
+        "LR-B1-032"
+      ],
+      "claim": "Герой указывает, что Д и Е — самые дальние от платформы приемки грузов; геометрическая дистанция/направление не задана.",
       "state": "TEXT_DIRECT",
       "metric": null
     }
