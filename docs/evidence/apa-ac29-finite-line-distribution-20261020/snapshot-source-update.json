@@ -1,0 +1,9 @@
+{
+  "status": "INSTALLED_EXPLICIT_ACCEPTED_SNAPSHOT_SOURCE",
+  "beforeSHA256": "682d498be016a1a65883b8fa0168e16d134dca8a643fb61784203223af41d22b",
+  "afterSHA256": "dbe0ac660ee7794b05b8a688b35485f5b1039976096ab5c0cb538e3e07b13156",
+  "backupRetained": true,
+  "nativeWrites": 0,
+  "modelWrites": 0,
+  "sourceRevision": "3527254a"
+}

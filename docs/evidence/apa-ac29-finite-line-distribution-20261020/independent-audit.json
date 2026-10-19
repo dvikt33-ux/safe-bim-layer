@@ -1,0 +1,125 @@
+{
+  "status": "AC29_FINITE_LINE_INSTALLED_SAVED_REOPENED_AUDIT_PASS",
+  "sourceCodeRevision": "3527254a88dceec0fd121ebd07fc39e80958bd9a",
+  "placementRecipe": {
+    "count": 3,
+    "end": {
+      "x": 1865.35,
+      "y": 855.35,
+      "z": 0
+    },
+    "mode": "LINE_SEGMENT",
+    "reference": {
+      "x": 315.35,
+      "y": 315.35,
+      "z": 0
+    },
+    "start": {
+      "x": 1815.35,
+      "y": 815.35,
+      "z": 0
+    }
+  },
+  "expectedTargets": [
+    {
+      "x": 1815.35,
+      "y": 815.35,
+      "z": 0
+    },
+    {
+      "x": 1840.35,
+      "y": 835.35,
+      "z": 0
+    },
+    {
+      "x": 1865.35,
+      "y": 855.35,
+      "z": 0
+    }
+  ],
+  "baselineGuidCount": 176,
+  "finalGuidCount": 182,
+  "allOriginalGeometryAndFaceMaterialsPreserved": true,
+  "newMapping": [
+    {
+      "newChildGuids": [
+        "1df9a2b6-0a8c-4be1-9c71-334a9c28e80e"
+      ],
+      "newRootGuid": "90425cef-fac3-4e6a-bcb4-64c25edefd0d",
+      "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+      "target": {
+        "x": 1815.35,
+        "y": 815.35,
+        "z": 0.0
+      }
+    },
+    {
+      "newChildGuids": [
+        "e1ef1851-a5ee-49aa-856b-f3e907e7ddad"
+      ],
+      "newRootGuid": "21d09fd7-4e51-42c8-9c3e-664ebc229793",
+      "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+      "target": {
+        "x": 1840.35,
+        "y": 835.35,
+        "z": 0.0
+      }
+    },
+    {
+      "newChildGuids": [
+        "c4b76bd2-a9fe-437e-8ce9-5c0e7f801bf8"
+      ],
+      "newRootGuid": "b1c6996c-9694-4541-9e25-e4c58bfd1246",
+      "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+      "target": {
+        "x": 1865.35,
+        "y": 855.35,
+        "z": 0.0
+      }
+    }
+  ],
+  "oneNativeBatch": true,
+  "nativeCalls": [
+    {
+      "command": "MoveElements",
+      "elapsedSeconds": 0.10900089994538575
+    },
+    {
+      "command": "SaveProject",
+      "elapsedSeconds": 3.8522637999849394
+    }
+  ],
+  "savedSHA256": "a72d54515045002ca33c59ddf83508dbe7d9e07ae4ec5e268c0c44fdd90b130d",
+  "sourceSnapshotSHA256": "f9f172004cb6abaed832445b9373083f39bc5deb71b2e3fd6ff601477663269f",
+  "originalPLNSHA256": "3a74d7cb17e460378eacfa8f933aeae29a5ca39fbf2bc73633115c9fee728750",
+  "protectedAncestorsUnchanged": true,
+  "sceneStates": [
+    [
+      "SharedNativeCopy20261019V1",
+      "PASS"
+    ],
+    [
+      "SharedNativeCopySave20261019V1",
+      "PASS"
+    ]
+  ],
+  "stepStates": [
+    [
+      "SharedNativeCopy20261019V1",
+      "operation",
+      "PASS"
+    ],
+    [
+      "SharedNativeCopySave20261019V1",
+      "operation",
+      "PASS"
+    ]
+  ],
+  "sqliteQuickCheck": "ok",
+  "realCloseConfirmed": true,
+  "reopenVerified": true,
+  "verificationNativeWrites": 0,
+  "acceptedPriorOperationsNotRepeated": true,
+  "priorWorkingCopyDriftObserved": "1202f31be224f34f79468ae35114866d1f76ab3c9be409cc7d016d51a11280cf",
+  "priorWorkingCopyNotRestored": true
+}

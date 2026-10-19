@@ -1,0 +1,22 @@
+{
+  "status": "INSTALLED_FINITE_LINE_DISTRIBUTION",
+  "sourceRevision": "544b58c0eeb75aa376049c84c619896bab27ae95",
+  "files": {
+    "scripts/apa_ac29_mass_request.py": {
+      "beforeSHA256": "cbb2d287c99382b0f589cbfe42906c63589bfffbdfd728015ba12cce68b8b4c0",
+      "afterSHA256": "570b8c62b57e34532c951e8d3e5a107c39bb42906bb0432dce3c5bb66658dda5"
+    },
+    "scripts/apa_ac29_copy_batch_oneshot.py": {
+      "beforeSHA256": "57b0d64f6a2ecedd40959e0d0b63bf6a916fb595504c1ad22d1d4c89bbdf801d",
+      "afterSHA256": "682d498be016a1a65883b8fa0168e16d134dca8a643fb61784203223af41d22b"
+    }
+  },
+  "all296OriginalContractsPreserved": true,
+  "catalogCommands": 298,
+  "fileCommands": 30,
+  "semanticCommands": 4,
+  "nativeWrites": 0,
+  "dependencyInstallation": false,
+  "APXChanged": false,
+  "backupRetainedLocally": true
+}
