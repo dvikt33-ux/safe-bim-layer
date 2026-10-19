@@ -67,7 +67,26 @@ def manifest(state,initial=False):
     return m
 
 
-def stage_placements(accepted,state,baseline_trace,placements):
+def accepted_copy_source(accepted,*,use_guarded_snapshot=False):
+    accepted=Path(accepted).resolve()
+    if not use_guarded_snapshot:
+        old,saved=saved_state(accepted)
+        return old,saved,Path(old['scratch'])
+    # Explicit snapshot recovery: never replace or trust a later changed PLN.
+    old=manifest(accepted);saved=read(accepted/'saved.json')
+    snap=read(accepted/'guarded-snapshot.json');receipt=read(accepted/'reopened.json')
+    source=accepted/'guarded-save.snapshot'
+    need(saved['status']=='SHARED_COPY_SAVED_PENDING_REOPEN' and
+         receipt['status']=='LIVE_SHARED_NATIVE_COPY_BATCH_SAVED_REOPENED_PASS' and receipt['reopenVerified'] and
+         receipt['savedSHA256']==saved['savedSHA256']==sha256(source) and
+         sha256(accepted/'guarded-snapshot.json')==saved['snapshotReceiptSHA256'] and
+         snap['savedSHA256']==snap['snapshotSHA256']==saved['savedSHA256'] and
+         snap['protectedSHA256']=={old['source']:old['sourceSHA256'],old['originalProtected']:old['originalProtectedSHA256']},
+         'SHARED_COPY_ACCEPTED_GUARDED_SNAPSHOT_REQUIRED')
+    return old,saved,source
+
+
+def stage_placements(accepted,state,baseline_trace,placements,*,use_guarded_snapshot=False):
     """New placement capability in a fresh copy of an accepted individual batch.
 
     Reuses the original execution, scope, verifier and save/reopen path below.
@@ -75,7 +94,8 @@ def stage_placements(accepted,state,baseline_trace,placements):
     """
     accepted,state,baseline_trace=[Path(p).resolve() for p in (accepted,state,baseline_trace)]
     shifts=placement_offsets(placements)
-    old,saved=saved_state(accepted);receipt=read(accepted/'reopened.json')
+    old,saved,source=accepted_copy_source(accepted,use_guarded_snapshot=use_guarded_snapshot)
+    receipt=read(accepted/'reopened.json')
     need(receipt['status']=='LIVE_SHARED_NATIVE_COPY_BATCH_SAVED_REOPENED_PASS' and receipt['reopenVerified'] and
          not state.exists() and state.parent.is_dir() and all(r['dz']==0 for r in shifts),
          'SHARED_COPY_ACCEPTED_SOURCE_AND_NEW_STATE_REQUIRED')
@@ -87,10 +107,10 @@ def stage_placements(accepted,state,baseline_trace,placements):
          'SHARED_COPY_ACCEPTED_FULL_BASELINE_REQUIRED')
     scratch=state.parent/'native-line-distribution.pln'
     need(not scratch.exists(),'SHARED_COPY_FRESH_PLN_REQUIRED')
-    state.mkdir();copy_exclusive(old['scratch'],scratch)
+    state.mkdir();copy_exclusive(source,scratch)
     need(sha256(scratch)==saved['savedSHA256'],'SHARED_COPY_INITIAL_BYTES_DRIFT')
     write_new_json(state/'baseline-native.json',native)
-    m=dict(schema=SCHEMA,source=old['scratch'],sourceSHA256=saved['savedSHA256'],
+    m=dict(schema=SCHEMA,source=str(source),sourceSHA256=saved['savedSHA256'],
         originalProtected=old['originalProtected'],originalProtectedSHA256=old['originalProtectedSHA256'],
         protectedAncestors={old['source']:old['sourceSHA256'],**old.get('protectedAncestors',{})},
         acceptedState=str(accepted),acceptedReceiptSHA256=sha256(accepted/'reopened.json'),
@@ -98,6 +118,9 @@ def stage_placements(accepted,state,baseline_trace,placements):
         baselineSHA256=sha256(state/'baseline-native.json'),baselineGuidSetSHA256=R.digest(ids),
         baselineBrepSHA256=G.fingerprint(native),baselineSemanticSHA256=V.semantic_digest(native,set(ids)),
         prototype=PROTOTYPE,placements=placements,status='STAGED_ONLY_NO_NATIVE_WRITES',automaticReplay=False)
+    if use_guarded_snapshot:
+        m['acceptedSnapshotSource']=True
+        m['laterWorkingCopySHA256Observed']=sha256(old['scratch'])
     write_new_json(state/'manifest.json',m);return m
 
 

@@ -75,5 +75,24 @@ class Gates(unittest.TestCase):
         with patch.object(B,'api_for',return_value=(closed,None)):
             self.assertEqual(B.check_closed(self.state)['nativeWrites'],0)
 
+    def test_explicit_snapshot_source_preserves_later_changed_working_copy(self):
+        self.saved();saved=B.read(self.state/'saved.json')
+        B.write_new_json(self.state/'reopened.json',dict(status='LIVE_SHARED_NATIVE_COPY_BATCH_SAVED_REOPENED_PASS',
+            reopenVerified=True,savedSHA256=saved['savedSHA256']))
+        working=Path(self.m['scratch']);working.write_bytes(b'later unrelated changed working copy')
+        with self.assertRaisesRegex(ValueError,'SAVED_BYTES'):B.accepted_copy_source(self.state)
+        old,r,source=B.accepted_copy_source(self.state,use_guarded_snapshot=True)
+        self.assertEqual(source,self.state/'guarded-save.snapshot')
+        self.assertEqual(B.sha256(source),r['savedSHA256'])
+        self.assertEqual(working.read_bytes(),b'later unrelated changed working copy')
+
+    def test_changed_snapshot_is_never_accepted_as_source(self):
+        self.saved();saved=B.read(self.state/'saved.json')
+        B.write_new_json(self.state/'reopened.json',dict(status='LIVE_SHARED_NATIVE_COPY_BATCH_SAVED_REOPENED_PASS',
+            reopenVerified=True,savedSHA256=saved['savedSHA256']))
+        (self.state/'guarded-save.snapshot').write_bytes(b'changed')
+        with self.assertRaisesRegex(ValueError,'GUARDED_SNAPSHOT_REQUIRED'):
+            B.accepted_copy_source(self.state,use_guarded_snapshot=True)
+
 
 if __name__=='__main__':unittest.main()
