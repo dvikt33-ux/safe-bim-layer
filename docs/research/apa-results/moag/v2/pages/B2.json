@@ -408,23 +408,23 @@
       "id": "B2-037",
       "page_number": 37,
       "url": "https://loveread.ec/read_book.php?id=53370&p=37",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "UNRESOLVED_OBJECT",
+      "recorded_spatial_hints": 0,
+      "notes": "Таис и Фёдор остаются в служебной рубке/каюте крейсера Иминуя. Встроенная техника питания, экран и санузел принадлежат чужому кораблю, не МОАГу. Новых планировочных данных о станции нет.",
+      "verification_method": "Full source-page reading; hostile cruiser excluded and retrospective MOAG lighting kept separate",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-038",
       "page_number": 38,
       "url": "https://loveread.ec/read_book.php?id=53370&p=38",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "UNRESOLVED_OBJECT",
+      "recorded_spatial_hints": 1,
+      "notes": "Таис и Фёдор продолжают пользоваться душем и диспетчерским столом чужого крейсера. Воспоминание Таис: на МОАГе роботы выключали или приглушали свет на двух обитаемых уровнях в искусственное ночное время, это режим освещения, а не изменение помещений.",
+      "verification_method": "Full source-page reading; hostile cruiser excluded and retrospective MOAG lighting kept separate",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-039",
