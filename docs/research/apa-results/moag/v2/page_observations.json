@@ -10536,6 +10536,20 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-671",
+      "page_id": "B3-015",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=15",
+      "station_id": "MOAG",
+      "narrative_mode": "DIALOGUE_CONFIRMED_LAYOUT",
+      "locator_hint": "Эмма описывает два люка Верхнего уровня к узким коридорам и кабельным каналам; люки есть и снизу.",
+      "spatial_assertion": "По достоверному объяснению Эммы, на Верхнем уровне МОАГа есть два люка, ведущих в узкие коридоры к кабельным каналам; внизу люки тоже имеются, но выход из них неудобен и опасен. Не назначать конкретный маршрут на другую станцию и не считать его здесь пройденным.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
