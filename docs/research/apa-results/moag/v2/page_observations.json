@@ -6687,6 +6687,113 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-407",
+      "page_id": "B2-029",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=29",
+      "station_id": "MOAG_MEMORY_ONLY",
+      "narrative_mode": "EXTERNAL_CARGO_BRANDING",
+      "locator_hint": "контейнеры с логотипом Моага на чужом крейсере",
+      "spatial_assertion": "На крейсере Гильдии имеются контейнеры с маркировкой МОАГа. Это подтверждает грузовую цепочку продукции станции, не конфигурацию цехов крейсера внутри МОАГа.",
+      "feature_refs": [
+        "L3-CARGO-HALL",
+        "L3-PRODUCTION"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-408",
+      "page_id": "B2-029",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=29",
+      "station_id": "UNRESOLVED_OBJECT",
+      "narrative_mode": "OTHER_SHIP_ASSEMBLY_EXCLUDED",
+      "locator_hint": "ленты конвейеров и многоножки в чужом ангаре",
+      "spatial_assertion": "Зал сборки беспилотников, склад и конвейер расположены на крейсере противника; исключены из архитектурного графа станции.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-409",
+      "page_id": "B2-030",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=30",
+      "station_id": "UNRESOLVED_OBJECT",
+      "narrative_mode": "OTHER_SHIP_LEVELS_EXCLUDED",
+      "locator_hint": "это только нижний технический уровень крейсера",
+      "spatial_assertion": "Описание нижнего технического яруса с серверными стенами и стремление найти вертикальный выход относится к крейсеру Гильдии, а не многоярусности МОАГа.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-410",
+      "page_id": "B2-031",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=31",
+      "station_id": "UNRESOLVED_OBJECT",
+      "narrative_mode": "OTHER_SHIP_CURVE_EXCLUDED",
+      "locator_hint": "широкая дуга и лестница с редко расположенными ступенями",
+      "spatial_assertion": "Криволинейный проход, лестница для шестиногих роботов и верхний коридор — элементы чужого крейсера; не добавлять их в модель МОАГа.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-411",
+      "page_id": "B2-031",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=31",
+      "station_id": "MOAG",
+      "narrative_mode": "BRIDGE_OPERATIONS",
+      "locator_hint": "после смены главы, обсуждение у экрана в рубке",
+      "spatial_assertion": "После смены главы действие возвращается в рубку МОАГа: герои исследуют электронные планшеты и неизвестный чип; новых дверей, размеров и помещений не указано.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-412",
+      "page_id": "B2-032",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=32",
+      "station_id": "MOAG",
+      "narrative_mode": "BRIDGE_HOLOGRAPHIC_RESEARCH",
+      "locator_hint": "планшетная голограмма на командном посту",
+      "spatial_assertion": "В командной рубке Третьего Коля и Эмма исследуют микросхему через планшеты с голограммой, устройство отключают от беспроводного канала станции; новая конструктивная геометрия не возникает.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-413",
+      "page_id": "B2-032",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=32",
+      "station_id": "MOAG",
+      "narrative_mode": "L3_SECTION_SEARCH_PLAN",
+      "locator_hint": "разделить весь третий уровень на секции",
+      "spatial_assertion": "Герои принимают решение обыскать Третий уровень по секциям для поиска сторонних устройств. Это план обследования, а не физически пройденный маршрут на данной странице.",
+      "feature_refs": [
+        "L3"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
