@@ -1,6 +1,6 @@
 {
   "schema": "APA-MOAG-TOPOLOGY-SNAPSHOT/0.1",
-  "source_blob_sha": "c3f1d1defaf421edc0556e7710d84fa6a91c0d5c",
+  "source_blob_sha": "d14592073528435ceadf5282d96450acd2dbe694",
   "derived_from": "docs/research/apa-results/moag/v1/evidence_graph.json",
   "status": "GRAPH_ONLY_NO_COORDINATES",
   "space_refs": [
@@ -393,6 +393,31 @@
       "id": "L3-CARGO-RECEIVING",
       "label": "Платформа приёмки грузов Третьего",
       "level": 3
+    },
+    {
+      "id": "L1-DARK-UPPER-PERIMETER",
+      "label": "Узкая галерея по периметру общего помещения Темной базы",
+      "level": 1
+    },
+    {
+      "id": "L1-STRAIGHT-FREIGHT",
+      "label": "Отдельный широкий ПРЯМОЙ грузовой коридор",
+      "level": 1
+    },
+    {
+      "id": "L1-ENG-CABLE-NICHES",
+      "label": "Узкие коммуникационные ниши с трубами и разноцветными кабелями",
+      "level": 1
+    },
+    {
+      "id": "LINK-LIFT-L2-L1",
+      "label": "Официальный лифт между Вторым и Нижним",
+      "level": null
+    },
+    {
+      "id": "L1-DARK-ENTRY-DOOR",
+      "label": "Двухстворчатая стальная дверь внешней границы Темной базы",
+      "level": 1
     }
   ],
   "relationships": [
@@ -1297,6 +1322,96 @@
       "state": "TEXT_DIRECT",
       "source_ids": [
         "LR-B1-032"
+      ]
+    },
+    {
+      "id": "E91",
+      "from": "L1-BASE-COMMON",
+      "to": "L1-DARK-UPPER-PERIMETER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-049"
+      ]
+    },
+    {
+      "id": "E92",
+      "from": "L1-DARK-UPPER-PERIMETER",
+      "to": "L1-BASE-SLEEP",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-050"
+      ]
+    },
+    {
+      "id": "E93",
+      "from": "L1-DARK-UPPER-PERIMETER",
+      "to": "L1-BASE-COMMON",
+      "relation": "above_floor",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-049"
+      ]
+    },
+    {
+      "id": "E94",
+      "from": "L1-ENG-CABLE-NICHES",
+      "to": "L1-STRAIGHT-FREIGHT",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-044"
+      ]
+    },
+    {
+      "id": "E95",
+      "from": "L1-DARK-ENTRY-DOOR",
+      "to": "L1-ENG-CABLE-NICHES",
+      "relation": "path_with_corridors_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-045"
+      ]
+    },
+    {
+      "id": "E96",
+      "from": "L1-BASES",
+      "to": "L1-DARK-ENTRY-DOOR",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-045"
+      ]
+    },
+    {
+      "id": "E97",
+      "from": "L2",
+      "to": "LINK-LIFT-L2-L1",
+      "relation": "elevator_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-047"
+      ]
+    },
+    {
+      "id": "E98",
+      "from": "LINK-LIFT-L2-L1",
+      "to": "L1",
+      "relation": "elevator_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-047"
+      ]
+    },
+    {
+      "id": "E99",
+      "from": "L1-STRAIGHT-FREIGHT",
+      "to": "L1-HANGAR-HALL",
+      "relation": "possibly_same_sector",
+      "state": "RECHECK_REQUIRED",
+      "source_ids": [
+        "LR-B1-044"
       ]
     }
   ],
