@@ -94,7 +94,10 @@
       "B3-042",
       "B3-043",
       "B3-044",
-      "B3-045"
+      "B3-045",
+      "B3-057",
+      "B3-058",
+      "B3-059"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -124,7 +127,9 @@
       "B3-018",
       "B3-034",
       "B3-038",
-      "B3-042"
+      "B3-042",
+      "B3-057",
+      "B3-058"
     ],
     "remote_evidence_page_ids": [
       "B2-052",
@@ -155,14 +160,15 @@
       "B3-040",
       "B3-043",
       "B3-044",
-      "B3-045"
+      "B3-045",
+      "B3-059"
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B3-045",
-      "context_reviewed_page_count": 91,
-      "full_evidence_page_count": 249,
-      "external_excluded_page_count": 27,
+      "as_of_page_id": "B3-059",
+      "context_reviewed_page_count": 94,
+      "full_evidence_page_count": 250,
+      "external_excluded_page_count": 29,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
       "justified_reopen_event_count": 5,
