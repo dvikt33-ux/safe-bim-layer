@@ -5,23 +5,46 @@
   "names": [
     {
       "value": "Млечный Путь",
-      "role": "original_name",
+      "role": "former_historical_name",
       "canonical_station_id": "MOAG",
-      "period": "BEFORE_ROBOT_CAPTURE"
+      "period": "EARLY_STATION_HISTORY",
+      "source_status": "DIRECT_TEXT"
     },
     {
       "value": "МОАГ",
       "role": "later_name",
       "canonical_station_id": "MOAG",
-      "period": "AFTER_ROBOT_CAPTURE"
+      "period": "LATER_STATION_HISTORY",
+      "source_status": "DIRECT_TEXT"
+    },
+    {
+      "value": "Моаг",
+      "role": "variant_spelling",
+      "canonical_station_id": "MOAG",
+      "period": "LATER_STATION_HISTORY",
+      "source_status": "DIRECT_TEXT"
     }
   ],
-  "identity_claim": "Млечный Путь и МОАГ — один и тот же физический космический корабль/станция; позднее название связано с захватом роботами.",
+  "identity_claim": "Станция «Млечный Путь» и станция МОАГ — один физический объект. Смена имени не создаёт второй станции и не доказывает изменения его геометрии.",
   "claim_provenance": {
-    "type": "USER_CLARIFICATION",
+    "type": "PRIMARY_TEXT_AND_USER_CLARIFICATION",
     "date": "2026-10-19",
-    "text_page_locator": null,
-    "validation_status": "PENDING_INDEPENDENT_PAGE_REFERENCE"
+    "validation_status": "DIRECT_TEXT_CONFIRMED",
+    "primary_sources": [
+      {
+        "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=11",
+        "evidence": "Прямая реплика Лона: два года имя «Млечный Путь», позже код М.О.А.Г. переименован в Моаг"
+      },
+      {
+        "url": "https://loveread.ec/read_book.php?id=48197&p=28",
+        "evidence": "Электронные замки: Нижний уровень станции «Млечный Путь», базы № 3 и № 4"
+      },
+      {
+        "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=16",
+        "evidence": "Архив капитана: исходное название станции и присвоение имени Моаг интеллекту"
+      }
+    ],
+    "user_clarification": "Млечный Путь и Моаг являются одним физическим объектом, имя меняется в истории"
   },
   "separate_entities": [
     {
@@ -35,15 +58,29 @@
     "use_story_phase_for_access_and_function_changes": true,
     "phases": [
       {
-        "id": "BEFORE_ROBOT_CAPTURE",
-        "station_id": "MOAG"
+        "id": "ORIGINAL_CREW",
+        "station_id": "MOAG",
+        "description": "Первоначальная эксплуатация, историческое имя Млечный Путь"
       },
       {
-        "id": "AFTER_ROBOT_CAPTURE",
-        "station_id": "MOAG"
+        "id": "AUTONOMOUS_AI",
+        "station_id": "MOAG",
+        "description": "Станция без экипажа, автономные функции и имя её ИИ"
+      },
+      {
+        "id": "ROBOT_MODIFIED",
+        "station_id": "MOAG",
+        "description": "Роботизированное управление, новые программы и ограничения доступа"
+      },
+      {
+        "id": "SURVIVORS",
+        "station_id": "MOAG",
+        "description": "Позднейшие действия героев и изменения помещений/систем"
       }
     ],
     "name_change_must_not_create_new_floor_graph": true,
     "unverified_reconstructions_stay_hypotheses": true
-  }
+  },
+  "naming_note": "В архиве капитана отдельно именуется интеллект станции «Моаг». Имя управляющего ИИ и позднее имя физической станции совпадают, но это разные сущности.",
+  "chronology_note": "Прямая реплика Лона сообщает, что прежнее название существовало два года. Точное совпадение даты переименования с моментом захвата роботами из прочитанных фрагментов не следует; использовать отдельные временные поля NAME_EPOCH и CONTROL_EPOCH."
 }
