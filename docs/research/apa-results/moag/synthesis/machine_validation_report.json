@@ -164,6 +164,11 @@
         "id": "IR-07",
         "pass": true,
         "actual": "all machine checks pass"
+      },
+      {
+        "id": "IR-08",
+        "pass": true,
+        "actual": "all feature refs resolve"
       }
     ],
     "pass": true
