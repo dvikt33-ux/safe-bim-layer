@@ -378,6 +378,41 @@
       "url": "https://loveread.ec/read_book.php?id=48197&p=65",
       "medium": "literary_text",
       "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-066",
+      "section": "Книга I, постраничная проверка веб-страницы 66",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=66",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-067",
+      "section": "Книга I, постраничная проверка веб-страницы 67",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=67",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-068",
+      "section": "Книга I, постраничная проверка веб-страницы 68",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=68",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-069",
+      "section": "Книга I, постраничная проверка веб-страницы 69",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=69",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-070",
+      "section": "Книга I, постраничная проверка веб-страницы 70",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=70",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
     }
   ],
   "nodes": [
@@ -2314,6 +2349,139 @@
       },
       "geometry_gate": "NOT_AUTHORIZED",
       "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ADULT-RETREAT-SUITE",
+      "label": "Взрослая каюта за дверью с проверкой ДНК",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "text_basis": "За биометрической дверью вход в сохранившуюся каюту экипажа: общая комната, ванная и спальня.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ADULT-RETREAT-LIVING",
+      "label": "Просторная общая комната взрослой каюты",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "text_basis": "Мягкие диваны, несколько мощных планшетов, раковина, белая лучевая печка, кофеварка, соковыжималка, мини-гриль.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ADULT-RETREAT-WET",
+      "label": "Ванная взрослой каюты с коричневой плиткой",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "text_basis": "От общего помещения отдельная дверь, коричневая керамическая плитка и розовая раковина; горячая вода.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ADULT-RETREAT-BED",
+      "label": "Спальня взрослой каюты с широкой кроватью",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-068"
+      ],
+      "text_basis": "За второй дверью отдельная спальня с широкой кроватью и пледом.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-DNA-HUMAN-LOCKS",
+      "label": "Переоборудованные дверные замки внутреннего круга",
+      "level": 3,
+      "type": "system",
+      "source_ids": [
+        "LR-B1-070"
+      ],
+      "text_basis": "В историческом этапе после эпидемии замки дверей внутреннего Третьего перенастроили на доступ по ДНК человека; относить к состоянию, не к исходной проектной планировке.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ARCHIVE-PLAN-SET",
+      "label": "Архивный видеокомплекс в каюте штурмана",
+      "level": 3,
+      "type": "equipment",
+      "source_ids": [
+        "LR-B1-069"
+      ],
+      "text_basis": "В жилой комнате один большой голографический экран выводит запись с трех планшетов.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-STAFF-FOOD-STORES",
+      "label": "Кладовая провизии вне закрытого внутреннего круга",
+      "level": 3,
+      "type": "space_group",
+      "source_ids": [
+        "LR-B1-070"
+      ],
+      "text_basis": "Здоровые члены экипажа выходили из внутреннего круга через общие коридоры за продуктами в кладовые; точные координаты и число неизвестны.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
     }
   ],
   "edges": [
@@ -3853,6 +4021,114 @@
         "LR-B1-65"
       ],
       "claim": "Расписанные стены, столы и стулья Овальной базы.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E129",
+      "from": "L3-REST-GALLERY-DEADEND",
+      "to": "L3-ADULT-RETREAT-SUITE",
+      "type": "biometric_door_to",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "claim": "Из тупикового верхнего прохода галереи одна дверь с человеческим ДНК допускает в защищенную каюту; точная дверь среди пары пока требует сверки",
+      "state": "TOPOLOGY_INFERRED",
+      "metric": null
+    },
+    {
+      "id": "E130",
+      "from": "L3-ADULT-RETREAT-SUITE",
+      "to": "L3-ADULT-RETREAT-LIVING",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "claim": "Общая комната",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E131",
+      "from": "L3-ADULT-RETREAT-SUITE",
+      "to": "L3-ADULT-RETREAT-WET",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "claim": "Отдельная ванная",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E132",
+      "from": "L3-ADULT-RETREAT-SUITE",
+      "to": "L3-ADULT-RETREAT-BED",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-068"
+      ],
+      "claim": "Отдельная спальня",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E133",
+      "from": "L3-ADULT-RETREAT-LIVING",
+      "to": "L3-ADULT-RETREAT-WET",
+      "type": "door_to",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "claim": "Первая дверь",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E134",
+      "from": "L3-ADULT-RETREAT-LIVING",
+      "to": "L3-ADULT-RETREAT-BED",
+      "type": "door_to",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "claim": "Вторая дверь",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E135",
+      "from": "L3-INNER",
+      "to": "L3-DNA-HUMAN-LOCKS",
+      "type": "historic_access_control",
+      "source_ids": [
+        "LR-B1-070"
+      ],
+      "claim": "Изоляция людей после распространения вируса, позднее переоборудование дверей",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E136",
+      "from": "L3-INNER",
+      "to": "L3-STAFF-FOOD-STORES",
+      "type": "historic_supply_expedition",
+      "source_ids": [
+        "LR-B1-070"
+      ],
+      "claim": "Вылазки из защищённого кольца по общим коридорам к кладовым, без прямого примыкания",
+      "state": "TOPOLOGY_INFERRED",
+      "metric": null
+    },
+    {
+      "id": "E137",
+      "from": "L3-ADULT-RETREAT-LIVING",
+      "to": "L3-ARCHIVE-PLAN-SET",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-069"
+      ],
+      "claim": "Событие воспроизведения записи в жилой комнате",
       "state": "TEXT_DIRECT",
       "metric": null
     }
