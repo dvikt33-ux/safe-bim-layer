@@ -375,34 +375,34 @@
       "id": "B2-034",
       "page_number": 34,
       "url": "https://loveread.ec/read_book.php?id=53370&p=34",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 10,
+      "notes": "Эмма и Коля выходят из капитанской рубки Третьего и идут во внутренний круг к Детскому блоку. Сразу за кувезами обнаружен отдельный узкий полутёмный коридор и единственная дверь с электронным замком, недоступным обычным полномочиям Мартина. За дверью центральная круглая галерея с металлическими перилами, от которой вниз виден круглый вертикальный объём, проходящий по центру станции на все три глобальных уровня; визуальная оценка глубины вниз около 15 м — не высотная отметка уровня.",
+      "verification_method": "Complete literary body reading with station identity and narrative switch classification; LoveRead",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-035",
       "page_number": 35,
       "url": "https://loveread.ec/read_book.php?id=53370&p=35",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 5,
+      "notes": "Галерея энергомодуля идёт по правильному кругу вокруг колбы с голубоватой средой; по толстым разноцветным кабелям от оборудования к галерее перемещаются микроустройства. Затем сюжет переключается на чужой крейсер Гильдии: его кабина наладчиков не часть МОАГа.",
+      "verification_method": "Complete literary body reading with station identity and narrative switch classification; LoveRead",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-036",
       "page_number": 36,
       "url": "https://loveread.ec/read_book.php?id=53370&p=36",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "OTHER_SHIP_NOT_MOAG",
+      "recorded_spatial_hints": 0,
+      "notes": "Страница целиком продолжает пребывание Таис и Фёдора в сервисной рубке на крейсере Гильдии (Иминуя), описывает его санузел, миникухню, стеклянные двери и серверы; эти объекты запрещено переносить в МОАГ. Новых физических объёмов на станции страница не подтверждает.",
+      "verification_method": "Complete literary body reading with station identity and narrative switch classification; LoveRead",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-037",
