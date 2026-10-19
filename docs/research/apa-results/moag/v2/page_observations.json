@@ -10802,6 +10802,34 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-690",
+      "page_id": "B3-059",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=59",
+      "station_id": "MOAG",
+      "narrative_mode": "CHARACTER_KNOWN_AI_ARCHITECTURE",
+      "locator_hint": "Питер говорит о возможностях интеллекта каждой станции после того, как Эмма вспоминает Мартина-МОАГа.",
+      "spatial_assertion": "По прямому объяснению Питера, интеллект каждой станции может проецировать себя в робота. Это общее свойство относится и к МОАГу и подтверждает возможность Мартина-МОАГа существовать в теле робота; конкретное тело и его расположение не указаны.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-691",
+      "page_id": "B3-059",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=59",
+      "station_id": "MOAG",
+      "narrative_mode": "CHARACTER_KNOWN_STATION_COMPARISON",
+      "locator_hint": "Эмма узнаёт капитанскую рубку другой станции как точное сходство с рубкой МОАГа.",
+      "spatial_assertion": "Капитанская рубка другой станции в точности напоминает рубку МОАГа: совпадают монитор, кресла и цвет ковра. Это точная аналогия конкретной рубки и её оснащения, но не доказательство идентичности остальной планировки станций.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
