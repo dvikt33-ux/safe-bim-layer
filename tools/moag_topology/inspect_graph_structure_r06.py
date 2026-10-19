@@ -133,6 +133,18 @@ def project(graph, fragments, bounds, r06):
             "clear_volume_bounding_prism_range_m3": e.get("clear_volume_bounds_m3"),
             "local_floor_factor": e.get("local_story_factor_range"),
             "scenario_not_text_measurement": True,
+            "book_derived_numeric_limits": {
+                "footprint_area_m2": None,
+                "usable_floor_area_m2": None,
+                "clear_volume_m3": None,
+                "note": "Reviewed source IDs establish presence/function, not numerical metrics"
+            },
+            "editable_project_bounds": {
+                "footprint_area_m2": [e["min_area_m2"], e["max_area_m2"]]
+                                       if "min_area_m2" in e else None,
+                "usable_floor_area_m2": e.get("usable_floor_area_range_m2"),
+                "clear_bounding_prism_m3": e.get("clear_volume_bounds_m3")
+            },
             "not_additive_by_default": role in NONADDITIVE_ROLES,
             "geometry_proven": False,
         })
