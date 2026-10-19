@@ -15,7 +15,7 @@ import sys
 BASE = Path(__file__).resolve().parents[2] / "docs/research/apa-results/moag"
 MOVEMENT = {"WALK","RUN","ELEVATOR_UP","ELEVATOR_DOWN","CRAWL",
             "DROP_DOWN","CLIMB_UP","CLIMB_DOWN","TURN_AND_CRAWL",
-            "ROPE_LADDER","HATCH_CLIMB","LADDER_UP","DOOR","NARRATIVE_GAP"}
+            "ROPE_LADDER","HATCH_CLIMB","LADDER_UP","DOOR","NARRATIVE_GAP","MAGNETIC_BOARD"}
 RELATIONS = {"RELATIVE_Z","ROUTE_WITH_ALTERNATE_VERT_PATH"}
 def load(path):
     return json.loads(path.read_text(encoding="utf-8"))
