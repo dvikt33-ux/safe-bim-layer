@@ -56,12 +56,12 @@
       "id": "B3-005",
       "page_number": 5,
       "url": "https://loveread.ec/read_book.php?id=58610&p=5",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "OTHER_SHIP_NOT_MOAG",
+      "recorded_spatial_hints": 0,
+      "notes": "Продолжение главы 2 на крейсере «Дракон»: катера, их обслуживание и обитатели корабля. Упоминание спасённых детей со станции не добавляет новых пространственных сведений о МОАГе; вся корабельная механика исключена.",
+      "verification_method": "Однажды прочитана через Opera для контекстной проверки; новые сведения о планировке МОАГа не найдены.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B3-006",
