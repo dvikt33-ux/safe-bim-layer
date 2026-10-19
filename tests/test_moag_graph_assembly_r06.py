@@ -60,6 +60,28 @@ class EvidenceGraphR06Tests(unittest.TestCase):
         self.assertTrue(all(not c["walkable_subgraph_proven"]
                             for c in r["connected_evidence_components"]))
 
+    def test_physical_component_reduction_uses_real_physical_bridges(self):
+        counts = self.result["counts"]
+        self.assertEqual(counts["before_routes_physical_components"]
+                         - counts["after_routes_physical_components"],
+                         counts["physical_components_joined"])
+        self.assertEqual(counts["physical_components_joined"],
+                         counts["physical_fragment_bridge_events"])
+        self.assertGreater(counts["physical_components_joined"], 0)
+        self.assertTrue(all(x["source_ids"]
+                            for x in self.result["physical_fragment_bridge_events"]))
+
+    def test_trace_is_inspectable_without_claiming_plan_geometry(self):
+        a, b = "M-L2-EMMA-SUITE-001", "M-L2-EMMA-KITCHEN-001"
+        chain = MOD.trace_between(self.result, a, b)
+        self.assertEqual(chain["status"],
+                         "QUALITATIVE_ASSOCIATION_CHAIN_NOT_TRAVEL_ITINERARY")
+        self.assertEqual(chain["edge_chain"][0]["edge_id"], "MOAG-R05-001")
+        self.assertIn("P-511", chain["edge_chain"][0]["source_ids"])
+        self.assertFalse(chain["geometry_proven"])
+        with self.assertRaisesRegex(ValueError, "UNKNOWN_TRACE_ENDPOINT"):
+            MOD.trace_between(self.result, "NOT-AN-INDEX", b)
+
     def test_narrative_gap_is_not_connected_across_unseen_route(self):
         r = self.result
         self.assertGreater(r["counts"]["narrative_gaps"], 0)
