@@ -73,7 +73,8 @@
       "B2-143",
       "B2-144",
       "B3-004",
-      "B3-005"
+      "B3-005",
+      "B3-006"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -114,13 +115,14 @@
       "B2-089",
       "B2-141",
       "B2-144",
-      "B3-004"
+      "B3-004",
+      "B3-006"
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B3-005",
-      "context_reviewed_page_count": 70,
-      "full_evidence_page_count": 233,
+      "as_of_page_id": "B3-006",
+      "context_reviewed_page_count": 71,
+      "full_evidence_page_count": 234,
       "external_excluded_page_count": 23,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
@@ -1422,10 +1424,11 @@
         "end": 7
       },
       "chapter_classification": "REMOTE_EVIDENCE",
-      "screening_status": "ONE_PASS_IN_PROGRESS",
+      "screening_status": "ONE_PASS_COMPLETE",
       "screened_pages": [
         "B3-004",
-        "B3-005"
+        "B3-005",
+        "B3-006"
       ],
       "scenes": [
         {
@@ -1434,6 +1437,10 @@
             {
               "page_id": "B3-004",
               "fragment": "После заголовка главы 2: в разговоре на крейсере сообщается, что в энергомодуле станции есть плазма живого металла, из которой возникают роботы-каракатицы; Жак объясняет программирование плазмы чипами."
+            },
+            {
+              "page_id": "B3-006",
+              "fragment": "В диалоге Ника: синтетики не смирились с потерей одной станции; вероятный референт — МОАГ, прямо не назван."
             }
           ],
           "classification": "REMOTE_EVIDENCE",
@@ -1461,7 +1468,8 @@
           "physical_location": "Крейсер «Дракон» и его обитатели.",
           "screened_out_material": "Устройство чужого корабля и его катеров не включается в модель МОАГа."
         }
-      ]
+      ],
+      "chapter_end_confirmed": true
     }
   ],
   "character_location_events": [
