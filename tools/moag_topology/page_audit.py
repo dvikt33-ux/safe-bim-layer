@@ -39,7 +39,9 @@ def check(root=ROOT):
             if status not in STATUSES:
                 raise ValueError("unknown coverage status "+pid)
             if status=="REVIEWED_FULL_PAGE":
-                if not p.get("full_page_review_date") or p.get("recorded_spatial_hints") is None:
+                if (not p.get("full_page_review_date") or not isinstance(p.get("recorded_spatial_hints"), int)
+                        or isinstance(p.get("recorded_spatial_hints"), bool) or p["recorded_spatial_hints"] < 0
+                        or not isinstance(p.get("notes"), str) or not p["notes"].strip()):
                     raise ValueError("false full reading status "+pid)
                 if p.get("target_station")=="UNCLASSIFIED":
                     raise ValueError("unknown station scope in read page "+pid)
