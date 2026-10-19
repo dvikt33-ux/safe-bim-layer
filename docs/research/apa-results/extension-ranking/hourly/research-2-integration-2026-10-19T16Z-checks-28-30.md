@@ -1,0 +1,4 @@
+# APA №2 16Z — SOURCE проверки 28–30
+28. ezdxf 1.4.5 XClip reads 2D WCS clipping path, enabled/inverted flags. ADAPTER metadata, exact visible vector clip NOT_FOUND. Source: https://ezdxf.readthedocs.io/en/stable/tools/xclip.html
+29. ezdxf Insert.mcount>1 requires multi_insert; APA C1 already decomposes but lacks cell provenance. ADAPTER row/col and parentHandle; next 2x3 zero spacing fixture. Source: https://ezdxf.readthedocs.io/en/stable/blocks/insert.html
+30. PR170 B3 uses ifcopenshell.open(copy); IfcOpenShell validate(filepath) captures parse logs. REUSE B1/B3; next corrupted numeric STEP ID fixture, separate PARSE/EXPRESS/IDS. Sources: https://github.com/dvikt33-ux/safe-bim-layer/pull/170 ; https://github.com/IfcOpenShell/IfcOpenShell/blob/ifcopenshell-python-0.8.5/src/ifcopenshell-python/ifcopenshell/validate.py
