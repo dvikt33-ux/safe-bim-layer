@@ -1035,12 +1035,12 @@
       "id": "B2-094",
       "page_number": 94,
       "url": "https://loveread.ec/read_book.php?id=53370&p=94",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MIXED_MOAG_EARTH",
+      "recorded_spatial_hints": 4,
+      "notes": "Смешанная страница главы 12 и 13. В финале станционной сцены Дина отказывается уходить с Ритой и возвращается к Эмме. Колька нажимает сенсорную панель, решётка туннеля №8 опускается и перекрывает выход; после этого персонажи уходят наверх, но конечный уровень не указан. Затем раздел 4: в каюте дети уснули в переносках; Колька проходит в гостиную, Дина входит на кухню. Предложение поселиться вместе обсуждается, текущая сцена подтверждает пребывание группы в каюте, но уровень неизвестен. Планы создать Гвардию Второго уровня, выдать звания/оружие и поощрять доступом к игровым мониторам библиотеки — предложения, не существующие элементы/правила. После заголовка главы 13 начинается внешний земной береговой эпизод Таис с Фёдором и Варом; его ландшафт и причалы не относятся к МОАГу.",
+      "verification_method": "Single full-page primary-source read in Opera; resolution of tunnel choice, station return/cabin, proposal vs existing state, and chapter-13 Earth scene classified inline",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-095",
