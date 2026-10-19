@@ -1,6 +1,6 @@
 {
   "schema": "APA-MOAG-TOPOLOGY-SNAPSHOT/0.1",
-  "source_blob_sha": "19e980ea5ed983d05b9ac2d2ba51babed461166c",
+  "source_blob_sha": "4f1696868ca8078bb875270bf924b899283d74f4",
   "derived_from": "docs/research/apa-results/moag/v1/evidence_graph.json",
   "status": "GRAPH_ONLY_NO_COORDINATES",
   "space_refs": [
@@ -542,6 +542,16 @@
     {
       "id": "L3-STAFF-FOOD-STORES",
       "label": "Кладовая провизии вне закрытого внутреннего круга",
+      "level": 3
+    },
+    {
+      "id": "L1-BOAT-LOCK-OUTER-HATCH",
+      "label": "Наружный круглый выход нижней шлюзовой камеры с треугольными створками",
+      "level": 1
+    },
+    {
+      "id": "L3-MAIN-LIFTS-HALL",
+      "label": "Широкий коридор главных лифтов Третьего",
       "level": 3
     }
   ],
@@ -1917,6 +1927,76 @@
       "state": "TEXT_DIRECT",
       "source_ids": [
         "LR-B1-069"
+      ]
+    },
+    {
+      "id": "E138",
+      "from": "L1-BOAT-LOCK",
+      "to": "L1-BOAT-LOCK-OUTER-HATCH",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-021"
+      ]
+    },
+    {
+      "id": "E139",
+      "from": "L1-ANGAR",
+      "to": "L1-BOAT-LOCK",
+      "relation": "pressure_sealed_access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-021"
+      ]
+    },
+    {
+      "id": "E140",
+      "from": "L1-BOAT-LOCK",
+      "to": "L1-ANGAR",
+      "relation": "comparable_spatial_volume_nonmetric",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-021"
+      ]
+    },
+    {
+      "id": "E141",
+      "from": "L3-BRIDGE",
+      "to": "L3-MAIN-LIFTS-HALL",
+      "relation": "route_via_two_turns",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-027"
+      ]
+    },
+    {
+      "id": "E142",
+      "from": "L3-MAIN-LIFTS-HALL",
+      "to": "L3-WORKSHOP-DOOR",
+      "relation": "route_to_production_gate",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-027"
+      ]
+    },
+    {
+      "id": "E143",
+      "from": "L3-CREW",
+      "to": "L3-CHILD-LAB",
+      "relation": "near_not_direct_door",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-026"
+      ]
+    },
+    {
+      "id": "E144",
+      "from": "L1-SEALED",
+      "to": "L1-ANGAR-HALL",
+      "relation": "access_route_by_old_corridor",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-017"
       ]
     }
   ],
