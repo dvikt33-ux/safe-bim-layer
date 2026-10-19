@@ -10634,6 +10634,34 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-678",
+      "page_id": "B3-023",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=23",
+      "station_id": "MOAG",
+      "narrative_mode": "DIALOGUE_CONFIRMED_LAYOUT",
+      "locator_hint": "Эмма связывает круглую структуру МОАГа, кольцевые коридоры и капитанскую рубку.",
+      "spatial_assertion": "На фоне известного устройства МОАГа Эмма говорит, что станция круглая, кольцевые коридоры должны вести к капитанской рубке. Это знание о МОАГе, перенесённое ею как ориентир на другую станцию; конкретный путь на чужом объекте не считается маршрутом МОАГа.",
+      "feature_refs": [],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-679",
+      "page_id": "B3-023",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=23",
+      "station_id": "OTHER_STATION_NOT_MOAG",
+      "narrative_mode": "OTHER_STATION_LAYOUT_EXCLUSION",
+      "locator_hint": "Целевая станция: сеть узких прямых проходов и четырёхходовая развилка, затем округлый светлый коридор у лестницы.",
+      "spatial_assertion": "Эти проходы, лестница, светильники, ниша и охраняющие роботы находятся на другой станции. Они не изменяют реконструкцию МОАГа; ожидание Эммы о кольцевом подходе к рубке на данном объекте ещё не подтверждено.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
