@@ -79,7 +79,8 @@
       "B3-011",
       "B3-015",
       "B3-016",
-      "B3-017"
+      "B3-017",
+      "B3-018"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -105,7 +106,8 @@
       "B2-142",
       "B2-143",
       "B3-005",
-      "B3-010"
+      "B3-010",
+      "B3-018"
     ],
     "remote_evidence_page_ids": [
       "B2-052",
@@ -130,10 +132,10 @@
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B3-017",
-      "context_reviewed_page_count": 76,
+      "as_of_page_id": "B3-018",
+      "context_reviewed_page_count": 77,
       "full_evidence_page_count": 239,
-      "external_excluded_page_count": 23,
+      "external_excluded_page_count": 24,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
       "justified_reopen_event_count": 5,
@@ -1533,11 +1535,12 @@
         "end": 18
       },
       "chapter_classification": "MIXED",
-      "screening_status": "ONE_PASS_IN_PROGRESS",
+      "screening_status": "ONE_PASS_COMPLETE",
       "screened_pages": [
         "B3-015",
         "B3-016",
-        "B3-017"
+        "B3-017",
+        "B3-018"
       ],
       "scenes": [
         {
@@ -1571,13 +1574,18 @@
             {
               "page_id": "B3-017",
               "fragment": "На другой станции фактически пройдены наружные скобы, круглый люк, малый шлюз, узкий коридор и проход за кабельной панелью; эти элементы не относятся к МОАГу."
+            },
+            {
+              "page_id": "B3-018",
+              "fragment": "Завершается сцена на другой станции; команда извлекает запись повреждённого робота. Новых фактов о МОАГе нет. Глава 7 начинается дальше на этой странице и является земной."
             }
           ],
           "classification": "EXTERNAL",
           "physical_location": "Другая станция, цель экспедиции.",
           "screened_out_material": "Внешняя форма корпуса не переносится на МОАГ."
         }
-      ]
+      ],
+      "chapter_end_confirmed": true
     }
   ],
   "character_location_events": [
