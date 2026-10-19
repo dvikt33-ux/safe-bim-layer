@@ -27,6 +27,10 @@ jobs:
         run: python tools/moag_topology/page_audit.py
       - name: Run fail-closed topology tests
         run: python -m unittest discover -s tests -p test_moag_*.py -v
+      - name: Assemble MOAG R06 evidence graph (no native writes)
+        run: |
+          python tools/moag_topology/assemble_evidence_graph_r06.py --out moag-r06-result.json
+          python -c "import json; r=json.load(open('moag-r06-result.json')); assert r['counts']['physical_indices']==197 and r['gates']['archicad_write'] is False and r['counts']['route_ledgers']>0; print('R06',r['status'],r['counts'])"
       - name: Validate site-page coverage and hypotheses
         run: python tools/moag_topology/page_audit.py
       - name: Validate ordered multi-level character routes
