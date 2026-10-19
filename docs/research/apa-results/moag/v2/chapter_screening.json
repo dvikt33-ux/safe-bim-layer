@@ -70,7 +70,8 @@
       "B2-135",
       "B2-141",
       "B2-142",
-      "B2-143"
+      "B2-143",
+      "B2-144"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -108,13 +109,14 @@
       "B2-087",
       "B2-088",
       "B2-089",
-      "B2-141"
+      "B2-141",
+      "B2-144"
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B2-143",
-      "context_reviewed_page_count": 67,
-      "full_evidence_page_count": 231,
+      "as_of_page_id": "B2-144",
+      "context_reviewed_page_count": 68,
+      "full_evidence_page_count": 232,
       "external_excluded_page_count": 22,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
@@ -1342,11 +1344,12 @@
         "end": 144
       },
       "chapter_classification": "MIXED",
-      "screening_status": "ONE_PASS_IN_PROGRESS",
+      "screening_status": "ONE_PASS_COMPLETE",
       "screened_pages": [
         "B2-141",
         "B2-142",
-        "B2-143"
+        "B2-143",
+        "B2-144"
       ],
       "scenes": [
         {
@@ -1385,8 +1388,24 @@
             "Жак"
           ],
           "screened_out_material": "Интерьер и быт другого корабля не относятся к реконструкции МОАГа."
+        },
+        {
+          "id": "B2P3C12-S3",
+          "page_fragments": [
+            {
+              "page_id": "B2-144",
+              "fragment": "Мысль Эммы на крейсере подтверждает, что МОАГ уже взорвался; роботы погибли и Мартин прекратил существование."
+            }
+          ],
+          "classification": "REMOTE_EVIDENCE",
+          "physical_location": "Крейсер «Дракон», удалённое воспоминание о МОАГе.",
+          "characters": [
+            "Эмма"
+          ],
+          "station_relevance": "Подтверждено состояние после уничтожения МОАГа. Способ разрушения и остатки станции не описаны."
         }
-      ]
+      ],
+      "chapter_end_confirmed": true
     }
   ],
   "character_location_events": [
