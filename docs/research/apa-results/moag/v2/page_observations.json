@@ -8716,6 +8716,34 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-540",
+      "page_id": "B2-094",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=94",
+      "station_id": "MOAG",
+      "narrative_mode": "SENSOR_GATE_TEMPORAL_STATE",
+      "locator_hint": "Участок туннеля №8 при возвращении Дины к Эмме",
+      "spatial_assertion": "Колька нажимает сенсорную панель; решётка туннеля №8 опускается и перекрывает выход. После закрытия туннель пустеет, а группа уходит наверх. Это эпизодический режим доступа и подтверждённое управление решёткой сенсором; место панели относительно решётки, конструкция, размеры и целевой уровень неизвестны.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-541",
+      "page_id": "B2-094",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=94",
+      "station_id": "MOAG",
+      "narrative_mode": "RESIDENTIAL_RETURN_AND_PROPOSED_USE",
+      "locator_hint": "После сцены у туннеля группа возвращается в жилую каюту: дети спят в переносках в гостиной, Дина заходит на кухню",
+      "spatial_assertion": "После возвращения наверх действие снова происходит в каюте: Колька проходит в гостиную и оставляет переноску; Дина входит на кухню, где находятся Соня и Макс. Это подтверждает использование гостиной и кухни в жилом помещении, но не размеры и план, уровень или доказанную идентичность с каютой из p90. Идея создать Гвардию Второго уровня, организовать доступ к игровым мониторам библиотеки и выдать командирам оружие остаётся предложением на будущее, не фактом существующей планировки/инфраструктуры.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT_WITH_PROPOSALS_SEPARATED",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
