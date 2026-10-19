@@ -2644,6 +2644,305 @@
       "constraints": [],
       "identity_hypotheses": [],
       "notes": "Маршрут разветвляется по персонажам в финальной точке: Фёдор внутри, Таис и Егор снаружи. Открытие прохода и последующая блокировка — разные временные состояния."
+    },
+    {
+      "id": "RT-023",
+      "title": "Эмма и Коля: старые нижние ангары → восстановленный проход → Овальная → технический обход → Темная",
+      "participants": [
+        "Эмма",
+        "Коля"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-104",
+        "B1-105",
+        "B1-106",
+        "B1-107"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT023-A",
+          "global_level": 1,
+          "label": "Выход из старой пультовой и лестница к ангару",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-104",
+          "movement_method": "CLIMB_DOWN",
+          "observed_constraint": "Выход из старой пультовой и лестница к ангару",
+          "existing_graph_node": "L1-CIRCULAR-STAIRS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT023-B",
+          "global_level": 1,
+          "label": "Тёмный нижний ангар",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-104",
+          "movement_method": "WALK",
+          "observed_constraint": "Тёмный нижний ангар",
+          "existing_graph_node": "L1-OLD-FREIGHT-HANGAR",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT023-C",
+          "global_level": 1,
+          "label": "Восстановленный прямой переход в обитаемую сеть",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-105",
+          "movement_method": "DOOR",
+          "observed_constraint": "Восстановленный прямой переход в обитаемую сеть",
+          "existing_graph_node": "L1-SEALED",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT023-D",
+          "global_level": 1,
+          "label": "Три железные ступеньки вверх, затем дугообразный коридор с резиновым полом",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-105",
+          "movement_method": "CLIMB_UP",
+          "observed_constraint": "Три железные ступеньки вверх, затем дугообразный коридор с резиновым полом",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT023-E",
+          "global_level": 1,
+          "label": "Узкие коридоры и двойные двери Овальной базы",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-105",
+          "movement_method": "DOOR",
+          "observed_constraint": "Узкие коридоры и двойные двери Овальной базы",
+          "existing_graph_node": "L1-OVAL",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT023-F",
+          "global_level": 1,
+          "label": "Овальная, общий жилой зал",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-106",
+          "movement_method": "WALK",
+          "observed_constraint": "Овальная, общий жилой зал",
+          "existing_graph_node": "L1-OVAL",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT023-G",
+          "global_level": 1,
+          "label": "Сокращённый технический путь через трубы и отсеки проводки",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-106",
+          "movement_method": "WALK",
+          "observed_constraint": "Сокращённый технический путь через трубы и отсеки проводки",
+          "existing_graph_node": "L1-ENG-CABLE-NICHES",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT023-H",
+          "global_level": 1,
+          "label": "Общая комната Темной базы",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-107",
+          "movement_method": "WALK",
+          "observed_constraint": "Общая комната Темной базы",
+          "existing_graph_node": "L1-TEMNAYA",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "После выхода из старого сектора Вовик отделяется и уходит вперёд. Отдельные примыкающие технические проходы не задают глобальный дополнительный этаж. Пара ступеней — локальный переход."
+    },
+    {
+      "id": "RT-024",
+      "title": "Таис: запертый сектор Нижнего → техническая шахта труб → ангар → верхняя диспетчерская → возврат к воротам",
+      "participants": [
+        "Таис",
+        "Фёдор"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-108",
+        "B1-109",
+        "B1-110",
+        "B1-111",
+        "B1-112",
+        "B1-113"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT024-A",
+          "global_level": 1,
+          "label": "Временное открытие и повторное закрытие двустворчатой двери",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-108",
+          "movement_method": "DOOR",
+          "observed_constraint": "Временное открытие и повторное закрытие двустворчатой двери",
+          "existing_graph_node": "L1-SEALED",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT024-B",
+          "global_level": 1,
+          "label": "Тёмный коридор с полукруглым потолком",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-108",
+          "movement_method": "WALK",
+          "observed_constraint": "Тёмный коридор с полукруглым потолком",
+          "existing_graph_node": "L1-OLD-FREIGHT-HANGAR",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT024-C",
+          "global_level": 1,
+          "label": "Прямой ход до первого перекрестка, затем поворот направо",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-109",
+          "movement_method": "WALK",
+          "observed_constraint": "Прямой ход до первого перекрестка, затем поворот направо",
+          "existing_graph_node": "L1-OLD-FREIGHT-HANGAR",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT024-D",
+          "global_level": 1,
+          "label": "Решётчатый выход старой технологической шахты для труб; встреча с Фёдором",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-109",
+          "movement_method": "WALK",
+          "observed_constraint": "Решётчатый выход старой технологической шахты для труб; встреча с Фёдором",
+          "existing_graph_node": "L1-VENT",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT024-E",
+          "global_level": 1,
+          "label": "Поворот у разбитой прямоугольной лампы и голографического чипа",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-110",
+          "movement_method": "WALK",
+          "observed_constraint": "Поворот у разбитой прямоугольной лампы и голографического чипа",
+          "existing_graph_node": "L1-OLD-FREIGHT-HANGAR",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT024-F",
+          "global_level": 1,
+          "label": "Широкий открытый ангарный проем и большой зал",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-110",
+          "movement_method": "WALK",
+          "observed_constraint": "Широкий открытый ангарный проем и большой зал",
+          "existing_graph_node": "L1-ANGAR-HALL",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT024-G",
+          "global_level": 1,
+          "label": "Подвесная лестница к верхней диспетчерской",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-110",
+          "movement_method": "CLIMB_UP",
+          "observed_constraint": "Подвесная лестница к верхней диспетчерской",
+          "existing_graph_node": "L1-CIRCULAR-STAIRS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT024-H",
+          "global_level": 1,
+          "label": "Верхние комнаты управления с водой и освещением",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-110",
+          "movement_method": "WALK",
+          "observed_constraint": "Верхние комнаты управления с водой и освещением",
+          "existing_graph_node": "L1-CIRCULAR-CONTROL",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT024-I",
+          "global_level": 1,
+          "label": "Скрытое обзорное остекление, открываемое сдвигаемой панелью",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-113",
+          "movement_method": "WALK",
+          "observed_constraint": "Скрытое обзорное остекление, открываемое сдвигаемой панелью",
+          "existing_graph_node": "L1-CIRCULAR-CONTROL",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT024-J",
+          "global_level": 1,
+          "label": "Спуск из верхней диспетчерской по той же лестнице",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-113",
+          "movement_method": "CLIMB_DOWN",
+          "observed_constraint": "Спуск из верхней диспетчерской по той же лестнице",
+          "existing_graph_node": "L1-CIRCULAR-STAIRS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT024-K",
+          "global_level": 1,
+          "label": "Коридоры к воротам закрытого сектора",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-113",
+          "movement_method": "WALK",
+          "observed_constraint": "Коридоры к воротам закрытого сектора",
+          "existing_graph_node": "L1-SEALED",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT024-L",
+          "global_level": 1,
+          "label": "Выход через открытые створки ворот",
+          "local_stratum": "local-lower-sublevel",
+          "source_page_id": "B1-113",
+          "movement_method": "DOOR",
+          "observed_constraint": "Выход через открытые створки ворот",
+          "existing_graph_node": "L1-SEALED",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT024-H",
+          "lower": "RT024-F",
+          "source_page_id": "B1-110",
+          "claim": "Диспетчерская размещена выше пола ангара, к ней ведёт лестница."
+        },
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT024-I",
+          "lower": "RT024-F",
+          "source_page_id": "B1-113",
+          "claim": "Обзорное окно находится в поднятых помещениях старого ангарного комплекса."
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Фёдор соединяется с Таис у выхода трубной шахты на p109. Трубный канал не приравнивается всем ранее описанным вентиляционным шахтам. Возврат заканчивается у ворот; дальнейшая доставка на Третий описана, но способ вертикального транспорта не указан."
     }
   ]
 }
