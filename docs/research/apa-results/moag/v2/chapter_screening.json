@@ -56,7 +56,17 @@
       "B2-106",
       "B2-107",
       "B2-108",
-      "B2-113"
+      "B2-113",
+      "B2-114",
+      "B2-115",
+      "B2-119",
+      "B2-120",
+      "B2-121",
+      "B2-126",
+      "B2-127",
+      "B2-128",
+      "B2-133",
+      "B2-134"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -95,9 +105,9 @@
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B2-113",
-      "context_reviewed_page_count": 53,
-      "full_evidence_page_count": 219,
+      "as_of_page_id": "B2-134",
+      "context_reviewed_page_count": 63,
+      "full_evidence_page_count": 229,
       "external_excluded_page_count": 20,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
@@ -114,7 +124,7 @@
         "B2-083": "первичный ответ по странице обрезался; адресно прочитаны последние десять абзацев и подтверждён конец страницы",
         "B2-088": "Первый ответ по p88 был обрезан ограничением вывода; выполнен один адресный компактный текстовый запрос для восстановления полного текста этой же страницы."
       },
-      "character_location_event_count": 46
+      "character_location_event_count": 55
     }
   },
   "method": "ONE_PASS: classify each page fragment and extract all relevant evidence during the same single reading. Use prior-page context and identify chapter/scene boundaries inline when headings appear. Do not pre-screen an entire chapter before rereading; reopens require a recorded concrete reason.",
@@ -1270,7 +1280,8 @@
       "chapter_classification": "STATION",
       "screening_status": "ONE_PASS_IN_PROGRESS",
       "screened_pages": [
-        "B2-133"
+        "B2-133",
+        "B2-134"
       ],
       "scenes": [
         {
@@ -1279,6 +1290,10 @@
             {
               "page_id": "B2-133",
               "fragment": "После заголовка главы 10: живое дерево раскрывает двойные двери цеха. Светлые просторные комнаты расходятся веером от главного круглого зала с прозрачной колбой живого металла. Через контейнерную зону и полукруглый проём Эмма проходит к изготовлению человекоподобных роботов."
+            },
+            {
+              "page_id": "B2-134",
+              "fragment": "Жак подтверждает, что сервер уже выключен и станция не работает. Эмма через лифт попадает на Первый уровень, проходит от раскрытых дверей неустановленного ангарного отсека, по широкому полукруглому коридору к бывшим жилым зонам и через проём входит в кладовые, где находит Кольку под полкой. Медотсек упомянут, но не локализован."
             }
           ],
           "classification": "STATION",
