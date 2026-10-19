@@ -102,7 +102,7 @@ class RegistryCoverage(unittest.TestCase):
     def test_source_keys_match_real_1_5_10_live_export(self):
         import json
         root=Path(__file__).resolve().parents[1]
-        catalog=json.loads((root/"schemas/tapir-live-1.5.10/tapir-scene-live.json").read_text())
+        catalog=json.loads((root/"schemas/tapir-live-1.5.10/tapir-scene-live.json").read_text(encoding="utf8"))
         for command,params in (("CreateBeams",beam()),
                                ("CreateWalls",wall()),
                                ("CreateRoofs",roof())):
