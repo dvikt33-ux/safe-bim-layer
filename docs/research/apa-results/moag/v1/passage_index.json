@@ -409,6 +409,136 @@
       ],
       "verification": "TEXT_SEEN",
       "absolute_coordinates": false
+    },
+    {
+      "id": "EV-026",
+      "source_id": "B1-04",
+      "locator_hint": "Федор предупреждает о боковом отверстии на середине вертикального спуска",
+      "observation_type": "dialogue",
+      "paraphrase": "Железная шахта имеет промежуточный выход к обитаемому Нижнему уровню, падение ниже ведет в неизвестное помещение.",
+      "node_refs": [
+        "L1-LOWER-SHAFT",
+        "SUB-LOWER-WELL"
+      ],
+      "edge_refs": [
+        "E55",
+        "E56"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-027",
+      "source_id": "B1-04",
+      "locator_hint": "«чуть ниже нашего Нижнего уровня есть еще помещения»",
+      "observation_type": "dialogue",
+      "paraphrase": "Прямое доказательство дополнительных помещений ниже обитаемой части; точное число этажей не сообщено.",
+      "node_refs": [
+        "SUB-LOWER-WELL"
+      ],
+      "edge_refs": [
+        "E57"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-028",
+      "source_id": "B1-04",
+      "locator_hint": "Колодец, двойная дверь, запаянный проход напротив",
+      "observation_type": "narration",
+      "paraphrase": "На нижней отметке квадратный колодец с запертой двойной дверью и заваренным проходом.",
+      "node_refs": [
+        "SUB-SEALED-DOOR",
+        "SUB-WELDED-WALL"
+      ],
+      "edge_refs": [
+        "E58",
+        "E59"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-029",
+      "source_id": "B1-17",
+      "locator_hint": "После широкого коридора — зал со спящими фриками; далее отдельный круглый высокий зал",
+      "observation_type": "movement",
+      "paraphrase": "В закрытой части больше одного большого ангароподобного объема, не следует объединять.",
+      "node_refs": [
+        "L1-SLEEPING-HANGAR",
+        "L1-CIRCULAR-HALL"
+      ],
+      "edge_refs": [
+        "E62",
+        "E63"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-030",
+      "source_id": "B1-17",
+      "locator_hint": "Коля спустился «на пару ступенек вниз» перед круглым высоким залом",
+      "observation_type": "movement",
+      "paraphrase": "Локальное понижение отметки пола относительно коридора, не новый полноценный этаж.",
+      "node_refs": [
+        "L1-HALL-STEPS",
+        "L1-CIRCULAR-HALL"
+      ],
+      "edge_refs": [
+        "E64"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-031",
+      "source_id": "B1-19",
+      "locator_hint": "Профессор укрылся в закрытом старом ангаре; новые грузовые ангары на Третьем",
+      "observation_type": "narration_and_diary",
+      "paraphrase": "Историческое перепрофилирование: старые грузовые ангары нижнего сектора выведены из эксплуатации после новых на Верхнем.",
+      "node_refs": [
+        "L1-OLD-FREIGHT-HANGAR",
+        "L3-DOCK"
+      ],
+      "edge_refs": [
+        "E61"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-032",
+      "source_id": "B1-18",
+      "locator_hint": "Федор копирует с планшета Шереметьева подробные карты всех трёх уровней",
+      "observation_type": "narration",
+      "paraphrase": "Первоначальная фраза об отсутствии планов отражает прошлую ограниченность доступа; впоследствии карты найдены.",
+      "node_refs": [
+        "L1",
+        "L2",
+        "L3"
+      ],
+      "edge_refs": [],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-033",
+      "source_id": "B1-17",
+      "locator_hint": "Полукруглый коридор, каюты, склады, широкие ангарные двери",
+      "observation_type": "movement",
+      "paraphrase": "Жилые каюты, склады и ангары присутствуют в общей закрытой части Нижнего уровня.",
+      "node_refs": [
+        "L1-OLD-PROF-CABINS",
+        "L1-SEALED",
+        "L1-OLD-FREIGHT-HANGAR"
+      ],
+      "edge_refs": [
+        "E65"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
     }
   ]
 }
