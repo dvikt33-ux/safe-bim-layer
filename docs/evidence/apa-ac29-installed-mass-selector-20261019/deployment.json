@@ -1,0 +1,69 @@
+{
+  "schema": "APA_INSTALLED_MASS_SELECTOR_UPDATE_V1",
+  "status": "INSTALLED_MASS_SELECTOR_READBACK_VERIFIED",
+  "applied": true,
+  "files": {
+    "scripts/archicad_project_accelerator.py": {
+      "beforeSHA256": "c48c3c214d7a33618e11bdbef8d9cbf7a96f21fa411fce23fed8352913639e57",
+      "afterSHA256": "30793c9538feacd11e86c6e6d688869f0506afb6e0ec19f74d50cdc143a26e03"
+    },
+    "scripts/apa_ac29_dynamic_native_verifiers.py": {
+      "beforeSHA256": "d02d160d6c58354a3d800fea6c38c4a008ba6631fb7c975fdc96bd60f9721f06",
+      "afterSHA256": "aef2feaa27c78c4a47180c48958165bad42677f7fce699c81f8d422e95d5d4af"
+    },
+    "scripts/apa_ac29_mass_request.py": {
+      "beforeSHA256": null,
+      "afterSHA256": "cbb2d287c99382b0f589cbfe42906c63589bfffbdfd728015ba12cce68b8b4c0"
+    },
+    "scripts/apa_ac29_group_strategy.py": {
+      "beforeSHA256": null,
+      "afterSHA256": "fef030e8a7e8efb6f57d25ab6108aee275266a742382c0dc683b9a743d2d950a"
+    },
+    "scripts/apa_ac29_semantic_operation_selector.py": {
+      "beforeSHA256": null,
+      "afterSHA256": "147888533c8f60342e35ee703af0999239ae3e7b5206dc02c49188cb4858f2ea"
+    },
+    "scripts/apa_ac29_assembly_operations.py": {
+      "beforeSHA256": null,
+      "afterSHA256": "fb2ddb1fcc470692f0b9e5352d429110eadcd87061b3627bfe4c110392f029ea"
+    },
+    "scripts/apa_ac29_native_group_clone_verifier.py": {
+      "beforeSHA256": null,
+      "afterSHA256": "840815dcc8c1f3377cf75ea02d9130555837a5517477b116d95a1ed0e256fd7f"
+    },
+    "scripts/apa_ac29_native_group_grid.py": {
+      "beforeSHA256": null,
+      "afterSHA256": "081363021776f9329337729a20fbf50cb06bcaa0fb9ea68dd0e9a6ca0afe640b"
+    },
+    "scripts/apa_ac29_installed_group_provider.py": {
+      "beforeSHA256": null,
+      "afterSHA256": "75d40cdddb87a20429803c204d71143d04a4525a6f1d4d0a17b866da828add7c"
+    },
+    "scripts/apa_ac29_installed_factory.py": {
+      "beforeSHA256": null,
+      "afterSHA256": "32fffd5d6da4bd99a16c3be9c697c57e5d878d2b90cd64c618317f48540c8c0e"
+    },
+    "schemas/accelerator/installed-group-copy.json": {
+      "beforeSHA256": null,
+      "afterSHA256": "a6d15faa46401329ca0be0695abb1f04abdcf447747ec1015914938f9c5ee2a9"
+    }
+  },
+  "modelWrites": 0,
+  "executedSourceRevision": "650b076963c4660fa903362588037c14aad1418e",
+  "originalUnchangedCodeFiles": 152,
+  "all296OriginalContractsPreserved": true,
+  "existingEnvironmentSentinels": {
+    "external-tools/apa-ifc-artifacts-b2/venv/pyvenv.cfg": "91624b27fbefb3ecff72c64e13ae07eeb3d138a73c3fe3a06afd83e18b201942",
+    "external-tools/apa-readonly-v1/venv/pyvenv.cfg": "afb52c5f69df2b72a88f7d3323ee51cbe45b419e4e1e8ca4ff0f8561dff87b69",
+    "external-tools/apa-semantic-v1/venv/pyvenv.cfg": "d673456ac44b04611f72d46d6f8013f6e021c33b23864e529586a827eda9a287",
+    "external-tools/apa-ifc-artifacts-b2/venv/Scripts/python.exe": "eb2f24f221e8f8ba5430e4d9d0247f31eba82907ee6f6b95ae424eacdccbea92",
+    "external-tools/apa-readonly-v1/venv/Scripts/python.exe": "21bb438c0d4a6f1f164b9a646f6ee000340185e5871180aec06db8d3f07c0082",
+    "external-tools/apa-semantic-v1/venv/Scripts/python.exe": "21bb438c0d4a6f1f164b9a646f6ee000340185e5871180aec06db8d3f07c0082"
+  },
+  "noDependencyInstallation": true,
+  "stagedBeforeApply": true,
+  "actualNativeReadOnlyQualification": "INSTALLED_MASS_SELECTOR_CURRENT_AC29_READONLY_QUALIFICATION_PASS",
+  "updaterDirectNativeCalls": 0,
+  "backupReceiptSHA256": "553aadef6823b46e2257e559a2fb951a73bcbd27c746544624313f95ed173787",
+  "backupRetainedLocally": true
+}

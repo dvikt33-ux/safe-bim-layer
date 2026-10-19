@@ -1,0 +1,18 @@
+{
+  "status": "NATIVE_READS_ONLY_NO_SAVE_OR_CLONE",
+  "calls": {
+    "GetProjectInfo": 4,
+    "GetStories": 4,
+    "GetAddOnVersion": 4,
+    "GetAPARuntimeInfoV1": 4,
+    "API.IsAddOnCommandAvailable": 4,
+    "GetAllElements": 1,
+    "GetModelDumpV1": 1,
+    "GetNativeGroupMembersV1": 4,
+    "GetDetailsOfElements": 4,
+    "API.GetProductInfo": 3
+  },
+  "totalReadCalls": 33,
+  "modelWrites": 0,
+  "rawTraceSHA256": "b51fa0779250711b471c2fe3a295ded4e6e8cb747fd2c50f30dd2959501e48cc"
+}
