@@ -243,12 +243,12 @@
       "id": "B3-022",
       "page_number": 22,
       "url": "https://loveread.ec/read_book.php?id=58610&p=22",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG_REMOTE_EVIDENCE",
+      "recorded_spatial_hints": 2,
+      "notes": "Страница на другой станции, но Эмма прямо сравнивает её с МОАГом. На МОАГе уровни обслуживаются главными кольцевыми коридорами, из которых отходят туннели к жилым и техническим помещениям. Мягкое резиновое покрытие пола на другой станции совпадает с МОАГом и гасит звук/сохраняет тепло. Четыре прямых прохода и ортогональная сеть целевой станции — другой объект и не переносятся.",
+      "verification_method": "Однажды прочитана через Opera; сведения из сравнения Эммы отделены от планировки другой станции.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B3-023",
