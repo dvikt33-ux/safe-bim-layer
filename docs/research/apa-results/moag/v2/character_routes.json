@@ -582,6 +582,362 @@
       ],
       "identity_hypotheses": [],
       "notes": "Несколько лестничных трасс и отдельных спален не доказывают сплошной верхний этаж всего Нижнего уровня."
+    },
+    {
+      "id": "RT-006",
+      "title": "От Темной базы к Диким по обходному маршруту",
+      "participants": [
+        "Таис",
+        "Фёдор"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-042",
+        "B1-043"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT006-A",
+          "label": "Темная база, выход в дальнюю сеть",
+          "global_level": 1,
+          "local_stratum": "inhabited-lower",
+          "source_page_id": "B1-42",
+          "movement_method": "WALK",
+          "observed_constraint": "Идут из общего жилого района с продуктами.",
+          "existing_graph_node": "L1-TEMNAYA",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT006-B",
+          "label": "Большой обход из-за запертых дверей",
+          "global_level": 1,
+          "local_stratum": "blocked-ring-detour",
+          "source_page_id": "B1-43",
+          "movement_method": "WALK",
+          "observed_constraint": "Прямых проходов нет, значительная часть дверей заперта или заварена.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT006-C",
+          "label": "Узкий тёмный коридор",
+          "global_level": 1,
+          "local_stratum": "remote-lower",
+          "source_page_id": "B1-43",
+          "movement_method": "WALK",
+          "observed_constraint": "После серии коридоров поворачивают в узкий тёмный проход.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT006-D",
+          "label": "Высокий порог и сорванная створка",
+          "global_level": 1,
+          "local_stratum": "wild-approach",
+          "source_page_id": "B1-43",
+          "movement_method": "CLIMB_UP",
+          "observed_constraint": "Перешагивают высокий порог, обходят оторванную дверь, лежащую на полу.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT006-E",
+          "label": "Два шага вниз",
+          "global_level": 1,
+          "local_stratum": "wild-local-datum",
+          "source_page_id": "B1-43",
+          "movement_method": "CLIMB_DOWN",
+          "observed_constraint": "Спускаются на две ступени вниз, после переходят через ряд труб.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT006-F",
+          "label": "Ряд инженерных труб и последний поворот",
+          "global_level": 1,
+          "local_stratum": "wild-service-approach",
+          "source_page_id": "B1-43",
+          "movement_method": "WALK",
+          "observed_constraint": "Приходится перелезть через открытые трубы перед поворотом.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT006-G",
+          "label": "Помещение базы Диких",
+          "global_level": 1,
+          "local_stratum": "wild-base",
+          "source_page_id": "B1-43",
+          "movement_method": "WALK",
+          "observed_constraint": "Одна лампочка в углу, железный стол с цветным пластиком, сильный запах.",
+          "existing_graph_node": "L1-WILD",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT006-D",
+          "lower": "RT006-E",
+          "source_page_id": "B1-043",
+          "claim": "Локальный спуск на две ступени после порога"
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Большой обход и закрытые участки — топологическое ограничение: нельзя соединять базу с мусоркой прямым коридором без новой книги."
+    },
+    {
+      "id": "RT-007",
+      "title": "Ночной обход Эммы из жилой базы в прямой грузовой коридор и обратно",
+      "participants": [
+        "Эмма"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-044",
+        "B1-045"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT007-A",
+          "label": "Спальная комната в Темной базе",
+          "global_level": 1,
+          "local_stratum": "base-sleeping-datum",
+          "source_page_id": "B1-44",
+          "movement_method": "WALK",
+          "observed_constraint": "Начало маршрута в комнате с узкой кроватью и стенной полкой.",
+          "existing_graph_node": "L1-BASE-SLEEP",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT007-B",
+          "label": "Первая лестница вниз из спальни",
+          "global_level": 1,
+          "local_stratum": "base-interior-vertical",
+          "source_page_id": "B1-44",
+          "movement_method": "CLIMB_DOWN",
+          "observed_constraint": "Эмма тихо спускается по лестнице.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT007-C",
+          "label": "Стальная раздвижная двухстворчатая дверь базы",
+          "global_level": 1,
+          "local_stratum": "base-security-perimeter",
+          "source_page_id": "B1-44",
+          "movement_method": "DOOR",
+          "observed_constraint": "Открывает замок флешкой и придерживает скрипящую створку.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT007-D",
+          "label": "Ещё одна длинная лестница",
+          "global_level": 1,
+          "local_stratum": "separate-vertical-transition",
+          "source_page_id": "B1-44",
+          "movement_method": "CLIMB_DOWN",
+          "observed_constraint": "После двери проходит ещё одну длинную лестницу и выходит в полутемный коридор.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT007-E",
+          "label": "Холодные коридоры и три поворота",
+          "global_level": 1,
+          "local_stratum": "remote-lower",
+          "source_page_id": "B1-44",
+          "movement_method": "WALK",
+          "observed_constraint": "В техническом секторе считает повороты, идёт по освещённым проходам.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT007-F",
+          "label": "Первый лаз над трубами",
+          "global_level": 1,
+          "local_stratum": "communication-duct",
+          "source_page_id": "B1-44",
+          "movement_method": "CRAWL",
+          "observed_constraint": "Попадает в лаз над проложенными инженерными трубами; намечает путь по слабому свету.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT007-G",
+          "label": "Второй узкий лаз из коммуникационных ниш",
+          "global_level": 1,
+          "local_stratum": "communication-duct",
+          "source_page_id": "B1-44",
+          "movement_method": "CRAWL",
+          "observed_constraint": "После очередного узкого лаза выходит в большой грузовой проход.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT007-H",
+          "label": "Прямой транспортно-грузовой коридор",
+          "global_level": 1,
+          "local_stratum": "freight-hall-floor",
+          "source_page_id": "B1-44",
+          "movement_method": "WALK",
+          "observed_constraint": "Прямой широкий коридор с резиновым полом, высокими воротами ангаров, низкими подсвеченными указателями и неработающими потолочными лампами.",
+          "existing_graph_node": "L1-ANGAR-HALL",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT007-I",
+          "label": "Возвращение через повреждённую панель",
+          "global_level": 1,
+          "local_stratum": "return-via-communication-duct",
+          "source_page_id": "B1-45",
+          "movement_method": "CRAWL",
+          "observed_constraint": "От останков андроида идёт назад через сорванную панель, трубы и толстые разноцветные кабели.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT007-J",
+          "label": "Знакомая стальная дверь базы",
+          "global_level": 1,
+          "local_stratum": "base-security-perimeter",
+          "source_page_id": "B1-45",
+          "movement_method": "DOOR",
+          "observed_constraint": "Возвращается к двустворчатой двери с двумя треугольниками и попадает на базу.",
+          "existing_graph_node": "L1-TEMNAYA",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT007-A",
+          "lower": "RT007-B",
+          "source_page_id": "B1-044",
+          "claim": "Первый спуск от спальни к входу базы"
+        },
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT007-C",
+          "lower": "RT007-D",
+          "source_page_id": "B1-044",
+          "claim": "Ещё одна длинная лестница после двери ведёт к нижнему техническому коридору"
+        }
+      ],
+      "identity_hypotheses": [
+        {
+          "candidate": "RT007-H",
+          "may_match": "L1-ANGAR-HALL",
+          "status": "UNVERIFIED_SAME_ROOM"
+        }
+      ],
+      "notes": "ДВА отдельных лестничных участка не означают два сплошных этажа. Предположение Эммы о пересечении обоих колец грузовым коридором отдельно исключено из доказанных связей."
+    },
+    {
+      "id": "RT-008",
+      "title": "Подъём Коли и Эммы через вентиляцию с Нижнего на Второй",
+      "participants": [
+        "Эмма",
+        "Колька"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-046"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT008-A",
+          "label": "Спальная часть Нижней базы",
+          "global_level": 1,
+          "local_stratum": "lower-habitable",
+          "source_page_id": "B1-46",
+          "movement_method": "WALK",
+          "observed_constraint": "Коля планирует путь на планшете и отключает датчики.",
+          "existing_graph_node": "L1-TEMNAYA",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT008-B",
+          "label": "Низкий узкий извилистый вентиляционный канал",
+          "global_level": null,
+          "local_stratum": "air-duct",
+          "source_page_id": "B1-46",
+          "movement_method": "CRAWL",
+          "observed_constraint": "Герои ползут в канале, не могут поднять голову.",
+          "existing_graph_node": "L1-VENT",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT008-C",
+          "label": "Решётка на выходе в жилой сектор",
+          "global_level": 2,
+          "local_stratum": "vent-access",
+          "source_page_id": "B1-46",
+          "movement_method": "DOOR",
+          "observed_constraint": "Коля отворачивает снаружи винты решётки магнитной отвёрткой.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT008-D",
+          "label": "Резиновое покрытие коридора Второго",
+          "global_level": 2,
+          "local_stratum": "second-pedestrian-floor",
+          "source_page_id": "B1-46",
+          "movement_method": "CLIMB_UP",
+          "observed_constraint": "После снятия решётки Эмма ступает на прорезиненную дорожку.",
+          "existing_graph_node": "L2",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT008-E",
+          "label": "Туннель к каюте Эммы",
+          "global_level": 2,
+          "local_stratum": "residential-corridor",
+          "source_page_id": "B1-46",
+          "movement_method": "WALK",
+          "observed_constraint": "Герои узнают расположение, выбирают нужный туннель и входят в каюту с Лоном.",
+          "existing_graph_node": "L2-CABINS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT008-D",
+          "lower": "RT008-A",
+          "source_page_id": "B1-046",
+          "claim": "Переход из нижней базы на Второй по вентиляции"
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Нельзя делать всякую шахту вентиляции одним и тем же каналом; совпадение с RT-003 требует отдельной проверки."
     }
   ]
 }
