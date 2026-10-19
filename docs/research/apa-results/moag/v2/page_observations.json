@@ -2333,6 +2333,348 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-143",
+      "page_id": "B1-035",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=35",
+      "station_id": "MOAG",
+      "narrative_mode": "INTERIOR",
+      "locator_hint": "из кухни в спальню, потом к комнате Сони",
+      "spatial_assertion": "У Эммы кухня и отдельные спальни двух сестёр, связанные внутренним коридором.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-144",
+      "page_id": "B1-035",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=35",
+      "station_id": "MOAG",
+      "narrative_mode": "FURNITURE_MECHANICAL",
+      "locator_hint": "в шкафу полка опускается и выезжает",
+      "spatial_assertion": "У шкафа спальни Эммы механизмы опускания/выдвижения верхней полки; в комнате диван, комод, зеркало и стол.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-145",
+      "page_id": "B1-036",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=36",
+      "station_id": "MOAG",
+      "narrative_mode": "CEREMONY_INTERIOR",
+      "locator_hint": "длинная серая дорожка; дети на галерее",
+      "spatial_assertion": "Пространство церемонии Второго уровня содержит длинную серую ковровую дорожку и галерею, на которой дети строятся полукругом.",
+      "feature_refs": [
+        "L2-GALLERY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-146",
+      "page_id": "B1-036",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=36",
+      "station_id": "MOAG",
+      "narrative_mode": "ELEVATOR_TRANSIT",
+      "locator_hint": "за поворотом дорожка к лифту",
+      "spatial_assertion": "От торжественного места через поворот есть доступ к лифту Второй → Третий.",
+      "feature_refs": [
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-147",
+      "page_id": "B1-036",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=36",
+      "station_id": "MOAG",
+      "narrative_mode": "INTERIOR",
+      "locator_hint": "белый коридор мягко изгибался; уборщики",
+      "spatial_assertion": "После лифта на Третьем белый изогнутый коридор с чистой облицовкой и бесшумными роботами-уборщиками.",
+      "feature_refs": [
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-148",
+      "page_id": "B1-037",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=37",
+      "station_id": "MOAG",
+      "narrative_mode": "CORRIDOR",
+      "locator_hint": "два одинаковых поворота; двери за одним",
+      "spatial_assertion": "На Третьем есть развилка с двумя визуально похожими ветвями; из одной видны двери.",
+      "feature_refs": [
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-149",
+      "page_id": "B1-037",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=37",
+      "station_id": "MOAG",
+      "narrative_mode": "ELEVATOR",
+      "locator_hint": "у другого лифта; спуск на Второй",
+      "spatial_assertion": "Из развилки и соседней зоны можно дойти к ещё одному лифту и спуститься на Второй.",
+      "feature_refs": [
+        "L2",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-150",
+      "page_id": "B1-037",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=37",
+      "station_id": "MOAG",
+      "narrative_mode": "PLAYGROUND_CIRCULATION",
+      "locator_hint": "малые тёмные коридоры, лестницы, заборчики",
+      "spatial_assertion": "От лифта Второго пути бегства идут через малые проходы и игровые площадки; имеют малые локальные перепады/барьеры.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-151",
+      "page_id": "B1-037",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=37",
+      "station_id": "MOAG",
+      "narrative_mode": "SHAFT_ENTRANCE",
+      "locator_hint": "широкая труба за поворотом",
+      "spatial_assertion": "За поворотом на Втором уровне есть широкий трубообразный ход вниз; герои поочередно спускаются в тёмное нижнее помещение.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-152",
+      "page_id": "B1-038",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=38",
+      "station_id": "MOAG",
+      "narrative_mode": "UNKNOWN_DOOR",
+      "locator_hint": "закрытые железные створки со звёздами",
+      "spatial_assertion": "Внизу под широкой трубой обнаружена запечатанная дверь, украшенная звёздами и снабжённая электронным разъёмом, повреждённым при попытке взлома.",
+      "feature_refs": [
+        "SUB-SEALED-DOOR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-153",
+      "page_id": "B1-038",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=38",
+      "station_id": "MOAG",
+      "narrative_mode": "UNKNOWN_FUNCTION",
+      "locator_hint": "за дверью могут быть ангар/челнок — вопросы детей",
+      "spatial_assertion": "Функция пространства за дверью неизвестна; слова об ангаре и челноках — только гипотезы героев.",
+      "feature_refs": [
+        "SUB-SEALED-DOOR"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-154",
+      "page_id": "B1-038",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=38",
+      "station_id": "MOAG",
+      "narrative_mode": "VERTICAL_RETURN",
+      "locator_hint": "подсадка на плечи к трубе; боковой поворот",
+      "spatial_assertion": "Герои поднимаются от двери обратно в верхнюю часть трубы и через близкий боковой отвод выходят в обитаемые технические коридоры Первого.",
+      "feature_refs": [
+        "L1-LOWER-SHAFT",
+        "L1-BASES"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-155",
+      "page_id": "B1-039",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=39",
+      "station_id": "MOAG",
+      "narrative_mode": "MEZZANINE",
+      "locator_hint": "перекладины лестницы в собственную спальню",
+      "spatial_assertion": "Таис сидит на перекладинах лестницы между общим залом Темной базы и своей спальней; спальня не на отметке пола общего зала.",
+      "feature_refs": [
+        "L1-TEMNAYA",
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-156",
+      "page_id": "B1-039",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=39",
+      "station_id": "MOAG",
+      "narrative_mode": "MEZZANINE",
+      "locator_hint": "из спальни Валька/Нитки Федор спустился по лестнице",
+      "spatial_assertion": "В Темной базе отдельный вход в спальню Валька и Нитки с овальной сдвижной створкой, из спальни спускаются по лестнице.",
+      "feature_refs": [
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-157",
+      "page_id": "B1-039",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=39",
+      "station_id": "MOAG",
+      "narrative_mode": "MEZZANINE",
+      "locator_hint": "два младших спускаются со своей лестницы",
+      "spatial_assertion": "У младших детей отдельная лестница к спальне, подтверждающая несколько независимых вертикальных подходов от общего помещения.",
+      "feature_refs": [
+        "L1-BASE-KIDS-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-158",
+      "page_id": "B1-039",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=39",
+      "station_id": "MOAG",
+      "narrative_mode": "DOOR_DEFECT",
+      "locator_hint": "тёмная овальная дверь заедает на половине",
+      "spatial_assertion": "Овальная сдвижная дверь спальни Валька/Нитки неисправна: остановилась на половине хода, её раздвигают вручную.",
+      "feature_refs": [
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-159",
+      "page_id": "B1-040",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=40",
+      "station_id": "MOAG",
+      "narrative_mode": "FUNCTION",
+      "locator_hint": "в столовой Темной базы",
+      "spatial_assertion": "Общее бытовое пространство Темной базы используется как столовая и место совещаний; нового пути движения между уровнями нет.",
+      "feature_refs": [
+        "L1-BASE-COMMON"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-160",
+      "page_id": "B1-041",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=41",
+      "station_id": "MOAG",
+      "narrative_mode": "VENT_LOGISTICS",
+      "locator_hint": "Лон может подвозить еду к вентиляционным люкам",
+      "spatial_assertion": "Вентиляционные люки служат не только проходами, но и точками передачи продовольствия с жилого уровня в скрытую систему снабжения.",
+      "feature_refs": [
+        "L1-VENT",
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-161",
+      "page_id": "B1-041",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=41",
+      "station_id": "MOAG",
+      "narrative_mode": "ACOUSTIC",
+      "locator_hint": "сквозь открытую дверь спальни слышна беседа соседей",
+      "spatial_assertion": "Открытые двери и малая акустическая изоляция спален Темной базы позволяют слышать разговоры из другого помещения.",
+      "feature_refs": [
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-162",
+      "page_id": "B1-042",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=42",
+      "station_id": "MOAG",
+      "narrative_mode": "KITCHEN_EQUIPMENT",
+      "locator_hint": "спуск Таис в общий зал, плитка на столе",
+      "spatial_assertion": "Из спальни Таис спускается в общий зал; электроплитка у края стола, белые окрашенные железные настенные полки и ящики с продуктами.",
+      "feature_refs": [
+        "L1-BASE-COMMON"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-163",
+      "page_id": "B1-042",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=42",
+      "station_id": "MOAG",
+      "narrative_mode": "DISTANCE_CONSTRAINT",
+      "locator_hint": "коридоры Диких на противоположной стороне от мусорки",
+      "spatial_assertion": "База Диких доступна через дальние полутёмные коридоры Нижнего уровня, в противоположном секторе относительно мусорки; точные XY и кольцо неизвестны.",
+      "feature_refs": [
+        "L1-WILD",
+        "L1-RECYCLING"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
