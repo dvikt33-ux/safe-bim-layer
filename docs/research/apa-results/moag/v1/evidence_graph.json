@@ -343,6 +343,41 @@
       "url": "https://loveread.ec/read_book.php?id=48197&p=60",
       "medium": "literary_text",
       "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-61",
+      "section": "Книга I, LoveRead страница 61",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=61",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-62",
+      "section": "Книга I, LoveRead страница 62",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=62",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-63",
+      "section": "Книга I, LoveRead страница 63",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=63",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-64",
+      "section": "Книга I, LoveRead страница 64",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=64",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-65",
+      "section": "Книга I, LoveRead страница 65",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=65",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
     }
   ],
   "nodes": [
@@ -2146,6 +2181,139 @@
       },
       "geometry_gate": "NOT_AUTHORIZED",
       "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-REST-UPPER-GALLERY",
+      "label": "Периметральная верхняя галерея круглого зала отдыха",
+      "level": 3,
+      "type": "circulation",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "text_basis": "Высокая галерея огибает ВЕСЬ зал, к ней ведут металлические ступени, в верхнем проходе ковровое покрытие; несколько коридоров-ответвлений.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-REST-UPPER-STAIRS",
+      "label": "Лестница на галерею Третьего зала отдыха",
+      "level": 3,
+      "type": "vertical_route",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "text_basis": "Металлическая лестница от пола зала к верхней галерее; на ступенях бежевое резиновое покрытие.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-REST-GALLERY-DEADEND",
+      "label": "Тупиковые коридоры и ДНК-двери верхней галереи",
+      "level": 3,
+      "type": "circulation",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "text_basis": "От галереи отходят несколько коридоров; один Т-образный заканчивается дверями с биометрическими датчиками; короткие повороты.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-UPPER-VENT-ESCAPE",
+      "label": "Низкая вентиляция Третьего для скрытого спуска",
+      "level": 3,
+      "type": "utility",
+      "source_ids": [
+        "LR-B1-63"
+      ],
+      "text_basis": "Из низкого верхнего коридора снимают решётку близко к полу и лезут в шахту, далее вертикальный сброс.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-VENT-LOW-GRILLE",
+      "label": "Вентиляционная решётка Второго около пола",
+      "level": 2,
+      "type": "portal",
+      "source_ids": [
+        "LR-B1-64"
+      ],
+      "text_basis": "Выход из вентиляции почти у пола рядом с автоматом какао и резиновой дорожкой.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-RETURN-FORK",
+      "label": "Двухпутная развилка возвращения к Нижним базам",
+      "level": 1,
+      "type": "circulation",
+      "source_ids": [
+        "LR-B1-65"
+      ],
+      "text_basis": "Низкий проём приводит к вилке: правый маршрут короче, левый длиннее; проходы меняются из-за опасности Диких.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-OVAL-PAINTED",
+      "label": "Художественно расписанный интерьер Овальной базы",
+      "level": 1,
+      "type": "interior_attribute",
+      "source_ids": [
+        "LR-B1-65"
+      ],
+      "text_basis": "Девушки разрисовали стены, столы и стулья. Факт относится к Овальной базе, не к Темной.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
     }
   ],
   "edges": [
@@ -3565,6 +3733,126 @@
         "LR-B1-059"
       ],
       "claim": "По направлению вправо от разветвления находятся крейсерские ангары и шлюзы; направление привязано к пути детей.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E119",
+      "from": "L3-REST",
+      "to": "L3-REST-UPPER-GALLERY",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "claim": "Верхняя галерея огибает круглый зал по периметру.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E120",
+      "from": "L3-REST",
+      "to": "L3-REST-UPPER-STAIRS",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "claim": "Из основной части зала металлическая лестница ведёт наверх.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E121",
+      "from": "L3-REST-UPPER-STAIRS",
+      "to": "L3-REST-UPPER-GALLERY",
+      "type": "stairs_to",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "claim": "Подъём по лестнице на галерею.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E122",
+      "from": "L3-REST-UPPER-GALLERY",
+      "to": "L3-REST-GALLERY-DEADEND",
+      "type": "branches_to",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "claim": "Из галереи идут тупиковые Т-образные коридоры с ДНК-дверями.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E123",
+      "from": "L3-REST-UPPER-GALLERY",
+      "to": "L3-REST",
+      "type": "above_floor",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "claim": "Галерея расположена над залом, из неё видно расположенные внизу диваны и столы.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E124",
+      "from": "L3-REST-GALLERY-DEADEND",
+      "to": "L3-UPPER-VENT-ESCAPE",
+      "type": "route_with_turns_to",
+      "source_ids": [
+        "LR-B1-63"
+      ],
+      "claim": "Из сектора галереи бегут по низкому коридору, затем в вентиляционную шахту; прямой проход не доказан.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E125",
+      "from": "L3-UPPER-VENT-ESCAPE",
+      "to": "L2-VENT-LOW-GRILLE",
+      "type": "vertical_duct_to",
+      "source_ids": [
+        "LR-B1-64"
+      ],
+      "claim": "Эмма и Коля спускаются из Третьего в вентиляцию Второго.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E126",
+      "from": "L2-VENT-LOW-GRILLE",
+      "to": "L2-CABINS",
+      "type": "tunnel_to",
+      "source_ids": [
+        "LR-B1-64"
+      ],
+      "claim": "От выхода рядом с автоматом путь через резиновый коридор в жилой сектор.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E127",
+      "from": "L1-RETURN-FORK",
+      "to": "L1-BASES",
+      "type": "right_short_left_long",
+      "source_ids": [
+        "LR-B1-65"
+      ],
+      "claim": "Правая ветка к базе короче, левая длиннее, обе связаны с базами; ориентация относительна движению.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E128",
+      "from": "L1-OVAL",
+      "to": "L1-OVAL-PAINTED",
+      "type": "interior_has",
+      "source_ids": [
+        "LR-B1-65"
+      ],
+      "claim": "Расписанные стены, столы и стулья Овальной базы.",
       "state": "TEXT_DIRECT",
       "metric": null
     }
