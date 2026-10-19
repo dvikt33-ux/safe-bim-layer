@@ -1,0 +1,206 @@
+{
+  "schema": "APA-MOAG-SCENE-SCREENING/1",
+  "date": "2026-10-19",
+  "scope": {
+    "total_pages": 412,
+    "screened_page_ids": [
+      "B2-051",
+      "B2-052",
+      "B2-053",
+      "B2-054",
+      "B2-055"
+    ],
+    "external_screened_page_ids": [
+      "B2-052"
+    ],
+    "remote_evidence_page_ids": [
+      "B2-052",
+      "B2-053"
+    ],
+    "uncertain_page_ids": []
+  },
+  "method": "Use the table of contents to locate chapter boundaries, then scan the chapter across all web pages to its next heading. Track scene changes and character locations before deciding whether each scene needs a full spatial audit. External narrative can be screened out only after checking for station-related remote evidence.",
+  "sequence_note": "B2-051/052 already had REVIEWED_FULL_PAGE entries before this chapter filter was formalized; their scene classes are a retrospective context cross-check. B2-053 was first read before its chapter boundary was checked in the table of contents; its split was then verified. B2-054/055 were read across the full chapter after its heading and end page were identified. This package does not claim the filter was applied before prior reads.",
+  "chapters": [
+    {
+      "id": "B2-PART2-CH1",
+      "book_id": "B2",
+      "part_number": 2,
+      "chapter_number": 1,
+      "title": "Таис. Яростная битва",
+      "page_span": {
+        "start": 51,
+        "end": 53
+      },
+      "chapter_classification": "MIXED",
+      "screening_status": "CONTEXT_SCREENED_WITH_RETROSPECTIVE_CROSSCHECK",
+      "screened_pages": [
+        "B2-051",
+        "B2-052",
+        "B2-053"
+      ],
+      "scenes": [
+        {
+          "id": "B2P2C1-S1",
+          "page_fragments": [
+            {
+              "page_id": "B2-051",
+              "fragment": "глава 1, станционная сцена до внешнего эпизода"
+            }
+          ],
+          "classification": "STATION",
+          "physical_location": "МОАГ, рубка",
+          "characters": [
+            "Таис"
+          ],
+          "station_relevance": "аварийное состояние белого сервера и систем управления"
+        },
+        {
+          "id": "B2P2C1-S2",
+          "page_fragments": [
+            {
+              "page_id": "B2-052",
+              "fragment": "весь основной текст страницы"
+            },
+            {
+              "page_id": "B2-053",
+              "fragment": "до заголовка главы 2"
+            }
+          ],
+          "classification": "REMOTE_EVIDENCE",
+          "physical_location": "крейсер «Иминуя»",
+          "characters": [
+            "Таис",
+            "Фёдор"
+          ],
+          "station_relevance": "МОАГ виден снаружи и кратко закрывает корабль от атаки сверху; интерьер и системы чужого корабля исключены из модели МОАГа",
+          "screened_out_material": "подробности боя, серверные панели и конструкция «Иминуи»"
+        }
+      ],
+      "screening_caveat": "p53 contains the chapter boundary; the two fragments on that webpage belong to different chapters."
+    },
+    {
+      "id": "B2-PART2-CH2",
+      "book_id": "B2",
+      "part_number": 2,
+      "chapter_number": 2,
+      "title": "Эмма. Роботы тоже люди…",
+      "page_span": {
+        "start": 53,
+        "end": 55
+      },
+      "chapter_classification": "STATION",
+      "screening_status": "CONTEXT_SCREENED_BEFORE_STRUCTURED_EXTRACTION",
+      "screened_pages": [
+        "B2-053",
+        "B2-054",
+        "B2-055"
+      ],
+      "scenes": [
+        {
+          "id": "B2P2C2-S1",
+          "page_fragments": [
+            {
+              "page_id": "B2-053",
+              "fragment": "от заголовка главы 2 до конца веб-страницы"
+            },
+            {
+              "page_id": "B2-054",
+              "fragment": "глава 2, части 1 и 2"
+            },
+            {
+              "page_id": "B2-055",
+              "fragment": "глава 2, части 2 и 3"
+            }
+          ],
+          "classification": "STATION",
+          "physical_location": "МОАГ, Третий уровень → Нижний мусорный блок → Второй уровень",
+          "characters": [
+            "Эмма",
+            "Коля",
+            "Егор",
+            "Жанна",
+            "близнецы",
+            "Катя"
+          ],
+          "station_relevance": "серверные системы, лифты, путь через Третий, кольцевые магистрали и автономная изоляция уровней"
+        }
+      ],
+      "screening_caveat": "The opening of p53 was first read before the chapter boundary was checked; p54–55 were then scanned to the next chapter heading (p56) and fully audited because the chapter is station-based."
+    }
+  ],
+  "character_location_events": [
+    {
+      "character_id": "Таис",
+      "story_time": "B2, часть 2, глава 1, страницы 52–53 до заголовка главы 2",
+      "current_location": "крейсер «Иминуя»",
+      "departure_event": "после боя обсуждается будущая стыковка со станцией, она ещё не состоялась",
+      "arrival_event": "не установлено в пределах проверенного фрагмента",
+      "source": [
+        "B2-052",
+        "B2-053"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Фёдор",
+      "story_time": "B2, часть 2, глава 1, страницы 52–53 до заголовка главы 2",
+      "current_location": "крейсер «Иминуя»",
+      "departure_event": "после боя обсуждается будущая стыковка со станцией, она ещё не состоялась",
+      "arrival_event": "не установлено в пределах проверенного фрагмента",
+      "source": [
+        "B2-052",
+        "B2-053"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Эмма",
+      "story_time": "B2, часть 2, глава 2, сцена на Третьем",
+      "current_location": "МОАГ, район рубки и производственного цеха Третьего",
+      "departure_event": "переход от рубки к отдельному залу серверов рядом с цехом",
+      "arrival_event": "далее группа у лифтов и в служебном коридоре",
+      "source": [
+        "B2-053",
+        "B2-054"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Коля",
+      "story_time": "B2, часть 2, глава 2, страницы 54–55",
+      "current_location": "МОАГ, Третий → мусорный блок → обитаемые коридоры Второго → Главная площадь",
+      "departure_event": "спуск через люк в полу в мусорный блок",
+      "arrival_event": "в следующей сцене группа уже в коридорах Второго; промежуточный путь не описан",
+      "source": [
+        "B2-054",
+        "B2-055"
+      ],
+      "confidence": "DIRECT_TEXT_WITH_NARRATIVE_GAP"
+    },
+    {
+      "character_id": "Егор",
+      "story_time": "B2, часть 2, глава 2, страницы 54–55",
+      "current_location": "МОАГ, Третий → мусорный блок → обитаемые коридоры Второго → Главная площадь",
+      "departure_event": "спуск через люк в полу в мусорный блок",
+      "arrival_event": "в следующей сцене группа уже в коридорах Второго; промежуточный путь не описан",
+      "source": [
+        "B2-054",
+        "B2-055"
+      ],
+      "confidence": "DIRECT_TEXT_WITH_NARRATIVE_GAP"
+    },
+    {
+      "character_id": "Жанна",
+      "story_time": "B2, часть 2, глава 2, страницы 54–55",
+      "current_location": "МОАГ, Третий → мусорный блок → обитаемые коридоры Второго → Главная площадь",
+      "departure_event": "спуск через люк в полу в мусорный блок",
+      "arrival_event": "в следующей сцене группа уже в коридорах Второго; промежуточный путь не описан",
+      "source": [
+        "B2-054",
+        "B2-055"
+      ],
+      "confidence": "DIRECT_TEXT_WITH_NARRATIVE_GAP"
+    }
+  ]
+}

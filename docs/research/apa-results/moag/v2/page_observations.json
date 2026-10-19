@@ -7554,6 +7554,164 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-461",
+      "page_id": "B2-053",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=53",
+      "station_id": "MOAG",
+      "narrative_mode": "EXTERIOR_STATION_AS_COVER",
+      "locator_hint": "станция немного прикрывала — крейсеры не могли залететь сверху",
+      "spatial_assertion": "В боевом эпизоде на «Иминуе» корпус/положение МОАГа на короткое время закрывает крейсер от атак сверху. Это только внешнее относительное наблюдение; размеры, форма оболочки и геометрия защитного поля не определены.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-462",
+      "page_id": "B2-053",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=53",
+      "station_id": "MOAG",
+      "narrative_mode": "BRIDGE_SERVER_DAMAGE",
+      "locator_hint": "потемнела белая стена сервера",
+      "spatial_assertion": "В главе Эммы на МОАГе физически наблюдается белая серверная стена у рубки; во время атаки она темнеет. Аварийное состояние не является изменением геометрии и не отождествляет этот сервер с энергомодулем.",
+      "feature_refs": [
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-463",
+      "page_id": "B2-054",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=54",
+      "station_id": "MOAG",
+      "narrative_mode": "THIRD_LEVEL_LIFE_SUPPORT_SERVERS",
+      "locator_hint": "небольшой зал недалеко от дверей цеха",
+      "spatial_assertion": "На Третьем возле дверей производственного цеха расположен небольшой зал с двумя длинными круглыми стойками серверов, содержащими платы в пазах. Один сервер погас, у второго часть индикаторов работает; эта пара обслуживает жизнеобеспечение и отделена от белого сервера Мартина в рубке.",
+      "feature_refs": [
+        "L3-PRODUCTION"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-464",
+      "page_id": "B2-054",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=54",
+      "station_id": "MOAG",
+      "narrative_mode": "THIRD_LEVEL_LIFT_FAILURE",
+      "locator_hint": "три лифта — один грузовой и два пассажирских; крыша кабины ниже пола",
+      "spatial_assertion": "Герои осматривают три лифта на Третьем: один грузовой и два пассажирских. Грузовая кабина остановилась в шахте; её плоская крыша видна примерно на 30 см ниже пола. Источник не задаёт размеры кабины или шахты.",
+      "feature_refs": [
+        "L3-FREIGHT-LIFTS",
+        "LINK-LIFT-SHAFT"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-465",
+      "page_id": "B2-054",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=54",
+      "station_id": "MOAG",
+      "narrative_mode": "THIRD_TO_WASTE_ROUTE",
+      "locator_hint": "две ступеньки вверх; коридор вдоль внешней стены; дверца и люк в полу",
+      "spatial_assertion": "Фактически пройден путь по коридорам Третьего через две ступени вверх, поворот, большой коридор со скошенными стенами и полукруглым потолком, узкий проход, вручную открываемую дверь и маленькую комнату с люком в полу; спуск выводит в мусорный блок. Принадлежность люка конкретной шахте и точная траектория по плану неизвестны.",
+      "feature_refs": [
+        "L3-SERVICE",
+        "L1-RECYCLING"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-466",
+      "page_id": "B2-054",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=54",
+      "station_id": "MOAG",
+      "narrative_mode": "EXPECTED_SECOND_LEVEL_SERVER",
+      "locator_hint": "сервер должен быть в середине Второго уровня",
+      "spatial_assertion": "Персонажи называют середину Второго местом следующего сервера жизнеобеспечения. На странице это план/ожидание, а не состоявшееся прибытие или доказательство конкретной комнаты.",
+      "feature_refs": [],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-467",
+      "page_id": "B2-055",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=55",
+      "station_id": "MOAG",
+      "narrative_mode": "SECOND_LEVEL_ORANGE_RING",
+      "locator_hint": "Оранжевая магистраль правильным кругом огибает внутренние каюты",
+      "spatial_assertion": "Оранжевая магистраль описана как широкая резиновая дорожка, замкнутая правильным кругом вокруг внутренних кают; за ней расположена жилая зона с детскими помещениями, яслями, каютами и кафе.",
+      "feature_refs": [
+        "L2-ORANGE",
+        "L2-RESIDENTIAL-RING"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-468",
+      "page_id": "B2-055",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=55",
+      "station_id": "MOAG",
+      "narrative_mode": "SECOND_LEVEL_GREEN_RING_AND_PLAZA",
+      "locator_hint": "полукруглые арки; Зелёная магистраль вокруг круглой Главной площади",
+      "spatial_assertion": "Группа проходит через полукруглые арки во внутренний жилой круг. Зелёная магистраль огибает круглую Главную площадь с растениями в горшках, скамьями, диванами и фонтанчиками.",
+      "feature_refs": [
+        "L2-GREEN",
+        "L2-PLAZA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-469",
+      "page_id": "B2-055",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=55",
+      "station_id": "MOAG",
+      "narrative_mode": "SECOND_LEVEL_CENTRAL_COLUMN_AND_LIFE_SUPPORT",
+      "locator_hint": "толстенный белый столб в середине Главной площади и отдельный экран",
+      "spatial_assertion": "В середине Главной площади проходит толстый белый столб, рядом находится голографический экран с Законом. Текст связывает управление жизнеобеспечением со Вторым уровнем и дальними коридорами, но не доказывает, что весь отдел или сервер размещён внутри центрального столба.",
+      "feature_refs": [
+        "L2-PLAZA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-470",
+      "page_id": "B2-055",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=55",
+      "station_id": "MOAG",
+      "narrative_mode": "SECOND_LEVEL_AUTONOMY_AND_SEPARATION",
+      "locator_hint": "уровни автономны; второй изолируют",
+      "spatial_assertion": "В сцене герои изолируют Второй уровень, закрывая решётки; сообщается, что уровни рассчитаны на автономную работу и могут быть отсоединены в аварии. Реальное отсоединение уровней, узлы стыковки и конструкция границ не показаны.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }

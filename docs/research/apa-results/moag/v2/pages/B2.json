@@ -584,34 +584,34 @@
       "id": "B2-053",
       "page_number": 53,
       "url": "https://loveread.ec/read_book.php?id=53370&p=53",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 2,
+      "notes": "Смешанная веб-страница: до заголовка главы 2 бой идёт на крейсере «Иминуя»; станция на короткое время закрывает корабль от атак сверху, но внутреннее устройство МОАГа не описывается. После заголовка главы 2 действие переносится в рубку МОАГа: на фоне тёмных мониторов темнеет белая серверная стена. Детали боя и устройства крейсера не переносить на станцию.",
+      "verification_method": "Full primary LoveRead page read; chapter heading and scene transitions checked against book contents; external ship material separated from MOAG evidence",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-054",
       "page_number": 54,
       "url": "https://loveread.ec/read_book.php?id=53370&p=54",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 4,
+      "notes": "Рубка/коридоры Третьего в аварийном состоянии. У дверей производственного цеха находится небольшой зал с двумя длинными круглыми стойками серверов жизнеобеспечения; один погас, у другого часть индикаторов работает. Осмотрены три лифта — один грузовой и два пассажирских; грузовой застрял, плоская крыша кабины видна приблизительно на 30 см ниже пола. Маршрут продолжается по коридору вдоль внешней стены, через две ступени, поворот, узкий проход и дверь в маленькую комнату с люком в полу, ведущим в мусорный блок. Указание персонажа о сервере в середине Второго — ожидаемая цель, не достигнутая на этой странице.",
+      "verification_method": "Full primary LoveRead page read; chapter heading and scene transitions checked against book contents; external ship material separated from MOAG evidence",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-055",
       "page_number": 55,
       "url": "https://loveread.ec/read_book.php?id=53370&p=55",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 4,
+      "notes": "После пропуска маршрута из мусорного блока герои выходят в обитаемые коридоры Второго. Оранжевая магистраль — широкая резиновая дорожка, правильным кругом огибающая внутренние каюты; полукруглые арки ведут к Зелёной магистрали вокруг круглой Главной площади с растениями, скамьями, диванами и фонтанчиками. На площади — толстый белый столб и отдельный голографический экран; связь столба с помещением управления жизнеобеспечением остаётся неясной, текст называет отделение систем в дальних коридорах. Второй уровень изолируют как автономную систему; возможность отсоединения уровней приведена персонажем как функция станции, без описания конструктивного узла.",
+      "verification_method": "Full primary LoveRead page read; chapter heading and scene transitions checked against book contents; external ship material separated from MOAG evidence",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-056",

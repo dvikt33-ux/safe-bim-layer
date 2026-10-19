@@ -4123,6 +4123,157 @@
       ],
       "identity_hypotheses": [],
       "notes": "Подробный путь из библиотеки в лифтовой вестибюль не указан; сегмент NARRATIVE_GAP не подтверждает расположение лифта непосредственно у библиотеки. Белый сервер у рубки отличен от центра энергомодуля."
+    },
+    {
+      "id": "RT-038",
+      "title": "Эмма и старшие: рубка Третьего → коридор/мусорный блок → кольцевые магистрали Второго",
+      "participants": [
+        "Эмма",
+        "Коля",
+        "Егор",
+        "Жанна",
+        "близнецы"
+      ],
+      "book": "B2",
+      "site_pages": [
+        "B2-053",
+        "B2-054",
+        "B2-055"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT038-A",
+          "label": "Рубка Третьего у белого сервера Мартина",
+          "global_level": 3,
+          "local_stratum": "command-room",
+          "source_page_id": "B2-053",
+          "movement_method": "WALK",
+          "observed_constraint": "После начала главы Эммы герои находятся у тёмных экранов и белой серверной стены рубки.",
+          "existing_graph_node": "L3-BRIDGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT038-B",
+          "label": "Зал пары серверов рядом с дверями производственного цеха",
+          "global_level": 3,
+          "local_stratum": "life-support-server-hall",
+          "source_page_id": "B2-054",
+          "movement_method": "WALK",
+          "observed_constraint": "Герои фактически переходят к небольшому залу рядом с дверями цеха.",
+          "existing_graph_node": "L3-PRODUCTION",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT038-C",
+          "label": "Третий: осмотр трёх лифтов и повреждённой грузовой шахты",
+          "global_level": 3,
+          "local_stratum": "lift-landing",
+          "source_page_id": "B2-054",
+          "movement_method": "WALK",
+          "observed_constraint": "У ближайших трёх лифтов осматривают остановившуюся грузовую кабину.",
+          "existing_graph_node": "L3-FREIGHT-LIFTS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT038-D",
+          "label": "Коридор Третьего вдоль внешней стены и узкий проход",
+          "global_level": 3,
+          "local_stratum": "outer-service-corridor",
+          "source_page_id": "B2-054",
+          "movement_method": "WALK",
+          "observed_constraint": "Две ступени вверх, поворот, большой коридор с полукруглым потолком и скошенными стенами, затем узкий проход.",
+          "existing_graph_node": "L3-SERVICE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT038-E",
+          "label": "Маленькая комната с дверью и люком в полу",
+          "global_level": 3,
+          "local_stratum": "service-room",
+          "source_page_id": "B2-054",
+          "movement_method": "DOOR",
+          "observed_constraint": "Дверь открывают вручную; в маленькой тёмной комнате есть железный люк в полу.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT038-F",
+          "label": "Спуск через люк в мусорный блок",
+          "global_level": 1,
+          "local_stratum": "recycling-block",
+          "source_page_id": "B2-054",
+          "movement_method": "DROP_DOWN",
+          "observed_constraint": "Герои спускаются через люк и оказываются в мусорном блоке.",
+          "existing_graph_node": "L1-RECYCLING",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT038-G",
+          "label": "Переход из мусорного блока к обитаемым коридорам Второго не описан",
+          "global_level": 2,
+          "local_stratum": "unreported-transition",
+          "source_page_id": "B2-055",
+          "movement_method": "NARRATIVE_GAP",
+          "observed_constraint": "Следующая сцена уже в обитаемых коридорах Второго; фактическая трасса между сценами не дана.",
+          "existing_graph_node": "L2",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT038-H",
+          "label": "Оранжевая кольцевая магистраль Второго",
+          "global_level": 2,
+          "local_stratum": "residential-ring",
+          "source_page_id": "B2-055",
+          "movement_method": "WALK",
+          "observed_constraint": "Герои выходят к Оранжевой магистрали, замкнутой вокруг внутренних кают.",
+          "existing_graph_node": "L2-ORANGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT038-I",
+          "label": "Полукруглые арки и переход к Зелёной магистрали",
+          "global_level": 2,
+          "local_stratum": "inner-residential-ring",
+          "source_page_id": "B2-055",
+          "movement_method": "WALK",
+          "observed_constraint": "Через полукруглые арки проходят во внутренний жилой круг и следуют к Зелёной магистрали.",
+          "existing_graph_node": "L2-GREEN",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT038-J",
+          "label": "Главная площадь Второго с центральным белым столбом",
+          "global_level": 2,
+          "local_stratum": "central-plaza",
+          "source_page_id": "B2-055",
+          "movement_method": "WALK",
+          "observed_constraint": "Группа достигает круглой Главной площади; центральный столб и отдельный экран описаны, но размещение серверного отдела внутри столба не подтверждено.",
+          "existing_graph_node": "L2-PLAZA",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT038-C",
+          "lower": "RT038-F",
+          "source_page_id": "B2-054",
+          "claim": "Наблюдается переход с Третьего к мусорному блоку через коридоры, комнату и люк; метрическая высота не задана."
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Фактический путь от мусорного блока до обитаемых коридоров Второго не описан; сегмент NARRATIVE_GAP обязателен. Локализация серверов жизнеобеспечения и возможность автономной работы записываются отдельно от непоказанного механизма отсоединения уровней."
     }
   ]
 }
