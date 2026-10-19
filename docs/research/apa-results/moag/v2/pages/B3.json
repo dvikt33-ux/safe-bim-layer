@@ -276,23 +276,23 @@
       "id": "B3-025",
       "page_number": 25,
       "url": "https://loveread.ec/read_book.php?id=58610&p=25",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "NON_MOAG_OR_RETROSPECTIVE",
+      "recorded_spatial_hints": 0,
+      "notes": "Контекстная граница: земной фрагмент главы 9 пропущен; в конце страницы есть только заголовок главы 10 «Эмма. Хозяйка станции», без её содержательной сцены. Станционный фрагмент начинается на p26.",
+      "verification_method": "Граница главы установлена по заголовку на странице; земной текст не анализировался. Содержательный станционный разбор начинается с p26.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B3-026",
       "page_number": 26,
       "url": "https://loveread.ec/read_book.php?id=58610&p=26",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG_REMOTE_EVIDENCE",
+      "recorded_spatial_hints": 1,
+      "notes": "Глава 10, сцена на другой станции. Эмма прямо сравнивает схему центрального кругового коридора чужого уровня с МОАГом: у МОАГа несколько центральных круговых коридоров. Коридоры, кладовые, арка и рубка, по которым группа проходит здесь, относятся к другой станции и не переносятся в модель МОАГа.",
+      "verification_method": "Одна полная страница прочитана один раз через Opera; прямое сравнительное свидетельство о МОАГе отделено от маршрута на другой станции.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B3-027",
