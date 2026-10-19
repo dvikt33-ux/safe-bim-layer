@@ -35,7 +35,8 @@
       "B2-079",
       "B2-080",
       "B2-081",
-      "B2-082"
+      "B2-082",
+      "B2-083"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -66,22 +67,24 @@
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B2-082",
-      "context_reviewed_page_count": 32,
-      "full_evidence_page_count": 198,
+      "as_of_page_id": "B2-083",
+      "context_reviewed_page_count": 33,
+      "full_evidence_page_count": 199,
       "external_excluded_page_count": 17,
       "unresolved_classification_page_count": 0,
-      "justified_reopened_page_count": 2,
-      "justified_reopen_event_count": 3,
+      "justified_reopened_page_count": 3,
+      "justified_reopen_event_count": 4,
       "justified_reopened_page_ids": [
         "B2-077",
-        "B2-079"
+        "B2-079",
+        "B2-083"
       ],
       "reopen_reasons": {
         "B2-077": "точно локализовать границу главы 9 на странице, разделённой между главами 8 и 9; страница повторно открывалась дважды",
-        "B2-079": "получить полный текст после усечения вывода; одно повторное открытие"
+        "B2-079": "получить полный текст после усечения вывода; одно повторное открытие",
+        "B2-083": "первичный ответ по странице обрезался; адресно прочитаны последние десять абзацев и подтверждён конец страницы"
       },
-      "character_location_event_count": 38
+      "character_location_event_count": 41
     }
   },
   "method": "ONE_PASS: classify each page fragment and extract all relevant evidence during the same single reading. Use prior-page context and identify chapter/scene boundaries inline when headings appear. Do not pre-screen an entire chapter before rereading; reopens require a recorded concrete reason.",
@@ -655,13 +658,14 @@
       "title": "Эмма. Интуиция",
       "page_span": {
         "start": 81,
-        "end": 82
+        "end": 83
       },
       "chapter_classification": "STATION",
       "screening_status": "ONE_PASS_IN_PROGRESS",
       "screened_pages": [
         "B2-081",
-        "B2-082"
+        "B2-082",
+        "B2-083"
       ],
       "scenes": [
         {
@@ -674,6 +678,10 @@
             {
               "page_id": "B2-082",
               "fragment": "продолжение главы 10: выход Эммы из каюты через галерею и лестницу к скамейке; спасение Макса от обстрела у прохода в туннель"
+            },
+            {
+              "page_id": "B2-083",
+              "fragment": "продолжение главы 10: возвращение от скамейки, встреча у лестницы, дети в каюте, ужин и рассказ Коли о нападении"
             }
           ],
           "classification": "STATION",
@@ -687,9 +695,9 @@
           "station_relevance": "доступность туннелей, устройство внутреннего круга, размещение площадей/детских площадок и разделение пищевого снабжения; эпизодическое блокирование магистралей пауками сохраняется как состояние сцены"
         }
       ],
-      "screening_caveat": "Глава 10 открыта на p81 и продолжается на p82. page_span.end — последняя обработанная страница, конец главы пока не найден.",
+      "screening_caveat": "Глава 10 открыта на p81 и продолжается на p82–83. page_span.end — последняя обработанная страница, конец главы пока не найден.",
       "chapter_end_confirmed": false,
-      "station_relevance": "схемы уровня и отдельный водяной резервуар, планировка каюты, галерея/лестница, скамьи с огнезащитной обработкой и временно опасный подход к туннелю; кладовая остаётся гипотезой персонажа"
+      "station_relevance": "схемы уровня и отдельный водяной резервуар, гипотеза кладовой, планировка каюты, галерея/лестница, огнезащита скамьи, лестничная встреча, детский быт, дверной замок как планируемое изменение, работа кухонной техники и рассказ о системах станции при нападении"
     }
   ],
   "character_location_events": [
@@ -1152,6 +1160,39 @@
       "arrival_event": "идёт к проходу в туннель, Эмма останавливает его до выхода в зону обстрела и укрывает",
       "source": [
         "B2-082"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Эмма",
+      "story_time": "B2, часть 2, глава 10, p83",
+      "current_location": "МОАГ, Второй уровень: лестничный участок и каюта",
+      "departure_event": "после спасения Макса возвращается с ним от опасного прохода к лестнице",
+      "arrival_event": "встречает Кольку и Соню с младенцами у лестницы; затем оказывается в каюте во время ужина",
+      "source": [
+        "B2-083"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Колька",
+      "story_time": "B2, часть 2, глава 10, p83",
+      "current_location": "МОАГ, Второй уровень: лестничный участок и каюта Эммы",
+      "departure_event": "вместе с Соней поднимается по лестнице с двумя переносками младенцев",
+      "arrival_event": "оказывается с детьми в каюте и готовит ужин",
+      "source": [
+        "B2-083"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Соня",
+      "story_time": "B2, часть 2, глава 10, p83",
+      "current_location": "МОАГ, Второй уровень: лестничный участок и гостиная каюты",
+      "departure_event": "поднимается по лестнице с переноской младенца",
+      "arrival_event": "ухаживает за младенцами в гостиной каюты",
+      "source": [
+        "B2-083"
       ],
       "confidence": "DIRECT_TEXT"
     }

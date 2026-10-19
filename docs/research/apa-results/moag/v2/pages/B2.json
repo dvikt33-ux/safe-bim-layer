@@ -914,12 +914,12 @@
       "id": "B2-083",
       "page_number": 83,
       "url": "https://loveread.ec/read_book.php?id=53370&p=83",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 5,
+      "notes": "Глава 10, МОАГ, Второй уровень. После спасения Макса Эмма встречает Кольку и Соню у лестницы: они поднимаются с двумя младенцами. В каюте готовят еду с помощью кухонного агрегата, используют шкаф для тарелок и посудомоечную машину; в гостиной Соня ухаживает за младенцем. План поставить на дверь каюты замок — будущее действие, пока не установленное состояние. Скафандры оставлены грудой в углу коридора. Игрушечные модели и их движения не являются геометрией станции. В диалоге сообщается об орбите станции, защитном поле и отказе роботов в результате нападения.",
+      "verification_method": "Single full-page primary-source read in Opera; last paragraphs recovered in one justified targeted reopen after initial output truncation",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-084",

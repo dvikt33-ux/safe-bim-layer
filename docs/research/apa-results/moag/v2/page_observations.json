@@ -8366,6 +8366,76 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-515",
+      "page_id": "B2-083",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=83",
+      "station_id": "MOAG",
+      "narrative_mode": "CABIN_DOMESTIC_EQUIPMENT",
+      "locator_hint": "кухонный агрегат, шкаф для тарелок, посудомоечная машина и гостиная",
+      "spatial_assertion": "В каюте используются кухонный агрегат и шкаф с тарелками; посудомоечную машину устанавливают в бытовой последовательности после еды. В гостиной Соня ухаживает за младенцем; ранее в гостиной назван диван. Точные положения техники, мойки и мебели в плане не заданы.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-516",
+      "page_id": "B2-083",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=83",
+      "station_id": "MOAG",
+      "narrative_mode": "PLANNED_CABIN_DOOR_LOCK",
+      "locator_hint": "разговор о будущем замке на двери каюты",
+      "spatial_assertion": "Колька предлагает в тот же день поставить замок, который смогут открыть только взрослые. Это планируемое изменение после ухода Макса; источник не подтверждает, что замок уже установлен, и не описывает конструкцию двери или запора.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-517",
+      "page_id": "B2-083",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=83",
+      "station_id": "MOAG",
+      "narrative_mode": "CORRIDOR_SPACESUIT_STORAGE",
+      "locator_hint": "угол коридора, где оставлены скафандры",
+      "spatial_assertion": "Эмма вспоминает, что скафандры лежат грудой в углу коридора. Это временное размещение вещей в конкретном эпизоде; название коридора и его связь с каютой не определены.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-518",
+      "page_id": "B2-083",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=83",
+      "station_id": "MOAG",
+      "narrative_mode": "STATION_ORBIT_AND_DEFENSE_FIELD",
+      "locator_hint": "рассказ Коли и игрушечная модель атаки крейсеров",
+      "spatial_assertion": "Коля рассказывает, что МОАГ вращается вокруг Земли и при атаке крейсеров станция включила защитное силовое поле, из-за которого корабли не могли стрелять по станции. Эти характеристики даны в объяснении персонажа; траектория, геометрия поля, параметры орбиты и форма станции не описаны. Игрушечные модели только иллюстрируют рассказ.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-519",
+      "page_id": "B2-083",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=83",
+      "station_id": "MOAG",
+      "narrative_mode": "MOAG_SERVER_AND_AUTOMATION_FAILURE",
+      "locator_hint": "сбои большого сервера Моага и отключение роботов",
+      "spatial_assertion": "По рассказу Коли, после сбоев в большом сервере Моаге роботы проникли на станцию и атаковали её; вражеские роботы отключили донов, уборщиков, пекарей и лонов. Это состояние систем во время нападения, не постоянная недоступность техники и не описание размещения серверных помещений.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
