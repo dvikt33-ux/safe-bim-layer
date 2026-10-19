@@ -1486,12 +1486,12 @@
       "id": "B2-135",
       "page_number": 135,
       "url": "https://loveread.ec/read_book.php?id=53370&p=135",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "REMOTE_EVIDENCE",
+      "recorded_spatial_hints": 2,
+      "notes": "Сцена после ухода с МОАГа происходит на корабле Ника. Для МОАГа сохранено только удалённое свидетельство: станция уже пустая/необитаемая и видна из окна; рядом находятся крейсеры. Взрыв станции обсуждается как будущее действие после отхода на безопасное расстояние, не как свершившийся факт. Интерьер катера, медицинское оборудование, корабли и ангар семейного корабля исключены из модели МОАГа.",
+      "verification_method": "Одна полная страница прочитана через Opera; сохранено только относящееся к МОАГу удалённое свидетельство, остальная корабельная сцена исключена.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-136",
