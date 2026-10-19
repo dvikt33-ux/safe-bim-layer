@@ -1013,12 +1013,12 @@
       "id": "B2-092",
       "page_number": 92,
       "url": "https://loveread.ec/read_book.php?id=53370&p=92",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 2,
+      "notes": "Глава 12 на МОАГе. Эмма и Колька приходят к стеклянным дверям малой библиотеки; внутри описаны столы и книжные шкафы с проходом между ними. Посещение подтверждает малую библиотеку из объявления p91; возможная идентичность с маленькой библиотекой p84 на первом этаже не установлена. Эмма сидит на полу у переносок, Ритка — на столе. Диалоги сообщают об эпизодических детских конфликтах с магнитными досками в парке, соке на галерее и мусоре/липких загрязнениях на лестницах. Это сообщения о текущем беспорядке, не постоянная отделка или конструктив.",
+      "verification_method": "Single full-page primary-source read in Opera; library arrival and dialogue-reported temporary station condition classified together",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-093",
