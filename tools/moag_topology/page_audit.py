@@ -12,8 +12,8 @@ import sys
 
 BOOKS={"B1":(48197,114),"B2":(53370,148),"B3":(58610,71),"B4":(63971,79)}
 STATUSES={"NOT_REVIEWED","REVIEWED_FULL_PAGE","INACCESSIBLE","PARTIAL_READ"}
-EVIDENCE={"DIRECT_TEXT","CONTEXT_INFERENCE","MEMORY_NOT_SPATIAL","EXCLUSION_EVIDENCE","DREAM_NONFACT","MEDIATED_IMAGE_UNVERIFIED"}
-STATIONS={"MOAG","MOAG_MEMORY_ONLY","THIRD_STATION_NOT_MOAG","UNRESOLVED_OBJECT"}
+EVIDENCE={"DIRECT_TEXT","CONTEXT_INFERENCE","MEMORY_NOT_SPATIAL","EXCLUSION_EVIDENCE","DREAM_NONFACT","MEDIATED_IMAGE_UNVERIFIED","CHARACTER_STATED_FALSEHOOD"}
+STATIONS={"MOAG","MOAG_MEMORY_ONLY","THIRD_STATION_NOT_MOAG","OTHER_STATION_NOT_MOAG","MOAG_COVER_STORY_NOT_FACT","UNRESOLVED_OBJECT"}
 VSTATUSES={"OPEN","INSUFFICIENT_EVIDENCE","TEXT_SUPPORTED_LOCAL_ONLY","REJECTED_AS_METRIC_EVIDENCE"}
 ROOT=Path(__file__).resolve().parents[2]/"docs/research/apa-results/moag/v2"
 
@@ -72,8 +72,10 @@ def check(root=ROOT):
             raise ValueError("dream treated as physical evidence "+id)
         if row["evidence_class"]=="MEDIATED_IMAGE_UNVERIFIED" and row.get("visual_hypothesis_refs"):
             raise ValueError("hologram promoted to visual evidence "+id)
-        if row["station_id"]=="THIRD_STATION_NOT_MOAG" and row["evidence_class"]!="EXCLUSION_EVIDENCE":
+        if row["station_id"] in {"THIRD_STATION_NOT_MOAG","OTHER_STATION_NOT_MOAG"} and row["evidence_class"]!="EXCLUSION_EVIDENCE":
             raise ValueError("other station promoted to MOAG "+id)
+        if row["station_id"]=="MOAG_COVER_STORY_NOT_FACT" and (row["evidence_class"]!="CHARACTER_STATED_FALSEHOOD" or row["feature_refs"] or row["visual_hypothesis_refs"]):
+            raise ValueError("false character account treated as MOAG geometry "+id)
     v=load(root/"visual_hypotheses.json")
     for h in v["hypotheses"]:
         if h.get("adopt_as_geometry") is not False:
