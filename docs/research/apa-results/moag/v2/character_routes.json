@@ -4274,6 +4274,47 @@
       ],
       "identity_hypotheses": [],
       "notes": "Фактический путь от мусорного блока до обитаемых коридоров Второго не описан; сегмент NARRATIVE_GAP обязателен. Локализация серверов жизнеобеспечения и возможность автономной работы записываются отдельно от непоказанного механизма отсоединения уровней."
+    },
+    {
+      "id": "RT-039",
+      "title": "Эмма: ясли Второго → детская игровая зона за застеклёнными раздвижными дверями",
+      "participants": [
+        "Эмма"
+      ],
+      "book": "B2",
+      "site_pages": [
+        "B2-060"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT039-A",
+          "label": "Ясли Второго уровня, выход через застеклённые раздвижные двери",
+          "global_level": 2,
+          "local_stratum": "infant-nursery",
+          "source_page_id": "B2-060",
+          "movement_method": "DOOR",
+          "observed_constraint": "Эмма выходит из яслей через застеклённые раздвижные двери; их ширина, высота и точное положение неизвестны.",
+          "existing_graph_node": "L2-NURSERY",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT039-B",
+          "label": "Детская игровая зона с прорезиненными дорожками и круглыми площадками",
+          "global_level": 2,
+          "local_stratum": "infant-play-area",
+          "source_page_id": "B2-060",
+          "movement_method": "WALK",
+          "observed_constraint": "Сразу за дверями описаны серые прорезиненные дорожки с низкими белыми бортиками, площадки и пластиковые горки.",
+          "existing_graph_node": "L2-INFANT-PLAY",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "Прямой переход с p60. Не выводить из этой сцены точные координаты, размеры, число комнат или непрерывность детской дорожки."
     }
   ]
 }

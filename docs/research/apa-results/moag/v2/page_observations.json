@@ -7712,6 +7712,196 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-471",
+      "page_id": "B2-056",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=56",
+      "station_id": "MOAG",
+      "narrative_mode": "SECOND_LEVEL_INFANT_CARE",
+      "locator_hint": "ясли Второго, кроватки и стол",
+      "spatial_assertion": "В яслях ухаживают за четырьмя новорождёнными: младенцев размещают в кроватках, для переодевания одного кладут на стол; один ребёнок переносится на руках. Точная схема расстановки кроваток и стола не дана.",
+      "feature_refs": [
+        "L2-NURSERY",
+        "L2-INFANT-NEW"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-472",
+      "page_id": "B2-056",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=56",
+      "station_id": "MOAG",
+      "narrative_mode": "NURSERY_BOTTLE_CLEANING",
+      "locator_hint": "специальный шкаф-автомат для бутылочек",
+      "spatial_assertion": "Бутылочки помещают в специальный шкаф, запускают программу кнопкой; примерно через полминуты получают чистые бутылочки. Габариты шкафа, его положение в помещении и технические подключения неизвестны.",
+      "feature_refs": [
+        "L2-NURSERY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-473",
+      "page_id": "B2-056",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=56",
+      "station_id": "MOAG",
+      "narrative_mode": "NURSERY_FORMULA_DISPENSER",
+      "locator_hint": "автомат смеси на подставке",
+      "spatial_assertion": "Отдельный пищевой автомат ставят на подставку; выбирают имя и возраст ребёнка, после чего он выдаёт дозированную смесь. Не указаны его размеры, точное место в яслях и связь со шкафом для бутылочек.",
+      "feature_refs": [
+        "L2-NURSERY",
+        "L2-INFANT-NEW"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-474",
+      "page_id": "B2-056",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=56",
+      "station_id": "MOAG",
+      "narrative_mode": "WHITE_COLUMN_POWER_MODULE_HYPOTHESIS",
+      "locator_hint": "белый столб в середине Главной площади",
+      "spatial_assertion": "Эмма предполагает, что внутри белого центрального столба может проходить энергомодуль станции. Это её догадка, не подтверждение размещения генератора или его конструкции.",
+      "feature_refs": [
+        "L2-PLAZA"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-475",
+      "page_id": "B2-059",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=59",
+      "station_id": "MOAG",
+      "narrative_mode": "SECOND_LEVEL_WINDOWS",
+      "locator_hint": "окна Второго уровня; библиотека как исключение",
+      "spatial_assertion": "Эмма вспоминает, что окон на Втором почти нет, за исключением библиотеки. Это качественное ограничение по наличию окон, не полная инвентаризация проёмов и не основание приписывать библиотеке конкретные размеры окна.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-476",
+      "page_id": "B2-060",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=60",
+      "station_id": "MOAG",
+      "narrative_mode": "CHILD_PLAY_AREA",
+      "locator_hint": "за застеклёнными раздвижными дверями яслей",
+      "spatial_assertion": "Из яслей Эмма выходит через застеклённые раздвижные двери в детскую зону: светло-серые прорезиненные дорожки с низкими белыми бортиками, круглые площадки с пластиковыми горками и рядами маленьких стульчиков. Размеры и взаимное расположение элементов не указаны.",
+      "feature_refs": [
+        "L2-NURSERY",
+        "L2-INFANT-PLAY"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-477",
+      "page_id": "B2-060",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=60",
+      "station_id": "MOAG",
+      "narrative_mode": "GREEN_RING_CHILD_SAFETY",
+      "locator_hint": "узкая Зелёная магистраль вокруг Главной площади и парка",
+      "spatial_assertion": "Зелёная магистраль описана как узкая дорожка, огибающая кругом Главную площадь и парк; движение на магнитных досках здесь запрещают из-за риска аварии. Точной ширины не дано.",
+      "feature_refs": [
+        "L2-GREEN",
+        "L2-PLAZA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-478",
+      "page_id": "B2-061",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=61",
+      "station_id": "MOAG",
+      "narrative_mode": "CHILD_DINING_AREA",
+      "locator_hint": "столовая детской группы",
+      "spatial_assertion": "Восемнадцать детей собирают в столовой и рассаживают за столы на маленькие стулья. Отдельный пространственный идентификатор столовой в реестре не установлен; не следует автоматически отождествлять её с кафе или другой известной комнатой.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-479",
+      "page_id": "B2-061",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=61",
+      "station_id": "MOAG",
+      "narrative_mode": "CHILD_KITCHEN_EQUIPMENT_EXPECTED",
+      "locator_hint": "еда и посуда для детской группы",
+      "spatial_assertion": "Персонажи ожидают наличие аппаратов с пакетами молока и посудомоечной машины; исправность части кухонной техники вызывает сомнение. Это сведения о предполагаемом оборудовании детской группы, а не полностью подтверждённая комплектация или работа.",
+      "feature_refs": [],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-480",
+      "page_id": "B2-062",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=62",
+      "station_id": "MOAG",
+      "narrative_mode": "SECOND_LEVEL_CABIN_SLEEPING",
+      "locator_hint": "комната Коли, диван и соседняя кухня",
+      "spatial_assertion": "Эмма показывает Максиму место для сна в комнате Коли: диван; сама затем ложится рядом на диван. Схема комнаты, её размеры и точное положение относительно других помещений не описаны.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-481",
+      "page_id": "B2-062",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=62",
+      "station_id": "MOAG",
+      "narrative_mode": "DOMESTIC_KITCHEN_STORAGE",
+      "locator_hint": "кухня со шкафами и пищевым агрегатом",
+      "spatial_assertion": "В кухне видны шкафы с тарелками и кружками, прозрачные контейнеры с запасами сухого молока, картофеля и хлопьев, а также пищевой агрегат для каш. Не указаны габариты кухни и точное размещение оборудования.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-482",
+      "page_id": "B2-057",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=57",
+      "station_id": "MOAG",
+      "narrative_mode": "MOAG_REMOTE_WINDOW_VIEW",
+      "locator_hint": "вид из окна крейсера «Иминуя»",
+      "spatial_assertion": "Таис и Фёдор видят МОАГ за окном; «Иминуя» дрейфует от станции, а два других крейсера удаляются от неё. Это подтверждает доступность внешнего ракурса и относительное движение объектов, но текст не задаёт внешний силуэт, размеры, пропорции, цвет или детали корпуса МОАГа.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }

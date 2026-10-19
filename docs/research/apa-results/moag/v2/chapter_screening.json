@@ -8,14 +8,26 @@
       "B2-052",
       "B2-053",
       "B2-054",
-      "B2-055"
+      "B2-055",
+      "B2-056",
+      "B2-057",
+      "B2-058",
+      "B2-059",
+      "B2-060",
+      "B2-061",
+      "B2-062"
     ],
     "external_screened_page_ids": [
-      "B2-052"
+      "B2-052",
+      "B2-056",
+      "B2-057",
+      "B2-058",
+      "B2-059"
     ],
     "remote_evidence_page_ids": [
       "B2-052",
-      "B2-053"
+      "B2-053",
+      "B2-057"
     ],
     "uncertain_page_ids": []
   },
@@ -87,14 +99,15 @@
       "title": "Эмма. Роботы тоже люди…",
       "page_span": {
         "start": 53,
-        "end": 55
+        "end": 56
       },
       "chapter_classification": "STATION",
       "screening_status": "CONTEXT_SCREENED_BEFORE_STRUCTURED_EXTRACTION",
       "screened_pages": [
         "B2-053",
         "B2-054",
-        "B2-055"
+        "B2-055",
+        "B2-056"
       ],
       "scenes": [
         {
@@ -111,6 +124,10 @@
             {
               "page_id": "B2-055",
               "fragment": "глава 2, части 2 и 3"
+            },
+            {
+              "page_id": "B2-056",
+              "fragment": "глава 2, до заголовка главы 3"
             }
           ],
           "classification": "STATION",
@@ -126,7 +143,128 @@
           "station_relevance": "серверные системы, лифты, путь через Третий, кольцевые магистрали и автономная изоляция уровней"
         }
       ],
-      "screening_caveat": "The opening of p53 was first read before the chapter boundary was checked; p54–55 were then scanned to the next chapter heading (p56) and fully audited because the chapter is station-based."
+      "screening_caveat": "The opening of p53 was first read before its chapter boundary was checked; p54–55 and the chapter-2 fragment on p56 were fully audited. Page 56 then begins chapter 3."
+    },
+    {
+      "id": "B2-PART2-CH3",
+      "book_id": "B2",
+      "part_number": 2,
+      "chapter_number": 3,
+      "title": "Таис. Здравствуй, Земля!",
+      "page_span": {
+        "start": 56,
+        "end": 59
+      },
+      "chapter_classification": "MIXED",
+      "screening_status": "CONTEXT_SCREENED_BEFORE_STRUCTURED_EXTRACTION",
+      "screened_pages": [
+        "B2-056",
+        "B2-057",
+        "B2-058",
+        "B2-059"
+      ],
+      "scenes": [
+        {
+          "id": "B2P2C3-S1",
+          "page_fragments": [
+            {
+              "page_id": "B2-057",
+              "fragment": "эпизод у окна: МОАГ и удаляющиеся корабли видны с «Иминуи»"
+            }
+          ],
+          "classification": "REMOTE_EVIDENCE",
+          "physical_location": "крейсер «Иминуя»",
+          "characters": [
+            "Таис",
+            "Фёдор"
+          ],
+          "station_relevance": "МОАГ виден через окно с другого корабля; фиксируются только внешний ракурс и относительное движение, без описания формы станции.",
+          "screened_out_material": "внутреннее устройство и трансформация «Иминуи», бой, спасательный модуль и Земля"
+        },
+        {
+          "id": "B2P2C3-S2",
+          "page_fragments": [
+            {
+              "page_id": "B2-056",
+              "fragment": "от заголовка главы 3 до конца страницы"
+            },
+            {
+              "page_id": "B2-057",
+              "fragment": "после краткого эпизода внешнего вида МОАГа из окна"
+            },
+            {
+              "page_id": "B2-058",
+              "fragment": "весь текст до продолжения на p59"
+            },
+            {
+              "page_id": "B2-059",
+              "fragment": "внешняя сцена до заголовка главы 4"
+            }
+          ],
+          "classification": "EXTERNAL",
+          "physical_location": "крейсер «Иминуя», спасательный модуль, Земля",
+          "characters": [
+            "Таис",
+            "Фёдор"
+          ],
+          "screened_out_material": "трансформация чужого крейсера в модуль, полёт и посадка на Землю, остров, городские строения и внешние корабли не описывают устройство МОАГа."
+        }
+      ],
+      "screening_caveat": "Chapter 3 begins on p56 after a station-based chapter-2 fragment and continues through the Earth arrival on p59; p57 contains one short REMOTE_EVIDENCE fragment, and p59 then begins chapter 4."
+    },
+    {
+      "id": "B2-PART2-CH4",
+      "book_id": "B2",
+      "part_number": 2,
+      "chapter_number": 4,
+      "title": "Эмма. Много хлопот с детьми",
+      "page_span": {
+        "start": 59,
+        "end": 62
+      },
+      "chapter_classification": "STATION",
+      "screening_status": "CONTEXT_SCREENED_BEFORE_STRUCTURED_EXTRACTION",
+      "screened_pages": [
+        "B2-059",
+        "B2-060",
+        "B2-061",
+        "B2-062"
+      ],
+      "scenes": [
+        {
+          "id": "B2P2C4-S1",
+          "page_fragments": [
+            {
+              "page_id": "B2-059",
+              "fragment": "от заголовка главы 4 до конца страницы"
+            },
+            {
+              "page_id": "B2-060",
+              "fragment": "глава 4, продолжение ухода за младенцами и детской зоной"
+            },
+            {
+              "page_id": "B2-061",
+              "fragment": "глава 4, детская магистраль и столовая"
+            },
+            {
+              "page_id": "B2-062",
+              "fragment": "глава 4, каюта, кухня и окончание главы"
+            }
+          ],
+          "classification": "STATION",
+          "physical_location": "МОАГ, Второй уровень: ясли, детская зона, Зелёная магистраль, столовая группы и каюта",
+          "characters": [
+            "Эмма",
+            "Коля",
+            "Максим",
+            "Егор",
+            "Тихон",
+            "дети"
+          ],
+          "station_relevance": "детские помещения и мебель, оконность Второго, участок Зелёной магистрали, столовая и бытовое оборудование"
+        }
+      ],
+      "screening_caveat": "Page 59 is split at the chapter-4 heading: the Earth landing is the end of chapter 3; the Emma/nursery scene begins chapter 4. The nightmare on p62 is explicitly a dream and is excluded from physical-space evidence."
     }
   ],
   "character_location_events": [
@@ -332,6 +470,94 @@
       "arrival_event": "дальнейшее местонахождение в этих страницах не установлено",
       "source": [
         "B2-054"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Эмма",
+      "story_time": "B2, часть 2, главы 2–4, p56 и p59–61",
+      "current_location": "МОАГ, Второй уровень: ясли, затем детская игровая зона, Зелёная магистраль и столовая группы",
+      "departure_event": "выходит из яслей через застеклённые раздвижные двери; дальнейшие короткие переходы показаны не все",
+      "arrival_event": "наблюдается в детской зоне и на Зелёной магистрали; собирает детей в столовой",
+      "source": [
+        "B2-056",
+        "B2-059",
+        "B2-060",
+        "B2-061"
+      ],
+      "confidence": "DIRECT_TEXT_WITH_NARRATIVE_GAP"
+    },
+    {
+      "character_id": "Коля",
+      "story_time": "B2, часть 2, глава 2, p56 и глава 4, p59",
+      "current_location": "МОАГ, Второй уровень: ясли; позже сцена ухода за детьми продолжается после ночного отдыха",
+      "departure_event": "в p56 находится вместе с Эммой в яслях; дальнейший переход между эпизодами не описан",
+      "arrival_event": "вновь упоминается при уходе за детьми; позже его комната на Втором служит местом сна Максима",
+      "source": [
+        "B2-056",
+        "B2-059",
+        "B2-062"
+      ],
+      "confidence": "DIRECT_TEXT_WITH_NARRATIVE_GAP"
+    },
+    {
+      "character_id": "Нитка",
+      "story_time": "B2, часть 2, глава 2, p56",
+      "current_location": "МОАГ, Второй уровень: уходит из яслей; дальнейшее место не установлено",
+      "departure_event": "после отказа продолжать уход хлопает дверью и покидает ясли",
+      "arrival_event": "не указан",
+      "source": [
+        "B2-056"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Таис",
+      "story_time": "B2, часть 2, глава 3, p57–59",
+      "current_location": "остров на Земле, рядом с местом посадки спасательного модуля",
+      "departure_event": "покидает «Иминуя» в отделившемся модуле, сформированном из капитанской рубки крейсера",
+      "arrival_event": "модуль садится на острове; Таис выходит на бетонное покрытие",
+      "source": [
+        "B2-057",
+        "B2-058",
+        "B2-059"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Фёдор",
+      "story_time": "B2, часть 2, глава 3, p57–59",
+      "current_location": "остров на Земле, рядом с местом посадки спасательного модуля",
+      "departure_event": "покидает «Иминуя» в отделившемся модуле, сформированном из капитанской рубки крейсера",
+      "arrival_event": "модуль садится на острове; Фёдор выходит на бетонное покрытие",
+      "source": [
+        "B2-057",
+        "B2-058",
+        "B2-059"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Максим",
+      "story_time": "B2, часть 2, глава 4, p60–62",
+      "current_location": "МОАГ, Второй уровень: детская зона, затем комната Коли и кухня",
+      "departure_event": "уходит из детской зоны с Эммой; конкретная трасса между помещениями не описана",
+      "arrival_event": "спит на диване в комнате Коли и позже находится на кухне",
+      "source": [
+        "B2-060",
+        "B2-061",
+        "B2-062"
+      ],
+      "confidence": "DIRECT_TEXT_WITH_NARRATIVE_GAP"
+    },
+    {
+      "character_id": "Егор",
+      "story_time": "B2, часть 2, глава 4, p60",
+      "current_location": "МОАГ, Второй уровень: Зелёная магистраль у Главной площади и парка",
+      "departure_event": "выходит на магистраль, пока Эмма покидает ясли",
+      "arrival_event": "остается следить, чтобы дети не катались на магнитных досках на узкой Зелёной дорожке",
+      "source": [
+        "B2-060"
       ],
       "confidence": "DIRECT_TEXT"
     }
