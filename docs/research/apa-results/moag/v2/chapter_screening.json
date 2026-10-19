@@ -42,7 +42,8 @@
       "B2-086",
       "B2-087",
       "B2-088",
-      "B2-089"
+      "B2-089",
+      "B2-090"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -80,9 +81,9 @@
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B2-089",
-      "context_reviewed_page_count": 39,
-      "full_evidence_page_count": 205,
+      "as_of_page_id": "B2-090",
+      "context_reviewed_page_count": 40,
+      "full_evidence_page_count": 206,
       "external_excluded_page_count": 19,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
@@ -99,7 +100,7 @@
         "B2-083": "первичный ответ по странице обрезался; адресно прочитаны последние десять абзацев и подтверждён конец страницы",
         "B2-088": "Первый ответ по p88 был обрезан ограничением вывода; выполнен один адресный компактный текстовый запрос для восстановления полного текста этой же страницы."
       },
-      "character_location_event_count": 41
+      "character_location_event_count": 42
     }
   },
   "method": "ONE_PASS: classify each page fragment and extract all relevant evidence during the same single reading. Use prior-page context and identify chapter/scene boundaries inline when headings appear. Do not pre-screen an entire chapter before rereading; reopens require a recorded concrete reason.",
@@ -732,9 +733,9 @@
       "title": "Таис. Все, что рассказывал Вар",
       "page_span": {
         "start": 85,
-        "end": 89
+        "end": 90
       },
-      "chapter_end_confirmed": false,
+      "chapter_end_confirmed": true,
       "chapter_classification": "MIXED",
       "screening_status": "ONE_PASS_IN_PROGRESS",
       "screened_pages": [
@@ -742,7 +743,8 @@
         "B2-086",
         "B2-087",
         "B2-088",
-        "B2-089"
+        "B2-089",
+        "B2-090"
       ],
       "scenes": [
         {
@@ -767,6 +769,10 @@
             {
               "page_id": "B2-089",
               "fragment": "земная сцена продолжается: рыбалка и роботы на острове Саб; Таис сравнивает земную опасность с защитой, теплом, едой и водой МОАГа"
+            },
+            {
+              "page_id": "B2-090",
+              "fragment": "до заголовка главы 12: завершение земной прогулки по острову Саб, выход на побережье и вид разрушенной башни «Чёрный нож»; внешний фрагмент исключён из геометрии МОАГа"
             }
           ],
           "classification": "REMOTE_EVIDENCE",
@@ -795,8 +801,47 @@
           "screened_out_material": "Сон Таис: p88 подтверждает, что ночной фрагмент p87 происходил во сне; не используется как событие или геометрия станции."
         }
       ],
-      "screening_caveat": "Земная глава продолжается на p85–89; p87 содержит дистанционное свидетельство о населении МОАГа и сон, подтверждённый на p88. p89 добавляет сравнение земной опасности с защитой и снабжением Второго уровня.",
+      "screening_caveat": "Земная глава 11 заканчивается перед заголовком главы 12 на p90; до заголовка описаны поселение и побережье Саба, без данных о геометрии МОАГа. Дистанционные факты о станции и сон отделены от этого фрагмента.",
       "station_relevance": "упоминание владения частью производственных станций относится к общей истории/легенде, не подтверждает конфигурацию МОАГа; голографические изображения относятся к Земле"
+    },
+    {
+      "id": "B2-PART2-CH12",
+      "book_id": "B2",
+      "part_number": 2,
+      "chapter_number": 12,
+      "title": "Эмма. Дети-роботы",
+      "page_span": {
+        "start": 90,
+        "end": 90
+      },
+      "chapter_end_confirmed": false,
+      "chapter_classification": "STATION",
+      "screening_status": "ONE_PASS_IN_PROGRESS",
+      "screened_pages": [
+        "B2-090"
+      ],
+      "scenes": [
+        {
+          "id": "B2P2C12-S1",
+          "page_fragments": [
+            {
+              "page_id": "B2-090",
+              "fragment": "после заголовка главы 12: утренний уход Эммы за младенцами; гостиная с колыбелями, кухня с холодильником и детским агрегатом, ванная"
+            }
+          ],
+          "classification": "STATION",
+          "physical_location": "МОАГ, жилое помещение/каюта Эммы — точный уровень и идентичность с ранее описанной каютой не установлены",
+          "characters": [
+            "Эмма",
+            "Колька",
+            "Ева",
+            "Диана"
+          ],
+          "station_relevance": "внутренняя функциональная последовательность гостиная → кухня → гостиная → ванная; колыбели, холодильник и детский агрегат для смеси/разогрева; душ. Без размеров и привязки к глобальному уровню."
+        }
+      ],
+      "screening_caveat": "p90 разделена: глава 11 и земной остров Саб до заголовка главы 12; станционная глава 12 начинается после заголовка.",
+      "station_relevance": "планировочная последовательность внутри жилого помещения, оборудование ухода за младенцами и сантехническая функция ванной; геометрия и уровень неизвестны."
     }
   ],
   "character_location_events": [
@@ -1296,6 +1341,17 @@
       "arrival_event": "ухаживает за младенцами в гостиной каюты",
       "source": [
         "B2-083"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Эмма",
+      "story_time": "B2, часть 2, глава 12, утро, p90",
+      "current_location": "МОАГ, жилое помещение: гостиная с колыбелями, кухня и ванная; глобальный уровень не указан",
+      "departure_event": "от колыбелей идёт на кухню за бутылочками и к детскому агрегату",
+      "arrival_event": "возвращается в гостиную кормить младенцев, затем несёт Диану в ванную мыть под душем",
+      "source": [
+        "B2-090"
       ],
       "confidence": "DIRECT_TEXT"
     }
