@@ -419,34 +419,34 @@
       "id": "B3-038",
       "page_number": 38,
       "url": "https://loveread.ec/read_book.php?id=58610&p=38",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "OTHER_STATION_NOT_MOAG",
+      "recorded_spatial_hints": 0,
+      "notes": "До заголовка главы 6 земной фрагмент предыдущей главы пропущен. После заголовка — сцена в коридорах и изоляторе другой станции; архитектурных или инженерных фактов о МОАГе здесь нет.",
+      "verification_method": "Земной фрагмент до заголовка главы 6 не анализировался; станционный фрагмент просмотрен для проверки прямых сведений о МОАГе.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B3-039",
       "page_number": 39,
       "url": "https://loveread.ec/read_book.php?id=58610&p=39",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG_REMOTE_EVIDENCE",
+      "recorded_spatial_hints": 1,
+      "notes": "Эмма прямо сопоставляет коридоры Другой станции со Вторым уровнем МОАГа: цвет прорезиненного пола, тип ламп и разметка коридоров такие же. Это визуальные характеристики МОАГа; план чужих коридоров не переносится. На странице также продолжается сцена чужого изолятора.",
+      "verification_method": "Одна страница прочитана один раз через Opera; знакомые визуальные элементы МОАГа отделены от планировки другого объекта.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B3-040",
       "page_number": 40,
       "url": "https://loveread.ec/read_book.php?id=58610&p=40",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG_REMOTE_EVIDENCE",
+      "recorded_spatial_hints": 2,
+      "notes": "Эмма говорит, что системы другой станции аналогичны МОАГу и она хорошо знает работу интеллект-системы уровня МОАГа. Описаны малые серверы жизнеобеспечения уровня и панели с разъемами/чипами; местоположение возле входа во внутренний уровень прямо относится к другой станции и не назначается МОАГу. После заголовка главы 7 начинается земной фрагмент, он пропущен.",
+      "verification_method": "Одна страница прочитана один раз через Opera; сравнение инженерных систем отделено от геометрии другой станции и земного фрагмента после заголовка.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B3-041",
