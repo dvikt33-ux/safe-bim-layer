@@ -1,6 +1,6 @@
 {
   "schema": "APA-MOAG-TOPOLOGY-SNAPSHOT/0.1",
-  "source_blob_sha": "eee6333cb8a8ae93ee03d1d8001c018bee90ccc5",
+  "source_blob_sha": "19e980ea5ed983d05b9ac2d2ba51babed461166c",
   "derived_from": "docs/research/apa-results/moag/v1/evidence_graph.json",
   "status": "GRAPH_ONLY_NO_COORDINATES",
   "space_refs": [
