@@ -991,12 +991,12 @@
       "id": "B2-090",
       "page_number": 90,
       "url": "https://loveread.ec/read_book.php?id=53370&p=90",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MIXED_MOAG_EARTH",
+      "recorded_spatial_hints": 7,
+      "notes": "Смешанная страница с границей глав. До заголовка главы 12 — земной остров Саб: дома, крытые веранды, каменистая дорога, кострище, побережье и разрушенная башня «Чёрный нож»; всё это исключено из геометрии МОАГа. После заголовка главы 12 — утренняя станционная сцена: колыбели двух младенцев в гостиной, кухня с холодильником и детским агрегатом (разогрев бутылочек/приготовление смеси), возвращение в гостиную и уход за ребёнком в ванной. Каюта и внутренний маршрут не привязаны к глобальному уровню; связь с каютой Эммы на Втором p82–84 не доказана как та же локация.",
+      "verification_method": "Single full-page primary-source read in Opera; Earth-to-MOAG chapter boundary classified inline and all station-room/equipment cues captured",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-091",
