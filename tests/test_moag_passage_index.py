@@ -1,5 +1,5 @@
 """Traceability tests for MOAG exact scene/dialogue locator index."""
-import copy
+import hashlib
 import json
 from pathlib import Path
 import unittest
@@ -34,6 +34,18 @@ class PassageIndexTests(unittest.TestCase):
             self.assertNotIn("x_m",p)
             self.assertNotIn("y_m",p)
             self.assertNotIn("scale",p)
+
+
+    def test_published_snapshot_matches_exact_source_blob(self):
+        content=(BASE/"evidence_graph.json").read_bytes()
+        canonical_sha=hashlib.sha1(b"blob "+str(len(content)).encode("ascii")+b"\\x00"+content).hexdigest()
+        snapshot=json.loads((BASE/"topology_snapshot.json").read_text(encoding="utf-8"))
+        self.assertEqual(snapshot["source_blob_sha"],canonical_sha)
+        self.assertEqual({x["id"] for x in snapshot["space_refs"]},
+                         {x["id"] for x in self.graph["nodes"]})
+        self.assertEqual({x["id"] for x in snapshot["relationships"]},
+                         {x["id"] for x in self.graph["edges"]})
+        self.assertFalse(snapshot["gates"]["apa_native_execute"])
 
 if __name__=="__main__":
     unittest.main()
