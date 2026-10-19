@@ -10662,6 +10662,20 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-680",
+      "page_id": "B3-026",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=26",
+      "station_id": "MOAG",
+      "narrative_mode": "CHARACTER_KNOWN_STATION_COMPARISON",
+      "locator_hint": "Эмма отличает центральный круговой коридор чужого уровня от знакомой структуры МОАГа.",
+      "spatial_assertion": "В достоверном сравнении Эмма сообщает, что на МОАГе несколько центральных круговых коридоров. Это уточняет многокольцевую структуру станции; коридор чужой станции и пройденный по нему маршрут к рубке не относятся к МОАГу.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
