@@ -3730,6 +3730,97 @@
       "constraints": [],
       "identity_hypotheses": [],
       "notes": "Персонаж Женя присоединяется только у двери цеха, не проходила исходный сегмент. Ориентация двух поворотов по плану неизвестна. Свет меняется во времени, маршрут не перемещает конструктив."
+    },
+    {
+      "id": "RT-034",
+      "title": "Эмма и Коля: капитанская рубка → внутренний круг Третьего → коридор за Детским блоком → замок → кольцевая галерея энергомодуля",
+      "participants": [
+        "Эмма",
+        "Коля"
+      ],
+      "book": "B2",
+      "site_pages": [
+        "B2-034",
+        "B2-035"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT034-A",
+          "label": "Из командной рубки в общий коридор Третьего",
+          "global_level": 3,
+          "local_stratum": "energy-core-upper-entry",
+          "source_page_id": "B2-034",
+          "movement_method": "WALK",
+          "observed_constraint": "Из командной рубки в общий коридор Третьего",
+          "existing_graph_node": "L3-BRIDGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT034-B",
+          "label": "Внутренний круг у помещения кувезов",
+          "global_level": 3,
+          "local_stratum": "energy-core-upper-entry",
+          "source_page_id": "B2-034",
+          "movement_method": "WALK",
+          "observed_constraint": "Внутренний круг у помещения кувезов",
+          "existing_graph_node": "L3-CHILD-LAB",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT034-C",
+          "label": "Узкий полутёмный коридор непосредственно за Детским блоком",
+          "global_level": 3,
+          "local_stratum": "energy-core-upper-entry",
+          "source_page_id": "B2-034",
+          "movement_method": "WALK",
+          "observed_constraint": "Узкий полутёмный коридор непосредственно за Детским блоком",
+          "existing_graph_node": "CORE-ENERGY-ACCESS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT034-D",
+          "label": "Одинарная запертая электронная дверь входа в энергомодуль",
+          "global_level": 3,
+          "local_stratum": "energy-core-upper-entry",
+          "source_page_id": "B2-034",
+          "movement_method": "DOOR",
+          "observed_constraint": "Одинарная запертая электронная дверь входа в энергомодуль",
+          "existing_graph_node": "CORE-ENERGY-ACCESS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT034-E",
+          "label": "Кольцевая галерея с металлическим ограждением",
+          "global_level": 3,
+          "local_stratum": "energy-core-upper-entry",
+          "source_page_id": "B2-034",
+          "movement_method": "WALK",
+          "observed_constraint": "Кольцевая галерея с металлическим ограждением",
+          "existing_graph_node": "CORE-ENERGY-GALLERY",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT034-F",
+          "label": "Обход кольцевой галереи, центральная прозрачная колба внизу",
+          "global_level": 3,
+          "local_stratum": "energy-core-upper-entry",
+          "source_page_id": "B2-035",
+          "movement_method": "WALK",
+          "observed_constraint": "Обход кольцевой галереи, центральная прозрачная колба внизу",
+          "existing_graph_node": "CORE-ENERGY-GALLERY",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "Галерея расположена у входа с Третьего, ниже расположен шахтообразный объём. Примерно 15 м вниз по наблюдению — не доказательство точной этажности. Форма ядра не задаёт форму всех этажей."
     }
   ]
 }
