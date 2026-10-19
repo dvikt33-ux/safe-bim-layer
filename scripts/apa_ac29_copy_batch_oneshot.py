@@ -105,7 +105,8 @@ def stage_placements(accepted,state,baseline_trace,placements,*,use_guarded_snap
     need(R.digest(ids)==saved['finalGuidSetSHA256'] and G.fingerprint(native)==saved['finalBrepSHA256'] and
          V.semantic_digest(native,set(ids))==saved['finalSemanticSHA256'] and PROTOTYPE in ids,
          'SHARED_COPY_ACCEPTED_FULL_BASELINE_REQUIRED')
-    scratch=state.parent/'native-line-distribution.pln'
+    scratch=state.parent/('native-axis-distribution.pln' if placements['mode']=='AXIS_INTERSECTIONS'
+                          else 'native-line-distribution.pln')
     need(not scratch.exists(),'SHARED_COPY_FRESH_PLN_REQUIRED')
     state.mkdir();copy_exclusive(source,scratch)
     need(sha256(scratch)==saved['savedSHA256'],'SHARED_COPY_INITIAL_BYTES_DRIFT')
