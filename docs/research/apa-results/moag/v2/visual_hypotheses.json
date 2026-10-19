@@ -1,0 +1,102 @@
+{
+  "schema": "APA-MOAG-VISUAL-HYPOTHESES/1",
+  "date": "2026-10-19",
+  "governance": "VISUAL_IS_SEARCH_HINT_ONLY; primary source must be page-reviewed; no illustration-to-wall writes",
+  "illustration_retention": "User-uploaded images remain in conversation; this register does not assert stable downloadable files or publication provenance.",
+  "hypotheses": [
+    {
+      "id": "VH-001",
+      "name": "Верхняя часть станции уже двух нижних",
+      "visual_source": "USER_UPLOAD:colored_three_ring_plan",
+      "proposed_claim": "Относительный диаметр глобального Третьего уровня меньше Первого/Второго",
+      "station": "MOAG",
+      "status": "OPEN",
+      "checked_against_pages": [],
+      "textual_finding": "Всё ещё нет прямых численных размеров; схема пользователя — проектная гипотеза.",
+      "adopt_as_geometry": false
+    },
+    {
+      "id": "VH-002",
+      "name": "Нижний блок имеет 2+2 полноразмерных сплошных этажа",
+      "visual_source": "USER_MESSAGE:structural_hypothesis",
+      "proposed_claim": "В Первом глобальном уровне имеются четыре непрерывные этажные плоскости",
+      "station": "MOAG",
+      "status": "OPEN",
+      "checked_against_pages": [],
+      "textual_finding": "Локальные верхние переходы и отсеки ниже баз подтверждены, количество ПОЛНЫХ перекрытий не подтверждено.",
+      "adopt_as_geometry": false
+    },
+    {
+      "id": "VH-003",
+      "name": "Инкубаторный блок находится строго по центру Третьего",
+      "visual_source": "USER_MESSAGE:visual_hypothesis",
+      "proposed_claim": "Плановое положение Детского блока точно совпадает с осью станции",
+      "station": "MOAG",
+      "status": "OPEN",
+      "checked_against_pages": [],
+      "textual_finding": "Есть внутренний круг и маршруты до детского блока, абсолютный центр не установлен.",
+      "adopt_as_geometry": false
+    },
+    {
+      "id": "VH-004",
+      "name": "Второй уровень имеет сплошные два этажа",
+      "visual_source": "USER_UPLOAD:rough_plan_and_prior_model",
+      "proposed_claim": "Полная жилая палуба Второго уровня разбита на два сплошных этажа",
+      "station": "MOAG",
+      "status": "INSUFFICIENT_EVIDENCE",
+      "checked_against_pages": [
+        "B1-056"
+      ],
+      "textual_finding": "На странице B1-056 прямо указаны ДВА этажа жилого блока, огибающего Зеленую магистраль: каюты 2-й этаж, магазины/игровые/туннели 1-й. Однако гипотеза о двух СПЛОШНЫХ палубах всего диаметра Второго остаётся недоказанной.",
+      "adopt_as_geometry": false
+    },
+    {
+      "id": "VH-005",
+      "name": "У капитанской рубки есть отдельная повышенная отметка",
+      "visual_source": "BOOK_I_PAGE_114_TEXT+USER_ILLUSTRATION:stacked_disks",
+      "proposed_claim": "Вход в рубку осуществляется по короткой широкой лестнице с подъёмом от коридора у производственных цехов",
+      "station": "MOAG",
+      "status": "TEXT_SUPPORTED_LOCAL_ONLY",
+      "checked_against_pages": [
+        "B1-114"
+      ],
+      "textual_finding": "Подтверждены лестница напротив цеховых дверей, белые ступени и серые поручни, двойные овальные двери. Нет доказательства полноценной верхней палубы.",
+      "adopt_as_geometry": false
+    },
+    {
+      "id": "VH-006",
+      "name": "Детские каюты образуют соты разного размера",
+      "visual_source": "USER_MESSAGE:honeycomb_hypothesis",
+      "proposed_claim": "Второй уровень имеет сотовую сетку ячеек неравной площади",
+      "station": "MOAG",
+      "status": "OPEN",
+      "checked_against_pages": [],
+      "textual_finding": "Необходимо найти прямые описания размеров, скосов и формы отдельных кают и коридоров.",
+      "adopt_as_geometry": false
+    },
+    {
+      "id": "VH-007",
+      "name": "Чёрно-белый рисунок станции из книги задаёт проектные пропорции",
+      "visual_source": "USER_UPLOAD:monochrome_station_illustrations",
+      "proposed_claim": "Художественные кольца и купол на иллюстрации задают точные конструктивные диаметры",
+      "station": "MOAG",
+      "status": "REJECTED_AS_METRIC_EVIDENCE",
+      "checked_against_pages": [],
+      "textual_finding": "Иллюстрация без масштаба и проверки ракурса не даёт допустимого метрического обмера.",
+      "adopt_as_geometry": false
+    },
+    {
+      "id": "VH-008",
+      "name": "Двухэтажный кольцевой жилой блок Второго",
+      "visual_source": "BOOK_I_PAGE_056_TEXT",
+      "proposed_claim": "Локальная внутренняя структура: верхние каюты над торгово-игровым этажом кольцевого блока",
+      "station": "MOAG",
+      "status": "TEXT_SUPPORTED_LOCAL_ONLY",
+      "checked_against_pages": [
+        "B1-056"
+      ],
+      "textual_finding": "Прямая авторская фраза о 1-м и 2-м этажах жилого блока вокруг Зеленой магистрали.",
+      "adopt_as_geometry": false
+    }
+  ]
+}

@@ -1,0 +1,4661 @@
+{
+  "schema": "APA-MOAG-AREA-VOLUME-BOUNDS-R05/0.1",
+  "date": "2026-10-20",
+  "status": "COMPLETE_INDEX_COVERAGE_SCENARIO_BOUNDS_NOT_CANON",
+  "scale_anchor_m": 1.6,
+  "scale_anchor_source": "USER_ARCHITECTURAL_REFERENCE",
+  "module_area_m2": 2.56,
+  "meaning": {
+    "min_max": "editable project-space hypotheses, not proven book measurements",
+    "area_roles": "NO floor area for doors, vehicles, equipment or abstract labels; for rooms usable floor, for hangars projected footprint, for core void cross-section",
+    "vertical_volume": "estimated spatial clear volume area_times_clear_height, never equal gross usable floor-area in multilevel rooms",
+    "global_envelopes": "circular-diameter project scenario only; no confirmed exact circular hull"
+  },
+  "profiles": [
+    {
+      "id": "MOAG-G-0001",
+      "kind": "level",
+      "name": "Первый / Нижний уровень",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-06",
+        "B2-01"
+      ],
+      "global_level": 1,
+      "area_role": "ALIAS_LEVEL_NO_DOUBLE_COUNT",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0002",
+      "kind": "level",
+      "name": "Второй / детский уровень",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-03",
+        "B1-04"
+      ],
+      "global_level": 2,
+      "area_role": "ALIAS_LEVEL_NO_DOUBLE_COUNT",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0003",
+      "kind": "level",
+      "name": "Третий / верхний уровень",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-06",
+        "B1-15"
+      ],
+      "global_level": 3,
+      "area_role": "ALIAS_LEVEL_NO_DOUBLE_COUNT",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0004",
+      "kind": "circulation",
+      "name": "Внутренний малый круг",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-06"
+      ],
+      "global_level": 1,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0005",
+      "kind": "circulation",
+      "name": "Внешний круг",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-06"
+      ],
+      "global_level": 1,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0006",
+      "kind": "zone",
+      "name": "Район бывших баз спецподразделения",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-06",
+        "B2-01"
+      ],
+      "global_level": 1,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 50,
+        "max_module2": 180000,
+        "min_height_in_human_modules": 2,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0007",
+      "kind": "zone",
+      "name": "Ангарный сектор",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B2-14"
+      ],
+      "global_level": 1,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 50,
+        "max_module2": 180000,
+        "min_height_in_human_modules": 2,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0008",
+      "kind": "space",
+      "name": "Темная база",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-10",
+        "B1-13"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0009",
+      "kind": "space",
+      "name": "Овальная база",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-06",
+        "B1-10"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0010",
+      "kind": "space",
+      "name": "База диких",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-10"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0011",
+      "kind": "space",
+      "name": "Общее помещение Темной базы",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-13"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0012",
+      "kind": "space_group",
+      "name": "Спальные комнаты Темной базы",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-10",
+        "B1-13"
+      ],
+      "global_level": 1,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0013",
+      "kind": "space",
+      "name": "Душевая/ванная Темной базы",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-02"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0014",
+      "kind": "space",
+      "name": "Цех сортировки/переработки отходов",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-06",
+        "B1-14"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0015",
+      "kind": "vertical_route",
+      "name": "Крутая служебная лестница на Третий уровень",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-06"
+      ],
+      "global_level": 1,
+      "area_role": "SHAFT_OR_STAIR_PATH_AREA",
+      "bounds": {
+        "min_module2": 2,
+        "max_module2": 20000,
+        "min_height_in_human_modules": 1.4,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0016",
+      "kind": "utility",
+      "name": "Вентиляция и скрытые лазы",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-02",
+        "B1-06"
+      ],
+      "global_level": 1,
+      "area_role": "UTILITY_SYSTEM_MAY_NOT_BE_ROOM",
+      "bounds": {
+        "min_module2": 2,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.3,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0017",
+      "kind": "circulation",
+      "name": "Магистральный коридор ангаров",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B2-14"
+      ],
+      "global_level": 1,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0018",
+      "kind": "space",
+      "name": "Ангар с двумя одноместными катерами",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B2-14"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0019",
+      "kind": "space_group",
+      "name": "Операторские кабины ангара",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B2-14"
+      ],
+      "global_level": 1,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0020",
+      "kind": "utility",
+      "name": "Шлюз катеров Нижнего уровня",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B2-14"
+      ],
+      "global_level": 1,
+      "area_role": "UTILITY_SYSTEM_MAY_NOT_BE_ROOM",
+      "bounds": {
+        "min_module2": 2,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.3,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0021",
+      "kind": "zone",
+      "name": "Запечатанная/неисследованная часть",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-06",
+        "B2-01"
+      ],
+      "global_level": 1,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 50,
+        "max_module2": 180000,
+        "min_height_in_human_modules": 2,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0022",
+      "kind": "circulation",
+      "name": "Внутренняя Зелёная магистраль",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-04"
+      ],
+      "global_level": 2,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0023",
+      "kind": "circulation",
+      "name": "Оранжевая магистраль",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-04"
+      ],
+      "global_level": 2,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0024",
+      "kind": "space",
+      "name": "Главная площадь",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-03",
+        "B1-04"
+      ],
+      "global_level": 2,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0025",
+      "kind": "circulation",
+      "name": "Жилая галерея над Главной площадью",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-03"
+      ],
+      "global_level": 2,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0026",
+      "kind": "space_group",
+      "name": "Детские каюты",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-03"
+      ],
+      "global_level": 2,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0027",
+      "kind": "space_group",
+      "name": "Кафе и магазины",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-04"
+      ],
+      "global_level": 2,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0028",
+      "kind": "circulation",
+      "name": "Шестые туннели",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-04"
+      ],
+      "global_level": 2,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0029",
+      "kind": "circulation",
+      "name": "Семнадцатые туннели",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-04"
+      ],
+      "global_level": 2,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0030",
+      "kind": "space_group",
+      "name": "Школа / экзаменационный блок",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-03"
+      ],
+      "global_level": 2,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0031",
+      "kind": "circulation",
+      "name": "Внутренний круг Верхнего уровня",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-06",
+        "B1-15"
+      ],
+      "global_level": 3,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0032",
+      "kind": "circulation",
+      "name": "Внешний круг Верхнего уровня",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-06"
+      ],
+      "global_level": 3,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0033",
+      "kind": "space",
+      "name": "Капитанская рубка",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-06"
+      ],
+      "global_level": 3,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0034",
+      "kind": "space_group",
+      "name": "Каюты персонала",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-06",
+        "B1-15"
+      ],
+      "global_level": 3,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0035",
+      "kind": "space",
+      "name": "Детский блок / кувезы",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-15"
+      ],
+      "global_level": 3,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0036",
+      "kind": "space",
+      "name": "Круглый зал отдыха",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-15"
+      ],
+      "global_level": 3,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0037",
+      "kind": "space_group",
+      "name": "Склады, включая постельное бельё",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-14"
+      ],
+      "global_level": 3,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0038",
+      "kind": "zone",
+      "name": "Шлюзы и ангары грузовых крейсеров",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-14"
+      ],
+      "global_level": 3,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 50,
+        "max_module2": 180000,
+        "min_height_in_human_modules": 2,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0039",
+      "kind": "zone",
+      "name": "Производственные отсеки",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-06",
+        "B1-14"
+      ],
+      "global_level": 3,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 50,
+        "max_module2": 180000,
+        "min_height_in_human_modules": 2,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0040",
+      "kind": "circulation",
+      "name": "Коридоры для роботов-погрузчиков",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-14"
+      ],
+      "global_level": 3,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0041",
+      "kind": "utility",
+      "name": "Центральный энергомодуль",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B2-01",
+        "LR-B2-034",
+        "LR-B2-035"
+      ],
+      "global_level": null,
+      "area_role": "UTILITY_SYSTEM_MAY_NOT_BE_ROOM",
+      "bounds": {
+        "min_module2": 2,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.3,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0042",
+      "kind": "space",
+      "name": "Соседний ангар Нижнего уровня",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B2-15"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0043",
+      "kind": "space",
+      "name": "Диспетчерская соседнего ангара",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B2-15"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0044",
+      "kind": "space_group",
+      "name": "Дополнительные заброшенные ангары",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B2-15"
+      ],
+      "global_level": 1,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0045",
+      "kind": "vertical_route",
+      "name": "Грузовые лифты Третьего уровня",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B2-13"
+      ],
+      "global_level": 3,
+      "area_role": "SHAFT_OR_STAIR_PATH_AREA",
+      "bounds": {
+        "min_module2": 2,
+        "max_module2": 20000,
+        "min_height_in_human_modules": 1.4,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0046",
+      "kind": "space",
+      "name": "Просторный грузовой зал у производства",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B2-13"
+      ],
+      "global_level": 3,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0047",
+      "kind": "space",
+      "name": "Отсек со скафандрами",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B2-13"
+      ],
+      "global_level": 3,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0048",
+      "kind": "portal",
+      "name": "Белые двери производственного цеха",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B2-13"
+      ],
+      "global_level": 3,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0049",
+      "kind": "vertical_route",
+      "name": "Вертикальная шахта с промежуточным боковым ответвлением",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-04"
+      ],
+      "global_level": null,
+      "area_role": "SHAFT_OR_STAIR_PATH_AREA",
+      "bounds": {
+        "min_module2": 2,
+        "max_module2": 20000,
+        "min_height_in_human_modules": 1.4,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0050",
+      "kind": "space",
+      "name": "Неизвестное помещение ниже обитаемой части Нижнего уровня",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-04"
+      ],
+      "global_level": null,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0051",
+      "kind": "portal",
+      "name": "Двойная дверь в нижнем колодце",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-04"
+      ],
+      "global_level": null,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0052",
+      "kind": "portal",
+      "name": "Запаянный проход напротив двери в нижнем колодце",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-04"
+      ],
+      "global_level": null,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0053",
+      "kind": "space_group",
+      "name": "Старый закрытый грузовой ангар Нижнего уровня",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-19"
+      ],
+      "global_level": 1,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0054",
+      "kind": "space_group",
+      "name": "Заброшенные каюты вблизи старого ангарного комплекса",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-17",
+        "B1-19"
+      ],
+      "global_level": 1,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0055",
+      "kind": "space",
+      "name": "Высокий круглый зал в закрытом секторе",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-17"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0056",
+      "kind": "vertical_route",
+      "name": "Местный ступенчатый переход к круглому залу",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-17"
+      ],
+      "global_level": 1,
+      "area_role": "SHAFT_OR_STAIR_PATH_AREA",
+      "bounds": {
+        "min_module2": 2,
+        "max_module2": 20000,
+        "min_height_in_human_modules": 1.4,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0057",
+      "kind": "space",
+      "name": "Большой ангар со спящими изменившимися взрослыми",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-17"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0058",
+      "kind": "circulation",
+      "name": "Верхний металлический мостик круглого зала",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-17"
+      ],
+      "global_level": 1,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0059",
+      "kind": "vertical_route",
+      "name": "Повреждённая лестница к верхнему мостику",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-17"
+      ],
+      "global_level": 1,
+      "area_role": "SHAFT_OR_STAIR_PATH_AREA",
+      "bounds": {
+        "min_module2": 2,
+        "max_module2": 20000,
+        "min_height_in_human_modules": 1.4,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0060",
+      "kind": "space",
+      "name": "Помещение ручного управления шлюзами за мостиком",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-17"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0061",
+      "kind": "space",
+      "name": "Жилая комната за операторской",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-17"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0062",
+      "kind": "spatial_constraint",
+      "name": "Локальные высотные ярусы Нижнего блока",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "B1-17"
+      ],
+      "global_level": 1,
+      "area_role": "RELATION_NOT_PHYSICAL_SPACE",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0063",
+      "kind": "circulation",
+      "name": "Трёхлучевая развилка у внешнего круга",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "global_level": 3,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0064",
+      "kind": "space",
+      "name": "Помещение изоляции перед освобождением детей",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "global_level": 3,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0065",
+      "kind": "space",
+      "name": "Круглая грузовая площадка у лифта",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "global_level": 3,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0066",
+      "kind": "vertical_route",
+      "name": "Лифтовая шахта с аварийным выходом на Нижний",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-023"
+      ],
+      "global_level": null,
+      "area_role": "SHAFT_OR_STAIR_PATH_AREA",
+      "bounds": {
+        "min_module2": 2,
+        "max_module2": 20000,
+        "min_height_in_human_modules": 1.4,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0067",
+      "kind": "portal",
+      "name": "Тёмный проём шахты у мусоропереработки",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-023"
+      ],
+      "global_level": 1,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0068",
+      "kind": "space",
+      "name": "Ванная и встроенная прачечная жилой каюты",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-024"
+      ],
+      "global_level": 2,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0069",
+      "kind": "zone",
+      "name": "Детский сад Второго уровня",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-025"
+      ],
+      "global_level": 2,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 50,
+        "max_module2": 180000,
+        "min_height_in_human_modules": 2,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0070",
+      "kind": "space",
+      "name": "Игровая младшего отделения",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-025"
+      ],
+      "global_level": 2,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0071",
+      "kind": "space",
+      "name": "Прогулочная площадка младшего отделения",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-026"
+      ],
+      "global_level": 2,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0072",
+      "kind": "space_group",
+      "name": "Комнаты для новорождённых",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-026"
+      ],
+      "global_level": 2,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0073",
+      "kind": "historical_zone",
+      "name": "Старые военно-служебные базы №3 и №4 (надписи замков)",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-028"
+      ],
+      "global_level": 1,
+      "area_role": "HISTORIC_LABEL_NO_NEW_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0074",
+      "kind": "space",
+      "name": "Удалённая маленькая спальня Ильи и Кати",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-028"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0075",
+      "kind": "space",
+      "name": "Спальня Маши с тремя младшими детьми",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-028"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0076",
+      "kind": "utility",
+      "name": "Водозабор и место мытья посуды на Темной базе",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-029"
+      ],
+      "global_level": 1,
+      "area_role": "UTILITY_SYSTEM_MAY_NOT_BE_ROOM",
+      "bounds": {
+        "min_module2": 2,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.3,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0077",
+      "kind": "vertical_route",
+      "name": "Лифты Д и Е у отдалённых коридоров Третьего",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-032"
+      ],
+      "global_level": 3,
+      "area_role": "SHAFT_OR_STAIR_PATH_AREA",
+      "bounds": {
+        "min_module2": 2,
+        "max_module2": 20000,
+        "min_height_in_human_modules": 1.4,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0078",
+      "kind": "space",
+      "name": "Платформа приёмки грузов Третьего",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-032"
+      ],
+      "global_level": 3,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0079",
+      "kind": "circulation",
+      "name": "Узкая галерея по периметру общего помещения Темной базы",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-049"
+      ],
+      "global_level": 1,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0080",
+      "kind": "circulation",
+      "name": "Отдельный широкий ПРЯМОЙ грузовой коридор",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-044"
+      ],
+      "global_level": 1,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0081",
+      "kind": "utility",
+      "name": "Узкие коммуникационные ниши с трубами и разноцветными кабелями",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-045"
+      ],
+      "global_level": 1,
+      "area_role": "UTILITY_SYSTEM_MAY_NOT_BE_ROOM",
+      "bounds": {
+        "min_module2": 2,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.3,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0082",
+      "kind": "vertical_route",
+      "name": "Официальный лифт между Вторым и Нижним",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-047"
+      ],
+      "global_level": null,
+      "area_role": "SHAFT_OR_STAIR_PATH_AREA",
+      "bounds": {
+        "min_module2": 2,
+        "max_module2": 20000,
+        "min_height_in_human_modules": 1.4,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0083",
+      "kind": "portal",
+      "name": "Двухстворчатая стальная дверь внешней границы Темной базы",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-045"
+      ],
+      "global_level": 1,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0084",
+      "kind": "zone",
+      "name": "Кольцевой двухэтажный жилой блок Второго",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "global_level": 2,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 50,
+        "max_module2": 180000,
+        "min_height_in_human_modules": 2,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0085",
+      "kind": "space_group",
+      "name": "Верхний этаж кают внутри жилого кольца",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "global_level": 2,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0086",
+      "kind": "space_group",
+      "name": "Нижний торгово-игровой этаж жилого кольца",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "global_level": 2,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0087",
+      "kind": "furniture",
+      "name": "Стол приготовления пищи на Темной базе",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-052"
+      ],
+      "global_level": 1,
+      "area_role": "FURNITURE_WITHIN_HOST",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0088",
+      "kind": "furniture",
+      "name": "Стол приёма пищи на Темной базе",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-052"
+      ],
+      "global_level": 1,
+      "area_role": "FURNITURE_WITHIN_HOST",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0089",
+      "kind": "portal",
+      "name": "Внешняя тяжёлая створчатая дверь к коридору баз",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-055"
+      ],
+      "global_level": 1,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0090",
+      "kind": "portal",
+      "name": "Внутренняя дверь собственно Темной базы",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-055"
+      ],
+      "global_level": 1,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0091",
+      "kind": "space_group",
+      "name": "Малые кладовые в дальнем конце коридора баз",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-055"
+      ],
+      "global_level": 1,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0092",
+      "kind": "portal",
+      "name": "Опускающаяся вниз дверь внутреннего круга Третьего",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-060"
+      ],
+      "global_level": 3,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0093",
+      "kind": "portal",
+      "name": "Двойные двери и арочный проход к детскому блоку",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-060"
+      ],
+      "global_level": 3,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0094",
+      "kind": "circulation",
+      "name": "Тёмный служебный переход после люка с Нижнего",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-059"
+      ],
+      "global_level": 3,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0095",
+      "kind": "circulation",
+      "name": "Периметральная верхняя галерея круглого зала отдыха",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "global_level": 3,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0096",
+      "kind": "vertical_route",
+      "name": "Лестница на галерею Третьего зала отдыха",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "global_level": 3,
+      "area_role": "SHAFT_OR_STAIR_PATH_AREA",
+      "bounds": {
+        "min_module2": 2,
+        "max_module2": 20000,
+        "min_height_in_human_modules": 1.4,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0097",
+      "kind": "circulation",
+      "name": "Тупиковые коридоры и ДНК-двери верхней галереи",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "global_level": 3,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0098",
+      "kind": "utility",
+      "name": "Низкая вентиляция Третьего для скрытого спуска",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-63"
+      ],
+      "global_level": 3,
+      "area_role": "UTILITY_SYSTEM_MAY_NOT_BE_ROOM",
+      "bounds": {
+        "min_module2": 2,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.3,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0099",
+      "kind": "portal",
+      "name": "Вентиляционная решётка Второго около пола",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-64"
+      ],
+      "global_level": 2,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0100",
+      "kind": "circulation",
+      "name": "Двухпутная развилка возвращения к Нижним базам",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-65"
+      ],
+      "global_level": 1,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 40,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0101",
+      "kind": "interior_attribute",
+      "name": "Художественно расписанный интерьер Овальной базы",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-65"
+      ],
+      "global_level": 1,
+      "area_role": "ATTRIBUTE_NOT_NEW_ROOM",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0102",
+      "kind": "space",
+      "name": "Взрослая каюта за дверью с проверкой ДНК",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "global_level": 3,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0103",
+      "kind": "space",
+      "name": "Просторная общая комната взрослой каюты",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "global_level": 3,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0104",
+      "kind": "space",
+      "name": "Ванная взрослой каюты с коричневой плиткой",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "global_level": 3,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0105",
+      "kind": "space",
+      "name": "Спальня взрослой каюты с широкой кроватью",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-068"
+      ],
+      "global_level": 3,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 3500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 70,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0106",
+      "kind": "system",
+      "name": "Переоборудованные дверные замки внутреннего круга",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-070"
+      ],
+      "global_level": 3,
+      "area_role": "SERVICE_NETWORK_NOT_NEW_ROOM",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0107",
+      "kind": "equipment",
+      "name": "Архивный видеокомплекс в каюте штурмана",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-069"
+      ],
+      "global_level": 3,
+      "area_role": "EQUIPMENT_WITHIN_HOST",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0108",
+      "kind": "space_group",
+      "name": "Кладовая провизии вне закрытого внутреннего круга",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B1-070"
+      ],
+      "global_level": 3,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0109",
+      "kind": "opening",
+      "name": "Наружный круглый выход нижней шлюзовой камеры с треугольными створками",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B2-021"
+      ],
+      "global_level": 1,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0110",
+      "kind": "corridor",
+      "name": "Широкий коридор главных лифтов Третьего",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B2-027"
+      ],
+      "global_level": 3,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 8,
+        "max_module2": 18000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 15,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0111",
+      "kind": "corridor",
+      "name": "Узкий проход к энергомодулю за Детским блоком",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "global_level": 3,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 8,
+        "max_module2": 18000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 15,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0112",
+      "kind": "opening",
+      "name": "Защищенная сдвижная дверь энергокамеры",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "global_level": 3,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0113",
+      "kind": "vertical_void",
+      "name": "Круглый центральный инженерный объем трёх уровней",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "global_level": null,
+      "area_role": "VOID_CROSS_SECTION_NOT_FLOOR",
+      "bounds": {
+        "min_module2": 100,
+        "max_module2": 150000,
+        "min_height_in_human_modules": 6,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0114",
+      "kind": "local_gallery",
+      "name": "Кольцевая огражденная галерея центрального энергомодуля",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "global_level": 3,
+      "area_role": "LOCAL_MEZZANINE_FLOOR",
+      "bounds": {
+        "min_module2": 6,
+        "max_module2": 40000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 30,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0115",
+      "kind": "logical_access",
+      "name": "Логический маршрут допуска к энергокамере (не дополнительный коридор)",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "global_level": 3,
+      "area_role": "LOGICAL_NO_GEOMETRY",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0116",
+      "kind": "vertical_access",
+      "name": "Локальные ступени выхода из кольцевой энергетической галереи",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B2-040"
+      ],
+      "global_level": 3,
+      "area_role": "STAIR_FOOTPRINT",
+      "bounds": {
+        "min_module2": 2,
+        "max_module2": 800,
+        "min_height_in_human_modules": 1.2,
+        "max_height_in_human_modules": 50,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "MOAG-G-0117",
+      "kind": "medical_room",
+      "name": "Медицинский диагностический отсек Третьего уровня",
+      "origin": "R04_CONCEPT",
+      "source_ids": [
+        "LR-B2-042"
+      ],
+      "global_level": 3,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 1000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 20,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-STA-L1-001",
+      "kind": "global_block",
+      "name": "Нижний глобальный блок",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-592",
+        "P-096"
+      ],
+      "global_level": 1,
+      "area_role": "LEVEL_ENVELOPE_AREA_PROJECT_SCENARIO",
+      "bounds": {
+        "min_module2": null,
+        "max_module2": null,
+        "min_height_in_human_modules": null,
+        "max_height_in_human_modules": null,
+        "editable_area_min_m2": 300000,
+        "editable_area_max_m2": 2400000,
+        "editable_height_min_m": 12,
+        "editable_height_max_m": 450
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": "Adjustable broad level envelope range, not floor sum; structural height covers voids and local galleries, not repeated global floors"
+    },
+    {
+      "id": "M-STA-L2-001",
+      "kind": "global_block",
+      "name": "Детский глобальный блок",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-484",
+        "P-467",
+        "P-096"
+      ],
+      "global_level": 2,
+      "area_role": "LEVEL_ENVELOPE_AREA_PROJECT_SCENARIO",
+      "bounds": {
+        "min_module2": null,
+        "max_module2": null,
+        "min_height_in_human_modules": null,
+        "max_height_in_human_modules": null,
+        "editable_area_min_m2": 120000,
+        "editable_area_max_m2": 1200000,
+        "editable_height_min_m": 8,
+        "editable_height_max_m": 250
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": "Adjustable broad level envelope range, not floor sum; structural height covers voids and local galleries, not repeated global floors"
+    },
+    {
+      "id": "M-STA-L3-001",
+      "kind": "global_block",
+      "name": "Верхний глобальный блок",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-096",
+        "P-200"
+      ],
+      "global_level": 3,
+      "area_role": "LEVEL_ENVELOPE_AREA_PROJECT_SCENARIO",
+      "bounds": {
+        "min_module2": null,
+        "max_module2": null,
+        "min_height_in_human_modules": null,
+        "max_height_in_human_modules": null,
+        "editable_area_min_m2": 80000,
+        "editable_area_max_m2": 700000,
+        "editable_height_min_m": 8,
+        "editable_height_max_m": 300
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": "Adjustable broad level envelope range, not floor sum; structural height covers voids and local galleries, not repeated global floors"
+    },
+    {
+      "id": "M-STA-CORE-001",
+      "kind": "vertical_industrial_volume",
+      "name": "Центральная энергокамера, сквозной объём",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-418",
+        "P-421"
+      ],
+      "global_level": null,
+      "area_role": "VERTICAL_CORE_SECTION",
+      "bounds": {
+        "min_module2": 150,
+        "max_module2": 150000,
+        "min_height_in_human_modules": 6,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": 100,
+        "editable_area_max_m2": 180000,
+        "editable_height_min_m": 12,
+        "editable_height_max_m": 600
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": "Core extends three levels; broad adjustable scenario"
+    },
+    {
+      "id": "M-L1-CG-001",
+      "kind": "complex",
+      "name": "Старый комплекс нижних грузовых ангаров крейсеров",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-240",
+        "P-243"
+      ],
+      "global_level": 1,
+      "area_role": "COMPLEX_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 5000,
+        "max_module2": 750000,
+        "min_height_in_human_modules": 6,
+        "max_height_in_human_modules": 320,
+        "editable_area_min_m2": 20000,
+        "editable_area_max_m2": 750000,
+        "editable_height_min_m": 16,
+        "editable_height_max_m": 450
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": "Large cruiser freight complex; broad adjustable scenario, not a book measurement"
+    },
+    {
+      "id": "M-L1-CG-CTRL-001",
+      "kind": "space_group",
+      "name": "Исторический центр управления грузовыми ангарами",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-240"
+      ],
+      "global_level": 1,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L1-AH-OLD-001",
+      "kind": "hangar",
+      "name": "Высокий старый ангар из эпизода B1-110",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-313"
+      ],
+      "global_level": 1,
+      "area_role": "SHIP_CLEAR_VOLUME",
+      "bounds": {
+        "min_module2": 350,
+        "max_module2": 350000,
+        "min_height_in_human_modules": 5,
+        "max_height_in_human_modules": 240,
+        "editable_area_min_m2": 2000,
+        "editable_area_max_m2": 220000,
+        "editable_height_min_m": 12,
+        "editable_height_max_m": 280
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": "Raised control room inside tall hangar"
+    },
+    {
+      "id": "M-L1-AH-OLD-ST-001",
+      "kind": "stair",
+      "name": "Лестница от пола ангара B1-110 к верхней диспетчерской",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-313"
+      ],
+      "global_level": 1,
+      "area_role": "STAIR_FOOTPRINT",
+      "bounds": {
+        "min_module2": 3,
+        "max_module2": 1000,
+        "min_height_in_human_modules": 2,
+        "max_height_in_human_modules": 60,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L1-AH-OLD-CTRL-001",
+      "kind": "raised_control_room",
+      "name": "Верхняя диспетчерская старого ангара B1-110",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-313",
+        "P-316"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 8,
+        "max_module2": 1200,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 30,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L1-CH-001",
+      "kind": "industrial_hall",
+      "name": "Высокий круглый технический зал, p75–76",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-219",
+        "P-220"
+      ],
+      "global_level": 1,
+      "area_role": "INDUSTRIAL_FREE_VOLUME",
+      "bounds": {
+        "min_module2": 350,
+        "max_module2": 190000,
+        "min_height_in_human_modules": 4,
+        "max_height_in_human_modules": 180,
+        "editable_area_min_m2": 400,
+        "editable_area_max_m2": 100000,
+        "editable_height_min_m": 6,
+        "editable_height_max_m": 180
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": "Tall circular hall with gallery"
+    },
+    {
+      "id": "M-L1-CH-GAL-001",
+      "kind": "internal_gallery",
+      "name": "Частичный верхний мостик круглого зала",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-220"
+      ],
+      "global_level": 1,
+      "area_role": "LOCAL_MEZZANINE_FLOOR",
+      "bounds": {
+        "min_module2": 6,
+        "max_module2": 40000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 30,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L1-CH-ST-001",
+      "kind": "stair",
+      "name": "Повреждённая лестница к мостику круглого зала",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-220"
+      ],
+      "global_level": 1,
+      "area_role": "STAIR_FOOTPRINT",
+      "bounds": {
+        "min_module2": 3,
+        "max_module2": 1000,
+        "min_height_in_human_modules": 2,
+        "max_height_in_human_modules": 60,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L1-CH-CTRL-001",
+      "kind": "control_room",
+      "name": "Пультовая за дверью с мостика круглого зала",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-221"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 6,
+        "max_module2": 1200,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 30,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L1-FH-001",
+      "kind": "hangar",
+      "name": "Первый нижний ангар двух малых катеров",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-364",
+        "P-365"
+      ],
+      "global_level": 1,
+      "area_role": "SHIP_CLEAR_VOLUME",
+      "bounds": {
+        "min_module2": 350,
+        "max_module2": 350000,
+        "min_height_in_human_modules": 5,
+        "max_height_in_human_modules": 240,
+        "editable_area_min_m2": 200,
+        "editable_area_max_m2": 60000,
+        "editable_height_min_m": 5,
+        "editable_height_max_m": 120
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": "Two small craft capacity, scenario to be narrowed from hull dimensions"
+    },
+    {
+      "id": "M-L1-FH-001-CTRL",
+      "kind": "raised_control_room",
+      "name": "Высокая операторская первого ангара катеров",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-365",
+        "P-367"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 8,
+        "max_module2": 1200,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 30,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L1-FH-001-ST",
+      "kind": "stair",
+      "name": "Металлическая лестница к операторской первого ангара",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-365",
+        "P-376"
+      ],
+      "global_level": 1,
+      "area_role": "STAIR_FOOTPRINT",
+      "bounds": {
+        "min_module2": 3,
+        "max_module2": 1000,
+        "min_height_in_human_modules": 2,
+        "max_height_in_human_modules": 60,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L1-FH-002",
+      "kind": "hangar",
+      "name": "Соседний нижний ангар трёх катеров",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-368"
+      ],
+      "global_level": 1,
+      "area_role": "SHIP_CLEAR_VOLUME",
+      "bounds": {
+        "min_module2": 350,
+        "max_module2": 350000,
+        "min_height_in_human_modules": 5,
+        "max_height_in_human_modules": 240,
+        "editable_area_min_m2": 300,
+        "editable_area_max_m2": 70000,
+        "editable_height_min_m": 5,
+        "editable_height_max_m": 120
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": "Three small craft capacity"
+    },
+    {
+      "id": "M-L1-FH-002-CTRL",
+      "kind": "raised_control_room",
+      "name": "Операторская соседнего ангара",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-367",
+        "P-369"
+      ],
+      "global_level": 1,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 8,
+        "max_module2": 1200,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 30,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L1-FH-002-ST",
+      "kind": "stair",
+      "name": "Лестница к операторской соседнего ангара",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-369"
+      ],
+      "global_level": 1,
+      "area_role": "STAIR_FOOTPRINT",
+      "bounds": {
+        "min_module2": 3,
+        "max_module2": 1000,
+        "min_height_in_human_modules": 2,
+        "max_height_in_human_modules": 60,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L1-FH-LOCK-001",
+      "kind": "airlock_chamber",
+      "name": "Герметичный шлюз малых катеров",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-384"
+      ],
+      "global_level": 1,
+      "area_role": "SEALED_SHIP_VOLUME",
+      "bounds": {
+        "min_module2": 100,
+        "max_module2": 160000,
+        "min_height_in_human_modules": 3.5,
+        "max_height_in_human_modules": 220,
+        "editable_area_min_m2": 200,
+        "editable_area_max_m2": 70000,
+        "editable_height_min_m": 5,
+        "editable_height_max_m": 120
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": "Broad lock chamber comparable in usable extent with small craft hangar"
+    },
+    {
+      "id": "M-L1-WASTE-001",
+      "kind": "production_hall",
+      "name": "Просторный перерабатывающий цех с конвейерами",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-107",
+        "P-108"
+      ],
+      "global_level": 1,
+      "area_role": "INDUSTRIAL_FREE_VOLUME",
+      "bounds": {
+        "min_module2": 350,
+        "max_module2": 190000,
+        "min_height_in_human_modules": 4,
+        "max_height_in_human_modules": 180,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L1-WASTE-FURNACE-001",
+      "kind": "industrial_equipment",
+      "name": "Промышленная печь у конца перерабатывающего цеха",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-108"
+      ],
+      "global_level": 1,
+      "area_role": "EQUIPMENT_WITHIN_HOST",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "M-L1-LOG-COR-001",
+      "kind": "cargo_corridor",
+      "name": "Широкий прямой транспортно-грузовой коридор",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-169"
+      ],
+      "global_level": 1,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 100,
+        "max_module2": 85000,
+        "min_height_in_human_modules": 2,
+        "max_height_in_human_modules": 40,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-RES-001",
+      "kind": "building_zone",
+      "name": "Локально двухэтажное кольцо кают",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-193",
+        "P-484"
+      ],
+      "global_level": 2,
+      "area_role": "MULTIFLOOR_ZONE_AGGREGATE",
+      "bounds": {
+        "min_module2": 80,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 3.6,
+        "max_height_in_human_modules": 100,
+        "editable_area_min_m2": 150,
+        "editable_area_max_m2": 190000,
+        "editable_height_min_m": 5.5,
+        "editable_height_max_m": 180
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": "Local two-storey residential ring"
+    },
+    {
+      "id": "M-L2-RES-GAL-001",
+      "kind": "internal_gallery",
+      "name": "Верхняя жилая галерея у Главной площади",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-484",
+        "P-486"
+      ],
+      "global_level": 2,
+      "area_role": "LOCAL_MEZZANINE_FLOOR",
+      "bounds": {
+        "min_module2": 6,
+        "max_module2": 40000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 30,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-PLAZA-001",
+      "kind": "public_hall",
+      "name": "Главная площадь",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-484",
+        "P-486"
+      ],
+      "global_level": 2,
+      "area_role": "PUBLIC_FREE_VOLUME",
+      "bounds": {
+        "min_module2": 80,
+        "max_module2": 130000,
+        "min_height_in_human_modules": 2.4,
+        "max_height_in_human_modules": 100,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-PLAZA-ST-001",
+      "kind": "stair",
+      "name": "Лестница с галереи вниз к Главной площади",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-486"
+      ],
+      "global_level": 2,
+      "area_role": "STAIR_FOOTPRINT",
+      "bounds": {
+        "min_module2": 3,
+        "max_module2": 1000,
+        "min_height_in_human_modules": 2,
+        "max_height_in_human_modules": 60,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-ORANGE-001",
+      "kind": "major_corridor",
+      "name": "Оранжевая кольцевая магистраль",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-467",
+        "P-504"
+      ],
+      "global_level": 2,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 100,
+        "max_module2": 65000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 16,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L3-CG-001",
+      "kind": "complex",
+      "name": "Новый комплекс грузовых ангаров Верхнего",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-243",
+        "P-200"
+      ],
+      "global_level": 3,
+      "area_role": "COMPLEX_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 5000,
+        "max_module2": 750000,
+        "min_height_in_human_modules": 6,
+        "max_height_in_human_modules": 320,
+        "editable_area_min_m2": 12000,
+        "editable_area_max_m2": 550000,
+        "editable_height_min_m": 16,
+        "editable_height_max_m": 450
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": "Upper cargo cruiser complex; different from lower"
+    },
+    {
+      "id": "M-L3-LOG-001",
+      "kind": "cargo_corridor",
+      "name": "Коридор к промышленно-ангарному сектору для погрузчиков",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-200"
+      ],
+      "global_level": 3,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 100,
+        "max_module2": 85000,
+        "min_height_in_human_modules": 2,
+        "max_height_in_human_modules": 40,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L3-LIFT-LOG-001",
+      "kind": "vertical_transport_group",
+      "name": "Группа грузовых подъёмников Верхнего",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-200"
+      ],
+      "global_level": 3,
+      "area_role": "SHAFT_GROUP_NO_FLOOR_ADDITIVITY",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 50000,
+        "min_height_in_human_modules": 2,
+        "max_height_in_human_modules": 350,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "V-BOAT-L1-001",
+      "kind": "small_combat_craft",
+      "name": "Малый одноместный катер Нижнего",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-364"
+      ],
+      "global_level": 1,
+      "area_role": "VEHICLE_ENVELOPE_NOT_STATION_FLOOR",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "V-STAR-OBS-001",
+      "kind": "starship",
+      "name": "Звездолёт из широкого ангара B2-120",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-611"
+      ],
+      "global_level": null,
+      "area_role": "VEHICLE_ENVELOPE_NOT_STATION_FLOOR",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "V-SPHERE-OBS-001",
+      "kind": "spherical_craft",
+      "name": "Чёрный шарообразный аппарат B2-121",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-621"
+      ],
+      "global_level": null,
+      "area_role": "VEHICLE_ENVELOPE_NOT_STATION_FLOOR",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "V-CARGO-CRUISER-001",
+      "kind": "cargo_cruiser_class",
+      "name": "Класс грузовых крейсеров, принимавшихся на Нижнем",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-240"
+      ],
+      "global_level": 1,
+      "area_role": "VEHICLE_ENVELOPE_NOT_STATION_FLOOR",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "V-DRAGON-001",
+      "kind": "cruiser",
+      "name": "Крейсер «Дракон»",
+      "origin": "R03_ENTITY",
+      "source_ids": [
+        "P-664"
+      ],
+      "global_level": null,
+      "area_role": "VEHICLE_ENVELOPE_NOT_STATION_FLOOR",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "V-IMINUYA-001",
+      "kind": "cruiser",
+      "name": "Крейсер «Иминуя»",
+      "origin": "R03_ENTITY",
+      "source_ids": [],
+      "global_level": null,
+      "area_role": "VEHICLE_ENVELOPE_NOT_STATION_FLOOR",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "M-L2-DINING-001",
+      "kind": "room",
+      "name": "Столовая детской группы",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-478"
+      ],
+      "global_level": 2,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 20,
+        "editable_area_min_m2": 24,
+        "editable_area_max_m2": 750,
+        "editable_height_min_m": 2.7,
+        "editable_height_max_m": 15
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": "18 seated children; functional initial human capacity scenario"
+    },
+    {
+      "id": "M-L2-LIB-OVAL-001",
+      "kind": "library",
+      "name": "Библиотека с большим овальным окном",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-488"
+      ],
+      "global_level": 2,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 1000,
+        "min_height_in_human_modules": 1.8,
+        "max_height_in_human_modules": 25,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-LIB-NOWINDOW-001",
+      "kind": "library",
+      "name": "Малая библиотека без окна",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-520"
+      ],
+      "global_level": 2,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 1000,
+        "min_height_in_human_modules": 1.8,
+        "max_height_in_human_modules": 25,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-LIB-MEETING-001",
+      "kind": "library",
+      "name": "Библиотека собраний со стеклянными дверями",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-535",
+        "P-537",
+        "P-545"
+      ],
+      "global_level": 2,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 1000,
+        "min_height_in_human_modules": 1.8,
+        "max_height_in_human_modules": 25,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-LIB-GLASS-DOOR-001",
+      "kind": "door",
+      "name": "Стеклянный вход в библиотеку собраний",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-535"
+      ],
+      "global_level": 2,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "M-L2-CONFERENCE-002",
+      "kind": "room",
+      "name": "Второй конференц-зал",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-494"
+      ],
+      "global_level": 2,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 20,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-OVAL-STORE-001",
+      "kind": "room",
+      "name": "Широкая овальная кладовая с пультом",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-494",
+        "P-495"
+      ],
+      "global_level": 2,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 20,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-OVAL-STORE-ROOM-002",
+      "kind": "room",
+      "name": "Дальнее помещение за овальной кладовой",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-495"
+      ],
+      "global_level": 2,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 20,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-TUNNEL-002",
+      "kind": "tunnel",
+      "name": "Туннель №2",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-504"
+      ],
+      "global_level": 2,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 14000,
+        "min_height_in_human_modules": 1.3,
+        "max_height_in_human_modules": 15,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-TUNNEL-008",
+      "kind": "tunnel",
+      "name": "Туннель №8",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-538",
+        "P-540"
+      ],
+      "global_level": 2,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 14000,
+        "min_height_in_human_modules": 1.3,
+        "max_height_in_human_modules": 15,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-FOOD-STORES-OUT-001",
+      "kind": "space_group",
+      "name": "Продовольственные склады за Оранжевой",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-506"
+      ],
+      "global_level": 2,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-WATER-RESERVOIR-001",
+      "kind": "technical",
+      "name": "Независимый резервуар Второго",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-509"
+      ],
+      "global_level": 2,
+      "area_role": "WATER_OR_TECHNICAL_VOLUME",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 40000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 150,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-EMMA-SUITE-001",
+      "kind": "suite",
+      "name": "Каюта с тремя спальнями Эммы",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-507",
+        "P-511"
+      ],
+      "global_level": null,
+      "area_role": "CONTAINER_USABLE_FLOOR",
+      "bounds": {
+        "min_module2": 15,
+        "max_module2": 1600,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 20,
+        "editable_area_min_m2": 35,
+        "editable_area_max_m2": 600,
+        "editable_height_min_m": 2.7,
+        "editable_height_max_m": 12
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": "Suite with three bedrooms and bath"
+    },
+    {
+      "id": "M-L2-EMMA-KITCHEN-001",
+      "kind": "room",
+      "name": "Кухня каюты Эммы",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-507",
+        "P-511"
+      ],
+      "global_level": null,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 20,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-EMMA-LIVING-001",
+      "kind": "room",
+      "name": "Гостиная каюты Эммы",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-507",
+        "P-511"
+      ],
+      "global_level": null,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 20,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-EMMA-BEDROOMS-001",
+      "kind": "space_group",
+      "name": "Группа трёх спален каюты",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-511"
+      ],
+      "global_level": null,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-EMMA-BATH-001",
+      "kind": "room",
+      "name": "Ванная каюты",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-511"
+      ],
+      "global_level": null,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 20,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-FREE-SUITE-001",
+      "kind": "suite",
+      "name": "Свободная каюта с цифровым замком",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-533"
+      ],
+      "global_level": null,
+      "area_role": "CONTAINER_USABLE_FLOOR",
+      "bounds": {
+        "min_module2": 15,
+        "max_module2": 1600,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 20,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-FREE-BED-001",
+      "kind": "room",
+      "name": "Спальня свободной каюты",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-533"
+      ],
+      "global_level": null,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 20,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-FREE-BATH-001",
+      "kind": "room",
+      "name": "Ванная свободной каюты",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-533"
+      ],
+      "global_level": null,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 20,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-PLAY-OUT-001",
+      "kind": "space_group",
+      "name": "Дальние игровые площадки за Оранжевой",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-505"
+      ],
+      "global_level": 2,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-DEADEND-001",
+      "kind": "corridor",
+      "name": "Тупик у кабельной лестницы",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-633"
+      ],
+      "global_level": 2,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 8,
+        "max_module2": 18000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 15,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-GRILLE-STAIR-001",
+      "kind": "stair",
+      "name": "Лестница вниз у тупика",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-633",
+        "P-634"
+      ],
+      "global_level": 2,
+      "area_role": "STAIR_FOOTPRINT",
+      "bounds": {
+        "min_module2": 3,
+        "max_module2": 1000,
+        "min_height_in_human_modules": 2,
+        "max_height_in_human_modules": 60,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L2-GRILLE-DOOR-001",
+      "kind": "door",
+      "name": "Кодовая решётка у лестницы",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-633",
+        "P-634"
+      ],
+      "global_level": 2,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "M-L3-ARMORY-001",
+      "kind": "room",
+      "name": "Кладовая оружия за белыми дверями",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-498"
+      ],
+      "global_level": 3,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 20,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L3-BRIDGE-GLASS-DOOR-001",
+      "kind": "door",
+      "name": "Стеклянные двери капитанской рубки",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-499",
+        "P-643"
+      ],
+      "global_level": 3,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "M-L3-PRODUCTION-ROUND-001",
+      "kind": "industrial_hall",
+      "name": "Главный круглый производственный зал",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-646",
+        "P-647"
+      ],
+      "global_level": 3,
+      "area_role": "INDUSTRIAL_FREE_VOLUME",
+      "bounds": {
+        "min_module2": 350,
+        "max_module2": 190000,
+        "min_height_in_human_modules": 4,
+        "max_height_in_human_modules": 180,
+        "editable_area_min_m2": 500,
+        "editable_area_max_m2": 90000,
+        "editable_height_min_m": 7,
+        "editable_height_max_m": 180
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": "Radial production hall"
+    },
+    {
+      "id": "M-L3-PRODUCTION-RADIAL-001",
+      "kind": "space_group",
+      "name": "Веер производственных помещений",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-646",
+        "P-648"
+      ],
+      "global_level": 3,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L3-PRODUCTION-VESSEL-001",
+      "kind": "equipment",
+      "name": "Колба живого металла в круглом зале",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-647"
+      ],
+      "global_level": 3,
+      "area_role": "EQUIPMENT_WITHIN_HOST",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "M-L3-PRODUCTION-HUMANOID-001",
+      "kind": "space_group",
+      "name": "Зона изготовления человекоподобных роботов",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-649"
+      ],
+      "global_level": 3,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L3-CABLE-HATCH-001",
+      "kind": "hatch",
+      "name": "Первый люк в кабельные ходы",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-671"
+      ],
+      "global_level": 3,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "M-L3-CABLE-HATCH-002",
+      "kind": "hatch",
+      "name": "Второй люк в кабельные ходы",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-671"
+      ],
+      "global_level": 3,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "M-L3-COMMS-HATCHES-001",
+      "kind": "hatch_group",
+      "name": "Ремонтные люки к внешней связи",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-674"
+      ],
+      "global_level": 3,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "M-L1-SEMICIRC-CORRIDOR-001",
+      "kind": "corridor",
+      "name": "Широкий полукруглый коридор у ангаров",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-656",
+        "P-657"
+      ],
+      "global_level": 1,
+      "area_role": "PATH_AREA",
+      "bounds": {
+        "min_module2": 8,
+        "max_module2": 18000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 15,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L1-SEMICIRC-STORES-001",
+      "kind": "space_group",
+      "name": "Кладовые от полукруглого коридора",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-657",
+        "P-658"
+      ],
+      "global_level": 1,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L1-STARSHIP-HANGAR-001",
+      "kind": "hangar",
+      "name": "Ангар со звездолётом",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-611",
+        "P-612",
+        "P-614"
+      ],
+      "global_level": 1,
+      "area_role": "SHIP_CLEAR_VOLUME",
+      "bounds": {
+        "min_module2": 350,
+        "max_module2": 350000,
+        "min_height_in_human_modules": 5,
+        "max_height_in_human_modules": 240,
+        "editable_area_min_m2": 300,
+        "editable_area_max_m2": 90000,
+        "editable_height_min_m": 6,
+        "editable_height_max_m": 150
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": "Starship hangar, separate from cruiser docks"
+    },
+    {
+      "id": "M-L1-STARSHIP-LOCK-001",
+      "kind": "airlock",
+      "name": "Шлюз звездолётного ангара",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-612",
+        "P-613",
+        "P-621",
+        "P-622"
+      ],
+      "global_level": 1,
+      "area_role": "SEALED_SHIP_VOLUME",
+      "bounds": {
+        "min_module2": 200,
+        "max_module2": 160000,
+        "min_height_in_human_modules": 3.5,
+        "max_height_in_human_modules": 220,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L1-STARSHIP-INNER-DOOR-001",
+      "kind": "door",
+      "name": "Внутренние двери звездолётного ангара",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-612"
+      ],
+      "global_level": 1,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "M-L1-STARSHIP-OUTER-GATE-001",
+      "kind": "gate",
+      "name": "Круглый большой внешний выход шлюза",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-613"
+      ],
+      "global_level": 1,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    },
+    {
+      "id": "M-L3-OLD-ISOLATION-ROOM-001",
+      "kind": "room",
+      "name": "Комната бывшей изоляции под сортировку роботов",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-571",
+        "P-572"
+      ],
+      "global_level": 3,
+      "area_role": "USABLE_FLOOR_SPACE",
+      "bounds": {
+        "min_module2": 5,
+        "max_module2": 500,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 20,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-L3-SMALL-STORES-ARC-001",
+      "kind": "space_group",
+      "name": "Полукруглый ряд маленьких кладовок",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-570"
+      ],
+      "global_level": 3,
+      "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+      "bounds": {
+        "min_module2": 10,
+        "max_module2": 90000,
+        "min_height_in_human_modules": 1.7,
+        "max_height_in_human_modules": 120,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-STA-CABLE-CRAWL-001",
+      "kind": "technical_route",
+      "name": "Узкая ветвящаяся кабельная шахта",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-559",
+        "P-560",
+        "P-561",
+        "P-562"
+      ],
+      "global_level": null,
+      "area_role": "SHAFT_PATH_SECTION",
+      "bounds": {
+        "min_module2": 2,
+        "max_module2": 9000,
+        "min_height_in_human_modules": 1.05,
+        "max_height_in_human_modules": 15,
+        "editable_area_min_m2": null,
+        "editable_area_max_m2": null,
+        "editable_height_min_m": null,
+        "editable_height_max_m": null
+      },
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": true,
+      "notes": null
+    },
+    {
+      "id": "M-STA-CABLE-HATCH-001",
+      "kind": "hatch",
+      "name": "Овальная крышка шахты",
+      "origin": "R05_ENTITY",
+      "source_ids": [
+        "P-559"
+      ],
+      "global_level": null,
+      "area_role": "OPENING_NO_USABLE_AREA",
+      "bounds": null,
+      "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+      "allow_manual_revision": false,
+      "notes": null
+    }
+  ],
+  "nonoverlapping_interior_groups": [
+    {
+      "parent": "M-L2-EMMA-SUITE-001",
+      "disjoint_children": [
+        "M-L2-EMMA-KITCHEN-001",
+        "M-L2-EMMA-LIVING-001",
+        "M-L2-EMMA-BEDROOMS-001",
+        "M-L2-EMMA-BATH-001"
+      ],
+      "basis": "P-511 separate functional rooms",
+      "constraint": "SUM_CHILDREN_USABLE_AREA_LEQ_PARENT_AREA"
+    },
+    {
+      "parent": "M-L2-FREE-SUITE-001",
+      "disjoint_children": [
+        "M-L2-FREE-BED-001",
+        "M-L2-FREE-BATH-001"
+      ],
+      "basis": "P-533 bedroom and bathroom inside same suite",
+      "constraint": "SUM_CHILDREN_USABLE_AREA_LEQ_PARENT_AREA"
+    }
+  ],
+  "contained_subarea_guards": [
+    {
+      "master": "M-STA-L1-001",
+      "member": "M-L1-CG-001",
+      "rule": "SINGLE_SUBAREA_CANNOT_EXCEED_GLOBAL_LEVEL_FOOTPRINT",
+      "source_ids": [
+        "P-240"
+      ]
+    },
+    {
+      "master": "M-STA-L3-001",
+      "member": "M-L3-CG-001",
+      "rule": "SINGLE_SUBAREA_CANNOT_EXCEED_GLOBAL_LEVEL_FOOTPRINT",
+      "source_ids": [
+        "P-243"
+      ]
+    },
+    {
+      "master": "M-STA-L1-001",
+      "member": "M-L1-FH-001",
+      "rule": "SINGLE_SUBAREA_CANNOT_EXCEED_GLOBAL_LEVEL_FOOTPRINT",
+      "source_ids": [
+        "P-364"
+      ]
+    },
+    {
+      "master": "M-STA-L1-001",
+      "member": "M-L1-FH-002",
+      "rule": "SINGLE_SUBAREA_CANNOT_EXCEED_GLOBAL_LEVEL_FOOTPRINT",
+      "source_ids": [
+        "P-368"
+      ]
+    },
+    {
+      "master": "M-STA-L2-001",
+      "member": "M-L2-RES-001",
+      "rule": "SINGLE_SUBAREA_CANNOT_EXCEED_GLOBAL_LEVEL_FOOTPRINT",
+      "source_ids": [
+        "P-484"
+      ]
+    },
+    {
+      "master": "M-STA-L3-001",
+      "member": "M-L3-PRODUCTION-ROUND-001",
+      "rule": "SINGLE_SUBAREA_CANNOT_EXCEED_GLOBAL_LEVEL_FOOTPRINT",
+      "source_ids": [
+        "P-646"
+      ]
+    }
+  ],
+  "level_comparisons": [
+    {
+      "a": "M-STA-L1-001",
+      "relation": "LARGER_FOOTPRINT_THAN",
+      "b": "M-STA-L3-001",
+      "status": "TEXT_P592"
+    },
+    {
+      "a": "M-STA-L1-001",
+      "relation": "LARGER_FOOTPRINT_THAN",
+      "b": "M-STA-L2-001",
+      "status": "USER_DESIGN"
+    },
+    {
+      "a": "M-STA-L2-001",
+      "relation": "LARGER_FOOTPRINT_THAN",
+      "b": "M-STA-L3-001",
+      "status": "USER_DESIGN"
+    }
+  ],
+  "applicability": {
+    "all_indexed_ids": 197,
+    "area_applicable": 157,
+    "not_applicable": 40
+  },
+  "geometry_gate": false,
+  "global_accounting": {
+    "level_envelopes": [
+      "M-STA-L1-001",
+      "M-STA-L2-001",
+      "M-STA-L3-001"
+    ],
+    "gross_area_definition": "projected area of occupied block envelope, not sum of partitions nor false solid disk",
+    "level_local_galleries": "additional usable floor within same vertical block, not additional global storeys",
+    "voids": "vertical core void subtract from usable floor where cut, not from all envelope projections",
+    "no_auto_sum_of_groups": "groups represent containers and overlap child rooms; sum only explicitly disjoint interiors"
+  },
+  "assumed_disjoint_level_budgets": [
+    {
+      "id": "L1-DISJOINT-01",
+      "parent": "M-STA-L1-001",
+      "members": [
+        "M-L1-CG-001",
+        "M-L1-FH-001",
+        "M-L1-FH-002",
+        "M-L1-WASTE-001"
+      ],
+      "status": "ADJUSTABLE_PROJECT_HYPOTHESIS_NOT_BOOK_CERTAINTY",
+      "purpose": "Prevent industrial envelope and distinct small-craft docks exceeding Lower footprint and structural volume",
+      "treat_as_same_host_vertical_block": true
+    },
+    {
+      "id": "L2-DISJOINT-01",
+      "parent": "M-STA-L2-001",
+      "members": [
+        "M-L2-RES-001",
+        "M-L2-PLAZA-001",
+        "M-L2-PLAY-OUT-001"
+      ],
+      "status": "ADJUSTABLE_PROJECT_HYPOTHESIS_NOT_BOOK_CERTAINTY",
+      "purpose": "Prevent ring, plaza and farther play fields exceeding Children projected area; do not double count interior cabins",
+      "treat_as_same_host_vertical_block": true
+    },
+    {
+      "id": "L3-DISJOINT-01",
+      "parent": "M-STA-L3-001",
+      "members": [
+        "M-L3-CG-001",
+        "M-L3-PRODUCTION-ROUND-001"
+      ],
+      "status": "ADJUSTABLE_PROJECT_HYPOTHESIS_NOT_BOOK_CERTAINTY",
+      "purpose": "Upper cruiser complex and productive hall must fit Upper block without double counting their internal rooms",
+      "treat_as_same_host_vertical_block": true
+    }
+  ],
+  "level_area_budget_interpretation": "Selected listed major compartments are treated as independent allocation zones solely for this explicit hypothesis. Disable/edit groups when book identity or overlap is uncertain. Never blindly sum every concept or child room.",
+  "local_floor_area_multipliers": {
+    "M-L2-RES-001": {
+      "min": 1,
+      "max": 2,
+      "layers_reported": 2,
+      "reason": "Two locally distinct residential/storey layers; precise continuity of upper floor unknown",
+      "source_ids": [
+        "P-484"
+      ]
+    },
+    "M-L1-AH-OLD-001": {
+      "min": 1,
+      "max": 1.25,
+      "layers_reported": null,
+      "reason": "Raised control room is partial, not an entire upper deck",
+      "source_ids": [
+        "P-313"
+      ]
+    },
+    "M-L1-CH-001": {
+      "min": 1,
+      "max": 1.25,
+      "layers_reported": null,
+      "reason": "Upper internal bridge is a partial mezzanine",
+      "source_ids": [
+        "P-220"
+      ]
+    },
+    "M-L1-FH-001": {
+      "min": 1,
+      "max": 1.25,
+      "layers_reported": null,
+      "reason": "Raised small-craft operator control",
+      "source_ids": [
+        "P-365"
+      ]
+    },
+    "M-L1-FH-002": {
+      "min": 1,
+      "max": 1.25,
+      "layers_reported": null,
+      "reason": "Adjacent raised operator control",
+      "source_ids": [
+        "P-369"
+      ]
+    },
+    "MOAG-G-0036": {
+      "min": 1,
+      "max": 1.2,
+      "layers_reported": null,
+      "reason": "Upper gallery around round rest hall is partial not a new global floor",
+      "source_ids": [
+        "P-580"
+      ]
+    }
+  },
+  "usable_floor_accounting": {
+    "default_ratio": [
+      1,
+      1
+    ],
+    "default_note": "single local floor equivalent in working model, editable if evidence of internal storey appears",
+    "skip_roles": [
+      "LEVEL_ENVELOPE_AREA_PROJECT_SCENARIO",
+      "VERTICAL_CORE_SECTION",
+      "VOID_CROSS_SECTION_NOT_FLOOR",
+      "SHAFT_PATH_SECTION",
+      "UTILITY_SYSTEM_MAY_NOT_BE_ROOM",
+      "SHAFT_OR_STAIR_PATH_AREA",
+      "SHAFT_GROUP_NO_FLOOR_ADDITIVITY"
+    ],
+    "negative_constraint": "A high clear volume cannot be counted as multiple full floors just because its ceiling is tall"
+  }
+}

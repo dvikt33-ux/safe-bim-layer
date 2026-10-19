@@ -1,0 +1,403 @@
+{
+  "schema": "APA-MOAG-R04-IDENTITY-REPAIR/0.1",
+  "date": "2026-10-20",
+  "source_count": 22,
+  "hard_alias_corrections": 5,
+  "provisional_unresolved": 2,
+  "note": "Not every multi-object observation is an identity error. Physical IDs are source-qualified mentions, not geometric placement or proof that all entities are distinct buildings.",
+  "items": [
+    {
+      "observation_id": "P-044",
+      "page": "B1-007",
+      "classification": "MULTI_OBJECT_VIEW_RELATION",
+      "source_legacy_node_refs": [
+        "L2-GALLERY",
+        "L2-PLAZA"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L2-RES-GAL-001",
+        "M-L2-PLAZA-001"
+      ],
+      "forbidden_automatic_candidates": [],
+      "meaning": "Галерея визуально обращена к площади, это не два имени одной комнаты.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-045",
+      "page": "B1-007",
+      "classification": "DIRECT_STAIR_RELATION",
+      "source_legacy_node_refs": [
+        "L2-GALLERY",
+        "L2-PLAZA"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L2-RES-GAL-001",
+        "M-L2-PLAZA-001",
+        "M-L2-PLAZA-ST-001"
+      ],
+      "forbidden_automatic_candidates": [],
+      "meaning": "Лестница между двумя объектами; не сливать их.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-067",
+      "page": "B1-012",
+      "classification": "ORDERED_ROUTE_MULTI_OBJECT",
+      "source_legacy_node_refs": [
+        "L2-ORANGE",
+        "L2-GREEN",
+        "L2-PLAZA",
+        "L2-T06"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L2-ORANGE-001",
+        "M-L2-PLAZA-001"
+      ],
+      "forbidden_automatic_candidates": [],
+      "meaning": "Содержит также Зелёную магистраль и туннель №6 в исходном графе; направление локально по маршруту.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-089",
+      "page": "B1-017",
+      "classification": "ROUTE_BETWEEN_CABINS_AND_GALLERY",
+      "source_legacy_node_refs": [
+        "L2-GALLERY",
+        "L2-CABINS"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L2-RES-GAL-001"
+      ],
+      "forbidden_automatic_candidates": [],
+      "meaning": "Каюты представлены исходной группой L2-CABINS, без нового физического ID конкретной каюты.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-096",
+      "page": "B1-019",
+      "classification": "ANALOGY_NOT_ALIGNED_SHAFTS",
+      "source_legacy_node_refs": [
+        "L1-INNER",
+        "L1-OUTER",
+        "L1-VENT",
+        "L2-GREEN",
+        "L2-ORANGE"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-STA-L1-001",
+        "M-STA-L2-001",
+        "M-STA-L3-001"
+      ],
+      "forbidden_automatic_candidates": [],
+      "meaning": "Сходство планировочной логики коридоров и вентшахт НЕ равные диаметры и не одна шахта.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-193",
+      "page": "B1-056",
+      "classification": "MULTI_OBJECT_TUNNEL_ACCESS",
+      "source_legacy_node_refs": [
+        "L2-RESIDENTIAL-LOWER",
+        "L2-ORANGE"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L2-RES-001",
+        "M-L2-ORANGE-001"
+      ],
+      "forbidden_automatic_candidates": [],
+      "meaning": "Выход из нижнего яруса жилого кольца к внешней магистрали через туннель, не смежная дверь.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-220",
+      "page": "B1-076",
+      "classification": "CORRECTED_FALSE_IDENTITY_ALIAS",
+      "source_legacy_node_refs": [
+        "L1-CIRCULAR-UPPER-WALK",
+        "L1-CIRCULAR-STAIRS"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L1-CH-001",
+        "M-L1-CH-GAL-001",
+        "M-L1-CH-ST-001"
+      ],
+      "forbidden_automatic_candidates": [
+        "M-L1-AH-OLD-ST-001"
+      ],
+      "meaning": "B1 p76 — лестница моста круглого зала, не лестница старого ангара B1 p110.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-221",
+      "page": "B1-076",
+      "classification": "CORRECTED_FALSE_IDENTITY_ALIAS",
+      "source_legacy_node_refs": [
+        "L1-CIRCULAR-CONTROL"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L1-CH-CTRL-001"
+      ],
+      "forbidden_automatic_candidates": [
+        "M-L1-AH-OLD-CTRL-001",
+        "M-L1-CG-CTRL-001"
+      ],
+      "meaning": "B1 p76 — дверь мостика в пультовую, не доказано её тождество другим операторским.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-240",
+      "page": "B1-082",
+      "classification": "HISTORIC_CARGO_FUNCTION_ONLY",
+      "source_legacy_node_refs": [
+        "L1-CIRCULAR-CONTROL",
+        "L1-OLD-FREIGHT-HANGAR"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L1-CG-001",
+        "M-L1-CG-CTRL-001"
+      ],
+      "forbidden_automatic_candidates": [
+        "M-L1-AH-OLD-CTRL-001",
+        "M-L1-CH-CTRL-001"
+      ],
+      "meaning": "Центр управления прежними грузовыми ангарами, точная диспетчерская в плане не идентифицирована.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-241",
+      "page": "B1-082",
+      "classification": "PROVISIONAL_CARGO_COMMUNICATION",
+      "source_legacy_node_refs": [
+        "L1-CIRCULAR-CONTROL"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L1-CG-CTRL-001"
+      ],
+      "forbidden_automatic_candidates": [
+        "M-L1-CH-CTRL-001",
+        "M-L1-AH-OLD-CTRL-001"
+      ],
+      "meaning": "Связь расписаний с грузовым комплексом, нельзя выбирать комнату по повторённому старому ID.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-264",
+      "page": "B1-090",
+      "classification": "SAME_SCENE_CONTROL_WITH_QUARTERS_IDENTITY_OPEN",
+      "source_legacy_node_refs": [
+        "L1-CIRCULAR-CONTROL",
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "verified_or_provisional_physical_entity_ids": [],
+      "forbidden_automatic_candidates": [],
+      "meaning": "Старое помещение с диспетчерским креслом и водой; идентичность с пультовой p76 и/или p110 не доказана.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-293",
+      "page": "B1-100",
+      "classification": "SAME_SCENE_CONTROL_WITH_QUARTERS_IDENTITY_OPEN",
+      "source_legacy_node_refs": [
+        "L1-CIRCULAR-CONTROL",
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "verified_or_provisional_physical_entity_ids": [],
+      "forbidden_automatic_candidates": [],
+      "meaning": "Кресло переносят между комнатами; смежность внутри эпизода подтверждена, но новые физические индексы требуют локализации.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-313",
+      "page": "B1-110",
+      "classification": "CORRECTED_FALSE_IDENTITY_ALIAS",
+      "source_legacy_node_refs": [
+        "L1-CIRCULAR-STAIRS",
+        "L1-CIRCULAR-CONTROL"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L1-AH-OLD-001",
+        "M-L1-AH-OLD-ST-001",
+        "M-L1-AH-OLD-CTRL-001"
+      ],
+      "forbidden_automatic_candidates": [
+        "M-L1-CH-ST-001",
+        "M-L1-CH-CTRL-001"
+      ],
+      "meaning": "Лестница и поднятая диспетчерская именно старого ангара B1 p110.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-316",
+      "page": "B1-113",
+      "classification": "CORRECTED_FALSE_IDENTITY_ALIAS",
+      "source_legacy_node_refs": [
+        "L1-CIRCULAR-CONTROL"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L1-AH-OLD-CTRL-001"
+      ],
+      "forbidden_automatic_candidates": [
+        "M-L1-CH-CTRL-001"
+      ],
+      "meaning": "Окно верхней диспетчерской в продолжении старого ангарного эпизода p110–113.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-317",
+      "page": "B1-113",
+      "classification": "CORRECTED_FALSE_IDENTITY_ALIAS",
+      "source_legacy_node_refs": [
+        "L1-CIRCULAR-STAIRS",
+        "L1-SEALED",
+        "L3"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L1-AH-OLD-ST-001"
+      ],
+      "forbidden_automatic_candidates": [
+        "M-L1-CH-ST-001"
+      ],
+      "meaning": "Спуск по лестнице этой верхней диспетчерской; переход к воротам не доказывает прямую дверь в медицинскую зону.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-364",
+      "page": "B2-014",
+      "classification": "MULTI_OBJECT_HANGAR_AND_AIRLOCK",
+      "source_legacy_node_refs": [
+        "L1-ANGAR",
+        "L1-BOAT-LOCK"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L1-FH-001",
+        "V-BOAT-L1-001"
+      ],
+      "forbidden_automatic_candidates": [],
+      "meaning": "Ангар и шлюз участвуют в одной сцене; прямой дверной проём подтверждается отдельно p385.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-366",
+      "page": "B2-015",
+      "classification": "MULTI_OBJECT_HANGAR_AND_CONTROL",
+      "source_legacy_node_refs": [
+        "L1-ANGAR",
+        "L1-OPERATORS"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L1-FH-001",
+        "M-L1-FH-001-CTRL"
+      ],
+      "forbidden_automatic_candidates": [],
+      "meaning": "Корабли и аппаратура операторской в одном ангарном комплексе.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-376",
+      "page": "B2-018",
+      "classification": "MULTI_OBJECT_HANGAR_STAIR_CONTROL",
+      "source_legacy_node_refs": [
+        "L1-OPERATORS",
+        "L1-ANGAR"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L1-FH-001",
+        "M-L1-FH-001-CTRL",
+        "M-L1-FH-001-ST"
+      ],
+      "forbidden_automatic_candidates": [],
+      "meaning": "Лестница внутри двухъярусного объёма, а не глобальный второй этаж.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-383",
+      "page": "B2-020",
+      "classification": "MULTI_OBJECT_OPERATOR_AND_LOCK",
+      "source_legacy_node_refs": [
+        "L1-OPERATORS",
+        "L1-BOAT-LOCK"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L1-FH-001-CTRL",
+        "M-L1-FH-LOCK-001"
+      ],
+      "forbidden_automatic_candidates": [],
+      "meaning": "Управление шлюзом из оператора не равно физическому примыканию комнат.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-384",
+      "page": "B2-021",
+      "classification": "QUALITATIVE_AIRLOCK_HANGAR_SCALE",
+      "source_legacy_node_refs": [
+        "L1-ANGAR",
+        "L1-BOAT-LOCK"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L1-FH-LOCK-001",
+        "M-L1-FH-001"
+      ],
+      "forbidden_automatic_candidates": [],
+      "meaning": "Просторность шлюзовой камеры сравнима с ангарной, но точный коэффициент неизвестен.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-450",
+      "page": "B2-047",
+      "classification": "MULTI_OBJECT_CABIN_GALLERY",
+      "source_legacy_node_refs": [
+        "L2-GALLERY",
+        "L2-CABINS"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L2-RES-GAL-001"
+      ],
+      "forbidden_automatic_candidates": [],
+      "meaning": "Галерея проходит возле двери каюты, обе части остаются раздельными.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    },
+    {
+      "observation_id": "P-465",
+      "page": "B2-054",
+      "classification": "CROSS_LEVEL_ROUTE_NOT_ADJACENCY",
+      "source_legacy_node_refs": [
+        "L3-SERVICE",
+        "L1-RECYCLING"
+      ],
+      "verified_or_provisional_physical_entity_ids": [
+        "M-L3-LOG-001",
+        "M-L1-WASTE-001"
+      ],
+      "forbidden_automatic_candidates": [],
+      "meaning": "Последовательность с люком из Третьего в мусорный блок Нижнего, не прямая общая стена.",
+      "source_verification": "EXISTING_REVIEWED_PAGE_OBSERVATION",
+      "geometric_adjacency_approved": false
+    }
+  ],
+  "gates": {
+    "no_fake_door_adjacency": true,
+    "no_automatic_merges": true,
+    "bim_write": false
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "A_EXPLICIT_LEVELS",
+    "assignments": {
+      "M-L1-CG-001": "M-STA-L1-001",
+      "M-L3-CG-001": "M-STA-L3-001",
+      "M-L2-LIB-OVAL-001": "M-STA-L2-001"
+    }
+  },
+  {
+    "id": "B_CARGO_IN_CHILD_SUITE",
+    "assignments": {
+      "M-L1-CG-001": "M-L2-EMMA-SUITE-001"
+    }
+  },
+  {
+    "id": "C_LOWER_CARGO_IN_UPPER_BLOCK",
+    "assignments": {
+      "M-L1-CG-001": "M-STA-L3-001"
+    }
+  }
+]

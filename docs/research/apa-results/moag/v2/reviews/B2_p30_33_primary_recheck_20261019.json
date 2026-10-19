@@ -1,0 +1,80 @@
+{
+  "schema": "APA-MOAG-PRIMARY-RECHECK/1",
+  "date": "2026-10-19",
+  "book_id": "B2",
+  "scope_pages": [
+    30,
+    33
+  ],
+  "source_site": "LoveRead",
+  "status": "SOURCE_RECHECK_PUBLISHED_NOT_AUTOMATICALLY_MERGED",
+  "physical_station_id": "SHIP-MLP-MOAG-001",
+  "pages": [
+    {
+      "page_id": "B2-030",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=30",
+      "status": "SOURCE_READ",
+      "object_class": "OTHER_VESSEL_NOT_MOAG",
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "spatial_conclusion": "Белые серверные коридоры, комнаты шестиногих роботов, обсуждаемая лестница наверх — это чужой крейсер, а не МОАГ.",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-031",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=31",
+      "status": "SOURCE_READ",
+      "object_class": "OTHER_VESSEL_NOT_MOAG",
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "spatial_conclusion": "Лестница для шестиногих роботов и ряд длинных узких белых коридоров находится в чужом крейсере.",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-032",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=32",
+      "status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "evidence_class": "DIRECT_TEXT",
+      "spatial_conclusion": "Эмма и Коля на станции исследуют электронную угрозу, используя планшеты и голографическое увеличение. Новая комната/производство не подтверждены.",
+      "metric_geometry_verified": false
+    },
+    {
+      "page_id": "B2-033",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=33",
+      "status": "SOURCE_READ",
+      "object_class": "MOAG",
+      "evidence_class": "DIRECT_TEXT",
+      "spatial_conclusion": "На Третьем обследованы доступные коридоры возле производственных дверей и кладовка роботов; из рубки виден тёмный коридор через стеклянные двери. Энергомодуль, детский сектор и цех остались вне обследования. Свет временно отключают на 10 минут.",
+      "metric_geometry_verified": false
+    }
+  ],
+  "spatial_constraints": [
+    {
+      "source_pages": [
+        "B2-033"
+      ],
+      "claim": "Third-level sweep did not include the energy module, child block or production shop; do not infer absence of internal equipment or threats.",
+      "verdict": "NEGATIVE_COVERAGE_LIMIT"
+    },
+    {
+      "source_pages": [
+        "B2-033"
+      ],
+      "claim": "Bridge doors have glazing to the common corridor, with general lighting changed during external attack.",
+      "verdict": "DIRECT_TEXT"
+    },
+    {
+      "source_pages": [
+        "B2-030",
+        "B2-031"
+      ],
+      "claim": "Foreign cruiser stairs and technical decks cannot be mapped onto the MOAG lower/upper decks.",
+      "verdict": "FOREIGN_OBJECT_EXCLUSION"
+    }
+  ],
+  "build_permissions": {
+    "geometry_authorized": false,
+    "native_archicad_write": false
+  },
+  "next_page": "B2-034",
+  "merge_rule": "Before import, fetch latest page ledger and observations, do not overwrite or duplicate already published entries."
+}

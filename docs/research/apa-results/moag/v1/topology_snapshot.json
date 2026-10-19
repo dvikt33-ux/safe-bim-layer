@@ -1,0 +1,2320 @@
+{
+  "schema": "APA-MOAG-TOPOLOGY-SNAPSHOT/0.1",
+  "source_blob_sha": "b09a07b9892f4f9d91549078b0067604a4b57223",
+  "derived_from": "docs/research/apa-results/moag/v1/evidence_graph.json",
+  "status": "GRAPH_ONLY_NO_COORDINATES",
+  "space_refs": [
+    {
+      "id": "L1",
+      "label": "Первый / Нижний уровень",
+      "level": 1
+    },
+    {
+      "id": "L2",
+      "label": "Второй / детский уровень",
+      "level": 2
+    },
+    {
+      "id": "L3",
+      "label": "Третий / верхний уровень",
+      "level": 3
+    },
+    {
+      "id": "L1-INNER",
+      "label": "Внутренний малый круг",
+      "level": 1
+    },
+    {
+      "id": "L1-OUTER",
+      "label": "Внешний круг",
+      "level": 1
+    },
+    {
+      "id": "L1-BASES",
+      "label": "Район бывших баз спецподразделения",
+      "level": 1
+    },
+    {
+      "id": "L1-HANGAR-ZONE",
+      "label": "Ангарный сектор",
+      "level": 1
+    },
+    {
+      "id": "L1-TEMNAYA",
+      "label": "Темная база",
+      "level": 1
+    },
+    {
+      "id": "L1-OVAL",
+      "label": "Овальная база",
+      "level": 1
+    },
+    {
+      "id": "L1-WILD",
+      "label": "База диких",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-COMMON",
+      "label": "Общее помещение Темной базы",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-SLEEP",
+      "label": "Спальные комнаты Темной базы",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-WET",
+      "label": "Душевая/ванная Темной базы",
+      "level": 1
+    },
+    {
+      "id": "L1-RECYCLING",
+      "label": "Цех сортировки/переработки отходов",
+      "level": 1
+    },
+    {
+      "id": "L1-STAIR-UP",
+      "label": "Крутая служебная лестница на Третий уровень",
+      "level": 1
+    },
+    {
+      "id": "L1-VENT",
+      "label": "Вентиляция и скрытые лазы",
+      "level": 1
+    },
+    {
+      "id": "L1-ANGAR-HALL",
+      "label": "Магистральный коридор ангаров",
+      "level": 1
+    },
+    {
+      "id": "L1-ANGAR",
+      "label": "Ангар с двумя одноместными катерами",
+      "level": 1
+    },
+    {
+      "id": "L1-OPERATORS",
+      "label": "Операторские кабины ангара",
+      "level": 1
+    },
+    {
+      "id": "L1-BOAT-LOCK",
+      "label": "Шлюз катеров Нижнего уровня",
+      "level": 1
+    },
+    {
+      "id": "L1-SEALED",
+      "label": "Запечатанная/неисследованная часть",
+      "level": 1
+    },
+    {
+      "id": "L2-GREEN",
+      "label": "Внутренняя Зелёная магистраль",
+      "level": 2
+    },
+    {
+      "id": "L2-ORANGE",
+      "label": "Оранжевая магистраль",
+      "level": 2
+    },
+    {
+      "id": "L2-PLAZA",
+      "label": "Главная площадь",
+      "level": 2
+    },
+    {
+      "id": "L2-GALLERY",
+      "label": "Жилая галерея над Главной площадью",
+      "level": 2
+    },
+    {
+      "id": "L2-CABINS",
+      "label": "Детские каюты",
+      "level": 2
+    },
+    {
+      "id": "L2-CAFE",
+      "label": "Кафе и магазины",
+      "level": 2
+    },
+    {
+      "id": "L2-T06",
+      "label": "Шестые туннели",
+      "level": 2
+    },
+    {
+      "id": "L2-T17",
+      "label": "Семнадцатые туннели",
+      "level": 2
+    },
+    {
+      "id": "L2-SCHOOL",
+      "label": "Школа / экзаменационный блок",
+      "level": 2
+    },
+    {
+      "id": "L3-INNER",
+      "label": "Внутренний круг Верхнего уровня",
+      "level": 3
+    },
+    {
+      "id": "L3-OUTER",
+      "label": "Внешний круг Верхнего уровня",
+      "level": 3
+    },
+    {
+      "id": "L3-BRIDGE",
+      "label": "Капитанская рубка",
+      "level": 3
+    },
+    {
+      "id": "L3-CREW",
+      "label": "Каюты персонала",
+      "level": 3
+    },
+    {
+      "id": "L3-CHILD-LAB",
+      "label": "Детский блок / кувезы",
+      "level": 3
+    },
+    {
+      "id": "L3-REST",
+      "label": "Круглый зал отдыха",
+      "level": 3
+    },
+    {
+      "id": "L3-STORE",
+      "label": "Склады, включая постельное бельё",
+      "level": 3
+    },
+    {
+      "id": "L3-DOCK",
+      "label": "Шлюзы и ангары грузовых крейсеров",
+      "level": 3
+    },
+    {
+      "id": "L3-PRODUCTION",
+      "label": "Производственные отсеки",
+      "level": 3
+    },
+    {
+      "id": "L3-SERVICE",
+      "label": "Коридоры для роботов-погрузчиков",
+      "level": 3
+    },
+    {
+      "id": "CORE-ENERGY",
+      "label": "Центральный энергомодуль",
+      "level": null
+    },
+    {
+      "id": "L1-ANGAR-ADJ",
+      "label": "Соседний ангар Нижнего уровня",
+      "level": 1
+    },
+    {
+      "id": "L1-OPERATORS-ADJ",
+      "label": "Диспетчерская соседнего ангара",
+      "level": 1
+    },
+    {
+      "id": "L1-ANGAR-OTHER",
+      "label": "Дополнительные заброшенные ангары",
+      "level": 1
+    },
+    {
+      "id": "L3-FREIGHT-LIFTS",
+      "label": "Грузовые лифты Третьего уровня",
+      "level": 3
+    },
+    {
+      "id": "L3-CARGO-HALL",
+      "label": "Просторный грузовой зал у производства",
+      "level": 3
+    },
+    {
+      "id": "L3-SUIT-ALCOVE",
+      "label": "Отсек со скафандрами",
+      "level": 3
+    },
+    {
+      "id": "L3-WORKSHOP-DOOR",
+      "label": "Белые двери производственного цеха",
+      "level": 3
+    },
+    {
+      "id": "L1-LOWER-SHAFT",
+      "label": "Вертикальная шахта с промежуточным боковым ответвлением",
+      "level": null
+    },
+    {
+      "id": "SUB-LOWER-WELL",
+      "label": "Неизвестное помещение ниже обитаемой части Нижнего уровня",
+      "level": null
+    },
+    {
+      "id": "SUB-SEALED-DOOR",
+      "label": "Двойная дверь в нижнем колодце",
+      "level": null
+    },
+    {
+      "id": "SUB-WELDED-WALL",
+      "label": "Запаянный проход напротив двери в нижнем колодце",
+      "level": null
+    },
+    {
+      "id": "L1-OLD-FREIGHT-HANGAR",
+      "label": "Старый закрытый грузовой ангар Нижнего уровня",
+      "level": 1
+    },
+    {
+      "id": "L1-OLD-PROF-CABINS",
+      "label": "Заброшенные каюты вблизи старого ангарного комплекса",
+      "level": 1
+    },
+    {
+      "id": "L1-CIRCULAR-HALL",
+      "label": "Высокий круглый зал в закрытом секторе",
+      "level": 1
+    },
+    {
+      "id": "L1-HALL-STEPS",
+      "label": "Местный ступенчатый переход к круглому залу",
+      "level": 1
+    },
+    {
+      "id": "L1-SLEEPING-HANGAR",
+      "label": "Большой ангар со спящими изменившимися взрослыми",
+      "level": 1
+    },
+    {
+      "id": "L1-CIRCULAR-UPPER-WALK",
+      "label": "Верхний металлический мостик круглого зала",
+      "level": 1
+    },
+    {
+      "id": "L1-CIRCULAR-STAIRS",
+      "label": "Повреждённая лестница к верхнему мостику",
+      "level": 1
+    },
+    {
+      "id": "L1-CIRCULAR-CONTROL",
+      "label": "Помещение ручного управления шлюзами за мостиком",
+      "level": 1
+    },
+    {
+      "id": "L1-CIRCULAR-QUARTERS",
+      "label": "Жилая комната за операторской",
+      "level": 1
+    },
+    {
+      "id": "L1-LOWER-BLOCK-STRATA",
+      "label": "Локальные высотные ярусы Нижнего блока",
+      "level": 1
+    },
+    {
+      "id": "L3-ISOLATION-TRIDENT",
+      "label": "Трёхлучевая развилка у внешнего круга",
+      "level": 3
+    },
+    {
+      "id": "L3-ISOLATION-CELL",
+      "label": "Помещение изоляции перед освобождением детей",
+      "level": 3
+    },
+    {
+      "id": "L3-LIFT-PLATFORM",
+      "label": "Круглая грузовая площадка у лифта",
+      "level": 3
+    },
+    {
+      "id": "LINK-LIFT-SHAFT",
+      "label": "Лифтовая шахта с аварийным выходом на Нижний",
+      "level": null
+    },
+    {
+      "id": "L1-LIFT-SHAFT-EXIT",
+      "label": "Тёмный проём шахты у мусоропереработки",
+      "level": 1
+    },
+    {
+      "id": "L2-WET-LAUNDRY",
+      "label": "Ванная и встроенная прачечная жилой каюты",
+      "level": 2
+    },
+    {
+      "id": "L2-NURSERY",
+      "label": "Детский сад Второго уровня",
+      "level": 2
+    },
+    {
+      "id": "L2-INFANT-PLAY",
+      "label": "Игровая младшего отделения",
+      "level": 2
+    },
+    {
+      "id": "L2-INFANT-YARD",
+      "label": "Прогулочная площадка младшего отделения",
+      "level": 2
+    },
+    {
+      "id": "L2-INFANT-NEW",
+      "label": "Комнаты для новорождённых",
+      "level": 2
+    },
+    {
+      "id": "L1-BASES-HISTORIC-NUMBERS",
+      "label": "Старые военно-служебные базы №3 и №4 (надписи замков)",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-REMOTE-BED",
+      "label": "Удалённая маленькая спальня Ильи и Кати",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-KIDS-SLEEP",
+      "label": "Спальня Маши с тремя младшими детьми",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-KITCHEN-WATER",
+      "label": "Водозабор и место мытья посуды на Темной базе",
+      "level": 1
+    },
+    {
+      "id": "L3-LIFTS-DE",
+      "label": "Лифты Д и Е у отдалённых коридоров Третьего",
+      "level": 3
+    },
+    {
+      "id": "L3-CARGO-RECEIVING",
+      "label": "Платформа приёмки грузов Третьего",
+      "level": 3
+    },
+    {
+      "id": "L1-DARK-UPPER-PERIMETER",
+      "label": "Узкая галерея по периметру общего помещения Темной базы",
+      "level": 1
+    },
+    {
+      "id": "L1-STRAIGHT-FREIGHT",
+      "label": "Отдельный широкий ПРЯМОЙ грузовой коридор",
+      "level": 1
+    },
+    {
+      "id": "L1-ENG-CABLE-NICHES",
+      "label": "Узкие коммуникационные ниши с трубами и разноцветными кабелями",
+      "level": 1
+    },
+    {
+      "id": "LINK-LIFT-L2-L1",
+      "label": "Официальный лифт между Вторым и Нижним",
+      "level": null
+    },
+    {
+      "id": "L1-DARK-ENTRY-DOOR",
+      "label": "Двухстворчатая стальная дверь внешней границы Темной базы",
+      "level": 1
+    },
+    {
+      "id": "L2-RESIDENTIAL-RING",
+      "label": "Кольцевой двухэтажный жилой блок Второго",
+      "level": 2
+    },
+    {
+      "id": "L2-RESIDENTIAL-UPPER",
+      "label": "Верхний этаж кают внутри жилого кольца",
+      "level": 2
+    },
+    {
+      "id": "L2-RESIDENTIAL-LOWER",
+      "label": "Нижний торгово-игровой этаж жилого кольца",
+      "level": 2
+    },
+    {
+      "id": "L1-BASE-COMMON-COOK-TABLE",
+      "label": "Стол приготовления пищи на Темной базе",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-COMMON-DINE-TABLE",
+      "label": "Стол приёма пищи на Темной базе",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-OUTER-GATE",
+      "label": "Внешняя тяжёлая створчатая дверь к коридору баз",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-INNER-GATE",
+      "label": "Внутренняя дверь собственно Темной базы",
+      "level": 1
+    },
+    {
+      "id": "L1-BASE-CORRIDOR-STORES",
+      "label": "Малые кладовые в дальнем конце коридора баз",
+      "level": 1
+    },
+    {
+      "id": "L3-INNER-SECTOR-GATE",
+      "label": "Опускающаяся вниз дверь внутреннего круга Третьего",
+      "level": 3
+    },
+    {
+      "id": "L3-CHILD-LAB-ENTRANCE",
+      "label": "Двойные двери и арочный проход к детскому блоку",
+      "level": 3
+    },
+    {
+      "id": "L3-UP-ACCESS-LOBBY",
+      "label": "Тёмный служебный переход после люка с Нижнего",
+      "level": 3
+    },
+    {
+      "id": "L3-REST-UPPER-GALLERY",
+      "label": "Периметральная верхняя галерея круглого зала отдыха",
+      "level": 3
+    },
+    {
+      "id": "L3-REST-UPPER-STAIRS",
+      "label": "Лестница на галерею Третьего зала отдыха",
+      "level": 3
+    },
+    {
+      "id": "L3-REST-GALLERY-DEADEND",
+      "label": "Тупиковые коридоры и ДНК-двери верхней галереи",
+      "level": 3
+    },
+    {
+      "id": "L3-UPPER-VENT-ESCAPE",
+      "label": "Низкая вентиляция Третьего для скрытого спуска",
+      "level": 3
+    },
+    {
+      "id": "L2-VENT-LOW-GRILLE",
+      "label": "Вентиляционная решётка Второго около пола",
+      "level": 2
+    },
+    {
+      "id": "L1-RETURN-FORK",
+      "label": "Двухпутная развилка возвращения к Нижним базам",
+      "level": 1
+    },
+    {
+      "id": "L1-OVAL-PAINTED",
+      "label": "Художественно расписанный интерьер Овальной базы",
+      "level": 1
+    },
+    {
+      "id": "L3-ADULT-RETREAT-SUITE",
+      "label": "Взрослая каюта за дверью с проверкой ДНК",
+      "level": 3
+    },
+    {
+      "id": "L3-ADULT-RETREAT-LIVING",
+      "label": "Просторная общая комната взрослой каюты",
+      "level": 3
+    },
+    {
+      "id": "L3-ADULT-RETREAT-WET",
+      "label": "Ванная взрослой каюты с коричневой плиткой",
+      "level": 3
+    },
+    {
+      "id": "L3-ADULT-RETREAT-BED",
+      "label": "Спальня взрослой каюты с широкой кроватью",
+      "level": 3
+    },
+    {
+      "id": "L3-DNA-HUMAN-LOCKS",
+      "label": "Переоборудованные дверные замки внутреннего круга",
+      "level": 3
+    },
+    {
+      "id": "L3-ARCHIVE-PLAN-SET",
+      "label": "Архивный видеокомплекс в каюте штурмана",
+      "level": 3
+    },
+    {
+      "id": "L3-STAFF-FOOD-STORES",
+      "label": "Кладовая провизии вне закрытого внутреннего круга",
+      "level": 3
+    },
+    {
+      "id": "L1-BOAT-LOCK-OUTER-HATCH",
+      "label": "Наружный круглый выход нижней шлюзовой камеры с треугольными створками",
+      "level": 1
+    },
+    {
+      "id": "L3-MAIN-LIFTS-HALL",
+      "label": "Широкий коридор главных лифтов Третьего",
+      "level": 3
+    },
+    {
+      "id": "L3-ENERGY-APPROACH",
+      "label": "Узкий проход к энергомодулю за Детским блоком",
+      "level": 3
+    },
+    {
+      "id": "L3-ENERGY-GATE",
+      "label": "Защищенная сдвижная дверь энергокамеры",
+      "level": 3
+    },
+    {
+      "id": "CORE-ENERGY-SHAFT",
+      "label": "Круглый центральный инженерный объем трёх уровней",
+      "level": null
+    },
+    {
+      "id": "CORE-ENERGY-GALLERY",
+      "label": "Кольцевая огражденная галерея центрального энергомодуля",
+      "level": 3
+    },
+    {
+      "id": "CORE-ENERGY-ACCESS",
+      "label": "Логический маршрут допуска к энергокамере (не дополнительный коридор)",
+      "level": 3
+    },
+    {
+      "id": "CORE-ENERGY-ACCESS-STEPS",
+      "label": "Локальные ступени выхода из кольцевой энергетической галереи",
+      "level": 3
+    },
+    {
+      "id": "L3-MEDICAL-ROOM",
+      "label": "Медицинский диагностический отсек Третьего уровня",
+      "level": 3
+    }
+  ],
+  "relationships": [
+    {
+      "id": "E01",
+      "from": "L1",
+      "to": "L1-INNER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E02",
+      "from": "L1",
+      "to": "L1-OUTER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E03",
+      "from": "L1",
+      "to": "L1-BASES",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06",
+        "B2-01"
+      ]
+    },
+    {
+      "id": "E04",
+      "from": "L1",
+      "to": "L1-HANGAR-ZONE",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-14"
+      ]
+    },
+    {
+      "id": "E05",
+      "from": "L1",
+      "to": "L1-RECYCLING",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E06",
+      "from": "L1",
+      "to": "L1-SEALED",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E07",
+      "from": "L1-BASES",
+      "to": "L1-TEMNAYA",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-10"
+      ]
+    },
+    {
+      "id": "E08",
+      "from": "L1-BASES",
+      "to": "L1-OVAL",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E09",
+      "from": "L1-BASES",
+      "to": "L1-WILD",
+      "relation": "includes",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B1-10"
+      ]
+    },
+    {
+      "id": "E10",
+      "from": "L1-BASES",
+      "to": "L1-INNER",
+      "relation": "links_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E11",
+      "from": "L1-TEMNAYA",
+      "to": "L1-BASE-COMMON",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-13"
+      ]
+    },
+    {
+      "id": "E12",
+      "from": "L1-TEMNAYA",
+      "to": "L1-BASE-SLEEP",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-10",
+        "B1-13"
+      ]
+    },
+    {
+      "id": "E13",
+      "from": "L1-TEMNAYA",
+      "to": "L1-BASE-WET",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-02"
+      ]
+    },
+    {
+      "id": "E14",
+      "from": "L1-BASE-COMMON",
+      "to": "L1-BASE-SLEEP",
+      "relation": "stairs_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-10"
+      ]
+    },
+    {
+      "id": "E15",
+      "from": "L1-BASES",
+      "to": "L2-CABINS",
+      "relation": "under",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E16",
+      "from": "L1-RECYCLING",
+      "to": "L1-STAIR-UP",
+      "relation": "behind_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E17",
+      "from": "L1-STAIR-UP",
+      "to": "L3-OUTER",
+      "relation": "connects_vertical",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B1-14"
+      ]
+    },
+    {
+      "id": "E18",
+      "from": "L1-VENT",
+      "to": "L2-ORANGE",
+      "relation": "connects_vertical",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B1-02",
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E19",
+      "from": "L1-HANGAR-ZONE",
+      "to": "L1-ANGAR-HALL",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-14"
+      ]
+    },
+    {
+      "id": "E20",
+      "from": "L1-ANGAR-HALL",
+      "to": "L1-ANGAR",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-14"
+      ]
+    },
+    {
+      "id": "E21",
+      "from": "L1-ANGAR",
+      "to": "L1-OPERATORS",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-14"
+      ]
+    },
+    {
+      "id": "E22",
+      "from": "L1-ANGAR",
+      "to": "L1-BOAT-LOCK",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-14"
+      ]
+    },
+    {
+      "id": "E23",
+      "from": "L1-BASES",
+      "to": "L1-HANGAR-ZONE",
+      "relation": "separate_sector",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-14"
+      ]
+    },
+    {
+      "id": "E24",
+      "from": "L2",
+      "to": "L2-GREEN",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E25",
+      "from": "L2",
+      "to": "L2-ORANGE",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E26",
+      "from": "L2",
+      "to": "L2-PLAZA",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-03"
+      ]
+    },
+    {
+      "id": "E27",
+      "from": "L2-ORANGE",
+      "to": "L2-GREEN",
+      "relation": "tunnel_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E28",
+      "from": "L2-GREEN",
+      "to": "L2-PLAZA",
+      "relation": "adjoins",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E29",
+      "from": "L2-GALLERY",
+      "to": "L2-PLAZA",
+      "relation": "overlooks",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-03"
+      ]
+    },
+    {
+      "id": "E30",
+      "from": "L2-GALLERY",
+      "to": "L2-CABINS",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-03"
+      ]
+    },
+    {
+      "id": "E31",
+      "from": "L2-GREEN",
+      "to": "L2-T06",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E32",
+      "from": "L2-ORANGE",
+      "to": "L2-T17",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E33",
+      "from": "L2-T06",
+      "to": "L2-CAFE",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E34",
+      "from": "L3",
+      "to": "L3-INNER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-15"
+      ]
+    },
+    {
+      "id": "E35",
+      "from": "L3",
+      "to": "L3-OUTER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E36",
+      "from": "L3-INNER",
+      "to": "L3-BRIDGE",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E37",
+      "from": "L3-INNER",
+      "to": "L3-CREW",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E38",
+      "from": "L3-INNER",
+      "to": "L3-CHILD-LAB",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-15"
+      ]
+    },
+    {
+      "id": "E39",
+      "from": "L3-INNER",
+      "to": "L3-REST",
+      "relation": "route_to",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B1-15"
+      ]
+    },
+    {
+      "id": "E40",
+      "from": "L3-OUTER",
+      "to": "L3-SERVICE",
+      "relation": "branches_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-14"
+      ]
+    },
+    {
+      "id": "E41",
+      "from": "L3-SERVICE",
+      "to": "L3-DOCK",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-14"
+      ]
+    },
+    {
+      "id": "E42",
+      "from": "L3-SERVICE",
+      "to": "L3-PRODUCTION",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-14"
+      ]
+    },
+    {
+      "id": "E43",
+      "from": "L1-VENT",
+      "to": "L3-INNER",
+      "relation": "aligned_with",
+      "state": "RECHECK_REQUIRED",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E44",
+      "from": "L1-INNER",
+      "to": "L2-GREEN",
+      "relation": "same_ring_logic",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-06"
+      ]
+    },
+    {
+      "id": "E45",
+      "from": "L1-HANGAR-ZONE",
+      "to": "L1-ANGAR-ADJ",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-15"
+      ]
+    },
+    {
+      "id": "E46",
+      "from": "L1-ANGAR-HALL",
+      "to": "L1-ANGAR-ADJ",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-15"
+      ]
+    },
+    {
+      "id": "E47",
+      "from": "L1-ANGAR-ADJ",
+      "to": "L1-OPERATORS-ADJ",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-15"
+      ]
+    },
+    {
+      "id": "E48",
+      "from": "L1-OPERATORS",
+      "to": "L1-OPERATORS-ADJ",
+      "relation": "internally_connected",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-15"
+      ]
+    },
+    {
+      "id": "E49",
+      "from": "L1-ANGAR-ADJ",
+      "to": "L1-ANGAR",
+      "relation": "craft_movement_via_hall",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-15"
+      ]
+    },
+    {
+      "id": "E50",
+      "from": "L1-HANGAR-ZONE",
+      "to": "L1-ANGAR-OTHER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-15"
+      ]
+    },
+    {
+      "id": "E51",
+      "from": "L3-FREIGHT-LIFTS",
+      "to": "L3-BRIDGE",
+      "relation": "corridor_near",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B2-13"
+      ]
+    },
+    {
+      "id": "E52",
+      "from": "L3-CARGO-HALL",
+      "to": "L3-WORKSHOP-DOOR",
+      "relation": "adjoins",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-13"
+      ]
+    },
+    {
+      "id": "E53",
+      "from": "L3-WORKSHOP-DOOR",
+      "to": "L3-PRODUCTION",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B2-13"
+      ]
+    },
+    {
+      "id": "E54",
+      "from": "L3-CARGO-HALL",
+      "to": "L3-SUIT-ALCOVE",
+      "relation": "near",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B2-13"
+      ]
+    },
+    {
+      "id": "E55",
+      "from": "L1-LOWER-SHAFT",
+      "to": "L1-BASES",
+      "relation": "mid_branch_to",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E56",
+      "from": "L1-LOWER-SHAFT",
+      "to": "SUB-LOWER-WELL",
+      "relation": "lower_terminus_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E57",
+      "from": "SUB-LOWER-WELL",
+      "to": "L1",
+      "relation": "below",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E58",
+      "from": "SUB-LOWER-WELL",
+      "to": "SUB-SEALED-DOOR",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E59",
+      "from": "SUB-LOWER-WELL",
+      "to": "SUB-WELDED-WALL",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E60",
+      "from": "L1-OLD-PROF-CABINS",
+      "to": "L1-OLD-FREIGHT-HANGAR",
+      "relation": "near",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B1-19"
+      ]
+    },
+    {
+      "id": "E61",
+      "from": "L1-OLD-FREIGHT-HANGAR",
+      "to": "L3-DOCK",
+      "relation": "superseded_by",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-19"
+      ]
+    },
+    {
+      "id": "E62",
+      "from": "L1-SEALED",
+      "to": "L1-CIRCULAR-HALL",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E63",
+      "from": "L1-SEALED",
+      "to": "L1-SLEEPING-HANGAR",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E64",
+      "from": "L1-HALL-STEPS",
+      "to": "L1-CIRCULAR-HALL",
+      "relation": "steps_down_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E65",
+      "from": "L1-SEALED",
+      "to": "L1-OLD-PROF-CABINS",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E66",
+      "from": "L1-CIRCULAR-HALL",
+      "to": "L1-CIRCULAR-UPPER-WALK",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E67",
+      "from": "L1-CIRCULAR-HALL",
+      "to": "L1-CIRCULAR-STAIRS",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E68",
+      "from": "L1-CIRCULAR-STAIRS",
+      "to": "L1-CIRCULAR-UPPER-WALK",
+      "relation": "vertical_access",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E69",
+      "from": "L1-CIRCULAR-UPPER-WALK",
+      "to": "L1-CIRCULAR-CONTROL",
+      "relation": "door_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E70",
+      "from": "L1-CIRCULAR-CONTROL",
+      "to": "L1-CIRCULAR-QUARTERS",
+      "relation": "door_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E71",
+      "from": "L1-CIRCULAR-UPPER-WALK",
+      "to": "L1-CIRCULAR-HALL",
+      "relation": "above",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E72",
+      "from": "L1-LOWER-BLOCK-STRATA",
+      "to": "L1-CIRCULAR-UPPER-WALK",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E73",
+      "from": "L1-LOWER-BLOCK-STRATA",
+      "to": "L1-OPERATORS",
+      "relation": "includes",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E74",
+      "from": "L3-OUTER",
+      "to": "L3-ISOLATION-TRIDENT",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-022"
+      ]
+    },
+    {
+      "id": "E75",
+      "from": "L3-ISOLATION-TRIDENT",
+      "to": "L3-STORE",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-022"
+      ]
+    },
+    {
+      "id": "E76",
+      "from": "L3-ISOLATION-TRIDENT",
+      "to": "L3-ISOLATION-CELL",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-022"
+      ]
+    },
+    {
+      "id": "E77",
+      "from": "L3-ISOLATION-CELL",
+      "to": "L3-LIFT-PLATFORM",
+      "relation": "escape_route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-022"
+      ]
+    },
+    {
+      "id": "E78",
+      "from": "L3-LIFT-PLATFORM",
+      "to": "LINK-LIFT-SHAFT",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-023"
+      ]
+    },
+    {
+      "id": "E79",
+      "from": "LINK-LIFT-SHAFT",
+      "to": "L1-LIFT-SHAFT-EXIT",
+      "relation": "emergency_vertical_exit",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-023"
+      ]
+    },
+    {
+      "id": "E80",
+      "from": "L1-LIFT-SHAFT-EXIT",
+      "to": "L1-RECYCLING",
+      "relation": "near_route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-023"
+      ]
+    },
+    {
+      "id": "E81",
+      "from": "L2-CABINS",
+      "to": "L2-WET-LAUNDRY",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-024"
+      ]
+    },
+    {
+      "id": "E82",
+      "from": "L2",
+      "to": "L2-NURSERY",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-025"
+      ]
+    },
+    {
+      "id": "E83",
+      "from": "L2-NURSERY",
+      "to": "L2-INFANT-PLAY",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-025"
+      ]
+    },
+    {
+      "id": "E84",
+      "from": "L2-INFANT-PLAY",
+      "to": "L2-INFANT-YARD",
+      "relation": "door_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-026"
+      ]
+    },
+    {
+      "id": "E85",
+      "from": "L2-NURSERY",
+      "to": "L2-INFANT-NEW",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-026"
+      ]
+    },
+    {
+      "id": "E86",
+      "from": "L1-BASES",
+      "to": "L1-BASES-HISTORIC-NUMBERS",
+      "relation": "historic_naming",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-028"
+      ]
+    },
+    {
+      "id": "E87",
+      "from": "L1-TEMNAYA",
+      "to": "L1-BASE-REMOTE-BED",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-028"
+      ]
+    },
+    {
+      "id": "E88",
+      "from": "L1-TEMNAYA",
+      "to": "L1-BASE-KIDS-SLEEP",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-028"
+      ]
+    },
+    {
+      "id": "E89",
+      "from": "L1-BASE-COMMON",
+      "to": "L1-BASE-KITCHEN-WATER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-029"
+      ]
+    },
+    {
+      "id": "E90",
+      "from": "L3-LIFTS-DE",
+      "to": "L3-CARGO-RECEIVING",
+      "relation": "farthest_lifts_from",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-032"
+      ]
+    },
+    {
+      "id": "E91",
+      "from": "L1-BASE-COMMON",
+      "to": "L1-DARK-UPPER-PERIMETER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-049"
+      ]
+    },
+    {
+      "id": "E92",
+      "from": "L1-DARK-UPPER-PERIMETER",
+      "to": "L1-BASE-SLEEP",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-050"
+      ]
+    },
+    {
+      "id": "E93",
+      "from": "L1-DARK-UPPER-PERIMETER",
+      "to": "L1-BASE-COMMON",
+      "relation": "above_floor",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-049"
+      ]
+    },
+    {
+      "id": "E94",
+      "from": "L1-ENG-CABLE-NICHES",
+      "to": "L1-STRAIGHT-FREIGHT",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-044"
+      ]
+    },
+    {
+      "id": "E95",
+      "from": "L1-DARK-ENTRY-DOOR",
+      "to": "L1-ENG-CABLE-NICHES",
+      "relation": "path_with_corridors_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-045"
+      ]
+    },
+    {
+      "id": "E96",
+      "from": "L1-BASES",
+      "to": "L1-DARK-ENTRY-DOOR",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-045"
+      ]
+    },
+    {
+      "id": "E97",
+      "from": "L2",
+      "to": "LINK-LIFT-L2-L1",
+      "relation": "elevator_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-047"
+      ]
+    },
+    {
+      "id": "E98",
+      "from": "LINK-LIFT-L2-L1",
+      "to": "L1",
+      "relation": "elevator_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-047"
+      ]
+    },
+    {
+      "id": "E99",
+      "from": "L1-STRAIGHT-FREIGHT",
+      "to": "L1-ANGAR-HALL",
+      "relation": "possibly_same_sector",
+      "state": "RECHECK_REQUIRED",
+      "source_ids": [
+        "LR-B1-044"
+      ]
+    },
+    {
+      "id": "E100",
+      "from": "L2",
+      "to": "L2-RESIDENTIAL-RING",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-056"
+      ]
+    },
+    {
+      "id": "E101",
+      "from": "L2-RESIDENTIAL-RING",
+      "to": "L2-RESIDENTIAL-UPPER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-056"
+      ]
+    },
+    {
+      "id": "E102",
+      "from": "L2-RESIDENTIAL-RING",
+      "to": "L2-RESIDENTIAL-LOWER",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-056"
+      ]
+    },
+    {
+      "id": "E103",
+      "from": "L2-RESIDENTIAL-UPPER",
+      "to": "L2-RESIDENTIAL-LOWER",
+      "relation": "above",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-056"
+      ]
+    },
+    {
+      "id": "E104",
+      "from": "L2-RESIDENTIAL-RING",
+      "to": "L2-GREEN",
+      "relation": "encircles",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-056"
+      ]
+    },
+    {
+      "id": "E105",
+      "from": "L2-RESIDENTIAL-UPPER",
+      "to": "L2-CABINS",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-056"
+      ]
+    },
+    {
+      "id": "E106",
+      "from": "L2-RESIDENTIAL-LOWER",
+      "to": "L2-ORANGE",
+      "relation": "tunnels_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-056"
+      ]
+    },
+    {
+      "id": "E107",
+      "from": "L1-BASE-COMMON",
+      "to": "L1-BASE-COMMON-COOK-TABLE",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-052"
+      ]
+    },
+    {
+      "id": "E108",
+      "from": "L1-BASE-COMMON",
+      "to": "L1-BASE-COMMON-DINE-TABLE",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-052"
+      ]
+    },
+    {
+      "id": "E109",
+      "from": "L1-BASES",
+      "to": "L1-BASE-OUTER-GATE",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-055"
+      ]
+    },
+    {
+      "id": "E110",
+      "from": "L1-BASE-OUTER-GATE",
+      "to": "L1-BASE-INNER-GATE",
+      "relation": "sequential_security_barrier",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-055"
+      ]
+    },
+    {
+      "id": "E111",
+      "from": "L1-BASES",
+      "to": "L1-BASE-CORRIDOR-STORES",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-055"
+      ]
+    },
+    {
+      "id": "E112",
+      "from": "L3-INNER",
+      "to": "L3-INNER-SECTOR-GATE",
+      "relation": "access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-060"
+      ]
+    },
+    {
+      "id": "E113",
+      "from": "L3-INNER-SECTOR-GATE",
+      "to": "L3-CHILD-LAB-ENTRANCE",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-060"
+      ]
+    },
+    {
+      "id": "E114",
+      "from": "L3-CHILD-LAB-ENTRANCE",
+      "to": "L3-CHILD-LAB",
+      "relation": "door_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-060"
+      ]
+    },
+    {
+      "id": "E115",
+      "from": "L1-STAIR-UP",
+      "to": "L3-UP-ACCESS-LOBBY",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-059"
+      ]
+    },
+    {
+      "id": "E116",
+      "from": "L3-UP-ACCESS-LOBBY",
+      "to": "L3-INNER",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-059"
+      ]
+    },
+    {
+      "id": "E117",
+      "from": "L3-INNER",
+      "to": "L3-OUTER",
+      "relation": "corridor_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-059"
+      ]
+    },
+    {
+      "id": "E118",
+      "from": "L3-OUTER",
+      "to": "L3-DOCK",
+      "relation": "route_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-059"
+      ]
+    },
+    {
+      "id": "E119",
+      "from": "L3-REST",
+      "to": "L3-REST-UPPER-GALLERY",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-61"
+      ]
+    },
+    {
+      "id": "E120",
+      "from": "L3-REST",
+      "to": "L3-REST-UPPER-STAIRS",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-61"
+      ]
+    },
+    {
+      "id": "E121",
+      "from": "L3-REST-UPPER-STAIRS",
+      "to": "L3-REST-UPPER-GALLERY",
+      "relation": "stairs_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-61"
+      ]
+    },
+    {
+      "id": "E122",
+      "from": "L3-REST-UPPER-GALLERY",
+      "to": "L3-REST-GALLERY-DEADEND",
+      "relation": "branches_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-61"
+      ]
+    },
+    {
+      "id": "E123",
+      "from": "L3-REST-UPPER-GALLERY",
+      "to": "L3-REST",
+      "relation": "above_floor",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-61"
+      ]
+    },
+    {
+      "id": "E124",
+      "from": "L3-REST-GALLERY-DEADEND",
+      "to": "L3-UPPER-VENT-ESCAPE",
+      "relation": "route_with_turns_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-63"
+      ]
+    },
+    {
+      "id": "E125",
+      "from": "L3-UPPER-VENT-ESCAPE",
+      "to": "L2-VENT-LOW-GRILLE",
+      "relation": "vertical_duct_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-64"
+      ]
+    },
+    {
+      "id": "E126",
+      "from": "L2-VENT-LOW-GRILLE",
+      "to": "L2-CABINS",
+      "relation": "tunnel_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-64"
+      ]
+    },
+    {
+      "id": "E127",
+      "from": "L1-RETURN-FORK",
+      "to": "L1-BASES",
+      "relation": "right_short_left_long",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-65"
+      ]
+    },
+    {
+      "id": "E128",
+      "from": "L1-OVAL",
+      "to": "L1-OVAL-PAINTED",
+      "relation": "interior_has",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-65"
+      ]
+    },
+    {
+      "id": "E129",
+      "from": "L3-REST-GALLERY-DEADEND",
+      "to": "L3-ADULT-RETREAT-SUITE",
+      "relation": "biometric_door_to",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "LR-B1-067"
+      ]
+    },
+    {
+      "id": "E130",
+      "from": "L3-ADULT-RETREAT-SUITE",
+      "to": "L3-ADULT-RETREAT-LIVING",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-067"
+      ]
+    },
+    {
+      "id": "E131",
+      "from": "L3-ADULT-RETREAT-SUITE",
+      "to": "L3-ADULT-RETREAT-WET",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-067"
+      ]
+    },
+    {
+      "id": "E132",
+      "from": "L3-ADULT-RETREAT-SUITE",
+      "to": "L3-ADULT-RETREAT-BED",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-068"
+      ]
+    },
+    {
+      "id": "E133",
+      "from": "L3-ADULT-RETREAT-LIVING",
+      "to": "L3-ADULT-RETREAT-WET",
+      "relation": "door_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-067"
+      ]
+    },
+    {
+      "id": "E134",
+      "from": "L3-ADULT-RETREAT-LIVING",
+      "to": "L3-ADULT-RETREAT-BED",
+      "relation": "door_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-067"
+      ]
+    },
+    {
+      "id": "E135",
+      "from": "L3-INNER",
+      "to": "L3-DNA-HUMAN-LOCKS",
+      "relation": "historic_access_control",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-070"
+      ]
+    },
+    {
+      "id": "E136",
+      "from": "L3-INNER",
+      "to": "L3-STAFF-FOOD-STORES",
+      "relation": "historic_supply_expedition",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "LR-B1-070"
+      ]
+    },
+    {
+      "id": "E137",
+      "from": "L3-ADULT-RETREAT-LIVING",
+      "to": "L3-ARCHIVE-PLAN-SET",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B1-069"
+      ]
+    },
+    {
+      "id": "E138",
+      "from": "L1-BOAT-LOCK",
+      "to": "L1-BOAT-LOCK-OUTER-HATCH",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-021"
+      ]
+    },
+    {
+      "id": "E139",
+      "from": "L1-ANGAR",
+      "to": "L1-BOAT-LOCK",
+      "relation": "pressure_sealed_access_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-021"
+      ]
+    },
+    {
+      "id": "E140",
+      "from": "L1-BOAT-LOCK",
+      "to": "L1-ANGAR",
+      "relation": "comparable_spatial_volume_nonmetric",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-021"
+      ]
+    },
+    {
+      "id": "E141",
+      "from": "L3-BRIDGE",
+      "to": "L3-MAIN-LIFTS-HALL",
+      "relation": "route_via_two_turns",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-027"
+      ]
+    },
+    {
+      "id": "E142",
+      "from": "L3-MAIN-LIFTS-HALL",
+      "to": "L3-WORKSHOP-DOOR",
+      "relation": "route_to_production_gate",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-027"
+      ]
+    },
+    {
+      "id": "E143",
+      "from": "L3-CREW",
+      "to": "L3-CHILD-LAB",
+      "relation": "near_not_direct_door",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-026"
+      ]
+    },
+    {
+      "id": "E144",
+      "from": "L1-SEALED",
+      "to": "L1-ANGAR-HALL",
+      "relation": "access_route_by_old_corridor",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-017"
+      ]
+    },
+    {
+      "id": "E145",
+      "from": "L3-INNER",
+      "to": "L3-ENERGY-APPROACH",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E146",
+      "from": "L3-CHILD-LAB",
+      "to": "L3-ENERGY-APPROACH",
+      "relation": "behind_not_proven_direct_door",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E147",
+      "from": "L3-ENERGY-APPROACH",
+      "to": "L3-ENERGY-GATE",
+      "relation": "ends_at_door",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E148",
+      "from": "L3-ENERGY-GATE",
+      "to": "CORE-ENERGY-GALLERY",
+      "relation": "opens_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E149",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "CORE-ENERGY-GALLERY",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E150",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "CORE-ENERGY",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E151",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L1",
+      "relation": "spans_global_level",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E152",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L2",
+      "relation": "spans_global_level",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E153",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L3",
+      "relation": "spans_global_level",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E154",
+      "from": "CORE-ENERGY-GALLERY",
+      "to": "CORE-ENERGY",
+      "relation": "circumferential_overlook",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E155",
+      "from": "L3-CHILD-LAB",
+      "to": "CORE-ENERGY-ACCESS",
+      "relation": "behind_child_block_not_door",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E156",
+      "from": "CORE-ENERGY-ACCESS",
+      "to": "CORE-ENERGY-GALLERY",
+      "relation": "single_locked_door_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E158",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "CORE-ENERGY-GALLERY",
+      "relation": "gallery_at_upper_access",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E159",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L1",
+      "relation": "vertical_extent_in_level_no_access_proven",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E160",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L2",
+      "relation": "vertical_extent_in_level_no_access_proven",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E161",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L3",
+      "relation": "vertical_extent_in_level_no_access_proven",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E162",
+      "from": "CORE-ENERGY-GALLERY",
+      "to": "CORE-ENERGY",
+      "relation": "overlooks_transparent_energy_column",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    },
+    {
+      "id": "E163",
+      "from": "CORE-ENERGY-GALLERY",
+      "to": "CORE-ENERGY-ACCESS-STEPS",
+      "relation": "ascends_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-040"
+      ]
+    },
+    {
+      "id": "E164",
+      "from": "CORE-ENERGY-ACCESS-STEPS",
+      "to": "L3-ENERGY-GATE",
+      "relation": "leads_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-040"
+      ]
+    },
+    {
+      "id": "E165",
+      "from": "L3",
+      "to": "L3-MEDICAL-ROOM",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-042"
+      ]
+    },
+    {
+      "id": "E166",
+      "from": "L3-BRIDGE",
+      "to": "L3-MEDICAL-ROOM",
+      "relation": "reachable_via_third_corridors",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "LR-B2-042"
+      ]
+    },
+    {
+      "id": "E167",
+      "from": "CORE-ENERGY-ACCESS",
+      "to": "L3-ENERGY-APPROACH",
+      "relation": "alias_to_physical_corridor",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "LR-B2-034"
+      ]
+    }
+  ],
+  "construction_dag": [
+    {
+      "id": "P0_evidence",
+      "depends_on": []
+    },
+    {
+      "id": "P1_topology",
+      "depends_on": [
+        "P0_evidence"
+      ]
+    },
+    {
+      "id": "P2_schematic_skeleton",
+      "depends_on": [
+        "P1_topology"
+      ]
+    },
+    {
+      "id": "P3_geometric_constraints",
+      "depends_on": [
+        "P2_schematic_skeleton"
+      ]
+    },
+    {
+      "id": "P4_structural_frame",
+      "depends_on": [
+        "P3_geometric_constraints"
+      ]
+    },
+    {
+      "id": "P5_walls_slabs_partitions",
+      "depends_on": [
+        "P4_structural_frame"
+      ]
+    },
+    {
+      "id": "P6_openings",
+      "depends_on": [
+        "P5_walls_slabs_partitions"
+      ]
+    },
+    {
+      "id": "P7_finishes",
+      "depends_on": [
+        "P6_openings"
+      ]
+    },
+    {
+      "id": "P8_mep_and_equipment",
+      "depends_on": [
+        "P7_finishes"
+      ]
+    }
+  ],
+  "gates": {
+    "graph_validated": true,
+    "geometry_approved": false,
+    "apa_native_execute": false,
+    "scene_writer_write": false
+  },
+  "instructions": "Graph only. Do not issue CreateWalls/CreateSlabs or other native operations without independently accepted geometry and SceneWriter authorization.",
+  "station_identity_ref": "docs/research/apa-results/moag/v2/station_identity.json"
+}

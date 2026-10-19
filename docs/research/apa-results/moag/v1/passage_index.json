@@ -1,0 +1,596 @@
+{
+  "schema": "APA-MOAG-PASSAGE-INDEX/0.1",
+  "date": "2026-10-19",
+  "status": "FIRST_ANCHORS_NOT_EXHAUSTIVE",
+  "copyright_note": "Only short search locator phrases and original brief spatial paraphrases; no full copyrighted text.",
+  "passages": [
+    {
+      "id": "EV-001",
+      "source_id": "B1-06",
+      "locator_hint": "«Планов нет, но большие главные коридоры и вентиляционные шахты»",
+      "observation_type": "dialogue",
+      "paraphrase": "Всё три уровня повторяют главные коридоры и инженерную схему; утверждение НЕ задаёт радиусов.",
+      "node_refs": [
+        "L1-INNER",
+        "L1-OUTER",
+        "L1-VENT"
+      ],
+      "edge_refs": [
+        "E01",
+        "E02",
+        "E10",
+        "E44"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-002",
+      "source_id": "B1-06",
+      "locator_hint": "«Наши базы находятся в том месте, где на Втором уровне каюты детей»",
+      "observation_type": "dialogue",
+      "paraphrase": "Вертикальное районирование: базы Первого в зоне кают Второго, но границы неизвестны.",
+      "node_refs": [
+        "L1-BASES",
+        "L2-CABINS"
+      ],
+      "edge_refs": [
+        "E15"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-003",
+      "source_id": "B1-06",
+      "locator_hint": "«Только мы бывали на одной половине Нижнего уровня»",
+      "observation_type": "dialogue",
+      "paraphrase": "Первоначальная исследованная часть нижней системы — примерно половина, доступ к другой тогда не найден.",
+      "node_refs": [
+        "L1-SEALED"
+      ],
+      "edge_refs": [
+        "E06"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-004",
+      "source_id": "B1-06",
+      "locator_hint": "«Проход на Третий уровень – узкая, крутая лестница – находился за мусоркой»",
+      "observation_type": "narration",
+      "paraphrase": "Крутая служебная лестница расположена за цехом утилизации.",
+      "node_refs": [
+        "L1-RECYCLING",
+        "L1-STAIR-UP"
+      ],
+      "edge_refs": [
+        "E16"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-005",
+      "source_id": "B1-04",
+      "locator_hint": "«Оранжевая магистраль ... внутренняя Зеленая магистраль»",
+      "observation_type": "movement",
+      "paraphrase": "Пешеходный путь проходит с внешней Оранжевой во внутреннюю Зеленую через соединяющий туннель.",
+      "node_refs": [
+        "L2-ORANGE",
+        "L2-GREEN"
+      ],
+      "edge_refs": [
+        "E27"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-006",
+      "source_id": "B1-04",
+      "locator_hint": "«через Главную площадь. Наперерез. К шестым туннелям»",
+      "observation_type": "dialogue_and_movement",
+      "paraphrase": "Переход через Главную площадь к шестым туннелям; у шестых есть детская игровая зона.",
+      "node_refs": [
+        "L2-PLAZA",
+        "L2-T06"
+      ],
+      "edge_refs": [
+        "E31"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-007",
+      "source_id": "B1-04",
+      "locator_hint": "«От шестых туннелей короткий переход вел к популярным магазинчикам»",
+      "observation_type": "narration",
+      "paraphrase": "Шестые туннели соединены коротким переходом с рядом магазинов.",
+      "node_refs": [
+        "L2-T06",
+        "L2-CAFE"
+      ],
+      "edge_refs": [
+        "E33"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-008",
+      "source_id": "B1-03",
+      "locator_hint": "«галерею второго этажа ... внизу – Главная площадь и сад»",
+      "observation_type": "narration",
+      "paraphrase": "Жилая галерея расположена над уровнем Главной площади; видны сад и фонтан.",
+      "node_refs": [
+        "L2-GALLERY",
+        "L2-PLAZA"
+      ],
+      "edge_refs": [
+        "E29",
+        "E30"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-009",
+      "source_id": "B1-10",
+      "locator_hint": "«лестницы, ведущей в спальню»",
+      "observation_type": "narration",
+      "paraphrase": "В Темной базе есть лестница к отдельной спальне; не означает, что все спальни наверху.",
+      "node_refs": [
+        "L1-BASE-COMMON",
+        "L1-BASE-SLEEP"
+      ],
+      "edge_refs": [
+        "E14"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-010",
+      "source_id": "B1-13",
+      "locator_hint": "«Двери в спальни тут не запирали ... от примитивного обогревателя»",
+      "observation_type": "narration",
+      "paraphrase": "Спальни связаны с общим залом и зависят от общего обогревателя.",
+      "node_refs": [
+        "L1-BASE-COMMON",
+        "L1-BASE-SLEEP"
+      ],
+      "edge_refs": [
+        "E11",
+        "E12"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-011",
+      "source_id": "B1-15",
+      "locator_hint": "«внутреннем круге ... бежевые дорожки ... панели под дерево»",
+      "observation_type": "narration",
+      "paraphrase": "Интерьер внутреннего Третьего круга: криволинейные ходы, бежевые дорожки, декоративные светильники, панели под дерево и редкие двери со стеклом.",
+      "node_refs": [
+        "L3-INNER"
+      ],
+      "edge_refs": [
+        "E34"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-012",
+      "source_id": "B1-15",
+      "locator_hint": "«Детский блок ... большое помещение с высоким потолком»",
+      "observation_type": "movement",
+      "paraphrase": "Высокий зал с кувезами, автоматическими стеклянными дверьми и голограммами.",
+      "node_refs": [
+        "L3-CHILD-LAB"
+      ],
+      "edge_refs": [
+        "E38"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-013",
+      "source_id": "B1-15",
+      "locator_hint": "«Пересекая огромный круглый зал ... диваны ... искусственной светлой кожей»",
+      "observation_type": "movement",
+      "paraphrase": "Круглый зал отдыха с диванами и стеклянными светящимися столиками; не задаёт сектор на окружности.",
+      "node_refs": [
+        "L3-REST"
+      ],
+      "edge_refs": [
+        "E39"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-014",
+      "source_id": "B2-01",
+      "locator_hint": "«заброшенные базы Первого уровня предназначались для отряда спецназа»",
+      "observation_type": "narration",
+      "paraphrase": "Бывшее назначение баз — военный жилой фонд; ангары катеров размещались на Первом.",
+      "node_refs": [
+        "L1-BASES",
+        "L1-HANGAR-ZONE"
+      ],
+      "edge_refs": [
+        "E03",
+        "E04"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-015",
+      "source_id": "B2-14",
+      "locator_hint": "«Базы находятся на другой части Нижнего уровня»",
+      "observation_type": "dialogue",
+      "paraphrase": "Подтверждено функциональное разделение ангарного и жилого районов Нижнего уровня.",
+      "node_refs": [
+        "L1-BASES",
+        "L1-HANGAR-ZONE"
+      ],
+      "edge_refs": [
+        "E23"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-016",
+      "source_id": "B2-14",
+      "locator_hint": "«коридорчик ... вывел в широкий длинный проход к ангару с полукруглым сводом»",
+      "observation_type": "movement",
+      "paraphrase": "Ангарный доступ включает короткое ответвление и длинный широкий коридор с полукруглым сводом.",
+      "node_refs": [
+        "L1-ANGAR-HALL",
+        "L1-ANGAR"
+      ],
+      "edge_refs": [
+        "E19",
+        "E20"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-017",
+      "source_id": "B2-14",
+      "locator_hint": "«кабинки операторов, закрепленные почти под потолком»",
+      "observation_type": "narration",
+      "paraphrase": "Две высокие операторские зоны, подъем по металлической лестнице.",
+      "node_refs": [
+        "L1-ANGAR",
+        "L1-OPERATORS"
+      ],
+      "edge_refs": [
+        "E21"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-018",
+      "source_id": "B2-14",
+      "locator_hint": "«Перед выходом в шлюз стояли два катера»",
+      "observation_type": "narration",
+      "paraphrase": "В одном ангаре стоят два одноместных катера перед шлюзом.",
+      "node_refs": [
+        "L1-ANGAR",
+        "L1-BOAT-LOCK"
+      ],
+      "edge_refs": [
+        "E22"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-019",
+      "source_id": "B2-15",
+      "locator_hint": "«Диспетчерская здесь соединяется с диспетчерской соседнего ангара»",
+      "observation_type": "dialogue",
+      "paraphrase": "Прямое внутреннее сообщение двух операторских без выхода в общий ангарный коридор.",
+      "node_refs": [
+        "L1-OPERATORS",
+        "L1-OPERATORS-ADJ"
+      ],
+      "edge_refs": [
+        "E48"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-020",
+      "source_id": "B2-15",
+      "locator_hint": "«Еще три катера есть в соседнем ... свет ... не включается»",
+      "observation_type": "dialogue",
+      "paraphrase": "Отдельное соседнее помещение ангара с отключённым освещением и тремя катерами.",
+      "node_refs": [
+        "L1-ANGAR-ADJ"
+      ],
+      "edge_refs": [
+        "E45",
+        "E46"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-021",
+      "source_id": "B2-15",
+      "locator_hint": "«проплыла до открытых дверей работающего ангара»",
+      "observation_type": "movement",
+      "paraphrase": "Катер способен пройти через ангарный коридор в действующий ангар с малым запасом ширины.",
+      "node_refs": [
+        "L1-ANGAR-HALL",
+        "L1-ANGAR",
+        "L1-ANGAR-ADJ"
+      ],
+      "edge_refs": [
+        "E49"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-022",
+      "source_id": "B2-15",
+      "locator_hint": "«Добрались до следующей двери, за которой нашли целый ряд катеров»",
+      "observation_type": "movement",
+      "paraphrase": "В ангарной группе имеется как минимум еще один закрытый отсек с поврежденными аппаратами; точную идентичность ангаров уточнить.",
+      "node_refs": [
+        "L1-ANGAR-OTHER"
+      ],
+      "edge_refs": [
+        "E50"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-023",
+      "source_id": "B2-13",
+      "locator_hint": "«от грузовых лифтов ... коридора, ведущего к корабельной рубке»",
+      "observation_type": "movement",
+      "paraphrase": "Грузовые лифты расположены рядом с проходом к рубке; не означает непосредственного примыкания к рубке.",
+      "node_refs": [
+        "L3-FREIGHT-LIFTS",
+        "L3-BRIDGE"
+      ],
+      "edge_refs": [
+        "E51"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-024",
+      "source_id": "B2-13",
+      "locator_hint": "«просторный грузовой зал перед самыми дверьми цеха»",
+      "observation_type": "movement",
+      "paraphrase": "Грузовой зал примыкает к белым дверям закрытого производственного цеха.",
+      "node_refs": [
+        "L3-CARGO-HALL",
+        "L3-WORKSHOP-DOOR",
+        "L3-PRODUCTION"
+      ],
+      "edge_refs": [
+        "E52",
+        "E53"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-025",
+      "source_id": "B2-13",
+      "locator_hint": "«небольшом отсеке со скафандрами»",
+      "observation_type": "narration",
+      "paraphrase": "Небольшая ниша/отсек скафандров на маршруте рядом с производственными помещениями.",
+      "node_refs": [
+        "L3-SUIT-ALCOVE",
+        "L3-CARGO-HALL"
+      ],
+      "edge_refs": [
+        "E54"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-026",
+      "source_id": "B1-04",
+      "locator_hint": "Федор предупреждает о боковом отверстии на середине вертикального спуска",
+      "observation_type": "dialogue",
+      "paraphrase": "Железная шахта имеет промежуточный выход к обитаемому Нижнему уровню, падение ниже ведет в неизвестное помещение.",
+      "node_refs": [
+        "L1-LOWER-SHAFT",
+        "SUB-LOWER-WELL"
+      ],
+      "edge_refs": [
+        "E55",
+        "E56"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-027",
+      "source_id": "B1-04",
+      "locator_hint": "«чуть ниже нашего Нижнего уровня есть еще помещения»",
+      "observation_type": "dialogue",
+      "paraphrase": "Прямое доказательство дополнительных помещений ниже обитаемой части; точное число этажей не сообщено.",
+      "node_refs": [
+        "SUB-LOWER-WELL"
+      ],
+      "edge_refs": [
+        "E57"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-028",
+      "source_id": "B1-04",
+      "locator_hint": "Колодец, двойная дверь, запаянный проход напротив",
+      "observation_type": "narration",
+      "paraphrase": "На нижней отметке квадратный колодец с запертой двойной дверью и заваренным проходом.",
+      "node_refs": [
+        "SUB-SEALED-DOOR",
+        "SUB-WELDED-WALL"
+      ],
+      "edge_refs": [
+        "E58",
+        "E59"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-029",
+      "source_id": "B1-17",
+      "locator_hint": "После широкого коридора — зал со спящими фриками; далее отдельный круглый высокий зал",
+      "observation_type": "movement",
+      "paraphrase": "В закрытой части больше одного большого ангароподобного объема, не следует объединять.",
+      "node_refs": [
+        "L1-SLEEPING-HANGAR",
+        "L1-CIRCULAR-HALL"
+      ],
+      "edge_refs": [
+        "E62",
+        "E63"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-030",
+      "source_id": "B1-17",
+      "locator_hint": "Коля спустился «на пару ступенек вниз» перед круглым высоким залом",
+      "observation_type": "movement",
+      "paraphrase": "Локальное понижение отметки пола относительно коридора, не новый полноценный этаж.",
+      "node_refs": [
+        "L1-HALL-STEPS",
+        "L1-CIRCULAR-HALL"
+      ],
+      "edge_refs": [
+        "E64"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-031",
+      "source_id": "B1-19",
+      "locator_hint": "Профессор укрылся в закрытом старом ангаре; новые грузовые ангары на Третьем",
+      "observation_type": "narration_and_diary",
+      "paraphrase": "Историческое перепрофилирование: старые грузовые ангары нижнего сектора выведены из эксплуатации после новых на Верхнем.",
+      "node_refs": [
+        "L1-OLD-FREIGHT-HANGAR",
+        "L3-DOCK"
+      ],
+      "edge_refs": [
+        "E61"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-032",
+      "source_id": "B1-18",
+      "locator_hint": "Федор копирует с планшета Шереметьева подробные карты всех трёх уровней",
+      "observation_type": "narration",
+      "paraphrase": "Первоначальная фраза об отсутствии планов отражает прошлую ограниченность доступа; впоследствии карты найдены.",
+      "node_refs": [
+        "L1",
+        "L2",
+        "L3"
+      ],
+      "edge_refs": [],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-033",
+      "source_id": "B1-17",
+      "locator_hint": "Полукруглый коридор, каюты, склады, широкие ангарные двери",
+      "observation_type": "movement",
+      "paraphrase": "Жилые каюты, склады и ангары присутствуют в общей закрытой части Нижнего уровня.",
+      "node_refs": [
+        "L1-OLD-PROF-CABINS",
+        "L1-SEALED",
+        "L1-OLD-FREIGHT-HANGAR"
+      ],
+      "edge_refs": [
+        "E65"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-034",
+      "source_id": "B1-17",
+      "locator_hint": "Коля обнаруживает металлический мостик под потолком, остаток лестницы",
+      "observation_type": "character_movement_and_narration",
+      "paraphrase": "В круглом зале есть верхний полукруглый мостик по половине зала и повреждённый лестничный подъём.",
+      "node_refs": [
+        "L1-CIRCULAR-HALL",
+        "L1-CIRCULAR-UPPER-WALK",
+        "L1-CIRCULAR-STAIRS"
+      ],
+      "edge_refs": [
+        "E66",
+        "E67",
+        "E68",
+        "E71"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-035",
+      "source_id": "B1-17",
+      "locator_hint": "За дверью с мостика найдена комната с пультами ручного управления шлюзами",
+      "observation_type": "character_movement_and_narration",
+      "paraphrase": "Верхняя галерея приводит к отдельному техническому помещению с органами ручного управления шлюзами.",
+      "node_refs": [
+        "L1-CIRCULAR-UPPER-WALK",
+        "L1-CIRCULAR-CONTROL"
+      ],
+      "edge_refs": [
+        "E69"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    },
+    {
+      "id": "EV-036",
+      "source_id": "B1-17",
+      "locator_hint": "Из помещения управления далее в жилую комнату за второй дверью",
+      "observation_type": "character_movement_and_narration",
+      "paraphrase": "Жилая комнатка связана дверью с операторской; раковина в столе, лучевая печь, приборы, кожаный диван.",
+      "node_refs": [
+        "L1-CIRCULAR-CONTROL",
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "edge_refs": [
+        "E70"
+      ],
+      "verification": "TEXT_SEEN",
+      "absolute_coordinates": false
+    }
+  ]
+}

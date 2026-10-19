@@ -1,0 +1,24 @@
+{
+  "M-L2-EMMA-SUITE-001": {
+    "min_area_m2": 60,
+    "max_area_m2": 600,
+    "chosen_area_m2": 120
+  },
+  "M-L2-EMMA-KITCHEN-001": {
+    "chosen_area_m2": 20
+  },
+  "M-L2-EMMA-LIVING-001": {
+    "chosen_area_m2": 40
+  },
+  "M-L2-EMMA-BEDROOMS-001": {
+    "chosen_area_m2": 45
+  },
+  "M-L2-EMMA-BATH-001": {
+    "chosen_area_m2": 15
+  },
+  "M-L2-DINING-001": {
+    "min_area_m2": 24,
+    "max_area_m2": 600,
+    "chosen_area_m2": 80
+  }
+}

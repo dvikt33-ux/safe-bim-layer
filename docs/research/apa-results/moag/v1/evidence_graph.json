@@ -1,0 +1,4811 @@
+{
+  "schema": "APA-MOAG-EVIDENCE-GRAPH/0.1",
+  "date": "2026-10-19",
+  "work_id": "APA-MOAG-01",
+  "issue": "https://github.com/dvikt33-ux/safe-bim-layer/issues/176",
+  "status": "IN_PROGRESS_PARTIAL_CORPUS",
+  "corpus": {
+    "books_total": 4,
+    "books_exhaustively_checked": 0,
+    "books_seeded": [
+      1,
+      2
+    ],
+    "warning": "Выборочный первичный граф, НЕ исчерпывающая экстракция всех томов. Сложные описания временных состояний требуют нового исследования."
+  },
+  "rule": "Литературный граф с циклами не является BIM-DAG исполнения. Нельзя размещать стены по ребрам без проверенных координат, размеров и утвержденной версии геометрии.",
+  "sources": [
+    {
+      "id": "B1-02",
+      "section": "Книга I, ч. I, гл. 1 «Таис. Охота»",
+      "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=2",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B1-03",
+      "section": "Книга I, ч. I, гл. 2 «Эмма. Экзамен»",
+      "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=3",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B1-04",
+      "section": "Книга I, ч. I, гл. 3 «Таис. Закон»",
+      "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=4",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B1-06",
+      "section": "Книга I, ч. I, гл. 5 «Таис. Дорога на Третий уровень»",
+      "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=6",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B1-08",
+      "section": "Книга I, ч. I, гл. 7 «Таис. Третий список»",
+      "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=8",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B1-10",
+      "section": "Книга I, ч. II, гл. 1 «Таис. Дикие»",
+      "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=10",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B1-13",
+      "section": "Книга I, ч. II, гл. 4 «Эмма. Фрик»",
+      "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=13",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B1-14",
+      "section": "Книга I, ч. II, гл. 5 «Таис. Биение сердца»",
+      "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=14",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B1-15",
+      "section": "Книга I, ч. II, гл. 6 «Эмма. Я не хочу умирать»",
+      "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=15",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B1-19",
+      "section": "Книга I, ч. III, гл. 2 «Эмма. Вышел месяц из тумана»",
+      "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=19",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B2-01",
+      "section": "Книга II, ч. I, гл. 1 «Таис. Кладовки с продуктами и оружием»",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=1",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B2-14",
+      "section": "Книга II, ангарный отсек и обследование катеров, интернет-страница 14",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=14",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B2-13",
+      "section": "Книга II, глава 4 → начало главы 5, интернет-страница 13",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=13",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B2-15",
+      "section": "Книга II, гл. 5 «Ангары и катера», интернет-страница 15",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=15",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B2-17",
+      "section": "Книга II, эпизод возвращения в ангары, интернет-страница 17",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=17",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B1-17",
+      "section": "Книга I, глава о закрытом секторе Нижнего уровня: Эмма и Коля, интернет-страница 17",
+      "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=17",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "B1-18",
+      "section": "Книга I, эпизод Фёдора и карт с планшета Андрея Шереметьева, интернет-страница 18",
+      "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=18",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-022",
+      "section": "Книга I, электронная веб-страница 22 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=22",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-023",
+      "section": "Книга I, электронная веб-страница 23 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=23",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-024",
+      "section": "Книга I, электронная веб-страница 24 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=24",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-025",
+      "section": "Книга I, электронная веб-страница 25 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=25",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-026",
+      "section": "Книга I, электронная веб-страница 26 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=26",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-027",
+      "section": "Книга I, электронная веб-страница 27 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=27",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-028",
+      "section": "Книга I, страница 28 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=28",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-029",
+      "section": "Книга I, страница 29 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=29",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-030",
+      "section": "Книга I, страница 30 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=30",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-031",
+      "section": "Книга I, страница 31 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=31",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-032",
+      "section": "Книга I, веб-страница 32",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=32",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-033",
+      "section": "Книга I, веб-страница 33",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=33",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-034",
+      "section": "Книга I, веб-страница 34",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=34",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-044",
+      "section": "Книга I, веб-страница 44 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=44",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-045",
+      "section": "Книга I, веб-страница 45 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=45",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-046",
+      "section": "Книга I, веб-страница 46 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=46",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-047",
+      "section": "Книга I, веб-страница 47 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=47",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-048",
+      "section": "Книга I, веб-страница 48 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=48",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-049",
+      "section": "Книга I, веб-страница 49 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=49",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-050",
+      "section": "Книга I, веб-страница 50 LoveRead",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=50",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-051",
+      "section": "Книга I, LoveRead веб-страница 51",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=51",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-052",
+      "section": "Книга I, LoveRead веб-страница 52",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=52",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-053",
+      "section": "Книга I, LoveRead веб-страница 53",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=53",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-054",
+      "section": "Книга I, LoveRead веб-страница 54",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=54",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-055",
+      "section": "Книга I, LoveRead веб-страница 55",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=55",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-056",
+      "section": "Книга I, LoveRead веб-страница 56",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=56",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-057",
+      "section": "Книга I, LoveRead веб-страница 57",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=57",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-058",
+      "section": "Книга I, LoveRead веб-страница 58",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=58",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-059",
+      "section": "Книга I, LoveRead веб-страница 59",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=59",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-060",
+      "section": "Книга I, LoveRead веб-страница 60",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=60",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-61",
+      "section": "Книга I, LoveRead страница 61",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=61",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-62",
+      "section": "Книга I, LoveRead страница 62",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=62",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-63",
+      "section": "Книга I, LoveRead страница 63",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=63",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-64",
+      "section": "Книга I, LoveRead страница 64",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=64",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-65",
+      "section": "Книга I, LoveRead страница 65",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=65",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-066",
+      "section": "Книга I, постраничная проверка веб-страницы 66",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=66",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-067",
+      "section": "Книга I, постраничная проверка веб-страницы 67",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=67",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-068",
+      "section": "Книга I, постраничная проверка веб-страницы 68",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=68",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-069",
+      "section": "Книга I, постраничная проверка веб-страницы 69",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=69",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B1-070",
+      "section": "Книга I, постраничная проверка веб-страницы 70",
+      "url": "https://loveread.ec/read_book.php?id=48197&p=70",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-017",
+      "section": "Книга II, полное чтение LoveRead, веб-страница 17",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=17",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-021",
+      "section": "Книга II, полное чтение LoveRead, веб-страница 21",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=21",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-026",
+      "section": "Книга II, полное чтение LoveRead, веб-страница 26",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=26",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-027",
+      "section": "Книга II, полное чтение LoveRead, веб-страница 27",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=27",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-034",
+      "section": "Книга II, страница LoveRead 34, первичный текст",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=34",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-035",
+      "section": "Книга II, страница LoveRead 35, первичный текст",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=35",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-040",
+      "section": "Книга II, LoveRead p40, постраничная проверка",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=40",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-041",
+      "section": "Книга II, LoveRead p41, постраничная проверка",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=41",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    },
+    {
+      "id": "LR-B2-042",
+      "section": "Книга II, LoveRead p42, постраничная проверка",
+      "url": "https://loveread.ec/read_book.php?id=53370&p=42",
+      "medium": "literary_text",
+      "quality": "TEXT_READ"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "L1",
+      "label": "Первый / Нижний уровень",
+      "level": 1,
+      "type": "level",
+      "source_ids": [
+        "B1-06",
+        "B2-01"
+      ],
+      "text_basis": "Технические, бывшие служебно-военные и закрытые сектора",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2",
+      "label": "Второй / детский уровень",
+      "level": 2,
+      "type": "level",
+      "source_ids": [
+        "B1-03",
+        "B1-04"
+      ],
+      "text_basis": "Жилые, учебные и общественные зоны",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3",
+      "label": "Третий / верхний уровень",
+      "level": 3,
+      "type": "level",
+      "source_ids": [
+        "B1-06",
+        "B1-15"
+      ],
+      "text_basis": "Рубка, производство, служебные и биотехнологические зоны",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-INNER",
+      "label": "Внутренний малый круг",
+      "level": 1,
+      "type": "circulation",
+      "source_ids": [
+        "B1-06"
+      ],
+      "text_basis": "Ряд бывших баз замыкается в малом кольце",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-OUTER",
+      "label": "Внешний круг",
+      "level": 1,
+      "type": "circulation",
+      "source_ids": [
+        "B1-06"
+      ],
+      "text_basis": "Отдельно назван большой внешний круг",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-BASES",
+      "label": "Район бывших баз спецподразделения",
+      "level": 1,
+      "type": "zone",
+      "source_ids": [
+        "B1-06",
+        "B2-01"
+      ],
+      "text_basis": "Базы под жилыми каютами детей Второго уровня",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-HANGAR-ZONE",
+      "label": "Ангарный сектор",
+      "level": 1,
+      "type": "zone",
+      "source_ids": [
+        "B2-14"
+      ],
+      "text_basis": "На другой части Нижнего уровня относительно баз",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-TEMNAYA",
+      "label": "Темная база",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B1-10",
+        "B1-13"
+      ],
+      "text_basis": "Жилище детей в бывших служебных помещениях",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-OVAL",
+      "label": "Овальная база",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B1-06",
+        "B1-10"
+      ],
+      "text_basis": "Самостоятельная база; имя не доказывает овальную форму всех комнат",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-WILD",
+      "label": "База диких",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B1-10"
+      ],
+      "text_basis": "Дальние коридоры и поврежденный вход",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-BASE-COMMON",
+      "label": "Общее помещение Темной базы",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B1-13"
+      ],
+      "text_basis": "Общий стол, раковина, обогреватель, входы в спальни",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-BASE-SLEEP",
+      "label": "Спальные комнаты Темной базы",
+      "level": 1,
+      "type": "space_group",
+      "source_ids": [
+        "B1-10",
+        "B1-13"
+      ],
+      "text_basis": "Часть спален достигается по лестнице, есть койки и матрасы; количество неизвестно",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-BASE-WET",
+      "label": "Душевая/ванная Темной базы",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B1-02"
+      ],
+      "text_basis": "Большая холодная комната, гладкая плитка, душевые поддоны",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-RECYCLING",
+      "label": "Цех сортировки/переработки отходов",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B1-06",
+        "B1-14"
+      ],
+      "text_basis": "Конвейеры, роботы-сортировщики, лучевая печь",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-STAIR-UP",
+      "label": "Крутая служебная лестница на Третий уровень",
+      "level": 1,
+      "type": "vertical_route",
+      "source_ids": [
+        "B1-06"
+      ],
+      "text_basis": "Проход находится за мусороперерабатывающим цехом",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-VENT",
+      "label": "Вентиляция и скрытые лазы",
+      "level": 1,
+      "type": "utility",
+      "source_ids": [
+        "B1-02",
+        "B1-06"
+      ],
+      "text_basis": "Люки, прямоугольные шахты, вертикальные участки",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-ANGAR-HALL",
+      "label": "Магистральный коридор ангаров",
+      "level": 1,
+      "type": "circulation",
+      "source_ids": [
+        "B2-14"
+      ],
+      "text_basis": "Длинный широкий проход под полукруглым сводом",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-ANGAR",
+      "label": "Ангар с двумя одноместными катерами",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B2-14"
+      ],
+      "text_basis": "Раздвижные входы, операторские кабины под потолком, путь к шлюзу",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-OPERATORS",
+      "label": "Операторские кабины ангара",
+      "level": 1,
+      "type": "space_group",
+      "source_ids": [
+        "B2-14"
+      ],
+      "text_basis": "Закреплены высоко под потолком, доступ по металлической лестнице",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-BOAT-LOCK",
+      "label": "Шлюз катеров Нижнего уровня",
+      "level": 1,
+      "type": "utility",
+      "source_ids": [
+        "B2-14"
+      ],
+      "text_basis": "Катера стоят перед выходом в шлюз",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-SEALED",
+      "label": "Запечатанная/неисследованная часть",
+      "level": 1,
+      "type": "zone",
+      "source_ids": [
+        "B1-06",
+        "B2-01"
+      ],
+      "text_basis": "Не все части доступны; степень и положение границ меняются по сюжету",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-GREEN",
+      "label": "Внутренняя Зелёная магистраль",
+      "level": 2,
+      "type": "circulation",
+      "source_ids": [
+        "B1-04"
+      ],
+      "text_basis": "Зеленые растения, резиновая дорожка, выходы к центру",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-ORANGE",
+      "label": "Оранжевая магистраль",
+      "level": 2,
+      "type": "circulation",
+      "source_ids": [
+        "B1-04"
+      ],
+      "text_basis": "Внешняя торговая/транспортная магистраль",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-PLAZA",
+      "label": "Главная площадь",
+      "level": 2,
+      "type": "space",
+      "source_ids": [
+        "B1-03",
+        "B1-04"
+      ],
+      "text_basis": "Фонтан, сад, панель Закона",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-GALLERY",
+      "label": "Жилая галерея над Главной площадью",
+      "level": 2,
+      "type": "circulation",
+      "source_ids": [
+        "B1-03"
+      ],
+      "text_basis": "Есть вертикальная внутренняя ярусность, перила и лестницы",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-CABINS",
+      "label": "Детские каюты",
+      "level": 2,
+      "type": "space_group",
+      "source_ids": [
+        "B1-03"
+      ],
+      "text_basis": "Жилой сектор на кольце",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-CAFE",
+      "label": "Кафе и магазины",
+      "level": 2,
+      "type": "space_group",
+      "source_ids": [
+        "B1-04"
+      ],
+      "text_basis": "Места торговли, зоны снабжения и еды",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-T06",
+      "label": "Шестые туннели",
+      "level": 2,
+      "type": "circulation",
+      "source_ids": [
+        "B1-04"
+      ],
+      "text_basis": "У выхода детские площадки, проход к магазинам",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-T17",
+      "label": "Семнадцатые туннели",
+      "level": 2,
+      "type": "circulation",
+      "source_ids": [
+        "B1-04"
+      ],
+      "text_basis": "Выход связан с Оранжевой магистралью",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-SCHOOL",
+      "label": "Школа / экзаменационный блок",
+      "level": 2,
+      "type": "space_group",
+      "source_ids": [
+        "B1-03"
+      ],
+      "text_basis": "Классы и экзаменационный холл; угловое размещение неизвестно",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-INNER",
+      "label": "Внутренний круг Верхнего уровня",
+      "level": 3,
+      "type": "circulation",
+      "source_ids": [
+        "B1-06",
+        "B1-15"
+      ],
+      "text_basis": "Содержит рубку и каюты, улучшенная отделка",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-OUTER",
+      "label": "Внешний круг Верхнего уровня",
+      "level": 3,
+      "type": "circulation",
+      "source_ids": [
+        "B1-06"
+      ],
+      "text_basis": "К нему ведут радиальные проходы, местами расширенные для погрузчиков",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-BRIDGE",
+      "label": "Капитанская рубка",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "B1-06"
+      ],
+      "text_basis": "Располагается во внутреннем круге",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-CREW",
+      "label": "Каюты персонала",
+      "level": 3,
+      "type": "space_group",
+      "source_ids": [
+        "B1-06",
+        "B1-15"
+      ],
+      "text_basis": "Внутренняя жилая часть",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-CHILD-LAB",
+      "label": "Детский блок / кувезы",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "B1-15"
+      ],
+      "text_basis": "Высокий зал с рядами кувезов и голографическими экранами",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-REST",
+      "label": "Круглый зал отдыха",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "B1-15"
+      ],
+      "text_basis": "Светлые диваны из искусственной кожи, стеклянные столики",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-STORE",
+      "label": "Склады, включая постельное бельё",
+      "level": 3,
+      "type": "space_group",
+      "source_ids": [
+        "B1-14"
+      ],
+      "text_basis": "Кладовые, стеллажи",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-DOCK",
+      "label": "Шлюзы и ангары грузовых крейсеров",
+      "level": 3,
+      "type": "zone",
+      "source_ids": [
+        "B1-14"
+      ],
+      "text_basis": "Грузовые шлюзовые камеры, не путать с ангарами катеров Первого",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-PRODUCTION",
+      "label": "Производственные отсеки",
+      "level": 3,
+      "type": "zone",
+      "source_ids": [
+        "B1-06",
+        "B1-14"
+      ],
+      "text_basis": "Смежны с внешними логистическими проходами",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-SERVICE",
+      "label": "Коридоры для роботов-погрузчиков",
+      "level": 3,
+      "type": "circulation",
+      "source_ids": [
+        "B1-14"
+      ],
+      "text_basis": "Местами шире остальных, к ангарам и шлюзам",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "CORE-ENERGY",
+      "label": "Центральный энергомодуль",
+      "level": null,
+      "type": "utility",
+      "source_ids": [
+        "B2-01",
+        "LR-B2-034",
+        "LR-B2-035"
+      ],
+      "text_basis": "Центральная прозрачная колба голубоватой жидкости с кабелями, крышкой, клапанами и подключением к серверу. Диаметры, абсолютные отметки и точный плановый центр не определены.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-ANGAR-ADJ",
+      "label": "Соседний ангар Нижнего уровня",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B2-15"
+      ],
+      "text_basis": "Гоша открывает смежный ангар; там еще три катера, свет не работает.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-OPERATORS-ADJ",
+      "label": "Диспетчерская соседнего ангара",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B2-15"
+      ],
+      "text_basis": "Имеется прямое сообщение между операторскими двух соседних ангаров.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-ANGAR-OTHER",
+      "label": "Дополнительные заброшенные ангары",
+      "level": 1,
+      "type": "space_group",
+      "source_ids": [
+        "B2-15"
+      ],
+      "text_basis": "На маршруте встречены другие ангары с поврежденными катерами; точное число помещений не доказано.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-FREIGHT-LIFTS",
+      "label": "Грузовые лифты Третьего уровня",
+      "level": 3,
+      "type": "vertical_route",
+      "source_ids": [
+        "B2-13"
+      ],
+      "text_basis": "От них есть поворот в коридор к рубке.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-CARGO-HALL",
+      "label": "Просторный грузовой зал у производства",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "B2-13"
+      ],
+      "text_basis": "Грузовой зал перед белыми дверями цеха.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-SUIT-ALCOVE",
+      "label": "Отсек со скафандрами",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "B2-13"
+      ],
+      "text_basis": "Небольшой отсек за поворотом на подходе к грузовому залу.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-WORKSHOP-DOOR",
+      "label": "Белые двери производственного цеха",
+      "level": 3,
+      "type": "portal",
+      "source_ids": [
+        "B2-13"
+      ],
+      "text_basis": "Закрытые двери цеха, ведущие из грузового зала.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-LOWER-SHAFT",
+      "label": "Вертикальная шахта с промежуточным боковым ответвлением",
+      "level": null,
+      "type": "vertical_route",
+      "source_ids": [
+        "B1-04"
+      ],
+      "text_basis": "Таис и Федор проходят через железную трубу; боковой выход ведет на их Нижний уровень; ниже есть другие помещения.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "SUB-LOWER-WELL",
+      "label": "Неизвестное помещение ниже обитаемой части Нижнего уровня",
+      "level": null,
+      "type": "space",
+      "source_ids": [
+        "B1-04"
+      ],
+      "text_basis": "Квадратный колодец ниже пропущенного бокового выхода; не доказан самостоятельный сплошной этаж.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "SUB-SEALED-DOOR",
+      "label": "Двойная дверь в нижнем колодце",
+      "level": null,
+      "type": "portal",
+      "source_ids": [
+        "B1-04"
+      ],
+      "text_basis": "Большая двойная дверь с кодовым разъемом и символами Млечного Пути/Моага; дверь заперта.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "SUB-WELDED-WALL",
+      "label": "Запаянный проход напротив двери в нижнем колодце",
+      "level": null,
+      "type": "portal",
+      "source_ids": [
+        "B1-04"
+      ],
+      "text_basis": "Потенциально бывший проход, по словам Фёдора виден сварной шов; маршрут не подтверждён.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-OLD-FREIGHT-HANGAR",
+      "label": "Старый закрытый грузовой ангар Нижнего уровня",
+      "level": 1,
+      "type": "space_group",
+      "source_ids": [
+        "B1-19"
+      ],
+      "text_basis": "Существовал до новых грузовых ангаров Третьего уровня. Точное соответствие ангару фриков и ангару катеров не установлено.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-OLD-PROF-CABINS",
+      "label": "Заброшенные каюты вблизи старого ангарного комплекса",
+      "level": 1,
+      "type": "space_group",
+      "source_ids": [
+        "B1-17",
+        "B1-19"
+      ],
+      "text_basis": "Отдельные каюты бывшей команды; один человек укрылся в старых каютах.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-CIRCULAR-HALL",
+      "label": "Высокий круглый зал в закрытом секторе",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B1-17"
+      ],
+      "text_basis": "Из коридора спускаются на несколько ступеней; рифленый железный пол, широкие тележки; помещение напоминает шлюзовый ангар.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-HALL-STEPS",
+      "label": "Местный ступенчатый переход к круглому залу",
+      "level": 1,
+      "type": "vertical_route",
+      "source_ids": [
+        "B1-17"
+      ],
+      "text_basis": "Короткий спуск на пару ступеней, не полноценный этаж.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-SLEEPING-HANGAR",
+      "label": "Большой ангар со спящими изменившимися взрослыми",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B1-17"
+      ],
+      "text_basis": "Широкий коридор ведет к большим воротам, за ними зал со спящими фриками; не следует отождествлять с круглым залом.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-CIRCULAR-UPPER-WALK",
+      "label": "Верхний металлический мостик круглого зала",
+      "level": 1,
+      "type": "circulation",
+      "source_ids": [
+        "B1-17"
+      ],
+      "text_basis": "Под потолком проходит полукруглый мостик вдоль половины зала, с проёмом и дверью; с нижним полом ранее соединяла лестница, остались её обломки.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-CIRCULAR-STAIRS",
+      "label": "Повреждённая лестница к верхнему мостику",
+      "level": 1,
+      "type": "vertical_route",
+      "source_ids": [
+        "B1-17"
+      ],
+      "text_basis": "Лестничный подход с основного пола на верхний мостик разрушен, сохранился подвижный короткий фрагмент.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-CIRCULAR-CONTROL",
+      "label": "Помещение ручного управления шлюзами за мостиком",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B1-17"
+      ],
+      "text_basis": "После перехода по верхнему мостику через дверь найдена отдельная комната с пультами ручного управления шлюзами.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-CIRCULAR-QUARTERS",
+      "label": "Жилая комната за операторской",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "B1-17"
+      ],
+      "text_basis": "За следующей дверью комната с несколькими дверями, нержавеющей раковиной в столе, лучевой печью, оборудованием и кожаным диваном.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-LOWER-BLOCK-STRATA",
+      "label": "Локальные высотные ярусы Нижнего блока",
+      "level": 1,
+      "type": "spatial_constraint",
+      "source_ids": [
+        "B1-17"
+      ],
+      "text_basis": "Доказаны дополнительные помещения ниже обычного Нижнего уровня, верхний мостик, операторские антресоли и лестничные перепады. НЕ доказаны 2 или 4 сплошные межэтажные плиты.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ISOLATION-TRIDENT",
+      "label": "Трёхлучевая развилка у внешнего круга",
+      "level": 3,
+      "type": "circulation",
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "text_basis": "Персонажи входят в развилку с тремя коридорами в секторе внешнего круга Третьего уровня; проход по центральному коридору.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ISOLATION-CELL",
+      "label": "Помещение изоляции перед освобождением детей",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "text_basis": "Из центрального коридора через дверь со слотом для флешки вход в отдельную запираемую комнату.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-LIFT-PLATFORM",
+      "label": "Круглая грузовая площадка у лифта",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "text_basis": "Небольшая круглая площадка со штабелями контейнеров, соединена с коридорами погрузчиков и грузовым/служебным лифтом.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "LINK-LIFT-SHAFT",
+      "label": "Лифтовая шахта с аварийным выходом на Нижний",
+      "level": null,
+      "type": "vertical_route",
+      "source_ids": [
+        "LR-B1-023"
+      ],
+      "text_basis": "Из остановленной кабины через квадратный потолочный люк выходят на крышу, далее верёвочной лестницей до бокового отверстия в стене шахты.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-LIFT-SHAFT-EXIT",
+      "label": "Тёмный проём шахты у мусоропереработки",
+      "level": 1,
+      "type": "portal",
+      "source_ids": [
+        "LR-B1-023"
+      ],
+      "text_basis": "Боковое квадратное отверстие в стене вертикальной шахты, переход к коридору Нижнего уровня поблизости от мусорки.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-WET-LAUNDRY",
+      "label": "Ванная и встроенная прачечная жилой каюты",
+      "level": 2,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-024"
+      ],
+      "text_basis": "Душ с влагостойким настенным пультом регулирования температуры, встроенные в стену стиральные машины; три на штатную каюту.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-NURSERY",
+      "label": "Детский сад Второго уровня",
+      "level": 2,
+      "type": "zone",
+      "source_ids": [
+        "LR-B1-025"
+      ],
+      "text_basis": "Детский сад организован по отделениям; Мартин отвечает за младшее, предусмотрены игровые и санитарные комнаты.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-INFANT-PLAY",
+      "label": "Игровая младшего отделения",
+      "level": 2,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-025"
+      ],
+      "text_basis": "Большой ковёр, детские кубики, шкаф, планшет, роботы-помощники; рядом санитарное обслуживание.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-INFANT-YARD",
+      "label": "Прогулочная площадка младшего отделения",
+      "level": 2,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-026"
+      ],
+      "text_basis": "Площадка сразу за дверью; резиновое покрытие, песочница, низкие горки, качалки, невысокая ограда с кадками.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-INFANT-NEW",
+      "label": "Комнаты для новорождённых",
+      "level": 2,
+      "type": "space_group",
+      "source_ids": [
+        "LR-B1-026"
+      ],
+      "text_basis": "Две отдельные комнаты для четырех малышей после доставки в прозрачных кувезах на лифте; игрушки и манежи.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-BASES-HISTORIC-NUMBERS",
+      "label": "Старые военно-служебные базы №3 и №4 (надписи замков)",
+      "level": 1,
+      "type": "historical_zone",
+      "source_ids": [
+        "LR-B1-028"
+      ],
+      "text_basis": "Сведения о прежнем названии «Нижний уровень станции Млечный путь, базы 3 и 4» хранятся в системах дверных замков; НЕ тождество трём убежищам детей.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-BASE-REMOTE-BED",
+      "label": "Удалённая маленькая спальня Ильи и Кати",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-028"
+      ],
+      "text_basis": "Маленькая тёмная холодная спальня в отдалении Темной базы, одна кровать у стены, три стула.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-BASE-KIDS-SLEEP",
+      "label": "Спальня Маши с тремя младшими детьми",
+      "level": 1,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-028"
+      ],
+      "text_basis": "Отдельное помещение внутри Темной базы, в котором Маша размещается с тремя детьми; связь со спальней Таис через общую стену подтверждена другим эпизодом.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-BASE-KITCHEN-WATER",
+      "label": "Водозабор и место мытья посуды на Темной базе",
+      "level": 1,
+      "type": "utility",
+      "source_ids": [
+        "LR-B1-029"
+      ],
+      "text_basis": "Из общего жилого помещения Илья набирает воду из крана, которым Маша пользуется при мытье посуды; кран не фиксирует местоположение стояков.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-LIFTS-DE",
+      "label": "Лифты Д и Е у отдалённых коридоров Третьего",
+      "level": 3,
+      "type": "vertical_route",
+      "source_ids": [
+        "LR-B1-032"
+      ],
+      "text_basis": "Лифты с буквами Д и Е расположены в коридорах, наиболее удалённых от платформы приёмки грузов, относительно других названных лифтов.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-CARGO-RECEIVING",
+      "label": "Платформа приёмки грузов Третьего",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-032"
+      ],
+      "text_basis": "Логистическая грузоприёмная платформа является опорной точкой для сравнения положения лифтов Д и Е.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-DARK-UPPER-PERIMETER",
+      "label": "Узкая галерея по периметру общего помещения Темной базы",
+      "level": 1,
+      "type": "circulation",
+      "source_ids": [
+        "LR-B1-049"
+      ],
+      "text_basis": "Галерея огибает ВСЮ общую комнату; дети сидят ниже неё; по галерее Таис идёт к собственной спальне.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-STRAIGHT-FREIGHT",
+      "label": "Отдельный широкий ПРЯМОЙ грузовой коридор",
+      "level": 1,
+      "type": "circulation",
+      "source_ids": [
+        "LR-B1-044"
+      ],
+      "text_basis": "Резиновое покрытие, большие ворота ангаров, низкие навигационные лампы и неработающее потолочное освещение. Нельзя автоматически отождествлять с другим ангарным проходом.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-ENG-CABLE-NICHES",
+      "label": "Узкие коммуникационные ниши с трубами и разноцветными кабелями",
+      "level": 1,
+      "type": "utility",
+      "source_ids": [
+        "LR-B1-045"
+      ],
+      "text_basis": "За сорванной панелью находятся трубы и толстые разноцветные кабели, путь ползком через два узких лаза.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "LINK-LIFT-L2-L1",
+      "label": "Официальный лифт между Вторым и Нижним",
+      "level": null,
+      "type": "vertical_route",
+      "source_ids": [
+        "LR-B1-047"
+      ],
+      "text_basis": "Некоторые штатные лифты непосредственно доезжают до Нижнего; Лон сопровождает детей с продуктами.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-DARK-ENTRY-DOOR",
+      "label": "Двухстворчатая стальная дверь внешней границы Темной базы",
+      "level": 1,
+      "type": "portal",
+      "source_ids": [
+        "LR-B1-045"
+      ],
+      "text_basis": "Дверь с двумя треугольниками, кодовым замком, отделяет тёплую жилую базу от холодных коридоров.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-RESIDENTIAL-RING",
+      "label": "Кольцевой двухэтажный жилой блок Второго",
+      "level": 2,
+      "type": "zone",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "text_basis": "Жилой блок правильным кругом огибает Зелёную магистраль. Внутри блока: каюты на 2-м этаже, магазины, игровые и туннели на 1-м; не доказывает вторую плиту на всем уровне.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-RESIDENTIAL-UPPER",
+      "label": "Верхний этаж кают внутри жилого кольца",
+      "level": 2,
+      "type": "space_group",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "text_basis": "Жилые каюты точно расположены на втором этаже кольцевого блока.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-RESIDENTIAL-LOWER",
+      "label": "Нижний торгово-игровой этаж жилого кольца",
+      "level": 2,
+      "type": "space_group",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "text_basis": "Нижний этаж кольцевого блока: магазины, игровые помещения, многочисленные туннели выхода к Оранжевой магистрали.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-BASE-COMMON-COOK-TABLE",
+      "label": "Стол приготовления пищи на Темной базе",
+      "level": 1,
+      "type": "furniture",
+      "source_ids": [
+        "LR-B1-052"
+      ],
+      "text_basis": "Отдельный стол для приготовления еды, на котором находится электроплитка.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-BASE-COMMON-DINE-TABLE",
+      "label": "Стол приёма пищи на Темной базе",
+      "level": 1,
+      "type": "furniture",
+      "source_ids": [
+        "LR-B1-052"
+      ],
+      "text_basis": "Отдельный стол для еды в общем помещении.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-BASE-OUTER-GATE",
+      "label": "Внешняя тяжёлая створчатая дверь к коридору баз",
+      "level": 1,
+      "type": "portal",
+      "source_ids": [
+        "LR-B1-055"
+      ],
+      "text_basis": "Первая внешняя дверь от холодного коридора на пути в сектор Темной и Овальной баз.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-BASE-INNER-GATE",
+      "label": "Внутренняя дверь собственно Темной базы",
+      "level": 1,
+      "type": "portal",
+      "source_ids": [
+        "LR-B1-055"
+      ],
+      "text_basis": "Вторая последовательная защитная дверь после внешней.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-BASE-CORRIDOR-STORES",
+      "label": "Малые кладовые в дальнем конце коридора баз",
+      "level": 1,
+      "type": "space_group",
+      "source_ids": [
+        "LR-B1-055"
+      ],
+      "text_basis": "Узкие кладовые со стеллажами и механическими щеколдами в конце коридора. Одну используют как изолятор.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-INNER-SECTOR-GATE",
+      "label": "Опускающаяся вниз дверь внутреннего круга Третьего",
+      "level": 3,
+      "type": "portal",
+      "source_ids": [
+        "LR-B1-060"
+      ],
+      "text_basis": "Мощная широкая одинарная дверь в криволинейной стене внутреннего круга с белым пластиком и знаком Млечного Пути.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-CHILD-LAB-ENTRANCE",
+      "label": "Двойные двери и арочный проход к детскому блоку",
+      "level": 3,
+      "type": "portal",
+      "source_ids": [
+        "LR-B1-060"
+      ],
+      "text_basis": "После опускающейся внешней двери коридор с голографической надписью; в зал проходят через двойные створки и узкий проход под аркой.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-UP-ACCESS-LOBBY",
+      "label": "Тёмный служебный переход после люка с Нижнего",
+      "level": 3,
+      "type": "circulation",
+      "source_ids": [
+        "LR-B1-059"
+      ],
+      "text_basis": "После лестницы из мусорки и железного люка дети попадают в маленький тёмный переход, потом через кодовую дверь выходят в яркий верхний коридор.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-REST-UPPER-GALLERY",
+      "label": "Периметральная верхняя галерея круглого зала отдыха",
+      "level": 3,
+      "type": "circulation",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "text_basis": "Высокая галерея огибает ВЕСЬ зал, к ней ведут металлические ступени, в верхнем проходе ковровое покрытие; несколько коридоров-ответвлений.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-REST-UPPER-STAIRS",
+      "label": "Лестница на галерею Третьего зала отдыха",
+      "level": 3,
+      "type": "vertical_route",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "text_basis": "Металлическая лестница от пола зала к верхней галерее; на ступенях бежевое резиновое покрытие.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-REST-GALLERY-DEADEND",
+      "label": "Тупиковые коридоры и ДНК-двери верхней галереи",
+      "level": 3,
+      "type": "circulation",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "text_basis": "От галереи отходят несколько коридоров; один Т-образный заканчивается дверями с биометрическими датчиками; короткие повороты.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-UPPER-VENT-ESCAPE",
+      "label": "Низкая вентиляция Третьего для скрытого спуска",
+      "level": 3,
+      "type": "utility",
+      "source_ids": [
+        "LR-B1-63"
+      ],
+      "text_basis": "Из низкого верхнего коридора снимают решётку близко к полу и лезут в шахту, далее вертикальный сброс.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L2-VENT-LOW-GRILLE",
+      "label": "Вентиляционная решётка Второго около пола",
+      "level": 2,
+      "type": "portal",
+      "source_ids": [
+        "LR-B1-64"
+      ],
+      "text_basis": "Выход из вентиляции почти у пола рядом с автоматом какао и резиновой дорожкой.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-RETURN-FORK",
+      "label": "Двухпутная развилка возвращения к Нижним базам",
+      "level": 1,
+      "type": "circulation",
+      "source_ids": [
+        "LR-B1-65"
+      ],
+      "text_basis": "Низкий проём приводит к вилке: правый маршрут короче, левый длиннее; проходы меняются из-за опасности Диких.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-OVAL-PAINTED",
+      "label": "Художественно расписанный интерьер Овальной базы",
+      "level": 1,
+      "type": "interior_attribute",
+      "source_ids": [
+        "LR-B1-65"
+      ],
+      "text_basis": "Девушки разрисовали стены, столы и стулья. Факт относится к Овальной базе, не к Темной.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ADULT-RETREAT-SUITE",
+      "label": "Взрослая каюта за дверью с проверкой ДНК",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "text_basis": "За биометрической дверью вход в сохранившуюся каюту экипажа: общая комната, ванная и спальня.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ADULT-RETREAT-LIVING",
+      "label": "Просторная общая комната взрослой каюты",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "text_basis": "Мягкие диваны, несколько мощных планшетов, раковина, белая лучевая печка, кофеварка, соковыжималка, мини-гриль.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ADULT-RETREAT-WET",
+      "label": "Ванная взрослой каюты с коричневой плиткой",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "text_basis": "От общего помещения отдельная дверь, коричневая керамическая плитка и розовая раковина; горячая вода.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ADULT-RETREAT-BED",
+      "label": "Спальня взрослой каюты с широкой кроватью",
+      "level": 3,
+      "type": "space",
+      "source_ids": [
+        "LR-B1-068"
+      ],
+      "text_basis": "За второй дверью отдельная спальня с широкой кроватью и пледом.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-DNA-HUMAN-LOCKS",
+      "label": "Переоборудованные дверные замки внутреннего круга",
+      "level": 3,
+      "type": "system",
+      "source_ids": [
+        "LR-B1-070"
+      ],
+      "text_basis": "В историческом этапе после эпидемии замки дверей внутреннего Третьего перенастроили на доступ по ДНК человека; относить к состоянию, не к исходной проектной планировке.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ARCHIVE-PLAN-SET",
+      "label": "Архивный видеокомплекс в каюте штурмана",
+      "level": 3,
+      "type": "equipment",
+      "source_ids": [
+        "LR-B1-069"
+      ],
+      "text_basis": "В жилой комнате один большой голографический экран выводит запись с трех планшетов.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-STAFF-FOOD-STORES",
+      "label": "Кладовая провизии вне закрытого внутреннего круга",
+      "level": 3,
+      "type": "space_group",
+      "source_ids": [
+        "LR-B1-070"
+      ],
+      "text_basis": "Здоровые члены экипажа выходили из внутреннего круга через общие коридоры за продуктами в кладовые; точные координаты и число неизвестны.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L1-BOAT-LOCK-OUTER-HATCH",
+      "label": "Наружный круглый выход нижней шлюзовой камеры с треугольными створками",
+      "level": 1,
+      "type": "opening",
+      "source_ids": [
+        "LR-B2-021"
+      ],
+      "text_basis": "На нижнем боевом шлюзе круглое наружное отверстие с разъезжающимися треугольными створками; размер и ориентация неизвестны",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-MAIN-LIFTS-HALL",
+      "label": "Широкий коридор главных лифтов Третьего",
+      "level": 3,
+      "type": "corridor",
+      "source_ids": [
+        "LR-B2-027"
+      ],
+      "text_basis": "От капитанской рубки после двух поворотов Эмма достигает широкого коридора, ведущего к главным лифтам; через него проходит к дверям производственного цеха",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ENERGY-APPROACH",
+      "label": "Узкий проход к энергомодулю за Детским блоком",
+      "level": 3,
+      "type": "corridor",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "text_basis": "Полутемный короткий коридор, в конце единственная дверь.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-ENERGY-GATE",
+      "label": "Защищенная сдвижная дверь энергокамеры",
+      "level": 3,
+      "type": "opening",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "text_basis": "Дверь в конце коридора на Третьем, замок взломан героями.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "CORE-ENERGY-SHAFT",
+      "label": "Круглый центральный инженерный объем трёх уровней",
+      "level": null,
+      "type": "vertical_void",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "text_basis": "Камера по центру, охватывает три уровня; взгляд с галереи вниз примерно на 15 м, но BIM Z неизвестна.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "CORE-ENERGY-GALLERY",
+      "label": "Кольцевая огражденная галерея центрального энергомодуля",
+      "level": 3,
+      "type": "local_gallery",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "text_basis": "Металлическая круговая галерея с ограждением вокруг колбы.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "CORE-ENERGY-ACCESS",
+      "label": "Логический маршрут допуска к энергокамере (не дополнительный коридор)",
+      "level": 3,
+      "type": "logical_access",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "text_basis": "Составной навигационный узел старых маршрутов: L3-ENERGY-APPROACH (единственный физический узкий коридор) + L3-ENERGY-GATE (единственная защищенная дверь). Не создавать отдельное помещение CORE-ENERGY-ACCESS или дублирующий коридор в BIM.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TOPOLOGY_INFERRED"
+    },
+    {
+      "id": "CORE-ENERGY-ACCESS-STEPS",
+      "label": "Локальные ступени выхода из кольцевой энергетической галереи",
+      "level": 3,
+      "type": "vertical_access",
+      "source_ids": [
+        "LR-B2-040"
+      ],
+      "text_basis": "Эмму подталкивают по ступеням вверх от галереи к защищённой двери, точное число ступеней неизвестно.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "id": "L3-MEDICAL-ROOM",
+      "label": "Медицинский диагностический отсек Третьего уровня",
+      "level": 3,
+      "type": "medical_room",
+      "source_ids": [
+        "LR-B2-042"
+      ],
+      "text_basis": "Коля и Эмма самостоятельно пользуются диагностикой: каталка автоматически въезжает в круглое отверстие сканера, рядом голографический экран результатов; координаты неизвестны.",
+      "position": {
+        "x": null,
+        "y": null,
+        "z": null,
+        "orientation": null,
+        "dimension_m": null
+      },
+      "geometry_gate": "NOT_AUTHORIZED",
+      "state": "TEXT_DIRECT"
+    }
+  ],
+  "edges": [
+    {
+      "id": "E01",
+      "from": "L1",
+      "to": "L1-INNER",
+      "type": "contains",
+      "source_ids": [
+        "B1-06"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Малое кольцо на Нижнем",
+      "metric": null
+    },
+    {
+      "id": "E02",
+      "from": "L1",
+      "to": "L1-OUTER",
+      "type": "contains",
+      "source_ids": [
+        "B1-06"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Внешнее кольцо",
+      "metric": null
+    },
+    {
+      "id": "E03",
+      "from": "L1",
+      "to": "L1-BASES",
+      "type": "contains",
+      "source_ids": [
+        "B1-06",
+        "B2-01"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Район баз",
+      "metric": null
+    },
+    {
+      "id": "E04",
+      "from": "L1",
+      "to": "L1-HANGAR-ZONE",
+      "type": "contains",
+      "source_ids": [
+        "B2-14"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Ангарный район",
+      "metric": null
+    },
+    {
+      "id": "E05",
+      "from": "L1",
+      "to": "L1-RECYCLING",
+      "type": "contains",
+      "source_ids": [
+        "B1-06"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Цех на Нижнем",
+      "metric": null
+    },
+    {
+      "id": "E06",
+      "from": "L1",
+      "to": "L1-SEALED",
+      "type": "contains",
+      "source_ids": [
+        "B1-06"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Неисследованный район",
+      "metric": null
+    },
+    {
+      "id": "E07",
+      "from": "L1-BASES",
+      "to": "L1-TEMNAYA",
+      "type": "includes",
+      "source_ids": [
+        "B1-10"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Темная база среди старых баз",
+      "metric": null
+    },
+    {
+      "id": "E08",
+      "from": "L1-BASES",
+      "to": "L1-OVAL",
+      "type": "includes",
+      "source_ids": [
+        "B1-06"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Овальная база",
+      "metric": null
+    },
+    {
+      "id": "E09",
+      "from": "L1-BASES",
+      "to": "L1-WILD",
+      "type": "includes",
+      "source_ids": [
+        "B1-10"
+      ],
+      "state": "TOPOLOGY_INFERRED",
+      "claim": "Дикие живут в дальних коридорах, отнести к сектору баз условно",
+      "metric": null
+    },
+    {
+      "id": "E10",
+      "from": "L1-BASES",
+      "to": "L1-INNER",
+      "type": "links_to",
+      "source_ids": [
+        "B1-06"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Базы замыкаются через малое кольцо",
+      "metric": null
+    },
+    {
+      "id": "E11",
+      "from": "L1-TEMNAYA",
+      "to": "L1-BASE-COMMON",
+      "type": "contains",
+      "source_ids": [
+        "B1-13"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Общая комната",
+      "metric": null
+    },
+    {
+      "id": "E12",
+      "from": "L1-TEMNAYA",
+      "to": "L1-BASE-SLEEP",
+      "type": "contains",
+      "source_ids": [
+        "B1-10",
+        "B1-13"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Спальни",
+      "metric": null
+    },
+    {
+      "id": "E13",
+      "from": "L1-TEMNAYA",
+      "to": "L1-BASE-WET",
+      "type": "contains",
+      "source_ids": [
+        "B1-02"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Ванная",
+      "metric": null
+    },
+    {
+      "id": "E14",
+      "from": "L1-BASE-COMMON",
+      "to": "L1-BASE-SLEEP",
+      "type": "stairs_to",
+      "source_ids": [
+        "B1-10"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Лестница к части спален",
+      "metric": null
+    },
+    {
+      "id": "E15",
+      "from": "L1-BASES",
+      "to": "L2-CABINS",
+      "type": "under",
+      "source_ids": [
+        "B1-06"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Базы находятся под жилыми каютами",
+      "metric": null
+    },
+    {
+      "id": "E16",
+      "from": "L1-RECYCLING",
+      "to": "L1-STAIR-UP",
+      "type": "behind_to",
+      "source_ids": [
+        "B1-06"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Лестница за мусоркой",
+      "metric": null
+    },
+    {
+      "id": "E17",
+      "from": "L1-STAIR-UP",
+      "to": "L3-OUTER",
+      "type": "connects_vertical",
+      "source_ids": [
+        "B1-14"
+      ],
+      "state": "TOPOLOGY_INFERRED",
+      "claim": "Лестница выходит к закрытому коридору Третьего; точное кольцо не доказано",
+      "metric": null
+    },
+    {
+      "id": "E18",
+      "from": "L1-VENT",
+      "to": "L2-ORANGE",
+      "type": "connects_vertical",
+      "source_ids": [
+        "B1-02",
+        "B1-04"
+      ],
+      "state": "TOPOLOGY_INFERRED",
+      "claim": "Вентиляция приводит на Второй; конкретный выход относительно магистрали переменный",
+      "metric": null
+    },
+    {
+      "id": "E19",
+      "from": "L1-HANGAR-ZONE",
+      "to": "L1-ANGAR-HALL",
+      "type": "contains",
+      "source_ids": [
+        "B2-14"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Широкий ангарный проход",
+      "metric": null
+    },
+    {
+      "id": "E20",
+      "from": "L1-ANGAR-HALL",
+      "to": "L1-ANGAR",
+      "type": "access_to",
+      "source_ids": [
+        "B2-14"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Двери из прохода в ангар",
+      "metric": null
+    },
+    {
+      "id": "E21",
+      "from": "L1-ANGAR",
+      "to": "L1-OPERATORS",
+      "type": "contains",
+      "source_ids": [
+        "B2-14"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Высоко расположенные кабины операторов",
+      "metric": null
+    },
+    {
+      "id": "E22",
+      "from": "L1-ANGAR",
+      "to": "L1-BOAT-LOCK",
+      "type": "route_to",
+      "source_ids": [
+        "B2-14"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Два катера стоят перед шлюзом",
+      "metric": null
+    },
+    {
+      "id": "E23",
+      "from": "L1-BASES",
+      "to": "L1-HANGAR-ZONE",
+      "type": "separate_sector",
+      "source_ids": [
+        "B2-14"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Фёдор противопоставляет части уровня",
+      "metric": null
+    },
+    {
+      "id": "E24",
+      "from": "L2",
+      "to": "L2-GREEN",
+      "type": "contains",
+      "source_ids": [
+        "B1-04"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Внутренняя магистраль",
+      "metric": null
+    },
+    {
+      "id": "E25",
+      "from": "L2",
+      "to": "L2-ORANGE",
+      "type": "contains",
+      "source_ids": [
+        "B1-04"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Внешняя магистраль",
+      "metric": null
+    },
+    {
+      "id": "E26",
+      "from": "L2",
+      "to": "L2-PLAZA",
+      "type": "contains",
+      "source_ids": [
+        "B1-03"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Центральная площадь",
+      "metric": null
+    },
+    {
+      "id": "E27",
+      "from": "L2-ORANGE",
+      "to": "L2-GREEN",
+      "type": "tunnel_to",
+      "source_ids": [
+        "B1-04"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Переход по туннелю через магистрали",
+      "metric": null
+    },
+    {
+      "id": "E28",
+      "from": "L2-GREEN",
+      "to": "L2-PLAZA",
+      "type": "adjoins",
+      "source_ids": [
+        "B1-04"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Зелёная окружает площадь",
+      "metric": null
+    },
+    {
+      "id": "E29",
+      "from": "L2-GALLERY",
+      "to": "L2-PLAZA",
+      "type": "overlooks",
+      "source_ids": [
+        "B1-03"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Галерея над Главной площадью",
+      "metric": null
+    },
+    {
+      "id": "E30",
+      "from": "L2-GALLERY",
+      "to": "L2-CABINS",
+      "type": "access_to",
+      "source_ids": [
+        "B1-03"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Каюты выходят на галерею",
+      "metric": null
+    },
+    {
+      "id": "E31",
+      "from": "L2-GREEN",
+      "to": "L2-T06",
+      "type": "route_to",
+      "source_ids": [
+        "B1-04"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Маршрут к шестым туннелям через площадь",
+      "metric": null
+    },
+    {
+      "id": "E32",
+      "from": "L2-ORANGE",
+      "to": "L2-T17",
+      "type": "access_to",
+      "source_ids": [
+        "B1-04"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Проход к семнадцатым",
+      "metric": null
+    },
+    {
+      "id": "E33",
+      "from": "L2-T06",
+      "to": "L2-CAFE",
+      "type": "route_to",
+      "source_ids": [
+        "B1-04"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Короткий переход к магазинам",
+      "metric": null
+    },
+    {
+      "id": "E34",
+      "from": "L3",
+      "to": "L3-INNER",
+      "type": "contains",
+      "source_ids": [
+        "B1-15"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Внутренний круг",
+      "metric": null
+    },
+    {
+      "id": "E35",
+      "from": "L3",
+      "to": "L3-OUTER",
+      "type": "contains",
+      "source_ids": [
+        "B1-06"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Внешний круг",
+      "metric": null
+    },
+    {
+      "id": "E36",
+      "from": "L3-INNER",
+      "to": "L3-BRIDGE",
+      "type": "contains",
+      "source_ids": [
+        "B1-06"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Рубка во внутреннем круге",
+      "metric": null
+    },
+    {
+      "id": "E37",
+      "from": "L3-INNER",
+      "to": "L3-CREW",
+      "type": "contains",
+      "source_ids": [
+        "B1-06"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Каюты во внутреннем круге",
+      "metric": null
+    },
+    {
+      "id": "E38",
+      "from": "L3-INNER",
+      "to": "L3-CHILD-LAB",
+      "type": "route_to",
+      "source_ids": [
+        "B1-15"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Путь по криволинейным коридорам",
+      "metric": null
+    },
+    {
+      "id": "E39",
+      "from": "L3-INNER",
+      "to": "L3-REST",
+      "type": "route_to",
+      "source_ids": [
+        "B1-15"
+      ],
+      "state": "TOPOLOGY_INFERRED",
+      "claim": "Круглый зал посещён после детского блока; сектор требует уточнения",
+      "metric": null
+    },
+    {
+      "id": "E40",
+      "from": "L3-OUTER",
+      "to": "L3-SERVICE",
+      "type": "branches_to",
+      "source_ids": [
+        "B1-14"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Белый коридор раздваивается, расширяется для погрузчиков",
+      "metric": null
+    },
+    {
+      "id": "E41",
+      "from": "L3-SERVICE",
+      "to": "L3-DOCK",
+      "type": "access_to",
+      "source_ids": [
+        "B1-14"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Крейсерные ангары и шлюзы справа по маршруту",
+      "metric": null
+    },
+    {
+      "id": "E42",
+      "from": "L3-SERVICE",
+      "to": "L3-PRODUCTION",
+      "type": "route_to",
+      "source_ids": [
+        "B1-14"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Производство дальше ангаров",
+      "metric": null
+    },
+    {
+      "id": "E43",
+      "from": "L1-VENT",
+      "to": "L3-INNER",
+      "type": "aligned_with",
+      "source_ids": [
+        "B1-06"
+      ],
+      "state": "RECHECK_REQUIRED",
+      "claim": "Общее совпадение главных шахт по уровням не определяет их смещение относительно внутреннего круга",
+      "metric": null
+    },
+    {
+      "id": "E44",
+      "from": "L1-INNER",
+      "to": "L2-GREEN",
+      "type": "same_ring_logic",
+      "source_ids": [
+        "B1-06"
+      ],
+      "state": "TEXT_DIRECT",
+      "claim": "Фёдор сравнивает кольца; НЕ равенство радиусов",
+      "metric": null
+    },
+    {
+      "id": "E45",
+      "from": "L1-HANGAR-ZONE",
+      "to": "L1-ANGAR-ADJ",
+      "type": "contains",
+      "source_ids": [
+        "B2-15"
+      ],
+      "claim": "Соседний ангар в секторе",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E46",
+      "from": "L1-ANGAR-HALL",
+      "to": "L1-ANGAR-ADJ",
+      "type": "access_to",
+      "source_ids": [
+        "B2-15"
+      ],
+      "claim": "Проход между рабочим и соседним ангарами",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E47",
+      "from": "L1-ANGAR-ADJ",
+      "to": "L1-OPERATORS-ADJ",
+      "type": "contains",
+      "source_ids": [
+        "B2-15"
+      ],
+      "claim": "Диспетчерская соседнего ангара",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E48",
+      "from": "L1-OPERATORS",
+      "to": "L1-OPERATORS-ADJ",
+      "type": "internally_connected",
+      "source_ids": [
+        "B2-15"
+      ],
+      "claim": "Диспетчерские смежных ангаров соединены",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E49",
+      "from": "L1-ANGAR-ADJ",
+      "to": "L1-ANGAR",
+      "type": "craft_movement_via_hall",
+      "source_ids": [
+        "B2-15"
+      ],
+      "claim": "Катер проходит через коридор в рабочий ангар; габариты неизвестны",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E50",
+      "from": "L1-HANGAR-ZONE",
+      "to": "L1-ANGAR-OTHER",
+      "type": "contains",
+      "source_ids": [
+        "B2-15"
+      ],
+      "claim": "Дополнительные ангары с поврежденными катерами",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E51",
+      "from": "L3-FREIGHT-LIFTS",
+      "to": "L3-BRIDGE",
+      "type": "corridor_near",
+      "source_ids": [
+        "B2-13"
+      ],
+      "claim": "От грузовых лифтов ход к коридору капитанской рубки",
+      "state": "TOPOLOGY_INFERRED",
+      "metric": null
+    },
+    {
+      "id": "E52",
+      "from": "L3-CARGO-HALL",
+      "to": "L3-WORKSHOP-DOOR",
+      "type": "adjoins",
+      "source_ids": [
+        "B2-13"
+      ],
+      "claim": "Грузовой зал перед дверями производства",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E53",
+      "from": "L3-WORKSHOP-DOOR",
+      "to": "L3-PRODUCTION",
+      "type": "access_to",
+      "source_ids": [
+        "B2-13"
+      ],
+      "claim": "Двери цеха связаны с производственными отсеками",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E54",
+      "from": "L3-CARGO-HALL",
+      "to": "L3-SUIT-ALCOVE",
+      "type": "near",
+      "source_ids": [
+        "B2-13"
+      ],
+      "claim": "Отсек со скафандрами за поворотом рядом с грузовым залом",
+      "state": "TOPOLOGY_INFERRED",
+      "metric": null
+    },
+    {
+      "id": "E55",
+      "from": "L1-LOWER-SHAFT",
+      "to": "L1-BASES",
+      "type": "mid_branch_to",
+      "source_ids": [
+        "B1-04"
+      ],
+      "claim": "Боковой выход в середине спуска ведет на обитаемый Нижний уровень; привязка непосредственно к зоне баз предварительна.",
+      "state": "TOPOLOGY_INFERRED",
+      "metric": null
+    },
+    {
+      "id": "E56",
+      "from": "L1-LOWER-SHAFT",
+      "to": "SUB-LOWER-WELL",
+      "type": "lower_terminus_to",
+      "source_ids": [
+        "B1-04"
+      ],
+      "claim": "После пропущенного ответвления попадают на отметку ниже привычного уровня.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E57",
+      "from": "SUB-LOWER-WELL",
+      "to": "L1",
+      "type": "below",
+      "source_ids": [
+        "B1-04"
+      ],
+      "claim": "Помещения ниже известного Нижнего уровня; не автоматически уровень L0.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E58",
+      "from": "SUB-LOWER-WELL",
+      "to": "SUB-SEALED-DOOR",
+      "type": "contains",
+      "source_ids": [
+        "B1-04"
+      ],
+      "claim": "Двойная дверь в колодце.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E59",
+      "from": "SUB-LOWER-WELL",
+      "to": "SUB-WELDED-WALL",
+      "type": "contains",
+      "source_ids": [
+        "B1-04"
+      ],
+      "claim": "Напротив двери запаянный бывший проход.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E60",
+      "from": "L1-OLD-PROF-CABINS",
+      "to": "L1-OLD-FREIGHT-HANGAR",
+      "type": "near",
+      "source_ids": [
+        "B1-19"
+      ],
+      "claim": "Каюты профессора в закрытой зоне старого ангара, точное примыкание не установлено.",
+      "state": "TOPOLOGY_INFERRED",
+      "metric": null
+    },
+    {
+      "id": "E61",
+      "from": "L1-OLD-FREIGHT-HANGAR",
+      "to": "L3-DOCK",
+      "type": "superseded_by",
+      "source_ids": [
+        "B1-19"
+      ],
+      "claim": "Новые грузовые ангары Верхнего уровня заменили прежний, ныне закрытый грузовой ангар. Историческое отношение, не пространственное.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E62",
+      "from": "L1-SEALED",
+      "to": "L1-CIRCULAR-HALL",
+      "type": "includes",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Высокий круглый зал в закрытой части Нижнего.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E63",
+      "from": "L1-SEALED",
+      "to": "L1-SLEEPING-HANGAR",
+      "type": "includes",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Ангар со спящими изменившимися взрослыми.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E64",
+      "from": "L1-HALL-STEPS",
+      "to": "L1-CIRCULAR-HALL",
+      "type": "steps_down_to",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Коридорный переход с коротким спуском вниз, без доказательства этажа.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E65",
+      "from": "L1-SEALED",
+      "to": "L1-OLD-PROF-CABINS",
+      "type": "includes",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Заброшенные каюты исследованы в закрытом секторе.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E66",
+      "from": "L1-CIRCULAR-HALL",
+      "to": "L1-CIRCULAR-UPPER-WALK",
+      "type": "contains",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Мостик расположен в верхней части круглого зала, идет полукругом по половине периметра.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E67",
+      "from": "L1-CIRCULAR-HALL",
+      "to": "L1-CIRCULAR-STAIRS",
+      "type": "contains",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Остатки лестницы, ведущей наверх к мостику.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E68",
+      "from": "L1-CIRCULAR-STAIRS",
+      "to": "L1-CIRCULAR-UPPER-WALK",
+      "type": "vertical_access",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Лестница повреждена; до мостика добираются по обломку.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E69",
+      "from": "L1-CIRCULAR-UPPER-WALK",
+      "to": "L1-CIRCULAR-CONTROL",
+      "type": "door_to",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "На верхнем мостике дверь ведёт в помещение с пультами управления шлюзами.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E70",
+      "from": "L1-CIRCULAR-CONTROL",
+      "to": "L1-CIRCULAR-QUARTERS",
+      "type": "door_to",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "За операторской после следующей закрытой двери находится жилое помещение.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E71",
+      "from": "L1-CIRCULAR-UPPER-WALK",
+      "to": "L1-CIRCULAR-HALL",
+      "type": "above",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Мостик расположен почти под потолком выше пола зала.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E72",
+      "from": "L1-LOWER-BLOCK-STRATA",
+      "to": "L1-CIRCULAR-UPPER-WALK",
+      "type": "includes",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Один из локальных подтверждённых верхних ярусов Нижнего блока.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E73",
+      "from": "L1-LOWER-BLOCK-STRATA",
+      "to": "L1-OPERATORS",
+      "type": "includes",
+      "source_ids": [
+        "B1-17"
+      ],
+      "claim": "Подпотолочные операторские кабины ангаров — другой локальный верхний ярус.",
+      "state": "TOPOLOGY_INFERRED",
+      "metric": null
+    },
+    {
+      "id": "E74",
+      "from": "L3-OUTER",
+      "to": "L3-ISOLATION-TRIDENT",
+      "type": "route_to",
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "claim": "Трёхлучевая развилка расположена около внешнего круга Третьего.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E75",
+      "from": "L3-ISOLATION-TRIDENT",
+      "to": "L3-STORE",
+      "type": "route_to",
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "claim": "По среднему проходу достигается склад с полками постельных вещей.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E76",
+      "from": "L3-ISOLATION-TRIDENT",
+      "to": "L3-ISOLATION-CELL",
+      "type": "route_to",
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "claim": "Через поворот и центральный коридор герои достигают запертой камеры изоляции.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E77",
+      "from": "L3-ISOLATION-CELL",
+      "to": "L3-LIFT-PLATFORM",
+      "type": "escape_route_to",
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "claim": "После освобождения путь ведёт запасным коридором на круглую контейнерную площадку у лифта.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E78",
+      "from": "L3-LIFT-PLATFORM",
+      "to": "LINK-LIFT-SHAFT",
+      "type": "access_to",
+      "source_ids": [
+        "LR-B1-023"
+      ],
+      "claim": "Ожидание у лифта, затем лифтовая кабина с возможностью остановки вручную.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E79",
+      "from": "LINK-LIFT-SHAFT",
+      "to": "L1-LIFT-SHAFT-EXIT",
+      "type": "emergency_vertical_exit",
+      "source_ids": [
+        "LR-B1-023"
+      ],
+      "claim": "Через потолочный люк кабины, крышу, веревочную лестницу и боковой проём в стене шахты.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E80",
+      "from": "L1-LIFT-SHAFT-EXIT",
+      "to": "L1-RECYCLING",
+      "type": "near_route_to",
+      "source_ids": [
+        "LR-B1-023"
+      ],
+      "claim": "На Нижнем слышен шум мусорки и чувствуется запах; не установлен контакт проёма непосредственно с цехом.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E81",
+      "from": "L2-CABINS",
+      "to": "L2-WET-LAUNDRY",
+      "type": "includes",
+      "source_ids": [
+        "LR-B1-024"
+      ],
+      "claim": "Типичная жилая каюта включает ванную со встроенными стиральными машинами.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E82",
+      "from": "L2",
+      "to": "L2-NURSERY",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-025"
+      ],
+      "claim": "Детский сад с отделениями на Втором уровне.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E83",
+      "from": "L2-NURSERY",
+      "to": "L2-INFANT-PLAY",
+      "type": "includes",
+      "source_ids": [
+        "LR-B1-025"
+      ],
+      "claim": "Игровая младшего отделения.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E84",
+      "from": "L2-INFANT-PLAY",
+      "to": "L2-INFANT-YARD",
+      "type": "door_to",
+      "source_ids": [
+        "LR-B1-026"
+      ],
+      "claim": "Прогулочная площадка находится сразу за дверью младшего отделения.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E85",
+      "from": "L2-NURSERY",
+      "to": "L2-INFANT-NEW",
+      "type": "includes",
+      "source_ids": [
+        "LR-B1-026"
+      ],
+      "claim": "В детском саду две отдельные комнаты новорождённых.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E86",
+      "from": "L1-BASES",
+      "to": "L1-BASES-HISTORIC-NUMBERS",
+      "type": "historic_naming",
+      "source_ids": [
+        "LR-B1-028"
+      ],
+      "claim": "Замки прежних баз хранит номера 3 и 4. Не доказывает, что нынешние три общины являются базами 1-3.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E87",
+      "from": "L1-TEMNAYA",
+      "to": "L1-BASE-REMOTE-BED",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-028"
+      ],
+      "claim": "Новая удалённая маленькая спальня в Темной.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E88",
+      "from": "L1-TEMNAYA",
+      "to": "L1-BASE-KIDS-SLEEP",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-028"
+      ],
+      "claim": "Отдельная комната Маши с тремя младшими.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E89",
+      "from": "L1-BASE-COMMON",
+      "to": "L1-BASE-KITCHEN-WATER",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-029"
+      ],
+      "claim": "Кран для набора воды и мытья посуды в бытовой общей зоне Темной базы.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E90",
+      "from": "L3-LIFTS-DE",
+      "to": "L3-CARGO-RECEIVING",
+      "type": "farthest_lifts_from",
+      "source_ids": [
+        "LR-B1-032"
+      ],
+      "claim": "Герой указывает, что Д и Е — самые дальние от платформы приемки грузов; геометрическая дистанция/направление не задана.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E91",
+      "from": "L1-BASE-COMMON",
+      "to": "L1-DARK-UPPER-PERIMETER",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-049"
+      ],
+      "claim": "Верхняя узкая галерея идёт вдоль всего периметра общего помещения Темной.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E92",
+      "from": "L1-DARK-UPPER-PERIMETER",
+      "to": "L1-BASE-SLEEP",
+      "type": "access_to",
+      "source_ids": [
+        "LR-B1-050"
+      ],
+      "claim": "Таис проходит по галерее от общего помещения к собственной спальне.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E93",
+      "from": "L1-DARK-UPPER-PERIMETER",
+      "to": "L1-BASE-COMMON",
+      "type": "above_floor",
+      "source_ids": [
+        "LR-B1-049"
+      ],
+      "claim": "Под галереей сидят дети; значит она расположена выше основной отметки общего пола.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E94",
+      "from": "L1-ENG-CABLE-NICHES",
+      "to": "L1-STRAIGHT-FREIGHT",
+      "type": "route_to",
+      "source_ids": [
+        "LR-B1-044"
+      ],
+      "claim": "Из узких инженерных ниш выход в прямой широкий грузовой проход.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E95",
+      "from": "L1-DARK-ENTRY-DOOR",
+      "to": "L1-ENG-CABLE-NICHES",
+      "type": "path_with_corridors_to",
+      "source_ids": [
+        "LR-B1-045"
+      ],
+      "claim": "Эмма вернулась из ниш к наружной двери базы через технические коридоры; прямого соприкосновения нет.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E96",
+      "from": "L1-BASES",
+      "to": "L1-DARK-ENTRY-DOOR",
+      "type": "access_to",
+      "source_ids": [
+        "LR-B1-045"
+      ],
+      "claim": "Вход с технического коридора в обитаемые базы с кодовым замком.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E97",
+      "from": "L2",
+      "to": "LINK-LIFT-L2-L1",
+      "type": "elevator_to",
+      "source_ids": [
+        "LR-B1-047"
+      ],
+      "claim": "Из жилого Второго уровня доступен лифт вниз до Нижнего.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E98",
+      "from": "LINK-LIFT-L2-L1",
+      "to": "L1",
+      "type": "elevator_to",
+      "source_ids": [
+        "LR-B1-047"
+      ],
+      "claim": "Лифт прибывает в тёмный коридор Нижнего.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E99",
+      "from": "L1-STRAIGHT-FREIGHT",
+      "to": "L1-ANGAR-HALL",
+      "type": "possibly_same_sector",
+      "source_ids": [
+        "LR-B1-044"
+      ],
+      "claim": "Не доказано тождество двух ангарных коридоров; запрет на слияние по одному описанию. (возможная идентичность, не доказанная; разные узлы остаются раздельными)",
+      "state": "RECHECK_REQUIRED",
+      "metric": null
+    },
+    {
+      "id": "E100",
+      "from": "L2",
+      "to": "L2-RESIDENTIAL-RING",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "claim": "Двухэтажный жилой блок находится внутри глобального Второго.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E101",
+      "from": "L2-RESIDENTIAL-RING",
+      "to": "L2-RESIDENTIAL-UPPER",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "claim": "Каюты на верхней отметке жилого кольца.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E102",
+      "from": "L2-RESIDENTIAL-RING",
+      "to": "L2-RESIDENTIAL-LOWER",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "claim": "Магазины, игры и туннели на нижней отметке жилого кольца.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E103",
+      "from": "L2-RESIDENTIAL-UPPER",
+      "to": "L2-RESIDENTIAL-LOWER",
+      "type": "above",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "claim": "Второй этаж кают расположен выше первого этажа общественных помещений.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E104",
+      "from": "L2-RESIDENTIAL-RING",
+      "to": "L2-GREEN",
+      "type": "encircles",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "claim": "Кольцевой жилой блок огибает внутреннюю Зеленую магистраль.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E105",
+      "from": "L2-RESIDENTIAL-UPPER",
+      "to": "L2-CABINS",
+      "type": "includes",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "claim": "Каюты входят в верхнюю часть жилого блока.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E106",
+      "from": "L2-RESIDENTIAL-LOWER",
+      "to": "L2-ORANGE",
+      "type": "tunnels_to",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "claim": "Из нижних магазинов и игровых через многочисленные туннели на Оранжевую.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E107",
+      "from": "L1-BASE-COMMON",
+      "to": "L1-BASE-COMMON-COOK-TABLE",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-052"
+      ],
+      "claim": "Стол приготовления пищи в общей.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E108",
+      "from": "L1-BASE-COMMON",
+      "to": "L1-BASE-COMMON-DINE-TABLE",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-052"
+      ],
+      "claim": "Отдельный стол для приёма пищи.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E109",
+      "from": "L1-BASES",
+      "to": "L1-BASE-OUTER-GATE",
+      "type": "access_to",
+      "source_ids": [
+        "LR-B1-055"
+      ],
+      "claim": "Внешняя дверь расположена в подходном коридоре баз.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E110",
+      "from": "L1-BASE-OUTER-GATE",
+      "to": "L1-BASE-INNER-GATE",
+      "type": "sequential_security_barrier",
+      "source_ids": [
+        "LR-B1-055"
+      ],
+      "claim": "Эти две двери последовательны, однако между ними длинный коридор и возможные ответвления.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E111",
+      "from": "L1-BASES",
+      "to": "L1-BASE-CORRIDOR-STORES",
+      "type": "includes",
+      "source_ids": [
+        "LR-B1-055"
+      ],
+      "claim": "Кладовки в конце коридора между базами.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E112",
+      "from": "L3-INNER",
+      "to": "L3-INNER-SECTOR-GATE",
+      "type": "access_to",
+      "source_ids": [
+        "LR-B1-060"
+      ],
+      "claim": "Стенка внутреннего круга имеет широкую опускающуюся дверь.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E113",
+      "from": "L3-INNER-SECTOR-GATE",
+      "to": "L3-CHILD-LAB-ENTRANCE",
+      "type": "route_to",
+      "source_ids": [
+        "LR-B1-060"
+      ],
+      "claim": "За опускающейся дверью внутренняя зона с голографическим указателем Детского блока.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E114",
+      "from": "L3-CHILD-LAB-ENTRANCE",
+      "to": "L3-CHILD-LAB",
+      "type": "door_to",
+      "source_ids": [
+        "LR-B1-060"
+      ],
+      "claim": "Двойные двери ведут в полутёмный высокий зал кувезов.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E115",
+      "from": "L1-STAIR-UP",
+      "to": "L3-UP-ACCESS-LOBBY",
+      "type": "route_to",
+      "source_ids": [
+        "LR-B1-059"
+      ],
+      "claim": "Из служебной лестницы и люка попадают в тёмный переход перед открытием двери.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E116",
+      "from": "L3-UP-ACCESS-LOBBY",
+      "to": "L3-INNER",
+      "type": "route_to",
+      "source_ids": [
+        "LR-B1-059"
+      ],
+      "claim": "После кодовой двери герои выходят в белый коридор около внутреннего круга.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E117",
+      "from": "L3-INNER",
+      "to": "L3-OUTER",
+      "type": "corridor_to",
+      "source_ids": [
+        "LR-B1-059"
+      ],
+      "claim": "Белый коридор от внутреннего круга ведёт к внешнему и расширяется для грузовых роботов.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E118",
+      "from": "L3-OUTER",
+      "to": "L3-DOCK",
+      "type": "route_to",
+      "source_ids": [
+        "LR-B1-059"
+      ],
+      "claim": "По направлению вправо от разветвления находятся крейсерские ангары и шлюзы; направление привязано к пути детей.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E119",
+      "from": "L3-REST",
+      "to": "L3-REST-UPPER-GALLERY",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "claim": "Верхняя галерея огибает круглый зал по периметру.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E120",
+      "from": "L3-REST",
+      "to": "L3-REST-UPPER-STAIRS",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "claim": "Из основной части зала металлическая лестница ведёт наверх.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E121",
+      "from": "L3-REST-UPPER-STAIRS",
+      "to": "L3-REST-UPPER-GALLERY",
+      "type": "stairs_to",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "claim": "Подъём по лестнице на галерею.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E122",
+      "from": "L3-REST-UPPER-GALLERY",
+      "to": "L3-REST-GALLERY-DEADEND",
+      "type": "branches_to",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "claim": "Из галереи идут тупиковые Т-образные коридоры с ДНК-дверями.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E123",
+      "from": "L3-REST-UPPER-GALLERY",
+      "to": "L3-REST",
+      "type": "above_floor",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "claim": "Галерея расположена над залом, из неё видно расположенные внизу диваны и столы.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E124",
+      "from": "L3-REST-GALLERY-DEADEND",
+      "to": "L3-UPPER-VENT-ESCAPE",
+      "type": "route_with_turns_to",
+      "source_ids": [
+        "LR-B1-63"
+      ],
+      "claim": "Из сектора галереи бегут по низкому коридору, затем в вентиляционную шахту; прямой проход не доказан.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E125",
+      "from": "L3-UPPER-VENT-ESCAPE",
+      "to": "L2-VENT-LOW-GRILLE",
+      "type": "vertical_duct_to",
+      "source_ids": [
+        "LR-B1-64"
+      ],
+      "claim": "Эмма и Коля спускаются из Третьего в вентиляцию Второго.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E126",
+      "from": "L2-VENT-LOW-GRILLE",
+      "to": "L2-CABINS",
+      "type": "tunnel_to",
+      "source_ids": [
+        "LR-B1-64"
+      ],
+      "claim": "От выхода рядом с автоматом путь через резиновый коридор в жилой сектор.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E127",
+      "from": "L1-RETURN-FORK",
+      "to": "L1-BASES",
+      "type": "right_short_left_long",
+      "source_ids": [
+        "LR-B1-65"
+      ],
+      "claim": "Правая ветка к базе короче, левая длиннее, обе связаны с базами; ориентация относительна движению.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E128",
+      "from": "L1-OVAL",
+      "to": "L1-OVAL-PAINTED",
+      "type": "interior_has",
+      "source_ids": [
+        "LR-B1-65"
+      ],
+      "claim": "Расписанные стены, столы и стулья Овальной базы.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E129",
+      "from": "L3-REST-GALLERY-DEADEND",
+      "to": "L3-ADULT-RETREAT-SUITE",
+      "type": "biometric_door_to",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "claim": "Из тупикового верхнего прохода галереи одна дверь с человеческим ДНК допускает в защищенную каюту; точная дверь среди пары пока требует сверки",
+      "state": "TOPOLOGY_INFERRED",
+      "metric": null
+    },
+    {
+      "id": "E130",
+      "from": "L3-ADULT-RETREAT-SUITE",
+      "to": "L3-ADULT-RETREAT-LIVING",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "claim": "Общая комната",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E131",
+      "from": "L3-ADULT-RETREAT-SUITE",
+      "to": "L3-ADULT-RETREAT-WET",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "claim": "Отдельная ванная",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E132",
+      "from": "L3-ADULT-RETREAT-SUITE",
+      "to": "L3-ADULT-RETREAT-BED",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-068"
+      ],
+      "claim": "Отдельная спальня",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E133",
+      "from": "L3-ADULT-RETREAT-LIVING",
+      "to": "L3-ADULT-RETREAT-WET",
+      "type": "door_to",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "claim": "Первая дверь",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E134",
+      "from": "L3-ADULT-RETREAT-LIVING",
+      "to": "L3-ADULT-RETREAT-BED",
+      "type": "door_to",
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "claim": "Вторая дверь",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E135",
+      "from": "L3-INNER",
+      "to": "L3-DNA-HUMAN-LOCKS",
+      "type": "historic_access_control",
+      "source_ids": [
+        "LR-B1-070"
+      ],
+      "claim": "Изоляция людей после распространения вируса, позднее переоборудование дверей",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E136",
+      "from": "L3-INNER",
+      "to": "L3-STAFF-FOOD-STORES",
+      "type": "historic_supply_expedition",
+      "source_ids": [
+        "LR-B1-070"
+      ],
+      "claim": "Вылазки из защищённого кольца по общим коридорам к кладовым, без прямого примыкания",
+      "state": "TOPOLOGY_INFERRED",
+      "metric": null
+    },
+    {
+      "id": "E137",
+      "from": "L3-ADULT-RETREAT-LIVING",
+      "to": "L3-ARCHIVE-PLAN-SET",
+      "type": "contains",
+      "source_ids": [
+        "LR-B1-069"
+      ],
+      "claim": "Событие воспроизведения записи в жилой комнате",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E138",
+      "from": "L1-BOAT-LOCK",
+      "to": "L1-BOAT-LOCK-OUTER-HATCH",
+      "type": "contains",
+      "source_ids": [
+        "LR-B2-021"
+      ],
+      "claim": "Шлюзовая камера включает наружный круглый проём с раздвижными треугольными створками.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E139",
+      "from": "L1-ANGAR",
+      "to": "L1-BOAT-LOCK",
+      "type": "pressure_sealed_access_to",
+      "source_ids": [
+        "LR-B2-021"
+      ],
+      "claim": "При выходе катера из ангара в шлюз со стороны ангара герметично закрывается дверь и откачивается воздух. Ангар и шлюз — разные объёмы.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E140",
+      "from": "L1-BOAT-LOCK",
+      "to": "L1-ANGAR",
+      "type": "comparable_spatial_volume_nonmetric",
+      "source_ids": [
+        "LR-B2-021"
+      ],
+      "claim": "Шлюз описан почти столь же просторным, как ангар. Только качественное соотношение габаритов, точные размеры неизвестны.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E141",
+      "from": "L3-BRIDGE",
+      "to": "L3-MAIN-LIFTS-HALL",
+      "type": "route_via_two_turns",
+      "source_ids": [
+        "LR-B2-027"
+      ],
+      "claim": "Эмма после двух поворотов от командной рубки достигает широкого коридора к главным лифтам; это маршрут, не непосредственная смежная дверь.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E142",
+      "from": "L3-MAIN-LIFTS-HALL",
+      "to": "L3-WORKSHOP-DOOR",
+      "type": "route_to_production_gate",
+      "source_ids": [
+        "LR-B2-027"
+      ],
+      "claim": "Широкий коридор Третьего доводит к закрытым дверям производственного цеха.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E143",
+      "from": "L3-CREW",
+      "to": "L3-CHILD-LAB",
+      "type": "near_not_direct_door",
+      "source_ids": [
+        "LR-B2-026"
+      ],
+      "claim": "Детский блок с кувезами расположен рядом с жилыми каютами взрослого сектора, общая дверь не доказана.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E144",
+      "from": "L1-SEALED",
+      "to": "L1-ANGAR-HALL",
+      "type": "access_route_by_old_corridor",
+      "source_ids": [
+        "LR-B2-017"
+      ],
+      "claim": "Эмма и Коля проходят от старой запечатанной двери через просторный коридор к ангарному проёму, промежуточные узлы и длина неизвестны.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E145",
+      "from": "L3-INNER",
+      "to": "L3-ENERGY-APPROACH",
+      "type": "contains",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Из внутреннего круга Третьего есть проход к энергомодулю.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E146",
+      "from": "L3-CHILD-LAB",
+      "to": "L3-ENERGY-APPROACH",
+      "type": "behind_not_proven_direct_door",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Подход расположен за Детским блоком, прямая внутренняя дверь между комнатами не доказана.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E147",
+      "from": "L3-ENERGY-APPROACH",
+      "to": "L3-ENERGY-GATE",
+      "type": "ends_at_door",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "В узком коридоре единственная защищенная дверь.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E148",
+      "from": "L3-ENERGY-GATE",
+      "to": "CORE-ENERGY-GALLERY",
+      "type": "opens_to",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "После открытия двери можно попасть на круглую металлическую галерею.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E149",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "CORE-ENERGY-GALLERY",
+      "type": "contains",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "В высоком круглом помещении имеется галерея.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E150",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "CORE-ENERGY",
+      "type": "contains",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Внутри центрального круглого объема размещена колба энергоустановки.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E151",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L1",
+      "type": "spans_global_level",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Инженерный объем уходит в нижнюю часть станции.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E152",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L2",
+      "type": "spans_global_level",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Инженерный объем связывает Второй уровень.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E153",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L3",
+      "type": "spans_global_level",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Инженерный объем связан с Третьим уровнем и его входом.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E154",
+      "from": "CORE-ENERGY-GALLERY",
+      "to": "CORE-ENERGY",
+      "type": "circumferential_overlook",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Галерея окружает центральную колбу.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E155",
+      "from": "L3-CHILD-LAB",
+      "to": "CORE-ENERGY-ACCESS",
+      "type": "behind_child_block_not_door",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Внутри Третьего проход к энергомодулю располагается непосредственно за Детским блоком, доступ по отдельному коридору.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E156",
+      "from": "CORE-ENERGY-ACCESS",
+      "to": "CORE-ENERGY-GALLERY",
+      "type": "single_locked_door_to",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Из узкого полутёмного коридора через одну запираемую дверь герои входят в круглое помещение энергомодуля на кольцевую галерею.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E158",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "CORE-ENERGY-GALLERY",
+      "type": "gallery_at_upper_access",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Галерея с металлическими перилами расположена на высоте входа с Третьего и огибает круглый объём.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E159",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L1",
+      "type": "vertical_extent_in_level_no_access_proven",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Центральный объём охватывает Нижний уровень; прямая дверь на этот уровень из центральной шахты пока не доказана.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E160",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L2",
+      "type": "vertical_extent_in_level_no_access_proven",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Центральный объём охватывает Второй уровень; наличие доступного выхода из шахты на Второй не доказано.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E161",
+      "from": "CORE-ENERGY-SHAFT",
+      "to": "L3",
+      "type": "vertical_extent_in_level_no_access_proven",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Центральный объём выходит на Третий уровень; подтверждена галерея с отдельным запираемым входом.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E162",
+      "from": "CORE-ENERGY-GALLERY",
+      "to": "CORE-ENERGY",
+      "type": "overlooks_transparent_energy_column",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "Из галереи персонажи наблюдают прозрачную вертикальную колбу энергомодуля, но её высота и диаметр неизвестны.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E163",
+      "from": "CORE-ENERGY-GALLERY",
+      "to": "CORE-ENERGY-ACCESS-STEPS",
+      "type": "ascends_to",
+      "source_ids": [
+        "LR-B2-040"
+      ],
+      "claim": "От кольцевой галереи при эвакуации поднимаются по ступеням к защищённой двери.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E164",
+      "from": "CORE-ENERGY-ACCESS-STEPS",
+      "to": "L3-ENERGY-GATE",
+      "type": "leads_to",
+      "source_ids": [
+        "LR-B2-040"
+      ],
+      "claim": "Локальные ступени выводят к закрываемой входной двери энергоотсека.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E165",
+      "from": "L3",
+      "to": "L3-MEDICAL-ROOM",
+      "type": "contains",
+      "source_ids": [
+        "LR-B2-042"
+      ],
+      "claim": "Медицинское диагностическое помещение, фактически посещённое героями на Третьем.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E166",
+      "from": "L3-BRIDGE",
+      "to": "L3-MEDICAL-ROOM",
+      "type": "reachable_via_third_corridors",
+      "source_ids": [
+        "LR-B2-042"
+      ],
+      "claim": "После событий у энергомодуля герои идут по третьему уровню к медицинскому отсеку; непосредственная смежная дверь с рубкой не доказана.",
+      "state": "TEXT_DIRECT",
+      "metric": null
+    },
+    {
+      "id": "E167",
+      "from": "CORE-ENERGY-ACCESS",
+      "to": "L3-ENERGY-APPROACH",
+      "type": "alias_to_physical_corridor",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "claim": "CORE-ENERGY-ACCESS сохраняется как логический маршрутный идентификатор и не обозначает вторую физическую коридорную полость; физическое помещение L3-ENERGY-APPROACH.",
+      "state": "TOPOLOGY_INFERRED",
+      "metric": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q01",
+      "priority": "BLOCKER",
+      "text": "Найти эпизод карты Первого уровня после взлома лона; сопоставить состояние до/после."
+    },
+    {
+      "id": "Q02",
+      "priority": "BLOCKER",
+      "text": "Перепроверить энергомодуль, осевое расположение, диапазон высот и отношение к Главной площади."
+    },
+    {
+      "id": "Q03",
+      "priority": "BLOCKER",
+      "text": "Установить реальные габариты трех уровней по тексту и иллюстрациям; без псевдоразмеров."
+    },
+    {
+      "id": "Q04",
+      "priority": "BLOCKER",
+      "text": "Восстановить все маршруты Нижнего уровня: Овальная, Темная, Дикая базы, ангары, склад, мусорка, заблокированный проход."
+    },
+    {
+      "id": "Q05",
+      "priority": "HIGH",
+      "text": "Проработать все книги III и IV с разграничением МОАГа и других станций."
+    },
+    {
+      "id": "Q06",
+      "priority": "HIGH",
+      "text": "Проверить количество/планировки баз 3 и 4 и их исторические названия."
+    },
+    {
+      "id": "Q07",
+      "priority": "HIGH",
+      "text": "Разметить мебель, отделку, освещение, энергоснабжение как зависимые слои, без преждевременной записи в BIM."
+    },
+    {
+      "id": "Q08",
+      "priority": "HIGH",
+      "text": "Подтвердить взаимную ориентацию капитанской рубки, детского блока, отдыха, шлюзов и производства."
+    },
+    {
+      "id": "Q09",
+      "priority": "BLOCKER",
+      "text": "Проверить гипотезу двух палуб внутри Первого уровня и дополнительного двухъярусного нижнего этажа. Книжный факт: под известным Нижним есть помещения; НЕ доказано наличие четырёх сплошных перекрытий. Сравнить размеры и z-связи баз, старых грузовых ангаров, катеров, высоких залов, энергетического ядра и операторских."
+    },
+    {
+      "id": "Q10",
+      "priority": "BLOCKER",
+      "text": "Отделить вложенные палубы Нижнего блока от глобальных трёх уровней. Найти в книгах точную формулировку числа полноценных этажей, их протяженности, на каких отметках находятся базы и ангары, и как связаны частичные антресоли."
+    },
+    {
+      "id": "Q11",
+      "priority": "HIGH",
+      "text": "Проверить конструкцию мостика круглого зала: верхняя полукруглая галерея → дверь → операторская ручных шлюзов → жилая комната. Установить обратный проход и доступ с уровня пола."
+    },
+    {
+      "id": "Q12",
+      "priority": "HIGH",
+      "text": "Где размещена лифтовая шахта Третий→Нижний относительно производственных коридоров, станции энергомодуля и кольцевой сети? Доказан маршрут, не XY-координаты."
+    },
+    {
+      "id": "Q13",
+      "priority": "HIGH",
+      "text": "Установить старую нумерацию баз станции (в замках названы 3 и 4), отличать её от трёх нынешних поселений; проверить были ли базы 1 и 2 и число исходных палуб Нижнего."
+    },
+    {
+      "id": "Q13",
+      "priority": "BLOCKER",
+      "text": "Определить соотношение галереи общего помещения Темной базы, короткой лестницы у ванной, дверей отдельных спален и длинной внешней лестницы. Верхний ярус доказан, число полноценных палуб не доказано."
+    },
+    {
+      "id": "Q14",
+      "priority": "HIGH",
+      "text": "Проверить: прямой грузовой коридор Эммы и ранее встреченный полукруглый ангарный переход — разные участки или общая система? Не выводить автоматом прохождение от внутреннего к внешнему кольцу."
+    }
+  ],
+  "station_identity": {
+    "canonical_station_id": "MOAG",
+    "identity_document": "docs/research/apa-results/moag/v2/station_identity.json",
+    "same_physical_entity_names": [
+      "Млечный Путь",
+      "МОАГ"
+    ],
+    "physical_object_id": "SHIP-MLP-MOAG-001",
+    "do_not_split_by_name": true,
+    "do_not_merge_other_stations": true,
+    "source_status": "DIRECT_TEXT_VERIFIED",
+    "primary_text_locator": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=11",
+    "chronology_caution": "Переименование имени станции и переход управления роботам — две отдельные временные оси, дата их совпадения пока не доказана."
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "schema": "APA-MOAG-CONTIGUOUS-PRIMARY-RECHECK/1",
+  "date": "2026-10-19",
+  "book_id": "B2",
+  "physical_station_id": "SHIP-MLP-MOAG-001",
+  "status": "SOURCE_READ_WITH_PROVENANCE_NOT_METRIC_GEOMETRY",
+  "scope": {
+    "start": 34,
+    "end": 42
+  },
+  "records": [
+    {
+      "page_id": "B2-034",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=34",
+      "location": "MOAG",
+      "architectural_summary": "К центру станции: L3 внутренний круг за Детским блоком → узкий полутёмный проход → защищённая дверь → круговой верхний периметр энергомодуля; центральный объём охватывает все три глобальных уровня; вниз по стенкам ~15 м по впечатлению Эммы.",
+      "evidence_class": "DIRECT_TEXT",
+      "absolute_xy": null,
+      "absolute_z_m": null
+    },
+    {
+      "page_id": "B2-035",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=35",
+      "location": "MIXED_MOAG_OTHER_VESSEL",
+      "architectural_summary": "На МОАГе непрерывная круговая галерея, по кабелям распространяются механизмы-паразиты; после смены сцены квадратное отверстие в полу и прозрачные двери относятся к чужому крейсеру Иминуя.",
+      "evidence_class": "DIRECT_TEXT_AND_EXCLUSION",
+      "absolute_xy": null,
+      "absolute_z_m": null
+    },
+    {
+      "page_id": "B2-036",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=36",
+      "location": "OTHER_VESSEL_NOT_MOAG",
+      "architectural_summary": "Только чужой крейсер Иминуя: сервисная рубка/наладчики, туалет, пищевая ниша, стеклянные двери и серверные платы. Не переносить в план МОАГа.",
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "absolute_xy": null,
+      "absolute_z_m": null
+    },
+    {
+      "page_id": "B2-037",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=37",
+      "location": "OTHER_VESSEL_NOT_MOAG",
+      "architectural_summary": "Только крейсер Иминуя: главная консоль/сервер, встроенный пищевой агрегат, гладкие стены, пол. Фраза об оборудовании МОАГа дана как сравнение, а не физическая сцена.",
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "absolute_xy": null,
+      "absolute_z_m": null
+    },
+    {
+      "page_id": "B2-038",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=38",
+      "location": "OTHER_VESSEL_NOT_MOAG_PLUS_MOAG_MEMORY",
+      "architectural_summary": "Нахождение на крейсере Иминуя, душ со встроенным дозатором и сушкой, белые коридоры не относятся к МОАГу. В воспоминании героя на МОАГе роботы имитировали цикл день/ночь освещением двух обитаемых уровней, но точные часы не указаны.",
+      "evidence_class": "EXCLUSION_PLUS_HISTORICAL_MEMORY",
+      "absolute_xy": null,
+      "absolute_z_m": null
+    },
+    {
+      "page_id": "B2-039",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=39",
+      "location": "OTHER_VESSEL_NOT_MOAG_PLUS_MOAG_MEMORY",
+      "architectural_summary": "Таис и Фёдор ночуют у пищевого автомата крейсера; чужая геометрия исключена. Воспоминание Эммы о Втором: детская площадка рядом с Главной площадью и центральная голографическая панель с правилами, заметная из зоны игр.",
+      "evidence_class": "EXCLUSION_PLUS_MEMORY",
+      "absolute_xy": null,
+      "absolute_z_m": null
+    },
+    {
+      "page_id": "B2-040",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=40",
+      "location": "MOAG",
+      "architectural_summary": "Во время атаки у энергомодуля Эмма и Коля отступают ВВЕРХ по ступеням от круговой галереи к защищённой входной двери; закрывают её локально вручную. После закрытия часть вредоносных устройств остаётся в коридоре снаружи.",
+      "evidence_class": "DIRECT_TEXT",
+      "absolute_xy": null,
+      "absolute_z_m": null
+    },
+    {
+      "page_id": "B2-041",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=41",
+      "location": "MOAG",
+      "architectural_summary": "Снаружи энергомодуля длинный белый коридор ведёт обратно к рубке Третьего; около поворота есть небольшая ниша-стоянка примерно для пяти андроидов. Двери рубки плотные, герои считают их защищёнными, жизнеобеспечение и силовое поле переведены в ручной режим.",
+      "evidence_class": "DIRECT_TEXT",
+      "absolute_xy": null,
+      "absolute_z_m": null
+    },
+    {
+      "page_id": "B2-042",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=42",
+      "location": "MOAG",
+      "architectural_summary": "В медицинском отсеке Третьего есть диагностический аппарат со сканирующей камерой: пациент лежит на движущейся каталке, входящей внутрь круглого приёмного зева; возле него голографический экран управления. Эмма и Коля посещают медотсек, затем планируют спуститься на Второй; факт спуска этой страницей ещё не подтверждён.",
+      "evidence_class": "DIRECT_TEXT",
+      "absolute_xy": null,
+      "absolute_z_m": null
+    }
+  ],
+  "constraints": [
+    {
+      "id": "VCORE-34",
+      "type": "CENTRAL_VOLUME_THROUGH_3_GLOBAL_LEVELS",
+      "support": [
+        "B2-034"
+      ],
+      "statement": "Central energy-core room and transparent module unite the three recognized global levels; no extra story is created."
+    },
+    {
+      "id": "VCORE-15M",
+      "type": "APPROXIMATE_RELATIVE_VERTICAL_DEPTH",
+      "support": [
+        "B2-034"
+      ],
+      "value_approx_m": 15,
+      "measurement_status": "CHARACTER_ESTIMATE_NON_METRIC_APPROVAL",
+      "statement": "Top third gallery viewpoint to lower interior wall region described as about fifteen meters; no surveyed height or story-to-story elevation."
+    },
+    {
+      "id": "VCORE-40",
+      "type": "UP_FROM_GALLERY_TO_EXIT_STEPS",
+      "support": [
+        "B2-040"
+      ],
+      "statement": "Characters move upward on steps toward access door from energy-core gallery; local elevation difference, count and exact Z unknown."
+    },
+    {
+      "id": "ACCESS-CORE",
+      "type": "DOOR_OPERATION_STORY_PHASE",
+      "support": [
+        "B2-034",
+        "B2-040"
+      ],
+      "statement": "Access door hacked on entry, then manually closed on retreat; ability of Martin to operate this entrance restricted."
+    },
+    {
+      "id": "ACCESS-BRIDGE",
+      "type": "PATH_TO_BRIDGE_AND_SERVICE_NICHE",
+      "support": [
+        "B2-041"
+      ],
+      "statement": "A white corridor near the energy-module exit leads toward third-level bridge and passes an alcove of security robots."
+    },
+    {
+      "id": "L3-MED",
+      "type": "THIRD_LEVEL_MEDICAL_EQUIPMENT",
+      "support": [
+        "B2-042"
+      ],
+      "statement": "Medical examination device with moving couch and cylindrical intake and adjacent holographic controls is physical, installed equipment."
+    }
+  ],
+  "exclusions": [
+    {
+      "pages": [
+        "B2-035",
+        "B2-036",
+        "B2-037",
+        "B2-038",
+        "B2-039"
+      ],
+      "station": "CRUISER_IMINUYA_NOT_MOAG",
+      "warning": "Scene switch inside pages must not merge alien cruiser architecture into station."
+    }
+  ],
+  "merging": "Fetch latest canonical sources and skip already-reviewed pages; do not duplicate known observations. Keep physical geometry write disabled.",
+  "geometry_authorized": false,
+  "native_write_allowed": false,
+  "next_page": "B2-043"
+}
