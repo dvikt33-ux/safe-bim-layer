@@ -137,6 +137,38 @@ class EvidenceGraphR06Tests(unittest.TestCase):
             MOD.assemble(self.graph, self.fragments, self.routes,
                          self.bounds, explicit_bridges=invalid)
 
+    def test_referential_context_overlay_not_confused_with_walkability(self):
+        result = self.result
+        counts = result["counts"]
+        self.assertLess(counts["context_affiliation_components_with_physical_indices"],
+                        counts["after_routes_physical_components"])
+        self.assertGreater(counts["context_component_promotions_joined"], 0)
+        context = result["referential_context_overlay"]
+        self.assertTrue(context["not_a_travel_graph"])
+        self.assertTrue(context["not_physical_room_unification"])
+        self.assertTrue(all(not g["metric_layout_proven"]
+                            for g in context["source_backed_affiliation_groups"]))
+        strict = MOD.trace_between(result, "MOAG-G-0001", "M-STA-L1-001")
+        # A referential promotion never fabricates a traversable connector:
+        # the chain may exist through other evidence, but not via promotion.
+        self.assertTrue(all(not step["edge_id"].startswith("PROMOTION::")
+                            for step in strict["edge_chain"]))
+
+    def test_stage_counters_monotonically_reduce_components(self):
+        counts = self.result["counts"]
+        stages = [counts[k] for k in (
+            "after_r04_physical_components", "after_r03_physical_components",
+            "after_r05_physical_components",
+            "after_explicit_physical_components",
+            "after_routes_physical_components")]
+        self.assertEqual(stages, sorted(stages, reverse=True))
+        self.assertEqual(stages[0] - stages[1],
+                         counts["r03_local_relation_component_reductions"])
+        self.assertEqual(stages[1] - stages[2],
+                         counts["r05_typed_link_component_reductions"])
+        self.assertEqual(stages[2] - stages[3],
+                         counts["r06_explicit_link_component_reductions"])
+
     def test_narrative_gap_is_not_connected_across_unseen_route(self):
         r = self.result
         self.assertGreater(r["counts"]["narrative_gaps"], 0)
