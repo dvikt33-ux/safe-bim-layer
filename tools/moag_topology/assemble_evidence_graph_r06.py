@@ -31,9 +31,10 @@ GAP = "NARRATIVE_GAP"
 
 
 class Components:
-    def __init__(self, ids):
+    def __init__(self, ids, physical_ids=()):
         self.parent = {x: x for x in ids}
         self.size = {x: 1 for x in ids}
+        self.has_physical = {x: x in physical_ids for x in ids}
 
     def root(self, x):
         while self.parent[x] != x:
@@ -49,6 +50,7 @@ class Components:
             a, b = b, a
         self.parent[b] = a
         self.size[a] += self.size[b]
+        self.has_physical[a] = self.has_physical[a] or self.has_physical[b]
         return True
 
     def groups(self):
@@ -111,8 +113,8 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
     ids = {n["id"] for n in nodes}
     if len(ids) != len(nodes):
         raise ValueError("DUPLICATE_GRAPH_VERTEX")
-    uf = Components(ids)
-    edges, bridges, conflicts, gaps, verticals = [], [], [], [], []
+    uf = Components(ids, kinds)
+    edges, bridges, physical_bridges, conflicts, gaps, verticals = [], [], [], [], [], []
     evidence_ids = set()
 
     def add(a, b, eid, kind, sources, *, connect=True, detail=None):
@@ -121,6 +123,10 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         if not sources:
             raise ValueError("UNSOURCED_ASSEMBLY_EDGE: " + eid)
         evidence_ids.add(eid)
+        root_a, root_b = uf.root(a), uf.root(b)
+        links_two_physical_islands = (connect and root_a != root_b
+            and uf.has_physical[root_a] and uf.has_physical[root_b]
+            and kind in ("ROUTE_VISITS_INDEX", "OBSERVED_ROUTE_ORDER_NOT_DIRECT_DOOR"))
         joined = uf.union(a, b) if connect else False
         edge = {"id": eid, "from": a, "to": b, "type": kind,
                 "source_ids": sources, "joins_components": joined,
@@ -131,6 +137,10 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         if joined:
             bridges.append({"edge_id": eid, "type": kind, "source_ids": sources,
                             "from": a, "to": b})
+            if links_two_physical_islands:
+                physical_bridges.append({"edge_id": eid, "from": a, "to": b,
+                                         "source_ids": sources,
+                                         "result": "PHYSICAL_EVIDENCE_COMPONENTS_CONNECTED_NOT_METRIC"})
         return joined
 
     for e in graph["source_relationships"]:
@@ -256,6 +266,7 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
             "after_routes_components": len(component_members),
             "route_bridge_events": sum(e["joins_components"] for e in edges
                                        if e["type"].startswith(("ROUTE_", "OBSERVED_"))),
+            "physical_fragment_bridge_events": len(physical_bridges),
             "narrative_gaps": len(gaps), "vertical_order_constraints": len(verticals),
             "crosswalk_review_conflicts": len(conflicts),
             "inferred_route_level_candidates": len(resolved),
@@ -271,6 +282,7 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
             for i, (members, p) in enumerate(zip(component_members, physical_only))
         ],
         "bridge_events": bridges,
+        "physical_fragment_bridge_events": physical_bridges,
         "route_location_review": conflicts,
         "narrative_gaps": gaps, "vertical_partial_order": verticals,
         "new_level_candidates": resolved,
@@ -308,7 +320,9 @@ def main():
         arg.out.write_text(payload, encoding="utf-8")
     else:
         print(payload, end="")
-    return 2 if result["status"] == "REVIEW_REQUIRED" else 0
+    return 2 if result["counts"]["area_check_failures"] or any(
+        item["code"] == "VERTICAL_ORDER_CYCLE"
+        for item in result["route_location_review"]) else 0
 
 
 if __name__ == "__main__":
