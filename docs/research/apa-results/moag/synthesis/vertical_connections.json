@@ -1,0 +1,1839 @@
+{
+  "schema": "APA-MOAG-VERTICAL-CONNECTIONS/1",
+  "created": "2026-10-19",
+  "status": "RELATIVE_AND_ROUTE_EVIDENCE_ONLY",
+  "global_hierarchy": {
+    "known_global_levels": [
+      1,
+      2,
+      3
+    ],
+    "nested_local_strata_not_extra_global_levels": true,
+    "absolute_datum_m": null
+  },
+  "source_strata": {
+    "schema": "APA-MOAG-VERTICAL-STRATA/0.1",
+    "status": "SOURCE_GROUNDED_RELATIVE_ELEVATIONS_ONLY",
+    "scope": "Внутренние высотные отметки Первого (Нижнего) глобального уровня МОАГа",
+    "global_level_hierarchy": {
+      "known_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "nested_local_strata_not_extra_global_levels": true,
+      "absolute_datum_m": null
+    },
+    "inequalities": [
+      {
+        "id": "Z01",
+        "higher": "L1-BASES",
+        "lower": "SUB-LOWER-WELL",
+        "relation": "above",
+        "source_ids": [
+          "B1-04"
+        ],
+        "proof": "Боковой выход вертикального спуска к обитаемому Нижнему находится выше неизвестного нижнего колодца",
+        "state": "TEXT_DIRECT",
+        "numeric_delta_m": null
+      },
+      {
+        "id": "Z02",
+        "higher": "L1-CIRCULAR-UPPER-WALK",
+        "lower": "L1-CIRCULAR-HALL",
+        "relation": "above_floor",
+        "source_ids": [
+          "B1-17"
+        ],
+        "proof": "Верхний мостик круглого зала находится почти под потолком над основным полом",
+        "state": "TEXT_DIRECT",
+        "numeric_delta_m": null
+      },
+      {
+        "id": "Z03",
+        "higher": "L1-OPERATORS",
+        "lower": "L1-ANGAR",
+        "relation": "above_floor",
+        "source_ids": [
+          "B2-14"
+        ],
+        "proof": "Операторские кабины расположены почти под потолком ангара, доступ по металлическим лестницам",
+        "state": "TEXT_DIRECT",
+        "numeric_delta_m": null
+      },
+      {
+        "id": "Z04",
+        "higher": "L1-BASE-SLEEP",
+        "lower": "L1-BASE-COMMON",
+        "relation": "upper_sleeper_access_exists",
+        "source_ids": [
+          "B1-10"
+        ],
+        "proof": "В Темной базе есть лестница, ведущая в спальню, но все спальни не обязательно выше общей",
+        "state": "TOPOLOGY_INFERRED",
+        "numeric_delta_m": null
+      },
+      {
+        "id": "Z05",
+        "higher": "L1-CIRCULAR-HALL",
+        "lower": "L1-HALL-STEPS",
+        "relation": "local_step_change_requires_check",
+        "source_ids": [
+          "B1-17"
+        ],
+        "proof": "Несколько ступеней спуска к залу; этот тип связи не означает отдельный этаж и не устанавливает знак высот без геометрического направления",
+        "state": "RECHECK_REQUIRED",
+        "numeric_delta_m": null
+      },
+      {
+        "id": "Z06",
+        "higher": "CORE-ENERGY-GALLERY",
+        "lower": "CORE-ENERGY-SHAFT",
+        "relation": "access_overlooks_downward_volume",
+        "source_ids": [
+          "LR-B2-034"
+        ],
+        "proof": "С кольцевой галереи Третьего видна глубокая центральная камера, проходящая через три уровня; 15 м приблизительная видимая глубина, не геометрическая отметка.",
+        "state": "TEXT_DIRECT",
+        "numeric_delta_m": null
+      }
+    ],
+    "zones": [
+      {
+        "id": "S-L1-1",
+        "label": "Основной обитаемый пояс баз Первого уровня",
+        "node_refs": [
+          "L1-BASES",
+          "L1-INNER"
+        ],
+        "global_level": 1,
+        "deck_index": null,
+        "contiguous_deck": "UNKNOWN",
+        "claimed_footprint_rank": null
+      },
+      {
+        "id": "S-L1-2",
+        "label": "Неизвестные помещения ниже обитаемого пояса",
+        "node_refs": [
+          "SUB-LOWER-WELL"
+        ],
+        "global_level": null,
+        "deck_index": null,
+        "contiguous_deck": "UNKNOWN",
+        "claimed_footprint_rank": null
+      },
+      {
+        "id": "S-L1-3",
+        "label": "Основной ангарный пол Нижнего блока",
+        "node_refs": [
+          "L1-HANGAR-ZONE",
+          "L1-ANGAR-HALL",
+          "L1-ANGAR"
+        ],
+        "global_level": 1,
+        "deck_index": null,
+        "contiguous_deck": "UNKNOWN",
+        "claimed_footprint_rank": null
+      },
+      {
+        "id": "S-L1-4",
+        "label": "Верхние частичные галереи в ангарных/технических объёмах",
+        "node_refs": [
+          "L1-CIRCULAR-UPPER-WALK",
+          "L1-OPERATORS"
+        ],
+        "global_level": 1,
+        "deck_index": null,
+        "contiguous_deck": "PARTIAL_LOCAL_ONLY",
+        "claimed_footprint_rank": null
+      }
+    ],
+    "unproven": [
+      "Четыре сплошных этажа в Нижнем блоке",
+      "Второй этаж Первого уровня перекрывает полный диаметр",
+      "Самая большая площадь связана с самым нижним ярусом",
+      "Высоты и абсолютные отметки всех ярусов",
+      "Установленное прямое соединение между нижним колодцем и ангарным сектором"
+    ],
+    "geometry_write_authorized": false
+  },
+  "confirmed_graph_vertical_edges": [
+    {
+      "edge_id": "E14",
+      "from": "L1-BASE-COMMON",
+      "type": "stairs_to",
+      "to": "L1-BASE-SLEEP",
+      "claim": "Лестница к части спален",
+      "source_ids": [
+        "B1-10"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E17",
+      "from": "L1-STAIR-UP",
+      "type": "connects_vertical",
+      "to": "L3-OUTER",
+      "claim": "Лестница выходит к закрытому коридору Третьего; точное кольцо не доказано",
+      "source_ids": [
+        "B1-14"
+      ],
+      "state": "TOPOLOGY_INFERRED"
+    },
+    {
+      "edge_id": "E18",
+      "from": "L1-VENT",
+      "type": "connects_vertical",
+      "to": "L2-ORANGE",
+      "claim": "Вентиляция приводит на Второй; конкретный выход относительно магистрали переменный",
+      "source_ids": [
+        "B1-02",
+        "B1-04"
+      ],
+      "state": "TOPOLOGY_INFERRED"
+    },
+    {
+      "edge_id": "E29",
+      "from": "L2-GALLERY",
+      "type": "overlooks",
+      "to": "L2-PLAZA",
+      "claim": "Галерея над Главной площадью",
+      "source_ids": [
+        "B1-03"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E57",
+      "from": "SUB-LOWER-WELL",
+      "type": "below",
+      "to": "L1",
+      "claim": "Помещения ниже известного Нижнего уровня; не автоматически уровень L0.",
+      "source_ids": [
+        "B1-04"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E64",
+      "from": "L1-HALL-STEPS",
+      "type": "steps_down_to",
+      "to": "L1-CIRCULAR-HALL",
+      "claim": "Коридорный переход с коротким спуском вниз, без доказательства этажа.",
+      "source_ids": [
+        "B1-17"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E68",
+      "from": "L1-CIRCULAR-STAIRS",
+      "type": "vertical_access",
+      "to": "L1-CIRCULAR-UPPER-WALK",
+      "claim": "Лестница повреждена; до мостика добираются по обломку.",
+      "source_ids": [
+        "B1-17"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E71",
+      "from": "L1-CIRCULAR-UPPER-WALK",
+      "type": "above",
+      "to": "L1-CIRCULAR-HALL",
+      "claim": "Мостик расположен почти под потолком выше пола зала.",
+      "source_ids": [
+        "B1-17"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E79",
+      "from": "LINK-LIFT-SHAFT",
+      "type": "emergency_vertical_exit",
+      "to": "L1-LIFT-SHAFT-EXIT",
+      "claim": "Через потолочный люк кабины, крышу, веревочную лестницу и боковой проём в стене шахты.",
+      "source_ids": [
+        "LR-B1-023"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E93",
+      "from": "L1-DARK-UPPER-PERIMETER",
+      "type": "above_floor",
+      "to": "L1-BASE-COMMON",
+      "claim": "Под галереей сидят дети; значит она расположена выше основной отметки общего пола.",
+      "source_ids": [
+        "LR-B1-049"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E97",
+      "from": "L2",
+      "type": "elevator_to",
+      "to": "LINK-LIFT-L2-L1",
+      "claim": "Из жилого Второго уровня доступен лифт вниз до Нижнего.",
+      "source_ids": [
+        "LR-B1-047"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E98",
+      "from": "LINK-LIFT-L2-L1",
+      "type": "elevator_to",
+      "to": "L1",
+      "claim": "Лифт прибывает в тёмный коридор Нижнего.",
+      "source_ids": [
+        "LR-B1-047"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E103",
+      "from": "L2-RESIDENTIAL-UPPER",
+      "type": "above",
+      "to": "L2-RESIDENTIAL-LOWER",
+      "claim": "Второй этаж кают расположен выше первого этажа общественных помещений.",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E121",
+      "from": "L3-REST-UPPER-STAIRS",
+      "type": "stairs_to",
+      "to": "L3-REST-UPPER-GALLERY",
+      "claim": "Подъём по лестнице на галерею.",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E123",
+      "from": "L3-REST-UPPER-GALLERY",
+      "type": "above_floor",
+      "to": "L3-REST",
+      "claim": "Галерея расположена над залом, из неё видно расположенные внизу диваны и столы.",
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E125",
+      "from": "L3-UPPER-VENT-ESCAPE",
+      "type": "vertical_duct_to",
+      "to": "L2-VENT-LOW-GRILLE",
+      "claim": "Эмма и Коля спускаются из Третьего в вентиляцию Второго.",
+      "source_ids": [
+        "LR-B1-64"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E151",
+      "from": "CORE-ENERGY-SHAFT",
+      "type": "spans_global_level",
+      "to": "L1",
+      "claim": "Инженерный объем уходит в нижнюю часть станции.",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E152",
+      "from": "CORE-ENERGY-SHAFT",
+      "type": "spans_global_level",
+      "to": "L2",
+      "claim": "Инженерный объем связывает Второй уровень.",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E153",
+      "from": "CORE-ENERGY-SHAFT",
+      "type": "spans_global_level",
+      "to": "L3",
+      "claim": "Инженерный объем связан с Третьим уровнем и его входом.",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E158",
+      "from": "CORE-ENERGY-SHAFT",
+      "type": "gallery_at_upper_access",
+      "to": "CORE-ENERGY-GALLERY",
+      "claim": "Галерея с металлическими перилами расположена на высоте входа с Третьего и огибает круглый объём.",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E159",
+      "from": "CORE-ENERGY-SHAFT",
+      "type": "vertical_extent_in_level_no_access_proven",
+      "to": "L1",
+      "claim": "Центральный объём охватывает Нижний уровень; прямая дверь на этот уровень из центральной шахты пока не доказана.",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E160",
+      "from": "CORE-ENERGY-SHAFT",
+      "type": "vertical_extent_in_level_no_access_proven",
+      "to": "L2",
+      "claim": "Центральный объём охватывает Второй уровень; наличие доступного выхода из шахты на Второй не доказано.",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E161",
+      "from": "CORE-ENERGY-SHAFT",
+      "type": "vertical_extent_in_level_no_access_proven",
+      "to": "L3",
+      "claim": "Центральный объём выходит на Третий уровень; подтверждена галерея с отдельным запираемым входом.",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E162",
+      "from": "CORE-ENERGY-GALLERY",
+      "type": "overlooks_transparent_energy_column",
+      "to": "CORE-ENERGY",
+      "claim": "Из галереи персонажи наблюдают прозрачную вертикальную колбу энергомодуля, но её высота и диаметр неизвестны.",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E163",
+      "from": "CORE-ENERGY-GALLERY",
+      "type": "ascends_to",
+      "to": "CORE-ENERGY-ACCESS-STEPS",
+      "claim": "От кольцевой галереи при эвакуации поднимаются по ступеням к защищённой двери.",
+      "source_ids": [
+        "LR-B2-040"
+      ],
+      "state": "TEXT_DIRECT"
+    },
+    {
+      "edge_id": "E164",
+      "from": "CORE-ENERGY-ACCESS-STEPS",
+      "type": "leads_to",
+      "to": "L3-ENERGY-GATE",
+      "claim": "Локальные ступени выводят к закрываемой входной двери энергоотсека.",
+      "source_ids": [
+        "LR-B2-040"
+      ],
+      "state": "TEXT_DIRECT"
+    }
+  ],
+  "relative_height_constraints": [
+    {
+      "id": "Z01",
+      "higher": "L1-BASES",
+      "lower": "SUB-LOWER-WELL",
+      "relation": "above",
+      "source_ids": [
+        "B1-04"
+      ],
+      "proof": "Боковой выход вертикального спуска к обитаемому Нижнему находится выше неизвестного нижнего колодца",
+      "state": "TEXT_DIRECT",
+      "numeric_delta_m": null
+    },
+    {
+      "id": "Z02",
+      "higher": "L1-CIRCULAR-UPPER-WALK",
+      "lower": "L1-CIRCULAR-HALL",
+      "relation": "above_floor",
+      "source_ids": [
+        "B1-17"
+      ],
+      "proof": "Верхний мостик круглого зала находится почти под потолком над основным полом",
+      "state": "TEXT_DIRECT",
+      "numeric_delta_m": null
+    },
+    {
+      "id": "Z03",
+      "higher": "L1-OPERATORS",
+      "lower": "L1-ANGAR",
+      "relation": "above_floor",
+      "source_ids": [
+        "B2-14"
+      ],
+      "proof": "Операторские кабины расположены почти под потолком ангара, доступ по металлическим лестницам",
+      "state": "TEXT_DIRECT",
+      "numeric_delta_m": null
+    },
+    {
+      "id": "Z04",
+      "higher": "L1-BASE-SLEEP",
+      "lower": "L1-BASE-COMMON",
+      "relation": "upper_sleeper_access_exists",
+      "source_ids": [
+        "B1-10"
+      ],
+      "proof": "В Темной базе есть лестница, ведущая в спальню, но все спальни не обязательно выше общей",
+      "state": "TOPOLOGY_INFERRED",
+      "numeric_delta_m": null
+    },
+    {
+      "id": "Z05",
+      "higher": "L1-CIRCULAR-HALL",
+      "lower": "L1-HALL-STEPS",
+      "relation": "local_step_change_requires_check",
+      "source_ids": [
+        "B1-17"
+      ],
+      "proof": "Несколько ступеней спуска к залу; этот тип связи не означает отдельный этаж и не устанавливает знак высот без геометрического направления",
+      "state": "RECHECK_REQUIRED",
+      "numeric_delta_m": null
+    },
+    {
+      "id": "Z06",
+      "higher": "CORE-ENERGY-GALLERY",
+      "lower": "CORE-ENERGY-SHAFT",
+      "relation": "access_overlooks_downward_volume",
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "proof": "С кольцевой галереи Третьего видна глубокая центральная камера, проходящая через три уровня; 15 м приблизительная видимая глубина, не геометрическая отметка.",
+      "state": "TEXT_DIRECT",
+      "numeric_delta_m": null
+    }
+  ],
+  "route_vertical_or_narrative_segments": [
+    {
+      "route_id": "RT-001",
+      "step_index": 2,
+      "from_step_id": "RT001-A",
+      "from_label": "Галерея церемонии и проход к лифту",
+      "to_step_id": "RT001-B",
+      "to_label": "Основной лифт на Третий",
+      "movement_method": "ELEVATOR_UP",
+      "global_level_from": 2,
+      "global_level_to": null,
+      "source_page_id": "B1-036",
+      "source_graph_node_from": "L2-GALLERY",
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-001",
+      "step_index": 6,
+      "from_step_id": "RT001-E",
+      "from_label": "Другой лифт у развилки",
+      "to_step_id": "RT001-F",
+      "to_label": "Спуск лифтом на Второй",
+      "movement_method": "ELEVATOR_DOWN",
+      "global_level_from": 3,
+      "global_level_to": null,
+      "source_page_id": "B1-037",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-001",
+      "step_index": 8,
+      "from_step_id": "RT001-G",
+      "from_label": "Тёмные малые коридоры и дальние игровые площадки",
+      "to_step_id": "RT001-H",
+      "to_label": "Широкая труба, вход с уровня площадок",
+      "movement_method": "CRAWL",
+      "global_level_from": 2,
+      "global_level_to": 2,
+      "source_page_id": "B1-037",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-001",
+      "step_index": 9,
+      "from_step_id": "RT001-H",
+      "from_label": "Широкая труба, вход с уровня площадок",
+      "to_step_id": "RT001-I",
+      "to_label": "Нижняя площадка у запечатанной двери",
+      "movement_method": "DROP_DOWN",
+      "global_level_from": 2,
+      "global_level_to": null,
+      "source_page_id": "B1-038",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-001",
+      "step_index": 10,
+      "from_step_id": "RT001-I",
+      "from_label": "Нижняя площадка у запечатанной двери",
+      "to_step_id": "RT001-J",
+      "to_label": "Возвращение вверх в ту же трубу",
+      "movement_method": "CLIMB_UP",
+      "global_level_from": null,
+      "global_level_to": null,
+      "source_page_id": "B1-038",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-001",
+      "step_index": 11,
+      "from_step_id": "RT001-J",
+      "from_label": "Возвращение вверх в ту же трубу",
+      "to_step_id": "RT001-K",
+      "to_label": "Близкий боковой поворот над нижней площадкой",
+      "movement_method": "TURN_AND_CRAWL",
+      "global_level_from": null,
+      "global_level_to": null,
+      "source_page_id": "B1-038",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-002",
+      "step_index": 4,
+      "from_step_id": "RT002-C",
+      "from_label": "Круглая площадка складирования у лифта",
+      "to_step_id": "RT002-D",
+      "to_label": "Лифт останавливается во время спуска",
+      "movement_method": "ELEVATOR_DOWN",
+      "global_level_from": 3,
+      "global_level_to": null,
+      "source_page_id": "B1-023",
+      "source_graph_node_from": "L3-LIFT-PLATFORM",
+      "source_graph_node_to": "LINK-LIFT-SHAFT",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-002",
+      "step_index": 5,
+      "from_step_id": "RT002-D",
+      "from_label": "Лифт останавливается во время спуска",
+      "to_step_id": "RT002-E",
+      "to_label": "Крыша кабины через потолочный люк",
+      "movement_method": "HATCH_CLIMB",
+      "global_level_from": null,
+      "global_level_to": null,
+      "source_page_id": "B1-023",
+      "source_graph_node_from": "LINK-LIFT-SHAFT",
+      "source_graph_node_to": "LINK-LIFT-SHAFT",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-002",
+      "step_index": 6,
+      "from_step_id": "RT002-E",
+      "from_label": "Крыша кабины через потолочный люк",
+      "to_step_id": "RT002-F",
+      "to_label": "Боковой проём шахты",
+      "movement_method": "ROPE_LADDER",
+      "global_level_from": null,
+      "global_level_to": 1,
+      "source_page_id": "B1-023",
+      "source_graph_node_from": "LINK-LIFT-SHAFT",
+      "source_graph_node_to": "L1-LIFT-SHAFT-EXIT",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-003",
+      "step_index": 2,
+      "from_step_id": "RT003-A",
+      "from_label": "Второй: служебный тупик к вентиляции",
+      "to_step_id": "RT003-B",
+      "to_label": "Горизонтальный низкий вентиляционный лаз",
+      "movement_method": "CRAWL",
+      "global_level_from": 2,
+      "global_level_to": null,
+      "source_page_id": "B1-002",
+      "source_graph_node_from": null,
+      "source_graph_node_to": "L1-VENT",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-003",
+      "step_index": 3,
+      "from_step_id": "RT003-B",
+      "from_label": "Горизонтальный низкий вентиляционный лаз",
+      "to_step_id": "RT003-C",
+      "to_label": "Вертикальная шахта и приземление на отходы",
+      "movement_method": "DROP_DOWN",
+      "global_level_from": null,
+      "global_level_to": 1,
+      "source_page_id": "B1-002",
+      "source_graph_node_from": "L1-VENT",
+      "source_graph_node_to": "L1-VENT",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-004",
+      "step_index": 3,
+      "from_step_id": "RT004-B",
+      "from_label": "Узкий закуток за цехом",
+      "to_step_id": "RT004-C",
+      "to_label": "Вертикальная лестница и квадратный люк наверху",
+      "movement_method": "LADDER_UP",
+      "global_level_from": 1,
+      "global_level_to": null,
+      "source_page_id": "B1-021",
+      "source_graph_node_from": "L1-STAIR-UP",
+      "source_graph_node_to": "L1-STAIR-UP",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-005",
+      "step_index": 2,
+      "from_step_id": "RT005-A",
+      "from_label": "Общее помещение с чайным столиком",
+      "to_step_id": "RT005-B",
+      "to_label": "Лестница к спальне Таис",
+      "movement_method": "CLIMB_UP",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-039",
+      "source_graph_node_from": "L1-BASE-COMMON",
+      "source_graph_node_to": "L1-BASE-SLEEP",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-005",
+      "step_index": 3,
+      "from_step_id": "RT005-B",
+      "from_label": "Лестница к спальне Таис",
+      "to_step_id": "RT005-C",
+      "to_label": "Площадка у спальни Валька/Нитки",
+      "movement_method": "CLIMB_DOWN",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-039",
+      "source_graph_node_from": "L1-BASE-SLEEP",
+      "source_graph_node_to": "L1-BASE-SLEEP",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-005",
+      "step_index": 4,
+      "from_step_id": "RT005-C",
+      "from_label": "Площадка у спальни Валька/Нитки",
+      "to_step_id": "RT005-D",
+      "to_label": "Лестница к спальне младших",
+      "movement_method": "CLIMB_DOWN",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-039",
+      "source_graph_node_from": "L1-BASE-SLEEP",
+      "source_graph_node_to": "L1-BASE-KIDS-SLEEP",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-005",
+      "step_index": 5,
+      "from_step_id": "RT005-D",
+      "from_label": "Лестница к спальне младших",
+      "to_step_id": "RT005-E",
+      "to_label": "Общее помещение после спуска Таис",
+      "movement_method": "CLIMB_DOWN",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-042",
+      "source_graph_node_from": "L1-BASE-KIDS-SLEEP",
+      "source_graph_node_to": "L1-BASE-COMMON",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-006",
+      "step_index": 4,
+      "from_step_id": "RT006-C",
+      "from_label": "Узкий тёмный коридор",
+      "to_step_id": "RT006-D",
+      "to_label": "Высокий порог и сорванная створка",
+      "movement_method": "CLIMB_UP",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-043",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-006",
+      "step_index": 5,
+      "from_step_id": "RT006-D",
+      "from_label": "Высокий порог и сорванная створка",
+      "to_step_id": "RT006-E",
+      "to_label": "Два шага вниз",
+      "movement_method": "CLIMB_DOWN",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-043",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-007",
+      "step_index": 2,
+      "from_step_id": "RT007-A",
+      "from_label": "Спальная комната в Темной базе",
+      "to_step_id": "RT007-B",
+      "to_label": "Первая лестница вниз из спальни",
+      "movement_method": "CLIMB_DOWN",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-044",
+      "source_graph_node_from": "L1-BASE-SLEEP",
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-007",
+      "step_index": 4,
+      "from_step_id": "RT007-C",
+      "from_label": "Стальная раздвижная двухстворчатая дверь базы",
+      "to_step_id": "RT007-D",
+      "to_label": "Ещё одна длинная лестница",
+      "movement_method": "CLIMB_DOWN",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-044",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-007",
+      "step_index": 6,
+      "from_step_id": "RT007-E",
+      "from_label": "Холодные коридоры и три поворота",
+      "to_step_id": "RT007-F",
+      "to_label": "Первый лаз над трубами",
+      "movement_method": "CRAWL",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-044",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-007",
+      "step_index": 7,
+      "from_step_id": "RT007-F",
+      "from_label": "Первый лаз над трубами",
+      "to_step_id": "RT007-G",
+      "to_label": "Второй узкий лаз из коммуникационных ниш",
+      "movement_method": "CRAWL",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-044",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-007",
+      "step_index": 9,
+      "from_step_id": "RT007-H",
+      "from_label": "Прямой транспортно-грузовой коридор",
+      "to_step_id": "RT007-I",
+      "to_label": "Возвращение через повреждённую панель",
+      "movement_method": "CRAWL",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-045",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-008",
+      "step_index": 2,
+      "from_step_id": "RT008-A",
+      "from_label": "Спальная часть Нижней базы",
+      "to_step_id": "RT008-B",
+      "to_label": "Низкий узкий извилистый вентиляционный канал",
+      "movement_method": "CRAWL",
+      "global_level_from": 1,
+      "global_level_to": null,
+      "source_page_id": "B1-046",
+      "source_graph_node_from": "L1-TEMNAYA",
+      "source_graph_node_to": "L1-VENT",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-008",
+      "step_index": 4,
+      "from_step_id": "RT008-C",
+      "from_label": "Решётка на выходе в жилой сектор",
+      "to_step_id": "RT008-D",
+      "to_label": "Резиновое покрытие коридора Второго",
+      "movement_method": "CLIMB_UP",
+      "global_level_from": 2,
+      "global_level_to": 2,
+      "source_page_id": "B1-046",
+      "source_graph_node_from": null,
+      "source_graph_node_to": "L2",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-009",
+      "step_index": 3,
+      "from_step_id": "RT009-B",
+      "from_label": "Подход к штатному лифту",
+      "to_step_id": "RT009-C",
+      "to_label": "Кабина штатного лифта вниз",
+      "movement_method": "ELEVATOR_DOWN",
+      "global_level_from": 2,
+      "global_level_to": null,
+      "source_page_id": "B1-047",
+      "source_graph_node_from": null,
+      "source_graph_node_to": "LINK-LIFT-L2-L1",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-010",
+      "step_index": 2,
+      "from_step_id": "RT010-A",
+      "from_label": "Ванная Темной базы",
+      "to_step_id": "RT010-B",
+      "to_label": "Короткая лестница около общего помещения",
+      "movement_method": "CLIMB_DOWN",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-049",
+      "source_graph_node_from": "L1-BASE-WET",
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-010",
+      "step_index": 4,
+      "from_step_id": "RT010-C",
+      "from_label": "Нижний пол общего помещения",
+      "to_step_id": "RT010-D",
+      "to_label": "Узкая верхняя галерея по периметру зала",
+      "movement_method": "CLIMB_UP",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-049",
+      "source_graph_node_from": "L1-BASE-COMMON",
+      "source_graph_node_to": "L1-DARK-UPPER-PERIMETER",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-011",
+      "step_index": 4,
+      "from_step_id": "RT011-C",
+      "from_label": "Оранжевая магистраль",
+      "to_step_id": "RT011-D",
+      "to_label": "Вентиляционный лаз у встречи с Колей",
+      "movement_method": "CRAWL",
+      "global_level_from": 2,
+      "global_level_to": 2,
+      "source_page_id": "B1-056",
+      "source_graph_node_from": "L2-ORANGE",
+      "source_graph_node_to": "L1-VENT",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-011",
+      "step_index": 5,
+      "from_step_id": "RT011-D",
+      "from_label": "Вентиляционный лаз у встречи с Колей",
+      "to_step_id": "RT011-E",
+      "to_label": "Вертикальная часть шахты",
+      "movement_method": "CLIMB_DOWN",
+      "global_level_from": 2,
+      "global_level_to": null,
+      "source_page_id": "B1-057",
+      "source_graph_node_from": "L1-VENT",
+      "source_graph_node_to": "L1-VENT",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-012",
+      "step_index": 2,
+      "from_step_id": "RT012-A",
+      "from_label": "Мусороперерабатывающий цех у горячей печи",
+      "to_step_id": "RT012-B",
+      "to_label": "Вертикальная служебная лестница",
+      "movement_method": "LADDER_UP",
+      "global_level_from": 1,
+      "global_level_to": null,
+      "source_page_id": "B1-059",
+      "source_graph_node_from": "L1-RECYCLING",
+      "source_graph_node_to": "L1-STAIR-UP",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-012",
+      "step_index": 3,
+      "from_step_id": "RT012-B",
+      "from_label": "Вертикальная служебная лестница",
+      "to_step_id": "RT012-C",
+      "to_label": "Железный люк Третьего",
+      "movement_method": "HATCH_CLIMB",
+      "global_level_from": null,
+      "global_level_to": 3,
+      "source_page_id": "B1-059",
+      "source_graph_node_from": "L1-STAIR-UP",
+      "source_graph_node_to": "L3-UP-ACCESS-LOBBY",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-013",
+      "step_index": 2,
+      "from_step_id": "RT013-A",
+      "from_label": "Большой круглый зал отдыха",
+      "to_step_id": "RT013-B",
+      "to_label": "Металлическая лестница вверх",
+      "movement_method": "CLIMB_UP",
+      "global_level_from": 3,
+      "global_level_to": 3,
+      "source_page_id": "B1-061",
+      "source_graph_node_from": "L3-REST",
+      "source_graph_node_to": "L3-REST-UPPER-STAIRS",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-013",
+      "step_index": 5,
+      "from_step_id": "RT013-D",
+      "from_label": "Тупиковый Т-образный коридор с ДНК-дверями",
+      "to_step_id": "RT013-E",
+      "to_label": "Возвращение на галерею и вниз в проход",
+      "movement_method": "CLIMB_DOWN",
+      "global_level_from": 3,
+      "global_level_to": 3,
+      "source_page_id": "B1-061",
+      "source_graph_node_from": "L3-REST-GALLERY-DEADEND",
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-013",
+      "step_index": 7,
+      "from_step_id": "RT013-F",
+      "from_label": "Низкий полутёмный коридор к наружной кольцевой сети",
+      "to_step_id": "RT013-G",
+      "to_label": "Снятая вентиляционная решётка",
+      "movement_method": "CRAWL",
+      "global_level_from": 3,
+      "global_level_to": 3,
+      "source_page_id": "B1-063",
+      "source_graph_node_from": null,
+      "source_graph_node_to": "L3-UPPER-VENT-ESCAPE",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-013",
+      "step_index": 8,
+      "from_step_id": "RT013-G",
+      "from_label": "Снятая вентиляционная решётка",
+      "to_step_id": "RT013-H",
+      "to_label": "Вертикальный сброс внутри вентиляции",
+      "movement_method": "DROP_DOWN",
+      "global_level_from": 3,
+      "global_level_to": null,
+      "source_page_id": "B1-063",
+      "source_graph_node_from": "L3-UPPER-VENT-ESCAPE",
+      "source_graph_node_to": "L3-UPPER-VENT-ESCAPE",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-013",
+      "step_index": 9,
+      "from_step_id": "RT013-H",
+      "from_label": "Вертикальный сброс внутри вентиляции",
+      "to_step_id": "RT013-I",
+      "to_label": "Низкий вентиляционный выход Второго",
+      "movement_method": "CRAWL",
+      "global_level_from": null,
+      "global_level_to": 2,
+      "source_page_id": "B1-064",
+      "source_graph_node_from": "L3-UPPER-VENT-ESCAPE",
+      "source_graph_node_to": "L2-VENT-LOW-GRILLE",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-014",
+      "step_index": 2,
+      "from_step_id": "RT014-A",
+      "from_label": "Безопасный коридор Второго после вентиляции",
+      "to_step_id": "RT014-B",
+      "to_label": "Переходы и спуск с Второго на Нижний",
+      "movement_method": "NARRATIVE_GAP",
+      "global_level_from": 2,
+      "global_level_to": null,
+      "source_page_id": "B1-065",
+      "source_graph_node_from": "L2-VENT-LOW-GRILLE",
+      "source_graph_node_to": null,
+      "status": "NARRATIVE_GAP_NOT_A_DIRECT_CONNECTION"
+    },
+    {
+      "route_id": "RT-015",
+      "step_index": 2,
+      "from_step_id": "RT015-A",
+      "from_label": "Из обитаемой базы к трубе закрытого Нижнего",
+      "to_step_id": "RT015-B",
+      "to_label": "Спуск по трубе на локальную нижнюю отметку",
+      "movement_method": "DROP_DOWN",
+      "global_level_from": 1,
+      "global_level_to": null,
+      "source_page_id": "B1-074",
+      "source_graph_node_from": "L1-BASES",
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-015",
+      "step_index": 8,
+      "from_step_id": "RT015-G",
+      "from_label": "Открытый ангар с заражёнными",
+      "to_step_id": "RT015-H",
+      "to_label": "Обход и спуск на пару ступеней к другому залу",
+      "movement_method": "CLIMB_DOWN",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-075",
+      "source_graph_node_from": "L1-ANGAR-HALL",
+      "source_graph_node_to": "L1-HALL-STEPS",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-015",
+      "step_index": 10,
+      "from_step_id": "RT015-I",
+      "from_label": "Круглый высокий зал с тележками",
+      "to_step_id": "RT015-J",
+      "to_label": "Подъём по остаткам лестницы",
+      "movement_method": "CLIMB_UP",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-076",
+      "source_graph_node_from": "L1-CIRCULAR-HALL",
+      "source_graph_node_to": "L1-CIRCULAR-STAIRS",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-016",
+      "step_index": 6,
+      "from_step_id": "RT016-E",
+      "from_label": "Мимо стеклянного проема зала с кувезами к соседнему лифту",
+      "to_step_id": "RT016-F",
+      "to_label": "Прозрачный лифт со спуском на Второй",
+      "movement_method": "ELEVATOR_DOWN",
+      "global_level_from": 3,
+      "global_level_to": null,
+      "source_page_id": "B1-079",
+      "source_graph_node_from": "L3-CHILD-LAB",
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-018",
+      "step_index": 1,
+      "from_step_id": null,
+      "from_label": null,
+      "to_step_id": "RT018-A",
+      "to_label": "Из столовой подготовлены к переходу; сам ход к внутреннему кругу не показан",
+      "movement_method": "NARRATIVE_GAP",
+      "global_level_from": null,
+      "global_level_to": 2,
+      "source_page_id": "B1-088",
+      "source_graph_node_from": null,
+      "source_graph_node_to": "L2",
+      "status": "NARRATIVE_GAP_NOT_A_DIRECT_CONNECTION"
+    },
+    {
+      "route_id": "RT-020",
+      "step_index": 3,
+      "from_step_id": "RT020-B",
+      "from_label": "Грузовой продуктовый лифт, посадка",
+      "to_step_id": "RT020-C",
+      "to_label": "Подъём грузовым лифтом на Третий",
+      "movement_method": "ELEVATOR_UP",
+      "global_level_from": 2,
+      "global_level_to": null,
+      "source_page_id": "B1-096",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-020",
+      "step_index": 6,
+      "from_step_id": "RT020-E",
+      "from_label": "Возврат к грузовому лифту с отключённым роботом",
+      "to_step_id": "RT020-F",
+      "to_label": "Спуск тем же лифтом на Второй",
+      "movement_method": "ELEVATOR_DOWN",
+      "global_level_from": 3,
+      "global_level_to": null,
+      "source_page_id": "B1-096",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-021",
+      "step_index": 2,
+      "from_step_id": "RT021-A",
+      "from_label": "Исходный Второй уровень; дальнейший способ подъема неизвестен",
+      "to_step_id": "RT021-B",
+      "to_label": "Пропуск описания перехода на Третий",
+      "movement_method": "NARRATIVE_GAP",
+      "global_level_from": 2,
+      "global_level_to": null,
+      "source_page_id": "B1-098",
+      "source_graph_node_from": "L2",
+      "source_graph_node_to": null,
+      "status": "NARRATIVE_GAP_NOT_A_DIRECT_CONNECTION"
+    },
+    {
+      "route_id": "RT-021",
+      "step_index": 4,
+      "from_step_id": "RT021-C",
+      "from_label": "Технические коридоры Третьего",
+      "to_step_id": "RT021-D",
+      "to_label": "Переход между Третьим и Нижним без уточненной в этой сцене лестницы",
+      "movement_method": "NARRATIVE_GAP",
+      "global_level_from": 3,
+      "global_level_to": null,
+      "source_page_id": "B1-098",
+      "source_graph_node_from": "L3",
+      "source_graph_node_to": null,
+      "status": "NARRATIVE_GAP_NOT_A_DIRECT_CONNECTION"
+    },
+    {
+      "route_id": "RT-021",
+      "step_index": 7,
+      "from_step_id": "RT021-F",
+      "from_label": "Подход к Темной базе",
+      "to_step_id": "RT021-G",
+      "to_label": "Локальная лестница к верхним спальным местам базы",
+      "movement_method": "CLIMB_UP",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-098",
+      "source_graph_node_from": "L1-TEMNAYA",
+      "source_graph_node_to": "L1-BASE-SLEEP",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-022",
+      "step_index": 2,
+      "from_step_id": "RT022-A",
+      "from_label": "Второй уровень: начало перемещения",
+      "to_step_id": "RT022-B",
+      "to_label": "Открываемые проходы и лестничный спуск к мусорному сектору",
+      "movement_method": "CLIMB_DOWN",
+      "global_level_from": 2,
+      "global_level_to": null,
+      "source_page_id": "B1-099",
+      "source_graph_node_from": "L2",
+      "source_graph_node_to": "L1-RECYCLING",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-023",
+      "step_index": 1,
+      "from_step_id": null,
+      "from_label": null,
+      "to_step_id": "RT023-A",
+      "to_label": "Выход из старой пультовой и лестница к ангару",
+      "movement_method": "CLIMB_DOWN",
+      "global_level_from": null,
+      "global_level_to": 1,
+      "source_page_id": "B1-104",
+      "source_graph_node_from": null,
+      "source_graph_node_to": "L1-CIRCULAR-STAIRS",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-023",
+      "step_index": 4,
+      "from_step_id": "RT023-C",
+      "from_label": "Восстановленный прямой переход в обитаемую сеть",
+      "to_step_id": "RT023-D",
+      "to_label": "Три железные ступеньки вверх, затем дугообразный коридор с резиновым полом",
+      "movement_method": "CLIMB_UP",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-105",
+      "source_graph_node_from": "L1-SEALED",
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-024",
+      "step_index": 7,
+      "from_step_id": "RT024-F",
+      "from_label": "Широкий открытый ангарный проем и большой зал",
+      "to_step_id": "RT024-G",
+      "to_label": "Подвесная лестница к верхней диспетчерской",
+      "movement_method": "CLIMB_UP",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-110",
+      "source_graph_node_from": "L1-ANGAR-HALL",
+      "source_graph_node_to": "L1-CIRCULAR-STAIRS",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-024",
+      "step_index": 10,
+      "from_step_id": "RT024-I",
+      "from_label": "Скрытое обзорное остекление, открываемое сдвигаемой панелью",
+      "to_step_id": "RT024-J",
+      "to_label": "Спуск из верхней диспетчерской по той же лестнице",
+      "movement_method": "CLIMB_DOWN",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B1-113",
+      "source_graph_node_from": "L1-CIRCULAR-CONTROL",
+      "source_graph_node_to": "L1-CIRCULAR-STAIRS",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-026",
+      "step_index": 2,
+      "from_step_id": "RT026-A",
+      "from_label": "Командная рубка Третьего",
+      "to_step_id": "RT026-B",
+      "to_label": "Лифт спуска с Третьего на Второй, кабина не описана",
+      "movement_method": "ELEVATOR_DOWN",
+      "global_level_from": 3,
+      "global_level_to": null,
+      "source_page_id": "B2-005",
+      "source_graph_node_from": "L3-BRIDGE",
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-030",
+      "step_index": 7,
+      "from_step_id": "RT030-F",
+      "from_label": "Два боевых катера перед шлюзом",
+      "to_step_id": "RT030-G",
+      "to_label": "Лестница к верхней операторской",
+      "movement_method": "CLIMB_UP",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B2-014",
+      "source_graph_node_from": "L1-BOAT-LOCK",
+      "source_graph_node_to": "L1-OPERATORS",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-031",
+      "step_index": 3,
+      "from_step_id": "RT031-B",
+      "from_label": "Двери рубки, открывающиеся в коридор",
+      "to_step_id": "RT031-C",
+      "to_label": "Короткий спуск лифтом к нижним закрытым помещениям",
+      "movement_method": "ELEVATOR_DOWN",
+      "global_level_from": 3,
+      "global_level_to": null,
+      "source_page_id": "B2-017",
+      "source_graph_node_from": "L3-BRIDGE",
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-035",
+      "step_index": 2,
+      "from_step_id": "RT035-A",
+      "from_label": "Круговая галерея энергомодуля",
+      "to_step_id": "RT035-B",
+      "to_label": "Подъём по ступеням вверх к двери центрального объёма",
+      "movement_method": "CLIMB_UP",
+      "global_level_from": 3,
+      "global_level_to": 3,
+      "source_page_id": "B2-040",
+      "source_graph_node_from": "CORE-ENERGY-GALLERY",
+      "source_graph_node_to": "CORE-ENERGY-ACCESS",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-036",
+      "step_index": 2,
+      "from_step_id": "RT036-A",
+      "from_label": "Третий: подход к небольшому пассажирскому лифту",
+      "to_step_id": "RT036-B",
+      "to_label": "Посадка и спуск лифтом на Второй",
+      "movement_method": "ELEVATOR_DOWN",
+      "global_level_from": 3,
+      "global_level_to": null,
+      "source_page_id": "B2-046",
+      "source_graph_node_from": "L3",
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-037",
+      "step_index": 2,
+      "from_step_id": "RT037-A",
+      "from_label": "Общее собрание в библиотеке Второго",
+      "to_step_id": "RT037-B",
+      "to_label": "Выход с совета, переход к лифту: подробный путь пропущен",
+      "movement_method": "NARRATIVE_GAP",
+      "global_level_from": 2,
+      "global_level_to": null,
+      "source_page_id": "B2-049",
+      "source_graph_node_from": "L2",
+      "source_graph_node_to": null,
+      "status": "NARRATIVE_GAP_NOT_A_DIRECT_CONNECTION"
+    },
+    {
+      "route_id": "RT-037",
+      "step_index": 3,
+      "from_step_id": "RT037-B",
+      "from_label": "Выход с совета, переход к лифту: подробный путь пропущен",
+      "to_step_id": "RT037-C",
+      "to_label": "Подъём со Второго на Третий в ранее использованной кабине",
+      "movement_method": "ELEVATOR_UP",
+      "global_level_from": null,
+      "global_level_to": null,
+      "source_page_id": "B2-050",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-038",
+      "step_index": 6,
+      "from_step_id": "RT038-E",
+      "from_label": "Маленькая комната с дверью и люком в полу",
+      "to_step_id": "RT038-F",
+      "to_label": "Спуск через люк в мусорный блок",
+      "movement_method": "DROP_DOWN",
+      "global_level_from": 3,
+      "global_level_to": 1,
+      "source_page_id": "B2-054",
+      "source_graph_node_from": null,
+      "source_graph_node_to": "L1-RECYCLING",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-038",
+      "step_index": 7,
+      "from_step_id": "RT038-F",
+      "from_label": "Спуск через люк в мусорный блок",
+      "to_step_id": "RT038-G",
+      "to_label": "Переход из мусорного блока к обитаемым коридорам Второго не описан",
+      "movement_method": "NARRATIVE_GAP",
+      "global_level_from": 1,
+      "global_level_to": 2,
+      "source_page_id": "B2-055",
+      "source_graph_node_from": "L1-RECYCLING",
+      "source_graph_node_to": "L2",
+      "status": "NARRATIVE_GAP_NOT_A_DIRECT_CONNECTION"
+    },
+    {
+      "route_id": "RT-040",
+      "step_index": 3,
+      "from_step_id": "RT040-B",
+      "from_label": "Галерея вокруг кают с видом на Главную площадь",
+      "to_step_id": "RT040-C",
+      "to_label": "Лестница вниз к Главной площади",
+      "movement_method": "CLIMB_DOWN",
+      "global_level_from": 2,
+      "global_level_to": 2,
+      "source_page_id": "B2-066",
+      "source_graph_node_from": "L2-GALLERY",
+      "source_graph_node_to": "L2-PLAZA",
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-041",
+      "step_index": 5,
+      "from_step_id": "RT041-D",
+      "from_label": "Выходы из кладовой к коридору мусорного отсека",
+      "to_step_id": "RT041-E",
+      "to_label": "Лестница и герметичный люк на Третий",
+      "movement_method": "HATCH_CLIMB",
+      "global_level_from": 2,
+      "global_level_to": null,
+      "source_page_id": "B2-075",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-041",
+      "step_index": 9,
+      "from_step_id": "RT041-H",
+      "from_label": "Площадка контейнеров перед грузовыми лифтами",
+      "to_step_id": "RT041-I",
+      "to_label": "Узкие шахты электрокабелей к третьему туннелю",
+      "movement_method": "CRAWL",
+      "global_level_from": null,
+      "global_level_to": null,
+      "source_page_id": "B2-077",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-042",
+      "step_index": 7,
+      "from_step_id": "RT042-F",
+      "from_label": "Проход в туннель и соседняя огнестойкая скамейка",
+      "to_step_id": "RT042-G",
+      "to_label": "Лестничный участок: встреча Эммы, Кольки и Сони",
+      "movement_method": "CLIMB_UP",
+      "global_level_from": 2,
+      "global_level_to": 2,
+      "source_page_id": "B2-083",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-044",
+      "step_index": 8,
+      "from_step_id": "RT044-G",
+      "from_label": "Парк со скамейками, деревьями и цветочными горшками",
+      "to_step_id": "RT044-H",
+      "to_label": "Малая библиотека со стеклянными дверями",
+      "movement_method": "NARRATIVE_GAP",
+      "global_level_from": null,
+      "global_level_to": null,
+      "source_page_id": "B2-092",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "NARRATIVE_GAP_NOT_A_DIRECT_CONNECTION"
+    },
+    {
+      "route_id": "RT-046",
+      "step_index": 2,
+      "from_step_id": "RT046-A",
+      "from_label": "Туннель №8 после возвращения Дины",
+      "to_step_id": "RT046-B",
+      "to_label": "Подъём «наверх» из туннельной зоны",
+      "movement_method": "CLIMB_UP",
+      "global_level_from": null,
+      "global_level_to": null,
+      "source_page_id": "B2-094",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-047",
+      "step_index": 2,
+      "from_step_id": "RT047-A",
+      "from_label": "Малая библиотека после собрания",
+      "to_step_id": "RT047-B",
+      "to_label": "Жилая каюта Эммы",
+      "movement_method": "NARRATIVE_GAP",
+      "global_level_from": null,
+      "global_level_to": null,
+      "source_page_id": "B2-101",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "NARRATIVE_GAP_NOT_A_DIRECT_CONNECTION"
+    },
+    {
+      "route_id": "RT-048",
+      "step_index": 1,
+      "from_step_id": null,
+      "from_label": null,
+      "to_step_id": "RT048-A",
+      "to_label": "Неуказанная точка отправления на Втором уровне",
+      "movement_method": "NARRATIVE_GAP",
+      "global_level_from": null,
+      "global_level_to": 2,
+      "source_page_id": "B2-105",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "NARRATIVE_GAP_NOT_A_DIRECT_CONNECTION"
+    },
+    {
+      "route_id": "RT-048",
+      "step_index": 4,
+      "from_step_id": "RT048-C",
+      "from_label": "Узкая овальная крышка входа в кабельную шахту",
+      "to_step_id": "RT048-D",
+      "to_label": "Разветвлённая кабельная шахта внутри стен",
+      "movement_method": "CRAWL",
+      "global_level_from": null,
+      "global_level_to": null,
+      "source_page_id": "B2-106",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-048",
+      "step_index": 5,
+      "from_step_id": "RT048-D",
+      "from_label": "Разветвлённая кабельная шахта внутри стен",
+      "to_step_id": "RT048-E",
+      "to_label": "Мусорный отсек и зона сортировки",
+      "movement_method": "CRAWL",
+      "global_level_from": null,
+      "global_level_to": null,
+      "source_page_id": "B2-106",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-048",
+      "step_index": 6,
+      "from_step_id": "RT048-E",
+      "from_label": "Мусорный отсек и зона сортировки",
+      "to_step_id": "RT048-F",
+      "to_label": "Лестница и герметичный люк наверх",
+      "movement_method": "LADDER_UP",
+      "global_level_from": null,
+      "global_level_to": null,
+      "source_page_id": "B2-106",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-048",
+      "step_index": 9,
+      "from_step_id": "RT048-H",
+      "from_label": "Коридор рядом с серебристыми дверями лифта",
+      "to_step_id": "RT048-I",
+      "to_label": "Коридор со стеклянными дверями капитанской рубки",
+      "movement_method": "TURN_AND_CRAWL",
+      "global_level_from": 3,
+      "global_level_to": 3,
+      "source_page_id": "B2-106",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-048",
+      "step_index": 10,
+      "from_step_id": "RT048-I",
+      "from_label": "Коридор со стеклянными дверями капитанской рубки",
+      "to_step_id": "RT048-J",
+      "to_label": "Коридор у небольшого блока освещения",
+      "movement_method": "CRAWL",
+      "global_level_from": 3,
+      "global_level_to": 3,
+      "source_page_id": "B2-107",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-048",
+      "step_index": 20,
+      "from_step_id": "RT048-S",
+      "from_label": "Зал отдыха с высоким потолком",
+      "to_step_id": "RT048-T",
+      "to_label": "Лестница из зала к круговой галерее",
+      "movement_method": "LADDER_UP",
+      "global_level_from": null,
+      "global_level_to": null,
+      "source_page_id": "B2-108",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-048",
+      "step_index": 24,
+      "from_step_id": "RT048-W",
+      "from_label": "Коридор к лифту с прозрачными дверями",
+      "to_step_id": "RT048-X",
+      "to_label": "Кабина лифта, остановленная в шахте",
+      "movement_method": "ELEVATOR_DOWN",
+      "global_level_from": 3,
+      "global_level_to": null,
+      "source_page_id": "B2-113",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-048",
+      "step_index": 25,
+      "from_step_id": "RT048-X",
+      "from_label": "Кабина лифта, остановленная в шахте",
+      "to_step_id": "RT048-Y",
+      "to_label": "Крыша кабины и шахта с силовым кабелем/скобами",
+      "movement_method": "CLIMB_DOWN",
+      "global_level_from": null,
+      "global_level_to": null,
+      "source_page_id": "B2-113",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-048",
+      "step_index": 26,
+      "from_step_id": "RT048-Y",
+      "from_label": "Крыша кабины и шахта с силовым кабелем/скобами",
+      "to_step_id": "RT048-Z",
+      "to_label": "Вентиляционный люк и проход",
+      "movement_method": "CRAWL",
+      "global_level_from": null,
+      "global_level_to": null,
+      "source_page_id": "B2-113",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-048",
+      "step_index": 27,
+      "from_step_id": "RT048-Z",
+      "from_label": "Вентиляционный люк и проход",
+      "to_step_id": "RT048-AA",
+      "to_label": "Старые базы у заброшенных ангаров",
+      "movement_method": "CRAWL",
+      "global_level_from": null,
+      "global_level_to": null,
+      "source_page_id": "B2-113",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-050",
+      "step_index": 1,
+      "from_step_id": null,
+      "from_label": null,
+      "to_step_id": "RT050-A",
+      "to_label": "Лифтовая кабина у Второго уровня",
+      "movement_method": "ELEVATOR",
+      "global_level_from": null,
+      "global_level_to": 2,
+      "source_page_id": "B2-127",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-050",
+      "step_index": 3,
+      "from_step_id": "RT050-B",
+      "from_label": "Коридор боя с небольшим тупиком",
+      "to_step_id": "RT050-C",
+      "to_label": "Узкая лестница за металлической решёткой",
+      "movement_method": "STAIR",
+      "global_level_from": 2,
+      "global_level_to": 2,
+      "source_page_id": "B2-127",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-050",
+      "step_index": 4,
+      "from_step_id": "RT050-C",
+      "from_label": "Узкая лестница за металлической решёткой",
+      "to_step_id": "RT050-D",
+      "to_label": "Участок доступа к кабельным шахтам",
+      "movement_method": "STAIR",
+      "global_level_from": 2,
+      "global_level_to": null,
+      "source_page_id": "B2-127",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    },
+    {
+      "route_id": "RT-050",
+      "step_index": 6,
+      "from_step_id": "RT050-E",
+      "from_label": "Коридор боя у Оранжевой магистрали",
+      "to_step_id": "RT050-F",
+      "to_label": "Неустановленный переход со Второго на Третий уровень",
+      "movement_method": "NARRATIVE_GAP",
+      "global_level_from": 2,
+      "global_level_to": null,
+      "source_page_id": "B2-128",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "NARRATIVE_GAP_NOT_A_DIRECT_CONNECTION"
+    },
+    {
+      "route_id": "RT-050",
+      "step_index": 7,
+      "from_step_id": "RT050-F",
+      "from_label": "Неустановленный переход со Второго на Третий уровень",
+      "to_step_id": "RT050-G",
+      "to_label": "Знакомые грузовые ангары на Третьем уровне",
+      "movement_method": "NARRATIVE_GAP",
+      "global_level_from": null,
+      "global_level_to": 3,
+      "source_page_id": "B2-128",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "NARRATIVE_GAP_NOT_A_DIRECT_CONNECTION"
+    },
+    {
+      "route_id": "RT-052",
+      "step_index": 1,
+      "from_step_id": null,
+      "from_label": null,
+      "to_step_id": "RT052-A",
+      "to_label": "Выход из производственного цеха и неизвестный путь к лифту",
+      "movement_method": "NARRATIVE_GAP",
+      "global_level_from": null,
+      "global_level_to": 1,
+      "source_page_id": "B2-134",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "NARRATIVE_GAP_NOT_A_DIRECT_CONNECTION"
+    },
+    {
+      "route_id": "RT-052",
+      "step_index": 2,
+      "from_step_id": "RT052-A",
+      "from_label": "Выход из производственного цеха и неизвестный путь к лифту",
+      "to_step_id": "RT052-B",
+      "to_label": "Лифт и прибытие на Первый уровень",
+      "movement_method": "ELEVATOR",
+      "global_level_from": 1,
+      "global_level_to": 1,
+      "source_page_id": "B2-134",
+      "source_graph_node_from": null,
+      "source_graph_node_to": null,
+      "status": "OBSERVED_ROUTE_SEGMENT_DOES_NOT_SET_METRIC_Z_OR_XY"
+    }
+  ],
+  "absolute_datum_m": null,
+  "metric_level_heights_m": null,
+  "core_direct_access_to_levels": {
+    "L1": false,
+    "L2": false,
+    "L3": true,
+    "notes": "Source graph explicitly withholds proof of direct access to L1/L2; L3 access through protected door and gallery."
+  },
+  "no_extra_global_levels": true
+}
