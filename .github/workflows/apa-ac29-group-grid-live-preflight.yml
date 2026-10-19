@@ -1,0 +1,44 @@
+name: APA AC29 Grid 8x4 Safe One-Shot (offline CI)
+on:
+  push:
+    branches:
+      - feature/apa-ac29-group-grid-live-20261018
+    paths:
+      - 'scripts/apa_ac29_group_grid_live_8x4.py'
+      - 'scripts/apa_ac29_group_scenewriter_live.py'
+      - 'tests/test_apa_ac29_group_grid_live_8x4.py'
+      - 'tests/test_apa_ac29_native_group_grid.py'
+      - '.github/workflows/apa-ac29-group-grid-live-preflight.yml'
+  pull_request:
+    paths:
+      - 'scripts/apa_ac29_group_grid_live_8x4.py'
+      - 'scripts/apa_ac29_group_scenewriter_live.py'
+      - 'tests/test_apa_ac29_group_grid_live_8x4.py'
+      - 'tests/test_apa_ac29_native_group_grid.py'
+      - '.github/workflows/apa-ac29-group-grid-live-preflight.yml'
+permissions:
+  contents: read
+jobs:
+  grid-one-shot:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install APA JSON schema validator
+        shell: pwsh
+        run: python -m pip install 'jsonschema>=4,<5'
+      - name: Syntax
+        run: python -m py_compile scripts/apa_ac29_group_grid_live_8x4.py scripts/apa_ac29_group_scenewriter_live.py
+      - name: Verify staged separate instance, checked native BREP and fail-closed one-shot
+        run: python -m unittest discover -s tests -p 'test_apa_ac29_group_grid_live_8x4.py' -v
+      - name: Retain original source-only 32-position synthetic contract tests
+        run: python -m unittest discover -s tests -p 'test_apa_ac29_native_group_grid.py' -v
+      - name: Retain previous successful 2-position SceneWriter guards
+        run: python -m unittest discover -s tests -p 'test_apa_ac29_native_group_writer_integration.py' -v

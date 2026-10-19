@@ -95,7 +95,16 @@ def publish_existing():
     return "PUBLISHED"
 
 
-def verify_previous():
+def verify_previous(*, verified_active_baseline=None):
+    """Guard source receipts and the currently open, byte-identical baseline.
+
+    V1 requires the original saved acceptance PLN to be active. After a
+    separately published zero-write forensic reconciliation, V2 may keep the
+    already open failed-test scratch #01 instead: it is an exact saved copy
+    of the source, with unchanged model and verified group readback. The
+    explicit exceptional path is pinned, not an arbitrary project override.
+    """
+
     completion = read_json(HISTORY / "resume-v2-result.json").get("result", {})
     success = "LIVE_GROUP_CHAIN_COMPLETED_AFTER_READONLY_RECONCILIATION"
     need(completion.get("status") == success
@@ -114,10 +123,27 @@ def verify_previous():
          and selected.get("modelGuidCount") == 44,
          "PREVIOUS_AUTOSELECT_NATIVE_ACCEPTANCE_MISSING")
     original_sha = read_json(HISTORY / "preflight.json")["sourceSha256"]
-    LIVE.guard(SOURCE, original_sha)
+    protected_saved_sha = LIVE.digest(SOURCE)
+    need(SOURCE.is_file() and protected_saved_sha,
+         "PROTECTED_SAVED_ACCEPTED_SCRATCH_MISSING")
+    if verified_active_baseline is None:
+        active_baseline = SOURCE
+    else:
+        # V2 ONLY: the exact, independently reconciled earlier writer test.
+        pinned_reconciled_pln = SOURCE.parent / "group-ac29-scene-writer-20261018-01.pln"
+        need(isinstance(verified_active_baseline, Path)
+             and verified_active_baseline == pinned_reconciled_pln,
+             "UNAUTHORIZED_ALTERNATE_ACTIVE_BASELINE")
+        need(active_baseline_sha := LIVE.digest(verified_active_baseline),
+             "RECONCILED_ACTIVE_TEST_PLN_MISSING")
+        need(active_baseline_sha == protected_saved_sha,
+             "RECONCILED_ACTIVE_TEST_NOT_IDENTICAL_TO_SOURCE")
+        active_baseline = verified_active_baseline
+    LIVE.guard(active_baseline, original_sha)
     need(LIVE.digest(LIVE.SOURCE_PATH) == original_sha,
          "PROTECTED_TEST_ORIGINAL_HASH_CHANGED")
-    need(LIVE.digest(SOURCE), "PROTECTED_SAVED_ACCEPTED_SCRATCH_MISSING")
+    need(LIVE.digest(SOURCE) == protected_saved_sha,
+         "PROTECTED_SAVED_SOURCE_CHANGED_DURING_PREWRITE_GUARD")
     return selected, original_sha
 
 
@@ -226,7 +252,7 @@ def native_intent(api, router, group, source_sha):
     return intent, native, ids
 
 
-def execute_once(revision, selected, original_sha):
+def execute_once(revision, selected, original_sha, *, native_transport=None):
     import hashlib
     need(LIVE.canonical_path(LIVE.project()["projectPath"]) ==
          LIVE.canonical_path(SCRATCH), "SCRATCH_SWITCHED_BEFORE_WRITE")
@@ -236,7 +262,7 @@ def execute_once(revision, selected, original_sha):
     )
     folder = STATE / "trace"
     folder.mkdir(exist_ok=True, parents=True)
-    api = APA.EvidenceAPI(APA.native_transport, folder, execute=False)
+    api = APA.EvidenceAPI(native_transport or APA.native_transport, folder, execute=False)
     writer = RUN.SceneWriter(
         api, journal_path=STATE / "original-scenewriter.sqlite",
         allow_3d_view_for_write=True
@@ -261,7 +287,7 @@ def execute_once(revision, selected, original_sha):
          and commands[0]["params"]["groupId"]["guid"].lower() ==
          selected["verifiedSourceGroupId"].lower()
          and len(ids) == 44
-         and preview["groupedTargetCount"] == 4
+         and preview["groupedTargetCount"] == 2 * len(OFFSET)
          and preview["individuallyRoutedTargetCount"] == 0,
          "APA_SOURCE_QUALIFIED_AUTO_GROUP_PLAN_DRIFT")
     registry = installed_verifiers()
@@ -344,8 +370,8 @@ def execute_once(revision, selected, original_sha):
          and len(result.get("trace", [])) == 1,
          "SCENEWRITER_GROUP_WORKFLOW_NOT_FULLY_VERIFIED")
     entry = result["results"][commands[0]["id"]]
-    need(len(entry["newGroupIds"]) == 2
-         and len(entry["createdElements"]) == 4,
+    need(len(entry["newGroupIds"]) == len(OFFSET)
+         and len(entry["createdElements"]) == 2 * len(OFFSET),
          "SCENEWRITER_GROUP_NATIVE_RESPONSE_NOT_EXACT")
     need(LIVE.digest(SCRATCH) == source_sha,
          "SAVED_SCRATCH_DISK_CHANGED_DURING_UNSAVED_NATIVE_CLONE")
@@ -354,14 +380,15 @@ def execute_once(revision, selected, original_sha):
     need(LIVE.digest(LIVE.SOURCE_PATH) == original_sha,
          "PROTECTED_FUNCTIONAL_TEST_SOURCE_DISK_CHANGED")
     ids_after = APA.inventory_guids(api)
-    need(len(ids_after) == 52, "GROUP_SCENEWRITER_44_PLUS_EIGHT_INVENTORY_REQUIRED")
+    need(len(ids_after) == 44 + 4 * len(OFFSET),
+         "GROUP_SCENEWRITER_ALL_GROUP_ROOT_SEGMENT_GUIDS_REQUIRED")
     need(api.write_attempts == 1,
          "GROUP_WRITER_EXPECTED_EXACTLY_ONE_NATIVE_MUTATION")
     return {
         "status": "LIVE_SCENEWRITER_NATIVE_GROUP_CLONE_PASS",
         "sourceRevision": revision,
         "port": LIVE.PORT, "scratchProject": str(SCRATCH),
-        "baseGuidCount": 44, "postGuidCount": 52,
+        "baseGuidCount": 44, "postGuidCount": len(ids_after),
         "nativeMutationCalls": api.write_attempts,
         "nativeModelWritesFromAddOn": entry.get("nativeModelWrites"),
         "saveCalls": 0,
@@ -381,7 +408,7 @@ def execute_once(revision, selected, original_sha):
     }
 
 
-def main():
+def main(*, verified_active_baseline=None):
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--execute", action="store_true")
     args = p.parse_args()
@@ -392,7 +419,7 @@ def main():
         need(False, "PREVIOUS_RESULT_ALREADY_EXISTS_NO_MODEL_RETRY")
     need(not STATE.exists() and not SCRATCH.exists(),
          "PREVIOUS_ATTEMPT_OR_DISPOSABLE_PLN_ALREADY_EXISTS_NO_RETRY")
-    _, original_sha = verify_previous()
+    _, original_sha = verify_previous(verified_active_baseline=verified_active_baseline)
     source_sha = LIVE.digest(SOURCE)
     STATE.mkdir(parents=True, exist_ok=False)
     MAILBOX.save(STATE / "attempted.json", {

@@ -1,7 +1,9 @@
 """Code-owned AC29 native group clone verifier for the original SceneWriter.
 
 A single source-qualified native group of two complete columns (each one
-ColumnSegment) is cloned twice. This module does not execute any commands;
+ColumnSegment) can be cloned at 1..32 distinct, BREP-cleared horizontal
+offsets in ONE existing native group operation (max 64 new Column roots).
+The 2-placement live acceptance remains a strict subset of this extension. This module does not execute any commands;
 it supplies independent native pre- and post-readback callbacks to the
 EXISTING APA Dynamic Mutation Scopes and SQLite SceneWriter.
 """
@@ -80,17 +82,17 @@ def verify_before(*, api, command, parameters, affected, native_before):
     require(isinstance(group, str) and GROUP_GUID.fullmatch(group),
             "GROUP_WRITER_GROUP_GUID_REQUIRED")
     shifts = parameters["translations"]
-    require(isinstance(shifts, list) and len(shifts) == 2,
-            "GROUP_WRITER_EXACT_TWO_GROUP_COPIES")
+    require(isinstance(shifts, list) and 1 <= len(shifts) <= 32,
+            "GROUP_WRITER_NATIVE_ONE_TO_32_GROUP_COPIES")
     seen = set()
     for offset in shifts:
         require(isinstance(offset, dict)
                 and set(offset) == {"dx", "dy", "dz"}
                 and all(type(n) in (int, float) and math.isfinite(n)
                         and abs(n) <= 10000 for n in offset.values())
-                and offset["dz"] == 0 and offset["dy"] == 0
-                and offset["dx"] > 0,
-                "GROUP_WRITER_HORIZONTAL_EXACT_SHIFT_REQUIRED")
+                and offset["dz"] == 0
+                and (offset["dx"] != 0 or offset["dy"] != 0),
+                "GROUP_WRITER_HORIZONTAL_NONZERO_EXACT_SHIFT_REQUIRED")
         point = tuple(round(offset[k], 6) for k in ("dx", "dy", "dz"))
         require(point not in seen, "GROUP_WRITER_DUPLICATE_GROUP_SHIFT")
         seen.add(point)
@@ -140,18 +142,31 @@ def verify_after(*, api, command, parameters, native_response, before_guids,
                  after_guids, affected, native_before, native_after, source_proof):
     require(command == CMD and not affected
             and source_proof.get("group") ==
-            parameters["groupId"]["guid"].lower(),
+            parameters["groupId"]["guid"].lower()
+            and source_proof.get("offsets") == parameters.get("translations")
+            and source_proof.get("status") ==
+            "GROUP_CLONE_SOURCE_OWNED_NATIVE_BREP_AND_LAYOUT_PASS"
+            and source_proof.get("sourceNativeGuidCount") == len(before_guids),
             "GROUP_WRITER_POST_READBACK_SOURCE_DRIFT")
+    number_of_groups = len(source_proof["offsets"])
+    require(1 <= number_of_groups <= 32
+            and len(source_proof.get("members", [])) == 2,
+            "GROUP_WRITER_POST_READBACK_COUNT_OUTSIDE_SDK_CAPACITY")
+    expected_roots = 2 * number_of_groups
+    expected_new_guids = 2 * expected_roots
     require(isinstance(native_response, dict)
             and isinstance(native_after, dict)
             and isinstance(native_after.get("elements"), list),
             "GROUP_WRITER_NATIVE_RESPONSE_OR_MODEL_DUMP_MISSING")
     newgroups = native_response.get("newGroupIds")
     outputs = native_response.get("createdElements")
-    require(isinstance(newgroups, list) and len(newgroups) == 2
-            and isinstance(outputs, list) and len(outputs) == 4
+    require(isinstance(newgroups, list) and
+            len(newgroups) == number_of_groups
+            and isinstance(outputs, list) and len(outputs) == expected_roots
+            and native_response.get("nativeModelWrites") == expected_roots
             and native_response.get("sourceGroupId", {}).get("guid", "").lower()
-            == source_proof["group"], "GROUP_WRITER_CLONE_TWO_GROUP_NATIVE_RESPONSE")
+            == source_proof["group"],
+            "GROUP_WRITER_NATIVE_RESPONSE_GROUP_ROOT_COUNT_MISMATCH")
     source_groups = [
         row.get("guid", "").lower() for row in newgroups if isinstance(row, dict)
     ]
@@ -159,17 +174,19 @@ def verify_after(*, api, command, parameters, native_response, before_guids,
         row.get("elementId", {}).get("guid", "").lower()
         for row in outputs if isinstance(row, dict)
     ]
-    require(len(source_groups) == 2 and len(set(source_groups)) == 2
+    require(len(source_groups) == number_of_groups
+            and len(set(source_groups)) == number_of_groups
             and all(GROUP_GUID.fullmatch(g) for g in source_groups)
-            and len(roots) == 4 and len(set(roots)) == 4
+            and len(roots) == expected_roots
+            and len(set(roots)) == expected_roots
             and all(GROUP_GUID.fullmatch(g) for g in roots),
             "GROUP_WRITER_GROUP_OR_PARENT_IDS_INVALID")
     nodes = {r["guid"].lower(): r for r in native_after["elements"]}
     require(len(nodes) == len(native_after["elements"])
             and set(nodes) == after_guids
             and before_guids <= after_guids
-            and len(after_guids - before_guids) == 8,
-            "GROUP_WRITER_COMPLETE_EIGHT_NEW_GUIDS_REQUIRED")
+            and len(after_guids - before_guids) == expected_new_guids,
+            "GROUP_WRITER_COMPLETE_NATIVE_ROOT_AND_SEGMENT_GUIDS_REQUIRED")
     new = after_guids - before_guids
     require(set(roots) <= new and set(roots).isdisjoint(before_guids),
             "GROUP_WRITER_COPIED_ROOT_NOT_NEW")
@@ -209,8 +226,9 @@ def verify_after(*, api, command, parameters, native_response, before_guids,
         require(matched == members,
                 "GROUP_WRITER_NATIVE_MEMBER_GEOMETRY_SET_MISMATCH")
     require(seen_roots == set(roots) and
-            seen_roots | seen_children == new and len(seen_children) == 4,
-            "GROUP_WRITER_ALL_EIGHT_GUIDS_NOT_EXACTLY_ACCOUNTED")
+            seen_roots | seen_children == new
+            and len(seen_children) == expected_roots,
+            "GROUP_WRITER_ALL_NATIVE_GROUP_GUIDS_NOT_EXACTLY_ACCOUNTED")
     return {
         "status": "GROUP_CLONE_SCENEWRITER_NATIVE_BREP_GUID_READBACK_PASS",
         "originalNativeGuidCount": len(before_guids),
@@ -218,6 +236,7 @@ def verify_after(*, api, command, parameters, native_response, before_guids,
         "newRootGuids": sorted(seen_roots),
         "newSegmentGuids": sorted(seen_children),
         "newGroupGuids": source_groups,
+        "groupCopyCount": number_of_groups,
         "originalGroupUnchanged": True,
         "allNativeRootsAndChildrenVerified": True
     }

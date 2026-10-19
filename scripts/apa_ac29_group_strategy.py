@@ -213,6 +213,15 @@ def workflow_for_selected(router, request, existing, targets, chosen):
             for group in plan["copyGroups"] for shift in group["displacements"]
         ]
         need(0 < len(rows) <= 200, "GROUP_SELECTOR_ELEMENT_BATCH_CAPACITY")
+        # MoveElements is dual-effect. Review the exact existing copy=True
+        # branch locally, as the existing single/multi-copy adapters do.
+        # DynamicCommands.prepare still rejects relocation/mixed batches.
+        if router.operation_kind("MoveElements") != "CREATE":
+            need(isinstance(router, DynamicCommands),
+                 "GROUP_SELECTOR_COPY_REQUIRES_EXISTING_DYNAMIC_ROUTER")
+            router.review_policy("MoveElements", "CREATE", "MODEL", {
+                "source": "https://github.com/dvikt33-ux/safe-bim-layer/pull/143",
+                "sha256": router.contract_hash("MoveElements")})
         operations.append({
             "id": "ungrouped_prototype_copy",
             "command": command_name(router, "MoveElements"),
