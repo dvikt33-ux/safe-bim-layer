@@ -11,6 +11,11 @@ on:
       - "tests/test_apa_ac29_mass_request.py"
       - "tests/test_apa_ac29_line_segment.py"
       - "tests/test_apa_ac29_selected_axes.py"
+      - "scripts/apa_ac29_native_group_create.py"
+      - "schemas/accelerator/native-group-create.json"
+      - "tests/test_apa_ac29_native_group_create.py"
+      - "scripts/apa_ac29_group_create_oneshot.py"
+      - "tests/test_apa_ac29_group_create_oneshot.py"
       - "tests/test_apa_ac29_group_batch_oneshot.py"
       - "scripts/apa_install_mass_selector.py"
       - "scripts/apa_ac29_installed_*.py"
@@ -52,6 +57,10 @@ jobs:
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
           python -m unittest discover -s tests -p "test_apa_ac29_selected_axes.py" -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m unittest discover -s tests -p "test_apa_ac29_native_group_create.py" -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m unittest discover -s tests -p "test_apa_ac29_group_create_oneshot.py" -v
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python -m unittest discover -s tests -p "test_archicad_dynamic_commands.py" -v
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
