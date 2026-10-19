@@ -2091,6 +2091,114 @@
       "constraints": [],
       "identity_hypotheses": [],
       "notes": "Мини-лаборатория и санузел пока отдельные анкеры маршрута без самостоятельных узлов v1. Их нельзя автоматически соединять с пультовой другой комнаты, пока схема не согласована."
+    },
+    {
+      "id": "RT-018",
+      "title": "Спасательная группа: внутренний круг Второго → Оранжевая → узкий коридор → школьные классы",
+      "participants": [
+        "Таис",
+        "Фёдор",
+        "Егор",
+        "Кир",
+        "Димка",
+        "Сенька"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-088",
+        "B1-089",
+        "B1-090"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT018-A",
+          "label": "Из столовой подготовлены к переходу; сам ход к внутреннему кругу не показан",
+          "global_level": 2,
+          "local_stratum": "second-level-rescue-route",
+          "source_page_id": "B1-088",
+          "movement_method": "NARRATIVE_GAP",
+          "observed_constraint": "Из столовой подготовлены к переходу; сам ход к внутреннему кругу не показан",
+          "existing_graph_node": "L2",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT018-B",
+          "label": "Внутренний круг, площадка роботов-садовников",
+          "global_level": 2,
+          "local_stratum": "second-level-rescue-route",
+          "source_page_id": "B1-089",
+          "movement_method": "WALK",
+          "observed_constraint": "Внутренний круг, площадка роботов-садовников",
+          "existing_graph_node": "L2-RESIDENTIAL-RING",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT018-C",
+          "label": "Поднятая защитная энергетическая решетка",
+          "global_level": 2,
+          "local_stratum": "second-level-rescue-route",
+          "source_page_id": "B1-089",
+          "movement_method": "DOOR",
+          "observed_constraint": "Поднятая защитная энергетическая решетка",
+          "existing_graph_node": "L2-ORANGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT018-D",
+          "label": "Переход по Оранжевой магистрали",
+          "global_level": 2,
+          "local_stratum": "second-level-rescue-route",
+          "source_page_id": "B1-089",
+          "movement_method": "RUN",
+          "observed_constraint": "Переход по Оранжевой магистрали",
+          "existing_graph_node": "L2-ORANGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT018-E",
+          "label": "Узкий школьный боковой коридор",
+          "global_level": 2,
+          "local_stratum": "second-level-rescue-route",
+          "source_page_id": "B1-089",
+          "movement_method": "RUN",
+          "observed_constraint": "Узкий школьный боковой коридор",
+          "existing_graph_node": "L2-SCHOOL",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT018-F",
+          "label": "Автоматические бронированные остекленные двери",
+          "global_level": 2,
+          "local_stratum": "second-level-rescue-route",
+          "source_page_id": "B1-090",
+          "movement_method": "DOOR",
+          "observed_constraint": "Автоматические бронированные остекленные двери",
+          "existing_graph_node": "L2-SCHOOL",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT018-G",
+          "label": "Классы с укрывшимися детьми",
+          "global_level": 2,
+          "local_stratum": "second-level-rescue-route",
+          "source_page_id": "B1-090",
+          "movement_method": "WALK",
+          "observed_constraint": "Классы с укрывшимися детьми",
+          "existing_graph_node": "L2-SCHOOL",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "Один глобальный уровень 2. Открытая решетка — временное состояние. Обратная эвакуация ещё не подтверждена. Сегмент до старта спасения NARRATIVE_GAP."
     }
   ]
 }
