@@ -1,0 +1,9 @@
+# APA №2 08Z — архитектуры, gate, передача
+
+Альтернативы: Publisher новый SDK29 writer REJECT (дублирование/ABI/EULA); выбран Graphisoft JSON read-only preflight + существующий Tapir PublishPublisherSet только после whitelist/файлового readback. Clone: официальный AC29 single предпочтителен для одного; Tapir viewsData[] batch для повторов только после runtime проверки и benchmark, per-item partial errors. IFC4D/5D новый scheduler/cost engine REJECT; pinned util.sequence/util.cost + минимальный bounded None/cycle/zero guard (готовый безопасный wrapper NOT_FOUND). MEP native SDK29 без локального ABI DEFER; выбран IFC read-only. MINSERT новый decomposer REJECT; выбран ezdxf multi_insert→C1.
+
+Гейты: SOURCE pin tag/blob/license/units/GUID→OFFLINE negative fixtures MEP IFC2X3/4, DXF 2×3 ATTRIB/XCLIP, SQLite STOPPED/LIVE_UNSAVED, 4D cycle/None, 5D zero/divide, Publisher [] STOP, Layout mm/revision, B3 >5000→BUILD Windows 3.11/3.12 existing lock (только после разрешения)→INSTALLED opt-in Router V1 regression→LIVE только разрешённый scratch, guarded SceneWriter/Save/reopen→ACCEPTED независимый GUID/BREP/SHA/per-file readback. Откат read-only: только новые отчёты, не исходные IFC/PLN/SQLite. VRAM 8GB не нужна для метаданных, 48GB RAM не гарантия на больших IFC; ускорение не измерялось.
+
+№1: найти готовый Publisher fail-closed wrapper с empty selection и SHA; источник sourceGuid до Tapir 1.6.0; AC29 CreateLayout full LayoutParameters sample; готовый Publisher export manifest; bounded IFC 4D/5D wrapper; MEP и MINSERT эталонные fixtures.
+
+№3 на утверждение OFFLINE: Publisher whitelist; Layout mm+revision; MEP all peers; MINSERT 6-cell; PR164/173 forensic; IFC4D cycle; IFC5D zero; ViewMap single/batch split. NEXT_RESEARCH_PRIORITIES.md не изменён. Новые OFFLINE/BUILD/INSTALLED/LIVE/ACCEPTED=0.
