@@ -2871,6 +2871,158 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-176",
+      "page_id": "B1-047",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=47",
+      "station_id": "MOAG",
+      "narrative_mode": "LON_DIALOGUE",
+      "locator_hint": "Лон знает о доступе обычных лифтов к Первому",
+      "spatial_assertion": "Лон характеризует Первый как технический; у робота нет полных планов, но некоторые официальные лифты могут доходить до Нижнего.",
+      "feature_refs": [
+        "LINK-LIFT-L2-L1",
+        "L1",
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-177",
+      "page_id": "B1-047",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=47",
+      "station_id": "MOAG",
+      "narrative_mode": "CARGO_ROUTE",
+      "locator_hint": "продукты и грузовая тележка у лифта",
+      "spatial_assertion": "Коля и Эмма организуют с Лоном перевозку большого количества продуктов на тележке с жилого уровня.",
+      "feature_refs": [
+        "L2-CABINS",
+        "LINK-LIFT-L2-L1"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-178",
+      "page_id": "B1-048",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=48",
+      "station_id": "MOAG",
+      "narrative_mode": "VERTICAL_MOVEMENT",
+      "locator_hint": "выход из лифта в сумрачный холодный коридор",
+      "spatial_assertion": "Эмма, Коля и Лон используют действующий лифт и прибывают с продуктами на Первый уровень.",
+      "feature_refs": [
+        "LINK-LIFT-L2-L1",
+        "L1"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-179",
+      "page_id": "B1-048",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=48",
+      "station_id": "MOAG",
+      "narrative_mode": "SERVICE_CIRCULATION",
+      "locator_hint": "от остановки Нижнего к Темной базе",
+      "spatial_assertion": "После нижней лифтовой остановки дети переносят продукты по техническим коридорам до жилой базы; короткий путь не доказан.",
+      "feature_refs": [
+        "L1",
+        "L1-TEMNAYA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-180",
+      "page_id": "B1-049",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=49",
+      "station_id": "MOAG",
+      "narrative_mode": "BATHROOM_SERVICES",
+      "locator_hint": "большой бак, бойлер и бельевые верёвки",
+      "spatial_assertion": "Ванная Темной базы имеет собственный запас нагретой воды, большую ёмкость и верёвки для сушки белья.",
+      "feature_refs": [
+        "L1-BASE-WET"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-181",
+      "page_id": "B1-049",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=49",
+      "station_id": "MOAG",
+      "narrative_mode": "LOCAL_STAIR",
+      "locator_hint": "короткая лестница из ванной к общему помещению",
+      "spatial_assertion": "В непосредственном маршруте между ванной и общим залом есть короткий лестничный переход; высота и направление относительно общей отметки требуют уточнения.",
+      "feature_refs": [
+        "L1-BASE-WET",
+        "L1-BASE-COMMON"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-182",
+      "page_id": "B1-049",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=49",
+      "station_id": "MOAG",
+      "narrative_mode": "INTERNAL_MEZZANINE",
+      "locator_hint": "узкая галерея по периметру общего зала",
+      "spatial_assertion": "Узкая верхняя галерея ОГИБАЕТ ВСЮ общую комнату Темной базы; дети сидят ниже неё на нижнем полу.",
+      "feature_refs": [
+        "L1-DARK-UPPER-PERIMETER",
+        "L1-BASE-COMMON"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-183",
+      "page_id": "B1-050",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=50",
+      "station_id": "MOAG",
+      "narrative_mode": "UPPER_ROOM_ACCESS",
+      "locator_hint": "из галереи в спальню Таис",
+      "spatial_assertion": "Таис проходит по узкой верхней галерее в свою спальню, значит верхний обход служит внутриблоковой коммуникацией.",
+      "feature_refs": [
+        "L1-DARK-UPPER-PERIMETER",
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-184",
+      "page_id": "B1-050",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=50",
+      "station_id": "MOAG",
+      "narrative_mode": "BEDROOM_INTERIOR",
+      "locator_hint": "кровать и небольшой бытовой интерьер спальни",
+      "spatial_assertion": "Спальня Таис находится у верхней галереи и содержит кровать и немного личных вещей; размер помещения неизвестен.",
+      "feature_refs": [
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
