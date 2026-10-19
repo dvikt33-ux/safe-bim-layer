@@ -1,0 +1,3 @@
+# APA №1 02Z — C5 Ifc5D, 88/100
+
+Функция: смета CSV/IFC и запрет ложных Space QTO. Источники: [Ifc5D README L8–13,47](https://github.com/IfcOpenShell/IfcOpenShell/blob/ifcopenshell-python-0.8.5/src/ifc5d/README.md#L8), [Space skip L105–107](https://github.com/IfcOpenShell/IfcOpenShell/blob/ifcopenshell-python-0.8.5/src/ifcopenshell-python/ifcopenshell/api/cost/assign_cost_item_quantity.py#L105). Не дубликат PR56 QTO: добавляется структура стоимости. Найти готовый read-only cost inspector, не новый writer. LGPL-3+, Windows locale, права ГЭСН/ФЕР, wheel NOT_VERIFIED. Вопрос №2: готовый валидатор пропущенных IfcSpace? ГОТОВО: SPACE_UNSUPPORTED, units/rates source и отказ от нулевой ложной сметы.

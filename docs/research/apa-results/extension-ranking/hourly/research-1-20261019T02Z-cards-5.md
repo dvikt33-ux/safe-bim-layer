@@ -1,0 +1,3 @@
+# APA №1 02Z — C7 Ifc4D, 79/100
+
+Функция: контроль связей задач и строительных продуктов. Источники: [IfcOpenShell 0.8.5 add_work_schedule L29](https://github.com/IfcOpenShell/IfcOpenShell/blob/ifcopenshell-python-0.8.5/src/ifcopenshell-python/ifcopenshell/api/sequence/add_work_schedule.py#L29), [assign_product L24](https://github.com/IfcOpenShell/IfcOpenShell/blob/ifcopenshell-python-0.8.5/src/ifcopenshell-python/ifcopenshell/api/sequence/assign_product.py#L24). Не дубликат CloneNativeGroupV1/Hotlink/PR70. Найти готовый read-only IfcWorkSchedule↔IfcTask↔IfcProduct audit, не второй планировщик. LGPL-3+, Windows wheel/реальные сроки NOT_VERIFIED. Вопрос №2: готовый orphan task/product validator? ГОТОВО: JSON diff по GUID без изменения PLN.
