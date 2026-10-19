@@ -4055,6 +4055,298 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-247",
+      "page_id": "B1-085",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=85",
+      "station_id": "MOAG",
+      "narrative_mode": "ENERGY_GATE",
+      "locator_hint": "решетка закрывает соседний туннель",
+      "spatial_assertion": "От общественного парка Второго соседний туннель закрыт энергетической решеткой при нападении.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-248",
+      "page_id": "B1-085",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=85",
+      "station_id": "MOAG",
+      "narrative_mode": "AI_CONTROL",
+      "locator_hint": "Мартин лишь проводник Моага",
+      "spatial_assertion": "Робот Мартин говорит, что представляет главный интеллект, но тот не локализован в его голове; комнату сервера текст не уточняет.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-249",
+      "page_id": "B1-085",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=85",
+      "station_id": "MOAG",
+      "narrative_mode": "PARK_CANTEEN",
+      "locator_hint": "совет приглашен в детсад",
+      "spatial_assertion": "Участники совета из парка переходят в столовую детсада; точная сеть перехода не описана.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-250",
+      "page_id": "B1-086",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=86",
+      "station_id": "MOAG",
+      "narrative_mode": "DAYCARE_CANTEEN",
+      "locator_hint": "столы, настенная голограмма",
+      "spatial_assertion": "Столовая детсада имеет низкие передвигаемые столики и стеновую голограмму персонажей.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-251",
+      "page_id": "B1-086",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=86",
+      "station_id": "MOAG",
+      "narrative_mode": "DAYCARE_TOILET",
+      "locator_hint": "зеркала у раковины низко",
+      "spatial_assertion": "Санузел детского сада оборудован действующей водой и низкими зеркалами на уровне, доступном детям.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-252",
+      "page_id": "B1-086",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=86",
+      "station_id": "MOAG",
+      "narrative_mode": "ACCESS_HISTORY",
+      "locator_hint": "изолированный Второй для детей",
+      "spatial_assertion": "Мартин сообщает об историческом ограничении посещений Второго уровня взрослыми и преимущественном обслуживании роботами.",
+      "feature_refs": [
+        "L2-RESIDENTIAL-RING"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-253",
+      "page_id": "B1-087",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=87",
+      "station_id": "MOAG",
+      "narrative_mode": "CLASSROOM_BLOCK",
+      "locator_hint": "12 детей заблокированы за Оранжевой",
+      "spatial_assertion": "Школьные классы по другую сторону Оранжевой магистрали временно изолированы, в них остались 12 детей и два Дона.",
+      "feature_refs": [
+        "L2-SCHOOL",
+        "L2-ORANGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-254",
+      "page_id": "B1-087",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=87",
+      "station_id": "MOAG",
+      "narrative_mode": "RESIDENTIAL_UNIT",
+      "locator_hint": "отдельная спальня, зал, кухня",
+      "spatial_assertion": "Одинарная детская каюта на Втором состоит из спальни, зала и кухни; свободных кают в этом районе несколько.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-255",
+      "page_id": "B1-088",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=88",
+      "station_id": "MOAG",
+      "narrative_mode": "CABIN_CUPBOARD",
+      "locator_hint": "зеркало и монитор верхних полок",
+      "spatial_assertion": "В спальне каюты установлен шкаф с большим зеркалом и монитором управления верхними полками.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-256",
+      "page_id": "B1-088",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=88",
+      "station_id": "MOAG",
+      "narrative_mode": "CABIN_BATH",
+      "locator_hint": "душ, диван из зала",
+      "spatial_assertion": "Внутри жилой каюты Второго есть душевая и зал с переносимой мебелью.",
+      "feature_refs": [
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-257",
+      "page_id": "B1-088",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=88",
+      "station_id": "MOAG",
+      "narrative_mode": "CLASSROOM_UTILITIES",
+      "locator_hint": "вода и туалет есть, еды нет",
+      "spatial_assertion": "Закрытые школьные кабинеты оборудованы водой и санитарными помещениями, пищевых автоматов там нет.",
+      "feature_refs": [
+        "L2-SCHOOL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-258",
+      "page_id": "B1-088",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=88",
+      "station_id": "MOAG",
+      "narrative_mode": "EXTERNAL_GALLERY",
+      "locator_hint": "галерея с детьми за окнами",
+      "spatial_assertion": "У столовой есть галерея, видимая через окна и двери; это не доказательство второго сплошного этажа.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-259",
+      "page_id": "B1-089",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=89",
+      "station_id": "MOAG",
+      "narrative_mode": "INNER_GARDEN_ROBOTS",
+      "locator_hint": "семь садовников во внутреннем круге",
+      "spatial_assertion": "Во внутреннем круге Второго расположена группа из семи роботов-садовников, временно перепрограммированных.",
+      "feature_refs": [
+        "L2-RESIDENTIAL-RING"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-260",
+      "page_id": "B1-089",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=89",
+      "station_id": "MOAG",
+      "narrative_mode": "TEMPORARY_GATE",
+      "locator_hint": "решетку подняли для прохода",
+      "spatial_assertion": "Одна из энергетических решеток временно поднята, позволив пройти из защищенного сектора на Оранжевую магистраль.",
+      "feature_refs": [
+        "L2-ORANGE",
+        "L2-GREEN"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-261",
+      "page_id": "B1-089",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=89",
+      "station_id": "MOAG",
+      "narrative_mode": "SCHOOL_RESCUE_ROUTE",
+      "locator_hint": "по магистрали, затем узкий коридор",
+      "spatial_assertion": "Спасатели физически проходят из внутреннего круга по Оранжевой, затем через узкий школьный коридор к двойным дверям.",
+      "feature_refs": [
+        "L2-ORANGE",
+        "L2-SCHOOL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-262",
+      "page_id": "B1-090",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=90",
+      "station_id": "MOAG",
+      "narrative_mode": "ARMORED_CLASSROOM_DOOR",
+      "locator_hint": "плотное бронированное стекло",
+      "spatial_assertion": "К школьным классам ведут самооткрывающиеся двери с бронированным остеклением.",
+      "feature_refs": [
+        "L2-SCHOOL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-263",
+      "page_id": "B1-090",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=90",
+      "station_id": "MOAG",
+      "narrative_mode": "MAGNETIC_BOARDS_HYPOTHESIS",
+      "locator_hint": "здесь должны быть магнитные доски",
+      "spatial_assertion": "Наличие магнитных досок в школе высказано как ожидание героя, фактически в тексте на странице не осмотрены.",
+      "feature_refs": [
+        "L2-SCHOOL"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-264",
+      "page_id": "B1-090",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=90",
+      "station_id": "MOAG",
+      "narrative_mode": "HISTORIC_DISPATCH_CHAIR",
+      "locator_hint": "большое диспетчерское кресло",
+      "spatial_assertion": "В закрытой старой ангарной пультовой стоит большое кресло на колесиках и с высокими подлокотниками, в ванной работает кран.",
+      "feature_refs": [
+        "L1-CIRCULAR-CONTROL",
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
