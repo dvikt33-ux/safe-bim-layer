@@ -66,7 +66,8 @@
       "B2-127",
       "B2-128",
       "B2-133",
-      "B2-134"
+      "B2-134",
+      "B2-135"
     ],
     "external_screened_page_ids": [
       "B2-052",
@@ -105,9 +106,9 @@
     ],
     "uncertain_page_ids": [],
     "metrics": {
-      "as_of_page_id": "B2-134",
-      "context_reviewed_page_count": 63,
-      "full_evidence_page_count": 229,
+      "as_of_page_id": "B2-135",
+      "context_reviewed_page_count": 64,
+      "full_evidence_page_count": 230,
       "external_excluded_page_count": 20,
       "unresolved_classification_page_count": 0,
       "justified_reopened_page_count": 4,
@@ -124,7 +125,7 @@
         "B2-083": "первичный ответ по странице обрезался; адресно прочитаны последние десять абзацев и подтверждён конец страницы",
         "B2-088": "Первый ответ по p88 был обрезан ограничением вывода; выполнен один адресный компактный текстовый запрос для восстановления полного текста этой же страницы."
       },
-      "character_location_event_count": 55
+      "character_location_event_count": 56
     }
   },
   "method": "ONE_PASS: classify each page fragment and extract all relevant evidence during the same single reading. Use prior-page context and identify chapter/scene boundaries inline when headings appear. Do not pre-screen an entire chapter before rereading; reopens require a recorded concrete reason.",
@@ -1277,11 +1278,12 @@
         "end": 135
       },
       "chapter_end_confirmed": true,
-      "chapter_classification": "STATION",
-      "screening_status": "ONE_PASS_IN_PROGRESS",
+      "chapter_classification": "MIXED",
+      "screening_status": "ONE_PASS_COMPLETE",
       "screened_pages": [
         "B2-133",
-        "B2-134"
+        "B2-134",
+        "B2-135"
       ],
       "scenes": [
         {
@@ -1304,6 +1306,22 @@
             "Жак"
           ],
           "station_relevance": "Подробно описана радиальная схема производственного цеха, центральная колба живого металла, проход к линии человекоподобных роботов. Диалоги о производстве/внешне завозимых боевых роботах учитываются как факты; уровень цеха не назначен."
+        },
+        {
+          "id": "B2P3C10-S2",
+          "page_fragments": [
+            {
+              "page_id": "B2-135",
+              "fragment": "После эвакуации с МОАГа: станция уже пуста и видна из корабля; уничтожение обсуждается как последующее действие. Остальные сведения относятся к кораблям и исключены."
+            }
+          ],
+          "classification": "REMOTE_EVIDENCE",
+          "physical_location": "Корабль Ника; МОАГ виден снаружи после эвакуации.",
+          "characters": [
+            "Эмма",
+            "Ник"
+          ],
+          "station_relevance": "Подтверждены пустое состояние МОАГа и его удалённый вид; силуэт и габариты не описаны. Взрыв — план на будущее."
         }
       ]
     }
@@ -1959,6 +1977,17 @@
       "arrival_event": "проходит через центральный зал, контейнерную зону и полукруглый проём в помещение производства человекоподобных роботов",
       "source": [
         "B2-133"
+      ],
+      "confidence": "DIRECT_TEXT"
+    },
+    {
+      "character_id": "Эмма и Ник",
+      "story_time": "B2, часть 3, глава 10, p135",
+      "current_location": "Корабль Ника после эвакуации с МОАГа; далее семейный корабль",
+      "departure_event": "покидают МОАГ на сферическом катере; конкретная точка выхода с орбиты не описана",
+      "arrival_event": "влетают в шлюз семейного корабля Ника; дальнейшее сопровождение Эммы к детям только планируется",
+      "source": [
+        "B2-135"
       ],
       "confidence": "DIRECT_TEXT"
     }
