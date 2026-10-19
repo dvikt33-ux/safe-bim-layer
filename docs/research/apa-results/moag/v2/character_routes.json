@@ -4432,6 +4432,123 @@
       "constraints": [],
       "identity_hypotheses": [],
       "notes": "Это маршрут эпизода разведки и укрытия на Втором уровне, содержащий элементы, запланированные по макету, и фактически пройденные участки; плановая часть и реальное движение различены в observed_constraint. Координаты и размеры отсутствуют."
+    },
+    {
+      "id": "RT-041",
+      "title": "Эмма и Коля: кафе Второго → коридорная развилка и овальная кладовая → мусорный отсек → Третий → капитанская рубка и грузовые лифты",
+      "participants": [
+        "Эмма",
+        "Коля"
+      ],
+      "book": "B2",
+      "site_pages": [
+        "B2-073",
+        "B2-074",
+        "B2-075",
+        "B2-076"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT041-A",
+          "label": "Кафе Второго у прозрачной двери",
+          "global_level": 2,
+          "local_stratum": "cafe-corridor-threshold",
+          "source_page_id": "B2-073",
+          "movement_method": "DOOR",
+          "observed_constraint": "Эмма и Коля защищаются в кафе и выходят через прозрачную дверь в коридор; точный план кафе не описан.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT041-B",
+          "label": "Длинный ярко освещённый коридор и развилка",
+          "global_level": 2,
+          "local_stratum": "corridor-junction",
+          "source_page_id": "B2-074",
+          "movement_method": "WALK",
+          "observed_constraint": "В конце коридоров один проход ведёт ко второму конференц-залу, другой — к складам; расстояния не заданы.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT041-C",
+          "label": "Широкое овальное помещение с пультом и шкафами",
+          "global_level": 2,
+          "local_stratum": "oval-control-storage-room",
+          "source_page_id": "B2-074",
+          "movement_method": "DOOR",
+          "observed_constraint": "Персонажи взламывают дверь и входят в овальную комнату с пультом и рядами шкафов.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT041-D",
+          "label": "Выходы из кладовой к коридору мусорного отсека",
+          "global_level": 2,
+          "local_stratum": "multi-exit-store-corridor",
+          "source_page_id": "B2-075",
+          "movement_method": "DOOR",
+          "observed_constraint": "У помещений есть несколько выходов; через вторые двери персонажи выходят к коридору с движущимися контейнерами.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT041-E",
+          "label": "Лестница и герметичный люк на Третий",
+          "global_level": null,
+          "local_stratum": "waste-deck-to-third-hatch",
+          "source_page_id": "B2-075",
+          "movement_method": "HATCH_CLIMB",
+          "observed_constraint": "Из района мусорного отсека лестница ведёт к герметичному люку на Третий; точная лестница и отметка не заданы.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT041-F",
+          "label": "Тёмные коридоры и кладовые Третьего",
+          "global_level": 3,
+          "local_stratum": "third-level-corridors-and-stores",
+          "source_page_id": "B2-075",
+          "movement_method": "WALK",
+          "observed_constraint": "Коля ориентируется по коридорам и ряду белых дверей, за одной находятся оружейные полки и контейнеры.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT041-G",
+          "label": "Капитанская рубка и прилегающий верхний сервер",
+          "global_level": 3,
+          "local_stratum": "captain-bridge-upper-server",
+          "source_page_id": "B2-075",
+          "movement_method": "WALK",
+          "observed_constraint": "Персонажи доходят до капитанской рубки; прозрачные двери позволяют видеть помещение, а вскрытые отсеки верхнего сервера расположены у её дверей.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT041-H",
+          "label": "Площадка контейнеров перед грузовыми лифтами",
+          "global_level": null,
+          "local_stratum": "freight-lift-container-area",
+          "source_page_id": "B2-076",
+          "movement_method": "WALK",
+          "observed_constraint": "Перед грузовыми лифтами замечены три ряда по четыре контейнера; уровень и точные координаты не уточнены.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "Последовательность опирается на реальное перемещение Эммы и Коли. Возможные угрозы, догадки персонажей о цели роботов и содержимое голограмм не превращены в доказанную геометрию; численные размеры отсутствуют."
     }
   ]
 }
