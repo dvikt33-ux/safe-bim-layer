@@ -8576,6 +8576,20 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-530",
+      "page_id": "B2-089",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=89",
+      "station_id": "MOAG",
+      "narrative_mode": "REMOTE_EVIDENCE_SHELTER_AND_PROVISIONING",
+      "locator_hint": "Таис на Земле сопоставляет опасность острова с укрытием на Втором уровне и защищённым бытом станции",
+      "spatial_assertion": "Таис вспоминает, что на станции можно было укрыться на Втором уровне, роботы обеспечивали защиту, а там были тепло, еда и вода. Это прямое свидетельство о функции защиты и снабжения в сравнении с Землёй; оно не задаёт форму, границы, маршруты, размеры или внешний вид Второго уровня.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
