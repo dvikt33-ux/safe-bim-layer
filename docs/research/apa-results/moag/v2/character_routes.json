@@ -938,6 +938,183 @@
       ],
       "identity_hypotheses": [],
       "notes": "Нельзя делать всякую шахту вентиляции одним и тем же каналом; совпадение с RT-003 требует отдельной проверки."
+    },
+    {
+      "id": "RT-009",
+      "title": "Лон сопровождает детей и груз со Второго на Нижний в обычном лифте",
+      "participants": [
+        "Эмма",
+        "Коля",
+        "Лон"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-047",
+        "B1-048"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT009-A",
+          "label": "Кухня жилой каюты Эммы",
+          "global_level": 2,
+          "local_stratum": "residential",
+          "source_page_id": "B1-047",
+          "movement_method": "WALK",
+          "observed_constraint": "Лон готовит пищу и управляет грузовой тележкой; груз собирают для Нижнего.",
+          "existing_graph_node": "L2-CABINS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT009-B",
+          "label": "Подход к штатному лифту",
+          "global_level": 2,
+          "local_stratum": "residential-lift-lobby",
+          "source_page_id": "B1-048",
+          "movement_method": "WALK",
+          "observed_constraint": "Продукты и вещи переносятся от каюты до лифта.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT009-C",
+          "label": "Кабина штатного лифта вниз",
+          "global_level": null,
+          "local_stratum": "between-2-and-1",
+          "source_page_id": "B1-047",
+          "movement_method": "ELEVATOR_DOWN",
+          "observed_constraint": "Лон сопровождает и показывает возможность остановки некоторых обычных лифтов на Нижнем.",
+          "existing_graph_node": "LINK-LIFT-L2-L1",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT009-D",
+          "label": "Тёмная остановка Нижнего",
+          "global_level": 1,
+          "local_stratum": "lower-service-landing",
+          "source_page_id": "B1-047",
+          "movement_method": "WALK",
+          "observed_constraint": "После остановки двери раздвигаются в холодный сумрак Нижнего.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT009-E",
+          "label": "Коридор от лифта к базам",
+          "global_level": 1,
+          "local_stratum": "lower-inhabited-route",
+          "source_page_id": "B1-048",
+          "movement_method": "WALK",
+          "observed_constraint": "Эмма с грузом идёт по нижним коридорам, встречает других детей, возвращается на базу.",
+          "existing_graph_node": "L1-BASES",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT009-B",
+          "lower": "RT009-D",
+          "source_page_id": "B1-047",
+          "claim": "Обычная лифтовая кабина спускается из жилой части Второго на Нижний"
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Имеются НЕСКОЛЬКО штатных лифтов с доступом на Первый, но точные шахты и связь с лифтами Д/Е Третьего не установлены. Лон не располагал картой Нижнего, однако фактически спустился."
+    },
+    {
+      "id": "RT-010",
+      "title": "Нижняя общая комната Темной базы, верхняя галерея и спальни",
+      "participants": [
+        "Таис",
+        "Вовик",
+        "Ромик",
+        "Фёдор"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-049",
+        "B1-050"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT010-A",
+          "label": "Ванная Темной базы",
+          "global_level": 1,
+          "local_stratum": "wet-room",
+          "source_page_id": "B1-049",
+          "movement_method": "WALK",
+          "observed_constraint": "Таис стирает и развешивает бельё у большого бака; срабатывающая дверь.",
+          "existing_graph_node": "L1-BASE-WET",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT010-B",
+          "label": "Короткая лестница около общего помещения",
+          "global_level": 1,
+          "local_stratum": "local-base-stair",
+          "source_page_id": "B1-049",
+          "movement_method": "CLIMB_DOWN",
+          "observed_constraint": "Возле входа в общий зал короткая лестница; её связь с ванной читается через движение Таис.",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT010-C",
+          "label": "Нижний пол общего помещения",
+          "global_level": 1,
+          "local_stratum": "common-floor",
+          "source_page_id": "B1-049",
+          "movement_method": "WALK",
+          "observed_constraint": "Младшие дети сидят под узкой галереей.",
+          "existing_graph_node": "L1-BASE-COMMON",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT010-D",
+          "label": "Узкая верхняя галерея по периметру зала",
+          "global_level": 1,
+          "local_stratum": "common-upper-walk",
+          "source_page_id": "B1-049",
+          "movement_method": "CLIMB_UP",
+          "observed_constraint": "Галерея огибает всю комнату; Таис ходит по ней к спальне.",
+          "existing_graph_node": "L1-DARK-UPPER-PERIMETER",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT010-E",
+          "label": "Вход в спальню Таис",
+          "global_level": 1,
+          "local_stratum": "upper-bedroom",
+          "source_page_id": "B1-050",
+          "movement_method": "WALK",
+          "observed_constraint": "Таис идёт по верхней галерее до своей спальни, затем оказывается на кровати.",
+          "existing_graph_node": "L1-BASE-SLEEP",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT010-D",
+          "lower": "RT010-C",
+          "source_page_id": "B1-049",
+          "claim": "Младшие сидят под галереей, и та огибает весь общий зал"
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Привязка короткой лестницы ванной к единой оси галереи требует уточнения: верхняя галерея подтверждена, но точный узел выхода не назван."
     }
   ]
 }
