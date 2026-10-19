@@ -243,34 +243,34 @@
       "id": "B2-022",
       "page_number": 22,
       "url": "https://loveread.ec/read_book.php?id=53370&p=22",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 1,
+      "notes": "Продолжение сражения за пределами МОАГа: управление катерами класса В, ИИ крейсера Иминуя, попытки дистанционного перехвата. Новых внутренних помещений станции не описано. Упоминание силового поля МОАГа относится к режиму обороны; помещения вражеского крейсера не относятся к станции.",
+      "verification_method": "Full primary literary-page reading, explicit separation of MOAG vs hostile cruiser, flashback, and recalled library process",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-023",
       "page_number": 23,
       "url": "https://loveread.ec/read_book.php?id=53370&p=23",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 0,
+      "notes": "Таис и Фёдор оказываются внутри чужого крейсера Гильдии: его просторный белый шлюз и узкий боковой коридор не являются частью МОАГа. Возвращение на станцию на этой странице не показано. Далее смена главы на жилую каюту Эммы/Коли без новой уникальной геометрии.",
+      "verification_method": "Full primary literary-page reading, explicit separation of MOAG vs hostile cruiser, flashback, and recalled library process",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-024",
       "page_number": 24,
       "url": "https://loveread.ec/read_book.php?id=53370&p=24",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "MOAG",
+      "recorded_spatial_hints": 3,
+      "notes": "В жилой каюте Второго Эмма, Коля и Соня используют спальные комнаты, общий коридор и кухонную бытовую технику; отдельная программа восстановления бумажных книг Второго включает принт-копир страниц, аппарат прошивки, вывод старых экземпляров в лучевую печь. Библиотечное оборудование реально существует согласно воспоминанию персонажа, но не указано, что весь комплекс находится непосредственно внутри читального зала.",
+      "verification_method": "Full primary literary-page reading, explicit separation of MOAG vs hostile cruiser, flashback, and recalled library process",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-025",
