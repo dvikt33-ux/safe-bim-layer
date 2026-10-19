@@ -2123,6 +2123,137 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-130",
+      "page_id": "B1-028",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=28",
+      "station_id": "MOAG",
+      "narrative_mode": "HISTORIC_LABEL",
+      "locator_hint": "старые замки «базы 3 и 4»",
+      "spatial_assertion": "Подтверждено историческое обозначение двух служебных баз Нижнего уровня Млечного Пути; не принимать за нумерацию трёх нынешних убежищ.",
+      "feature_refs": [
+        "L1-BASES-HISTORIC-NUMBERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-131",
+      "page_id": "B1-028",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=28",
+      "station_id": "MOAG",
+      "narrative_mode": "SPACE",
+      "locator_hint": "крохотная спальня в отдалении",
+      "spatial_assertion": "Для Ильи и Кати выделена холодная удалённая спальня Темной базы: одна кровать у стены и три стула.",
+      "feature_refs": [
+        "L1-BASE-REMOTE-BED"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-132",
+      "page_id": "B1-028",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=28",
+      "station_id": "MOAG",
+      "narrative_mode": "OCCUPANCY",
+      "locator_hint": "Маша с тремя мальками",
+      "spatial_assertion": "Маша проживает вместе с тремя младшими детьми в одной спальне, поэтому вместимость спальных ячеек неоднородна.",
+      "feature_refs": [
+        "L1-BASE-KIDS-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-133",
+      "page_id": "B1-029",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=29",
+      "station_id": "MOAG",
+      "narrative_mode": "PLUMBING",
+      "locator_hint": "кран, где Маша моет посуду",
+      "spatial_assertion": "В общем помещении базы доступен кран для набора воды и мытья посуды; инженерное подключение требует трассировки, не угадывается.",
+      "feature_refs": [
+        "L1-BASE-KITCHEN-WATER",
+        "L1-BASE-COMMON"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-134",
+      "page_id": "B1-029",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=29",
+      "station_id": "MOAG",
+      "narrative_mode": "VERTICAL",
+      "locator_hint": "Таис поднялась в свою спальню",
+      "spatial_assertion": "Факт повторного подъёма к спальне Таис из общего бытового пространства подтверждает локальную высотную связь.",
+      "feature_refs": [
+        "L1-BASE-SLEEP",
+        "L1-BASE-COMMON"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-135",
+      "page_id": "B1-030",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=30",
+      "station_id": "MOAG",
+      "narrative_mode": "NETWORK_TOPOLOGY",
+      "locator_hint": "флешка в узле процессора на Втором",
+      "spatial_assertion": "Узел управления тепловыми датчиками находится на Втором уровне и связан с инженерной сетью датчиков других коридоров, но кабельные трассы и этаж узла не названы.",
+      "feature_refs": [
+        "L2",
+        "L1-VENT"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-136",
+      "page_id": "B1-031",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=31",
+      "station_id": "MOAG",
+      "narrative_mode": "LOWER_BASE_OCCUPANCY",
+      "locator_hint": "свободных спален уже не осталось",
+      "spatial_assertion": "На момент сюжета жилые спальни Темной базы полностью заняты; это социальное состояние, а не конструктивное доказательство количества комнат.",
+      "feature_refs": [
+        "L1-TEMNAYA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-137",
+      "page_id": "B1-031",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=31",
+      "station_id": "MOAG",
+      "narrative_mode": "HYPOTHESIS_IN_DIALOGUE",
+      "locator_hint": "может это ангар с небольшими крейсерами",
+      "spatial_assertion": "Фёдор предполагает, что неизвестная запечатанная дверь ведёт к выходу/ангару. Факт назначения за дверью НЕ установлен.",
+      "feature_refs": [
+        "SUB-SEALED-DOOR"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
