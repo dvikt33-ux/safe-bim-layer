@@ -14,6 +14,13 @@ CREATE='SharedGroupCreate20261020V1';SAVE='SharedGroupCreateSave20261020V1'
 SOURCE_REF='https://github.com/dvikt33-ux/safe-bim-layer/pull/157'
 
 
+def operation(m):
+    if m.get('operation','CREATE')=='CREATE':return N,AUTH,CREATE,SAVE
+    need(m['operation']=='UNGROUP','GROUP_EDIT_UNKNOWN_OPERATION')
+    import apa_ac29_native_group_ungroup as U
+    return U,'USER_APPROVED_AC29_NATIVE_GROUP_UNGROUP_DISPOSABLE_20261020','SharedGroupUngroup20261020V1','SharedGroupUngroupSave20261020V1'
+
+
 def stage(accepted,state,trace,members):
     accepted,state,trace=[Path(p).resolve() for p in (accepted,state,trace)]
     old,saved,source=B.accepted_copy_source(accepted,use_guarded_snapshot=True)
@@ -50,8 +57,34 @@ def manifest(state,initial=False):
     return m
 
 
+def stage_ungroup(accepted,state,trace):
+    accepted,state,trace=[Path(p).resolve() for p in (accepted,state,trace)]
+    old=manifest(accepted);saved=read(accepted/'saved.json');receipt=read(accepted/'reopened.json')
+    source=accepted/'guarded-save.snapshot';snap=read(accepted/'guarded-snapshot.json')
+    need(receipt['status']=='LIVE_SHARED_NATIVE_GROUP_CREATE_SAVED_REOPENED_PASS' and receipt['reopenVerified'] and
+         receipt['savedSHA256']==saved['savedSHA256']==sha256(source) and
+         sha256(accepted/'guarded-snapshot.json')==saved['snapshotReceiptSHA256'] and
+         snap['savedSHA256']==snap['snapshotSHA256']==saved['savedSHA256'] and
+         not state.exists() and state.parent.is_dir(),'GROUP_UNGROUP_ACCEPTED_SNAPSHOT_AND_NEW_STATE_REQUIRED')
+    rows=[json.loads(l) for l in trace.read_text(encoding='utf8').splitlines()]
+    native=B.C.G.normalize_dump([r['response'] for r in rows if r['command']=='GetModelDumpV1'][-1])
+    ids=sorted(r['guid'].lower() for r in native['elements'])
+    need(R.digest(ids)==saved['finalGuidSetSHA256'] and G.fingerprint(native)==saved['finalBrepSHA256'] and
+         V.semantic_digest(native,set(ids))==saved['finalSemanticSHA256'],'GROUP_UNGROUP_ACCEPTED_BASELINE_REQUIRED')
+    scratch=state.parent/'native-group-ungroup.pln';need(not scratch.exists(),'GROUP_UNGROUP_FRESH_SCRATCH_REQUIRED')
+    state.mkdir();B.copy_exclusive(source,scratch);need(sha256(scratch)==saved['savedSHA256'],'GROUP_UNGROUP_COPY_SHA_DRIFT')
+    write(state/'baseline-native.json',native)
+    m=dict(old,source=str(source),sourceSHA256=saved['savedSHA256'],scratch=str(scratch),scratchInitialSHA256=saved['savedSHA256'],
+        protectedAncestors={old['source']:old['sourceSHA256'],**old['protectedAncestors']},
+        acceptedState=str(accepted),acceptedReceiptSHA256=sha256(accepted/'reopened.json'),
+        baselineSHA256=sha256(state/'baseline-native.json'),baselineGuidSetSHA256=R.digest(ids),
+        baselineBrepSHA256=G.fingerprint(native),baselineSemanticSHA256=V.semantic_digest(native,set(ids)),
+        operation='UNGROUP',groupGuid=receipt['reopenedReadback']['groupId'])
+    write(state/'manifest.json',m);return m
+
+
 def api_for(m,state,execute=False,saved_sha=None):
-    api,guard=G.prepare_api(m,state,execute=execute,saved_sha=saved_sha,authorization_ref=AUTH)
+    api,guard=G.prepare_api(m,state,execute=execute,saved_sha=saved_sha,authorization_ref=operation(m)[1])
     api.allowed|={'GetNativeGroupRootsV1'}
     return api,guard
 
@@ -61,15 +94,17 @@ def current_plan(state):
     ids,native=B.capture(m,api)
     need(R.digest(ids)==m['baselineGuidSetSHA256'] and G.fingerprint(native)==m['baselineBrepSHA256'] and
          V.semantic_digest(native,set(ids))==m['baselineSemanticSHA256'],'GROUP_CREATE_CURRENT_MODEL_DRIFT')
-    router=F.native_command_router();task=dict(schemaVersion=N.SCHEMA,request='Сгруппировать проверенные существующие колонны',sourceRef=SOURCE_REF,memberGuids=m['members'])
+    adapter,_,_,_=operation(m)
+    router=F.native_command_router();task=dict(schemaVersion=adapter.SCHEMA,request='Сгруппировать проверенные существующие колонны' if adapter is N else 'Разгруппировать проверенную нативную группу',sourceRef=SOURCE_REF,memberGuids=m['members'])
+    if adapter is not N:task['groupGuid']=m['groupGuid']
     writer=R.SceneWriter(api,journal_path=state/'batch-scenewriter.sqlite',schema_path=G.SCHEMA_PATH,allow_3d_view_for_write=True)
     selected=A.prepare_current_runtime_group_native_task(router,writer,task)['preview']
     ops=selected['selectedNativeTaskPreview']['workflow']['graph']['operations']
-    need(len(ops)==1 and ops[0]['command']==N.CMD,'GROUP_CREATE_ONE_NATIVE_GROUP_COMMAND_REQUIRED')
-    proof=N.before(api=api,command=N.CMD,parameters=ops[0]['params'],affected=m['members'],native_before=native)
+    need(len(ops)==1 and ops[0]['command']==adapter.CMD,'GROUP_CREATE_ONE_NATIVE_GROUP_COMMAND_REQUIRED')
+    proof=adapter.before(api=api,command=adapter.CMD,parameters=ops[0]['params'],affected=m['members'],native_before=native)
     need(api.write_attempts==0,'GROUP_CREATE_PLAN_READONLY_REQUIRED')
     return dict(status='GROUP_CREATE_CURRENT_NATIVE_PLAN_PASS',task=task,params=ops[0]['params'],sourceProof=proof,
-        runtimeIdentity=P.verify_runtime(api),contractSHA256=router.contract_hash(N.CMD),baselineGuids=ids,nativeWrites=0)
+        runtimeIdentity=P.verify_runtime(api),contractSHA256=router.contract_hash(adapter.CMD),baselineGuids=ids,nativeWrites=0)
 
 
 def plan(state):
@@ -79,7 +114,8 @@ def plan(state):
 
 def verify_model(m,api,p,response):
     ids,native=B.capture(m,api)
-    proof=N.after(api=api,command=N.CMD,parameters=p['params'],native_response=response,
+    adapter,_,_,_=operation(m)
+    proof=adapter.after(api=api,command=adapter.CMD,parameters=p['params'],native_response=response,
         before_guids=set(p['baselineGuids']),after_guids=set(ids),affected=m['members'],
         native_before={},native_after=native,source_proof=p['sourceProof'])
     return ids,native,proof
@@ -91,24 +127,25 @@ def execute(state):
     lease=B.ScratchWriteLease(m['scratch'],state,m['scratchInitialSHA256']);lease.acquire()
     write(state/'attempted.json',dict(planSHA256=sha256(state/'plan.json'),automaticReplay=False))
     try:
+        adapter,auth,create_scene,save_scene=operation(m)
         api,guard=api_for(m,state,True);router=F.native_command_router()
         need(P.verify_runtime(api)==p['runtimeIdentity'],'GROUP_CREATE_RUNTIME_DRIFT')
-        N.attach(router);router.probe_runtime(api,N.CMD)
+        adapter.attach(router);router.probe_runtime(api,adapter.CMD)
         selected=A.prepare_auto_optimized_native_task(router,p['task']);graph=selected['selectedNativeTaskPreview']['workflow'];op=graph['graph']['operations'][0]
-        need(op['params']==p['params'] and router.contract_hash(N.CMD)==p['contractSHA256'],'GROUP_CREATE_CONTRACT_DRIFT')
+        need(op['params']==p['params'] and router.contract_hash(adapter.CMD)==p['contractSHA256'],'GROUP_CREATE_CONTRACT_DRIFT')
         with sqlite3.connect(state/'batch-scenewriter.sqlite') as db:
             db.execute('CREATE TABLE scenes(scene_id TEXT PRIMARY KEY,plan_hash TEXT NOT NULL,state TEXT NOT NULL,result TEXT NOT NULL)')
             db.execute('CREATE TABLE steps(scene_id TEXT NOT NULL,step_id TEXT NOT NULL,state TEXT NOT NULL,guid TEXT,output TEXT NOT NULL,PRIMARY KEY(scene_id,step_id))')
         writer=R.SceneWriter(api,journal_path=state/'batch-scenewriter.sqlite',schema_path=G.SCHEMA_PATH,allow_3d_view_for_write=True)
         spec=dict(schemaVersion='apa-ac29-dynamic-mutation-scope/1',projectSha256=m['scratchInitialSHA256'],sourcePlanHash=graph['sourcePlanHash'],
-            authorizationRef=AUTH,sourceEvidenceRef=SOURCE_REF,sceneId=CREATE,stepId=op['id'],command=N.CMD,effect='MODIFY',impact='MODEL',
+            authorizationRef=auth,sourceEvidenceRef=SOURCE_REF,sceneId=create_scene,stepId=op['id'],command=adapter.CMD,effect='MODIFY',impact='MODEL',
             commandContractHash=p['contractSHA256'],parametersHash=R.digest(p['params']),expectedBeforeGuidSetHash=m['baselineGuidSetSHA256'],
-            expectedBeforeNativeBrepHash=m['baselineBrepSHA256'],affectedGuids=m['members'],retainedGuids=sorted(set(p['baselineGuids'])-set(m['members'])),verifierId=N.VERIFIER)
+            expectedBeforeNativeBrepHash=m['baselineBrepSHA256'],affectedGuids=m['members'],retainedGuids=sorted(set(p['baselineGuids'])-set(m['members'])),verifierId=adapter.VERIFIER)
         scopes=build_existing_workflow_scopes(spec=spec,plan=graph,router=router,registry=installed_verifiers(),writer=writer,api=api,
             capture_model=B.D.capture_full_model,guid_inventory=A.inventory_guids,current_project_sha=lambda:sha256(m['scratch']),
-            approved_project_sha=m['scratchInitialSHA256'],local_authorization=AUTH)
+            approved_project_sha=m['scratchInitialSHA256'],local_authorization=auth)
         result=A.run_auto_optimized_native_task(router,api,selected,writer,scopes)
-        need(result['status']=='WORKFLOW_CALLABLE_VERIFIED' and api.calls[N.CMD]==1,'GROUP_CREATE_UNKNOWN_NO_REPLAY')
+        need(result['status']=='WORKFLOW_CALLABLE_VERIFIED' and api.calls[adapter.CMD]==1,'GROUP_CREATE_UNKNOWN_NO_REPLAY')
         response=result['results'][op['id']];ids,native,proof=verify_model(m,api,p,response)
         signatures=B.C.retained_geometry_signatures(native,ids);guard.enable_after_verified_copy()
         router.review_policy('SaveProject','TRANSACTION','PROJECT',dict(source=SOURCE_REF,sha256=router.contract_hash('SaveProject')))
@@ -122,12 +159,13 @@ def execute(state):
             protected={m['source']:m['sourceSHA256'],m['originalProtected']:m['originalProtectedSHA256'],**m['protectedAncestors']}
             snap=B.preserve_guarded_save(m['scratch'],state/'guarded-save.snapshot',guard.new_saved_sha,protected)
             write(state/'guarded-snapshot.json',snap);return dict(status='GROUP_CREATE_SAVE_SNAPSHOT_PASS')
-        saved=router.execute(writer,SAVE,router.prepare('SaveProject',{}),[],signatures,m['scratchInitialSHA256'],AUTH,'PROJECT',after_save,verify_before=before_save)
+        saved=router.execute(writer,save_scene,router.prepare('SaveProject',{}),[],signatures,m['scratchInitialSHA256'],auth,'PROJECT',after_save,verify_before=before_save)
         need(saved['status']=='PASS' and api.calls['SaveProject']==1 and api.write_attempts==2,'GROUP_CREATE_ONE_GROUP_ONE_SAVE_REQUIRED')
         r=dict(schema=SCHEMA,status='SHARED_GROUP_CREATE_SAVED_PENDING_REOPEN',nativeResponse=response,nativeReadback=proof,
             finalGuidCount=len(ids),finalGuidSetSHA256=R.digest(ids),finalBrepSHA256=G.fingerprint(native),
             finalSemanticSHA256=V.semantic_digest(native,set(ids)),savedSHA256=guard.new_saved_sha,
-            snapshotReceiptSHA256=sha256(state/'guarded-snapshot.json'),groupCreateCalls=1,saveCalls=1,reopenVerified=False,automaticReplay=False)
+            snapshotReceiptSHA256=sha256(state/'guarded-snapshot.json'),nativeGroupCommand=adapter.CMD,
+            groupCreateCalls=int(adapter is N),ungroupCalls=int(adapter is not N),saveCalls=1,reopenVerified=False,automaticReplay=False)
         write(state/'saved.json',r);return r
     except Exception as exc:
         write(state/'failed.json',dict(status='UNKNOWN_NO_REPLAY_READONLY_RECONCILIATION_REQUIRED',error=str(exc),automaticReplay=False));raise
@@ -157,5 +195,6 @@ def verify_reopen(state):
     ids,native,proof=verify_model(m,api,p,r['nativeResponse'])
     need(R.digest(ids)==r['finalGuidSetSHA256'] and G.fingerprint(native)==r['finalBrepSHA256'] and
          V.semantic_digest(native,set(ids))==r['finalSemanticSHA256'] and api.write_attempts==0,'GROUP_CREATE_REOPEN_NATIVE_DRIFT')
-    result=dict(r,status='LIVE_SHARED_NATIVE_GROUP_CREATE_SAVED_REOPENED_PASS',reopenVerified=True,reopenedReadback=proof,sourceUnchanged=True,verificationNativeWrites=0)
+    status='LIVE_SHARED_NATIVE_GROUP_CREATE_SAVED_REOPENED_PASS' if operation(m)[0] is N else 'LIVE_SHARED_NATIVE_GROUP_UNGROUP_SAVED_REOPENED_PASS'
+    result=dict(r,status=status,reopenVerified=True,reopenedReadback=proof,sourceUnchanged=True,verificationNativeWrites=0)
     write(state/'reopened.json',result);return result

@@ -1,0 +1,106 @@
+{
+  "version": "29",
+  "category": "Native SDK group operation",
+  "availability": "BUILD_CANDIDATE_NOT_RUNTIME_REGISTERED",
+  "implementationSource": "archicad-addon/Sources/NativeGroupCommands.inc",
+  "implementationSHA256": "f915d0a2f6127e489eacebd242f72fcab3c409ce07ea7290efa3fb38175d0528",
+  "impact": "MODEL",
+  "description": "Ungroup explicitly selected flat native group with complete GUID readback and original members preserved.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "groupId": {
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "guid"
+        ],
+        "additionalProperties": false
+      },
+      "sourceRef": {
+        "type": "string",
+        "minLength": 8
+      }
+    },
+    "required": [
+      "groupId",
+      "sourceRef"
+    ],
+    "additionalProperties": false
+  },
+  "returns": {
+    "anyOf": [
+      {
+        "type": "object",
+        "properties": {
+          "nativeModelWrites": {
+            "type": "integer"
+          },
+          "previousGroupId": {
+            "type": "object",
+            "properties": {
+              "guid": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "guid"
+            ],
+            "additionalProperties": false
+          },
+          "releasedMembers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "guid": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "guid"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "nativeModelWrites",
+          "previousGroupId",
+          "releasedMembers"
+        ],
+        "additionalProperties": false
+      },
+      {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "integer"
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "code",
+              "message"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "additionalProperties": false
+      }
+    ]
+  },
+  "operationKind": "MODIFY"
+}
