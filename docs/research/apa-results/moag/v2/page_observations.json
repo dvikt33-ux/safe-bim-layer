@@ -4876,6 +4876,383 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-297",
+      "page_id": "B1-103",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=103",
+      "station_id": "MOAG",
+      "narrative_mode": "STAFF_MEDIA",
+      "locator_hint": "На стенах бывшей столовой закрытого Нижнего установлены большие э",
+      "spatial_assertion": "На стенах бывшей столовой закрытого Нижнего установлены большие экраны, управляемые голосом; их изображение не является физической геометрией других помещений.",
+      "feature_refs": [
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-298",
+      "page_id": "B1-104",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=104",
+      "station_id": "MOAG",
+      "narrative_mode": "MEDIATED_RECREATION",
+      "locator_hint": "Старое видео демонстрирует круглый зал отдыха Третьего с людьми, ",
+      "spatial_assertion": "Старое видео демонстрирует круглый зал отдыха Третьего с людьми, диванами и столиками. Это архивное изображение реального знакомого зала, а не текущая сцена.",
+      "feature_refs": [
+        "L3-REST"
+      ],
+      "evidence_class": "MEDIATED_IMAGE_UNVERIFIED",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-299",
+      "page_id": "B1-104",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=104",
+      "station_id": "MOAG",
+      "narrative_mode": "LOWER_EXIT",
+      "locator_hint": "Эмма и Коля из старых служебных помещений по лестнице выходят в н",
+      "spatial_assertion": "Эмма и Коля из старых служебных помещений по лестнице выходят в нижнюю закрытую ангарную сеть.",
+      "feature_refs": [
+        "L1-CIRCULAR-QUARTERS",
+        "L1-OLD-FREIGHT-HANGAR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-300",
+      "page_id": "B1-105",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=105",
+      "station_id": "MOAG",
+      "narrative_mode": "REOPENED_ROUTE",
+      "locator_hint": "В старом Нижнем герои находят восстановленный проход и выбираются",
+      "spatial_assertion": "В старом Нижнем герои находят восстановленный проход и выбираются в обитаемую техническую сеть, без прежнего обхода через трубу.",
+      "feature_refs": [
+        "L1-SEALED",
+        "L1-BASES"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-301",
+      "page_id": "B1-105",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=105",
+      "station_id": "MOAG",
+      "narrative_mode": "THREE_STEPS",
+      "locator_hint": "На выходе из восстановленного прохода есть три железные ступеньки",
+      "spatial_assertion": "На выходе из восстановленного прохода есть три железные ступеньки, затем мягкое резиновое покрытие дугообразного коридора с серыми пластмассовыми панелями.",
+      "feature_refs": [
+        "L1-SEALED"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-302",
+      "page_id": "B1-105",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=105",
+      "station_id": "MOAG",
+      "narrative_mode": "OVAL_ACCESS",
+      "locator_hint": "Короткие технические переходы ведут к двойным дверям с эмблемой М",
+      "spatial_assertion": "Короткие технические переходы ведут к двойным дверям с эмблемой Млечного Пути, за которыми обитают жители Овальной базы.",
+      "feature_refs": [
+        "L1-OVAL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-303",
+      "page_id": "B1-105",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=105",
+      "station_id": "MOAG",
+      "narrative_mode": "OVAL_FURNISHINGS",
+      "locator_hint": "В тёплой комнате Овальной базы круглый жёлто-оранжевый коврик и ч",
+      "spatial_assertion": "В тёплой комнате Овальной базы круглый жёлто-оранжевый коврик и четыре сближенные кровати с цветными покрывалами.",
+      "feature_refs": [
+        "L1-OVAL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-304",
+      "page_id": "B1-106",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=106",
+      "station_id": "MOAG",
+      "narrative_mode": "OVAL_INTERIOR",
+      "locator_hint": "В Овальной базе на стенах рисунки, у кроватей тумбы и небольшие д",
+      "spatial_assertion": "В Овальной базе на стенах рисунки, у кроватей тумбы и небольшие декоративные фигурки.",
+      "feature_refs": [
+        "L1-OVAL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-305",
+      "page_id": "B1-106",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=106",
+      "station_id": "MOAG",
+      "narrative_mode": "TECH_SHORTCUT",
+      "locator_hint": "Из Овальной к Темной базе можно пройти сокращённым маршрутом чере",
+      "spatial_assertion": "Из Овальной к Темной базе можно пройти сокращённым маршрутом через узкие технические проходы, открытые трубы, ниши с крупными силовыми кабелями и накопителями.",
+      "feature_refs": [
+        "L1-OVAL",
+        "L1-TEMNAYA",
+        "L1-ENG-CABLE-NICHES"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-306",
+      "page_id": "B1-107",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=107",
+      "station_id": "MOAG",
+      "narrative_mode": "PIPE_REFUGE",
+      "locator_hint": "Фёдор скрывается в технической шахте за решёткой внутри закрытого",
+      "spatial_assertion": "Фёдор скрывается в технической шахте за решёткой внутри закрытого Нижнего; точный тип канала становится яснее на странице 109.",
+      "feature_refs": [
+        "L1-SEALED",
+        "L1-VENT"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-307",
+      "page_id": "B1-108",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=108",
+      "station_id": "MOAG",
+      "narrative_mode": "SEALED_GATE_OPERATION",
+      "locator_hint": "Управляемая снаружи двустворчатая дверь закрытой части Нижнего от",
+      "spatial_assertion": "Управляемая снаружи двустворчатая дверь закрытой части Нижнего открывается на время прохода Таис и затем вновь закрывается.",
+      "feature_refs": [
+        "L1-SEALED"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-308",
+      "page_id": "B1-108",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=108",
+      "station_id": "MOAG",
+      "narrative_mode": "LOWER_CORRIDOR_FINISH",
+      "locator_hint": "Внутри закрытого Нижнего тёмный коридор с полукруглым потолком и ",
+      "spatial_assertion": "Внутри закрытого Нижнего тёмный коридор с полукруглым потолком и резиновым покрытием пола; электрический свет выключен.",
+      "feature_refs": [
+        "L1-OLD-FREIGHT-HANGAR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-309",
+      "page_id": "B1-109",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=109",
+      "station_id": "MOAG",
+      "narrative_mode": "JUNCTION_RIGHT",
+      "locator_hint": "От запертого входа маршрут Таис идёт прямо к первому перекрестку,",
+      "spatial_assertion": "От запертого входа маршрут Таис идёт прямо к первому перекрестку, далее направо по указанию Фёдора; право относится к направлению её движения.",
+      "feature_refs": [
+        "L1-OLD-FREIGHT-HANGAR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-310",
+      "page_id": "B1-109",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=109",
+      "station_id": "MOAG",
+      "narrative_mode": "PIPE_SHAFT_CORRECTION",
+      "locator_hint": "Место укрытия Фёдора оказывается старой шахтой прокладки труб с т",
+      "spatial_assertion": "Место укрытия Фёдора оказывается старой шахтой прокладки труб с тонкими металлическими трубами, решётчатым люком, а не обязательно вентиляционным каналом.",
+      "feature_refs": [
+        "L1-VENT"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-311",
+      "page_id": "B1-110",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=110",
+      "station_id": "MOAG",
+      "narrative_mode": "HANGAR_TURN_MARKERS",
+      "locator_hint": "От ближайшего перекрёстка поворот обозначен разбитым прямоугольны",
+      "spatial_assertion": "От ближайшего перекрёстка поворот обозначен разбитым прямоугольным светильником и поврежденным голографическим чипом, за ним широкий ангарный проём.",
+      "feature_refs": [
+        "L1-OLD-FREIGHT-HANGAR"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-312",
+      "page_id": "B1-110",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=110",
+      "station_id": "MOAG",
+      "narrative_mode": "VERTICAL_GATE",
+      "locator_hint": "У широкого входа в старый ангар створки, предположительно, опуска",
+      "spatial_assertion": "У широкого входа в старый ангар створки, предположительно, опускались в пол и поднимались к потолку; механизм по расположению створок, без испытания.",
+      "feature_refs": [
+        "L1-ANGAR-HALL"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-313",
+      "page_id": "B1-110",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=110",
+      "station_id": "MOAG",
+      "narrative_mode": "UPPER_DISPATCH_ACCESS",
+      "locator_hint": "В высоком старом нижнем ангаре сбоку подвешена лестница, ведущая ",
+      "spatial_assertion": "В высоком старом нижнем ангаре сбоку подвешена лестница, ведущая в поднятую диспетчерскую с рабочим светом, водой, кушеткой и креслом, но без тепла.",
+      "feature_refs": [
+        "L1-CIRCULAR-STAIRS",
+        "L1-CIRCULAR-CONTROL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-314",
+      "page_id": "B1-111",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=111",
+      "station_id": "MOAG",
+      "narrative_mode": "DISPATCH_WET_FOOD",
+      "locator_hint": "В старой верхней диспетчерской Нижнего есть действующий душ и авт",
+      "spatial_assertion": "В старой верхней диспетчерской Нижнего есть действующий душ и автомат приготовления напитков.",
+      "feature_refs": [
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-315",
+      "page_id": "B1-112",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=112",
+      "station_id": "MOAG",
+      "narrative_mode": "DISPATCH_WET_ACCESS",
+      "locator_hint": "Из комнаты с кушеткой имеется доступ в санузел; будущий выход из ",
+      "spatial_assertion": "Из комнаты с кушеткой имеется доступ в санузел; будущий выход из нижнего блока пока только обсуждается.",
+      "feature_refs": [
+        "L1-CIRCULAR-QUARTERS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-316",
+      "page_id": "B1-113",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=113",
+      "station_id": "MOAG",
+      "narrative_mode": "LOWER_VIEWPORT",
+      "locator_hint": "В верхней старой диспетчерской закрытого Нижнего часть облицовки ",
+      "spatial_assertion": "В верхней старой диспетчерской закрытого Нижнего часть облицовки стены сдвигается, открывая обзорное остекление примерно на половину стены и действительный вид на Землю; точный размер и ориентация неизвестны.",
+      "feature_refs": [
+        "L1-CIRCULAR-CONTROL"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-317",
+      "page_id": "B1-113",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=113",
+      "station_id": "MOAG",
+      "narrative_mode": "LOWER_DISPATCH_EXIT",
+      "locator_hint": "Таис и Фёдор физически спускаются по лестнице верхней диспетчерск",
+      "spatial_assertion": "Таис и Фёдор физически спускаются по лестнице верхней диспетчерской и проходят к воротам нижнего сектора; далее их доставляют в медицинскую зону Третьего.",
+      "feature_refs": [
+        "L1-CIRCULAR-STAIRS",
+        "L1-SEALED",
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-318",
+      "page_id": "B1-113",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=113",
+      "station_id": "MOAG",
+      "narrative_mode": "UPPER_MEDICAL_ROOM",
+      "locator_hint": "На Третьем находится тёплая медицинская палата с ровным белым пот",
+      "spatial_assertion": "На Третьем находится тёплая медицинская палата с ровным белым потолком, линейными встроенными светильниками, шершавой керамической плиткой пола и стеклянной дверью в коридор.",
+      "feature_refs": [
+        "L3"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-319",
+      "page_id": "B1-114",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=114",
+      "station_id": "MOAG",
+      "narrative_mode": "MAIN_BRIDGE_REAL",
+      "locator_hint": "От производственных дверей Третьего через широкий коридор располо",
+      "spatial_assertion": "От производственных дверей Третьего через широкий коридор расположена короткая белая лестница к двойной овальной двери основной рубки, полукруглым пультам и широкому окну на Землю.",
+      "feature_refs": [
+        "L3-PRODUCTION",
+        "L3-BRIDGE"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
