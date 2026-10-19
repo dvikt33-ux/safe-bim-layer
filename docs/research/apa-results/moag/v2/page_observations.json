@@ -10494,6 +10494,20 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-668",
+      "page_id": "B3-006",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=6",
+      "station_id": "MOAG",
+      "narrative_mode": "DIALOGUE_CONFIRMED_OPERATIONAL_STATE",
+      "locator_hint": "Ник о том, что синтетики не смирились с потерей одной из станций.",
+      "spatial_assertion": "В контексте освобождения Эммы Ник сообщает, что синтетики не приняли потерю одной станции; вероятнее всего имеется в виду МОАГ, но название здесь прямо не повторено. Это оперативное состояние/контекст, не новое пространственное свидетельство.",
+      "feature_refs": [],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
