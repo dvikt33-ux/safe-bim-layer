@@ -1,0 +1,5 @@
+# APA №1 02Z — карточки C1–C2 для №2
+
+**C1 · 95/100 · Native attribute classification.** Функция: аудит классификаций материалов/атрибутов. Источник: [SDK29 GetClassificationItems, L409](https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/group___attribute.html#L409), GetClassificationInSystem L412. Не дубликат CloneNativeGroupV1/PR159/162/56: API_Attr_Head, не element GUID. Найти готовый read-only SDK29 inspector; EULA/Windows11/AC29 build5101 ABI NOT_VERIFIED. Вопрос №2: официальный пример attribute→system/item pairs? ГОТОВО: перечень систем/классов и отсутствующих привязок без PLN writes.
+
+**C2 · 93/100 · Attribute property QA.** Источник: [SDK29, L424–448](https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/group___attribute.html#L424). Функция: определения, значения, Available, Visible, IsValidValue. Не дубликат element/IFC property routes. Найти готовый read-only inspector. Риски: propertyDefinition GUID ≠ element GUID; EULA/ABI NOT_VERIFIED. Вопрос №2: sample с раздельным Available/Visible/Unset? ГОТОВО: readback таблица всех четырёх состояний без Set.
