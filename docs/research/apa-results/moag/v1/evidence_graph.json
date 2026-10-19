@@ -4220,6 +4220,8 @@
     "physical_object_id": "SHIP-MLP-MOAG-001",
     "do_not_split_by_name": true,
     "do_not_merge_other_stations": true,
-    "source_status": "USER_CONFIRMED_NEEDS_EXACT_TEXT_LOCATOR"
+    "source_status": "DIRECT_TEXT_VERIFIED",
+    "primary_text_locator": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=11",
+    "chronology_caution": "Переименование имени станции и переход управления роботам — две отдельные временные оси, дата их совпадения пока не доказана."
   }
 }
