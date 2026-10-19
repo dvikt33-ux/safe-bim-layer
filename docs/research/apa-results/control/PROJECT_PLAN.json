@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 182,
+  "revision": 183,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2411,6 +2411,13 @@
       "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-233124Z-native-owner-runtime/source-audit.json",
       "kind": "REPORT",
       "verification": "PUBLIC_OWNER_ROUTE_NOT_AC29_QUALIFIED"
+    },
+    "ART-P70-A11-S03-SAFE01-SOURCE-20261019": {
+      "id": "ART-P70-A11-S03-SAFE01-SOURCE-20261019",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/175",
+      "kind": "CODE",
+      "verification": "GITHUB_SOURCE_READ_LIVE_NOT_RUN",
+      "scope": "First close SAFE-01; then group/grid and existing catalog selection. User authorized copy-only AC29 tests; preserve originals and main."
     }
   },
   "tasks": {
@@ -4986,7 +4993,7 @@
       "action_id": "APA-P70.A11",
       "title": "Исправить пробелы после системного теста",
       "kind": "INTEGRATION",
-      "status": "PARTIAL",
+      "status": "IN_PROGRESS",
       "priority": 1,
       "work_key": "system-gap-driven-development-v31",
       "depends_on": [
@@ -5023,7 +5030,8 @@
         "ART-APA-FAST-COMPILER",
         "ART-APA-RU-JUNCTION-NORMS",
         "ART-APA-FULL-CYCLE-RESEARCH",
-        "ART-APA-SOURCE-71-INDEX-20261011"
+        "ART-APA-SOURCE-71-INDEX-20261011",
+        "ART-P70-A11-S03-SAFE01-SOURCE-20261019"
       ],
       "outputs": [
         "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.",
@@ -5200,9 +5208,9 @@
         "PR111 61f56376e37755cfb4a15db29071970525297904 exactPR109base. Initial preapproval checkpoint retained separately; userthenapproved exact71b8529a8da39a478d5a1bc8a370ea97bf63fdc39e4801e793aa36e214074fa4 read-onlycycle. Candidateidentity/source106393a verified,runtime293commands,2extendedexistingcommands CALLABLE_VERIFIED:actualgeneratedObject RailingRailowner,parent/root,Objectandowner128AddPars,rootRailmemo,selectedlibrarymaster/parameterscriptsprivate. ActualsettingsownerabsentfromphysicalrootRailmemo;storedmemo flags1donotoverrideevaluatedDisabled/Child. Top-levelscriptsdelegate tomacros,no fixingruleproof. Bothmaterials36,expectedGUID37;NOT_RESTORED,BLOCKED,no setterretryorDisabledwrite. Newtypedownerfacts inexistingDependencyImpact:352nodes482edges,134observedRailimpacts. DefaultcompoundMODIFYfull BREP/material/GDL/ownership/dependent/beforeproofs;existingSQLiteintentretained,oldtargetfailureproofmatched,legacyunscopedscopeNOT_VERIFIED. OriginalAPX restored8f5a9341and77registrationvaluesbyteexact,newprocessoriginalruntime264commands. Unexpectedtestcopy savedbytechangeafterUIexit afcbdaaea880to0a9c01419823,causeNOT_VERIFIED,noexplicitSaveAPI/nativeMutationcommand. Independentoriginalruntime409signatures/128GDLmatchPR109;bothfilecheckpointsprivate,noblindrollback,sourcePLNunchanged. OverallpersistencePARTIAL; qualifyclosebehaviorbefore anynextnativewrite. Nooffline tests/workflowdispatch/quantitycall/newexecutor/graph/commandnames. CWbounds,newExtruded/RevolvedfieldsBUILDonly;publicmaterialrecoveryroute notAC29qualified. ExactPR104approvalseparatependingnotreasked. Nextsaved-fileprovenance,publicsettingsowner/macrodiagnosis,thenseparatelyapproved2materialrecovery. A11.S03PARTIAL;historicalDONE/evidenceretained."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
-      "owner": null,
-      "lease_until": null,
-      "claim_ref": null,
+      "owner": "apa-mass-integration-20261019",
+      "lease_until": "2026-10-19T19:54:18Z",
+      "claim_ref": "APA-RUN-20261019-SAFE01-INTEGRATION",
       "requires_approval": false,
       "evidence": [
         "ART-P70-A11-S03-WINDOWS-G01-FIX-20261012",
