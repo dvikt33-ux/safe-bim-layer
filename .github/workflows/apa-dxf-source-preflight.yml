@@ -1,0 +1,24 @@
+name: APA ready DXF source preflight
+on:
+  pull_request:
+    paths:
+      - 'scripts/apa_dxf_source_preflight.py'
+      - 'scripts/apa_ac29_installed_factory.py'
+      - 'tests/test_apa_dxf_source_preflight.py'
+      - '.github/workflows/apa-dxf-source-preflight.yml'
+permissions:
+  contents: read
+jobs:
+  ready-vendor:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install ezdxf==1.4.5 'jsonschema>=4,<5'
+      - run: python -m unittest discover -s tests -p test_apa_dxf_source_preflight.py -v
