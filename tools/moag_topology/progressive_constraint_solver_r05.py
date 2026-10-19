@@ -53,6 +53,8 @@ def solve(graph, fragments, anchors=None):
     adjacency=defaultdict(list)
     eq=defaultdict(list)
     evidence=[]
+    new_bridge_candidates=[]
+    old_graph_links=[]
     for e in edges:
         if e["id"] in ids or e["from"] not in allnodes or e["to"] not in allnodes:
             raise ValueError("BAD_FRAGMENT_EDGE")
@@ -65,10 +67,38 @@ def solve(graph, fragments, anchors=None):
             a,b=e["from"],e["to"]
             adjacency[a].append((b,e["id"]))
             adjacency[b].append((a,e["id"]))
+            new_bridge_candidates.append((a,b,e["id"],e["source_ids"]))
         if e["level_policy"] in LEVEL_EQ:
             eq[e["from"]].append((e["to"],e["id"]))
             eq[e["to"]].append((e["from"],e["id"]))
             evidence.append(e)
+    # Reuse the R04 architectural source graph when assembling fragments.
+    # Old edges are explicitly qualified: do not equate historical naming,
+    # spatial analogy, or known-bad links with physical connectivity.
+    excluded_classes={"HISTORICAL_NOT_PHYSICAL_ADJACENCY",
+                      "IDENTITY_OR_LOGICAL_ALIAS_NOT_PHYSICAL_UNION",
+                      "RELATIVE_ALIGNMENT_NOT_METRIC"}
+    for e in graph["source_relationships"]:
+        if (e["binding_status"] in
+            {"QUARANTINED_DO_NOT_USE_AS_DIRECT_GEOMETRY","RECHECK_REQUIRED"} or
+            e["semantic_class"] in excluded_classes):
+            continue
+        a,b=e["from"],e["to"]
+        if a not in allnodes or b not in allnodes:
+            raise ValueError("R04_EDGE_DANGLING")
+        adjacency[a].append((b,e["id"]))
+        adjacency[b].append((a,e["id"]))
+        old_graph_links.append((a,b,e["id"]))
+    for e in graph["derived_r03_relationships"]:
+        if (e["evidence_state"]=="HYPOTHESIS" or
+            e["semantic_class"] in {"HISTORY","UNRESOLVED_IDENTITY","USER_SIZE_ORDER"}):
+            continue
+        a,b=e["from"],e["to"]
+        if a not in allnodes or b not in allnodes:
+            raise ValueError("R03_EDGE_DANGLING")
+        adjacency[a].append((b,e["id"]))
+        adjacency[b].append((a,e["id"]))
+        old_graph_links.append((a,b,e["id"]))
     for id,a in anchors.items():
         if id not in allnodes or not isinstance(a,dict) or set(a)!={"global_level"}:
             raise ValueError("UNKNOWN_ANCHOR_OR_SHAPE: "+str(id))
@@ -100,6 +130,27 @@ def solve(graph, fragments, anchors=None):
             proof[b].add(eid)
             for c,ee in eq[b]:
                 if c!=a: queue.append((c,b,ee))
+    # Each new fragment link may fuse two previously disconnected groups.
+    # This event is a discovered qualitative connection, never a coordinate.
+    parent={id:id for id in allnodes}
+    def find(x):
+        while parent[x]!=x:
+            parent[x]=parent[parent[x]]
+            x=parent[x]
+        return x
+    def join(a,b):
+        a,b=find(a),find(b)
+        if a==b:return False
+        parent[b]=a
+        return True
+    for a,b,_ in old_graph_links:
+        join(a,b)
+    bridge_events=[]
+    for a,b,eid,sources in new_bridge_candidates:
+        if join(a,b):
+            bridge_events.append({
+                "edge_id":eid,"from":a,"to":b,"source_ids":sources,
+                "result":"QUALITATIVE_FRAGMENTS_FUSED_COORDINATES_STILL_UNKNOWN"})
     # With only qualitative topology, multiple graph components are expected.
     visited=set()
     comps=[]
@@ -140,10 +191,13 @@ def solve(graph, fragments, anchors=None):
         "counts":{"all_nodes":len(allnodes),"r05_new_nodes":len(fragments["physical_entities"]),
                   "typed_edges":len(edges),"multi_node_components":len(comps),
                   "level_singletons":len(singleton),"level_nonunique":len(unresolved),
-                  "hypothetical_identity_links":len(maybe),"negative_identity_links":len(negative)},
+                  "hypothetical_identity_links":len(maybe),"negative_identity_links":len(negative),
+                  "base_graph_qualitative_links":len(old_graph_links),
+                  "new_links_that_joined_fragments":len(bridge_events)},
         "known_or_inferred_levels":singleton,
         "level_domains_still_open":unresolved,
         "topological_fragments":sorted(comps,key=lambda x:(-len(x["member_ids"]),x["member_ids"][0])),
+        "bridge_events":bridge_events,
         "identity_hypotheses":maybe,
         "identity_exclusions":negative,
         "gates":{"metric_coordinates_known":False,"planar_embedding_unique":False,
