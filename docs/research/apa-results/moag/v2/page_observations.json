@@ -2675,6 +2675,202 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-164",
+      "page_id": "B1-043",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=43",
+      "station_id": "MOAG",
+      "narrative_mode": "DETOUR",
+      "locator_hint": "долго обходят запечатанные проходы",
+      "spatial_assertion": "На дальний сектор Диких приходится делать значительный обход: прямые туннели закрыты или заварены.",
+      "feature_refs": [
+        "L1-WILD",
+        "L1-SEALED"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-165",
+      "page_id": "B1-043",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=43",
+      "station_id": "MOAG",
+      "narrative_mode": "LOCAL_Z",
+      "locator_hint": "высокий порог, оторванная дверь, две ступеньки вниз",
+      "spatial_assertion": "Перед базой Диких высокий порог, сорванная дверь, локальное понижение на две ступени и открытые трубы.",
+      "feature_refs": [
+        "L1-WILD"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-166",
+      "page_id": "B1-043",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=43",
+      "station_id": "MOAG",
+      "narrative_mode": "INTERIOR",
+      "locator_hint": "одна лампочка, железный стол с цветной пластиковой обшивкой",
+      "spatial_assertion": "Внутри Дикой базы одна горящая лампа в углу и металлический стол с цветной пластиковой поверхностью.",
+      "feature_refs": [
+        "L1-WILD"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-167",
+      "page_id": "B1-044",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=44",
+      "station_id": "MOAG",
+      "narrative_mode": "LOCAL_Z",
+      "locator_hint": "из спальни вниз, затем после двери ещё одна длинная лестница",
+      "spatial_assertion": "При выходе Эммы из Темной базы последовательно две лестничные связи разделены входной дверью с металлической створкой.",
+      "feature_refs": [
+        "L1-TEMNAYA",
+        "L1-BASE-SLEEP"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-168",
+      "page_id": "B1-044",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=44",
+      "station_id": "MOAG",
+      "narrative_mode": "ROUTE",
+      "locator_hint": "три поворота, труба и два отдельных узких лаза",
+      "spatial_assertion": "После входной двери Эмма проходит техкоридоры с тремя поворотами и систему закрытых коммуникационных ниш над трубами.",
+      "feature_refs": [
+        "L1"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-169",
+      "page_id": "B1-044",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=44",
+      "station_id": "MOAG",
+      "narrative_mode": "FREIGHT_HALL",
+      "locator_hint": "широкий абсолютно прямой транспортный коридор",
+      "spatial_assertion": "Широкий прямолинейный проход с резиновым настилом, большими ангарными воротами, низкими указателями грузовых маршрутов и неработающими потолочными лампами.",
+      "feature_refs": [
+        "L1"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-170",
+      "page_id": "B1-044",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=44",
+      "station_id": "MOAG",
+      "narrative_mode": "HYPOTHESIS",
+      "locator_hint": "как будто пересекает два кольца",
+      "spatial_assertion": "Пересечение прямого коридора с внутренним и внешним кругами — предположение Эммы, не результат измерения или прямой авторской геометрии.",
+      "feature_refs": [
+        "L1"
+      ],
+      "evidence_class": "CONTEXT_INFERENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-171",
+      "page_id": "B1-045",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=45",
+      "station_id": "MOAG",
+      "narrative_mode": "SERVICE_SHAFT",
+      "locator_hint": "разорванная панель, разноцветные толстые кабели",
+      "spatial_assertion": "Обратная дорога проходит через коммуникационную нишу с толстыми трубами и цветными электрическими кабелями за сорванной панелью.",
+      "feature_refs": [
+        "L1"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-172",
+      "page_id": "B1-045",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=45",
+      "station_id": "MOAG",
+      "narrative_mode": "SECURITY_AND_THERMAL",
+      "locator_hint": "автоматическая дверь с эмблемой из двух треугольников",
+      "spatial_assertion": "Дверь на базу металлическая двухстворчатая, с кодовым замком и старой эмблемой; двери помогают удерживать тепло.",
+      "feature_refs": [
+        "L1-TEMNAYA"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-173",
+      "page_id": "B1-046",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=46",
+      "station_id": "MOAG",
+      "narrative_mode": "VENTILATION_ROUTE",
+      "locator_hint": "сильно тесный длинный извилистый вентиляционный ход",
+      "spatial_assertion": "Коля и Эмма ползут из Нижнего к выходу в коридор Второго, почти не могут поднять голову.",
+      "feature_refs": [
+        "L1-VENT",
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-174",
+      "page_id": "B1-046",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=46",
+      "station_id": "MOAG",
+      "narrative_mode": "DUCT_SERVICE",
+      "locator_hint": "решетка с винтами, магнитная отвертка",
+      "spatial_assertion": "Для выхода на Второй отвинчивается вентиляционная решётка, после неё резиновая дорожка и переход к жилой каюте.",
+      "feature_refs": [
+        "L2",
+        "L2-CABINS"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-175",
+      "page_id": "B1-046",
+      "citation_url": "https://loveread.ec/read_book.php?id=48197&p=46",
+      "station_id": "MOAG",
+      "narrative_mode": "INFORMATION_SYSTEM",
+      "locator_hint": "датчики отключаются по выбору коридоров",
+      "spatial_assertion": "Коля на планшете выбирает конкретные коридоры и блокирует тепловые датчики для маршрута; это не доказательство расположения сенсорных трасс.",
+      "feature_refs": [
+        "L2"
+      ],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
