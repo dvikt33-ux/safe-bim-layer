@@ -961,7 +961,7 @@
       "status": "REVIEWED_FULL_PAGE",
       "target_station": "REMOTE_EVIDENCE",
       "recorded_spatial_hints": 1,
-      "notes": "Глава 11, земная сцена в доме Найды. Таис сообщает Варy о новорождённых и годовалых детях на станции и о работающей технологии рождения детей — дистанционное свидетельство о населении/функции, без пространственных деталей. Следующий ночной фрагмент с шестиногими нападающими начинается после укладывания спать и имеет признаки сна/видения, но реальность фрагмента по этой странице не установлена; оставлен UNCERTAIN, не исключён.",
+      "notes": "Глава 11, земная сцена в доме Найды. Таис сообщает Вару о новорождённых и годовалых детях на станции и о работающей технологии рождения детей — дистанционное свидетельство о населении/функции, без пространственных деталей. Ночной фрагмент с шестиногими нападающими на p87 первоначально классифицирован как UNCERTAIN; p88 подтверждает через воспоминание Таис, что это был сон, поэтому неопределённость снята по последующему контексту без повторного открытия p87.",
       "verification_method": "Single full-page primary-source read in Opera; remote station dialogue and uncertain night fragment classified separately",
       "full_page_review_date": "2026-10-19"
     },
@@ -969,12 +969,12 @@
       "id": "B2-088",
       "page_number": 88,
       "url": "https://loveread.ec/read_book.php?id=53370&p=88",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "REMOTE_EVIDENCE",
+      "recorded_spatial_hints": 1,
+      "notes": "Глава 11, земная сцена в доме Найды на острове Саб. Описание окна, каменного берега, комнаты, деревянных стен, печи, лестницы, терраски и хозяйства относится к Земле и не используется как геометрия МОАГа. Дистанционные сведения: Таис вспоминает, что Мартин-Моаг приходит в её сны; Вар и Таис с Фёдором подтверждают, что дети всю жизнь провели на орбите. Архитектурных сведений о станции нет.",
+      "verification_method": "Opera primary page read; because first returned text was truncated, one targeted compact text-only retrieval recovered the complete same page",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B2-089",
