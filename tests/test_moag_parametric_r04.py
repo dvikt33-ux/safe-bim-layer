@@ -91,6 +91,22 @@ class MOAGParametricR04(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"CRUISER_COUNT_POSITIVE_INTEGER_REQUIRED"):
             MOD.evaluate(self.graph,{"cargo_cruisers_simultaneous_in_hangar":2.5})
 
+    def test_stable_indexed_room_resizing_feeds_shared_constraints(self):
+        editable=dict(self.demo)
+        del editable["fighter_hangar_1_clear_width_m"]
+        overrides={"M-L1-FH-001":{"width_m":1}}
+        result=MOD.evaluate(self.graph,editable,entity_overrides=overrides)
+        self.assertEqual(result["parameter_values"]["fighter_hangar_1_clear_width_m"],1.0)
+        self.assertIn("R004",{x["id"] for x in result["rules"] if x["status"]=="FAIL"})
+        self.assertEqual(result["entity_geometry_overrides"],overrides)
+        with self.assertRaisesRegex(ValueError,"CONFLICTING_NAMED_AND_INDEXED_PARAMETER"):
+            MOD.evaluate(self.graph,self.demo,entity_overrides=overrides)
+        with self.assertRaisesRegex(ValueError,"UNRECOGNIZED_PHYSICAL_INDEX"):
+            MOD.evaluate(self.graph,{},entity_overrides={"MOAG-G-9999":{"width_m":10}})
+        source_only=MOD.evaluate(self.graph,{},entity_overrides={"MOAG-G-0001":{"diameter_m":20}})
+        self.assertEqual(source_only["unbound_indexed_geometry_ids"],["MOAG-G-0001"])
+        self.assertFalse(source_only["gates"]["geometry_approved"])
+
     def test_apa_read_only_geometry_helpers(self):
         plan=[{"id":"hangar","rectangle":{"xMin":0,"xMax":50,"yMin":0,"yMax":50}},
               {"id":"upper_room","rectangle":{"xMin":10,"xMax":20,"yMin":10,"yMax":20}}]
