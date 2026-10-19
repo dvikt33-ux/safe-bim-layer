@@ -10704,6 +10704,20 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-683",
+      "page_id": "B3-035",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=35",
+      "station_id": "MOAG",
+      "narrative_mode": "CHARACTER_KNOWN_STATION_COMPARISON",
+      "locator_hint": "Эмма узнаёт знакомое прорезиненное покрытие после приземления в коридоре другой станции.",
+      "spatial_assertion": "На другой станции Эмма касается знакомого ей прорезиненного покрытия, что подтверждает её знание такого покрытия на МОАГе и согласуется с P-677. Это повторное свидетельство о материале пола, не локализующее покрытие в определённом помещении МОАГа; карта, люк и труба в этой сцене принадлежат другой станции.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
