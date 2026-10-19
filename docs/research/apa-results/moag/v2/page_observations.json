@@ -8814,6 +8814,76 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-548",
+      "page_id": "B2-100",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=100",
+      "station_id": "MOAG",
+      "narrative_mode": "DIRECT_TEXT",
+      "locator_hint": "Продолжение собрания в малой библиотеке; близнецы рядом с Эммой помогают занять детей и присматривают за младенцами.",
+      "spatial_assertion": "Малая библиотека остаётся местом собрания детей и взрослых. Состав присутствующих и размещение детей в данном эпизоде — контекст сцены; постоянную вместимость, расстановку или детскую зону не выводить.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-549",
+      "page_id": "B2-100",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=100",
+      "station_id": "MOAG",
+      "narrative_mode": "DIRECT_TEXT",
+      "locator_hint": "Нитка и Катя уходят из библиотеки; Нитка говорит, что проход уже открыт.",
+      "spatial_assertion": "Подтвержден выход персонажей из малой библиотеки; дверь/проход открыт в момент ухода. Причина — перенастройка серверного управления по словам Нитки; точная конструкция двери и постоянный режим не установлены.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-550",
+      "page_id": "B2-100",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=100",
+      "station_id": "MOAG",
+      "narrative_mode": "CHARACTER_PROPOSAL_NONSPATIAL",
+      "locator_hint": "Колька предлагает правила поведения, сделать свободную каюту изолятором и создать Гвардию уровня.",
+      "spatial_assertion": "Это обсуждаемые решения и планы персонажей. Не считать уже действующей планировкой, переоборудованием или утверждёнными правилами; в геометрию и постоянную топологию не добавлять.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-551",
+      "page_id": "B2-100",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=100",
+      "station_id": "MOAG",
+      "narrative_mode": "FACTUAL_IN_STORY_OPERATIONAL_STATE",
+      "locator_hint": "Перед уходом Нитка сообщает, что утром перенастроила сервер и проход уже открыт.",
+      "spatial_assertion": "Нитка перенастроила сервер утром; это состоявшееся событие повествования и операционное изменение доступа. Серверное помещение не локализовано, геометрические связи не выводятся.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-552",
+      "page_id": "B2-100",
+      "citation_url": "https://loveread.ec/read_book.php?id=53370&p=100",
+      "station_id": "MOAG",
+      "narrative_mode": "CHARACTER_REPORTED_ACCESS_STATE",
+      "locator_hint": "Нитка пересказывает утреннюю встречу с Риткой, которая сказала, что свободно перемещается по Верхнему уровню.",
+      "spatial_assertion": "Вторичное сообщение о свободе передвижения чипированной Ритки по Верхнему уровню. Не регистрировать как пройденный маршрут и не выводить путь, дверь или пространственную связь.",
+      "feature_refs": [],
+      "evidence_class": "DIRECT_TEXT",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
