@@ -14,6 +14,7 @@ import apa_ac29_group_batch_oneshot as G
 import apa_ac29_native_copy_verifier as V
 import apa_ac29_installed_factory as F
 import apa_ac29_installed_group_provider as P
+from apa_ac29_mass_request import placement_offsets
 from apa_ac29_dynamic_native_verifiers import installed_verifiers
 from apa_ac29_dynamic_write_scopes import build_existing_workflow_scopes
 from apa_ac29_save_isolation import ScratchWriteLease,copy_exclusive,preserve_guarded_save,write_new_json,sha256
@@ -58,10 +59,69 @@ def manifest(state,initial=False):
          sha256(m['originalProtected'])==m['originalProtectedSHA256'] and
          sha256(Path(m['acceptedState'])/'reopened.json')==m['acceptedReceiptSHA256'] and
          sha256(state/'baseline-native.json')==m['baselineSHA256'],'SHARED_COPY_SOURCE_OR_BASELINE_DRIFT')
+    need(all(sha256(path)==expected for path,expected in m.get('protectedAncestors',{}).items()),
+         'SHARED_COPY_PROTECTED_ANCESTOR_DRIFT')
     if initial:need(sha256(m['scratch'])==m['scratchInitialSHA256'] and
         not any((state/n).exists() for n in ('attempted.json','batch-scenewriter.sqlite','saved.json','failed.json')),
         'SHARED_COPY_ONE_SHOT_NO_REPLAY')
     return m
+
+
+def accepted_copy_source(accepted,*,use_guarded_snapshot=False):
+    accepted=Path(accepted).resolve()
+    if not use_guarded_snapshot:
+        old,saved=saved_state(accepted)
+        return old,saved,Path(old['scratch'])
+    # Explicit snapshot recovery: never replace or trust a later changed PLN.
+    old=manifest(accepted);saved=read(accepted/'saved.json')
+    snap=read(accepted/'guarded-snapshot.json');receipt=read(accepted/'reopened.json')
+    source=accepted/'guarded-save.snapshot'
+    need(saved['status']=='SHARED_COPY_SAVED_PENDING_REOPEN' and
+         receipt['status']=='LIVE_SHARED_NATIVE_COPY_BATCH_SAVED_REOPENED_PASS' and receipt['reopenVerified'] and
+         receipt['savedSHA256']==saved['savedSHA256']==sha256(source) and
+         sha256(accepted/'guarded-snapshot.json')==saved['snapshotReceiptSHA256'] and
+         snap['savedSHA256']==snap['snapshotSHA256']==saved['savedSHA256'] and
+         snap['protectedSHA256']=={old['source']:old['sourceSHA256'],old['originalProtected']:old['originalProtectedSHA256']},
+         'SHARED_COPY_ACCEPTED_GUARDED_SNAPSHOT_REQUIRED')
+    return old,saved,source
+
+
+def stage_placements(accepted,state,baseline_trace,placements,*,use_guarded_snapshot=False):
+    """New placement capability in a fresh copy of an accepted individual batch.
+
+    Reuses the original execution, scope, verifier and save/reopen path below.
+    A new layout never resets or repeats the accepted operation's state.
+    """
+    accepted,state,baseline_trace=[Path(p).resolve() for p in (accepted,state,baseline_trace)]
+    shifts=placement_offsets(placements)
+    old,saved,source=accepted_copy_source(accepted,use_guarded_snapshot=use_guarded_snapshot)
+    receipt=read(accepted/'reopened.json')
+    need(receipt['status']=='LIVE_SHARED_NATIVE_COPY_BATCH_SAVED_REOPENED_PASS' and receipt['reopenVerified'] and
+         not state.exists() and state.parent.is_dir() and all(r['dz']==0 for r in shifts),
+         'SHARED_COPY_ACCEPTED_SOURCE_AND_NEW_STATE_REQUIRED')
+    rows=[json.loads(r) for r in baseline_trace.read_text(encoding='utf8').splitlines()]
+    native=C.G.normalize_dump([r['response'] for r in rows if r['command']=='GetModelDumpV1'][-1])
+    ids=sorted(r['guid'].lower() for r in native['elements'])
+    need(R.digest(ids)==saved['finalGuidSetSHA256'] and G.fingerprint(native)==saved['finalBrepSHA256'] and
+         V.semantic_digest(native,set(ids))==saved['finalSemanticSHA256'] and PROTOTYPE in ids,
+         'SHARED_COPY_ACCEPTED_FULL_BASELINE_REQUIRED')
+    scratch=state.parent/'native-line-distribution.pln'
+    need(not scratch.exists(),'SHARED_COPY_FRESH_PLN_REQUIRED')
+    state.mkdir();copy_exclusive(source,scratch)
+    need(sha256(scratch)==saved['savedSHA256'],'SHARED_COPY_INITIAL_BYTES_DRIFT')
+    write_new_json(state/'baseline-native.json',native)
+    m=dict(schema=SCHEMA,source=str(source),sourceSHA256=saved['savedSHA256'],
+        originalProtected=old['originalProtected'],originalProtectedSHA256=old['originalProtectedSHA256'],
+        protectedAncestors={old['source']:old['sourceSHA256'],**old.get('protectedAncestors',{})},
+        acceptedState=str(accepted),acceptedReceiptSHA256=sha256(accepted/'reopened.json'),
+        scratch=str(scratch),scratchInitialSHA256=saved['savedSHA256'],port=old['port'],
+        baselineSHA256=sha256(state/'baseline-native.json'),baselineGuidSetSHA256=R.digest(ids),
+        baselineBrepSHA256=G.fingerprint(native),baselineSemanticSHA256=V.semantic_digest(native,set(ids)),
+        prototype=PROTOTYPE,placements=placements,status='STAGED_ONLY_NO_NATIVE_WRITES',automaticReplay=False)
+    if use_guarded_snapshot:
+        m['acceptedSnapshotSource']=True
+        m['laterWorkingCopySHA256Observed']=sha256(old['scratch'])
+    write_new_json(state/'manifest.json',m);return m
 
 
 def api_for(m,state,execute=False,saved_sha=None):
@@ -84,12 +144,13 @@ def current_plan(state):
         familySignature=R.digest(dict(typed=source['typed'],solid=source['solid'])),nativeReadbackVerified=True)]
     task=dict(schemaVersion='apa-native-mass-request/1',request='Тиражировать отдельную проверенную колонну по линии',
         sourceRef=SOURCE_REF,existing=existing,assembly=None,
-        placements=dict(mode='LINEAR',count=2,start=dict(dx=1000,dy=0,dz=0),step=dict(dx=25,dy=0,dz=0)))
+        placements=m.get('placements',dict(mode='LINEAR',count=2,start=dict(dx=1000,dy=0,dz=0),step=dict(dx=25,dy=0,dz=0))))
     writer=R.SceneWriter(api,journal_path=state/'batch-scenewriter.sqlite',schema_path=G.SCHEMA_PATH,allow_3d_view_for_write=True)
     selected=A.prepare_current_runtime_group_native_task(router,writer,task)['preview']
     ops=selected['selectedNativeTaskPreview']['workflow']['graph']['operations']
     need(len(ops)==1 and ops[0]['command']==V.CMD and selected['groupedTargetCount']==0 and
-         selected['individuallyRoutedTargetCount']==2,'SHARED_COPY_ONE_EXISTING_MOVE_COPY_ROUTE_REQUIRED')
+         selected['individuallyRoutedTargetCount']==len(placement_offsets(task['placements'])),
+         'SHARED_COPY_ONE_EXISTING_MOVE_COPY_ROUTE_REQUIRED')
     proof=V.verify_before(api=api,command=V.CMD,parameters=ops[0]['params'],affected=[],native_before=native)
     need(api.write_attempts==0,'SHARED_COPY_PLAN_MUST_BE_READONLY')
     return dict(schema=SCHEMA,status='READONLY_SHARED_COPY_PLAN_PASS',task=task,preview=selected,

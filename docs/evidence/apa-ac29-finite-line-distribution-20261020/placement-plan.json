@@ -1,0 +1,63 @@
+{
+  "recipe": {
+    "count": 3,
+    "end": {
+      "x": 1865.35,
+      "y": 855.35,
+      "z": 0
+    },
+    "mode": "LINE_SEGMENT",
+    "reference": {
+      "x": 315.35,
+      "y": 315.35,
+      "z": 0
+    },
+    "start": {
+      "x": 1815.35,
+      "y": 815.35,
+      "z": 0
+    }
+  },
+  "params": {
+    "elementsWithMoveVectors": [
+      {
+        "copy": true,
+        "elementId": {
+          "guid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0"
+        },
+        "moveVector": {
+          "x": 1500.0,
+          "y": 500.0,
+          "z": 0.0
+        }
+      },
+      {
+        "copy": true,
+        "elementId": {
+          "guid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0"
+        },
+        "moveVector": {
+          "x": 1525.0,
+          "y": 520.0,
+          "z": 0.0
+        }
+      },
+      {
+        "copy": true,
+        "elementId": {
+          "guid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0"
+        },
+        "moveVector": {
+          "x": 1550.0,
+          "y": 540.0,
+          "z": 0.0
+        }
+      }
+    ]
+  },
+  "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+  "collisionProof": {
+    "evaluatedSolidBoxes": 3,
+    "status": "MULTI_COPY_ALL_NATIVE_BREP_AABB_CLEAR_PASS"
+  }
+}

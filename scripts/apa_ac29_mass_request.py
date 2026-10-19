@@ -57,6 +57,27 @@ def placement_offsets(layout):
         start, step = vector(layout["start"]), vector(layout["step"])
         offsets = [vector({k: start[k] + i * step[k] for k in start})
                    for i in range(layout["count"])]
+    elif mode == "LINE_SEGMENT":
+        # Positions include both explicit endpoints. Count means new copies;
+        # the retained prototype is not silently included in that count.
+        need(set(layout) == {"mode", "count", "start", "end", "reference"} and
+             type(layout["count"]) is int and 2 <= layout["count"] <= 200,
+             "MASS_SEGMENT_EXPLICIT_ENDPOINTS_REFERENCE_AND_COPY_COUNT_REQUIRED")
+        points = {}
+        for name in ("start", "end", "reference"):
+            point = layout[name]
+            need(isinstance(point, dict) and set(point) == {"x", "y", "z"} and
+                 all(type(n) in (int, float) and math.isfinite(n) and abs(n) <= 10000
+                     for n in point.values()), "MASS_SEGMENT_FINITE_MODEL_METERS_REQUIRED")
+            points[name] = point
+        start, end, reference = (points[k] for k in ("start", "end", "reference"))
+        need(start["z"] == end["z"] == reference["z"],
+             "MASS_SEGMENT_HORIZONTAL_SOURCE_STORY_ONLY")
+        need(math.hypot(end["x"] - start["x"], end["y"] - start["y"]) >= 1e-6,
+             "MASS_SEGMENT_DISTINCT_ENDPOINTS_REQUIRED")
+        offsets = [vector({"d" + k: start[k] + (end[k] - start[k]) * i /
+                           (layout["count"] - 1) - reference[k] for k in ("x", "y", "z")})
+                   for i in range(layout["count"])]
     elif mode == "GRID":
         from apa_ac29_native_group_grid import grid_offsets, SCHEMA as GRID_SCHEMA
         need(set(layout) == {"mode", "columns", "rows", "stepX", "stepY", "startDx", "startDy"},
@@ -111,11 +132,12 @@ def normalize_mass_request(task):
          "MASS_FRESH_NATIVE_SOURCE_GUIDS_REQUIRED")
     for row in existing:
         GROUP.key(row)
-    if task["placements"]["mode"] == "AXIS_INTERSECTIONS":
-        need(task["placements"]["sourceRef"] == task["sourceRef"] and
+    if task["placements"]["mode"] in {"AXIS_INTERSECTIONS", "LINE_SEGMENT"}:
+        need((task["placements"]["mode"] != "AXIS_INTERSECTIONS" or
+              task["placements"]["sourceRef"] == task["sourceRef"]) and
              all(abs(task["placements"]["reference"][k] - existing[0]["anchor"][k]) <= 1e-6
                  for k in ("x", "y", "z")),
-             "MASS_AXIS_REFERENCE_MUST_MATCH_FIRST_VERIFIED_SOURCE_ANCHOR")
+             "MASS_PLACEMENT_REFERENCE_MUST_MATCH_FIRST_VERIFIED_SOURCE_ANCHOR")
     assembly = copy.deepcopy(task["assembly"])
     if assembly is not None:
         # Use only the currently code-owned clone verifier's actual domain.
