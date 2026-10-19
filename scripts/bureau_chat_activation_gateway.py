@@ -89,7 +89,7 @@ def gh_api(api_path):
     return json.loads(process.stdout)
 
 
-def fetch_events():
+def fetch_events(known=None):
     """Общий транспорт, но отдельный от inbox PR #139 и его native-исполнителя."""
     items = gh_api(f"repos/{REPOSITORY}/contents/{INBOX}?ref=main")
     if not isinstance(items, list) or len(items) > 500:
@@ -100,6 +100,10 @@ def fetch_events():
             continue
         name = item["name"][:-5]
         if not ID.fullmatch(name):
+            continue
+        if known is not None and name in known:
+            if known[name] != item["sha"]:
+                raise ValueError("IMMUTABLE_EVENT_REWRITTEN")
             continue
         obj = gh_api(f"repos/{REPOSITORY}/contents/{INBOX}/{name}.json?ref=main")
         raw = base64.b64decode(obj["content"], validate=True)
@@ -182,14 +186,14 @@ def ingest(db, event, sha, targets, now=None):
 
 
 def claim(db):
-    """Атомарно выдаёт не более одного события на один занятый чат."""
+    """Атомарно выдаёт одно UI-переключение за раз, не прерывая другие исследования."""
     db.execute("BEGIN IMMEDIATE")
     try:
         row = db.execute(
             """SELECT job_id,target FROM jobs AS j
                WHERE status='QUEUED' AND NOT EXISTS (
                  SELECT 1 FROM jobs AS busy
-                 WHERE busy.target=j.target AND busy.status IN
+                 WHERE busy.status IN
                    ('LAUNCHING','AWAIT_TAB_PROOF','BLOCKED_NEEDS_RECONCILE')
                )
                ORDER BY created_at,job_id LIMIT 1"""
@@ -281,6 +285,8 @@ def main(argv=None):
     sub.add_parser("scan")
     sub.add_parser("dispatch")
     sub.add_parser("status")
+    watch = sub.add_parser("watch")
+    watch.add_argument("--interval", type=int, default=5)
     ack = sub.add_parser("confirm-tab")
     ack.add_argument("job_id")
     ack.add_argument("--proof", required=True)
@@ -288,10 +294,24 @@ def main(argv=None):
     config = load_config(args.config)
     db = database(args.db)
     try:
-        if args.command == "scan":
-            for name, event, sha in fetch_events():
-                validate(event, name, config["targets"])
-                print(name, ingest(db, event, sha, config["targets"]))
+        if args.command in ("scan", "watch"):
+            if args.command == "watch" and not 5 <= args.interval <= 3600:
+                raise ValueError("INVALID_WATCH_INTERVAL")
+            while True:
+                try:
+                    known = dict(db.execute("SELECT job_id,blob_sha FROM jobs"))
+                    for name, event, sha in fetch_events(known):
+                        validate(event, name, config["targets"])
+                        print(name, ingest(db, event, sha, config["targets"]), flush=True)
+                    if args.command == "watch":
+                        print(dispatch_one(db, config), flush=True)
+                except Exception as exc:
+                    if args.command == "scan":
+                        raise
+                    print("WATCH_BLOCKED:", type(exc).__name__, str(exc)[:200], flush=True)
+                if args.command != "watch":
+                    break
+                time.sleep(args.interval)
         elif args.command == "dispatch":
             print(dispatch_one(db, config))
         elif args.command == "confirm-tab":
