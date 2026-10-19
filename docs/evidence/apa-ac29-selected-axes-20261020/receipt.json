@@ -1,0 +1,146 @@
+{
+  "automaticReplay": false,
+  "finalBrepSHA256": "a0c51ac41eb968b9e093fb835021be40ab43c7b7d2fcc507338bacca63ce680b",
+  "finalGuidCount": 188,
+  "finalGuidSetSHA256": "0c9ed79a586370ebb6bc30f053c59c1b65dbe0485c4b6cc1ff245f913150e389",
+  "finalSemanticSHA256": "822f3f843cb43dfea36edfedcaeff0ef8a51d685fed57290c1b8d91af100623c",
+  "nativeCopyCalls": 1,
+  "nativeReadback": {
+    "allOriginalGeometryAndFaceMaterialsPreserved": true,
+    "allSelectedSourcesUngrouped": true,
+    "finalGuidCount": 188,
+    "mapping": [
+      {
+        "newChildGuids": [
+          "2730679d-ebb8-4b49-83d7-848fbf71442c"
+        ],
+        "newRootGuid": "6d8fd777-f320-43c8-84ce-4d4bc7d65351",
+        "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+        "target": {
+          "x": 2315.35,
+          "y": 1315.35,
+          "z": 0
+        }
+      },
+      {
+        "newChildGuids": [
+          "9fe4d463-3cea-4c47-952a-ccc07cdbd060"
+        ],
+        "newRootGuid": "bbf0aa7b-0bce-4eaf-a835-4770cf42c980",
+        "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+        "target": {
+          "x": 2385.35,
+          "y": 1355.35,
+          "z": 0
+        }
+      },
+      {
+        "newChildGuids": [
+          "9c675a15-8b2b-4ed1-a89b-b684dce705aa"
+        ],
+        "newRootGuid": "c8df0060-9629-4827-91d2-8448667abff3",
+        "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+        "target": {
+          "x": 2340.35,
+          "y": 1315.35,
+          "z": 0
+        }
+      }
+    ],
+    "newChildGuids": [
+      "2730679d-ebb8-4b49-83d7-848fbf71442c",
+      "9c675a15-8b2b-4ed1-a89b-b684dce705aa",
+      "9fe4d463-3cea-4c47-952a-ccc07cdbd060"
+    ],
+    "newPhysicalCopyCount": 3,
+    "newRootGuids": [
+      "6d8fd777-f320-43c8-84ce-4d4bc7d65351",
+      "bbf0aa7b-0bce-4eaf-a835-4770cf42c980",
+      "c8df0060-9629-4827-91d2-8448667abff3"
+    ],
+    "status": "MASS_COPY_SHARED_REGISTRY_NATIVE_GUID_BREP_READBACK_PASS",
+    "unchangedPrototypeGuids": [
+      "0a17fb15-3639-4dfa-ab01-cd910ae112b0"
+    ]
+  },
+  "nativeResponse": {
+    "executionResults": [
+      {
+        "success": true
+      },
+      {
+        "success": true
+      },
+      {
+        "success": true
+      }
+    ]
+  },
+  "reopenVerified": true,
+  "reopenedReadback": {
+    "allOriginalGeometryAndFaceMaterialsPreserved": true,
+    "allSelectedSourcesUngrouped": true,
+    "finalGuidCount": 188,
+    "mapping": [
+      {
+        "newChildGuids": [
+          "2730679d-ebb8-4b49-83d7-848fbf71442c"
+        ],
+        "newRootGuid": "6d8fd777-f320-43c8-84ce-4d4bc7d65351",
+        "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+        "target": {
+          "x": 2315.35,
+          "y": 1315.35,
+          "z": 0
+        }
+      },
+      {
+        "newChildGuids": [
+          "9fe4d463-3cea-4c47-952a-ccc07cdbd060"
+        ],
+        "newRootGuid": "bbf0aa7b-0bce-4eaf-a835-4770cf42c980",
+        "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+        "target": {
+          "x": 2385.35,
+          "y": 1355.35,
+          "z": 0
+        }
+      },
+      {
+        "newChildGuids": [
+          "9c675a15-8b2b-4ed1-a89b-b684dce705aa"
+        ],
+        "newRootGuid": "c8df0060-9629-4827-91d2-8448667abff3",
+        "sourceGuid": "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+        "target": {
+          "x": 2340.35,
+          "y": 1315.35,
+          "z": 0
+        }
+      }
+    ],
+    "newChildGuids": [
+      "2730679d-ebb8-4b49-83d7-848fbf71442c",
+      "9c675a15-8b2b-4ed1-a89b-b684dce705aa",
+      "9fe4d463-3cea-4c47-952a-ccc07cdbd060"
+    ],
+    "newPhysicalCopyCount": 3,
+    "newRootGuids": [
+      "6d8fd777-f320-43c8-84ce-4d4bc7d65351",
+      "bbf0aa7b-0bce-4eaf-a835-4770cf42c980",
+      "c8df0060-9629-4827-91d2-8448667abff3"
+    ],
+    "status": "MASS_COPY_SHARED_REGISTRY_NATIVE_GUID_BREP_READBACK_PASS",
+    "unchangedPrototypeGuids": [
+      "0a17fb15-3639-4dfa-ab01-cd910ae112b0"
+    ]
+  },
+  "saveCalls": 1,
+  "savedSHA256": "439cb4c35b7daf336ea0cdeff4b694a3a976fd99fb5e3753f2c44b05bdf1e330",
+  "schema": "APA_AC29_SHARED_NATIVE_COPY_BATCH_V1",
+  "snapshotReceiptSHA256": "372d4785f119d90fb644275cc5e7a91f2fb24fbd6b50499795a8a3c3a5f7531e",
+  "sourceSHA256": "a72d54515045002ca33c59ddf83508dbe7d9e07ae4ec5e268c0c44fdd90b130d",
+  "sourceUnchanged": true,
+  "status": "LIVE_SHARED_NATIVE_COPY_BATCH_SAVED_REOPENED_PASS",
+  "verificationNativeWrites": 0
+}
