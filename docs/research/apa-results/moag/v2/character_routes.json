@@ -1863,6 +1863,234 @@
         }
       ],
       "notes": "Физически пройденные помещения не объединять с неосмотренными схемами p78; абсолютные Z и XY неизвестны."
+    },
+    {
+      "id": "RT-016",
+      "title": "Таис и Фёдор: взрослая каюта Третьего → Детский блок → ДНК-лифт → школа/Оранжевая → защитные решётки Второго",
+      "participants": [
+        "Таис",
+        "Фёдор"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-079",
+        "B1-080",
+        "B1-081"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT016-A",
+          "label": "Охраняемая взрослая каюта Третьего",
+          "global_level": 3,
+          "local_stratum": "old-adult-quarters",
+          "source_page_id": "B1-079",
+          "movement_method": "WALK",
+          "observed_constraint": "Охраняемая взрослая каюта Третьего",
+          "existing_graph_node": "L3-ADULT-RETREAT-SUITE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT016-B",
+          "label": "Основная дверь в зал отдыха: проход временно блокирован роботами",
+          "global_level": 3,
+          "local_stratum": "adult-retreat-hall-exit",
+          "source_page_id": "B1-079",
+          "movement_method": "WALK",
+          "observed_constraint": "Основная дверь в зал отдыха: проход временно блокирован роботами",
+          "existing_graph_node": "L3-REST",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT016-C",
+          "label": "Возврат в каюту, короткий коридор с кладовкой и зеркалом",
+          "global_level": 3,
+          "local_stratum": "adult-private-corridor",
+          "source_page_id": "B1-079",
+          "movement_method": "WALK",
+          "observed_constraint": "Возврат в каюту, короткий коридор с кладовкой и зеркалом",
+          "existing_graph_node": "L3-ADULT-RETREAT-SUITE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT016-D",
+          "label": "Боковая белая ДНК-дверь к Детскому блоку",
+          "global_level": 3,
+          "local_stratum": "adult-private-exit",
+          "source_page_id": "B1-079",
+          "movement_method": "DOOR",
+          "observed_constraint": "Боковая белая ДНК-дверь к Детскому блоку",
+          "existing_graph_node": "L3-DNA-HUMAN-LOCKS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT016-E",
+          "label": "Мимо стеклянного проема зала с кувезами к соседнему лифту",
+          "global_level": 3,
+          "local_stratum": "child-block-corridor",
+          "source_page_id": "B1-079",
+          "movement_method": "WALK",
+          "observed_constraint": "Мимо стеклянного проема зала с кувезами к соседнему лифту",
+          "existing_graph_node": "L3-CHILD-LAB",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT016-F",
+          "label": "Прозрачный лифт со спуском на Второй",
+          "global_level": null,
+          "local_stratum": "lift-3-to-2",
+          "source_page_id": "B1-079",
+          "movement_method": "ELEVATOR_DOWN",
+          "observed_constraint": "Прозрачный лифт со спуском на Второй",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT016-G",
+          "label": "Освещённый туннель рядом со школой и экзаменационными комнатами",
+          "global_level": 2,
+          "local_stratum": "school-corridor",
+          "source_page_id": "B1-079",
+          "movement_method": "WALK",
+          "observed_constraint": "Освещённый туннель рядом со школой и экзаменационными комнатами",
+          "existing_graph_node": "L2-SCHOOL",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT016-H",
+          "label": "Оранжевая магистраль, оцепление роботов на подходе к внутреннему кольцу",
+          "global_level": 2,
+          "local_stratum": "orange-barrier",
+          "source_page_id": "B1-079",
+          "movement_method": "WALK",
+          "observed_constraint": "Оранжевая магистраль, оцепление роботов на подходе к внутреннему кольцу",
+          "existing_graph_node": "L2-ORANGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT016-I",
+          "label": "Боковой защитный туннель во время нападения",
+          "global_level": 2,
+          "local_stratum": "orange-side-tunnel",
+          "source_page_id": "B1-080",
+          "movement_method": "RUN",
+          "observed_constraint": "Боковой защитный туннель во время нападения",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT016-J",
+          "label": "Возврат к оцеплению на Оранжевой через поворот",
+          "global_level": 2,
+          "local_stratum": "orange-main-return",
+          "source_page_id": "B1-080",
+          "movement_method": "RUN",
+          "observed_constraint": "Возврат к оцеплению на Оранжевой через поворот",
+          "existing_graph_node": "L2-ORANGE",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT016-K",
+          "label": "Отступление в защищённый внутренний туннель, закрытие энергетической решётки",
+          "global_level": 2,
+          "local_stratum": "inner-ring-gate",
+          "source_page_id": "B1-081",
+          "movement_method": "RUN",
+          "observed_constraint": "Отступление в защищённый внутренний туннель, закрытие энергетической решётки",
+          "existing_graph_node": "L2-GREEN",
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [
+        {
+          "kind": "RELATIVE_Z",
+          "higher": "RT016-E",
+          "lower": "RT016-G",
+          "source_page_id": "B1-079",
+          "claim": "Герои спускаются с Третьего на Второй лифтом; абсолютная высота и шахта по координатам неизвестны."
+        }
+      ],
+      "identity_hypotheses": [],
+      "notes": "Прохождение бокового выхода около Детского блока на p79 подтверждено сценой, ранее было только схемой. Защитная решётка — меняющееся во времени инженерное состояние, не стена."
+    },
+    {
+      "id": "RT-017",
+      "title": "Закрытые жилые помещения старых ангаров Нижнего: комната → мини-лаборатория → санузел",
+      "participants": [
+        "Эмма",
+        "Коля",
+        "Вовик"
+      ],
+      "book": "B1",
+      "site_pages": [
+        "B1-081",
+        "B1-082"
+      ],
+      "route_kind": "OBSERVED_CHARACTER_ROUTE",
+      "nodes": [
+        {
+          "id": "RT017-A",
+          "label": "Старая жилая служебная комната с автономным кухонным агрегатом",
+          "global_level": 1,
+          "local_stratum": "sealed-lower-control-quarters",
+          "source_page_id": "B1-081",
+          "movement_method": "WALK",
+          "observed_constraint": "Старая жилая служебная комната с автономным кухонным агрегатом",
+          "existing_graph_node": "L1-CIRCULAR-QUARTERS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT017-B",
+          "label": "Смежная мини-лаборатория с компьютерами",
+          "global_level": 1,
+          "local_stratum": "sealed-lower-control-quarters",
+          "source_page_id": "B1-082",
+          "movement_method": "WALK",
+          "observed_constraint": "Смежная мини-лаборатория с компьютерами",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT017-C",
+          "label": "Возврат в жилую комнату",
+          "global_level": 1,
+          "local_stratum": "sealed-lower-control-quarters",
+          "source_page_id": "B1-082",
+          "movement_method": "WALK",
+          "observed_constraint": "Возврат в жилую комнату",
+          "existing_graph_node": "L1-CIRCULAR-QUARTERS",
+          "relative_xy": null,
+          "absolute_z_m": null
+        },
+        {
+          "id": "RT017-D",
+          "label": "Смежная ванная, выдвижной унитаз и раковина",
+          "global_level": 1,
+          "local_stratum": "sealed-lower-control-quarters",
+          "source_page_id": "B1-082",
+          "movement_method": "WALK",
+          "observed_constraint": "Смежная ванная, выдвижной унитаз и раковина",
+          "existing_graph_node": null,
+          "relative_xy": null,
+          "absolute_z_m": null
+        }
+      ],
+      "constraints": [],
+      "identity_hypotheses": [],
+      "notes": "Мини-лаборатория и санузел пока отдельные анкеры маршрута без самостоятельных узлов v1. Их нельзя автоматически соединять с пультовой другой комнаты, пока схема не согласована."
     }
   ]
 }
