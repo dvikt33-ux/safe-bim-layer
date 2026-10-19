@@ -160,6 +160,7 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         add(e["from"], e["to"], e["id"], "R05_QUALITATIVE_ASSOCIATION",
             e["source_ids"], detail=e["relation"])
     before_routes = len(uf.groups())
+    before_physical_components = len({uf.root(node) for node in kinds})
     level_suggestions = defaultdict(list)
 
     for route in route_groups:
@@ -249,6 +250,7 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
                              "supporting_route_witnesses": witnesses,
                              "status": "PROVISIONAL_INFERENCE_NOT_AUTHORITATIVE_XY"})
     component_members = uf.groups()
+    after_physical_components = len({uf.root(node) for node in kinds})
     physical_only = [sorted(n for n in members if n in kinds) for members in component_members]
     all_kinds = defaultdict(int)
     for e in edges:
@@ -264,6 +266,12 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
             "physical_indices": len(physical), "route_occurrences": len(route_steps),
             "route_ledgers": len(route_groups), "before_routes_components": before_routes,
             "after_routes_components": len(component_members),
+            "before_routes_physical_components": before_physical_components,
+            "after_routes_physical_components": after_physical_components,
+            "physical_components_joined": before_physical_components - after_physical_components,
+            "isolated_physical_indices": sum(len(p) == 1 and len(members) == 1
+                                             for members, p in zip(component_members, physical_only)),
+            "route_only_components": sum(not p for p in physical_only),
             "route_bridge_events": sum(e["joins_components"] for e in edges
                                        if e["type"].startswith(("ROUTE_", "OBSERVED_"))),
             "physical_fragment_bridge_events": len(physical_bridges),
@@ -284,6 +292,8 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         "bridge_events": bridges,
         "physical_fragment_bridge_events": physical_bridges,
         "route_location_review": conflicts,
+        "identity_hypotheses_not_merged": prior["topology"]["identity_hypotheses"],
+        "negative_identity_constraints": prior["topology"]["identity_exclusions"],
         "narrative_gaps": gaps, "vertical_partial_order": verticals,
         "new_level_candidates": resolved,
         "area_volume": {
@@ -299,6 +309,44 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
     }
 
 
+
+def trace_between(result, start, goal):
+    """Find a source-backed association chain, NOT a verified travel route."""
+    names = {x["id"] for x in result["nodes"]}
+    if start not in names or goal not in names:
+        raise ValueError("UNKNOWN_TRACE_ENDPOINT")
+    graph = defaultdict(list)
+    for edge in result["typed_evidence_edges"]:
+        # Vertical ordering is not access and does not fuse places.
+        if edge["type"] == "R03_RELATIVE_VERTICAL_EVIDENCE":
+            continue
+        graph[edge["from"]].append((edge["to"], edge))
+        graph[edge["to"]].append((edge["from"], edge))
+    previous = {start: None}
+    queue = deque([start])
+    while queue and goal not in previous:
+        current = queue.popleft()
+        for nxt, edge in sorted(graph[current], key=lambda x: x[1]["id"]):
+            if nxt not in previous:
+                previous[nxt] = (current, edge)
+                queue.append(nxt)
+    if goal not in previous:
+        return {"status": "UNCONNECTED_UNDER_RECORDED_EVIDENCE",
+                "from": start, "to": goal, "edge_chain": [],
+                "geometry_proven": False}
+    chain = []
+    at = goal
+    while at != start:
+        origin, edge = previous[at]
+        chain.append({"from": origin, "to": at, "edge_id": edge["id"],
+                      "kind": edge["type"], "source_ids": edge["source_ids"]})
+        at = origin
+    chain.reverse()
+    return {"status": "QUALITATIVE_ASSOCIATION_CHAIN_NOT_TRAVEL_ITINERARY",
+            "from": start, "to": goal, "edge_chain": chain,
+            "geometry_proven": False}
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--graph", type=Path, default=SYNTH / "full_indexed_parametric_graph_r04.json")
@@ -310,11 +358,14 @@ def main():
     ap.add_argument("--area-overrides", type=Path)
     ap.add_argument("--variants", type=Path)
     ap.add_argument("--out", type=Path)
+    ap.add_argument("--between", nargs=2, metavar=("FROM_ID", "TO_ID"))
     arg = ap.parse_args()
     read = lambda p: json.loads(p.read_text(encoding="utf-8")) if p else None
     result = assemble(read(arg.graph), read(arg.fragments), read(arg.routes),
                       read(arg.bounds), read(arg.r04_parameters),
                       read(arg.area_overrides), read(arg.anchors), read(arg.variants))
+    if arg.between:
+        result["requested_evidence_trace"] = trace_between(result, *arg.between)
     payload = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False) + "\n"
     if arg.out:
         arg.out.write_text(payload, encoding="utf-8")
