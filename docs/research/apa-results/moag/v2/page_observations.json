@@ -10508,6 +10508,20 @@
       "plan_coordinates": null,
       "dimensions_m": null,
       "visual_hypothesis_refs": []
+    },
+    {
+      "id": "P-669",
+      "page_id": "B3-010",
+      "citation_url": "https://loveread.ec/read_book.php?id=58610&p=10",
+      "station_id": "OTHER_STATION_NOT_MOAG",
+      "narrative_mode": "OTHER_STATION_REMOTE_SIGNAL",
+      "locator_hint": "Крейсерский объёмный экран показывает тёмный диск другой станции с запросом о помощи.",
+      "spatial_assertion": "Сигнал и тёмный образ относятся к другой станции с детьми, не к МОАГу; точка наблюдения — крейсер «Дракон». Не переносить её форму или состояние в модель МОАГа.",
+      "feature_refs": [],
+      "evidence_class": "EXCLUSION_EVIDENCE",
+      "plan_coordinates": null,
+      "dimensions_m": null,
+      "visual_hypothesis_refs": []
     }
   ]
 }
