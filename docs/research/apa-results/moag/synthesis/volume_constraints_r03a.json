@@ -1,0 +1,1139 @@
+{
+  "schema": "APA-MOAG-VOLUMETRIC-CONSTRAINT-SEED/0.1",
+  "date": "2026-10-20",
+  "status": "DERIVED_REVIEW_REQUIRED_NO_APPROVED_GEOMETRY",
+  "source_branch": "feature/apa-moag-evidence-topology-v1-20261019",
+  "scope": "Selected major objects and relations; NOT exhaustive all 690 observations.",
+  "human_reference": {
+    "height_m": 1.6,
+    "status": "USER_DESIGN_SCENARIO_NOT_CANON"
+  },
+  "objects": [
+    {
+      "id": "M-STA-L1-001",
+      "name": "Нижний глобальный блок",
+      "kind": "global_block",
+      "level": 1,
+      "source_observation_ids": [
+        "P-592",
+        "P-096"
+      ],
+      "legacy_graph_ids": [],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-STA-L2-001",
+      "name": "Детский глобальный блок",
+      "kind": "global_block",
+      "level": 2,
+      "source_observation_ids": [
+        "P-484",
+        "P-467",
+        "P-096"
+      ],
+      "legacy_graph_ids": [],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-STA-L3-001",
+      "name": "Верхний глобальный блок",
+      "kind": "global_block",
+      "level": 3,
+      "source_observation_ids": [
+        "P-096",
+        "P-200"
+      ],
+      "legacy_graph_ids": [],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-STA-CORE-001",
+      "name": "Центральная энергокамера, сквозной объём",
+      "kind": "vertical_industrial_volume",
+      "level": null,
+      "source_observation_ids": [
+        "P-418",
+        "P-421"
+      ],
+      "legacy_graph_ids": [
+        "CORE-ENERGY-SHAFT"
+      ],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": "Не отождествлять с круглым залом Нижнего."
+    },
+    {
+      "id": "M-L1-CG-001",
+      "name": "Старый комплекс нижних грузовых ангаров крейсеров",
+      "kind": "complex",
+      "level": 1,
+      "source_observation_ids": [
+        "P-240",
+        "P-243"
+      ],
+      "legacy_graph_ids": [
+        "L1-OLD-FREIGHT-HANGAR"
+      ],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": "Исторический приём крупных крейсеров; число доков неизвестно."
+    },
+    {
+      "id": "M-L1-CG-CTRL-001",
+      "name": "Исторический центр управления грузовыми ангарами",
+      "kind": "space_group",
+      "level": 1,
+      "source_observation_ids": [
+        "P-240"
+      ],
+      "legacy_graph_ids": [
+        "L1-CIRCULAR-CONTROL"
+      ],
+      "identity_status": "PROVISIONAL_DISTINCT",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": "Тождество пультовой у круглого зала ещё проверить."
+    },
+    {
+      "id": "M-L1-AH-OLD-001",
+      "name": "Высокий старый ангар из эпизода B1-110",
+      "kind": "hangar",
+      "level": 1,
+      "source_observation_ids": [
+        "P-313"
+      ],
+      "legacy_graph_ids": [],
+      "identity_status": "PROVISIONAL_DISTINCT",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": "Не объединять с круглым залом p76 без доказательства."
+    },
+    {
+      "id": "M-L1-AH-OLD-ST-001",
+      "name": "Лестница от пола ангара B1-110 к верхней диспетчерской",
+      "kind": "stair",
+      "level": 1,
+      "source_observation_ids": [
+        "P-313"
+      ],
+      "legacy_graph_ids": [
+        "L1-CIRCULAR-STAIRS"
+      ],
+      "identity_status": "PROVISIONAL_DISTINCT",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": "Источник P-313 прежде неверифицированно привязан к лестнице другого эпизода."
+    },
+    {
+      "id": "M-L1-AH-OLD-CTRL-001",
+      "name": "Верхняя диспетчерская старого ангара B1-110",
+      "kind": "raised_control_room",
+      "level": 1,
+      "source_observation_ids": [
+        "P-313",
+        "P-316"
+      ],
+      "legacy_graph_ids": [
+        "L1-CIRCULAR-CONTROL"
+      ],
+      "identity_status": "PROVISIONAL_DISTINCT",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": "Функции размещения человека; связь с круглым залом p76 недоказана."
+    },
+    {
+      "id": "M-L1-CH-001",
+      "name": "Высокий круглый технический зал, p75–76",
+      "kind": "industrial_hall",
+      "level": 1,
+      "source_observation_ids": [
+        "P-219",
+        "P-220"
+      ],
+      "legacy_graph_ids": [
+        "L1-CIRCULAR-HALL"
+      ],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-L1-CH-GAL-001",
+      "name": "Частичный верхний мостик круглого зала",
+      "kind": "internal_gallery",
+      "level": 1,
+      "source_observation_ids": [
+        "P-220"
+      ],
+      "legacy_graph_ids": [],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-L1-CH-ST-001",
+      "name": "Повреждённая лестница к мостику круглого зала",
+      "kind": "stair",
+      "level": 1,
+      "source_observation_ids": [
+        "P-220"
+      ],
+      "legacy_graph_ids": [
+        "L1-CIRCULAR-STAIRS"
+      ],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": "Отличать от лестницы старого ангара B1-110."
+    },
+    {
+      "id": "M-L1-CH-CTRL-001",
+      "name": "Пультовая за дверью с мостика круглого зала",
+      "kind": "control_room",
+      "level": 1,
+      "source_observation_ids": [
+        "P-221"
+      ],
+      "legacy_graph_ids": [
+        "L1-CIRCULAR-CONTROL"
+      ],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": "Функция по сцене предположительно управление шлюзами."
+    },
+    {
+      "id": "M-L1-FH-001",
+      "name": "Первый нижний ангар двух малых катеров",
+      "kind": "hangar",
+      "level": 1,
+      "source_observation_ids": [
+        "P-364",
+        "P-365"
+      ],
+      "legacy_graph_ids": [
+        "L1-ANGAR"
+      ],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": "Не предназначать автоматически для крейсеров."
+    },
+    {
+      "id": "M-L1-FH-001-CTRL",
+      "name": "Высокая операторская первого ангара катеров",
+      "kind": "raised_control_room",
+      "level": 1,
+      "source_observation_ids": [
+        "P-365",
+        "P-367"
+      ],
+      "legacy_graph_ids": [
+        "L1-OPERATORS"
+      ],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-L1-FH-001-ST",
+      "name": "Металлическая лестница к операторской первого ангара",
+      "kind": "stair",
+      "level": 1,
+      "source_observation_ids": [
+        "P-365",
+        "P-376"
+      ],
+      "legacy_graph_ids": [],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-L1-FH-002",
+      "name": "Соседний нижний ангар трёх катеров",
+      "kind": "hangar",
+      "level": 1,
+      "source_observation_ids": [
+        "P-368"
+      ],
+      "legacy_graph_ids": [
+        "L1-ANGAR-ADJ"
+      ],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-L1-FH-002-CTRL",
+      "name": "Операторская соседнего ангара",
+      "kind": "raised_control_room",
+      "level": 1,
+      "source_observation_ids": [
+        "P-367",
+        "P-369"
+      ],
+      "legacy_graph_ids": [
+        "L1-OPERATORS-ADJ"
+      ],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-L1-FH-002-ST",
+      "name": "Лестница к операторской соседнего ангара",
+      "kind": "stair",
+      "level": 1,
+      "source_observation_ids": [
+        "P-369"
+      ],
+      "legacy_graph_ids": [],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-L1-FH-LOCK-001",
+      "name": "Герметичный шлюз малых катеров",
+      "kind": "airlock_chamber",
+      "level": 1,
+      "source_observation_ids": [
+        "P-384"
+      ],
+      "legacy_graph_ids": [
+        "L1-BOAT-LOCK"
+      ],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": "Сопоставим с ангаром по просторности; не маленький тамбур."
+    },
+    {
+      "id": "M-L1-WASTE-001",
+      "name": "Просторный перерабатывающий цех с конвейерами",
+      "kind": "production_hall",
+      "level": 1,
+      "source_observation_ids": [
+        "P-107",
+        "P-108"
+      ],
+      "legacy_graph_ids": [
+        "L1-RECYCLING"
+      ],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-L1-WASTE-FURNACE-001",
+      "name": "Промышленная печь у конца перерабатывающего цеха",
+      "kind": "industrial_equipment",
+      "level": 1,
+      "source_observation_ids": [
+        "P-108"
+      ],
+      "legacy_graph_ids": [],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-L1-LOG-COR-001",
+      "name": "Широкий прямой транспортно-грузовой коридор",
+      "kind": "cargo_corridor",
+      "level": 1,
+      "source_observation_ids": [
+        "P-169"
+      ],
+      "legacy_graph_ids": [],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": "Не отождествлять с дугообразным ангарным коридором."
+    },
+    {
+      "id": "M-L2-RES-001",
+      "name": "Локально двухэтажное кольцо кают",
+      "kind": "building_zone",
+      "level": 2,
+      "source_observation_ids": [
+        "P-193",
+        "P-484"
+      ],
+      "legacy_graph_ids": [
+        "L2-CABINS"
+      ],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-L2-RES-GAL-001",
+      "name": "Верхняя жилая галерея у Главной площади",
+      "kind": "internal_gallery",
+      "level": 2,
+      "source_observation_ids": [
+        "P-484",
+        "P-486"
+      ],
+      "legacy_graph_ids": [
+        "L2-GALLERY"
+      ],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-L2-PLAZA-001",
+      "name": "Главная площадь",
+      "kind": "public_hall",
+      "level": 2,
+      "source_observation_ids": [
+        "P-484",
+        "P-486"
+      ],
+      "legacy_graph_ids": [
+        "L2-PLAZA"
+      ],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-L2-PLAZA-ST-001",
+      "name": "Лестница с галереи вниз к Главной площади",
+      "kind": "stair",
+      "level": 2,
+      "source_observation_ids": [
+        "P-486"
+      ],
+      "legacy_graph_ids": [],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-L2-ORANGE-001",
+      "name": "Оранжевая кольцевая магистраль",
+      "kind": "major_corridor",
+      "level": 2,
+      "source_observation_ids": [
+        "P-467",
+        "P-504"
+      ],
+      "legacy_graph_ids": [
+        "L2-ORANGE"
+      ],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-L3-CG-001",
+      "name": "Новый комплекс грузовых ангаров Верхнего",
+      "kind": "complex",
+      "level": 3,
+      "source_observation_ids": [
+        "P-243",
+        "P-200"
+      ],
+      "legacy_graph_ids": [
+        "L3-CARGO-HALL"
+      ],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": "Отличен по эпохе и положению от старого нижнего комплекса."
+    },
+    {
+      "id": "M-L3-LOG-001",
+      "name": "Коридор к промышленно-ангарному сектору для погрузчиков",
+      "kind": "cargo_corridor",
+      "level": 3,
+      "source_observation_ids": [
+        "P-200"
+      ],
+      "legacy_graph_ids": [
+        "L3-SERVICE"
+      ],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": ""
+    },
+    {
+      "id": "M-L3-LIFT-LOG-001",
+      "name": "Группа грузовых подъёмников Верхнего",
+      "kind": "vertical_transport_group",
+      "level": 3,
+      "source_observation_ids": [
+        "P-200"
+      ],
+      "legacy_graph_ids": [],
+      "identity_status": "SOURCE",
+      "location_xy": null,
+      "level_z_m": null,
+      "dimensions_m": null,
+      "shape_exact": false,
+      "notes": "Точное число и расположение не выводятся."
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "V-BOAT-L1-001",
+      "name": "Малый одноместный катер Нижнего",
+      "level": 1,
+      "kind": "small_combat_craft",
+      "source_observation_ids": [
+        "P-364"
+      ],
+      "notes": "2 экземпляра в первом нижнем ангаре; 3 в соседнем.",
+      "dimensions_m": null
+    },
+    {
+      "id": "V-STAR-OBS-001",
+      "name": "Звездолёт из широкого ангара B2-120",
+      "level": null,
+      "kind": "starship",
+      "source_observation_ids": [
+        "P-611"
+      ],
+      "notes": "Описан как примерно вдвое крупнее/длиннее катера; принадлежность конкретному комплексу требует подтверждения.",
+      "dimensions_m": null
+    },
+    {
+      "id": "V-SPHERE-OBS-001",
+      "name": "Чёрный шарообразный аппарат B2-121",
+      "level": null,
+      "kind": "spherical_craft",
+      "source_observation_ids": [
+        "P-621"
+      ],
+      "notes": "Крупнее первого звездолёта; входит через круглый шлюз.",
+      "dimensions_m": null
+    },
+    {
+      "id": "V-CARGO-CRUISER-001",
+      "name": "Класс грузовых крейсеров, принимавшихся на Нижнем",
+      "level": 1,
+      "kind": "cargo_cruiser_class",
+      "source_observation_ids": [
+        "P-240"
+      ],
+      "notes": "Длина/ширина/осадка неизвестны; не отождествлять с Иминуей.",
+      "dimensions_m": null
+    },
+    {
+      "id": "V-DRAGON-001",
+      "name": "Крейсер «Дракон»",
+      "level": null,
+      "kind": "cruiser",
+      "source_observation_ids": [
+        "P-664"
+      ],
+      "notes": "Описан как небольшой по сравнению со станцией; не установлен как посетитель конкретного дока.",
+      "dimensions_m": null
+    },
+    {
+      "id": "V-IMINUYA-001",
+      "name": "Крейсер «Иминуя»",
+      "level": null,
+      "kind": "cruiser",
+      "source_observation_ids": [],
+      "notes": "Класс из книжных эпизодов; привязку к докам МОАГа не допускать без прямого источника.",
+      "dimensions_m": null
+    }
+  ],
+  "relations": [
+    {
+      "id": "RC-001",
+      "subject_id": "M-STA-L1-001",
+      "relation": "LARGER_OVERALL_EXTENT_THAN",
+      "object_id": "M-STA-L3-001",
+      "source_observation_ids": [
+        "P-592"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": "Не переводить в точное отношение площадей или объёмов."
+    },
+    {
+      "id": "RC-002",
+      "subject_id": "M-STA-L1-001",
+      "relation": "PROJECT_ORDER_LARGER_THAN",
+      "object_id": "M-STA-L2-001",
+      "source_observation_ids": [],
+      "certainty": "USER_SCENARIO",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": "Порядок L1>L2>L3 — утверждённое пользовательское требование, отдельно от книжной цитаты."
+    },
+    {
+      "id": "RC-003",
+      "subject_id": "M-STA-L2-001",
+      "relation": "PROJECT_ORDER_LARGER_THAN",
+      "object_id": "M-STA-L3-001",
+      "source_observation_ids": [],
+      "certainty": "USER_SCENARIO",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-004",
+      "subject_id": "M-STA-CORE-001",
+      "relation": "SPANS_GLOBAL_LEVEL",
+      "object_id": "M-STA-L1-001",
+      "source_observation_ids": [
+        "P-418"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-005",
+      "subject_id": "M-STA-CORE-001",
+      "relation": "SPANS_GLOBAL_LEVEL",
+      "object_id": "M-STA-L2-001",
+      "source_observation_ids": [
+        "P-418"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-006",
+      "subject_id": "M-STA-CORE-001",
+      "relation": "SPANS_GLOBAL_LEVEL",
+      "object_id": "M-STA-L3-001",
+      "source_observation_ids": [
+        "P-418"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-007",
+      "subject_id": "M-L1-CG-001",
+      "relation": "HISTORICALLY_RECEIVED",
+      "object_id": "V-CARGO-CRUISER-001",
+      "source_observation_ids": [
+        "P-240"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-008",
+      "subject_id": "M-L1-CG-001",
+      "relation": "PREDECESSOR_CARGO_FUNCTION_OF",
+      "object_id": "M-L3-CG-001",
+      "source_observation_ids": [
+        "P-243"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-009",
+      "subject_id": "M-L1-AH-OLD-001",
+      "relation": "HAS_INTERNAL_UPPER_ROOM",
+      "object_id": "M-L1-AH-OLD-CTRL-001",
+      "source_observation_ids": [
+        "P-313"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-010",
+      "subject_id": "M-L1-AH-OLD-ST-001",
+      "relation": "CONNECTS_FLOOR_TO_UPPER_ROOM",
+      "object_id": "M-L1-AH-OLD-CTRL-001",
+      "source_observation_ids": [
+        "P-313"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-011",
+      "subject_id": "M-L1-CH-001",
+      "relation": "HAS_UPPER_GALLERY",
+      "object_id": "M-L1-CH-GAL-001",
+      "source_observation_ids": [
+        "P-220"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-012",
+      "subject_id": "M-L1-CH-ST-001",
+      "relation": "LEADS_UP_TO",
+      "object_id": "M-L1-CH-GAL-001",
+      "source_observation_ids": [
+        "P-220"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-013",
+      "subject_id": "M-L1-CH-GAL-001",
+      "relation": "DOOR_LEADS_TO",
+      "object_id": "M-L1-CH-CTRL-001",
+      "source_observation_ids": [
+        "P-221"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-014",
+      "subject_id": "M-L1-FH-001",
+      "relation": "ACCOMMODATES_COUNT",
+      "object_id": "V-BOAT-L1-001",
+      "source_observation_ids": [
+        "P-364"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": "Два катера; агрегированная вместимость первого ангара."
+    },
+    {
+      "id": "RC-015",
+      "subject_id": "M-L1-FH-002",
+      "relation": "ACCOMMODATES_COUNT",
+      "object_id": "V-BOAT-L1-001",
+      "source_observation_ids": [
+        "P-368"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": "Три катера другого ангара."
+    },
+    {
+      "id": "RC-016",
+      "subject_id": "M-L1-FH-001-CTRL",
+      "relation": "ELEVATED_WITHIN",
+      "object_id": "M-L1-FH-001",
+      "source_observation_ids": [
+        "P-365"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-017",
+      "subject_id": "M-L1-FH-001-ST",
+      "relation": "CONNECTS_FLOOR_TO",
+      "object_id": "M-L1-FH-001-CTRL",
+      "source_observation_ids": [
+        "P-365"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-018",
+      "subject_id": "M-L1-FH-002-CTRL",
+      "relation": "ELEVATED_WITHIN",
+      "object_id": "M-L1-FH-002",
+      "source_observation_ids": [
+        "P-369"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-019",
+      "subject_id": "M-L1-FH-002-ST",
+      "relation": "CONNECTS_FLOOR_TO",
+      "object_id": "M-L1-FH-002-CTRL",
+      "source_observation_ids": [
+        "P-369"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-020",
+      "subject_id": "M-L1-FH-001-CTRL",
+      "relation": "DIRECT_PASSAGE_TO",
+      "object_id": "M-L1-FH-002-CTRL",
+      "source_observation_ids": [
+        "P-367"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-021",
+      "subject_id": "M-L1-FH-LOCK-001",
+      "relation": "SPACIOUSNESS_COMPARABLE_TO",
+      "object_id": "M-L1-FH-001",
+      "source_observation_ids": [
+        "P-384"
+      ],
+      "certainty": "TOPOLOGY_INFERRED",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": "Типовая связь катерного ангара и шлюза; индивидуальный номер шлюза подтверждать отдельно."
+    },
+    {
+      "id": "RC-022",
+      "subject_id": "M-L1-WASTE-001",
+      "relation": "CONTAINS_EQUIPMENT",
+      "object_id": "M-L1-WASTE-FURNACE-001",
+      "source_observation_ids": [
+        "P-108"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-023",
+      "subject_id": "M-L2-RES-001",
+      "relation": "HAS_UPPER_GALLERY",
+      "object_id": "M-L2-RES-GAL-001",
+      "source_observation_ids": [
+        "P-484"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-024",
+      "subject_id": "M-L2-RES-GAL-001",
+      "relation": "OVERLOOKS",
+      "object_id": "M-L2-PLAZA-001",
+      "source_observation_ids": [
+        "P-486"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-025",
+      "subject_id": "M-L2-PLAZA-ST-001",
+      "relation": "CONNECTS_UPPER_TO_LOWER",
+      "object_id": "M-L2-PLAZA-001",
+      "source_observation_ids": [
+        "P-486"
+      ],
+      "certainty": "DIRECT_TEXT",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": ""
+    },
+    {
+      "id": "RC-026",
+      "subject_id": "M-L3-LOG-001",
+      "relation": "CONNECTS_INNER_OUTER_CIRCULATION",
+      "object_id": "M-L3-CG-001",
+      "source_observation_ids": [
+        "P-200"
+      ],
+      "certainty": "TOPOLOGY_INFERRED",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": "Грузовой коридор подходит к ангарной группе, но точная дверь не названа."
+    },
+    {
+      "id": "RC-027",
+      "subject_id": "M-L1-AH-OLD-001",
+      "relation": "POSSIBLY_SAME_COMPLEX_AS",
+      "object_id": "M-L1-CG-001",
+      "source_observation_ids": [
+        "P-313",
+        "P-240"
+      ],
+      "certainty": "HYPOTHESIS",
+      "frame_of_reference": null,
+      "metric_value": null,
+      "metric_unit": null,
+      "note": "Не сливать до дополнительного подтверждения."
+    }
+  ],
+  "identity_conflicts": [
+    {
+      "issue_id": "ID-C01",
+      "a": "M-L1-AH-OLD-ST-001",
+      "b": "M-L1-CH-ST-001",
+      "status": "MUST_REMAIN_DISTINCT_UNTIL_PROVEN",
+      "evidence": [
+        "P-313",
+        "P-220"
+      ],
+      "reason": "B1-110 старая ангарная лестница и B1-076 лестница круглого зала привязаны прежним графом к одному L1-CIRCULAR-STAIRS."
+    },
+    {
+      "issue_id": "ID-C02",
+      "a": "M-L1-AH-OLD-CTRL-001",
+      "b": "M-L1-CH-CTRL-001",
+      "status": "MUST_REMAIN_DISTINCT_UNTIL_PROVEN",
+      "evidence": [
+        "P-313",
+        "P-221",
+        "P-316"
+      ],
+      "reason": "Диспетчерская p110–113 и пультовая p76 ранее получили один L1-CIRCULAR-CONTROL."
+    },
+    {
+      "issue_id": "ID-C03",
+      "a": "M-L1-CG-001",
+      "b": "M-L1-FH-001",
+      "status": "NEVER_AUTO_MERGE",
+      "evidence": [
+        "P-240",
+        "P-364"
+      ],
+      "reason": "Грузовые крейсеры vs одноместные катера; физическая идентичность не доказана."
+    },
+    {
+      "issue_id": "ID-C04",
+      "a": "M-L1-CH-001",
+      "b": "M-STA-CORE-001",
+      "status": "NEVER_AUTO_MERGE",
+      "evidence": [
+        "P-219",
+        "P-418"
+      ],
+      "reason": "Нижний круглый зал vs центральный энергомодуль разных эпизодов."
+    },
+    {
+      "issue_id": "ID-C05",
+      "a": "M-L1-CG-001",
+      "b": "M-L3-CG-001",
+      "status": "DISTINCT_HISTORIC_PHASE_AND_LEVEL",
+      "evidence": [
+        "P-243"
+      ],
+      "reason": "Верхние грузовые ангары построены позже и заменили нижние."
+    }
+  ],
+  "qualified_motion_examples": [
+    {
+      "id": "TIME-01",
+      "event": "Спуск с галереи на Главную площадь",
+      "source_observation_ids": [
+        "P-486"
+      ],
+      "observed_duration_s_approx": 30,
+      "movement": "STAIRS_PLUS_WALK",
+      "possible_path_length_m": null,
+      "calibration_warning": "Не вычислять без скорости, остановок и геометрии лестницы."
+    },
+    {
+      "id": "TIME-02",
+      "event": "Лифт Второй–Третий",
+      "source_observation_ids": [
+        "P-231"
+      ],
+      "observed_duration_s_approx": 30,
+      "movement": "ELEVATOR",
+      "possible_vertical_delta_m": null,
+      "calibration_warning": "Лифтовое время не равно произведению скорости ходьбы на время."
+    }
+  ],
+  "numeric_constraints": [
+    {
+      "id": "NUM-01",
+      "metric": "OBSERVED_CORE_VIEW_DEPTH",
+      "object_id": "M-STA-CORE-001",
+      "value_m_approx": 15,
+      "source_observation_ids": [
+        "P-421"
+      ],
+      "quality": "CHARACTER_VISUAL_ESTIMATE_FROM_GALLERY_NOT_LEVEL_HEIGHT"
+    },
+    {
+      "id": "NUM-02",
+      "metric": "SMALL_CRAFT_OCCUPANCY_COUNT",
+      "object_id": "M-L1-FH-001",
+      "count": 2,
+      "source_observation_ids": [
+        "P-364"
+      ]
+    },
+    {
+      "id": "NUM-03",
+      "metric": "SMALL_CRAFT_OCCUPANCY_COUNT",
+      "object_id": "M-L1-FH-002",
+      "count": 3,
+      "source_observation_ids": [
+        "P-368"
+      ]
+    },
+    {
+      "id": "NUM-04",
+      "metric": "STARSHIP_TO_SMALL_CRAFT_APPROX_LONGITUDINAL_SCALE",
+      "object_id": "V-STAR-OBS-001",
+      "approx_ratio": 2,
+      "source_observation_ids": [
+        "P-611"
+      ],
+      "quality": "NARRATIVE_COMPARISON_NOT_METRIC"
+    }
+  ],
+  "gates": {
+    "geometry_approved": false,
+    "apa_runtime_executed": false,
+    "scene_writer_write": false,
+    "bim_write": false,
+    "merge_main": false,
+    "forbid_automatic_identity_merges": true
+  }
+}
