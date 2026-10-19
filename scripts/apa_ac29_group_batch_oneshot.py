@@ -34,6 +34,7 @@ SAVE_SCENE = "NativeGroupSave20261019V1"
 need = V.require
 read = H.read
 SCHEMA_PATH = IDENTITY.SCHEMA_PATH
+PRIOR174_SCRATCH = Path(r"C:\LocalAI\APA_Group_Acceptance\group-ac29-grid-8x4-20261018-01.pln")
 
 
 def fingerprint(model):
@@ -55,14 +56,16 @@ def safe01_gate(path):
     return sha256(state / "reopened.json")
 
 
-def stage(source, scratch, state, baseline_trace, safe01, group, placements, port):
+def stage(source, scratch, state, baseline_trace, safe01, group, placements, port, *, prior_stage=None):
     source, scratch, state, baseline_trace, safe01 = [Path(p).resolve()
         for p in (source, scratch, state, baseline_trace, safe01)]
     shifts = placement_offsets(placements)
     need(source.is_file() and source.suffix.lower() == scratch.suffix.lower() == ".pln"
          and source != scratch and scratch.parent.is_dir() and state.parent.is_dir()
-         and not scratch.exists() and not state.exists() and type(port) is int
-         and 19727 <= port <= 19735 and V.GROUP_GUID.fullmatch(group or "")
+         and not state.exists() and type(port) is int
+         and ((prior_stage is None and not scratch.exists() and 19727 <= port <= 19735)
+              or (prior_stage is not None and port == 19726 and scratch == PRIOR174_SCRATCH))
+         and V.GROUP_GUID.fullmatch(group or "")
          and 1 <= len(shifts) <= 32 and all(r["dz"] == 0 for r in shifts),
          "GROUP_BATCH_NEW_ISOLATED_PLN_AND_VALID_GROUP_REQUIRED")
     safe_hash = safe01_gate(safe01)
@@ -75,7 +78,25 @@ def stage(source, scratch, state, baseline_trace, safe01, group, placements, por
     need(len(ids) == 44 and len(set(ids)) == 44,
          "GROUP_BATCH_ACCEPTED_44_GUID_BASELINE_REQUIRED")
     original_sha = sha256(source)
-    copy_exclusive(source, scratch)
+    adoption = {}
+    if prior_stage is None:
+        copy_exclusive(source, scratch)
+    else:
+        prior_path = Path(prior_stage).resolve()
+        prior = read(prior_path)
+        need(prior.get("schema") == "APA_AC29_GROUP_GRID_STAGE_V1"
+             and prior.get("status") == "STAGED_SAVED_COPY_ONLY_NO_ARCHICAD_CALLS"
+             and Path(prior["scratchProject"]).resolve() == scratch
+             and Path(prior["sourceProject"]).resolve() == source
+             and prior.get("sourceSavedSha256") == original_sha
+             and prior.get("sourceGroupId", "").lower() == group.lower()
+             and prior.get("shifts") == shifts and prior.get("expectedOriginalGuids") == 44
+             and prior.get("expectedPostGuids") == 172
+             and not any((prior_path.parent / name).exists() for name in
+                ("attempted.json", "before-native-dispatch.json", "result.json", "original-scenewriter.sqlite")),
+             "GROUP_BATCH_PRIOR174_MUST_BE_EXACT_UNATTEMPTED_ISOLATED_STAGE")
+        adoption = dict(adoptedPrior174Stage=str(prior_path), priorStageSHA256=sha256(prior_path),
+                        existingSavedTestCopyAdoptedWithoutFileWrite=True)
     need(sha256(scratch) == sha256(source) == original_sha, "GROUP_BATCH_COPY_SHA_DRIFT")
     state.mkdir(exist_ok=False)
     write_new_json(state / "baseline-native.json", baseline)
@@ -87,6 +108,7 @@ def stage(source, scratch, state, baseline_trace, safe01, group, placements, por
         sourceBaselineTrace=str(baseline_trace), sourceBaselineTraceSHA256=sha256(baseline_trace),
         safe01State=str(safe01), safe01ReceiptSHA256=safe_hash,
         status="STAGED_NO_MODEL_WRITES", automaticReplay=False)
+    manifest.update(adoption)
     write_new_json(state / "manifest.json", manifest)
     return manifest
 
@@ -100,6 +122,9 @@ def manifest_for(state, *, initial=False):
          and sha256(m["sourceBaselineTrace"]) == m["sourceBaselineTraceSHA256"]
          and safe01_gate(m["safe01State"]) == m["safe01ReceiptSHA256"],
          "GROUP_BATCH_IMMUTABLE_SOURCE_OR_SAFE01_PROOF_DRIFT")
+    if "adoptedPrior174Stage" in m:
+        need(sha256(m["adoptedPrior174Stage"]) == m["priorStageSHA256"],
+             "GROUP_BATCH_ORIGINAL_PRIOR174_RECEIPT_CHANGED")
     if initial:
         need(sha256(m["scratch"]) == m["scratchInitialSHA256"]
              and not any((state / name).exists() for name in
@@ -341,15 +366,17 @@ def main():
     p.add_argument("--state", required=True)
     p.add_argument("--source"); p.add_argument("--scratch"); p.add_argument("--baseline-trace")
     p.add_argument("--safe01-state"); p.add_argument("--source-group"); p.add_argument("--placements-json")
+    p.add_argument("--adopt-prior174-stage")
     p.add_argument("--port", type=int, default=19727)
     args = p.parse_args()
     if args.phase == "stage":
         need(all((args.source,args.scratch,args.baseline_trace,args.safe01_state,args.source_group,args.placements_json)),
              "GROUP_BATCH_STAGE_EXPLICIT_INPUTS_REQUIRED")
         out = stage(args.source,args.scratch,args.state,args.baseline_trace,args.safe01_state,
-                    args.source_group,read(args.placements_json),args.port)
+                    args.source_group,read(args.placements_json),args.port,
+                    prior_stage=args.adopt_prior174_stage)
     else:
-        need(not any((args.source,args.scratch,args.baseline_trace,args.safe01_state,args.source_group,args.placements_json)),
+        need(not any((args.source,args.scratch,args.baseline_trace,args.safe01_state,args.source_group,args.placements_json,args.adopt_prior174_stage)),
              "GROUP_BATCH_REUSE_ONLY_PINNED_MANIFEST")
         out = {"plan":plan,"execute":execute,"check-closed":check_closed,"verify-reopen":verify_reopen}[args.phase](args.state)
     print(json.dumps(out,ensure_ascii=False,indent=2))

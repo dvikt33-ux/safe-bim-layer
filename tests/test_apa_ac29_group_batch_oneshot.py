@@ -58,6 +58,43 @@ class GroupBatchGates(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'NOT_REGISTERED'):G.build_plan(self.state)
             model.assert_not_called()
 
+    def prior174(self):
+        group='00000000-0000-4000-8000-000000000001'
+        layout=dict(mode='GRID',columns=8,rows=4,stepX=25,stepY=8,startDx=25,startDy=0)
+        prior=self.root/'prior174';prior.mkdir()
+        record=dict(schema='APA_AC29_GROUP_GRID_STAGE_V1',status='STAGED_SAVED_COPY_ONLY_NO_ARCHICAD_CALLS',
+            sourceProject=str(self.source),scratchProject=str(self.scratch),
+            sourceSavedSha256=sha256(self.source),sourceGroupId=group,
+            shifts=G.placement_offsets(layout),expectedOriginalGuids=44,expectedPostGuids=172)
+        write_new_json(prior/'stage.json',record)
+        self.trace.write_text(json.dumps(dict(command='GetModelDumpV1',response=dict(elements=[])))+'\n')
+        model=dict(elements=[dict(guid=f'00000000-0000-4000-8000-{i:012d}') for i in range(44)])
+        return prior,group,layout,model
+
+    def test_exact_prior174_adoption_does_not_recopy_or_edit_old_receipt(self):
+        prior,group,layout,model=self.prior174()
+        original=self.scratch.read_bytes();proof=(prior/'stage.json').read_bytes()
+        with patch.object(G,'PRIOR174_SCRATCH',self.scratch), \
+             patch.object(G.C.G,'normalize_dump',return_value=model), \
+             patch.object(G,'fingerprint',return_value='b'*64),patch.object(G,'copy_exclusive') as copy:
+            m=G.stage(self.source,self.scratch,self.root/'state2',self.trace,self.root/'safe01',
+                      group,layout,19726,prior_stage=prior/'stage.json')
+            copy.assert_not_called()
+        self.assertTrue(m['existingSavedTestCopyAdoptedWithoutFileWrite'])
+        self.assertEqual(self.scratch.read_bytes(),original)
+        self.assertEqual((prior/'stage.json').read_bytes(),proof)
+
+    def test_prior174_attempt_cannot_be_adopted_even_when_saved_sha_matches(self):
+        prior,group,layout,model=self.prior174()
+        write_new_json(prior/'attempted.json',dict(status='UNKNOWN'))
+        with patch.object(G,'PRIOR174_SCRATCH',self.scratch), \
+             patch.object(G.C.G,'normalize_dump',return_value=model), \
+             patch.object(G,'fingerprint',return_value='b'*64):
+            with self.assertRaisesRegex(ValueError,'EXACT_UNATTEMPTED'):
+                G.stage(self.source,self.scratch,self.root/'state2',self.trace,self.root/'safe01',
+                        group,layout,19726,prior_stage=prior/'stage.json')
+        self.assertFalse((self.root/'state2').exists())
+
     def test_baseline_or_original_source_drift_is_denied(self):
         for p in (self.source,self.state/'baseline-native.json',self.trace):
             old=p.read_bytes();p.write_bytes(b'changed')
