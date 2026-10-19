@@ -199,12 +199,12 @@
       "id": "B3-018",
       "page_number": 18,
       "url": "https://loveread.ec/read_book.php?id=58610&p=18",
-      "status": "NOT_REVIEWED",
-      "target_station": "UNCLASSIFIED",
-      "recorded_spatial_hints": null,
-      "notes": null,
-      "verification_method": "pending",
-      "full_page_review_date": null
+      "status": "REVIEWED_FULL_PAGE",
+      "target_station": "OTHER_STATION_NOT_MOAG",
+      "recorded_spatial_hints": 0,
+      "notes": "Смешанная страница: до заголовка главы 7 завершается станционная сцена на другой станции, где команда разбирает поврежденного робота и получает его записи; новых сведений о МОАГе нет. Текст после заголовка главы 7 относится к Земле и пропущен.",
+      "verification_method": "Однократно прочитан финальный станционный фрагмент до заголовка главы 7; земной фрагмент после него не анализировался.",
+      "full_page_review_date": "2026-10-19"
     },
     {
       "id": "B3-019",
