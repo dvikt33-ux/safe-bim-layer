@@ -1,6 +1,6 @@
 {
   "schema": "APA-MOAG-TOPOLOGY-SNAPSHOT/0.1",
-  "source_blob_sha": "8e15e0ca4b9338193af4d3a91cce4abbe3d8e575",
+  "source_blob_sha": "f4724bbca33e55d97611d9c032d291239f4f85fd",
   "derived_from": "docs/research/apa-results/moag/v1/evidence_graph.json",
   "status": "GRAPH_ONLY_NO_COORDINATES",
   "space_refs": [
@@ -243,6 +243,76 @@
       "id": "L3-WORKSHOP-DOOR",
       "label": "Белые двери производственного цеха",
       "level": 3
+    },
+    {
+      "id": "L1-LOWER-SHAFT",
+      "label": "Вертикальная шахта с промежуточным боковым ответвлением",
+      "level": null
+    },
+    {
+      "id": "SUB-LOWER-WELL",
+      "label": "Неизвестное помещение ниже обитаемой части Нижнего уровня",
+      "level": null
+    },
+    {
+      "id": "SUB-SEALED-DOOR",
+      "label": "Двойная дверь в нижнем колодце",
+      "level": null
+    },
+    {
+      "id": "SUB-WELDED-WALL",
+      "label": "Запаянный проход напротив двери в нижнем колодце",
+      "level": null
+    },
+    {
+      "id": "L1-OLD-FREIGHT-HANGAR",
+      "label": "Старый закрытый грузовой ангар Нижнего уровня",
+      "level": 1
+    },
+    {
+      "id": "L1-OLD-PROF-CABINS",
+      "label": "Заброшенные каюты вблизи старого ангарного комплекса",
+      "level": 1
+    },
+    {
+      "id": "L1-CIRCULAR-HALL",
+      "label": "Высокий круглый зал в закрытом секторе",
+      "level": 1
+    },
+    {
+      "id": "L1-HALL-STEPS",
+      "label": "Местный ступенчатый переход к круглому залу",
+      "level": 1
+    },
+    {
+      "id": "L1-SLEEPING-HANGAR",
+      "label": "Большой ангар со спящими изменившимися взрослыми",
+      "level": 1
+    },
+    {
+      "id": "L1-CIRCULAR-UPPER-WALK",
+      "label": "Верхний металлический мостик круглого зала",
+      "level": 1
+    },
+    {
+      "id": "L1-CIRCULAR-STAIRS",
+      "label": "Повреждённая лестница к верхнему мостику",
+      "level": 1
+    },
+    {
+      "id": "L1-CIRCULAR-CONTROL",
+      "label": "Помещение ручного управления шлюзами за мостиком",
+      "level": 1
+    },
+    {
+      "id": "L1-CIRCULAR-QUARTERS",
+      "label": "Жилая комната за операторской",
+      "level": 1
+    },
+    {
+      "id": "L1-LOWER-BLOCK-STRATA",
+      "label": "Локальные высотные ярусы Нижнего блока",
+      "level": 1
     }
   ],
   "relationships": [
@@ -787,6 +857,196 @@
       "state": "TOPOLOGY_INFERRED",
       "source_ids": [
         "B2-13"
+      ]
+    },
+    {
+      "id": "E55",
+      "from": "L1-LOWER-SHAFT",
+      "to": "L1-BASES",
+      "relation": "mid_branch_to",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E56",
+      "from": "L1-LOWER-SHAFT",
+      "to": "SUB-LOWER-WELL",
+      "relation": "lower_terminus_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E57",
+      "from": "SUB-LOWER-WELL",
+      "to": "L1",
+      "relation": "below",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E58",
+      "from": "SUB-LOWER-WELL",
+      "to": "SUB-SEALED-DOOR",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E59",
+      "from": "SUB-LOWER-WELL",
+      "to": "SUB-WELDED-WALL",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-04"
+      ]
+    },
+    {
+      "id": "E60",
+      "from": "L1-OLD-PROF-CABINS",
+      "to": "L1-OLD-FREIGHT-HANGAR",
+      "relation": "near",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B1-19"
+      ]
+    },
+    {
+      "id": "E61",
+      "from": "L1-OLD-FREIGHT-HANGAR",
+      "to": "L3-DOCK",
+      "relation": "superseded_by",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-19"
+      ]
+    },
+    {
+      "id": "E62",
+      "from": "L1-SEALED",
+      "to": "L1-CIRCULAR-HALL",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E63",
+      "from": "L1-SEALED",
+      "to": "L1-SLEEPING-HANGAR",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E64",
+      "from": "L1-HALL-STEPS",
+      "to": "L1-CIRCULAR-HALL",
+      "relation": "steps_down_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E65",
+      "from": "L1-SEALED",
+      "to": "L1-OLD-PROF-CABINS",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E66",
+      "from": "L1-CIRCULAR-HALL",
+      "to": "L1-CIRCULAR-UPPER-WALK",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E67",
+      "from": "L1-CIRCULAR-HALL",
+      "to": "L1-CIRCULAR-STAIRS",
+      "relation": "contains",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E68",
+      "from": "L1-CIRCULAR-STAIRS",
+      "to": "L1-CIRCULAR-UPPER-WALK",
+      "relation": "vertical_access",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E69",
+      "from": "L1-CIRCULAR-UPPER-WALK",
+      "to": "L1-CIRCULAR-CONTROL",
+      "relation": "door_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E70",
+      "from": "L1-CIRCULAR-CONTROL",
+      "to": "L1-CIRCULAR-QUARTERS",
+      "relation": "door_to",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E71",
+      "from": "L1-CIRCULAR-UPPER-WALK",
+      "to": "L1-CIRCULAR-HALL",
+      "relation": "above",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E72",
+      "from": "L1-LOWER-BLOCK-STRATA",
+      "to": "L1-CIRCULAR-UPPER-WALK",
+      "relation": "includes",
+      "state": "TEXT_DIRECT",
+      "source_ids": [
+        "B1-17"
+      ]
+    },
+    {
+      "id": "E73",
+      "from": "L1-LOWER-BLOCK-STRATA",
+      "to": "L1-OPERATORS",
+      "relation": "includes",
+      "state": "TOPOLOGY_INFERRED",
+      "source_ids": [
+        "B1-17"
       ]
     }
   ],
