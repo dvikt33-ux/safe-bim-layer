@@ -255,20 +255,32 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
                                       "alias": mapped, "page": source})
                 else:
                     v = s.get("global_level")
-                    if v is not None and v not in level[target]:
-                        # A shaft/utility may span more than its old single-level alias.
-                        review = "MULTILEVEL_ALIAS_REVIEW" if kinds[target] in MULTILEVEL_KINDS else "ROUTE_LOCATION_LEVEL_CONFLICT"
-                        conflicts.append({"code": review, "route_id": route["id"],
-                                          "step_id": s["id"], "target": target,
-                                          "page": source, "observed_level": v,
-                                          "indexed_levels": sorted(level[target])})
-                    else:
-                        if v is not None and kinds[target] not in MULTILEVEL_KINDS:
-                            level_suggestions[target].append((v, route["id"], s["id"], source))
-                    # A visit links an occurrence to an indexed concept, not
-                    # an identity union or proof of one-level physical placement.
-                    add(a, target, "VISIT::" + route["id"] + "::" + s["id"],
-                        "ROUTE_VISITS_INDEX", [source], detail={"alias": mapped})
+                    mismatch = v is not None and v not in level[target]
+                    multilevel = kinds[target] in MULTILEVEL_KINDS
+                    if mismatch:
+                        # A shared utility network can have access points on
+                        # other decks. A non-network room at a contradictory
+                        # level, however, cannot attach to the graph.
+                        review = ("MULTILEVEL_ALIAS_REVIEW" if multilevel
+                                  else "ROUTE_LOCATION_LEVEL_CONFLICT")
+                        conflicts.append({
+                            "code": review, "route_id": route["id"],
+                            "step_id": s["id"], "target": target,
+                            "page": source, "observed_level": v,
+                            "indexed_levels": sorted(level[target]),
+                            "connection_accepted": multilevel,
+                            "interpretation": (
+                                "NETWORK_CONTACT_LEVEL_NOT_SINGLE_ROOM_ELEVATION"
+                                if multilevel else "SOURCE_LEVEL_CONTRADICTION_NO_JOIN")})
+                    elif v is not None and not multilevel:
+                        level_suggestions[target].append(
+                            (v, route["id"], s["id"], source))
+                    # Keep a multilevel system contact as a qualitative witness,
+                    # but refuse to union any ordinary room with contradictory level.
+                    if not mismatch or multilevel:
+                        add(a, target, "VISIT::" + route["id"] + "::" + s["id"],
+                            "ROUTE_VISITS_INDEX", [source],
+                            detail={"alias": mapped, "network_contact": multilevel})
             if i > 0:
                 prev = steps[i - 1]
                 if s.get("movement_method") == GAP or prev.get("movement_method") == GAP:
