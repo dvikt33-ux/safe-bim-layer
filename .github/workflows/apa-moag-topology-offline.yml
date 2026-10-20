@@ -47,6 +47,10 @@ jobs:
         run: |
           python tools/moag_topology/unified_evidence_graph_r07.py --out moag-r07-unified-evidence.json
           python -c "import json; x=json.load(open('moag-r07-unified-evidence.json')); i=x['inventory']; assert i['all_vertices']==575 and i['physical_or_conceptual_indices']==197 and i['direct_access_edges']==25 and i['narrative_gaps_not_joined']==18 and not x['gates']['bim_authorized'] and not x['gates']['one_qualitative_spatial_component']; print('UNIFIED_R07',i['all_vertices'],i['all_typed_relations'],i['qualitative_components_with_physical_indices'])"
+      - name: Preserve unknown passages and symmetry alternatives in R08 overlay
+        run: |
+          python tools/moag_topology/hypothesis_overlay_r08.py --out moag-r08-hypotheses.json
+          python -c "import json; r=json.load(open('moag-r08-hypotheses.json')); c=r['counts']; assert c['proven_nodes_unchanged']==575 and c['proven_edges_unchanged']==761 and c['unknown_route_intervals_kept']==18 and c['unlocated_fixed_elements_kept']==12 and c['unselected_layout_options']==8 and c['proven_components_unchanged']==39 and r['gates']['hypotheses_can_change_proven_connectivity'] is False and r['gates']['symmetry_assumed_as_fact'] is False and r['gates']['Archicad_writes'] is False; print('R08',c)"
       - name: Archive R06 evidence graphs without promoting them to geometry
         uses: actions/upload-artifact@v4
         with:
@@ -57,6 +61,7 @@ jobs:
             moag-r06-readiness.json
             moag-r06-research-frontiers.json
             moag-r07-unified-evidence.json
+            moag-r08-hypotheses.json
           if-no-files-found: error
           retention-days: 30
       - name: Validate site-page coverage and hypotheses
