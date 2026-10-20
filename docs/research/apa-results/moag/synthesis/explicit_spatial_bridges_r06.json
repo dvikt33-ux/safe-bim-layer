@@ -39,6 +39,7 @@
       "to": "M-L1-FH-002-ST",
       "relation": "LOCAL_STAIR_IN_HANGAR",
       "source_ids": [
+        "P-368",
         "P-369"
       ],
       "explanation": "В соседнем ангаре лестница ведёт к высокой операторской",
