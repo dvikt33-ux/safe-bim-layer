@@ -1,0 +1,548 @@
+"""Единый локальный диспетчер бюро: GitHub -> SQLite -> Opera/Automa -> квитанции.
+
+Один постоянно работающий процесс, один поток управления Opera, отдельные
+занятости чатов, опционально тот же установленный и проверенный исполнитель APA.
+Никакого изменения основного APA, моделей PLN или существующего UI Dispatcher.
+"""
+from __future__ import annotations
+
+import argparse
+import base64
+from datetime import datetime, timezone
+import hashlib
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+import hmac
+import importlib.util
+import json
+import os
+from pathlib import Path
+import re
+import secrets
+import sqlite3
+import subprocess
+import threading
+import time
+from urllib.parse import parse_qs, quote, urlsplit
+
+import bureau_chat_activation_gateway as legacy
+
+REPO = "dvikt33-ux/safe-bim-bridge"
+EVENTS = "safe-bim-mailbox/chat-dispatch/jobs"
+TASKS = "safe-bim-mailbox/bureau/tasks/"
+RESULTS = "safe-bim-mailbox/bureau/results/"
+JOB_ID = re.compile(r"^[a-z][a-z0-9-]{7,63}$")
+TARGET = re.compile(r"^[A-Za-z][A-Za-z0-9-]{1,32}$")
+HEX40 = re.compile(r"^[0-9a-f]{40}$")
+HEX64 = re.compile(r"^[0-9a-f]{64}$")
+ACTIVE_UI = ("LAUNCHING", "WAIT_TAB", "WAIT_SUBMIT", "BLOCKED")
+ACTIVE_CHAT = ACTIVE_UI + ("WAIT_RESULT",)
+VALID_EVENTS = frozenset((
+    "ASSIGN_TASK", "REPORT_READY", "DEPARTMENT_REPORT_READY",
+    "HQ_BRIEF_READY", "ARENA_RESULT_READY", "TRIGGER_PROBE"
+))
+NEXT_EVENT = {
+    "ASSIGN_TASK": "REPORT_READY",
+    "REPORT_READY": "DEPARTMENT_REPORT_READY",
+    "DEPARTMENT_REPORT_READY": "HQ_BRIEF_READY",
+}
+
+
+def now_iso():
+    return datetime.now(timezone.utc).isoformat()
+
+
+def only_utc(value):
+    return legacy.iso(value).isoformat()
+
+
+def checked_remote(path, blob_sha):
+    """SHA-pinned отдельный GitHub JSON; не выполняет присланный код."""
+    data = legacy.gh_api(f"repos/{REPO}/contents/{path}?ref=main")
+    raw = base64.b64decode("".join(data["content"].split()), validate=True)
+    actual = legacy.git_blob_sha(raw)
+    if actual != blob_sha or data["sha"] != blob_sha:
+        raise ValueError("REMOTE_SOURCE_SHA_MISMATCH")
+    if len(raw) > 32768:
+        raise ValueError("REMOTE_SOURCE_OVERSIZE")
+    return json.loads(raw.decode("utf-8-sig"))
+
+
+def config_load(filename):
+    config = json.loads(Path(filename).read_text(encoding="utf-8"))
+    expected = {"operaExe", "extensionId", "targets", "routes", "pollSeconds",
+                "callbackPort", "apaEnabled", "apaBridgePath", "apaBridgeSha256"}
+    if set(config) != expected:
+        raise ValueError("CONFIG_KEYS_INVALID")
+    if (not legacy.EXTENSION_ID.fullmatch(config["extensionId"])
+            or not isinstance(config["targets"], dict)
+            or not config["targets"]):
+        raise ValueError("INVALID_AUTOMA_CONFIG")
+    if not 5 <= config["pollSeconds"] <= 3600:
+        raise ValueError("INVALID_POLL_SECONDS")
+    if not 1024 <= config["callbackPort"] <= 65535:
+        raise ValueError("INVALID_CALLBACK_PORT")
+    for key, target in config["targets"].items():
+        if (not TARGET.fullmatch(key)
+                or set(target) != {"workflowId"}
+                or not legacy.WORKFLOW_ID.fullmatch(target["workflowId"])):
+            raise ValueError("TARGET_NOT_VALIDATED")
+    if (not isinstance(config["routes"], dict)
+            or not all(k in config["targets"] and set(value) == set(NEXT_EVENT.values())
+                       and all(dest in config["targets"] for dest in value.values())
+                       for k, value in config["routes"].items())):
+        raise ValueError("ROUTES_NOT_IN_LOCAL_ALLOWLIST")
+    if not isinstance(config["apaEnabled"], bool):
+        raise ValueError("APA_FLAG_INVALID")
+    if config["apaEnabled"] and (not HEX64.fullmatch(config["apaBridgeSha256"])
+                                  or not config["apaBridgePath"]):
+        raise ValueError("APA_PINNED_SOURCE_REQUIRED")
+    return config
+
+
+def open_db(db_path):
+    db_path = Path(db_path)
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+    db = sqlite3.connect(db_path, isolation_level=None, check_same_thread=False, timeout=30)
+    db.execute("PRAGMA journal_mode=WAL")
+    db.execute("PRAGMA synchronous=FULL")
+    db.execute("""CREATE TABLE IF NOT EXISTS jobs (
+        id TEXT PRIMARY KEY,
+        target TEXT NOT NULL,
+        event_type TEXT NOT NULL,
+        action TEXT NOT NULL,
+        blob_sha TEXT NOT NULL,
+        task TEXT NOT NULL,
+        parent TEXT,
+        created TEXT NOT NULL,
+        expires TEXT NOT NULL,
+        status TEXT NOT NULL,
+        nonce TEXT,
+        proof TEXT,
+        changed TEXT NOT NULL)""")
+    db.execute("""CREATE TABLE IF NOT EXISTS ledger (
+        seq INTEGER PRIMARY KEY AUTOINCREMENT,
+        job_id TEXT NOT NULL,
+        status TEXT NOT NULL,
+        at TEXT NOT NULL,
+        detail TEXT NOT NULL)""")
+    db.execute("""CREATE INDEX IF NOT EXISTS jobs_by_status ON jobs(status,target)""")
+    return db
+
+
+def journal(db, job_id, status, detail=""):
+    db.execute("UPDATE jobs SET status=?,changed=? WHERE id=?",
+               (status, now_iso(), job_id))
+    db.execute("INSERT INTO ledger(job_id,status,at,detail) VALUES(?,?,?,?)",
+               (job_id, status, now_iso(), str(detail)[:500]))
+
+
+def validate_event(event, filename, config):
+    if not isinstance(event, dict):
+        raise ValueError("NOT_AN_EVENT")
+    if event.get("schema") == legacy.SCHEMA:
+        legacy.validate(event, filename, config["targets"])
+        return {
+            "id": event["jobId"], "target": event["targetChat"],
+            "event_type": event["eventType"], "action": "ACTIVATE_ONLY",
+            "task": {}, "parent": None,
+            "created": only_utc(event["createdAt"]),
+            "expires": only_utc(event["expiresAt"])
+        }
+    fields = {"schema", "jobId", "eventType", "targetChat", "action",
+              "createdAt", "expiresAt", "taskRef", "parentJobId"}
+    if (set(event) != fields or event["schema"] != "BUREAU_JOB_V2"
+            or not isinstance(event["jobId"], str)
+            or not JOB_ID.fullmatch(event["jobId"])
+            or event["jobId"] != filename
+            or event["eventType"] not in VALID_EVENTS
+            or event["action"] != "DELIVER_TASK"
+            or event["targetChat"] not in config["targets"]):
+        raise ValueError("JOB_V2_NOT_AUTHORIZED")
+    created, expires = only_utc(event["createdAt"]), only_utc(event["expiresAt"])
+    current = now_iso()
+    if not (created <= current < expires):
+        raise ValueError("EVENT_WINDOW_INVALID")
+    if ((datetime.fromisoformat(expires) - datetime.fromisoformat(created))
+            .total_seconds() > 7 * 86400):
+        raise ValueError("EVENT_TTL_TOO_LONG")
+    ref = event["taskRef"]
+    if (not isinstance(ref, dict) or set(ref) != {"path", "blobSha"}
+            or not isinstance(ref["path"], str)
+            or not ref["path"].startswith(TASKS)
+            or ".." in ref["path"]
+            or not ref["path"].endswith(".json")
+            or not isinstance(ref["blobSha"], str)
+            or not HEX40.fullmatch(ref["blobSha"])):
+        raise ValueError("TASK_NOT_PINNED")
+    task = checked_remote(ref["path"], ref["blobSha"])
+    if (not isinstance(task, dict)
+            or set(task) != {"schema", "jobId", "instruction"}
+            or task["schema"] != "BUREAU_TASK_V1"
+            or task["jobId"] != event["jobId"]
+            or not isinstance(task["instruction"], str)
+            or not 10 <= len(task["instruction"]) <= 6000):
+        raise ValueError("TASK_CONTENT_INVALID")
+    parent = event["parentJobId"]
+    if parent is not None and (not isinstance(parent, str) or not JOB_ID.fullmatch(parent)):
+        raise ValueError("PARENT_ID_INVALID")
+    return {"id": filename, "target": event["targetChat"],
+            "event_type": event["eventType"], "action": "DELIVER_TASK",
+            "task": task, "parent": parent, "created": created, "expires": expires}
+
+
+class Coordinator:
+    def __init__(self, config, db, opener=None):
+        self.config, self.db = config, db
+        self.lock = threading.RLock()
+        self.opener = opener or self._open_opera
+        self.bridge_lock = None
+        self.apa = None
+
+    @staticmethod
+    def _open_opera(exe, url):
+        subprocess.Popen([str(exe), url],
+                         stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
+                         stderr=subprocess.DEVNULL, close_fds=True)
+
+    def record(self, ev, sha):
+        with self.lock:
+            self.db.execute("BEGIN IMMEDIATE")
+            try:
+                previous = self.db.execute(
+                    "SELECT blob_sha FROM jobs WHERE id=?", (ev["id"],)
+                ).fetchone()
+                if previous:
+                    if previous[0] != sha:
+                        raise ValueError("IMMUTABLE_JOB_REWRITTEN")
+                    self.db.execute("COMMIT")
+                    return "DUPLICATE"
+                self.db.execute("""INSERT INTO jobs
+                    (id,target,event_type,action,blob_sha,task,parent,created,expires,status,changed)
+                    VALUES(?,?,?,?,?,?,?,?,?,'QUEUED',?)""",
+                    (ev["id"], ev["target"], ev["event_type"], ev["action"],
+                     sha, json.dumps(ev["task"], ensure_ascii=False), ev["parent"],
+                     ev["created"], ev["expires"], now_iso()))
+                journal(self.db, ev["id"], "QUEUED", "SOURCE_SHA_VERIFIED")
+                self.db.execute("COMMIT")
+                return "QUEUED"
+            except Exception:
+                self.db.execute("ROLLBACK")
+                raise
+
+    def scan(self):
+        items = legacy.gh_api(f"repos/{REPO}/contents/{EVENTS}?ref=main")
+        if not isinstance(items, list) or len(items) > 500:
+            raise ValueError("EVENT_INBOX_INVALID")
+        with self.lock:
+            known = dict(self.db.execute("SELECT id,blob_sha FROM jobs"))
+        added = 0
+        for item in sorted(items, key=lambda x: x.get("name", "")):
+            filename = item.get("name", "")
+            if item.get("type") != "file" or not filename.endswith(".json"):
+                continue
+            job_id = filename[:-5]
+            if not JOB_ID.fullmatch(job_id):
+                continue
+            if job_id in known:
+                if known[job_id] != item["sha"]:
+                    raise ValueError("IMMUTABLE_JOB_REWRITTEN")
+                continue
+            raw_event = checked_remote(f"{EVENTS}/{filename}", item["sha"])
+            ev = validate_event(raw_event, job_id, self.config)
+            if self.record(ev, item["sha"]) == "QUEUED":
+                added += 1
+        return added
+
+    def launch_one(self):
+        """Глобальная блокировка Opera; длительная занятость только целевого чата."""
+        with self.lock:
+            self.db.execute("BEGIN IMMEDIATE")
+            try:
+                current = now_iso()
+                for (job_id,) in self.db.execute(
+                    "SELECT id FROM jobs WHERE status='QUEUED' AND expires<=?",
+                    (current,)
+                ).fetchall():
+                    journal(self.db, job_id, "EXPIRED", "NOT_EXECUTED")
+                job = self.db.execute("""
+                    SELECT id,target,action FROM jobs j
+                    WHERE j.status='QUEUED'
+                    AND NOT EXISTS (
+                      SELECT 1 FROM jobs u WHERE u.status IN
+                      ('LAUNCHING','WAIT_TAB','WAIT_SUBMIT','BLOCKED'))
+                    AND NOT EXISTS (
+                      SELECT 1 FROM jobs b WHERE b.target=j.target
+                      AND b.status IN
+                      ('LAUNCHING','WAIT_TAB','WAIT_SUBMIT','BLOCKED','WAIT_RESULT'))
+                    ORDER BY j.created,j.id LIMIT 1""").fetchone()
+                if job:
+                    nonce = secrets.token_urlsafe(32)
+                    self.db.execute("UPDATE jobs SET nonce=? WHERE id=?",
+                                    (nonce, job[0]))
+                    journal(self.db, job[0], "LAUNCHING", "DURABLE_INTENT")
+                self.db.execute("COMMIT")
+            except Exception:
+                self.db.execute("ROLLBACK")
+                raise
+        if not job:
+            return "NO_ELIGIBLE_WORK"
+        job_id, target, _ = job
+        exe = Path(self.config["operaExe"])
+        if not exe.is_file():
+            with self.lock:
+                journal(self.db, job_id, "BLOCKED", "OPERA_EXE_NOT_FOUND")
+            return "BLOCKED"
+        workflow = self.config["targets"][target]["workflowId"]
+        url = (f"chrome-extension://{self.config['extensionId']}/execute.html#/"
+               f"{workflow}?jobId={quote(job_id, safe='')}"
+               f"&token={quote(nonce, safe='')}"
+               f"&callbackPort={self.config['callbackPort']}")
+        try:
+            self.opener(exe, url)
+        except Exception as err:
+            with self.lock:
+                journal(self.db, job_id, "BLOCKED",
+                        "OPERA_INVOCATION_ERROR:" + type(err).__name__)
+            return "BLOCKED"
+        with self.lock:
+            journal(self.db, job_id, "WAIT_TAB", "OPERA_INVOCATION_ONLY")
+        return "WAIT_TAB:" + job_id
+
+    def task_for(self, job_id, nonce):
+        with self.lock:
+            job = self.db.execute("""
+                SELECT target,action,task,status,nonce
+                FROM jobs WHERE id=?""", (job_id,)).fetchone()
+            if (not job or job[3] not in ("WAIT_TAB", "WAIT_SUBMIT")
+                    or not hmac.compare_digest(job[4] or "", nonce)):
+                raise ValueError("TASK_ACCESS_DENIED")
+            return {"jobId": job_id, "targetChat": job[0],
+                    "action": job[1],
+                    "instruction": json.loads(job[2]).get("instruction", "")}
+
+    def ack(self, job_id, nonce, stage, proof="", receipt_sha=None):
+        """ACK Automa или итогового издателя, не приравнивать вызов Opera к результату."""
+        if not isinstance(proof, str) or not 1 <= len(proof) <= 500:
+            raise ValueError("ACK_PROOF_REQUIRED")
+        with self.lock:
+            row = self.db.execute(
+                "SELECT status,nonce,action,event_type,target FROM jobs WHERE id=?",
+                (job_id,)
+            ).fetchone()
+            if not row or not hmac.compare_digest(row[1] or "", nonce):
+                raise ValueError("ACK_NOT_AUTHENTICATED")
+            status, _, action, event_type, target = row
+            if stage == "TAB_SELECTED" and status == "WAIT_TAB":
+                next_status = ("COMPLETE_ACTIVATION" if action == "ACTIVATE_ONLY"
+                               else "WAIT_SUBMIT")
+            elif stage == "MESSAGE_SUBMITTED" and status == "WAIT_SUBMIT":
+                next_status = "WAIT_RESULT"
+            elif stage == "FAILED" and status in ACTIVE_CHAT:
+                next_status = "BLOCKED"
+            elif stage == "RESULT_PUBLISHED" and status == "WAIT_RESULT":
+                if (not isinstance(receipt_sha, str)
+                        or not HEX40.fullmatch(receipt_sha)):
+                    raise ValueError("RESULT_RECEIPT_REQUIRED")
+                receipt = checked_remote(f"{RESULTS}{job_id}.json", receipt_sha)
+                if (not isinstance(receipt, dict)
+                        or set(receipt) != {
+                            "schema", "jobId", "status", "documentUrl", "summary"
+                        } or receipt["schema"] != "BUREAU_RECEIPT_V1"
+                        or receipt["jobId"] != job_id
+                        or receipt["status"] != "REPORT_PUBLISHED"
+                        or not isinstance(receipt["summary"], str)
+                        or len(receipt["summary"]) > 1000
+                        or not isinstance(receipt["documentUrl"], str)
+                        or not (receipt["documentUrl"].startswith("https://docs.google.com/document/")
+                                or receipt["documentUrl"].startswith(
+                                    "https://github.com/dvikt33-ux/"))):
+                    raise ValueError("RECEIPT_NOT_VERIFIED")
+                next_status = "COMPLETE_REPORTED"
+            else:
+                raise ValueError("ACK_STAGE_OUT_OF_ORDER")
+            self.db.execute("BEGIN IMMEDIATE")
+            try:
+                journal(self.db, job_id, next_status, proof)
+                self.db.execute("UPDATE jobs SET proof=? WHERE id=?",
+                                (proof, job_id))
+                if stage == "RESULT_PUBLISHED":
+                    self._chain_receipt(job_id, event_type, target, receipt,
+                                        receipt_sha)
+                self.db.execute("COMMIT")
+            except Exception:
+                self.db.execute("ROLLBACK")
+                raise
+            return next_status
+
+    def _chain_receipt(self, job_id, event_type, target, receipt, receipt_sha):
+        """Только локально одобренные маршруты. Не утверждает, что документ проверен."""
+        next_type = NEXT_EVENT.get(event_type)
+        route = self.config["routes"].get(target, {})
+        next_target = route.get(next_type) if next_type else None
+        if not next_target:
+            return
+        next_id = "r" + hashlib.sha256(
+            (job_id + "|" + next_type + "|" + next_target).encode()
+        ).hexdigest()[:29]
+        instruction = (
+            "Проектное бюро. Этап: " + next_type +
+            ". Проверь результат предыдущего задания " + job_id +
+            ". Адрес опубликованного материала: " + receipt["documentUrl"] +
+            ". Краткое содержание по заявлению исполнителя: " +
+            receipt["summary"] +
+            ". Не принимай публикацию за независимую проверку. "
+            "Проведи свою проверку, сохрани заключение и опубликуй новую "
+            "квитанцию BUREAU_RECEIPT_V1 с идентификатором " + next_id + "."
+        )
+        created = now_iso()
+        expiry = datetime.fromisoformat(created).timestamp() + 3 * 86400
+        expires = datetime.fromtimestamp(expiry, tz=timezone.utc).isoformat()
+        self.db.execute("""INSERT OR IGNORE INTO jobs
+            (id,target,event_type,action,blob_sha,task,parent,created,expires,status,changed)
+            VALUES(?,?,?,?,?,?,?,?,?,'QUEUED',?)""",
+            (next_id, next_target, next_type, "DELIVER_TASK", receipt_sha,
+             json.dumps({"schema": "BUREAU_TASK_V1", "jobId": next_id,
+                         "instruction": instruction}, ensure_ascii=False),
+             job_id, created, expires, now_iso()))
+        if self.db.execute("SELECT changes()").fetchone()[0]:
+            journal(self.db, next_id, "QUEUED", "DERIVED_FROM_RECEIPT:" + job_id)
+
+    def recover(self, job_id, reason):
+        """Ручная отмена после аварии; неизвестную отправку никогда не повторяем."""
+        if not isinstance(reason, str) or not 8 <= len(reason) <= 500:
+            raise ValueError("RECONCILIATION_EVIDENCE_REQUIRED")
+        with self.lock:
+            row = self.db.execute("SELECT status FROM jobs WHERE id=?",
+                                  (job_id,)).fetchone()
+            if not row or row[0] not in ACTIVE_CHAT:
+                raise ValueError("JOB_NOT_IN_UNKNOWN_STATE")
+            journal(self.db, job_id, "CANCELLED_AFTER_REVIEW", reason)
+
+    def enable_apa(self):
+        if not self.config["apaEnabled"]:
+            return "APA_DISABLED_BY_LOCAL_CONFIG"
+        path = Path(self.config["apaBridgePath"])
+        if (not path.is_file()
+                or hashlib.sha256(path.read_bytes()).hexdigest()
+                != self.config["apaBridgeSha256"]):
+            raise ValueError("APA_BRIDGE_CODE_NOT_PINNED")
+        spec = importlib.util.spec_from_file_location(
+            "installed_apa_ac29_job_bridge", path
+        )
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        module.STATE.mkdir(parents=True, exist_ok=True)
+        # Штатный lock PR #139 гарантирует отказ, если прежний worker уже жив.
+        self.bridge_lock = module.acquire_singleton()
+        self.apa = module
+        return "APA_EXISTING_WORKER_LOCK_ACQUIRED"
+
+    def scan_apa(self):
+        if self.apa:
+            return self.apa.poll_once()
+        return 0
+
+    def statuses(self):
+        with self.lock:
+            return [dict(id=r[0], target=r[1], event=r[2], state=r[3])
+                    for r in self.db.execute(
+                        "SELECT id,target,event_type,status FROM jobs ORDER BY created,id"
+                    )]
+
+
+def handler_for(coordinator):
+    class Handler(BaseHTTPRequestHandler):
+        def _reply(self, code, obj):
+            content = json.dumps(obj, ensure_ascii=False).encode()
+            self.send_response(code)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Length", str(len(content)))
+            self.send_header("Cache-Control", "no-store")
+            self.end_headers()
+            self.wfile.write(content)
+
+        def do_GET(self):
+            parsed = urlsplit(self.path)
+            if parsed.path != "/task":
+                return self._reply(404, {"error": "NOT_FOUND"})
+            qs = parse_qs(parsed.query)
+            try:
+                return self._reply(200, coordinator.task_for(
+                    qs.get("jobId", [""])[0], qs.get("token", [""])[0]))
+            except ValueError:
+                return self._reply(403, {"error": "ACCESS_DENIED"})
+
+        def do_POST(self):
+            if urlsplit(self.path).path != "/ack":
+                return self._reply(404, {"error": "NOT_FOUND"})
+            try:
+                n = int(self.headers.get("Content-Length", "0"))
+                if not 0 < n <= 8192:
+                    return self._reply(413, {"error": "PAYLOAD_SIZE"})
+                body = json.loads(self.rfile.read(n))
+                if not isinstance(body, dict) or not set(body).issubset({
+                    "jobId", "token", "stage", "proof", "receiptSha"
+                }) or not {"jobId", "token", "stage", "proof"}.issubset(body):
+                    raise ValueError("ACK_ENVELOPE_INVALID")
+                status = coordinator.ack(
+                    body["jobId"], body["token"], body["stage"], body["proof"],
+                    body.get("receiptSha"))
+                return self._reply(200, {"status": status})
+            except (ValueError, TypeError, KeyError):
+                return self._reply(409, {"error": "ACK_NOT_ACCEPTED"})
+
+        def log_message(self, format, *args):
+            return  # Never log URL query strings containing ephemeral token.
+
+    return Handler
+
+
+def main():
+    p = argparse.ArgumentParser()
+    p.add_argument("--config", required=True)
+    p.add_argument("--db", required=True)
+    p.add_argument("command", choices=("run", "scan", "status", "cancel"))
+    p.add_argument("--job-id")
+    p.add_argument("--reason")
+    a = p.parse_args()
+    config = config_load(a.config)
+    c = Coordinator(config, open_db(a.db))
+    if a.command == "status":
+        print(json.dumps(c.statuses(), ensure_ascii=False, indent=2))
+        return
+    if a.command == "cancel":
+        c.recover(a.job_id, a.reason)
+        print("CANCELLED_AFTER_REVIEW", a.job_id)
+        return
+    c.enable_apa()   # fails closed if the previous APA receiver is still active
+    if a.command == "scan":
+        print("BUREAU_NEW", c.scan(), "APA_JOBS", c.scan_apa())
+        return
+    server = ThreadingHTTPServer(
+        ("127.0.0.1", config["callbackPort"]), handler_for(c)
+    )
+    server.daemon_threads = True
+    worker = threading.Thread(target=server.serve_forever, daemon=True)
+    worker.start()
+    print("BUREAU_UNIFIED_READY", "127.0.0.1", config["callbackPort"],
+          "APA_ENABLED", c.apa is not None, flush=True)
+    try:
+        while True:
+            try:
+                c.scan()
+                c.scan_apa()
+                print(c.launch_one(), flush=True)
+            except Exception as exc:
+                print("BUREAU_SCAN_BLOCKED", type(exc).__name__,
+                      str(exc)[:300], flush=True)
+            time.sleep(config["pollSeconds"])
+    finally:
+        server.shutdown()
+        server.server_close()
+        if c.bridge_lock:
+            c.bridge_lock.close()
+        c.db.close()
+
+
+if __name__ == "__main__":
+    main()
