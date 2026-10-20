@@ -252,6 +252,16 @@ def build(g, f, b, routes, *, master=None, source=None, option_file=None):
         },
         "hypothetical_nodes": guessed_nodes,
         "hypothetical_edges": guessed_edges,
+        "composed_graph": {
+            "nodes": base_nodes + guessed_nodes,
+            "edges": base_edges + guessed_edges,
+            "proven_index_ids": sorted(original_ids),
+            "hypothetical_node_ids": sorted(x["id"] for x in guessed_nodes),
+            "hypothetical_edge_ids": sorted(x["id"] for x in guessed_edges),
+            "graph_unity_does_not_mean_spatial_connectivity": True,
+            "traversable_evidence_must_filter_layer": "EXPLICIT_ACCESS",
+            "all_hypothetical_edges_have_connects_proven_components_false": True
+        },
         "merged_visualization_node_count": len(base_nodes) + len(guessed_nodes),
         "merged_visualization_relation_count": len(base_edges) + len(guessed_edges),
         "unknown_transits": unknown_transits,
