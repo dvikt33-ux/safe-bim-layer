@@ -199,6 +199,21 @@
       "proves_xy": false,
       "proves_z_m": false,
       "creates_global_level": false
+    },
+    {
+      "id": "S06-014",
+      "from": "M-L3-LOG-001",
+      "to": "M-L3-CG-001",
+      "relation": "CARGO_LOADER_CORRIDOR_BRANCHES_TOWARD_HANGAR_ZONE",
+      "source_ids": [
+        "P-200"
+      ],
+      "explanation": "Белый коридор от внутреннего круга расширяется на развилке для погрузчиков; справа находится ангарная/шлюзовая группа Верхнего. Документирована топологическая связь сектора с коридором, не непосредственный проём и не тождество всей группы одному ангару.",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
     }
   ],
   "deferred_hypotheses": [
