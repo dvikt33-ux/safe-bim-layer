@@ -1,0 +1,46 @@
+{
+  "schema": "APA-MOAG-QUALITATIVE-VEHICLE-CLEARANCE-R06/0.1",
+  "status": "SOURCE_QUALITATIVE_NO_METRIC_DIMENSIONS",
+  "reviewed_source": {
+    "page_id": "B2-015",
+    "url": "https://loveread.ec/read_book.php?id=53370&p=15",
+    "evidence_kind": "DIRECT_NARRATIVE_ACTION",
+    "integrated_into_main_v2_observation_ledger": false
+  },
+  "constraints": [
+    {
+      "id": "CLR06-001",
+      "route_domain": "LOWER_HANGAR_INTERCONNECTION",
+      "architectural_entity_id": "MOAG-G-0017",
+      "vehicle_size_variable": "SMALL_COMBAT_CRAFT_ACTUAL_VARIANT_UNIDENTIFIED",
+      "relation": "PASSAGE_WIDTH_GREATER_OR_EQUAL_CRAFT_EFFECTIVE_WIDTH",
+      "proof": "A small craft flew through the corridor connecting hangars and barely fit",
+      "minimum_clearance_m": null,
+      "upper_clearance_m": null,
+      "axis_orientation": null,
+      "station": "MOAG",
+      "scenario_constraint": true
+    },
+    {
+      "id": "CLR06-002",
+      "route_domain": "LOWER_HANGAR_ENTRY",
+      "architectural_entity_id": "M-L1-FH-001",
+      "vehicle_size_variable": "SMALL_COMBAT_CRAFT_ACTUAL_VARIANT_UNIDENTIFIED",
+      "relation": "OPERATIVE_HANGAR_ENTRY_CLEAR_WIDTH_GREATER_OR_EQUAL_CRAFT_WIDTH",
+      "proof": "The craft passed through the opened working-hangar entrance from corridor into the hangar",
+      "minimum_clearance_m": null,
+      "upper_clearance_m": null,
+      "axis_orientation": null,
+      "station": "MOAG",
+      "scenario_constraint": true
+    }
+  ],
+  "avoid_false_inferences": [
+    "No exact diameter, dimension, minimum bend radius or turning circle is measured",
+    "The moved craft may be from a further hangar, not identical to indexed vehicle V-BOAT-L1-001",
+    "Corridor can pass a craft but is not proven suitable for a cargo cruiser",
+    "The route is not proof of physical direct door between the two first indexed hangars"
+  ],
+  "geometry_ready": false,
+  "archicad_write": false
+}
