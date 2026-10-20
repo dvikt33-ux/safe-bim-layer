@@ -405,6 +405,19 @@ class UnifiedServiceTests(unittest.TestCase):
             "SELECT status FROM jobs WHERE id='quick-ack-021'").fetchone()[0],
             "WAIT_SUBMIT")
 
+    def test_opera_exception_after_ack_keeps_confirmed_state(self):
+        self.enqueue("quick-ack-102")
+        def opener(exe, url):
+            self.c.ack("quick-ack-102", self.token("quick-ack-102"),
+                       "TAB_SELECTED", "Existing tab selected")
+            raise OSError("Opera returned after tab was selected")
+        self.c.opener = opener
+        self.assertEqual(self.launch(), "WAIT_SUBMIT")
+        self.assertEqual(self.db.execute(
+            "SELECT status FROM jobs WHERE id='quick-ack-102'"
+        ).fetchone()[0], "WAIT_SUBMIT")
+        self.assertEqual(self.c.launch_one(), "NO_ELIGIBLE_WORK")
+
     def test_remote_stage_spoofing_rejected_before_fetch(self):
         event = globals()["event"]("progress-022", "D-03", "REPORT_READY")
         with patch.object(service, "checked_remote") as fetch:
