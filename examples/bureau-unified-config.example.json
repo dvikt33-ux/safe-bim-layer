@@ -1,0 +1,121 @@
+{
+  "operaExe": "C:\\Program Files\\Opera\\launcher.exe",
+  "extensionId": "infppggnoaenmfagbfknfkancpbljcca",
+  "targets": {
+    "D-01": {
+      "workflowId": "REPLACE_WORKFLOW_EMPLOYEE_01"
+    },
+    "DIR-01": {
+      "workflowId": "REPLACE_WORKFLOW_DIRECTOR_01"
+    },
+    "D-02": {
+      "workflowId": "REPLACE_WORKFLOW_EMPLOYEE_02"
+    },
+    "DIR-02": {
+      "workflowId": "REPLACE_WORKFLOW_DIRECTOR_02"
+    },
+    "D-03": {
+      "workflowId": "REPLACE_WORKFLOW_EMPLOYEE_03"
+    },
+    "DIR-03": {
+      "workflowId": "REPLACE_WORKFLOW_DIRECTOR_03"
+    },
+    "D-04": {
+      "workflowId": "REPLACE_WORKFLOW_EMPLOYEE_04"
+    },
+    "DIR-04": {
+      "workflowId": "REPLACE_WORKFLOW_DIRECTOR_04"
+    },
+    "D-05": {
+      "workflowId": "REPLACE_WORKFLOW_EMPLOYEE_05"
+    },
+    "DIR-05": {
+      "workflowId": "REPLACE_WORKFLOW_DIRECTOR_05"
+    },
+    "D-06": {
+      "workflowId": "REPLACE_WORKFLOW_EMPLOYEE_06"
+    },
+    "DIR-06": {
+      "workflowId": "REPLACE_WORKFLOW_DIRECTOR_06"
+    },
+    "D-07": {
+      "workflowId": "REPLACE_WORKFLOW_EMPLOYEE_07"
+    },
+    "DIR-07": {
+      "workflowId": "REPLACE_WORKFLOW_DIRECTOR_07"
+    },
+    "D-08": {
+      "workflowId": "REPLACE_WORKFLOW_EMPLOYEE_08"
+    },
+    "DIR-08": {
+      "workflowId": "REPLACE_WORKFLOW_DIRECTOR_08"
+    },
+    "SECRETARIAT": {
+      "workflowId": "REPLACE_WORKFLOW_SECRETARIAT"
+    },
+    "HQ": {
+      "workflowId": "REPLACE_WORKFLOW_HEADQUARTERS"
+    },
+    "APA-CONTROL": {
+      "workflowId": "REPLACE_WORKFLOW_APA_CONTROL"
+    }
+  },
+  "routes": {
+    "D-01": {
+      "REPORT_READY": "DIR-01"
+    },
+    "DIR-01": {
+      "DEPARTMENT_REPORT_READY": "SECRETARIAT"
+    },
+    "D-02": {
+      "REPORT_READY": "DIR-02"
+    },
+    "DIR-02": {
+      "DEPARTMENT_REPORT_READY": "SECRETARIAT"
+    },
+    "D-03": {
+      "REPORT_READY": "DIR-03"
+    },
+    "DIR-03": {
+      "DEPARTMENT_REPORT_READY": "SECRETARIAT"
+    },
+    "D-04": {
+      "REPORT_READY": "DIR-04"
+    },
+    "DIR-04": {
+      "DEPARTMENT_REPORT_READY": "SECRETARIAT"
+    },
+    "D-05": {
+      "REPORT_READY": "DIR-05"
+    },
+    "DIR-05": {
+      "DEPARTMENT_REPORT_READY": "SECRETARIAT"
+    },
+    "D-06": {
+      "REPORT_READY": "DIR-06"
+    },
+    "DIR-06": {
+      "DEPARTMENT_REPORT_READY": "SECRETARIAT"
+    },
+    "D-07": {
+      "REPORT_READY": "DIR-07"
+    },
+    "DIR-07": {
+      "DEPARTMENT_REPORT_READY": "SECRETARIAT"
+    },
+    "D-08": {
+      "REPORT_READY": "DIR-08"
+    },
+    "DIR-08": {
+      "DEPARTMENT_REPORT_READY": "SECRETARIAT"
+    },
+    "SECRETARIAT": {
+      "HQ_BRIEF_READY": "HQ"
+    }
+  },
+  "pollSeconds": 5,
+  "callbackPort": 18765,
+  "apaEnabled": true,
+  "apaBridgePath": "C:\\LocalAI\\APA_AC29_Stable\\controllers\\apa_ac29_autonomous_job_bridge.py",
+  "apaBridgeSha256": "AUTO_PIN_INSTALLED_BRIDGE"
+}
