@@ -680,7 +680,9 @@ def run_locked(c, a, config):
                           str(exc)[:300], flush=True)
                 next_apa_poll = time.monotonic() + 30
             try:
-                print(c.launch_one(), flush=True)
+                launch_status = c.launch_one()
+                if launch_status not in ("NO_ELIGIBLE_WORK", "DISPATCH_DISARMED"):
+                    print(launch_status, flush=True)
             except Exception as exc:
                 print("BUREAU_DISPATCH_BLOCKED", type(exc).__name__,
                       str(exc)[:300], flush=True)
