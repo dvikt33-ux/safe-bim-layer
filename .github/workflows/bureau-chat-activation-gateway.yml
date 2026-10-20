@@ -5,6 +5,8 @@ on:
     paths:
       - 'scripts/bureau_chat_activation_gateway.py'
       - 'scripts/bureau_unified_service.py'
+      - 'scripts/install_bureau_unified_service.py'
+      - 'examples/bureau-unified-config.example.json'
       - 'tests/test_bureau_chat_activation_gateway.py'
       - 'tests/test_bureau_unified_service.py'
       - '.github/workflows/bureau-chat-activation-gateway.yml'
@@ -23,7 +25,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Compile dispatcher
-        run: python -m py_compile scripts/bureau_chat_activation_gateway.py scripts/bureau_unified_service.py tests/test_bureau_chat_activation_gateway.py tests/test_bureau_unified_service.py
+        run: python -m py_compile scripts/bureau_chat_activation_gateway.py scripts/bureau_unified_service.py scripts/install_bureau_unified_service.py tests/test_bureau_chat_activation_gateway.py tests/test_bureau_unified_service.py
       - name: Test queue and launch guards
         run: python -m unittest discover -s tests -p 'test_bureau_chat_activation_gateway.py' -v
       - name: Test unified multi-chat runtime and stage guards
