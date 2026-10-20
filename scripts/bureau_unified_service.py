@@ -194,6 +194,14 @@ def validate_event(event, filename, config):
     if ((datetime.fromisoformat(expires) - datetime.fromisoformat(created))
             .total_seconds() > 7 * 86400):
         raise ValueError("EVENT_TTL_TOO_LONG")
+    # Reject fabricated progression before making any further GitHub read.
+    parent = event["parentJobId"]
+    if event["eventType"] not in ("ASSIGN_TASK", "ARENA_RESULT_READY"):
+        raise ValueError("EXTERNAL_STAGE_BYPASS_FORBIDDEN")
+    if parent is not None:
+        raise ValueError("EXTERNAL_PARENT_BYPASS_FORBIDDEN")
+    if event["eventType"] == "ARENA_RESULT_READY" and event["targetChat"] != "APA-CONTROL":
+        raise ValueError("ARENA_TARGET_NOT_AUTHORIZED")
     ref = event["taskRef"]
     if (not isinstance(ref, dict) or set(ref) != {"path", "blobSha"}
             or not isinstance(ref["path"], str)
@@ -203,6 +211,8 @@ def validate_event(event, filename, config):
             or not isinstance(ref["blobSha"], str)
             or not HEX40.fullmatch(ref["blobSha"])):
         raise ValueError("TASK_NOT_PINNED")
+    if ref["path"] != TASKS + filename + ".json":
+        raise ValueError("TASK_PATH_MUST_MATCH_JOB_ID")
     task = checked_remote(ref["path"], ref["blobSha"])
     if (not isinstance(task, dict)
             or set(task) != {"schema", "jobId", "instruction"}
@@ -211,16 +221,7 @@ def validate_event(event, filename, config):
             or not isinstance(task["instruction"], str)
             or not 10 <= len(task["instruction"]) <= 6000):
         raise ValueError("TASK_CONTENT_INVALID")
-    parent = event["parentJobId"]
-    # Follow-up events may only be generated locally after a verified receipt.
-    if event["eventType"] not in ("ASSIGN_TASK", "ARENA_RESULT_READY"):
-        raise ValueError("EXTERNAL_STAGE_BYPASS_FORBIDDEN")
-    if parent is not None:
-        raise ValueError("EXTERNAL_PARENT_BYPASS_FORBIDDEN")
-    if event["eventType"] == "ARENA_RESULT_READY" and event["targetChat"] != "APA-CONTROL":
-        raise ValueError("ARENA_TARGET_NOT_AUTHORIZED")
-    if ref["path"] != TASKS + filename + ".json":
-        raise ValueError("TASK_PATH_MUST_MATCH_JOB_ID")
+
     return {"id": filename, "target": event["targetChat"],
             "event_type": event["eventType"], "action": "DELIVER_TASK",
             "task": task, "parent": parent, "created": created, "expires": expires}
