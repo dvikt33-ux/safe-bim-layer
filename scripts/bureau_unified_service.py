@@ -88,7 +88,7 @@ def config_load(filename):
                 or not legacy.WORKFLOW_ID.fullmatch(target["workflowId"])
                 or not isinstance(target["chatUrl"], str)
                 or not re.fullmatch(
-                    r"https://chatgpt\.com/c/[0-9a-f-]{36}", target["chatUrl"])):
+                    r"https://chatgpt\.com/(?:c|g/g-p-[0-9a-f]{32}(?:-[a-z0-9-]+)?/c)/[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}", target["chatUrl"])):
             raise ValueError("TARGET_NOT_VALIDATED")
     if (not isinstance(config["routes"], dict)
             or not all(k in config["targets"] and isinstance(value, dict)
