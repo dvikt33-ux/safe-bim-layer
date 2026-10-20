@@ -84,8 +84,11 @@ def config_load(filename):
         raise ValueError("INVALID_CALLBACK_PORT")
     for key, target in config["targets"].items():
         if (not TARGET.fullmatch(key)
-                or set(target) != {"workflowId"}
-                or not legacy.WORKFLOW_ID.fullmatch(target["workflowId"])):
+                or set(target) != {"workflowId", "chatUrl"}
+                or not legacy.WORKFLOW_ID.fullmatch(target["workflowId"])
+                or not isinstance(target["chatUrl"], str)
+                or not re.fullmatch(
+                    r"https://chatgpt\.com/c/[0-9a-f-]{36}", target["chatUrl"])):
             raise ValueError("TARGET_NOT_VALIDATED")
     if (not isinstance(config["routes"], dict)
             or not all(k in config["targets"] and isinstance(value, dict)
@@ -339,6 +342,7 @@ class Coordinator:
                     or not hmac.compare_digest(job[4] or "", nonce)):
                 raise ValueError("TASK_ACCESS_DENIED")
             return {"jobId": job_id, "targetChat": job[0],
+                    "chatUrl": self.config["targets"][job[0]]["chatUrl"],
                     "action": job[1],
                     "instruction": json.loads(job[2]).get("instruction", "")}
 
