@@ -358,7 +358,11 @@ class Coordinator:
                 journal(self.db, job_id, "BLOCKED_UI",
                         "OPERA_INVOCATION_ERROR:" + type(err).__name__)
             return "BLOCKED_UI"
-        return "WAIT_TAB:" + job_id
+        # An immediate Automa ACK can already have advanced the state.
+        with self.lock:
+            state = self.db.execute("SELECT status FROM jobs WHERE id=?",
+                                    (job_id,)).fetchone()[0]
+        return state + ":" + job_id
 
     def task_for(self, job_id, nonce):
         with self.lock:
