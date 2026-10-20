@@ -17,27 +17,35 @@ def inspect_factory(scripts,root):
 
 def install(root,source,stage):
     root,source,stage=[Path(p).resolve() for p in (root,source,stage)]
-    old=(root/FILES[0]).read_bytes()
-    if sha(old)!=PIN or (root/FILES[1]).exists() or stage.exists() or root==source or not stage.parent.is_dir():
+    old=(root/FILES[0]).read_bytes();old_files={FILES[0]:old}
+    upgrade=(sha(old)=='dda2b87d7dbab7a6d53f3e40bd2296812e08b0998084c2b4dc53bc1404a878bf' and
+             (root/FILES[1]).is_file() and sha((root/FILES[1]).read_bytes())=='4e9b866860755f5fee63ecc2a1682a84f646158c5a9a0260a3f9c6fa0d9ea064')
+    initial=sha(old)==PIN and not (root/FILES[1]).exists()
+    if not (initial or upgrade) or stage.exists() or root==source or not stage.parent.is_dir():
         raise ValueError('DXF_INSTALL_EXACT_CURRENT_FACTORY_AND_NEW_STAGE_REQUIRED')
+    if upgrade:old_files[FILES[1]]=(root/FILES[1]).read_bytes()
     before=inspect_factory(root/'scripts',root)
     stage.mkdir();(stage/'scripts').mkdir()
     new={n:(source/n).read_bytes() for n in FILES}
     for n,data in new.items():compile(data,n,'exec');(stage/n).write_bytes(data)
     preview=inspect_factory(stage/'scripts',root)
-    if before['contracts']!={k:preview['contracts'][k] for k in before['contracts']} or len(preview['contracts'])!=len(before['contracts'])+1:
+    updated={'AddOn.APADXFPreflight.DXFSourcePreflight'} if upgrade else set()
+    checked={k:v for k,v in before['contracts'].items() if k not in updated}
+    if checked!={k:preview['contracts'][k] for k in checked} or len(preview['contracts'])!=len(before['contracts'])+int(initial):
         raise ValueError('DXF_INSTALL_PREVIOUS_CONTRACT_DRIFT')
     backup=root/'runtime-code-backups'/('dxf-preflight-'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ'))
-    backup.mkdir();(backup/'apa_ac29_installed_factory.py').write_bytes(old)
+    backup.mkdir()
+    for n,data in old_files.items():(backup/Path(n).name).write_bytes(data)
     for n,data in new.items():atomic(root/n,data)
     try:
         after=inspect_factory(root/'scripts',root)
         if after!=preview or any((root/n).read_bytes()!=data for n,data in new.items()):raise ValueError('DXF_INSTALL_READBACK_DRIFT')
     except BaseException:
-        atomic(root/FILES[0],old)
+        for n,data in old_files.items():atomic(root/n,data)
         raise
-    result=dict(status='INSTALLED_READY_DXF_SOURCE_PREFLIGHT',files={n:dict(beforeSHA256=sha(old) if n==FILES[0] else None,afterSHA256=sha(data)) for n,data in new.items()},
-        originalContractCount=len(before['contracts']),allPreviousContractsPreserved=True,inventory=after['inventory'],backupRetainedLocally=True,
+    result=dict(status='INSTALLED_READY_DXF_SOURCE_PREFLIGHT',files={n:dict(beforeSHA256=sha(old_files[n]) if n in old_files else None,afterSHA256=sha(data)) for n,data in new.items()},
+        originalContractCount=len(before['contracts']),allPreviouslyAcceptedContractsPreserved=True,updatedPendingContractIds=sorted(updated),
+        allPreviousContractsPreserved=not updated,inventory=after['inventory'],backupRetainedLocally=True,
         dependenciesReinstalled=False,nativeCalls=0,modelWrites=0,stageValidatedBeforeApply=True)
     (backup/'receipt.json').write_text(json.dumps(result,indent=2)+'\n',encoding='utf8')
     return result

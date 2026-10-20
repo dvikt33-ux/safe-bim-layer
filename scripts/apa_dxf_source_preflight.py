@@ -78,11 +78,21 @@ def analyze_file(source):
     source=Path(source).resolve(strict=True)
     need(source.is_file() and source.suffix.lower()=='.dxf' and source.stat().st_size<=MAX_BYTES,'DXF_PREFLIGHT_BOUNDED_DXF_REQUIRED')
     before=digest(source);mode='STRICT'
-    try:doc=ezdxf.readfile(source);auditor=doc.audit()
+    try:doc=ezdxf.readfile(source)
     except ezdxf.DXFStructureError:
         from ezdxf import recover
         doc,auditor=recover.readfile(source);mode='RECOVERED_IN_MEMORY_REVIEW_REQUIRED'
-    result=analyze(doc,auditor,source.parent,mode)
+        result=analyze(doc,auditor,source.parent,mode)
+        result['inventoryPhase']='RECOVERED_IN_MEMORY_DOCUMENT'
+    else:
+        # Audit may fix/delete entities in memory. Count the parsed source
+        # BEFORE those changes, then attach the auditor's findings.
+        from types import SimpleNamespace
+        result=analyze(doc,SimpleNamespace(errors=[],fixes=[]),source.parent,mode)
+        auditor=doc.audit()
+        result.update(auditErrors=len(auditor.errors),auditInMemoryFixes=len(auditor.fixes),
+            inventoryPhase='PARSED_SOURCE_BEFORE_AUDIT',
+            readyForFurtherSourceAnalysis=result['readyForFurtherSourceAnalysis'] and not auditor.errors and not auditor.fixes)
     need(digest(source)==before,'DXF_PREFLIGHT_SOURCE_CHANGED')
     return dict(schema=SCHEMA,source=dict(path=str(source),sha256=before,bytes=source.stat().st_size),
         result=result,sourceUnchanged=True,nativeCalls=0,nativeWrites=0,modelWrites=0,dependencyVersion='ezdxf1.4.5')
@@ -101,7 +111,8 @@ def call(a,output):
 
 def register(router):
     need(CMD not in router.catalog['commands'],'DXF_PREFLIGHT_ALREADY_REGISTERED')
-    contract=dict(version='1',description='Source DXF recover/audit, local XREF hashes, bounded MINSERT counts and declared units; no model writes',
+    contract=dict(version='1',implementationSHA256=hashlib.sha256(Path(__file__).read_bytes().replace(b'\r\n',b'\n')).hexdigest(),
+        description='Source DXF recover/audit, local XREF hashes, bounded MINSERT counts and declared units; no model writes',
         parameters=dict(type='object',properties={k:dict(type='string',minLength=1) for k in ('a','output')},required=['a','output'],additionalProperties=False),
         returns=dict(type='object',required=['schema','source','result','sourceUnchanged','nativeCalls','modelWrites','artifact']))
     router.add_local_provider('APADXFPreflight',{'DXFSourcePreflight':contract},{'DXFSourcePreflight':call},SCHEMA,{'DXFSourcePreflight':[]})

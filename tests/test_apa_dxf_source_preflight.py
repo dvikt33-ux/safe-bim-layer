@@ -26,6 +26,7 @@ class DrawingTests(unittest.TestCase):
         self.assertEqual(v['xrefs'][0]['sha256'],hashlib.sha256(target.read_bytes()).hexdigest())
         self.assertEqual(D.digest(source),before);self.assertEqual(r['nativeCalls'],0)
         self.assertFalse(v['automaticBIMWriteAllowed'])
+        self.assertEqual(v['inventoryPhase'],'PARSED_SOURCE_BEFORE_AUDIT')
     def test_missing_xref_and_unitless_are_not_ready(self):
         doc=self.drawing();doc.units=0;source=self.root/'source.dxf';doc.saveas(source)
         v=D.analyze_file(source)['result'];self.assertFalse(v['readyForFurtherSourceAnalysis'])
@@ -44,6 +45,16 @@ class DrawingTests(unittest.TestCase):
     def test_recovered_document_or_in_memory_fixes_never_become_ready(self):
         doc=self.drawing(False);v=D.analyze(doc,doc.audit(),self.root,'RECOVERED_IN_MEMORY_REVIEW_REQUIRED')
         self.assertFalse(v['readyForFurtherSourceAnalysis']);self.assertFalse(v['repairedDrawingSaved'])
+    def test_audit_cannot_silently_change_reported_source_inventory(self):
+        from unittest.mock import patch
+        doc=self.drawing(False);source=self.root/'source.dxf';doc.saveas(source)
+        original_audit=type(doc).audit
+        def deleting_audit(current):
+            for e in list(current.modelspace().query('INSERT')):current.modelspace().delete_entity(e)
+            return original_audit(current)
+        with patch.object(type(doc),'audit',deleting_audit):r=D.analyze_file(source)
+        self.assertEqual(r['result']['inserts']['insertRecords'],1)
+        self.assertEqual(r['result']['inserts']['nominalMatrixSlots'],6)
 
 class RegistryTests(unittest.TestCase):
     def test_existing_router_registers_code_owned_read_only_handler(self):

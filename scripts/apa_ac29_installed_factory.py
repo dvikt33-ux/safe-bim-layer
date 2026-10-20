@@ -31,7 +31,7 @@ def native_command_router(schema_path=None,official_commands=None,include_functi
     attach(router)
     import apa_dxf_source_preflight as dxf
     data=Path(dxf.__file__).read_bytes().replace(b'\r\n',b'\n')
-    if hashlib.sha256(data).hexdigest()!='4e9b866860755f5fee63ecc2a1682a84f646158c5a9a0260a3f9c6fa0d9ea064':
+    if hashlib.sha256(data).hexdigest()!='8f8cca6e17c1d3032d61fdb8401678d2adbb71a1f986258ed5f94bf2c776fbc9':
         raise ValueError('INSTALLED_DXF_PREFLIGHT_SOURCE_DRIFT')
     dxf.register(router)
     return router
