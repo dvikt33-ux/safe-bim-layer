@@ -270,6 +270,16 @@ class EvidenceGraphR06Tests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "UNKNOWN_OR_DUPLICATE_ROUTE_CONTEXT_CORRECTION"):
             MOD.assemble(self.graph, self.fragments, self.routes, self.bounds,
                          route_corrections=corrections)
+        # Regression: removing a repair must fail rather than silently
+        # relink the p110 dispatch stairs to the p76 stair.
+        corrections = copy.deepcopy(
+            json.loads((BASE / "synthesis/route_context_corrections_r06.json")
+                       .read_text(encoding="utf-8")))
+        corrections["corrections"] = [r for r in corrections["corrections"]
+                                      if r["step_id"] != "RT024-G"]
+        with self.assertRaisesRegex(ValueError, "AMBIGUOUS_ROUTE_ALIAS_REQUIRES_CONTEXT"):
+            MOD.assemble(self.graph, self.fragments, self.routes, self.bounds,
+                         route_corrections=corrections)
 
     def test_context_proximity_and_inferred_review_never_fuse_spaces(self):
         by = {x["id"]: x for x in self.result["typed_evidence_edges"]}
