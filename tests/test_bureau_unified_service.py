@@ -44,6 +44,7 @@ class UnifiedServiceTests(unittest.TestCase):
             "extensionId": "a" * 32,
             "pollSeconds": 5, "callbackPort": 18765,
             "dispatchArmed": True,  # isolated simulated runtime only
+            "externalEntryTargets": ["D-03", "D-04"],
             "targets": {
                 "D-03": {"workflowId": "workflow_d03"},
                 "D-04": {"workflowId": "workflow_d04"},
@@ -227,6 +228,32 @@ class UnifiedServiceTests(unittest.TestCase):
         ev["targetChat"] = "D-99"
         with self.assertRaisesRegex(ValueError, "JOB_V2_NOT_AUTHORIZED"):
             service.validate_event(ev, ev["jobId"], self.config)
+
+    def test_external_assignment_targets_are_configured_not_hardcoded(self):
+        name = "SPECIALIST-09"
+        self.config["targets"][name] = {
+            "workflowId": "workflow_specialist09",
+            "chatUrl": "https://chatgpt.com/c/00000000-0000-0000-0000-000000000009",
+        }
+        ev = event("assign-specialist-009", name)
+        with patch.object(service, "checked_remote") as fetch:
+            with self.assertRaisesRegex(ValueError, "EXTERNAL_TARGET_NOT_ADMITTED"):
+                service.validate_event(ev, ev["jobId"], self.config)
+            fetch.assert_not_called()
+        self.config["externalEntryTargets"].append(name)
+        task = {"schema": "BUREAU_TASK_V1", "jobId": ev["jobId"],
+                "instruction": "Проведи исследование по поручению."}
+        with patch.object(service, "checked_remote", return_value=task):
+            self.assertEqual(service.validate_event(ev, ev["jobId"],
+                                                    self.config)["target"], name)
+
+    def test_external_entry_target_must_be_local_and_unique(self):
+        path = Path(self.tmp.name) / "entry-config.json"
+        for entries in (["D-03", "D-03"], ["NOT-REGISTERED"], "D-03"):
+            self.config["externalEntryTargets"] = entries
+            path.write_text(json.dumps(self.config), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "EXTERNAL_ENTRY_TARGETS_INVALID"):
+                service.config_load(path)
 
     def test_source_task_is_sha_pinned(self):
         ev = event("assign-002")

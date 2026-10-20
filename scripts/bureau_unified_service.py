@@ -92,9 +92,12 @@ def checked_remote(path, blob_sha):
 def config_load(filename):
     config = json.loads(Path(filename).read_text(encoding="utf-8"))
     config.setdefault("dispatchArmed", False)
+    # Existing private configs remain readable, but no new external assignment
+    # is admitted until its entry target is explicitly configured.
+    config.setdefault("externalEntryTargets", [])
     expected = {"operaExe", "extensionId", "targets", "routes", "pollSeconds",
                 "callbackPort", "apaEnabled", "apaBridgePath", "apaBridgeSha256",
-                "dispatchArmed"}
+                "dispatchArmed", "externalEntryTargets"}
     if set(config) != expected:
         raise ValueError("CONFIG_KEYS_INVALID")
     if (not legacy.EXTENSION_ID.fullmatch(config["extensionId"])
@@ -119,6 +122,12 @@ def config_load(filename):
                        and all(dest in config["targets"] for dest in value.values())
                        for k, value in config["routes"].items())):
         raise ValueError("ROUTES_NOT_IN_LOCAL_ALLOWLIST")
+    entry_targets = config["externalEntryTargets"]
+    if (not isinstance(entry_targets, list)
+            or any(not isinstance(name, str) or name not in config["targets"]
+                   for name in entry_targets)
+            or len(entry_targets) != len(set(entry_targets))):
+        raise ValueError("EXTERNAL_ENTRY_TARGETS_INVALID")
     if not isinstance(config["apaEnabled"], bool):
         raise ValueError("APA_FLAG_INVALID")
     if not isinstance(config["dispatchArmed"], bool):
@@ -213,8 +222,8 @@ def validate_event(event, filename, config):
         raise ValueError("EXTERNAL_STAGE_BYPASS_FORBIDDEN")
     if parent is not None:
         raise ValueError("EXTERNAL_PARENT_BYPASS_FORBIDDEN")
-    if not re.fullmatch(r"D-0[1-8]", event["targetChat"]):
-        raise ValueError("EXTERNAL_TARGET_NOT_EMPLOYEE")
+    if event["targetChat"] not in config.get("externalEntryTargets", ()):
+        raise ValueError("EXTERNAL_TARGET_NOT_ADMITTED")
     ref = event["taskRef"]
     if (not isinstance(ref, dict) or set(ref) != {"path", "blobSha"}
             or not isinstance(ref["path"], str)

@@ -129,6 +129,7 @@
       "HQ_BRIEF_READY": "HQ"
     }
   },
+  "externalEntryTargets": ["D-01", "D-02", "D-03", "D-04", "D-05", "D-06", "D-07", "D-08"],
   "pollSeconds": 5,
   "callbackPort": 18765,
   "apaEnabled": true,
