@@ -49,6 +49,22 @@ def project(graph, fragments, bounds, r06):
     source_r05 = {x["id"]: x for x in fragments["typed_edges"]}
     spatial_r06 = json.loads(assembly.BRIDGES.read_text(encoding="utf-8"))
     source_r06 = {x["id"]: x for x in spatial_r06["typed_edges"]}
+    clearance = json.loads(
+        (SYNTH / "qualitative_vehicle_clearance_r06.json").read_text(encoding="utf-8"))
+    if clearance.get("schema") != "APA-MOAG-QUALITATIVE-VEHICLE-CLEARANCE-R06/0.1":
+        raise ValueError("BAD_QUALITATIVE_CLEARANCE_SCHEMA")
+    reviewed_page = clearance["reviewed_source"]["page_id"]
+    pages = json.loads((BASE / "v2/pages/B2.json").read_text(encoding="utf-8"))
+    if (reviewed_page != "B2-015" or
+            pages["pages"][14]["status"] != "REVIEWED_FULL_PAGE" or
+            clearance["reviewed_source"]["url"] != pages["pages"][14]["url"]):
+        raise ValueError("UNREVIEWED_CLEARANCE_PAGE")
+    for condition in clearance["constraints"]:
+        if (condition["architectural_entity_id"] not in known or
+                condition["minimum_clearance_m"] is not None or
+                condition["upper_clearance_m"] is not None or
+                condition["station"] != "MOAG"):
+            raise ValueError("UNSOURCED_CLEARANCE_OR_PREMATURE_METRIC")
     typed, access = [], []
     for e in r06["typed_evidence_edges"]:
         kind, direct = "UNCLASSIFIED", False
@@ -230,6 +246,12 @@ def project(graph, fragments, bounds, r06):
             "geometry_proven": False
         },
         "interlevel_span_without_access": spans,
+        "source_qualitative_vehicle_clearance": {
+            "page_id": reviewed_page,
+            "inequalities": clearance["constraints"],
+            "unverified_metric_dimensions": True,
+            "exclusion_rules": clearance["avoid_false_inferences"]
+        },
         "local_upper_floor_double_count_review": local_overlap_reviews,
         "spatial_area_volume_profiles": area_profiles,
         "source_concept_to_refined_object_accounting_guards": candidate_crosswalks,
