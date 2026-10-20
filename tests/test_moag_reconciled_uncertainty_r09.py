@@ -51,6 +51,13 @@ class ReconciledR09(unittest.TestCase):
         self.assertTrue(all(
             set(x["joint_candidate_level_domain"]) <=
             set(x["union_of_boundary_level_domains"]) for x in gaps))
+        # A journey whose two described boundaries are on L2 might still
+        # temporarily pass another global level in an unobserved interval.
+        self.assertTrue(all(x["global_deck_domain_of_actual_intermediate_path"]
+                            == [1, 2, 3] and
+                            x["other_global_decks_cannot_be_ruled_out_as_detours"]
+                            and x["route_may_leave_and_return_to_same_level"]
+                            for x in gaps))
 
     def test_duplicate_candidates_are_crosswalks_not_double_links(self):
         result = self.result
@@ -89,6 +96,26 @@ class ReconciledR09(unittest.TestCase):
         invalid["edges"][0]["source_ids"] = ["FAKE-SOURCE"]
         with self.assertRaisesRegex(ValueError, "R08_PROVEN_GRAPHS_DIVERGED"):
             r09.build(self.g, self.f, self.b, self.r, left=left, right=invalid)
+
+    def test_secondary_virtual_interval_cannot_disappear_without_failure(self):
+        left = r09.r08a.build(self.g, self.f, self.b, self.r)
+        right = r09.r08b.build(self.g, self.f, self.b, self.r)
+        broken = copy.deepcopy(right)
+        del broken["nodes"][-1]
+        with self.assertRaisesRegex(
+                ValueError, "SECOND_R08_UNKNOWN_NODE_INVENTORY_DIVERGED"):
+            r09.build(self.g, self.f, self.b, self.r, left=left, right=broken)
+
+    def test_secondary_gap_endpoints_never_become_access(self):
+        left = r09.r08a.build(self.g, self.f, self.b, self.r)
+        right = r09.r08b.build(self.g, self.f, self.b, self.r)
+        broken = copy.deepcopy(right)
+        e = next(x for x in broken["edges"]
+                 if x["id"].startswith("R08-GAP:"))
+        e["proves_direct_access"] = True
+        with self.assertRaisesRegex(
+                ValueError, "SECOND_R08_GAP_EDGE_PROMOTED_OR_UNMATCHED"):
+            r09.build(self.g, self.f, self.b, self.r, left=left, right=broken)
 
     def test_inconsistent_secondary_gap_source_rejected(self):
         left = r09.r08a.build(self.g, self.f, self.b, self.r)
