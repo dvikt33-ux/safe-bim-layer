@@ -132,6 +132,27 @@ class MOAGHypothesisOverlay(unittest.TestCase):
         self.assertEqual(len(self.master["nodes"]), 575)
         self.assertEqual(len(self.master["edges"]), 761)
 
+    def test_what_if_preview_connects_only_selected_soft_variants(self):
+        baseline = overlay.preview_variant_selection(self.output, [])
+        self.assertEqual(baseline["conditional_physical_component_count"], 39)
+        self.assertEqual(baseline["verified_physical_component_count_still"], 39)
+        chosen = [x["mutually_alternative_conceptual_models"][0]
+                  for x in self.output["mutually_alternative_layout_groups"]]
+        scenario = overlay.preview_variant_selection(self.output, chosen)
+        self.assertLessEqual(
+            scenario["conditional_physical_component_count"], 39)
+        self.assertEqual(scenario["verified_physical_component_count_still"], 39)
+        self.assertEqual(len(scenario["hypothetical_link_effects"]), 8)
+        self.assertTrue(scenario["evidence_graph_unchanged"])
+        self.assertFalse(scenario["geometry_or_direct_access_approved"])
+        self.assertEqual(self.output["counts"]["proven_components_unchanged"], 39)
+        with self.assertRaisesRegex(
+                ValueError, "MULTIPLE_INCOMPATIBLE_HYPOTHESES_IN_ONE_GROUP"):
+            overlay.preview_variant_selection(
+                self.output, ["R08-H001", "R08-H002"])
+        with self.assertRaisesRegex(ValueError, "UNKNOWN_HYPOTHESIS_VARIANT"):
+            overlay.preview_variant_selection(self.output, ["H08-UNKNOWN-TRANSIT-01"])
+
     def test_disjoint_level_candidate_rejected(self):
         options = copy.deepcopy(overlay.read(overlay.OPTIONS))
         options["alternative_groups"][0]["options"][0]["to"] = "M-STA-L3-001"
