@@ -564,7 +564,7 @@ def handler_for(coordinator):
 
         def _local_host_only(self):
             return self.headers.get("Host", "") == (
-                "127.0.0.1:" + str(coordinator.config["callbackPort"]))
+                "127.0.0.1:" + str(self.server.server_address[1]))
 
         def do_GET(self):
             if not self._local_host_only():
