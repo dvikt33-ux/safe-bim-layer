@@ -63,6 +63,10 @@ jobs:
         run: |
           python tools/moag_topology/reconcile_uncertainty_r09.py --out moag-r09-reconciled-uncertainty.json
           python -c "import json; x=json.load(open('moag-r09-reconciled-uncertainty.json')); q=x['quantities']; assert q['total_vertices']==593 and q['total_typed_edges']==845 and q['cross_referenced_same_endpoint_candidates']==4 and q['unknown_route_gaps_reconciled']==18 and q['observed_transitions_still_without_direct_geometry']==306 and not x['gates']['archicad_write'] and not x['gates']['hypothesis_may_merge_evidence_components']; print('R09',q)"
+      - name: Produce source-page bridge review frontier R10 without spatial writes
+        run: |
+          python tools/moag_topology/review_frontiers_r10.py --out moag-r10-review-frontiers.json
+          python -c "import json; r=json.load(open('moag-r10-review-frontiers.json')); q=r['quantities']; assert q['fixed_isolates']==12 and q['candidate_options']==24 and q['narrative_gaps']==18 and q['witnessed_intervals']==306 and q['global_identity_questions']==5 and not any(r['gates'].values()); print('FRONTIERS_R10',q)"
       - name: Archive R06 evidence graphs without promoting them to geometry
         uses: actions/upload-artifact@v4
         with:
@@ -74,6 +78,7 @@ jobs:
             moag-r06-research-frontiers.json
             moag-r07-unified-evidence.json
             moag-r09-reconciled-uncertainty.json
+            moag-r10-review-frontiers.json
             moag-r08-hypothetical-overlay.json
             moag-r08-hypotheses.json
             moag-r08-what-if.json
