@@ -92,6 +92,78 @@ class UnifiedServiceTests(unittest.TestCase):
         ).fetchone()[0]
 
 
+    def test_private_github_receipt_auto_advances_chain_exactly_once(self):
+        self.enqueue("auto-receipt-103")
+        self.launch()
+        token = self.token("auto-receipt-103")
+        self.c.ack("auto-receipt-103", token, "TAB_SELECTED", "Selected")
+        self.c.ack("auto-receipt-103", token, "MESSAGE_SUBMITTED", "Sent")
+        listing = [{"name": "auto-receipt-103.json", "type": "file",
+                    "sha": "a" * 40}]
+        receipt = {"schema": "BUREAU_RECEIPT_V1", "jobId": "auto-receipt-103",
+                   "status": "REPORT_PUBLISHED",
+                   "documentUrl": "https://docs.google.com/document/d/realDoc123/edit",
+                   "summary": "Submitted for independent review"}
+        with patch.object(service.legacy, "gh_api", return_value=listing):
+            with patch.object(service, "checked_remote", return_value=receipt) as checked:
+                self.assertEqual(self.c.scan_receipts(), 1)
+                self.assertEqual(self.c.scan_receipts(), 0)
+        checked.assert_called_once()
+        self.assertEqual(self.db.execute(
+            "SELECT status,receipt_sha FROM jobs WHERE id='auto-receipt-103'"
+        ).fetchone(), ("COMPLETE_REPORTED", "a" * 40))
+        self.assertEqual(self.db.execute(
+            "SELECT COUNT(*) FROM jobs WHERE parent='auto-receipt-103'"
+        ).fetchone()[0], 1)
+
+    def test_invalid_receipt_quarantined_without_blocking_other_result(self):
+        for name in ("auto-bad-104", "auto-good-105"):
+            self.enqueue(name)
+            self.launch()
+            token = self.token(name)
+            self.c.ack(name, token, "TAB_SELECTED", "Selected")
+            self.c.ack(name, token, "MESSAGE_SUBMITTED", "Sent")
+        listing = [
+            {"name": "auto-bad-104.json", "type": "file", "sha": "b" * 40},
+            {"name": "auto-good-105.json", "type": "file", "sha": "c" * 40}]
+        def remote(path, sha):
+            job = path.split("/")[-1][:-5]
+            return {"schema": "BUREAU_RECEIPT_V1", "jobId": job,
+                    "status": "REPORT_PUBLISHED",
+                    "documentUrl": ("https://invalid.example/document" if
+                                    job == "auto-bad-104" else
+                                    "https://docs.google.com/document/d/realDoc123/edit"),
+                    "summary": "Review needed"}
+        with patch.object(service.legacy, "gh_api", return_value=listing):
+            with patch.object(service, "checked_remote", side_effect=remote) as checked:
+                self.assertEqual(self.c.scan_receipts(), 1)
+                self.assertEqual(self.c.scan_receipts(), 0)
+                self.assertEqual(checked.call_count, 2)
+        self.assertEqual(self.db.execute(
+            "SELECT COUNT(*) FROM invalid_receipts").fetchone()[0], 1)
+        self.assertEqual(self.db.execute(
+            "SELECT status FROM jobs WHERE id='auto-good-105'"
+        ).fetchone()[0], "COMPLETE_REPORTED")
+
+    def test_completed_receipt_rewrite_is_detected(self):
+        self.enqueue("auto-immutable-106")
+        self.launch()
+        token = self.token("auto-immutable-106")
+        self.c.ack("auto-immutable-106", token, "TAB_SELECTED", "Selected")
+        self.c.ack("auto-immutable-106", token, "MESSAGE_SUBMITTED", "Sent")
+        receipt = {"schema": "BUREAU_RECEIPT_V1", "jobId": "auto-immutable-106",
+                   "status": "REPORT_PUBLISHED",
+                   "documentUrl": "https://docs.google.com/document/d/realDoc123/edit",
+                   "summary": "Immutable"}
+        with patch.object(service, "checked_remote", return_value=receipt):
+            self.c.ack("auto-immutable-106", token, "RESULT_PUBLISHED",
+                       "Verified", "d" * 40)
+        mutated = [{"name": "auto-immutable-106.json", "type": "file",
+                    "sha": "e" * 40}]
+        with patch.object(service.legacy, "gh_api", return_value=mutated):
+            with self.assertRaisesRegex(ValueError, "PUBLISHED_RECEIPT_REWRITTEN"):
+                self.c.scan_receipts()
+
     def test_dispatch_disarmed_by_default_and_in_old_config(self):
         self.config["dispatchArmed"] = False
         self.enqueue("safeguard-101")
