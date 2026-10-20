@@ -1338,7 +1338,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Topic: PRODUCT_DEVELOPMENT
 - Work key: system-gap-driven-development-v31
 - Depends on: APA-P70.A11.S02
-- Related, check before duplicating: APA-P70.A11.S06, APA-P70.A11.S07, APA-P70.A11.S08, APA-P70.A11.S09, APA-P70.A11.S10, APA-P70.A04.S01, APA-P70.A04.S03, APA-P70.A11.S11, APA-P70.A11.S12, APA-P70.A11.S13, APA-P70.A11.S14, APA-P70.A11.S15, APA-P70.A11.S16, APA-P70.A11.S17, APA-P70.A11.S18, APA-P70.A11.S19, APA-P70.A11.S20, APA-P70.A11.S21, APA-P70.A11.S22
+- Related, check before duplicating: APA-P70.A11.S06, APA-P70.A11.S07, APA-P70.A11.S08, APA-P70.A11.S09, APA-P70.A11.S10, APA-P70.A04.S01, APA-P70.A04.S03, APA-P70.A11.S11, APA-P70.A11.S12, APA-P70.A11.S13, APA-P70.A11.S14, APA-P70.A11.S15, APA-P70.A11.S16, APA-P70.A11.S17, APA-P70.A11.S18, APA-P70.A11.S19, APA-P70.A11.S20, APA-P70.A11.S21, APA-P70.A11.S22, APA-P70.A11.S23
 - Acceptance: Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.
 - Owner/lease: unclaimed
 - Requires owner approval: False
@@ -1636,7 +1636,7 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 
 ## APA-P70.A11.S22
 
-**Расширить общий нативный пакетный copier на самостоятельные стены** — INTEGRATION / IN_PROGRESS / P0
+**Расширить общий нативный пакетный copier на самостоятельные стены** — INTEGRATION / PARTIAL / P0
 
 - Parent: APA-P70 → APA-P70.A11
 - Topic: PRODUCT_DEVELOPMENT
@@ -1644,7 +1644,23 @@ Generated from PROJECT_PLAN.json. Read before claiming a task.
 - Depends on: APA-P70.A11.S14
 - Related, check before duplicating: APA-P70.A11.S03
 - Acceptance: Existing MoveElements(copy=true), same Router/registry/SceneWriter. Actual source typed wall coordinates and closed/materialized BREP, no hosted openings/dependents/group membership, story0, exact preserved source/new GUID/geometry/material facts, collision preflight. Necessary automatic tests and one new safe-copy LIVE operation/save/reopen only if eligible actual source. No new primitive creation or invented geometry; unsupported wall domains failclosed. Publish implementation and exact evidence.
-- Owner/lease: apa-mass-integration-20261019 / 2026-10-20T04:18:53Z
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-P70-A11-S14-COPY-RECEIPT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/README_RU.md)
+- Existing V2 runs: none
+- Expected output: Fresh native READ_ONLY source qualification: 4Walls,2hostDoor/Window;2withoutchildren still have joined/cut BREP differingfromisolatedtypedrectangle. No suitable independentlyunchanged standaloneWall donor; nativewrites0. Separate Slab candidate actualtypedrectangle+closedBREP exists; continue independent elementtype, do not create arbitrary donor or run predictable mismatching Wall write. Sourcequalification receipt will publish with next sharedcopier feature.
+
+## APA-P70.A11.S23
+
+**Нативное пакетное копирование самостоятельного прямоугольного перекрытия** — INTEGRATION / IN_PROGRESS / P0
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: ac29-shared-native-batch-copy-standalone-slab
+- Depends on: APA-P70.A11.S14
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: Existing MoveElements(copy=true), same Router/registry/SceneWriter, actual straight rectangular BasicSlab floor0/noholes/nochildren/nohost/group, explicit horizontalplacements. Actual typed polygon+closed/materialized nativeBREP, exactGUID/type/geometry/materialreadback and retainedmodel; necessary automatic tests +one safe-copy nativebatch/save/reopen, install/publish. OtherSlabdomains failclosed, no CreateSlabs or newdependency.
+- Owner/lease: apa-mass-integration-20261019 / 2026-10-20T04:21:15Z
 - Requires owner approval: False
 - Source inputs: [ART-P70-A11-S14-COPY-RECEIPT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/README_RU.md)
 - Existing V2 runs: none

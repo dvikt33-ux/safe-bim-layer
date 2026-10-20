@@ -13,10 +13,10 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | CLAIMED | 0 |
 | DONE_PUBLISHED | 38 |
 | IN_PROGRESS | 1 |
-| PARTIAL | 17 |
+| PARTIAL | 18 |
 | READY | 34 |
 | SUPERSEDED | 0 |
-| DISPATCHABLE_NOW | 18 |
+| DISPATCHABLE_NOW | 19 |
 | HELD_BY_DEPENDENCIES | 33 |
 | EXPIRED_LEASES | 0 |
 
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| APA-P70.A11.S22 | apa-mass-integration-20261019 | 2026-10-20T04:18:53Z | ac29-shared-native-batch-copy-standalone-wall |
+| APA-P70.A11.S23 | apa-mass-integration-20261019 | 2026-10-20T04:21:15Z | ac29-shared-native-batch-copy-standalone-slab |
 
 ## CONTROL — 0 ready
 
@@ -66,10 +66,11 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | P3 | APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами | Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED |
 | P8 | APA-P00.A03.S03 — Publisher, дедупликация, retry, heartbeat и ошибки | Publisher E2E + оставшиеся recovery/heartbeat gates |
 
-## INTEGRATION — 1 ready
+## INTEGRATION — 2 ready
 
 | Priority | Task | Acceptance |
 | --- | --- | --- |
+| P0 | APA-P70.A11.S22 — Расширить общий нативный пакетный copier на самостоятельные стены | Existing MoveElements(copy=true), same Router/registry/SceneWriter. Actual source typed wall coordinates and closed/materialized BREP, no hosted openings/dependents/group membership, story0, exact preserved source/new GUID/geometry/material facts, collision preflight. Necessary automatic tests and one new safe-copy LIVE operation/save/reopen only if eligible actual source. No new primitive creation or invented geometry; unsupported wall domains failclosed. Publish implementation and exact evidence. |
 | P1 | APA-P70.A11.S03 — Исправить пробелы после системного теста | Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence. |
 
 ## VALIDATION — 4 ready

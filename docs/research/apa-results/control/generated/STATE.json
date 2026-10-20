@@ -1,17 +1,17 @@
 {
   "active": [
-    "APA-P70.A11.S22"
+    "APA-P70.A11.S23"
   ],
   "artifact_count": 397,
   "counts": {
     "BLOCKED": 13,
     "CLAIMED": 0,
-    "DISPATCHABLE_NOW": 18,
+    "DISPATCHABLE_NOW": 19,
     "DONE_PUBLISHED": 38,
     "EXPIRED_LEASES": 0,
     "HELD_BY_DEPENDENCIES": 33,
     "IN_PROGRESS": 1,
-    "PARTIAL": 17,
+    "PARTIAL": 18,
     "READY": 34,
     "SUPERSEDED": 0
   },
@@ -92,17 +92,17 @@
         "id": "APA-P70.A11",
         "status": "IN_PROGRESS",
         "title": "v3.1: пакетная интеграция, взаимодействие и системные проверки",
-        "total": 22
+        "total": 23
       }
     ],
     "active": [
-      "APA-P70.A11.S22"
+      "APA-P70.A11.S23"
     ],
     "done": 27,
     "next_eligible": "APA-P70.A02.S02",
     "plan_id": "APA-P70",
     "status": "IN_PROGRESS",
-    "total": 51
+    "total": 52
   },
   "dispatchable": {
     "BUILD": [
@@ -116,6 +116,7 @@
     ],
     "CONTROL": [],
     "INTEGRATION": [
+      "APA-P70.A11.S22",
       "APA-P70.A11.S03"
     ],
     "RESEARCH": [
@@ -174,10 +175,10 @@
   "known_published_v2_runs": 62,
   "legacy_reports": "NOT_FULLY_INDEXED",
   "orphan_v2_manifests": [],
-  "plan_revision": 196,
+  "plan_revision": 197,
   "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
   "research_lookahead": {
-    "linked_product_substeps": 51,
+    "linked_product_substeps": 52,
     "next_eligible_research": [
       "APA-P50.A01.S01",
       "APA-P50.A02.S01"
@@ -204,7 +205,7 @@
   },
   "schema": "APA_PROJECT_CONTROLLER_STATE_V1",
   "source_plan": "docs/research/apa-results/control/PROJECT_PLAN.json",
-  "task_count": 103,
+  "task_count": 104,
   "topic_count": 16,
   "topics": {
     "ARCHITECTURE": {
@@ -296,7 +297,7 @@
     },
     "PRODUCT_DEVELOPMENT": {
       "done": 27,
-      "ready": 2,
+      "ready": 3,
       "task_ids": [
         "APA-P70.A01.S01",
         "APA-P70.A01.S02",
@@ -348,7 +349,8 @@
         "APA-P70.A11.S19",
         "APA-P70.A11.S20",
         "APA-P70.A11.S21",
-        "APA-P70.A11.S22"
+        "APA-P70.A11.S22",
+        "APA-P70.A11.S23"
       ]
     },
     "PUBLISHER": {

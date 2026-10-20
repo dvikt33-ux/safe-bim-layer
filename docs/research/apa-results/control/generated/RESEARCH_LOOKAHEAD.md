@@ -368,3 +368,10 @@ A candidate research S-ID must still satisfy its own dependencies and claim gate
 - Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
 - Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
 - Использовать источники (ветка/файл/PR): [ART-P70-A11-S14-COPY-RECEIPT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/README_RU.md)
+
+### APA-P70.A11.S23 — Нативное пакетное копирование самостоятельного прямоугольного перекрытия
+
+- Готовность исследования: **GAP**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S14-COPY-RECEIPT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/README_RU.md)

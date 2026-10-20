@@ -8,8 +8,8 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 ## Краткая сводка
 
 - План: APA-P70 — Разработка APA — полный цикл проектирования и выпуска
-- Статус: **IN_PROGRESS**; завершено 27/51 подзадач.
-- Сейчас: APA-P70.A11.S22
+- Статус: **IN_PROGRESS**; завершено 27/52 подзадач.
+- Сейчас: APA-P70.A11.S23
 - Следующая доступная: APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами
 
 ## Этапы → задачи
@@ -26,7 +26,7 @@ requires_approval tasks are not dispatchable until separate owner approval is re
 | APA-P70.A08 — Сквозная приёмка и расширение без переписывания ядра | PARTIAL | 1/5 |
 | APA-P70.A09 — Геометрия и точность после приёмки ядра | DONE_PUBLISHED | 1/1 |
 | APA-P70.A10 — Измеримое ускорение стабильных операций | WAITING | 0/1 |
-| APA-P70.A11 — v3.1: пакетная интеграция, взаимодействие и системные проверки | IN_PROGRESS | 13/22 |
+| APA-P70.A11 — v3.1: пакетная интеграция, взаимодействие и системные проверки | IN_PROGRESS | 13/23 |
 
 ## Подзадачи и следующий шаг
 
@@ -162,5 +162,7 @@ requires_approval tasks are not dispatchable until separate owner approval is re
   - Источники/ветки: [ART-P70-A11-S20-DXF-READY-SOURCE-20261020](https://github.com/dvikt33-ux/safe-bim-layer/pull/163)
 - **APA-P70.A11.S21 [DONE_PUBLISHED]** Автовыбор команды группировки, перемещения и разгруппировки из запроса; исследования: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
   - Источники/ветки: [ART-P70-A11-S17-GROUP-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/3e20da6c8447749bc2db7e09247a012a98f6b396/docs/evidence/apa-ac29-shared-group-create-20261020/README_RU.md), [ART-P70-A11-S18-UNGROUP-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/8a95c9e6bb3af95d9a38a27bc1009aeec04b615e/docs/evidence/apa-ac29-shared-ungroup-20261020/README_RU.md), [ART-P70-A11-S19-MOVE-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/426ea870ef6e2fce60a6354a3c6f335906100e18/docs/evidence/apa-ac29-shared-group-move-20261020/README_RU.md)
-- **APA-P70.A11.S22 [IN_PROGRESS]** Расширить общий нативный пакетный copier на самостоятельные стены; исследования: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- **APA-P70.A11.S22 [PARTIAL / ELIGIBLE]** Расширить общий нативный пакетный copier на самостоятельные стены; исследования: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+  - Источники/ветки: [ART-P70-A11-S14-COPY-RECEIPT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/README_RU.md)
+- **APA-P70.A11.S23 [IN_PROGRESS]** Нативное пакетное копирование самостоятельного прямоугольного перекрытия; исследования: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
   - Источники/ветки: [ART-P70-A11-S14-COPY-RECEIPT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/README_RU.md)
