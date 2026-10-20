@@ -90,6 +90,8 @@ def project(graph, fragments, bounds, r06):
             kind = "ROUTE_OBSERVATION_ANCHOR"
         elif e["type"] == "OBSERVED_ROUTE_ORDER_NOT_DIRECT_DOOR":
             kind = "ORDERED_ROUTE_STEPS_NOT_ADJACENT_ROOMS"
+        elif e["type"] == "EXTERIOR_OR_OTHER_VEHICLE_EVENT_NOT_INTERNAL_PASSAGE":
+            kind = "EXTERNAL_VEHICLE_EVENT_NOT_STATION_LINK"
         else:
             raise ValueError("UNKNOWN_EVIDENCE_RELATION: " + eid)
         # Nonconnecting evidence (inference, proximity, visibility, spans)
