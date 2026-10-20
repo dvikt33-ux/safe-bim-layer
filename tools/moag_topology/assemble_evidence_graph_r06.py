@@ -31,6 +31,7 @@ R03_ADDITIONAL_DIRECT_RELATIONS = {"LEADS_UP_TO", "DOOR_LEADS_TO", "ELEVATED_WIT
 R03_OBSERVATION_ONLY_RELATIONS = {"SPANS_GLOBAL_LEVEL", "OVERLOOKS"}
 GAP = "NARRATIVE_GAP"
 BRIDGES = SYNTH / "explicit_spatial_bridges_r06.json"
+CONTEXT_CORRECTIONS = SYNTH / "route_context_corrections_r06.json"
 R03_CONNECTING_RELATIONS = {
     "HAS_INTERNAL_UPPER_ROOM", "CONNECTS_FLOOR_TO_UPPER_ROOM",
     "HAS_UPPER_GALLERY", "CONNECTS_FLOOR_TO", "CONNECTS_UPPER_TO_LOWER"
@@ -69,11 +70,14 @@ class Components:
 
 
 def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=None,
-             anchors=None, variants=None, explicit_bridges=None):
+             anchors=None, variants=None, explicit_bridges=None,
+             route_corrections=None):
     if routes.get("schema") is None or not isinstance(routes.get("routes"), list):
         raise ValueError("BAD_ROUTE_LEDGER")
     if explicit_bridges is None:
         explicit_bridges = json.loads(BRIDGES.read_text(encoding="utf-8"))
+    if route_corrections is None:
+        route_corrections = json.loads(CONTEXT_CORRECTIONS.read_text(encoding="utf-8"))
     prior = r05.run(graph, fragments, bounds, parameters, area_overrides,
                     anchors, variants)
     level = {}
@@ -236,6 +240,46 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
             reference_promotions.append(promotion)
         else:
             review_promotions.append(promotion)
+    if route_corrections.get("schema") != "APA-MOAG-ROUTE-CONTEXT-CORRECTIONS-R06/0.1":
+        raise ValueError("INVALID_ROUTE_CONTEXT_CORRECTIONS_SCHEMA")
+    episode_repairs = {x["observation_id"]: x for x in graph["identity_repairs"]}
+    all_route_steps = {(ro["id"], s["id"]): s
+                       for ro in route_groups for s in ro["nodes"]}
+    corrections = {}
+    for fix in route_corrections["corrections"]:
+        key = (fix["route_id"], fix["step_id"])
+        if key not in all_route_steps or key in corrections:
+            raise ValueError("UNKNOWN_OR_DUPLICATE_ROUTE_CONTEXT_CORRECTION")
+        step = all_route_steps[key]
+        observation = records.get(fix["observation_id"])
+        if (observation is None or observation["station"] != "MOAG" or
+                observation["evidence_class"] != "DIRECT_TEXT" or
+                observation["page"] != fix["source_page_id"] or
+                step["source_page_id"] != fix["source_page_id"] or
+                step.get("existing_graph_node") != fix["legacy_alias"]):
+            raise ValueError("CONTEXT_CORRECTION_SOURCE_MISMATCH")
+        action = fix["action"]
+        if action == "REMAP_TO_EPISODE_SPECIFIC_PHYSICAL_INDEX":
+            repaired = episode_repairs.get(fix["observation_id"])
+            target = fix["new_index_id"]
+            if (target not in kinds or repaired is None or
+                    target not in repaired["verified_or_provisional_physical_entity_ids"] or
+                    fix["legacy_alias"] not in repaired["source_legacy_node_refs"] or
+                    target in repaired["forbidden_automatic_candidates"] or
+                    observation["new_status"] != "CORRECTED_FALSE_IDENTITY_ALIAS"):
+                raise ValueError("ROUTE_CORRECTION_IDENTITY_NOT_SOURCE_BACKED")
+        elif action == "QUARANTINE_UNRESOLVED_LEGACY_ALIAS":
+            if fix.get("new_index_id") is not None or not fix.get("reason"):
+                raise ValueError("INVALID_AMBIGUOUS_ROUTE_QUARANTINE")
+        else:
+            raise ValueError("UNSUPPORTED_ROUTE_CORRECTION_ACTION")
+        corrections[key] = fix
+    for x in route_corrections.get("negative_identity_constraints", []):
+        if (x["first"] not in kinds or x["second"] not in kinds or
+                x["first"] == x["second"]):
+            raise ValueError("INVALID_NEGATIVE_IDENTITY_CONSTRAINT")
+    contextual_route_repairs = []
+    contextual_route_quarantines = []
     before_routes = len(uf.groups())
     before_physical_components = len({uf.root(node) for node in kinds})
     level_suggestions = defaultdict(list)
@@ -247,8 +291,24 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
             a = local[s["id"]]
             source = s["source_page_id"]
             mapped = s.get("existing_graph_node")
+            correction = corrections.get((route["id"], s["id"]))
+            if correction and correction["action"] == "QUARANTINE_UNRESOLVED_LEGACY_ALIAS":
+                contextual_route_quarantines.append({
+                    "route_id": route["id"], "step_id": s["id"],
+                    "source_page_id": source, "legacy_alias": mapped,
+                    "source_observation_id": correction["observation_id"],
+                    "status": "UNRESOLVED_PHYSICAL_REFERENT_NOT_JOINED"})
+                mapped = None
             if mapped is not None:
-                target = aliases.get(mapped, mapped)
+                target = (correction["new_index_id"]
+                          if correction else aliases.get(mapped, mapped))
+                if correction:
+                    contextual_route_repairs.append({
+                        "route_id": route["id"], "step_id": s["id"],
+                        "source_page_id": source, "legacy_alias": mapped,
+                        "new_physical_index_id": target,
+                        "source_observation_id": correction["observation_id"],
+                        "not_a_metric_position": True})
                 if target not in kinds:
                     conflicts.append({"code": "ROUTE_ALIAS_UNRESOLVED",
                                       "route_id": route["id"], "step_id": s["id"],
@@ -477,6 +537,8 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
                                              for members, p in zip(component_members, physical_only)),
             "route_only_components": sum(not p for p in physical_only),
             "unconnected_index_research_tasks": len(isolated_queue),
+            "route_context_disambiguations": len(contextual_route_repairs),
+            "route_context_quarantines": len(contextual_route_quarantines),
             "route_bridge_events": sum(e["joins_components"] for e in edges
                                        if e["type"].startswith(("ROUTE_", "OBSERVED_"))),
             "physical_fragment_bridge_events": len(physical_bridges),
@@ -516,6 +578,10 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         "bridge_events": bridges,
         "physical_fragment_bridge_events": physical_bridges,
         "route_location_review": conflicts,
+        "route_context_disambiguation_audit": contextual_route_repairs,
+        "route_context_quarantine_audit": contextual_route_quarantines,
+        "route_negative_identity_constraints": route_corrections.get(
+            "negative_identity_constraints", []),
         "reference_promotion_crosswalks_not_spatial_links": reference_promotions,
         "promotion_identity_review_queue": review_promotions,
         "deferred_spatial_hypotheses_not_linked": explicit_bridges.get("deferred_hypotheses", []),
@@ -584,6 +650,7 @@ def main():
     ap.add_argument("--fragments", type=Path, default=SYNTH / "progressive_fragments_r05.json")
     ap.add_argument("--routes", type=Path, default=ROUTES)
     ap.add_argument("--bridges", type=Path, default=BRIDGES)
+    ap.add_argument("--context-corrections", type=Path, default=CONTEXT_CORRECTIONS)
     ap.add_argument("--bounds", type=Path, default=SYNTH / "area_volume_bounds_r05.json")
     ap.add_argument("--anchors", type=Path)
     ap.add_argument("--r04-parameters", type=Path)
@@ -596,7 +663,7 @@ def main():
     result = assemble(read(arg.graph), read(arg.fragments), read(arg.routes),
                       read(arg.bounds), read(arg.r04_parameters),
                       read(arg.area_overrides), read(arg.anchors), read(arg.variants),
-                      read(arg.bridges))
+                      read(arg.bridges), read(arg.context_corrections))
     if arg.between:
         result["requested_evidence_trace"] = trace_between(result, *arg.between)
     payload = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False) + "\n"
