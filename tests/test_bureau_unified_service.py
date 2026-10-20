@@ -230,5 +230,70 @@ class UnifiedServiceTests(unittest.TestCase):
         self.assertIsNone(self.c.apa)
 
 
+    def test_invalid_event_is_quarantined_and_other_event_is_received(self):
+        current = datetime.now(timezone.utc)
+        good = {
+            "schema": service.legacy.SCHEMA, "jobId": "activation-15",
+            "eventType": "TRIGGER_PROBE", "targetChat": "D-03",
+            "action": "ACTIVATE_ONLY",
+            "createdAt": stamp(current-timedelta(minutes=1)),
+            "expiresAt": stamp(current+timedelta(days=1)),
+            "sourceRef": None
+        }
+        items = [
+            {"name": "activation-15.json", "type": "file", "sha": "a"*40},
+            {"name": "activation-16.json", "type": "file", "sha": "b"*40}
+        ]
+        with patch.object(service.legacy, "gh_api", return_value=items):
+            with patch.object(service, "checked_remote",
+                              side_effect=[good, {"unexpected": True}]):
+                self.assertEqual(self.c.scan(), 1)
+        self.assertEqual(self.db.execute(
+            "SELECT count(*) FROM rejected").fetchone()[0], 1)
+        self.assertEqual(self.db.execute(
+            "SELECT count(*) FROM jobs").fetchone()[0], 1)
+
+    def test_duplicate_ack_network_retry_does_not_create_second_job(self):
+        self.enqueue("assign-017")
+        self.launch()
+        token = self.token("assign-017")
+        self.assertEqual(self.c.ack("assign-017", token, "TAB_SELECTED",
+                                    "selected"), "WAIT_SUBMIT")
+        self.assertEqual(self.c.ack("assign-017", token, "TAB_SELECTED",
+                                    "selected"), "WAIT_SUBMIT")
+        self.assertEqual(self.c.ack("assign-017", token, "MESSAGE_SUBMITTED",
+                                    "sent"), "WAIT_RESULT")
+        self.assertEqual(self.c.ack("assign-017", token, "MESSAGE_SUBMITTED",
+                                    "sent"), "WAIT_RESULT")
+        self.assertEqual(self.db.execute(
+            "SELECT count(*) FROM jobs").fetchone()[0], 1)
+
+    def test_route_from_director_to_secretariat(self):
+        self.enqueue("director-018", "DIR-03", "REPORT_READY")
+        self.launch()
+        token = self.token("director-018")
+        self.c.ack("director-018", token, "TAB_SELECTED", "selected")
+        self.c.ack("director-018", token, "MESSAGE_SUBMITTED", "sent")
+        receipt = {"schema":"BUREAU_RECEIPT_V1", "jobId":"director-018",
+                   "status":"REPORT_PUBLISHED",
+                   "documentUrl":"https://docs.google.com/document/d/sample/edit",
+                   "summary":"Директор подготовил заключение"}
+        with patch.object(service, "checked_remote", return_value=receipt):
+            self.c.ack("director-018", token, "RESULT_PUBLISHED",
+                       "review receipt", "c"*40)
+        self.assertEqual(
+            self.db.execute(
+                "SELECT target,event_type FROM jobs WHERE parent='director-018'"
+            ).fetchone(),
+            ("SECRETARIAT", "DEPARTMENT_REPORT_READY"))
+
+    def test_cross_process_owner_lock(self):
+        path = Path(self.tmp.name) / "unified.sqlite"
+        with service.exclusive_process_lock(path):
+            with self.assertRaisesRegex(RuntimeError, "UNIFIED_BUREAU_ALREADY_RUNNING"):
+                with service.exclusive_process_lock(path):
+                    pass
+
+
 if __name__ == "__main__":
     unittest.main()
