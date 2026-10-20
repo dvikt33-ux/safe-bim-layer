@@ -554,11 +554,17 @@ class Coordinator:
         if not isinstance(reason, str) or not 8 <= len(reason) <= 500:
             raise ValueError("RECONCILIATION_EVIDENCE_REQUIRED")
         with self.lock:
-            row = self.db.execute("SELECT status FROM jobs WHERE id=?",
-                                  (job_id,)).fetchone()
-            if not row or row[0] not in ACTIVE_CHAT:
-                raise ValueError("JOB_NOT_IN_UNKNOWN_STATE")
-            journal(self.db, job_id, "CANCELLED_AFTER_REVIEW", reason)
+            self.db.execute("BEGIN IMMEDIATE")
+            try:
+                row = self.db.execute("SELECT status FROM jobs WHERE id=?",
+                                      (job_id,)).fetchone()
+                if not row or row[0] not in ACTIVE_CHAT:
+                    raise ValueError("JOB_NOT_IN_UNKNOWN_STATE")
+                journal(self.db, job_id, "CANCELLED_AFTER_REVIEW", reason)
+                self.db.execute("COMMIT")
+            except Exception:
+                self.db.execute("ROLLBACK")
+                raise
 
     def enable_apa(self):
         if not self.config["apaEnabled"]:
