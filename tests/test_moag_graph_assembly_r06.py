@@ -145,6 +145,27 @@ class EvidenceGraphR06Tests(unittest.TestCase):
             for x in queue if x["spatial_inventory_role"] !=
             "FIXED_ROOM_CORRIDOR_DOOR_OR_TECHNICAL_INFRASTRUCTURE"))
 
+    def test_b3_foreign_station_hatches_are_quarantined_not_moag_access(self):
+        s = self.result
+        ids = set(s["quarantined_foreign_station_candidate_indices"])
+        self.assertEqual(ids, {
+            "M-L3-CABLE-HATCH-001", "M-L3-CABLE-HATCH-002",
+            "M-L3-COMMS-HATCHES-001"})
+        self.assertEqual(s["counts"]["unverified_moag_station_identity_indices"], 3)
+        node = {x["id"]: x for x in s["nodes"]
+                if x["layer"] == "PHYSICAL_INDEX"}
+        self.assertTrue(all(not node[i]["moag_station_identity_verified"]
+                            for i in ids))
+        self.assertEqual(set(s["quarantined_foreign_station_source_observations"]),
+                         {"P-671", "P-674"})
+        bad = copy.deepcopy(
+            json.loads((BASE / "synthesis/explicit_spatial_bridges_r06.json")
+                       .read_text(encoding="utf-8")))
+        bad["typed_edges"][-1]["source_ids"] = ["P-671"]
+        with self.assertRaisesRegex(ValueError, "FOREIGN_STATION_SOURCE_NOT_MOAG_PROOF"):
+            MOD.assemble(self.graph, self.fragments, self.routes, self.bounds,
+                         explicit_bridges=bad)
+
     def test_concept_promotions_do_not_count_as_spatial_joins(self):
         r = self.result
         self.assertEqual(r["counts"]["reference_promotion_crosswalks"], 17)
