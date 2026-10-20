@@ -638,7 +638,8 @@ def main():
         print(json.dumps(c.statuses(), ensure_ascii=False, indent=2))
         return
     if a.command == "cancel":
-        c.recover(a.job_id, a.reason)
+        with exclusive_process_lock(a.db):
+            c.recover(a.job_id, a.reason)
         print("CANCELLED_AFTER_REVIEW", a.job_id)
         return
     with exclusive_process_lock(a.db):
