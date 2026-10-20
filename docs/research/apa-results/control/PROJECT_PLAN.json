@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 194,
+  "revision": 195,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2558,6 +2558,20 @@
       "kind": "REVIEW",
       "verification": "RANKED_CATALOG_SOURCE_REVIEWED_NOT_IMPLEMENTATION",
       "scope": "Ready existingezdxf candidate: reuseinstalled1.4.5 in V1venv. New sourceDXF preflight: recover/audit,XREF existence/hash,MINSERTcounts andunits. ExistingIFC schema/IDS commands notduplicated."
+    },
+    "ART-P70-A11-S20-DXF-RECEIPT-20261020": {
+      "id": "ART-P70-A11-S20-DXF-RECEIPT-20261020",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/f0ca0e10aa067b7f9a2497b6974d458abe689aa8/docs/evidence/apa-dxf-source-preflight-20261020/README_RU.md",
+      "kind": "RECEIPT",
+      "verification": "INSTALLED_READY_DXF_SOURCE_PREFLIGHT_REAL_FILE_PASS",
+      "scope": "OneinstalledexistingRouteradapter usingexistingezdxf1.4.5/V1venv: originalpreauditINSERT/MINSERT/XREF/units+audit/recover. RealROCKWOOLsourcecopy SHAe220unchanged,634inserts,63memoryfixes,INSUNITS0->readinessfalse, noDXFsave/nativecalls. All298acceptedcontracts/30+4reads preserved,CI4SUCCESS on1dbecode."
+    },
+    "ART-P70-A11-S20-DXF-AUDIT-20261020": {
+      "id": "ART-P70-A11-S20-DXF-AUDIT-20261020",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/f0ca0e10aa067b7f9a2497b6974d458abe689aa8/docs/evidence/apa-dxf-source-preflight-20261020/independent-audit.json",
+      "kind": "REVIEW",
+      "verification": "AUDIT_READBACK_VERIFIED",
+      "scope": "OneinstalledexistingRouteradapter usingexistingezdxf1.4.5/V1venv: originalpreauditINSERT/MINSERT/XREF/units+audit/recover. RealROCKWOOLsourcecopy SHAe220unchanged,634inserts,63memoryfixes,INSUNITS0->readinessfalse, noDXFsave/nativecalls. All298acceptedcontracts/30+4reads preserved,CI4SUCCESS on1dbecode."
     }
   },
   "tasks": {
@@ -5156,7 +5170,8 @@
         "APA-P70.A11.S17",
         "APA-P70.A11.S18",
         "APA-P70.A11.S19",
-        "APA-P70.A11.S20"
+        "APA-P70.A11.S20",
+        "APA-P70.A11.S21"
       ],
       "inputs": [
         "ART-APA-HIGHLEVEL-PR34",
@@ -5363,7 +5378,8 @@
         "2026-10-20 S16/PR184 selectednamedaxisintersections installed/published; S17 sharednativegroupcreation is nextfunction, reuseexisting SDKcommand.",
         "2026-10-20 S17/PR185 sharednativegroupcreate installed/published. NextS18 nativeungroup edits acceptedgroup innewcopy, no recreatinggroup.",
         "2026-10-20 S18/PR186 nativeungroup installed/published; S19 nativewholegroup move next. Existingacceptedgroup snapshot reused, no recreation.",
-        "2026-10-20 S19/PR188 wholegroupmove installed/published. Five newnativecapabilities S15..S19 acceptedonceeach; S20 ready DXFadapter from163 next independentthin integration usingexistingvenv."
+        "2026-10-20 S19/PR188 wholegroupmove installed/published. Five newnativecapabilities S15..S19 acceptedonceeach; S20 ready DXFadapter from163 next independentthin integration usingexistingvenv.",
+        "2026-10-20 S20/PR189 readyDXFadapter installed/published; nextS21 naturalgroupintent selectsacceptednativecommands usingfreshcapability read-onlyqualification, no oldnativeoperation repeats."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
       "owner": null,
@@ -6311,7 +6327,7 @@
       "action_id": "APA-P70.A11",
       "title": "Готовая лёгкая DXF интеграция: recover/audit, XREF/hash, MINSERT и единицы через общий Router",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 1,
       "work_key": "existing-ezdxf-dxf-source-preflight",
       "depends_on": [
@@ -6323,11 +6339,45 @@
       "inputs": [
         "ART-P70-A11-S20-DXF-READY-SOURCE-20261020"
       ],
-      "outputs": [],
+      "outputs": [
+        "PR189 readyDXFdiagnostics installed/publishedf0ca0e10,one newREAD_ONLYcommand viaexistingfactory defaultcatalog299. Actualsourcee220/report61bbSHA, old298contractspreserved, no package reinstall. Sourceunready correctlyreported; adapteracceptancePASS. Initialcandidate refinedbeforeauditinventory, stoppedstage loader fixed beforeapply; oldreceiptsretained."
+      ],
       "acceptance": "One realadapter onexistingRouter/registry, reuseinstalledezdxf1.4.5 andexistingV1venv, preserve30+4commands/all296contracts. Sourcehashbefore/after,failclosedonparse/audit/unknownunits/missingoroutsideXREF; noDXFrepairwrite, noPLN/APX/nativecalls. Automaticcontract checks andone realmanufacturerDXF safe-copy operation; publish/install/report. No duplicatedIDS/schema/geometry engines.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [
+        "ART-P70-A11-S20-DXF-RECEIPT-20261020",
+        "ART-P70-A11-S20-DXF-AUDIT-20261020"
+      ],
+      "blocked_reason": null
+    },
+    "APA-P70.A11.S21": {
+      "id": "APA-P70.A11.S21",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Автовыбор команды группировки, перемещения и разгруппировки из запроса",
+      "kind": "INTEGRATION",
+      "status": "IN_PROGRESS",
+      "priority": 0,
+      "work_key": "ac29-natural-group-intent-existing-native-selector",
+      "depends_on": [
+        "APA-P70.A11.S19"
+      ],
+      "related": [
+        "APA-P70.A11.S03"
+      ],
+      "inputs": [
+        "ART-P70-A11-S17-GROUP-RECEIPT-20261020",
+        "ART-P70-A11-S18-UNGROUP-RECEIPT-20261020",
+        "ART-P70-A11-S19-MOVE-RECEIPT-20261020"
+      ],
+      "outputs": [],
+      "acceptance": "Usertext+explicitGUIDs/source/vector -> boundedintentrecognition -> existingtypedgroupadapters -> actualruntimecapabilitydiscovery -> existingregistry/SceneWriter. Ambiguous/composite/boolean/incompleteintents failclosed; no inventedmembers/coordinates. Automaticroutingcontracts andone currentAC29READ_ONLY qualification ofthree nativecommands againstfreshsources/scopes; reuseacceptedwrite/save/reopenreceipts185/186/188 without repeatingwrites.",
       "owner": "apa-mass-integration-20261019",
-      "lease_until": "2026-10-20T03:54:49Z",
-      "claim_ref": "APA-RUN-20261020-DXF-PREFLIGHT",
+      "lease_until": "2026-10-20T04:07:22Z",
+      "claim_ref": "APA-RUN-20261020-AUTO-GROUP-INTENT",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
@@ -6630,7 +6680,8 @@
         "APA-P70.A11.S17",
         "APA-P70.A11.S18",
         "APA-P70.A11.S19",
-        "APA-P70.A11.S20"
+        "APA-P70.A11.S20",
+        "APA-P70.A11.S21"
       ],
       "artifact_ids": [
         "ART-APA-FULL-CYCLE",
@@ -7440,9 +7491,21 @@
         "APA-P10.A01.S03",
         "APA-P50.A02.S01"
       ],
+      "readiness": "SUFFICIENT",
+      "readiness_evidence_ids": [
+        "ART-P70-A11-S20-DXF-AUDIT-20261020"
+      ],
+      "note": "Adapterready/installed/realfileverified; manufacturerDXF itself hasunverifiedunits+63auditfixes, so automaticBIM readinessfalse. No duplicateIFC/IDSengine."
+    },
+    "APA-P70.A11.S21": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
       "readiness": "GAP",
       "readiness_evidence_ids": [],
-      "note": "Ready163candidate andactualinstalledezdxf/vendor/C1adapter available; no lengthyresearch or dependencyduplication. DXFsourceanalysis only, noautomaticBIMinference."
+      "note": "Acceptednative185/186/188 functions reused; onlyintentnormalization andexistingentrypoint extension. One read-onlyfreshcapability/source/scope qualification, no newrouter/executor/repeatedwrite."
     }
   },
   "component_catalog": {
