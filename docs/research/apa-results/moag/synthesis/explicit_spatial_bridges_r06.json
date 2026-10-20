@@ -1,7 +1,7 @@
 {
   "schema": "APA-MOAG-EXPLICIT-SPATIAL-BRIDGES-R06/0.1",
   "status": "REVIEWED_OBSERVATION_DERIVED_RELATIONS_NOT_APPROVED_METRIC_GEOMETRY",
-  "description": "Only explicit reviewed station observations; source IDs validate against R04 audit. Each edge is distinct-place qualitative relation; never SAME_IDENTITY.",
+  "description": "Only explicit reviewed station observations; source IDs validate against R04 audit. Each edge is distinct-place qualitative relation; never SAME_IDENTITY. Дополнение R06 20.10: конкретные источники P-240, P-356—358, P-364 и P-385 дают шесть типизированных связей без метрической локализации, причём техника и исторический центр не считаются прямыми проходами.",
   "typed_edges": [
     {
       "id": "S06-001",
@@ -87,6 +87,98 @@
         "P-193"
       ],
       "explanation": "Из нижнего яруса жилого кольца выход к Оранжевой через не локализованные туннели",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-007",
+      "from": "M-L1-FH-001",
+      "to": "V-BOAT-L1-001",
+      "relation": "VEHICLE_STORED_IN_HANGAR",
+      "source_ids": [
+        "P-364"
+      ],
+      "explanation": "Боевой катер физически стоит внутри первого ангара; это отношение хранения транспортного средства, не отдельная комната",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-008",
+      "from": "M-L1-FH-001",
+      "to": "M-L1-FH-LOCK-001",
+      "relation": "AIRLOCK_GATE_BETWEEN_HANGAR_AND_CHAMBER",
+      "source_ids": [
+        "P-364",
+        "P-385"
+      ],
+      "explanation": "Катера из ангара проходят в герметичную камеру через закрываемые створки; существование ворот подтверждено, состояние доступа зависит от времени",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": true,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-009",
+      "from": "MOAG-G-0045",
+      "to": "MOAG-G-0046",
+      "relation": "FREIGHT_LIFTS_TO_CARGO_HALL_VIA_WIDE_PASSAGE",
+      "source_ids": [
+        "P-356"
+      ],
+      "explanation": "От грузовых лифтов Верхнего ведёт широкий проход к грузовому залу; промежуточная геометрия прохода неизвестна",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-010",
+      "from": "MOAG-G-0046",
+      "to": "MOAG-G-0047",
+      "relation": "SPACESUIT_ALCOVE_BY_CARGO_HALL",
+      "source_ids": [
+        "P-357"
+      ],
+      "explanation": "Ниша скафандров расположена у грузового зала за поворотом; прямой дверной проход между ними не доказан",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-011",
+      "from": "MOAG-G-0046",
+      "to": "MOAG-G-0048",
+      "relation": "CARGO_HALL_FACES_PRODUCTION_GATE",
+      "source_ids": [
+        "P-356",
+        "P-358"
+      ],
+      "explanation": "Двери производственного цеха непосредственно видны из грузового зала; дверь существовала, но посещения производственного цеха не было",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-012",
+      "from": "M-L1-CG-001",
+      "to": "M-L1-CG-CTRL-001",
+      "relation": "HISTORIC_CONTROLLER_OF_CARGO_HANGAR_COMPLEX",
+      "source_ids": [
+        "P-240"
+      ],
+      "explanation": "Найденная документация описывает исторический центр управления грузовыми ангарами крейсеров; связь функциональная, не подтверждение прямого прохода",
       "certainty": "DIRECT_TEXT_REVIEWED",
       "proves_direct_door": false,
       "proves_xy": false,
