@@ -4,7 +4,9 @@ on:
   pull_request:
     paths:
       - 'scripts/bureau_chat_activation_gateway.py'
+      - 'scripts/bureau_unified_service.py'
       - 'tests/test_bureau_chat_activation_gateway.py'
+      - 'tests/test_bureau_unified_service.py'
       - '.github/workflows/bureau-chat-activation-gateway.yml'
   workflow_dispatch:
 
@@ -21,6 +23,9 @@ jobs:
         with:
           python-version: '3.11'
       - name: Compile dispatcher
-        run: python -m py_compile scripts/bureau_chat_activation_gateway.py tests/test_bureau_chat_activation_gateway.py
+        run: python -m py_compile scripts/bureau_chat_activation_gateway.py scripts/bureau_unified_service.py tests/test_bureau_chat_activation_gateway.py tests/test_bureau_unified_service.py
       - name: Test queue and launch guards
         run: python -m unittest discover -s tests -p 'test_bureau_chat_activation_gateway.py' -v
+      - name: Test unified multi-chat runtime and stage guards
+        run: python -m unittest discover -s tests -p 'test_bureau_unified_service.py' -v
+
