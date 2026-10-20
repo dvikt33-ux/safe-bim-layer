@@ -58,6 +58,10 @@ class UnifiedServiceTests(unittest.TestCase):
             "apaEnabled": False, "apaBridgePath": "",
             "apaBridgeSha256": ""
         }
+        for number, key in enumerate(self.config["targets"], 1):
+            self.config["targets"][key]["chatUrl"] = (
+                f"https://chatgpt.com/c/00000000-0000-0000-0000-{number:012d}"
+            )
         self.db = service.open_db(path / "queue.sqlite")
         self.addCleanup(self.db.close)
         self.opened = []
@@ -85,6 +89,22 @@ class UnifiedServiceTests(unittest.TestCase):
         return self.db.execute(
             "SELECT nonce FROM jobs WHERE id=?", (job_id,)
         ).fetchone()[0]
+
+
+    def test_private_chat_url_only_local_and_one_workflow_can_be_reused(self):
+        for target in self.config["targets"].values():
+            target["workflowId"] = "one_shared_workflow"
+        path = Path(self.tmp.name) / "config.json"
+        path.write_text(json.dumps(self.config), encoding="utf-8")
+        loaded = service.config_load(path)
+        self.assertEqual(
+            len({x["workflowId"] for x in loaded["targets"].values()}), 1)
+        self.enqueue("assign-019")
+        self.launch()
+        task = self.c.task_for("assign-019", self.token("assign-019"))
+        self.assertTrue(task["chatUrl"].startswith("https://chatgpt.com/c/"))
+        self.assertIn("Проведи исследование", task["instruction"])
+        self.assertNotIn("chatgpt.com", self.opened[0])
 
     def test_v2_contract_rejects_remote_text_and_wrong_target(self):
         ev = event("assign-001")
