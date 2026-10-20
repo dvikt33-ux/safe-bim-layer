@@ -125,6 +125,7 @@ def audit():
             "non_area_indices": len(values) - scenario_profiles,
             "book_metric_footprint_profiles": source_numeric_proven,
             "scenario_interval_failures": result["counts"]["area_check_failures"],
+            "curated_relations_have_two_endpoint_provenance_checks": True,
             "book_metric_range_proof_not_substituted_with_scenario": True,
             "local_upper_floor_double_count_review_cases": len(
                 projection["local_upper_floor_double_count_review"]),
@@ -138,6 +139,10 @@ def audit():
             "route_steps_with_single_global_level": directly_mapped,
             "physically_confirmed_xy_index_count": geocoordinates,
             "metric_vertical_offsets_verified": False,
+            "new_nonmetric_source_placement_constraints": len(
+                projection["source_qualitative_placement_constraints"]["constraints"]),
+            "local_height_order_does_not_add_global_level": True,
+            "unlocated_cargo_receiving_lift_distance_remains_ordinal": True,
             "plans_elevations_sections_mutually_verified": False,
         },
         "hard_blockers_for_BIM": [
