@@ -58,7 +58,7 @@ jobs:
       - name: Preserve R08 unlocated rooms, route holes and nonbinding symmetry scenarios
         run: |
           python tools/moag_topology/hypothetical_structure_r08.py --out moag-r08-hypothetical-overlay.json
-          python -c "import json; r=json.load(open('moag-r08-hypothetical-overlay.json')); i=r['inventory']; assert i['unlocated_fixed_object_groups']==12 and i['still_unknown_route_gaps']==18 and i['optional_compositional_pattern_scenarios']==3 and i['total_nodes_including_nonphysical_placeholders']==593 and i['total_relations_including_unapproved_scenarios']==821 and i['approved_explicit_access_edges']==25 and i['approved_qualitative_physical_components']==39 and r['gates']['hypothesis_edges_are_nonconnecting'] and not r['gates']['archicad_write']; print('UNCERTAINTY_R08',i)"
+          python -c "import json; r=json.load(open('moag-r08-hypothetical-overlay.json')); i=r['inventory']; assert i['unlocated_fixed_object_groups']==12 and i['still_unknown_route_gaps']==18 and i['ordered_route_transitions_with_unlocated_path_geometry']==306 and i['optional_compositional_pattern_scenarios']==3 and i['total_nodes_including_nonphysical_placeholders']==593 and i['total_relations_including_unapproved_scenarios']==821 and i['approved_explicit_access_edges']==25 and i['approved_qualitative_physical_components']==39 and r['gates']['hypothesis_edges_are_nonconnecting'] and not r['gates']['archicad_write']; print('UNCERTAINTY_R08',i)"
       - name: Archive R06 evidence graphs without promoting them to geometry
         uses: actions/upload-artifact@v4
         with:
