@@ -117,6 +117,118 @@
           "falsifier": "Схема, показывающая исключительно круговой, безветвевой маршрут"
         }
       ]
+    },
+    {
+      "group_id": "R08-THIRD-OLD-ISOLATION-CONTEXT",
+      "question": "Где находился коридор старой изоляции Третьего относительно грузового узла?",
+      "source_ids": [
+        "P-571",
+        "P-573"
+      ],
+      "options": [
+        {
+          "id": "R08-H009",
+          "from": "M-L3-OLD-ISOLATION-ROOM-001",
+          "to": "MOAG-G-0045",
+          "relation": "POSSIBLE_ROUTE_REACHES_FREIGHT_LIFTS_AFTER_ISOLATION_PASSAGE",
+          "basis": "CIRCULATION_TOPOLOGY_ALTERNATIVE",
+          "reason": "В эпизоде из изоляционного коридора позднее выходят к грузовой площадке с лифтами; допускается маршрут через промежуточные помещения, не прямая дверь.",
+          "falsifier": "Текст устанавливает иной лифтовый узел либо переход по отдельному не связанному с этим блоком маршруту"
+        },
+        {
+          "id": "R08-H010",
+          "from": "M-L3-OLD-ISOLATION-ROOM-001",
+          "to": "MOAG-G-0039",
+          "relation": "POSSIBLE_ISOLATION_WING_ALONG_INDUSTRIAL_SERVICE_CORRIDOR",
+          "basis": "REPEATED_FUNCTION_ANALOGY",
+          "reason": "Сортировочная деятельность у старой изоляции могла использовать ветвь промышленного обслуживания, однако единая зона производства не доказана.",
+          "falsifier": "Описание отдельного медицинского крыла с самостоятельным маршрутом к площадке лифтов"
+        }
+      ]
+    },
+    {
+      "group_id": "R08-THIRD-ARMORY-ACCESS-SECTOR",
+      "question": "Где на Третьем располагается известная оружейная за белыми дверями?",
+      "source_ids": [
+        "P-498",
+        "P-200"
+      ],
+      "options": [
+        {
+          "id": "R08-H011",
+          "from": "M-L3-ARMORY-001",
+          "to": "MOAG-G-0031",
+          "relation": "POSSIBLE_ARMORY_BRANCH_FROM_THIRD_INNER_CIRCULATION",
+          "basis": "RING_AND_RADIAL_SYMMETRY_CONCEPT_ONLY",
+          "reason": "После выхода на Третий герой идёт к ряду белых дверей; оружейная может иметь ответвление от внутреннего циркуляционного кольца, но путь не прослежен.",
+          "falsifier": "Конкретный маршрут показывает, что белые двери расположены только за внешним промышленным сектором"
+        },
+        {
+          "id": "R08-H012",
+          "from": "M-L3-ARMORY-001",
+          "to": "M-L3-LOG-001",
+          "relation": "POSSIBLE_ARMORY_BRANCH_FROM_CARGO_SERVICE_SECTOR",
+          "basis": "CIRCULATION_TOPOLOGY_ALTERNATIVE",
+          "reason": "Такие кладовые функционально могли размещаться вдоль доступного служебного грузового прохода; нельзя считать это прямой дверью или доказательством оружейного склада как промышленного помещения.",
+          "falsifier": "Текст помещает ряд белых дверей на другом по отношению к грузовому маршруту участке Третьего"
+        }
+      ]
+    },
+    {
+      "group_id": "R08-SECOND-LIBRARY-PLACEMENT",
+      "question": "В какой части детского блока расположена большая библиотека с овальным окном?",
+      "source_ids": [
+        "P-488",
+        "P-484"
+      ],
+      "options": [
+        {
+          "id": "R08-H013",
+          "from": "M-L2-LIB-OVAL-001",
+          "to": "M-L2-PLAZA-001",
+          "relation": "POSSIBLE_PUBLIC_LIBRARY_ADJACENT_TO_MAIN_PLAZA_SECTOR",
+          "basis": "LOCAL_RING_SYMMETRY_CONCEPT_ONLY",
+          "reason": "Общественный зал с окном мог выходить к площади или общему пространству детского блока, но прямого прохода из библиотеки на площадь не установлено.",
+          "falsifier": "Описание библиотеки вдали от площади или расположение окна на внешнюю обшивку"
+        },
+        {
+          "id": "R08-H014",
+          "from": "M-L2-LIB-OVAL-001",
+          "to": "M-L2-RES-001",
+          "relation": "POSSIBLE_LIBRARY_IN_RESIDENTIAL_RING_BRANCH",
+          "basis": "NON_SYMMETRIC_ALTERNATIVE",
+          "reason": "Библиотека может занимать секцию кольца кают с отдельным подходом; сходство использования помещений не доказывает повторяющийся модуль.",
+          "falsifier": "Установлен отдельный центральный общественный блок библиотеки без общего жилого кольца"
+        }
+      ]
+    },
+    {
+      "group_id": "R08-THIRD-SMALL-STORES-ARC",
+      "question": "К какому из служебных путей относятся полукруговые малые кладовки Третьего?",
+      "source_ids": [
+        "P-570",
+        "P-200"
+      ],
+      "options": [
+        {
+          "id": "R08-H015",
+          "from": "M-L3-SMALL-STORES-ARC-001",
+          "to": "M-L3-LOG-001",
+          "relation": "POSSIBLE_STORES_ON_CARGO_LOADER_NETWORK",
+          "basis": "CIRCULATION_TOPOLOGY_ALTERNATIVE",
+          "reason": "Полукруговая линия кладовых и проход к дверям цеха могут совпасть с грузовым сектором, но нет доказательства, что это коридор P-200.",
+          "falsifier": "Подтверждение разных коридоров или отдельного внутреннего кольца и промышленного сектора"
+        },
+        {
+          "id": "R08-H016",
+          "from": "M-L3-SMALL-STORES-ARC-001",
+          "to": "MOAG-G-0039",
+          "relation": "POSSIBLE_STORES_ON_INNER_SERVICE_ARC_BY_PRODUCTION",
+          "basis": "RING_AND_RADIAL_SYMMETRY_CONCEPT_ONLY",
+          "reason": "Небольшие помещения могут следовать дуге сервисного коридора у производственных дверей, без тождества основной грузовой магистрали.",
+          "falsifier": "Повествовательный маршрут показывает иной, удалённый от производства ряд кладовых"
+        }
+      ]
     }
   ],
   "gates": {
