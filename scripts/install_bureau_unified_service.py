@@ -77,11 +77,42 @@ def wait_health(port, child):
             with urlopen(f"http://127.0.0.1:{port}/health", timeout=0.4) as reply:
                 body = json_module.loads(reply.read())
             if (body.get("status") == "BUREAU_UNIFIED_ALIVE"
-                    and body.get("apaAttached") is True):
+                    and body.get("apaAttached") is True
+                    and body.get("pid") == child.pid):
                 return True
         except (OSError, ValueError):
             time.sleep(0.3)
     raise RuntimeError("UNIFIED_HEALTH_NOT_CONFIRMED")
+
+
+def watchdog_script(launcher, pause_file, port):
+    """VBS watchdog starts immediately; never launches a second live service."""
+    launcher, pause_file = safe_path(launcher), safe_path(pause_file)
+    if not 1024 <= int(port) <= 65535:
+        raise ValueError("INVALID_CALLBACK_PORT")
+    return (
+        'Set sh = CreateObject("WScript.Shell")\r\n'
+        'Set fs = CreateObject("Scripting.FileSystemObject")\r\n'
+        'Function ServiceAlive()\r\n'
+        '  On Error Resume Next\r\n'
+        '  Set req = CreateObject("MSXML2.ServerXMLHTTP.6.0")\r\n'
+        '  req.setTimeouts 500, 500, 500, 500\r\n'
+        '  req.Open "GET", "http://127.0.0.1:' + str(port) + '/health", False\r\n'
+        '  req.Send\r\n'
+        '  ServiceAlive = (Err.Number = 0)\r\n'
+        '  If ServiceAlive Then ServiceAlive = (req.Status = 200 And '
+        'InStr(req.responseText, "BUREAU_UNIFIED_ALIVE") > 0 And '
+        'InStr(req.responseText, Chr(34) & "apaAttached" & Chr(34) & ": true") > 0)\r\n'
+        '  Err.Clear\r\n'
+        '  On Error GoTo 0\r\n'
+        'End Function\r\n'
+        'Do While Not fs.FileExists("' + pause_file + '")\r\n'
+        '  If Not ServiceAlive() Then\r\n'
+        '    sh.Run Chr(34) & "' + launcher + '" & Chr(34), 0, True\r\n'
+        '  End If\r\n'
+        '  WScript.Sleep 15000\r\n'
+        'Loop\r\n'
+    )
 
 
 def install(config_path, root):
@@ -133,23 +164,20 @@ def install(config_path, root):
     new = startup / NEW_STARTUP
     if new.exists() or disabled.exists():
         raise RuntimeError("STARTUP_MIGRATION_ALREADY_PRESENT_REVIEW_MANUALLY")
+    if not old.is_file():
+        raise RuntimeError("OLD_APA_AUTOSTART_NOT_LOCATED_FAIL_CLOSED")
 
     child = None
+    watcher = None
     old_moved = False
     try:
         if old.exists():
             old.rename(disabled)
             old_moved = True
         stop_file = safe_path(state_dir / "PAUSE_AUTOSTART")
-        vbs = (
-            'Set sh = CreateObject("WScript.Shell")\r\n'
-            'Set fs = CreateObject("Scripting.FileSystemObject")\r\n'
-            'Do While Not fs.FileExists("' + stop_file + '")\r\n'
-            '  sh.Run Chr(34) & "' + safe_path(launch_cmd)
-            + '" & Chr(34), 0, True\r\n'
-            '  WScript.Sleep 15000\r\n'
-            'Loop\r\n'
-        )
+        if Path(stop_file).exists():
+            raise RuntimeError("PAUSE_SENTINEL_PRESENT_REMOVE_AFTER_REVIEW")
+        vbs = watchdog_script(launch_cmd, stop_file, config["callbackPort"])
         new.write_text(vbs, encoding="utf-8")
         with log.open("ab") as output:
             child = subprocess.Popen(
@@ -158,12 +186,22 @@ def install(config_path, root):
                 creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0)
             )
         wait_health(config["callbackPort"], child)
+        # Start supervision in this session as well, not only at next login.
+        watcher = subprocess.Popen(
+            ["wscript.exe", str(new)],
+            stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0)
+        )
+        if watcher.poll() is not None:
+            raise RuntimeError("WATCHDOG_FAILED_TO_START")
         receipt = {
             "status": "BUREAU_UNIFIED_LOCAL_PROCESS_READY",
             "oldStartupDisabled": old_moved,
             "newStartup": str(new),
             "apaBridgeSha256": pinned_sha,
             "servicePid": child.pid,
+            "watchdogPid": watcher.pid,
             "database": dbp,
             "log": logp,
             "httpPort": config["callbackPort"],
@@ -178,6 +216,8 @@ def install(config_path, root):
         )
         return receipt
     except Exception:
+        if watcher is not None and watcher.poll() is None:
+            watcher.terminate()
         if child is not None and child.poll() is None:
             child.terminate()
         new.unlink(missing_ok=True)
