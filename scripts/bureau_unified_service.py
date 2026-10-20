@@ -121,6 +121,8 @@ def config_load(filename):
         raise ValueError("ROUTES_NOT_IN_LOCAL_ALLOWLIST")
     if not isinstance(config["apaEnabled"], bool):
         raise ValueError("APA_FLAG_INVALID")
+    if not isinstance(config["dispatchArmed"], bool):
+        raise ValueError("DISPATCH_ARMED_FLAG_INVALID")
     if config["apaEnabled"] and (not HEX64.fullmatch(config["apaBridgeSha256"])
                                   or not config["apaBridgePath"]):
         raise ValueError("APA_PINNED_SOURCE_REQUIRED")
