@@ -118,7 +118,7 @@ class UnifiedServiceTests(unittest.TestCase):
 
     def test_invalid_receipt_quarantined_without_blocking_other_result(self):
         for name in ("auto-bad-104", "auto-good-105"):
-            self.enqueue(name)
+            self.enqueue(name, "D-04" if name == "auto-good-105" else "D-03")
             self.launch()
             token = self.token(name)
             self.c.ack(name, token, "TAB_SELECTED", "Selected")
