@@ -263,12 +263,42 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
                         # level, however, cannot attach to the graph.
                         review = ("MULTILEVEL_ALIAS_REVIEW" if multilevel
                                   else "ROUTE_LOCATION_LEVEL_CONFLICT")
+                        # Resolve only the *semantic* network contact when the
+                        # same route documents a directed descent/ascent from
+                        # this contact to a node at the indexed level. It never
+                        # fixes the network's global origin or its metric Z.
+                        witnesses = []
+                        if multilevel:
+                            by_step = {x["id"]: x for x in steps}
+                            for z in route.get("constraints", []):
+                                if z.get("kind") != "RELATIVE_Z":
+                                    continue
+                                hi = by_step.get(z.get("higher"))
+                                lo = by_step.get(z.get("lower"))
+                                if hi is None or lo is None or z.get("source_page_id") not in route["site_pages"]:
+                                    continue
+                                counterpart = (lo if hi["id"] == s["id"] else
+                                               hi if lo["id"] == s["id"] else None)
+                                if counterpart is None:
+                                    continue
+                                other_level = counterpart.get("global_level")
+                                if other_level in level[target] and other_level != v:
+                                    witnesses.append({
+                                        "other_step": counterpart["id"],
+                                        "other_level": other_level,
+                                        "relative_z": "HIGHER" if hi["id"] == s["id"] else "LOWER",
+                                        "source_page_id": z["source_page_id"]})
                         conflicts.append({
                             "code": review, "route_id": route["id"],
                             "step_id": s["id"], "target": target,
                             "page": source, "observed_level": v,
                             "indexed_levels": sorted(level[target]),
                             "connection_accepted": multilevel,
+                            "vertical_transition_witnesses": witnesses,
+                            "semantic_review": (
+                                "DOCUMENTED_LEVEL_CROSSING_NETWORK_CONTACT"
+                                if witnesses else "UNRESOLVED_NETWORK_CONTACT"
+                                if multilevel else "INCOMPATIBLE_ROOM_LEVEL"),
                             "interpretation": (
                                 "NETWORK_CONTACT_LEVEL_NOT_SINGLE_ROOM_ELEVATION"
                                 if multilevel else "SOURCE_LEVEL_CONTRADICTION_NO_JOIN")})
@@ -444,6 +474,11 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
             "high_priority_disconnected_frontiers": sum(x["priority"].startswith("P1_") for x in frontiers),
             "vertical_order_constraints": len(verticals),
             "crosswalk_review_conflicts": len(conflicts),
+            "documented_multilevel_network_contacts": sum(
+                x.get("semantic_review") == "DOCUMENTED_LEVEL_CROSSING_NETWORK_CONTACT"
+                for x in conflicts),
+            "ordinary_room_level_conflicts": sum(
+                x["code"] == "ROUTE_LOCATION_LEVEL_CONFLICT" for x in conflicts),
             "inferred_route_level_candidates": len(resolved),
             "source_backed_edges_by_class": dict(sorted(all_kinds.items())),
             "area_profiles": area["counts"]["with_area"], "area_check_failures": area["counts"]["fails"]
