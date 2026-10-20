@@ -18,6 +18,7 @@ import os
 from pathlib import Path
 import re
 import secrets
+from contextlib import contextmanager
 import sqlite3
 import subprocess
 import threading
@@ -127,6 +128,9 @@ def open_db(db_path):
         at TEXT NOT NULL,
         detail TEXT NOT NULL)""")
     db.execute("""CREATE INDEX IF NOT EXISTS jobs_by_status ON jobs(status,target)""")
+    db.execute("""CREATE TABLE IF NOT EXISTS rejected (
+        job_id TEXT PRIMARY KEY, blob_sha TEXT NOT NULL,
+        reason TEXT NOT NULL, changed TEXT NOT NULL)""")
     return db
 
 
@@ -236,6 +240,7 @@ class Coordinator:
             raise ValueError("EVENT_INBOX_INVALID")
         with self.lock:
             known = dict(self.db.execute("SELECT id,blob_sha FROM jobs"))
+            rejected = dict(self.db.execute("SELECT job_id,blob_sha FROM rejected"))
         added = 0
         for item in sorted(items, key=lambda x: x.get("name", "")):
             filename = item.get("name", "")
@@ -248,10 +253,26 @@ class Coordinator:
                 if known[job_id] != item["sha"]:
                     raise ValueError("IMMUTABLE_JOB_REWRITTEN")
                 continue
-            raw_event = checked_remote(f"{EVENTS}/{filename}", item["sha"])
-            ev = validate_event(raw_event, job_id, self.config)
-            if self.record(ev, item["sha"]) == "QUEUED":
-                added += 1
+            if job_id in rejected:
+                if rejected[job_id] != item["sha"]:
+                    raise ValueError("REJECTED_EVENT_REWRITTEN")
+                continue
+            try:
+                raw_event = checked_remote(f"{EVENTS}/{filename}", item["sha"])
+                ev = validate_event(raw_event, job_id, self.config)
+                if self.record(ev, item["sha"]) == "QUEUED":
+                    added += 1
+            except (ValueError, UnicodeError, json.JSONDecodeError) as exc:
+                with self.lock:
+                    self.db.execute(
+                        "INSERT OR IGNORE INTO rejected(job_id,blob_sha,reason,changed)"
+                        " VALUES(?,?,?,?)",
+                        (job_id, item["sha"], type(exc).__name__ +
+                         ":" + str(exc)[:200], now_iso())
+                    )
+                # Deterministic invalid task stays quarantined; valid siblings continue.
+                print("BUREAU_EVENT_REJECTED", job_id, type(exc).__name__,
+                      flush=True)
         return added
 
     def launch_one(self):
@@ -452,6 +473,34 @@ class Coordinator:
                     )]
 
 
+@contextmanager
+def exclusive_process_lock(path):
+    """Межпроцессная блокировка на Windows и POSIX без сторонних библиотек."""
+    lock_path = Path(str(path) + ".owner.lock")
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    file = lock_path.open("a+b")
+    try:
+        file.seek(0)
+        file.write(b"\x00")
+        file.flush()
+        file.seek(0)
+        if os.name == "nt":
+            import msvcrt
+            try:
+                msvcrt.locking(file.fileno(), msvcrt.LK_NBLCK, 1)
+            except OSError:
+                raise RuntimeError("UNIFIED_BUREAU_ALREADY_RUNNING")
+        else:
+            import fcntl
+            try:
+                fcntl.flock(file.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except OSError:
+                raise RuntimeError("UNIFIED_BUREAU_ALREADY_RUNNING")
+        yield
+    finally:
+        file.close()
+
+
 def handler_for(coordinator):
     class Handler(BaseHTTPRequestHandler):
         def _reply(self, code, obj):
@@ -519,6 +568,11 @@ def main():
         c.recover(a.job_id, a.reason)
         print("CANCELLED_AFTER_REVIEW", a.job_id)
         return
+    with exclusive_process_lock(a.db):
+        run_locked(c, a, config)
+
+
+def run_locked(c, a, config):
     c.enable_apa()   # fails closed if the previous APA receiver is still active
     if a.command == "scan":
         print("BUREAU_NEW", c.scan(), "APA_JOBS", c.scan_apa())
