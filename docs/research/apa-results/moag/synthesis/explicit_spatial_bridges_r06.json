@@ -1,0 +1,270 @@
+{
+  "schema": "APA-MOAG-EXPLICIT-SPATIAL-BRIDGES-R06/0.1",
+  "status": "REVIEWED_OBSERVATION_DERIVED_RELATIONS_NOT_APPROVED_METRIC_GEOMETRY",
+  "description": "Only explicit reviewed station observations; source IDs validate against R04 audit. Each edge is distinct-place qualitative relation; never SAME_IDENTITY. Дополнение R06 20.10: конкретные источники P-240, P-356—358, P-364 и P-385 дают шесть типизированных связей без метрической локализации, причём техника и исторический центр не считаются прямыми проходами.",
+  "typed_edges": [
+    {
+      "id": "S06-001",
+      "from": "M-L1-CH-GAL-001",
+      "to": "M-L1-CH-ST-001",
+      "relation": "LOCAL_STAIR_ACCESS",
+      "source_ids": [
+        "P-220"
+      ],
+      "explanation": "Лестница ведёт к внутреннему мостику круглого зала",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-002",
+      "from": "M-L1-FH-001",
+      "to": "M-L1-FH-001-ST",
+      "relation": "LOCAL_STAIR_IN_HANGAR",
+      "source_ids": [
+        "P-365"
+      ],
+      "explanation": "Операторская первого ангара находится над полом; доступ по лестнице",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-003",
+      "from": "M-L1-FH-002",
+      "to": "M-L1-FH-002-ST",
+      "relation": "LOCAL_STAIR_IN_HANGAR",
+      "source_ids": [
+        "P-368",
+        "P-369"
+      ],
+      "explanation": "В соседнем ангаре лестница ведёт к высокой операторской",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-004",
+      "from": "M-L1-WASTE-001",
+      "to": "M-L1-WASTE-FURNACE-001",
+      "relation": "EQUIPMENT_INSIDE_WORKSHOP",
+      "source_ids": [
+        "P-108"
+      ],
+      "explanation": "Печь в дальнем конце перерабатывающего цеха; оборудование не отдельное помещение",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-005",
+      "from": "M-L2-RES-GAL-001",
+      "to": "M-L2-PLAZA-ST-001",
+      "relation": "LOCAL_STAIR_FROM_GALLERY",
+      "source_ids": [
+        "P-486"
+      ],
+      "explanation": "Спуск с галереи на площадь по лестнице",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-006",
+      "from": "M-L2-RES-001",
+      "to": "M-L2-ORANGE-001",
+      "relation": "ROUTE_VIA_UNMODELED_TUNNEL",
+      "source_ids": [
+        "P-193"
+      ],
+      "explanation": "Из нижнего яруса жилого кольца выход к Оранжевой через не локализованные туннели",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-007",
+      "from": "M-L1-FH-001",
+      "to": "V-BOAT-L1-001",
+      "relation": "VEHICLE_STORED_IN_HANGAR",
+      "source_ids": [
+        "P-364"
+      ],
+      "explanation": "Боевой катер физически стоит внутри первого ангара; это отношение хранения транспортного средства, не отдельная комната",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-008",
+      "from": "M-L1-FH-001",
+      "to": "M-L1-FH-LOCK-001",
+      "relation": "AIRLOCK_GATE_BETWEEN_HANGAR_AND_CHAMBER",
+      "source_ids": [
+        "P-364",
+        "P-384",
+        "P-385"
+      ],
+      "explanation": "Катера из ангара проходят в герметичную камеру через закрываемые створки; существование ворот подтверждено, состояние доступа зависит от времени",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": true,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-009",
+      "from": "MOAG-G-0045",
+      "to": "MOAG-G-0046",
+      "relation": "FREIGHT_LIFTS_TO_CARGO_HALL_VIA_WIDE_PASSAGE",
+      "source_ids": [
+        "P-356"
+      ],
+      "explanation": "От грузовых лифтов Верхнего ведёт широкий проход к грузовому залу; промежуточная геометрия прохода неизвестна",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-010",
+      "from": "MOAG-G-0046",
+      "to": "MOAG-G-0047",
+      "relation": "SPACESUIT_ALCOVE_BY_CARGO_HALL",
+      "source_ids": [
+        "P-357"
+      ],
+      "explanation": "Ниша скафандров расположена у грузового зала за поворотом; прямой дверной проход между ними не доказан",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-011",
+      "from": "MOAG-G-0046",
+      "to": "MOAG-G-0048",
+      "relation": "CARGO_HALL_FACES_PRODUCTION_GATE",
+      "source_ids": [
+        "P-356",
+        "P-358"
+      ],
+      "explanation": "Двери производственного цеха непосредственно видны из грузового зала; дверь существовала, но посещения производственного цеха не было",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-012",
+      "from": "M-L1-CG-001",
+      "to": "M-L1-CG-CTRL-001",
+      "relation": "HISTORIC_CONTROLLER_OF_CARGO_HANGAR_COMPLEX",
+      "source_ids": [
+        "P-240"
+      ],
+      "explanation": "Найденная документация описывает исторический центр управления грузовыми ангарами крейсеров; связь функциональная, не подтверждение прямого прохода",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-013",
+      "from": "MOAG-G-0089",
+      "to": "MOAG-G-0090",
+      "relation": "SEQUENTIAL_BASE_GATES_VIA_INTERMEDIATE_CORRIDOR",
+      "source_ids": [
+        "P-190"
+      ],
+      "explanation": "Два последовательных дверных рубежа у баз Нижнего уровня отделены длинным коридором; доказана маршрутная связь, но не непосредственная соседняя дверь",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    },
+    {
+      "id": "S06-014",
+      "from": "M-L3-LOG-001",
+      "to": "M-L3-CG-001",
+      "relation": "CARGO_LOADER_CORRIDOR_BRANCHES_TOWARD_HANGAR_ZONE",
+      "source_ids": [
+        "P-200"
+      ],
+      "explanation": "Белый коридор от внутреннего круга расширяется на развилке для погрузчиков; справа находится ангарная/шлюзовая группа Верхнего. Документирована топологическая связь сектора с коридором, не непосредственный проём и не тождество всей группы одному ангару.",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
+    }
+  ],
+  "deferred_hypotheses": [
+    {
+      "id": "H06-001",
+      "from": "M-L1-FH-001",
+      "to": "M-L1-FH-LOCK-001",
+      "source_ids": [
+        "P-385"
+      ],
+      "reason": "Историческая гипотеза снята: B2 p14–15 и p21 позволяют отнести действующий шлюз к первому рабочему ангару; соседние ангары не отождествляются со шлюзом автоматически.",
+      "approved_as_connection": true,
+      "status": "RESOLVED_BY_EPISODE_SPECIFIC_SOURCE_REFERENCE",
+      "superseded_by": "S06-008",
+      "additional_scene_source": {
+        "page_id": "B2-015",
+        "url": "https://loveread.ec/read_book.php?id=53370&p=15",
+        "exact_context": "Здешний шлюз относится к рабочему первому ангару с двумя исправными катерами; близнецы уточняют, что найденные позже катера из соседнего ангара должны запускаться через этот рабочий шлюз.",
+        "scope": "AIRLOCK_OF_WORKING_HANGAR_NOT_ALL_NEIGHBOUR_HANGARS"
+      }
+    },
+    {
+      "id": "H06-002",
+      "from": "M-L3-SMALL-STORES-ARC-001",
+      "to": "M-L3-LOG-001",
+      "source_ids": [
+        "P-570"
+      ],
+      "reason": "Не подтверждено тождество описанного коридора грузовому",
+      "approved_as_connection": false,
+      "status": "OPEN_NO_PHYSICAL_IDENTITY_OR_DIRECT_ROUTE_PROOF"
+    },
+    {
+      "id": "H06-003",
+      "from": "M-L3-OLD-ISOLATION-ROOM-001",
+      "to": "MOAG-G-0030",
+      "source_ids": [
+        "P-571",
+        "P-572"
+      ],
+      "reason": "Ошибка прежней очереди: MOAG-G-0030 — школа/экзаменационный блок Второго (L2), а M-L3-OLD-ISOLATION-ROOM-001 — старая изоляционная комната Третьего (L3). Данные P-571/P-572 не устанавливают тождество со школой и не разрешают объединение уровней.",
+      "approved_as_connection": false,
+      "status": "REJECTED_WRONG_IDENTITY_AND_DISJOINT_GLOBAL_LEVELS",
+      "disjoint_level_evidence": {
+        "from_level": 3,
+        "to_level": 2,
+        "from_kind": "old_isolation_room",
+        "to_kind": "school_exam_block"
+      }
+    }
+  ]
+}

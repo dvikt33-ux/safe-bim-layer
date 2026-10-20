@@ -1,0 +1,311 @@
+{
+  "schema": "APA-MOAG-HYPOTHESIS-PROPOSALS-R08/0.1",
+  "title": "Гипотезы размещения, а не доказанные соединения",
+  "status": "UNAPPROVED_SPATIAL_SCENARIOS",
+  "purpose": "Preserve all known but unlocated elements and all route gaps, and explore possible symmetry without authorizing geometry or physical edge union",
+  "isolation_candidate_groups": [
+    {
+      "target_index_id": "MOAG-G-0077",
+      "group": "ELEVATOR_D_E_DISTANCE_CONSTRAINT",
+      "possible_anchors": [
+        "MOAG-G-0031",
+        "MOAG-G-0032"
+      ],
+      "rationale": "Лифты Д/Е находятся на третьем уровне и далее от грузоприёмной площадки; конкретный внутренний/внешний круг неизвестен",
+      "source_observation_or_page_ids": [
+        "LR-B1-032"
+      ],
+      "contraindication": "Не выводить расстояние, направление или тождество с грузовыми лифтами",
+      "model_status": "HYPOTHESIS_ONLY",
+      "decision_rule": "REQUIRE_NEW_DIRECT_TEXT_OR_OBSERVED_ROUTE",
+      "geometry_approved": false,
+      "identity_approved": false,
+      "access_approved": false
+    },
+    {
+      "target_index_id": "MOAG-G-0078",
+      "group": "FREIGHT_RECEPTION_SECTOR",
+      "possible_anchors": [
+        "MOAG-G-0045",
+        "M-L3-LOG-001"
+      ],
+      "rationale": "Грузоприёмная платформа может обслуживаться логистической сетью третьего уровня, но проход и конкретная группа лифтов не доказаны",
+      "source_observation_or_page_ids": [
+        "LR-B1-032",
+        "P-200"
+      ],
+      "contraindication": "Лифты Д/Е могут быть отдельно от грузового лифтового узла",
+      "model_status": "HYPOTHESIS_ONLY",
+      "decision_rule": "REQUIRE_NEW_DIRECT_TEXT_OR_OBSERVED_ROUTE",
+      "geometry_approved": false,
+      "identity_approved": false,
+      "access_approved": false
+    },
+    {
+      "target_index_id": "MOAG-G-0108",
+      "group": "OUTER_TO_INNER_SERVICE_ROUTE",
+      "possible_anchors": [
+        "MOAG-G-0032",
+        "MOAG-G-0031"
+      ],
+      "rationale": "Продовольственные кладовые расположены вне закрытого внутреннего круга; возможна связь через периметральный или межкольцевой проход",
+      "source_observation_or_page_ids": [
+        "LR-B1-070"
+      ],
+      "contraindication": "Не помещать кладовую внутрь закрытого круга в качестве факта",
+      "model_status": "HYPOTHESIS_ONLY",
+      "decision_rule": "REQUIRE_NEW_DIRECT_TEXT_OR_OBSERVED_ROUTE",
+      "geometry_approved": false,
+      "identity_approved": false,
+      "access_approved": false
+    },
+    {
+      "target_index_id": "M-L1-LOG-COR-001",
+      "group": "LOWER_HANGAR_CARGO_SPINE",
+      "possible_anchors": [
+        "MOAG-G-0017",
+        "M-L1-CG-001"
+      ],
+      "rationale": "Широкий прямолинейный грузовой коридор может быть частью ангарного сообщения Нижнего, но не отождествлён с другими полукруглыми ходами",
+      "source_observation_or_page_ids": [
+        "P-169"
+      ],
+      "contraindication": "Не подменять прямой коридор полукруглым или историческим ангаром",
+      "model_status": "HYPOTHESIS_ONLY",
+      "decision_rule": "REQUIRE_NEW_DIRECT_TEXT_OR_OBSERVED_ROUTE",
+      "geometry_approved": false,
+      "identity_approved": false,
+      "access_approved": false
+    },
+    {
+      "target_index_id": "M-L3-LIFT-LOG-001",
+      "group": "THIRD_DECK_LIFT_NETWORK",
+      "possible_anchors": [
+        "MOAG-G-0045",
+        "M-L3-LOG-001"
+      ],
+      "rationale": "Упоминание верхних грузовых подъёмников и их связи с транспортными коридорами допускает общую логистическую сеть, но тождество двух групп не подтверждено",
+      "source_observation_or_page_ids": [
+        "P-200",
+        "P-356"
+      ],
+      "contraindication": "Сходное назначение лифтов не означает один физический узел",
+      "model_status": "HYPOTHESIS_ONLY",
+      "decision_rule": "REQUIRE_NEW_DIRECT_TEXT_OR_OBSERVED_ROUTE",
+      "geometry_approved": false,
+      "identity_approved": false,
+      "access_approved": false
+    },
+    {
+      "target_index_id": "M-L2-DINING-001",
+      "group": "CHILDREN_DINING_FUNCTIONAL_NEIGHBOR",
+      "possible_anchors": [
+        "M-L2-RES-001",
+        "M-L2-PLAZA-001"
+      ],
+      "rationale": "Столовая детей вероятно обслуживает жилую/общественную часть второго блока, но ни место, ни вход не описаны",
+      "source_observation_or_page_ids": [
+        "P-478"
+      ],
+      "contraindication": "Не утверждать дверь из кольца или площади",
+      "model_status": "HYPOTHESIS_ONLY",
+      "decision_rule": "REQUIRE_NEW_DIRECT_TEXT_OR_OBSERVED_ROUTE",
+      "geometry_approved": false,
+      "identity_approved": false,
+      "access_approved": false
+    },
+    {
+      "target_index_id": "M-L2-LIB-OVAL-001",
+      "group": "OVAL_WINDOW_EXTERIOR_VIEW",
+      "possible_anchors": [
+        "M-L2-RES-001",
+        "M-L2-PLAZA-001"
+      ],
+      "rationale": "Большое овальное окно с видом на крейсеры даёт ограничение внешнего обзора; сектор размещения библиотеки остаётся вариантным",
+      "source_observation_or_page_ids": [
+        "P-488"
+      ],
+      "contraindication": "Не доказывает центральное/радиальное положение или форму корпуса",
+      "model_status": "HYPOTHESIS_ONLY",
+      "decision_rule": "REQUIRE_NEW_DIRECT_TEXT_OR_OBSERVED_ROUTE",
+      "geometry_approved": false,
+      "identity_approved": false,
+      "access_approved": false
+    },
+    {
+      "target_index_id": "M-L2-LIB-NOWINDOW-001",
+      "group": "WINDOWLESS_LOCAL_LOWER_STORY",
+      "possible_anchors": [
+        "M-L2-RES-001",
+        "M-L2-PLAZA-001"
+      ],
+      "rationale": "Малая библиотека без окна находится на локальном первом этаже внутри второго блока; её нельзя переносить на глобальный Нижний",
+      "source_observation_or_page_ids": [
+        "P-520"
+      ],
+      "contraindication": "Не сливать с библиотекой овального окна",
+      "model_status": "HYPOTHESIS_ONLY",
+      "decision_rule": "REQUIRE_NEW_DIRECT_TEXT_OR_OBSERVED_ROUTE",
+      "geometry_approved": false,
+      "identity_approved": false,
+      "access_approved": false
+    },
+    {
+      "target_index_id": "M-L2-WATER-RESERVOIR-001",
+      "group": "SECOND_DECK_WATER_SERVICE",
+      "possible_anchors": [
+        "M-STA-L2-001",
+        "M-L2-ORANGE-001"
+      ],
+      "rationale": "Собственный резервуар второго блока может иметь обслуживание от внутренних технических маршрутов, но точный проход не известен",
+      "source_observation_or_page_ids": [
+        "P-509"
+      ],
+      "contraindication": "Резервуар не равен помещению доступному из Оранжевой",
+      "model_status": "HYPOTHESIS_ONLY",
+      "decision_rule": "REQUIRE_NEW_DIRECT_TEXT_OR_OBSERVED_ROUTE",
+      "geometry_approved": false,
+      "identity_approved": false,
+      "access_approved": false
+    },
+    {
+      "target_index_id": "M-L3-ARMORY-001",
+      "group": "WHITE_DOOR_STORES_ACCESS",
+      "possible_anchors": [
+        "MOAG-G-0037",
+        "M-L3-LOG-001"
+      ],
+      "rationale": "Кладовая оружия за рядом белых дверей относится к верхней обслуживаемой зоне; возможные соседства нельзя превращать в проходы",
+      "source_observation_or_page_ids": [
+        "P-498"
+      ],
+      "contraindication": "Не доказывает принадлежность общим складам",
+      "model_status": "HYPOTHESIS_ONLY",
+      "decision_rule": "REQUIRE_NEW_DIRECT_TEXT_OR_OBSERVED_ROUTE",
+      "geometry_approved": false,
+      "identity_approved": false,
+      "access_approved": false
+    },
+    {
+      "target_index_id": "M-L3-OLD-ISOLATION-ROOM-001",
+      "group": "OLD_ISOLATION_ROUTE_SECTOR",
+      "possible_anchors": [
+        "MOAG-G-0031",
+        "MOAG-G-0032"
+      ],
+      "rationale": "Комната бывшего изолятора достигается по старому коридору; он пока не отождествлён с известными кольцевыми магистралями",
+      "source_observation_or_page_ids": [
+        "P-571",
+        "P-572"
+      ],
+      "contraindication": "Нельзя путать изолятор Третьего со школой Второго",
+      "model_status": "HYPOTHESIS_ONLY",
+      "decision_rule": "REQUIRE_NEW_DIRECT_TEXT_OR_OBSERVED_ROUTE",
+      "geometry_approved": false,
+      "identity_approved": false,
+      "access_approved": false
+    },
+    {
+      "target_index_id": "M-L3-SMALL-STORES-ARC-001",
+      "group": "ARC_SMALL_STORES_ACCESS",
+      "possible_anchors": [
+        "MOAG-G-0031",
+        "M-L3-LOG-001"
+      ],
+      "rationale": "Полукруглый ряд маленьких кладовых расположен вдоль локального коридора; идентичность этого коридора с грузовой магистралью не доказана",
+      "source_observation_or_page_ids": [
+        "P-570"
+      ],
+      "contraindication": "Не переносить изгиб кладовых на весь корпус станции",
+      "model_status": "HYPOTHESIS_ONLY",
+      "decision_rule": "REQUIRE_NEW_DIRECT_TEXT_OR_OBSERVED_ROUTE",
+      "geometry_approved": false,
+      "identity_approved": false,
+      "access_approved": false
+    }
+  ],
+  "analogical_patterns": [
+    {
+      "id": "R08-PAT-RING-01",
+      "kind": "RADIAL_SECTOR_ANALOGY",
+      "references": [
+        "MOAG-G-0031",
+        "MOAG-G-0032",
+        "M-L3-LOG-001"
+      ],
+      "source_context": [
+        "P-200"
+      ],
+      "assumption": "Кольцевые маршруты и радиальные ответвления могут повторяться по секторам Верхнего",
+      "not_deduced": "Число лучей, равный угловой шаг, зеркальная симметрия и точные радиусы",
+      "fit_check": "Не нарушать наблюдения о развилках и неизвестной протяжённости переходов",
+      "confidence_label": "ANALOGICAL_NOT_BOOK_FACT",
+      "produces_graph_edges": false,
+      "fixes_xy_z": false,
+      "requires_independent_source_confirmation": true
+    },
+    {
+      "id": "R08-PAT-HANGAR-02",
+      "kind": "REPEATED_BAY_ANALOGY",
+      "references": [
+        "M-L1-FH-001",
+        "M-L1-FH-002",
+        "M-L1-FH-001-CTRL",
+        "M-L1-FH-002-CTRL"
+      ],
+      "source_context": [
+        "P-365",
+        "P-367",
+        "P-368",
+        "P-369"
+      ],
+      "assumption": "Два ангара катеров с верхними операторскими могут иметь повторяемую модульную организацию",
+      "not_deduced": "Одинаковая площадь, ориентация ворот, зеркальная планировка или одинаковая лестница",
+      "fit_check": "Сохранять различие оборудования, освещения и числа катеров",
+      "confidence_label": "ANALOGICAL_NOT_BOOK_FACT",
+      "produces_graph_edges": false,
+      "fixes_xy_z": false,
+      "requires_independent_source_confirmation": true
+    },
+    {
+      "id": "R08-PAT-LEVEL-03",
+      "kind": "CONCENTRIC_BLOCK_DESIGN_SCENARIO",
+      "references": [
+        "M-STA-L1-001",
+        "M-STA-L2-001",
+        "M-STA-L3-001"
+      ],
+      "source_context": [
+        "P-096",
+        "P-592"
+      ],
+      "assumption": "Вариант согласованной общей оси/концентрических блоков для проектной компоновки",
+      "not_deduced": "Круглые одинаковые палубы, точный центр оси, одинаковые радиусы и полномасштабная симметрия",
+      "fit_check": "Нижний объём больше Верхнего только по подтверждённым порядковым ограничениям; локальные антресоли не глобальные уровни",
+      "confidence_label": "ANALOGICAL_NOT_BOOK_FACT",
+      "produces_graph_edges": false,
+      "fixes_xy_z": false,
+      "requires_independent_source_confirmation": true
+    }
+  ],
+  "mandatory_alternative": "LEAVE_UNLOCATED_WITH_EVIDENCE_PRESERVED",
+  "priorities": [
+    "FIRST_DOCUMENTED_DIRECT_PATHS",
+    "THEN_LOCAL_FUNCTIONAL_PLACEMENT",
+    "LAST_ANALOGICAL_SYMMETRY"
+  ],
+  "forbidden_promotions": [
+    "HYPOTHESIS_TO_DIRECT_DOOR",
+    "SYMMETRY_TO_METRIC_AXIS",
+    "NARRATIVE_GAP_TO_KNOWN_CORRIDOR",
+    "GLOBAL_LEVEL_FROM_LOCAL_MEZZANINE",
+    "ALIAS_TO_PHYSICAL_IDENTITY",
+    "AREA_SUM_WITH_DOUBLE_COUNT"
+  ],
+  "gates": {
+    "union_into_evidence_components": false,
+    "archicad_write": false,
+    "metric_xy_or_z": false,
+    "symmetry_as_fact": false
+  }
+}

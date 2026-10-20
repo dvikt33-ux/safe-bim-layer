@@ -1,0 +1,40 @@
+{
+  "schema": "APA-MOAG-FOREIGN-STATION-CONTEXT-QUARANTINE-R06/0.1",
+  "status": "REVIEW_REQUIRED_DO_NOT_USE_AS_CONFIRMED_MOAG_ROOM_GEOMETRY",
+  "reason": "B3 pp15-17 are the expedition's approach to and traversal of an alien/other station. The pronoun 'station' in the repair-hatch discussion is not proven to refer to MOAG, and known layouts may be transferred by character analogy. B3 p17 explicitly calls current location a foreign station and distinguishes the access code previously used on MOAG. Keep original observations for audit, not as source-validated MOAG geometry.",
+  "source_pages": [
+    {
+      "page_id": "B3-015",
+      "url": "https://loveread.ec/read_book.php?id=58610&p=15",
+      "exclusion": "Plan to use two upper hatches while rescuing Luke at target station is not verified as physical observation on MOAG"
+    },
+    {
+      "page_id": "B3-016",
+      "url": "https://loveread.ec/read_book.php?id=58610&p=16",
+      "exclusion": "Repair hatches on target's external shell and recalled/analogous station diagrams need referent resolution"
+    },
+    {
+      "page_id": "B3-017",
+      "url": "https://loveread.ec/read_book.php?id=58610&p=17",
+      "exclusion": "Explicitly foreign station during hatch opening and cable shaft traversal"
+    }
+  ],
+  "quarantined_observation_ids": [
+    "P-671",
+    "P-674"
+  ],
+  "contextual_comparison_observation_ids": [
+    "P-672"
+  ],
+  "affected_index_ids": [
+    "M-L3-CABLE-HATCH-001",
+    "M-L3-CABLE-HATCH-002",
+    "M-L3-COMMS-HATCHES-001"
+  ],
+  "source_station_verdict": "EXPLICIT_MOAG_IDENTITY_NOT_PROVEN_FROM_THIS_SCENE",
+  "do_not_remove_source_records": true,
+  "do_not_delete_preexisting_area_profiles": true,
+  "do_not_add_to_moag_access_graph": true,
+  "needs_textological_review": true,
+  "station_geometry_ready": false
+}

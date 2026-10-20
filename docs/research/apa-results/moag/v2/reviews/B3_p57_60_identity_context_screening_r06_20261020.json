@@ -1,0 +1,91 @@
+{
+  "schema": "APA-MOAG-SOURCE-SCREENING-R06-B3-57-60/0.1",
+  "status": "PRIMARY_WEB_PAGES_READ_CONTEXT_FILTERED_NOT_YET_IMPORTED_TO_V2_LEDGER",
+  "book": "B3",
+  "scope": "Часть III, глава 4 Эмма. Главный интеллект станции; страница 57 смешанная, страница 60 смешанная.",
+  "pages": [
+    {
+      "page_id": "B3-057",
+      "url": "https://loveread.ec/read_book.php?id=58610&p=57",
+      "read": "FULL_PAGE",
+      "parts": [
+        {
+          "narrative_location": "земное действие до заголовка главы 4",
+          "classification": "EXTERNAL_TO_MOAG",
+          "geometry_allowed": false
+        },
+        {
+          "narrative_location": "после заголовка главы 4",
+          "classification": "OTHER_ORBITAL_STATION_PITER",
+          "geometry_allowed": false
+        }
+      ],
+      "moag_evidence": []
+    },
+    {
+      "page_id": "B3-058",
+      "url": "https://loveread.ec/read_book.php?id=58610&p=58",
+      "read": "FULL_PAGE",
+      "parts": [
+        {
+          "classification": "OTHER_ORBITAL_STATION_PITER",
+          "geometry_allowed": false
+        }
+      ],
+      "moag_evidence": [
+        {
+          "kind": "MOAG_CHARACTER_MEMORY_NONSPATIAL",
+          "summary": "Эмма вспоминает Мартина и Лоньку и ощущает утрату МОАГа; сведений для локализации помещений нет.",
+          "may_enter_architectural_graph": false
+        }
+      ]
+    },
+    {
+      "page_id": "B3-059",
+      "url": "https://loveread.ec/read_book.php?id=58610&p=59",
+      "read": "FULL_PAGE",
+      "parts": [
+        {
+          "classification": "OTHER_ORBITAL_STATION_PITER",
+          "geometry_allowed": false
+        }
+      ],
+      "moag_evidence": [
+        {
+          "kind": "REMOTE_COMPARATIVE_INTERIOR",
+          "summary": "Эмма узнаёт в рубке другой станции знакомые по МОАГу монитор, кресла и ковровое покрытие того же цвета. Подтверждено сходство оснащения рубок, но не доказано тождество планировки, объёма, размеров, координат, дверей или этажа.",
+          "moag_target_candidate": "MOAG капитанская рубка (R04 legacy ID требует отдельной сверки)",
+          "may_enter_architectural_graph": false,
+          "may_enter_design_reference": true
+        }
+      ]
+    },
+    {
+      "page_id": "B3-060",
+      "url": "https://loveread.ec/read_book.php?id=58610&p=60",
+      "read": "FULL_PAGE",
+      "parts": [
+        {
+          "classification": "OTHER_ORBITAL_STATION_PITER_CH4_END",
+          "geometry_allowed": false
+        },
+        {
+          "classification": "EARTH_PLOT_CH5_START",
+          "geometry_allowed": false
+        }
+      ],
+      "moag_evidence": []
+    }
+  ],
+  "narrative_identity_constraints": [
+    "Питер управляет другой орбитальной станцией, не МОАГом. Его лифты, лестницы, капитанская рубка и вооружение не переносятся в модель МОАГа.",
+    "Сходство оборудования рубок не означает идентичные геометрические планы.",
+    "После заголовка главы 5 на странице 60 начинается земная глава, исключить из геометрии станции."
+  ],
+  "route_insertions": 0,
+  "physical_nodes_insertions": 0,
+  "spatial_edges_insertions": 0,
+  "metric_dimensions_insertions": 0,
+  "geometry_approved": false,
+  "review_next": "Продолжить с главы 6 (станционный сюжет) по точной границе оглавления; прежде проверить, содержит ли глава воспоминания о МОАГе, а не расположение других станций."
+}

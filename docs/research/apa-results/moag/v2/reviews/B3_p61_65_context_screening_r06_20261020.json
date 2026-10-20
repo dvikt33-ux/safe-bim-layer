@@ -1,0 +1,67 @@
+{
+  "schema": "APA-MOAG-CONTEXT-SCREENING-B3-61-65-R06/0.1",
+  "status": "DIRECT_WEB_PAGE_READ_FILTERED_NO_SPATIAL_PROMOTION",
+  "book": "B3",
+  "date": "2026-10-20",
+  "scope": "Конец части III главы 5, глава 6 Эмма. Атака старых знакомцев, начало главы 7",
+  "pages": [
+    {
+      "page_id": "B3-061",
+      "url": "https://loveread.ec/read_book.php?id=58610&p=61",
+      "read": "FULL",
+      "story_context": "EARTH_OR_CRUISER",
+      "geometric_station": "NOT_MOAG",
+      "moag_physical_evidence": false
+    },
+    {
+      "page_id": "B3-062",
+      "url": "https://loveread.ec/read_book.php?id=58610&p=62",
+      "read": "FULL",
+      "story_context": "EARTH_CH5_END_AND_INCOGNITO_CH6_START",
+      "geometric_station": "NOT_MOAG",
+      "moag_physical_evidence": false,
+      "noncanon_hypotheses": [
+        {
+          "description": "Эмма допускает, что МОАГ тоже мог иметь лазерные орудия, управляемые из рубки",
+          "mode": "CHARACTER_SPECULATION",
+          "adopted_as_moag_equipment": false,
+          "adopted_as_geometry": false
+        }
+      ]
+    },
+    {
+      "page_id": "B3-063",
+      "url": "https://loveread.ec/read_book.php?id=58610&p=63",
+      "read": "FULL",
+      "story_context": "INCOGNITO_CH6",
+      "geometric_station": "OTHER_STATION",
+      "moag_physical_evidence": false,
+      "exclusion": "Развилки коридоров, оружие и участки Второго относятся к другой станции"
+    },
+    {
+      "page_id": "B3-064",
+      "url": "https://loveread.ec/read_book.php?id=58610&p=64",
+      "read": "FULL",
+      "story_context": "INCOGNITO_CH6_END_EARTH_CH7_START",
+      "geometric_station": "OTHER_STATION_AND_EARTH",
+      "moag_physical_evidence": false,
+      "exclusion": "Внутренний круг, два грузовых лифта, вентшахты и кладовки — станция Питера; новая глава начинается на этой же странице"
+    },
+    {
+      "page_id": "B3-065",
+      "url": "https://loveread.ec/read_book.php?id=58610&p=65",
+      "read": "FULL",
+      "story_context": "EARTH_CH7_OTHER_STATION_REFERENCES",
+      "geometric_station": "EARTH_AND_SECOND_STATION",
+      "moag_physical_evidence": false,
+      "exclusion": "Не переносить горный ангар Второй станции в МОАГ"
+    }
+  ],
+  "moag_space_edges_added": 0,
+  "moag_room_nodes_added": 0,
+  "moag_global_story_additions": 0,
+  "moag_metric_dimensions_added": 0,
+  "preserved_hypotheses": 1,
+  "note": "Ни одна из страниц 61–65 не подтверждает новую конструктивно-планировочную связь МОАГа; предыдущий просмотр B3 p57–60 хранится отдельно. Данные не импортированы в ledger v2, его счётчики не менялись. Порядок главы установлен по заголовкам страниц и оглавлению.",
+  "geometry_approved": false
+}
