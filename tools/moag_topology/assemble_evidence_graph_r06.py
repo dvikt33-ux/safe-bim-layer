@@ -35,6 +35,7 @@ AMBIGUOUS_LEGACY_SCENE_IDS = {
 GAP = "NARRATIVE_GAP"
 BRIDGES = SYNTH / "explicit_spatial_bridges_r06.json"
 CONTEXT_CORRECTIONS = SYNTH / "route_context_corrections_r06.json"
+STATION_CONTEXT_QUARANTINE = SYNTH / "B3_p15_17_station_identity_quarantine_r06.json"
 R03_CONNECTING_RELATIONS = {
     "HAS_INTERNAL_UPPER_ROOM", "CONNECTS_FLOOR_TO_UPPER_ROOM",
     "HAS_UPPER_GALLERY", "CONNECTS_FLOOR_TO", "CONNECTS_UPPER_TO_LOWER"
@@ -90,13 +91,22 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         level[rec["node_id"]] = set(rec["possible_global_levels"])
     physical = graph["indexed_source_entities"] + graph["indexed_r03_entities"] + fragments["physical_entities"]
     kinds = {x["id"]: x["kind"] for x in physical}
+    station_review = json.loads(STATION_CONTEXT_QUARANTINE.read_text(encoding="utf-8"))
+    if station_review.get("schema") != "APA-MOAG-FOREIGN-STATION-CONTEXT-QUARANTINE-R06/0.1":
+        raise ValueError("UNEXPECTED_FOREIGN_STATION_QUARANTINE_SCHEMA")
+    disputed_indices = set(station_review["affected_index_ids"])
+    disputed_observations = set(station_review["quarantined_observation_ids"])
+    if (not disputed_indices <= set(kinds) or
+            len(disputed_indices) != len(station_review["affected_index_ids"])):
+        raise ValueError("INVALID_FOREIGN_STATION_INDEX_LIST")
     if len(kinds) != len(physical) or set(level) != set(kinds):
         raise ValueError("INCONSISTENT_PHYSICAL_INDEX")
     aliases = graph["legacy_id_to_stable_id"]
     nodes = [{
         "id": x["id"], "layer": "PHYSICAL_INDEX", "kind": x["kind"],
         "possible_global_levels": sorted(level[x["id"]]),
-        "source_ids": x.get("source_ids", []), "coordinates_known": False
+        "source_ids": x.get("source_ids", []), "coordinates_known": False,
+        "moag_station_identity_verified": x["id"] not in disputed_indices
     } for x in physical]
     route_steps = {}
     route_groups = []
@@ -207,6 +217,10 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
     if explicit_bridges.get("schema") != "APA-MOAG-EXPLICIT-SPATIAL-BRIDGES-R06/0.1":
         raise ValueError("BAD_SPATIAL_BRIDGE_SCHEMA")
     records = {x["id"]: x for x in graph["observations"]}
+    if (not disputed_observations <= set(records) or
+            any(records[s]["page"] not in ("B3-015", "B3-016")
+                for s in disputed_observations)):
+        raise ValueError("FOREIGN_STATION_QUARANTINE_SOURCE_MISMATCH")
     if len(records) != len(graph["observations"]):
         raise ValueError("DUPLICATE_OBSERVATION_IDENTIFIER")
     allowed = {"LOCAL_STAIR_ACCESS", "LOCAL_STAIR_IN_HANGAR",
@@ -225,6 +239,9 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         if e["from"] == e["to"] or e.get("certainty") != "DIRECT_TEXT_REVIEWED":
             raise ValueError("INVALID_EXPLICIT_SPATIAL_CLAIM")
         source_ids = e.get("source_ids") or []
+        if disputed_observations & set(source_ids) or (
+                e["from"] in disputed_indices or e["to"] in disputed_indices):
+            raise ValueError("FOREIGN_STATION_SOURCE_NOT_MOAG_PROOF")
         if not all(s in records and records[s]["station"] == "MOAG"
                    and records[s]["evidence_class"] == "DIRECT_TEXT"
                    for s in source_ids):
@@ -512,7 +529,9 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         provenance = n.get("source_ids") or n.get("source_observation_ids") or []
         crosswalk = safe_referents.get(n["id"])
         review = uncertain_referents.get(n["id"])
-        role = ("GLOBAL_OR_HISTORICAL_CONTAINER_NOT_INDEPENDENT_ROOM"
+        role = ("DISPUTED_OTHER_STATION_OR_UNRESOLVED_FEATURE"
+                if n["id"] in disputed_indices else
+                "GLOBAL_OR_HISTORICAL_CONTAINER_NOT_INDEPENDENT_ROOM"
                 if n["kind"] in nonroom_containers else
                 "VEHICLE_OR_VEHICLE_CLASS_NOT_STATION_ROOM"
                 if n["kind"] in nonroom_craft else
@@ -563,6 +582,7 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
                                              for members, p in zip(component_members, physical_only)),
             "route_only_components": sum(not p for p in physical_only),
             "unconnected_index_research_tasks": len(isolated_queue),
+            "unverified_moag_station_identity_indices": len(disputed_indices),
             "isolated_candidates_by_role": dict(sorted(isolated_counts_by_role.items())),
             "isolated_fixed_room_corridor_door_or_technical_infrastructure": isolated_counts_by_role[
                 "FIXED_ROOM_CORRIDOR_DOOR_OR_TECHNICAL_INFRASTRUCTURE"],
@@ -618,6 +638,8 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         "negative_identity_constraints": prior["topology"]["identity_exclusions"],
         "narrative_gaps": gaps, "research_frontiers_not_edges": frontiers,
         "unconnected_index_source_review_queue": isolated_queue,
+        "quarantined_foreign_station_candidate_indices": sorted(disputed_indices),
+        "quarantined_foreign_station_source_observations": sorted(disputed_observations),
         "vertical_partial_order": verticals,
         "new_level_candidates": resolved,
         "area_volume": {
