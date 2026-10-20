@@ -55,7 +55,10 @@ def project(graph, fragments, bounds, r06):
         if eid in source_r04:
             rel = source_r04[eid]["relation"]
             cls = source_r04[eid]["semantic_class"]
-            direct = rel in DIRECT_R04 and cls != "PROXIMITY_NOT_SHAPE_PROOF"
+            direct = (rel in DIRECT_R04 and
+                      source_r04[eid]["binding_status"] == "PROVISIONAL_SOURCE_RELATION" and
+                      e["connects_evidence_graph"] and
+                      cls != "PROXIMITY_NOT_SHAPE_PROOF")
             kind = ("DIRECT_ACCESS_OR_GATE" if direct else
                     "NONLOCAL_ROUTE" if cls == "ROUTE_REACHABILITY_NOT_DIRECT_DOOR" else
                     "CONTAINMENT_OR_MEMBERSHIP" if cls == "FUNCTIONAL_CONTAINMENT_NOT_WALL_GEOMETRY" else
@@ -89,6 +92,10 @@ def project(graph, fragments, bounds, r06):
             kind = "ORDERED_ROUTE_STEPS_NOT_ADJACENT_ROOMS"
         else:
             raise ValueError("UNKNOWN_EVIDENCE_RELATION: " + eid)
+        # Nonconnecting evidence (inference, proximity, visibility, spans)
+        # must never be smuggled into the traversable graph.
+        if not e["connects_evidence_graph"]:
+            direct = False
         rec = {"edge_id": eid, "from": e["from"], "to": e["to"],
                "relation_class": kind, "source_ids": e["source_ids"],
                "physically_traversable_connection_asserted": direct,
