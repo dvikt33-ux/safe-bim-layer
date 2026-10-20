@@ -18,7 +18,7 @@ import apa_ac29_reusable_native_copy as SINGLE
 
 require = SINGLE.require
 GUID = SINGLE.GUID
-TYPES = {"Column": "ColumnSegment", "Beam": "BeamSegment", "Object": None}
+TYPES = {"Column": "ColumnSegment", "Beam": "BeamSegment", "Object": None, "Slab": None}
 COORDS = ("x", "y", "z")
 
 
@@ -214,6 +214,38 @@ def solid_fingerprint(root, children, anchor, *, parent_guid):
     }
 
 
+def slab_anchor(detail):
+    """Actual Tapir slab outline and top elevation, never a guessed centroid."""
+    d=detail.get('details',{})
+    outline=d.get('polygonOutline')
+    require(detail.get('type')=='Slab' and isinstance(outline,list) and len(outline)==5 and
+            all(isinstance(p,dict) and set(p)=={'x','y'} and
+                all(type(v) in (int,float) and math.isfinite(v) for v in p.values()) for p in outline) and
+            outline[0]==outline[-1] and len({(p['x'],p['y']) for p in outline[:-1]})==4 and
+            len({p['x'] for p in outline})==len({p['y'] for p in outline})==2 and
+            all((a['x']==b['x']) != (a['y']==b['y']) for a,b in zip(outline,outline[1:])) and
+            d.get('holes')==[] and d.get('structureType')=='Basic' and
+            d.get('referencePlaneLocation')=='Top' and
+            type(d.get('thickness')) in (int,float) and 0<d['thickness']<=100 and
+            type(d.get('zCoordinate')) in (int,float) and math.isfinite(d['zCoordinate']) and
+            d.get('offsetFromTop')==0 and d.get('floorFill',{}).get('use') is False and
+            d.get('floorFill',{}).get('orientation',{}).get('type')=='Global',
+            'MULTI_COPY_SLAB_REQUIRES_BASIC_RECTANGLE_TOP_NO_HOLES_GLOBAL_UNUSED_FILL')
+    return vector(dict(x=outline[0]['x'],y=outline[0]['y'],z=d['zCoordinate']))
+
+
+def verify_slab_solid(row,detail):
+    """Reject cut/joined/SEO geometry before copying this narrow slab domain."""
+    anchor=slab_anchor(detail);d=detail['details'];bodies=row.get('bodies') or []
+    require(len(bodies)==1 and bodies[0].get('closed') is True,
+            'MULTI_COPY_SLAB_REQUIRES_ONE_CLOSED_NATIVE_BODY')
+    expected={(round(p['x'],5),round(p['y'],5),round(z,5))
+              for p in d['polygonOutline'][:-1] for z in (anchor['z'],anchor['z']-d['thickness'])}
+    vertices=bodies[0].get('vertices',[])
+    require(len(vertices)==8 and {tuple(round(v,5) for v in p) for p in vertices}==expected,
+            'MULTI_COPY_SLAB_NATIVE_RECTANGLE_EXTRUSION_DIFFERS_FROM_TYPED_SOURCE')
+
+
 def source_detail_fingerprint(detail, kind, anchor):
     """Normalize ONLY the documented coordinates for each native type.
 
@@ -224,7 +256,14 @@ def source_detail_fingerprint(detail, kind, anchor):
             isinstance(detail.get("details"), dict),
             "MULTI_COPY_TYPED_DETAILS_MISSING")
     d = copy.deepcopy(detail["details"])
-    if kind in ("Column", "Object"):
+    if kind == 'Slab':
+        actual=slab_anchor(detail)
+        require(all(SINGLE.almost(actual[k],anchor[k]) for k in COORDS),
+                'MULTI_COPY_SLAB_TYPED_ANCHOR_DRIFT')
+        for point in d['polygonOutline']:
+            for k in ('x','y'):point[k]=round(point[k]-anchor[k],5)
+        d['zCoordinate']=round(d['zCoordinate']-anchor['z'],5)
+    elif kind in ("Column", "Object"):
         origin = d.get("origin")
         require(isinstance(origin, dict) and
                 all(SINGLE.almost(origin.get(k), anchor[k])

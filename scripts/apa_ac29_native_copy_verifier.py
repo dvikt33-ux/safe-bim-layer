@@ -47,10 +47,13 @@ def facts(api,nodes,guids,native):
         row=nodes[guid];kind=row['type'];detail=details[guid]
         need(kind in M.TYPES and row.get('homeStory')==detail.get('floorIndex')==0,
              'MASS_COPY_ONLY_KNOWN_STANDALONE_STORY_ZERO')
-        d=detail['details'];point=d.get('begCoordinate') if kind=='Beam' else d.get('origin')
-        need(isinstance(point,dict),'MASS_COPY_TYPED_NATIVE_ORIGIN_REQUIRED')
-        z=d.get('zCoordinate') if kind in ('Column','Beam') else point.get('z')
-        anchor=dict(x=point.get('x'),y=point.get('y'),z=z);M.vector(anchor)
+        if kind=='Slab':
+            anchor=M.slab_anchor(detail);M.verify_slab_solid(row,detail)
+        else:
+            d=detail['details'];point=d.get('begCoordinate') if kind=='Beam' else d.get('origin')
+            need(isinstance(point,dict),'MASS_COPY_TYPED_NATIVE_ORIGIN_REQUIRED')
+            z=d.get('zCoordinate') if kind in ('Column','Beam') else point.get('z')
+            anchor=dict(x=point.get('x'),y=point.get('y'),z=z);M.vector(anchor)
         typed=M.source_detail_fingerprint(detail,kind,anchor)
         children=M.owned_children(nodes,guid,kind)
         solid=M.solid_fingerprint(row,children,anchor,parent_guid=guid)

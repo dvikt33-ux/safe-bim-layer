@@ -14,7 +14,7 @@ import re
 from apa_ac29_assembly_operations import plan_assemblies
 
 GUID = re.compile(r"^[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$")
-COPYABLE = frozenset({"Column", "Beam", "Object"})
+COPYABLE = frozenset({"Column", "Beam", "Object", "Slab"})
 CREATE = {"Column": ("CreateColumns", "columnsData"),
           "Beam": ("CreateBeams", "beamsData")}
 SCHEMA = "APA_AC29_GROUP_FIRST_STRATEGY_V1"

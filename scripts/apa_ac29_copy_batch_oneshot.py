@@ -125,6 +125,35 @@ def stage_placements(accepted,state,baseline_trace,placements,*,use_guarded_snap
     write_new_json(state/'manifest.json',m);return m
 
 
+def stage_slab(accepted,state,baseline_path,prototype,placements):
+    """Fresh disposable copy of a saved/reopened group result; no recreation."""
+    from apa_ac29_group_create_oneshot import saved_state as group_saved_state
+    accepted,state,baseline_path=[Path(p).resolve() for p in (accepted,state,baseline_path)]
+    old,saved=group_saved_state(accepted);receipt=read(accepted/'reopened.json')
+    need(receipt.get('reopenVerified') is True and receipt['savedSHA256']==saved['savedSHA256'] and
+         not state.exists() and state.parent.is_dir(),'SHARED_COPY_ACCEPTED_SOURCE_AND_NEW_STATE_REQUIRED')
+    shifts=placement_offsets(placements);need(all(r['dz']==0 for r in shifts),'SHARED_COPY_HORIZONTAL_ONLY')
+    native=read(baseline_path);ids=sorted(r['guid'].lower() for r in native['elements'])
+    need(R.digest(ids)==saved['finalGuidSetSHA256'] and G.fingerprint(native)==saved['finalBrepSHA256'] and
+         V.semantic_digest(native,set(ids))==saved['finalSemanticSHA256'] and
+         any(r['guid'].lower()==prototype and r['type']=='Slab' for r in native['elements']),
+         'SHARED_COPY_ACCEPTED_SLAB_BASELINE_REQUIRED')
+    source=accepted/'guarded-save.snapshot';scratch=state.parent/'native-slab-copy.pln'
+    need(sha256(source)==saved['savedSHA256'] and not scratch.exists(),'SHARED_COPY_FRESH_PLN_REQUIRED')
+    state.mkdir();copy_exclusive(source,scratch);write_new_json(state/'baseline-native.json',native)
+    m=dict(schema=SCHEMA,source=str(source),sourceSHA256=saved['savedSHA256'],
+        originalProtected=old['originalProtected'],originalProtectedSHA256=old['originalProtectedSHA256'],
+        protectedAncestors={old['source']:old['sourceSHA256'],**old.get('protectedAncestors',{})},
+        acceptedState=str(accepted),acceptedReceiptSHA256=sha256(accepted/'reopened.json'),
+        scratch=str(scratch),scratchInitialSHA256=saved['savedSHA256'],port=old['port'],
+        baselineSHA256=sha256(state/'baseline-native.json'),baselineGuidSetSHA256=R.digest(ids),
+        baselineBrepSHA256=G.fingerprint(native),baselineSemanticSHA256=V.semantic_digest(native,set(ids)),
+        prototype=prototype,placements=placements,request='Копировать самостоятельное перекрытие в заданные позиции',
+        sourceRef='https://github.com/dvikt33-ux/safe-bim-layer/pull/190',
+        status='STAGED_ONLY_NO_NATIVE_WRITES',automaticReplay=False)
+    write_new_json(state/'manifest.json',m);return m
+
+
 def api_for(m,state,execute=False,saved_sha=None):
     api,guard=G.prepare_api(m,state,execute=execute,saved_sha=saved_sha,authorization_ref=AUTH)
     # Original code-owned SDK reader; no new write allowlist or transport.
@@ -143,8 +172,11 @@ def current_plan(state):
     nodes={r['guid'].lower():r for r in native['elements']};source=V.facts(api,nodes,[m['prototype']],native)[m['prototype']]
     existing=[dict(guid=m['prototype'],type=source['type'],storyIndex=0,anchor=source['anchor'],
         familySignature=R.digest(dict(typed=source['typed'],solid=source['solid'])),nativeReadbackVerified=True)]
-    task=dict(schemaVersion='apa-native-mass-request/1',request='Тиражировать отдельную проверенную колонну по линии',
-        sourceRef=SOURCE_REF,existing=existing,assembly=None,
+    if source['type']=='Slab':
+        # Code-owned facts above proved the actual root has no host/children.
+        existing[0].update(nativeDependenciesVerified=True,dependentElementGuids=[])
+    task=dict(schemaVersion='apa-native-mass-request/1',request=m.get('request','Тиражировать отдельную проверенную колонну по линии'),
+        sourceRef=m.get('sourceRef',SOURCE_REF),existing=existing,assembly=None,
         placements=m.get('placements',dict(mode='LINEAR',count=2,start=dict(dx=1000,dy=0,dz=0),step=dict(dx=25,dy=0,dz=0))))
     writer=R.SceneWriter(api,journal_path=state/'batch-scenewriter.sqlite',schema_path=G.SCHEMA_PATH,allow_3d_view_for_write=True)
     selected=A.prepare_current_runtime_group_native_task(router,writer,task)['preview']
@@ -205,7 +237,9 @@ def execute(state):
         def before_save(live):
             fresh,current,_=verify_model(m,live,p,response)
             need(fresh==ids and V.semantic_digest(current,set(fresh))==semantic and lease.verify() and
-                 sha256(m['scratch'])==m['scratchInitialSHA256'],'SHARED_COPY_PRESAVE_DRIFT')
+                 sha256(m['scratch'])==m['scratchInitialSHA256'] and
+                 all(sha256(path)==expected for path,expected in m.get('protectedAncestors',{}).items()),
+                 'SHARED_COPY_PRESAVE_DRIFT')
             return dict(status='SHARED_COPY_PRESAVE_PASS')
         def after_save(reply,_):
             need(reply=={'success':True} and guard.new_saved_sha and lease.verify(),'SHARED_COPY_SAVE_NOT_CONFIRMED')
