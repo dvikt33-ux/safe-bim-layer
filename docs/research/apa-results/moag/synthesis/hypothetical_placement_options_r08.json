@@ -1,0 +1,129 @@
+{
+  "schema": "APA-MOAG-HYPOTHETICAL-PLACEMENT-OPTIONS-R08/0.1",
+  "status": "ALTERNATIVES_NOT_PHYSICAL_LINKS",
+  "interpretation": "Hypotheses are design alternatives; a repeated architectural module and annular/radial form are plausible, not verified global station symmetry. No alternative is selected as truth.",
+  "source": "R04/R05/R07 graph and explicitly indexed direct-text observations",
+  "confidence_scale": "QUALITATIVE_LOW_ONLY_NO_NUMERICAL_PROBABILITIES",
+  "approval_rule": "An option can become a source-evidence edge only after direct book evidence and independent contradiction check",
+  "alternative_groups": [
+    {
+      "group_id": "R08-LOWER-HANGAR-PATTERN",
+      "question": "Как повторяются малые ангары Нижнего?",
+      "source_ids": [
+        "P-365",
+        "P-368",
+        "P-369"
+      ],
+      "options": [
+        {
+          "id": "R08-H001",
+          "from": "M-L1-FH-001",
+          "to": "M-L1-FH-002",
+          "relation": "POSSIBLE_SEQUENTIAL_CELLS_ALONG_ONE_SERVICE_SPINE",
+          "basis": "REPEATED_FUNCTION_ANALOGY",
+          "reason": "Два соседних малых ангара имеют похожие верхние операторские, могут быть расположены последовательно вдоль общего служебного коридора.",
+          "falsifier": "Страница с различными радиальными ответвлениями или противоположными сторонами независимых проходов"
+        },
+        {
+          "id": "R08-H002",
+          "from": "M-L1-FH-001",
+          "to": "M-L1-FH-002",
+          "relation": "POSSIBLE_RADIAL_CELLS_OFF_SHARED_DISTRIBUTOR",
+          "basis": "RADIAL_SYMMETRY_CONCEPT_ONLY",
+          "reason": "Два функционально похожих ангара могут занимать боковые ветви общей распределительной зоны, но не доказана общая ось или точный сектор.",
+          "falsifier": "Прямое описание одной продольной цепочки ангаров без радиального разветвления"
+        }
+      ]
+    },
+    {
+      "group_id": "R08-THIRD-RING-ROUTES",
+      "question": "Как устроен переход от внутреннего кольца Третьего к промышленно-ангарному сектору?",
+      "source_ids": [
+        "P-200"
+      ],
+      "options": [
+        {
+          "id": "R08-H003",
+          "from": "MOAG-G-0031",
+          "to": "M-L3-LOG-001",
+          "relation": "POSSIBLE_RADIAL_SPUR_BETWEEN_INNER_AND_OUTER_CIRCLES",
+          "basis": "RING_AND_RADIAL_SYMMETRY_CONCEPT_ONLY",
+          "reason": "Наличие внутреннего/внешнего кругов и расширения коридора для погрузчиков допускает радиальный подход, но не устанавливает прямую геометрическую ось.",
+          "falsifier": "Текст о тангенциальном обходе и нескольких изломах вместо радиальной ветви"
+        },
+        {
+          "id": "R08-H004",
+          "from": "MOAG-G-0031",
+          "to": "M-L3-LOG-001",
+          "relation": "POSSIBLE_IRREGULAR_MULTIBEND_CONNECTOR",
+          "basis": "CIRCULATION_TOPOLOGY_ALTERNATIVE",
+          "reason": "Тот же переход мог проходить через развилки и непрямые участки без осевой симметрии станции.",
+          "falsifier": "Описание прямого радиального луча между обоими кольцами"
+        }
+      ]
+    },
+    {
+      "group_id": "R08-RESIDENTIAL-PLAZA",
+      "question": "Как ориентированы жилое кольцо, галереи и Главная площадь Второго?",
+      "source_ids": [
+        "P-193",
+        "P-484",
+        "P-486"
+      ],
+      "options": [
+        {
+          "id": "R08-H005",
+          "from": "M-L2-RES-001",
+          "to": "M-L2-PLAZA-001",
+          "relation": "POSSIBLE_LOCALLY_REPEATED_GALLERY_SEGMENTS",
+          "basis": "LOCAL_RING_SYMMETRY_CONCEPT_ONLY",
+          "reason": "Жилое кольцо и частичная галерея допускают повторяемые секции с несколькими одинаковыми лестничными узлами, но все ступени не зафиксированы.",
+          "falsifier": "Прямое описание лишь одной галереи или нерегулярного фронта с неравными пролётами"
+        },
+        {
+          "id": "R08-H006",
+          "from": "M-L2-RES-001",
+          "to": "M-L2-PLAZA-001",
+          "relation": "POSSIBLE_ASYMMETRIC_LOCAL_GALLERY_WITH_LIMITED_STAIRS",
+          "basis": "NON_SYMMETRIC_ALTERNATIVE",
+          "reason": "Повторение помещений не обязано означать геометрическую симметрию; галерея может занимать неполный сектор и иметь один подтверждённый спуск.",
+          "falsifier": "Первичная схема либо текст о непрерывном симметричном обрамлении площади"
+        }
+      ]
+    },
+    {
+      "group_id": "R08-REMOTE-CARGO-LIFTS",
+      "question": "Чем обусловлена удалённость лифтов Д и Е от платформы приёмки грузов Третьего?",
+      "source_ids": [
+        "P-138"
+      ],
+      "options": [
+        {
+          "id": "R08-H007",
+          "from": "MOAG-G-0077",
+          "to": "MOAG-G-0078",
+          "relation": "POSSIBLE_LONG_ARC_DISTANCE_ON_ANNULAR_CIRCULATION",
+          "basis": "CIRCULAR_SERVICE_PATTERN_OPTION",
+          "reason": "Фраза 'самые дальние' совместима с длинным путём по кольцевому сектору, не обязательно противоположная сторона диска.",
+          "falsifier": "Подтверждение, что платформа и лифты соединены единственным прямым радиальным коридором"
+        },
+        {
+          "id": "R08-H008",
+          "from": "MOAG-G-0077",
+          "to": "MOAG-G-0078",
+          "relation": "POSSIBLE_LONG_BRANCHING_SERVICE_PATH",
+          "basis": "NON_SYMMETRIC_ALTERNATIVE",
+          "reason": "Удалённость может означать длинную сеть служебных ответвлений без круговой симметрии и без прямого прохода к платформе.",
+          "falsifier": "Схема, показывающая исключительно круговой, безветвевой маршрут"
+        }
+      ]
+    }
+  ],
+  "gates": {
+    "auto_select_symmetry": false,
+    "force_single_connected_station": false,
+    "modify_proven_components": false,
+    "assign_metric_coordinates": false,
+    "produce_archicad_writes": false
+  }
+}
