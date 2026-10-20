@@ -217,7 +217,8 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
                "FREIGHT_LIFTS_TO_CARGO_HALL_VIA_WIDE_PASSAGE",
                "SPACESUIT_ALCOVE_BY_CARGO_HALL",
                "CARGO_HALL_FACES_PRODUCTION_GATE",
-               "HISTORIC_CONTROLLER_OF_CARGO_HANGAR_COMPLEX"}
+               "HISTORIC_CONTROLLER_OF_CARGO_HANGAR_COMPLEX",
+               "SEQUENTIAL_BASE_GATES_VIA_INTERMEDIATE_CORRIDOR"}
     for e in explicit_bridges["typed_edges"]:
         if e["relation"] not in allowed or e["from"] not in kinds or e["to"] not in kinds:
             raise ValueError("UNSUPPORTED_EXPLICIT_SPATIAL_LINK")
