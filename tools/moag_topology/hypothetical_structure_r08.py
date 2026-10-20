@@ -151,6 +151,25 @@ def build(graph, fragments, bounds, routes, *, proposals=None):
         raise ValueError("NOT_ALL_UNLOCATED_FIXED_INDICES_PRESERVED:" +
                          repr(sorted(isolates - covered)))
 
+    # The 18 explicit narrative cuts are NOT the only unknown pathways:
+    # ordered route observations also leave the geometry of 306 traversed
+    # intervals unlocated. Preserve them without claiming 306 physical halls.
+    observed_transitions_with_unknown_geometry = [
+        {
+            "id": e["id"], "from_occurrence": e["from"],
+            "to_occurrence": e["to"], "source_ids": e["source_ids"],
+            "route_order_witnessed": True,
+            "direct_door_or_same_corridor_proven": False,
+            "intermediate_geometry_unknown": True,
+            "number_of_intervening_physical_elements_inferred": False
+        }
+        for e in original_edges
+        if e["id"].startswith("STEP::") and e["layer"] == "OBSERVED_TRAJECTORY"
+    ]
+    if len(observed_transitions_with_unknown_geometry) != (
+            assembled["counts"]["source_backed_edges_by_class"][
+                "OBSERVED_ROUTE_ORDER_NOT_DIRECT_DOOR"]):
+        raise ValueError("ORDERED_ROUTE_UNCERTAINTY_NOT_FULLY_PRESERVED")
     unresolved_route_slots = []
     for gap in assembled["narrative_gaps"]:
         key = gap["route_id"] + ":" + gap["from"] + ":" + gap["to"]
@@ -235,6 +254,8 @@ def build(graph, fragments, bounds, routes, *, proposals=None):
             "candidate_intercomponent_choices_not_actual_merges":
                 potential_cross_component_choices,
             "route_gap_candidate_edges": len(unresolved_route_slots) * 2,
+            "ordered_route_transitions_with_unlocated_path_geometry":
+                len(observed_transitions_with_unknown_geometry),
             "optional_compositional_pattern_scenarios": len(pattern_reviews),
             "total_nodes_including_nonphysical_placeholders": len(nodes),
             "total_relations_including_unapproved_scenarios": len(edges),
@@ -247,6 +268,8 @@ def build(graph, fragments, bounds, routes, *, proposals=None):
         },
         "isolated_object_placement_hypotheses": groups,
         "unknown_route_segments": unresolved_route_slots,
+        "witnessed_route_transitions_without_direct_door_geometry":
+            observed_transitions_with_unknown_geometry,
         "nonbinding_symmetry_and_analogy_scenarios": pattern_reviews,
         "current_proven_qualitative_component_membership":
             base["component_membership_not_rooms_or_geometry"],
