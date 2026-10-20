@@ -39,6 +39,10 @@ jobs:
         run: |
           python tools/moag_topology/audit_readiness_r06.py --out moag-r06-readiness.json
           python -c "import json; r=json.load(open('moag-r06-readiness.json')); assert r['source_reading']['total_corpus_pages']==412 and r['area_volume']['book_metric_footprint_profiles']==0 and r['gates']['BIM_release_ready'] is False; print('READINESS',r['source_reading'],r['graph_structure'],r['levels_and_geometry'])"
+      - name: Export unresolved architecture and route-gap research backlog
+        run: |
+          python tools/moag_topology/research_frontiers_r06.py --out moag-r06-research-frontiers.json
+          python -c "import json; r=json.load(open('moag-r06-research-frontiers.json')); assert r['fixed_infrastructure_isolation_count']==12 and r['total_route_gaps']==18 and r['geometry_approved'] is False; print('SOURCE_TRIAGE',r['fixed_infrastructure_isolation_count'],r['total_route_gaps'])"
       - name: Archive R06 evidence graphs without promoting them to geometry
         uses: actions/upload-artifact@v4
         with:
@@ -47,6 +51,7 @@ jobs:
             moag-r06-result.json
             moag-r06-structural-projections.json
             moag-r06-readiness.json
+            moag-r06-research-frontiers.json
           if-no-files-found: error
           retention-days: 30
       - name: Validate site-page coverage and hypotheses
