@@ -106,6 +106,28 @@ class UnifiedServiceTests(unittest.TestCase):
         self.assertIn("Проведи исследование", task["instruction"])
         self.assertNotIn("chatgpt.com", self.opened[0])
 
+    def test_project_scoped_chat_urls_from_existing_workspaces(self):
+        project = "https://chatgpt.com/g/g-p-" + "a" * 32
+        conversation = "00000000-0000-0000-0000-000000000003"
+        actual = project + "-01-istor-arkh-analogi/c/" + conversation
+        self.config["targets"]["D-03"]["chatUrl"] = actual
+        path = Path(self.tmp.name) / "project-config.json"
+        path.write_text(json.dumps(self.config), encoding="utf-8")
+        self.assertEqual(
+            service.config_load(path)["targets"]["D-03"]["chatUrl"], actual)
+        self.enqueue("project-021")
+        self.launch()
+        task = self.c.task_for("project-021", self.token("project-021"))
+        self.assertEqual(task["chatUrl"], actual)
+        for invalid in (
+            actual + "/extra", actual.replace("chatgpt.com", "evil.example"),
+            "https://chatgpt.com/g/other/c/" + conversation,
+        ):
+            self.config["targets"]["D-03"]["chatUrl"] = invalid
+            path.write_text(json.dumps(self.config), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "TARGET_NOT_VALIDATED"):
+                service.config_load(path)
+
     def test_v2_contract_rejects_remote_text_and_wrong_target(self):
         ev = event("assign-001")
         ev["instruction"] = "Remote injected instruction"
