@@ -1,0 +1,84 @@
+{
+  "status": "INSTALLED_AUTO_GROUP_INTENT_FRESH_NATIVE_READONLY_QUALIFICATION_PASS",
+  "sourceCodeRevision": "22bd5092ac1e2a91f0fc1f0c1a3a82fb573bf900",
+  "currentGuidCount": 188,
+  "currentSavedSHA256": "ebbd057418099a0823e2dd58a9765fd25ab6e41de6524253ad0785764c288187",
+  "runtimeIdentity": {
+    "contract": "APA_NATIVE_RUNTIME_IDENTITY_V1",
+    "buildIdentity": "6a9ebc59bf9b03c6243f8609ed9a58ffe0ad0bf38389cdfd42dd3f6540c711dc",
+    "sourceRevision": "a6b8cea99adcd04b18737f6596d5a294306164b2",
+    "sdkMajor": 29,
+    "developerId": 826567491,
+    "localId": 368333322,
+    "stairSolverPolicy": "DETACHED_DIAGNOSTIC_READONLY_NO_SETTER_OR_SOLVER",
+    "nativeModelWrites": 0
+  },
+  "cases": [
+    {
+      "request": "Сгруппировать выбранные колонны",
+      "recognizedAction": "CREATE_GROUP",
+      "nativeCommand": "AddOn.TapirCommand.CreateNativeGroupV1",
+      "sourceVerification": "GROUP_CREATE_FULL_NATIVE_PREFLIGHT_PASS",
+      "freshRuntimeAvailable": true,
+      "codeOwnedVerifier": "VerifiedNativeGroupCreate",
+      "affectedGuids": [
+        "0a17fb15-3639-4dfa-ab01-cd910ae112b0",
+        "c7e72514-3c33-4cb2-8cc2-310d59430437"
+      ],
+      "retainedGuidCount": 186,
+      "graphOperations": 1,
+      "commandContractSHA256": "98d26228f8f8d3518c1585773b810a76e6a4cb202c685a7ae6551ce2a90f52f7",
+      "parametersSHA256": "55754baa366cc5f050b96d836237755a2e9bfe8e70d783bbea6bd1106244fa4e",
+      "executionPermission": false,
+      "verificationNativeWrites": 0
+    },
+    {
+      "request": "Разгруппировать выбранную группу",
+      "recognizedAction": "UNGROUP",
+      "nativeCommand": "AddOn.TapirCommand.UngroupNativeGroupV1",
+      "sourceVerification": "GROUP_UNGROUP_FULL_NATIVE_PREFLIGHT_PASS",
+      "freshRuntimeAvailable": true,
+      "codeOwnedVerifier": "VerifiedNativeGroupUngroup",
+      "affectedGuids": [
+        "6d8fd777-f320-43c8-84ce-4d4bc7d65351",
+        "c8df0060-9629-4827-91d2-8448667abff3"
+      ],
+      "retainedGuidCount": 186,
+      "graphOperations": 1,
+      "commandContractSHA256": "02db5cd5af8d29fe5b16f4be3967c97e307fd8e0f39ecae96c05f42a2477ed2c",
+      "parametersSHA256": "dd67e0fd679e6b0c88c4ccca66ed555bd4ccb36f4fc3fb6aa281ce559ec49b5b",
+      "executionPermission": false,
+      "verificationNativeWrites": 0
+    },
+    {
+      "request": "Переместить целую группу",
+      "recognizedAction": "MOVE",
+      "nativeCommand": "AddOn.TapirCommand.MoveNativeGroupV1",
+      "sourceVerification": "GROUP_MOVE_FULL_NATIVE_PREFLIGHT_PASS",
+      "freshRuntimeAvailable": true,
+      "codeOwnedVerifier": "VerifiedNativeGroupMove",
+      "affectedGuids": [
+        "2730679d-ebb8-4b49-83d7-848fbf71442c",
+        "6d8fd777-f320-43c8-84ce-4d4bc7d65351",
+        "9c675a15-8b2b-4ed1-a89b-b684dce705aa",
+        "c8df0060-9629-4827-91d2-8448667abff3"
+      ],
+      "retainedGuidCount": 184,
+      "graphOperations": 1,
+      "commandContractSHA256": "b42ba14a4df41326c063a5f43ce6f1d7e7ce23642bb114a7d187e3c7a1ce5d4c",
+      "parametersSHA256": "6cfb45e5881893e328e55325293222114f004f2134c3db3ac7b4007cfa9cbbda",
+      "executionPermission": false,
+      "verificationNativeWrites": 0
+    }
+  ],
+  "nativeCommandExecutions": 0,
+  "nativeWriteAttempts": 0,
+  "saveCalls": 0,
+  "journalCreated": false,
+  "acceptedWriteReceiptsReused": [
+    "PR185",
+    "PR186",
+    "PR188"
+  ],
+  "oldNativeOperationsNotRepeated": true
+}
