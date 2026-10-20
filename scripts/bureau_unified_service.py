@@ -377,6 +377,8 @@ class Coordinator:
             return {"jobId": job_id, "targetChat": job[0],
                     "chatUrl": self.config["targets"][job[0]]["chatUrl"],
                     "action": job[1],
+                    # Canonical project slugs may change; this UUID is stable.
+                    "conversationId": self.config["targets"][job[0]]["chatUrl"].split("/c/")[-1],
                     "instruction": json.loads(job[2]).get("instruction", "")}
 
     def ack(self, job_id, nonce, stage, proof="", receipt_sha=None):
