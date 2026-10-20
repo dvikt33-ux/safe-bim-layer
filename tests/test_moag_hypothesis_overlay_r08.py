@@ -33,6 +33,19 @@ class MOAGHypothesisOverlay(unittest.TestCase):
         self.assertEqual(c["proven_edges_unchanged"], 761)
         self.assertEqual(c["proven_components_unchanged"], 39)
         self.assertEqual(c["unknown_route_intervals_kept"], 18)
+        self.assertEqual(c["all_existing_indices_without_measured_XY"], 197)
+        self.assertEqual(c["indices_with_missing_source_reference"], 1)
+        register = r["entire_unplaced_index_register"]
+        self.assertEqual(len(register), 197)
+        self.assertEqual(len({x["index_id"] for x in register}), 197)
+        self.assertTrue(all(not x["XY_confirmed"] and
+                            not x["metric_Z_confirmed"] for x in register))
+        unresolved = [x["index_id"] for x in register
+                      if x["source_provenance_review_required"]]
+        self.assertEqual(unresolved, ["V-IMINUYA-001"])
+        self.assertIn("P-220", next(
+            x for x in register if x["index_id"] == "M-L1-CH-ST-001"
+        )["source_ids"])
         self.assertEqual(c["unlocated_fixed_elements_kept"], 12)
         self.assertEqual(c["symmetry_and_nonsymmetry_option_groups"], 8)
         self.assertEqual(c["unselected_layout_options"], 16)
