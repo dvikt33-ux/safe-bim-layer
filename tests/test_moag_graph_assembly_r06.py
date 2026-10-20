@@ -339,6 +339,32 @@ class EvidenceGraphR06Tests(unittest.TestCase):
             MOD.assemble(self.graph, self.fragments, self.routes, self.bounds,
                          route_corrections=corrections)
 
+    def test_gap_frontiers_obey_corrected_scene_aliases(self):
+        # A synthetic gap within the p110 route must use the p110
+        # stair/control, never the unrelated p76 circular hall.
+        routes = copy.deepcopy(self.routes)
+        r = next(x for x in routes["routes"] if x["id"] == "RT-024")
+        s = next(x for x in r["nodes"] if x["id"] == "RT024-H")
+        s["movement_method"] = "NARRATIVE_GAP"
+        updated = MOD.assemble(self.graph, self.fragments, routes, self.bounds)
+        gaps = [x for x in updated["research_frontiers_not_edges"]
+                if x["route_id"] == "RT-024"]
+        self.assertTrue(gaps)
+        self.assertTrue(all(x["endpoint_resolution"] ==
+                            "SCENE_CORRECTED_LEVEL_CHECKED_NO_FOREIGN_STATION"
+                            for x in gaps))
+        self.assertTrue(all(x["left_indexed_witness"] not in
+                            ("MOAG-G-0059", "MOAG-G-0060")
+                            for x in gaps))
+        self.assertTrue(all(x["right_indexed_witness"] not in
+                            ("MOAG-G-0059", "MOAG-G-0060")
+                            for x in gaps))
+        self.assertTrue(any(x["left_indexed_witness"] ==
+                            "M-L1-AH-OLD-ST-001" and
+                            x["right_indexed_witness"] ==
+                            "M-L1-AH-OLD-CTRL-001" for x in gaps))
+        self.assertEqual(len(self.result["research_frontiers_not_edges"]), 18)
+
     def test_context_proximity_and_inferred_review_never_fuse_spaces(self):
         by = {x["id"]: x for x in self.result["typed_evidence_edges"]}
         for edge_id in ("MOAG-RG-E28", "MOAG-RG-E52",
