@@ -29,6 +29,9 @@ MULTILEVEL_KINDS = {"utility", "stair", "shaft", "technical_route",
                     "hatch", "hatch_group", "elevator", "technical"}
 R03_ADDITIONAL_DIRECT_RELATIONS = {"LEADS_UP_TO", "DOOR_LEADS_TO", "ELEVATED_WITHIN", "DIRECT_PASSAGE_TO", "CONTAINS_EQUIPMENT"}
 R03_OBSERVATION_ONLY_RELATIONS = {"SPANS_GLOBAL_LEVEL", "OVERLOOKS"}
+AMBIGUOUS_LEGACY_SCENE_IDS = {
+    "L1-CIRCULAR-STAIRS", "L1-CIRCULAR-CONTROL"
+}
 GAP = "NARRATIVE_GAP"
 BRIDGES = SYNTH / "explicit_spatial_bridges_r06.json"
 CONTEXT_CORRECTIONS = SYNTH / "route_context_corrections_r06.json"
@@ -292,6 +295,9 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
             source = s["source_page_id"]
             mapped = s.get("existing_graph_node")
             correction = corrections.get((route["id"], s["id"]))
+            if mapped in AMBIGUOUS_LEGACY_SCENE_IDS and correction is None:
+                raise ValueError("AMBIGUOUS_ROUTE_ALIAS_REQUIRES_CONTEXT: " +
+                                 route["id"] + "::" + s["id"])
             if correction and correction["action"] == "QUARANTINE_UNRESOLVED_LEGACY_ALIAS":
                 contextual_route_quarantines.append({
                     "route_id": route["id"], "step_id": s["id"],
