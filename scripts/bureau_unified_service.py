@@ -724,6 +724,13 @@ def run_locked(c, a, config):
             except Exception as exc:
                 print("BUREAU_INBOX_UNAVAILABLE", type(exc).__name__,
                       str(exc)[:300], flush=True)
+            try:
+                discovered = c.scan_receipts()
+                if discovered:
+                    print("BUREAU_RECEIPTS_ACCEPTED", discovered, flush=True)
+            except Exception as exc:
+                print("BUREAU_RESULTS_UNAVAILABLE", type(exc).__name__,
+                      str(exc)[:300], flush=True)
             if time.monotonic() >= next_apa_poll:
                 try:
                     c.scan_apa()
