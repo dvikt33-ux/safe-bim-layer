@@ -71,6 +71,32 @@ def build(graph, fragments, bounds, routes, *, left=None, right=None):
         route_gaps_b[key] = x
     if set(route_gaps_a) != set(route_gaps_b):
         raise ValueError("DIFFERENT_UNOBSERVED_ROUTE_BOUNDARIES")
+    # The second register must contribute *exactly* two soft ends for
+    # each missing interval and exactly the declared 24 placement options.
+    secondary_placeholder_ids = {
+        n["id"] for n in right["nodes"][nproof:]}
+    if (len(secondary_placeholder_ids) != len(right["nodes"][nproof:]) or
+            secondary_placeholder_ids != {x["id"] for x in route_gaps_b.values()}):
+        raise ValueError("SECOND_R08_UNKNOWN_NODE_INVENTORY_DIVERGED")
+    secondary_extra = right["edges"][eproof:]
+    if (len(secondary_extra) != len({
+            x["id"] for x in secondary_extra}) or
+            len(secondary_extra) !=
+            right["inventory"]["route_gap_candidate_edges"] +
+            right["inventory"]["alternative_placement_edges"]):
+        raise ValueError("SECOND_R08_HYPOTHETICAL_EDGE_COUNT_DIVERGED")
+    gap_edges_b = [x for x in secondary_extra
+                   if x["id"].startswith("R08-GAP:")]
+    if len(gap_edges_b) != 2 * len(route_gaps_b):
+        raise ValueError("SECOND_R08_GAP_ENDPOINT_EDGES_NOT_PAIRED")
+    valid_placeholder_ids = secondary_placeholder_ids
+    for edge in gap_edges_b:
+        if (sum(endpoint in valid_placeholder_ids
+                for endpoint in (edge["from"], edge["to"])) != 1 or
+                edge["joins_approved_evidence_component"] or
+                edge["proves_direct_access"] or
+                edge["metric_geometry_proven"]):
+            raise ValueError("SECOND_R08_GAP_EDGE_PROMOTED_OR_UNMATCHED")
     gap_aliases = []
     for key, x in route_gaps_a.items():
         y = route_gaps_b[key]
@@ -89,6 +115,10 @@ def build(graph, fragments, bounds, routes, *, left=None, right=None):
             "joint_candidate_level_domain": x["candidate_level_domain"],
             "union_of_boundary_level_domains": y["possible_global_levels"],
             "level_domains_have_different_meanings": True,
+            "other_global_decks_cannot_be_ruled_out_as_detours": True,
+            "route_may_leave_and_return_to_same_level": True,
+            "global_deck_domain_of_actual_intermediate_path": [1, 2, 3],
+            "not_a_hard_restriction_of_intermediate_path_elevation": True,
             "no_intermediate_room_count_proven": True
         })
 
