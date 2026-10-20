@@ -50,7 +50,8 @@
       "local_storey_number": 1,
       "identity_with_other_library_verified": false,
       "metric_geometry_proven": false,
-      "interpretation": "First floor in residential area does not mean global station Lower level, or same space as the large library"
+      "interpretation": "First floor in residential area does not mean global station Lower level, or same space as the large library",
+      "direct_access_claim": false
     },
     {
       "id": "POS06-004",
