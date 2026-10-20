@@ -243,6 +243,14 @@ class EvidenceGraphR06Tests(unittest.TestCase):
                             and x["connection_accepted"]
                             for x in review))
         self.assertFalse(result["gates"]["metric_z_known"])
+        self.assertEqual(result["counts"]["documented_multilevel_network_contacts"], 1)
+        vent = next(x for x in review if x["route_id"] == "RT-011"
+                    and x["target"] == "MOAG-G-0016")
+        self.assertEqual(vent["semantic_review"],
+                         "DOCUMENTED_LEVEL_CROSSING_NETWORK_CONTACT")
+        self.assertEqual(vent["vertical_transition_witnesses"][0]["other_level"], 1)
+        self.assertEqual(vent["vertical_transition_witnesses"][0]["source_page_id"],
+                         "B1-057")
 
     def test_invalid_provenance_fails_closed(self):
         data = copy.deepcopy(self.routes)
