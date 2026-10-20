@@ -24,7 +24,8 @@ DIRECT_R03 = {
 }
 DIRECT_R05 = {"DOOR_TO_OTHER_ROOM", "CONNECTS_VIA_PORTAL"}
 DIRECT_R06 = {"LOCAL_STAIR_ACCESS", "LOCAL_STAIR_IN_HANGAR",
-              "LOCAL_STAIR_FROM_GALLERY"}
+              "LOCAL_STAIR_FROM_GALLERY",
+              "AIRLOCK_GATE_BETWEEN_HANGAR_AND_CHAMBER"}
 VOLUME_ROLES = {"LEVEL_ENVELOPE_AREA_PROJECT_SCENARIO",
                 "VERTICAL_CORE_SECTION", "VOID_CROSS_SECTION_NOT_FLOOR",
                 "SHAFT_PATH_SECTION", "SHAFT_GROUP_NO_FLOOR_ADDITIVITY"}
@@ -84,7 +85,13 @@ def project(graph, fragments, bounds, r06):
             rel = source_r06[eid]["relation"]
             direct = rel in DIRECT_R06
             kind = ("DIRECT_ACCESS_OR_GATE" if direct else
-                    "EQUIPMENT_CONTAINMENT" if rel == "EQUIPMENT_INSIDE_WORKSHOP"
+                    "EQUIPMENT_CONTAINMENT" if rel in (
+                        "EQUIPMENT_INSIDE_WORKSHOP", "VEHICLE_STORED_IN_HANGAR")
+                    else "HISTORICAL_FUNCTION_NOT_PASSAGE"
+                    if rel == "HISTORIC_CONTROLLER_OF_CARGO_HANGAR_COMPLEX"
+                    else "SPATIAL_CONTEXT_NOT_DIRECT_PASSAGE"
+                    if rel in ("SPACESUIT_ALCOVE_BY_CARGO_HALL",
+                               "CARGO_HALL_FACES_PRODUCTION_GATE")
                     else "NONLOCAL_ROUTE")
         elif e["type"] == "ROUTE_VISITS_INDEX":
             kind = "ROUTE_OBSERVATION_ANCHOR"
