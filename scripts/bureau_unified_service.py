@@ -320,6 +320,55 @@ class Coordinator:
                       flush=True)
         return added
 
+    def scan_receipts(self):
+        """Discover verified published receipts without relying on a browser ACK."""
+        items = legacy.gh_api(
+            f"repos/{REPO}/contents/{RESULTS.rstrip('/')}?ref=main")
+        if not isinstance(items, list) or len(items) > 500:
+            raise ValueError("RESULT_INBOX_INVALID")
+        with self.lock:
+            pending = {
+                row[0]: (row[1], row[2], row[3])
+                for row in self.db.execute(
+                    "SELECT id,nonce,status,receipt_sha FROM jobs "
+                    "WHERE status IN ('WAIT_RESULT','COMPLETE_REPORTED')")
+            }
+            invalid = dict(self.db.execute(
+                "SELECT job_id,blob_sha FROM invalid_receipts"))
+        received = 0
+        for item in items:
+            name = item.get("name", "")
+            if item.get("type") != "file" or not name.endswith(".json"):
+                continue
+            job_id = name[:-5]
+            if not JOB_ID.fullmatch(job_id) or job_id not in pending:
+                continue
+            nonce, status, existing_sha = pending[job_id]
+            sha = item.get("sha", "")
+            if not isinstance(sha, str) or not HEX40.fullmatch(sha):
+                raise ValueError("RESULT_LISTING_SHA_INVALID")
+            if status == "COMPLETE_REPORTED":
+                if existing_sha and existing_sha != sha:
+                    raise ValueError("PUBLISHED_RECEIPT_REWRITTEN")
+                continue
+            if invalid.get(job_id) == sha:
+                continue
+            try:
+                self.ack(job_id, nonce, "RESULT_PUBLISHED",
+                         "VERIFIED_GITHUB_RECEIPT_AUTO_DISCOVERY", sha)
+                received += 1
+            except (ValueError, UnicodeError, json.JSONDecodeError) as exc:
+                with self.lock:
+                    self.db.execute(
+                        "INSERT OR REPLACE INTO invalid_receipts "
+                        "(job_id,blob_sha,reason,changed) VALUES(?,?,?,?)",
+                        (job_id, sha,
+                         type(exc).__name__ + ":" + str(exc)[:200],
+                         now_iso()))
+                print("BUREAU_RECEIPT_REJECTED", job_id,
+                      type(exc).__name__, flush=True)
+        return received
+
     def launch_one(self):
         """Глобальная блокировка Opera; длительная занятость только целевого чата."""
         if not self.config.get("dispatchArmed", False):
