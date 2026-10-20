@@ -43,6 +43,7 @@ class UnifiedServiceTests(unittest.TestCase):
             "operaExe": str(self.opera),
             "extensionId": "a" * 32,
             "pollSeconds": 5, "callbackPort": 18765,
+            "dispatchArmed": True,  # isolated simulated runtime only
             "targets": {
                 "D-03": {"workflowId": "workflow_d03"},
                 "D-04": {"workflowId": "workflow_d04"},
