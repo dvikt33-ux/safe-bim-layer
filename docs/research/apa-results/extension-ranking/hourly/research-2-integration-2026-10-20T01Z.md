@@ -1,9 +1,13 @@
-# APA №2 — исследование способов интеграции, 2026-10-20 01Z
+# APA №2 — интеграция готовых решений, 2026-10-20 01Z
 
-SOURCE-only. Выполнено 30 проверок первоисточников и два контрааудита. Новых OFFLINE/BUILD/INSTALLED/LIVE/ACCEPTED=0. MODEL_MODE_NOT_VERIFIABLE.
+**Опубликован комплект отчёта:** 30 SOURCE-проверок по первоисточникам, 2 независимых контрааудита, 9 маршрутов, альтернативы, гейты и передача №3. Новых OFFLINE/BUILD/INSTALLED/LIVE/ACCEPTED=0. MODEL_MODE_NOT_VERIFIABLE. Никаких установок, живых операций, изменений кода/PLN/APX/main/канона/NEXT.
 
-Основные находки: в tagged Tapir 1.5.9 уже существуют GetNavigatorItemTree (PublisherSets, publisherSetName, GUID children), CreateWindows и CreateDoors (ownerWallId, centerOffset, размеры, ориентация, favoriteName). Повторная разработка этих команд не нужна. В GetNavigatorItemTree ошибки чтения детей скрываются, поэтому полная инвентаризация Publisher без дополнительного контроля не доказана. Пустой whitelist Publish передаётся как nullptr и опасен. ezdxf1.4.5 игнорирует XCLIP при recursive_decompose; MINSERT уже обрабатывается, но zero spacing дедуплицирует позиции. IfcOpenShell0.8.5 get_connected_port возвращает первого peer; полный граф требует чтения IfcRelConnectsPorts. Готов get_referenced_elements для IFC2X3/IFC4. PR173 LIVE receipt не равен независимой бинарной приёмке; PR175 lease не блокирует внешние записи.
+**Проверки:** [01–05](research-2-integration-2026-10-20T01Z-checks-A.md), [06–10](research-2-integration-2026-10-20T01Z-checks-B.md), [11–15](research-2-integration-2026-10-20T01Z-checks-C.md), [16–20](research-2-integration-2026-10-20T01Z-checks-D.md), [21–25](research-2-integration-2026-10-20T01Z-checks-E.md), [26–30](research-2-integration-2026-10-20T01Z-checks-F.md).
 
-Источники: https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/NavigatorCommands.cpp ; https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/ExtendedElementCommands.cpp ; https://github.com/mozman/ezdxf/blob/v1.4.5/src/ezdxf/disassemble.py ; https://github.com/IfcOpenShell/IfcOpenShell/blob/ifcopenshell-python-0.8.5/src/ifcopenshell-python/ifcopenshell/util/system.py .
+**Матрица:** [I00-01..03](research-2-integration-2026-10-20T01Z-matrix-A.md), [I00-04..06](research-2-integration-2026-10-20T01Z-matrix-B.md), [I00-07..09](research-2-integration-2026-10-20T01Z-matrix-C.md). [Два контрааудита](research-2-integration-2026-10-20T01Z-audits.md). [Альтернативы, гейты, вопросы №1, передача №3](research-2-integration-2026-10-20T01Z-handoff.md).
 
-Публикация частичная до дополнения матрицей и 30 адресными проверками; не считать полный отчёт завершённым.
+**Контроль:** [№3 00Z](audit-2026-10-20-00-tasks-2.md), [№2 00Z](research-2-integration-2026-10-20T00Z.md), последний основной [№1 18Z](research-1-20261019T18Z.md). Новых основных №1 в каталоге не найдено. 61/61 уникальных ID и формул проверены; benchmark 0, live_accepted 0. Текущий канон revision197, исторический rev182 только чтение.
+
+**Новые важные находки:** Tapir1.5.9 уже предоставляет Publisher GUID tree и native CreateWindows/CreateDoors; не нужен новый writer. Однако tree может скрыть ошибку чтения детей, а PDF-метки не дают wall GUID/offset. Существующие Router, SDK Bridge, C1, IFC V2, BIM Graph и SceneWriter переиспользуются. Готового полного end-to-end XCLIP или PDF→host adapter в проверенных источниках не найдено.
+
+**Статус:** SOURCE_RESEARCH_COMPLETE; PUBLICATION_READBACK_PENDING до проверки этого индекса. Это не приёмка интеграции.
