@@ -3,61 +3,80 @@
   "extensionId": "infppggnoaenmfagbfknfkancpbljcca",
   "targets": {
     "D-01": {
-      "workflowId": "REPLACE_WORKFLOW_EMPLOYEE_01"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "DIR-01": {
-      "workflowId": "REPLACE_WORKFLOW_DIRECTOR_01"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "D-02": {
-      "workflowId": "REPLACE_WORKFLOW_EMPLOYEE_02"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "DIR-02": {
-      "workflowId": "REPLACE_WORKFLOW_DIRECTOR_02"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "D-03": {
-      "workflowId": "REPLACE_WORKFLOW_EMPLOYEE_03"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "DIR-03": {
-      "workflowId": "REPLACE_WORKFLOW_DIRECTOR_03"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "D-04": {
-      "workflowId": "REPLACE_WORKFLOW_EMPLOYEE_04"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "DIR-04": {
-      "workflowId": "REPLACE_WORKFLOW_DIRECTOR_04"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "D-05": {
-      "workflowId": "REPLACE_WORKFLOW_EMPLOYEE_05"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "DIR-05": {
-      "workflowId": "REPLACE_WORKFLOW_DIRECTOR_05"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "D-06": {
-      "workflowId": "REPLACE_WORKFLOW_EMPLOYEE_06"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "DIR-06": {
-      "workflowId": "REPLACE_WORKFLOW_DIRECTOR_06"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "D-07": {
-      "workflowId": "REPLACE_WORKFLOW_EMPLOYEE_07"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "DIR-07": {
-      "workflowId": "REPLACE_WORKFLOW_DIRECTOR_07"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "D-08": {
-      "workflowId": "REPLACE_WORKFLOW_EMPLOYEE_08"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "DIR-08": {
-      "workflowId": "REPLACE_WORKFLOW_DIRECTOR_08"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "SECRETARIAT": {
-      "workflowId": "REPLACE_WORKFLOW_SECRETARIAT"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "HQ": {
-      "workflowId": "REPLACE_WORKFLOW_HEADQUARTERS"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     },
     "APA-CONTROL": {
-      "workflowId": "REPLACE_WORKFLOW_APA_CONTROL"
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
     }
   },
   "routes": {
