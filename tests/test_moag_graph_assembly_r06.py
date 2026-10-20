@@ -97,7 +97,7 @@ class EvidenceGraphR06Tests(unittest.TestCase):
         r = self.result
         curated = [x for x in r["typed_evidence_edges"]
                    if x["type"] == "R06_OBSERVATION_DERIVED_SPACE_LINK"]
-        self.assertEqual(len(curated), 6)
+        self.assertEqual(len(curated), 12)
         self.assertGreater(r["counts"]["r06_explicit_link_component_reductions"], 0)
         self.assertTrue(all(x["source_ids"] and not x["metric_geometry_proven"]
                             for x in curated))
@@ -107,6 +107,25 @@ class EvidenceGraphR06Tests(unittest.TestCase):
                          "QUALITATIVE_ASSOCIATION_CHAIN_NOT_TRAVEL_ITINERARY")
         self.assertIn(trace["edge_chain"][0]["edge_id"],
                       {"S06-004", "MOAG-R3-RC-022"})
+
+    def test_cargo_and_hangar_bridges_attach_without_invented_direct_doors(self):
+        e = {x["id"]: x for x in self.result["typed_evidence_edges"]}
+        expected = {
+            "S06-007": ("M-L1-FH-001", "V-BOAT-L1-001", "P-364"),
+            "S06-008": ("M-L1-FH-001", "M-L1-FH-LOCK-001", "P-385"),
+            "S06-009": ("MOAG-G-0045", "MOAG-G-0046", "P-356"),
+            "S06-010": ("MOAG-G-0046", "MOAG-G-0047", "P-357"),
+            "S06-011": ("MOAG-G-0046", "MOAG-G-0048", "P-358"),
+            "S06-012": ("M-L1-CG-001", "M-L1-CG-CTRL-001", "P-240"),
+        }
+        for id, (a, b, source) in expected.items():
+            self.assertEqual((e[id]["from"], e[id]["to"]), (a, b))
+            self.assertIn(source, e[id]["source_ids"])
+            self.assertFalse(e[id]["metric_geometry_proven"])
+            self.assertFalse(e[id]["detail"]["not_a_direct_door"]
+                             if id == "S06-008" else
+                             not e[id]["detail"]["not_a_direct_door"])
+        self.assertEqual(self.result["counts"]["physical_indices"], 197)
 
     def test_concept_promotions_do_not_count_as_spatial_joins(self):
         r = self.result
