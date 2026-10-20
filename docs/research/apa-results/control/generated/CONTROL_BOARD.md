@@ -11,7 +11,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | ---: |
 | BLOCKED | 13 |
 | CLAIMED | 0 |
-| DONE_PUBLISHED | 36 |
+| DONE_PUBLISHED | 37 |
 | IN_PROGRESS | 1 |
 | PARTIAL | 17 |
 | READY | 34 |
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| APA-P70.A11.S20 | apa-mass-integration-20261019 | 2026-10-20T03:54:49Z | existing-ezdxf-dxf-source-preflight |
+| APA-P70.A11.S21 | apa-mass-integration-20261019 | 2026-10-20T04:07:22Z | ac29-natural-group-intent-existing-native-selector |
 
 ## CONTROL — 0 ready
 
