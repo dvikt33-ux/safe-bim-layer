@@ -489,6 +489,47 @@ class UnifiedServiceTests(unittest.TestCase):
         finally:
             migrated.close()
 
+    def test_windows_watchdog_verifies_health_before_restart(self):
+        import install_bureau_unified_service as installer
+        script = installer.watchdog_script(
+            "C:/Safe/launch-bureau-unified.cmd",
+            "C:/Safe/PAUSE_AUTOSTART", 18765)
+        self.assertIn("Function ServiceAlive()", script)
+        self.assertIn("http://127.0.0.1:18765/health", script)
+        self.assertIn("If Not ServiceAlive() Then", script)
+        self.assertIn("Do While Not fs.FileExists(", script)
+        self.assertIn("BUREAU_UNIFIED_ALIVE", script)
+        self.assertIn("apaAttached", script)
+        with self.assertRaisesRegex(ValueError, "INVALID_CALLBACK_PORT"):
+            installer.watchdog_script("C:/Safe/a.cmd",
+                                       "C:/Safe/PAUSE_AUTOSTART", 10)
+
+    def test_http_health_exposes_current_process_identity(self):
+        import os
+        from http.server import ThreadingHTTPServer
+        from urllib.request import urlopen, Request
+        from urllib.error import HTTPError
+        import threading
+        server = ThreadingHTTPServer(
+            ("127.0.0.1", 0), service.handler_for(self.c))
+        worker = threading.Thread(target=server.serve_forever, daemon=True)
+        worker.start()
+        self.addCleanup(server.server_close)
+        self.addCleanup(server.shutdown)
+        endpoint = f"http://127.0.0.1:{server.server_address[1]}"
+        with urlopen(endpoint + "/health") as response:
+            health = json.loads(response.read())
+        self.assertEqual(health["pid"], os.getpid())
+        with self.assertRaises(HTTPError) as rejection:
+            urlopen(Request(endpoint + "/health",
+                            headers={"Host": "untrusted.example"}))
+        self.assertEqual(rejection.exception.code, 403)
+        with self.assertRaises(HTTPError) as rejection:
+            urlopen(Request(endpoint + "/ack", method="POST",
+                            data=b'{"jobId":"bad"}',
+                            headers={"Content-Type": "text/plain"}))
+        self.assertEqual(rejection.exception.code, 415)
+
     def test_installer_refuses_non_windows_without_mutating_system(self):
         import install_bureau_unified_service as installer
         if __import__("os").name != "nt":
