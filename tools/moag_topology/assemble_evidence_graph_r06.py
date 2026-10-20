@@ -105,7 +105,11 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
     nodes = [{
         "id": x["id"], "layer": "PHYSICAL_INDEX", "kind": x["kind"],
         "possible_global_levels": sorted(level[x["id"]]),
-        "source_ids": x.get("source_ids", []), "coordinates_known": False,
+        "source_ids": (
+            x.get("source_ids") or x.get("source_observation_ids") or []),
+        "source_location_needs_review": not bool(
+            x.get("source_ids") or x.get("source_observation_ids")),
+        "coordinates_known": False,
         "moag_station_identity_verified": x["id"] not in disputed_indices
     } for x in physical]
     route_steps = {}
