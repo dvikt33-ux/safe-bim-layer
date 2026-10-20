@@ -55,6 +55,10 @@ jobs:
         run: |
           python tools/moag_topology/hypothesis_overlay_r08.py --preview R08-H001 R08-H003 --out moag-r08-what-if.json
           python -c "import json; r=json.load(open('moag-r08-what-if.json')); p=r['requested_hypothetical_preview']; assert p['verified_physical_component_count_still']==39 and p['conditional_physical_component_count']<=39 and p['evidence_graph_unchanged'] and not p['geometry_or_direct_access_approved']; print('WHAT_IF_ONLY',p['conditional_physical_component_count'])"
+      - name: Preserve R08 unlocated rooms, route holes and nonbinding symmetry scenarios
+        run: |
+          python tools/moag_topology/hypothetical_structure_r08.py --out moag-r08-hypothetical-overlay.json
+          python -c "import json; r=json.load(open('moag-r08-hypothetical-overlay.json')); i=r['inventory']; assert i['unlocated_fixed_object_groups']==12 and i['still_unknown_route_gaps']==18 and i['optional_compositional_pattern_scenarios']==3 and i['total_nodes_including_nonphysical_placeholders']==593 and i['total_relations_including_unapproved_scenarios']==821 and i['approved_explicit_access_edges']==25 and i['approved_qualitative_physical_components']==39 and r['gates']['hypothesis_edges_are_nonconnecting'] and not r['gates']['archicad_write']; print('UNCERTAINTY_R08',i)"
       - name: Archive R06 evidence graphs without promoting them to geometry
         uses: actions/upload-artifact@v4
         with:
@@ -65,6 +69,7 @@ jobs:
             moag-r06-readiness.json
             moag-r06-research-frontiers.json
             moag-r07-unified-evidence.json
+            moag-r08-hypothetical-overlay.json
             moag-r08-hypotheses.json
             moag-r08-what-if.json
           if-no-files-found: error
