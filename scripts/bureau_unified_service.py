@@ -319,6 +319,8 @@ class Coordinator:
 
     def launch_one(self):
         """Глобальная блокировка Opera; длительная занятость только целевого чата."""
+        if not self.config.get("dispatchArmed", False):
+            return "DISPATCH_DISARMED"
         with self.lock:
             self.db.execute("BEGIN IMMEDIATE")
             try:
