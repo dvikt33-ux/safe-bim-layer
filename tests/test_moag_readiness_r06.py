@@ -40,6 +40,8 @@ class ReadinessAuditR06(unittest.TestCase):
         self.assertEqual(r["area_volume"]["applicable_project_interval_profiles"], 157)
         self.assertEqual(r["area_volume"]["non_area_indices"], 40)
         self.assertEqual(r["area_volume"]["book_metric_footprint_profiles"], 0)
+        self.assertGreaterEqual(
+            r["area_volume"]["local_upper_floor_double_count_review_cases"], 5)
         self.assertEqual(r["levels_and_geometry"]["physically_confirmed_xy_index_count"], 0)
         self.assertFalse(r["gates"]["BIM_release_ready"])
         self.assertFalse(r["gates"]["readiness_percentage_can_be_interpreted_as_project_completion"])
