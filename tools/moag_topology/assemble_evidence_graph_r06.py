@@ -500,6 +500,10 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
                       for x in reference_promotions}
     uncertain_referents = {x["new_physical_id"]: x["source_concept_id"]
                           for x in review_promotions}
+    nonroom_containers = {"global_block", "vertical_industrial_volume", "historical_zone"}
+    nonroom_craft = {"small_combat_craft", "starship", "spherical_craft",
+                     "cargo_cruiser_class", "cruiser"}
+    isolated_counts_by_role = defaultdict(int)
     isolated_queue = []
     for members, p in zip(component_members, physical_only):
         if len(members) != 1 or len(p) != 1:
@@ -508,8 +512,16 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         provenance = n.get("source_ids") or n.get("source_observation_ids") or []
         crosswalk = safe_referents.get(n["id"])
         review = uncertain_referents.get(n["id"])
+        role = ("GLOBAL_OR_HISTORICAL_CONTAINER_NOT_INDEPENDENT_ROOM"
+                if n["kind"] in nonroom_containers else
+                "VEHICLE_OR_VEHICLE_CLASS_NOT_STATION_ROOM"
+                if n["kind"] in nonroom_craft else
+                "FIXED_ROOM_CORRIDOR_DOOR_OR_TECHNICAL_INFRASTRUCTURE")
+        isolated_counts_by_role[role] += 1
         isolated_queue.append({
             "physical_index_id": n["id"], "name": n["name"], "kind": n["kind"],
+            "spatial_inventory_role": role,
+            "not_automatically_a_separate_room": role != "FIXED_ROOM_CORRIDOR_DOOR_OR_TECHNICAL_INFRASTRUCTURE",
             "source_ids": provenance,
             "crosswalk_to_existing_concept": crosswalk,
             "identity_review_concept": review,
@@ -551,6 +563,9 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
                                              for members, p in zip(component_members, physical_only)),
             "route_only_components": sum(not p for p in physical_only),
             "unconnected_index_research_tasks": len(isolated_queue),
+            "isolated_candidates_by_role": dict(sorted(isolated_counts_by_role.items())),
+            "isolated_fixed_room_corridor_door_or_technical_infrastructure": isolated_counts_by_role[
+                "FIXED_ROOM_CORRIDOR_DOOR_OR_TECHNICAL_INFRASTRUCTURE"],
             "route_context_disambiguations": len(contextual_route_repairs),
             "route_context_quarantines": len(contextual_route_quarantines),
             "route_bridge_events": sum(e["joins_components"] for e in edges
