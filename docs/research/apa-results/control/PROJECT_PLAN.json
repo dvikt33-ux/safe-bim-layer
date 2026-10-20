@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 195,
+  "revision": 196,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -2572,6 +2572,20 @@
       "kind": "REVIEW",
       "verification": "AUDIT_READBACK_VERIFIED",
       "scope": "OneinstalledexistingRouteradapter usingexistingezdxf1.4.5/V1venv: originalpreauditINSERT/MINSERT/XREF/units+audit/recover. RealROCKWOOLsourcecopy SHAe220unchanged,634inserts,63memoryfixes,INSUNITS0->readinessfalse, noDXFsave/nativecalls. All298acceptedcontracts/30+4reads preserved,CI4SUCCESS on1dbecode."
+    },
+    "ART-P70-A11-S21-INTENT-RECEIPT-20261020": {
+      "id": "ART-P70-A11-S21-INTENT-RECEIPT-20261020",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/773bfe60797e162f5c1986ec141a4e24d2c7dae9/docs/evidence/apa-ac29-auto-group-intent-20261020/README_RU.md",
+      "kind": "RECEIPT",
+      "verification": "INSTALLED_AUTO_GROUP_INTENT_FRESH_NATIVE_READONLY_QUALIFICATION_PASS",
+      "scope": "Installed bounded Russian/English intent selects accepted create/move/ungroup adapters in existing Router. Three fresh actualAC29 capability/source/scope qualifications; zero mutation/save/journal; write receipts185/186/188 reused. Exact code22bd5092 CI8success verified20261020; no repeated accepted writes."
+    },
+    "ART-P70-A11-S21-INTENT-AUDIT-20261020": {
+      "id": "ART-P70-A11-S21-INTENT-AUDIT-20261020",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/773bfe60797e162f5c1986ec141a4e24d2c7dae9/docs/evidence/apa-ac29-auto-group-intent-20261020/independent-audit.json",
+      "kind": "REVIEW",
+      "verification": "AUDIT_READBACK_VERIFIED",
+      "scope": "Installed bounded Russian/English intent selects accepted create/move/ungroup adapters in existing Router. Three fresh actualAC29 capability/source/scope qualifications; zero mutation/save/journal; write receipts185/186/188 reused. Exact code22bd5092 CI8success verified20261020; no repeated accepted writes."
     }
   },
   "tasks": {
@@ -5171,7 +5185,8 @@
         "APA-P70.A11.S18",
         "APA-P70.A11.S19",
         "APA-P70.A11.S20",
-        "APA-P70.A11.S21"
+        "APA-P70.A11.S21",
+        "APA-P70.A11.S22"
       ],
       "inputs": [
         "ART-APA-HIGHLEVEL-PR34",
@@ -5379,7 +5394,8 @@
         "2026-10-20 S17/PR185 sharednativegroupcreate installed/published. NextS18 nativeungroup edits acceptedgroup innewcopy, no recreatinggroup.",
         "2026-10-20 S18/PR186 nativeungroup installed/published; S19 nativewholegroup move next. Existingacceptedgroup snapshot reused, no recreation.",
         "2026-10-20 S19/PR188 wholegroupmove installed/published. Five newnativecapabilities S15..S19 acceptedonceeach; S20 ready DXFadapter from163 next independentthin integration usingexistingvenv.",
-        "2026-10-20 S20/PR189 readyDXFadapter installed/published; nextS21 naturalgroupintent selectsacceptednativecommands usingfreshcapability read-onlyqualification, no oldnativeoperation repeats."
+        "2026-10-20 S20/PR189 readyDXFadapter installed/published; nextS21 naturalgroupintent selectsacceptednativecommands usingfreshcapability read-onlyqualification, no oldnativeoperation repeats.",
+        "2026-10-20 S21/PR190 installed automatic group intent published, codeCI8SUCCESS. NextS22 shared native standaloneWall batch copier; no repeats of accepted Column/group operations."
       ],
       "acceptance": "Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.",
       "owner": null,
@@ -6359,7 +6375,7 @@
       "action_id": "APA-P70.A11",
       "title": "Автовыбор команды группировки, перемещения и разгруппировки из запроса",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "DONE_PUBLISHED",
       "priority": 0,
       "work_key": "ac29-natural-group-intent-existing-native-selector",
       "depends_on": [
@@ -6373,11 +6389,43 @@
         "ART-P70-A11-S18-UNGROUP-RECEIPT-20261020",
         "ART-P70-A11-S19-MOVE-RECEIPT-20261020"
       ],
-      "outputs": [],
+      "outputs": [
+        "PR190 published773bfe60 and installed22bd5092. Three automatic group actions actual native READ_ONLY qualified; unchanged existing native adapters. CodeCI8SUCCESS. No new LIVE_WRITE_PASS claimed."
+      ],
       "acceptance": "Usertext+explicitGUIDs/source/vector -> boundedintentrecognition -> existingtypedgroupadapters -> actualruntimecapabilitydiscovery -> existingregistry/SceneWriter. Ambiguous/composite/boolean/incompleteintents failclosed; no inventedmembers/coordinates. Automaticroutingcontracts andone currentAC29READ_ONLY qualification ofthree nativecommands againstfreshsources/scopes; reuseacceptedwrite/save/reopenreceipts185/186/188 without repeatingwrites.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [
+        "ART-P70-A11-S21-INTENT-RECEIPT-20261020",
+        "ART-P70-A11-S21-INTENT-AUDIT-20261020"
+      ],
+      "blocked_reason": null
+    },
+    "APA-P70.A11.S22": {
+      "id": "APA-P70.A11.S22",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Расширить общий нативный пакетный copier на самостоятельные стены",
+      "kind": "INTEGRATION",
+      "status": "IN_PROGRESS",
+      "priority": 0,
+      "work_key": "ac29-shared-native-batch-copy-standalone-wall",
+      "depends_on": [
+        "APA-P70.A11.S14"
+      ],
+      "related": [
+        "APA-P70.A11.S03"
+      ],
+      "inputs": [
+        "ART-P70-A11-S14-COPY-RECEIPT-20261019"
+      ],
+      "outputs": [],
+      "acceptance": "Existing MoveElements(copy=true), same Router/registry/SceneWriter. Actual source typed wall coordinates and closed/materialized BREP, no hosted openings/dependents/group membership, story0, exact preserved source/new GUID/geometry/material facts, collision preflight. Necessary automatic tests and one new safe-copy LIVE operation/save/reopen only if eligible actual source. No new primitive creation or invented geometry; unsupported wall domains failclosed. Publish implementation and exact evidence.",
       "owner": "apa-mass-integration-20261019",
-      "lease_until": "2026-10-20T04:07:22Z",
-      "claim_ref": "APA-RUN-20261020-AUTO-GROUP-INTENT",
+      "lease_until": "2026-10-20T04:18:53Z",
+      "claim_ref": "APA-RUN-20261020-WALL-COPY",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
@@ -6681,7 +6729,8 @@
         "APA-P70.A11.S18",
         "APA-P70.A11.S19",
         "APA-P70.A11.S20",
-        "APA-P70.A11.S21"
+        "APA-P70.A11.S21",
+        "APA-P70.A11.S22"
       ],
       "artifact_ids": [
         "ART-APA-FULL-CYCLE",
@@ -7503,9 +7552,21 @@
         "APA-P10.A01.S03",
         "APA-P50.A02.S01"
       ],
+      "readiness": "SUFFICIENT",
+      "readiness_evidence_ids": [
+        "ART-P70-A11-S21-INTENT-AUDIT-20261020"
+      ],
+      "note": "Installed intent entrypoint -> fresh actual native command/source/scope qualifications. Accepted downstream writes reused; three actions explicit and bounded."
+    },
+    "APA-P70.A11.S22": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
       "readiness": "GAP",
       "readiness_evidence_ids": [],
-      "note": "Acceptednative185/186/188 functions reused; onlyintentnormalization andexistingentrypoint extension. One read-onlyfreshcapability/source/scope qualification, no newrouter/executor/repeatedwrite."
+      "note": "Extend accepted copier one new physical element type. Fresh actual wall source qualification before mutation; no research reset or arbitrary wall creation."
     }
   },
   "component_catalog": {
