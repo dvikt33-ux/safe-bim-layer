@@ -34,12 +34,18 @@ class MOAGHypothesisOverlay(unittest.TestCase):
         self.assertEqual(c["proven_components_unchanged"], 39)
         self.assertEqual(c["unknown_route_intervals_kept"], 18)
         self.assertEqual(c["unlocated_fixed_elements_kept"], 12)
-        self.assertEqual(c["symmetry_and_nonsymmetry_option_groups"], 4)
-        self.assertEqual(c["unselected_layout_options"], 8)
+        self.assertEqual(c["symmetry_and_nonsymmetry_option_groups"], 8)
+        self.assertEqual(c["unselected_layout_options"], 16)
         self.assertEqual(c["hypothetical_nodes"], 18)
         self.assertEqual(r["merged_visualization_node_count"], 593)
         self.assertFalse(r["gates"]["hypotheses_can_change_proven_connectivity"])
         self.assertFalse(r["gates"]["symmetry_assumed_as_fact"])
+        self.assertEqual(r["counts"]["hypothetical_edges"], 64)
+        self.assertEqual(r["merged_visualization_relation_count"], 825)
+        self.assertEqual(len(r["composed_graph"]["nodes"]), 593)
+        self.assertEqual(len(r["composed_graph"]["edges"]), 825)
+        self.assertTrue(r["composed_graph"][
+            "graph_unity_does_not_mean_spatial_connectivity"])
         self.assertEqual(r["unified_evidence_graph"]["nodes"],
                          self.master["nodes"])
         self.assertEqual(r["unified_evidence_graph"]["edges"],
@@ -85,7 +91,7 @@ class MOAGHypothesisOverlay(unittest.TestCase):
 
     def test_symmetric_and_asymmetric_candidates_coexist_without_selection(self):
         x = self.output
-        self.assertEqual(len(x["mutually_alternative_layout_groups"]), 4)
+        self.assertEqual(len(x["mutually_alternative_layout_groups"]), 8)
         self.assertTrue(all(
             z["selected_variant"] is None and
             not z["applies_stationwide_symmetry"] and
@@ -94,7 +100,7 @@ class MOAGHypothesisOverlay(unittest.TestCase):
         candidates = [e for e in x["hypothetical_edges"]
                       if e["layer"] ==
                       "HYPOTHETICAL_SYMMETRY_OR_FUNCTIONAL_LAYOUT"]
-        self.assertEqual(len(candidates), 8)
+        self.assertEqual(len(candidates), 16)
         self.assertTrue(any("SYMMETRY" in e["basis"] for e in candidates))
         self.assertTrue(any(e["basis"] == "NON_SYMMETRIC_ALTERNATIVE"
                             for e in candidates))
