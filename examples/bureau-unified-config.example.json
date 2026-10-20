@@ -133,5 +133,6 @@
   "callbackPort": 18765,
   "apaEnabled": true,
   "apaBridgePath": "C:\\LocalAI\\APA_AC29_Stable\\controllers\\apa_ac29_autonomous_job_bridge.py",
-  "apaBridgeSha256": "AUTO_PIN_INSTALLED_BRIDGE"
+  "apaBridgeSha256": "AUTO_PIN_INSTALLED_BRIDGE",
+  "dispatchArmed": false
 }
