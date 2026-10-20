@@ -4,6 +4,7 @@ on:
     paths:
       - 'scripts/apa_dxf_source_preflight.py'
       - 'scripts/apa_ac29_installed_factory.py'
+      - 'scripts/apa_install_dxf_preflight.py'
       - 'tests/test_apa_dxf_source_preflight.py'
       - '.github/workflows/apa-dxf-source-preflight.yml'
 permissions:

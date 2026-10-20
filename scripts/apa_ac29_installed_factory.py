@@ -29,7 +29,7 @@ def native_command_router(schema_path=None,official_commands=None,include_functi
     semantic.register(router)
     from apa_ac29_installed_group_provider import attach
     attach(router)
-    import apa_dxf_source_preflight as dxf
+    dxf=load(Path(__file__).with_name('apa_dxf_source_preflight.py'),'apa_installed_dxf_source_preflight')
     data=Path(dxf.__file__).read_bytes().replace(b'\r\n',b'\n')
     if hashlib.sha256(data).hexdigest()!='8f8cca6e17c1d3032d61fdb8401678d2adbb71a1f986258ed5f94bf2c776fbc9':
         raise ValueError('INSTALLED_DXF_PREFLIGHT_SOURCE_DRIFT')
