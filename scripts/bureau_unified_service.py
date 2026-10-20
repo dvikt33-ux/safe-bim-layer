@@ -62,11 +62,15 @@ def verified_document_url(value):
         return False
     u = urlsplit(value)
     if (u.scheme != "https" or u.username or u.password
-            or u.port or u.query or u.fragment):
+            or u.port or u.fragment):
         return False
     if u.netloc == "docs.google.com":
+        if u.query not in ("", "usp=drivesdk", "usp=sharing"):
+            return False
         return bool(re.fullmatch(r"/document/d/[A-Za-z0-9_-]{6,}/edit", u.path))
     if u.netloc == "github.com":
+        if u.query:
+            return False
         return (bool(re.fullmatch(
             r"/dvikt33-ux/[A-Za-z0-9_.-]+/(?:blob|pull)/[A-Za-z0-9_./-]+",
             u.path)) and ".." not in u.path)
