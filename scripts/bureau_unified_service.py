@@ -34,8 +34,8 @@ JOB_ID = re.compile(r"^[a-z][a-z0-9-]{7,63}$")
 TARGET = re.compile(r"^[A-Za-z][A-Za-z0-9-]{1,32}$")
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
-ACTIVE_UI = ("LAUNCHING", "WAIT_TAB", "WAIT_SUBMIT", "BLOCKED")
-ACTIVE_CHAT = ACTIVE_UI + ("WAIT_RESULT",)
+ACTIVE_UI = ("LAUNCHING", "WAIT_TAB", "WAIT_SUBMIT", "BLOCKED_UI")
+ACTIVE_CHAT = ACTIVE_UI + ("WAIT_RESULT", "BLOCKED_CHAT")
 VALID_EVENTS = frozenset((
     "ASSIGN_TASK", "REPORT_READY", "DEPARTMENT_REPORT_READY",
     "HQ_BRIEF_READY", "ARENA_RESULT_READY", "TRIGGER_PROBE"
@@ -87,7 +87,8 @@ def config_load(filename):
                 or not legacy.WORKFLOW_ID.fullmatch(target["workflowId"])):
             raise ValueError("TARGET_NOT_VALIDATED")
     if (not isinstance(config["routes"], dict)
-            or not all(k in config["targets"] and set(value) == set(NEXT_EVENT.values())
+            or not all(k in config["targets"] and isinstance(value, dict)
+                       and set(value).issubset(set(NEXT_EVENT.values()))
                        and all(dest in config["targets"] for dest in value.values())
                        for k, value in config["routes"].items())):
         raise ValueError("ROUTES_NOT_IN_LOCAL_ALLOWLIST")
@@ -159,8 +160,8 @@ def validate_event(event, filename, config):
             or event["targetChat"] not in config["targets"]):
         raise ValueError("JOB_V2_NOT_AUTHORIZED")
     created, expires = only_utc(event["createdAt"]), only_utc(event["expiresAt"])
-    current = now_iso()
-    if not (created <= current < expires):
+    current = datetime.now(timezone.utc)
+    if not (datetime.fromisoformat(created) <= current < datetime.fromisoformat(expires)):
         raise ValueError("EVENT_WINDOW_INVALID")
     if ((datetime.fromisoformat(expires) - datetime.fromisoformat(created))
             .total_seconds() > 7 * 86400):
@@ -269,11 +270,11 @@ class Coordinator:
                     WHERE j.status='QUEUED'
                     AND NOT EXISTS (
                       SELECT 1 FROM jobs u WHERE u.status IN
-                      ('LAUNCHING','WAIT_TAB','WAIT_SUBMIT','BLOCKED'))
+                      ('LAUNCHING','WAIT_TAB','WAIT_SUBMIT','BLOCKED_UI'))
                     AND NOT EXISTS (
                       SELECT 1 FROM jobs b WHERE b.target=j.target
                       AND b.status IN
-                      ('LAUNCHING','WAIT_TAB','WAIT_SUBMIT','BLOCKED','WAIT_RESULT'))
+                      ('LAUNCHING','WAIT_TAB','WAIT_SUBMIT','BLOCKED_UI','BLOCKED_CHAT','WAIT_RESULT'))
                     ORDER BY j.created,j.id LIMIT 1""").fetchone()
                 if job:
                     nonce = secrets.token_urlsafe(32)
@@ -290,8 +291,8 @@ class Coordinator:
         exe = Path(self.config["operaExe"])
         if not exe.is_file():
             with self.lock:
-                journal(self.db, job_id, "BLOCKED", "OPERA_EXE_NOT_FOUND")
-            return "BLOCKED"
+                journal(self.db, job_id, "BLOCKED_UI", "OPERA_EXE_NOT_FOUND")
+            return "BLOCKED_UI"
         workflow = self.config["targets"][target]["workflowId"]
         url = (f"chrome-extension://{self.config['extensionId']}/execute.html#/"
                f"{workflow}?jobId={quote(job_id, safe='')}"
@@ -301,9 +302,9 @@ class Coordinator:
             self.opener(exe, url)
         except Exception as err:
             with self.lock:
-                journal(self.db, job_id, "BLOCKED",
+                journal(self.db, job_id, "BLOCKED_UI",
                         "OPERA_INVOCATION_ERROR:" + type(err).__name__)
-            return "BLOCKED"
+            return "BLOCKED_UI"
         with self.lock:
             journal(self.db, job_id, "WAIT_TAB", "OPERA_INVOCATION_ONLY")
         return "WAIT_TAB:" + job_id
@@ -338,7 +339,8 @@ class Coordinator:
             elif stage == "MESSAGE_SUBMITTED" and status == "WAIT_SUBMIT":
                 next_status = "WAIT_RESULT"
             elif stage == "FAILED" and status in ACTIVE_CHAT:
-                next_status = "BLOCKED"
+                next_status = ("BLOCKED_CHAT" if status == "WAIT_RESULT"
+                               else "BLOCKED_UI")
             elif stage == "RESULT_PUBLISHED" and status == "WAIT_RESULT":
                 if (not isinstance(receipt_sha, str)
                         or not HEX40.fullmatch(receipt_sha)):
@@ -463,6 +465,9 @@ def handler_for(coordinator):
 
         def do_GET(self):
             parsed = urlsplit(self.path)
+            if parsed.path == "/health":
+                return self._reply(200, {"status": "BUREAU_UNIFIED_ALIVE",
+                                         "apaAttached": coordinator.apa is not None})
             if parsed.path != "/task":
                 return self._reply(404, {"error": "NOT_FOUND"})
             qs = parse_qs(parsed.query)
@@ -526,11 +531,14 @@ def main():
     worker.start()
     print("BUREAU_UNIFIED_READY", "127.0.0.1", config["callbackPort"],
           "APA_ENABLED", c.apa is not None, flush=True)
+    next_apa_poll = time.monotonic()
     try:
         while True:
             try:
                 c.scan()
-                c.scan_apa()
+                if time.monotonic() >= next_apa_poll:
+                    c.scan_apa()
+                    next_apa_poll = time.monotonic() + 30
                 print(c.launch_one(), flush=True)
             except Exception as exc:
                 print("BUREAU_SCAN_BLOCKED", type(exc).__name__,
