@@ -211,7 +211,13 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         raise ValueError("DUPLICATE_OBSERVATION_IDENTIFIER")
     allowed = {"LOCAL_STAIR_ACCESS", "LOCAL_STAIR_IN_HANGAR",
                "EQUIPMENT_INSIDE_WORKSHOP", "LOCAL_STAIR_FROM_GALLERY",
-               "ROUTE_VIA_UNMODELED_TUNNEL"}
+               "ROUTE_VIA_UNMODELED_TUNNEL",
+               "VEHICLE_STORED_IN_HANGAR",
+               "AIRLOCK_GATE_BETWEEN_HANGAR_AND_CHAMBER",
+               "FREIGHT_LIFTS_TO_CARGO_HALL_VIA_WIDE_PASSAGE",
+               "SPACESUIT_ALCOVE_BY_CARGO_HALL",
+               "CARGO_HALL_FACES_PRODUCTION_GATE",
+               "HISTORIC_CONTROLLER_OF_CARGO_HANGAR_COMPLEX"}
     for e in explicit_bridges["typed_edges"]:
         if e["relation"] not in allowed or e["from"] not in kinds or e["to"] not in kinds:
             raise ValueError("UNSUPPORTED_EXPLICIT_SPATIAL_LINK")
@@ -225,7 +231,8 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         if not level[e["from"]] & level[e["to"]]:
             raise ValueError("EXPLICIT_LINK_DISJOINT_LEVELS")
         add(e["from"], e["to"], e["id"], "R06_OBSERVATION_DERIVED_SPACE_LINK",
-            source_ids, detail={"relation": e["relation"], "explanation": e["explanation"]})
+            source_ids, detail={"relation": e["relation"], "explanation": e["explanation"],
+                                "not_a_direct_door": not bool(e.get("proves_direct_door"))})
     after_explicit_physical_components = len({uf.root(node) for node in kinds})
     reference_promotions = []
     review_promotions = []
