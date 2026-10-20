@@ -542,7 +542,7 @@ class DynamicCommands:
         its body/attributes are expected to be unchanged. Only the caller's
         source-verified native BREP verifier can declare the new copies PASS.
         """
-        if prototype_type not in {'Column', 'Beam', 'Object'}:
+        if prototype_type not in {'Column', 'Beam', 'Object', 'Slab'}:
             raise ValueError('NATIVE_COPY_ONLY_SUPPORTED_STANDALONE_PROTOTYPES')
         if not isinstance(prototype_guid, str) or not prototype_guid:
             raise ValueError('NATIVE_COPY_EXISTING_PROTOTYPE_GUID_REQUIRED')
@@ -766,7 +766,7 @@ class DynamicCommands:
                 raise ValueError('MULTI_COPY_TYPED_SOURCE_GROUP_REQUIRED')
             guid=group['prototypeGuid']
             if (not isinstance(guid,str) or not guid or
-                    group['prototypeType'] not in {'Column','Beam','Object'}
+                    group['prototypeType'] not in {'Column','Beam','Object','Slab'}
                     or not isinstance(group['sourceRef'],str) or
                     not group['sourceRef'].strip()):
                 raise ValueError('MULTI_COPY_EXISTING_PROTO_AND_SOURCE_REQUIRED')
