@@ -1,0 +1,70 @@
+{
+  "status": "INSTALLED_READY_DXF_SOURCE_PREFLIGHT",
+  "files": {
+    "scripts/apa_ac29_installed_factory.py": {
+      "beforeSHA256": "dda2b87d7dbab7a6d53f3e40bd2296812e08b0998084c2b4dc53bc1404a878bf",
+      "afterSHA256": "db52f8e6991c6188b70a8ea25454e9e423e101c7dc2d9bc706761486c57e52e3"
+    },
+    "scripts/apa_dxf_source_preflight.py": {
+      "beforeSHA256": "4e9b866860755f5fee63ecc2a1682a84f646158c5a9a0260a3f9c6fa0d9ea064",
+      "afterSHA256": "8f8cca6e17c1d3032d61fdb8401678d2adbb71a1f986258ed5f94bf2c776fbc9"
+    }
+  },
+  "originalContractCount": 299,
+  "allPreviouslyAcceptedContractsPreserved": true,
+  "updatedPendingContractIds": [
+    "AddOn.APADXFPreflight.DXFSourcePreflight"
+  ],
+  "allPreviousContractsPreserved": false,
+  "inventory": {
+    "catalogCommands": 299,
+    "fileCommands": [
+      "AddOn.APADXFGeometryC1.DXFClosedContours",
+      "AddOn.APADXFGeometryC1.DXFRepeatedAssemblies",
+      "AddOn.APADXFGeometryC1.DXFWorldPaths",
+      "AddOn.APAExternalReadOnly.DXFVectors",
+      "AddOn.APAExternalReadOnly.IDSValidate",
+      "AddOn.APAExternalReadOnly.IFCClash",
+      "AddOn.APAExternalReadOnly.IFCDiff",
+      "AddOn.APAExternalReadOnly.IFCQuantities",
+      "AddOn.APAExternalReadOnly.PDFVectors",
+      "AddOn.APAHighDensityReadOnlyV2.DXFBlockInsertions",
+      "AddOn.APAHighDensityReadOnlyV2.DXFDimensionEntities",
+      "AddOn.APAHighDensityReadOnlyV2.DXFLayerInventory",
+      "AddOn.APAHighDensityReadOnlyV2.DXFTextAnnotations",
+      "AddOn.APAHighDensityReadOnlyV2.IFCClassificationCoverage",
+      "AddOn.APAHighDensityReadOnlyV2.IFCGeoReferenceAudit",
+      "AddOn.APAHighDensityReadOnlyV2.IFCGlobalIdAudit",
+      "AddOn.APAHighDensityReadOnlyV2.IFCOpeningRelations",
+      "AddOn.APAHighDensityReadOnlyV2.IFCPortRelations",
+      "AddOn.APAHighDensityReadOnlyV2.IFCPropertySetCoverage",
+      "AddOn.APAHighDensityReadOnlyV2.IFCSchemaInventory",
+      "AddOn.APAHighDensityReadOnlyV2.IFCSpatialRelations",
+      "AddOn.APAIFCArtifactsB2.IFCBCFIssues",
+      "AddOn.APAIFCArtifactsB2.IFCCSVExport",
+      "AddOn.APAIFCArtifactsB2.IFCExtractElements",
+      "AddOn.APAIFCGeometryB3.IFCGeometryBounds",
+      "AddOn.APAIFCGeometryB3.IFCGeometryGLB",
+      "AddOn.APAIFCGeometryB3.IFCGeometryOBJ",
+      "AddOn.APAIFCReportsB1.IDSReportODS",
+      "AddOn.APAIFCReportsB1.IFCSchemaValidate",
+      "AddOn.APAIFCReportsB1.IFCSelect"
+    ],
+    "semanticCommands": [
+      "AddOn.APASemantic.OpenBIMSegments",
+      "AddOn.APASemantic.PDFPageRaster",
+      "AddOn.APASemantic.PDFPaths",
+      "AddOn.APASemantic.RasterFloorplan"
+    ],
+    "additionalFileCommands": [
+      "AddOn.APADXFPreflight.DXFSourcePreflight"
+    ],
+    "nativeWrites": 0,
+    "automaticNativeExecution": false
+  },
+  "backupRetainedLocally": true,
+  "dependenciesReinstalled": false,
+  "nativeCalls": 0,
+  "modelWrites": 0,
+  "stageValidatedBeforeApply": true
+}
