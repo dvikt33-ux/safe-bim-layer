@@ -105,6 +105,8 @@ def audit():
             "book_metric_footprint_profiles": source_numeric_proven,
             "scenario_interval_failures": result["counts"]["area_check_failures"],
             "book_metric_range_proof_not_substituted_with_scenario": True,
+            "local_upper_floor_double_count_review_cases": len(
+                projection["local_upper_floor_double_count_review"]),
             "actual_ship_manoeuvre_clearances_proven": False,
         },
         "levels_and_geometry": {
