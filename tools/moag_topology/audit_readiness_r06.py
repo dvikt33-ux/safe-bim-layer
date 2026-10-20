@@ -94,6 +94,9 @@ def audit():
             "indexed_physical_and_conceptual_candidates": indexed,
             "qualitative_components": result["counts"]["after_routes_physical_components"],
             "fully_isolated_indices": result["counts"]["isolated_physical_indices"],
+            "isolated_index_roles": result["counts"]["isolated_candidates_by_role"],
+            "unconnected_station_architecture_and_technical_indices":
+                result["counts"]["isolated_fixed_room_corridor_door_or_technical_infrastructure"],
             "direct_access_links": len(projection["direct_access_graph"]["edges"]),
             "direct_access_components": projection["direct_access_graph"]["component_count"],
             "semantic_review_links_excluded_from_connectivity":
