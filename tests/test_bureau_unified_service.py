@@ -92,6 +92,23 @@ class UnifiedServiceTests(unittest.TestCase):
         ).fetchone()[0]
 
 
+    def test_dispatch_disarmed_by_default_and_in_old_config(self):
+        self.config["dispatchArmed"] = False
+        self.enqueue("safeguard-101")
+        self.assertEqual(self.launch(), "DISPATCH_DISARMED")
+        self.assertEqual(self.db.execute(
+            "SELECT status FROM jobs WHERE id='safeguard-101'").fetchone()[0],
+            "QUEUED")
+        self.assertEqual(self.opened, [])
+        self.config.pop("dispatchArmed")
+        location = Path(self.tmp.name) / "old-private.json"
+        location.write_text(json.dumps(self.config), encoding="utf-8")
+        self.assertIs(service.config_load(location)["dispatchArmed"], False)
+        self.config["dispatchArmed"] = "yes"
+        location.write_text(json.dumps(self.config), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "DISPATCH_ARMED_FLAG_INVALID"):
+            service.config_load(location)
+
     def test_private_chat_url_only_local_and_one_workflow_can_be_reused(self):
         for target in self.config["targets"].values():
             target["workflowId"] = "one_shared_workflow"
