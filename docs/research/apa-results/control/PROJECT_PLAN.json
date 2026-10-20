@@ -1,6 +1,6 @@
 {
   "schema": "APA_PROJECT_PLAN_V1",
-  "revision": 196,
+  "revision": 197,
   "project": "Archicad Project Accelerator / Archicad 29",
   "repository": "dvikt33-ux/safe-bim-layer",
   "canonical_branch": "research/apa-verified-results-hub-20261010",
@@ -5186,7 +5186,8 @@
         "APA-P70.A11.S19",
         "APA-P70.A11.S20",
         "APA-P70.A11.S21",
-        "APA-P70.A11.S22"
+        "APA-P70.A11.S22",
+        "APA-P70.A11.S23"
       ],
       "inputs": [
         "ART-APA-HIGHLEVEL-PR34",
@@ -6409,7 +6410,7 @@
       "action_id": "APA-P70.A11",
       "title": "Расширить общий нативный пакетный copier на самостоятельные стены",
       "kind": "INTEGRATION",
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "priority": 0,
       "work_key": "ac29-shared-native-batch-copy-standalone-wall",
       "depends_on": [
@@ -6421,11 +6422,40 @@
       "inputs": [
         "ART-P70-A11-S14-COPY-RECEIPT-20261019"
       ],
-      "outputs": [],
+      "outputs": [
+        "Fresh native READ_ONLY source qualification: 4Walls,2hostDoor/Window;2withoutchildren still have joined/cut BREP differingfromisolatedtypedrectangle. No suitable independentlyunchanged standaloneWall donor; nativewrites0. Separate Slab candidate actualtypedrectangle+closedBREP exists; continue independent elementtype, do not create arbitrary donor or run predictable mismatching Wall write. Sourcequalification receipt will publish with next sharedcopier feature."
+      ],
       "acceptance": "Existing MoveElements(copy=true), same Router/registry/SceneWriter. Actual source typed wall coordinates and closed/materialized BREP, no hosted openings/dependents/group membership, story0, exact preserved source/new GUID/geometry/material facts, collision preflight. Necessary automatic tests and one new safe-copy LIVE operation/save/reopen only if eligible actual source. No new primitive creation or invented geometry; unsupported wall domains failclosed. Publish implementation and exact evidence.",
+      "owner": null,
+      "lease_until": null,
+      "claim_ref": null,
+      "requires_approval": false,
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "APA-P70.A11.S23": {
+      "id": "APA-P70.A11.S23",
+      "plan_id": "APA-P70",
+      "action_id": "APA-P70.A11",
+      "title": "Нативное пакетное копирование самостоятельного прямоугольного перекрытия",
+      "kind": "INTEGRATION",
+      "status": "IN_PROGRESS",
+      "priority": 0,
+      "work_key": "ac29-shared-native-batch-copy-standalone-slab",
+      "depends_on": [
+        "APA-P70.A11.S14"
+      ],
+      "related": [
+        "APA-P70.A11.S03"
+      ],
+      "inputs": [
+        "ART-P70-A11-S14-COPY-RECEIPT-20261019"
+      ],
+      "outputs": [],
+      "acceptance": "Existing MoveElements(copy=true), same Router/registry/SceneWriter, actual straight rectangular BasicSlab floor0/noholes/nochildren/nohost/group, explicit horizontalplacements. Actual typed polygon+closed/materialized nativeBREP, exactGUID/type/geometry/materialreadback and retainedmodel; necessary automatic tests +one safe-copy nativebatch/save/reopen, install/publish. OtherSlabdomains failclosed, no CreateSlabs or newdependency.",
       "owner": "apa-mass-integration-20261019",
-      "lease_until": "2026-10-20T04:18:53Z",
-      "claim_ref": "APA-RUN-20261020-WALL-COPY",
+      "lease_until": "2026-10-20T04:21:15Z",
+      "claim_ref": "APA-RUN-20261020-SLAB-COPY",
       "requires_approval": false,
       "evidence": [],
       "blocked_reason": null
@@ -6730,7 +6760,8 @@
         "APA-P70.A11.S19",
         "APA-P70.A11.S20",
         "APA-P70.A11.S21",
-        "APA-P70.A11.S22"
+        "APA-P70.A11.S22",
+        "APA-P70.A11.S23"
       ],
       "artifact_ids": [
         "ART-APA-FULL-CYCLE",
@@ -7567,6 +7598,16 @@
       "readiness": "GAP",
       "readiness_evidence_ids": [],
       "note": "Extend accepted copier one new physical element type. Fresh actual wall source qualification before mutation; no research reset or arbitrary wall creation."
+    },
+    "APA-P70.A11.S23": {
+      "research_task_ids": [
+        "APA-P10.A02.S02",
+        "APA-P10.A01.S03",
+        "APA-P50.A02.S01"
+      ],
+      "readiness": "GAP",
+      "readiness_evidence_ids": [],
+      "note": "Actual Slab candidate in accepted188GUID model; extend same copier one physicallyqualifiable type. WallS22 sourcejoined remainsPARTIAL withzero mutations."
     }
   },
   "component_catalog": {
