@@ -184,6 +184,21 @@
       "proves_xy": false,
       "proves_z_m": false,
       "creates_global_level": false
+    },
+    {
+      "id": "S06-013",
+      "from": "MOAG-G-0089",
+      "to": "MOAG-G-0090",
+      "relation": "SEQUENTIAL_BASE_GATES_VIA_INTERMEDIATE_CORRIDOR",
+      "source_ids": [
+        "P-190"
+      ],
+      "explanation": "Два последовательных дверных рубежа у баз Нижнего уровня отделены длинным коридором; доказана маршрутная связь, но не непосредственная соседняя дверь",
+      "certainty": "DIRECT_TEXT_REVIEWED",
+      "proves_direct_door": false,
+      "proves_xy": false,
+      "proves_z_m": false,
+      "creates_global_level": false
     }
   ],
   "deferred_hypotheses": [
