@@ -318,11 +318,21 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
                                  "to": s["id"], "source_pages": [prev["source_page_id"], source],
                                  "status": "NARRATIVE_GAP_NO_ADJACENCY"})
                 else:
+                    exterior_event = (
+                        s.get("local_stratum") == "outer-space" or
+                        prev.get("local_stratum") == "outer-space" or
+                        s.get("movement_method") == "VEHICLE_ENTRY"
+                    )
+                    # An aircraft leaving the hull, or a different aircraft
+                    # entering the scene, is NOT an internal corridor of MOAG.
                     add(local[prev["id"]], a,
                         "STEP::" + route["id"] + "::" + prev["id"] + "::" + s["id"],
-                        "OBSERVED_ROUTE_ORDER_NOT_DIRECT_DOOR",
+                        "EXTERIOR_OR_OTHER_VEHICLE_EVENT_NOT_INTERNAL_PASSAGE"
+                        if exterior_event else "OBSERVED_ROUTE_ORDER_NOT_DIRECT_DOOR",
                         sorted({prev["source_page_id"], source}),
-                        detail={"arrival_method": s.get("movement_method")})
+                        connect=not exterior_event,
+                        detail={"arrival_method": s.get("movement_method"),
+                                "outside_internal_station_graph": exterior_event})
         for c in route.get("constraints", []):
             if c.get("kind") != "RELATIVE_Z":
                 continue
