@@ -367,9 +367,14 @@ class Coordinator:
             self.opener(exe, url)
         except Exception as err:
             with self.lock:
-                journal(self.db, job_id, "BLOCKED_UI",
-                        "OPERA_INVOCATION_ERROR:" + type(err).__name__)
-            return "BLOCKED_UI"
+                status = self.db.execute(
+                    "SELECT status FROM jobs WHERE id=?", (job_id,)
+                ).fetchone()[0]
+                if status == "WAIT_TAB":
+                    journal(self.db, job_id, "BLOCKED_UI",
+                            "OPERA_INVOCATION_ERROR:" + type(err).__name__)
+                    status = "BLOCKED_UI"
+            return status
         # An immediate Automa ACK can already have advanced the state.
         with self.lock:
             state = self.db.execute("SELECT status FROM jobs WHERE id=?",
