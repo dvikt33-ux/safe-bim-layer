@@ -140,9 +140,15 @@ def install(config_path, root):
         if old.exists():
             old.rename(disabled)
             old_moved = True
+        stop_file = safe_path(state_dir / "PAUSE_AUTOSTART")
         vbs = (
-            'CreateObject("WScript.Shell").Run Chr(34) & "'
-            + safe_path(launch_cmd) + '" & Chr(34), 0, False\r\n'
+            'Set sh = CreateObject("WScript.Shell")\r\n'
+            'Set fs = CreateObject("Scripting.FileSystemObject")\r\n'
+            'Do While Not fs.FileExists("' + stop_file + '")\r\n'
+            '  sh.Run Chr(34) & "' + safe_path(launch_cmd)
+            + '" & Chr(34), 0, True\r\n'
+            '  WScript.Sleep 15000\r\n'
+            'Loop\r\n'
         )
         new.write_text(vbs, encoding="utf-8")
         with log.open("ab") as output:
@@ -162,7 +168,9 @@ def install(config_path, root):
             "log": logp,
             "httpPort": config["callbackPort"],
             "liveAutomaChatDispatchVerified": False,
-            "liveReportChainingVerified": False
+            "liveReportChainingVerified": False,
+            "restartWatchdog": "Windows Startup VBS supervised loop",
+            "pauseAutostartSentinel": str(state_dir / "PAUSE_AUTOSTART")
         }
         (state_dir / "install-receipt.json").write_text(
             json.dumps(receipt, ensure_ascii=False, indent=2) + "\n",
