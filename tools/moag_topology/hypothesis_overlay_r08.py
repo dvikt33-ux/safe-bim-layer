@@ -261,6 +261,8 @@ def build(g, f, b, routes, *, master=None, source=None, option_file=None):
         "unified_evidence_graph": {
             "schema": master["schema"],
             "nodes": base_nodes, "edges": base_edges,
+            "component_membership": master[
+                "component_membership_not_rooms_or_geometry"],
             "proven_component_count": master["inventory"][
                 "qualitative_components_with_physical_indices"],
             "proven_direct_access_edges": master["inventory"]["direct_access_edges"]
@@ -311,6 +313,67 @@ def build(g, f, b, routes, *, master=None, source=None, option_file=None):
             "Archicad_writes": False,
             "approved_BIM_geometry": False
         }
+    }
+
+
+def preview_variant_selection(overlay, proposed_option_ids):
+    """What-if physical-component count; never a source-backed graph edit.
+
+    Ignore gap placeholders and global-level scope links. Only hypothetical
+    *layout alternatives* can be selected. This metric describes the effect
+    if chosen soft edges were later verified, not actual station connectivity.
+    """
+    group_by_option = {x["id"]: x["alternative_group"]
+                       for x in overlay["speculative_layout_variants"]}
+    chosen_groups = {}
+    for option_id in proposed_option_ids:
+        if option_id not in group_by_option:
+            raise ValueError("UNKNOWN_HYPOTHESIS_VARIANT")
+        group = group_by_option[option_id]
+        if group in chosen_groups:
+            raise ValueError("MULTIPLE_INCOMPATIBLE_HYPOTHESES_IN_ONE_GROUP")
+        chosen_groups[group] = option_id
+
+    n = {x["id"]: x for x in overlay["unified_evidence_graph"]["nodes"]}
+    comp = overlay["unified_evidence_graph"]["component_membership"]
+    physical = [x for x in n if n[x]["layer"] == "PHYSICAL_INDEX"]
+    roots = {comp[x]: comp[x] for x in physical}
+
+    def find(x):
+        while roots[x] != x:
+            roots[x] = roots[roots[x]]
+            x = roots[x]
+        return x
+
+    applied = []
+    for e in overlay["hypothetical_edges"]:
+        if e["id"] not in proposed_option_ids:
+            continue
+        if e["layer"] != "HYPOTHETICAL_SYMMETRY_OR_FUNCTIONAL_LAYOUT":
+            raise ValueError("PREVIEW_MUST_NOT_PROMOTE_OTHER_HYPOTHESIS_TYPES")
+        a, b = comp[e["from"]], comp[e["to"]]
+        if a not in roots or b not in roots:
+            raise ValueError("PREVIEW_ENDPOINT_NOT_PHYSICAL_COMPONENT")
+        ra, rb = find(a), find(b)
+        would_join = ra != rb
+        if would_join:
+            roots[rb] = ra
+        applied.append({"option_id": e["id"],
+                        "could_join_two_separate_components": would_join,
+                        "not_a_confirmed_route": True})
+    count = len({find(x) for x in roots})
+    verified = overlay["counts"]["proven_components_unchanged"]
+    if count > verified:
+        raise ValueError("PREVIEW_ADDS_UNEXPECTED_PHYSICAL_COMPONENTS")
+    return {
+        "schema": "APA-MOAG-HYPOTHETICAL-CONNECTIVITY-PREVIEW-R08/0.1",
+        "hypothetical_selected_option_ids": list(proposed_option_ids),
+        "conditional_physical_component_count": count,
+        "verified_physical_component_count_still": verified,
+        "component_reduction_only_if_future_proof": verified - count,
+        "hypothetical_link_effects": applied,
+        "evidence_graph_unchanged": True,
+        "geometry_or_direct_access_approved": False
     }
 
 
