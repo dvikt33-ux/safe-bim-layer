@@ -97,6 +97,8 @@ def audit():
             "isolated_index_roles": result["counts"]["isolated_candidates_by_role"],
             "unconnected_station_architecture_and_technical_indices":
                 result["counts"]["isolated_fixed_room_corridor_door_or_technical_infrastructure"],
+            "station_attribution_unverified_candidates":
+                result["counts"]["unverified_moag_station_identity_indices"],
             "direct_access_links": len(projection["direct_access_graph"]["edges"]),
             "direct_access_components": projection["direct_access_graph"]["component_count"],
             "semantic_review_links_excluded_from_connectivity":
