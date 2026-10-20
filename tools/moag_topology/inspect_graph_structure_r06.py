@@ -157,6 +157,28 @@ def project(graph, fragments, bounds, r06):
             "not_additive_by_default": role in NONADDITIVE_ROLES,
             "geometry_proven": False,
         })
+    # Multipliers may already budget partial extra floors. A separately
+    # indexed control-room/mezzanine cannot be naively added to that same
+    # host's upper-floor allowance without explicit non-overlap geometry.
+    local_overlap_reviews = []
+    multipliers = bounds.get("local_floor_area_multipliers", {})
+    for link in graph["derived_r03_relationships"]:
+        if link["relation"] not in ("HAS_INTERNAL_UPPER_ROOM",
+                                  "HAS_UPPER_GALLERY", "ELEVATED_WITHIN"):
+            continue
+        host, child = link["from"], link["to"]
+        if link["relation"] == "ELEVATED_WITHIN":
+            host, child = child, host
+        ratio = multipliers.get(host)
+        if ratio and ratio["max"] > 1:
+            local_overlap_reviews.append({
+                "host_id": host, "local_floor_entity_id": child,
+                "source_observation_ids": link["source_observation_ids"],
+                "host_local_floor_factor_max": ratio["max"],
+                "status": "POTENTIAL_DOUBLE_COUNT_WITH_HOST_MULTIPLIER",
+                "rule": "NEVER_SUM_HOST_MULTIPLIER_AND_CHILD_FLOOR_UNLESS_DISJOINT_FLOOR_GEOMETRY_PROVEN",
+                "additional_global_storey_created": False
+            })
     spans = [r for r in typed if r["relation_class"] == "INTERLEVEL_SPAN_NOT_ACCESS"]
     budget = r06["area_volume"]["counts"]
     return {
@@ -173,6 +195,7 @@ def project(graph, fragments, bounds, r06):
             "geometry_proven": False
         },
         "interlevel_span_without_access": spans,
+        "local_upper_floor_double_count_review": local_overlap_reviews,
         "spatial_area_volume_profiles": area_profiles,
         "area_and_volume_accounting": {
             "profile_count": len(area_profiles),
