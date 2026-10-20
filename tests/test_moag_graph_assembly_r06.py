@@ -210,6 +210,40 @@ class EvidenceGraphR06Tests(unittest.TestCase):
                             and x["target"] == "MOAG-G-0016" for x in items))
         self.assertFalse(self.result["gates"]["metric_z_known"])
 
+    def test_context_proximity_and_inferred_review_never_fuse_spaces(self):
+        by = {x["id"]: x for x in self.result["typed_evidence_edges"]}
+        for edge_id in ("MOAG-RG-E28", "MOAG-RG-E52",
+                        "MOAG-RG-E39", "MOAG-RG-E51", "MOAG-RG-E55"):
+            self.assertIn(edge_id, by)
+            self.assertFalse(by[edge_id]["connects_evidence_graph"], edge_id)
+            self.assertFalse(by[edge_id]["joins_components"], edge_id)
+            self.assertEqual(by[edge_id]["type"],
+                             "R04_PROVISIONAL_CONTEXT_NOT_CONNECTING")
+
+    def test_incorrect_route_room_level_does_not_join_components(self):
+        bad = copy.deepcopy(self.routes)
+        item = bad["routes"][0]["nodes"][0]
+        self.assertEqual(item["existing_graph_node"], "L2-GALLERY")
+        item["global_level"] = 1
+        checked = MOD.assemble(self.graph, self.fragments, bad, self.bounds)
+        self.assertTrue(any(x["code"] == "ROUTE_LOCATION_LEVEL_CONFLICT"
+                            and x["connection_accepted"] is False
+                            for x in checked["route_location_review"]))
+        self.assertNotIn("VISIT::RT-001::RT001-A",
+                         {x["id"] for x in checked["typed_evidence_edges"]})
+        self.assertFalse(checked["gates"]["metric_z_known"])
+
+    def test_ventilation_contact_crosses_level_without_setting_deck(self):
+        result = self.result
+        review = [x for x in result["route_location_review"]
+                  if x["code"] == "MULTILEVEL_ALIAS_REVIEW"]
+        self.assertTrue(any(x["target"] == "MOAG-G-0016"
+                            and x["route_id"] == "RT-011"
+                            and x["observed_level"] == 2
+                            and x["connection_accepted"]
+                            for x in review))
+        self.assertFalse(result["gates"]["metric_z_known"])
+
     def test_invalid_provenance_fails_closed(self):
         data = copy.deepcopy(self.routes)
         data["routes"][0]["nodes"][0]["source_page_id"] = "UNVERIFIED"
