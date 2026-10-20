@@ -107,6 +107,25 @@ class MOAGStructuralProjections(unittest.TestCase):
                           {x["physical_index_id"]
                            for x in self.structure["spatial_area_volume_profiles"]})
 
+    def test_source_placement_constraints_preserve_height_and_size_without_xy(self):
+        projection = self.structure["source_qualitative_placement_constraints"]
+        self.assertTrue(projection["nonconnecting_with_access_graph"])
+        self.assertFalse(projection["metric_coordinates_assigned"])
+        self.assertFalse(projection["new_global_levels_created"])
+        c = {x["id"]: x for x in projection["constraints"]}
+        self.assertEqual(set(c), {f"POS06-{i:03d}" for i in range(1, 6)})
+        self.assertEqual(c["POS06-001"]["kind"], "RELATIVE_LOCAL_VERTICAL_ORDER")
+        self.assertEqual(c["POS06-001"]["global_level_relation"],
+                         "BOTH_WITHIN_LEVEL_2")
+        self.assertEqual(c["POS06-002"]["kind"],
+                         "ORDINAL_DISTANCE_FROM_REFERENCE")
+        self.assertIsNone(c["POS06-002"]["distance_m"])
+        self.assertIsNone(c["POS06-004"]["area_ratio_min"])
+        self.assertIsNone(c["POS06-004"]["area_ratio_max"])
+        self.assertIsNone(c["POS06-005"]["volume_ratio"])
+        self.assertIsNone(c["POS06-003"]["global_level_assignment_from_this_statement"])
+        self.assertEqual(self.structure["direct_access_graph"]["component_count"], 173)
+
     def test_areas_are_not_blindly_summed_as_three_floors(self):
         p = {x["physical_index_id"]:x
              for x in self.structure["spatial_area_volume_profiles"]}
