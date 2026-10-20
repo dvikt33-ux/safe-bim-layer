@@ -245,7 +245,8 @@
         "P-570"
       ],
       "reason": "Не подтверждено тождество описанного коридора грузовому",
-      "approved_as_connection": false
+      "approved_as_connection": false,
+      "status": "OPEN_NO_PHYSICAL_IDENTITY_OR_DIRECT_ROUTE_PROOF"
     },
     {
       "id": "H06-003",
@@ -255,8 +256,15 @@
         "P-571",
         "P-572"
       ],
-      "reason": "Без дополнительной проверки нельзя объединять старую и вновь описанную изоляцию",
-      "approved_as_connection": false
+      "reason": "Ошибка прежней очереди: MOAG-G-0030 — школа/экзаменационный блок Второго (L2), а M-L3-OLD-ISOLATION-ROOM-001 — старая изоляционная комната Третьего (L3). Данные P-571/P-572 не устанавливают тождество со школой и не разрешают объединение уровней.",
+      "approved_as_connection": false,
+      "status": "REJECTED_WRONG_IDENTITY_AND_DISJOINT_GLOBAL_LEVELS",
+      "disjoint_level_evidence": {
+        "from_level": 3,
+        "to_level": 2,
+        "from_kind": "old_isolation_room",
+        "to_kind": "school_exam_block"
+      }
     }
   ]
 }
