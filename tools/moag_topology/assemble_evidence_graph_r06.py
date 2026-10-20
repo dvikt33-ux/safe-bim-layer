@@ -479,10 +479,22 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         def nearest_mapped(items):
             for step in items:
                 alias = step.get("existing_graph_node")
-                if alias is not None:
-                    target = aliases.get(alias, alias)
-                    if target in kinds:
-                        return target
+                fix = corrections.get((route["id"], step["id"]))
+                if fix and fix["action"] == "QUARANTINE_UNRESOLVED_LEGACY_ALIAS":
+                    continue
+                if alias in AMBIGUOUS_LEGACY_SCENE_IDS and fix is None:
+                    raise ValueError("UNREPAIRED_GAP_FRONTIER_ALIAS")
+                if alias is None:
+                    continue
+                target = (fix["new_index_id"]
+                          if fix else aliases.get(alias, alias))
+                if target not in kinds or target in disputed_indices:
+                    continue
+                v = step.get("global_level")
+                if v is not None and v not in level[target] and (
+                        kinds[target] not in MULTILEVEL_KINDS):
+                    continue
+                return target
             return None
         left = nearest_mapped(reversed(steps[:idx + 1]))
         right = nearest_mapped(steps[idx + 1:])
@@ -493,7 +505,8 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
             "source_pages": gap["source_pages"],
             "priority": ("P1_DISCONNECTED_KNOWN_ENDPOINTS" if different_islands
                          else "P2_GAP_RECHECK_WITH_CONTEXT"),
-            "status": "RESEARCH_FRONTIER_NOT_AN_ADDED_GRAPH_EDGE"
+            "status": "RESEARCH_FRONTIER_NOT_AN_ADDED_GRAPH_EDGE",
+            "endpoint_resolution": "SCENE_CORRECTED_LEVEL_CHECKED_NO_FOREIGN_STATION"
         })
     component_members = uf.groups()
     after_physical_components = len({uf.root(node) for node in kinds})
