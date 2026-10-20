@@ -65,6 +65,46 @@ def project(graph, fragments, bounds, r06):
                 condition["upper_clearance_m"] is not None or
                 condition["station"] != "MOAG"):
             raise ValueError("UNSOURCED_CLEARANCE_OR_PREMATURE_METRIC")
+    placement = json.loads(
+        (SYNTH / "qualitative_placement_constraints_r06.json").read_text(encoding="utf-8"))
+    if placement.get("schema") != "APA-MOAG-QUALITATIVE-PLACEMENT-R06/0.1":
+        raise ValueError("BAD_PLACEMENT_CONSTRAINT_SCHEMA")
+    reviewed_observations = {x["id"]: x for x in graph["observations"]}
+    placement_ids = set()
+    allowed_placement_kinds = {
+        "RELATIVE_LOCAL_VERTICAL_ORDER", "ORDINAL_DISTANCE_FROM_REFERENCE",
+        "LOCAL_STOREY_LABEL_UNRESOLVED",
+        "QUALITATIVE_ROOM_SPACIOUSNESS_COMPARISON",
+        "NONMETRIC_VEHICLE_ENVELOPE_COMPARISON",
+    }
+    metric_keys = ("z_difference_m", "distance_m", "area_ratio_min",
+                   "area_ratio_max", "length_ratio", "volume_ratio")
+    for constraint in placement["constraints"]:
+        if constraint["id"] in placement_ids or (
+                constraint["kind"] not in allowed_placement_kinds):
+            raise ValueError("INVALID_PLACEMENT_TYPE_OR_DUPLICATE")
+        placement_ids.add(constraint["id"])
+        if (constraint["subject"] not in known or
+                (constraint.get("reference") is not None and
+                 (constraint["reference"] not in known or
+                  constraint["reference"] == constraint["subject"]))):
+            raise ValueError("INVALID_PLACEMENT_REFERENT")
+        if (not constraint.get("source_ids") or
+                any(source_id not in reviewed_observations or
+                    reviewed_observations[source_id]["evidence_class"] != "DIRECT_TEXT" or
+                    reviewed_observations[source_id]["station"] != "MOAG"
+                    for source_id in constraint["source_ids"])):
+            raise ValueError("UNSOURCED_PLACEMENT_CONSTRAINT")
+        if (constraint.get("metric_geometry_proven") is not False or
+                constraint.get("direct_access_claim") is not False or
+                any(constraint.get(k) is not None for k in metric_keys)):
+            raise ValueError("PREMATURE_GEOMETRY_FROM_QUALITATIVE_PLACEMENT")
+        if constraint["kind"] == "RELATIVE_LOCAL_VERTICAL_ORDER":
+            subject = next(x for x in r06["nodes"] if x["id"] == constraint["subject"])
+            reference = next(x for x in r06["nodes"] if x["id"] == constraint["reference"])
+            if (subject["possible_global_levels"] != [2] or
+                    reference["possible_global_levels"] != [2]):
+                raise ValueError("LOCAL_VERTICAL_ORDER_MUST_NOT_CREATE_GLOBAL_DECK")
     typed, access = [], []
     for e in r06["typed_evidence_edges"]:
         kind, direct = "UNCLASSIFIED", False
@@ -246,6 +286,12 @@ def project(graph, fragments, bounds, r06):
             "geometry_proven": False
         },
         "interlevel_span_without_access": spans,
+        "source_qualitative_placement_constraints": {
+            "constraints": placement["constraints"],
+            "nonconnecting_with_access_graph": True,
+            "metric_coordinates_assigned": False,
+            "new_global_levels_created": False
+        },
         "source_qualitative_vehicle_clearance": {
             "page_id": reviewed_page,
             "inequalities": clearance["constraints"],
