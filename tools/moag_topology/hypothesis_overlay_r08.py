@@ -239,6 +239,21 @@ def build(g, f, b, routes, *, master=None, source=None, option_file=None):
             master["inventory"]["qualitative_components_with_physical_indices"] !=
             source["counts"]["after_routes_physical_components"]):
         raise ValueError("R08_CHANGED_PROVEN_EVIDENCE_GRAPH")
+    # The entire indexed inventory remains present even when a record has
+    # only a functional identity and no measured station coordinates.
+    source_unlocated_register = [{
+        "index_id": n["id"],
+        "kind": n["kind"],
+        "source_ids": n.get("source_ids", []),
+        "source_provenance_review_required": n.get(
+            "source_location_needs_review", not bool(n.get("source_ids"))),
+        "global_level_domain": n["possible_global_levels"],
+        "belongs_to_MOAG_confirmed_by_this_layer":
+            n.get("moag_station_identity_verified", True),
+        "XY_confirmed": False,
+        "metric_Z_confirmed": False,
+        "hypothesis_may_place_but_not_redefine_identity": True
+    } for n in base_nodes if n["layer"] == "PHYSICAL_INDEX"]
     layers = dict(sorted(Counter(x["layer"] for x in guessed_edges).items()))
     return {
         "schema": "APA-MOAG-HYPOTHESIS-OVERLAY-R08/0.1",
@@ -265,6 +280,7 @@ def build(g, f, b, routes, *, master=None, source=None, option_file=None):
         "merged_visualization_node_count": len(base_nodes) + len(guessed_nodes),
         "merged_visualization_relation_count": len(base_edges) + len(guessed_edges),
         "unknown_transits": unknown_transits,
+        "entire_unplaced_index_register": source_unlocated_register,
         "unlocated_fixed_stational_elements": unlocated_fixed,
         "mutually_alternative_layout_groups": groups,
         "speculative_layout_variants": variants,
@@ -274,6 +290,10 @@ def build(g, f, b, routes, *, master=None, source=None, option_file=None):
             "proven_components_unchanged": master["inventory"][
                 "qualitative_components_with_physical_indices"],
             "unknown_route_intervals_kept": len(unknown_transits),
+            "all_existing_indices_without_measured_XY": len(source_unlocated_register),
+            "indices_with_missing_source_reference": sum(
+                x["source_provenance_review_required"]
+                for x in source_unlocated_register),
             "unlocated_fixed_elements_kept": len(unlocated_fixed),
             "symmetry_and_nonsymmetry_option_groups": len(groups),
             "unselected_layout_options": len(variants),
