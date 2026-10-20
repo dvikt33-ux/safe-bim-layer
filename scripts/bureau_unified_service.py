@@ -642,6 +642,8 @@ def handler_for(coordinator):
             if parsed.path == "/health":
                 return self._reply(200, {"status": "BUREAU_UNIFIED_ALIVE",
                                          "apaAttached": coordinator.apa is not None,
+                                         "dispatchArmed": coordinator.config.get(
+                                             "dispatchArmed", False),
                                          "pid": os.getpid()})
             if parsed.path != "/task":
                 return self._reply(404, {"error": "NOT_FOUND"})
