@@ -1,0 +1,80 @@
+{
+  "schema": "APA_RESEARCH2_PUBLICATION_MANIFEST_V1",
+  "cycle": "2026-10-20T15Z",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "source_only": true,
+  "source_checks_this_cycle": 26,
+  "counteraudits_this_cycle": 2,
+  "new_gates": {
+    "OFFLINE": 0,
+    "BUILD": 0,
+    "INSTALLED": 0,
+    "LIVE": 0,
+    "ACCEPTED": 0
+  },
+  "historical_06Z": "RECONSTRUCTED_COVERAGE_01_TO_30; original-byte-equivalence-not-claimed; independent acceptance pending",
+  "current_15Z": "PARTIAL_EVIDENCE_CHECKS_A_WRITE_BLOCKED",
+  "files": [
+    {
+      "name": "06Z-main",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-20T06Z.md",
+      "status": "FETCHED",
+      "blob_sha1": "b32d56fcfa77aa60ee98aedc0480210d0554eab4",
+      "characters": 12189
+    },
+    {
+      "name": "06Z-checks-A",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-20T06Z-checks-A.md",
+      "status": "FETCHED",
+      "blob_sha1": "19c9cca1ecdc755adbdba59a758ec8e2262b8d7f",
+      "characters": 6290
+    },
+    {
+      "name": "06Z-checks-B1",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-20T06Z-checks-B1.md",
+      "status": "FETCHED",
+      "blob_sha1": "faff219bc9d7c309cf4c108dad6845b9638d6ad7",
+      "characters": 3031
+    },
+    {
+      "name": "06Z-checks-B2",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-20T06Z-checks-B2.md",
+      "status": "FETCHED",
+      "blob_sha1": "343a988bc491dfda723687b0f1cf76e044b0d683",
+      "characters": 3215
+    },
+    {
+      "name": "06Z-audits",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-20T06Z-audits.md",
+      "status": "FETCHED",
+      "blob_sha1": "c22f38c9258110ac6dc73a884d08b8583a2529a9",
+      "characters": 1135
+    },
+    {
+      "name": "06Z-matrix",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-20T06Z-matrix.md",
+      "status": "FETCHED",
+      "blob_sha1": "7322329c1fc31eaa6cb7d27ff0fd92426442bf5e",
+      "characters": 1959
+    },
+    {
+      "name": "15Z-checks-A",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-20T15Z-checks-A.md",
+      "status": "NOT_FOUND"
+    },
+    {
+      "name": "15Z-checks-B",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-20T15Z-checks-B.md",
+      "status": "FETCHED",
+      "blob_sha1": "a0464b15562bd85e10421d4f15111bfb25333996",
+      "characters": 6170
+    },
+    {
+      "name": "15Z-matrix",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-20T15Z-matrix-audits.md",
+      "status": "FETCHED",
+      "blob_sha1": "d93db12124972d236267a73c258a24613d956029",
+      "characters": 5642
+    }
+  ]
+}
