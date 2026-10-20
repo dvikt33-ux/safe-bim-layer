@@ -50,7 +50,7 @@ jobs:
       - name: Preserve unknown passages and symmetry alternatives in R08 overlay
         run: |
           python tools/moag_topology/hypothesis_overlay_r08.py --out moag-r08-hypotheses.json
-          python -c "import json; r=json.load(open('moag-r08-hypotheses.json')); c=r['counts']; assert c['proven_nodes_unchanged']==575 and c['proven_edges_unchanged']==761 and c['unknown_route_intervals_kept']==18 and c['unlocated_fixed_elements_kept']==12 and c['unselected_layout_options']==8 and c['proven_components_unchanged']==39 and r['gates']['hypotheses_can_change_proven_connectivity'] is False and r['gates']['symmetry_assumed_as_fact'] is False and r['gates']['Archicad_writes'] is False; print('R08',c)"
+          python -c "import json; r=json.load(open('moag-r08-hypotheses.json')); c=r['counts']; assert c['proven_nodes_unchanged']==575 and c['proven_edges_unchanged']==761 and c['unknown_route_intervals_kept']==18 and c['unlocated_fixed_elements_kept']==12 and c['unselected_layout_options']==16 and c['hypothetical_edges']==64 and r['merged_visualization_relation_count']==825 and c['proven_components_unchanged']==39 and r['gates']['hypotheses_can_change_proven_connectivity'] is False and r['gates']['symmetry_assumed_as_fact'] is False and r['gates']['Archicad_writes'] is False; print('R08',c)"
       - name: Archive R06 evidence graphs without promoting them to geometry
         uses: actions/upload-artifact@v4
         with:
