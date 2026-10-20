@@ -1,0 +1,17 @@
+# APA №2 — архив 06Z, проверки 23–30 (вторая часть восстановления)
+
+23. **Как защищены внешние ссылки DXF?** PR189, `xref_record`: ограничение XREF count, bounded bytes, SHA before/after, `PRESENT_HASHED`; remote/foreign absolute path не загружается. **Вердикт:** REUSE read-only, не следовать удалённым XREF. Далее — missing/changed-during-hash fixture.
+
+24. **Каков default IfcDiff именно в 0.8.5?** [tag0.8.5 ifcdiff.py](https://github.com/IfcOpenShell/IfcOpenShell/blob/ifcopenshell-python-0.8.5/src/ifcdiff/ifcdiff.py#L81-L90), blob `c7d6bb5d031cb6a41a161db5be7c35d9345b6795`: `self.relationships=relationships or ['geometry']`. **Вердикт:** по умолчанию attributes не проверяются; далее explicit relationships.
+
+25. **Проверяются ли attributes при явном профиле?** Тот же ifcdiff.py, строки 140–170: `relationship=='attributes'` включает `should_check_attributes`, затем `diff_element(old,new)`; `geometry` — отдельно. **Вердикт:** REUSE `['attributes','geometry','property','container','type']` по цели; далее fixture attribute-only change.
+
+26. **Проверяет ли IfcDiff все Opening/Feature GUID?** Тот же ifcdiff.py, строки 109–119: `if not e.is_a('IfcFeatureElement')` исключает features из основного набора. **Вердикт:** отдельная проверка `IfcRelVoidsElement`/openings нужна; далее fixture удаления Opening с неизменным host.
+
+27. **Какие дополнительные пакеты нужны IfcDiff?** Тот же ifcdiff.py, строки 19–40: `numpy`, `deepdiff.DeepDiff`, `orderly_set.OrderedSet`, `ifcopenshell.geom`; исходник LGPL-3.0-or-later. **Вердикт:** SOURCE_AVAILABLE, локальная доступность пакетов UNKNOWN; не устанавливать. Далее — read-only dependency manifest.
+
+28. **Как извлекать порты IFC2X3/IFC4?** [IfcOpenShell0.8.5 util/system.py](https://github.com/IfcOpenShell/IfcOpenShell/blob/ifcopenshell-python-0.8.5/src/ifcopenshell-python/ifcopenshell/util/system.py#L91-L109), blob `39d920701800a5be9f733d7badbf9e1d7a882058`: `get_ports` проходит `IsNestedBy` и `HasPorts` (IFC2X3), фильтр `IfcDistributionPort`. **Вердикт:** REUSE, не писать второй IFC parser; далее fixtures двух схем.
+
+29. **Можно ли получить все peers и relation GUID готовыми функциями?** Тот же system.py, строки 111–164: `get_connected_port` возвращает первого; `get_connected_to/from` перебирают все отношения, но возвращают элементы, не GUID каждой связи. **Вердикт:** REUSE all-peer helper для узлов; минимальный адаптер обходит `ConnectedTo/ConnectedFrom` и сохраняет GUID `IfcRelConnectsPorts`. Далее — duplicate/branch/orphan fixture.
+
+30. **Как учитывать размещённые и кэшированные Hotlink?** [SDK29.3000 Hotlink API](https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3000/docs/group___hotlink.html), blob `277e31227ecd2614bff0a3895eff3bcd3a5b58fe`: `ACAPI_Hotlink_GetHotlinkNodes(...,enableUnplaced)`, `GetHotlinkNodeTree`, `GetHotlinkInstances`, `GetHotlinkProxyElementTable`. [Tapir1.5.9 ProjectCommands.cpp](https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/ProjectCommands.cpp#L681-L700) blob `99053b4ce5f32b33ae456a076f4355a68994e207` пропускает ошибки root/tree. **Вердикт:** REUSE+ADAPTER error-aware, node≠instance, cached≠placed, proxy≠source. Далее — два счётчика и mapping direction.
