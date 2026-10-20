@@ -6,6 +6,7 @@ no dependencies installed, and no native commands called during attachment.
 import argparse
 import importlib.util
 import json
+import hashlib
 from pathlib import Path
 
 ROOT=Path(r'C:\LocalAI\APA_AC29_Stable')
@@ -28,6 +29,11 @@ def native_command_router(schema_path=None,official_commands=None,include_functi
     semantic.register(router)
     from apa_ac29_installed_group_provider import attach
     attach(router)
+    dxf=load(Path(__file__).with_name('apa_dxf_source_preflight.py'),'apa_installed_dxf_source_preflight')
+    data=Path(dxf.__file__).read_bytes().replace(b'\r\n',b'\n')
+    if hashlib.sha256(data).hexdigest()!='8f8cca6e17c1d3032d61fdb8401678d2adbb71a1f986258ed5f94bf2c776fbc9':
+        raise ValueError('INSTALLED_DXF_PREFLIGHT_SOURCE_DRIFT')
+    dxf.register(router)
     return router
 
 
@@ -35,11 +41,12 @@ def inventory(router):
     local=sorted(k for k,v in router.catalog['commands'].items() if v.get('api')=='local-python')
     semantic=[k for k in local if k.startswith('AddOn.APASemantic.')]
     # Optional original APAAnalysis commands are distinct from these 34 reads.
-    files=[k for k in local if not k.startswith(('AddOn.APASemantic.','AddOn.APAAnalysis.'))]
-    if len(files)!=30 or len(semantic)!=4 or any(router.operation_kind(k)!='READ_ONLY' for k in files+semantic):
+    extra=[k for k in local if k.startswith('AddOn.APADXFPreflight.')]
+    files=[k for k in local if not k.startswith(('AddOn.APASemantic.','AddOn.APAAnalysis.','AddOn.APADXFPreflight.'))]
+    if len(files)!=30 or len(semantic)!=4 or any(router.operation_kind(k)!='READ_ONLY' for k in files+semantic+extra):
         raise ValueError('INSTALLED_THIRTY_FILE_AND_FOUR_SEMANTIC_READS_REQUIRED')
     return dict(catalogCommands=len(router.catalog['commands']),fileCommands=files,
-                semanticCommands=semantic,nativeWrites=0,automaticNativeExecution=False)
+                semanticCommands=semantic,additionalFileCommands=extra,nativeWrites=0,automaticNativeExecution=False)
 
 
 def main():

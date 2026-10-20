@@ -1,0 +1,51 @@
+{
+  "status": "REAL_MANUFACTURER_DXF_EXISTING_ROUTER_READONLY_PASS",
+  "sourceCodeRevision": "1dbe777ba0aafa04a00a2a9366aeb4aa0872d2a4",
+  "command": "AddOn.APADXFPreflight.DXFSourcePreflight",
+  "contractSHA256": "56bc9ac162b89b49d222d505ac0d4d447b5bd954a19530c448443a712b347b93",
+  "sourceCopySHA256": "e220ff6c56589f94d594a2824578d6ec5433eaeb027b6b3a345d00dd0aaf7679",
+  "originalUnchanged": true,
+  "sourceCopyUnchanged": true,
+  "reportSHA256": "61bb104d98e39b82ce3a4683d8b4b58c09631d18801930f169fdaf7bdab3ea6b",
+  "reportBytes": 23187,
+  "result": {
+    "parseMode": "STRICT",
+    "dxfVersion": "AC1015",
+    "auditErrors": 0,
+    "auditInMemoryFixes": 63,
+    "repairedDrawingSaved": false,
+    "insunitsCode": 0,
+    "unitsDeclared": false,
+    "scaleCalibration": "NOT_VERIFIED",
+    "unitConversionApplied": false,
+    "xrefs": [],
+    "xrefsComplete": true,
+    "inserts": {
+      "countScope": "MODELSPACE_TOP_LEVEL_ONLY",
+      "insertRecords": 634,
+      "minsertRecords": 0,
+      "nominalMatrixSlots": 634,
+      "ezdxfEffectiveInsertCount": 634,
+      "examplesTruncated": true,
+      "nestedBlockExpansionApplied": false,
+      "virtualGeometryCreated": false
+    },
+    "readyForFurtherSourceAnalysis": false,
+    "automaticBIMWriteAllowed": false,
+    "inventoryPhase": "PARSED_SOURCE_BEFORE_AUDIT"
+  },
+  "dependencyVersion": "ezdxf1.4.5",
+  "existingVendorPythonReused": true,
+  "dependenciesReinstalled": false,
+  "all296OriginalContractsPreserved": true,
+  "all298PreviousFactoryContractsPreserved": true,
+  "catalogCommands": 299,
+  "historicalFileCommands": 30,
+  "semanticCommands": 4,
+  "additionalFileCommands": [
+    "AddOn.APADXFPreflight.DXFSourcePreflight"
+  ],
+  "nativeCalls": 0,
+  "modelWrites": 0,
+  "sourceExamplesOmitted": true
+}
