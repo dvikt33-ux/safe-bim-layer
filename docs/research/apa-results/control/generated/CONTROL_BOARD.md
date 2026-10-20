@@ -11,7 +11,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 | --- | ---: |
 | BLOCKED | 13 |
 | CLAIMED | 0 |
-| DONE_PUBLISHED | 37 |
+| DONE_PUBLISHED | 38 |
 | IN_PROGRESS | 1 |
 | PARTIAL | 17 |
 | READY | 34 |
@@ -30,7 +30,7 @@ This file is generated. Never dispatch from chat memory or edit this board.
 
 | Task | Owner | Lease until | Work key |
 | --- | --- | --- | --- |
-| APA-P70.A11.S21 | apa-mass-integration-20261019 | 2026-10-20T04:07:22Z | ac29-natural-group-intent-existing-native-selector |
+| APA-P70.A11.S22 | apa-mass-integration-20261019 | 2026-10-20T04:18:53Z | ac29-shared-native-batch-copy-standalone-wall |
 
 ## CONTROL — 0 ready
 
