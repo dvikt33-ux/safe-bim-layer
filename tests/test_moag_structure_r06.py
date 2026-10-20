@@ -94,6 +94,19 @@ class MOAGStructuralProjections(unittest.TestCase):
         self.assertIn("M-L1-WASTE-001",
                       profiles["MOAG-G-0014"]["candidate_same_referent_index_ids"])
 
+    def test_craft_corridor_passability_is_an_inequality_not_a_meter_guess(self):
+        s = self.structure["source_qualitative_vehicle_clearance"]
+        self.assertEqual(s["page_id"], "B2-015")
+        self.assertEqual(len(s["inequalities"]), 2)
+        self.assertTrue(s["unverified_metric_dimensions"])
+        for c in s["inequalities"]:
+            self.assertIsNone(c["minimum_clearance_m"])
+            self.assertIsNone(c["upper_clearance_m"])
+            self.assertIn("GREATER_OR_EQUAL", c["relation"])
+            self.assertIn(c["architectural_entity_id"],
+                          {x["physical_index_id"]
+                           for x in self.structure["spatial_area_volume_profiles"]})
+
     def test_areas_are_not_blindly_summed_as_three_floors(self):
         p = {x["physical_index_id"]:x
              for x in self.structure["spatial_area_volume_profiles"]}
