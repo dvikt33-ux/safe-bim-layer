@@ -223,6 +223,54 @@ class EvidenceGraphR06Tests(unittest.TestCase):
             self.assertFalse(edge[key]["connects_evidence_graph"])
             self.assertTrue(edge[key]["source_ids"])
 
+    def test_circular_control_room_reused_legacy_id_does_not_fuse_two_episodes(self):
+        result = self.result
+        visit = {x["id"]: x for x in result["typed_evidence_edges"]
+                 if x["type"] == "ROUTE_VISITS_INDEX"}
+        expected = {
+            "VISIT::RT-015::RT015-J": "M-L1-CH-ST-001",
+            "VISIT::RT-015::RT015-K": "M-L1-CH-GAL-001",
+            "VISIT::RT-015::RT015-L": "M-L1-CH-CTRL-001",
+            "VISIT::RT-024::RT024-G": "M-L1-AH-OLD-ST-001",
+            "VISIT::RT-024::RT024-H": "M-L1-AH-OLD-CTRL-001",
+            "VISIT::RT-024::RT024-I": "M-L1-AH-OLD-CTRL-001",
+            "VISIT::RT-024::RT024-J": "M-L1-AH-OLD-ST-001",
+        }
+        for id, target in expected.items():
+            self.assertIn(id, visit)
+            self.assertEqual(visit[id]["to"], target, id)
+        self.assertNotIn("VISIT::RT-023::RT023-A", visit)
+        self.assertEqual(result["counts"]["route_context_disambiguations"], 7)
+        self.assertEqual(result["counts"]["route_context_quarantines"], 1)
+        self.assertEqual(
+            result["route_context_quarantine_audit"][0]["source_observation_id"],
+            "P-299")
+        self.assertTrue(all(not item["not_a_metric_position"] is False
+                            for item in result["route_context_disambiguation_audit"]))
+
+    def test_circular_alias_repairs_must_have_same_page_review(self):
+        corrections = copy.deepcopy(
+            json.loads((BASE / "synthesis/route_context_corrections_r06.json")
+                       .read_text(encoding="utf-8")))
+        corrections["corrections"][0]["new_index_id"] = "M-L1-AH-OLD-ST-001"
+        with self.assertRaisesRegex(ValueError, "ROUTE_CORRECTION_IDENTITY_NOT_SOURCE_BACKED"):
+            MOD.assemble(self.graph, self.fragments, self.routes, self.bounds,
+                         route_corrections=corrections)
+        corrections = copy.deepcopy(
+            json.loads((BASE / "synthesis/route_context_corrections_r06.json")
+                       .read_text(encoding="utf-8")))
+        corrections["corrections"][0]["source_page_id"] = "B1-110"
+        with self.assertRaisesRegex(ValueError, "CONTEXT_CORRECTION_SOURCE_MISMATCH"):
+            MOD.assemble(self.graph, self.fragments, self.routes, self.bounds,
+                         route_corrections=corrections)
+        corrections = copy.deepcopy(
+            json.loads((BASE / "synthesis/route_context_corrections_r06.json")
+                       .read_text(encoding="utf-8")))
+        corrections["corrections"].append(copy.deepcopy(corrections["corrections"][0]))
+        with self.assertRaisesRegex(ValueError, "UNKNOWN_OR_DUPLICATE_ROUTE_CONTEXT_CORRECTION"):
+            MOD.assemble(self.graph, self.fragments, self.routes, self.bounds,
+                         route_corrections=corrections)
+
     def test_context_proximity_and_inferred_review_never_fuse_spaces(self):
         by = {x["id"]: x for x in self.result["typed_evidence_edges"]}
         for edge_id in ("MOAG-RG-E28", "MOAG-RG-E52",
