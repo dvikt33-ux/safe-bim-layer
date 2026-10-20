@@ -120,9 +120,11 @@ def build(graph, fragments, bounds, routes, *, master=None, left=None,
             for cid in canonical:
                 e = edges.get(cid)
                 if (not e or target not in (e["from"], e["to"])
-                        or e["proves_direct_access"]
-                        or e["joins_approved_evidence_component"]
-                        or e["metric_geometry_proven"]):
+                        or e.get("proves_direct_access", False)
+                        or e.get("direct_access_proven", False)
+                        or e.get("joins_approved_evidence_component", False)
+                        or e.get("connects_proven_components", False)
+                        or e.get("metric_geometry_proven", True)):
                     raise ValueError("R10_OPTION_PROMOTED_OR_MISSING")
                 anchor = e["to"] if e["from"] == target else e["from"]
                 if anchor not in components:
