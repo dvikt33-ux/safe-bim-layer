@@ -49,6 +49,12 @@ class ReadinessAuditR06(unittest.TestCase):
         self.assertGreaterEqual(
             r["area_volume"]["local_upper_floor_double_count_review_cases"], 5)
         self.assertEqual(r["levels_and_geometry"]["physically_confirmed_xy_index_count"], 0)
+        self.assertEqual(
+            r["levels_and_geometry"]["new_nonmetric_source_placement_constraints"], 5)
+        self.assertTrue(
+            r["levels_and_geometry"]["local_height_order_does_not_add_global_level"])
+        self.assertTrue(
+            r["area_volume"]["curated_relations_have_two_endpoint_provenance_checks"])
         self.assertFalse(r["gates"]["BIM_release_ready"])
         self.assertFalse(r["gates"]["readiness_percentage_can_be_interpreted_as_project_completion"])
 
