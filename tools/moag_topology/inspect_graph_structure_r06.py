@@ -127,6 +127,32 @@ def project(graph, fragments, bounds, r06):
                     q.append(dest)
         components.append(sorted(members))
     locations = {x["id"]: x for x in r06["nodes"] if x["layer"] == "PHYSICAL_INDEX"}
+    # The R04 source concept and R03 expanded entity may describe the
+    # same physical floor. Until identity/extent is settled, prohibit BOTH
+    # records from being independently accumulated as additive plan area.
+    candidate_crosswalks = []
+    crosswalk_by_index = {}
+    for old in graph["indexed_source_entities"]:
+        to = old.get("promoted_physical_entity_id")
+        if not to:
+            continue
+        if to not in known or old["id"] not in known:
+            raise ValueError("CROSSWALK_UNKNOWN_INDEX")
+        verdict = old.get("promotion_verdict")
+        crosswalk = {
+            "source_concept_id": old["id"],
+            "refined_index_id": to,
+            "source_page_ids": old.get("source_ids", []),
+            "identity_status": verdict,
+            "independent_floor_area_sum_permitted": False,
+            "geometry_extent_equivalence_proven": False,
+            "review_action": ("CHECK_GLOBAL_ENTITY_IDENTITY" if
+                              verdict == "REVIEW_SOURCE_IDENTITY_BEFORE_BINDING"
+                              else "RESOLVE_PROVISIONAL_REFERENT_EXTENT")
+        }
+        candidate_crosswalks.append(crosswalk)
+        crosswalk_by_index.setdefault(old["id"], []).append(to)
+        crosswalk_by_index.setdefault(to, []).append(old["id"])
     area_profiles = []
     for key in sorted(known):
         p, e = profiles[key], effective[key]
@@ -154,7 +180,9 @@ def project(graph, fragments, bounds, r06):
                 "usable_floor_area_m2": e.get("usable_floor_area_range_m2"),
                 "clear_bounding_prism_m3": e.get("clear_volume_bounds_m3")
             },
-            "not_additive_by_default": role in NONADDITIVE_ROLES,
+            "not_additive_by_default": role in NONADDITIVE_ROLES or key in crosswalk_by_index,
+            "candidate_same_referent_index_ids": crosswalk_by_index.get(key, []),
+            "requires_crosswalk_reconciliation_before_sum": key in crosswalk_by_index,
             "geometry_proven": False,
         })
     # Multipliers may already budget partial extra floors. A separately
@@ -197,6 +225,7 @@ def project(graph, fragments, bounds, r06):
         "interlevel_span_without_access": spans,
         "local_upper_floor_double_count_review": local_overlap_reviews,
         "spatial_area_volume_profiles": area_profiles,
+        "source_concept_to_refined_object_accounting_guards": candidate_crosswalks,
         "area_and_volume_accounting": {
             "profile_count": len(area_profiles),
             "area_bearing": budget["with_area"],
