@@ -210,6 +210,19 @@ class EvidenceGraphR06Tests(unittest.TestCase):
                             and x["target"] == "MOAG-G-0016" for x in items))
         self.assertFalse(self.result["gates"]["metric_z_known"])
 
+    def test_external_flight_or_other_craft_entry_not_station_passage(self):
+        edge = {x["id"]: x for x in self.result["typed_evidence_edges"]}
+        self.assertIn("STEP::RT-032::RT032-F::RT032-G", edge)
+        self.assertIn("STEP::RT-049::RT049-N::RT049-O", edge)
+        for key in ("STEP::RT-032::RT032-F::RT032-G",
+                    "STEP::RT-049::RT049-N::RT049-O"):
+            self.assertEqual(
+                edge[key]["type"],
+                "EXTERIOR_OR_OTHER_VEHICLE_EVENT_NOT_INTERNAL_PASSAGE")
+            self.assertFalse(edge[key]["joins_components"])
+            self.assertFalse(edge[key]["connects_evidence_graph"])
+            self.assertTrue(edge[key]["source_ids"])
+
     def test_context_proximity_and_inferred_review_never_fuse_spaces(self):
         by = {x["id"]: x for x in self.result["typed_evidence_edges"]}
         for edge_id in ("MOAG-RG-E28", "MOAG-RG-E52",
