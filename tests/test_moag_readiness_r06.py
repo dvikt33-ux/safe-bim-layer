@@ -34,11 +34,17 @@ class ReadinessAuditR06(unittest.TestCase):
         self.assertEqual(r["routes"]["recorded_steps"], 378)
         self.assertLessEqual(r["routes"]["steps_with_accepted_source_index_link"],
                              r["routes"]["steps_with_existing_index_reference"])
+        self.assertEqual(r["graph_structure"]["episode_specific_aliases_repaired"], 7)
+        self.assertEqual(r["graph_structure"]["ambiguous_route_steps_quarantined"], 1)
+        self.assertEqual(r["routes"]["steps_with_accepted_source_index_link"],
+                         r["routes"]["steps_with_existing_index_reference"] - 1)
 
     def test_project_metric_intervals_cannot_be_reported_as_book_measurements(self):
         r = self.value
         self.assertEqual(r["area_volume"]["applicable_project_interval_profiles"], 157)
         self.assertEqual(r["area_volume"]["non_area_indices"], 40)
+        self.assertEqual(
+            r["area_volume"]["non_additive_source_to_refined_crosswalk_pairs"], 22)
         self.assertEqual(r["area_volume"]["book_metric_footprint_profiles"], 0)
         self.assertGreaterEqual(
             r["area_volume"]["local_upper_floor_double_count_review_cases"], 5)
