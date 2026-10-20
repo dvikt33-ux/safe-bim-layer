@@ -280,6 +280,11 @@ def prepare_auto_optimized_native_task(router, intent, planner_python=None):
     intent uses the same DynamicCommands and SceneWriter native-task graph.
     No live model reads, native writes or runtime registration inference.
     """
+    if isinstance(intent, dict) and intent.get('schemaVersion') == 'apa-native-group-request/1':
+        from apa_ac29_group_intent import normalize
+        typed,recognized=normalize(intent)
+        return dict(prepare_auto_optimized_native_task(router,typed,planner_python),recognizedGroupIntent=recognized,
+                    userRequestSchema='apa-native-group-request/1')
     if isinstance(intent, dict) and intent.get('schemaVersion') == 'apa-native-group-move/1':
         from apa_ac29_native_group_move import prepare
         return prepare(router,intent)
@@ -327,6 +332,10 @@ def prepare_current_runtime_group_native_task(router, writer, intent):
     The result is still unpermitted and must use run_auto_optimized_native_task
     with original per-step SceneWriter scopes and independent readback.
     """
+    recognized=None
+    if isinstance(intent, dict) and intent.get('schemaVersion') == 'apa-native-group-request/1':
+        from apa_ac29_group_intent import normalize
+        intent,recognized=normalize(intent)
     if isinstance(intent, dict) and intent.get('schemaVersion') == 'apa-native-mass-request/1':
         from apa_ac29_mass_request import normalize_mass_request
         intent = normalize_mass_request(intent)
@@ -346,6 +355,7 @@ def prepare_current_runtime_group_native_task(router, writer, intent):
             raise ValueError('APA_GROUP_NATIVE_COMMAND_NOT_RUNTIME_REGISTERED:'+command)
         checked.append(command)
     final = prepare_auto_optimized_native_task(router, intent)
+    if recognized is not None:final=dict(final,recognizedGroupIntent=recognized,userRequestSchema='apa-native-group-request/1')
     if (final.get('status') != 'ONE_SOURCE_QUALIFIED_STRATEGY_PREPARED'
             or final.get('selectedNativeTaskPreview') is None
             or final.get('nativeWritePermission') is not False):

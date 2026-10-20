@@ -1,0 +1,24 @@
+{
+  "status": "INSTALLED_AUTO_GROUP_INTENT",
+  "sourceCodeRevision": "22bd5092ac1e2a91f0fc1f0c1a3a82fb573bf900",
+  "files": {
+    "scripts/archicad_project_accelerator.py": {
+      "beforeSHA256": "3254143d6fd071672d7abe74ca7521befffc65b4c6cb0ac8c24e7891f744f3d9",
+      "afterSHA256": "7413d7a22fcb8f650d9d24d8bd26e395ee64772dd34a26cd80c1b2d2d86cc950"
+    },
+    "scripts/apa_ac29_group_intent.py": {
+      "beforeSHA256": null,
+      "afterSHA256": "0e599e01abc1603bf64609e9f6b39b38f14c82363d947f7f4592cfe365745877"
+    }
+  },
+  "all296OriginalContractsPreserved": true,
+  "historicalFileCommands": 30,
+  "semanticCommands": 4,
+  "additionalFileCommands": [
+    "AddOn.APADXFPreflight.DXFSourcePreflight"
+  ],
+  "backupRetainedLocally": true,
+  "nativeCalls": 0,
+  "modelWrites": 0,
+  "dependenciesReinstalled": false
+}

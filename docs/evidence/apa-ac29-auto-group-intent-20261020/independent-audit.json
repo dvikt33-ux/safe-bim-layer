@@ -1,0 +1,38 @@
+{
+  "status": "INSTALLED_GROUP_INTENT_NATIVE_READONLY_SOURCE_SCOPE_AUDIT_PASS",
+  "sourceCodeRevision": "22bd5092ac1e2a91f0fc1f0c1a3a82fb573bf900",
+  "qualificationSHA256": "ce31695b745eb6cf63c41c167ad42c2e70214ec5b2a9dda4470e90aeba01a6ea",
+  "rawNativeTraceSHA256": "b2053fce12568a3c6afc2509d1b603985abb3200113cc4e055898b02c97cfe9f",
+  "unchangedAcceptedNativeAdapters": {
+    "scripts/apa_ac29_native_group_create.py": "ff78e6345ce165292394ec49192a0a0dac5b2190db4e2f332d257d01b6353c74",
+    "scripts/apa_ac29_native_group_ungroup.py": "f8ec32589aec1639beef82ec2ac360cb26d1f7dd2583899708a308fbd916e4c8",
+    "scripts/apa_ac29_native_group_move.py": "4e880d0370eedfd14a9294dd06ae8577692d1e4cb2c26140af303c7fcb56fbcc"
+  },
+  "recognizedActions": [
+    "CREATE_GROUP",
+    "UNGROUP",
+    "MOVE"
+  ],
+  "actualRuntimeIdentity": {
+    "contract": "APA_NATIVE_RUNTIME_IDENTITY_V1",
+    "buildIdentity": "6a9ebc59bf9b03c6243f8609ed9a58ffe0ad0bf38389cdfd42dd3f6540c711dc",
+    "sourceRevision": "a6b8cea99adcd04b18737f6596d5a294306164b2",
+    "sdkMajor": 29,
+    "developerId": 826567491,
+    "localId": 368333322,
+    "stairSolverPolicy": "DETACHED_DIAGNOSTIC_READONLY_NO_SETTER_OR_SOLVER",
+    "nativeModelWrites": 0
+  },
+  "currentSavedSHA256": "ebbd057418099a0823e2dd58a9765fd25ab6e41de6524253ad0785764c288187",
+  "currentGuidCount": 188,
+  "allSourceScopesQualified": true,
+  "nativeCommandExecutions": 0,
+  "saveCalls": 0,
+  "journalCreated": false,
+  "acceptedNativeWriteReceiptsReused": [
+    "PR185",
+    "PR186",
+    "PR188"
+  ],
+  "oldNativeOperationsNotRepeated": true
+}
