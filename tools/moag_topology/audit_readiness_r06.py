@@ -26,6 +26,20 @@ def audit():
     routes = read(BASE / "v2/character_routes.json")
     result = assembly.assemble(graph, fragments, routes, bounds)
     projection = structural.project(graph, fragments, bounds, result)
+    identity_review = read(SYNTH / "global_identity_review_r06.json")
+    review_expected = {
+        x["new_physical_id"]: x["source_concept_id"]
+        for x in result["promotion_identity_review_queue"]}
+    review_actual = {
+        x["candidate_physical_index_id"]: x["source_concept_id"]
+        for x in identity_review["review_items"]}
+    if review_expected != review_actual or len(review_actual) != 5:
+        raise ValueError("GLOBAL_IDENTITY_REVIEW_NOT_SYNCED_TO_SOURCE")
+    if any(x["global_identity_approved"] or
+           x["metric_extent_equivalence_approved"] or
+           x["independent_area_addition_permitted"]
+           for x in identity_review["review_items"]):
+        raise ValueError("UNPROVEN_GLOBAL_ALIAS_PROMOTED")
 
     full_pages = Counter()
     all_pages = 0
@@ -86,6 +100,8 @@ def audit():
                 result["counts"]["source_backed_edges_by_class"].get(
                     "R04_PROVISIONAL_CONTEXT_NOT_CONNECTING", 0),
             "unresolved_promotions": result["counts"]["promotions_needing_identity_review"],
+            "episode_specific_aliases_repaired": result["counts"]["route_context_disambiguations"],
+            "ambiguous_route_steps_quarantined": result["counts"]["route_context_quarantines"],
         },
         "routes": {
             "registered_routes": result["counts"]["route_ledgers"],
@@ -107,6 +123,8 @@ def audit():
             "book_metric_range_proof_not_substituted_with_scenario": True,
             "local_upper_floor_double_count_review_cases": len(
                 projection["local_upper_floor_double_count_review"]),
+            "non_additive_source_to_refined_crosswalk_pairs": len(
+                projection["source_concept_to_refined_object_accounting_guards"]),
             "actual_ship_manoeuvre_clearances_proven": False,
         },
         "levels_and_geometry": {
