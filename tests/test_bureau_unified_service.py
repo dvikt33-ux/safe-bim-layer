@@ -381,7 +381,7 @@ class UnifiedServiceTests(unittest.TestCase):
             statuses.append(self.c.ack(
                 "quick-ack-021", nonce, "TAB_SELECTED", "Exact chat selected"))
         self.c.opener = opener
-        self.assertEqual(self.launch(), "WAIT_TAB:quick-ack-021")
+        self.assertEqual(self.launch(), "WAIT_SUBMIT:quick-ack-021")
         self.assertEqual(statuses, ["WAIT_SUBMIT"])
         self.assertEqual(self.db.execute(
             "SELECT status FROM jobs WHERE id='quick-ack-021'").fetchone()[0],
