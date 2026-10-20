@@ -123,10 +123,7 @@
       "DEPARTMENT_REPORT_READY": "SECRETARIAT"
     },
     "D-08": {
-      "REPORT_READY": "DIR-08"
-    },
-    "DIR-08": {
-      "DEPARTMENT_REPORT_READY": "SECRETARIAT"
+      "REPORT_READY": "HQ"
     },
     "SECRETARIAT": {
       "HQ_BRIEF_READY": "HQ"
