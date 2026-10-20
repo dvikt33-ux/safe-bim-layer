@@ -167,6 +167,26 @@ class EvidenceGraphR06Tests(unittest.TestCase):
             MOD.assemble(self.graph, self.fragments, self.routes, self.bounds,
                          explicit_bridges=bad)
 
+    def test_same_deck_wrong_observation_cannot_join_unrelated_room(self):
+        base = json.loads((BASE / "synthesis/explicit_spatial_bridges_r06.json")
+                          .read_text(encoding="utf-8"))
+        bad = copy.deepcopy(base)
+        # Same global level, legitimate reviewed citation, but the armoury
+        # is not mentioned in the cargo-hall observation P-356/P-358.
+        link = next(x for x in bad["typed_edges"] if x["id"] == "S06-011")
+        link["from"] = "M-L3-ARMORY-001"
+        with self.assertRaisesRegex(
+                ValueError, "EXPLICIT_LINK_ENDPOINT_NOT_GROUNDED_IN_SOURCE"):
+            MOD.assemble(self.graph, self.fragments, self.routes, self.bounds,
+                         explicit_bridges=bad)
+        bad = copy.deepcopy(base)
+        link = next(x for x in bad["typed_edges"] if x["id"] == "S06-003")
+        link["from"] = "M-L1-FH-001"
+        with self.assertRaisesRegex(
+                ValueError, "EXPLICIT_LINK_ENDPOINT_NOT_GROUNDED_IN_SOURCE"):
+            MOD.assemble(self.graph, self.fragments, self.routes, self.bounds,
+                         explicit_bridges=bad)
+
     def test_concept_promotions_do_not_count_as_spatial_joins(self):
         r = self.result
         self.assertEqual(r["counts"]["reference_promotion_crosswalks"], 17)
