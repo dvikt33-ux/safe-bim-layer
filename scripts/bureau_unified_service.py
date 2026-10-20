@@ -163,6 +163,9 @@ def open_db(db_path):
     db.execute("""CREATE TABLE IF NOT EXISTS rejected (
         job_id TEXT PRIMARY KEY, blob_sha TEXT NOT NULL,
         reason TEXT NOT NULL, changed TEXT NOT NULL)""")
+    db.execute("""CREATE TABLE IF NOT EXISTS invalid_receipts (
+        job_id TEXT PRIMARY KEY, blob_sha TEXT NOT NULL,
+        reason TEXT NOT NULL, changed TEXT NOT NULL)""")
     return db
 
 
