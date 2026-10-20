@@ -74,14 +74,21 @@ def build(graph, fragments, bounds, routes, *, left=None, right=None):
     gap_aliases = []
     for key, x in route_gaps_a.items():
         y = route_gaps_b[key]
+        # One R08 register records the possible *shared* level of the two
+        # boundaries; the other records the union of levels that might be
+        # crossed during an unknown route. Do not silently equate these.
         if (set(x["source_pages"]) != set(y["source_pages"]) or
-                set(x["candidate_level_domain"]) != set(y["possible_global_levels"])):
+                not set(x["candidate_level_domain"]) <= set(
+                    y["possible_global_levels"])):
             raise ValueError("R08_ROUTE_GAP_PROVENANCE_OR_LEVEL_CONFLICT")
         gap_aliases.append({
             "route_id": key[0], "step_ids": list(key[1:]),
             "canonical_hypothetical_node_id": x["hypothetical_node_id"],
             "secondary_register_alias": y["id"],
             "same_missing_information_not_two_physical_corridors": True,
+            "joint_candidate_level_domain": x["candidate_level_domain"],
+            "union_of_boundary_level_domains": y["possible_global_levels"],
+            "level_domains_have_different_meanings": True,
             "no_intermediate_room_count_proven": True
         })
 
