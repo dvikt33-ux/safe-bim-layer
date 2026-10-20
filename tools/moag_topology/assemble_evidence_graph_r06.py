@@ -223,6 +223,42 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         raise ValueError("FOREIGN_STATION_QUARANTINE_SOURCE_MISMATCH")
     if len(records) != len(graph["observations"]):
         raise ValueError("DUPLICATE_OBSERVATION_IDENTIFIER")
+    # Reject an attractive but unsourced connection between unrelated
+    # objects on the same global level. A valid page alone is insufficient:
+    # both endpoint indices must have explicit referent evidence from that
+    # page (legacy reference, verified refined ID, or index provenance).
+    physical_by_id = {n["id"]: n for n in physical}
+
+    def canonical_page(value):
+        try:
+            k = value.removeprefix("LR-")
+            book, num = k.split("-", 1)
+            if book not in ("B1", "B2", "B3", "B4"):
+                return None
+            return f"{book}-{int(num):03d}"
+        except (ValueError, AttributeError):
+            return None
+
+    def observation_anchor_indices(source_id):
+        rec = records[source_id]
+        anchors = set(rec.get("source_concept_ids", []))
+        anchors.update(rec.get("r03_direct_mentioned_objects", []))
+        anchors.update(rec.get("verified_r04_entity_mentions", []))
+        for legacy in rec.get("original_graph_feature_refs", []):
+            index = aliases.get(legacy, legacy)
+            if index in kinds:
+                anchors.add(index)
+        page = canonical_page(rec["page"])
+        for ix in physical:
+            if source_id in ix.get("source_observation_ids", []):
+                anchors.add(ix["id"])
+            # R04 candidates often store 'B2-13' instead of 'B2-013';
+            # the matching reviewed page can anchor that source concept.
+            elif ix.get("source_ids") and any(
+                    canonical_page(s) == page for s in ix["source_ids"]):
+                anchors.add(ix["id"])
+        return anchors
+
     allowed = {"LOCAL_STAIR_ACCESS", "LOCAL_STAIR_IN_HANGAR",
                "EQUIPMENT_INSIDE_WORKSHOP", "LOCAL_STAIR_FROM_GALLERY",
                "ROUTE_VIA_UNMODELED_TUNNEL",
@@ -249,6 +285,11 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
             raise ValueError("EXPLICIT_LINK_SOURCE_NOT_VERIFIED")
         if not level[e["from"]] & level[e["to"]]:
             raise ValueError("EXPLICIT_LINK_DISJOINT_LEVELS")
+        source_anchors = set().union(
+            *(observation_anchor_indices(source_id) for source_id in source_ids))
+        if not {e["from"], e["to"]} <= source_anchors:
+            raise ValueError(
+                "EXPLICIT_LINK_ENDPOINT_NOT_GROUNDED_IN_SOURCE: " + e["id"])
         add(e["from"], e["to"], e["id"], "R06_OBSERVATION_DERIVED_SPACE_LINK",
             source_ids, detail={"relation": e["relation"], "explanation": e["explanation"],
                                 "not_a_direct_door": not bool(e.get("proves_direct_door"))})
