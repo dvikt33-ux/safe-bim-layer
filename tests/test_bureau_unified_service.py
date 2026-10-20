@@ -315,5 +315,49 @@ class UnifiedServiceTests(unittest.TestCase):
                     pass
 
 
+    def test_loopback_http_real_task_and_ack_without_chatgpt(self):
+        from http.server import ThreadingHTTPServer
+        from urllib.request import urlopen, Request
+        from urllib.parse import urlencode
+        import threading
+        self.enqueue("activation-020")
+        self.launch()
+        token = self.token("activation-020")
+        server = ThreadingHTTPServer(("127.0.0.1", 0),
+                                     service.handler_for(self.c))
+        worker = threading.Thread(target=server.serve_forever, daemon=True)
+        worker.start()
+        self.addCleanup(server.server_close)
+        self.addCleanup(server.shutdown)
+        base = f"http://127.0.0.1:{server.server_address[1]}"
+        with urlopen(base + "/health") as reply:
+            health = json.loads(reply.read())
+        self.assertEqual(health["status"], "BUREAU_UNIFIED_ALIVE")
+        args = urlencode({"jobId":"activation-020","token":token})
+        with urlopen(base + "/task?" + args) as reply:
+            task = json.loads(reply.read())
+        self.assertEqual(task["targetChat"], "D-03")
+        self.assertTrue(task["chatUrl"].startswith("https://chatgpt.com/c/"))
+        request = Request(
+            base + "/ack", method="POST",
+            data=json.dumps({
+                "jobId":"activation-020", "token":token,
+                "stage":"TAB_SELECTED", "proof":"Existing URL matched"
+            }).encode(),
+            headers={"Content-Type":"application/json"})
+        with urlopen(request) as reply:
+            result = json.loads(reply.read())
+        self.assertEqual(result["status"], "WAIT_SUBMIT")
+        with self.assertRaises(Exception):
+            urlopen(base + "/task?jobId=activation-020&token=wrong-token")
+
+    def test_installer_refuses_non_windows_without_mutating_system(self):
+        import install_bureau_unified_service as installer
+        if __import__("os").name != "nt":
+            with self.assertRaisesRegex(RuntimeError, "WINDOWS_ONLY_INSTALLER"):
+                installer.install(Path(self.tmp.name) / "nonexistent.json",
+                                  Path(self.tmp.name))
+
+
 if __name__ == "__main__":
     unittest.main()
