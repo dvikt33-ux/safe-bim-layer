@@ -128,6 +128,23 @@ class EvidenceGraphR06Tests(unittest.TestCase):
                              not e[id]["detail"]["not_a_direct_door"])
         self.assertEqual(self.result["counts"]["physical_indices"], 197)
 
+    def test_isolated_room_metric_excludes_ships_and_global_containers(self):
+        counts = self.result["counts"]
+        r = counts["isolated_candidates_by_role"]
+        self.assertEqual(sum(r.values()), counts["isolated_physical_indices"])
+        self.assertEqual(
+            counts["isolated_fixed_room_corridor_door_or_technical_infrastructure"],
+            r["FIXED_ROOM_CORRIDOR_DOOR_OR_TECHNICAL_INFRASTRUCTURE"])
+        self.assertGreater(r["VEHICLE_OR_VEHICLE_CLASS_NOT_STATION_ROOM"], 0)
+        self.assertGreater(r["GLOBAL_OR_HISTORICAL_CONTAINER_NOT_INDEPENDENT_ROOM"], 0)
+        queue = self.result["unconnected_index_source_review_queue"]
+        self.assertEqual(len(queue), counts["isolated_physical_indices"])
+        self.assertTrue(all(x["spatial_inventory_role"] in r for x in queue))
+        self.assertTrue(all(
+            x["not_automatically_a_separate_room"]
+            for x in queue if x["spatial_inventory_role"] !=
+            "FIXED_ROOM_CORRIDOR_DOOR_OR_TECHNICAL_INFRASTRUCTURE"))
+
     def test_concept_promotions_do_not_count_as_spatial_joins(self):
         r = self.result
         self.assertEqual(r["counts"]["reference_promotion_crosswalks"], 17)
