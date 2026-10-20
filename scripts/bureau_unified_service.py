@@ -196,12 +196,14 @@ def validate_event(event, filename, config):
         raise ValueError("EVENT_TTL_TOO_LONG")
     # Reject fabricated progression before making any further GitHub read.
     parent = event["parentJobId"]
-    if event["eventType"] not in ("ASSIGN_TASK", "ARENA_RESULT_READY"):
+    # Only first-hop employee assignments can arrive from the public mailbox.
+    # ARENA_RESULT_READY remains activation-only via the legacy V1 schema.
+    if event["eventType"] != "ASSIGN_TASK":
         raise ValueError("EXTERNAL_STAGE_BYPASS_FORBIDDEN")
     if parent is not None:
         raise ValueError("EXTERNAL_PARENT_BYPASS_FORBIDDEN")
-    if event["eventType"] == "ARENA_RESULT_READY" and event["targetChat"] != "APA-CONTROL":
-        raise ValueError("ARENA_TARGET_NOT_AUTHORIZED")
+    if not re.fullmatch(r"D-0[1-8]", event["targetChat"]):
+        raise ValueError("EXTERNAL_TARGET_NOT_EMPLOYEE")
     ref = event["taskRef"]
     if (not isinstance(ref, dict) or set(ref) != {"path", "blobSha"}
             or not isinstance(ref["path"], str)
@@ -560,11 +562,18 @@ def handler_for(coordinator):
             self.end_headers()
             self.wfile.write(content)
 
+        def _local_host_only(self):
+            return self.headers.get("Host", "") == (
+                "127.0.0.1:" + str(coordinator.config["callbackPort"]))
+
         def do_GET(self):
+            if not self._local_host_only():
+                return self._reply(403, {"error": "BAD_HOST"})
             parsed = urlsplit(self.path)
             if parsed.path == "/health":
                 return self._reply(200, {"status": "BUREAU_UNIFIED_ALIVE",
-                                         "apaAttached": coordinator.apa is not None})
+                                         "apaAttached": coordinator.apa is not None,
+                                         "pid": os.getpid()})
             if parsed.path != "/task":
                 return self._reply(404, {"error": "NOT_FOUND"})
             qs = parse_qs(parsed.query)
@@ -575,6 +584,10 @@ def handler_for(coordinator):
                 return self._reply(403, {"error": "ACCESS_DENIED"})
 
         def do_POST(self):
+            if not self._local_host_only():
+                return self._reply(403, {"error": "BAD_HOST"})
+            if self.headers.get("Content-Type", "").split(";")[0].strip().lower() != "application/json":
+                return self._reply(415, {"error": "JSON_REQUIRED"})
             if urlsplit(self.path).path != "/ack":
                 return self._reply(404, {"error": "NOT_FOUND"})
             try:
