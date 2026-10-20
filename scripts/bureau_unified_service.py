@@ -91,8 +91,10 @@ def checked_remote(path, blob_sha):
 
 def config_load(filename):
     config = json.loads(Path(filename).read_text(encoding="utf-8"))
+    config.setdefault("dispatchArmed", False)
     expected = {"operaExe", "extensionId", "targets", "routes", "pollSeconds",
-                "callbackPort", "apaEnabled", "apaBridgePath", "apaBridgeSha256"}
+                "callbackPort", "apaEnabled", "apaBridgePath", "apaBridgeSha256",
+                "dispatchArmed"}
     if set(config) != expected:
         raise ValueError("CONFIG_KEYS_INVALID")
     if (not legacy.EXTENSION_ID.fullmatch(config["extensionId"])
