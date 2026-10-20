@@ -63,6 +63,16 @@ class MOAGStructuralProjections(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "UNKNOWN_ACCESS_INDEX"):
             module.trace_direct_access(s, "NOT-IN-GRAPH", "M-L1-FH-001-CTRL")
 
+    def test_internal_upper_floors_are_not_added_twice_to_host_multiplier(self):
+        overlaps = self.structure["local_upper_floor_double_count_review"]
+        self.assertGreaterEqual(len(overlaps), 5)
+        pairs = {(x["host_id"], x["local_floor_entity_id"]) for x in overlaps}
+        self.assertIn(("M-L1-CH-001", "M-L1-CH-GAL-001"), pairs)
+        self.assertIn(("M-L2-RES-001", "M-L2-RES-GAL-001"), pairs)
+        self.assertIn(("M-L1-FH-001", "M-L1-FH-001-CTRL"), pairs)
+        self.assertTrue(all(not x["additional_global_storey_created"] for x in overlaps))
+        self.assertTrue(all(x["source_observation_ids"] for x in overlaps))
+
     def test_areas_are_not_blindly_summed_as_three_floors(self):
         p = {x["physical_index_id"]:x
              for x in self.structure["spatial_area_volume_profiles"]}
