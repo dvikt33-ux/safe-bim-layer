@@ -1,0 +1,87 @@
+{
+  "schema": "APA-MOAG-QUALITATIVE-PLACEMENT-R06/0.1",
+  "status": "SOURCE_REFERENCED_NON_METRIC_CONSTRAINTS_NOT_CONNECTIONS",
+  "general_rules": [
+    "Do not introduce a plan wall, distance in meters or new global deck",
+    "Do not use relative-size comparisons as additive usable floor area",
+    "No record here proves a walkable door or an identical room"
+  ],
+  "constraints": [
+    {
+      "id": "POS06-001",
+      "kind": "RELATIVE_LOCAL_VERTICAL_ORDER",
+      "subject": "M-L2-RES-GAL-001",
+      "reference": "M-L2-PLAZA-001",
+      "source_ids": [
+        "P-521"
+      ],
+      "condition": "GALLERY_LOCAL_FLOOR_HIGHER_THAN_MAIN_SQUARE_FLOOR",
+      "z_difference_m": null,
+      "global_level_relation": "BOTH_WITHIN_LEVEL_2",
+      "direct_access_claim": false,
+      "metric_geometry_proven": false,
+      "interpretation": "Upper residential gallery can descend to the Main Square; not a fourth deck"
+    },
+    {
+      "id": "POS06-002",
+      "kind": "ORDINAL_DISTANCE_FROM_REFERENCE",
+      "subject": "MOAG-G-0077",
+      "reference": "MOAG-G-0078",
+      "source_ids": [
+        "P-138"
+      ],
+      "condition": "LIFTS_D_AND_E_AT_FAR_END_RELATIVE_TO_OTHER_REFERENCED_LIFTS",
+      "comparator_set": "OTHER_LIFTS_NOT_INDIVIDUALLY_LOCALIZED",
+      "distance_m": null,
+      "orientation": null,
+      "direct_access_claim": false,
+      "metric_geometry_proven": false,
+      "interpretation": "Two lifts D/E are reported among the farthest from cargo receiving; no physical passage or distance inferred"
+    },
+    {
+      "id": "POS06-003",
+      "kind": "LOCAL_STOREY_LABEL_UNRESOLVED",
+      "subject": "M-L2-LIB-NOWINDOW-001",
+      "source_ids": [
+        "P-520"
+      ],
+      "condition": "SMALL_WINDOWLESS_LIBRARY_AT_LOCALLY_CALLED_FIRST_FLOOR",
+      "global_level_assignment_from_this_statement": null,
+      "local_storey_number": 1,
+      "identity_with_other_library_verified": false,
+      "metric_geometry_proven": false,
+      "interpretation": "First floor in residential area does not mean global station Lower level, or same space as the large library"
+    },
+    {
+      "id": "POS06-004",
+      "kind": "QUALITATIVE_ROOM_SPACIOUSNESS_COMPARISON",
+      "subject": "M-L1-FH-LOCK-001",
+      "reference": "M-L1-FH-001",
+      "source_ids": [
+        "P-384"
+      ],
+      "condition": "AIRLOCK_AND_HANGAR_COMPARABLE_SPACIOUSNESS_AS_CHARACTER_REPORTED",
+      "area_ratio_min": null,
+      "area_ratio_max": null,
+      "metric_geometry_proven": false,
+      "direct_access_claim": false,
+      "interpretation": "No width, volume, floor area ratio or chamber cross section measured"
+    },
+    {
+      "id": "POS06-005",
+      "kind": "NONMETRIC_VEHICLE_ENVELOPE_COMPARISON",
+      "subject": "V-SPHERE-OBS-001",
+      "reference": "V-STAR-OBS-001",
+      "source_ids": [
+        "P-621"
+      ],
+      "condition": "OBSERVED_SPHERE_BIGGER_THAN_FIRST_STARSHIP",
+      "dimension_compared": "OVERALL_APPARENT_SIZE_UNSPECIFIED",
+      "length_ratio": null,
+      "volume_ratio": null,
+      "metric_geometry_proven": false,
+      "direct_access_claim": false,
+      "interpretation": "Cannot infer a spherical craft is larger in every linear dimension or that either vessel gives station clearance"
+    }
+  ]
+}
