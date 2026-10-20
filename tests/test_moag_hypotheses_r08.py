@@ -42,6 +42,15 @@ class UncertaintyGraphR08(unittest.TestCase):
         self.assertEqual(inv["still_unknown_route_gaps"], 18)
         self.assertEqual(inv["new_unknown_route_placeholders_not_new_rooms"], 18)
         self.assertEqual(inv["route_gap_candidate_edges"], 36)
+        self.assertEqual(
+            inv["ordered_route_transitions_with_unlocated_path_geometry"], 306)
+        ordered = self.output[
+            "witnessed_route_transitions_without_direct_door_geometry"]
+        self.assertEqual(len(ordered), 306)
+        self.assertTrue(all(x["route_order_witnessed"] and
+                            not x["direct_door_or_same_corridor_proven"] and
+                            not x["number_of_intervening_physical_elements_inferred"]
+                            for x in ordered))
         self.assertEqual(inv["total_nodes_including_nonphysical_placeholders"], 593)
         self.assertEqual(inv["total_relations_including_unapproved_scenarios"], 821)
         self.assertTrue(all(x["not_counted_as_physical_room"] and
