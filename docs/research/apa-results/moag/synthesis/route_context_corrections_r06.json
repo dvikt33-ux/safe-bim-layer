@@ -1,0 +1,113 @@
+{
+  "schema": "APA-MOAG-ROUTE-CONTEXT-CORRECTIONS-R06/0.1",
+  "status": "SOURCE_REVIEWED_EPISODE_DISAMBIGUATION",
+  "notes": "Correct only concrete route occurrences. The old legacy IDs are ambiguous between B1 pp76,104,110-113; original route ledger remains immutable. Episode-level mapping never proves cross-episode adjacency or identity.",
+  "corrections": [
+    {
+      "route_id": "RT-015",
+      "step_id": "RT015-J",
+      "source_page_id": "B1-076",
+      "legacy_alias": "L1-CIRCULAR-STAIRS",
+      "action": "REMAP_TO_EPISODE_SPECIFIC_PHYSICAL_INDEX",
+      "new_index_id": "M-L1-CH-ST-001",
+      "observation_id": "P-220",
+      "geometry_proven": false
+    },
+    {
+      "route_id": "RT-015",
+      "step_id": "RT015-K",
+      "source_page_id": "B1-076",
+      "legacy_alias": "L1-CIRCULAR-UPPER-WALK",
+      "action": "REMAP_TO_EPISODE_SPECIFIC_PHYSICAL_INDEX",
+      "new_index_id": "M-L1-CH-GAL-001",
+      "observation_id": "P-220",
+      "geometry_proven": false
+    },
+    {
+      "route_id": "RT-015",
+      "step_id": "RT015-L",
+      "source_page_id": "B1-076",
+      "legacy_alias": "L1-CIRCULAR-CONTROL",
+      "action": "REMAP_TO_EPISODE_SPECIFIC_PHYSICAL_INDEX",
+      "new_index_id": "M-L1-CH-CTRL-001",
+      "observation_id": "P-221",
+      "geometry_proven": false
+    },
+    {
+      "route_id": "RT-024",
+      "step_id": "RT024-G",
+      "source_page_id": "B1-110",
+      "legacy_alias": "L1-CIRCULAR-STAIRS",
+      "action": "REMAP_TO_EPISODE_SPECIFIC_PHYSICAL_INDEX",
+      "new_index_id": "M-L1-AH-OLD-ST-001",
+      "observation_id": "P-313",
+      "geometry_proven": false
+    },
+    {
+      "route_id": "RT-024",
+      "step_id": "RT024-H",
+      "source_page_id": "B1-110",
+      "legacy_alias": "L1-CIRCULAR-CONTROL",
+      "action": "REMAP_TO_EPISODE_SPECIFIC_PHYSICAL_INDEX",
+      "new_index_id": "M-L1-AH-OLD-CTRL-001",
+      "observation_id": "P-313",
+      "geometry_proven": false
+    },
+    {
+      "route_id": "RT-024",
+      "step_id": "RT024-I",
+      "source_page_id": "B1-113",
+      "legacy_alias": "L1-CIRCULAR-CONTROL",
+      "action": "REMAP_TO_EPISODE_SPECIFIC_PHYSICAL_INDEX",
+      "new_index_id": "M-L1-AH-OLD-CTRL-001",
+      "observation_id": "P-316",
+      "geometry_proven": false
+    },
+    {
+      "route_id": "RT-024",
+      "step_id": "RT024-J",
+      "source_page_id": "B1-113",
+      "legacy_alias": "L1-CIRCULAR-STAIRS",
+      "action": "REMAP_TO_EPISODE_SPECIFIC_PHYSICAL_INDEX",
+      "new_index_id": "M-L1-AH-OLD-ST-001",
+      "observation_id": "P-317",
+      "geometry_proven": false
+    },
+    {
+      "route_id": "RT-023",
+      "step_id": "RT023-A",
+      "source_page_id": "B1-104",
+      "legacy_alias": "L1-CIRCULAR-STAIRS",
+      "action": "QUARANTINE_UNRESOLVED_LEGACY_ALIAS",
+      "new_index_id": null,
+      "observation_id": "P-299",
+      "reason": "p104 reports stairs descending from old control quarters to the hangar network, without proof that the stairs are the p76 bridge or the p110 raised dispatch staircase.",
+      "geometry_proven": false
+    }
+  ],
+  "negative_identity_constraints": [
+    {
+      "first": "M-L1-CH-ST-001",
+      "second": "M-L1-AH-OLD-ST-001",
+      "source_observation_ids": [
+        "P-220",
+        "P-313"
+      ],
+      "interpretation": "DISTINCT_EPISODES_NOT_IDENTICAL_BY_LEGACY_NAME"
+    },
+    {
+      "first": "M-L1-CH-CTRL-001",
+      "second": "M-L1-AH-OLD-CTRL-001",
+      "source_observation_ids": [
+        "P-221",
+        "P-313"
+      ],
+      "interpretation": "DISTINCT_EPISODES_NOT_IDENTICAL_BY_LEGACY_NAME"
+    }
+  ],
+  "gates": {
+    "physical_identity_merged": false,
+    "new_geometry_inferred": false,
+    "metric_coordinates_approved": false
+  }
+}
