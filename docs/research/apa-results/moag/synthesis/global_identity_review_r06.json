@@ -1,0 +1,117 @@
+{
+  "schema": "APA-MOAG-GLOBAL-IDENTITY-REVIEW-R06/0.1",
+  "scope": "Five R04-to-R03 conceptual crosswalks with unknown spatial extent or collision of legacy names",
+  "source_of_truth": "R04 source graph + R03 explicit observation corrections; this report does not modify either",
+  "review_items": [
+    {
+      "source_concept_id": "MOAG-G-0025",
+      "candidate_physical_index_id": "M-L2-RES-GAL-001",
+      "source_observation_ids": [
+        "P-044",
+        "P-045",
+        "P-484",
+        "P-486"
+      ],
+      "reason": "Верхняя галерея у площади и каютное кольцо имеют совпадающий функциональный контекст, но не установлено, покрывает ли ранний индекс все участки галереи.",
+      "review_kind": "CHECK_GALLERY_EXTENT_VS_SINGLE_RING",
+      "local_route_disambiguation_available": false,
+      "global_identity_approved": false,
+      "metric_extent_equivalence_approved": false,
+      "independent_area_addition_permitted": false,
+      "status": "REVIEW_REQUIRED_NOT_MERGED"
+    },
+    {
+      "source_concept_id": "MOAG-G-0040",
+      "candidate_physical_index_id": "M-L3-LOG-001",
+      "source_observation_ids": [
+        "P-083",
+        "P-200",
+        "P-465"
+      ],
+      "reason": "Ранняя группа коридоров для погрузчиков может охватывать более одного коридора. Уточнённый индекс — конкретная транспортная связь промышленного сектора.",
+      "review_kind": "CHECK_CORRIDOR_SET_VS_SINGLE_ROUTE",
+      "local_route_disambiguation_available": false,
+      "global_identity_approved": false,
+      "metric_extent_equivalence_approved": false,
+      "independent_area_addition_permitted": false,
+      "status": "REVIEW_REQUIRED_NOT_MERGED"
+    },
+    {
+      "source_concept_id": "MOAG-G-0053",
+      "candidate_physical_index_id": "M-L1-CG-001",
+      "source_observation_ids": [
+        "P-205",
+        "P-240",
+        "P-243",
+        "P-313"
+      ],
+      "reason": "Раннее обозначение отдельного старого ангара нельзя объявлять тождественным всему историческому ангарному комплексу; старый ангар B1-110 также имеет собственный индекс.",
+      "review_kind": "CHECK_SINGLE_OLD_HANGAR_VS_HISTORIC_COMPLEX",
+      "local_route_disambiguation_available": false,
+      "global_identity_approved": false,
+      "metric_extent_equivalence_approved": false,
+      "independent_area_addition_permitted": false,
+      "status": "REVIEW_REQUIRED_NOT_MERGED"
+    },
+    {
+      "source_concept_id": "MOAG-G-0059",
+      "candidate_physical_index_id": "M-L1-CH-ST-001",
+      "source_observation_ids": [
+        "P-220",
+        "P-313",
+        "P-317"
+      ],
+      "reason": "Привязка лестницы эпизода B1-076 к мостику восстановлена, но тот же устаревший код употреблялся для лестницы B1-110/113. Глобальное тождество запрещено.",
+      "review_kind": "EPISODE_76_ONLY_NO_GLOBAL_ALIAS",
+      "local_route_disambiguation_available": true,
+      "global_identity_approved": false,
+      "metric_extent_equivalence_approved": false,
+      "independent_area_addition_permitted": false,
+      "status": "REVIEW_REQUIRED_NOT_MERGED"
+    },
+    {
+      "source_concept_id": "MOAG-G-0060",
+      "candidate_physical_index_id": "M-L1-CH-CTRL-001",
+      "source_observation_ids": [
+        "P-221",
+        "P-240",
+        "P-313",
+        "P-316"
+      ],
+      "reason": "Пультовая за мостиком B1-076 и диспетчерская старого ангара B1-110/113 имеют разные доказательные сущности; повторный код не объединяет их.",
+      "review_kind": "EPISODE_76_ONLY_NO_GLOBAL_ALIAS",
+      "local_route_disambiguation_available": true,
+      "global_identity_approved": false,
+      "metric_extent_equivalence_approved": false,
+      "independent_area_addition_permitted": false,
+      "status": "REVIEW_REQUIRED_NOT_MERGED"
+    }
+  ],
+  "negative_identities": [
+    {
+      "first": "M-L1-CH-ST-001",
+      "second": "M-L1-AH-OLD-ST-001",
+      "sources": [
+        "P-220",
+        "P-313",
+        "P-317"
+      ],
+      "status": "DO_NOT_UNIFY_WITHOUT_NEW_EVIDENCE"
+    },
+    {
+      "first": "M-L1-CH-CTRL-001",
+      "second": "M-L1-AH-OLD-CTRL-001",
+      "sources": [
+        "P-221",
+        "P-313",
+        "P-316"
+      ],
+      "status": "DO_NOT_UNIFY_WITHOUT_NEW_EVIDENCE"
+    }
+  ],
+  "approval_gates": {
+    "geometry": false,
+    "global_alias_merge": false,
+    "scene_specific_route_repair": true
+  }
+}
