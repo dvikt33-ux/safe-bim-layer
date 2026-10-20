@@ -19,7 +19,7 @@ class UnresolvedSpatialResearch(unittest.TestCase):
         self.assertEqual(r["total_route_gaps"], 18)
         self.assertEqual(len(r["isolated_fixed_infrastructure"]), 12)
         self.assertEqual(len(r["narrative_route_gaps"]), 18)
-        self.assertTrue(all(not x["no_automatic_link"]
+        self.assertTrue(all(x["no_automatic_link"]
                             for x in r["isolated_fixed_infrastructure"]))
         self.assertTrue(all(not x["link_automatically"]
                             for x in r["narrative_route_gaps"]))
