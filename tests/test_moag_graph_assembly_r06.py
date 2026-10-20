@@ -97,7 +97,7 @@ class EvidenceGraphR06Tests(unittest.TestCase):
         r = self.result
         curated = [x for x in r["typed_evidence_edges"]
                    if x["type"] == "R06_OBSERVATION_DERIVED_SPACE_LINK"]
-        self.assertEqual(len(curated), 12)
+        self.assertEqual(len(curated), 13)
         self.assertGreater(r["counts"]["r06_explicit_link_component_reductions"], 0)
         self.assertTrue(all(x["source_ids"] and not x["metric_geometry_proven"]
                             for x in curated))
@@ -117,6 +117,7 @@ class EvidenceGraphR06Tests(unittest.TestCase):
             "S06-010": ("MOAG-G-0046", "MOAG-G-0047", "P-357"),
             "S06-011": ("MOAG-G-0046", "MOAG-G-0048", "P-358"),
             "S06-012": ("M-L1-CG-001", "M-L1-CG-CTRL-001", "P-240"),
+            "S06-013": ("MOAG-G-0089", "MOAG-G-0090", "P-190"),
         }
         for id, (a, b, source) in expected.items():
             self.assertEqual((e[id]["from"], e[id]["to"]), (a, b))
