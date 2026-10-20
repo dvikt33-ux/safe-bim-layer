@@ -157,8 +157,17 @@ def assemble(graph, fragments, routes, bounds, parameters=None, area_overrides=N
         if e["semantic_class"] not in R04_SPATIAL or e["binding_status"] in (
                 "QUARANTINED_DO_NOT_USE_AS_DIRECT_GEOMETRY", "RECHECK_REQUIRED"):
             continue
-        add(e["from"], e["to"], e["id"], "R04_QUALITATIVE_ASSOCIATION",
-            e["source_ids"], detail=e["semantic_class"])
+        # Spatial proximity is descriptive context, not a connected passage.
+        # Likewise inferred-review edges are explicitly unconfirmed and must
+        # not fuse previously disconnected source-backed components.
+        permitted = (e["semantic_class"] != "PROXIMITY_NOT_SHAPE_PROOF" and
+                     e["binding_status"] != "INFERRED_REVIEW")
+        add(e["from"], e["to"], e["id"],
+            "R04_QUALITATIVE_ASSOCIATION" if permitted
+            else "R04_PROVISIONAL_CONTEXT_NOT_CONNECTING",
+            e["source_ids"], connect=permitted,
+            detail={"semantic_class": e["semantic_class"],
+                    "source_binding_status": e["binding_status"]})
     after_r04_physical_components = len({uf.root(node) for node in kinds})
     for e in graph["derived_r03_relationships"]:
         relation = e["relation"]
