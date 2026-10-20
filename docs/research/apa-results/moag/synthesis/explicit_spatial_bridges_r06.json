@@ -226,8 +226,16 @@
       "source_ids": [
         "P-385"
       ],
-      "reason": "Шлюзовые двери есть, но без адресной проверки нельзя выбрать, к какому именно ангару относятся",
-      "approved_as_connection": false
+      "reason": "Историческая гипотеза снята: B2 p14–15 и p21 позволяют отнести действующий шлюз к первому рабочему ангару; соседние ангары не отождествляются со шлюзом автоматически.",
+      "approved_as_connection": true,
+      "status": "RESOLVED_BY_EPISODE_SPECIFIC_SOURCE_REFERENCE",
+      "superseded_by": "S06-008",
+      "additional_scene_source": {
+        "page_id": "B2-015",
+        "url": "https://loveread.ec/read_book.php?id=53370&p=15",
+        "exact_context": "Здешний шлюз относится к рабочему первому ангару с двумя исправными катерами; близнецы уточняют, что найденные позже катера из соседнего ангара должны запускаться через этот рабочий шлюз.",
+        "scope": "AIRLOCK_OF_WORKING_HANGAR_NOT_ALL_NEIGHBOUR_HANGARS"
+      }
     },
     {
       "id": "H06-002",
