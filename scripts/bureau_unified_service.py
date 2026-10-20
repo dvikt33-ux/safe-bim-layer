@@ -344,6 +344,9 @@ class Coordinator:
 
     def ack(self, job_id, nonce, stage, proof="", receipt_sha=None):
         """ACK Automa или итогового издателя, не приравнивать вызов Opera к результату."""
+        if (not isinstance(job_id, str) or not JOB_ID.fullmatch(job_id)
+                or not isinstance(nonce, str) or not isinstance(stage, str)):
+            raise ValueError("ACK_FIELD_TYPES_INVALID")
         if not isinstance(proof, str) or not 1 <= len(proof) <= 500:
             raise ValueError("ACK_PROOF_REQUIRED")
         with self.lock:
@@ -354,6 +357,13 @@ class Coordinator:
             if not row or not hmac.compare_digest(row[1] or "", nonce):
                 raise ValueError("ACK_NOT_AUTHENTICATED")
             status, _, action, event_type, target = row
+            # Сетевой ACK может повториться после потерянного HTTP-ответа.
+            if stage == "TAB_SELECTED" and status in ("WAIT_SUBMIT", "WAIT_RESULT", "COMPLETE_ACTIVATION", "COMPLETE_REPORTED"):
+                return status
+            if stage == "MESSAGE_SUBMITTED" and status in ("WAIT_RESULT", "COMPLETE_REPORTED"):
+                return status
+            if stage == "RESULT_PUBLISHED" and status == "COMPLETE_REPORTED":
+                return status
             if stage == "TAB_SELECTED" and status == "WAIT_TAB":
                 next_status = ("COMPLETE_ACTIVATION" if action == "ACTIVATE_ONLY"
                                else "WAIT_SUBMIT")
@@ -590,12 +600,20 @@ def run_locked(c, a, config):
         while True:
             try:
                 c.scan()
-                if time.monotonic() >= next_apa_poll:
+            except Exception as exc:
+                print("BUREAU_INBOX_UNAVAILABLE", type(exc).__name__,
+                      str(exc)[:300], flush=True)
+            if time.monotonic() >= next_apa_poll:
+                try:
                     c.scan_apa()
-                    next_apa_poll = time.monotonic() + 30
+                except Exception as exc:
+                    print("APA_INBOX_UNAVAILABLE", type(exc).__name__,
+                          str(exc)[:300], flush=True)
+                next_apa_poll = time.monotonic() + 30
+            try:
                 print(c.launch_one(), flush=True)
             except Exception as exc:
-                print("BUREAU_SCAN_BLOCKED", type(exc).__name__,
+                print("BUREAU_DISPATCH_BLOCKED", type(exc).__name__,
                       str(exc)[:300], flush=True)
             time.sleep(config["pollSeconds"])
     finally:
