@@ -380,12 +380,17 @@ def preview_variant_selection(overlay, proposed_option_ids):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", type=Path)
+    parser.add_argument("--preview", nargs="*", metavar="HYPOTHESIS_ID",
+                        help="Optional unproven scenario preview; not a BIM link")
     args = parser.parse_args()
     g = read(SYNTH / "full_indexed_parametric_graph_r04.json")
     f = read(SYNTH / "progressive_fragments_r05.json")
     b = read(SYNTH / "area_volume_bounds_r05.json")
     r = read(BASE / "v2/character_routes.json")
     result = build(g, f, b, r)
+    if args.preview is not None:
+        result["requested_hypothetical_preview"] = preview_variant_selection(
+            result, args.preview)
     payload = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False) + "\n"
     if args.out:
         args.out.write_text(payload, encoding="utf-8")
