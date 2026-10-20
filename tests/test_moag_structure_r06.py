@@ -73,6 +73,27 @@ class MOAGStructuralProjections(unittest.TestCase):
         self.assertTrue(all(not x["additional_global_storey_created"] for x in overlaps))
         self.assertTrue(all(x["source_observation_ids"] for x in overlaps))
 
+    def test_old_concept_area_never_summed_with_refined_R03_space(self):
+        s = self.structure
+        guards = s["source_concept_to_refined_object_accounting_guards"]
+        self.assertEqual(len(guards), 22)
+        self.assertEqual(sum(x["identity_status"] ==
+                             "REVIEW_SOURCE_IDENTITY_BEFORE_BINDING"
+                             for x in guards), 5)
+        self.assertTrue(all(not x["independent_floor_area_sum_permitted"]
+                            and not x["geometry_extent_equivalence_proven"]
+                            for x in guards))
+        profiles = {x["physical_index_id"]: x
+                    for x in s["spatial_area_volume_profiles"]}
+        for pair in guards:
+            old, refined = pair["source_concept_id"], pair["refined_index_id"]
+            self.assertTrue(profiles[old]["not_additive_by_default"])
+            self.assertTrue(profiles[refined]["not_additive_by_default"])
+            self.assertTrue(profiles[old]["requires_crosswalk_reconciliation_before_sum"])
+            self.assertIn(refined, profiles[old]["candidate_same_referent_index_ids"])
+        self.assertIn("M-L1-WASTE-001",
+                      profiles["MOAG-G-0014"]["candidate_same_referent_index_ids"])
+
     def test_areas_are_not_blindly_summed_as_three_floors(self):
         p = {x["physical_index_id"]:x
              for x in self.structure["spatial_area_volume_profiles"]}
