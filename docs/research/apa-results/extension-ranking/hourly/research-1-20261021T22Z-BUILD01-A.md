@@ -1,0 +1,39 @@
+# APA №1 — BUILD-01 | 2026-10-21 22Z | SOURCE 01–15
+
+**Влияние на BUILD-01:** новые ограничения для G1/G2 — несходимость отметок этажей при однопроходном SetStories, зависимость редактирования этажей от активного этажа, неявное наследование профиля стены из tool defaults. G0 по-прежнему BLOCKED (нет SHA локального APX и live registration), G1/G2 только SOURCE. **Новых PASS нет; здание не создано.** [Инженерная задача #192](https://github.com/dvikt33-ux/safe-bim-layer/issues/192).
+
+**Границы:** Windows 11 / AC29 build 5101 / Tapir 1.5.10 — заданная конфигурация, а не проверенная локальная установка. Tapir upstream 1.5.9/1.7.2 — исходники под MIT; официальные Graphisoft JSON/Python AC29 — Apache Software License, DevKit SDK29 — отдельная EULA. Владелец задачи №2 — интеграционные SOURCE-инструкции, не LIVE. 0–100 — экспертная важность, не benchmark. Исторический [PROJECT_PLAN rev182, immutable commit](https://github.com/dvikt33-ux/safe-bim-layer/blob/049576378c961c5d7a9a62611f4091e3da70d309/docs/research/apa-results/control/PROJECT_PLAN.json) только чтение; [матрица 61](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-extension-ranking-hub-20261018/docs/research/apa-results/extension-ranking/priority_matrix_20261018.json) прочитана, не изменена.
+
+## 15 независимых контрактных вопросов (SOURCE, не 15 испытаний AC29)
+
+**01 | G0 | Доказан ли APX по имени версии?** [#192, 20.10.2026](https://github.com/dvikt33-ux/safe-bim-layer/issues/192), пользовательский репозиторий (лицензия не установлена): gate требует именно бинарный SHA/APX, port, active PLN, registration и schema. Указание «1.5.10» не содержит этих доказательств. **Решение:** RUNTIME_BLOCKED. **№2:** получить read-only файл→SHA256 и регистрацию без установки; 100/100.
+
+**02 | G0 | Можно ли получить build и язык из штатного API?** [Graphisoft AC29 GetProductInfo](https://archicadapi.graphisoft.com/archicadPythonPackage/archicad.releases.ac29.html), официальный клиент 29.3000/Apache: возвращает version, build number, language code запущенного Archicad. Не возвращает APX SHA. **№2:** независимый product-info read-only и сравнение с build 5101; 100/100.
+
+**03 | G0 | Сохранённая схема равна активному APX?** [PR #74, compiler](https://github.com/dvikt33-ux/safe-bim-layer/blob/5a3a9201a715a5528c93bed4a5318e2acb32eea7/scripts/archicad_project_accelerator.py), пользовательский код/лицензия не проверена: provenance указывает источник документации Tapir, но не хеш загруженного APX. **№2:** развести CATALOG_SHA и RUNTIME_APX_SHA; 100/100.
+
+**04 | G0 | Можно ли полагаться на старый GenerateDocumentation?** [тот же pinned PR #74](https://github.com/dvikt33-ux/safe-bim-layer/blob/5a3a9201a715a5528c93bed4a5318e2acb32eea7/scripts/archicad_project_accelerator.py): проверка происхождения и JS schema-файлов относится к моменту экспорта. Фактический набор команд в открытом Archicad требует нового read-only запроса. **№2:** сравнить зарегистрированные commandName/version/required fields с G1 typed DAG, несовпадение BLOCK; 100/100.
+
+**05 | G1 | Возвращает ли GetStories высоту верхнего этажа в pinned baseline?** [Tapir 1.5.9 ProjectCommands.cpp](https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/ProjectCommands.cpp), MIT, blob 99053b4c: поле height добавляется лишь при `i+1<storyCount`. **№2:** высоту верхнего этажа задавать явно в authored brief; не выводить из отсутствующего поля; 98/100.
+
+**06 | G1 | Умеет ли pinned SetStories закреплять отрицательные индексы?** [Tapir 1.5.9 ProjectCommands.cpp](https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/ProjectCommands.cpp), MIT: `GetNewFirstStoryIndex` и `APIStory_InsBelow` присутствуют; старый дефект [#570](https://github.com/ENZYME-APD/tapir-archicad-automation/issues/570) для 1.5.8 не переносить автоматически. **№2:** в G1 закрепить floor index/elevation, runtime проверить отдельно; 95/100.
+
+**07 | G1 | Гарантирует ли один SetStories точные уровни при росте с одного этажа?** [Tapir issue #573](https://github.com/ENZYME-APD/tapir-archicad-automation/issues/573), AC28 Windows/main 20.08.2026, MIT upstream: индексы -2…1 верны, но уровни ушли на -5.95 м, команда вернула success. Проверен двухпроходный обход; на AC29/1.5.10 не проверено. **№2:** не считать success доказательством, сравнить полный массив index+level; 99/100.
+
+**08 | G1 | Влияет ли активный этаж на SetStories?** [issue #747](https://github.com/ENZYME-APD/tapir-archicad-automation/issues/747), AC28 Win 1.6.0, MIT: изменение нижнего этажа при активном верхнем перемещало не тот уровень. Для AC29 5101 неизвестно. **№2:** предусмотреть fail-closed по actStory, запрет изменения уровней без отдельного разрешения; 98/100.
+
+**09 | G1 | ChangeWindow storyIndex действительно переключает этаж?** [issue #748](https://github.com/ENZYME-APD/tapir-archicad-automation/issues/748), AC26/28 Win 1.6.0, MIT: success=true при неизменном `GetStories.actStory`; путь через navigatorItemId работал на AC28. **№2:** проверять actStory после переключения, не доверять только ответу команды; 97/100.
+
+**10 | G1 | Есть ли готовый официальный read-only идентификатор этажей?** [Graphisoft AC29 GetStoryNavigatorItems](https://archicadapi.graphisoft.com/archicadPythonPackage/archicad.releases.ac29.html), Apache: по navigatorItemIds возвращает данные story items или ошибки. Не подменяет Tapir `floorId` без сопоставления. **№2:** построить проверочную таблицу storyIndex/elevation/navigator ID и явно пометить неизвестные соответствия; 92/100.
+
+**11 | G2 | Почему Basic Wall может получить неверную высоту/толщину?** [issue #531](https://github.com/ENZYME-APD/tapir-archicad-automation/issues/531), AC28 Win, открыта: complex-profile Wall tool default сохраняет memo, а явные `height`/`thickness` игнорируются без ошибки. На локальном AC29 не воспроизведено. **№2:** read-only fingerprint defaults/проверка параметров; не выполнять пробный CREATE без отдельного допуска; 100/100.
+
+**12 | G2 | Распространяется ли профильный default на пакет?** [Tapir 1.5.9 ElementCreationCommands.cpp](https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/ElementCreationCommands.cpp), MIT, blob 716f52f2: `ACAPI_Element_GetDefaults(&element,&memo)` вызывается до цикла элементов, элемент и memo повторно используются. Совместно с #531 это риск массового неверного CREATE, а не доказанный локальный дефект. **№2:** preflight структуры и обязательный post-create readback каждой стены; 100/100.
+
+**13 | G2 | Можно ли задать слой в CreateWalls/Slabs/Beams/Columns?** [issue #1043](https://github.com/ENZYME-APD/tapir-archicad-automation/issues/1043), upstream main 17.10.2026, MIT: `layerIndex` отсутствует в этих Create*, элемент наследует tool/favorite layer, требуется отдельный SetDetailsOfElements. **№2:** включить layer-binding отдельной проверяемой фазой, не выдумывать поле; 98/100.
+
+**14 | G2 | Можно ли отличить материал Basic Slab от Composite по readback?** [Tapir 1.5.9 ElementCommands.cpp](https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.5.9/archicad-addon/Sources/ElementCommands.cpp), MIT, blob 8feaaeda: `GetDetailsOfElements` возвращает `structureType`, `thickness`, `level`, `referencePlaneLocation`, а затем `compositeId` или `buildingMaterialId` по типу. **№2:** требовать material GUID+structure+thickness, не только геометрический bbox; 99/100.
+
+**15 | G2 | Может ли присвоение слоя молча не сработать?** [issue #555](https://github.com/ENZYME-APD/tapir-archicad-automation/issues/555), AC28 Win 1.5.7, MIT: hidden/locked layer допускает `success:true` при фактическом no-op SetDetails/Move/Delete. **№2:** read-only проверить isHidden/isLocked и фактический layerIndex после разрешённой операции; 100/100.
+
+**Статус A:** 15 проверенных SOURCE-вопросов, новых OFFLINE/BUILD/INSTALLED/LIVE/ACCEPTED = 0/0/0/0/0. MODEL_MODE_NOT_VERIFIABLE.
