@@ -1,0 +1,35 @@
+{
+  "schema": "APA_R2_HOURLY_SHA_MANIFEST_V1",
+  "cycle": "2026-10-22T19Z",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "status": "SOURCE_ONLY_NOT_ACCEPTED",
+  "sources_verified": 30,
+  "local_writes": 0,
+  "files": [
+    {
+      "file": "research-2-integration-2026-10-22T19Z-checks-A.md",
+      "git_blob_sha1": "6733651bf7094046b86fdc4e0137b8aeb96db31b",
+      "verified_readback": true
+    },
+    {
+      "file": "research-2-integration-2026-10-22T19Z-checks-B.md",
+      "git_blob_sha1": "3064e07cb5d9a709bc531d62b7778066068b07f9",
+      "verified_readback": true
+    },
+    {
+      "file": "research-2-integration-2026-10-22T19Z-matrix.md",
+      "git_blob_sha1": "016c9b28baee7ec772c2a81958139c27dd1390e8",
+      "verified_readback": true
+    },
+    {
+      "file": "research-2-integration-2026-10-22T19Z-audit-A.md",
+      "git_blob_sha1": "8e6f9536ddab5fc6a7818423816851636c7a0903",
+      "verified_readback": true
+    },
+    {
+      "file": "research-2-integration-2026-10-22T19Z-audit-B.md",
+      "git_blob_sha1": "9caabf2f2050505d45a1880bfb674b032883281f",
+      "verified_readback": true
+    }
+  ]
+}
