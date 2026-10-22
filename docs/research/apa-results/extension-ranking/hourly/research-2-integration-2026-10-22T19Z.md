@@ -2,6 +2,8 @@
 
 **Вклад:** установлен точный барьер `CreateSlabs` без `buildingMaterialId/structureType` и несовместимость PR126 packed с PR74 single-GUID. G0 требует SHA загруженного APX и runtime command inventory. Решение: существующий компилятор/SceneWriter, qualified Favorite и single-create до приёмки.
 
+**G0 NOT_FOUND:** единая проверенная команда полного installed inventory/APX SHA не обнаружена. Минимальный read-only adapter: хешировать локальный загруженный APX и опросить `IsAddOnCommandAvailable` по каждому ID pinned каталога; затем сверить runtime schemas, без CREATE.
+
 30 реальных SOURCE-чтений, 9 маршрутов, 2 контрааудита. Приложения повторно прочитаны, SHA проверены:
 
 - [SOURCE 01–14](research-2-integration-2026-10-22T19Z-checks-A.md)
