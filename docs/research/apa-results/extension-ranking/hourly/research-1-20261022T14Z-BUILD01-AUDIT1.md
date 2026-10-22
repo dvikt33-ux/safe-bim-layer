@@ -1,0 +1,3 @@
+# Контрааудит A — версия и доказательство
+
+Гипотеза: merged/released Tapir 1.7.2 = AC29 LIVE. **Опровергнуто:** [PR865](https://github.com/ENZYME-APD/tapir-archicad-automation/pull/865), [PR785](https://github.com/ENZYME-APD/tapir-archicad-automation/pull/785), [PR558](https://github.com/ENZYME-APD/tapir-archicad-automation/pull/558) отмечены авторами unbuilt/untested; [PR860](https://github.com/ENZYME-APD/tapir-archicad-automation/pull/860) тестировался LIVE на AC30, AC29 только built claim. [Релиз](https://github.com/ENZYME-APD/tapir-archicad-automation/releases/tag/1.7.2) не доказывает локальный APX 1.5.10. №2: PID→APX SHA→runtime commands→schema. G0 BLOCKED. SOURCE only.
