@@ -1,0 +1,2 @@
+# BUILD-01 solution card C03
+C03. Plan polygon triangulation, PR1351 https://github.com/ENZYME-APD/tapir-archicad-automation/pull/1351 . G4, expert 68/100; upstream MIT OPEN 1.7.3, not installed. TriangulatePolygonsOfElements returns 2D x/y triangles for Slab, Zone, Mesh, Roof. Benefit: area and contour audit. Risk: not 3D BREP; DevKit handle assumptions untested. №2: use only as optional independent 2D area check.
