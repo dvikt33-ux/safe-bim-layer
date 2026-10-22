@@ -1,0 +1,2 @@
+# Контрааудит B BUILD-01
+C1/C2 закрывают вопрос поиска пути APX, но не регистрацию/schema; C3 требует реальных Zone, AABB не BREP, onlySupportedTypes может исключить GUID. Не дублировать PR34/48/74/82/97/126/131/149/154/159/160/162 и CloneNativeGroupV1. Fork https://github.com/gnekt/mcp-archicad-with-tapir требует отдельный Add-On/Claude Desktop и дублирует SceneWriter — не P0. №2: PID→APX SHA→registration→schema→PR74 G1. G0 BLOCKED; G1 NOT_RUN; G2 SOURCE_ONLY; G3 NOT_AUTHORIZED; G4/G5 NOT_RUN. MODEL_MODE_NOT_VERIFIABLE.
