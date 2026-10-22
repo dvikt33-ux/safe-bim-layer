@@ -1,0 +1,240 @@
+"""Однократная безопасная установка единого бюро вместо PR139 Startup.
+
+Никаких задач/моделей Archicad не меняет. Старый приемник не завершает
+насильственно: при занятой блокировке APA установка отказывается продолжать.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import time
+from urllib.request import urlopen
+
+from bureau_unified_service import config_load
+
+APA_BLOB = "ef52f5fc184c6ac59c1197c14e1bbbc06237fdd2"
+OLD_STARTUP = "APA-AC29-GPT-Bridge.vbs"
+NEW_STARTUP = "Bureau-Unified-Dispatcher.vbs"
+
+
+def git_blob_sha(data):
+    return hashlib.sha1(
+        b"blob " + str(len(data)).encode("ascii") + b"\0" + data
+    ).hexdigest()
+
+
+def safe_path(path):
+    value = str(Path(path).resolve())
+    if any(symbol in value for symbol in ('"', '\r', '\n', '%', '!', '^')):
+        raise ValueError("PATH_UNSAFE_FOR_WINDOWS_STARTUP")
+    return value
+
+
+def startup_folder():
+    roaming = os.environ.get("APPDATA")
+    if not roaming:
+        raise RuntimeError("WINDOWS_APPDATA_REQUIRED")
+    return Path(roaming) / "Microsoft" / "Windows" / "Start Menu" / "Programs" / "Startup"
+
+
+def check_existing_bridge(path):
+    source = Path(path)
+    if not source.is_file() or git_blob_sha(source.read_bytes()) != APA_BLOB:
+        raise ValueError("INSTALLED_APA_BRIDGE_NOT_SOURCE_PINNED")
+    spec = importlib.util.spec_from_file_location("approved_existing_bridge", source)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    module.STATE.mkdir(parents=True, exist_ok=True)
+    try:
+        handle = module.acquire_singleton()
+    except Exception as exc:
+        raise RuntimeError("OLD_APA_WORKER_STILL_RUNNING_STOP_ONCE_FIRST") from exc
+    handle.close()
+    return hashlib.sha256(source.read_bytes()).hexdigest()
+
+
+def write_private_configuration(path, data):
+    temp = path.with_suffix(".pending")
+    temp.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+                    encoding="utf-8")
+    os.replace(temp, path)
+
+
+def wait_health(port, child):
+    """Ожидаем готовность только запущенного нами процесса; никакой чужой службы."""
+    import json as json_module
+    for _ in range(15):
+        if child.poll() is not None:
+            raise RuntimeError("UNIFIED_PROCESS_EXITED_BEFORE_READY")
+        try:
+            with urlopen(f"http://127.0.0.1:{port}/health", timeout=0.4) as reply:
+                body = json_module.loads(reply.read())
+            if (body.get("status") == "BUREAU_UNIFIED_ALIVE"
+                    and body.get("apaAttached") is True
+                    and body.get("pid") == child.pid):
+                return True
+        except (OSError, ValueError):
+            time.sleep(0.3)
+    raise RuntimeError("UNIFIED_HEALTH_NOT_CONFIRMED")
+
+
+def watchdog_script(launcher, pause_file, port):
+    """VBS watchdog starts immediately; never launches a second live service."""
+    launcher, pause_file = safe_path(launcher), safe_path(pause_file)
+    if not 1024 <= int(port) <= 65535:
+        raise ValueError("INVALID_CALLBACK_PORT")
+    return (
+        'Set sh = CreateObject("WScript.Shell")\r\n'
+        'Set fs = CreateObject("Scripting.FileSystemObject")\r\n'
+        'Function ServiceAlive()\r\n'
+        '  On Error Resume Next\r\n'
+        '  Set req = CreateObject("MSXML2.ServerXMLHTTP.6.0")\r\n'
+        '  req.setTimeouts 500, 500, 500, 500\r\n'
+        '  req.Open "GET", "http://127.0.0.1:' + str(port) + '/health", False\r\n'
+        '  req.Send\r\n'
+        '  ServiceAlive = (Err.Number = 0)\r\n'
+        '  If ServiceAlive Then ServiceAlive = (req.Status = 200 And '
+        'InStr(req.responseText, "BUREAU_UNIFIED_ALIVE") > 0 And '
+        'InStr(req.responseText, Chr(34) & "apaAttached" & Chr(34) & ": true") > 0)\r\n'
+        '  Err.Clear\r\n'
+        '  On Error GoTo 0\r\n'
+        'End Function\r\n'
+        'Do While Not fs.FileExists("' + pause_file + '")\r\n'
+        '  If Not ServiceAlive() Then\r\n'
+        '    sh.Run Chr(34) & "' + launcher + '" & Chr(34), 0, True\r\n'
+        '  End If\r\n'
+        '  WScript.Sleep 15000\r\n'
+        'Loop\r\n'
+    )
+
+
+def install(config_path, root):
+    if os.name != "nt":
+        raise RuntimeError("WINDOWS_ONLY_INSTALLER")
+    config_path = Path(config_path).resolve()
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+    if not config.get("apaEnabled"):
+        raise ValueError("UNIFIED_INSTALL_REQUIRES_APA_ENABLED")
+    if any(x["workflowId"].startswith("REPLACE_")
+           for x in config.get("targets", {}).values()):
+        raise ValueError("AUTOMA_WORKFLOW_IDS_NOT_CONFIGURED")
+    pinned_sha = check_existing_bridge(config["apaBridgePath"])
+    if config.get("apaBridgeSha256") == "AUTO_PIN_INSTALLED_BRIDGE":
+        config["apaBridgeSha256"] = pinned_sha
+        write_private_configuration(config_path, config)
+    elif config.get("apaBridgeSha256") != pinned_sha:
+        raise ValueError("APA_BRIDGE_HASH_MISMATCH")
+    config = config_load(config_path)
+
+    repo_scripts = Path(__file__).resolve().parent
+    dest = Path(root) / "controllers" / "bureau-unified-v1"
+    dest.mkdir(parents=True, exist_ok=True)
+    for filename in ("bureau_unified_service.py",
+                     "bureau_chat_activation_gateway.py"):
+        shutil.copy2(repo_scripts / filename, dest / filename)
+
+    state_dir = Path(root) / "bureau-unified-state"
+    state_dir.mkdir(parents=True, exist_ok=True)
+    log = state_dir / "service.log"
+    db = state_dir / "jobs.sqlite"
+    python = safe_path(sys.executable)
+    script = safe_path(dest / "bureau_unified_service.py")
+    cfg = safe_path(config_path)
+    dbp = safe_path(db)
+    logp = safe_path(log)
+    launch_cmd = dest / "launch-bureau-unified.cmd"
+    launch_cmd.write_text(
+        "@echo off\r\n"
+        f'"{python}" "{script}" --config "{cfg}" --db "{dbp}" run'
+        f' >> "{logp}" 2>&1\r\n',
+        encoding="utf-8"
+    )
+
+    startup = startup_folder()
+    startup.mkdir(parents=True, exist_ok=True)
+    old = startup / OLD_STARTUP
+    disabled = startup / (OLD_STARTUP + ".disabled")
+    new = startup / NEW_STARTUP
+    if new.exists() or disabled.exists():
+        raise RuntimeError("STARTUP_MIGRATION_ALREADY_PRESENT_REVIEW_MANUALLY")
+    if not old.is_file():
+        raise RuntimeError("OLD_APA_AUTOSTART_NOT_LOCATED_FAIL_CLOSED")
+
+    child = None
+    watcher = None
+    old_moved = False
+    try:
+        if old.exists():
+            old.rename(disabled)
+            old_moved = True
+        stop_file = safe_path(state_dir / "PAUSE_AUTOSTART")
+        if Path(stop_file).exists():
+            raise RuntimeError("PAUSE_SENTINEL_PRESENT_REMOVE_AFTER_REVIEW")
+        vbs = watchdog_script(launch_cmd, stop_file, config["callbackPort"])
+        new.write_text(vbs, encoding="utf-8")
+        with log.open("ab") as output:
+            child = subprocess.Popen(
+                [python, script, "--config", cfg, "--db", dbp, "run"],
+                stdin=subprocess.DEVNULL, stdout=output, stderr=subprocess.STDOUT,
+                creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0)
+            )
+        wait_health(config["callbackPort"], child)
+        # Start supervision in this session as well, not only at next login.
+        watcher = subprocess.Popen(
+            ["wscript.exe", str(new)],
+            stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0)
+        )
+        if watcher.poll() is not None:
+            raise RuntimeError("WATCHDOG_FAILED_TO_START")
+        receipt = {
+            "status": "BUREAU_UNIFIED_LOCAL_PROCESS_READY",
+            "oldStartupDisabled": old_moved,
+            "newStartup": str(new),
+            "apaBridgeSha256": pinned_sha,
+            "servicePid": child.pid,
+            "watchdogPid": watcher.pid,
+            "database": dbp,
+            "log": logp,
+            "httpPort": config["callbackPort"],
+            "liveAutomaChatDispatchVerified": False,
+            "liveReportChainingVerified": False,
+            "restartWatchdog": "Windows Startup VBS supervised loop",
+            "pauseAutostartSentinel": str(state_dir / "PAUSE_AUTOSTART")
+        }
+        (state_dir / "install-receipt.json").write_text(
+            json.dumps(receipt, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8"
+        )
+        return receipt
+    except Exception:
+        if watcher is not None and watcher.poll() is None:
+            watcher.terminate()
+        if child is not None and child.poll() is None:
+            child.terminate()
+        new.unlink(missing_ok=True)
+        if old_moved and disabled.exists():
+            disabled.rename(old)
+        raise
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--config", required=True)
+    parser.add_argument(
+        "--root", default=r"C:\LocalAI\APA_AC29_Stable")
+    args = parser.parse_args()
+    print(json.dumps(install(args.config, args.root),
+                     ensure_ascii=False, indent=2))
+
+
+if __name__ == "__main__":
+    main()
