@@ -1,0 +1,71 @@
+{
+  "schema": "apa-project-map/1",
+  "updated": "2026-10-22",
+  "source": "GitHub",
+  "note": "Предварительные статусы; не подтверждают LIVE/ACCEPTED",
+  "sections": [
+    {
+      "id": "management",
+      "title": "Управление APA",
+      "status": "В работе",
+      "items": [
+        "API и SceneWriter",
+        "GitHub и архив",
+        "Компилятор заданий"
+      ]
+    },
+    {
+      "id": "archicad",
+      "title": "Archicad и Tapir",
+      "status": "Блокировано",
+      "items": [
+        "Навигация и поэтажное чтение",
+        "CreateSlabs и readback",
+        "BUILD-01"
+      ]
+    },
+    {
+      "id": "rhino",
+      "title": "Rhino и Grasshopper",
+      "status": "Исследование",
+      "items": [
+        "Rhino 8",
+        "Grasshopper",
+        "Live Connection",
+        "Rhino.Compute"
+      ]
+    },
+    {
+      "id": "temple",
+      "title": "Храмовый комплекс",
+      "status": "Исследование",
+      "items": [
+        "Нормативы Д-04",
+        "Функции Д-05",
+        "Архитектура Д-06",
+        "Купола и своды"
+      ]
+    },
+    {
+      "id": "qa",
+      "title": "Проверка и приёмка",
+      "status": "Не принято",
+      "items": [
+        "SOURCE",
+        "OFFLINE",
+        "LIVE",
+        "ACCEPTED"
+      ]
+    },
+    {
+      "id": "docs",
+      "title": "Документация",
+      "status": "В работе",
+      "items": [
+        "Каталог инструментов",
+        "Карта APA",
+        "Журнал решений"
+      ]
+    }
+  ]
+}
