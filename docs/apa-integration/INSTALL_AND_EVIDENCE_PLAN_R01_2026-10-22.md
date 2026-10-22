@@ -1,47 +1,55 @@
-# APA integration — installation and evidence plan R01
-Date: 2026-10-22. Status: design only; no local integration tests.
+# APA — план установки и проверки математических данных. Редакция R01
 
-## Target
-Production: Archicad 29; Rhino 8 with Grasshopper. Archicad 30 is not a dependency. No paid third-party MCP subscription required.
+Дата: 22 октября 2026 года. Статус: проектная спецификация. Испытания на ноутбуке ещё не проводились.
 
-## Candidate components (verify versions and licenses before installation)
-1. Archicad 29, valid license.
-2. Rhino 8, valid license (Grasshopper included).
-3. Graphisoft Grasshopper–Archicad Live Connection matching Archicad 29.
-4. Tapir for Archicad: https://github.com/ENZYME-APD/tapir-archicad-automation
-5. Archicad MCP candidate: https://github.com/lgradisar/archicad-mcp
-6. Rhino MCP candidate: https://github.com/firstofthekind/rhino-mcp
-7. Python runtime and MCP client/orchestrator — exact versions to derive from selected repositories.
-8. RhinoCommon and Grasshopper SDK are programming APIs included with Rhino/Grasshopper, not necessarily separate installers.
-Optional: Rhino.Compute only if headless computation is justified; review licensing.
+## Цель
+Рабочая среда: **Archicad 29**, **Rhino 8** и встроенный **Grasshopper**. Archicad 30 не требуется. Платную стороннюю подписку на MCP-сервер не предусматриваем.
 
-## Architecture
-Task specification -> orchestrator -> Rhino/Grasshopper adapter -> geometry/graph evidence -> validated handoff -> Archicad 29 adapter -> BIM evidence -> acceptance report.
-MCP is transport, not an assurance of geometry creation or validation.
+## Компоненты — предварительный перечень
+1. **Archicad 29** — основная среда информационного моделирования зданий (BIM); нужна действующая лицензия.
+2. **Rhino 8** — построение точной геометрии; нужна действующая лицензия. Grasshopper входит в Rhino.
+3. **Grasshopper–Archicad Live Connection** — совместимую с Archicad 29 версию необходимо проверить на официальном сайте Graphisoft.
+4. **Tapir для Archicad** — кандидат для расширенной автоматизации: https://github.com/ENZYME-APD/tapir-archicad-automation
+5. **Archicad MCP** — кандидат на сервер обмена командами: https://github.com/lgradisar/archicad-mcp
+6. **Rhino MCP** — кандидат на сервер управления Rhino и Grasshopper: https://github.com/firstofthekind/rhino-mcp
+7. **Python и управляющий сервис APA** — конкретные версии и зависимости определим после проверки исходного кода выбранных серверов.
+8. **RhinoCommon и Grasshopper SDK** — интерфейсы программирования, доступные в среде Rhino/Grasshopper; их не следует автоматически считать отдельными программами для установки.
 
-## Required evidence per operation
-- task_id, operation_id, revision, software versions, units, coordinate reference and tolerance
-- Rhino object GUIDs and geometry type; Brep validity, closedness, topology; bounding box; mass properties when defined
-- Grasshopper document and component instance IDs, input values, wires/dependencies, solver errors
-- geometry revision and checksum or stable reference to full serialized geometry
-- Archicad element GUIDs, type, placement, dimensions, classifications and source-object mapping
-- machine-readable pass/fail checks, error details, timestamps
-Screenshots are supplemental, never substitutes for geometric evidence.
+**Необязательно:** Rhino.Compute — только если потребуется выполнение вычислений без открытого интерфейса Rhino; условия лицензирования подлежат проверке.
 
-## First acceptance test (when laptop available)
-A. Read-only: inspect a known Rhino Brep and Grasshopper graph; compare against expected values.
-B. Parameter change: modify one parameter, recompute, confirm geometric invariants and diff.
-C. Transfer to Archicad 29: create supported native BIM element, read it back, compare with design intent.
-D. Rollback: failed validation must not corrupt the production project; use a copy and preserve logs.
-No unattended modeling until tests pass.
+## Как должна работать система
+Задание → управляющий сервис APA → управление Rhino/Grasshopper → получение математических данных и связей параметрической модели → проверка → передача в Archicad 29 → чтение созданных BIM-элементов → итоговый протокол.
 
-## Unverified / risks
-- MCP repositories' current licenses, command lists, maintainers, dependencies and Rhino 8 / Archicad 29 compatibility require code-level review.
-- Grasshopper Live Connection does not guarantee every Rhino shape maps to native BIM semantics.
-- JSON API / Tapir coverage must be audited operation by operation.
-- ChatGPT has no direct connection to local Rhino in this conversation.
-- No installation, interoperability test, or independent audit has occurred.
+**Важно:** MCP передаёт команды и результаты, но сам по себе не гарантирует правильность построенной модели.
 
-## Installation sequence (provisional)
-Check OS and licensing -> install/verify Archicad 29 -> install/verify Rhino 8 and Grasshopper -> matching Live Connection -> test manual BIM transfer -> Tapir -> test read-only Archicad API -> Rhino MCP in isolated environment -> test read-only graph and geometry -> Archicad MCP in isolated environment -> integrate orchestrator -> evidence acceptance tests.
-Do not install unreviewed code into production projects.
+## Что обязательно считывать после каждой операции
+- Идентификатор задания и операции, редакцию модели, версии программ, единицы измерения и допустимые отклонения.
+- Для Rhino: идентификаторы объектов, тип геометрии, корректность и замкнутость Brep, топологию, габариты, объём и другие характеристики там, где они определены.
+- Для Grasshopper: идентификаторы документа и компонентов, входные параметры, соединения между компонентами, ошибки пересчёта.
+- Версию геометрии и контрольную сумму либо устойчивую ссылку на полные математические данные.
+- Для Archicad: идентификаторы элементов, их типы, положение, размеры, классификации и связь с исходной геометрией.
+- Машинно-читаемые результаты проверок: пройдено/не пройдено, причины ошибок и время проверки.
+
+Скриншоты допускаются как дополнительное доказательство, но не заменяют математические данные.
+
+## Первый практический тест — когда появится ноутбук
+1. **Только чтение:** получить характеристики заранее известного объекта Rhino и схему Grasshopper; сравнить с эталоном.
+2. **Изменение параметра:** изменить один параметр, пересчитать модель, проверить результат и различия.
+3. **Передача в Archicad 29:** создать поддерживаемый нативный BIM-элемент, прочитать его обратно и сопоставить с заданием.
+4. **Откат при ошибке:** работать на копии проекта, сохранять журналы и не повреждать основную модель.
+
+До успешного прохождения этих проверок не включать автономное непрерывное моделирование.
+
+## Что пока не подтверждено
+- Актуальные лицензии, зависимости, список команд и совместимость выбранных MCP-серверов с Rhino 8 и Archicad 29.
+- Полнота передачи геометрии из Grasshopper в нативные BIM-элементы.
+- Достаточность команд Tapir и официального интерфейса Archicad для всех операций APA.
+- Сквозная работоспособность системы: локальная установка и испытания ещё не проводились.
+
+## Предварительный порядок установки
+Проверить операционную систему и лицензии → установить или проверить Archicad 29 → Rhino 8 с Grasshopper → совместимый Live Connection → вручную проверить передачу BIM-элемента → установить Tapir → проверить чтение данных Archicad → отдельно установить и проверить Rhino MCP → отдельно установить и проверить Archicad MCP → подключить управляющий сервис APA → провести приёмочные испытания.
+
+**Правило безопасности:** непроверенные расширения не устанавливать непосредственно в рабочие проекты.
+
+## Язык документации
+Все инструкции и отчёты, предназначенные пользователю, писать **на русском языке**. Английский оставлять только в названиях программ, командах, адресах ссылок и других технических обозначениях.
