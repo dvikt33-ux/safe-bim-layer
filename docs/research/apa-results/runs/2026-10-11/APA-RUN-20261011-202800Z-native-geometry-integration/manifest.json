@@ -1,0 +1,75 @@
+{
+  "action_id": "APA-P70.A09",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-NATIVE-GEOMETRY-INTEGRATED",
+      "evidence_ids": [
+        "EV-GEOMETRY-ACCEPTANCE",
+        "EV-GEOMETRY-RAW-BYTES"
+      ],
+      "statement": "Current source independently replays captured native17element geometry/contact readback; 2D overlap remains separate from native3D collision. Expanded geometry and engineering remain unverified.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-GEOMETRY-ACCEPTANCE",
+      "kind": "TEST_RESULT",
+      "sha256": "aa5edcea313719e66cc2e2bb1c8ec926147e964210d3df852bf07b7cfdfd0ac1",
+      "source_revision": "ec401314c185df4845ccb6ae7b15e57234a46cad",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-202800Z-native-geometry-integration/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-GEOMETRY-RAW-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "9afab8d09c00ce228753b3a602b8b9f1c58179a23ddb588b26abfed5a13504db",
+      "source_revision": "ec401314c185df4845ccb6ae7b15e57234a46cad",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-202800Z-native-geometry-integration/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "codex-apa-core-native-20261011",
+  "executor_run_id": "APA-RUN-20261011-201000Z-native-geometry-capability",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-11T20:26:56Z",
+  "idempotency_key": "sha256:2cf4fa0eef870f913be1564489ce91363e07431fe337a960b5b7cca900870283",
+  "inputs": [
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-SDK-GET3D",
+    "ART-SDK-SEO"
+  ],
+  "next_substep": "APA-P70.A02.S04",
+  "phase": "SOURCE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261011-202800Z-native-geometry-integration",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29build5101RUS(capturednative)",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": null,
+    "source_branch": "feature/apa-native-geometry-20261011",
+    "tapir": "1.5.10"
+  },
+  "source_revisions": [
+    {
+      "revision": "ec401314c185df4845ccb6ae7b15e57234a46cad",
+      "source_sha": "ec401314c185df4845ccb6ae7b15e57234a46cad",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/50"
+    }
+  ],
+  "started_at": "2026-10-11T20:26:56Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A09.S01"
+}

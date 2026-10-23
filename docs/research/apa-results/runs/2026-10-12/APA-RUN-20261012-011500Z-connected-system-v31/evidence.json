@@ -1,0 +1,24 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-CONNECTED-SYSTEM-V31",
+      "evidence_ids": [
+        "EV-SYSTEM-ACCEPTANCE"
+      ],
+      "statement": "Combined22primary/48GUID native readback, source preservation, current Details/solver/collision/IFC interactions pass; mandatory unsupported modules explicitly block engineering scope.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-SYSTEM-ACCEPTANCE",
+      "kind": "TEST_RESULT",
+      "sha256": "5bf1f56155e868263c74c967eea0cbfd69163a6bbcb096d13abdf480705b878b",
+      "source_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-011500Z-connected-system-v31/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261012-011500Z-connected-system-v31",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

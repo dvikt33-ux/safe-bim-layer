@@ -1,0 +1,85 @@
+{
+  "action_id": "APA-P70.A11",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-G01-WINDOWS-SQLITE-FIX",
+      "evidence_ids": [
+        "EV-G01-REGRESSION"
+      ],
+      "statement": "Observed SQLite lifecycle gap fixed;340Windows host and340each Windows/LinuxCI tests pass; S03 remains partial with8other gaps open.",
+      "status": "OFFLINE_PASS"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-G01-REGRESSION",
+      "kind": "TEST_RESULT",
+      "sha256": "9a48d169d5293faf046a3f728f696d28a02bf30af17822775fbb87cc86ca47b3",
+      "source_revision": "2b499730ac4c52b70d796f2857fb15d7e3d3d676",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-012500Z-gap-windows-sqlite-v31/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "codex-apa-gap-v31-20261012",
+  "executor_run_id": "APA-RUN-20261012-012500Z-gap-windows-sqlite-v31",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-12T01:25:53Z",
+  "idempotency_key": "sha256:e220fbf942e6a4a660f5a92acb420455381999b7b2abfc07b5184a2b78109c3c",
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "next_substep": "APA-P70.A11.S03",
+  "phase": "OFFLINE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261012-012500Z-gap-windows-sqlite-v31",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "no native runtime calls in gap repair",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": null,
+    "source_branch": "feature/apa-connected-gap-windows-20261012",
+    "tapir": "1.5.10 contracts retained"
+  },
+  "source_revisions": [
+    {
+      "revision": "2b499730ac4c52b70d796f2857fb15d7e3d3d676",
+      "source_sha": "2b499730ac4c52b70d796f2857fb15d7e3d3d676",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/54"
+    }
+  ],
+  "started_at": "2026-10-12T01:25:53Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A11.S03"
+}

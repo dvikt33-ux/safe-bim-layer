@@ -1,0 +1,559 @@
+{
+  "status": "LIVE_READ_ONLY_SOURCE_CONDITION_EVALUATION_PASS",
+  "nativeWriteCalls": 0,
+  "checks": {
+    "schema": "APA_NATIVE_SOURCE_CONDITION_RESULTS_V1",
+    "sourceConditions": {
+      "schema": "APA_VERIFIED_SOURCE_CONDITIONS_V1",
+      "verifiedAt": "2026-10-12",
+      "sourceScope": "Exact public registry scope and amendment instruction only; consolidated technical clauses unavailable",
+      "sources": {
+        "roofScope": {
+          "edition": "СП 17.13330.2017",
+          "uri": "https://protect.gost.ru/sp/details/844352c5-dda6-4006-acd8-b6875d1ed6a8",
+          "locator": "Область применения — full displayed scope paragraph",
+          "verification": "VERIFIED_DISPLAYED_SOURCE_CONDITION",
+          "excerpt": "во всех климатических зонах Российской Федерации",
+          "paraphrase": "Scope concerns new roofing, reconstruction or major repair of the specified roofing technologies in Russian buildings; material name alone does not identify a listed technology",
+          "registryAmendments": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "allowedWorkTypes": [
+            "new",
+            "reconstruction",
+            "major_repair"
+          ],
+          "allowedRoofSystems": [
+            "bitumen_roll",
+            "polymer_roll",
+            "mastic",
+            "chrysotile_cement_corrugated",
+            "cement_fiber_corrugated",
+            "bitumen_corrugated",
+            "cement_sand_tile",
+            "ceramic_tile",
+            "polymer_cement_tile",
+            "bitumen_tile",
+            "chrysotile_cement_flat_tile",
+            "composite_tile",
+            "cement_fiber_flat_tile",
+            "slate_tile",
+            "galvanized_steel_sheet",
+            "copper_sheet",
+            "zinc_titanium_sheet",
+            "aluminum_sheet",
+            "metal_profile_sheet",
+            "metal_tile",
+            "metal_seam_tile",
+            "reinforced_concrete_trough_panels"
+          ]
+        },
+        "thermalScope": {
+          "edition": "СП 50.13330.2024",
+          "uri": "https://protect.gost.ru/sp/details/5081dae9-9ee9-455f-80e8-d093d495361c",
+          "locator": "Область применения — displayed scope and all exclusions",
+          "verification": "VERIFIED_DISPLAYED_SOURCE_CONDITION",
+          "excerpt": "общей площадью более 50 м2",
+          "paraphrase": "Scope needs new construction/reconstruction, listed building purpose, total area greater than the stated limit and maintained temperature/humidity regime, with exclusions explicitly checked",
+          "effectiveDate": "2024-06-16",
+          "areaStrictlyGreaterThanM2": 50,
+          "allowedWorkTypes": [
+            "new",
+            "reconstruction"
+          ],
+          "allowedBuildingUses": [
+            "residential",
+            "public",
+            "industrial",
+            "agricultural",
+            "warehouse"
+          ],
+          "exclusions": [
+            "religious",
+            "periodic_heating_below_3_days_week",
+            "seasonal_heating_below_3_months_year",
+            "temporary_up_to_2_heating_seasons",
+            "greenhouse",
+            "cold_store",
+            "cultural_heritage",
+            "utility_structure"
+          ],
+          "historicAuthorityDecisionRequired": true
+        },
+        "roofThermalReference": {
+          "edition": "СП 17.13330.2017 — изменение №5",
+          "uri": "https://protect.gost.ru/sp/changesdetails/c660c8fe-0ace-4b25-b976-8acad8a8154e",
+          "locator": "Содержание изменения к НД — replacement of thermal normative reference",
+          "verification": "VERIFIED_DISPLAYED_AMENDMENT_INSTRUCTION",
+          "excerpt": "СП 50.13330.2024",
+          "paraphrase": "The fifth amendment replaces the earlier thermal-design reference with the current thermal standard; check the project requirement graph's edition edge, not thermal performance",
+          "effectiveDate": "2025-01-10",
+          "expectedThermalEdition": "СП 50.13330.2024",
+          "geometryOrEngineeringApproval": false
+        }
+      },
+      "unavailableTechnicalClauses": [
+        {
+          "id": "roof-slope-by-system",
+          "locator": "SP17 technical minimum slope provisions/table",
+          "status": "NOT_VERIFIED",
+          "reason": "Primary full consolidated clause and selected roofing technology unavailable; actual BREP slope can be measured but no normative threshold applied"
+        },
+        {
+          "id": "roof-parapet-waterproofing",
+          "locator": "SP17 section5.1 clauses referenced by existing GitHub research",
+          "status": "NOT_VERIFIED",
+          "reason": "Full primary clause, parapet role and waterproofing-layer evidence absent; research dimensions not promoted"
+        },
+        {
+          "id": "wall-roof-thermal-interface",
+          "locator": "SP50 technical envelope provisions / SP230 junction tables",
+          "status": "NOT_VERIFIED",
+          "reason": "Full clause/table row, certified layers and thermal design evidence absent; body contact is not insulation continuity or thermal approval"
+        }
+      ]
+    },
+    "sourceConditionsDigest": "9cadf9fd04ab7589469da46e624b129a8dad67fc82378df45519c821c480bf08",
+    "inputNormativePackDigest": "5753c8eb730ed18e4ede0a309a28adbfea022723f0f8e56f03fee770e8569bb5",
+    "nativeMetrics": {
+      "id-sha256:51fe26b6654ee6ca9854": {
+        "status": "VERIFIED_NATIVE_GEOMETRY",
+        "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE",
+        "slopePercent": 15.11352180000001,
+        "slopeDegrees": 8.59436692369688,
+        "bodySignature": "3ddf222acf91e0703c6ad64a8d621b714e08bd0e415771832622636b2717c65c",
+        "normativeSlopeThreshold": null,
+        "normativeSlopeResult": "NOT_VERIFIED"
+      }
+    },
+    "checks": [
+      {
+        "junctionId": "native-wall-east-level-2",
+        "ruleId": "sp17-roof-scope",
+        "sourceId": "roofScope",
+        "status": "NOT_VERIFIED",
+        "nativeGuids": [
+          "id-sha256:497e0b19b9b41188698e",
+          "id-sha256:51fe26b6654ee6ca9854"
+        ],
+        "engineeringApproved": false,
+        "missingEvidence": [
+          "ROOF_WORK_TYPE_NOT_VERIFIED",
+          "SOURCE_BOUND_ROOF_TECHNOLOGY_NOT_VERIFIED"
+        ]
+      },
+      {
+        "junctionId": "native-wall-east-level-2",
+        "ruleId": "sp17-amendment5-thermal-reference",
+        "sourceId": "roofThermalReference",
+        "status": "PASS_DOCUMENTED",
+        "nativeGuids": [
+          "id-sha256:497e0b19b9b41188698e",
+          "id-sha256:51fe26b6654ee6ca9854"
+        ],
+        "engineeringApproved": false,
+        "observedEdition": "СП 50.13330.2024",
+        "expectedEdition": "СП 50.13330.2024",
+        "roofApplicability": "NOT_VERIFIED",
+        "acceptanceScope": "Verified amendment reference edge only; not thermal or roof compliance"
+      },
+      {
+        "junctionId": "native-wall-east-level-2",
+        "ruleId": "sp50-envelope-scope",
+        "sourceId": "thermalScope",
+        "status": "NOT_VERIFIED",
+        "nativeGuids": [
+          "id-sha256:497e0b19b9b41188698e",
+          "id-sha256:51fe26b6654ee6ca9854"
+        ],
+        "engineeringApproved": false,
+        "missingEvidence": [
+          "buildingWorkType",
+          "buildingUse",
+          "totalBuildingAreaM2",
+          "maintainedTemperatureHumidity",
+          "architecturalHistoricSignificance",
+          "religious",
+          "periodic_heating_below_3_days_week",
+          "seasonal_heating_below_3_months_year",
+          "temporary_up_to_2_heating_seasons",
+          "greenhouse",
+          "cold_store",
+          "cultural_heritage",
+          "utility_structure"
+        ],
+        "totalBuildingAreaM2": null,
+        "areaIsNotInferredFromTestSlabs": true
+      },
+      {
+        "junctionId": "native-wall-north-level-2",
+        "ruleId": "sp17-roof-scope",
+        "sourceId": "roofScope",
+        "status": "NOT_VERIFIED",
+        "nativeGuids": [
+          "id-sha256:4b2c7d00e3d409a9ab32",
+          "id-sha256:51fe26b6654ee6ca9854"
+        ],
+        "engineeringApproved": false,
+        "missingEvidence": [
+          "ROOF_WORK_TYPE_NOT_VERIFIED",
+          "SOURCE_BOUND_ROOF_TECHNOLOGY_NOT_VERIFIED"
+        ]
+      },
+      {
+        "junctionId": "native-wall-north-level-2",
+        "ruleId": "sp17-amendment5-thermal-reference",
+        "sourceId": "roofThermalReference",
+        "status": "PASS_DOCUMENTED",
+        "nativeGuids": [
+          "id-sha256:4b2c7d00e3d409a9ab32",
+          "id-sha256:51fe26b6654ee6ca9854"
+        ],
+        "engineeringApproved": false,
+        "observedEdition": "СП 50.13330.2024",
+        "expectedEdition": "СП 50.13330.2024",
+        "roofApplicability": "NOT_VERIFIED",
+        "acceptanceScope": "Verified amendment reference edge only; not thermal or roof compliance"
+      },
+      {
+        "junctionId": "native-wall-north-level-2",
+        "ruleId": "sp50-envelope-scope",
+        "sourceId": "thermalScope",
+        "status": "NOT_VERIFIED",
+        "nativeGuids": [
+          "id-sha256:4b2c7d00e3d409a9ab32",
+          "id-sha256:51fe26b6654ee6ca9854"
+        ],
+        "engineeringApproved": false,
+        "missingEvidence": [
+          "buildingWorkType",
+          "buildingUse",
+          "totalBuildingAreaM2",
+          "maintainedTemperatureHumidity",
+          "architecturalHistoricSignificance",
+          "religious",
+          "periodic_heating_below_3_days_week",
+          "seasonal_heating_below_3_months_year",
+          "temporary_up_to_2_heating_seasons",
+          "greenhouse",
+          "cold_store",
+          "cultural_heritage",
+          "utility_structure"
+        ],
+        "totalBuildingAreaM2": null,
+        "areaIsNotInferredFromTestSlabs": true
+      },
+      {
+        "junctionId": "native-wall-south-level-2",
+        "ruleId": "sp17-roof-scope",
+        "sourceId": "roofScope",
+        "status": "NOT_VERIFIED",
+        "nativeGuids": [
+          "id-sha256:0f66b42e488c297215cd",
+          "id-sha256:51fe26b6654ee6ca9854"
+        ],
+        "engineeringApproved": false,
+        "missingEvidence": [
+          "ROOF_WORK_TYPE_NOT_VERIFIED",
+          "SOURCE_BOUND_ROOF_TECHNOLOGY_NOT_VERIFIED"
+        ]
+      },
+      {
+        "junctionId": "native-wall-south-level-2",
+        "ruleId": "sp17-amendment5-thermal-reference",
+        "sourceId": "roofThermalReference",
+        "status": "PASS_DOCUMENTED",
+        "nativeGuids": [
+          "id-sha256:0f66b42e488c297215cd",
+          "id-sha256:51fe26b6654ee6ca9854"
+        ],
+        "engineeringApproved": false,
+        "observedEdition": "СП 50.13330.2024",
+        "expectedEdition": "СП 50.13330.2024",
+        "roofApplicability": "NOT_VERIFIED",
+        "acceptanceScope": "Verified amendment reference edge only; not thermal or roof compliance"
+      },
+      {
+        "junctionId": "native-wall-south-level-2",
+        "ruleId": "sp50-envelope-scope",
+        "sourceId": "thermalScope",
+        "status": "NOT_VERIFIED",
+        "nativeGuids": [
+          "id-sha256:0f66b42e488c297215cd",
+          "id-sha256:51fe26b6654ee6ca9854"
+        ],
+        "engineeringApproved": false,
+        "missingEvidence": [
+          "buildingWorkType",
+          "buildingUse",
+          "totalBuildingAreaM2",
+          "maintainedTemperatureHumidity",
+          "architecturalHistoricSignificance",
+          "religious",
+          "periodic_heating_below_3_days_week",
+          "seasonal_heating_below_3_months_year",
+          "temporary_up_to_2_heating_seasons",
+          "greenhouse",
+          "cold_store",
+          "cultural_heritage",
+          "utility_structure"
+        ],
+        "totalBuildingAreaM2": null,
+        "areaIsNotInferredFromTestSlabs": true
+      },
+      {
+        "junctionId": "native-wall-west-level-2",
+        "ruleId": "sp17-roof-scope",
+        "sourceId": "roofScope",
+        "status": "NOT_VERIFIED",
+        "nativeGuids": [
+          "id-sha256:3677c5da2430b7bed34b",
+          "id-sha256:51fe26b6654ee6ca9854"
+        ],
+        "engineeringApproved": false,
+        "missingEvidence": [
+          "ROOF_WORK_TYPE_NOT_VERIFIED",
+          "SOURCE_BOUND_ROOF_TECHNOLOGY_NOT_VERIFIED"
+        ]
+      },
+      {
+        "junctionId": "native-wall-west-level-2",
+        "ruleId": "sp17-amendment5-thermal-reference",
+        "sourceId": "roofThermalReference",
+        "status": "PASS_DOCUMENTED",
+        "nativeGuids": [
+          "id-sha256:3677c5da2430b7bed34b",
+          "id-sha256:51fe26b6654ee6ca9854"
+        ],
+        "engineeringApproved": false,
+        "observedEdition": "СП 50.13330.2024",
+        "expectedEdition": "СП 50.13330.2024",
+        "roofApplicability": "NOT_VERIFIED",
+        "acceptanceScope": "Verified amendment reference edge only; not thermal or roof compliance"
+      },
+      {
+        "junctionId": "native-wall-west-level-2",
+        "ruleId": "sp50-envelope-scope",
+        "sourceId": "thermalScope",
+        "status": "NOT_VERIFIED",
+        "nativeGuids": [
+          "id-sha256:3677c5da2430b7bed34b",
+          "id-sha256:51fe26b6654ee6ca9854"
+        ],
+        "engineeringApproved": false,
+        "missingEvidence": [
+          "buildingWorkType",
+          "buildingUse",
+          "totalBuildingAreaM2",
+          "maintainedTemperatureHumidity",
+          "architecturalHistoricSignificance",
+          "religious",
+          "periodic_heating_below_3_days_week",
+          "seasonal_heating_below_3_months_year",
+          "temporary_up_to_2_heating_seasons",
+          "greenhouse",
+          "cold_store",
+          "cultural_heritage",
+          "utility_structure"
+        ],
+        "totalBuildingAreaM2": null,
+        "areaIsNotInferredFromTestSlabs": true
+      }
+    ],
+    "dependencyGraph": {
+      "nodes": [
+        "junction:native-wall-east-level-2",
+        "junction:native-wall-north-level-2",
+        "junction:native-wall-south-level-2",
+        "junction:native-wall-west-level-2",
+        "roof:id-sha256:51fe26b6654ee6ca9854",
+        "source:roofScope",
+        "source:roofThermalReference",
+        "source:thermalScope"
+      ],
+      "edges": [
+        [
+          "roof:id-sha256:51fe26b6654ee6ca9854",
+          "junction:native-wall-east-level-2"
+        ],
+        [
+          "roof:id-sha256:51fe26b6654ee6ca9854",
+          "junction:native-wall-north-level-2"
+        ],
+        [
+          "roof:id-sha256:51fe26b6654ee6ca9854",
+          "junction:native-wall-south-level-2"
+        ],
+        [
+          "roof:id-sha256:51fe26b6654ee6ca9854",
+          "junction:native-wall-west-level-2"
+        ],
+        [
+          "source:roofScope",
+          "roof:id-sha256:51fe26b6654ee6ca9854"
+        ],
+        [
+          "source:roofThermalReference",
+          "roof:id-sha256:51fe26b6654ee6ca9854"
+        ],
+        [
+          "source:thermalScope",
+          "roof:id-sha256:51fe26b6654ee6ca9854"
+        ]
+      ],
+      "acyclic": true
+    },
+    "nativeWriteCalls": 0,
+    "engineeringAcceptance": "ENGINEERING_NOT_VERIFIED",
+    "technicalNormativeConditions": [
+      {
+        "id": "roof-slope-by-system",
+        "locator": "SP17 technical minimum slope provisions/table",
+        "status": "NOT_VERIFIED",
+        "reason": "Primary full consolidated clause and selected roofing technology unavailable; actual BREP slope can be measured but no normative threshold applied"
+      },
+      {
+        "id": "roof-parapet-waterproofing",
+        "locator": "SP17 section5.1 clauses referenced by existing GitHub research",
+        "status": "NOT_VERIFIED",
+        "reason": "Full primary clause, parapet role and waterproofing-layer evidence absent; research dimensions not promoted"
+      },
+      {
+        "id": "wall-roof-thermal-interface",
+        "locator": "SP50 technical envelope provisions / SP230 junction tables",
+        "status": "NOT_VERIFIED",
+        "reason": "Full clause/table row, certified layers and thermal design evidence absent; body contact is not insulation continuity or thermal approval"
+      }
+    ],
+    "resultDigest": "3aabbd19f1b256489508ef18c5155767a7cbf2e2961d8ef04d389475b7c95c4e"
+  },
+  "contourCandidate": {
+    "schema": "APA_SINGLE_PLANE_CONTOUR_CANDIDATE_V1",
+    "roofGuid": "id-sha256:51fe26b6654ee6ca9854",
+    "sourceBodyHash": "0cc7605d8ace8f21e5434c6daa568efb0c5df953a29af766edef4c5f669562ee",
+    "sourceDetailsHash": "e266ff644345547adac0e95f6f488ef6a1f9206af4ed28f61b52a85c0db5a4ad",
+    "actualOutline": [
+      [
+        40,
+        40
+      ],
+      [
+        50,
+        40
+      ],
+      [
+        50,
+        48
+      ],
+      [
+        40,
+        48
+      ],
+      [
+        40,
+        40
+      ]
+    ],
+    "holes": [],
+    "homeStory": 1,
+    "materials": {
+      "api": "ACAPI_Element_Get",
+      "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+      "structureType": 0,
+      "buildingMaterial": {
+        "nativeField": "shellBase.structure",
+        "attributeType": 12,
+        "attributeIndex": 10,
+        "guid": "id-sha256:460ab9cf8caf48c17c0c",
+        "name": "Железобетон - Конструкционный",
+        "defaultSurface": {
+          "nativeField": "buildingMaterial.cutMaterial",
+          "attributeType": 5,
+          "attributeIndex": 4,
+          "guid": "id-sha256:547d736d45b5e8718116",
+          "name": "Бетон - 02"
+        }
+      },
+      "topMat": {
+        "nativeField": "shellBase.topMat",
+        "attributeType": 5,
+        "attributeIndex": 0,
+        "overridden": false,
+        "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+      },
+      "sidMat": {
+        "nativeField": "shellBase.sidMat",
+        "attributeType": 5,
+        "attributeIndex": 0,
+        "overridden": false,
+        "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+      },
+      "botMat": {
+        "nativeField": "shellBase.botMat",
+        "attributeType": 5,
+        "attributeIndex": 0,
+        "overridden": false,
+        "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+      }
+    },
+    "lowerPlane": {
+      "normal": [
+        -0.0,
+        -0.14943813241724604,
+        0.9887710779445593
+      ],
+      "distance": -0.044899,
+      "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+    },
+    "nativeWrites": 0,
+    "memoMatchedActualPlaneDistances": [
+      0.155101
+    ],
+    "memoToLowerFaceCentroidOffsetXY": [
+      0.0,
+      0.02988762599999717
+    ],
+    "memoToLowerFaceSymmetricDifferenceSquareMeters": 0.5977525199999434,
+    "lowerFaceAuthority": "Actual BREP; memo contour is not the lower-face footprint",
+    "nativeSdkPath": "ACAPI_Element_GetMemo + ACAPI_Element_ChangeMemo",
+    "memoMasks": [
+      "APIMemoMask_Polygon",
+      "APIMemoMask_EdgeTrims",
+      "APIMemoMask_SideMaterials",
+      "APIMemoMask_RoofEdgeTypes"
+    ],
+    "edgeCustomizations": "Must preserve and synchronize native edge arrays; do not use sample null-clearing defaults",
+    "runtimeContract": "NOT_VERIFIED_INSTALLED_COMMAND; inspected ModifyRoofs rejects SinglePlane",
+    "executionAllowed": false,
+    "status": "NEEDS_APPROVED_PROJECT_CONTOUR_AND_RUNTIME_CONTRACT",
+    "candidateDigest": "b11472bfe6343d695c1451ebae20489827c5e3f21c4bcf0e917b70a65483e9e8"
+  },
+  "nativeTargetCount": 5,
+  "acceptedBaselineGuidCount": 109,
+  "sourceBodiesUnchanged": true,
+  "journalUnchanged": true,
+  "savedHashUnchanged": true,
+  "plnSha256": "0d87954de1a0b75f0510c4bbd1a7424db2eb09fa928d5e0fb746c58d9a18f14d",
+  "version": {
+    "version": "1.5.10"
+  },
+  "normativePackDigest": "5753c8eb730ed18e4ede0a309a28adbfea022723f0f8e56f03fee770e8569bb5",
+  "normativeAcceptance": "NOT_VERIFIED",
+  "ruleCounts": {
+    "NOT_VERIFIED": 8,
+    "PASS_DOCUMENTED": 4
+  },
+  "jurisdiction": {
+    "country": "RU",
+    "region": "Central Russia",
+    "evidenceUri": "user:2026-10-12-verified-rules-jurisdiction",
+    "verification": "USER_CONFIRMED_COUNTRY_REGION_ONLY"
+  },
+  "nativeWrites": 0,
+  "repairExecuted": false,
+  "baselineEvidenceSha256": "92795edf228ad64cd18f62fbd919798b265990d261700261ecdb0f1ef53bf05b"
+}

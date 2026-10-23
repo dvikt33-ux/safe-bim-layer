@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:6b62f612d3659908d3b93071285148b18c837072244abdcd51d62e294cd10505",
+  "index_commit_sha": "908be31f14e573ff6eb856e3d8746735c0f83696",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "908be31f14e573ff6eb856e3d8746735c0f83696",
+  "report_path": "docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-184337Z-grid-stair-exact/REPORT.md",
+  "report_sha256": "2ef11279d297b688b049685ae9ac650f82d2bffdc21cf699ede800180c2c58e4",
+  "run_id": "APA-RUN-20261013-184337Z-grid-stair-exact",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

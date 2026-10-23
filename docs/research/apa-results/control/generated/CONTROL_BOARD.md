@@ -1,0 +1,128 @@
+# APA — единственный Project Controller / Control Board
+
+**Source of truth:** [PROJECT_PLAN.json](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json).
+This file is generated. Never dispatch from chat memory or edit this board.
+**Execution trigger:** ChatGPT Scheduled Tasks (user-configured, not a controller cron).
+**Scheduler state:** CONFIGURED_UNVERIFIED; **Publisher:** DEPLOYED; **verified 24/7:** NOT_RUNNING.
+
+## Task status
+
+| Status | Count |
+| --- | ---: |
+| BLOCKED | 13 |
+| CLAIMED | 0 |
+| DONE_PUBLISHED | 38 |
+| IN_PROGRESS | 1 |
+| PARTIAL | 18 |
+| READY | 34 |
+| SUPERSEDED | 0 |
+| DISPATCHABLE_NOW | 19 |
+| HELD_BY_DEPENDENCIES | 33 |
+| EXPIRED_LEASES | 0 |
+
+## Полный цикл разработки APA
+
+[DEVELOPMENT_BOARD.md](DEVELOPMENT_BOARD.md) — стадии P → A → S, фактические статусы и следующий шаг.
+Родительские стадии DONE только если все дочерние S-ID DONE_PUBLISHED.
+[RESEARCH_LOOKAHEAD.md](RESEARCH_LOOKAHEAD.md) — исследования будущих этапов в том же реестре.
+
+## Claimed tasks
+
+| Task | Owner | Lease until | Work key |
+| --- | --- | --- | --- |
+| APA-P70.A11.S23 | apa-mass-integration-20261019 | 2026-10-20T04:21:15Z | ac29-shared-native-batch-copy-standalone-slab |
+
+## CONTROL — 0 ready
+
+| Priority | Task | Acceptance |
+| --- | --- | --- |
+| — | — | — |
+
+## CONSOLIDATION — 3 ready
+
+| Priority | Task | Acceptance |
+| --- | --- | --- |
+| P0 | APA-P00.A02.S03 — Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов | Evidence map и superseded_by для дублей |
+| P8 | APA-P00.A01.S03 — Инвентаризировать 72 ветки и PR, проверить уникальные результаты и ancestry | Список уникальных артефактов, SHA, дубликатов и неизвестного |
+| P8 | APA-P50.A01.S01 — Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR | Traceability matrix, orphan report list |
+
+## RESEARCH — 8 ready
+
+| Priority | Task | Acceptance |
+| --- | --- | --- |
+| P7 | APA-P10.A01.S01 — AC29 SDK headers и native create/change/get сигнатуры | Версии SDK, первоисточники, проверенные сигнатуры |
+| P7 | APA-P10.A01.S02 — Этажи, building materials, surfaces, composites, profiles, связи | Матрица native elements/attributes и readback |
+| P7 | APA-P10.A01.S03 — Morph/Roof/Shell/Openings/SEO/3D dump | Матрица покрытия и побочных эффектов |
+| P7 | APA-P10.A02.S01 — Tapir публичные версии и Python/JSON vs локальная 1.5.10 | Compatibility matrix с source SHA |
+| P7 | APA-P10.A02.S02 — GDL/TN, Unicode, target identity и 92 ошибок | Разбор blockers без ложного LIVE |
+| P7 | APA-P10.A02.S03 — MCP/IFC/openBIM и альтернативы | Матрица альтернатив с границами |
+| P7 | APA-P10.A02.S04 — Native MEP/Tapir MEP команды, трассы, порты | MEP command/route/port matrix |
+| P7 | APA-P50.A02.S01 — Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов | Capability matrix, версии, пересечения |
+
+## BUILD — 2 ready
+
+| Priority | Task | Acceptance |
+| --- | --- | --- |
+| P3 | APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами | Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED |
+| P8 | APA-P00.A03.S03 — Publisher, дедупликация, retry, heartbeat и ошибки | Publisher E2E + оставшиеся recovery/heartbeat gates |
+
+## INTEGRATION — 2 ready
+
+| Priority | Task | Acceptance |
+| --- | --- | --- |
+| P0 | APA-P70.A11.S22 — Расширить общий нативный пакетный copier на самостоятельные стены | Existing MoveElements(copy=true), same Router/registry/SceneWriter. Actual source typed wall coordinates and closed/materialized BREP, no hosted openings/dependents/group membership, story0, exact preserved source/new GUID/geometry/material facts, collision preflight. Necessary automatic tests and one new safe-copy LIVE operation/save/reopen only if eligible actual source. No new primitive creation or invented geometry; unsupported wall domains failclosed. Publish implementation and exact evidence. |
+| P1 | APA-P70.A11.S03 — Исправить пробелы после системного теста | Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence. |
+
+## VALIDATION — 4 ready
+
+| Priority | Task | Acceptance |
+| --- | --- | --- |
+| P8 | APA-P00.A02.S04 — Контролировать receipt/commit/readback всех завершённых отчётов | Нет ложных DONE без квитанции |
+| P8 | APA-P00.A03.S01 — Проверить write/readback для всех классов исполнителей | Capability matrix по каждому исполнителю |
+| P8 | APA-P60.A02.S03 — Протестировать CAS-claim, lease, duplicate prevention | Offline tests PASS; concurrent two-writer CAS and lease-expiry recovery NOT_VERIFIED |
+| P8 | APA-P60.A02.S04 — Ввести сбор предложений задач исследователями и принятие аудитором в PROJECT_PLAN | Процесс discovery proposal -> independent audit decision -> TASK registry admission задокументирован; CAS claim/readback и уникальность work_key/dependency DAG соблюдены; Scheduled instructions согласованы. End-to-end независимая публикация proposal, аудит, регистрация и валидатор контроллера подтверждены фактами. Не объявлять DONE по одним инструкциям. |
+
+## Waiting for dependencies
+
+| Task | Missing completed prerequisites |
+| --- | --- |
+| APA-P00.A03.S04 | APA-P00.A03.S03 |
+| APA-P10.A03.S01 | APA-P10.A01.S01, APA-P10.A02.S01, APA-P10.A02.S03 |
+| APA-P10.A03.S02 | APA-P10.A03.S01 |
+| APA-P20.A01.S01 | APA-P10.A01.S01 |
+| APA-P20.A01.S02 | APA-P20.A01.S01 |
+| APA-P20.A01.S03 | APA-P20.A01.S02 |
+| APA-P20.A02.S01 | APA-P20.A01.S03 |
+| APA-P30.A01.S01 | APA-P10.A03.S02, APA-P20.A01.S03 |
+| APA-P30.A01.S02 | APA-P30.A01.S01 |
+| APA-P30.A02.S01 | APA-P30.A01.S01 |
+| APA-P30.A02.S02 | APA-P30.A02.S01 |
+| APA-P50.A01.S02 | APA-P50.A01.S01 |
+| APA-P50.A01.S03 | APA-P50.A01.S01 |
+| APA-P50.A02.S02 | APA-P50.A02.S01 |
+| APA-P50.A02.S03 | APA-P50.A02.S02, APA-P30.A01.S01 |
+| APA-P50.A03.S01 | APA-P50.A01.S03, APA-P50.A02.S02 |
+| APA-P50.A03.S02 | APA-P50.A03.S01 |
+| APA-P70.A01.S02 | APA-P50.A01.S01 |
+| APA-P70.A05.S01 | APA-P70.A02.S02 |
+| APA-P70.A05.S02 | APA-P70.A05.S01 |
+| APA-P70.A05.S03 | APA-P70.A05.S02 |
+| APA-P70.A06.S01 | APA-P70.A02.S02, APA-P70.A05.S03 |
+| APA-P70.A06.S02 | APA-P70.A06.S01 |
+| APA-P70.A07.S01 | APA-P70.A10.S01 |
+| APA-P70.A07.S02 | APA-P70.A07.S01, APA-P70.A05.S03, APA-P70.A06.S02 |
+| APA-P70.A07.S03 | APA-P70.A07.S02 |
+| APA-P70.A08.S01 | APA-P70.A07.S03 |
+| APA-P70.A08.S02 | APA-P70.A08.S01 |
+| APA-P70.A08.S03 | APA-P70.A08.S02 |
+| APA-P70.A08.S05 | APA-P70.A08.S03 |
+| APA-P70.A10.S01 | APA-P70.A06.S02 |
+| APA-P70.A11.S04 | APA-P70.A11.S03 |
+| APA-P70.A11.S05 | APA-P70.A11.S04, APA-P70.A08.S02 |
+
+## Warnings
+
+- Unmapped V2 manifests: 0
+- Expired leases: none
+- Legacy flat reports remain in ARTIFACT_REGISTER; do not silently infer their task links.
+- DONE_PUBLISHED needs accepted evidence, not only a receipt.

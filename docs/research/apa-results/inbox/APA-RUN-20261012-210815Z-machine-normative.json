@@ -1,0 +1,67 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261012-210815Z-machine-normative",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A02",
+  "substep_id": "APA-P70.A02.S02",
+  "executor": "work-machine-normative-integration-20261012",
+  "executor_run_id": "APA-CLAIM-MACHINE-NORMATIVE-20261012T205218Z",
+  "phase": "SOURCE",
+  "started_at": "2026-10-12T20:52:18Z",
+  "finished_at": "2026-10-12T21:08:15Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 cached109 evidence reused; zero new native calls",
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-machine-normative-integration-20261012"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/68",
+      "revision": "29aa06a6e9bbef0d991bea922e1ad4101ab29bdd",
+      "source_sha": "29aa06a6e9bbef0d991bea922e1ad4101ab29bdd"
+    }
+  ],
+  "inputs": [
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-CSE-RESEARCH"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-MACHINE-NORMATIVE",
+      "statement": "Existing TDK normative machine base connected to current APA normative executor and CSE/BIM context. Exact pinned28file source slice; upstream resolver/evidence validator execute directly; one roof rule file, nine existing IDs, four cached real junctions and36NOT_VERIFIEDbindings. User-confirmedIZHS/defaultdeny/exact object-module-depth-stage gates; quarantine design_only cannot promote confirmed/docPASS to engineering. Legacy24bindings/12sourcechecks retained by digest and mapped without edition upgrade.27newtests;573host/Windows+LinuxCI PASS;37code/28source blobs matched. No new native calls or geometry checks. A02.S02PARTIAL; A11.S03PARTIAL/S10BLOCKED unchanged. Next source-bound roof facts, exact rule/revision/evidence closure and available existing evaluator qualification through sameinterface.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-210815Z-machine-normative/integration.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "8de2b229afa7203a433e3a1e3e92c97ec29548ef1d1388cc8cc02c1f1a2eb178",
+      "source_revision": "29aa06a6e9bbef0d991bea922e1ad4101ab29bdd"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-210815Z-machine-normative/EVIDENCE_SHA256.json",
+      "kind": "LOCAL_LOG",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "bb9b4992150b464f6c919de99a0ad4804366e147b185ff5419d884a7a4aac2a2",
+      "source_revision": "29aa06a6e9bbef0d991bea922e1ad4101ab29bdd"
+    }
+  ],
+  "report_markdown": "# APA: existing normative database integration\n\nBase: exact draft PR67 head `633c799da125622be6317ea9d09a9b7eb83fb98a`.\nMachine source: `dvikt33-ux/tdk-course-project`,\n`normative-recovery-2026-10-06`, commit\n`67f17d407d14aebb091daaf79f11c10178b87440`.\nBootstrap protocol read before policies, schemas, routes and rules.\n\nThe existing APA normative contour now exposes\n`connect_existing_normative_database`. It binds the existing TDK resolver and\nevidence validator to the existing CSE/project pack and cached Native Model\nDump evidence. It does not create a normative engine, geometry evaluator or\nnative writer. The existing SceneWriter remains the sole write executor.\n\n## Integration map\n\n| Pipeline | Existing contract | APA bridge/result |\n|---|---|---|\n| Project Profile | project_profile.schema, object/module taxonomies | Exact user-confirmed IZHS, RU; requested design-task scope, architecture.details; unknown project facts remain unknown |\n| Object/Module Route | exact object route, compiled blocks, CompiledBlockResolver | Roof-only targets/dependency closure; no parent/cross-class fallback or inactive engineering blocks |\n| Applicable Rule | existing roof block IDs, Central release whitelist, aliases | Nine original canonical rule IDs, no rules rewritten; function/module/stage filters |\n| Evidence Gate | original validate_confirmed, rule.schema, source policy, TRUST_STATUS | Stored field validation is separate from authoritative release; quarantine blocks normative acceptance |\n| BIM Facts | existing CSE signatures, native context, immutable PR67 cached evidence | GUID/XYZ/material/story/body bindings for four actual junctions; no new geometry measurements |\n| Rule Evaluation | existing compiled resolver/guards and APA normative executor | Actual source contract executes; narrative roof calculators stay explicitly unavailable |\n| Result | existing project pack + machine result digest | Per-target NOT_VERIFIED reasons; empty authoritative stage pack; no native write plan |\n\n## PR66/67 compatibility audit\n\nThe PR66 document catalog duplicates machine source identities for SP17 and\nSP50, but not the machine atomic rule set. They are joined as document identity\nlinks, preserving all 24 historical bindings and 12 PR67 checks. The other\nthree legacy documents are explicitly outside the scoped roof package.\nNo metadata record or PASS_DOCUMENTED reference edge is promoted to a\nconfirmed machine rule or engineering verdict.\n\nThe previous adapter lacked exact building type, module/depth routing,\nquarantine release gates and canonical machine IDs. These are now explicit.\nThe existing machine resolver originally opens every block in its catalog;\nthe facade limits this to the requested dependency closure while reusing its\noriginal resolve, dependency and guard methods. Only one rule file is read.\n\nStatus incompatibility is preserved: machine `confirmed` describes a stored\nsource claim; `STORED_FIELDS_PASS` describes validation by the original source\nvalidator; APA `NOT_VERIFIED` describes project acceptance. `PASS_DOCUMENTED`\nfrom PR67 is document-reference evidence only. None implies physical contact,\nengineering suitability or audited_ready release.\n\nSP17's existing passport tracks amendments1–5 and warns that changed Table4.1\nrows require the exact amendment5 overlay. The generic slope procedure is not\na numeric lookup row. SP50.13330.2024 is mapped to its existing passport, not\nglobally substituted for every SP50 reference. The existing dependency policy\nrequires the exact dated/undated body occurrence; ambiguous references remain\nunresolved. No global pinning or automatic edition upgrade is implemented.\n\n## Working result and limits\n\nThe user confirmed IZHS for the current model. The cached four original\nWall/Roof junctions produce 36 bindings to nine existing SP17 rules. All retain\nNOT_VERIFIED: the branch and blocks are quarantined/design_only, roof system\nand layers are not source-bound, and the upstream roof calculators are declared\nbut not implemented. Existing nominal dimensions are not transferred into the\nproject. Roof.usable/roof.pitched_insulated functions and table-row branches\nremain separately denied where exact inputs are missing.\n\nThe original 109-GUID evidence, five target body signatures, materials/stories,\nand the previous gap measurements are reused without remeasurement. No new\nArchicad calls, geometry checks, PLN saves/opens, APX changes or engineering\nclaims occur. Current live-model equality is not reasserted in this package.\nSource snapshot hashes make CI reproducible without private-repository network\ncredentials. PR66/67 remain operational and unchanged.\n\nNext: provide source-bound roof construction/layers and exact applicable\nrule/revision evidence, then qualify the existing declared roof calculator or\nan existing compatible implementation through this same interface. Do not\nremove quarantine or mark A02.S02 complete from integration tests alone.\nFor other modules, extend the reviewed source slice and exact route; never\nload the full library or borrow norms from another building type.\n\nValidation:27newtests;573/573Windows host PASS (75.567s). Windows/Linux CI verified in ci.json.28exact upstream source blobs and37code blobs match GitHub. Four cached junctions yield36NOT_VERIFIEDbindings; one rule file read. Zero new Archicad calls and no geometry repetition.\n\n\nEvidence: [APA-RUN-20261012-210815Z-machine-normative](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-210815Z-machine-normative). Draft PR68, head 29aa06a6e9bbef0d991bea922e1ad4101ab29bdd. Stable SHA tokens replace private native identities; raw payloads stay local. Publication makes zero native calls.\n",
+  "next_substep": "APA-P70.A02.S02",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

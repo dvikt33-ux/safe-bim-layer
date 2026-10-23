@@ -1,0 +1,854 @@
+{
+  "status": "NATIVE_AUTHORED_GEOMETRY_READBACK_PASS",
+  "primaryCoverage": 21,
+  "relationshipComponents": [
+    [
+      "id-sha256:65d8420266703fea8653",
+      "id-sha256:28ab6d8e35a02c734bc2",
+      "id-sha256:9bee2c14fbec975fab09",
+      "id-sha256:14aaf8c7d105768b2e00",
+      "id-sha256:284220a43a8f5bd566e0",
+      "id-sha256:3f7bee1571ef6aa81c92",
+      "id-sha256:fa3ad1d185ea99eb9920",
+      "id-sha256:f5db3272958141343cdc",
+      "id-sha256:13075a7e5542c507815a",
+      "id-sha256:79fb9dcff7102be5e3cc",
+      "id-sha256:b0bdf5941062773a81f3",
+      "id-sha256:72f33dc79d76882f08d2",
+      "id-sha256:d6a0e9b136b35e4df0a9",
+      "id-sha256:74b3dd731055cfceaad6",
+      "id-sha256:c8e2ecabc0c282d2ac0b",
+      "id-sha256:e6c58b2c154dcf8d1d3a",
+      "id-sha256:c73f5a79ec85c0cbb2f6",
+      "id-sha256:8f5a6dbe72d6b3e8c424",
+      "id-sha256:7ea6e4cddcbcd6a48301",
+      "id-sha256:3fde89cef1172737c913",
+      "id-sha256:8010c034396414fb378c"
+    ]
+  ],
+  "graphEdges": [
+    {
+      "guids": [
+        "id-sha256:79fb9dcff7102be5e3cc",
+        "id-sha256:9bee2c14fbec975fab09"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:79fb9dcff7102be5e3cc",
+        "id-sha256:f5db3272958141343cdc"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:79fb9dcff7102be5e3cc",
+        "id-sha256:74b3dd731055cfceaad6"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:79fb9dcff7102be5e3cc",
+        "id-sha256:c8e2ecabc0c282d2ac0b"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:79fb9dcff7102be5e3cc",
+        "id-sha256:c73f5a79ec85c0cbb2f6"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:79fb9dcff7102be5e3cc",
+        "id-sha256:8f5a6dbe72d6b3e8c424"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:79fb9dcff7102be5e3cc",
+        "id-sha256:3fde89cef1172737c913"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:f5db3272958141343cdc",
+        "id-sha256:72f33dc79d76882f08d2"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:f5db3272958141343cdc",
+        "id-sha256:9bee2c14fbec975fab09"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:f5db3272958141343cdc",
+        "id-sha256:e6c58b2c154dcf8d1d3a"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:f5db3272958141343cdc",
+        "id-sha256:c73f5a79ec85c0cbb2f6"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:9bee2c14fbec975fab09",
+        "id-sha256:c8e2ecabc0c282d2ac0b"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:9bee2c14fbec975fab09",
+        "id-sha256:e6c58b2c154dcf8d1d3a"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:9bee2c14fbec975fab09",
+        "id-sha256:3fde89cef1172737c913"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:c73f5a79ec85c0cbb2f6",
+        "id-sha256:8f5a6dbe72d6b3e8c424"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:c73f5a79ec85c0cbb2f6",
+        "id-sha256:c8e2ecabc0c282d2ac0b"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:c73f5a79ec85c0cbb2f6",
+        "id-sha256:e6c58b2c154dcf8d1d3a"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:c73f5a79ec85c0cbb2f6",
+        "id-sha256:3fde89cef1172737c913"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:c8e2ecabc0c282d2ac0b",
+        "id-sha256:13075a7e5542c507815a"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:c8e2ecabc0c282d2ac0b",
+        "id-sha256:e6c58b2c154dcf8d1d3a"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:e6c58b2c154dcf8d1d3a",
+        "id-sha256:284220a43a8f5bd566e0"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:e6c58b2c154dcf8d1d3a",
+        "id-sha256:3f7bee1571ef6aa81c92"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:e6c58b2c154dcf8d1d3a",
+        "id-sha256:fa3ad1d185ea99eb9920"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:e6c58b2c154dcf8d1d3a",
+        "id-sha256:d6a0e9b136b35e4df0a9"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:e6c58b2c154dcf8d1d3a",
+        "id-sha256:3fde89cef1172737c913"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:e6c58b2c154dcf8d1d3a",
+        "id-sha256:8010c034396414fb378c"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:3f7bee1571ef6aa81c92",
+        "id-sha256:65d8420266703fea8653"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:3f7bee1571ef6aa81c92",
+        "id-sha256:14aaf8c7d105768b2e00"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:3f7bee1571ef6aa81c92",
+        "id-sha256:d6a0e9b136b35e4df0a9"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:3f7bee1571ef6aa81c92",
+        "id-sha256:8010c034396414fb378c"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:65d8420266703fea8653",
+        "id-sha256:8010c034396414fb378c"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:65d8420266703fea8653",
+        "id-sha256:d6a0e9b136b35e4df0a9"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:65d8420266703fea8653",
+        "id-sha256:fa3ad1d185ea99eb9920"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:65d8420266703fea8653",
+        "id-sha256:284220a43a8f5bd566e0"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:8010c034396414fb378c",
+        "id-sha256:7ea6e4cddcbcd6a48301"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:8010c034396414fb378c",
+        "id-sha256:284220a43a8f5bd566e0"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:8010c034396414fb378c",
+        "id-sha256:fa3ad1d185ea99eb9920"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:d6a0e9b136b35e4df0a9",
+        "id-sha256:28ab6d8e35a02c734bc2"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:d6a0e9b136b35e4df0a9",
+        "id-sha256:284220a43a8f5bd566e0"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:d6a0e9b136b35e4df0a9",
+        "id-sha256:fa3ad1d185ea99eb9920"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:fa3ad1d185ea99eb9920",
+        "id-sha256:b0bdf5941062773a81f3"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:3fde89cef1172737c913",
+        "id-sha256:74b3dd731055cfceaad6"
+      ],
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    }
+  ],
+  "sharedNativeSurfaces": [
+    {
+      "guids": [
+        "id-sha256:65d8420266703fea8653",
+        "id-sha256:284220a43a8f5bd566e0"
+      ],
+      "sharedAreaSquareMeters": 0.7709635036222937,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:65d8420266703fea8653",
+        "id-sha256:3f7bee1571ef6aa81c92"
+      ],
+      "sharedAreaSquareMeters": 2.4931157454794106,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:65d8420266703fea8653",
+        "id-sha256:fa3ad1d185ea99eb9920"
+      ],
+      "sharedAreaSquareMeters": 2.312890510866443,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:65d8420266703fea8653",
+        "id-sha256:d6a0e9b136b35e4df0a9"
+      ],
+      "sharedAreaSquareMeters": 3.003753910216016,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:65d8420266703fea8653",
+        "id-sha256:8010c034396414fb378c"
+      ],
+      "sharedAreaSquareMeters": 3.003753910216016,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:28ab6d8e35a02c734bc2",
+        "id-sha256:d6a0e9b136b35e4df0a9"
+      ],
+      "sharedAreaSquareMeters": 0.23999999999998523,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:9bee2c14fbec975fab09",
+        "id-sha256:f5db3272958141343cdc"
+      ],
+      "sharedAreaSquareMeters": 0.839999999999992,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:9bee2c14fbec975fab09",
+        "id-sha256:79fb9dcff7102be5e3cc"
+      ],
+      "sharedAreaSquareMeters": 2.9999999999999716,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:9bee2c14fbec975fab09",
+        "id-sha256:c8e2ecabc0c282d2ac0b"
+      ],
+      "sharedAreaSquareMeters": 0.8400000000000318,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:9bee2c14fbec975fab09",
+        "id-sha256:e6c58b2c154dcf8d1d3a"
+      ],
+      "sharedAreaSquareMeters": 2.9999999999999716,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:9bee2c14fbec975fab09",
+        "id-sha256:3fde89cef1172737c913"
+      ],
+      "sharedAreaSquareMeters": 0.28000000000006364,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:14aaf8c7d105768b2e00",
+        "id-sha256:3f7bee1571ef6aa81c92"
+      ],
+      "sharedAreaSquareMeters": 0.24000000000005486,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:284220a43a8f5bd566e0",
+        "id-sha256:d6a0e9b136b35e4df0a9"
+      ],
+      "sharedAreaSquareMeters": 0.32155127210007306,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:284220a43a8f5bd566e0",
+        "id-sha256:e6c58b2c154dcf8d1d3a"
+      ],
+      "sharedAreaSquareMeters": 0.7700000000001753,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:284220a43a8f5bd566e0",
+        "id-sha256:8010c034396414fb378c"
+      ],
+      "sharedAreaSquareMeters": 0.3600833876000819,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:3f7bee1571ef6aa81c92",
+        "id-sha256:d6a0e9b136b35e4df0a9"
+      ],
+      "sharedAreaSquareMeters": 0.9624019394999909,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:3f7bee1571ef6aa81c92",
+        "id-sha256:e6c58b2c154dcf8d1d3a"
+      ],
+      "sharedAreaSquareMeters": 2.4900000000000935,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:3f7bee1571ef6aa81c92",
+        "id-sha256:8010c034396414fb378c"
+      ],
+      "sharedAreaSquareMeters": 1.082502039525893,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:fa3ad1d185ea99eb9920",
+        "id-sha256:b0bdf5941062773a81f3"
+      ],
+      "sharedAreaSquareMeters": 0.24000000000005486,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:fa3ad1d185ea99eb9920",
+        "id-sha256:d6a0e9b136b35e4df0a9"
+      ],
+      "sharedAreaSquareMeters": 0.9646538163000364,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:fa3ad1d185ea99eb9920",
+        "id-sha256:e6c58b2c154dcf8d1d3a"
+      ],
+      "sharedAreaSquareMeters": 2.3100000000000884,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:fa3ad1d185ea99eb9920",
+        "id-sha256:8010c034396414fb378c"
+      ],
+      "sharedAreaSquareMeters": 1.080250162800041,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:f5db3272958141343cdc",
+        "id-sha256:79fb9dcff7102be5e3cc"
+      ],
+      "sharedAreaSquareMeters": 2.4900000000000935,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:f5db3272958141343cdc",
+        "id-sha256:72f33dc79d76882f08d2"
+      ],
+      "sharedAreaSquareMeters": 0.2400000000000549,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:f5db3272958141343cdc",
+        "id-sha256:e6c58b2c154dcf8d1d3a"
+      ],
+      "sharedAreaSquareMeters": 2.4900000000000935,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:f5db3272958141343cdc",
+        "id-sha256:c73f5a79ec85c0cbb2f6"
+      ],
+      "sharedAreaSquareMeters": 0.839999999999992,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:13075a7e5542c507815a",
+        "id-sha256:c8e2ecabc0c282d2ac0b"
+      ],
+      "sharedAreaSquareMeters": 0.2600000000000597,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:79fb9dcff7102be5e3cc",
+        "id-sha256:74b3dd731055cfceaad6"
+      ],
+      "sharedAreaSquareMeters": 0.045800000000014406,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:79fb9dcff7102be5e3cc",
+        "id-sha256:c8e2ecabc0c282d2ac0b"
+      ],
+      "sharedAreaSquareMeters": 2.3100000000000884,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:79fb9dcff7102be5e3cc",
+        "id-sha256:c73f5a79ec85c0cbb2f6"
+      ],
+      "sharedAreaSquareMeters": 2.6999999999999744,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:79fb9dcff7102be5e3cc",
+        "id-sha256:8f5a6dbe72d6b3e8c424"
+      ],
+      "sharedAreaSquareMeters": 0.05715000000000031,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:79fb9dcff7102be5e3cc",
+        "id-sha256:3fde89cef1172737c913"
+      ],
+      "sharedAreaSquareMeters": 0.6800000000001544,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:d6a0e9b136b35e4df0a9",
+        "id-sha256:e6c58b2c154dcf8d1d3a"
+      ],
+      "sharedAreaSquareMeters": 2.9999999999999716,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:74b3dd731055cfceaad6",
+        "id-sha256:3fde89cef1172737c913"
+      ],
+      "sharedAreaSquareMeters": 0.8928760000001085,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:c8e2ecabc0c282d2ac0b",
+        "id-sha256:e6c58b2c154dcf8d1d3a"
+      ],
+      "sharedAreaSquareMeters": 2.3100000000000884,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:c8e2ecabc0c282d2ac0b",
+        "id-sha256:c73f5a79ec85c0cbb2f6"
+      ],
+      "sharedAreaSquareMeters": 0.8400000000000318,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:e6c58b2c154dcf8d1d3a",
+        "id-sha256:c73f5a79ec85c0cbb2f6"
+      ],
+      "sharedAreaSquareMeters": 2.9999999999999716,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:e6c58b2c154dcf8d1d3a",
+        "id-sha256:3fde89cef1172737c913"
+      ],
+      "sharedAreaSquareMeters": 0.7700000000001753,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:e6c58b2c154dcf8d1d3a",
+        "id-sha256:8010c034396414fb378c"
+      ],
+      "sharedAreaSquareMeters": 2.9999999999999716,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:c73f5a79ec85c0cbb2f6",
+        "id-sha256:8f5a6dbe72d6b3e8c424"
+      ],
+      "sharedAreaSquareMeters": 1.9502760000000374,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:c73f5a79ec85c0cbb2f6",
+        "id-sha256:3fde89cef1172737c913"
+      ],
+      "sharedAreaSquareMeters": 0.28000000000006364,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    },
+    {
+      "guids": [
+        "id-sha256:7ea6e4cddcbcd6a48301",
+        "id-sha256:8010c034396414fb378c"
+      ],
+      "sharedAreaSquareMeters": 0.23999999999998523,
+      "evidence": "resultant-native-BREP-coplanar-surface"
+    }
+  ],
+  "nativeVolumeIntersectionPairs": [],
+  "collisionEngine": "Tapir.GetCollisions; Shapely/AABB produce candidates only",
+  "structuralAcceptance": "NOT_VERIFIED",
+  "jointQualityAcceptance": "NOT_VERIFIED",
+  "geometryScope": "ALL_AVAILABLE_BODIES_IN_REGENERATED_3D_VIEW; existing layer/design-option/3D filters remain in force",
+  "inventoryUnchanged": true,
+  "crossPriorModelVolumeCollisions": [],
+  "roofJunctions": {
+    "native-wall-east-level-2": {
+      "status": "NATIVE_WALL_ROOF_UNDERSIDE_SEO_CONTACT_PASS",
+      "actualContact": {
+        "status": "ACTUAL_NATIVE_ROOF_UNDERSIDE_FACE_CONTACT_PASS",
+        "plane": {
+          "normal": [
+            -0.0,
+            -0.04997916920862571,
+            0.9987502603980715
+          ],
+          "distance": 4.201081,
+          "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+        },
+        "sharedAreaSquareMeters": 2.4931157454794106,
+        "actualFaceIndices": {
+          "wall": [
+            [
+              0,
+              1
+            ]
+          ],
+          "roof": [
+            [
+              0,
+              2
+            ]
+          ]
+        },
+        "wallEntirelyBelowUnderside": true,
+        "holesPreservedInContactCheck": true
+      },
+      "nativeOperation": "SubtractionUpwards",
+      "requestedSkipPolygonHoles": true,
+      "nativeReadbackSkipPolygonHoles": false,
+      "flagAcceptance": "NOT_VERIFIED"
+    },
+    "native-wall-north-level-2": {
+      "status": "NATIVE_WALL_ROOF_UNDERSIDE_SEO_CONTACT_PASS",
+      "actualContact": {
+        "status": "ACTUAL_NATIVE_ROOF_UNDERSIDE_FACE_CONTACT_PASS",
+        "plane": {
+          "normal": [
+            -0.0,
+            -0.04997916920862571,
+            0.9987502603980715
+          ],
+          "distance": 4.201081,
+          "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+        },
+        "sharedAreaSquareMeters": 3.003753910216016,
+        "actualFaceIndices": {
+          "wall": [
+            [
+              0,
+              1
+            ]
+          ],
+          "roof": [
+            [
+              0,
+              2
+            ]
+          ]
+        },
+        "wallEntirelyBelowUnderside": true,
+        "holesPreservedInContactCheck": true
+      },
+      "nativeOperation": "SubtractionUpwards",
+      "requestedSkipPolygonHoles": true,
+      "nativeReadbackSkipPolygonHoles": false,
+      "flagAcceptance": "NOT_VERIFIED"
+    },
+    "native-wall-south-level-2": {
+      "status": "NATIVE_WALL_ROOF_UNDERSIDE_SEO_CONTACT_PASS",
+      "actualContact": {
+        "status": "ACTUAL_NATIVE_ROOF_UNDERSIDE_FACE_CONTACT_PASS",
+        "plane": {
+          "normal": [
+            -0.0,
+            -0.04997916920862571,
+            0.9987502603980715
+          ],
+          "distance": 4.201081,
+          "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+        },
+        "sharedAreaSquareMeters": 3.003753910216016,
+        "actualFaceIndices": {
+          "wall": [
+            [
+              0,
+              1
+            ]
+          ],
+          "roof": [
+            [
+              0,
+              2
+            ]
+          ]
+        },
+        "wallEntirelyBelowUnderside": true,
+        "holesPreservedInContactCheck": true
+      },
+      "nativeOperation": "SubtractionUpwards",
+      "requestedSkipPolygonHoles": true,
+      "nativeReadbackSkipPolygonHoles": false,
+      "flagAcceptance": "NOT_VERIFIED"
+    },
+    "native-wall-west-level-2": {
+      "status": "NATIVE_WALL_ROOF_UNDERSIDE_SEO_CONTACT_PASS",
+      "actualContact": {
+        "status": "ACTUAL_NATIVE_ROOF_UNDERSIDE_FACE_CONTACT_PASS",
+        "plane": {
+          "normal": [
+            -0.0,
+            -0.04997916920862571,
+            0.9987502603980715
+          ],
+          "distance": 4.201081,
+          "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+        },
+        "sharedAreaSquareMeters": 2.312890510866443,
+        "actualFaceIndices": {
+          "wall": [
+            [
+              0,
+              1
+            ]
+          ],
+          "roof": [
+            [
+              0,
+              2
+            ]
+          ]
+        },
+        "wallEntirelyBelowUnderside": true,
+        "holesPreservedInContactCheck": true
+      },
+      "nativeOperation": "SubtractionUpwards",
+      "requestedSkipPolygonHoles": true,
+      "nativeReadbackSkipPolygonHoles": false,
+      "flagAcceptance": "NOT_VERIFIED"
+    },
+    "test-partition-1": {
+      "status": "NATIVE_WALL_ROOF_UNDERSIDE_SEO_CONTACT_PASS",
+      "actualContact": {
+        "status": "ACTUAL_NATIVE_ROOF_UNDERSIDE_FACE_CONTACT_PASS",
+        "plane": {
+          "normal": [
+            -0.0,
+            -0.04997916920862571,
+            0.9987502603980715
+          ],
+          "distance": 4.201081,
+          "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+        },
+        "sharedAreaSquareMeters": 0.7709635036222937,
+        "actualFaceIndices": {
+          "wall": [
+            [
+              0,
+              1
+            ]
+          ],
+          "roof": [
+            [
+              0,
+              2
+            ]
+          ]
+        },
+        "wallEntirelyBelowUnderside": true,
+        "holesPreservedInContactCheck": true
+      },
+      "nativeOperation": "SubtractionUpwards",
+      "requestedSkipPolygonHoles": true,
+      "nativeReadbackSkipPolygonHoles": false,
+      "flagAcceptance": "NOT_VERIFIED"
+    }
+  },
+  "nativeRoofHoleCount": 0,
+  "fullFamilyEngineeringAcceptance": "NOT_VERIFIED"
+}

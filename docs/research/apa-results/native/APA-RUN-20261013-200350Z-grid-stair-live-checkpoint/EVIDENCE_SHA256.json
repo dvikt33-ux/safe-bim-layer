@@ -1,0 +1,10 @@
+{
+  "ci.json": "7086079766b4a071b5dbc85b995f5d9bb98ee2b5b5dd2f9459488fdfc2724d55",
+  "code-readback.json": "de265a0d3462dc45c4414973de8fe4d414f84a038ffde516adda41e383a8bc26",
+  "core-knowledge-query.json": "7375fcba100a4b2ff26cf1cbbc1c341b0338b5831fc8c084fcd73edb04e18f0d",
+  "deployment-reconciliation.json": "3d24b55789900eb15b7ae6396039c5020c0b01f152b3db68b152d680ba40996d",
+  "existing-project-test.json": "9f368906251ff55616991c9c37b6aebd355843f86d65bb6a93f4303955df0965",
+  "gap-register.json": "58c57e3b81281187b08c0e328bc6ff9d2201898d22f832966da59dcef80551a3",
+  "preservation-save-open.json": "0f0ad71cfe2c3241a88ddac31bdcb40e0fbcaba5f6bc7c73047daa4538a506a0",
+  "stair-repeatability.json": "8f6552bd1619324132dff14eafc8b53528efa44a300a50d8c7021ee65105f932"
+}

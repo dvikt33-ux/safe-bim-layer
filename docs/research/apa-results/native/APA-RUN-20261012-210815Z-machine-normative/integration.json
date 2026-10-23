@@ -1,0 +1,2712 @@
+{
+  "status": "CACHED_NATIVE_EXISTING_MACHINE_END_TO_END_PASS",
+  "sourceCommit": "67f17d407d14aebb091daaf79f11c10178b87440",
+  "nativeReads": 0,
+  "nativeWrites": 0,
+  "geometryRecomputed": false,
+  "acceptedBaselineGuidCount": 109,
+  "priorNativeEvidenceSHA256": "0282a31dc5638d29f907102bd114d743c811160ded1916b3394aa3011b46edd6",
+  "baselineGeometryDigest": "c0f71dcbce1d8514130030cea107fecced525e49f62a27fad9104f8936f959a5",
+  "nativeBaselineVerification": "REUSED_PREVIOUSLY_VERIFIED_NOT_REFRESHED",
+  "junctions": 4,
+  "machineRuleBindings": 36,
+  "statusCounts": {
+    "NOT_VERIFIED": 36
+  },
+  "sourceGateCounts": {
+    "STORED_FIELDS_PASS": 36
+  },
+  "ruleFilesRead": [
+    "01_Normative_Base/_Machine/rules/roofing_2026.yaml"
+  ],
+  "result": {
+    "schema": "APA_EXISTING_MACHINE_NORMATIVE_RESULTS_V1",
+    "projectId": "apa-isolated-authored-20261011",
+    "profile": {
+      "object_class": "residential",
+      "object_subclass": "izhs",
+      "active_functions": [],
+      "modules": {
+        "architecture": "details"
+      },
+      "project_phase": "design",
+      "jurisdiction": "RU",
+      "evidenceUri": "user:2026-10-12-current-APA-model-IZHS",
+      "stageEvidence": "REQUESTED_DESIGN_TASK_SCOPE_ONLY_NOT_BUILDING_PERMIT",
+      "location": {
+        "country_code": "RU",
+        "subject_rf": "Central Russia - user confirmed; exact locality unresolved"
+      }
+    },
+    "profileErrors": [],
+    "sourceCommit": "67f17d407d14aebb091daaf79f11c10178b87440",
+    "sourceLockDigest": "a9a455f5dd22a1d34c390d39eb80a23285a1e1ab2e12347adf8d2f4c82a74483",
+    "legacy": {
+      "legacyNormativePackDigest": "5753c8eb730ed18e4ede0a309a28adbfea022723f0f8e56f03fee770e8569bb5",
+      "legacySourceResultDigest": "3aabbd19f1b256489508ef18c5155767a7cbf2e2961d8ef04d389475b7c95c4e",
+      "sourceMappings": [
+        {
+          "legacyDocumentId": "thermal",
+          "machineSourceId": "SP-50-13330-2024-GARANT",
+          "relation": "DOCUMENT_IDENTITY_ONLY",
+          "legacyMetadataVerification": "VERIFIED_REGISTRY_METADATA",
+          "acceptance": "NOT_VERIFIED"
+        },
+        {
+          "legacyDocumentId": "thermal_bridge",
+          "machineSourceId": null,
+          "relation": "NOT_IN_ROOF_PACKAGE",
+          "legacyMetadataVerification": "VERIFIED_REGISTRY_METADATA",
+          "acceptance": "NOT_VERIFIED"
+        },
+        {
+          "legacyDocumentId": "roof",
+          "machineSourceId": "SP-17-13330-2017-GARANT",
+          "relation": "DOCUMENT_IDENTITY_ONLY",
+          "legacyMetadataVerification": "VERIFIED_REGISTRY_METADATA",
+          "acceptance": "NOT_VERIFIED"
+        },
+        {
+          "legacyDocumentId": "fire",
+          "machineSourceId": null,
+          "relation": "NOT_IN_ROOF_PACKAGE",
+          "legacyMetadataVerification": "VERIFIED_REGISTRY_METADATA",
+          "acceptance": "NOT_VERIFIED"
+        },
+        {
+          "legacyDocumentId": "window",
+          "machineSourceId": null,
+          "relation": "NOT_IN_ROOF_PACKAGE",
+          "legacyMetadataVerification": "VERIFIED_REGISTRY_METADATA",
+          "acceptance": "NOT_VERIFIED"
+        }
+      ],
+      "legacyBindings": [
+        {
+          "junctionId": "native-wall-east-level-2",
+          "nativeGuids": [
+            "id-sha256:497e0b19b9b41188698e",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "c8f8850ff1f3808fe85b338a2a405e5890abaa218a8a7152a3214d42862c95c7",
+          "family": "wall_roof",
+          "ruleId": "thermal-envelope-interface",
+          "edition": "СП 50.13330.2024",
+          "sourceUri": "https://protect.gost.ru/sp/details/5081dae9-9ee9-455f-80e8-d093d495361c",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Applicable envelope provisions require full clause verification",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:thermalEnvelopeApplicability",
+            "PROJECT_FACT:climateDesignBasis",
+            "CSE_FACT:insulationLayers",
+            "CSE_FACT:layerContinuityEvidence",
+            "ENGINEERING_EVIDENCE:validatedThermalAssessment",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-east-level-2",
+          "nativeGuids": [
+            "id-sha256:497e0b19b9b41188698e",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "c8f8850ff1f3808fe85b338a2a405e5890abaa218a8a7152a3214d42862c95c7",
+          "family": "wall_roof",
+          "ruleId": "thermal-bridge-table-binding",
+          "edition": "СП 230.1325800.2015",
+          "sourceUri": "https://protect.gost.ru/sp/details/e8f68a1e-2928-41be-bf89-21330a32f8b5",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Applicable thermal-nonuniformity table; exact row not selected",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:thermalEnvelopeApplicability",
+            "CSE_FACT:tableRowSource",
+            "CSE_FACT:tableGeometrySignature",
+            "CSE_FACT:thermalMaterialProperties",
+            "ENGINEERING_EVIDENCE:qualifiedTableOrThermalEngine",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-east-level-2",
+          "nativeGuids": [
+            "id-sha256:497e0b19b9b41188698e",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "c8f8850ff1f3808fe85b338a2a405e5890abaa218a8a7152a3214d42862c95c7",
+          "family": "wall_roof",
+          "ruleId": "roof-system-and-junction",
+          "edition": "СП 17.13330.2017",
+          "sourceUri": "https://protect.gost.ru/sp/details/844352c5-dda6-4006-acd8-b6875d1ed6a8",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "System-specific roofing provisions; native SinglePlane is not a roofing technology",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:roofDesignBasis",
+            "CSE_FACT:roofSystem",
+            "CSE_FACT:waterproofingLayerEvidence",
+            "CSE_FACT:junctionRole",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-east-level-2",
+          "nativeGuids": [
+            "id-sha256:497e0b19b9b41188698e",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "c8f8850ff1f3808fe85b338a2a405e5890abaa218a8a7152a3214d42862c95c7",
+          "family": "wall_roof",
+          "ruleId": "bitumen-parapet-detail",
+          "edition": "СП 17.13330.2017",
+          "sourceUri": "https://protect.gost.ru/sp/details/844352c5-dda6-4006-acd8-b6875d1ed6a8",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Research references SP17 section5.1, clauses5.1.17/18/20/22/23/25; NOT_VERIFIED_CLAUSE",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:roofDesignBasis",
+            "CSE_FACT:roofSystem",
+            "CSE_FACT:junctionRole",
+            "CSE_FACT:waterproofingLayerEvidence",
+            "SYSTEM_SPECIFIC_APPLICABILITY_UNKNOWN",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-east-level-2",
+          "nativeGuids": [
+            "id-sha256:497e0b19b9b41188698e",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "c8f8850ff1f3808fe85b338a2a405e5890abaa218a8a7152a3214d42862c95c7",
+          "family": "wall_roof",
+          "ruleId": "fire-interface-evidence",
+          "edition": "СП 2.13130.2020",
+          "sourceUri": "https://protect.gost.ru/sp/details/90783c81-7eaa-4b90-b774-55ad27e6dfa1",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Applicable fire-resistance requirement; no class or limit inferred from material",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:fireDesignBasis",
+            "PROJECT_FACT:fireCompartmentRole",
+            "CSE_FACT:fireSystemTestEvidence",
+            "ENGINEERING_EVIDENCE:fireResistanceAssessment",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-east-level-2",
+          "nativeGuids": [
+            "id-sha256:497e0b19b9b41188698e",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "c8f8850ff1f3808fe85b338a2a405e5890abaa218a8a7152a3214d42862c95c7",
+          "family": "wall_roof",
+          "ruleId": "window-installation-layer-evidence",
+          "edition": "ГОСТ 30971-2012",
+          "sourceUri": "https://protect.gost.ru/gost/details/09b731bf-531e-428b-8ef9-556ed2d1c110",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Applicable installation-joint provisions and AnnexA; missing layers remain NOT_VERIFIED",
+          "status": "NOT_APPLICABLE",
+          "missingEvidence": [],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-north-level-2",
+          "nativeGuids": [
+            "id-sha256:4b2c7d00e3d409a9ab32",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "f499c8e689011754b3d1bd8e1fe4f547ec0008ecd81040889f1a6cb6a0674514",
+          "family": "wall_roof",
+          "ruleId": "thermal-envelope-interface",
+          "edition": "СП 50.13330.2024",
+          "sourceUri": "https://protect.gost.ru/sp/details/5081dae9-9ee9-455f-80e8-d093d495361c",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Applicable envelope provisions require full clause verification",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:thermalEnvelopeApplicability",
+            "PROJECT_FACT:climateDesignBasis",
+            "CSE_FACT:insulationLayers",
+            "CSE_FACT:layerContinuityEvidence",
+            "ENGINEERING_EVIDENCE:validatedThermalAssessment",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-north-level-2",
+          "nativeGuids": [
+            "id-sha256:4b2c7d00e3d409a9ab32",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "f499c8e689011754b3d1bd8e1fe4f547ec0008ecd81040889f1a6cb6a0674514",
+          "family": "wall_roof",
+          "ruleId": "thermal-bridge-table-binding",
+          "edition": "СП 230.1325800.2015",
+          "sourceUri": "https://protect.gost.ru/sp/details/e8f68a1e-2928-41be-bf89-21330a32f8b5",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Applicable thermal-nonuniformity table; exact row not selected",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:thermalEnvelopeApplicability",
+            "CSE_FACT:tableRowSource",
+            "CSE_FACT:tableGeometrySignature",
+            "CSE_FACT:thermalMaterialProperties",
+            "ENGINEERING_EVIDENCE:qualifiedTableOrThermalEngine",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-north-level-2",
+          "nativeGuids": [
+            "id-sha256:4b2c7d00e3d409a9ab32",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "f499c8e689011754b3d1bd8e1fe4f547ec0008ecd81040889f1a6cb6a0674514",
+          "family": "wall_roof",
+          "ruleId": "roof-system-and-junction",
+          "edition": "СП 17.13330.2017",
+          "sourceUri": "https://protect.gost.ru/sp/details/844352c5-dda6-4006-acd8-b6875d1ed6a8",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "System-specific roofing provisions; native SinglePlane is not a roofing technology",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:roofDesignBasis",
+            "CSE_FACT:roofSystem",
+            "CSE_FACT:waterproofingLayerEvidence",
+            "CSE_FACT:junctionRole",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-north-level-2",
+          "nativeGuids": [
+            "id-sha256:4b2c7d00e3d409a9ab32",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "f499c8e689011754b3d1bd8e1fe4f547ec0008ecd81040889f1a6cb6a0674514",
+          "family": "wall_roof",
+          "ruleId": "bitumen-parapet-detail",
+          "edition": "СП 17.13330.2017",
+          "sourceUri": "https://protect.gost.ru/sp/details/844352c5-dda6-4006-acd8-b6875d1ed6a8",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Research references SP17 section5.1, clauses5.1.17/18/20/22/23/25; NOT_VERIFIED_CLAUSE",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:roofDesignBasis",
+            "CSE_FACT:roofSystem",
+            "CSE_FACT:junctionRole",
+            "CSE_FACT:waterproofingLayerEvidence",
+            "SYSTEM_SPECIFIC_APPLICABILITY_UNKNOWN",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-north-level-2",
+          "nativeGuids": [
+            "id-sha256:4b2c7d00e3d409a9ab32",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "f499c8e689011754b3d1bd8e1fe4f547ec0008ecd81040889f1a6cb6a0674514",
+          "family": "wall_roof",
+          "ruleId": "fire-interface-evidence",
+          "edition": "СП 2.13130.2020",
+          "sourceUri": "https://protect.gost.ru/sp/details/90783c81-7eaa-4b90-b774-55ad27e6dfa1",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Applicable fire-resistance requirement; no class or limit inferred from material",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:fireDesignBasis",
+            "PROJECT_FACT:fireCompartmentRole",
+            "CSE_FACT:fireSystemTestEvidence",
+            "ENGINEERING_EVIDENCE:fireResistanceAssessment",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-north-level-2",
+          "nativeGuids": [
+            "id-sha256:4b2c7d00e3d409a9ab32",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "f499c8e689011754b3d1bd8e1fe4f547ec0008ecd81040889f1a6cb6a0674514",
+          "family": "wall_roof",
+          "ruleId": "window-installation-layer-evidence",
+          "edition": "ГОСТ 30971-2012",
+          "sourceUri": "https://protect.gost.ru/gost/details/09b731bf-531e-428b-8ef9-556ed2d1c110",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Applicable installation-joint provisions and AnnexA; missing layers remain NOT_VERIFIED",
+          "status": "NOT_APPLICABLE",
+          "missingEvidence": [],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-south-level-2",
+          "nativeGuids": [
+            "id-sha256:0f66b42e488c297215cd",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "600185820330998816b6270c0f4f748710e947be825e2792ce4f3119d8a7fb41",
+          "family": "wall_roof",
+          "ruleId": "thermal-envelope-interface",
+          "edition": "СП 50.13330.2024",
+          "sourceUri": "https://protect.gost.ru/sp/details/5081dae9-9ee9-455f-80e8-d093d495361c",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Applicable envelope provisions require full clause verification",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:thermalEnvelopeApplicability",
+            "PROJECT_FACT:climateDesignBasis",
+            "CSE_FACT:insulationLayers",
+            "CSE_FACT:layerContinuityEvidence",
+            "ENGINEERING_EVIDENCE:validatedThermalAssessment",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-south-level-2",
+          "nativeGuids": [
+            "id-sha256:0f66b42e488c297215cd",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "600185820330998816b6270c0f4f748710e947be825e2792ce4f3119d8a7fb41",
+          "family": "wall_roof",
+          "ruleId": "thermal-bridge-table-binding",
+          "edition": "СП 230.1325800.2015",
+          "sourceUri": "https://protect.gost.ru/sp/details/e8f68a1e-2928-41be-bf89-21330a32f8b5",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Applicable thermal-nonuniformity table; exact row not selected",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:thermalEnvelopeApplicability",
+            "CSE_FACT:tableRowSource",
+            "CSE_FACT:tableGeometrySignature",
+            "CSE_FACT:thermalMaterialProperties",
+            "ENGINEERING_EVIDENCE:qualifiedTableOrThermalEngine",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-south-level-2",
+          "nativeGuids": [
+            "id-sha256:0f66b42e488c297215cd",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "600185820330998816b6270c0f4f748710e947be825e2792ce4f3119d8a7fb41",
+          "family": "wall_roof",
+          "ruleId": "roof-system-and-junction",
+          "edition": "СП 17.13330.2017",
+          "sourceUri": "https://protect.gost.ru/sp/details/844352c5-dda6-4006-acd8-b6875d1ed6a8",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "System-specific roofing provisions; native SinglePlane is not a roofing technology",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:roofDesignBasis",
+            "CSE_FACT:roofSystem",
+            "CSE_FACT:waterproofingLayerEvidence",
+            "CSE_FACT:junctionRole",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-south-level-2",
+          "nativeGuids": [
+            "id-sha256:0f66b42e488c297215cd",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "600185820330998816b6270c0f4f748710e947be825e2792ce4f3119d8a7fb41",
+          "family": "wall_roof",
+          "ruleId": "bitumen-parapet-detail",
+          "edition": "СП 17.13330.2017",
+          "sourceUri": "https://protect.gost.ru/sp/details/844352c5-dda6-4006-acd8-b6875d1ed6a8",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Research references SP17 section5.1, clauses5.1.17/18/20/22/23/25; NOT_VERIFIED_CLAUSE",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:roofDesignBasis",
+            "CSE_FACT:roofSystem",
+            "CSE_FACT:junctionRole",
+            "CSE_FACT:waterproofingLayerEvidence",
+            "SYSTEM_SPECIFIC_APPLICABILITY_UNKNOWN",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-south-level-2",
+          "nativeGuids": [
+            "id-sha256:0f66b42e488c297215cd",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "600185820330998816b6270c0f4f748710e947be825e2792ce4f3119d8a7fb41",
+          "family": "wall_roof",
+          "ruleId": "fire-interface-evidence",
+          "edition": "СП 2.13130.2020",
+          "sourceUri": "https://protect.gost.ru/sp/details/90783c81-7eaa-4b90-b774-55ad27e6dfa1",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Applicable fire-resistance requirement; no class or limit inferred from material",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:fireDesignBasis",
+            "PROJECT_FACT:fireCompartmentRole",
+            "CSE_FACT:fireSystemTestEvidence",
+            "ENGINEERING_EVIDENCE:fireResistanceAssessment",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-south-level-2",
+          "nativeGuids": [
+            "id-sha256:0f66b42e488c297215cd",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "600185820330998816b6270c0f4f748710e947be825e2792ce4f3119d8a7fb41",
+          "family": "wall_roof",
+          "ruleId": "window-installation-layer-evidence",
+          "edition": "ГОСТ 30971-2012",
+          "sourceUri": "https://protect.gost.ru/gost/details/09b731bf-531e-428b-8ef9-556ed2d1c110",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Applicable installation-joint provisions and AnnexA; missing layers remain NOT_VERIFIED",
+          "status": "NOT_APPLICABLE",
+          "missingEvidence": [],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-west-level-2",
+          "nativeGuids": [
+            "id-sha256:3677c5da2430b7bed34b",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "163a5ac747b3896d13b417d9ed5a9fd6938b3f340e17b8bdbf857a094246ccbd",
+          "family": "wall_roof",
+          "ruleId": "thermal-envelope-interface",
+          "edition": "СП 50.13330.2024",
+          "sourceUri": "https://protect.gost.ru/sp/details/5081dae9-9ee9-455f-80e8-d093d495361c",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Applicable envelope provisions require full clause verification",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:thermalEnvelopeApplicability",
+            "PROJECT_FACT:climateDesignBasis",
+            "CSE_FACT:insulationLayers",
+            "CSE_FACT:layerContinuityEvidence",
+            "ENGINEERING_EVIDENCE:validatedThermalAssessment",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-west-level-2",
+          "nativeGuids": [
+            "id-sha256:3677c5da2430b7bed34b",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "163a5ac747b3896d13b417d9ed5a9fd6938b3f340e17b8bdbf857a094246ccbd",
+          "family": "wall_roof",
+          "ruleId": "thermal-bridge-table-binding",
+          "edition": "СП 230.1325800.2015",
+          "sourceUri": "https://protect.gost.ru/sp/details/e8f68a1e-2928-41be-bf89-21330a32f8b5",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Applicable thermal-nonuniformity table; exact row not selected",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:thermalEnvelopeApplicability",
+            "CSE_FACT:tableRowSource",
+            "CSE_FACT:tableGeometrySignature",
+            "CSE_FACT:thermalMaterialProperties",
+            "ENGINEERING_EVIDENCE:qualifiedTableOrThermalEngine",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-west-level-2",
+          "nativeGuids": [
+            "id-sha256:3677c5da2430b7bed34b",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "163a5ac747b3896d13b417d9ed5a9fd6938b3f340e17b8bdbf857a094246ccbd",
+          "family": "wall_roof",
+          "ruleId": "roof-system-and-junction",
+          "edition": "СП 17.13330.2017",
+          "sourceUri": "https://protect.gost.ru/sp/details/844352c5-dda6-4006-acd8-b6875d1ed6a8",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "System-specific roofing provisions; native SinglePlane is not a roofing technology",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:roofDesignBasis",
+            "CSE_FACT:roofSystem",
+            "CSE_FACT:waterproofingLayerEvidence",
+            "CSE_FACT:junctionRole",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-west-level-2",
+          "nativeGuids": [
+            "id-sha256:3677c5da2430b7bed34b",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "163a5ac747b3896d13b417d9ed5a9fd6938b3f340e17b8bdbf857a094246ccbd",
+          "family": "wall_roof",
+          "ruleId": "bitumen-parapet-detail",
+          "edition": "СП 17.13330.2017",
+          "sourceUri": "https://protect.gost.ru/sp/details/844352c5-dda6-4006-acd8-b6875d1ed6a8",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Research references SP17 section5.1, clauses5.1.17/18/20/22/23/25; NOT_VERIFIED_CLAUSE",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:roofDesignBasis",
+            "CSE_FACT:roofSystem",
+            "CSE_FACT:junctionRole",
+            "CSE_FACT:waterproofingLayerEvidence",
+            "SYSTEM_SPECIFIC_APPLICABILITY_UNKNOWN",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-west-level-2",
+          "nativeGuids": [
+            "id-sha256:3677c5da2430b7bed34b",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "163a5ac747b3896d13b417d9ed5a9fd6938b3f340e17b8bdbf857a094246ccbd",
+          "family": "wall_roof",
+          "ruleId": "fire-interface-evidence",
+          "edition": "СП 2.13130.2020",
+          "sourceUri": "https://protect.gost.ru/sp/details/90783c81-7eaa-4b90-b774-55ad27e6dfa1",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Applicable fire-resistance requirement; no class or limit inferred from material",
+          "status": "NOT_VERIFIED",
+          "missingEvidence": [
+            "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND",
+            "PROJECT_FACT:fireDesignBasis",
+            "PROJECT_FACT:fireCompartmentRole",
+            "CSE_FACT:fireSystemTestEvidence",
+            "ENGINEERING_EVIDENCE:fireResistanceAssessment",
+            "FULL_CLAUSE_AND_SYSTEM_APPLICABILITY_NOT_VERIFIED"
+          ],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        },
+        {
+          "junctionId": "native-wall-west-level-2",
+          "nativeGuids": [
+            "id-sha256:3677c5da2430b7bed34b",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "nativeContextSignature": "163a5ac747b3896d13b417d9ed5a9fd6938b3f340e17b8bdbf857a094246ccbd",
+          "family": "wall_roof",
+          "ruleId": "window-installation-layer-evidence",
+          "edition": "ГОСТ 30971-2012",
+          "sourceUri": "https://protect.gost.ru/gost/details/09b731bf-531e-428b-8ef9-556ed2d1c110",
+          "registryMetadata": "VERIFIED_REGISTRY_METADATA",
+          "clauseLocator": "Applicable installation-joint provisions and AnnexA; missing layers remain NOT_VERIFIED",
+          "status": "NOT_APPLICABLE",
+          "missingEvidence": [],
+          "numericEvaluationExecuted": false,
+          "engineeringApproved": false,
+          "geometryContactIsNotNormativeApproval": true
+        }
+      ],
+      "legacyChecks": [
+        {
+          "junctionId": "native-wall-east-level-2",
+          "ruleId": "sp17-roof-scope",
+          "sourceId": "roofScope",
+          "status": "NOT_VERIFIED",
+          "nativeGuids": [
+            "id-sha256:497e0b19b9b41188698e",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "engineeringApproved": false,
+          "missingEvidence": [
+            "ROOF_WORK_TYPE_NOT_VERIFIED",
+            "SOURCE_BOUND_ROOF_TECHNOLOGY_NOT_VERIFIED"
+          ]
+        },
+        {
+          "junctionId": "native-wall-east-level-2",
+          "ruleId": "sp17-amendment5-thermal-reference",
+          "sourceId": "roofThermalReference",
+          "status": "PASS_DOCUMENTED",
+          "nativeGuids": [
+            "id-sha256:497e0b19b9b41188698e",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "engineeringApproved": false,
+          "observedEdition": "СП 50.13330.2024",
+          "expectedEdition": "СП 50.13330.2024",
+          "roofApplicability": "NOT_VERIFIED",
+          "acceptanceScope": "Verified amendment reference edge only; not thermal or roof compliance"
+        },
+        {
+          "junctionId": "native-wall-east-level-2",
+          "ruleId": "sp50-envelope-scope",
+          "sourceId": "thermalScope",
+          "status": "NOT_VERIFIED",
+          "nativeGuids": [
+            "id-sha256:497e0b19b9b41188698e",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "engineeringApproved": false,
+          "missingEvidence": [
+            "buildingWorkType",
+            "buildingUse",
+            "totalBuildingAreaM2",
+            "maintainedTemperatureHumidity",
+            "architecturalHistoricSignificance",
+            "religious",
+            "periodic_heating_below_3_days_week",
+            "seasonal_heating_below_3_months_year",
+            "temporary_up_to_2_heating_seasons",
+            "greenhouse",
+            "cold_store",
+            "cultural_heritage",
+            "utility_structure"
+          ],
+          "totalBuildingAreaM2": null,
+          "areaIsNotInferredFromTestSlabs": true
+        },
+        {
+          "junctionId": "native-wall-north-level-2",
+          "ruleId": "sp17-roof-scope",
+          "sourceId": "roofScope",
+          "status": "NOT_VERIFIED",
+          "nativeGuids": [
+            "id-sha256:4b2c7d00e3d409a9ab32",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "engineeringApproved": false,
+          "missingEvidence": [
+            "ROOF_WORK_TYPE_NOT_VERIFIED",
+            "SOURCE_BOUND_ROOF_TECHNOLOGY_NOT_VERIFIED"
+          ]
+        },
+        {
+          "junctionId": "native-wall-north-level-2",
+          "ruleId": "sp17-amendment5-thermal-reference",
+          "sourceId": "roofThermalReference",
+          "status": "PASS_DOCUMENTED",
+          "nativeGuids": [
+            "id-sha256:4b2c7d00e3d409a9ab32",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "engineeringApproved": false,
+          "observedEdition": "СП 50.13330.2024",
+          "expectedEdition": "СП 50.13330.2024",
+          "roofApplicability": "NOT_VERIFIED",
+          "acceptanceScope": "Verified amendment reference edge only; not thermal or roof compliance"
+        },
+        {
+          "junctionId": "native-wall-north-level-2",
+          "ruleId": "sp50-envelope-scope",
+          "sourceId": "thermalScope",
+          "status": "NOT_VERIFIED",
+          "nativeGuids": [
+            "id-sha256:4b2c7d00e3d409a9ab32",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "engineeringApproved": false,
+          "missingEvidence": [
+            "buildingWorkType",
+            "buildingUse",
+            "totalBuildingAreaM2",
+            "maintainedTemperatureHumidity",
+            "architecturalHistoricSignificance",
+            "religious",
+            "periodic_heating_below_3_days_week",
+            "seasonal_heating_below_3_months_year",
+            "temporary_up_to_2_heating_seasons",
+            "greenhouse",
+            "cold_store",
+            "cultural_heritage",
+            "utility_structure"
+          ],
+          "totalBuildingAreaM2": null,
+          "areaIsNotInferredFromTestSlabs": true
+        },
+        {
+          "junctionId": "native-wall-south-level-2",
+          "ruleId": "sp17-roof-scope",
+          "sourceId": "roofScope",
+          "status": "NOT_VERIFIED",
+          "nativeGuids": [
+            "id-sha256:0f66b42e488c297215cd",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "engineeringApproved": false,
+          "missingEvidence": [
+            "ROOF_WORK_TYPE_NOT_VERIFIED",
+            "SOURCE_BOUND_ROOF_TECHNOLOGY_NOT_VERIFIED"
+          ]
+        },
+        {
+          "junctionId": "native-wall-south-level-2",
+          "ruleId": "sp17-amendment5-thermal-reference",
+          "sourceId": "roofThermalReference",
+          "status": "PASS_DOCUMENTED",
+          "nativeGuids": [
+            "id-sha256:0f66b42e488c297215cd",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "engineeringApproved": false,
+          "observedEdition": "СП 50.13330.2024",
+          "expectedEdition": "СП 50.13330.2024",
+          "roofApplicability": "NOT_VERIFIED",
+          "acceptanceScope": "Verified amendment reference edge only; not thermal or roof compliance"
+        },
+        {
+          "junctionId": "native-wall-south-level-2",
+          "ruleId": "sp50-envelope-scope",
+          "sourceId": "thermalScope",
+          "status": "NOT_VERIFIED",
+          "nativeGuids": [
+            "id-sha256:0f66b42e488c297215cd",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "engineeringApproved": false,
+          "missingEvidence": [
+            "buildingWorkType",
+            "buildingUse",
+            "totalBuildingAreaM2",
+            "maintainedTemperatureHumidity",
+            "architecturalHistoricSignificance",
+            "religious",
+            "periodic_heating_below_3_days_week",
+            "seasonal_heating_below_3_months_year",
+            "temporary_up_to_2_heating_seasons",
+            "greenhouse",
+            "cold_store",
+            "cultural_heritage",
+            "utility_structure"
+          ],
+          "totalBuildingAreaM2": null,
+          "areaIsNotInferredFromTestSlabs": true
+        },
+        {
+          "junctionId": "native-wall-west-level-2",
+          "ruleId": "sp17-roof-scope",
+          "sourceId": "roofScope",
+          "status": "NOT_VERIFIED",
+          "nativeGuids": [
+            "id-sha256:3677c5da2430b7bed34b",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "engineeringApproved": false,
+          "missingEvidence": [
+            "ROOF_WORK_TYPE_NOT_VERIFIED",
+            "SOURCE_BOUND_ROOF_TECHNOLOGY_NOT_VERIFIED"
+          ]
+        },
+        {
+          "junctionId": "native-wall-west-level-2",
+          "ruleId": "sp17-amendment5-thermal-reference",
+          "sourceId": "roofThermalReference",
+          "status": "PASS_DOCUMENTED",
+          "nativeGuids": [
+            "id-sha256:3677c5da2430b7bed34b",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "engineeringApproved": false,
+          "observedEdition": "СП 50.13330.2024",
+          "expectedEdition": "СП 50.13330.2024",
+          "roofApplicability": "NOT_VERIFIED",
+          "acceptanceScope": "Verified amendment reference edge only; not thermal or roof compliance"
+        },
+        {
+          "junctionId": "native-wall-west-level-2",
+          "ruleId": "sp50-envelope-scope",
+          "sourceId": "thermalScope",
+          "status": "NOT_VERIFIED",
+          "nativeGuids": [
+            "id-sha256:3677c5da2430b7bed34b",
+            "id-sha256:51fe26b6654ee6ca9854"
+          ],
+          "engineeringApproved": false,
+          "missingEvidence": [
+            "buildingWorkType",
+            "buildingUse",
+            "totalBuildingAreaM2",
+            "maintainedTemperatureHumidity",
+            "architecturalHistoricSignificance",
+            "religious",
+            "periodic_heating_below_3_days_week",
+            "seasonal_heating_below_3_months_year",
+            "temporary_up_to_2_heating_seasons",
+            "greenhouse",
+            "cold_store",
+            "cultural_heritage",
+            "utility_structure"
+          ],
+          "totalBuildingAreaM2": null,
+          "areaIsNotInferredFromTestSlabs": true
+        }
+      ],
+      "referencePolicy": "01_Normative_Base/_Machine/dependency_resolution_policy.yaml",
+      "thermalReference": "EXACT_REFERENCE_OCCURRENCE_REQUIRED_NO_GLOBAL_PIN_OR_UPGRADE",
+      "legacyDocumentPassIsNotMachineRulePass": true
+    },
+    "bimFacts": [
+      {
+        "junctionId": "native-wall-east-level-2",
+        "guids": [
+          "id-sha256:497e0b19b9b41188698e",
+          "id-sha256:51fe26b6654ee6ca9854"
+        ],
+        "nativeContextSignature": "c8f8850ff1f3808fe85b338a2a405e5890abaa218a8a7152a3214d42862c95c7",
+        "elements": [
+          {
+            "guid": "id-sha256:497e0b19b9b41188698e",
+            "kind": "Wall",
+            "floorIndex": 1,
+            "bounds": [
+              [
+                [
+                  49.85,
+                  50.15
+                ],
+                [
+                  39.85,
+                  48.15
+                ],
+                [
+                  3,
+                  6
+                ]
+              ]
+            ],
+            "materialBindings": {
+              "api": "ACAPI_Element_Get",
+              "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+              "structureType": 0,
+              "buildingMaterial": {
+                "nativeField": "wall.structure",
+                "attributeType": 12,
+                "attributeIndex": 10,
+                "guid": "id-sha256:460ab9cf8caf48c17c0c",
+                "name": "Железобетон - Конструкционный",
+                "defaultSurface": {
+                  "nativeField": "buildingMaterial.cutMaterial",
+                  "attributeType": 5,
+                  "attributeIndex": 4,
+                  "guid": "id-sha256:547d736d45b5e8718116",
+                  "name": "Бетон - 02"
+                }
+              },
+              "refMat": {
+                "nativeField": "wall.refMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "oppMat": {
+                "nativeField": "wall.oppMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "sidMat": {
+                "nativeField": "wall.sidMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              }
+            },
+            "hostGuid": null
+          },
+          {
+            "guid": "id-sha256:51fe26b6654ee6ca9854",
+            "kind": "Roof",
+            "floorIndex": 1,
+            "bounds": [
+              [
+                [
+                  40,
+                  50
+                ],
+                [
+                  40,
+                  48.029887626
+                ],
+                [
+                  6.004517073,
+                  7.411353033
+                ]
+              ]
+            ],
+            "materialBindings": {
+              "api": "ACAPI_Element_Get",
+              "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+              "structureType": 0,
+              "buildingMaterial": {
+                "nativeField": "shellBase.structure",
+                "attributeType": 12,
+                "attributeIndex": 10,
+                "guid": "id-sha256:460ab9cf8caf48c17c0c",
+                "name": "Железобетон - Конструкционный",
+                "defaultSurface": {
+                  "nativeField": "buildingMaterial.cutMaterial",
+                  "attributeType": 5,
+                  "attributeIndex": 4,
+                  "guid": "id-sha256:547d736d45b5e8718116",
+                  "name": "Бетон - 02"
+                }
+              },
+              "topMat": {
+                "nativeField": "shellBase.topMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "sidMat": {
+                "nativeField": "shellBase.sidMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "botMat": {
+                "nativeField": "shellBase.botMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              }
+            },
+            "hostGuid": null
+          }
+        ],
+        "bodySignatures": {
+          "id-sha256:497e0b19b9b41188698e": "4f919923b46b96010b72934c06d52d57cf6e4fe3efe264c1d8fb817d79d07b93",
+          "id-sha256:51fe26b6654ee6ca9854": "3ddf222acf91e0703c6ad64a8d621b714e08bd0e415771832622636b2717c65c"
+        },
+        "cse": {},
+        "cseEvidenceCurrent": false,
+        "cachedMetrics": {
+          "id-sha256:51fe26b6654ee6ca9854": {
+            "status": "VERIFIED_NATIVE_GEOMETRY",
+            "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE",
+            "slopePercent": 15.11352180000001,
+            "slopeDegrees": 8.59436692369688,
+            "bodySignature": "3ddf222acf91e0703c6ad64a8d621b714e08bd0e415771832622636b2717c65c",
+            "normativeSlopeThreshold": null,
+            "normativeSlopeResult": "NOT_VERIFIED"
+          }
+        },
+        "geometryRecomputed": false
+      },
+      {
+        "junctionId": "native-wall-north-level-2",
+        "guids": [
+          "id-sha256:4b2c7d00e3d409a9ab32",
+          "id-sha256:51fe26b6654ee6ca9854"
+        ],
+        "nativeContextSignature": "f499c8e689011754b3d1bd8e1fe4f547ec0008ecd81040889f1a6cb6a0674514",
+        "elements": [
+          {
+            "guid": "id-sha256:4b2c7d00e3d409a9ab32",
+            "kind": "Wall",
+            "floorIndex": 1,
+            "bounds": [
+              [
+                [
+                  39.85,
+                  49.85
+                ],
+                [
+                  47.85,
+                  48.15
+                ],
+                [
+                  3,
+                  6
+                ]
+              ]
+            ],
+            "materialBindings": {
+              "api": "ACAPI_Element_Get",
+              "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+              "structureType": 0,
+              "buildingMaterial": {
+                "nativeField": "wall.structure",
+                "attributeType": 12,
+                "attributeIndex": 10,
+                "guid": "id-sha256:460ab9cf8caf48c17c0c",
+                "name": "Железобетон - Конструкционный",
+                "defaultSurface": {
+                  "nativeField": "buildingMaterial.cutMaterial",
+                  "attributeType": 5,
+                  "attributeIndex": 4,
+                  "guid": "id-sha256:547d736d45b5e8718116",
+                  "name": "Бетон - 02"
+                }
+              },
+              "refMat": {
+                "nativeField": "wall.refMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "oppMat": {
+                "nativeField": "wall.oppMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "sidMat": {
+                "nativeField": "wall.sidMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              }
+            },
+            "hostGuid": null
+          },
+          {
+            "guid": "id-sha256:51fe26b6654ee6ca9854",
+            "kind": "Roof",
+            "floorIndex": 1,
+            "bounds": [
+              [
+                [
+                  40,
+                  50
+                ],
+                [
+                  40,
+                  48.029887626
+                ],
+                [
+                  6.004517073,
+                  7.411353033
+                ]
+              ]
+            ],
+            "materialBindings": {
+              "api": "ACAPI_Element_Get",
+              "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+              "structureType": 0,
+              "buildingMaterial": {
+                "nativeField": "shellBase.structure",
+                "attributeType": 12,
+                "attributeIndex": 10,
+                "guid": "id-sha256:460ab9cf8caf48c17c0c",
+                "name": "Железобетон - Конструкционный",
+                "defaultSurface": {
+                  "nativeField": "buildingMaterial.cutMaterial",
+                  "attributeType": 5,
+                  "attributeIndex": 4,
+                  "guid": "id-sha256:547d736d45b5e8718116",
+                  "name": "Бетон - 02"
+                }
+              },
+              "topMat": {
+                "nativeField": "shellBase.topMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "sidMat": {
+                "nativeField": "shellBase.sidMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "botMat": {
+                "nativeField": "shellBase.botMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              }
+            },
+            "hostGuid": null
+          }
+        ],
+        "bodySignatures": {
+          "id-sha256:4b2c7d00e3d409a9ab32": "d332b179ba00ca80404fd635227da44f781a01ea85a56ef63f9023d75a3d2ff0",
+          "id-sha256:51fe26b6654ee6ca9854": "3ddf222acf91e0703c6ad64a8d621b714e08bd0e415771832622636b2717c65c"
+        },
+        "cse": {},
+        "cseEvidenceCurrent": false,
+        "cachedMetrics": {
+          "id-sha256:51fe26b6654ee6ca9854": {
+            "status": "VERIFIED_NATIVE_GEOMETRY",
+            "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE",
+            "slopePercent": 15.11352180000001,
+            "slopeDegrees": 8.59436692369688,
+            "bodySignature": "3ddf222acf91e0703c6ad64a8d621b714e08bd0e415771832622636b2717c65c",
+            "normativeSlopeThreshold": null,
+            "normativeSlopeResult": "NOT_VERIFIED"
+          }
+        },
+        "geometryRecomputed": false
+      },
+      {
+        "junctionId": "native-wall-south-level-2",
+        "guids": [
+          "id-sha256:0f66b42e488c297215cd",
+          "id-sha256:51fe26b6654ee6ca9854"
+        ],
+        "nativeContextSignature": "600185820330998816b6270c0f4f748710e947be825e2792ce4f3119d8a7fb41",
+        "elements": [
+          {
+            "guid": "id-sha256:0f66b42e488c297215cd",
+            "kind": "Wall",
+            "floorIndex": 1,
+            "bounds": [
+              [
+                [
+                  39.85,
+                  49.85
+                ],
+                [
+                  39.85,
+                  40.15
+                ],
+                [
+                  3,
+                  6
+                ]
+              ]
+            ],
+            "materialBindings": {
+              "api": "ACAPI_Element_Get",
+              "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+              "structureType": 0,
+              "buildingMaterial": {
+                "nativeField": "wall.structure",
+                "attributeType": 12,
+                "attributeIndex": 10,
+                "guid": "id-sha256:460ab9cf8caf48c17c0c",
+                "name": "Железобетон - Конструкционный",
+                "defaultSurface": {
+                  "nativeField": "buildingMaterial.cutMaterial",
+                  "attributeType": 5,
+                  "attributeIndex": 4,
+                  "guid": "id-sha256:547d736d45b5e8718116",
+                  "name": "Бетон - 02"
+                }
+              },
+              "refMat": {
+                "nativeField": "wall.refMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "oppMat": {
+                "nativeField": "wall.oppMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "sidMat": {
+                "nativeField": "wall.sidMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              }
+            },
+            "hostGuid": null
+          },
+          {
+            "guid": "id-sha256:51fe26b6654ee6ca9854",
+            "kind": "Roof",
+            "floorIndex": 1,
+            "bounds": [
+              [
+                [
+                  40,
+                  50
+                ],
+                [
+                  40,
+                  48.029887626
+                ],
+                [
+                  6.004517073,
+                  7.411353033
+                ]
+              ]
+            ],
+            "materialBindings": {
+              "api": "ACAPI_Element_Get",
+              "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+              "structureType": 0,
+              "buildingMaterial": {
+                "nativeField": "shellBase.structure",
+                "attributeType": 12,
+                "attributeIndex": 10,
+                "guid": "id-sha256:460ab9cf8caf48c17c0c",
+                "name": "Железобетон - Конструкционный",
+                "defaultSurface": {
+                  "nativeField": "buildingMaterial.cutMaterial",
+                  "attributeType": 5,
+                  "attributeIndex": 4,
+                  "guid": "id-sha256:547d736d45b5e8718116",
+                  "name": "Бетон - 02"
+                }
+              },
+              "topMat": {
+                "nativeField": "shellBase.topMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "sidMat": {
+                "nativeField": "shellBase.sidMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "botMat": {
+                "nativeField": "shellBase.botMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              }
+            },
+            "hostGuid": null
+          }
+        ],
+        "bodySignatures": {
+          "id-sha256:0f66b42e488c297215cd": "c78908eecd53dceaeafe322eee17c7e14b193d5b90021aecbeffd6405cde00da",
+          "id-sha256:51fe26b6654ee6ca9854": "3ddf222acf91e0703c6ad64a8d621b714e08bd0e415771832622636b2717c65c"
+        },
+        "cse": {},
+        "cseEvidenceCurrent": false,
+        "cachedMetrics": {
+          "id-sha256:51fe26b6654ee6ca9854": {
+            "status": "VERIFIED_NATIVE_GEOMETRY",
+            "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE",
+            "slopePercent": 15.11352180000001,
+            "slopeDegrees": 8.59436692369688,
+            "bodySignature": "3ddf222acf91e0703c6ad64a8d621b714e08bd0e415771832622636b2717c65c",
+            "normativeSlopeThreshold": null,
+            "normativeSlopeResult": "NOT_VERIFIED"
+          }
+        },
+        "geometryRecomputed": false
+      },
+      {
+        "junctionId": "native-wall-west-level-2",
+        "guids": [
+          "id-sha256:3677c5da2430b7bed34b",
+          "id-sha256:51fe26b6654ee6ca9854"
+        ],
+        "nativeContextSignature": "163a5ac747b3896d13b417d9ed5a9fd6938b3f340e17b8bdbf857a094246ccbd",
+        "elements": [
+          {
+            "guid": "id-sha256:3677c5da2430b7bed34b",
+            "kind": "Wall",
+            "floorIndex": 1,
+            "bounds": [
+              [
+                [
+                  39.85,
+                  40.15
+                ],
+                [
+                  40.15,
+                  47.85
+                ],
+                [
+                  3,
+                  6
+                ]
+              ]
+            ],
+            "materialBindings": {
+              "api": "ACAPI_Element_Get",
+              "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+              "structureType": 0,
+              "buildingMaterial": {
+                "nativeField": "wall.structure",
+                "attributeType": 12,
+                "attributeIndex": 10,
+                "guid": "id-sha256:460ab9cf8caf48c17c0c",
+                "name": "Железобетон - Конструкционный",
+                "defaultSurface": {
+                  "nativeField": "buildingMaterial.cutMaterial",
+                  "attributeType": 5,
+                  "attributeIndex": 4,
+                  "guid": "id-sha256:547d736d45b5e8718116",
+                  "name": "Бетон - 02"
+                }
+              },
+              "refMat": {
+                "nativeField": "wall.refMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "oppMat": {
+                "nativeField": "wall.oppMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "sidMat": {
+                "nativeField": "wall.sidMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              }
+            },
+            "hostGuid": null
+          },
+          {
+            "guid": "id-sha256:51fe26b6654ee6ca9854",
+            "kind": "Roof",
+            "floorIndex": 1,
+            "bounds": [
+              [
+                [
+                  40,
+                  50
+                ],
+                [
+                  40,
+                  48.029887626
+                ],
+                [
+                  6.004517073,
+                  7.411353033
+                ]
+              ]
+            ],
+            "materialBindings": {
+              "api": "ACAPI_Element_Get",
+              "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+              "structureType": 0,
+              "buildingMaterial": {
+                "nativeField": "shellBase.structure",
+                "attributeType": 12,
+                "attributeIndex": 10,
+                "guid": "id-sha256:460ab9cf8caf48c17c0c",
+                "name": "Железобетон - Конструкционный",
+                "defaultSurface": {
+                  "nativeField": "buildingMaterial.cutMaterial",
+                  "attributeType": 5,
+                  "attributeIndex": 4,
+                  "guid": "id-sha256:547d736d45b5e8718116",
+                  "name": "Бетон - 02"
+                }
+              },
+              "topMat": {
+                "nativeField": "shellBase.topMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "sidMat": {
+                "nativeField": "shellBase.sidMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              },
+              "botMat": {
+                "nativeField": "shellBase.botMat",
+                "attributeType": 5,
+                "attributeIndex": 0,
+                "overridden": false,
+                "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+              }
+            },
+            "hostGuid": null
+          }
+        ],
+        "bodySignatures": {
+          "id-sha256:3677c5da2430b7bed34b": "0b6e78aca1b2e05b7bd05b26286939ef364829bd734d75034e87dd4d920d1e8b",
+          "id-sha256:51fe26b6654ee6ca9854": "3ddf222acf91e0703c6ad64a8d621b714e08bd0e415771832622636b2717c65c"
+        },
+        "cse": {},
+        "cseEvidenceCurrent": false,
+        "cachedMetrics": {
+          "id-sha256:51fe26b6654ee6ca9854": {
+            "status": "VERIFIED_NATIVE_GEOMETRY",
+            "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE",
+            "slopePercent": 15.11352180000001,
+            "slopeDegrees": 8.59436692369688,
+            "bodySignature": "3ddf222acf91e0703c6ad64a8d621b714e08bd0e415771832622636b2717c65c",
+            "normativeSlopeThreshold": null,
+            "normativeSlopeResult": "NOT_VERIFIED"
+          }
+        },
+        "geometryRecomputed": false
+      }
+    ],
+    "bindings": [
+      {
+        "junctionId": "native-wall-east-level-2",
+        "ruleId": "ROOF-SP17-MATERIAL-SLOPE-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "4.3",
+          "table": "4.1"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "c8f8850ff1f3808fe85b338a2a405e5890abaa218a8a7152a3214d42862c95c7",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "DENY",
+        "missingEvidence": [
+          "EXACT_CURRENT_TABLE_ROW_OVERLAY_NOT_BOUND",
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-north-level-2",
+        "ruleId": "ROOF-SP17-MATERIAL-SLOPE-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "4.3",
+          "table": "4.1"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "f499c8e689011754b3d1bd8e1fe4f547ec0008ecd81040889f1a6cb6a0674514",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "DENY",
+        "missingEvidence": [
+          "EXACT_CURRENT_TABLE_ROW_OVERLAY_NOT_BOUND",
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-south-level-2",
+        "ruleId": "ROOF-SP17-MATERIAL-SLOPE-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "4.3",
+          "table": "4.1"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "600185820330998816b6270c0f4f748710e947be825e2792ce4f3119d8a7fb41",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "DENY",
+        "missingEvidence": [
+          "EXACT_CURRENT_TABLE_ROW_OVERLAY_NOT_BOUND",
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-west-level-2",
+        "ruleId": "ROOF-SP17-MATERIAL-SLOPE-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "4.3",
+          "table": "4.1"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "163a5ac747b3896d13b417d9ed5a9fd6938b3f340e17b8bdbf857a094246ccbd",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "DENY",
+        "missingEvidence": [
+          "EXACT_CURRENT_TABLE_ROW_OVERLAY_NOT_BOUND",
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-east-level-2",
+        "ruleId": "ROOF-VENT-CHANNEL-TABLE-A2-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "appendix": "A",
+          "table": "A.2"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "c8f8850ff1f3808fe85b338a2a405e5890abaa218a8a7152a3214d42862c95c7",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "DENY",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "DENY",
+        "missingEvidence": [
+          "FUNCTION_SCOPE_INACTIVE",
+          "EXACT_CURRENT_TABLE_ROW_OVERLAY_NOT_BOUND",
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-north-level-2",
+        "ruleId": "ROOF-VENT-CHANNEL-TABLE-A2-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "appendix": "A",
+          "table": "A.2"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "f499c8e689011754b3d1bd8e1fe4f547ec0008ecd81040889f1a6cb6a0674514",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "DENY",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "DENY",
+        "missingEvidence": [
+          "FUNCTION_SCOPE_INACTIVE",
+          "EXACT_CURRENT_TABLE_ROW_OVERLAY_NOT_BOUND",
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-south-level-2",
+        "ruleId": "ROOF-VENT-CHANNEL-TABLE-A2-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "appendix": "A",
+          "table": "A.2"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "600185820330998816b6270c0f4f748710e947be825e2792ce4f3119d8a7fb41",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "DENY",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "DENY",
+        "missingEvidence": [
+          "FUNCTION_SCOPE_INACTIVE",
+          "EXACT_CURRENT_TABLE_ROW_OVERLAY_NOT_BOUND",
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-west-level-2",
+        "ruleId": "ROOF-VENT-CHANNEL-TABLE-A2-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "appendix": "A",
+          "table": "A.2"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "163a5ac747b3896d13b417d9ed5a9fd6938b3f340e17b8bdbf857a094246ccbd",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "DENY",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "DENY",
+        "missingEvidence": [
+          "FUNCTION_SCOPE_INACTIVE",
+          "EXACT_CURRENT_TABLE_ROW_OVERLAY_NOT_BOUND",
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-east-level-2",
+        "ruleId": "ROOF-NO-DYNAMIC-LOAD-ON-MEMBRANE-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "4.10"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "c8f8850ff1f3808fe85b338a2a405e5890abaa218a8a7152a3214d42862c95c7",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-north-level-2",
+        "ruleId": "ROOF-NO-DYNAMIC-LOAD-ON-MEMBRANE-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "4.10"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "f499c8e689011754b3d1bd8e1fe4f547ec0008ecd81040889f1a6cb6a0674514",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-south-level-2",
+        "ruleId": "ROOF-NO-DYNAMIC-LOAD-ON-MEMBRANE-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "4.10"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "600185820330998816b6270c0f4f748710e947be825e2792ce4f3119d8a7fb41",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-west-level-2",
+        "ruleId": "ROOF-NO-DYNAMIC-LOAD-ON-MEMBRANE-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "4.10"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "163a5ac747b3896d13b417d9ed5a9fd6938b3f340e17b8bdbf857a094246ccbd",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-east-level-2",
+        "ruleId": "ROOF-SCREED-JOINTS-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.1.9"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "c8f8850ff1f3808fe85b338a2a405e5890abaa218a8a7152a3214d42862c95c7",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-north-level-2",
+        "ruleId": "ROOF-SCREED-JOINTS-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.1.9"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "f499c8e689011754b3d1bd8e1fe4f547ec0008ecd81040889f1a6cb6a0674514",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-south-level-2",
+        "ruleId": "ROOF-SCREED-JOINTS-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.1.9"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "600185820330998816b6270c0f4f748710e947be825e2792ce4f3119d8a7fb41",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-west-level-2",
+        "ruleId": "ROOF-SCREED-JOINTS-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.1.9"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "163a5ac747b3896d13b417d9ed5a9fd6938b3f340e17b8bdbf857a094246ccbd",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-east-level-2",
+        "ruleId": "ROOF-WATERPROOF-UPSTAND-300-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.1.20"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "c8f8850ff1f3808fe85b338a2a405e5890abaa218a8a7152a3214d42862c95c7",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-north-level-2",
+        "ruleId": "ROOF-WATERPROOF-UPSTAND-300-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.1.20"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "f499c8e689011754b3d1bd8e1fe4f547ec0008ecd81040889f1a6cb6a0674514",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-south-level-2",
+        "ruleId": "ROOF-WATERPROOF-UPSTAND-300-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.1.20"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "600185820330998816b6270c0f4f748710e947be825e2792ce4f3119d8a7fb41",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-west-level-2",
+        "ruleId": "ROOF-WATERPROOF-UPSTAND-300-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.1.20"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "163a5ac747b3896d13b417d9ed5a9fd6938b3f340e17b8bdbf857a094246ccbd",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-east-level-2",
+        "ruleId": "ROOF-DRAIN-LOWERING-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.1.25"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "c8f8850ff1f3808fe85b338a2a405e5890abaa218a8a7152a3214d42862c95c7",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-north-level-2",
+        "ruleId": "ROOF-DRAIN-LOWERING-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.1.25"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "f499c8e689011754b3d1bd8e1fe4f547ec0008ecd81040889f1a6cb6a0674514",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-south-level-2",
+        "ruleId": "ROOF-DRAIN-LOWERING-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.1.25"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "600185820330998816b6270c0f4f748710e947be825e2792ce4f3119d8a7fb41",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-west-level-2",
+        "ruleId": "ROOF-DRAIN-LOWERING-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.1.25"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "163a5ac747b3896d13b417d9ed5a9fd6938b3f340e17b8bdbf857a094246ccbd",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-east-level-2",
+        "ruleId": "ROOF-EXIT-UPSTAND-150-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.1.27"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "c8f8850ff1f3808fe85b338a2a405e5890abaa218a8a7152a3214d42862c95c7",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-north-level-2",
+        "ruleId": "ROOF-EXIT-UPSTAND-150-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.1.27"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "f499c8e689011754b3d1bd8e1fe4f547ec0008ecd81040889f1a6cb6a0674514",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-south-level-2",
+        "ruleId": "ROOF-EXIT-UPSTAND-150-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.1.27"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "600185820330998816b6270c0f4f748710e947be825e2792ce4f3119d8a7fb41",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-west-level-2",
+        "ruleId": "ROOF-EXIT-UPSTAND-150-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.1.27"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "163a5ac747b3896d13b417d9ed5a9fd6938b3f340e17b8bdbf857a094246ccbd",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "MATCH",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-east-level-2",
+        "ruleId": "ROOF-USABLE-LOAD-CHECK-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.3.1"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "c8f8850ff1f3808fe85b338a2a405e5890abaa218a8a7152a3214d42862c95c7",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "DENY",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "FUNCTION_SCOPE_INACTIVE",
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-north-level-2",
+        "ruleId": "ROOF-USABLE-LOAD-CHECK-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.3.1"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "f499c8e689011754b3d1bd8e1fe4f547ec0008ecd81040889f1a6cb6a0674514",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "DENY",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "FUNCTION_SCOPE_INACTIVE",
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-south-level-2",
+        "ruleId": "ROOF-USABLE-LOAD-CHECK-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.3.1"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "600185820330998816b6270c0f4f748710e947be825e2792ce4f3119d8a7fb41",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "DENY",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "FUNCTION_SCOPE_INACTIVE",
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-west-level-2",
+        "ruleId": "ROOF-USABLE-LOAD-CHECK-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "clause": "5.3.1"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "163a5ac747b3896d13b417d9ed5a9fd6938b3f340e17b8bdbf857a094246ccbd",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "DENY",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "STORED_CHAIN_MATCH",
+        "missingEvidence": [
+          "FUNCTION_SCOPE_INACTIVE",
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-east-level-2",
+        "ruleId": "ROOF-USABLE-PARAPET-1200-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "amendment": "N 4",
+          "clause": "5.3.4"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "c8f8850ff1f3808fe85b338a2a405e5890abaa218a8a7152a3214d42862c95c7",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "DENY",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "DENY",
+        "missingEvidence": [
+          "FUNCTION_SCOPE_INACTIVE",
+          "LOCATOR_AMENDMENT_UNRESOLVED",
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-north-level-2",
+        "ruleId": "ROOF-USABLE-PARAPET-1200-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "amendment": "N 4",
+          "clause": "5.3.4"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "f499c8e689011754b3d1bd8e1fe4f547ec0008ecd81040889f1a6cb6a0674514",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "DENY",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "DENY",
+        "missingEvidence": [
+          "FUNCTION_SCOPE_INACTIVE",
+          "LOCATOR_AMENDMENT_UNRESOLVED",
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-south-level-2",
+        "ruleId": "ROOF-USABLE-PARAPET-1200-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "amendment": "N 4",
+          "clause": "5.3.4"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "600185820330998816b6270c0f4f748710e947be825e2792ce4f3119d8a7fb41",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "DENY",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "DENY",
+        "missingEvidence": [
+          "FUNCTION_SCOPE_INACTIVE",
+          "LOCATOR_AMENDMENT_UNRESOLVED",
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      },
+      {
+        "junctionId": "native-wall-west-level-2",
+        "ruleId": "ROOF-USABLE-PARAPET-1200-001",
+        "aliasUsed": null,
+        "sourceRuleStatus": "confirmed",
+        "sourceId": "SP-17-13330-2017-GARANT",
+        "sourceLocator": {
+          "document_code": "СП 17.13330.2017",
+          "amendment": "N 4",
+          "clause": "5.3.4"
+        },
+        "sourcePath": "01_Normative_Base/_Machine/rules/roofing_2026.yaml",
+        "sourceBlob": "548abff72b9396b3a9923aff06a16c999b31c242",
+        "nativeContextSignature": "163a5ac747b3896d13b417d9ed5a9fd6938b3f340e17b8bdbf857a094246ccbd",
+        "status": "NOT_VERIFIED",
+        "scopeGate": "DENY",
+        "evidenceGate": "STORED_FIELDS_PASS",
+        "revisionGate": "DENY",
+        "missingEvidence": [
+          "FUNCTION_SCOPE_INACTIVE",
+          "LOCATOR_AMENDMENT_UNRESOLVED",
+          "QUARANTINED_SOURCE_DESIGN_ONLY_RELEASE",
+          "UPSTREAM_ROOF_CALCULATOR_DECLARED_NOT_IMPLEMENTED",
+          "CSE_SOURCE_OR_NATIVE_SIGNATURE_NOT_BOUND"
+        ],
+        "engineeringApproved": false,
+        "numericEvaluationExecuted": false
+      }
+    ],
+    "nativeWriteCalls": 0,
+    "nativeReadCalls": 0,
+    "geometryRecomputed": false,
+    "normativeAuthority": false,
+    "engineeringAcceptance": "ENGINEERING_NOT_VERIFIED",
+    "stagePack": [],
+    "nativeWritePlan": null,
+    "ruleEvaluator": "EXISTING_TDK_BLOCK_RESOLVER_AND_EVIDENCE_VALIDATOR",
+    "runtimeResolution": {
+      "targets": [
+        "IZHS.ROOF.DETAILS"
+      ],
+      "selected_closure": [
+        "IZHS.ELEMENTS.CORE",
+        "IZHS.SHELL.CORE",
+        "IZHS.ROOF.DETAILS"
+      ],
+      "new_blocks": [
+        "IZHS.ELEMENTS.CORE",
+        "IZHS.SHELL.CORE",
+        "IZHS.ROOF.DETAILS"
+      ],
+      "reused_dependencies": [],
+      "skipped_targets": [],
+      "fast_pack": false,
+      "fallback_reasons": [],
+      "fallback_scope": [],
+      "normative_authority": false,
+      "missing_inputs": [],
+      "blocked_outputs": [],
+      "warnings": []
+    },
+    "status": "EXISTING_MACHINE_CONNECTED",
+    "openedSourceFiles": [
+      "NORMATIVE_WORK_PROTOCOL.md",
+      "01_Normative_Base/_Machine/source_policy.yaml",
+      "01_Normative_Base/_Machine/rule.schema.yaml",
+      "01_Normative_Base/_Machine/README.md",
+      "01_Normative_Base/_Machine/TRUST_STATUS.md",
+      "01_Normative_Base/_Machine/project_profile.schema.yaml",
+      "01_Normative_Base/_Machine/object_taxonomy.yaml",
+      "01_Normative_Base/_Machine/module_taxonomy.yaml",
+      "01_Normative_Base/_Machine/retrieval_policy.yaml",
+      "01_Normative_Base/_Machine/dependency_resolution_policy.yaml",
+      "01_Normative_Base/_Machine/routes/index.yaml",
+      "01_Normative_Base/_Machine/evidence/sources_roofing_2026.yaml",
+      "01_Normative_Base/_Machine/evidence/source_sp50_2024_izhs.yaml",
+      "01_Normative_Base/_Machine/routes/objects/residential.izhs.yaml",
+      "04_Code_Generation/blocks/residential.izhs/IZHS.ELEMENTS.CORE.yaml",
+      "04_Code_Generation/blocks/residential.izhs/IZHS.SHELL.CORE.yaml",
+      "04_Code_Generation/blocks/residential.izhs/IZHS.ARCH.DETAILS.yaml",
+      "04_Code_Generation/blocks/residential.izhs/IZHS.ROOF.DETAILS.yaml",
+      "04_Code_Generation/block_catalog/residential.izhs.yaml",
+      "04_Code_Generation/runtime/block_resolver.py",
+      "04_Code_Generation/block_resolution_policy.yaml",
+      "01_Normative_Base/_Machine/audit/IZHS_CENTRAL_RUSSIA_RELEASE_SET_2026-10-03.yaml",
+      "01_Normative_Base/_Machine/canonical_rule_aliases.yaml",
+      "scripts/validate_normative_evidence.py",
+      "01_Normative_Base/_Machine/rules/roofing_2026.yaml"
+    ],
+    "ruleFilesRead": [
+      "01_Normative_Base/_Machine/rules/roofing_2026.yaml"
+    ],
+    "dependencyGraph": {
+      "nodes": [
+        "67f17d407d14aebb091daaf79f11c10178b87440",
+        "ROOF-DRAIN-LOWERING-001",
+        "ROOF-EXIT-UPSTAND-150-001",
+        "ROOF-NO-DYNAMIC-LOAD-ON-MEMBRANE-001",
+        "ROOF-SCREED-JOINTS-001",
+        "ROOF-SP17-MATERIAL-SLOPE-001",
+        "ROOF-USABLE-LOAD-CHECK-001",
+        "ROOF-USABLE-PARAPET-1200-001",
+        "ROOF-VENT-CHANNEL-TABLE-A2-001",
+        "ROOF-WATERPROOF-UPSTAND-300-001",
+        "native-wall-east-level-2",
+        "native-wall-north-level-2",
+        "native-wall-south-level-2",
+        "native-wall-west-level-2"
+      ],
+      "edges": [
+        [
+          "ROOF-DRAIN-LOWERING-001",
+          "native-wall-east-level-2"
+        ],
+        [
+          "ROOF-DRAIN-LOWERING-001",
+          "native-wall-north-level-2"
+        ],
+        [
+          "ROOF-DRAIN-LOWERING-001",
+          "native-wall-south-level-2"
+        ],
+        [
+          "ROOF-DRAIN-LOWERING-001",
+          "native-wall-west-level-2"
+        ],
+        [
+          "ROOF-EXIT-UPSTAND-150-001",
+          "native-wall-east-level-2"
+        ],
+        [
+          "ROOF-EXIT-UPSTAND-150-001",
+          "native-wall-north-level-2"
+        ],
+        [
+          "ROOF-EXIT-UPSTAND-150-001",
+          "native-wall-south-level-2"
+        ],
+        [
+          "ROOF-EXIT-UPSTAND-150-001",
+          "native-wall-west-level-2"
+        ],
+        [
+          "ROOF-NO-DYNAMIC-LOAD-ON-MEMBRANE-001",
+          "native-wall-east-level-2"
+        ],
+        [
+          "ROOF-NO-DYNAMIC-LOAD-ON-MEMBRANE-001",
+          "native-wall-north-level-2"
+        ],
+        [
+          "ROOF-NO-DYNAMIC-LOAD-ON-MEMBRANE-001",
+          "native-wall-south-level-2"
+        ],
+        [
+          "ROOF-NO-DYNAMIC-LOAD-ON-MEMBRANE-001",
+          "native-wall-west-level-2"
+        ],
+        [
+          "ROOF-SCREED-JOINTS-001",
+          "native-wall-east-level-2"
+        ],
+        [
+          "ROOF-SCREED-JOINTS-001",
+          "native-wall-north-level-2"
+        ],
+        [
+          "ROOF-SCREED-JOINTS-001",
+          "native-wall-south-level-2"
+        ],
+        [
+          "ROOF-SCREED-JOINTS-001",
+          "native-wall-west-level-2"
+        ],
+        [
+          "ROOF-SP17-MATERIAL-SLOPE-001",
+          "native-wall-east-level-2"
+        ],
+        [
+          "ROOF-SP17-MATERIAL-SLOPE-001",
+          "native-wall-north-level-2"
+        ],
+        [
+          "ROOF-SP17-MATERIAL-SLOPE-001",
+          "native-wall-south-level-2"
+        ],
+        [
+          "ROOF-SP17-MATERIAL-SLOPE-001",
+          "native-wall-west-level-2"
+        ],
+        [
+          "ROOF-USABLE-LOAD-CHECK-001",
+          "native-wall-east-level-2"
+        ],
+        [
+          "ROOF-USABLE-LOAD-CHECK-001",
+          "native-wall-north-level-2"
+        ],
+        [
+          "ROOF-USABLE-LOAD-CHECK-001",
+          "native-wall-south-level-2"
+        ],
+        [
+          "ROOF-USABLE-LOAD-CHECK-001",
+          "native-wall-west-level-2"
+        ],
+        [
+          "ROOF-USABLE-PARAPET-1200-001",
+          "native-wall-east-level-2"
+        ],
+        [
+          "ROOF-USABLE-PARAPET-1200-001",
+          "native-wall-north-level-2"
+        ],
+        [
+          "ROOF-USABLE-PARAPET-1200-001",
+          "native-wall-south-level-2"
+        ],
+        [
+          "ROOF-USABLE-PARAPET-1200-001",
+          "native-wall-west-level-2"
+        ],
+        [
+          "ROOF-VENT-CHANNEL-TABLE-A2-001",
+          "native-wall-east-level-2"
+        ],
+        [
+          "ROOF-VENT-CHANNEL-TABLE-A2-001",
+          "native-wall-north-level-2"
+        ],
+        [
+          "ROOF-VENT-CHANNEL-TABLE-A2-001",
+          "native-wall-south-level-2"
+        ],
+        [
+          "ROOF-VENT-CHANNEL-TABLE-A2-001",
+          "native-wall-west-level-2"
+        ],
+        [
+          "ROOF-WATERPROOF-UPSTAND-300-001",
+          "native-wall-east-level-2"
+        ],
+        [
+          "ROOF-WATERPROOF-UPSTAND-300-001",
+          "native-wall-north-level-2"
+        ],
+        [
+          "ROOF-WATERPROOF-UPSTAND-300-001",
+          "native-wall-south-level-2"
+        ],
+        [
+          "ROOF-WATERPROOF-UPSTAND-300-001",
+          "native-wall-west-level-2"
+        ]
+      ],
+      "sceneWriterRequiredForAnyFutureWrite": true
+    },
+    "resultDigest": "8fbdd950d8e40f28f8f6e2c6b4b19b534255b79241ed607f79e986bc9b37d161"
+  },
+  "selectedCseAndLegacyEvidenceUnchanged": true,
+  "engineeringAcceptance": "ENGINEERING_NOT_VERIFIED"
+}

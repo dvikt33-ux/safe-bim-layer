@@ -1,0 +1,9 @@
+{
+  "capability-counts.json": "487b4f141ed2e08efa5e39efb58e72e2ccd0ff7a1ccfb9f3a73a52642ed50594",
+  "connected-workflow.json": "1a6c06634c7888b73096d3a4840845a9a080dcaa6f00e9ade2d55b35a3801841",
+  "core-knowledge-query.json": "be4c566d35f09b2f16dc8a6c272d85dcb8905086d58cc5fbc705b4bea922264c",
+  "gap-register.json": "69c10e0b607e21ce8c7303f0b0402efb859a11451cb0f089de96ac55afa25adc",
+  "historical-providers.json": "20471fa23bf7dc465d111d87dbe0740a56f6df44d79ea2babe2552442a286036",
+  "provider-matrix.json": "14cb67210c78a11e6376dcc7ae8d1865a78aa1dcecd245192e5d8832fdbe4dba",
+  "windows-ci.json": "653c61a976b64af81f5463ce9658ed15418810f3c94f76d1ed2af45f1145a6fd"
+}

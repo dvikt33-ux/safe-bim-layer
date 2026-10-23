@@ -1,0 +1,40 @@
+{
+  "status": "PUBLISHED_PARTIAL_PRESERVATION_AND_OFFLINE_REPLAY_NATIVE_PENDING",
+  "revision": 141,
+  "codeHead": "c1b4e1a565bcd903273933d8917608df156ac600",
+  "ci": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38459091689",
+  "tests": 697,
+  "newTests": 8,
+  "existingProjectOnly": true,
+  "accepted143Preserved": true,
+  "original168SavedBytesUnchanged": true,
+  "uiSaveOpenCycles": 2,
+  "modelCreateModifyCalls": 0,
+  "existingSceneWriterJournalUnchanged": true,
+  "candidateLoaded": false,
+  "installedAPXFileChanged": false,
+  "freshOldCommands": 263,
+  "newCommandsMissing": 8,
+  "gridLIVE": "NOT_VERIFIED",
+  "stairSOURCE_DIMENSION": "NOT_VERIFIED",
+  "liveREPEATABILITY": "NOT_VERIFIED",
+  "engineering": "NOT_VERIFIED",
+  "blocking_dependencies": [
+    {
+      "id": "DEP-APA-GRID-STAIR-APX-LOAD",
+      "status": "BLOCKED_AMBIGUOUS_MANAGER_PATH_AFTER_AUTHORIZED_SWITCH",
+      "stage": "UNAMBIGUOUS_TEST_INSTANCE_MODULE_LOADING",
+      "authorization": "GRANTED_TEMPORARY_TEST_INSTANCE_ONLY",
+      "automaticApprovalRejection": "DISPLAYED_INSTALLED_PATH_INSTEAD_OF_EXTERNAL_CANDIDATE",
+      "target_task": "APA-P70.A11.S03"
+    },
+    {
+      "id": "DEP-APA-GRID-LIBRARY-ROLE-MAPPING",
+      "status": "NOT_VERIFIED_PENDING_NEW_NATIVE_DEFAULTS",
+      "depends_on": [
+        "DEP-APA-GRID-STAIR-APX-LOAD"
+      ]
+    }
+  ],
+  "historicalTasksPreserved": 91
+}

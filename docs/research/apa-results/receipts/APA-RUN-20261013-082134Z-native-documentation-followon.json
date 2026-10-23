@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:a22d6af503b1884f695b85427bb335e6d086fac52a432167326bd7009e277321",
+  "index_commit_sha": "b2145ff696bc4cc0928dc75a672fab3002d54f25",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "b2145ff696bc4cc0928dc75a672fab3002d54f25",
+  "report_path": "docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-082134Z-native-documentation-followon/REPORT.md",
+  "report_sha256": "d0ca77e41784bdfda109e86d48f2d40f5f702ee2cba565a9ab1aaad0da85d9f3",
+  "run_id": "APA-RUN-20261013-082134Z-native-documentation-followon",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

@@ -1,0 +1,13 @@
+{
+  "axisId": "APA-A",
+  "guidSHA256": "1d18e50d5c700ab6dae99756d1a20ef377677ab3a672dba7829b0acff06956f3",
+  "coordinate": 71,
+  "sourceHash": "783a01b66eea1b527528def4d2fc68501954dbe34a2be04a9072185e14bcb71f",
+  "status": "READBACK_BOUND_SAME_GUID",
+  "graphOperation": "SetGDLParametersOfElements",
+  "lengthParameter": "AC_Length",
+  "angleParameter": "AC_Angle",
+  "sdkMemoAngleUnits": "RADIANS",
+  "existingGDLChangeAngleUnits": "DEGREES",
+  "retainedGraphExecutor": "EXISTING_SCENEWRITER_SQLITE"
+}

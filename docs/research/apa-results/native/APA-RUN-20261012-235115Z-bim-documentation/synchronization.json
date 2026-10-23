@@ -1,0 +1,191 @@
+{
+  "status": "LIVE_MODEL_SPECIFICATION_SYNC_PASS",
+  "delta": {
+    "status": "BIM_FACTS_UPDATED",
+    "beforeVersion": "2126b02d805bae95cc47ac44b8f3856f5052ee5bf56f15f204e0e68d2bd87a13",
+    "afterVersion": "5230750bf868c8e39c8e3982e788fa986e9ee71365063ad9664259e121e3a639",
+    "changedGuids": [
+      "id-sha256:efd26943ca1678f8c9fd",
+      "id-sha256:e082e6637458b40def2f"
+    ],
+    "changedNativeModelGuids": [
+      "id-sha256:e082e6637458b40def2f"
+    ],
+    "changedDrawingFactGuids": [
+      "id-sha256:efd26943ca1678f8c9fd",
+      "id-sha256:e082e6637458b40def2f"
+    ],
+    "addedGuids": [],
+    "removedGuids": [],
+    "nativeDrawingRegeneration": "REQUIRES_NATIVE_REBUILD_AND_INDEPENDENT_READBACK"
+  },
+  "testWallBefore": {
+    "guid": "id-sha256:e082e6637458b40def2f",
+    "nativeType": "Wall",
+    "count": 1,
+    "storyIndex": 0,
+    "storyElevationMeters": 0,
+    "referenceGeometry": {
+      "kind": "WallReferenceLine",
+      "begin": {
+        "x": 43,
+        "y": 44
+      },
+      "end": {
+        "x": 44,
+        "y": 44
+      },
+      "arcAngle": 0,
+      "referenceLineLocation": 1,
+      "offset": 0,
+      "bottomOffsetFromHomeStory": 0,
+      "height": 1,
+      "thickness": 0.1,
+      "flipped": true
+    },
+    "resultantBoundsMeters": [
+      [
+        43.15,
+        44
+      ],
+      [
+        43.95,
+        44.05
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "relationships": {},
+    "quantities": {
+      "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+      "surfaceAreaSquareMeters": 2.069999999999982,
+      "volumeCubicMeters": 0.08499999999999552,
+      "bodyCount": 1,
+      "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+    },
+    "bodySignature": "c264b193955c0bb975a64518ecfce82ee08b88617857d81bf65c8bbe98dd05d1",
+    "floorPlanStatus": "NATIVE_CUT_FILL_NOT_AVAILABLE",
+    "material": {
+      "nativeField": "wall.structure",
+      "attributeType": 12,
+      "attributeIndex": 10,
+      "guid": "id-sha256:460ab9cf8caf48c17c0c",
+      "name": "Железобетон - Конструкционный",
+      "defaultSurface": {
+        "nativeField": "buildingMaterial.cutMaterial",
+        "attributeType": 5,
+        "attributeIndex": 4,
+        "guid": "id-sha256:547d736d45b5e8718116",
+        "name": "Бетон - 02"
+      }
+    },
+    "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+    "floorPlanPolygons": []
+  },
+  "testWallAfter": {
+    "guid": "id-sha256:e082e6637458b40def2f",
+    "nativeType": "Wall",
+    "count": 1,
+    "storyIndex": 0,
+    "storyElevationMeters": 0,
+    "referenceGeometry": {
+      "kind": "WallReferenceLine",
+      "begin": {
+        "x": 43,
+        "y": 44
+      },
+      "end": {
+        "x": 44,
+        "y": 44
+      },
+      "arcAngle": 0,
+      "referenceLineLocation": 1,
+      "offset": 0,
+      "bottomOffsetFromHomeStory": 0,
+      "height": 1.2,
+      "thickness": 0.1,
+      "flipped": true
+    },
+    "resultantBoundsMeters": [
+      [
+        43.15,
+        44
+      ],
+      [
+        43.95,
+        44.05
+      ],
+      [
+        0,
+        1.2
+      ]
+    ],
+    "relationships": {},
+    "quantities": {
+      "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+      "surfaceAreaSquareMeters": 2.44999999999998,
+      "volumeCubicMeters": 0.10199999999999676,
+      "bodyCount": 1,
+      "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+    },
+    "bodySignature": "b7f4cf71a8c6b28b14e8905a39112e81ce7b975e7edb56c5eae193859023c98b",
+    "floorPlanStatus": "NATIVE_CUT_FILL_AVAILABLE",
+    "material": {
+      "nativeField": "wall.structure",
+      "attributeType": 12,
+      "attributeIndex": 10,
+      "guid": "id-sha256:460ab9cf8caf48c17c0c",
+      "name": "Железобетон - Конструкционный",
+      "defaultSurface": {
+        "nativeField": "buildingMaterial.cutMaterial",
+        "attributeType": 5,
+        "attributeIndex": 4,
+        "guid": "id-sha256:547d736d45b5e8718116",
+        "name": "Бетон - 02"
+      }
+    },
+    "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+    "floorPlanPolygons": [
+      {
+        "coordinates": [
+          {
+            "x": 44,
+            "y": 44.050000006
+          },
+          {
+            "x": 43.149999992,
+            "y": 44.050000006
+          },
+          {
+            "x": 43.149999992,
+            "y": 43.950000003
+          },
+          {
+            "x": 44,
+            "y": 43.950000003
+          },
+          {
+            "x": 44,
+            "y": 44.050000006
+          }
+        ]
+      }
+    ]
+  },
+  "original109Retained": true,
+  "nativeCollisionResponse": {
+    "collisions": []
+  },
+  "nativePlanCutFillCountBefore": 15,
+  "nativePlanCutFillCountAfter": 16,
+  "nativeDrawingVisualCoordinates": "NOT_VERIFIED",
+  "refreshMode": "Explicit refresh_package call through the existing SceneWriter; no background watcher. Native database regeneration and owner links verified after modification and Save/Open. Full vertical drawn coordinate synchronization remains NOT_VERIFIED.",
+  "journalReconciliations": [
+    "Initial Section creation rejected APIERR_BADDATABASE; independent readback proved no effect. New corrected scenario ran only after reconciliation.",
+    "A local circular-reference validation failure dispatched no Create; independently verified before corrected scenario.",
+    "Initial Elevation activation and successful new test Wall modification had strict verification failures; no blind retry. Independent readback reconciled outcomes. Original ledger events remain historical PARTIAL_OR_UNKNOWN_OUTCOME.",
+    "Save/Open completed successfully. Final public adapter refresh was performed sequentially after Open and verified against the saved model."
+  ]
+}

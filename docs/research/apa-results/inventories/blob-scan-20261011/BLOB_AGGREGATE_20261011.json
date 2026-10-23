@@ -1,0 +1,1039 @@
+{
+  "schema": "APA_BRANCH_BLOB_AGGREGATE_V1",
+  "source_snapshot": "BRANCH_HEADS_20261010.json",
+  "snapshot_captured_at": "2026-10-10T10:30:11.098Z",
+  "generated_at_utc": "2026-10-11T00:09:14.002Z",
+  "repository": "dvikt33-ux/safe-bim-layer",
+  "scope": "Frozen 72 branches (69 distinct head SHA) as of 2026-10-10 snapshot; not current refs",
+  "sources": [
+    {
+      "path": "docs/research/apa-results/inventories/blob-scan-20261011/BATCH_01.json",
+      "git_blob_sha": "ed4847575f1dfe85ee143dab2abe561e66b8ba09",
+      "sha_count": 10
+    },
+    {
+      "path": "docs/research/apa-results/inventories/blob-scan-20261011/BATCH_02.json",
+      "git_blob_sha": "5c872e1013fc4a8962d3230005df4c83ad675d4c",
+      "sha_count": 10
+    },
+    {
+      "path": "docs/research/apa-results/inventories/blob-scan-20261011/BATCH_03.json",
+      "git_blob_sha": "44c88c809ab86f5e06175eac4cd4fc114c064cf1",
+      "sha_count": 10
+    },
+    {
+      "path": "docs/research/apa-results/inventories/blob-scan-20261011/BATCH_04.json",
+      "git_blob_sha": "da2f6a9646cd2157b4422fb344ae5c1c259f383a",
+      "sha_count": 10
+    },
+    {
+      "path": "docs/research/apa-results/inventories/blob-scan-20261011/BATCH_05.json",
+      "git_blob_sha": "532962c8faab49e4a2e917201cde04b935714b28",
+      "sha_count": 10
+    },
+    {
+      "path": "docs/research/apa-results/inventories/blob-scan-20261011/BATCH_06.json",
+      "git_blob_sha": "5765eb0133f82cb9d9a8c0ff036c6735f363ddf6",
+      "sha_count": 10
+    },
+    {
+      "path": "docs/research/apa-results/inventories/blob-scan-20261011/BATCH_07.json",
+      "git_blob_sha": "c7fecde954f9b24b506c0c2e126b6767a86c3ba0",
+      "sha_count": 9
+    }
+  ],
+  "counts": {
+    "snapshot_branch_names": 72,
+    "distinct_head_sha": 69,
+    "head_trees_fetched": 69,
+    "non_truncated_head_trees": 69,
+    "blob_occurrences": 10559,
+    "distinct_blob_sha": 1414,
+    "distinct_blob_paths": 1455,
+    "distinct_path_sha_pairs": 1584,
+    "sha_in_only_one_head": 278,
+    "sha_in_multiple_heads": 1136,
+    "identical_blob_across_different_paths": 44,
+    "paths_with_multiple_blob_sha": 84
+  },
+  "head_summary": [
+    {
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "branch_names": [
+        "research/archicad29-tapir159-expansion"
+      ],
+      "blob_count": 85,
+      "globally_exclusive_sha_count": 71,
+      "globally_exclusive_blob_examples": [
+        "research/archicad29-tapir159/00_master/project_profile_v0_1.schema.json",
+        "research/archicad29-tapir159/00_master/README.md",
+        "research/archicad29-tapir159/00_master/RESEARCH_MASTER_AUDIT.md",
+        "research/archicad29-tapir159/01_missing_data_audit/MISSING_DATA_AUDIT_PASS_01_10.md",
+        "research/archicad29-tapir159/01_missing_data_audit/MISSING_DATA_AUDIT_PASS_11_20.md",
+        "research/archicad29-tapir159/01_missing_data_audit/README.md",
+        "research/archicad29-tapir159/02_tapir_159_delta/README.md",
+        "research/archicad29-tapir159/02_tapir_159_delta/TAPIR_159_DELTA.md",
+        "research/archicad29-tapir159/03_archicad_api_contracts/COMPOSITE_STRUCTURES_RESEARCH_PASSES_01_18.md",
+        "research/archicad29-tapir159/03_archicad_api_contracts/FLAT_ROOF_PARAPET_RESEARCH_PASSES_01_15.md"
+      ],
+      "tree_entries": 100,
+      "complete": true
+    },
+    {
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.3-20261006"
+      ],
+      "blob_count": 57,
+      "globally_exclusive_sha_count": 28,
+      "globally_exclusive_blob_examples": [
+        "knowledge/detail-machine/CURRENT",
+        "knowledge/detail-machine/releases/v2.4/AUDIT_v2.4.json",
+        "knowledge/detail-machine/releases/v2.4/BRAAS_ROOF_DETAILS_SOURCE_VERIFY_v2.4.json",
+        "knowledge/detail-machine/releases/v2.4/detail-machine-v2.4-systematized.tar.gz",
+        "knowledge/detail-machine/releases/v2.4/manifest_v2.4.json",
+        "knowledge/detail-machine/releases/v2.4/ORIGINAL_PACKAGE_SHA256.txt",
+        "knowledge/detail-machine/releases/v2.4/README_v2.4.md",
+        "knowledge/detail-machine/releases/v2.4/RESTORE.md",
+        "knowledge/detail-machine/releases/v2.4/SUMMARY_v2.4.json",
+        "knowledge/detail-machine/releases/v2.4/SYSTEMATIZED_ARCHIVE_SHA256.txt"
+      ],
+      "tree_entries": 68,
+      "complete": true
+    },
+    {
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "branch_names": [
+        "arena/runtime-hardening-v1"
+      ],
+      "blob_count": 99,
+      "globally_exclusive_sha_count": 19,
+      "globally_exclusive_blob_examples": [
+        "bimexec/docs/H1_ADAPTER_PARITY.md",
+        "bimexec/probes/ac29_contract.py",
+        "bimexec/probes/backends_v13.py",
+        "bimexec/probes/probe_t2_connections_v13.py",
+        "bimexec/probes/probe_t2_live_v13.py",
+        "bimexec/reference/bimexec/adapters.py",
+        "bimexec/reference/bimexec/tapir_raw.py",
+        "bimexec/reference/README.md",
+        "bimexec/tests/h1_evidence/py_compile.txt",
+        "bimexec/tests/h1_evidence/README.md"
+      ],
+      "tree_entries": 114,
+      "complete": true
+    },
+    {
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "branch_names": [
+        "work/stage5-hosted-window"
+      ],
+      "blob_count": 586,
+      "globally_exclusive_sha_count": 18,
+      "globally_exclusive_blob_examples": [
+        "closed_loop/live_wall.py",
+        "closed_loop/live_window.py",
+        "closed_loop/models.py",
+        "closed_loop/stage5_audit_pack.py",
+        "closed_loop/stage5_offline_evidence.py",
+        "closed_loop/stage5_window_scenario.py",
+        "closed_loop/wall_attempts.py",
+        "closed_loop/window_attempts.py",
+        "docs/CURRENT_STATUS.md",
+        "docs/INDEX.md"
+      ],
+      "tree_entries": 700,
+      "complete": true
+    },
+    {
+      "head_sha": "9b076792124d99d67dcc0f01554b4834fc3ed8cb",
+      "branch_names": [
+        "research/apa-verified-results-hub-20261010"
+      ],
+      "blob_count": 38,
+      "globally_exclusive_sha_count": 17,
+      "globally_exclusive_blob_examples": [
+        "docs/research/apa-results/2026-10-10-research-register.md",
+        "docs/research/apa-results/AGENT_PROTOCOL.md",
+        "docs/research/apa-results/ARTIFACT_REGISTER.md",
+        "docs/research/apa-results/AUTOMATION_AND_GATES.md",
+        "docs/research/apa-results/BRANCH_REGISTRY.md",
+        "docs/research/apa-results/CURRENT_BLOCKERS.md",
+        "docs/research/apa-results/CURRENT_STATUS.md",
+        "docs/research/apa-results/MASTER_PLAN.md",
+        "docs/research/apa-results/PUBLISHING_PROTOCOL.md",
+        "docs/research/apa-results/README.md"
+      ],
+      "tree_entries": 49,
+      "complete": true
+    },
+    {
+      "head_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "branch_names": [
+        "arena/plinth-grade-runtime-audit-20260927"
+      ],
+      "blob_count": 113,
+      "globally_exclusive_sha_count": 13,
+      "globally_exclusive_blob_examples": [
+        ".gitignore",
+        "controller/app.py",
+        "controller/client.py",
+        "launcher.py",
+        "palette/RFIX/Safe_BIM_Palette.html",
+        "safe_bim_ipc.py",
+        "safe_bim_layer.py",
+        "safe_bim_operations.py",
+        "safe_bim_runtime.py",
+        "safe_bim_service.py"
+      ],
+      "tree_entries": 132,
+      "complete": true
+    },
+    {
+      "head_sha": "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+      "branch_names": [
+        "feature/apa-slack-event-coordinator-20261010"
+      ],
+      "blob_count": 380,
+      "globally_exclusive_sha_count": 8,
+      "globally_exclusive_blob_examples": [
+        ".github/workflows/apa-sync-offline.yml",
+        "docs/APA_SLACK_COORDINATOR.md",
+        "scripts/apa_sync/coordinator.py",
+        "scripts/apa_sync/requirements.txt",
+        "scripts/apa_sync/slack_app_manifest.yml",
+        "scripts/apa_sync/socket_mode.py",
+        "scripts/apa_sync/step_sync.py",
+        "tests/test_apa_slack_sync.py"
+      ],
+      "tree_entries": 417,
+      "complete": true
+    },
+    {
+      "head_sha": "27906e2a1370146a8d740f02384ab02a584ce918",
+      "branch_names": [
+        "feature/chat-bridge-wall-write-mvp"
+      ],
+      "blob_count": 183,
+      "globally_exclusive_sha_count": 8,
+      "globally_exclusive_blob_examples": [
+        "sync_bridge/archicad_context_provider.py",
+        "sync_bridge/bridge.py",
+        "sync_bridge/host.py",
+        "sync_bridge/store.py",
+        "sync_bridge/wall_write.py",
+        "tests_sync/test_s2_5_runtime_bootstrap.py",
+        "tests_sync/test_wall_write_host_mvp.py",
+        "tests_sync/test_wall_write_mvp.py"
+      ],
+      "tree_entries": 208,
+      "complete": true
+    },
+    {
+      "head_sha": "1e87381693ef6467dfacd97374b8a990687881f7",
+      "branch_names": [
+        "prototype/s2.4-archicad-context-provider-20260929"
+      ],
+      "blob_count": 170,
+      "globally_exclusive_sha_count": 8,
+      "globally_exclusive_blob_examples": [
+        "bimexec/probes/backends.py",
+        "sync_bridge/__main__.py",
+        "sync_bridge/instance_lock.py",
+        "sync_bridge/store.py",
+        "tests_sync/closing.py",
+        "tests_sync/test_s1_2_ownership.py",
+        "tests_sync/test_s1_3_liveness.py",
+        "tests_sync/test_s2_3_context_roundtrip.py"
+      ],
+      "tree_entries": 195,
+      "complete": true
+    },
+    {
+      "head_sha": "faf2fd8adcfd3329ae77a137b37f739a9a462225",
+      "branch_names": [
+        "work/stage4-live-hardening"
+      ],
+      "blob_count": 569,
+      "globally_exclusive_sha_count": 8,
+      "globally_exclusive_blob_examples": [
+        "closed_loop/live_wall.py",
+        "closed_loop/stage4_live_scenario.py",
+        "closed_loop/stage4_offline_evidence.py",
+        "docs/CURRENT_STATUS.md",
+        "docs/INDEX.md",
+        "README.md",
+        "scripts/stage4_audit_pack.py",
+        "tests_stage4_live/test_audit_integration.py"
+      ],
+      "tree_entries": 681,
+      "complete": true
+    },
+    {
+      "head_sha": "751fdfbc1be929f3da601e1094f74fed2f02b322",
+      "branch_names": [
+        "chatgpt/accelerator-floor-offline-20261009"
+      ],
+      "blob_count": 361,
+      "globally_exclusive_sha_count": 6,
+      "globally_exclusive_blob_examples": [
+        ".github/workflows/archicad-contracts.yml",
+        "docs/archicad-accelerator-floor-offline-20261009.md",
+        "scripts/archicad_accelerator_offline_benchmark.py",
+        "scripts/archicad_bim_graph.py",
+        "scripts/archicad_typical_floor_graph.py",
+        "tests/test_archicad_typical_floor_graph.py"
+      ],
+      "tree_entries": 393,
+      "complete": true
+    },
+    {
+      "head_sha": "2ec5c001544a0eede73daa99c618ba53448f226c",
+      "branch_names": [
+        "chatgpt/construction-detail-library-v2.2-20261006"
+      ],
+      "blob_count": 26,
+      "globally_exclusive_sha_count": 6,
+      "globally_exclusive_blob_examples": [
+        "construction_details/ACTIVE_RELEASE",
+        "construction_details/index/source_counts.json",
+        "construction_details/index/systems.json",
+        "construction_details/README.md",
+        "construction_details/releases/v2.2/machine-state-v2.2.tar.gz.b64",
+        "construction_details/tools/unpack_release.py"
+      ],
+      "tree_entries": 34,
+      "complete": true
+    },
+    {
+      "head_sha": "743b791504eb92805a18edf78d20b958a6220710",
+      "branch_names": [
+        "chatgpt/project-revision-consolidation-20261006"
+      ],
+      "blob_count": 20,
+      "globally_exclusive_sha_count": 6,
+      "globally_exclusive_blob_examples": [
+        "docs/CLOSED_LOOP_MIGRATION_BUNDLE_1.md",
+        "docs/closed_loop_migration_bundle_1.v1.json",
+        "docs/project_capability_migration_matrix.v1.json",
+        "docs/PROJECT_REVISION_CONSOLIDATION_2026-10-06.md",
+        "docs/stage4_live_hardening_acceptance.v1.json",
+        "docs/STAGE4_LIVE_HARDENING_REGRESSION_CONTRACT.md"
+      ],
+      "tree_entries": 23,
+      "complete": true
+    },
+    {
+      "head_sha": "1b3a43479343d65ce1a63d181c5b83f683530050",
+      "branch_names": [
+        "feature/somestuff-syncguids-source-20261009"
+      ],
+      "blob_count": 27,
+      "globally_exclusive_sha_count": 6,
+      "globally_exclusive_blob_examples": [
+        "integrations/somestuff-syncguids/patches/registrar.diff",
+        "integrations/somestuff-syncguids/prepare_build_ac29.ps1",
+        "integrations/somestuff-syncguids/README.md",
+        "integrations/somestuff-syncguids/smoke_syncguids.py",
+        "integrations/somestuff-syncguids/Sources/AddOn/json_commands/SyncGuidsCommand.cpp",
+        "integrations/somestuff-syncguids/Sources/AddOn/json_commands/SyncGuidsCommand.hpp"
+      ],
+      "tree_entries": 40,
+      "complete": true
+    },
+    {
+      "head_sha": "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+      "branch_names": [
+        "archicad-capability-registry"
+      ],
+      "blob_count": 19,
+      "globally_exclusive_sha_count": 5,
+      "globally_exclusive_blob_examples": [
+        "docs/ARCHICAD_CAPABILITY_REGISTRY.md",
+        "docs/ARCHICAD_CAPABILITY_ROADMAP.md",
+        "docs/ARCHICAD_MODELING_STANDARD.md",
+        "tests/smoke/basic_slab_favorite.py",
+        "tests/smoke/native_window_door_continuous_wall.py"
+      ],
+      "tree_entries": 24,
+      "complete": true
+    },
+    {
+      "head_sha": "81344925f06523bb60ee300f48af458ab0288938",
+      "branch_names": [
+        "chatgpt/archicad-modeling-standard-v1"
+      ],
+      "blob_count": 33,
+      "globally_exclusive_sha_count": 5,
+      "globally_exclusive_blob_examples": [
+        "bim_qa.py",
+        "docs/BIM_QA_VALIDATION.md",
+        "docs/BIM_QA.md",
+        "tests/test_bim_qa_policy_v11.py",
+        "tests/test_story_tapir_adapters.py"
+      ],
+      "tree_entries": 38,
+      "complete": true
+    },
+    {
+      "head_sha": "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+      "branch_names": [
+        "chatgpt/mailbox-graph-host-integration-20261009"
+      ],
+      "blob_count": 352,
+      "globally_exclusive_sha_count": 5,
+      "globally_exclusive_blob_examples": [
+        ".github/workflows/archicad-contracts.yml",
+        "scripts/archicad_bim_graph.py",
+        "tests/test_archicad_bim_graph.py",
+        "tests/test_archicad_mailbox_graph_adapter.py",
+        "tests/test_archicad_wall_host_integration.py"
+      ],
+      "tree_entries": 384,
+      "complete": true
+    },
+    {
+      "head_sha": "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+      "branch_names": [
+        "research/apa-tn-gdl-create-01-native-probe-20261009"
+      ],
+      "blob_count": 377,
+      "globally_exclusive_sha_count": 5,
+      "globally_exclusive_blob_examples": [
+        "docs/research/APA_TN-GDL-CREATE-01_BLOCKER1_AUDIT_2026-10-09.md",
+        "docs/research/APA_TN-GDL-CREATE-01_CHECKPOINT_2026-10-09.md",
+        "docs/research/patches/tapir-1.5.10-blocker1-readonly-diagnostic.patch",
+        "scripts/verify_apa_blocker1_patch.py",
+        "tests/test_apa_blocker1_patch.py"
+      ],
+      "tree_entries": 414,
+      "complete": true
+    },
+    {
+      "head_sha": "8881c46c222a7adaf6372941c185db4ac67598e1",
+      "branch_names": [
+        "work/planning-engine-v0"
+      ],
+      "blob_count": 91,
+      "globally_exclusive_sha_count": 5,
+      "globally_exclusive_blob_examples": [
+        "docs/examples/planning_engine_v0/house-inputs.json",
+        "docs/PLANNING_ENGINE_V0.md",
+        "examples/planning_house_v0.py",
+        "planning_engine.py",
+        "tests/test_planning_engine.py"
+      ],
+      "tree_entries": 106,
+      "complete": true
+    },
+    {
+      "head_sha": "14bc0d2a37a751029381e506809025eb434aa721",
+      "branch_names": [
+        "arena/runtime-safety-fix-ac01"
+      ],
+      "blob_count": 121,
+      "globally_exclusive_sha_count": 4,
+      "globally_exclusive_blob_examples": [
+        "safe_bim_layer.py",
+        "safe_bim_operations.py",
+        "safe_bim_verification.py",
+        "tests_safety/fake_bim.py"
+      ],
+      "tree_entries": 141,
+      "complete": true
+    },
+    {
+      "head_sha": "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+      "branch_names": [
+        "feature/gpt-mailbox-write-path-20261005"
+      ],
+      "blob_count": 182,
+      "globally_exclusive_sha_count": 3,
+      "globally_exclusive_blob_examples": [
+        "sync_bridge/__main__.py",
+        "sync_bridge/write_bridge.py",
+        "tests_sync/test_s2_7_mailbox_write.py"
+      ],
+      "tree_entries": 207,
+      "complete": true
+    },
+    {
+      "head_sha": "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+      "branch_names": [
+        "work/stage4-performance-pass"
+      ],
+      "blob_count": 573,
+      "globally_exclusive_sha_count": 3,
+      "globally_exclusive_blob_examples": [
+        "closed_loop/live_wall.py",
+        "docs/CURRENT_STATUS.md",
+        "docs/INDEX.md"
+      ],
+      "tree_entries": 685,
+      "complete": true
+    },
+    {
+      "head_sha": "c6ab4749e8784cc65170167d166daa6cc219a931",
+      "branch_names": [
+        "arena/fix-house-offline-audit-f7d38af",
+        "arena/tapir159-compat-geometry-c6ab474"
+      ],
+      "blob_count": 125,
+      "globally_exclusive_sha_count": 2,
+      "globally_exclusive_blob_examples": [
+        "safe_bim_house_primitives.py",
+        "tests_house_primitives/test_house_primitives.py"
+      ],
+      "tree_entries": 146,
+      "complete": true
+    },
+    {
+      "head_sha": "f7d38af825de57fc57660eeddf1186cc5b21ac71",
+      "branch_names": [
+        "arena/house-primitives-offline-ebbe779"
+      ],
+      "blob_count": 125,
+      "globally_exclusive_sha_count": 2,
+      "globally_exclusive_blob_examples": [
+        "safe_bim_house_primitives.py",
+        "tests_house_primitives/test_house_primitives.py"
+      ],
+      "tree_entries": 146,
+      "complete": true
+    },
+    {
+      "head_sha": "53d6b638b4e638c669ce169196088c3b3a5cdc30",
+      "branch_names": [
+        "audit/arena-reconciliation-gpt-counter-audit-20260928"
+      ],
+      "blob_count": 39,
+      "globally_exclusive_sha_count": 2,
+      "globally_exclusive_blob_examples": [
+        "ARENA_RECONCILIATION_GPT_COUNTER_AUDIT_20260928.md",
+        "audit/arena-full-system-audit-20260928/TAPIR_1.5.9_COMMAND_INVENTORY.md"
+      ],
+      "tree_entries": 47,
+      "complete": true
+    },
+    {
+      "head_sha": "bf860e1557b9d54318c022191cdc1cef4a84e2d7",
+      "branch_names": [
+        "docs/chat-first-work-minimal"
+      ],
+      "blob_count": 21,
+      "globally_exclusive_sha_count": 2,
+      "globally_exclusive_blob_examples": [
+        ".github/pull_request_template.md",
+        "docs/OPERATING_MODEL.md"
+      ],
+      "tree_entries": 28,
+      "complete": true
+    },
+    {
+      "head_sha": "ee3d1a8e7d7d2bd7bd8ee3bc27cdac98c7f8decd",
+      "branch_names": [
+        "research/apa-archicad29-independent-audit-20261010"
+      ],
+      "blob_count": 23,
+      "globally_exclusive_sha_count": 2,
+      "globally_exclusive_blob_examples": [
+        "AGENTS.md",
+        "RESEARCH_INDEX.md"
+      ],
+      "tree_entries": 30,
+      "complete": true
+    },
+    {
+      "head_sha": "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+      "branch_names": [
+        "work/stage2-orchestrator-skeleton"
+      ],
+      "blob_count": 118,
+      "globally_exclusive_sha_count": 2,
+      "globally_exclusive_blob_examples": [
+        "closed_loop/models.py",
+        "closed_loop/orchestrator.py"
+      ],
+      "tree_entries": 143,
+      "complete": true
+    },
+    {
+      "head_sha": "02ed7a8a5a6e199bdfcb7cc7c7836dd7038deacb",
+      "branch_names": [
+        "chatgpt-write-test"
+      ],
+      "blob_count": 11,
+      "globally_exclusive_sha_count": 1,
+      "globally_exclusive_blob_examples": [
+        "chatgpt-write-test.txt"
+      ],
+      "tree_entries": 13,
+      "complete": true
+    },
+    {
+      "head_sha": "ebe46536c85111248234235c8e7ac8cbd2bffac5",
+      "branch_names": [
+        "chatgpt/detail-machine-db-v2.2-20261006"
+      ],
+      "blob_count": 30,
+      "globally_exclusive_sha_count": 1,
+      "globally_exclusive_blob_examples": [
+        "knowledge/detail-machine/CURRENT"
+      ],
+      "tree_entries": 38,
+      "complete": true
+    },
+    {
+      "head_sha": "7bd2f7076933e31cdf6d24855ca703c0c6e67545",
+      "branch_names": [
+        "chatgpt/minimal-archicad-inventory"
+      ],
+      "blob_count": 15,
+      "globally_exclusive_sha_count": 1,
+      "globally_exclusive_blob_examples": [
+        "archicad_inventory.py"
+      ],
+      "tree_entries": 18,
+      "complete": true
+    },
+    {
+      "head_sha": "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+      "branch_names": [
+        "chatgpt/tapir-1510-offline-preflight-20261009"
+      ],
+      "blob_count": 353,
+      "globally_exclusive_sha_count": 1,
+      "globally_exclusive_blob_examples": [
+        ".github/workflows/archicad-contracts.yml"
+      ],
+      "tree_entries": 385,
+      "complete": true
+    },
+    {
+      "head_sha": "f02a167eb73cb149713cf5e613911b144fce5be2",
+      "branch_names": [
+        "chatgpt/whole-scene-v1-20261009"
+      ],
+      "blob_count": 357,
+      "globally_exclusive_sha_count": 1,
+      "globally_exclusive_blob_examples": [
+        ".github/workflows/archicad-contracts.yml"
+      ],
+      "tree_entries": 389,
+      "complete": true
+    },
+    {
+      "head_sha": "88cf532c70362b3f404aa5bae2c640527fca5616",
+      "branch_names": [
+        "chatgpt/working-first-development-rule"
+      ],
+      "blob_count": 14,
+      "globally_exclusive_sha_count": 1,
+      "globally_exclusive_blob_examples": [
+        "docs/OPERATING_MODEL.md"
+      ],
+      "tree_entries": 17,
+      "complete": true
+    },
+    {
+      "head_sha": "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+      "branch_names": [
+        "feature/gpt-direct-bridge-20261002"
+      ],
+      "blob_count": 181,
+      "globally_exclusive_sha_count": 1,
+      "globally_exclusive_blob_examples": [
+        "scripts/start_gpt_archicad_bridge.py"
+      ],
+      "tree_entries": 206,
+      "complete": true
+    },
+    {
+      "head_sha": "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+      "branch_names": [
+        "prototype/s2.5-runtime-bootstrap-20260929"
+      ],
+      "blob_count": 173,
+      "globally_exclusive_sha_count": 1,
+      "globally_exclusive_blob_examples": [
+        "sync_bridge/host.py"
+      ],
+      "tree_entries": 198,
+      "complete": true
+    },
+    {
+      "head_sha": "39231a1e63ab91ff05cabe484bf737c176434a44",
+      "branch_names": [
+        "research/apa-tn-gdl-create-01-blocker1-audit-20261009"
+      ],
+      "blob_count": 374,
+      "globally_exclusive_sha_count": 1,
+      "globally_exclusive_blob_examples": [
+        "docs/research/APA_TN-GDL-CREATE-01_BLOCKER1_AUDIT_2026-10-09.md"
+      ],
+      "tree_entries": 410,
+      "complete": true
+    },
+    {
+      "head_sha": "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+      "branch_names": [
+        "arena/fix-wall-readback-z-14bc0d2"
+      ],
+      "blob_count": 122,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 142,
+      "complete": true
+    },
+    {
+      "head_sha": "c55f404829e4e11004ea5c59c8b3aec18b663866",
+      "branch_names": [
+        "arena/t0-probes"
+      ],
+      "blob_count": 89,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 103,
+      "complete": true
+    },
+    {
+      "head_sha": "181ca75229d9fd949797dbfa607c5245b121aaec",
+      "branch_names": [
+        "audit/arena-full-system-audit-20260928"
+      ],
+      "blob_count": 36,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 44,
+      "complete": true
+    },
+    {
+      "head_sha": "59239ceac83529c1fb6ad5d97fdf3d74edacc848",
+      "branch_names": [
+        "audit/gpt-counter-audit-arena-20260928"
+      ],
+      "blob_count": 38,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 46,
+      "complete": true
+    },
+    {
+      "head_sha": "b7fa4d304263f6dccc9edc11f607c26942ba695c",
+      "branch_names": [
+        "audit/live-r0-r4-20260928"
+      ],
+      "blob_count": 24,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 30,
+      "complete": true
+    },
+    {
+      "head_sha": "f8b82ed3008c4669faf1424958b30f43aa4b5d92",
+      "branch_names": [
+        "chatgpt/closed-loop-orchestrator-v1"
+      ],
+      "blob_count": 30,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 39,
+      "complete": true
+    },
+    {
+      "head_sha": "4559bf13a2b17dd525cf91ed00521cabbdaf5a0c",
+      "branch_names": [
+        "chatgpt/detail-machine-v2.2"
+      ],
+      "blob_count": 47,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 60,
+      "complete": true
+    },
+    {
+      "head_sha": "3cbfc4e379b54d4249badd508fb64c21886ac186",
+      "branch_names": [
+        "chatgpt/detail-machine-v2.3"
+      ],
+      "blob_count": 57,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 71,
+      "complete": true
+    },
+    {
+      "head_sha": "a5eb3eee68817925ecfebb0fb22ab6b8fbe59f03",
+      "branch_names": [
+        "chatgpt/kaiman-exact-v2.4"
+      ],
+      "blob_count": 65,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 80,
+      "complete": true
+    },
+    {
+      "head_sha": "0e7a312d7a7c491d877b6746b275acd0364c97ab",
+      "branch_names": [
+        "chatgpt/kaiman-exact-v2.5"
+      ],
+      "blob_count": 68,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 84,
+      "complete": true
+    },
+    {
+      "head_sha": "c0223e18370e5e3d5205ca401a68d7603b4be120",
+      "branch_names": [
+        "chatgpt/mailbox-wall-local-transfer-20261009"
+      ],
+      "blob_count": 350,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 382,
+      "complete": true
+    },
+    {
+      "head_sha": "99326ff531dfa9cb19c906ee349304fdca92fc52",
+      "branch_names": [
+        "chatgpt/project-intake-stage0-v1"
+      ],
+      "blob_count": 34,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 39,
+      "complete": true
+    },
+    {
+      "head_sha": "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+      "branch_names": [
+        "chatgpt/schema-driven-batch-20261008"
+      ],
+      "blob_count": 348,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 380,
+      "complete": true
+    },
+    {
+      "head_sha": "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+      "branch_names": [
+        "feature/project-accelerator-integration-pr-20261009",
+        "research/apa-20261009-api-mep-batching-audit",
+        "research/apa-20261009-resource-mep-bridges-audit-v1"
+      ],
+      "blob_count": 372,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 408,
+      "complete": true
+    },
+    {
+      "head_sha": "38cfe7feaa756717a9cdb8915f7c701e3d9c4d5f",
+      "branch_names": [
+        "feature/working-archicad-mvp"
+      ],
+      "blob_count": 330,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 361,
+      "complete": true
+    },
+    {
+      "head_sha": "d5695f435a5841d39f0fe69a6424cccc1c8d0a4c",
+      "branch_names": [
+        "main"
+      ],
+      "blob_count": 21,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 28,
+      "complete": true
+    },
+    {
+      "head_sha": "7469b775f2552e41846c86512e87c13cdb864b6b",
+      "branch_names": [
+        "prototype/s2.6-control-surface-20260929"
+      ],
+      "blob_count": 180,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 205,
+      "complete": true
+    },
+    {
+      "head_sha": "246f6768de552acac4110b86a2d8b62672ee3eae",
+      "branch_names": [
+        "research/apa-tn-gdl-create-01-checkpoint-20261009"
+      ],
+      "blob_count": 373,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 409,
+      "complete": true
+    },
+    {
+      "head_sha": "4fedb7cb815f9109755a9174bbae709fa18fdab7",
+      "branch_names": [
+        "research/archicad-full-capability-audit-20260928"
+      ],
+      "blob_count": 30,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 37,
+      "complete": true
+    },
+    {
+      "head_sha": "e6962b612938cc399913246bc7e296f59704772e",
+      "branch_names": [
+        "research/architectural-model-quality-v2"
+      ],
+      "blob_count": 26,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 34,
+      "complete": true
+    },
+    {
+      "head_sha": "7281bab2ec012933cf056d81d26822c017951ad6",
+      "branch_names": [
+        "research/library-system-v3"
+      ],
+      "blob_count": 40,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 49,
+      "complete": true
+    },
+    {
+      "head_sha": "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+      "branch_names": [
+        "work/audit-pack-fix"
+      ],
+      "blob_count": 381,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 454,
+      "complete": true
+    },
+    {
+      "head_sha": "cc838c0fd0e40be7426ea991af54234a35f22544",
+      "branch_names": [
+        "work/constraint-compilation-v0"
+      ],
+      "blob_count": 86,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 99,
+      "complete": true
+    },
+    {
+      "head_sha": "1d4b66ae36d955588dcf2276a3e7b0ccaf6f74ef",
+      "branch_names": [
+        "work/design-engine-stage0"
+      ],
+      "blob_count": 40,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 47,
+      "complete": true
+    },
+    {
+      "head_sha": "e273edbeb5bfd6337856fccf5e8c9834c0273a5a",
+      "branch_names": [
+        "work/design-functional-program-v0"
+      ],
+      "blob_count": 48,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 56,
+      "complete": true
+    },
+    {
+      "head_sha": "3eb33b3c248a19088eb6868ddd997a69fab8d4a7",
+      "branch_names": [
+        "work/design-intent-v0"
+      ],
+      "blob_count": 54,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 63,
+      "complete": true
+    },
+    {
+      "head_sha": "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+      "branch_names": [
+        "work/evidence-storage-lfs"
+      ],
+      "blob_count": 298,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 347,
+      "complete": true
+    },
+    {
+      "head_sha": "c75665feb8029116245dd1ec76733e599ebdc24a",
+      "branch_names": [
+        "work/project-constraint-input-v0"
+      ],
+      "blob_count": 70,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 81,
+      "complete": true
+    },
+    {
+      "head_sha": "6901fe69d834f8d571c53d3bbda57f46d2106943",
+      "branch_names": [
+        "work/project-normative-bundle-v0"
+      ],
+      "blob_count": 79,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 91,
+      "complete": true
+    },
+    {
+      "head_sha": "8cbbab827ee8a1bdde5e7d44ac3d1b06f5b4cc8b",
+      "branch_names": [
+        "work/site-context-model-v0"
+      ],
+      "blob_count": 62,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 72,
+      "complete": true
+    },
+    {
+      "head_sha": "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+      "branch_names": [
+        "work/stage1-v0-regression"
+      ],
+      "blob_count": 78,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 97,
+      "complete": true
+    },
+    {
+      "head_sha": "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+      "branch_names": [
+        "work/stage3-live-wall-closed-loop"
+      ],
+      "blob_count": 262,
+      "globally_exclusive_sha_count": 0,
+      "globally_exclusive_blob_examples": [],
+      "tree_entries": 310,
+      "complete": true
+    }
+  ],
+  "interpretation": [
+    "Exact Git blob SHA identity means exact Git-stored bytes, not semantic equivalence of independent source findings.",
+    "One-head exclusive blob is unique among frozen sampled HEAD trees, not proof of a unique research topic and not a live runtime test.",
+    "Git LFS pointer blob SHA may be hash of pointer file, not external binary; .tar.gz content was not downloaded.",
+    "Current canonical research branch has advanced beyond captured head SHA; compare to canonical current index separately before claiming unpublished results.",
+    "No branches deleted, rebased, merged, or marked fully audited for technical correctness."
+  ]
+}

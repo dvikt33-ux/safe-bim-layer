@@ -1,0 +1,50 @@
+{
+  "status": "G01_WINDOWS_SQLITE_LIFETIME_FIXED",
+  "actionStatus": "PARTIAL_OTHER_GAPS_OPEN",
+  "codeHead": "2b499730ac4c52b70d796f2857fb15d7e3d3d676",
+  "draftPR": 54,
+  "repairedFixtureConnections": 11,
+  "repairedReadonlyDiagnosticConnections": 1,
+  "transactionCommitRollbackPreserved": true,
+  "allExistingAssertionsRetained": true,
+  "forcedGarbageCollection": false,
+  "cleanupErrorsIgnored": false,
+  "localWindows": {
+    "tests": 340,
+    "status": "PASS",
+    "seconds": 57.492
+  },
+  "githubCI": {
+    "status": "PASS",
+    "run": 38191624258,
+    "codeHead": "2b499730ac4c52b70d796f2857fb15d7e3d3d676",
+    "jobs": [
+      {
+        "id": 114625401851,
+        "name": "offline-contracts (ubuntu-latest)",
+        "status": "PASS",
+        "tests": 340,
+        "schemaAndGraphContracts": "PASS",
+        "powerShellSyntax": "PASS"
+      },
+      {
+        "id": 114625402026,
+        "name": "offline-contracts (windows-latest)",
+        "status": "PASS",
+        "tests": 340,
+        "schemaAndGraphContracts": "PASS",
+        "powerShellSyntax": "PASS"
+      }
+    ]
+  },
+  "schemaAndSampleGraphContracts": "PASS",
+  "restrictedWindowsSandbox": "5_WinError5_atomic_temp_state_replacement_denials; same watcher tests pass on host and CI",
+  "baselineHistoricalSQLiteCleanupErrors": 28,
+  "finalHostSQLiteCleanupErrors": 0,
+  "nativeCalls": 0,
+  "plnWrites": 0,
+  "apxWrites": 0,
+  "fullEngineeringAcceptance": "NOT_VERIFIED",
+  "nativeModelAcceptanceRetained": "22primary/48GUID; prior save/reopen and shared system acceptance",
+  "fullRawLogs": "LOCAL_ONLY_UNCHANGED; public statuses/counts/checksums only"
+}

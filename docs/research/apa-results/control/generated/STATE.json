@@ -1,0 +1,412 @@
+{
+  "active": [
+    "APA-P70.A11.S23"
+  ],
+  "artifact_count": 397,
+  "counts": {
+    "BLOCKED": 13,
+    "CLAIMED": 0,
+    "DISPATCHABLE_NOW": 19,
+    "DONE_PUBLISHED": 38,
+    "EXPIRED_LEASES": 0,
+    "HELD_BY_DEPENDENCIES": 33,
+    "IN_PROGRESS": 1,
+    "PARTIAL": 18,
+    "READY": 34,
+    "SUPERSEDED": 0
+  },
+  "development": {
+    "actions": [
+      {
+        "done": 2,
+        "id": "APA-P70.A01",
+        "status": "PARTIAL",
+        "title": "Единая база существующих возможностей и доказательств",
+        "total": 3
+      },
+      {
+        "done": 3,
+        "id": "APA-P70.A02",
+        "status": "PARTIAL",
+        "title": "Требования, нормативы и библиотека конкретного проекта",
+        "total": 4
+      },
+      {
+        "done": 4,
+        "id": "APA-P70.A03",
+        "status": "DONE_PUBLISHED",
+        "title": "Планировка и редактируемая нативная BIM-модель",
+        "total": 4
+      },
+      {
+        "done": 3,
+        "id": "APA-P70.A04",
+        "status": "DONE_PUBLISHED",
+        "title": "Конструктивные узлы, кладка, фасады и сопряжения",
+        "total": 3
+      },
+      {
+        "done": 0,
+        "id": "APA-P70.A05",
+        "status": "WAITING",
+        "title": "Расчёт несущих систем и инженерная обратная связь",
+        "total": 3
+      },
+      {
+        "done": 0,
+        "id": "APA-P70.A06",
+        "status": "WAITING",
+        "title": "MEP и междисциплинарная координация",
+        "total": 2
+      },
+      {
+        "done": 0,
+        "id": "APA-P70.A07",
+        "status": "WAITING",
+        "title": "Ведомости, чертежи, нормативная проверка и выпуск",
+        "total": 3
+      },
+      {
+        "done": 1,
+        "id": "APA-P70.A08",
+        "status": "PARTIAL",
+        "title": "Сквозная приёмка и расширение без переписывания ядра",
+        "total": 5
+      },
+      {
+        "done": 1,
+        "id": "APA-P70.A09",
+        "status": "DONE_PUBLISHED",
+        "title": "Геометрия и точность после приёмки ядра",
+        "total": 1
+      },
+      {
+        "done": 0,
+        "id": "APA-P70.A10",
+        "status": "WAITING",
+        "title": "Измеримое ускорение стабильных операций",
+        "total": 1
+      },
+      {
+        "done": 13,
+        "id": "APA-P70.A11",
+        "status": "IN_PROGRESS",
+        "title": "v3.1: пакетная интеграция, взаимодействие и системные проверки",
+        "total": 23
+      }
+    ],
+    "active": [
+      "APA-P70.A11.S23"
+    ],
+    "done": 27,
+    "next_eligible": "APA-P70.A02.S02",
+    "plan_id": "APA-P70",
+    "status": "IN_PROGRESS",
+    "total": 52
+  },
+  "dispatchable": {
+    "BUILD": [
+      "APA-P70.A02.S02",
+      "APA-P00.A03.S03"
+    ],
+    "CONSOLIDATION": [
+      "APA-P00.A02.S03",
+      "APA-P00.A01.S03",
+      "APA-P50.A01.S01"
+    ],
+    "CONTROL": [],
+    "INTEGRATION": [
+      "APA-P70.A11.S22",
+      "APA-P70.A11.S03"
+    ],
+    "RESEARCH": [
+      "APA-P10.A01.S01",
+      "APA-P10.A01.S02",
+      "APA-P10.A01.S03",
+      "APA-P10.A02.S01",
+      "APA-P10.A02.S02",
+      "APA-P10.A02.S03",
+      "APA-P10.A02.S04",
+      "APA-P50.A02.S01"
+    ],
+    "VALIDATION": [
+      "APA-P00.A02.S04",
+      "APA-P00.A03.S01",
+      "APA-P60.A02.S03",
+      "APA-P60.A02.S04"
+    ]
+  },
+  "expired_leases": [],
+  "held": [
+    "APA-P00.A03.S04",
+    "APA-P10.A03.S01",
+    "APA-P10.A03.S02",
+    "APA-P20.A01.S01",
+    "APA-P20.A01.S02",
+    "APA-P20.A01.S03",
+    "APA-P20.A02.S01",
+    "APA-P30.A01.S01",
+    "APA-P30.A01.S02",
+    "APA-P30.A02.S01",
+    "APA-P30.A02.S02",
+    "APA-P50.A01.S02",
+    "APA-P50.A01.S03",
+    "APA-P50.A02.S02",
+    "APA-P50.A02.S03",
+    "APA-P50.A03.S01",
+    "APA-P50.A03.S02",
+    "APA-P70.A01.S02",
+    "APA-P70.A05.S01",
+    "APA-P70.A05.S02",
+    "APA-P70.A05.S03",
+    "APA-P70.A06.S01",
+    "APA-P70.A06.S02",
+    "APA-P70.A07.S01",
+    "APA-P70.A07.S02",
+    "APA-P70.A07.S03",
+    "APA-P70.A08.S01",
+    "APA-P70.A08.S02",
+    "APA-P70.A08.S03",
+    "APA-P70.A08.S05",
+    "APA-P70.A10.S01",
+    "APA-P70.A11.S04",
+    "APA-P70.A11.S05"
+  ],
+  "known_published_v2_runs": 62,
+  "legacy_reports": "NOT_FULLY_INDEXED",
+  "orphan_v2_manifests": [],
+  "plan_revision": 197,
+  "publisher": "DEPLOYED_SYNTHETIC_E2E_PASS",
+  "research_lookahead": {
+    "linked_product_substeps": 52,
+    "next_eligible_research": [
+      "APA-P50.A01.S01",
+      "APA-P50.A02.S01"
+    ],
+    "next_target": "APA-P70.A01.S01",
+    "unassessed": 33
+  },
+  "research_runner_24h": "NOT_RUNNING",
+  "scheduler": {
+    "activation_gate": "Schedules configured and task IDs independently read via automation listing on 2026-10-10. REAL scheduled GitHub status claim -> report/receipt -> completion NOT VERIFIED. Do not mark RUNNING_VERIFIED until observed.",
+    "chatgpt_task_id": "6ac9752aae8081919d9feeada08ad91e",
+    "chatgpt_task_ids": {
+      "audit": "6ac7664c66f88191a51d8c0a414b0eac",
+      "discovery": "6ac83b171cf08191b74e06caaa8ae1c7",
+      "technical": "6ac9752aae8081919d9feeada08ad91e"
+    },
+    "last_triggered_at": null,
+    "last_verified_run_id": null,
+    "mode": "Three enabled hourly ChatGPT scheduled tasks; each must choose an eligible task from this plan and CAS-record IN_PROGRESS before research, then DONE_PUBLISHED/PARTIAL/BLOCKED with evidence and release lease.",
+    "provider": "ChatGPT Scheduled Tasks",
+    "schedule": "Hourly staggered: audit at :00, discovery at :20, technical at :40",
+    "state": "CONFIGURED_UNVERIFIED",
+    "timezone": "Europe/Moscow"
+  },
+  "schema": "APA_PROJECT_CONTROLLER_STATE_V1",
+  "source_plan": "docs/research/apa-results/control/PROJECT_PLAN.json",
+  "task_count": 104,
+  "topic_count": 16,
+  "topics": {
+    "ARCHITECTURE": {
+      "done": 0,
+      "ready": 0,
+      "task_ids": [
+        "APA-P10.A03.S01",
+        "APA-P10.A03.S02",
+        "APA-P30.A01.S01",
+        "APA-P30.A01.S02"
+      ]
+    },
+    "AUTOMATION": {
+      "done": 0,
+      "ready": 0,
+      "task_ids": [
+        "APA-P40.A01.S01",
+        "APA-P40.A01.S02",
+        "APA-P40.A01.S03",
+        "APA-P40.A01.S04"
+      ]
+    },
+    "CONTROLLER": {
+      "done": 6,
+      "ready": 2,
+      "task_ids": [
+        "APA-P60.A01.S01",
+        "APA-P60.A01.S02",
+        "APA-P60.A01.S03",
+        "APA-P60.A01.S04",
+        "APA-P60.A02.S01",
+        "APA-P60.A02.S02",
+        "APA-P60.A02.S03",
+        "APA-P60.A02.S04"
+      ]
+    },
+    "GDL_TN": {
+      "done": 0,
+      "ready": 1,
+      "task_ids": [
+        "APA-P10.A02.S02"
+      ]
+    },
+    "HUB_GOVERNANCE": {
+      "done": 5,
+      "ready": 3,
+      "task_ids": [
+        "APA-P00.A01.S01",
+        "APA-P00.A01.S02",
+        "APA-P00.A01.S03",
+        "APA-P00.A01.S04",
+        "APA-P00.A02.S01",
+        "APA-P00.A02.S02",
+        "APA-P00.A02.S03",
+        "APA-P00.A02.S04",
+        "APA-P00.A02.S05"
+      ]
+    },
+    "IFC_MCP": {
+      "done": 0,
+      "ready": 1,
+      "task_ids": [
+        "APA-P10.A02.S03"
+      ]
+    },
+    "KNOWLEDGE_GRAPH": {
+      "done": 0,
+      "ready": 1,
+      "task_ids": [
+        "APA-P50.A01.S01",
+        "APA-P50.A01.S02",
+        "APA-P50.A01.S03"
+      ]
+    },
+    "MEP": {
+      "done": 0,
+      "ready": 1,
+      "task_ids": [
+        "APA-P10.A02.S04"
+      ]
+    },
+    "MVP": {
+      "done": 0,
+      "ready": 0,
+      "task_ids": [
+        "APA-P30.A02.S01",
+        "APA-P30.A02.S02"
+      ]
+    },
+    "PRODUCT_DEVELOPMENT": {
+      "done": 27,
+      "ready": 3,
+      "task_ids": [
+        "APA-P70.A01.S01",
+        "APA-P70.A01.S02",
+        "APA-P70.A01.S03",
+        "APA-P70.A02.S01",
+        "APA-P70.A02.S02",
+        "APA-P70.A02.S03",
+        "APA-P70.A03.S01",
+        "APA-P70.A03.S02",
+        "APA-P70.A03.S03",
+        "APA-P70.A04.S01",
+        "APA-P70.A04.S02",
+        "APA-P70.A04.S03",
+        "APA-P70.A05.S01",
+        "APA-P70.A05.S02",
+        "APA-P70.A05.S03",
+        "APA-P70.A06.S01",
+        "APA-P70.A06.S02",
+        "APA-P70.A07.S01",
+        "APA-P70.A07.S02",
+        "APA-P70.A07.S03",
+        "APA-P70.A08.S01",
+        "APA-P70.A08.S02",
+        "APA-P70.A08.S03",
+        "APA-P70.A03.S04",
+        "APA-P70.A08.S04",
+        "APA-P70.A09.S01",
+        "APA-P70.A02.S04",
+        "APA-P70.A10.S01",
+        "APA-P70.A08.S05",
+        "APA-P70.A11.S01",
+        "APA-P70.A11.S02",
+        "APA-P70.A11.S03",
+        "APA-P70.A11.S04",
+        "APA-P70.A11.S05",
+        "APA-P70.A11.S06",
+        "APA-P70.A11.S07",
+        "APA-P70.A11.S08",
+        "APA-P70.A11.S09",
+        "APA-P70.A11.S10",
+        "APA-P70.A11.S11",
+        "APA-P70.A11.S12",
+        "APA-P70.A11.S13",
+        "APA-P70.A11.S14",
+        "APA-P70.A11.S15",
+        "APA-P70.A11.S16",
+        "APA-P70.A11.S17",
+        "APA-P70.A11.S18",
+        "APA-P70.A11.S19",
+        "APA-P70.A11.S20",
+        "APA-P70.A11.S21",
+        "APA-P70.A11.S22",
+        "APA-P70.A11.S23"
+      ]
+    },
+    "PUBLISHER": {
+      "done": 0,
+      "ready": 2,
+      "task_ids": [
+        "APA-P00.A03.S01",
+        "APA-P00.A03.S02",
+        "APA-P00.A03.S03",
+        "APA-P00.A03.S04"
+      ]
+    },
+    "SDK_NATIVE": {
+      "done": 0,
+      "ready": 3,
+      "task_ids": [
+        "APA-P10.A01.S01",
+        "APA-P10.A01.S02",
+        "APA-P10.A01.S03"
+      ]
+    },
+    "SYNTHESIS": {
+      "done": 0,
+      "ready": 0,
+      "task_ids": [
+        "APA-P50.A03.S01",
+        "APA-P50.A03.S02"
+      ]
+    },
+    "TAPIR_PYTHON": {
+      "done": 0,
+      "ready": 1,
+      "task_ids": [
+        "APA-P10.A02.S01"
+      ]
+    },
+    "TESTS": {
+      "done": 0,
+      "ready": 0,
+      "task_ids": [
+        "APA-P20.A01.S01",
+        "APA-P20.A01.S02",
+        "APA-P20.A01.S03",
+        "APA-P20.A02.S01",
+        "APA-P20.A02.S02",
+        "APA-P20.A02.S03"
+      ]
+    },
+    "TOOL_INTEGRATION": {
+      "done": 0,
+      "ready": 1,
+      "task_ids": [
+        "APA-P50.A02.S01",
+        "APA-P50.A02.S02",
+        "APA-P50.A02.S03"
+      ]
+    }
+  }
+}

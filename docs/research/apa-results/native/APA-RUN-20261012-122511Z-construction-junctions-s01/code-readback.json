@@ -1,0 +1,18 @@
+{
+  "head": "fab5fd71c68616de510ad8b6b06ce22eaf58520b",
+  "status": "COMMITTED_GITHUB_BLOBS_MATCH",
+  "files": [
+    {
+      "path": "scripts/archicad_details_context.py",
+      "sha": "4bc4e5ee827c8e5dacb4306ff92871a6e9083513"
+    },
+    {
+      "path": "tests/test_archicad_construction_junctions.py",
+      "sha": "e4490ef321eb9ddc388a5597eefce27594caccfa"
+    },
+    {
+      "path": "docs/research/apa-construction-junctions-20261012.md",
+      "sha": "9e44d1e85f4d93693e2414c149632e2459413696"
+    }
+  ]
+}

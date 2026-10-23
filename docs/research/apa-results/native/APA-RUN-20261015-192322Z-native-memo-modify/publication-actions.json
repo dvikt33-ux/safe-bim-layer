@@ -1,0 +1,11 @@
+{
+  "status": "ZERO_WORKFLOW_RUNS_FOR_OWN_CODE_AND_CLAIM",
+  "commitRunCounts": {
+    "b5216050185636e7ca3edad553b9fef6e2c788ab": 0,
+    "13139d6cd03340bff7fbde5ccac5735929843b7a": 0
+  },
+  "workflowDispatch": false,
+  "offlineTestsRun": false,
+  "directPublisher": true,
+  "publicationOnlyNoNativeOperations": true
+}

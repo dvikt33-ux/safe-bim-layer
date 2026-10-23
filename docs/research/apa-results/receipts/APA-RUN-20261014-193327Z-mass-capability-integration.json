@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:0b93fc255e9a7a2718a892688dbeaf0c362fda7b25ac7506bcbb94413410b249",
+  "index_commit_sha": "a4f72be6e328bcf667ad55bd75f75b222ca401ce",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "a4f72be6e328bcf667ad55bd75f75b222ca401ce",
+  "report_path": "docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-193327Z-mass-capability-integration/REPORT.md",
+  "report_sha256": "5abae53f580f3042d1aa5f511f0a2dcdc23f64ad287e035bd141cd0b51f872c1",
+  "run_id": "APA-RUN-20261014-193327Z-mass-capability-integration",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

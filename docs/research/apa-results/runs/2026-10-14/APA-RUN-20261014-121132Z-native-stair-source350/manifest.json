@@ -1,0 +1,145 @@
+{
+  "action_id": "APA-P70.A11",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-NATIVE-STAIR350",
+      "evidence_ids": [
+        "EV-SOURCE",
+        "EV-DIM",
+        "EV-PRESERVE"
+      ],
+      "statement": "True native Stair has350mm going,150mm rises and1mwidth independently confirmed by native properties/actualBREP after Save/Open.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-STAIR255-PRESERVED",
+      "evidence_ids": [
+        "EV-PRESERVE",
+        "EV-JOURNAL"
+      ],
+      "statement": "All255current inventory signatures and previous145geometry/material/story signatures preserved; no new native collision pairs, no Create replay.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-STAIR-INVENTORY-PARTIAL",
+      "evidence_ids": [
+        "EV-INVENTORY",
+        "EV-JOURNAL"
+      ],
+      "statement": "Ten supportObject owner ancestries remainNOT_VERIFIED; initialCreate journaloutcome preserved, exactSDKedit blocked and engineering not verified.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-SOURCE",
+      "kind": "TEST_RESULT",
+      "sha256": "c63423a63290efe81c28631f519eecab93b8e85fd1a1699137b8dad91edead07",
+      "source_revision": "3221b8e7a0b775ece1018caf622a32c6ca9cb9dc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/source-recipe.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-DIM",
+      "kind": "TEST_RESULT",
+      "sha256": "dfe0d51844fa18678255bbd9c7a3aa1cb9c9df1338509d9d7f8562bb8d2ac5e9",
+      "source_revision": "3221b8e7a0b775ece1018caf622a32c6ca9cb9dc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/native-dimensions.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-INVENTORY",
+      "kind": "TEST_RESULT",
+      "sha256": "faf782fac6d694f0810d135164ff5dc50881dcb0337370370dee34ae60a20dba",
+      "source_revision": "3221b8e7a0b775ece1018caf622a32c6ca9cb9dc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/inventory-audit.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-PRESERVE",
+      "kind": "TEST_RESULT",
+      "sha256": "bef59dd5b71cd26d1a31a26c3747cd27595b10f7ea0dc8749b0233b2f9f5b1d5",
+      "source_revision": "3221b8e7a0b775ece1018caf622a32c6ca9cb9dc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/preservation-save-open.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-JOURNAL",
+      "kind": "TEST_RESULT",
+      "sha256": "8efdc20ceb7c62dc511a3a2d602ff5548a2fbb30cb72647aedf5a451fbd6256f",
+      "source_revision": "3221b8e7a0b775ece1018caf622a32c6ca9cb9dc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/journal-reconciliation.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-CI",
+      "kind": "TEST_RESULT",
+      "sha256": "816f38046d59d3f8ca514d2017777a78e340821eb2df0142ea7f07fad828efac",
+      "source_revision": "3221b8e7a0b775ece1018caf622a32c6ca9cb9dc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/windows-ci.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "work-native-stair-source-20261014",
+  "executor_run_id": "APA-CLAIM-NATIVE-STAIR-SOURCE-20261014T102813Z",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-14T12:11:32Z",
+  "idempotency_key": "sha256:e7fb85912e631600ade7b864ccbe38eb40123cc526484c8dda9b609c80b0b933",
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "next_substep": "APA-P70.A11.S03",
+  "phase": "LIVE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261014-121132Z-native-stair-source350",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29 authorizedtest nativeevidence; artifact-onlypublication",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": "29 existingoverlay unchanged",
+    "source_branch": "feature/apa-native-stair-source-going-20261014",
+    "tapir": "originaluserAPX existingCreateStairs contract"
+  },
+  "source_revisions": [
+    {
+      "revision": "3221b8e7a0b775ece1018caf622a32c6ca9cb9dc",
+      "source_sha": "3221b8e7a0b775ece1018caf622a32c6ca9cb9dc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/81"
+    }
+  ],
+  "started_at": "2026-10-14T10:28:13Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A11.S03"
+}

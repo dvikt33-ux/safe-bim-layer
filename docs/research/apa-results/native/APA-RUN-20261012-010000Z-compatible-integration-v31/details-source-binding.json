@@ -1,0 +1,51 @@
+{
+  "release": "v2.12",
+  "archiveSha256": "fbd23cbca9d306b630537679b75ff5b015f1e35a2b8470811387c137a32bdeb6",
+  "detailId": "ARMO_SELFLOCK_ROOF__P0003",
+  "sourceId": "ARMO_SELFLOCK_ROOF",
+  "sourceLocator": {
+    "representation": "albom_tehnicheskih_reshenii_samozaschelkivayuscheisya_krovli_armo.pdf",
+    "page": 3
+  },
+  "hostElementToken": "test-identity-51fe26b6654ee6ca",
+  "facts": [
+    {
+      "factId": "ARMO_SELFLOCK_ROOF__P0003__PF001",
+      "entity": "c4",
+      "normalizedUnit": "mm",
+      "values": {
+        "value": 25.0,
+        "value_2": 150.0,
+        "value_2_max": null,
+        "source_value": 25.0,
+        "source_value_2": 150.0,
+        "source_value_2_max": null
+      }
+    },
+    {
+      "factId": "ARMO_SELFLOCK_ROOF__P0003__PF002",
+      "entity": "c5",
+      "normalizedUnit": "mm",
+      "values": {
+        "value": 50.0,
+        "value_2": 50.0,
+        "value_2_max": null,
+        "source_value": 50.0,
+        "source_value_2": 50.0,
+        "source_value_2_max": null
+      }
+    }
+  ],
+  "missingDimensionEntities": [
+    "c1",
+    "c2",
+    "c3",
+    "c6",
+    "c7",
+    "c8",
+    "c9",
+    "c10"
+  ],
+  "assemblyWriteAllowed": false,
+  "assemblyGate": "SOURCE_COMMIT_FALSE_AND_UNRESOLVED_DIMENSIONS"
+}

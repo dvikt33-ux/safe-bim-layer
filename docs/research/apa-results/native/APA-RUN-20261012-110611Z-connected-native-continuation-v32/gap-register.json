@@ -1,0 +1,55 @@
+{
+  "substep": "APA-P70.A11.S03",
+  "status": "PARTIAL",
+  "codeHead": "3a743a4f96a98acdcbb837946603f0681d9a1f54",
+  "gaps": [
+    {
+      "id": "G01",
+      "status": "FIXED_VERIFIED_PR54_RETAINED",
+      "evidence": "403Windows/Linux PASS; no repeated SQLite implementation"
+    },
+    {
+      "id": "G02",
+      "status": "LIVE73_CONTEXT_SOURCE_BOUND_NATIVE_TIMBER_PART_PASS",
+      "remaining": "Bounded A04 matrix is partial; contextual qualification and other incomplete records retain blockers"
+    },
+    {
+      "id": "G03",
+      "status": "INDEPENDENT_C4_NATIVE_PART_PASS_FULL_ASSEMBLY_BLOCKED",
+      "dependency": "APA-P70.A11.S06",
+      "remaining": "Eight missing source dimensions, source commit=false, manufacturer material grade and c5 actual rafter orientation"
+    },
+    {
+      "id": "G04",
+      "status": "LIVE7_ROUTE_TEE_TWO_ELBOW_NETWORK_PASS_TERMINAL_OPEN",
+      "dependency": "APA-P70.A11.S10",
+      "remaining": "Native circular preference/transition/terminal-port qualification; complete HVAC engineering remains unverified"
+    },
+    {
+      "id": "G05",
+      "status": "POST_REOPEN_NATIVE_OPENING_SEO_READBACK_PASS_SHELL_EDIT_UNSUPPORTED",
+      "dependency": "APA-P70.A11.S07"
+    },
+    {
+      "id": "G06",
+      "status": "REAL_ANALYTICAL_ADAPTERS_RETAINED_EXTERNAL_SAM_SAF_ENGINE_LOAD_NORM_GATES",
+      "dependency": "APA-P70.A11.S08"
+    },
+    {
+      "id": "G07",
+      "status": "ACTUAL37_MAPPINGS_26_PORTS_11_NATIVE_IFC_OWNER_EDGES_MATCH",
+      "dependency": "APA-P70.A11.S09",
+      "remaining": "Receiver semantic certification, proxy timber subtype and generic terminal IFC subtype"
+    },
+    {
+      "id": "G08",
+      "status": "DEDICATED_NATIVE_SCOPE_AND_MATRIX_ROW_INTERPRETATION_PASS",
+      "remaining": "Terminal omitted by generic enumeration; source part body curved flag prevents native quantity qualification; unknown-type GDL query quarantined"
+    },
+    {
+      "id": "G09",
+      "status": "FUNCTIONAL_WORK_PRIORITIZED_NO_INSTALLER_OR_OPTIMIZATION_CLAIM",
+      "remaining": "A11.S04 waits real S03 acceptance"
+    }
+  ]
+}

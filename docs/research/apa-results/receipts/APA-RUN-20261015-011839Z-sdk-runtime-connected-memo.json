@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:a37a7fb9ed32bdd89e9a5f45593c332c4e536403424ef224094fd49823d81e67",
+  "index_commit_sha": "6731ad4ac2f9b1e4195117abb12f044d773250ce",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "6731ad4ac2f9b1e4195117abb12f044d773250ce",
+  "report_path": "docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-011839Z-sdk-runtime-connected-memo/REPORT.md",
+  "report_sha256": "dee59105fda63f3fb77a65d5a0464e8127009e1d16617a111581532ebe6d3d2a",
+  "run_id": "APA-RUN-20261015-011839Z-sdk-runtime-connected-memo",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

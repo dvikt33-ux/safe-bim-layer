@@ -1,0 +1,28 @@
+{
+  "status": "NOT_VERIFIED",
+  "retainedCount": 145,
+  "currentGenericCount": 255,
+  "newRootCount": 1,
+  "newListedHierarchicalMembers": 45,
+  "additionalBodylessObjects": 64,
+  "explicitOwnerInStairMembers": 54,
+  "unresolvedAdditionalObjects": 10,
+  "unresolvedGUIDHashes": [
+    "be295854325b71859327a78dacfd87600a11a002c3085df36d549c85408b000d",
+    "293e0e8320fb9ba970e020276adadbbd5f565491ccb32f8e661337daa70b00c2",
+    "69a220555c53d5340c4e79da4678bef1351de1bd2bedaf5a518f4154929e8d2e",
+    "b406c37c47938d7bcceb208eb9a5dc992b6e7ff2ffaf2cb24acc9ac227c5b6b0",
+    "4ea1bef3678477d75f4cd8ac4f3a71bfdf65f1b3347491fbef1e4cd87870c9ec",
+    "ca32a582078c7b20a801933bcf90f76306271b8184ded99974b99f5571cb7fe9",
+    "8cb524c6290a43ca88790d07c85ef59743af2cf30e0f81083fe4797223167bf1",
+    "620158cce669613694a3a3d619976e369b89460856909cf8a3e80ae5ca4f1309",
+    "dd6f2d21cb599e01e6886a73c64ad773ab31e5584a09914beb362ce4b556da6a",
+    "537f1038ebfabf24e86dd749e3d953b5c7d454eebf435fd976c9388f1ff80264"
+  ],
+  "nativeField": "object.owner",
+  "emptyBodyDoesNotProveAnnotation": true,
+  "hiddenParents": "NATIVE_TREAD_RISER_STRUCTURE_TYPES_READABLE_ANCESTRY_NOT_PROVED",
+  "specializedGetConnectedElements": "EMPTY_LISTS_TREAD_RISER_STRUCTURE_OBJECT",
+  "deletedElements": 0,
+  "automaticCreateRetry": false
+}

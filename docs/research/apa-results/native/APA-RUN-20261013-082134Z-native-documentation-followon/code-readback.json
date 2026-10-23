@@ -1,0 +1,26 @@
+{
+  "head": "93557ed0cd59c471b0f903a03708ed88c8feb31b",
+  "parent": "88169d358e4c329f8959f557c944300adcec2df9",
+  "branch": "feature/apa-native-documentation-followon-20261013",
+  "expected": {
+    ".github/workflows/archicad-contracts.yml": "bd98be84d1a1c8f50cfc2d420c41c1341a32cfdc",
+    "docs/APA_BIM_DOCUMENTATION.md": "4b8a1dba2fa83ac05bf693f99c763ecd43899bec",
+    "scripts/archicad_bim_documentation.py": "6fd54ef82825a36e5ecf0b8b097163b620d5ba17",
+    "scripts/archicad_scene_run.py": "2c52b27968cf42deb1be56e88cbb9a9a88941ceb",
+    "scripts/archicad_native_documentation.py": "79999e99755e5388b76702f926e357e545199759",
+    "tests/test_archicad_native_documentation.py": "9a391125064f722c79fbfa043fde4858898b5416"
+  },
+  "hostTests": 623,
+  "newTests": 17,
+  "fullCommittedDiffPrivacyScan": "PASS",
+  "excludedCodeUnchanged": true,
+  "pr": 73,
+  "prReadback": {
+    "baseRefName": "feature/apa-knowledge-integration-20261013",
+    "headRefOid": "93557ed0cd59c471b0f903a03708ed88c8feb31b",
+    "isDraft": true,
+    "number": 73,
+    "url": "https://github.com/dvikt33-ux/safe-bim-layer/pull/73"
+  },
+  "githubBlobReadback": "ALL_SIX_MATCH"
+}

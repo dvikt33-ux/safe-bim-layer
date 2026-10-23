@@ -1,0 +1,2170 @@
+{
+  "schema": "APA_DOCUMENTATION_PROCESSED_FACTS_V1",
+  "modelVersion": "5230750bf868c8e39c8e3982e788fa986e9ee71365063ad9664259e121e3a639",
+  "nativePlan": {
+    "storyIndex": 0,
+    "status": "BIM_FACTS_WITH_NATIVE_CUT_FILLS",
+    "nativeCutFillCount": 16
+  },
+  "specifications": {
+    "Column": {
+      "count": 2,
+      "rows": [
+        {
+          "guid": "id-sha256:efd26943ca1678f8c9fd",
+          "nativeType": "Column",
+          "count": 1,
+          "storyIndex": 0,
+          "storyElevationMeters": 0,
+          "referenceGeometry": {
+            "origin": {
+              "x": 43,
+              "y": 44
+            },
+            "bottomOffsetFromHomeStory": 0
+          },
+          "resultantBoundsMeters": null,
+          "relationships": {},
+          "quantities": {
+            "status": "NATIVE_BODY_NOT_AVAILABLE"
+          },
+          "bodySignature": "4bf0b5bd39d5d372f236c82d40b32a5a332786211c8a5ad51e8021efacd8c3aa",
+          "floorPlanStatus": "NATIVE_CUT_FILL_AVAILABLE",
+          "material": {},
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": [
+            {
+              "coordinates": [
+                {
+                  "x": 42.85,
+                  "y": 44.149999992
+                },
+                {
+                  "x": 42.85,
+                  "y": 43.85
+                },
+                {
+                  "x": 43.149999992,
+                  "y": 43.85
+                },
+                {
+                  "x": 43.149999992,
+                  "y": 43.950000003
+                },
+                {
+                  "x": 43.000000004,
+                  "y": 43.950000003
+                },
+                {
+                  "x": 43.000000004,
+                  "y": 44.050000006
+                },
+                {
+                  "x": 43.149999992,
+                  "y": 44.050000006
+                },
+                {
+                  "x": 43.149999992,
+                  "y": 44.149999992
+                },
+                {
+                  "x": 42.85,
+                  "y": 44.149999992
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 43.000000004,
+                  "y": 44.050000006
+                },
+                {
+                  "x": 43.000000004,
+                  "y": 43.950000003
+                },
+                {
+                  "x": 43.149999992,
+                  "y": 43.950000003
+                },
+                {
+                  "x": 43.149999992,
+                  "y": 44.050000006
+                },
+                {
+                  "x": 43.000000004,
+                  "y": 44.050000006
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "guid": "id-sha256:6ad65ff5e9324d471f74",
+          "nativeType": "Column",
+          "count": 1,
+          "storyIndex": 0,
+          "storyElevationMeters": 0,
+          "referenceGeometry": {
+            "origin": {
+              "x": 47,
+              "y": 44
+            },
+            "bottomOffsetFromHomeStory": 0
+          },
+          "resultantBoundsMeters": null,
+          "relationships": {},
+          "quantities": {
+            "status": "NATIVE_BODY_NOT_AVAILABLE"
+          },
+          "bodySignature": "4bf0b5bd39d5d372f236c82d40b32a5a332786211c8a5ad51e8021efacd8c3aa",
+          "floorPlanStatus": "NATIVE_CUT_FILL_AVAILABLE",
+          "material": {},
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": [
+            {
+              "coordinates": [
+                {
+                  "x": 46.85,
+                  "y": 43.85
+                },
+                {
+                  "x": 47.15,
+                  "y": 43.85
+                },
+                {
+                  "x": 47.15,
+                  "y": 44.15
+                },
+                {
+                  "x": 46.85,
+                  "y": 44.15
+                },
+                {
+                  "x": 46.85,
+                  "y": 43.85
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "nativeInteractiveScheduleRows": "NOT_VERIFIED_NO_INSTALLED_ROW_READ_OR_CONFIGURE_CONTRACT"
+    },
+    "Door": {
+      "count": 1,
+      "rows": [
+        {
+          "guid": "id-sha256:96904ae0a9a643d0bdd1",
+          "nativeType": "Door",
+          "count": 1,
+          "storyIndex": 0,
+          "storyElevationMeters": 0,
+          "referenceGeometry": {
+            "centerOffsetAlongHost": 5,
+            "sillHeight": 0,
+            "width": 1,
+            "height": 2.1,
+            "refSide": false,
+            "reflected": false
+          },
+          "resultantBoundsMeters": [
+            [
+              44.463,
+              45.537
+            ],
+            [
+              39.831,
+              40.169
+            ],
+            [
+              0,
+              2.137
+            ]
+          ],
+          "relationships": {
+            "hostGuid": "id-sha256:74e13663688cd71e3a87"
+          },
+          "quantities": {
+            "status": "NATIVE_QUANTITIES_NOT_VERIFIED",
+            "reason": "NATIVE_BODY_NOT_CLOSED"
+          },
+          "bodySignature": "77970d7987eae05213714d434f4395ceb6fb6938354d5b1a6b1c34dbefc81509",
+          "floorPlanStatus": "NATIVE_CUT_FILL_AVAILABLE",
+          "material": {},
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": [
+            {
+              "coordinates": [
+                {
+                  "x": 45.475,
+                  "y": 39.965
+                },
+                {
+                  "x": 45.5,
+                  "y": 39.965
+                },
+                {
+                  "x": 45.5,
+                  "y": 40.15
+                },
+                {
+                  "x": 45.475,
+                  "y": 40.15
+                },
+                {
+                  "x": 45.475,
+                  "y": 39.965
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 45.487,
+                  "y": 40.169
+                },
+                {
+                  "x": 45.487,
+                  "y": 40.15
+                },
+                {
+                  "x": 45.537,
+                  "y": 40.15
+                },
+                {
+                  "x": 45.537,
+                  "y": 40.169
+                },
+                {
+                  "x": 45.487,
+                  "y": 40.169
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 44.5,
+                  "y": 39.965
+                },
+                {
+                  "x": 44.525,
+                  "y": 39.965
+                },
+                {
+                  "x": 44.525,
+                  "y": 40.15
+                },
+                {
+                  "x": 44.5,
+                  "y": 40.15
+                },
+                {
+                  "x": 44.5,
+                  "y": 39.965
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 44.513,
+                  "y": 40.15
+                },
+                {
+                  "x": 44.513,
+                  "y": 40.169
+                },
+                {
+                  "x": 44.463,
+                  "y": 40.169
+                },
+                {
+                  "x": 44.463,
+                  "y": 40.15
+                },
+                {
+                  "x": 44.513,
+                  "y": 40.15
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 45.487,
+                  "y": 39.85
+                },
+                {
+                  "x": 45.487,
+                  "y": 39.831
+                },
+                {
+                  "x": 45.537,
+                  "y": 39.831
+                },
+                {
+                  "x": 45.537,
+                  "y": 39.85
+                },
+                {
+                  "x": 45.487,
+                  "y": 39.85
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 44.513,
+                  "y": 39.831
+                },
+                {
+                  "x": 44.513,
+                  "y": 39.85
+                },
+                {
+                  "x": 44.463,
+                  "y": 39.85
+                },
+                {
+                  "x": 44.463,
+                  "y": 39.831
+                },
+                {
+                  "x": 44.513,
+                  "y": 39.831
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 45.5,
+                  "y": 39.965
+                },
+                {
+                  "x": 45.46,
+                  "y": 39.965
+                },
+                {
+                  "x": 45.46,
+                  "y": 39.85
+                },
+                {
+                  "x": 45.5,
+                  "y": 39.85
+                },
+                {
+                  "x": 45.5,
+                  "y": 39.965
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 44.5,
+                  "y": 39.85
+                },
+                {
+                  "x": 44.54,
+                  "y": 39.85
+                },
+                {
+                  "x": 44.54,
+                  "y": 39.965
+                },
+                {
+                  "x": 44.5,
+                  "y": 39.965
+                },
+                {
+                  "x": 44.5,
+                  "y": 39.85
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 44.54,
+                  "y": 38.93
+                },
+                {
+                  "x": 44.58,
+                  "y": 38.93
+                },
+                {
+                  "x": 44.58,
+                  "y": 39.85
+                },
+                {
+                  "x": 44.54,
+                  "y": 39.85
+                },
+                {
+                  "x": 44.54,
+                  "y": 38.93
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "nativeInteractiveScheduleRows": "NOT_VERIFIED_NO_INSTALLED_ROW_READ_OR_CONFIGURE_CONTRACT"
+    },
+    "Roof": {
+      "count": 1,
+      "rows": [
+        {
+          "guid": "id-sha256:51fe26b6654ee6ca9854",
+          "nativeType": "Roof",
+          "count": 1,
+          "storyIndex": 1,
+          "storyElevationMeters": 3,
+          "referenceGeometry": {
+            "roofClass": 0,
+            "baseLine": {
+              "begin": {
+                "x": 40,
+                "y": 40
+              },
+              "end": {
+                "x": 50,
+                "y": 40
+              }
+            },
+            "slopeAngle": 0.15,
+            "posSign": true
+          },
+          "resultantBoundsMeters": [
+            [
+              40,
+              50
+            ],
+            [
+              40,
+              48.029887626
+            ],
+            [
+              6.004517073,
+              7.411353033
+            ]
+          ],
+          "relationships": {},
+          "quantities": {
+            "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+            "surfaceAreaSquareMeters": 169.05337145501312,
+            "volumeCubicMeters": 16.181703109680967,
+            "bodyCount": 1,
+            "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+          },
+          "bodySignature": "3ddf222acf91e0703c6ad64a8d621b714e08bd0e415771832622636b2717c65c",
+          "floorPlanStatus": "NATIVE_CUT_FILL_NOT_AVAILABLE",
+          "material": {
+            "nativeField": "shellBase.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "id-sha256:460ab9cf8caf48c17c0c",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "id-sha256:547d736d45b5e8718116",
+              "name": "Бетон - 02"
+            }
+          },
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": []
+        }
+      ],
+      "nativeInteractiveScheduleRows": "NOT_VERIFIED_NO_INSTALLED_ROW_READ_OR_CONFIGURE_CONTRACT"
+    },
+    "Slab": {
+      "count": 2,
+      "rows": [
+        {
+          "guid": "id-sha256:301c85f39127ffe91075",
+          "nativeType": "Slab",
+          "count": 1,
+          "storyIndex": 0,
+          "storyElevationMeters": 0,
+          "referenceGeometry": {
+            "levelFromHomeStory": 0,
+            "referencePlaneLocation": 0,
+            "thickness": 0.2
+          },
+          "resultantBoundsMeters": [
+            [
+              40,
+              50
+            ],
+            [
+              40,
+              48
+            ],
+            [
+              -0.2,
+              0
+            ]
+          ],
+          "relationships": {},
+          "quantities": {
+            "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+            "surfaceAreaSquareMeters": 167.2,
+            "volumeCubicMeters": 16.000000000000004,
+            "bodyCount": 1,
+            "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+          },
+          "bodySignature": "b3ad6a2fe6dbb90657b8b094b3efcb42a27b256b9b90dee5bc06aef277fc2eca",
+          "floorPlanStatus": "NATIVE_CUT_FILL_NOT_AVAILABLE",
+          "material": {
+            "nativeField": "slab.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "id-sha256:460ab9cf8caf48c17c0c",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "id-sha256:547d736d45b5e8718116",
+              "name": "Бетон - 02"
+            }
+          },
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": []
+        },
+        {
+          "guid": "id-sha256:f5f2c00fc1a32e21c0d6",
+          "nativeType": "Slab",
+          "count": 1,
+          "storyIndex": 1,
+          "storyElevationMeters": 3,
+          "referenceGeometry": {
+            "levelFromHomeStory": 0,
+            "referencePlaneLocation": 0,
+            "thickness": 0.2
+          },
+          "resultantBoundsMeters": [
+            [
+              40,
+              50
+            ],
+            [
+              40,
+              48
+            ],
+            [
+              2.8,
+              3
+            ]
+          ],
+          "relationships": {},
+          "quantities": {
+            "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+            "surfaceAreaSquareMeters": 167.32,
+            "volumeCubicMeters": 15.963999999999999,
+            "bodyCount": 1,
+            "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+          },
+          "bodySignature": "580d2ac8c31fe76ad3bf037b48e4293084a94176ad93746dca02eb3bf8b1ece7",
+          "floorPlanStatus": "NATIVE_CUT_FILL_NOT_AVAILABLE",
+          "material": {
+            "nativeField": "slab.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "id-sha256:460ab9cf8caf48c17c0c",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "id-sha256:547d736d45b5e8718116",
+              "name": "Бетон - 02"
+            }
+          },
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": []
+        }
+      ],
+      "nativeInteractiveScheduleRows": "NOT_VERIFIED_NO_INSTALLED_ROW_READ_OR_CONFIGURE_CONTRACT"
+    },
+    "Wall": {
+      "count": 9,
+      "rows": [
+        {
+          "guid": "id-sha256:6a94dc736ea218863f63",
+          "nativeType": "Wall",
+          "count": 1,
+          "storyIndex": 0,
+          "storyElevationMeters": 0,
+          "referenceGeometry": {
+            "kind": "WallReferenceLine",
+            "begin": {
+              "x": 50,
+              "y": 40
+            },
+            "end": {
+              "x": 50,
+              "y": 48
+            },
+            "arcAngle": 0,
+            "referenceLineLocation": 1,
+            "offset": 0,
+            "bottomOffsetFromHomeStory": 0,
+            "height": 3,
+            "thickness": 0.3,
+            "flipped": true
+          },
+          "resultantBoundsMeters": [
+            [
+              49.85,
+              50.15
+            ],
+            [
+              39.85,
+              48.15
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "relationships": {},
+          "quantities": {
+            "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+            "surfaceAreaSquareMeters": 55.19999999999989,
+            "volumeCubicMeters": 6.797999999999885,
+            "bodyCount": 1,
+            "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+          },
+          "bodySignature": "2dff5514bd111a67b3848c709fbdfd91cabbc106ce81bea5a5af4d4e53fdee4f",
+          "floorPlanStatus": "NATIVE_CUT_FILL_AVAILABLE",
+          "material": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "id-sha256:460ab9cf8caf48c17c0c",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "id-sha256:547d736d45b5e8718116",
+              "name": "Бетон - 02"
+            }
+          },
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": [
+            {
+              "coordinates": [
+                {
+                  "x": 49.85,
+                  "y": 39.85
+                },
+                {
+                  "x": 50.15,
+                  "y": 39.85
+                },
+                {
+                  "x": 49.85,
+                  "y": 40.15
+                },
+                {
+                  "x": 49.85,
+                  "y": 39.85
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 49.85,
+                  "y": 48.15
+                },
+                {
+                  "x": 49.85,
+                  "y": 47.85
+                },
+                {
+                  "x": 50.15,
+                  "y": 48.15
+                },
+                {
+                  "x": 49.85,
+                  "y": 48.15
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 49.85,
+                  "y": 40.15
+                },
+                {
+                  "x": 50.15,
+                  "y": 39.85
+                },
+                {
+                  "x": 50.15,
+                  "y": 40.15
+                },
+                {
+                  "x": 49.85,
+                  "y": 40.15
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 49.85,
+                  "y": 47.85
+                },
+                {
+                  "x": 49.85,
+                  "y": 44.599999984
+                },
+                {
+                  "x": 50.150000049,
+                  "y": 44.599999984
+                },
+                {
+                  "x": 50.150000049,
+                  "y": 47.85
+                },
+                {
+                  "x": 49.85,
+                  "y": 47.85
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 49.85,
+                  "y": 40.15
+                },
+                {
+                  "x": 50.150000049,
+                  "y": 40.15
+                },
+                {
+                  "x": 50.150000049,
+                  "y": 43.400000016
+                },
+                {
+                  "x": 49.85,
+                  "y": 43.400000016
+                },
+                {
+                  "x": 49.85,
+                  "y": 40.15
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 49.85,
+                  "y": 47.85
+                },
+                {
+                  "x": 50.15,
+                  "y": 47.85
+                },
+                {
+                  "x": 50.15,
+                  "y": 48.15
+                },
+                {
+                  "x": 49.85,
+                  "y": 47.85
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "guid": "id-sha256:74e13663688cd71e3a87",
+          "nativeType": "Wall",
+          "count": 1,
+          "storyIndex": 0,
+          "storyElevationMeters": 0,
+          "referenceGeometry": {
+            "kind": "WallReferenceLine",
+            "begin": {
+              "x": 40,
+              "y": 40
+            },
+            "end": {
+              "x": 50,
+              "y": 40
+            },
+            "arcAngle": 0,
+            "referenceLineLocation": 1,
+            "offset": 0,
+            "bottomOffsetFromHomeStory": 0,
+            "height": 3,
+            "thickness": 0.3,
+            "flipped": true
+          },
+          "resultantBoundsMeters": [
+            [
+              39.85,
+              49.85
+            ],
+            [
+              39.85,
+              40.15
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "relationships": {},
+          "quantities": {
+            "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+            "surfaceAreaSquareMeters": 64.85999999999991,
+            "volumeCubicMeters": 8.074499999999873,
+            "bodyCount": 1,
+            "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+          },
+          "bodySignature": "00330d0487c9b022e82f53e5cbddba0f276f26c521d77b6003ce5614f0a365d5",
+          "floorPlanStatus": "NATIVE_CUT_FILL_AVAILABLE",
+          "material": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "id-sha256:460ab9cf8caf48c17c0c",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "id-sha256:547d736d45b5e8718116",
+              "name": "Бетон - 02"
+            }
+          },
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": [
+            {
+              "coordinates": [
+                {
+                  "x": 40.15,
+                  "y": 40.15
+                },
+                {
+                  "x": 39.85,
+                  "y": 40.15
+                },
+                {
+                  "x": 39.85,
+                  "y": 39.85
+                },
+                {
+                  "x": 40.15,
+                  "y": 40.15
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 40.15,
+                  "y": 40.15
+                },
+                {
+                  "x": 39.85,
+                  "y": 39.85
+                },
+                {
+                  "x": 40.15,
+                  "y": 39.85
+                },
+                {
+                  "x": 40.15,
+                  "y": 40.15
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 40.15,
+                  "y": 40.150000015
+                },
+                {
+                  "x": 40.15,
+                  "y": 39.85
+                },
+                {
+                  "x": 44.500000072,
+                  "y": 39.85
+                },
+                {
+                  "x": 44.500000072,
+                  "y": 40.150000015
+                },
+                {
+                  "x": 40.15,
+                  "y": 40.150000015
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 45.499999928,
+                  "y": 40.150000015
+                },
+                {
+                  "x": 45.499999928,
+                  "y": 39.85
+                },
+                {
+                  "x": 49.85,
+                  "y": 39.85
+                },
+                {
+                  "x": 49.85,
+                  "y": 40.150000015
+                },
+                {
+                  "x": 45.499999928,
+                  "y": 40.150000015
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "guid": "id-sha256:3677c5da2430b7bed34b",
+          "nativeType": "Wall",
+          "count": 1,
+          "storyIndex": 1,
+          "storyElevationMeters": 3,
+          "referenceGeometry": {
+            "kind": "WallReferenceLine",
+            "begin": {
+              "x": 40,
+              "y": 40
+            },
+            "end": {
+              "x": 40,
+              "y": 48
+            },
+            "arcAngle": 0,
+            "referenceLineLocation": 1,
+            "offset": 0,
+            "bottomOffsetFromHomeStory": 0,
+            "height": 3,
+            "thickness": 0.3,
+            "flipped": true
+          },
+          "resultantBoundsMeters": [
+            [
+              39.85,
+              40.15
+            ],
+            [
+              40.15,
+              47.85
+            ],
+            [
+              3,
+              6
+            ]
+          ],
+          "relationships": {},
+          "quantities": {
+            "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+            "surfaceAreaSquareMeters": 51.179999999999936,
+            "volumeCubicMeters": 6.497999999999877,
+            "bodyCount": 1,
+            "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+          },
+          "bodySignature": "0b6e78aca1b2e05b7bd05b26286939ef364829bd734d75034e87dd4d920d1e8b",
+          "floorPlanStatus": "NATIVE_CUT_FILL_AVAILABLE",
+          "material": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "id-sha256:460ab9cf8caf48c17c0c",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "id-sha256:547d736d45b5e8718116",
+              "name": "Бетон - 02"
+            }
+          },
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": [
+            {
+              "coordinates": [
+                {
+                  "x": 39.85,
+                  "y": 47.85
+                },
+                {
+                  "x": 39.85,
+                  "y": 44.599999984
+                },
+                {
+                  "x": 40.150000049,
+                  "y": 44.599999984
+                },
+                {
+                  "x": 40.150000049,
+                  "y": 47.85
+                },
+                {
+                  "x": 39.85,
+                  "y": 47.85
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 39.85,
+                  "y": 40.15
+                },
+                {
+                  "x": 40.150000049,
+                  "y": 40.15
+                },
+                {
+                  "x": 40.150000049,
+                  "y": 43.400000016
+                },
+                {
+                  "x": 39.85,
+                  "y": 43.400000016
+                },
+                {
+                  "x": 39.85,
+                  "y": 40.15
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "guid": "id-sha256:497e0b19b9b41188698e",
+          "nativeType": "Wall",
+          "count": 1,
+          "storyIndex": 1,
+          "storyElevationMeters": 3,
+          "referenceGeometry": {
+            "kind": "WallReferenceLine",
+            "begin": {
+              "x": 50,
+              "y": 40
+            },
+            "end": {
+              "x": 50,
+              "y": 48
+            },
+            "arcAngle": 0,
+            "referenceLineLocation": 1,
+            "offset": 0,
+            "bottomOffsetFromHomeStory": 0,
+            "height": 3,
+            "thickness": 0.3,
+            "flipped": true
+          },
+          "resultantBoundsMeters": [
+            [
+              49.85,
+              50.15
+            ],
+            [
+              39.85,
+              48.15
+            ],
+            [
+              3,
+              6
+            ]
+          ],
+          "relationships": {},
+          "quantities": {
+            "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+            "surfaceAreaSquareMeters": 55.13999999999989,
+            "volumeCubicMeters": 7.038000000000011,
+            "bodyCount": 1,
+            "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+          },
+          "bodySignature": "4f919923b46b96010b72934c06d52d57cf6e4fe3efe264c1d8fb817d79d07b93",
+          "floorPlanStatus": "NATIVE_CUT_FILL_AVAILABLE",
+          "material": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "id-sha256:460ab9cf8caf48c17c0c",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "id-sha256:547d736d45b5e8718116",
+              "name": "Бетон - 02"
+            }
+          },
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": [
+            {
+              "coordinates": [
+                {
+                  "x": 49.85,
+                  "y": 40.15
+                },
+                {
+                  "x": 49.85,
+                  "y": 40
+                },
+                {
+                  "x": 50.15,
+                  "y": 40
+                },
+                {
+                  "x": 50.15,
+                  "y": 40.15
+                },
+                {
+                  "x": 49.85,
+                  "y": 40.15
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 49.85,
+                  "y": 47.85
+                },
+                {
+                  "x": 49.85,
+                  "y": 44.599999984
+                },
+                {
+                  "x": 50.150000049,
+                  "y": 44.599999984
+                },
+                {
+                  "x": 50.150000049,
+                  "y": 47.85
+                },
+                {
+                  "x": 49.85,
+                  "y": 47.85
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 49.85,
+                  "y": 40.15
+                },
+                {
+                  "x": 50.150000049,
+                  "y": 40.15
+                },
+                {
+                  "x": 50.150000049,
+                  "y": 43.400000016
+                },
+                {
+                  "x": 49.85,
+                  "y": 43.400000016
+                },
+                {
+                  "x": 49.85,
+                  "y": 40.15
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 50.15,
+                  "y": 47.85
+                },
+                {
+                  "x": 50.15,
+                  "y": 48
+                },
+                {
+                  "x": 49.85,
+                  "y": 48
+                },
+                {
+                  "x": 49.85,
+                  "y": 47.85
+                },
+                {
+                  "x": 50.15,
+                  "y": 47.85
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "guid": "id-sha256:4b2c7d00e3d409a9ab32",
+          "nativeType": "Wall",
+          "count": 1,
+          "storyIndex": 1,
+          "storyElevationMeters": 3,
+          "referenceGeometry": {
+            "kind": "WallReferenceLine",
+            "begin": {
+              "x": 40,
+              "y": 48
+            },
+            "end": {
+              "x": 50,
+              "y": 48
+            },
+            "arcAngle": 0,
+            "referenceLineLocation": 1,
+            "offset": 0,
+            "bottomOffsetFromHomeStory": 0,
+            "height": 3,
+            "thickness": 0.3,
+            "flipped": true
+          },
+          "resultantBoundsMeters": [
+            [
+              39.85,
+              49.85
+            ],
+            [
+              47.85,
+              48.15
+            ],
+            [
+              3,
+              6
+            ]
+          ],
+          "relationships": {},
+          "quantities": {
+            "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+            "surfaceAreaSquareMeters": 67.79999999999993,
+            "volumeCubicMeters": 8.999999999999943,
+            "bodyCount": 1,
+            "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+          },
+          "bodySignature": "d332b179ba00ca80404fd635227da44f781a01ea85a56ef63f9023d75a3d2ff0",
+          "floorPlanStatus": "NATIVE_CUT_FILL_AVAILABLE",
+          "material": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "id-sha256:460ab9cf8caf48c17c0c",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "id-sha256:547d736d45b5e8718116",
+              "name": "Бетон - 02"
+            }
+          },
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": [
+            {
+              "coordinates": [
+                {
+                  "x": 40.15,
+                  "y": 48.15
+                },
+                {
+                  "x": 40,
+                  "y": 48.15
+                },
+                {
+                  "x": 40,
+                  "y": 47.85
+                },
+                {
+                  "x": 40.15,
+                  "y": 47.85
+                },
+                {
+                  "x": 40.15,
+                  "y": 48.15
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 49.85,
+                  "y": 48.15
+                },
+                {
+                  "x": 40.15,
+                  "y": 48.15
+                },
+                {
+                  "x": 40.15,
+                  "y": 47.85
+                },
+                {
+                  "x": 49.85,
+                  "y": 47.85
+                },
+                {
+                  "x": 49.85,
+                  "y": 48.15
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "guid": "id-sha256:f7a694272de27df78773",
+          "nativeType": "Wall",
+          "count": 1,
+          "storyIndex": 0,
+          "storyElevationMeters": 0,
+          "referenceGeometry": {
+            "kind": "WallReferenceLine",
+            "begin": {
+              "x": 40,
+              "y": 40
+            },
+            "end": {
+              "x": 40,
+              "y": 48
+            },
+            "arcAngle": 0,
+            "referenceLineLocation": 1,
+            "offset": 0,
+            "bottomOffsetFromHomeStory": 0,
+            "height": 3,
+            "thickness": 0.3,
+            "flipped": true
+          },
+          "resultantBoundsMeters": [
+            [
+              39.85,
+              40.15
+            ],
+            [
+              40.15,
+              47.85
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "relationships": {},
+          "quantities": {
+            "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+            "surfaceAreaSquareMeters": 51.119999999999926,
+            "volumeCubicMeters": 6.266999999999898,
+            "bodyCount": 1,
+            "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+          },
+          "bodySignature": "87a935f03175da42c849ac5f18219d55eee4bb0ed60f5a22ef9e6e42b972f1ce",
+          "floorPlanStatus": "NATIVE_CUT_FILL_AVAILABLE",
+          "material": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "id-sha256:460ab9cf8caf48c17c0c",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "id-sha256:547d736d45b5e8718116",
+              "name": "Бетон - 02"
+            }
+          },
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": [
+            {
+              "coordinates": [
+                {
+                  "x": 39.85,
+                  "y": 47.85
+                },
+                {
+                  "x": 39.85,
+                  "y": 44.599999984
+                },
+                {
+                  "x": 40.150000049,
+                  "y": 44.599999984
+                },
+                {
+                  "x": 40.150000049,
+                  "y": 47.85
+                },
+                {
+                  "x": 39.85,
+                  "y": 47.85
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 39.85,
+                  "y": 40.15
+                },
+                {
+                  "x": 40.150000049,
+                  "y": 40.15
+                },
+                {
+                  "x": 40.150000049,
+                  "y": 43.400000016
+                },
+                {
+                  "x": 39.85,
+                  "y": 43.400000016
+                },
+                {
+                  "x": 39.85,
+                  "y": 40.15
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "guid": "id-sha256:0f66b42e488c297215cd",
+          "nativeType": "Wall",
+          "count": 1,
+          "storyIndex": 1,
+          "storyElevationMeters": 3,
+          "referenceGeometry": {
+            "kind": "WallReferenceLine",
+            "begin": {
+              "x": 40,
+              "y": 40
+            },
+            "end": {
+              "x": 50,
+              "y": 40
+            },
+            "arcAngle": 0,
+            "referenceLineLocation": 1,
+            "offset": 0,
+            "bottomOffsetFromHomeStory": 0,
+            "height": 3,
+            "thickness": 0.3,
+            "flipped": true
+          },
+          "resultantBoundsMeters": [
+            [
+              39.85,
+              49.85
+            ],
+            [
+              39.85,
+              40.15
+            ],
+            [
+              3,
+              6
+            ]
+          ],
+          "relationships": {},
+          "quantities": {
+            "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+            "surfaceAreaSquareMeters": 67.79999999999993,
+            "volumeCubicMeters": 8.999999999999943,
+            "bodyCount": 1,
+            "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+          },
+          "bodySignature": "c78908eecd53dceaeafe322eee17c7e14b193d5b90021aecbeffd6405cde00da",
+          "floorPlanStatus": "NATIVE_CUT_FILL_AVAILABLE",
+          "material": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "id-sha256:460ab9cf8caf48c17c0c",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "id-sha256:547d736d45b5e8718116",
+              "name": "Бетон - 02"
+            }
+          },
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": [
+            {
+              "coordinates": [
+                {
+                  "x": 40.15,
+                  "y": 40.15
+                },
+                {
+                  "x": 40,
+                  "y": 40.15
+                },
+                {
+                  "x": 40,
+                  "y": 39.85
+                },
+                {
+                  "x": 40.15,
+                  "y": 39.85
+                },
+                {
+                  "x": 40.15,
+                  "y": 40.15
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 49.85,
+                  "y": 40.15
+                },
+                {
+                  "x": 40.15,
+                  "y": 40.15
+                },
+                {
+                  "x": 40.15,
+                  "y": 39.85
+                },
+                {
+                  "x": 49.85,
+                  "y": 39.85
+                },
+                {
+                  "x": 49.85,
+                  "y": 40.15
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "guid": "id-sha256:1e3ed023078481e26610",
+          "nativeType": "Wall",
+          "count": 1,
+          "storyIndex": 0,
+          "storyElevationMeters": 0,
+          "referenceGeometry": {
+            "kind": "WallReferenceLine",
+            "begin": {
+              "x": 40,
+              "y": 48
+            },
+            "end": {
+              "x": 50,
+              "y": 48
+            },
+            "arcAngle": 0,
+            "referenceLineLocation": 1,
+            "offset": 0,
+            "bottomOffsetFromHomeStory": 0,
+            "height": 3,
+            "thickness": 0.3,
+            "flipped": true
+          },
+          "resultantBoundsMeters": [
+            [
+              39.85,
+              49.85
+            ],
+            [
+              47.85,
+              48.15
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "relationships": {},
+          "quantities": {
+            "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+            "surfaceAreaSquareMeters": 67.79999999999993,
+            "volumeCubicMeters": 8.704499999999834,
+            "bodyCount": 1,
+            "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+          },
+          "bodySignature": "1b4e449488196fe23c842c70f1d5d1ec084016e187819849a2c7a3a26c63a67e",
+          "floorPlanStatus": "NATIVE_CUT_FILL_AVAILABLE",
+          "material": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "id-sha256:460ab9cf8caf48c17c0c",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "id-sha256:547d736d45b5e8718116",
+              "name": "Бетон - 02"
+            }
+          },
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": [
+            {
+              "coordinates": [
+                {
+                  "x": 39.85,
+                  "y": 47.85
+                },
+                {
+                  "x": 40.15,
+                  "y": 47.85
+                },
+                {
+                  "x": 39.85,
+                  "y": 48.15
+                },
+                {
+                  "x": 39.85,
+                  "y": 47.85
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 39.85,
+                  "y": 48.15
+                },
+                {
+                  "x": 40.15,
+                  "y": 47.85
+                },
+                {
+                  "x": 40.15,
+                  "y": 48.15
+                },
+                {
+                  "x": 39.85,
+                  "y": 48.15
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 49.85,
+                  "y": 48.15
+                },
+                {
+                  "x": 40.15,
+                  "y": 48.15
+                },
+                {
+                  "x": 40.15,
+                  "y": 47.85
+                },
+                {
+                  "x": 49.85,
+                  "y": 47.85
+                },
+                {
+                  "x": 49.85,
+                  "y": 48.15
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "guid": "id-sha256:e082e6637458b40def2f",
+          "nativeType": "Wall",
+          "count": 1,
+          "storyIndex": 0,
+          "storyElevationMeters": 0,
+          "referenceGeometry": {
+            "kind": "WallReferenceLine",
+            "begin": {
+              "x": 43,
+              "y": 44
+            },
+            "end": {
+              "x": 44,
+              "y": 44
+            },
+            "arcAngle": 0,
+            "referenceLineLocation": 1,
+            "offset": 0,
+            "bottomOffsetFromHomeStory": 0,
+            "height": 1.2,
+            "thickness": 0.1,
+            "flipped": true
+          },
+          "resultantBoundsMeters": [
+            [
+              43.15,
+              44
+            ],
+            [
+              43.95,
+              44.05
+            ],
+            [
+              0,
+              1.2
+            ]
+          ],
+          "relationships": {},
+          "quantities": {
+            "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+            "surfaceAreaSquareMeters": 2.44999999999998,
+            "volumeCubicMeters": 0.10199999999999676,
+            "bodyCount": 1,
+            "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+          },
+          "bodySignature": "b7f4cf71a8c6b28b14e8905a39112e81ce7b975e7edb56c5eae193859023c98b",
+          "floorPlanStatus": "NATIVE_CUT_FILL_AVAILABLE",
+          "material": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "id-sha256:460ab9cf8caf48c17c0c",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "id-sha256:547d736d45b5e8718116",
+              "name": "Бетон - 02"
+            }
+          },
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": [
+            {
+              "coordinates": [
+                {
+                  "x": 44,
+                  "y": 44.050000006
+                },
+                {
+                  "x": 43.149999992,
+                  "y": 44.050000006
+                },
+                {
+                  "x": 43.149999992,
+                  "y": 43.950000003
+                },
+                {
+                  "x": 44,
+                  "y": 43.950000003
+                },
+                {
+                  "x": 44,
+                  "y": 44.050000006
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "nativeInteractiveScheduleRows": "NOT_VERIFIED_NO_INSTALLED_ROW_READ_OR_CONFIGURE_CONTRACT"
+    },
+    "Window": {
+      "count": 4,
+      "rows": [
+        {
+          "guid": "id-sha256:8ae117c09289712b0e11",
+          "nativeType": "Window",
+          "count": 1,
+          "storyIndex": 0,
+          "storyElevationMeters": 0,
+          "referenceGeometry": {
+            "centerOffsetAlongHost": 4,
+            "sillHeight": 1,
+            "width": 1.2,
+            "height": 1.2,
+            "refSide": false,
+            "reflected": false
+          },
+          "resultantBoundsMeters": [
+            [
+              50.1,
+              50.175
+            ],
+            [
+              43.4,
+              44.6
+            ],
+            [
+              1,
+              2.2
+            ]
+          ],
+          "relationships": {
+            "hostGuid": "id-sha256:6a94dc736ea218863f63"
+          },
+          "quantities": {
+            "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+            "surfaceAreaSquareMeters": 4.128999999999967,
+            "volumeCubicMeters": 0.04173749999999658,
+            "bodyCount": 7,
+            "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+          },
+          "bodySignature": "eba27405a452f63a3a8a8f087dcf956787404c3c8f969ae82f8a637a691e448a",
+          "floorPlanStatus": "NATIVE_CUT_FILL_AVAILABLE",
+          "material": {},
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": [
+            {
+              "coordinates": [
+                {
+                  "x": 50.15,
+                  "y": 44.6
+                },
+                {
+                  "x": 50.1,
+                  "y": 44.6
+                },
+                {
+                  "x": 50.1,
+                  "y": 44.525
+                },
+                {
+                  "x": 50.15,
+                  "y": 44.525
+                },
+                {
+                  "x": 50.15,
+                  "y": 44.6
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 50.1,
+                  "y": 43.4
+                },
+                {
+                  "x": 50.15,
+                  "y": 43.4
+                },
+                {
+                  "x": 50.15,
+                  "y": 43.475
+                },
+                {
+                  "x": 50.1,
+                  "y": 43.475
+                },
+                {
+                  "x": 50.1,
+                  "y": 43.4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "guid": "id-sha256:3940fd04267e7b5d887b",
+          "nativeType": "Window",
+          "count": 1,
+          "storyIndex": 0,
+          "storyElevationMeters": 0,
+          "referenceGeometry": {
+            "centerOffsetAlongHost": 4,
+            "sillHeight": 1,
+            "width": 1.2,
+            "height": 1.2,
+            "refSide": false,
+            "reflected": false
+          },
+          "resultantBoundsMeters": [
+            [
+              40.1,
+              40.175
+            ],
+            [
+              43.4,
+              44.6
+            ],
+            [
+              1,
+              2.2
+            ]
+          ],
+          "relationships": {
+            "hostGuid": "id-sha256:f7a694272de27df78773"
+          },
+          "quantities": {
+            "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+            "surfaceAreaSquareMeters": 4.128999999999967,
+            "volumeCubicMeters": 0.041737499999994584,
+            "bodyCount": 7,
+            "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+          },
+          "bodySignature": "6f20e0687958590a5207d86e53bf47163ca13e4bedbf2fb951f3c7bd4f6f666f",
+          "floorPlanStatus": "NATIVE_CUT_FILL_AVAILABLE",
+          "material": {},
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": [
+            {
+              "coordinates": [
+                {
+                  "x": 40.15,
+                  "y": 44.6
+                },
+                {
+                  "x": 40.1,
+                  "y": 44.6
+                },
+                {
+                  "x": 40.1,
+                  "y": 44.525
+                },
+                {
+                  "x": 40.15,
+                  "y": 44.525
+                },
+                {
+                  "x": 40.15,
+                  "y": 44.6
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 40.1,
+                  "y": 43.4
+                },
+                {
+                  "x": 40.15,
+                  "y": 43.4
+                },
+                {
+                  "x": 40.15,
+                  "y": 43.475
+                },
+                {
+                  "x": 40.1,
+                  "y": 43.475
+                },
+                {
+                  "x": 40.1,
+                  "y": 43.4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "guid": "id-sha256:d247a6d036a10f9f1ff1",
+          "nativeType": "Window",
+          "count": 1,
+          "storyIndex": 1,
+          "storyElevationMeters": 3,
+          "referenceGeometry": {
+            "centerOffsetAlongHost": 4,
+            "sillHeight": 1,
+            "width": 1.2,
+            "height": 1.2,
+            "refSide": false,
+            "reflected": false
+          },
+          "resultantBoundsMeters": [
+            [
+              50.1,
+              50.175
+            ],
+            [
+              43.4,
+              44.6
+            ],
+            [
+              4,
+              5.2
+            ]
+          ],
+          "relationships": {
+            "hostGuid": "id-sha256:497e0b19b9b41188698e"
+          },
+          "quantities": {
+            "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+            "surfaceAreaSquareMeters": 4.128999999999964,
+            "volumeCubicMeters": 0.04173749999999596,
+            "bodyCount": 7,
+            "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+          },
+          "bodySignature": "35b2c7ca525c80bd70b6fa14f673d82612bdf0dd5286667afc5a5ec781eca047",
+          "floorPlanStatus": "NATIVE_CUT_FILL_AVAILABLE",
+          "material": {},
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": [
+            {
+              "coordinates": [
+                {
+                  "x": 50.15,
+                  "y": 44.6
+                },
+                {
+                  "x": 50.1,
+                  "y": 44.6
+                },
+                {
+                  "x": 50.1,
+                  "y": 44.525
+                },
+                {
+                  "x": 50.15,
+                  "y": 44.525
+                },
+                {
+                  "x": 50.15,
+                  "y": 44.6
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 50.1,
+                  "y": 43.4
+                },
+                {
+                  "x": 50.15,
+                  "y": 43.4
+                },
+                {
+                  "x": 50.15,
+                  "y": 43.475
+                },
+                {
+                  "x": 50.1,
+                  "y": 43.475
+                },
+                {
+                  "x": 50.1,
+                  "y": 43.4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "guid": "id-sha256:b766ca8c720e1b6dd174",
+          "nativeType": "Window",
+          "count": 1,
+          "storyIndex": 1,
+          "storyElevationMeters": 3,
+          "referenceGeometry": {
+            "centerOffsetAlongHost": 4,
+            "sillHeight": 1,
+            "width": 1.2,
+            "height": 1.2,
+            "refSide": false,
+            "reflected": false
+          },
+          "resultantBoundsMeters": [
+            [
+              40.1,
+              40.175
+            ],
+            [
+              43.4,
+              44.6
+            ],
+            [
+              4,
+              5.2
+            ]
+          ],
+          "relationships": {
+            "hostGuid": "id-sha256:3677c5da2430b7bed34b"
+          },
+          "quantities": {
+            "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+            "surfaceAreaSquareMeters": 4.128999999999964,
+            "volumeCubicMeters": 0.04173749999999801,
+            "bodyCount": 7,
+            "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+          },
+          "bodySignature": "32905016d97acce2ac287f5fcdad809c12aaa15eb6c33360fc01138e3263af5d",
+          "floorPlanStatus": "NATIVE_CUT_FILL_AVAILABLE",
+          "material": {},
+          "materialCoverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "floorPlanPolygons": [
+            {
+              "coordinates": [
+                {
+                  "x": 40.15,
+                  "y": 44.6
+                },
+                {
+                  "x": 40.1,
+                  "y": 44.6
+                },
+                {
+                  "x": 40.1,
+                  "y": 44.525
+                },
+                {
+                  "x": 40.15,
+                  "y": 44.525
+                },
+                {
+                  "x": 40.15,
+                  "y": 44.6
+                }
+              ]
+            },
+            {
+              "coordinates": [
+                {
+                  "x": 40.1,
+                  "y": 43.4
+                },
+                {
+                  "x": 40.15,
+                  "y": 43.4
+                },
+                {
+                  "x": 40.15,
+                  "y": 43.475
+                },
+                {
+                  "x": 40.1,
+                  "y": 43.475
+                },
+                {
+                  "x": 40.1,
+                  "y": 43.4
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "nativeInteractiveScheduleRows": "NOT_VERIFIED_NO_INSTALLED_ROW_READ_OR_CONFIGURE_CONTRACT"
+    }
+  },
+  "normativeAcceptance": "NOT_EXECUTED",
+  "verticalCoordinates": "NOT_VERIFIED_NO_INSTALLED_2D_PRIMITIVE_EXPORT_CONTRACT",
+  "nativeMaterialLabels": "Some Native Model Dump story/GDL labels contain replacement characters; numeric story levels and attribute identities remain factual. Do not promote damaged display labels."
+}

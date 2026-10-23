@@ -1,0 +1,33 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-WALL-ROOF-ACTUAL-UNDERSIDE-NATIVE109",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ],
+      "statement": "True native Wall/Roof underside contact2.33623338255613m2 matches source-derived2.336233382576165m2, actual lower BREP plane and changed Wall body; no new volume collisions.109GUID/45context saved/reopened; all107accepted GUID/body/material/story retained. Requested skipPolygonHolestrue/readbackfalse remains metadata NOT_VERIFIED with actual geometry independently proven and no write replay. Four original gaps measured by actual face overlap, unchanged. Actual IFC52elements/45bounds/20quantitymatches/0mismatch/26materials/12portrelations/6openinghosts.469Windows host/Windows+LinuxCI PASS,6exact GitHubcode blobs. S03PARTIAL/S10BLOCKED; no exposed sized transition/segment maps, no APX/global preference/existing network changes. Publication zero native calls.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "kind": "TEST_RESULT",
+      "sha256": "de9254338b764727a24b5d1481deb147258b14a64f0dffef83920b91a0c2515a",
+      "source_revision": "7966db58ca8830b43938a03cc064bcc3e952a21e",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "31cc7cb2b850e44a794e987cda172245b308c35722e42e613ada0e32faf79c08",
+      "source_revision": "7966db58ca8830b43938a03cc064bcc3e952a21e",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

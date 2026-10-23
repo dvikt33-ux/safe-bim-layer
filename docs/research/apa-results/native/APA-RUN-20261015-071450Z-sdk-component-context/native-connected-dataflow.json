@@ -1,0 +1,21 @@
+{
+  "schema": "APA_COMPONENT_CONTEXT_DATAFLOW_V1",
+  "status": "CAPTURED_NEW_NATIVE_READS_TO_EXISTING_BIM_GRAPH_PASS",
+  "components": 86,
+  "independentExistingMembershipOwnerMatch": 86,
+  "homeStoryNativeMatch": 86,
+  "nodes": 96,
+  "edges": 87,
+  "affectedCount": 42,
+  "drawingSourceEdges": 1,
+  "omittedReasons": [
+    "DRAWING_SOURCE_NOT_IN_CAPTURED_VIEWMAP",
+    "DRAWING_SOURCE_NOT_IN_CAPTURED_VIEWMAP",
+    "DRAWING_SOURCE_NOT_IN_CAPTURED_VIEWMAP"
+  ],
+  "sourceSHA256": "b4caccbac312a5591b55be2d0d651714634c203e3b7934862612d2aa2818f2f6",
+  "planHash": "8a9f702f9db1d1b5bf2ac4da45a459ff72d2435cdd0b7db545a0d0d07770ce60",
+  "nativeModelWrites": 0,
+  "physicalContact": "NOT_INFERRED",
+  "quantityEngineCalled": false
+}

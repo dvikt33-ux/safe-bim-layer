@@ -1,0 +1,75 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261011-195000Z-isolated-authored-core",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A03",
+  "substep_id": "APA-P70.A03.S02",
+  "executor": "codex-apa-core-native-20261011",
+  "executor_run_id": "APA-RUN-20261011T1920Z-isolated-authored-native",
+  "phase": "SOURCE",
+  "started_at": "2026-10-11T19:50:00Z",
+  "finished_at": "2026-10-11T19:50:39Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 build5101 RUS (captured native evidence)",
+    "sdk": null,
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-isolated-authored-native-20261011"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/48",
+      "revision": "71b288576600c1855ae6673c16257bed491577f8",
+      "source_sha": "71b288576600c1855ae6673c16257bed491577f8"
+    }
+  ],
+  "inputs": [
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-APA-PLN-WRITE-AUTH-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-AUTHORED-NATIVE-SAVED-EVIDENCE",
+      "statement": "Captured native receipts prove17primary elements plus2ownedsegments, saved/reopened with20baselineGUIDs preserved. This publication is source inspection of these artifacts.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-AUTHORED-NATIVE-PERSISTENCE"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-AUTHORED-NATIVE-CODE-CI",
+      "statement": "PR48 source71b2885 passed289offline tests; native acceptance derives separately from captured readback.",
+      "status": "OFFLINE_PASS",
+      "evidence_ids": [
+        "EV-AUTHORED-CODE-CI"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-AUTHORED-NATIVE-PERSISTENCE",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-195000Z-isolated-authored-core/persistence-20261011-building17/result.json",
+      "kind": "LOCAL_LOG",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "baa744d92a57a9ea75acda3152d5c0cdbc25213641c12ed56a96f56a1fbbc0bd",
+      "source_revision": "71b288576600c1855ae6673c16257bed491577f8"
+    },
+    {
+      "evidence_id": "EV-AUTHORED-CODE-CI",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38169485089",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "71b288576600c1855ae6673c16257bed491577f8"
+    }
+  ],
+  "report_markdown": "# APA-P70.A03.S02 — authored native building, saved and reopened\n\nThe user explicitly authorized PLN writes in the current chat. On Archicad 29 build5101 RUS / Tapir1.5.10, exact port19724 and `C:\\LocalAI\\APA_Isolated_Writer_Test_01.pln`, one authored brief/layout now produces a connected two-storey building through the existing Project Accelerator, BIM Graph, SceneWriter and durable SQLite operation journal.\n\nVerified result: 8 native Basic walls, 2 native Basic slabs, 2 native columns, 1 door and4 windows with exact host GUIDs. The source20GUIDs are all retained. Total inventory39 consists of20baseline +17primary +2ColumnSegment GUIDs whose ownership was independently read via GetSubelementsOfHierarchicalElements. Footprint10x8m, stories0/+3m, storey heights3m. Walls/slabs/columns use freshly resolved “Железобетон - Конструкционный”, GUID63DB2CE9-903D-45C0-B93C-B3C604C77394; thicknesses .30/.20m.\n\nSaveProject and OpenProject returned success; all17element geometries, types, native stories, material GUIDs and5opening host GUIDs were independently read again after reopening. PLN SHA256 after save and reopen: `8fe34a89a3ffa79e27cb3fc0c981b55be38f89b93fbac3582f7fdb83844d1631`.\n\nTwo observed integration failures are preserved verbatim: initial upper slab incorrectly used relative Z for CreateSlabs (native command uses absolute project Z); then whole-model inventory omitted ColumnSegments. Recovery never replayed Create. The upper slab GUID was reconciled by a durable one-shot ModifySlabs and original6creates were retained; later inventory correction was read-only after proving direct column/segment ownership. Historical failed ledgers/results remain intact.\n\nThe 17-element input and bounded extension are in [draft PR48](https://github.com/dvikt33-ux/safe-bim-layer/pull/48), stacked on PR47, source commit `71b288576600c1855ae6673c16257bed491577f8`. [CI38169485089](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38169485089) passed289offline tests plus contract and PowerShell checks. Offline results are separate from native results.\n\nRaw dispatched intents/responses/timings, independent reads, failed and successful checkpoints, save/reopen receipts and harness sources are under [docs/research/apa-results/native/APA-RUN-20261011-195000Z-isolated-authored-core](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-195000Z-isolated-authored-core); EVIDENCE_SHA256.json hashes every copied byte. No PLN or proprietary library binary is uploaded.\n\nThis publication request is a separate read-only SOURCE inspection of already captured native evidence. Its safety flags describe publication: this publisher does not write PLN, APX or main. The preceding authorized native execution did modify the named test PLN; raw native evidence records that explicitly. This report does not pretend publication itself executed Archicad.\n\nS02 acceptance covers native authored assembly through the reused writer. Incremental geometry edit/explicit restore S03 remains next. Native completeness S04 and combined core acceptance A08.S04 require their separate checks. Structural/junction/normative acceptance, roof/stair/MEP, automatic space planning, Archicad30 compatibility and visible-UI quality are NOT_VERIFIED. Door/window default library parts were used successfully here; arbitrary library compatibility is not established. No main merge, protected/tested branch/APX change, Deep Research or new paid model run occurred.\n",
+  "next_substep": "APA-P70.A03.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

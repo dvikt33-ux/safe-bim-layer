@@ -1,0 +1,155 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261015-140914Z-native-parametric-mep",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-native-parametric-20261015",
+  "executor_run_id": "APA-CLAIM-NATIVE-PARAMETRIC-20261015T131611Z",
+  "phase": "LIVE",
+  "started_at": "2026-10-15T13:16:11Z",
+  "finished_at": "2026-10-15T14:09:14Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "Authorized409copy read-only current placed parameter/attribute/IFC flow and actual3D visual checks; no writes",
+    "sdk": "Shared native assembly MODIFY and missing public MEP topology built,not installed",
+    "tapir": "Existing commands reused through same router and journal; no quantities",
+    "source_branch": "feature/apa-native-parametric-mep-20261015"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/107",
+      "revision": "9a3091638eaa1a9c72f9a08c17d02855d8419edc",
+      "source_sha": "9a3091638eaa1a9c72f9a08c17d02855d8419edc"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-PARAMETRIC-NATIVE-FLOW",
+      "statement": "Current original runtime reads one placed frame:49GDLparameters,oneIFCidentity,sevenproperties,two typedattributeedges. Existing graph yields60nodes59edges;DependencyImpact11nodes. Actual3D sample selections match3nativeGUIDs and retained geometry signatures. Saved bytes unchanged,no modelwrites.",
+      "status": "LIVE_PASS",
+      "evidence_ids": [
+        "EV-0"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-PARAMETRIC-SDK-BUILD",
+      "statement": "Shared9kind native MODIFY with stamps,masked SDK changes,typed attributes and existing SceneWriter/SQLite readback adapter; public MEP ownership topology read. Full Release build passes. New3contracts absent from original runtime; no MODIFY or topology LIVE_PASS.",
+      "status": "BUILD_PASS",
+      "evidence_ids": [
+        "EV-1",
+        "EV-2",
+        "EV-3"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-PARAMETRIC-NO-TEST-PUBLICATION",
+      "statement": "Actual code/canonical/default workflow hashes inspected; only push,pull_request and manual events; all commits skipCI; direct existing publisher functions, no dispatch,test runner, quantity engine, APX installation or project saves. Opening107switch cancelled at current save prompt.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-0",
+        "EV-6",
+        "EV-7"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-140914Z-native-parametric-mep/native-runtime.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "c2269b5ad5b0e271bb2a4f17275596f383a636be6e5e911a752e21f76dcd4247",
+      "source_revision": "9a3091638eaa1a9c72f9a08c17d02855d8419edc"
+    },
+    {
+      "evidence_id": "EV-1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-140914Z-native-parametric-mep/SDK-build.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "0af3d66025654d19375ce3e39c597ad9f3e3b9628e7dcfcf91ac3f8ea571bc54",
+      "source_revision": "9a3091638eaa1a9c72f9a08c17d02855d8419edc"
+    },
+    {
+      "evidence_id": "EV-2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-140914Z-native-parametric-mep/module-contracts.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "72b1a74ea540d6096608a42b8a5c8313d485c658c3ac0024b6432268a2d223ac",
+      "source_revision": "9a3091638eaa1a9c72f9a08c17d02855d8419edc"
+    },
+    {
+      "evidence_id": "EV-3",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-140914Z-native-parametric-mep/module-coverage.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "8700c47b80af14a05784593eb3dedeb801e332422f44584e1976a933db3c4873",
+      "source_revision": "9a3091638eaa1a9c72f9a08c17d02855d8419edc"
+    },
+    {
+      "evidence_id": "EV-4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-140914Z-native-parametric-mep/gap-register.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "568a83df42ae25afe4935fde6a38234875ab03dfcc6dc6e42f3aa384e16b3f03",
+      "source_revision": "9a3091638eaa1a9c72f9a08c17d02855d8419edc"
+    },
+    {
+      "evidence_id": "EV-5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-140914Z-native-parametric-mep/next-capability-proposals.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "26276b4281b71319d7c22c03a0fd917e40e18a495f57e0d73553793948e99ca7",
+      "source_revision": "9a3091638eaa1a9c72f9a08c17d02855d8419edc"
+    },
+    {
+      "evidence_id": "EV-6",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-140914Z-native-parametric-mep/publication-preflight.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "915277d6ede4aa7e4e7eb07b59d15b05a2e8abee3f37b1ecb76e9bdf118fa1b2",
+      "source_revision": "9a3091638eaa1a9c72f9a08c17d02855d8419edc"
+    },
+    {
+      "evidence_id": "EV-7",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-140914Z-native-parametric-mep/publication-actions.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "0c5cc39a7148ce059342ab088234936cddf0f0b8dda73a93e323ef5215d9ad4d",
+      "source_revision": "9a3091638eaa1a9c72f9a08c17d02855d8419edc"
+    }
+  ],
+  "report_markdown": "# Native parametric editing and linked parameter data\n\nContinuation of PR104, exact base `6ae582b9f2a9666389fc06fd0528bbfff3fde6b4`. A11.S03 remains PARTIAL. This package performs **no offline tests, model writes, APX installation or quantity-engine calls**.\n\nThe product now has a shared, compiled native MODIFY contract and a single preparation/readback adapter. These new mutation paths are **BUILD_PASS, not LIVE_PASS**. Existing runtime calls independently demonstrate a useful material → placed GDL parameter → native component → IFC identity → property dependency chain. The previously pending visual inspection of the three accepted complex native samples is completed.\n\n## Available operations and exact limits\n\n| Native type | Masked changes implemented | Scope boundary |\n| --- | --- | --- |\n| Curtain Wall root | Height, story-relative level | Reference lines, segment patterns and full frame/panel schemes require additional native memo work. Existing MoveElements handles placement. |\n| Curtain Wall frame | Building Material, surface, own-material flag | Exact typed attribute GUID required; names are not identities. |\n| Curtain Wall panel | Thickness, Building Material, outer/inner/cut surfaces and override flags | Root and target GUID retained; generated children must be reconciled. |\n| Railing root | Default segment height, default post offset, bottom offset | A default height is not proof that every customized segment changes. Association with Stair remains NOT_VERIFIED. |\n| Railing segment/node | Segment height and offsets; node elevation/post offset | Does not create associations or alter the reference-path topology. |\n| Railing rail/handrail | Height, horizontal offset, visibility | Applicable native component fields only. |\n| Shell | Level; Basic thickness/material or Composite identity; surfaces and flags; Extruded begin/vector | Applicable structure/class fields only. Extruded profile editing preserves vertex count and accepts one straight contour without arcs. Existing memo closure/body/edge data are preserved. New holes and Revolved/Ruled editing remain unsupported. |\n\n`GetNativeAssemblyEditStateV1` reads current type, story, decimal-string native modification stamp, applicable values and typed attribute identities. `ModifyNativeAssemblyV1` takes the exact GUID, expected type/stamp and explicit changes. It rereads and checks the stamp inside the native undoable operation, applies SDK masks with `ACAPI_Element_Change`, and never implements MODIFY by delete/create. Root/component masks are shared across nine native types; source availability is not execution permission.\n\n`scripts/apa_native_parameter_edit.py` provides `prepare_assembly_edit`, `execute_assembly_edit` and `prepare_existing_gdl_edit`. Preparation returns an existing dynamic-command ticket and no permission. Execution delegates to the **existing router → SceneWriter → SQLite**. The caller supplies explicit authorization for an isolated copy, the affected root/complete child subtree, retained signatures and saved-model identity. A fresh captured-state digest guards preconditions; independent parameter, attribute and membership reads reconcile added/removed children. Physical resultant geometry still requires separate body acceptance. No automatic dependent writes, second journal, retries or alternative executor were added.\n\n## Public MEP integration\n\n`GetNativeMEPTopologyV1` adds the missing public SDK ownership/identity facts for RoutingElement, RoutingSegment, RoutingNode, RigidSegment and Transition. It returns native parents, segment/node IDs, system identity, applicable dimensions/preferences, terminal logical references and transition ports. Existing `GetMEPPorts`, `GetMEPRoutingElements` and `GetMEPDistributionSystems` provide ports, physical flags, peer references and distributions; those implementations are reused.\n\nThe existing dependency adapter preserves separate native, port, connection, system, segment and node namespaces. A physical connection requires reciprocal native port evidence. Logical references, system membership and geometric proximity never substitute for physical connectivity. Missing specialized headers/relationships remain explicit. Current open architectural copy has no MEP elements or systems, so positive topology runtime validation remains NOT_VERIFIED. No global preferences, route GUIDs, connectors or quantity engine were changed.\n\n## Practical GDL / material / IFC flow in the original runtime\n\nOne existing placed Curtain Wall frame supplies **49 current GDL parameters**, including one **2×2 array**. The adapter reuses `SetGDLParametersOfElements` rather than introducing another setter. Current GetGDL returns flattened arrays, while the existing setter interprets a flat array as Nx1. Preparation reconstructs the declared row-major matrix, preserving both dimensions; scalar/array/type/lock checks fail closed. A current-value preview was prepared, **not executed**. Native GDL editability and dependent script effects are not accepted by preparation alone.\n\nCurrent reads of that same frame yield **one nonempty IFC identity and seven property rows**. Native Building Material and Surface headers resolve typed GDL attribute indices to actual attribute GUIDs. The existing graph now represents **60 nodes / 59 dependencies**: 49 parameter edges, two typed material/surface edges, one IFC identity and seven property edges. Existing `DependencyImpact` finds **11 affected nodes** for a selected material change. This is impact analysis, not an instruction to perform dependent writes. A library-part edge was omitted because no actual library-part identity was captured. IFC accessor strings do not prove export or complete semantic compatibility; `IFC_EXPORT_NOT_VERIFIED` remains.\n\n## Native visual and retention evidence\n\nThe existing Shell, Railing and Curtain Wall were selected individually in the actual Archicad 3D window. Native `GetSelectedElements` confirmed the sample GUID for each screenshot. Targeted Native Model Dump readback of only those three roots matches their accepted geometry signatures; saved PLN bytes remain unchanged. This closes the prior visual-inspection gap without recreating samples or repeating the full 409-GUID inventory.\n\n![Existing native Extruded Shell](https://github.com/dvikt33-ux/safe-bim-layer/blob/9a3091638eaa1a9c72f9a08c17d02855d8419edc/docs/evidence/native-parametric-visual/shell.png)\n\n![Existing native Railing](https://github.com/dvikt33-ux/safe-bim-layer/blob/9a3091638eaa1a9c72f9a08c17d02855d8419edc/docs/evidence/native-parametric-visual/railing.png)\n\n![Existing native Curtain Wall](https://github.com/dvikt33-ux/safe-bim-layer/blob/9a3091638eaa1a9c72f9a08c17d02855d8419edc/docs/evidence/native-parametric-visual/curtain-wall.png)\n\nAn attempt to open the separate 107-GUID Opening project encountered a save-changes prompt for the current model. **Open was cancelled** to preserve unknown unsaved state. No Save/Discard was selected. The prior 107-project post-close comparison remains NOT_VERIFIED; this no longer depends on an unavailable computer-use interface.\n\n## Build, runtime and catalog\n\n- Full Archicad29 Windows Release compile/link passed. Binary hash, size, build identity, source hashes and private build-log digest are in `docs/evidence/APA_NATIVE_PARAMETRIC_BUILD.json`; binaries and raw private logs are not committed.\n- Three new SDK contracts are source-identified, implemented and BUILD_PASS. All three were independently reported absent by the original runtime registration probe. They have **no CALLABLE_VERIFIED or LIVE_PASS** yet.\n- Existing source catalog attachment produces **391 preparable entries**: 276 Tapir-source, 73 official JSON, 32 add-on-source and ten local entries. This is a deduplicated preparation count, not 391 installed commands. The functional manifest has 18 SDK contracts. Current original-runtime compatibility retains the historical337 baseline; only the three new negative registration checks are fresh in this package.\n- Exact PR104 binary `2ed42a…e91cb` permission is still pending; no duplicate request or deployment occurred. The newer build is a distinct binary and is not authorized by that pending request.\n- Quantity engine stays QUARANTINED. The three unmatched Drawing sources, class-specific Shell extensions and unrestricted assembly path editing retain their precise limitations. No Navigator update was invoked.\n\n## Publication without tests\n\nActual workflows on the code base, canonical research branch and default branch were inspected before publication. Only push, pull_request and manually dispatched workflows were present; no pull_request_target or workflow_run handler was found. All new commits include `[skip ci]`. The existing publisher is invoked directly for one immutable run, its normal indexes and receipt; no publisher workflow, watchdog or test runner is invoked. The preexisting pending publisher file is preserved. GitHub byte/blob readback and Actions inspection establish the publication outcome. Workflow behavior follows the [GitHub skip-workflow documentation](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs); skip text alone is not treated as a universal guarantee.\n\n## Exact continuation\n\n1. When the existing exact PR104 APX permission is answered, perform only its authorized read-only enhanced-field checks and restoration; do not substitute this newer binary.\n2. Separately authorize the new compiled binary and an isolated-copy MODIFY scenario. Validate one root parameter, one native component attribute and an Extruded profile/vector change through the shared journal, independently accept bodies/child GUID mapping, then Save/Open. Do not alter accepted samples without that permission.\n3. Validate the new MEP topology on an existing positive MEP model once it can be accessed without losing unsaved current state. Then extend native paths/patterns and Shell contour classes sequentially. Audit proposals are recorded without creating duplicate task IDs.\n\n\nPublished [draft PR107](https://github.com/dvikt33-ux/safe-bim-layer/pull/107) at `9a3091638eaa1a9c72f9a08c17d02855d8419edc`. Canonical claim revision176; task remainsPARTIAL. No offline tests, native model writes or APX changes. Actual build is distinct from the pending PR104 exact-binary request.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

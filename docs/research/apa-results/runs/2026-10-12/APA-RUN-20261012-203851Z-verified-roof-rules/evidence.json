@@ -1,0 +1,33 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-VERIFIED-ROOF-RULES",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ],
+      "statement": "Existing normative/native adapters execute verified displayed source conditions on actual four Wall/Roof targets, source-linked dependency graph and one shared actual roof measurement.4PASS_DOCUMENTED amendment-reference edges only,8NOT_VERIFIED applicability. User confirmedRU/Central Russia; construction/climate/load data not inferred. SDK planeRoof polygon/ChangeMemo path SOURCE_VERIFIED, exposed runtime edit NOT_VERIFIED. Actual memo vs lower BREP offset29.887626mm; bounded contour candidate only, no design invented or native write.33newtests,546host/Windows+LinuxCI PASS,7exact code blobs. A02.S02/A11.S03PARTIAL, A05.S01 acceptance dependency unsatisfied, S10BLOCKED. All source junctions untouched, saved109baseline/journal and five fresh target signatures unchanged.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "kind": "TEST_RESULT",
+      "sha256": "b4e1eb42d6ca7cb7ed1f9f3ec38448417d4bad9b8eb1a4ab2d9161fd31f35100",
+      "source_revision": "633c799da125622be6317ea9d09a9b7eb83fb98a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-203851Z-verified-roof-rules/integration.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "1d86bc94f280b0bb9bfabc31a82f8f79a717ab984be43d156e2fd4c4a88d1824",
+      "source_revision": "633c799da125622be6317ea9d09a9b7eb83fb98a",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-203851Z-verified-roof-rules/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261012-203851Z-verified-roof-rules",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

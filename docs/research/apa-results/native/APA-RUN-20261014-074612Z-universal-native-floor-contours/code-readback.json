@@ -1,0 +1,36 @@
+{
+  "head": "cb73cd578c7cd7577f80397920d9e81b8d09c6e1",
+  "parent": "e375a34f68fc7f31a8f77aef0542e5ede54d5132",
+  "branch": "feature/apa-universal-native-runtime-20261014",
+  "pr": 80,
+  "url": "https://github.com/dvikt33-ux/safe-bim-layer/pull/80",
+  "prReadback": {
+    "baseRefName": "feature/apa-native-grid-stair-runtime-20261014",
+    "headRefName": "feature/apa-universal-native-runtime-20261014",
+    "headRefOid": "cb73cd578c7cd7577f80397920d9e81b8d09c6e1",
+    "isDraft": true,
+    "number": 80,
+    "url": "https://github.com/dvikt33-ux/safe-bim-layer/pull/80"
+  },
+  "githubBlobReadback": "ALL_13_COMMITTED_BLOBS_BYTE_EXACT_MATCH",
+  "expected": {
+    "archicad-addon/Examples/build_model_dump.py": "45de7f640b201ad49597bccfcb1dbb45a7f12bae",
+    "archicad-addon/Sources/NativeGridCommands.cpp": "73b56bbff2a383b49816b27b7bb09381f9611836",
+    "archicad-addon/Sources/NativeGridCommands.hpp": "dd2b08ee197e2156842478ef2973cd13bb68ca37",
+    "archicad-addon/Sources/NativeStairCommands.cpp": "5207107cba53dd261739f060f449bd2471d78cf5",
+    "scripts/archicad_authored_extension.py": "9faa66fb1ae46b4bedb9398b910fc314f8971ace",
+    "scripts/archicad_authored_geometry.py": "f43fc5b04e90e0e7a85f3f780da8153e73066243",
+    "scripts/archicad_authored_native_plan.py": "a9d8cb844a862ea92aed955fae999ddcc418eb86",
+    "scripts/archicad_building_shell.py": "59bb8c24d641f550eb63abf0059b811fc10ffd59",
+    "scripts/archicad_native_spatial_tools.py": "b43f777536ecf28107ea61a2eeb59527cdcf7382",
+    "scripts/archicad_project_accelerator.py": "49c4a49daee8d62df14d3e24d7d477e6df5af92e",
+    "scripts/archicad_scene_run.py": "54301ea79d737125a23efd57db5f87b015826c6e",
+    "tests/test_archicad_source_floorplates.py": "fecbb7f74fb6d4c40dd93955d3c6faa4de6ea79a",
+    "docs/APA_UNIVERSAL_NATIVE_RUNTIME_AND_CONTOURS.md": "1d9c142e5c3b42afeddcc077f4e5e9e01a5f89e1"
+  },
+  "hostTests": 718,
+  "newTests": 11,
+  "hostLogSHA256": "b7e5c728743850d10bfce99f98955ce12e1cc2deb09aa46be233fbd8e9daaa79",
+  "firstFeatureCommit": "496f717a509ce84299d637c4a066a61b9e524a3a",
+  "baseHead": "60a78e0cd55fc4951c1de3c8d060adf4f9538134"
+}

@@ -1,0 +1,24 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-G01-WINDOWS-SQLITE-FIX",
+      "evidence_ids": [
+        "EV-G01-REGRESSION"
+      ],
+      "statement": "Observed SQLite lifecycle gap fixed;340Windows host and340each Windows/LinuxCI tests pass; S03 remains partial with8other gaps open.",
+      "status": "OFFLINE_PASS"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-G01-REGRESSION",
+      "kind": "TEST_RESULT",
+      "sha256": "9a48d169d5293faf046a3f728f696d28a02bf30af17822775fbb87cc86ca47b3",
+      "source_revision": "2b499730ac4c52b70d796f2857fb15d7e3d3d676",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-012500Z-gap-windows-sqlite-v31/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261012-012500Z-gap-windows-sqlite-v31",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

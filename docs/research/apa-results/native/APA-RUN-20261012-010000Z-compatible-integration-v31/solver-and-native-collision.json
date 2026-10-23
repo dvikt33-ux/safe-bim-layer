@@ -1,0 +1,93 @@
+{
+  "status": "OPTIMAL",
+  "provider": "OR-Tools CP-SAT",
+  "candidates": [
+    {
+      "y": 42.0,
+      "blockedBy": [],
+      "envelopeMeters": [
+        [
+          41.95,
+          48.05
+        ],
+        [
+          41.819,
+          42.181
+        ],
+        [
+          2.3440000000000003,
+          2.6559999999999997
+        ]
+      ]
+    },
+    {
+      "y": 44.0,
+      "blockedBy": [
+        "authored-column-1",
+        "authored-column-2"
+      ],
+      "envelopeMeters": [
+        [
+          41.95,
+          48.05
+        ],
+        [
+          43.819,
+          44.181
+        ],
+        [
+          2.3440000000000003,
+          2.6559999999999997
+        ]
+      ]
+    },
+    {
+      "y": 46.0,
+      "blockedBy": [],
+      "envelopeMeters": [
+        [
+          41.95,
+          48.05
+        ],
+        [
+          45.819,
+          46.181
+        ],
+        [
+          2.3440000000000003,
+          2.6559999999999997
+        ]
+      ]
+    }
+  ],
+  "scope": "ONE_EXPLICIT_STRAIGHT_ROUTE_CANDIDATE_SET",
+  "nativeCollisionAcceptance": "NO_REPORTED_COLLISIONS_WITH_18_CORE_PRIMARIES; POSITIVE_ROOF_MORPH_CALIBRATION_SEPARATE",
+  "engineeringAcceptance": "NOT_VERIFIED",
+  "elapsedSeconds": 0.0021476,
+  "selectedIndex": 2,
+  "nodeCoordinates": [
+    {
+      "x": 42.0,
+      "y": 46.0,
+      "z": 2.5
+    },
+    {
+      "x": 48.0,
+      "y": 46.0,
+      "z": 2.5
+    }
+  ],
+  "nativeMatchesSelectedCandidate": true,
+  "nativeCollisionResult": {
+    "collisions": []
+  },
+  "nominalCrossSectionMeters": [
+    0.2,
+    0.15
+  ],
+  "actualPhysicalWidthHeightMeters": [
+    0.26200000000000045,
+    0.21199999999999974
+  ],
+  "modelWriteAttempts": 0
+}

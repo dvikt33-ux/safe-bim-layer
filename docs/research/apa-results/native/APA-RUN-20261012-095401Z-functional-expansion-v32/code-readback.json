@@ -1,0 +1,46 @@
+{
+  "status": "GITHUB_PR_ALL_CHANGED_BLOBS_BYTE_EXACT",
+  "commit": "1908482fdb3df381c1bf6d04f8c2fa28f41069bd",
+  "files": [
+    {
+      "path": ".github/workflows/archicad-contracts.yml",
+      "blobSha": "f0fa8666c2b95aa01338d809a17a0d1c2d98dbde"
+    },
+    {
+      "path": "docs/research/apa-functional-expansion-v32.md",
+      "blobSha": "affea39115d078f904eb7d91552002d198bfc865"
+    },
+    {
+      "path": "scripts/archicad_bim_graph.py",
+      "blobSha": "87fc7476c9079a189c8b8e31ae3c6beaf6712dd3"
+    },
+    {
+      "path": "scripts/archicad_connected_components.py",
+      "blobSha": "a30763c255d1ceb48a6fc171867c29d42aacf893"
+    },
+    {
+      "path": "scripts/archicad_connected_ifc.py",
+      "blobSha": "0bbf8d0a3c1d59729293515c0fb461ee0c29fd13"
+    },
+    {
+      "path": "scripts/archicad_details_context.py",
+      "blobSha": "e05cea3169adfa9b5c2aef9afa08564697ee33fc"
+    },
+    {
+      "path": "scripts/archicad_functional_expansion.py",
+      "blobSha": "a1d45d1370b1295280ea915f1c15d689dbc97eb8"
+    },
+    {
+      "path": "scripts/archicad_native_mep_network.py",
+      "blobSha": "df235c2103bfaa2200b2b3cc1a8a69c85c5955f7"
+    },
+    {
+      "path": "scripts/archicad_scene_run.py",
+      "blobSha": "c19ace01fb9287812c390e77674a59be7e3aa9b7"
+    },
+    {
+      "path": "tests/test_archicad_functional_expansion.py",
+      "blobSha": "eb9b3f4e5123f016047106482b70538db6dfbed2"
+    }
+  ]
+}

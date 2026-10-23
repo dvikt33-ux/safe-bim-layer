@@ -1,0 +1,10 @@
+{
+  "core-knowledge-query.json": "c703dfd33424ad87c370f28010904927fdaf9a4d7e42b57081d79cd2ae3fbff7",
+  "gap-register.json": "bfebc460fca85b0f74febea35edc813dece0456994a6d6aa2c8a2e05cd46ed7d",
+  "module-contracts.json": "80025161a207a951ef6f90808adc05ddbefc540e230c1af0a3645c9930d902b8",
+  "module-coverage.json": "ed55ce5ff5307ef2ea97b8755a392b8e4966dbfbec26424e6ec90d5fa6e45920",
+  "native-connected-dataflow.json": "56927dfef3bbe150774739f6a5455e22942116692cfdd9eee63c9bf9ecdf14b1",
+  "native-runtime.json": "e3f9abaa6048b9fe0a4b4a97df2df3a52e5ae9f367fd483bb0a065d05868aa4f",
+  "SDK-build.json": "ad8fee49a0256cf980ba9e77810f991deb2aa11b565cf917dd74a855dd068c7b",
+  "windows-ci.json": "bd1431224aa0b8e8028f5152a488fbbeec33a27dd4d38be56751340ee0fb8b03"
+}

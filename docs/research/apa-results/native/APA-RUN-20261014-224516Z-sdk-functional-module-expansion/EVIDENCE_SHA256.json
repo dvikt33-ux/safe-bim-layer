@@ -1,0 +1,9 @@
+{
+  "core-knowledge-query.json": "5795fbee32970fda49e692654413828820e82b2c99f700138c3ad3f814e3737a",
+  "gap-register.json": "fa07f84d21048e9926b3ebada034630470633fa64e6c39995aaeb55365d83bce",
+  "local-functional-results.json": "2a4e92d1c49985199f73fdaa4a79e17d78f51dd734222c368fa4377f918f3f27",
+  "module-contracts.json": "63e909a76bcdf610c84333cefe0edb790d34603c1f639e6ed1f3eaa83b3493bf",
+  "module-coverage.json": "cac0c20bb68ece74aa50ae27290d13431e86c2267a190ba638493a17888175c9",
+  "sdk-build.json": "91e34c6399a9bb1ec72464e44576c7c779695eea633a71a4ebdee998797d471d",
+  "windows-ci.json": "c4a825efa70d1f2877f814afef7538960b9231b78ca124ede9bc01ccb07de4ca"
+}

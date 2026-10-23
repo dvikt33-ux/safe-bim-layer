@@ -1,0 +1,35 @@
+{
+  "status": "NATIVE_AXIS_GRID_SOURCE_READBACK_PASS",
+  "axisId": "APA-A",
+  "sourceHash": "783a01b66eea1b527528def4d2fc68501954dbe34a2be04a9072185e14bcb71f",
+  "nativeVariation": 1196574028,
+  "nativePlacement": {
+    "x": 71,
+    "y": 0,
+    "angle": 1.570796327,
+    "floorIndex": 0
+  },
+  "nativeParameters": [
+    {
+      "name": "AC_Length",
+      "nativeType": 2,
+      "value": 8
+    },
+    {
+      "name": "AC_MarkerText_1",
+      "nativeType": 12,
+      "value": "APA-A"
+    },
+    {
+      "name": "AC_Angle",
+      "nativeType": 3,
+      "value": 1.5707963267948966
+    }
+  ],
+  "engineeringAcceptance": "NOT_VERIFIED",
+  "renderedSpanAcceptance": "REQUIRES_INDEPENDENT_NATIVE_VIEW_GEOMETRY",
+  "guidSHA256": "1d18e50d5c700ab6dae99756d1a20ef377677ab3a672dba7829b0acff06956f3",
+  "unchanged145": true,
+  "newCreates": 0,
+  "purpose": "READ_EXISTING_NATIVE_GRID_CUD_ALREADY_ACCEPTED_NO_REPEAT"
+}

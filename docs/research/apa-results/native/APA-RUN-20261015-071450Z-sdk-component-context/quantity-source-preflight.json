@@ -1,0 +1,20 @@
+{
+  "schema": "APA_QUANTITY_PREFLIGHT_SOURCE_REVIEW_V1",
+  "status": "SOURCE_REVIEW_ONLY_ENGINE_QUARANTINED",
+  "sdk": "Archicad29.3000",
+  "sources": {
+    "Support/Inc/APIdefs_Elements.h": "6304a8e8e9d67eb161f44ca55bf82548107f20323a6581399d826db624c64356",
+    "Examples/Element_Test/Src/Element_Snippets.cpp": "a7ddc3736f0b43c045162089491930644a46994d3b5c4f85f763e2f9d9d4a377",
+    "Examples/Plan_Dump/Src/DumpWriter.cpp": "14ea807df4cfc6de5fed331516d467e5ed1f88dbfcb4d012b91780febe266234"
+  },
+  "comparison": [
+    "API_Quantities is a class with a constructor that initializes all four output pointers to nullptr. Prior declaration without braces does not establish uninitialized pointer ownership.",
+    "Prior prototype supplied stack API_ElementQuantity and GS::Array<API_CompositeQuantity>; pointers remain alive for the synchronous call. No manual SDK allocation/free occurred. Allocation ownership is not a demonstrated root cause.",
+    "Element_Test Do_CalcQuantities uses GetMoreQuantities, an explicit full mask and all four output arrays. Plan_Dump WriteSurfVol uses GetQuantities with type-specific masks and differing parameter choices. These are source examples, not a proven crash fix.",
+    "Prior prototype used GetQuantities with default mask, minOpeningSize=0 and a mixed Wall/Slab/Roof/Stair batch. No stage/type record identifies the failing item. Current code does not replay it or substitute masks speculatively.",
+    "New GetNativeQuantityPreflightV1 reads element identity/type and emits PRE_ENGINE stage. It never constructs quantity buffers/masks or invokes either quantity API. Existing quantity entry and Python dispatch remain disabled."
+  ],
+  "futureEngineProbe": "REQUIRES_SEPARATE_QUALIFIED_ISOLATED_ARCHICAD_DIAGNOSTIC_ELEMENTS_AND_EXACT_APX_AUTHORIZATION_NOT_CURRENT_PLN",
+  "nativeEngineCalls": 0,
+  "rootCause": "NOT_VERIFIED"
+}

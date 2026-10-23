@@ -1,0 +1,33 @@
+name: APA Publisher immutable stage retry regression
+
+on:
+  pull_request:
+    paths:
+      - 'tools/apa_publisher/**'
+      - '.github/workflows/apa-research-publisher.yml'
+      - '.github/workflows/apa-publisher-stage-retry-offline.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  immutable-stage-safety:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Bash syntax safety
+        run: bash -n tools/apa_publisher/publish_stage_retry.sh
+      - name: Actual two-clone Git concurrency and immutable state tests
+        run: python -m unittest discover -s tools/apa_publisher/tests -p 'test_stage_retry.py' -v
+      - name: Existing Publisher regression suite
+        run: env GITHUB_REF=refs/heads/research/apa-verified-results-hub-20261010 python -m unittest discover -s tools/apa_publisher/tests -p 'test_publisher.py' -v
+      - name: Canonical controller regression and inbox readback
+        run: |
+          python -m unittest discover -s tools/apa_controller/tests -v
+          env GITHUB_REF=refs/heads/research/apa-verified-results-hub-20261010 python tools/apa_controller/controller.py validate
+          env GITHUB_REF=refs/heads/research/apa-verified-results-hub-20261010 python tools/apa_controller/controller.py verify-inbox

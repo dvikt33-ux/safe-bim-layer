@@ -1,0 +1,49 @@
+{
+  "status": "NATIVE_GEOMETRY_INTEGRATION_ACCEPTANCE_PASS",
+  "task": "APA-P70.A09.S01",
+  "sourceHead": "ec401314c185df4845ccb6ae7b15e57234a46cad",
+  "pullRequest": 50,
+  "offlineCI": 38172112026,
+  "evidenceKind": "SOURCE_REPLAY_OF_IMMUTABLE_NATIVE_READBACK",
+  "independentReplayEqualsCapturedLiveResult": true,
+  "actualNativeCommands": {
+    "GetProjectInfo": 2,
+    "GetStories": 2,
+    "GetAddOnVersion": 2,
+    "GetAllElements": 2,
+    "GetDetailsOfElements": 17,
+    "GetSubelementsOfHierarchicalElements": 1,
+    "GetModelDumpV1": 1,
+    "GetCollisions": 32
+  },
+  "publicationNewArchicadCalls": 0,
+  "coverage": 17,
+  "retainedInventory": 39,
+  "topologyCounts": {
+    "elements": 39,
+    "bodies": 56,
+    "vertices": 788,
+    "faces": 524,
+    "holeContours": 12
+  },
+  "contactPairs": 34,
+  "xyOverlapWithoutNativeVolumeCollision": 40,
+  "relationshipComponents": 1,
+  "positiveNativeCollisionCalibration": "NOT_VERIFIED",
+  "jointQualityAcceptance": "NOT_VERIFIED",
+  "structuralAcceptance": "NOT_VERIFIED",
+  "visibleUI": "NOT_VERIFIED",
+  "scope": "Accepted17-element core; original3D filters retained; nativeColumnSegment ownership is explicit",
+  "reusedResearch": [
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-SDK-GET3D",
+    "ART-SDK-SEO"
+  ],
+  "limits": [
+    "RoofShellSEO_NOT_INTEGRATED",
+    "CurvedComplexGeometry_NOT_VERIFIED",
+    "ArbitraryGDL_NOT_VERIFIED",
+    "Normative_NOT_VERIFIED",
+    "Archicad30_NOT_VERIFIED"
+  ]
+}

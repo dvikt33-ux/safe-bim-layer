@@ -1,0 +1,83 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261011-195800Z-incremental-native-edit",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A03",
+  "substep_id": "APA-P70.A03.S03",
+  "executor": "codex-apa-core-native-20261011",
+  "executor_run_id": "APA-RUN-20261011-195400Z-incremental-native-edit",
+  "phase": "SOURCE",
+  "started_at": "2026-10-11T19:58:08Z",
+  "finished_at": "2026-10-11T19:58:08Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 build5101 RUS (captured evidence)",
+    "sdk": null,
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-isolated-authored-native-20261011"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/48",
+      "revision": "976c19cecebe3f6bb4352365d9a59051d5b2b61b",
+      "source_sha": "976c19cecebe3f6bb4352365d9a59051d5b2b61b"
+    }
+  ],
+  "inputs": [
+    "ART-P70-A03-S02-AUTHORED-BUILDING17-SAVED-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-INCREMENTAL-NATIVE-EDIT-RESTORE",
+      "statement": "Captured independent native readback proves existing window edit and explicit restore without GUID/host/story/material drift, followed by save/reopen and original graph restoration.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-INCREMENTAL-FINAL-AUDIT",
+        "EV-INCREMENTAL-PERSISTENCE"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-INCREMENTAL-CI-289",
+      "statement": "Head976c19c passed289offline tests; independent native results remain separate.",
+      "status": "OFFLINE_PASS",
+      "evidence_ids": [
+        "EV-INCREMENTAL-CI"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-INCREMENTAL-FINAL-AUDIT",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-195800Z-incremental-native-edit/core-final-readonly-20261011/result.json",
+      "kind": "LOCAL_LOG",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "806c5880453cf099e282d937698e8bca4b3c9cdfe215860916a2b8c13700cfa6",
+      "source_revision": "976c19cecebe3f6bb4352365d9a59051d5b2b61b"
+    },
+    {
+      "evidence_id": "EV-INCREMENTAL-PERSISTENCE",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-195800Z-incremental-native-edit/persistence-20261011-after-edit-restore/result.json",
+      "kind": "LOCAL_LOG",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "78bc461b870da652aac512d60e97c3775344d1f446cb456613fc295804c914c3",
+      "source_revision": "976c19cecebe3f6bb4352365d9a59051d5b2b61b"
+    },
+    {
+      "evidence_id": "EV-INCREMENTAL-CI",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38170051997",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": "976c19cecebe3f6bb4352365d9a59051d5b2b61b"
+    }
+  ],
+  "report_markdown": "# APA-P70.A03.S03 — existing opening edit and explicit restore\n\nUser-authorized live test in exact APA_Isolated_Writer_Test_01.pln, Archicad29 build5101 RUS/Tapir1.5.10, port19724. The existing Window GUID1BE6CED6-AD75-47F0-8009-3791C957B50C was modified in place: width1.20→1.40→1.20m. Each change had read-only preparation, exact token, durable SQLite intent before ModifyWindows and independent whole17element readback. Zero creates, zero missing/extra/unexplained GUIDs, inventory39preserved including20baseline and2directly owned ColumnSegments. Host wall GUID0CA6A748-E5E1-41D4-AAE6-778ACE39D960, story0, center4m, sill1m and height1.2m remained unchanged; all other element geometry/materials stayed exact.\n\nSaveProject/OpenProject both returned success after restore; all17elements and39GUIDs matched after reopen. Saved and reopened PLN SHA256: `a1b5baf970a7f3b389a810723935a96eae797fdeff22989882fbc8906189823d`.\n\nFinal independent read-only audit recompiled the original authored building input using fresh stories/material lookup. Its graph matched the saved native model; the material-bound sourcePlanHash `dc7fa97c737f8334587647d8d877315ec0850c8383ea7d07373eebc4dfd565de` equals the original17element plan. The first edit/restore receipt used a graph-only hash; final source976c19c and audit consistently restore the original full hash. Historic receipts are preserved, not rewritten.\n\n[PR48](https://github.com/dvikt33-ux/safe-bim-layer/pull/48) head `976c19cecebe3f6bb4352365d9a59051d5b2b61b` passed [CI38170051997](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38170051997):289offline tests plus schema contracts/PowerShell checks. Fourteen focused authored tests include full17element creation with column hierarchy, existing10→17GUID reuse, material no-op stop, unrelated extraGUID rejection and edit/restore hash equality. Native results are independently recorded here, not inferred from CI.\n\nRaw evidence and file hashes: [docs/research/apa-results/native/APA-RUN-20261011-195800Z-incremental-native-edit](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-195800Z-incremental-native-edit). The source files show the original authorized PLN writes. This separate SOURCE publication inspects captured artifacts read-only; publication itself modifies no PLN/APX/main. No additional writes were issued for final inspection, no ambiguous create replay, no paid model/Deep Research, no protected branch/main merge.\n\nAcceptance for bounded incremental editing/restore S03 is met. S04 will separately check required native-type completeness; A08.S04 will combine accepted S02/S03/S04 evidence. Arbitrary field edits, multi-operation transaction rollback, generic library swaps, roofs/stairs/MEP, engineering/normative/junction acceptance, visible UI quality and Archicad30 remain unverified.\n",
+  "next_substep": "APA-P70.A03.S04",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

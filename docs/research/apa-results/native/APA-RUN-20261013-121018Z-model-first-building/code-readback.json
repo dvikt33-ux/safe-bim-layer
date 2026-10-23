@@ -1,0 +1,30 @@
+{
+  "head": "5a3a9201a715a5528c93bed4a5318e2acb32eea7",
+  "parent": "93557ed0cd59c471b0f903a03708ed88c8feb31b",
+  "branch": "feature/apa-model-first-building-20261013",
+  "expected": {
+    ".github/workflows/archicad-contracts.yml": "dd66310dfbeed22a3ef14064cd451259551892ca",
+    "docs/APA_MODEL_FIRST_BUILDING.md": "55c5e64186e7013ecec83349de005e28f60fcff5",
+    "examples/accelerator/model-first-building.json": "e192fbb31bc872d751c41aa7132f0a4981755051",
+    "scripts/archicad_accelerator_integration.py": "88dd54806ecbfdb215e04b7ed4fb0e897c75b7ed",
+    "scripts/archicad_authored_extension.py": "e6d5bbf760c82e934b194205edd0fb133d2212fa",
+    "scripts/archicad_authored_geometry.py": "737d35a3ae3d61b601403f9b0af51b08974b26c7",
+    "scripts/archicad_authored_native_plan.py": "f57812f29c826bc48ce3c6ffd0f9b6a7dc628a7d",
+    "scripts/archicad_project_accelerator.py": "8e0ce2fbb5441009925f0d9199e180e8670a5eea",
+    "scripts/archicad_scene_run.py": "ca91c1cfc41cee763c62d1f3a70337d74fbafd53",
+    "tests/test_archicad_model_first_building.py": "ff7d5aaacc02f5096363b08441ad1f3c9c8a2f1d"
+  },
+  "hostTests": 638,
+  "newTests": 15,
+  "fullCommittedDiffPrivacyScan": "PASS",
+  "excludedCodeUnchanged": true,
+  "pr": 74,
+  "prReadback": {
+    "baseRefName": "feature/apa-native-documentation-followon-20261013",
+    "headRefOid": "5a3a9201a715a5528c93bed4a5318e2acb32eea7",
+    "isDraft": true,
+    "number": 74,
+    "url": "https://github.com/dvikt33-ux/safe-bim-layer/pull/74"
+  },
+  "githubBlobReadback": "ALL_TEN_MATCH"
+}

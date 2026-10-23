@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "runId": 38296039263,
+  "url": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38296039263",
+  "head": "e43bc6055d648270b72dc573a22c9d52c71a83f8",
+  "host": {
+    "tests": 513,
+    "seconds": 73.2,
+    "result": "OK"
+  },
+  "jobs": [
+    {
+      "id": 114967238603,
+      "name": "offline-contracts (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "tests": 513,
+      "seconds": 32.877,
+      "allRequiredSteps": "PASS"
+    },
+    {
+      "id": 114967239167,
+      "name": "offline-contracts (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "tests": 513,
+      "seconds": 284.481,
+      "allRequiredSteps": "PASS"
+    }
+  ]
+}

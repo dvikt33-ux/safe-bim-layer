@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:970c6b1a1b491f163798cf0343efc25215b799f89ca1870bce32df35ad6ae53e",
+  "index_commit_sha": "329cb3264bce27d40f73b741624ad6281339e639",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "329cb3264bce27d40f73b741624ad6281339e639",
+  "report_path": "docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-234433Z-true-grid-live-stair-runtime/REPORT.md",
+  "report_sha256": "f8309aab724fffcbe7ca45d408f399503958ba9ae431edc17ba8de1578bb6ab2",
+  "run_id": "APA-RUN-20261013-234433Z-true-grid-live-stair-runtime",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

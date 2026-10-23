@@ -1,0 +1,5 @@
+{
+  "port": 19724,
+  "command": "GetProjectInfo",
+  "parameters": {}
+}

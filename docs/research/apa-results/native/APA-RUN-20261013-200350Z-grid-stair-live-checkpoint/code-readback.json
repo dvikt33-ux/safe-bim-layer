@@ -1,0 +1,23 @@
+{
+  "head": "c1b4e1a565bcd903273933d8917608df156ac600",
+  "parent": "bc8f8575ed65e308e10c5ac5f573b7d8ad9466a6",
+  "branch": "feature/apa-grid-stair-live-20261013",
+  "expected": {
+    "scripts/archicad_native_spatial_tools.py": "ce6aef3667ae6b43cd56561254cc92c73fd276a4",
+    "tests/test_archicad_native_spatial_tools.py": "dc130c678fc6ba16575bc622dab42a86c9a8842f",
+    "examples/accelerator/native-grid-stair-test.json": "f20563eefbf6caf639ff62db87a5bb3d2b7f3522",
+    "docs/APA_TRUE_GRID_EXACT_STAIR.md": "fecc403d7a74187833e6765e976711ae99395c19"
+  },
+  "pr": 77,
+  "url": "https://github.com/dvikt33-ux/safe-bim-layer/pull/77",
+  "githubBlobReadback": "ALL_4_COMMITTED_BLOBS_BYTE_EXACT_MATCH",
+  "hostTests": 697,
+  "newTests": 8,
+  "hostLogSHA256": "d5ec97b2a6218816a00602aec780dc7ab3fccd1687e3b578e4b26648a82939b9",
+  "prReadback": {
+    "baseRefName": "feature/apa-grid-stair-exact-20261013",
+    "headRefOid": "c1b4e1a565bcd903273933d8917608df156ac600",
+    "isDraft": true,
+    "url": "https://github.com/dvikt33-ux/safe-bim-layer/pull/77"
+  }
+}

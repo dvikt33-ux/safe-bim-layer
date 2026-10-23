@@ -1,0 +1,42 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-KNOWLEDGE-CORE-MCP",
+      "evidence_ids": [
+        "EV-INTEGRATION",
+        "EV-STALE",
+        "EV-CI"
+      ],
+      "statement": "APA core uses the existing knowledge module on source-verified data; real SDK stdio client passes. Actual ChatGPT registration and engineering acceptance not claimed.",
+      "status": "LIVE_PASS"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-INTEGRATION",
+      "kind": "TEST_RESULT",
+      "sha256": "f2812200bd35319ccfae917edb8f209666454c5db42465f1b83d99d1bfb89381",
+      "source_revision": "88169d358e4c329f8959f557c944300adcec2df9",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-013642Z-knowledge-core-mcp/integration.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-STALE",
+      "kind": "TEST_RESULT",
+      "sha256": "90cd74d3b89630d087bcc4d2f00d4d92b93ba5cca8f51ea0226fc85194444fa3",
+      "source_revision": "88169d358e4c329f8959f557c944300adcec2df9",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-013642Z-knowledge-core-mcp/real-stale-rebuild.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-CI",
+      "kind": "TEST_RESULT",
+      "sha256": "f310fa8f0e3011d71d109ee1d5d585ac8fb3e74e0a3757e32193083a251c989f",
+      "source_revision": "88169d358e4c329f8959f557c944300adcec2df9",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-013642Z-knowledge-core-mcp/ci.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261013-013642Z-knowledge-core-mcp",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:bbce107ee9e36046867c7af961f758493f8b7469a58e85391fc44eea7af366bf",
+  "index_commit_sha": "984262b7688f841fe649042751f6f341d37c223c",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "984262b7688f841fe649042751f6f341d37c223c",
+  "report_path": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-091905Z-p70-source-integration-map/REPORT.md",
+  "report_sha256": "cb64e15954b6a26cf4645ba54b4de3b4dbb8d8a253ba603d46de52472448a078",
+  "run_id": "APA-RUN-20261011-091905Z-p70-source-integration-map",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

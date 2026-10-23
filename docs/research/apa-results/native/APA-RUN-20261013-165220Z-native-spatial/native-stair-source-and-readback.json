@@ -1,0 +1,132 @@
+{
+  "source": {
+    "favoriteName": "Лестница Монолитная без Отделки",
+    "sourceSHA256": "ae2ac9b234889b75835062356cd293ea9881d7a839e68d68dca5106de5a3296f",
+    "values": {
+      "FlightWidth": 1.0,
+      "StepNum": 20.0,
+      "RiserHeight": 0.15,
+      "TreadDepth": 0.35,
+      "TotalHeight": 3.0
+    },
+    "exportAcceptance": "MAIN_XML_PARSED; RELATED_GDL_EXPORT_SEPARATELY_QUALIFIED",
+    "engineeringAcceptance": "NOT_VERIFIED",
+    "nativeExportStatus": {
+      "error": {
+        "code": -7003,
+        "message": "ACAPI_Favorite_Export failed."
+      }
+    }
+  },
+  "sourceDimensionRole": "EXPLICIT_TEST_EXISTING_FAVORITE_AND_ACTUAL_STORY_RISE",
+  "requestedNativeParameters": {
+    "stairsData": [
+      {
+        "favoriteName": "Лестница Монолитная без Отделки",
+        "baseLinePoints": [
+          {
+            "x": 42.55,
+            "y": 40.675
+          },
+          {
+            "x": 42.55,
+            "y": 47.324999999999996
+          }
+        ],
+        "zCoordinate": 0,
+        "floorIndex": 0,
+        "totalHeight": 3.3,
+        "flightWidth": 1.0,
+        "stepNum": 20,
+        "riserHeight": 0.16499999999999998,
+        "treadDepth": 0.35,
+        "finishVisible": false
+      }
+    ]
+  },
+  "readback": {
+    "status": "NATIVE_STAIR_OWNED_GEOMETRY_PASS",
+    "guid": "id-sha256:c7ee9d2b14ec40ae29cc",
+    "childGuids": [
+      "id-sha256:5bb4b126a7d7614a3a90",
+      "id-sha256:f14cf4761cde26a615aa",
+      "id-sha256:d690c1a347e187320205",
+      "id-sha256:44dd917e02d8d0e9780c",
+      "id-sha256:254406818c29da277bda",
+      "id-sha256:39655af0e2ae424ae225",
+      "id-sha256:eefa5cf3920ea4c49e76",
+      "id-sha256:ef43bf1f2417577f1e03",
+      "id-sha256:317b627f5b4d89ac59a0",
+      "id-sha256:752790f89fc0b27b228f",
+      "id-sha256:9d612f2c95e14368ef2a",
+      "id-sha256:8c1de30119ef091f6ed3",
+      "id-sha256:fbc001a7369b56a63ff8",
+      "id-sha256:d309c2e9b4ce89de2efa",
+      "id-sha256:14b36c5ce9109c813b19",
+      "id-sha256:3911f6716da5706698c7",
+      "id-sha256:d55e07eb7c179f15543e",
+      "id-sha256:cf10fadf83c968f2dc58",
+      "id-sha256:31fe9b0e69958d0886c3",
+      "id-sha256:92a48044eb7497ed0852",
+      "id-sha256:8738453f7dadf28c1e88",
+      "id-sha256:6e9af816dc04b862c6d0",
+      "id-sha256:8923630ce5cc6e9bbde4",
+      "id-sha256:86558257cb3293a60d30",
+      "id-sha256:1e97f6733ab632381fa7",
+      "id-sha256:6cd3d75c8a3c1aa00020",
+      "id-sha256:5f88ae9c65459da78210",
+      "id-sha256:3c50c5ae4cdcf7aaa189",
+      "id-sha256:726c28171ccac10f11a0",
+      "id-sha256:76e285ce901ee74c0bcb",
+      "id-sha256:5ac7442dea454d80a6f8",
+      "id-sha256:8572684172c7cc5efbd6",
+      "id-sha256:d3c2d79dda149598f7db",
+      "id-sha256:425a761a09d05dd1b271",
+      "id-sha256:7714d01806b6be3bb143",
+      "id-sha256:b8f6998be7aba4aa58cb",
+      "id-sha256:969f3eb5152b4b6c6881",
+      "id-sha256:cb522d3598ca092dbd29",
+      "id-sha256:413498d34fbcbbea0543",
+      "id-sha256:c351f0feab0cc17c896a",
+      "id-sha256:6de1821103ec29ddf78a"
+    ],
+    "nativePartCounts": {
+      "stairRisers": 20,
+      "stairTreads": 20,
+      "stairStructures": 1
+    },
+    "bounds": {
+      "xMin": 42.55,
+      "xMax": 43.55,
+      "yMin": 40.675,
+      "yMax": 47.075,
+      "zMin": -0.1,
+      "zMax": 3.3
+    },
+    "actualBodyCount": 1,
+    "nativeType": "Stair",
+    "typedStairParameters": "OFFICIAL_PRECISE_BUILTIN_PROPERTIES_AND_NATIVE_MEMO_BREP",
+    "actualNumericProperties": {
+      "Stair_DefaultGoing": 0.32,
+      "Stair_DefaultRiserHeight": 0.165,
+      "Stair_FlightWidth": 1,
+      "Stair_WalkingLineLength": 6.4
+    },
+    "requestedGoing": 0.35,
+    "requestedGoingAcceptance": "NOT_VERIFIED_NATIVE_SOLVER_CHANGED_GOING",
+    "engineeringAcceptance": "NOT_VERIFIED"
+  },
+  "sourceExport": "PARTIAL_ERROR_-7003_MAIN_XML_DIMENSIONS_VALID_COMPLETE_FAVORITE_GDL_BUNDLE_NOT_VERIFIED",
+  "supportedSourceDimensions": [
+    "flightWidth1m",
+    "stepNum20",
+    "derivedRiser0.165m_for_nativeRise3.3m"
+  ],
+  "strictGoingAcceptance": "NOT_VERIFIED_NATIVE_SOLVER_CHANGED_GOING",
+  "minimumMissingRuntimeContract": [
+    "treadDepthLocked true native setting",
+    "native Stair baseline/parameter edit and precise readback"
+  ],
+  "shape": "ACTUAL_NATIVE_STAIR_NOT_MORPH_OR_GENERIC_OBJECT",
+  "engineeringAcceptance": "NOT_VERIFIED"
+}

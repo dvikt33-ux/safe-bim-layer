@@ -1,0 +1,377 @@
+# APA — опережающие исследования / RESEARCH_LOOKAHEAD
+
+Generated from the SAME [PROJECT_PLAN.json](../PROJECT_PLAN.json).
+Research runs and BUILD use ONE registry, never independent plans.
+NOT_ASSESSED ≠ GAP and not proof that an additional research run is required.
+SUFFICIENT requires accepted evidence; it defers repetitive research on that target.
+A candidate research S-ID must still satisfy its own dependencies and claim gate.
+
+## Следующее исследование
+
+- Цель: APA-P70.A01.S01; доступные исследовательские S-ID: APA-P50.A01.S01, APA-P50.A02.S01
+
+## Источники и очередь по продуктовым подзадачам
+
+### APA-P70.A01.S01 — Сопоставить полный продуктовый контракт с существующим кодом и исследованиями
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A01.S01 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P50.A01.S01, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md)
+
+### APA-P70.A01.S02 — Привязать все значимые наработки к функциям продукта, выявить пробелы
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A01.S01 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P50.A01.S01, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md), [ART-TRACE-REPORT](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/REPORT.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md)
+
+### APA-P70.A01.S03 — Утвердить минимальные границы интеграции и порядок сквозных поставок
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A01.S01 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P50.A01.S01, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
+
+### APA-P70.A02.S01 — Собрать семантический контракт задания, участка, этажей и помещений
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A01.S02 (PARTIAL), APA-P10.A02.S02 (READY), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A01.S02, APA-P10.A02.S02, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md)
+
+### APA-P70.A02.S02 — Связать проектные требования с версиями нормативов и проверяемыми правилами
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A01.S02 (PARTIAL), APA-P10.A02.S02 (READY), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A01.S02, APA-P10.A02.S02, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-P70-A02-TDK-MACHINE-SOURCE-20261012](https://github.com/dvikt33-ux/tdk-course-project/tree/67f17d407d14aebb091daaf79f11c10178b87440/01_Normative_Base/_Machine)
+
+### APA-P70.A02.S03 — Собрать проектный Library Pack из проверяемых строительных систем и узлов
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A01.S02 (PARTIAL), APA-P10.A02.S02 (READY), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A01.S02, APA-P10.A02.S02, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
+
+### APA-P70.A02.S04 — Интегрировать реальные материалы, Composite/Profile и выбранные GDL-библиотеки
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md)
+
+### APA-P70.A03.S01 — Связать помещения, несущую схему, оси, уровни и конструктивные ограничения
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A01.S02 (PARTIAL), APA-P10.A01.S03 (PARTIAL), APA-P10.A03.S01 (READY), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A01.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
+
+### APA-P70.A03.S02 — Собрать модель средствами уже существующих BIM-исполнителей
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A01.S02 (PARTIAL), APA-P10.A01.S03 (PARTIAL), APA-P10.A03.S01 (READY), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A01.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md), [ART-APA-PLN-WRITE-AUTH-20261011](../../../../../docs/research/apa-results/control/IMPLEMENTATION_ROADMAP.md%23%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B4%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%B0)
+
+### APA-P70.A03.S03 — Доказать редактируемость, GUID/host/story/material и инкрементальное обновление
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A01.S02 (PARTIAL), APA-P10.A01.S03 (PARTIAL), APA-P10.A03.S01 (READY), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A01.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md)
+
+### APA-P70.A03.S04 — Дополнить авторскую модель до связного небольшого здания существующими writer-циклами
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
+
+### APA-P70.A04.S01 — Вывести из модели обязательные семейства узлов и их условия применимости
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-P70-A11-S03-NATIVE95-V32-20261012](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-110611Z-connected-native-continuation-v32/REPORT.md)
+
+### APA-P70.A04.S02 — Привязать выбранные узлы и композиции к нативным BIM элементам
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md)
+
+### APA-P70.A04.S03 — Проверить узлы окон, облицовки, перекрытий и кровельных примыканий
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12)
+
+### APA-P70.A05.S01 — Получить проверяемую расчётную схему и исходные нагрузки
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A01.S01 (PARTIAL), APA-P10.A03.S01 (READY), APA-P10.A03.S02 (READY)
+- Доступны сейчас: APA-P10.A01.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
+
+### APA-P70.A05.S02 — Использовать SAM/SAF/IFC и доступный проверенный расчётный движок
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A01.S01 (PARTIAL), APA-P10.A03.S01 (READY), APA-P10.A03.S02 (READY)
+- Доступны сейчас: APA-P10.A01.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md)
+
+### APA-P70.A05.S03 — Применить результаты инженерного расчёта и повторно проверить узлы
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A01.S01 (PARTIAL), APA-P10.A03.S01 (READY), APA-P10.A03.S02 (READY)
+- Доступны сейчас: APA-P10.A01.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md)
+
+### APA-P70.A06.S01 — Сформировать инженерные требования и трассы на базе штатного MEP
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A02.S04 (PARTIAL), APA-P10.A02.S03 (READY)
+- Доступны сейчас: APA-P10.A02.S04, APA-P10.A02.S03
+- Использовать источники (ветка/файл/PR): [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md)
+
+### APA-P70.A06.S02 — Проверить инженерные сети, проходки, коллизии и узлы пересечений
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A02.S04 (PARTIAL), APA-P10.A02.S03 (READY)
+- Доступны сейчас: APA-P10.A02.S04, APA-P10.A02.S03
+- Использовать источники (ветка/файл/PR): [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md)
+
+### APA-P70.A07.S01 — Получить согласованные планы, разрезы, фасады, спецификации и узлы
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A02.S03 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A01.S03 (READY)
+- Доступны сейчас: APA-P10.A02.S03, APA-P10.A01.S03
+- Использовать источники (ветка/файл/PR): [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml)
+
+### APA-P70.A07.S02 — Выполнить поэлементную и общепроектную проверку нормативов
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A02.S03 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A01.S03 (READY)
+- Доступны сейчас: APA-P10.A02.S03, APA-P10.A01.S03
+- Использовать источники (ветка/файл/PR): [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md)
+
+### APA-P70.A07.S03 — Собрать итоговый пакет BIM/IFC/PDF и доказательства проверки
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A02.S03 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A01.S03 (READY)
+- Доступны сейчас: APA-P10.A02.S03, APA-P10.A01.S03
+- Использовать источники (ветка/файл/PR): [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md)
+
+### APA-P70.A08.S01 — Проверить полный цикл создания проекта на эталонном ИЖС
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A01.S01 (PARTIAL), APA-P50.A03.S01 (READY), APA-P50.A03.S02 (READY)
+- Доступны сейчас: APA-P50.A01.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16)
+
+### APA-P70.A08.S02 — Проверить доработку единственного открытого существующего PLN
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A01.S01 (PARTIAL), APA-P50.A03.S01 (READY), APA-P50.A03.S02 (READY)
+- Доступны сейчас: APA-P50.A01.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
+
+### APA-P70.A08.S03 — Доказать расширяемость на другом типе здания и системах
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A01.S01 (PARTIAL), APA-P50.A03.S01 (READY), APA-P50.A03.S02 (READY)
+- Доступны сейчас: APA-P50.A01.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
+
+### APA-P70.A08.S04 — Принять ядро: задание → связное редактируемое здание → правка → readback
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
+
+### APA-P70.A08.S05 — Адаптировать готовое ядро под установленный Archicad 30
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
+
+### APA-P70.A09.S01 — Подключить Native Model Dump, графовую связность и реальные 3D-проверки
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-SDK-SEO](../../../../../docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md)
+
+### APA-P70.A10.S01 — Оптимизировать конкретный стабильный сценарий с измерением результата
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md)
+
+### APA-P70.A11.S01 — Подключить готовые компоненты совместимым пакетом
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json)
+
+### APA-P70.A11.S02 — Проверить объединённую систему в тестовом PLN
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json)
+
+### APA-P70.A11.S03 — Исправить пробелы после системного теста
+
+- Готовность исследования: **GAP**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json), [ART-P70-A11-S03-SAFE01-SOURCE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/pull/175)
+
+### APA-P70.A11.S04 — Измерить и ускорить объединённый контур
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json)
+
+### APA-P70.A11.S05 — Собрать установщик стабилизированного APA
+
+- Готовность исследования: **NOT_ASSESSED**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json)
+
+### APA-P70.A11.S06 — Получить подтверждённые размеры и источник сборки производителя
+
+- Готовность исследования: **GAP**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json)
+
+### APA-P70.A11.S07 — Подтвердить доступный нативный контракт Shell и редактирования Opening
+
+- Готовность исследования: **GAP**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json)
+
+### APA-P70.A11.S08 — Подключить фактический SAM/SAF обмен и входы расчётного движка
+
+- Готовность исследования: **GAP**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json)
+
+### APA-P70.A11.S09 — Подтвердить семантический обмен с MCP/Twinmotion
+
+- Готовность исследования: **GAP**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json)
+
+### APA-P70.A11.S10 — Подтвердить нативный круглый порт терминала, предпочтения диаметра и переход MEP
+
+- Готовность исследования: **GAP**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S03-PR56-20261012](https://github.com/dvikt33-ux/safe-bim-layer/pull/56), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-P70-A11-S10-REFERENCE200-20261012](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-132353Z-construction-junction-qualification-s03/mep-preferences.json)
+
+### APA-P70.A11.S11 — SAFE-01: точный synchronous snapshot после native save, поздняя scratch-запись и GUI reopen
+
+- Готовность исследования: **GAP**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S03-SAFE01-SOURCE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/pull/175)
+
+### APA-P70.A11.S12 — Завершить native группы/сетки и единый mass-request selector с сохранением и reopen
+
+- Готовность исследования: **SUFFICIENT**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S11-SAFE01-LIVE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/d2d63d8045974bf5d6c49a77da1e013d4f9f7725/docs/evidence/apa-ac29-safe01-integration-20261019/live01/README_RU.md), [ART-P70-A11-S12-GROUPGRID-SOURCE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/pull/174)
+
+### APA-P70.A11.S13 — Подключить принятый mass-request/native-group путь к установленному APA с сохранением 30+4 маршрутов
+
+- Готовность исследования: **SUFFICIENT**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S12-GROUP32-LIVE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/0041bdb3e9ef3a82763083c70689a52f0c36d9e1/docs/evidence/apa-ac29-native-massops-integration-20261019/live03/README_RU.md), [ART-P70-A11-S11-SAFE01-LIVE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/d2d63d8045974bf5d6c49a77da1e013d4f9f7725/docs/evidence/apa-ac29-safe01-integration-20261019/live01/README_RU.md)
+
+### APA-P70.A11.S14 — Довести индивидуальное native пакетное копирование через общий selector/registry и сохранённую копию
+
+- Готовность исследования: **SUFFICIENT**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S13-INSTALLED-SELECTOR-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/14a8922b2f0affd84205908ea8d7503d984348c1/docs/evidence/apa-ac29-installed-mass-selector-20261019/README_RU.md), [ART-P70-A11-S14-MULTICOPY-SOURCE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/pull/143)
+
+### APA-P70.A11.S15 — Распределение нативных копий по конечной линии с явными концами и числом позиций
+
+- Готовность исследования: **SUFFICIENT**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S14-COPY-RECEIPT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/README_RU.md), [ART-P70-A11-S14-COPY-AUDIT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/independent-audit.json)
+
+### APA-P70.A11.S16 — Размещение по выбранным пересечениям именованных осей с нерегулярными шагами
+
+- Готовность исследования: **SUFFICIENT**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S15-LINE-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/c3d2c9767bab54f4d7ec763e6af3ed0f736c452c/docs/evidence/apa-ac29-finite-line-distribution-20261020/README_RU.md), [ART-P70-A11-S15-LINE-AUDIT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/c3d2c9767bab54f4d7ec763e6af3ed0f736c452c/docs/evidence/apa-ac29-finite-line-distribution-20261020/independent-audit.json)
+
+### APA-P70.A11.S17 — Создание нативной группы через общий selector/registry/SceneWriter
+
+- Готовность исследования: **SUFFICIENT**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S16-AXES-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/09133e81a13098dc53fbe2e385bb30a3bcdbf27a/docs/evidence/apa-ac29-selected-axes-20261020/README_RU.md), [ART-P70-A11-S16-AXES-AUDIT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/09133e81a13098dc53fbe2e385bb30a3bcdbf27a/docs/evidence/apa-ac29-selected-axes-20261020/independent-audit.json)
+
+### APA-P70.A11.S18 — Редактирование групп: нативная разгруппировка через общий selector/registry
+
+- Готовность исследования: **SUFFICIENT**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S17-GROUP-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/3e20da6c8447749bc2db7e09247a012a98f6b396/docs/evidence/apa-ac29-shared-group-create-20261020/README_RU.md), [ART-P70-A11-S17-GROUP-AUDIT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/3e20da6c8447749bc2db7e09247a012a98f6b396/docs/evidence/apa-ac29-shared-group-create-20261020/independent-audit.json)
+
+### APA-P70.A11.S19 — Перемещение целой нативной группы через общий selector/registry
+
+- Готовность исследования: **SUFFICIENT**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S18-UNGROUP-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/8a95c9e6bb3af95d9a38a27bc1009aeec04b615e/docs/evidence/apa-ac29-shared-ungroup-20261020/README_RU.md), [ART-P70-A11-S18-UNGROUP-AUDIT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/8a95c9e6bb3af95d9a38a27bc1009aeec04b615e/docs/evidence/apa-ac29-shared-ungroup-20261020/independent-audit.json), [ART-P70-A11-S17-GROUP-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/3e20da6c8447749bc2db7e09247a012a98f6b396/docs/evidence/apa-ac29-shared-group-create-20261020/README_RU.md)
+
+### APA-P70.A11.S20 — Готовая лёгкая DXF интеграция: recover/audit, XREF/hash, MINSERT и единицы через общий Router
+
+- Готовность исследования: **SUFFICIENT**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S20-DXF-READY-SOURCE-20261020](https://github.com/dvikt33-ux/safe-bim-layer/pull/163)
+
+### APA-P70.A11.S21 — Автовыбор команды группировки, перемещения и разгруппировки из запроса
+
+- Готовность исследования: **SUFFICIENT**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S17-GROUP-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/3e20da6c8447749bc2db7e09247a012a98f6b396/docs/evidence/apa-ac29-shared-group-create-20261020/README_RU.md), [ART-P70-A11-S18-UNGROUP-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/8a95c9e6bb3af95d9a38a27bc1009aeec04b615e/docs/evidence/apa-ac29-shared-ungroup-20261020/README_RU.md), [ART-P70-A11-S19-MOVE-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/426ea870ef6e2fce60a6354a3c6f335906100e18/docs/evidence/apa-ac29-shared-group-move-20261020/README_RU.md)
+
+### APA-P70.A11.S22 — Расширить общий нативный пакетный copier на самостоятельные стены
+
+- Готовность исследования: **GAP**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S14-COPY-RECEIPT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/README_RU.md)
+
+### APA-P70.A11.S23 — Нативное пакетное копирование самостоятельного прямоугольного перекрытия
+
+- Готовность исследования: **GAP**
+- Связанные исследования: APA-P10.A02.S02 (READY), APA-P10.A01.S03 (PARTIAL), APA-P50.A02.S01 (PARTIAL)
+- Доступны сейчас: APA-P10.A02.S02, APA-P10.A01.S03, APA-P50.A02.S01
+- Использовать источники (ветка/файл/PR): [ART-P70-A11-S14-COPY-RECEIPT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/README_RU.md)

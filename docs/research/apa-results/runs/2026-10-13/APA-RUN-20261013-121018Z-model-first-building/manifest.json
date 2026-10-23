@@ -1,0 +1,111 @@
+{
+  "action_id": "APA-P70.A11",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-MODEL-FIRST-BUILDING",
+      "evidence_ids": [
+        "EV-NATIVE",
+        "EV-GEOMETRY",
+        "EV-EDITS",
+        "EV-CI"
+      ],
+      "statement": "Connected native21-element two-story test model, five actual Roof underside contacts, explicit native roles, coordinated Roof/Window edits and Save/Open.168current identities preserve original126and prototype147. Axes/global-story/full-roof/stair criteria remain unmet; A11.S03PARTIAL.",
+      "status": "LIVE_PASS"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-NATIVE",
+      "kind": "TEST_RESULT",
+      "sha256": "1690a6ede95e80164982183d5f2bbe6b3975fc5fb94b39ec4be05c1fe152bbbb",
+      "source_revision": "5a3a9201a715a5528c93bed4a5318e2acb32eea7",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-121018Z-model-first-building/native-readback.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-GEOMETRY",
+      "kind": "TEST_RESULT",
+      "sha256": "8682066f2a6faefe78979aac4d68461e96afcdfd634a7e620a5d4b3302e8983d",
+      "source_revision": "5a3a9201a715a5528c93bed4a5318e2acb32eea7",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-121018Z-model-first-building/geometry-and-connections.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-EDITS",
+      "kind": "TEST_RESULT",
+      "sha256": "89404799fb5906a524abaa5221e5e7fc96f940ab2a2670f48769ec050939b945",
+      "source_revision": "5a3a9201a715a5528c93bed4a5318e2acb32eea7",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-121018Z-model-first-building/parameter-edits.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-CI",
+      "kind": "TEST_RESULT",
+      "sha256": "245d015b8b24b05dc19c7f7a88eccc05f8045cee2872fec650525ff89458e31c",
+      "source_revision": "5a3a9201a715a5528c93bed4a5318e2acb32eea7",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-121018Z-model-first-building/ci.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "work-model-first-building-20261013",
+  "executor_run_id": "APA-CLAIM-MODEL-FIRST-20261013T085858Z",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-13T12:10:18Z",
+  "idempotency_key": "sha256:a55f08f1089cfa1b54b29e325ae23e144508912f2a028b01a286ea1065632d99",
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "next_substep": "APA-P70.A11.S03",
+  "phase": "LIVE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261013-121018Z-model-first-building",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29 authorized isolated model-first copy saved; publication makes no native changes",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "source_branch": "feature/apa-model-first-building-20261013",
+    "tapir": "1.5.10"
+  },
+  "source_revisions": [
+    {
+      "revision": "5a3a9201a715a5528c93bed4a5318e2acb32eea7",
+      "source_sha": "5a3a9201a715a5528c93bed4a5318e2acb32eea7",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/74"
+    }
+  ],
+  "started_at": "2026-10-13T08:58:58Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A11.S03"
+}

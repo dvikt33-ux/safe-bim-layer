@@ -1,0 +1,225 @@
+{
+  "schema": "APA_NATIVE_MODIFY_ACCEPTANCE_V1",
+  "status": "PARTIAL_SHELL_LIVE_PASS_RAILING_MATERIAL_DRIFT_CW_NO_EFFECT",
+  "nativeBinaryTestedSHA256": "4e6cdf2a59e46c50b78f52558fe2e9f3cd19a51c4b1142898dda29d2bcc3aead",
+  "nativeBinaryTestedBuildIdentity": "18a238ec1365294d5065b187a6ff552845b6aed0d1cc2e8c8d9f2efaef5b3d23",
+  "nativeBinaryTestedSourceRevision": "d1c71d82d2e1339903d1941bcb24c82b8cc69b18",
+  "nativeCommandDocumentationCount": 293,
+  "cases": {
+    "railing": {
+      "status": "PARTIAL_NATIVE_PARAMETER_BREP_PASS_TYPED_MATERIAL_DRIFT",
+      "beforeBounds": [
+        [
+          210,
+          212
+        ],
+        [
+          -0.0625,
+          -0.0375
+        ],
+        [
+          0.0575,
+          0.0825
+        ]
+      ],
+      "afterBounds": [
+        [
+          210,
+          212
+        ],
+        [
+          -0.0625,
+          -0.0375
+        ],
+        [
+          0.1575,
+          0.1825
+        ]
+      ],
+      "beforeMetrics": {
+        "bodies": 34,
+        "vertices": 3504,
+        "faces": 2444,
+        "closedBodies": 34
+      },
+      "afterMetrics": {
+        "bodies": 34,
+        "vertices": 3504,
+        "faces": 2444,
+        "closedBodies": 34
+      },
+      "nativeParentAndRootPreserved": true,
+      "retainedElements": 315,
+      "materialSurfaceSetPreserved": true,
+      "nativeIFCIdentityPreserved": true,
+      "IFCExport": "NOT_VERIFIED",
+      "engineering": "NOT_VERIFIED",
+      "sceneId": "native-memo-modify-railing-20261015-01",
+      "requestedChanges": {
+        "heightMetres": 0.17
+      },
+      "addedChildGUIDs": 0,
+      "removedChildGUIDs": 0,
+      "typedMaterialAssignments": "FAIL_ONE_NATIVE_OWNED_OBJECT_TWO_GDL_MATERIALS",
+      "nativeDependentBalusters": 18,
+      "dependentBalusterBottomShiftMetres": 0.1,
+      "dependentBalusterTopMetres": 1.08,
+      "materialDrift": {
+        "parameters": [
+          "bmatRail",
+          "bmatFixing"
+        ],
+        "beforeBuildingMaterialIndex": 37,
+        "afterBuildingMaterialIndex": 36,
+        "exactAttributeGUIDIdentityChecked": true,
+        "effectiveSurfacesUnchanged": true,
+        "restoration": {
+          "status": "LIVE_RECONCILED_UNSUPPORTED_NO_EFFECT_NO_REPLAY",
+          "sceneId": "native-memo-restore-two-materials-20261015-01",
+          "nativeErrorCode": -2130312313,
+          "sdkError": "APIERR_NOTSUPPORTED",
+          "errorSource": "Archicad29 APIdefs_ErrorCodes.h APIErrorStart +903",
+          "all409NativeSignaturesUnchanged": true,
+          "allPlacedGDLParametersUnchanged": true,
+          "restoredMaterials": false,
+          "currentMaterialIndex": 36,
+          "requiredOriginalMaterialIndex": 37,
+          "railingHeightMetres": 0.17,
+          "shellExtrusionYMetres": 4.5,
+          "nativeWritesDuringReconciliation": 0,
+          "automaticRetry": false,
+          "reason": "Existing setter ACAPI_Element_Change AddPars rejects this nested Railing-owned Object; owner-aware native component memo edit required, not a duplicate direct setter attempt."
+        }
+      },
+      "acceptance": "Height and dependent BREP effect confirmed. Material drift persists. Not full Railing LIVE_PASS."
+    },
+    "shell": {
+      "status": "LIVE_PASS_NATIVE_PARAMETER_BREP_TYPED_MATERIAL_RETENTION",
+      "beforeBounds": [
+        [
+          217.865835921,
+          222.134164079
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          1.335410197
+        ]
+      ],
+      "afterBounds": [
+        [
+          217.865835921,
+          222.134164079
+        ],
+        [
+          0,
+          4.5
+        ],
+        [
+          0,
+          1.335410197
+        ]
+      ],
+      "beforeMetrics": {
+        "bodies": 1,
+        "vertices": 18,
+        "faces": 12,
+        "closedBodies": 1
+      },
+      "afterMetrics": {
+        "bodies": 1,
+        "vertices": 18,
+        "faces": 12,
+        "closedBodies": 1
+      },
+      "nativeParentAndRootPreserved": true,
+      "retainedElements": 408,
+      "materialSurfaceSetPreserved": true,
+      "nativeIFCIdentityPreserved": true,
+      "IFCExport": "NOT_VERIFIED",
+      "engineering": "NOT_VERIFIED",
+      "sceneId": "native-memo-modify-shell-20261015-01",
+      "requestedChanges": {
+        "extrusionXMetres": 0.0,
+        "extrusionYMetres": 4.5,
+        "extrusionZMetres": 0.0
+      },
+      "addedChildGUIDs": 0,
+      "removedChildGUIDs": 0,
+      "typedMaterialAssignments": "PASS"
+    },
+    "curtainWall": {
+      "status": "NATIVE_NOERROR_NO_EFFECT_NOT_PASS",
+      "requestedHeightMetres": 2.2,
+      "actualHeightMetres": 2,
+      "beforeBounds": [
+        [
+          199.95,
+          202.050000005
+        ],
+        [
+          -0.3,
+          0
+        ],
+        [
+          -0.05,
+          2.05
+        ]
+      ],
+      "afterBounds": [
+        [
+          199.95,
+          202.050000005
+        ],
+        [
+          -0.3,
+          0
+        ],
+        [
+          -0.05,
+          2.05
+        ]
+      ],
+      "changedGUIDs": 0,
+      "nativeNoErrorResponse": true,
+      "retry": false,
+      "newSource": "SCALAR_HEIGHT_REFUSED_USE_EXPLICIT_NATIVE_CONTOUR_MEMO_BUILD_ONLY"
+    }
+  },
+  "qualifiedNativeRootScopeCounts": {
+    "positive-cw": 56,
+    "positive-railing": 94,
+    "positive-shell": 1
+  },
+  "GUIDs": 409,
+  "changedNativeSignatureGUIDs": 21,
+  "changedResultantBREPGUIDs": 20,
+  "addedGUIDs": 0,
+  "removedGUIDs": 0,
+  "unchangedOutsideRailingAndShell": 314,
+  "previous258GUIDsUnchanged": true,
+  "save": "JOURNALED_PASS",
+  "open": "COPY_REOPENED_IN_NEW_PROCESS_ORIGINAL_RUNTIME_ALL409_SIGNATURES_MATCH",
+  "openTransport": "ORIGINAL_TIMEOUT_NEVER_RETRIED_INDEPENDENT_RECONCILIATION_HASH_APPENDED",
+  "newCopySavedSHA256": "afcbdaaea880ea6e13c62e0573be5ae54996003193ffd9b01405cb1a8ee3632c",
+  "sourceSavedPLNBytesUnchanged": true,
+  "initialUnsavedState": "PRESERVED_BY_AUTHORIZED_SAVE_AS_NEW_COPY",
+  "originalAPXBytesRestored": true,
+  "originalRegistrationRestored": true,
+  "restoredRuntime": {
+    "status": "RESTORED_RUNTIME_AND409_GUIDS_REOPEN_READ_PASS",
+    "version": {
+      "version": "1.5.10"
+    },
+    "originalAPXRestored": true
+  },
+  "enhancedFields": "PR107_EXACT_BINARY_LIVE_READ_NOT_PENDING_PR104_BINARY_SUBSTITUTION",
+  "MEPPositive": "NOT_VERIFIED_NO_SAMPLE",
+  "quantityEngine": "QUARANTINED_NOT_CALLED",
+  "offlineTestsRun": false,
+  "engineering": "NOT_VERIFIED",
+  "IFCExport": "NOT_VERIFIED"
+}

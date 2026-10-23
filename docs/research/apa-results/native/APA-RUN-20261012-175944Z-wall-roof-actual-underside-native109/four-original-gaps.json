@@ -1,0 +1,97 @@
+{
+  "status": "FOUR_ACTUAL_ORIGINAL_UPPER_WALL_ROOF_GAPS_MEASURED",
+  "nativeWrites": 0,
+  "source": "Accepted native107 saved body data; published49-pair qualification",
+  "gaps": [
+    {
+      "wallIdentityHash": "19f1f7b797c9b1df39ec9f7501a5a197924bfd7ad3ac05fea5337b19647d5a23",
+      "roofIdentityHash": "629b26b9466538e74b84172814d449c7b25504569f5630b2abb1610de4f2a7f4",
+      "gap": {
+        "status": "ACTUAL_NATIVE_UNDERSIDE_GAP_MEASURED",
+        "minimumVerticalGapMeters": 0.004516899951801712,
+        "maximumVerticalGapMeters": 1.2135986439518023,
+        "projectedOverlapAreaSquareMeters": 1.1999999999999886,
+        "wallTopAbsoluteZ": 6,
+        "roofUndersidePlane": {
+          "normal": [
+            -0.0,
+            -0.14943813241724604,
+            0.9887710779445593
+          ],
+          "distance": -0.044899,
+          "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+        },
+        "authority": "ACTUAL_NATIVE_FACE_OVERLAP; not bounding-box separation",
+        "engineeringAcceptance": "ENGINEERING_NOT_VERIFIED"
+      }
+    },
+    {
+      "wallIdentityHash": "848d50e9eedd3f187f8220ea2f101577e6d16c7c58a1a7304b14beab1bb1bcf4",
+      "roofIdentityHash": "629b26b9466538e74b84172814d449c7b25504569f5630b2abb1610de4f2a7f4",
+      "gap": {
+        "status": "ACTUAL_NATIVE_UNDERSIDE_GAP_MEASURED",
+        "minimumVerticalGapMeters": 1.186411288380791,
+        "maximumVerticalGapMeters": 1.2135986439518023,
+        "projectedOverlapAreaSquareMeters": 1.7718931160999585,
+        "wallTopAbsoluteZ": 6,
+        "roofUndersidePlane": {
+          "normal": [
+            -0.0,
+            -0.14943813241724604,
+            0.9887710779445593
+          ],
+          "distance": -0.044899,
+          "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+        },
+        "authority": "ACTUAL_NATIVE_FACE_OVERLAP; not bounding-box separation",
+        "engineeringAcceptance": "ENGINEERING_NOT_VERIFIED"
+      }
+    },
+    {
+      "wallIdentityHash": "b1dfb1e045032ca3b11dd97923d9d34b55afd98e97c7b426c21b0d80403ea92c",
+      "roofIdentityHash": "629b26b9466538e74b84172814d449c7b25504569f5630b2abb1610de4f2a7f4",
+      "gap": {
+        "status": "ACTUAL_NATIVE_UNDERSIDE_GAP_MEASURED",
+        "minimumVerticalGapMeters": 0.004516899951801712,
+        "maximumVerticalGapMeters": 0.022670109780789538,
+        "projectedOverlapAreaSquareMeters": 1.183106883900014,
+        "wallTopAbsoluteZ": 6,
+        "roofUndersidePlane": {
+          "normal": [
+            -0.0,
+            -0.14943813241724604,
+            0.9887710779445593
+          ],
+          "distance": -0.044899,
+          "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+        },
+        "authority": "ACTUAL_NATIVE_FACE_OVERLAP; not bounding-box separation",
+        "engineeringAcceptance": "ENGINEERING_NOT_VERIFIED"
+      }
+    },
+    {
+      "wallIdentityHash": "461396d47d687a0df62b44f6c3bc9e59d05bfdfed018e0ffe48ae6d49cb60298",
+      "roofIdentityHash": "629b26b9466538e74b84172814d449c7b25504569f5630b2abb1610de4f2a7f4",
+      "gap": {
+        "status": "ACTUAL_NATIVE_UNDERSIDE_GAP_MEASURED",
+        "minimumVerticalGapMeters": 0.022670109780789538,
+        "maximumVerticalGapMeters": 1.186411288380791,
+        "projectedOverlapAreaSquareMeters": 1.1549999999999896,
+        "wallTopAbsoluteZ": 6,
+        "roofUndersidePlane": {
+          "normal": [
+            -0.0,
+            -0.14943813241724604,
+            0.9887710779445593
+          ],
+          "distance": -0.044899,
+          "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+        },
+        "authority": "ACTUAL_NATIVE_FACE_OVERLAP; not bounding-box separation",
+        "engineeringAcceptance": "ENGINEERING_NOT_VERIFIED"
+      }
+    }
+  ],
+  "retainedOriginalGeometry": "UNCHANGED",
+  "newUndersideSpecimen": "Separate native Wall/Roof supported scenario, not an edit of these original walls"
+}

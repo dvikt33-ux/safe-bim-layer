@@ -1,0 +1,94 @@
+{
+  "opening": {
+    "status": "NATIVE_OPENING_HOST_AND_BODY_CHANGE_PASS",
+    "guid": "id-sha256:4a4567797321729af159",
+    "hostGuid": "id-sha256:43142421afc7d8a55e82",
+    "homeStory": 0,
+    "genericType": "Opening",
+    "genericDetails": {
+      "error": "Not yet supported element type"
+    },
+    "beforeHostBodyHash": "9c0fa49ce344d75136e021c063ca970f830d4a2f277f4d537aca7191c96a2d40",
+    "nativeHoleBoundsMeters": [
+      [
+        64.8,
+        65.2
+      ],
+      [
+        59.85,
+        60.15
+      ],
+      [
+        1,
+        1.6
+      ]
+    ],
+    "geometryAuthority": "TWO_ACTUAL_NATIVE_HOST_INNER_FACE_CONTOURS"
+  },
+  "openingHostAfterBodyHash": "70a8c1b32ff88acf171342aca0f7a9297061872f19932136beffba5d8e3a72f2",
+  "openingHostFaceCount": 10,
+  "seo": {
+    "status": "SEO_SUBTRACTION_NATIVE_LINK_AND_BREP_PASS",
+    "targetGuid": "id-sha256:df53ca227a0b386ef451",
+    "operatorGuid": "id-sha256:a0739fb99f636d01a87e",
+    "linkReadback": [
+      {
+        "solidLinksWithTheGivenTarget": [
+          {
+            "operatorId": {
+              "guid": "id-sha256:a0739fb99f636d01a87e"
+            },
+            "operation": "Subtraction",
+            "linkFlags": {
+              "inheritOperatorAttributes": false,
+              "skipPolygonHoles": false
+            }
+          }
+        ],
+        "solidLinksWithTheGivenOperator": []
+      }
+    ],
+    "beforeBodyHash": "6f2e19bb7135d8daebee4eabe5bd9b653145c125783a4e2f1da31d2dd6330da8"
+  },
+  "seoAfterBodyHash": "525fa99044aae38b58e8a336d7af58b0229979961c6a7ea5191c006545e88039",
+  "seoActualBoundsMeters": [
+    [
+      70,
+      71
+    ],
+    [
+      60,
+      62
+    ],
+    [
+      0,
+      2
+    ]
+  ],
+  "providerScope": {
+    "CreateShells": "UNSUPPORTED_INSTALLED_PROVIDER",
+    "ModifyShells": "UNSUPPORTED_INSTALLED_PROVIDER",
+    "CreateOpenings": "SCHEMA_AVAILABLE_REQUIRES_NATIVE_READBACK",
+    "ModifyOpenings": "UNSUPPORTED_INSTALLED_PROVIDER",
+    "CreateSolidElementLinks": "SCHEMA_AVAILABLE_REQUIRES_NATIVE_READBACK",
+    "RemoveSolidElementLinks": "SCHEMA_AVAILABLE_REQUIRES_NATIVE_READBACK"
+  },
+  "journalReconciliationReceipts": [
+    {
+      "sceneId": "functional-gap-mep-extension-20261012",
+      "originalJournalStatePreserved": "PARTIAL_OR_UNKNOWN_OUTCOME",
+      "reconciliation": "READONLY_NATIVE_STATE_VERIFIED_NO_RETRY"
+    },
+    {
+      "sceneId": "functional-gap-opening-seo-specimens-20261012",
+      "originalJournalStatePreserved": "PARTIAL_OR_UNKNOWN_OUTCOME",
+      "reconciliation": "READONLY_NATIVE_STATE_VERIFIED_NO_RETRY"
+    },
+    {
+      "sceneId": "functional-gap-seo-subtraction-20261012",
+      "originalJournalStatePreserved": "PARTIAL_OR_UNKNOWN_OUTCOME",
+      "reconciliation": "READONLY_NATIVE_STATE_VERIFIED_NO_RETRY"
+    }
+  ],
+  "engineeringAcceptance": "NOT_VERIFIED"
+}

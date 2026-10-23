@@ -1,0 +1,33 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-COMPATIBLE-NATIVE-PACKAGE-V31",
+      "evidence_ids": [
+        "EV-CONNECTED-ACCEPTANCE",
+        "EV-CONNECTED-BYTES"
+      ],
+      "statement": "Current code connects native Roof/Morph/one straight MEP route, real selected Details joins, native-context CP-SAT and IFC world-bound verification through retained writer. Final22primary/48GUIDs persist; complete engineering/network/manufacturer assembly is not claimed. Publication replays local captures with no new Archicad calls.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-CONNECTED-ACCEPTANCE",
+      "kind": "TEST_RESULT",
+      "sha256": "c38eb499824e1736dbb5b578f143be014bfdfb55aaed9a5d8e780881e2fdeb0f",
+      "source_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-010000Z-compatible-integration-v31/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-CONNECTED-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "64f0e581242ae3521b9e02dbad6c81bf0fb4bf3b8b92fd2300cf09fa601d7df2",
+      "source_revision": "286b1ae8614421b927af95c4c278147c8d55baba",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-010000Z-compatible-integration-v31/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261012-010000Z-compatible-integration-v31",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

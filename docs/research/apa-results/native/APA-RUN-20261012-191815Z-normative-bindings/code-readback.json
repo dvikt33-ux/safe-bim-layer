@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "head": "e43bc6055d648270b72dc573a22c9d52c71a83f8",
+  "parent": "b056cb76929a62047c82fd66961b72eb4d9078a8",
+  "files": [
+    {
+      "path": "scripts/archicad_project_accelerator.py",
+      "sha": "0b133d98ad4846a5a3ae881ea52959a575ebb225",
+      "match": true
+    },
+    {
+      "path": "scripts/archicad_normative_bindings.py",
+      "sha": "5ffd2a51979ef677767840d0f52ae47d91c30e1c",
+      "match": true
+    },
+    {
+      "path": "examples/accelerator/ru-junction-rulepack-20261012.json",
+      "sha": "16b7ee0db9464f311ad8def8e68bc7aa5147f5bb",
+      "match": true
+    },
+    {
+      "path": "tests/test_archicad_normative_bindings.py",
+      "sha": "8e3c0cf8b1645bc98c3a94bc9fdfa068d2dba06b",
+      "match": true
+    },
+    {
+      "path": "docs/research/apa_normative_bindings_2026-10-12.md",
+      "sha": "6fc2203ba937976e4277ba5f6d38821ff71b065f",
+      "match": true
+    }
+  ]
+}

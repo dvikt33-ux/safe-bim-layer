@@ -1,0 +1,145 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261014-193327Z-mass-capability-integration",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-mass-capability-integration-20261014",
+  "executor_run_id": "APA-CLAIM-MASS-CAPABILITIES-20261014T180500Z",
+  "phase": "LIVE",
+  "started_at": "2026-10-14T18:05:00Z",
+  "finished_at": "2026-10-14T19:33:27Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 Windows11 authorized existingtest; readworkflow and Save service; artifact publication",
+    "sdk": "29 public declarations and registered source examples",
+    "tapir": "1.5.10 restored original",
+    "source_branch": "feature/apa-mass-capability-integration-20261014"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/84",
+      "revision": "08527c0edde2096cf5d7be534b5e49f5c9038647",
+      "source_sha": "08527c0edde2096cf5d7be534b5e49f5c9038647"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-MASS-CONTRACTS",
+      "statement": "363 unique contracts prepared;337 current compatible,26source-only,official68unprobed and32APX NOT_EXPOSED separately.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-0",
+        "EV-1",
+        "EV-2"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-CONNECTED-WORKFLOW",
+      "statement": "12step native dataflow with15actualcalls and4independent effects;258retained,zero geometry writes,shared SceneWriter Save service.",
+      "status": "LIVE_PASS",
+      "evidence_ids": [
+        "EV-3"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-MASS-LIMITS",
+      "statement": "Full functional coverage not achieved; source runtime/effects/vendor ABI blockers exact;S03PARTIAL.",
+      "status": "NOT_VERIFIED",
+      "evidence_ids": [
+        "EV-4"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/capability-counts.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "487b4f141ed2e08efa5e39efb58e72e2ccd0ff7a1ccfb9f3a73a52642ed50594",
+      "source_revision": "08527c0edde2096cf5d7be534b5e49f5c9038647"
+    },
+    {
+      "evidence_id": "EV-1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/provider-matrix.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "14cb67210c78a11e6376dcc7ae8d1865a78aa1dcecd245192e5d8832fdbe4dba",
+      "source_revision": "08527c0edde2096cf5d7be534b5e49f5c9038647"
+    },
+    {
+      "evidence_id": "EV-2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/historical-providers.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "20471fa23bf7dc465d111d87dbe0740a56f6df44d79ea2babe2552442a286036",
+      "source_revision": "08527c0edde2096cf5d7be534b5e49f5c9038647"
+    },
+    {
+      "evidence_id": "EV-3",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/connected-workflow.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "1a6c06634c7888b73096d3a4840845a9a080dcaa6f00e9ade2d55b35a3801841",
+      "source_revision": "08527c0edde2096cf5d7be534b5e49f5c9038647"
+    },
+    {
+      "evidence_id": "EV-4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/gap-register.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "69c10e0b607e21ce8c7303f0b0402efb859a11451cb0f089de96ac55afa25adc",
+      "source_revision": "08527c0edde2096cf5d7be534b5e49f5c9038647"
+    },
+    {
+      "evidence_id": "EV-5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/windows-ci.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "653c61a976b64af81f5463ce9658ed15418810f3c94f76d1ed2af45f1145a6fd",
+      "source_revision": "08527c0edde2096cf5d7be534b5e49f5c9038647"
+    },
+    {
+      "evidence_id": "EV-6",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-193327Z-mass-capability-integration/core-knowledge-query.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "be4c566d35f09b2f16dc8a6c272d85dcb8905086d58cc5fbc705b4bea922264c",
+      "source_revision": "08527c0edde2096cf5d7be534b5e49f5c9038647"
+    }
+  ],
+  "report_markdown": "# APA mass capability integration — working cross-provider workflow\n\n[Draft PR84](https://github.com/dvikt33-ux/safe-bim-layer/pull/84), exact head `08527c0edde2096cf5d7be534b5e49f5c9038647`, parent PR82 `1c27e7c4b66d5b225724e777719e6a675660494a`. Current canonical revision159 verified by the existing main orchestrator Knowledge Graph and GitHub CAS lease.\n\n| Provider | Discovered contracts | Current runtime | Prepared by APA | Callable this pass | Blocked source contracts |\n|---|---:|---|---:|---:|---:|\n| Original Tapir/SDK |264|264 registered|264|10|0|\n| Official AC29 typed JSON API |73|5 called;68 not individually probed|73|5|0 known;68 unprobed|\n| Candidate-only SDK delta |12|0 in restored runtime|12|0|12|\n| Installed DevKit registered examples |14|0|14|0|14|\n| Other loaded APX |32 providers, no standalone JSON contract discovered|32 modules loaded|0 additional contracts|0|NOT_EXPOSED|\n| Known alternative fork-only tools |2 incomplete schemas|0|0|0|2|\n\n337 current compatible contracts;363 unique prepared including26source-only. Fifteen distinct actual successful calls;four independently verified effects. Prior16LIVE results are preserved and not recounted. Documented effect metadata:142read,72create,46modify,18delete,7transaction,1service,51UNKNOWN. UNKNOWN cannot execute. Discovered/preparable is not write permission. The other32APX matrix includes exact hashes/export classifications/blockers, without inventing commands from DLL symbols. 848SDK declaration names,7702C++ ABI exports and2779GDL resources are separate. Alternatives250native contracts duplicate current Tapir;fiveMCP broker/control tools do not add native operations. Historical16provider snapshot is reconciled and preserved; IfcOpenShell/native dump statuses were stale. Existing libraries/adapters are reused, not replaced.\n\n## Actual functional result\n\nThe existing BIM Graph compiles a12step workflow. Producer result pointers feed actual GUID/attribute IDs into typed consumers across official API and Tapir:10Walls → native details/bounds/IFC mapping;59BuildingMaterials;2779library Objects;stories/navigator/MEP. Existing NativeModelDump/IFC BREP quantities/Shapely supply shared GUID,XYZ,story,material and relationship facts. Nine of ten official Wall boxes differ from resultant BREP; both sources remain explicit, with actual BREP as physical authority. No false geometry equality or IFC semantic acceptance.\n\nNew namespaces and source schemas route without per-name Python handlers. Existing KnowledgeGraph indexes summaries; full selected schema is lazy. No new executor/scheduler/MCP/journal. Parameters/results are validated; registration rechecked; producer dependencies compiled by existing graph; concrete consumer parameters validated again. Source-bound effects and policy hashes replace name-derived permission. Writes require explicit affected scope, operation-specific preflight/readback, identity/hash, complete retained inventory and the same SceneWriter/SQLite intent-before-write. UNKNOWN no replay preserved. One authorized SaveProject service passed through that writer;all258accepted signatures preserved,zero geometry mutations. APX unchanged,no newPLN,no unrelated model writes. Save/Open acceptance of existing Roofs remains priorPR82 evidence, not repeated or asserted as new.\n\nWindows CI [PASS](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38623886612) at exact head;seven local critical routing tests only. Normative system, KnowledgeGraph/search implementation, documentation and main unchanged. S03 remains PARTIAL;S10/A07 historical dependencies unchanged. Source-only26commands need accepted loaded providers;51UNKNOWN policies need source review;otherAPX need documented namespace/service ABI/license. Next: concrete safe category workflows with existing router, preserving source-only and current runtime boundaries. Narrow Roof Surface/Stair/MEP defects deferred per user priority. Publisher safety flags cover artifact publication only;authorized non-geometric Save separately evidenced.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

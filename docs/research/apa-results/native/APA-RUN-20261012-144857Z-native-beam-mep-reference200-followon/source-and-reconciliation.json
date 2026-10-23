@@ -1,0 +1,135 @@
+{
+  "originalPR57Head": "b1abd584585feb0f286621337986c8a5d3077507",
+  "sourceArchiveSha256": "fbd23cbca9d306b630537679b75ff5b015f1e35a2b8470811387c137a32bdeb6",
+  "facts": {
+    "c4": {
+      "detailId": "ARMO_SELFLOCK_ROOF__P0003",
+      "entityId": "c4",
+      "sourceFactId": "ARMO_SELFLOCK_ROOF__P0003__PF001",
+      "sourceLocator": {
+        "representation": "albom_tehnicheskih_reshenii_samozaschelkivayuscheisya_krovli_armo.pdf",
+        "page": 3
+      },
+      "sourceSectionMeters": {
+        "width": 0.15,
+        "height": 0.025
+      },
+      "modelDerivedLengthMeters": 10,
+      "missingAssemblyDimensionEntities": [
+        "c1",
+        "c2",
+        "c3",
+        "c6",
+        "c7",
+        "c8",
+        "c9",
+        "c10"
+      ]
+    },
+    "c5": {
+      "detailId": "ARMO_SELFLOCK_ROOF__P0003",
+      "entityId": "c5",
+      "sourceFactId": "ARMO_SELFLOCK_ROOF__P0003__PF002",
+      "sourceLocator": {
+        "representation": "albom_tehnicheskih_reshenii_samozaschelkivayuscheisya_krovli_armo.pdf",
+        "page": 3
+      },
+      "sourceSectionMeters": {
+        "width": 0.05,
+        "height": 0.05
+      },
+      "modelDerivedLengthMeters": 5.980100048867446,
+      "missingAssemblyDimensionEntities": [
+        "c1",
+        "c2",
+        "c3",
+        "c6",
+        "c7",
+        "c8",
+        "c9",
+        "c10"
+      ]
+    }
+  },
+  "nativeModelInputs": {
+    "baselineCount": 96,
+    "finalCount": 107,
+    "allAcceptedSignaturesPreserved": true
+  },
+  "newJournalOutcomesPreserved": {
+    "c5": {
+      "sceneId": "native-followon-source-beam-c5-create-20261012",
+      "planHash": "1a65b6f165a6ab2757eabe7378c30da49d57fcea03ef3a9ecd992bf35bfec5df",
+      "status": "PARTIAL_OR_UNKNOWN_OUTCOME",
+      "plnSaved": false,
+      "automaticRetry": false,
+      "steps": {
+        "native-source-beam-c5": {
+          "status": "PASS",
+          "guid": "id-sha256:faa8e878d06048cf2f74",
+          "kind": "Beam"
+        }
+      },
+      "sceneDimensions": {
+        "scope": "connected explicit project geometry"
+      },
+      "reusedCount": 0,
+      "failedStep": "FINAL_READBACK",
+      "reason": "ValueError: NATIVE_BEAM_ACTUAL_SUPPORT_AREA_MISMATCH:0.00731108100944968",
+      "manualReconciliationRequired": true
+    },
+    "profile": {
+      "status": "PARTIAL_OR_UNKNOWN_OUTCOME",
+      "automaticRetry": false,
+      "sceneId": "native-followon-beam-c4-profile-convention-correction-20261012",
+      "command": "ModifyBeams",
+      "operationHash": "254c935230eb49c3d1288a70857ed47ec6cd694fd26837b6a56026ceccacea53",
+      "nativeResponse": {
+        "executionResults": [
+          {
+            "success": true
+          }
+        ]
+      },
+      "reason": "ValueError: BEAM_NATIVE_PARAMETER_MISMATCH:profileAngle",
+      "manualReconciliationRequired": true
+    },
+    "trim": {
+      "status": "PARTIAL_OR_UNKNOWN_OUTCOME",
+      "automaticRetry": false,
+      "sceneId": "native-followon-native-wall-roof-trim-operation-20261012",
+      "command": "TrimElements",
+      "operationHash": "c60b59924fc410a9ee4022c7630aff4a7d89d5c8dacd1c51603eed88ebcbd126",
+      "nativeResponse": {
+        "success": true
+      },
+      "reason": "ValueError: ROOF_TRIM_ACTUAL_BEARING_SURFACE_MISMATCH:3.2363406080000052",
+      "manualReconciliationRequired": true
+    },
+    "seo": {
+      "status": "PARTIAL_OR_UNKNOWN_OUTCOME",
+      "automaticRetry": false,
+      "sceneId": "native-followon-native-wall-roof-underside-seo-20261012",
+      "command": "CreateSolidElementLinks",
+      "operationHash": "1ab4c55ab34555ef46e8793ff96c2f3c32df25f29c1c2b0049586758079a6169",
+      "nativeResponse": {
+        "executionResults": [
+          {
+            "success": true
+          }
+        ]
+      },
+      "reason": "ValueError: ROOF_TRIM_ACTUAL_BEARING_SURFACE_MISMATCH:3.2363406080000052",
+      "manualReconciliationRequired": true
+    }
+  },
+  "reconciliation": "Original post-readback failures retained; confirmed responses reconciled by independent final state, never replayed",
+  "rawNativePayloadsPLNAndIFC": "LOCAL_ONLY_NOT_PUBLISHED",
+  "evidenceFileHashes": {
+    "apa-live-evidence/native-followon-circular-terminal-persistence/result.json": "d7c53d20e3e2b59aff67b09fdc2721504a30ae492cba6ef07d8e039369ebe811",
+    "apa-live-evidence/native-followon-beam-pair-persistence/result.json": "19b6895b4195d5bc843856db0f7ae2c9b1eb64b1a48f32c7a33e0b9a729097ed",
+    "apa-live-evidence/native-followon-wall-roof-junction-persistence/result.json": "c1b4fa1b59dbb1944c4b157d4d529d5a4247abf1b3088c6f561d8d786b565e0a",
+    "apa-live-evidence/native-followon-final-readback107/result.json": "311682b64c59e7bbba1a8973bb52ea10362d71a6fdeb2c7b694f3cbed5c9ad40",
+    "apa-live-evidence/native-followon-ifc-current107-readonly-final/result.json": "0e91bbbc95f3301c0a0dee007de296bb5701d1f712372a574302ceee20a4caf2"
+  }
+}

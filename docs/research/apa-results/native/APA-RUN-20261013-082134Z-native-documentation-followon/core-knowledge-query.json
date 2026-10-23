@@ -1,0 +1,14 @@
+{
+  "schema": "APA_COMPACT_RETRIEVAL_V1",
+  "status": "OK",
+  "authority": "VERIFIED_GITHUB_PLAN_SNAPSHOT",
+  "plan_revision": 129,
+  "plan_sha256": "18b1835f7ad3f8a618415c62e9df4b8ef77515a2b0abb5c857fb0cd71b7ee47d",
+  "retrieval": "EXACT_TASK",
+  "task_claim": "NEVER_AUTOMATIC",
+  "executor": "Main archicad_project_accelerator.retrieve_project_knowledge",
+  "sourceMode": "GITHUB_CURRENT",
+  "query": "APA-P70.A11.S03 APA-P70.A07.S01",
+  "freshness": "GitHub revision129 captured before claim130; not claimed as floating latest",
+  "implementation": "UNCHANGED"
+}

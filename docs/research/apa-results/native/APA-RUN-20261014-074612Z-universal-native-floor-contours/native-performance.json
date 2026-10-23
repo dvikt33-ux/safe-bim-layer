@@ -1,0 +1,32 @@
+{
+  "status": "ACTUAL_NATIVE_MEASUREMENTS_NOT_SYNTHETIC_SPEED_OR_SCALABILITY",
+  "operationIncludesReadback": true,
+  "seconds": {
+    "createSeconds": 1.0018436999998812,
+    "editSeconds": 1.446323599999232,
+    "saveSeconds": 3.250933299999815,
+    "openSeconds": 11.45788360000006
+  },
+  "compileSeconds": 0.4885499999509193,
+  "compileMeasurement": "LOCAL_PYTHON_SOURCE_COMPILATION",
+  "nativeCalls": {
+    "GetProjectInfo": 21,
+    "GetAllElements": 10,
+    "GetModelDumpV1": 16,
+    "GetStories": 22,
+    "GetAddOnVersion": 20,
+    "GetAttributesByType": 2,
+    "Get3DBoundingBoxes": 4,
+    "GetSubelementsOfHierarchicalElements": 2,
+    "CreateSlabs": 1,
+    "GetDetailsOfElements": 10,
+    "ModifySlabs": 2,
+    "GetCollisions": 1,
+    "SaveProject": 1,
+    "OpenProject": 1
+  },
+  "nativeElementCreates": 1,
+  "nativeModelMutations": 3,
+  "saveOpenCalls": 2,
+  "largeModelBenchmark": "NOT_RUN_FUNCTIONAL_COMPLETENESS_FIRST"
+}

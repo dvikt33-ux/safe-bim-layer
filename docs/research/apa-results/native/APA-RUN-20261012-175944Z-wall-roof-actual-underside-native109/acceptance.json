@@ -1,0 +1,241 @@
+{
+  "substep": "APA-P70.A11.S03",
+  "status": "PARTIAL",
+  "draftPR": 63,
+  "codeHead": "7966db58ca8830b43938a03cc064bcc3e952a21e",
+  "basePR59Head": "744e0bd184a11f1de4a1cf16382d21aec6f8cfca",
+  "nativeGuidCount": 109,
+  "sharedContextRecords": 45,
+  "accepted107Preserved": "LIVE_PASS",
+  "all109SavedReopenedIndependentReadback": "LIVE_PASS",
+  "plnSha256": "0d87954de1a0b75f0510c4bbd1a7424db2eb09fa928d5e0fb746c58d9a18f14d",
+  "actualUndersideContact": {
+    "status": "ACTUAL_NATIVE_ROOF_UNDERSIDE_FACE_CONTACT_PASS",
+    "plane": {
+      "normal": [
+        -0.0,
+        -0.14943813241724604,
+        0.9887710779445593
+      ],
+      "distance": -0.044899,
+      "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+    },
+    "sharedAreaSquareMeters": 2.33623338255613,
+    "actualFaceIndices": {
+      "wall": [
+        [
+          0,
+          1
+        ]
+      ],
+      "roof": [
+        [
+          0,
+          2
+        ]
+      ]
+    },
+    "wallEntirelyBelowUnderside": true,
+    "holesPreservedInContactCheck": true
+  },
+  "expectedAreaSquareMeters": 2.336233382576165,
+  "nativeTools": [
+    "Wall",
+    "Roof"
+  ],
+  "materialStoryTypedParameters": "LIVE_PASS",
+  "nativeSourceBinding": {
+    "sourceWallGuid": "id-sha256:3677c5da2430b7bed34b",
+    "sourceRoofGuid": "id-sha256:51fe26b6654ee6ca9854",
+    "sourceBodies": [
+      {
+        "guid": "id-sha256:3677c5da2430b7bed34b",
+        "geometryHash": "531ef1d6df0a8bfae9b89a3727577f522dcec5a5ef849fb3697cba57c80f5064",
+        "materialBindings": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "structureType": 0,
+          "buildingMaterial": {
+            "nativeField": "wall.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "id-sha256:460ab9cf8caf48c17c0c",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "id-sha256:547d736d45b5e8718116",
+              "name": "Бетон - 02"
+            }
+          },
+          "refMat": {
+            "nativeField": "wall.refMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "oppMat": {
+            "nativeField": "wall.oppMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "sidMat": {
+            "nativeField": "wall.sidMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          }
+        },
+        "homeStory": 1
+      },
+      {
+        "guid": "id-sha256:51fe26b6654ee6ca9854",
+        "geometryHash": "0cc7605d8ace8f21e5434c6daa568efb0c5df953a29af766edef4c5f669562ee",
+        "materialBindings": {
+          "api": "ACAPI_Element_Get",
+          "coverage": "NATIVE_FIELDS_AVAILABLE_FOR_TYPE",
+          "structureType": 0,
+          "buildingMaterial": {
+            "nativeField": "shellBase.structure",
+            "attributeType": 12,
+            "attributeIndex": 10,
+            "guid": "id-sha256:460ab9cf8caf48c17c0c",
+            "name": "Железобетон - Конструкционный",
+            "defaultSurface": {
+              "nativeField": "buildingMaterial.cutMaterial",
+              "attributeType": 5,
+              "attributeIndex": 4,
+              "guid": "id-sha256:547d736d45b5e8718116",
+              "name": "Бетон - 02"
+            }
+          },
+          "topMat": {
+            "nativeField": "shellBase.topMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "sidMat": {
+            "nativeField": "shellBase.sidMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          },
+          "botMat": {
+            "nativeField": "shellBase.botMat",
+            "attributeType": 5,
+            "attributeIndex": 0,
+            "overridden": false,
+            "effectiveWhen": "overridden=true; otherwise use structure/GDL source"
+          }
+        },
+        "homeStory": 1
+      }
+    ],
+    "placementAuthority": "Separate native specimen beyond actual maximum model X by one measured roof span; wall at copied roof center",
+    "dimensionAuthority": "Actual wall thickness and resultant span, roof pitch/thickness/polygon, wall base and roof highest vertex",
+    "sourceInterface": "Published49-pair west-upper-wall/roof gap; original model is preserved",
+    "expectedAreaSquareMeters": 2.336233382576165,
+    "fullConstructionSolution": "NOT_VERIFIED",
+    "engineeringAcceptance": "ENGINEERING_NOT_VERIFIED",
+    "expectedUndersidePlane": {
+      "normal": [
+        -0.0,
+        -0.14943813241724604,
+        0.9887710779445593
+      ],
+      "distance": -0.044899,
+      "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+    },
+    "operation": "SubtractionUpwards",
+    "linkFlags": {
+      "inheritOperatorAttributes": false,
+      "skipPolygonHoles": true
+    },
+    "nativeOperationReason": "Ignore operator polygon holes during upward subtraction; preserve actual roof thickness/material and accepted specimen",
+    "noTrimRequired": true
+  },
+  "nativeSEORelation": [
+    {
+      "solidLinksWithTheGivenTarget": [
+        {
+          "operatorId": {
+            "guid": "id-sha256:016f35214efa88c46fa3"
+          },
+          "operation": "SubtractionUpwards",
+          "linkFlags": {
+            "inheritOperatorAttributes": false,
+            "skipPolygonHoles": false
+          }
+        }
+      ],
+      "solidLinksWithTheGivenOperator": []
+    }
+  ],
+  "requestedLinkFlags": {
+    "inheritOperatorAttributes": false,
+    "skipPolygonHoles": true
+  },
+  "nativeFlagReadback": "NOT_VERIFIED_REQUEST_READBACK_DIFFERENCE",
+  "flagCause": "NOT_VERIFIED; request true, observed false. Installed query source ignores SDK GetFlags return code; actual failure/flag application not inferred.",
+  "initialJournalOutcome": {
+    "status": "PARTIAL_OR_UNKNOWN_OUTCOME",
+    "automaticRetry": false,
+    "sceneId": "roof-closure-native-underside-seo-skip-holes-20261012",
+    "command": "CreateSolidElementLinks",
+    "operationHash": "df5533146d3384cc9c6e547d17a43c30193cdcc93286d548844d1efcf8e3a9fe",
+    "nativeResponse": {
+      "executionResults": [
+        {
+          "success": true
+        }
+      ]
+    },
+    "reason": "ValueError: ROOF_BEARING_SEO_LINK_NOT_PROVEN",
+    "manualReconciliationRequired": true
+  },
+  "reconciliation": "Independent read-only geometry and relation proof; historical failure preserved; no native replay",
+  "newNativeCollisions": [],
+  "baselineCollisionPairsPreserved": [
+    [
+      "id-sha256:51fe26b6654ee6ca9854",
+      "id-sha256:37e03a097129cc9aa5b9"
+    ]
+  ],
+  "originalFourWallRoofGaps": "UNCHANGED; actual face-overlap gap measurement published separately",
+  "oldAcceptedPerimeterSpecimen": "PRESERVED",
+  "nativeCreateAttempts": 2,
+  "nativeSEOAttempts": 1,
+  "nativeSaveAttempts": 1,
+  "nativeOpenAttempts": 1,
+  "nativeMutationReplays": 0,
+  "renamedIsolatedCopy": {
+    "authorization": "Direct current-user reply: continue in renamed isolated file",
+    "identityHash": "e92f3ed8481af178c7bd09739e7309b6270ff80e4c5cbc1089f7600e8e0bc748",
+    "beforeSaveSha256": "9e813284e8955adb103d0f311872f4fa7c6cd23f1c8ef001cc07a8cd4ed5d8f1",
+    "all107BaselineSignaturesMatchedBeforeWrite": true
+  },
+  "mep": "ExistingØ200terminal pair and main network unchanged; two routed components, sized transition/main bridge BLOCKED",
+  "A11.S10": "BLOCKED",
+  "A04.S01-S03": "DONE_PUBLISHED_RETAINED",
+  "fullFamily": "NOT_VERIFIED",
+  "engineeringAcceptance": "ENGINEERING_NOT_VERIFIED",
+  "visible3DAcceptance": "NOT_VERIFIED",
+  "ifc": {
+    "elements": 52,
+    "boundsMatches": 45,
+    "quantityMatches": 20,
+    "quantityMismatches": 0,
+    "materials": 26,
+    "portRelations": 12,
+    "openingHosts": 6,
+    "structuralContactAndSEOExportSemantics": "NOT_VERIFIED"
+  }
+}

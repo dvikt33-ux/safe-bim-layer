@@ -1,0 +1,267 @@
+{
+  "status": "POST_SAVE_OPEN_DOCUMENTATION_NATIVE_READBACK_PASS",
+  "originalGuidCount": 109,
+  "currentGuidCount": 121,
+  "originalSignaturesUnchanged": true,
+  "originalSignatureHash": "c0f71dcbce1d8514130030cea107fecced525e49f62a27fad9104f8936f959a5",
+  "savedFileSHA256": "c7350d717e223fd5ec8e82dbaa44197e4483a54b31c54c3913e317a0893054c9",
+  "extraNativeElements": [
+    {
+      "guid": "id-sha256:76c413c56882517a81bd",
+      "type": "Object",
+      "homeStory": 0,
+      "relationships": {
+        "ownerGuid": "id-sha256:8bbd0a75af225917d68f",
+        "nativeField": "object.owner",
+        "ownerResolution": "OUTSIDE_DUMP_OR_UNRESOLVED"
+      }
+    },
+    {
+      "guid": "id-sha256:5f53f0c1815015ab9168",
+      "type": "Object",
+      "homeStory": 0,
+      "relationships": {
+        "ownerGuid": "id-sha256:583e8e7da919f68b2995",
+        "nativeField": "object.owner",
+        "ownerResolution": "OUTSIDE_DUMP_OR_UNRESOLVED"
+      }
+    },
+    {
+      "guid": "id-sha256:0165eeec96498d361237",
+      "type": "Object",
+      "homeStory": 0,
+      "relationships": {
+        "ownerGuid": "id-sha256:583e8e7da919f68b2995",
+        "nativeField": "object.owner",
+        "ownerResolution": "OUTSIDE_DUMP_OR_UNRESOLVED"
+      }
+    },
+    {
+      "guid": "id-sha256:a0bf5bf67d2943eeb00d",
+      "type": "Object",
+      "homeStory": 0,
+      "relationships": {
+        "ownerGuid": "id-sha256:8bbd0a75af225917d68f",
+        "nativeField": "object.owner",
+        "ownerResolution": "OUTSIDE_DUMP_OR_UNRESOLVED"
+      }
+    },
+    {
+      "guid": "id-sha256:92ccfeac6f27c9faf3a0",
+      "type": "Object",
+      "homeStory": 0,
+      "relationships": {
+        "ownerGuid": "id-sha256:77beca6a07f6a6f6d27e",
+        "nativeField": "object.owner",
+        "ownerResolution": "IN_DUMP"
+      }
+    },
+    {
+      "guid": "id-sha256:5715235653f0e61d7ebf",
+      "type": "Object",
+      "homeStory": 0,
+      "relationships": {
+        "ownerGuid": "id-sha256:583e8e7da919f68b2995",
+        "nativeField": "object.owner",
+        "ownerResolution": "OUTSIDE_DUMP_OR_UNRESOLVED"
+      }
+    },
+    {
+      "guid": "id-sha256:320ef0364e5ab6cff25f",
+      "type": "Object",
+      "homeStory": 0,
+      "relationships": {
+        "ownerGuid": "id-sha256:583e8e7da919f68b2995",
+        "nativeField": "object.owner",
+        "ownerResolution": "OUTSIDE_DUMP_OR_UNRESOLVED"
+      }
+    },
+    {
+      "guid": "id-sha256:57450340fb95fd0d63bb",
+      "type": "Object",
+      "homeStory": 0,
+      "relationships": {
+        "ownerGuid": "id-sha256:8bbd0a75af225917d68f",
+        "nativeField": "object.owner",
+        "ownerResolution": "OUTSIDE_DUMP_OR_UNRESOLVED"
+      }
+    },
+    {
+      "guid": "id-sha256:16ca6c3f1c4ad8c4c03d",
+      "type": "Object",
+      "homeStory": 0,
+      "relationships": {
+        "ownerGuid": "id-sha256:8bbd0a75af225917d68f",
+        "nativeField": "object.owner",
+        "ownerResolution": "OUTSIDE_DUMP_OR_UNRESOLVED"
+      }
+    },
+    {
+      "guid": "id-sha256:77beca6a07f6a6f6d27e",
+      "type": "InteriorElevation",
+      "homeStory": 0,
+      "relationships": {}
+    },
+    {
+      "guid": "id-sha256:c24142ad8461263dda85",
+      "type": "CutPlane",
+      "homeStory": 0,
+      "relationships": {}
+    },
+    {
+      "guid": "id-sha256:e082e6637458b40def2f",
+      "type": "Wall",
+      "homeStory": 0,
+      "relationships": {}
+    }
+  ],
+  "views": {
+    "elevation": {
+      "status": "NATIVE_DATABASE_REGENERATION_PASS",
+      "coverage": "NATIVE_VIEW_EMPTY_OR_OUTSIDE_SELECTED_BUILDING",
+      "windowType": "Elevation",
+      "sourceGuid": "id-sha256:3a26a654ad3d4a837e9a",
+      "database": {
+        "databaseId": {
+          "guid": "id-sha256:59d0f401cc7fe529260a"
+        }
+      },
+      "allOwnerCount": 0,
+      "selectedOwners": [],
+      "modelVersion": "5230750bf868c8e39c8e3982e788fa986e9ee71365063ad9664259e121e3a639",
+      "verticalDrawingCoordinates": "NOT_VERIFIED_NO_INSTALLED_2D_PRIMITIVE_EXPORT_CONTRACT"
+    },
+    "section": {
+      "status": "NATIVE_DATABASE_REGENERATION_PASS",
+      "coverage": "NATIVE_SELECTED_GEOMETRY_PRESENT",
+      "windowType": "Section",
+      "sourceGuid": "id-sha256:d08630af151891a7f01b",
+      "database": {
+        "databaseId": {
+          "guid": "id-sha256:8a4e84447ff736115f48"
+        }
+      },
+      "allOwnerCount": 48,
+      "selectedOwners": [
+        {
+          "ownerGuid": "id-sha256:efd26943ca1678f8c9fd",
+          "nativeType": "Column"
+        },
+        {
+          "ownerGuid": "id-sha256:6ad65ff5e9324d471f74",
+          "nativeType": "Column"
+        },
+        {
+          "ownerGuid": "id-sha256:301c85f39127ffe91075",
+          "nativeType": "Slab"
+        },
+        {
+          "ownerGuid": "id-sha256:6a94dc736ea218863f63",
+          "nativeType": "Wall"
+        },
+        {
+          "ownerGuid": "id-sha256:1e3ed023078481e26610",
+          "nativeType": "Wall"
+        },
+        {
+          "ownerGuid": "id-sha256:f7a694272de27df78773",
+          "nativeType": "Wall"
+        },
+        {
+          "ownerGuid": "id-sha256:f5f2c00fc1a32e21c0d6",
+          "nativeType": "Slab"
+        },
+        {
+          "ownerGuid": "id-sha256:497e0b19b9b41188698e",
+          "nativeType": "Wall"
+        },
+        {
+          "ownerGuid": "id-sha256:4b2c7d00e3d409a9ab32",
+          "nativeType": "Wall"
+        },
+        {
+          "ownerGuid": "id-sha256:3677c5da2430b7bed34b",
+          "nativeType": "Wall"
+        },
+        {
+          "ownerGuid": "id-sha256:8ae117c09289712b0e11",
+          "nativeType": "Window"
+        },
+        {
+          "ownerGuid": "id-sha256:3940fd04267e7b5d887b",
+          "nativeType": "Window"
+        },
+        {
+          "ownerGuid": "id-sha256:d247a6d036a10f9f1ff1",
+          "nativeType": "Window"
+        },
+        {
+          "ownerGuid": "id-sha256:b766ca8c720e1b6dd174",
+          "nativeType": "Window"
+        },
+        {
+          "ownerGuid": "id-sha256:51fe26b6654ee6ca9854",
+          "nativeType": "Roof"
+        },
+        {
+          "ownerGuid": "id-sha256:e082e6637458b40def2f",
+          "nativeType": "Wall"
+        }
+      ],
+      "modelVersion": "5230750bf868c8e39c8e3982e788fa986e9ee71365063ad9664259e121e3a639",
+      "verticalDrawingCoordinates": "NOT_VERIFIED_NO_INSTALLED_2D_PRIMITIVE_EXPORT_CONTRACT"
+    },
+    "projection": {
+      "status": "NATIVE_DATABASE_REGENERATION_PASS",
+      "coverage": "NATIVE_SELECTED_GEOMETRY_PRESENT",
+      "windowType": "InteriorElevation",
+      "sourceGuid": "id-sha256:4a182302bdaf7c39e40a",
+      "database": {
+        "databaseId": {
+          "guid": "id-sha256:31293fcabbbd9bfa4dcd"
+        }
+      },
+      "allOwnerCount": 5,
+      "selectedOwners": [
+        {
+          "ownerGuid": "id-sha256:6ad65ff5e9324d471f74",
+          "nativeType": "Column"
+        },
+        {
+          "ownerGuid": "id-sha256:6a94dc736ea218863f63",
+          "nativeType": "Wall"
+        },
+        {
+          "ownerGuid": "id-sha256:8ae117c09289712b0e11",
+          "nativeType": "Window"
+        },
+        {
+          "ownerGuid": "id-sha256:96904ae0a9a643d0bdd1",
+          "nativeType": "Door"
+        }
+      ],
+      "modelVersion": "5230750bf868c8e39c8e3982e788fa986e9ee71365063ad9664259e121e3a639",
+      "verticalDrawingCoordinates": "NOT_VERIFIED_NO_INSTALLED_2D_PRIMITIVE_EXPORT_CONTRACT"
+    }
+  },
+  "explicitCreatedViews": 4,
+  "createdNativeViewpoints": {
+    "Section": 1,
+    "InteriorElevation": 1,
+    "Elevation": 0
+  },
+  "additionalElementsExplanation": "One new Wall, one CutPlane, one InteriorElevation and nine native Object markers/subordinates.121 is full native inventory;112 is the explicitly protected109+3 persistence set. ViewMap/database GUIDs are separate identities.",
+  "persistence": {
+    "save": {
+      "status": "PASS",
+      "command": "SaveProject"
+    },
+    "open": {
+      "status": "PASS",
+      "command": "OpenProject"
+    }
+  },
+  "liveExecutionModifiedAuthorizedTestPLN": true,
+  "originalPLNModified": false,
+  "publisherSafetyScope": "Inbox safety booleans describe the publisher process only: zero native calls or model/APX changes during publication. The preceding authorized live test changed and saved the isolated test PLN as documented here."
+}

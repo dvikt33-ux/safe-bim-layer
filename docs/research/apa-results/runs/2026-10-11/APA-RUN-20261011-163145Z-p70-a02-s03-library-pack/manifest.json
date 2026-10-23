@@ -1,0 +1,163 @@
+{
+  "action_id": "APA-P70.A02",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-P70-S03-PROVISIONAL-PACK",
+      "evidence_ids": [
+        "EV-PLP-COMPILER",
+        "EV-PLP-ENTRYPOINT",
+        "EV-PLP-EXAMPLE",
+        "EV-PLP-TESTS",
+        "EV-PLP-CI"
+      ],
+      "statement": "A versioned project-local provisional RC slab CSE candidate and explicit missing junction conditions compiled through the existing accelerator entrypoint, no copy of global registry.",
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S03-BM-STORY-REUSE",
+      "evidence_ids": [
+        "EV-PLP-COMPILER",
+        "EV-PLP-TESTS",
+        "EV-PLP-CI"
+      ],
+      "statement": "Native BM name-to-project GUID resolver and GetStories are reused from existing modules; precise PLN/read-only path fail closed on mismatches and never dispatch writes.",
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S03-DETAILS-UNAPPROVED",
+      "evidence_ids": [
+        "EV-PLP-MANIFEST",
+        "EV-PLP-OWNER-BASIC-SLAB",
+        "EV-PLP-EXAMPLE"
+      ],
+      "statement": "v2.12 source index and user-reported Basic slab native readback are research/native evidence, not permission to import vendor files or structurally approve CSE, junctions, normative compliance.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S03-NO-LIVE-ATTRIBUTE-THIS-RUN",
+      "evidence_ids": [
+        "EV-PLP-CI"
+      ],
+      "statement": "No independent live project materials or manufactured library parts were queried in this S-ID; all new acceptance is offline-only.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-PLP-COMPILER",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "b6053b93d9956bcbfd22a528f4f5750e07e9f5a7",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-project-library-pack-20261011/scripts/archicad_project_library_pack.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-PLP-ENTRYPOINT",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "ac6e28f47a31ce543dcac9b8fed8622072843858",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-project-library-pack-20261011/scripts/archicad_project_accelerator.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-PLP-TESTS",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "9bd5e5ee808fe4b46b92ea062c832accfb9709af",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-project-library-pack-20261011/tests/test_archicad_project_library_pack.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-PLP-EXAMPLE",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "ab612835da674bb7af84191dc93f174c6d92d9fb",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-project-library-pack-20261011/examples/accelerator/project-library-rc-slab.candidate.json",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-PLP-CI",
+      "kind": "TEST_RESULT",
+      "sha256": null,
+      "source_revision": "83fd72e150e96cb90db75145436d023969365bd3",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38155701345",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-PLP-MANIFEST",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "797752bd4eb5b82a0056e2bc475dd4005fff4abb",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12/manifest.json",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-PLP-OWNER-BASIC-SLAB",
+      "kind": "USER_SUPPLIED",
+      "sha256": null,
+      "source_revision": "e4bf711bdc3322f594699b59ea34107cde0bcfdf",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr35-basic-slab-implementation-partial-20261011.md",
+      "verification": "SOURCE_READ"
+    }
+  ],
+  "executor": "chatgpt-gpt6-manual",
+  "executor_run_id": "APA-RUN-20261011-170300Z-p70-a02-s03-project-library-pack",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-11T16:31:45Z",
+  "idempotency_key": "sha256:15fa91873436d58f13a245b292be7ee841c980354dd75b92f4287bda98ad998b",
+  "inputs": [
+    "ART-APA-PLP-CONTRACT",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-CSE-RESEARCH",
+    "ART-APA-ASSEMBLY-PLAN",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011"
+  ],
+  "next_substep": "APA-P70.A03.S01",
+  "phase": "OFFLINE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261011-163145Z-p70-a02-s03-library-pack",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29 (source target; no new runtime)",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": null,
+    "source_branch": "feature/apa-project-library-pack-20261011",
+    "tapir": "1.5.10 (prior test, not invoked)"
+  },
+  "source_revisions": [
+    {
+      "revision": "b6053b93d9956bcbfd22a528f4f5750e07e9f5a7",
+      "source_sha": "b6053b93d9956bcbfd22a528f4f5750e07e9f5a7",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-project-library-pack-20261011/scripts/archicad_project_library_pack.py"
+    },
+    {
+      "revision": "ac6e28f47a31ce543dcac9b8fed8622072843858",
+      "source_sha": "ac6e28f47a31ce543dcac9b8fed8622072843858",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-project-library-pack-20261011/scripts/archicad_project_accelerator.py"
+    },
+    {
+      "revision": "9bd5e5ee808fe4b46b92ea062c832accfb9709af",
+      "source_sha": "9bd5e5ee808fe4b46b92ea062c832accfb9709af",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-project-library-pack-20261011/tests/test_archicad_project_library_pack.py"
+    },
+    {
+      "revision": "ab612835da674bb7af84191dc93f174c6d92d9fb",
+      "source_sha": "ab612835da674bb7af84191dc93f174c6d92d9fb",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-project-library-pack-20261011/examples/accelerator/project-library-rc-slab.candidate.json"
+    }
+  ],
+  "started_at": "2026-10-11T16:24:30Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A02.S03"
+}

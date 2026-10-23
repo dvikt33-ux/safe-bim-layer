@@ -1,0 +1,442 @@
+{
+  "legacy_flat_runs": "preserved and indexed manually",
+  "run_count": 62,
+  "runs": [
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SYNTHETIC",
+      "report": "runs/2026-10-10/APA-RUN-20261010-104437Z-publisher-integration-smoke/REPORT.md",
+      "run_id": "APA-RUN-20261010-104437Z-publisher-integration-smoke",
+      "substep_id": "APA-P00.A03.S04"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/REPORT.md",
+      "run_id": "APA-RUN-20261010-110048Z-legacy-traceability",
+      "substep_id": "APA-P50.A01.S01"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md",
+      "run_id": "APA-RUN-20261010-143940Z-opening-shell-geom",
+      "substep_id": "APA-P10.A01.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md",
+      "run_id": "APA-RUN-20261010-163950Z-tapir-compat-6f29",
+      "substep_id": "APA-P10.A02.S01"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md",
+      "run_id": "APA-RUN-20261010-200823Z-mep-route-port-gate",
+      "substep_id": "APA-P10.A02.S04"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/REPORT.md",
+      "run_id": "APA-RUN-20261010-234200Z-slack-legacy-three-audit",
+      "substep_id": "APA-P00.A02.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-10/APA-RUN-20261010-235301Z-branch-evidence-dedup/REPORT.md",
+      "run_id": "APA-RUN-20261010-235301Z-branch-evidence-dedup",
+      "substep_id": "APA-P00.A02.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-001922Z-eighty-head-blob-inventory/REPORT.md",
+      "run_id": "APA-RUN-20261011-001922Z-eighty-head-blob-inventory",
+      "substep_id": "APA-P00.A02.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-091905Z-p70-source-integration-map/REPORT.md",
+      "run_id": "APA-RUN-20261011-091905Z-p70-source-integration-map",
+      "substep_id": "APA-P70.A01.S01"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-092155Z-source71-byte-archive/REPORT.md",
+      "run_id": "APA-RUN-20261011-092155Z-source71-byte-archive",
+      "substep_id": "APA-P00.A02.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze/REPORT.md",
+      "run_id": "APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze",
+      "substep_id": "APA-P70.A01.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "OFFLINE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md",
+      "run_id": "APA-RUN-20261011-161511Z-p70-semantic-brief-getstories",
+      "substep_id": "APA-P70.A02.S01"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "OFFLINE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-163145Z-p70-a02-s03-library-pack/REPORT.md",
+      "run_id": "APA-RUN-20261011-163145Z-p70-a02-s03-library-pack",
+      "substep_id": "APA-P70.A02.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "OFFLINE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md",
+      "run_id": "APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths",
+      "substep_id": "APA-P70.A03.S01"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "OFFLINE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial/REPORT.md",
+      "run_id": "APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial",
+      "substep_id": "APA-P70.A03.S02"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-190658Z-roof-comp-context-map/REPORT.md",
+      "run_id": "APA-RUN-20261011-190658Z-roof-comp-context-map",
+      "substep_id": "APA-P00.A02.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-195000Z-isolated-authored-core/REPORT.md",
+      "run_id": "APA-RUN-20261011-195000Z-isolated-authored-core",
+      "substep_id": "APA-P70.A03.S02"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-195800Z-incremental-native-edit/REPORT.md",
+      "run_id": "APA-RUN-20261011-195800Z-incremental-native-edit",
+      "substep_id": "APA-P70.A03.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-200100Z-native-completeness/REPORT.md",
+      "run_id": "APA-RUN-20261011-200100Z-native-completeness",
+      "substep_id": "APA-P70.A03.S04"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md",
+      "run_id": "APA-RUN-20261011-200500Z-editable-core-acceptance",
+      "substep_id": "APA-P70.A08.S04"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md",
+      "run_id": "APA-RUN-20261011-202800Z-native-geometry-integration",
+      "substep_id": "APA-P70.A09.S01"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md",
+      "run_id": "APA-RUN-20261011-211000Z-native-material-library-integration",
+      "substep_id": "APA-P70.A02.S04"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-010000Z-compatible-integration-v31/REPORT.md",
+      "run_id": "APA-RUN-20261012-010000Z-compatible-integration-v31",
+      "substep_id": "APA-P70.A11.S01"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-011500Z-connected-system-v31/REPORT.md",
+      "run_id": "APA-RUN-20261012-011500Z-connected-system-v31",
+      "substep_id": "APA-P70.A11.S02"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "OFFLINE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-012500Z-gap-windows-sqlite-v31/REPORT.md",
+      "run_id": "APA-RUN-20261012-012500Z-gap-windows-sqlite-v31",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-075300Z-functional-gaps-v31/REPORT.md",
+      "run_id": "APA-RUN-20261012-075300Z-functional-gaps-v31",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-095401Z-functional-expansion-v32/REPORT.md",
+      "run_id": "APA-RUN-20261012-095401Z-functional-expansion-v32",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-110611Z-connected-native-continuation-v32/REPORT.md",
+      "run_id": "APA-RUN-20261012-110611Z-connected-native-continuation-v32",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-122511Z-construction-junctions-s01/REPORT.md",
+      "run_id": "APA-RUN-20261012-122511Z-construction-junctions-s01",
+      "substep_id": "APA-P70.A04.S01"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-123259Z-construction-junctions-s01-openings/REPORT.md",
+      "run_id": "APA-RUN-20261012-123259Z-construction-junctions-s01-openings",
+      "substep_id": "APA-P70.A04.S01"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-130748Z-construction-junction-native-support-s02/REPORT.md",
+      "run_id": "APA-RUN-20261012-130748Z-construction-junction-native-support-s02",
+      "substep_id": "APA-P70.A04.S02"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-132353Z-construction-junction-qualification-s03/REPORT.md",
+      "run_id": "APA-RUN-20261012-132353Z-construction-junction-qualification-s03",
+      "substep_id": "APA-P70.A04.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon/REPORT.md",
+      "run_id": "APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109/REPORT.md",
+      "run_id": "APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-185427Z-four-real-wall-roof-native109/REPORT.md",
+      "run_id": "APA-RUN-20261012-185427Z-four-real-wall-roof-native109",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-191815Z-normative-bindings/REPORT.md",
+      "run_id": "APA-RUN-20261012-191815Z-normative-bindings",
+      "substep_id": "APA-P70.A02.S02"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-203851Z-verified-roof-rules/REPORT.md",
+      "run_id": "APA-RUN-20261012-203851Z-verified-roof-rules",
+      "substep_id": "APA-P70.A02.S02"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "SOURCE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-210815Z-machine-normative/REPORT.md",
+      "run_id": "APA-RUN-20261012-210815Z-machine-normative",
+      "substep_id": "APA-P70.A02.S02"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-12/APA-RUN-20261012-235115Z-bim-documentation/REPORT.md",
+      "run_id": "APA-RUN-20261012-235115Z-bim-documentation",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-13/APA-RUN-20261013-013642Z-knowledge-core-mcp/REPORT.md",
+      "run_id": "APA-RUN-20261013-013642Z-knowledge-core-mcp",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-13/APA-RUN-20261013-082134Z-native-documentation-followon/REPORT.md",
+      "run_id": "APA-RUN-20261013-082134Z-native-documentation-followon",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-13/APA-RUN-20261013-121018Z-model-first-building/REPORT.md",
+      "run_id": "APA-RUN-20261013-121018Z-model-first-building",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-13/APA-RUN-20261013-165220Z-native-spatial/REPORT.md",
+      "run_id": "APA-RUN-20261013-165220Z-native-spatial",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "BUILD",
+      "report": "runs/2026-10-13/APA-RUN-20261013-184337Z-grid-stair-exact/REPORT.md",
+      "run_id": "APA-RUN-20261013-184337Z-grid-stair-exact",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-13/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/REPORT.md",
+      "run_id": "APA-RUN-20261013-200350Z-grid-stair-live-checkpoint",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-13/APA-RUN-20261013-234433Z-true-grid-live-stair-runtime/REPORT.md",
+      "run_id": "APA-RUN-20261013-234433Z-true-grid-live-stair-runtime",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-14/APA-RUN-20261014-074612Z-universal-native-floor-contours/REPORT.md",
+      "run_id": "APA-RUN-20261014-074612Z-universal-native-floor-contours",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-14/APA-RUN-20261014-095400Z-runtime-identity-live/REPORT.md",
+      "run_id": "APA-RUN-20261014-095400Z-runtime-identity-live",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-14/APA-RUN-20261014-121132Z-native-stair-source350/REPORT.md",
+      "run_id": "APA-RUN-20261014-121132Z-native-stair-source350",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-14/APA-RUN-20261014-172915Z-full-native-command-roofs/REPORT.md",
+      "run_id": "APA-RUN-20261014-172915Z-full-native-command-roofs",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-14/APA-RUN-20261014-193327Z-mass-capability-integration/REPORT.md",
+      "run_id": "APA-RUN-20261014-193327Z-mass-capability-integration",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-14/APA-RUN-20261014-215514Z-executable-bim-workflows/REPORT.md",
+      "run_id": "APA-RUN-20261014-215514Z-executable-bim-workflows",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "BUILD",
+      "report": "runs/2026-10-14/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/REPORT.md",
+      "run_id": "APA-RUN-20261014-224516Z-sdk-functional-module-expansion",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-15/APA-RUN-20261015-011839Z-sdk-runtime-connected-memo/REPORT.md",
+      "run_id": "APA-RUN-20261015-011839Z-sdk-runtime-connected-memo",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-15/APA-RUN-20261015-071450Z-sdk-component-context/REPORT.md",
+      "run_id": "APA-RUN-20261015-071450Z-sdk-component-context",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-15/APA-RUN-20261015-092957Z-native-positive-modules/REPORT.md",
+      "run_id": "APA-RUN-20261015-092957Z-native-positive-modules",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-15/APA-RUN-20261015-105500Z-native-original-reopen/REPORT.md",
+      "run_id": "APA-RUN-20261015-105500Z-native-original-reopen",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-15/APA-RUN-20261015-123508Z-native-linked-data/REPORT.md",
+      "run_id": "APA-RUN-20261015-123508Z-native-linked-data",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-15/APA-RUN-20261015-140914Z-native-parametric-mep/REPORT.md",
+      "run_id": "APA-RUN-20261015-140914Z-native-parametric-mep",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-15/APA-RUN-20261015-192322Z-native-memo-modify/REPORT.md",
+      "run_id": "APA-RUN-20261015-192322Z-native-memo-modify",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-15/APA-RUN-20261015-230555Z-native-owner-recovery/REPORT.md",
+      "run_id": "APA-RUN-20261015-230555Z-native-owner-recovery",
+      "substep_id": "APA-P70.A11.S03"
+    },
+    {
+      "evidence_status": "EVIDENCE_READY",
+      "phase": "LIVE",
+      "report": "runs/2026-10-15/APA-RUN-20261015-233124Z-native-owner-runtime/REPORT.md",
+      "run_id": "APA-RUN-20261015-233124Z-native-owner-runtime",
+      "substep_id": "APA-P70.A11.S03"
+    }
+  ],
+  "schema": "APA_GENERATED_INDEX_V1",
+  "source": "immutable V2 runs"
+}

@@ -1,0 +1,87 @@
+name: APA Research OS automatic publisher
+
+on:
+  push:
+    branches:
+      - research/apa-verified-results-hub-20261010
+    paths:
+      - 'docs/research/apa-results/inbox/*.json'
+      - 'tools/apa_publisher/**'
+      - 'tools/apa_controller/**'
+      - 'docs/research/apa-results/control/PROJECT_PLAN.json'
+      - '.github/workflows/apa-research-publisher.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apa-research-os-publisher-canonical-hub
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'dvikt33-ux/safe-bim-layer' && github.ref == 'refs/heads/research/apa-verified-results-hub-20261010'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out only the canonical research branch
+        uses: actions/checkout@v4
+        with:
+          ref: research/apa-verified-results-hub-20261010
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Offline safety and idempotency tests
+        run: python -m unittest discover -s tools/apa_publisher/tests -v
+
+      - name: Project Controller DAG, claim and dispatch tests
+        run: python -m unittest discover -s tools/apa_controller/tests -v
+
+      - name: Validate canonical project plan and reject orphan/unclaimed inbox
+        run: |
+          python tools/apa_controller/controller.py validate
+          python tools/apa_controller/controller.py verify-inbox
+
+      - name: Commit immutable reports with bounded retry
+        id: report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "apa-research-publisher[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          bash tools/apa_publisher/publish_stage_retry.sh reports
+
+      - name: Verify remote GitHub report and index bytes
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python tools/apa_publisher/publisher.py verify --commit "${{ steps.report.outputs.sha }}"
+
+      - name: Commit verified receipts with bounded retry
+        id: receipts
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash tools/apa_publisher/publish_stage_retry.sh receipts "${{ steps.report.outputs.sha }}"
+
+      - name: Verify remote GitHub receipts
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python tools/apa_publisher/publisher.py verify-receipts --commit "${{ steps.receipts.outputs.sha }}"
+
+      - name: Commit latest controller projections with bounded retry
+        id: controller
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash tools/apa_controller/publish_generated_retry.sh
+
+      - name: Verify controller projections via GitHub REST
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python tools/apa_controller/controller.py verify-remote --commit "${{ steps.controller.outputs.sha }}"

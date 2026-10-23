@@ -1,0 +1,9 @@
+{
+  "connected-windows-full-regression.log": "d9212206ed2a07d3d70e62225d1bce2aaa4bb8079ce0995682742df1ae1d5263",
+  "connected-windows-final-regression.log": "57bcf5761a32b7486a6822e274f1eea91bdda9eaf4ee351154bbeb5c5d36f773",
+  "connected-windows-host-regression.log": "f92eb74f92e4a331434993518232f6ebc5351bb5766ec4ccd6226f6c87cd5ca1",
+  "connected-windows-fixture-final.log": "0480cbdadb0ea5344539d4dd5e09bd2f1e4abe6e1b7eaafef122adaf59830aff",
+  "connected-gap-contracts.log": "84f69edafd29b311564ef05f2d6c5bde550c1f9ca981f8ecd061525b0bfe67bf",
+  "connected-gap-graph.log": "d096614354b877335867eaa55e5bc4d7d70df9f371e0e8b7be87382e15f20d58",
+  "connected-gap-ci-summary.json": "ce73c737ca05ce9b0edc800b627bb2b58b3a4947da2cb22be02de074b39b7000"
+}

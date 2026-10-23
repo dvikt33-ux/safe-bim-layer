@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:ac3944e391d63d805f7e861fd721919345a07d8fd482fbc9318e2ef6a39f7da7",
+  "index_commit_sha": "79ae8de2f81a5dc14f2bb02abd535d189abc3f9d",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "79ae8de2f81a5dc14f2bb02abd535d189abc3f9d",
+  "report_path": "docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-140914Z-native-parametric-mep/REPORT.md",
+  "report_sha256": "95dd399ba65c64d2fd2f12230da70ee3703cf02ae63b4fe2df0b2b36e11f7d63",
+  "run_id": "APA-RUN-20261015-140914Z-native-parametric-mep",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

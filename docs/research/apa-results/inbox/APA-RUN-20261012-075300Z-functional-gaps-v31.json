@@ -1,0 +1,87 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261012-075300Z-functional-gaps-v31",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "codex-apa-functional-gaps-v31-20261012",
+  "executor_run_id": "APA-RUN-20261012-functional-gaps-v31",
+  "phase": "SOURCE",
+  "started_at": "2026-10-12T07:59:24Z",
+  "finished_at": "2026-10-12T07:59:24Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29(captured native)",
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-connected-gaps-v31-20261012"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/55",
+      "revision": "3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2",
+      "source_sha": "3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-FUNCTIONAL-GAPS-V31",
+      "statement": "Working Details73context adapter, reciprocal native connected MEP and hosted Opening/SEO share accepted native context and SceneWriter. Original48GUID preserved;27primary/59GUID saved/reopened. IFC host/port/material observations are bounded. S03PARTIAL; external data/provider dependencies and engineering NOT_VERIFIED remain explicit. Publication replays captured evidence with no new native calls.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-FUNCTIONAL-GAPS-ACCEPTANCE",
+        "EV-FUNCTIONAL-GAPS-BYTES"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-FUNCTIONAL-GAPS-ACCEPTANCE",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-075300Z-functional-gaps-v31/acceptance.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "b8c7320625263df61c86f620fecd28d957377314e7ce05c8bc99ffe3f1449a63",
+      "source_revision": "3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2"
+    },
+    {
+      "evidence_id": "EV-FUNCTIONAL-GAPS-BYTES",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-075300Z-functional-gaps-v31/EVIDENCE_SHA256.json",
+      "kind": "LOCAL_LOG",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "8adb2d20cda2a9d1cd4c22fdcde011eed2b27418a166268553af5b95cbdf94af",
+      "source_revision": "3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2"
+    }
+  ],
+  "report_markdown": "# Functional gap package over PR54\n\nThis package continues the accepted core through the existing native context,\nModel Dump, NetworkX/Shapely, CP-SAT, BIM Graph and SceneWriter. It adds source\njoins and independent observations, rather than another executor or tracer.\n\n`archicad_details_context.py` checks the pinned v2.12 archive and source PDF\nhash/page/fact joins for all73Porotherm context records, evaluates each native\nwall's geometry/material/product context, and exchanges a detached detail/host\nrecord. Candidate AABB proximity is explicitly weaker than exact joint\ngeometry. Existing RC walls do not become Porotherm by inference. Each source\ncompile gate survives independently. The selected ARMO adapter still reports\neight missing required dimension entities and source commit=false.\n\n`archicad_native_mep_network.py` combines dedicated routing node/segment GUIDs,\nnative distribution membership and actual reciprocal physical-port references.\nCoincident ports alone do not prove connectivity. The existing connected CLI\nnow accepts multiple routes in one pinned native system. On the authorized\nisolated scenario a CP-SAT-selected1m extension connected automatically to the\naccepted6m duct: two routes, two segments, four routing nodes, two physical\nducts, one reciprocal native join. Both original endpoints/GUIDs survive. Two\nouter ports remain open; terminal equipment and engineering approval are not\nclaimed. A redundant ConnectMEPElements would risk merging ownership, so the\nadapter returns ALREADY_NATIVE_CONNECTED without another write.\n\nThe shared SceneWriter gains opt-in, schema/hash/journal-bound native operations\nfor Opening/SEO and MEP connection/modification. Each intent reserves a durable\nstep before one dispatch and independently reads native state; uncertain\noutcomes never replay. A wall verifier now correctly checks omitted offset and\narcAngle defaults against native zero instead of failing after creation.\n\nThe live package creates a separate2×2×0.3m diagnostic wall, one0.4×0.6m Generic\nOpening and two explicit closed Morph specimens. Hosting is independently\nqueried; both actual inner face contours prove X64.8..65.2m,Z1..1.6m and the\n0.3m host penetration. SEO Subtraction reduces the2m target cube to X70..71m,\nY60..62m,Z0..2m while preserving target/operator GUIDs, native links and materials.\nNo original48GUID geometry changes. Three stopped verifications were reconciled\nread-only (GUID casing, omitted Wall defaults, wrong verifier bounds shape);\ntheir successful native operations were never repeated or hidden in history.\n\n`archicad_functional_gaps.py --receipt <local-receipt.json> --output <new-dir>`\nreuses the accepted22element native core and independently verifies the new\nnetwork, new primary identities, source applicability, Opening/SEO and native\nduct-vs-core collision query. It reads only; the receipt includes actual source\nplan, geometry signatures, inventory, identities and pre-operation bodies.\nFreshly verify the allowed isolated project before using that receipt.\n\nThe saved/reopened model has27primary elements and59totalGUIDs. Opening creates\ntwo native owned annotation objects as well as its own GUID; these are accounted\nfor. Save/Open preserve the complete inventory, geometry, links and port IDs.\nPLN SHA256: `da37fa0fe9b1b255f1618a881a79eb9d4ae8b66993a99cb75fdba30cddc69bb4`.\nThe intentional existing Roof/Morph collision remains test calibration.\n\nIFC2X3 export matches26whole native/physical element world bounds plus the\nOpening's effective host-cut extents. Its standalone IFC cutter is0.9m deep,\nwhile the actual wall penetration is0.3m; both bounds and0.3m overshoot are\nretained explicitly. Matching uses the actual IfcRelVoidsElement host and the\nintersection with that host's bounds. The exported network contains a real\nIfcRelConnectsPorts relation. Native material assignments and structural data\nare read from actual IFC entities. This export contains no analytical members,\nanalysis models or load groups; none are invented. Full IFC semantics,\nquantities, face equality and engineering acceptance remain NOT_VERIFIED.\n\nG01 is already repaired by PR54. G02's context adapter, bounded G04 network,\nOpening/SEO subset ofG05 and G08 interpretation now work. Current provider\nhas no CreateShells/ModifyShells/ModifyOpenings contracts. Ready SDK source is\nnot an installed capability and the APX remains unchanged. Manufacturer source\ndimensions, native SAM/SAF export/qualified mappings, licensed solver/approved\nloads and remaining MCP/Twinmotion interfaces remain explicit dependencies.\nS03 remains PARTIAL; S04 performance and the installer wait for acceptance.\n\n## Published acceptance\n\n[Draft PR55](https://github.com/dvikt33-ux/safe-bim-layer/pull/55), stacked onPR54 at `3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2`.31new tests; complete371/371PASS locally on Windows53.506s and [CI38220178336](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38220178336), Linux22.088s/Windows147.326s. Schema/graph contracts and all3launcher syntax checks PASS.\n\n[Acceptance](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-075300Z-functional-gaps-v31/acceptance.json), [current G01–G09 register](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-075300Z-functional-gaps-v31/gap-register.json), [selected source/native/IFC proof](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-075300Z-functional-gaps-v31), [checksums](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-075300Z-functional-gaps-v31/EVIDENCE_SHA256.json). Publication uses captured proof, zero new native calls/writes. Original source archives and raw captures stay local unchanged; this publishes seven selected JSON proof files plus manifest. Native/IFC identities are consistently SHA-tokenized; no project binaries, personal paths, full native catalogs or unrelated raw payloads are exported.\n\nA11.S03 remains PARTIAL with verified independent capabilities published. Exact next step: continue S03 against this head; qualify remaining native Shell/edit provider, manufacturer dimensions and SAM/SAF/receiver dependencies individually. ExistingS-ID and evidence remain; S04 waits for trueS03 acceptance. Engineering and visibleUI remain NOT_VERIFIED. No paid/delegated run.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

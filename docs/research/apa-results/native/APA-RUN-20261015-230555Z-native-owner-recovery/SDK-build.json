@@ -1,0 +1,19 @@
+{
+  "schema": "APA_NATIVE_OWNER_BUILD_V1",
+  "status": "FULL_RELEASE_BUILD_PASS_NOT_INSTALLED",
+  "APXSHA256": "71b8529a8da39a478d5a1bc8a370ea97bf63fdc39e4801e793aa36e214074fa4",
+  "sourceRevision": "106393a46ecb53acfec08855cde215117c23a9ad",
+  "buildIdentity": "8bb81311578f39f96ae7cbebfd3ad69e258b0f329f4b079c8c47102643c17b85",
+  "buildLogSHA256": "1ba79699b521dd7b147b4a1cb4cf757882917bf9e1872d6989df39c0adc072f5",
+  "completionMarker": "[100%] Built target AddOn",
+  "SDKMajor": 29,
+  "platform": "WINDOWS11_ARCHICAD29",
+  "newCommandNames": 0,
+  "contracts": "Existing assembly state, memo, library defaults and Shell fields; same dynamic router",
+  "originalAPXChanged": false,
+  "offlineTestsRun": false,
+  "quantityEngineCalled": false,
+  "runtimeRegistration": "NOT_VERIFIED",
+  "callableVerification": "NOT_VERIFIED",
+  "live": "NOT_VERIFIED"
+}

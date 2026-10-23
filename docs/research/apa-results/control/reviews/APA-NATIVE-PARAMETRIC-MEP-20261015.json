@@ -1,0 +1,24 @@
+{
+  "status": "DONE_PUBLISHED_PACKAGE_S03_PARTIAL",
+  "revision": 177,
+  "codePR": 107,
+  "codeHead": "9a3091638eaa1a9c72f9a08c17d02855d8419edc",
+  "newSDK": "BUILD_PASS_NOT_INSTALLED",
+  "nativeModify": "NOT_VERIFIED",
+  "nativeGDLIFCFlow": "LIVE_READ_PASS_60NODES59EDGES",
+  "visualThreeSamples": "LIVE_GUID_SELECTION_AND_GEOMETRY_RETENTION_PASS",
+  "mepPositive": "NOT_VERIFIED_NO_CURRENT_SAMPLE",
+  "opening107": "NOT_VERIFIED_CURRENT_SAVE_PROMPT_OPEN_CANCELLED",
+  "offlineTests": false,
+  "workflowDispatch": false,
+  "nativeWrites": 0,
+  "APXChanged": false,
+  "quantityEngine": "QUARANTINED_NOT_CALLED",
+  "receiptRun": "APA-RUN-20261015-140914Z-native-parametric-mep",
+  "publication": "DIRECT_EXISTING_PUBLISHER_BYTE_BLOB_READBACK",
+  "knownActionsRunCounts": {
+    "79ae8de2f81a5dc14f2bb02abd535d189abc3f9d": 0,
+    "aef7d263506b2cc4774112352bf54df2f11ef20e": 0
+  },
+  "newTaskIDs": 0
+}

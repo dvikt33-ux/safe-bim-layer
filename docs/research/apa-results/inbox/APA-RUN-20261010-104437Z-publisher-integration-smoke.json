@@ -1,0 +1,59 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261010-104437Z-publisher-integration-smoke",
+  "plan_id": "APA-P00",
+  "action_id": "APA-P00.A03",
+  "substep_id": "APA-P00.A03.S04",
+  "executor": "chatgpt-ordinary-github",
+  "executor_run_id": "apa-publisher-integration-20261010-104437Z",
+  "phase": "SYNTHETIC",
+  "started_at": "2026-10-10T10:44:37Z",
+  "finished_at": "2026-10-10T10:44:37Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": null,
+    "sdk": null,
+    "tapir": null,
+    "source_branch": "research/apa-verified-results-hub-20261010"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/.github/workflows/apa-research-publisher.yml",
+      "revision": "901dd973293f3200749b5f37fd5bbfa7f7da4f21",
+      "source_sha": "901dd973293f3200749b5f37fd5bbfa7f7da4f21"
+    }
+  ],
+  "inputs": [
+    "tools/apa_publisher/publisher.py",
+    "tools/apa_publisher/tests/test_publisher.py"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-PUBLISHER-SYNTHETIC-20261010",
+      "statement": "Synthetic request tests the automatic GitHub publication pipeline; it is not an Archicad live, build, or geometry test.",
+      "status": "REPORTED",
+      "evidence_ids": [
+        "EV-WORKFLOW-CODE"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-WORKFLOW-CODE",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/.github/workflows/apa-research-publisher.yml",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "901dd973293f3200749b5f37fd5bbfa7f7da4f21"
+    }
+  ],
+  "report_markdown": "# APA Research OS — synthetic publisher integration smoke\n\nRun ID: APA-RUN-20261010-104437Z-publisher-integration-smoke\n\nThis run exercises the automatic inbox-to-immutable-run-to-GitHub-REST-readback-to-receipt pipeline. It is intentionally synthetic. It does not access Archicad, PLN, APX, Tapir, live BIM geometry, or any paid research/model API.\n\nExpected evidence after workflow: GitHub Actions run with success, immutable REPORT.md / manifest.json / evidence.json, generated index entry, publication receipt with report commit SHA and readback_verified=true. A failure must remain a failed workflow rather than a claimed success.\n\nClaim status for this report: REPORTED; technical Archicad findings: NOT_VERIFIED.\n",
+  "next_substep": "APA-P00.A03.S04",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

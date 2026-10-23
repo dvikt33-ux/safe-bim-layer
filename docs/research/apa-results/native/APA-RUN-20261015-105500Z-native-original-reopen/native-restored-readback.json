@@ -1,0 +1,30 @@
+{
+  "schema": "APA_NATIVE_ORIGINAL_REOPEN_V1",
+  "status": "LIVE_PASS",
+  "modelRole": "USER_REOPENED_AUTHORIZED_POSITIVE_SAMPLE_COPY",
+  "originalAPXFileSHA256": "8f5a9341bb9d51cb98a0a58bdbc63d3d3623a0c9f74b3cd3f1a4732c06961969",
+  "tapirVersion": "1.5.10",
+  "archicadVersion": 29,
+  "originalGUIDs": 258,
+  "totalGUIDs": 409,
+  "fullNativeGeometryMaterialsRelationshipsMatch": true,
+  "originalSerializedDetailRowsMatch": 258,
+  "newNativeRoots": 3,
+  "signatureSetSHA256": "35bdb1967cb6993d51960781286fd9114f47df08b43348436052119e3d63d3c3",
+  "savedSHA256": "ec79ad15f853617b16c19991f8a07d97e169c70d36f779616530b9ea1b4b1abd",
+  "savedHashMatchesPriorCheckpoint": false,
+  "savedBytesUnchangedDuringRead": true,
+  "candidateCommandsAvailable": {
+    "CreateNativeAssemblyV1": false,
+    "GetNativeLibraryPartDefaultsV1": false,
+    "GetNativeNavigatorBindingsV1": false
+  },
+  "nativeModelWrites": 0,
+  "saveCalls": 0,
+  "createModifyDeleteCalls": 0,
+  "APXSwitchCalls": 0,
+  "quantityEngineCalled": false,
+  "visualInspection": "NOT_VERIFIED",
+  "otherOpeningModelPostClose": "NOT_VERIFIED_SEPARATE_PROJECT_NOT_OPENED_THIS_PASS",
+  "engineering": "NOT_VERIFIED"
+}

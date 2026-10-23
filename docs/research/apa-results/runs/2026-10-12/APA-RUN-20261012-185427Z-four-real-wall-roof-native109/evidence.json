@@ -1,0 +1,33 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-FOUR-REAL-WALL-ROOF-NATIVE109",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ],
+      "statement": "Working actual-native four-junction assessment and exact correction plans;73Details sources, one shared Roof dependency. All four measured gaps VERIFIED, only39.44-59.06percent of actual caps covered; direct complete-cap Wall height plus SEO NOT_APPLICABLE. SinglePlane contour edit requires qualified native SDK/UI contract; inspected ModifyRoofs accepts PolyRoof only. All109GUID/body/material/story, saved-file SHA and journal unchanged; zero native writes. Guarded same-SceneWriter two-operation application OFFLINE_PASS on synthetic callbacks with explicit separate-copy/plan authorization and no replay.495Windows host/Windows+LinuxCI PASS,6exact code blobs. Reciprocal skipPolygonHoles false readback vs true request remains NOT_VERIFIED; source getter ignores SDK errors. S03PARTIAL/S10BLOCKED; no APX/global preference/MEP mutation.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "kind": "TEST_RESULT",
+      "sha256": "baf28a3c2c577205d0b4b7bd056e2e01993ff944e5c4a33bef6be214beca36a3",
+      "source_revision": "b056cb76929a62047c82fd66961b72eb4d9078a8",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-185427Z-four-real-wall-roof-native109/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "b89c78cd0e1454395ed42f0ec668c4928e8deffa5a7d7c8d5d5788fdc796eac4",
+      "source_revision": "b056cb76929a62047c82fd66961b72eb4d9078a8",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-185427Z-four-real-wall-roof-native109/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261012-185427Z-four-real-wall-roof-native109",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

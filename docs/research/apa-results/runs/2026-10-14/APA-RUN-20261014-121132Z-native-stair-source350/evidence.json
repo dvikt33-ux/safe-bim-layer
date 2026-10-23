@@ -1,0 +1,84 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-NATIVE-STAIR350",
+      "evidence_ids": [
+        "EV-SOURCE",
+        "EV-DIM",
+        "EV-PRESERVE"
+      ],
+      "statement": "True native Stair has350mm going,150mm rises and1mwidth independently confirmed by native properties/actualBREP after Save/Open.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-STAIR255-PRESERVED",
+      "evidence_ids": [
+        "EV-PRESERVE",
+        "EV-JOURNAL"
+      ],
+      "statement": "All255current inventory signatures and previous145geometry/material/story signatures preserved; no new native collision pairs, no Create replay.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-STAIR-INVENTORY-PARTIAL",
+      "evidence_ids": [
+        "EV-INVENTORY",
+        "EV-JOURNAL"
+      ],
+      "statement": "Ten supportObject owner ancestries remainNOT_VERIFIED; initialCreate journaloutcome preserved, exactSDKedit blocked and engineering not verified.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-SOURCE",
+      "kind": "TEST_RESULT",
+      "sha256": "c63423a63290efe81c28631f519eecab93b8e85fd1a1699137b8dad91edead07",
+      "source_revision": "3221b8e7a0b775ece1018caf622a32c6ca9cb9dc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/source-recipe.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-DIM",
+      "kind": "TEST_RESULT",
+      "sha256": "dfe0d51844fa18678255bbd9c7a3aa1cb9c9df1338509d9d7f8562bb8d2ac5e9",
+      "source_revision": "3221b8e7a0b775ece1018caf622a32c6ca9cb9dc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/native-dimensions.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-INVENTORY",
+      "kind": "TEST_RESULT",
+      "sha256": "faf782fac6d694f0810d135164ff5dc50881dcb0337370370dee34ae60a20dba",
+      "source_revision": "3221b8e7a0b775ece1018caf622a32c6ca9cb9dc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/inventory-audit.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-PRESERVE",
+      "kind": "TEST_RESULT",
+      "sha256": "bef59dd5b71cd26d1a31a26c3747cd27595b10f7ea0dc8749b0233b2f9f5b1d5",
+      "source_revision": "3221b8e7a0b775ece1018caf622a32c6ca9cb9dc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/preservation-save-open.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-JOURNAL",
+      "kind": "TEST_RESULT",
+      "sha256": "8efdc20ceb7c62dc511a3a2d602ff5548a2fbb30cb72647aedf5a451fbd6256f",
+      "source_revision": "3221b8e7a0b775ece1018caf622a32c6ca9cb9dc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/journal-reconciliation.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-CI",
+      "kind": "TEST_RESULT",
+      "sha256": "816f38046d59d3f8ca514d2017777a78e340821eb2df0142ea7f07fad828efac",
+      "source_revision": "3221b8e7a0b775ece1018caf622a32c6ca9cb9dc",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-121132Z-native-stair-source350/windows-ci.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261014-121132Z-native-stair-source350",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

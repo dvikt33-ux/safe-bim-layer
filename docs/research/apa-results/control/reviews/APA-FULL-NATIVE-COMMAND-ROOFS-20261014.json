@@ -1,0 +1,19 @@
+{
+  "status": "DONE_PUBLISHED_FUNCTIONAL_BLOCK_S03_PARTIAL",
+  "revision": 158,
+  "codePR": 82,
+  "codeHead": "1c27e7c4b66d5b225724e777719e6a675660494a",
+  "candidateRoutable": 348,
+  "restoredRoutable": 337,
+  "liveVerified": 16,
+  "nativeRoofGeometry": "LIVE_PASS",
+  "retained255": true,
+  "current258": true,
+  "saveOpen": "LIVE_PASS",
+  "APXrestored": true,
+  "hipSourceSurfaceTransfer": "NOT_VERIFIED",
+  "otherAPXNamespaces": "NOT_EXPOSED",
+  "engineering": "NOT_VERIFIED",
+  "receiptRun": "APA-RUN-20261014-172915Z-full-native-command-roofs",
+  "next": "EXISTING_ROOF_SURFACE_MEMO_CONTRACT"
+}

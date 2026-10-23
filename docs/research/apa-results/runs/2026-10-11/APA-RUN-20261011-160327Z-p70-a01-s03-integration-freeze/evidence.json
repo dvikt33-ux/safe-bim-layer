@@ -1,0 +1,118 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-P70-S03-ONE-WRITER-BOUNDARY",
+      "evidence_ids": [
+        "EV-P70-S03-COMPILER",
+        "EV-P70-S03-GRAPH",
+        "EV-P70-S03-WRITER",
+        "EV-P70-S03-TEMPLATE",
+        "EV-P70-S03-SLAB-DONOR"
+      ],
+      "statement": "Use existing Project Accelerator + BIM Graph + SceneWriter, reuse Template Builder and slab helper as donors; prohibit parallel executable paths.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S03-CREATE-ONLY-GAP",
+      "evidence_ids": [
+        "EV-P70-S03-COMPILER",
+        "EV-P70-S03-WRITER"
+      ],
+      "statement": "Current public compiler accepts one component; generic ADAPT_EXISTING and stable GUID diff/Modify remain unimplemented, thus next compiler/semantic gates must precede broad build task.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S03-25-REOPEN-SLICE",
+      "evidence_ids": [
+        "EV-P70-S03-LIVE-REPORT"
+      ],
+      "statement": "User-supplied logs show 25 typed planned elements and 45 native GUID after selecting copied PLN, but cannot generalize to full product.",
+      "status": "REPORTED"
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S03-ROADMAP",
+      "evidence_ids": [
+        "EV-P70-S03-ROADMAP",
+        "EV-P70-S03-COMPILER"
+      ],
+      "statement": "Reuse accepted D0-D6 priorities from the roadmap under existing PROJECT_PLAN.json S-IDs; next eligible dependent step is P70.A02.S01.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-P70-S03-COMPILER",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "59dadabf664326d8401a2514c5fd7436b7657cbb",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_project_accelerator.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-S03-GRAPH",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "fc68f82b1d0cf89d5d4576ac03225572a6ffadf2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_bim_graph.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-S03-WRITER",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "7905cfa237ec989da31b527aa931dd7f4663504e",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_scene_run.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-S03-TEMPLATE",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "eadef8875372578609985edbd30ceced5075d4e8",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_template_builder.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-S03-SHELL",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "4e03a0143e62a416c1682129fefd4fab829c9e47",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_building_shell.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-S03-CAPABILITIES",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "b4efd579d5acc723439a1553e79b4a4b1c0074cd",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_accelerator_integration.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-S03-SLAB-DONOR",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "efbaf139c4a6707226a2e6bbe07a7cc9f5fafa28",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/working-archicad-mvp/scripts/archicad_executor.py",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-P70-S03-LIVE-REPORT",
+      "kind": "USER_SUPPLIED",
+      "sha256": null,
+      "source_revision": null,
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr35-basic-slab-implementation-partial-20261011.md",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-P70-S03-ROADMAP",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "10fb9eb468cae1c9bb8200b76440824b2469607e",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/control/APA_ACCELERATOR_DELIVERY_ROADMAP_20261011.md",
+      "verification": "SOURCE_READ"
+    }
+  ],
+  "run_id": "APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

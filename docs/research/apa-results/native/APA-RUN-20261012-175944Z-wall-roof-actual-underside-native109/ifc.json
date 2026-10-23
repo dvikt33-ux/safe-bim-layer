@@ -1,0 +1,71 @@
+{
+  "status": "ACTUAL_IFC109_NATIVE_UNDERSIDE_WALL_ROOF_BODY_MATERIAL_QUANTITY_PASS",
+  "nativeGuidCount": 109,
+  "contextMappings": 45,
+  "boundsMatchCount": 45,
+  "ifcElementCount": 52,
+  "newNativeMembers": [
+    {
+      "stepId": "native-underside-wall",
+      "nativeTool": "Wall",
+      "actualIfcType": "IfcWall",
+      "materials": [
+        "Железобетон - Конструкционный"
+      ],
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 4.2669370259318384e-09,
+        "volumeDeltaCubicMeters": 6.138538566347052e-10,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      },
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 62.31888734257427,
+        "volumeCubicMeters": 8.326489415473459,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      }
+    },
+    {
+      "stepId": "native-underside-roof",
+      "nativeTool": "Roof",
+      "actualIfcType": "IfcRoof",
+      "materials": [
+        "Железобетон - Конструкционный"
+      ],
+      "nativeComparison": {
+        "areaDeltaSquareMeters": 1.0671101335901767e-08,
+        "volumeDeltaCubicMeters": 2.6905723871095688e-08,
+        "status": "IFC_NATIVE_QUANTITIES_MATCH"
+      },
+      "nativeQuantities": {
+        "status": "NATIVE_PLANAR_BREP_QUANTITIES",
+        "surfaceAreaSquareMeters": 169.05337145501306,
+        "volumeCubicMeters": 16.181703109680853,
+        "bodyCount": 1,
+        "authority": "Actual resultant planar faces with holes and independently counted closed edges"
+      }
+    }
+  ],
+  "quantities": {
+    "schema": "APA_QUANTIFIED_IFC_EXCHANGE_V1",
+    "ifcSchema": "IFC2X3",
+    "fileSha256": "e552f8b179304b32246858dd72a77398301b09612585c9cc55945c28081ed322",
+    "lengthUnitScaleToMeters": 0.001,
+    "quantityMatchCount": 20,
+    "quantityMismatchCount": 0,
+    "semanticCompatibility": "NOT_VERIFIED",
+    "engineeringAcceptance": "NOT_VERIFIED",
+    "nativeWrites": 0
+  },
+  "materialAssignmentCount": 26,
+  "nativePortRelationCount": 12,
+  "openingHostCount": 6,
+  "ifcFileSha256": "e552f8b179304b32246858dd72a77398301b09612585c9cc55945c28081ed322",
+  "retained107GuidAndGeometry": "PASS",
+  "plnSha256Unchanged": "0d87954de1a0b75f0510c4bbd1a7424db2eb09fa928d5e0fb746c58d9a18f14d",
+  "exportAttempts": 1,
+  "modelWriteAttempts": 0,
+  "structuralContactAndSEOExportSemantics": "NOT_VERIFIED",
+  "fullSemanticCompatibility": "NOT_VERIFIED",
+  "engineeringAcceptance": "ENGINEERING_NOT_VERIFIED"
+}

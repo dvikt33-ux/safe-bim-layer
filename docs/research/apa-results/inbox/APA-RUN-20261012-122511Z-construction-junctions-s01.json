@@ -1,0 +1,68 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261012-122511Z-construction-junctions-s01",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A04",
+  "substep_id": "APA-P70.A04.S01",
+  "executor": "work-construction-junctions-20261012",
+  "executor_run_id": "APA-RUN-20261012T120854Z-construction-junctions-s01",
+  "phase": "SOURCE",
+  "started_at": "2026-10-12T12:08:54Z",
+  "finished_at": "2026-10-12T12:25:11Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 native evidence captured; publication makes zero native calls",
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-construction-junctions-20261012"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/57",
+      "revision": "fab5fd71c68616de510ad8b6b06ce22eaf58520b",
+      "source_sha": "fab5fd71c68616de510ad8b6b06ce22eaf58520b"
+    }
+  ],
+  "inputs": [
+    "ART-APA-CSE-RESEARCH",
+    "ART-APA-DETAILS-V212",
+    "ART-P70-A11-S03-NATIVE95-V32-20261012"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-CONSTRUCTION-JUNCTIONS-S01",
+      "statement": "S01 accepted-model construction interface/source coverage complete:47interfaces across required families,34actual native shared-surface contacts,95GUID/body signatures preserved.412Windows/Linux tests PASS; source and engineering gaps explicit. Existing batten/counterbatten source relation qualifies the next bounded support sub-junction. Publication makes zero native calls.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-122511Z-construction-junctions-s01/coverage.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "575721587033e754484ff40488336eb7e7fa46547b4412a6ac74ec38d4c2d6fb",
+      "source_revision": "fab5fd71c68616de510ad8b6b06ce22eaf58520b"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-122511Z-construction-junctions-s01/EVIDENCE_SHA256.json",
+      "kind": "LOCAL_LOG",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "776fd2e236795c4d5dd53d2d9e2620353c0e17fef2aa53b3bafc04cd3e11a8e2",
+      "source_revision": "fab5fd71c68616de510ad8b6b06ce22eaf58520b"
+    }
+  ],
+  "report_markdown": "# A04.S01 — model-derived construction junction coverage\n\nCompleted the accepted-model coverage through the existing native context,\nNetworkX and Shapely BREP contact analyzer. No native elements were recreated.\nFresh isolated-project identity, native inventory and all95accepted geometry\nsignatures matched the persisted PR56 baseline; the PLN SHA256 remained\ndea93fe0fd520747bf4fee5f12d86372f57d972a7021b65029419d2d127892c8.\n\nThe47actual interfaces comprise12wall/floor,5wall/window/door,4upper-wall/roof,\n2roof-member/abutment,20wall intersections and4column/floor interfaces.\nCladding is absent.34interfaces have positive measured coplanar native BREP\nsurface area,12have no shared surface, and the intentional diagnostic Morph\nhas a native roof volume intersection. Surface contact, logical host binding,\nnative collision and engineering acceptance remain distinct.\n\nAll73context and1142source records were inspected through the pinned Details\nv2.12 archive. Source/detail IDs, page locators, actual materials, absolute XYZ,\nfloors and compile blockers travel with the interface records. None of the\nfull manufacturer assemblies is source-approved. Reinforcement, ring beams,\nfastener selections and cladding applicability remain explicit gaps; a\nconcrete body or a product name does not prove these systems or capacity.\nThe registered CSE and Russian-junction rule references retain source-only\nstatus; no new normative applicability or engineering approval is asserted.\n\nNine new offline tests cover real face area, edge contact, volume overlap,\nholes, nonplanar limitations, column-segment ownership, roof gaps, missing\ncladding and source gates. Full Windows host suite:412/412PASS in56.479s.\nGitHub Windows/Linux CI and committed blob readback accompany publication.\n\nThe source-supported next sub-junction is explicit:\nARMO_SELFLOCK_ROOF__P0003, page3, PF00125x150mm existing batten,\nPF00250x50mm new counterbatten, relation\nbattens_supported_by_counterbattens. Implement the new rafter-following\ncounterbatten through the existing SceneWriter, pin the old batten and roof,\nderive span/placement from native geometry, reuse the accepted structural\ntimber material, and prove actual contact without a new native collision.\nThe existing batten remains unchanged. This is a bounded support sub-junction;\nthe complete roof assembly, fixings, timber grade and engineering remain\nunverified. Proceed to A04.S02 after this S01 publication is verified.\n\n\nEvidence: [APA-RUN-20261012-122511Z-construction-junctions-s01](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-122511Z-construction-junctions-s01). Draft PR57, head fab5fd71c68616de510ad8b6b06ce22eaf58520b. Stable SHA tokens replace private native identities; raw payloads stay local. Publication makes zero native calls.\n",
+  "next_substep": "APA-P70.A04.S02",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

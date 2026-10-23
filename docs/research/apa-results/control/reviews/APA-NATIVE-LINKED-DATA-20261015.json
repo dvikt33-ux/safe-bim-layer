@@ -1,0 +1,15 @@
+{
+  "status": "DONE_PUBLISHED_PACKAGE_S03_PARTIAL",
+  "revision": 175,
+  "codePR": 104,
+  "codeHead": "6ae582b9f2a9666389fc06fd0528bbfff3fde6b4",
+  "nativeIFCRead": "LIVE_PASS_SCOPED",
+  "enhancedSDK": "BUILD_PASS_NOT_INSTALLED_EXACT_PERMISSION_PENDING",
+  "nativeWrites": 0,
+  "quantityEngine": "QUARANTINED_NOT_CALLED",
+  "offlineProductTests": false,
+  "automaticPublisherOfflineTests": "UNINTENDED_EXECUTED_SEE_ERRATUM",
+  "publisherWorkflow": "CANCELLED",
+  "receipt": "DONE_PUBLISHED_INDEPENDENT_GITHUB_READBACK",
+  "receiptRun": "APA-RUN-20261015-123508Z-native-linked-data"
+}

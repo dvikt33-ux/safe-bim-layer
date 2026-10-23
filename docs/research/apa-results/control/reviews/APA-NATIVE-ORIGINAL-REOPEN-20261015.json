@@ -1,0 +1,18 @@
+{
+  "status": "DONE_PUBLISHED_FUNCTIONAL_ACCEPTANCE_SUPPLEMENT_S03_PARTIAL",
+  "revision": 173,
+  "codePR": 97,
+  "codeHead": "8f134001ca0e3250eda587db61ac01dbd6357326",
+  "originalRuntimeCopyReopen": "LIVE_PASS",
+  "totalGUIDs": 409,
+  "originalDetailsAndSignatures": 258,
+  "geometryMaterialsRelationshipsMatch": true,
+  "nativeWrites": 0,
+  "savedBytesUnchangedDuringRead": true,
+  "otherOpeningPostClose": "NOT_VERIFIED",
+  "sampleVisual": "NOT_VERIFIED",
+  "quantityEngine": "QUARANTINED_NOT_CALLED",
+  "productCode": "UNCHANGED",
+  "WindowsCI": "PRIOR_EXACT_CODE_PASS_REUSED",
+  "receiptRun": "APA-RUN-20261015-105500Z-native-original-reopen"
+}

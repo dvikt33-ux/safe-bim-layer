@@ -1,0 +1,67 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261012-132353Z-construction-junction-qualification-s03",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A04",
+  "substep_id": "APA-P70.A04.S03",
+  "executor": "work-construction-junctions-20261012",
+  "executor_run_id": "APA-RUN-20261012-131000Z-construction-junction-qualification-s03",
+  "phase": "SOURCE",
+  "started_at": "2026-10-12T13:10:00Z",
+  "finished_at": "2026-10-12T13:23:53Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 native evidence captured; publication makes zero native calls",
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-construction-junctions-20261012"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/57",
+      "revision": "b1abd584585feb0f286621337986c8a5d3077507",
+      "source_sha": "b1abd584585feb0f286621337986c8a5d3077507"
+    }
+  ],
+  "inputs": [
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-DETAILS-V212"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-CONSTRUCTION-JUNCTION-QUALIFICATION-S03",
+      "statement": "Actual49native interfaces qualified:34PASS_GEOMETRY,1PASS_DOCUMENTED bounded c4/c5source support,14NOT_VERIFIED,0PASS_ENGINEERING; no complete-family approval.95old GUID/body signatures preserved;96current saved/reopened. Current IFC38/38bounds and new IfcBeam timber member verified.432Windows/Linux tests PASS. Existing live diameter0.2m/reference200Create selector identified read-only; terminal transition/connection still unverified. Publication zero native calls.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-132353Z-construction-junction-qualification-s03/acceptance.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "a2748aeb3faed98ff3e4c58575683f822767a3136577a547dd914abe9f27992b",
+      "source_revision": "b1abd584585feb0f286621337986c8a5d3077507"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-132353Z-construction-junction-qualification-s03/EVIDENCE_SHA256.json",
+      "kind": "LOCAL_LOG",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "31d2fe1ab27058acae640564a0afe147ddeddfe3329780672cb974e3fe439332",
+      "source_revision": "b1abd584585feb0f286621337986c8a5d3077507"
+    }
+  ],
+  "report_markdown": "# A04.S03 — actual construction interface qualification\n\nThe new source-bound ARMO batten/counterbatten support was read independently after successful Save/Open. Native body,50×50mm section,5.9801000489m measured span, structural-timber material, story1, existing Beam classification and actual75cm²face contact PASS. All95previous GUID/body signatures remain identical;96current GUID and38context records. No new native collision; the known roof-intersecting diagnostic Morph and all previous collision pairs are preserved.\n\nThe reusable qualifier grades all49actual candidate interface pairs:34PASS_GEOMETRY, one PASS_DOCUMENTED bounded source support,14NOT_VERIFIED, zero PASS_ENGINEERING. It rejects stale/duplicate/support-pair/area discrepancies and volume intersections. Logical binding, physical contact, intersection and capacity remain separate. Window/door host interfaces, wall/floor, wall/roof, roof members, wall intersections and column/floor use actual native geometry/material/story data. Cladding is absent; four upper-wall/roof interfaces have real gaps. Generic Opening geometry is read from actual host inner contours. No complete family is declared accepted.\n\nThe current96GUID model was exported once through the existing IFC adapter:45IFC elements,38/38world-bounds matches,20material assignments,11port links,6opening hosts,12quantity comparisons with zero mismatch. The new source counterbatten exports as IfcBeam with actual structural-timber material and bounds delta below5e-10m. Native Morph curved memo prevents native quantity qualification; this field was not rewritten to obtain a PASS. Full receiver semantic compatibility and engineering remain NOT_VERIFIED.\n\n432/432tests PASS locally and Windows/Linux CI38254658345, including29junction tests. A first restricted local run encountered temporary-file replacement permissions in five retained tests; the ordinary host run passed all432. Code blobs were independently read from GitHub and match the commit. Native S03 qualification made zero model writes; the one local IFC export preserves the saved PLN hash and all96bodies. Visible 3D inspection is NOT_VERIFIED; actual3DBREP readback is the geometry evidence.\n\nSeparate read-only S10 qualification corrected a former gap: installed CreateMEPRoutingElements already supports crossSectionReferenceId. Live Ventilation preferences contain referenceId200 for diameter0.2m; native source injects a locally modified segment default into the new route without editing user preference tables. Modify does not expose this selector despite a broader donor-example comment. Terminal remains unconnected; actual reference-based creation, transition and reciprocal connections are not claimed. No MEP write/settings/APX change occurred.\n\nThe G01–G09 register records the current96GUID/38context/432tests and preserves the verified PR56baseline95GUID/403tests. Full roof assembly still needs eight source dimensions, fixing/grade/rafter-bearing data; complete construction families and structural acceptance remain open under the existing source/engineering tasks. The immediate MEP next step is a controlled new reference200route/transition probe with independent port/section/readback, subject to the user's restriction on potentially ambiguous repeated MEP writes. A11.S04 optimization is not started while A11.S03 integration criteria remain partial.\n\nS03 completes actual interface qualification with explicit NOT_VERIFIED results; it does not complete every construction family or provide engineering approval. Only the bounded new source support sub-junction is physically realized and documented. This publication makes zero native calls; preceding execution modifies only the approved isolated PLN and creates a new local IFC artifact.\n\n\nEvidence: [APA-RUN-20261012-132353Z-construction-junction-qualification-s03](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-132353Z-construction-junction-qualification-s03). Draft PR57, head b1abd584585feb0f286621337986c8a5d3077507. Stable SHA tokens replace private native identities; raw payloads stay local. Publication makes zero native calls.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

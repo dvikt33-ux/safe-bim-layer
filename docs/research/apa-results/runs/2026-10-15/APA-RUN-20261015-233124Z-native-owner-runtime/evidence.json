@@ -1,0 +1,155 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-OWNER-RUNTIME",
+      "evidence_ids": [
+        "EV-10"
+      ],
+      "statement": "Direct exact71 binary approval obtained after initialPR111 checkpoint. Runtime identity/source match;293commands exported. Existing assembly state and selectedlibraryscript commands callableverified. ActualRailingRail settingsowner,parent/root,independent128parameter Object/ownermemos read;owner absentfromphysicalrootRailmemo. Top-levelmaster/parameterscripts readableprivately,macrocontrolled fixingrule unproven;no setter executed.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-OWNER-PERSISTENCE",
+      "evidence_ids": [
+        "EV-11"
+      ],
+      "statement": "OriginalAPX and77registrationvalues restoredbyteexact;neworiginalruntime264commands. Independent reopen:all409native signatures/all128GDL matchPR109,sourcePLN untouched. Testcopy savedbytes unexpectedlychanged afterUIexit,afcbdaaea880to0a9c01419823,causenotverified;no SaveAPIormutationcommands. Bothcheckpoints retained,no rollback. OverallpersistencePARTIAL,notbyteexactPASS.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-OWNER-CONNECTED",
+      "evidence_ids": [
+        "EV-12",
+        "EV-3"
+      ],
+      "statement": "Actualowner memo andtypedmaterialfacts feed existingDependencyImpact:352nodes482edges,134observedRailimpacts;settingsowner,physicalmembership,storedflags andactiveDisabledflags remain distinct. DefaultcompoundMODIFY requiresfullgeometry/material/GDL/ownership/dependency/beforeproofs. MaterialsNOT_RESTORED,recoveryBLOCKED,noblindretry orDisabledwrite.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-OWNER-BUILD-SCOPE",
+      "evidence_ids": [
+        "EV-1",
+        "EV-10"
+      ],
+      "statement": "FullWindowsRelease build ofexistingcommands;nativeowner/libraryread subsetLIVE_VERIFIED afterapproval. NewCWbounds andExtruded/Revolvedfields onlyBUILD_PASS,nomutationLIVE_PASS. Oneexistingwriter/router/journal;originalintentretainedinresults,legacyunknownscopeNOT_VERIFIED.",
+      "status": "BUILD_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-OWNER-NO-TESTS",
+      "evidence_ids": [
+        "EV-5",
+        "EV-9"
+      ],
+      "statement": "Existingworkflowhashes unchanged;allcommits skipCI,directpublisherfunctions,nooffline tests,normalautomation,workflowdispatchorquantitycalls. Thispublication action changesrepositoryartifactsonly;precedingexplicitlyapprovedAPXreadonlycycle andpersistenceexceptionareseparateevidence.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "kind": "OTHER",
+      "sha256": "a30a9384940ffccc0ca49f36400a45ff18d20ed0657a91dee06cd223cf58b09a",
+      "source_revision": "61f56376e37755cfb4a15db29071970525297904",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-233124Z-native-owner-runtime/native-current.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-1",
+      "kind": "OTHER",
+      "sha256": "df438ad78584b7b3243f91021598184eba969fffbccc28191736fe82f5b278df",
+      "source_revision": "61f56376e37755cfb4a15db29071970525297904",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-233124Z-native-owner-runtime/SDK-build.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-2",
+      "kind": "OTHER",
+      "sha256": "edf18b684daf2b4f9f7ea8f602449077eaacd4d361eed4d2693a7dfffb49e957",
+      "source_revision": "61f56376e37755cfb4a15db29071970525297904",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-233124Z-native-owner-runtime/preparation-flow.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-3",
+      "kind": "OTHER",
+      "sha256": "dcf544a554af31d3b04e3f7921d5efd36db4fd2776851a39be9390d8da0c0ed8",
+      "source_revision": "61f56376e37755cfb4a15db29071970525297904",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-233124Z-native-owner-runtime/compound-acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-4",
+      "kind": "OTHER",
+      "sha256": "7f8f2d13eb96b79c2e40ea58658235e26f30ae12a8405aff5f85024b41bc2f25",
+      "source_revision": "61f56376e37755cfb4a15db29071970525297904",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-233124Z-native-owner-runtime/source-audit.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-5",
+      "kind": "OTHER",
+      "sha256": "d8b3a2cdb4657f2901dfed756844950758ee3e20dafebbf64903eda762b80cc7",
+      "source_revision": "61f56376e37755cfb4a15db29071970525297904",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-233124Z-native-owner-runtime/publication-preflight.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-6",
+      "kind": "OTHER",
+      "sha256": "c51d4965eba83859e1ca156316bbe62d3b510ff30eda752e0c9273d98761ff79",
+      "source_revision": "61f56376e37755cfb4a15db29071970525297904",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-233124Z-native-owner-runtime/gap-register.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-7",
+      "kind": "OTHER",
+      "sha256": "03103ce6341799cffa7d8c242109ec0690aebe5ddcd048c230bfb49c8f6b30d0",
+      "source_revision": "61f56376e37755cfb4a15db29071970525297904",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-233124Z-native-owner-runtime/module-contracts.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-8",
+      "kind": "OTHER",
+      "sha256": "38e289850dea8e2b0bf4fbc1972fb4b68c59c7806ef11c5533a4b4af6ab7926a",
+      "source_revision": "61f56376e37755cfb4a15db29071970525297904",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-233124Z-native-owner-runtime/module-coverage.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-9",
+      "kind": "OTHER",
+      "sha256": "c4ff622f7c0269940d2ca8e94d928cac139aee119a68766eab14694861d55ba7",
+      "source_revision": "61f56376e37755cfb4a15db29071970525297904",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-233124Z-native-owner-runtime/publication-actions.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-10",
+      "kind": "OTHER",
+      "sha256": "1c37ebedcc1672cf3a59c66d085f9d71477e775cf3d1fe35a9bccfb9e51c1b09",
+      "source_revision": "61f56376e37755cfb4a15db29071970525297904",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-233124Z-native-owner-runtime/native-live-readback.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-11",
+      "kind": "OTHER",
+      "sha256": "4844c6be4da1e8f95d0f6a3b4b5bacb13c1ffda2f5bfc8e61e271c0d9acfd0d8",
+      "source_revision": "61f56376e37755cfb4a15db29071970525297904",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-233124Z-native-owner-runtime/persistence.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-12",
+      "kind": "OTHER",
+      "sha256": "da031f042522d50f1ac7257d2d46bc4f2a963bd4aa2c167fcbffbc25a2d813b1",
+      "source_revision": "61f56376e37755cfb4a15db29071970525297904",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-233124Z-native-owner-runtime/diagnosed-flow.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261015-233124Z-native-owner-runtime",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

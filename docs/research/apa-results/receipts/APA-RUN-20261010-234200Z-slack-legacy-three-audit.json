@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:d99d47cbb6abd783d60316dd756453fb815ca8fcdf79be5f1792ed8f89832a8b",
+  "index_commit_sha": "ffa2d56fa5eb915398131b07a26e1a2644a11fd6",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "ffa2d56fa5eb915398131b07a26e1a2644a11fd6",
+  "report_path": "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/REPORT.md",
+  "report_sha256": "07ff9e7f016ff3461c0926c5d59d6289af97a2c293e7423dd985e916001fc476",
+  "run_id": "APA-RUN-20261010-234200Z-slack-legacy-three-audit",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

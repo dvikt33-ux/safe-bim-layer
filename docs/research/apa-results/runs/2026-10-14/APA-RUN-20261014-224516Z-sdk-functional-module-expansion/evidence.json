@@ -1,0 +1,97 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-MODULE-COVERAGE",
+      "evidence_ids": [
+        "EV-0",
+        "EV-3"
+      ],
+      "statement": "377prepared=368native/source+9local;337lastverifiedoriginal runtime;32APX noindependentcontract;source andlocalcounterdomains separate.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-LOCAL-MODULES",
+      "evidence_ids": [
+        "EV-1"
+      ],
+      "statement": "Nineinstalledlibrary/oldAPAentries callable onarchived native/IFC data throughsamecatalog/BIMGraph; sixnewanalytics, threeutilityaccess entries;noNativeLIVEclaim.",
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-SDK-BUILD",
+      "evidence_ids": [
+        "EV-2"
+      ],
+      "statement": "FullRelease APX280Tapir+1DevKit sourcehandlers; fiveSDKgroupadapters andoneDevKitreuse; exactbinaryidentity/sourcehash;notinstalled.",
+      "status": "BUILD_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-MODULE-LIMITS",
+      "evidence_ids": [
+        "EV-4"
+      ],
+      "statement": "S03PARTIAL;31nativecontracts needruntime;complexmemo/vendor/schedule/MEP gaps andengineering notverified;zeroPLN/APXmutation.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "kind": "TEST_RESULT",
+      "sha256": "cac0c20bb68ece74aa50ae27290d13431e86c2267a190ba638493a17888175c9",
+      "source_revision": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/module-coverage.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-1",
+      "kind": "TEST_RESULT",
+      "sha256": "2a4e92d1c49985199f73fdaa4a79e17d78f51dd734222c368fa4377f918f3f27",
+      "source_revision": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/local-functional-results.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-2",
+      "kind": "TEST_RESULT",
+      "sha256": "91e34c6399a9bb1ec72464e44576c7c779695eea633a71a4ebdee998797d471d",
+      "source_revision": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/sdk-build.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-3",
+      "kind": "TEST_RESULT",
+      "sha256": "63e909a76bcdf610c84333cefe0edb790d34603c1f639e6ed1f3eaa83b3493bf",
+      "source_revision": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/module-contracts.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-4",
+      "kind": "TEST_RESULT",
+      "sha256": "fa07f84d21048e9926b3ebada034630470633fa64e6c39995aaeb55365d83bce",
+      "source_revision": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/gap-register.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-5",
+      "kind": "TEST_RESULT",
+      "sha256": "c4a825efa70d1f2877f814afef7538960b9231b78ca124ede9bc01ccb07de4ca",
+      "source_revision": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/windows-ci.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-6",
+      "kind": "TEST_RESULT",
+      "sha256": "5795fbee32970fda49e692654413828820e82b2c99f700138c3ad3f814e3737a",
+      "source_revision": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/core-knowledge-query.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261014-224516Z-sdk-functional-module-expansion",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

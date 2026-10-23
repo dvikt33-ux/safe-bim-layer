@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:49237ba95acd2216b726052e1124117cf0780368e2e72cf154809ef6243eb0a8",
+  "index_commit_sha": "5a6f3e65fa8a3a7438136e232b6e07455884e31d",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "5a6f3e65fa8a3a7438136e232b6e07455884e31d",
+  "report_path": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200100Z-native-completeness/REPORT.md",
+  "report_sha256": "d74f225945e0b2a8fe22579159b087c568c69bab24d2bb0c84aa7980401201f9",
+  "run_id": "APA-RUN-20261011-200100Z-native-completeness",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

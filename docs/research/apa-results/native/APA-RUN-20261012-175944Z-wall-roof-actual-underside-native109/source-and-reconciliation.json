@@ -1,0 +1,18 @@
+{
+  "status": "SOURCE_VERIFIED_LOCAL_SOURCE_AND_NATIVE_READBACK_SEPARATED",
+  "files": {
+    "SolidElementOperationCommands.cpp": "2f15b4a437909dd558efa83291ea849f55ee21a2462426454c67c5a539530b6b",
+    "MEPCommands.cpp": "f2238e8e192e63cdce43ea4e1538d8fed4d1e3120167edd9ebc4c97015db4e7c",
+    "MEPTransitionDefault.hpp": "5f66dc7e8f565b95265a53496cdcae48432c5952b5ec16cb797d60020cc89c30",
+    "MEPRoutingElementDefault.hpp": "1a9270e19bbfd2ea031c98ab527f5e115c8ff7884447db14c4c132e80089b0e8"
+  },
+  "mepContract": "CreateMEPElements closed enum Terminal/Accessory/Equipment/Fitting and no port-section inputs; Create routing source passes empty per-segment maps to SDK Place. TransitionDefault only supplies non-geometric settings. Read-only native ports/network unchanged. No native transition creation attempted.",
+  "minimalProviderChangeToQualify": "Expose existing SDK route-local rectangular/circular segment maps, then independently verify generated transition identity/two-port sections on a new specimen. A retained-GUID-safe main connection requires its own exposed and tested contract. Installed APX changes require separate authorization.",
+  "seoFlags": "Source reads GetFlags into initially zero flags without checking its error code; cannot distinguish factual cleared flags from query failure. Request/readback difference is retained; actual contact independently proves desired geometry.",
+  "exactBinarySourceCorrespondence": "NOT_VERIFIED; source hashes identify inspected files, not an inferred exact installed-binary build",
+  "rawEvidenceSha256": {
+    "apa-live-evidence\\roof-closure-native-underside-seo\\result.json": "e5f97743f1ef56d624e518f3d17f80b05b55c4693d34490f2d76589a6c64a256",
+    "apa-live-evidence\\roof-closure-underside-persistence\\result.json": "cfc96baed77d721bcc5a9b70194356d57d5d7997287af463d5c3f4a4f5e5d87a",
+    "apa-live-evidence\\roof-closure-independent-final109\\result.json": "6525f671ddcdeb3582912c7974ecfee8ac2d3a3df2d270e94fce114901d92dea"
+  }
+}

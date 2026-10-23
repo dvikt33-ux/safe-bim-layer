@@ -1,0 +1,74 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-TRUE-GRID-LIVE",
+      "evidence_ids": [
+        "EV-GRID",
+        "EV-RECONCILE"
+      ],
+      "statement": "True GREL Grid create/read/edit/same-GUID reuse and SceneWriter Save/Open preserve original143 geometry/material/story signatures; saved144. Full rendered wire span not verified.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-STAIR-RUNTIME-BLOCKER",
+      "evidence_ids": [
+        "EV-STAIR",
+        "EV-DEPLOY"
+      ],
+      "statement": "Single detached Stair probe reset the connection and Archicad process disappeared; no new Stair writes and saved bytes unchanged. Exact dimensions not verified.",
+      "status": "NOT_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-NATIVE-GRID-WINDOWS-CI",
+      "evidence_ids": [
+        "EV-CI"
+      ],
+      "statement": "707Windows APA and102upstream tests/coreMCP integration pass; new Stair writes deny missing/failed/stale detached proof.",
+      "status": "OFFLINE_PASS"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-GRID",
+      "kind": "TEST_RESULT",
+      "sha256": "05b05dc44c222e5d73a6d08450f9a084ab49d718baf583e64d0e8b9937c01992",
+      "source_revision": "60a78e0cd55fc4951c1de3c8d060adf4f9538134",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-234433Z-true-grid-live-stair-runtime/true-grid.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-RECONCILE",
+      "kind": "TEST_RESULT",
+      "sha256": "82210881d6581468cf6295ab21c0e42e1a2f6bb42a8b144016d4b51f9d3a4f5e",
+      "source_revision": "60a78e0cd55fc4951c1de3c8d060adf4f9538134",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-234433Z-true-grid-live-stair-runtime/grid-reconciliation.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-STAIR",
+      "kind": "TEST_RESULT",
+      "sha256": "dfd09dc5c6800faff803fec0541067d87c8c53d5e3b67b592e8685553bf138d3",
+      "source_revision": "60a78e0cd55fc4951c1de3c8d060adf4f9538134",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-234433Z-true-grid-live-stair-runtime/stair-runtime-blocker.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-DEPLOY",
+      "kind": "TEST_RESULT",
+      "sha256": "a3ae93e1c289a06c2d65734b9016d2dfdcb518193a7ea6ee8236c3f1bfa24569",
+      "source_revision": "60a78e0cd55fc4951c1de3c8d060adf4f9538134",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-234433Z-true-grid-live-stair-runtime/deployment-restoration.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-CI",
+      "kind": "TEST_RESULT",
+      "sha256": "808cbeacae61311e94632b76190bdaf8f897dfaed5461f183b4bd9a0a27ce3e8",
+      "source_revision": "60a78e0cd55fc4951c1de3c8d060adf4f9538134",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-234433Z-true-grid-live-stair-runtime/ci.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261013-234433Z-true-grid-live-stair-runtime",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

@@ -1,0 +1,12 @@
+{
+  "acceptance.json": "09e68333cd2f112bfa260a3019e02bd560c6772340efc38c967f443278a50270",
+  "code-readback.json": "9d875d0d78cc6a09e32aaf1c534bc51a029a0961f1d6468da3e7c45b2ae18bbc",
+  "details-native.json": "e7db031415bc4ea8bbc937df65e11ba74599722c890b470043e6b9a15e1b6261",
+  "gap-register.json": "cc4d7d935ac3f1e62fd6a60233cb614b4d707c312be32f4170d56929bdbcbf54",
+  "ifc-coordination.json": "a245f43764bc9ee3bf232133ab5b99881c57e82fbbd610780a0e7f816a46e286",
+  "ifc-quantities.json": "29fe381c41883553d127f63b14fcbf3b59078bd82ca23a0e67318c7848eff1b1",
+  "LOCAL_RAW_SHA256.json": "1f6b293bbb91c8f078a450a8130464da7cdb67ae96dc94fb279d06e44b6d1ccb",
+  "mep-network.json": "b815c411468836aa89455da9117f23e0d27aadc100587d6c7ebc02fc66dd6fae",
+  "native-ifc-connectivity.json": "7bf707abd00b2999e81f0024f5034d60f7676030fc8921d316b7e2ea0becbb11",
+  "persistence.json": "c1a163a75b93b9880dbb2a5a59e61461bd2a49d46860a1a9cb7b2010c81834c7"
+}

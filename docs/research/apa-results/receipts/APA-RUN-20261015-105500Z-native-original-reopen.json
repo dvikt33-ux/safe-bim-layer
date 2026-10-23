@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:dd558e42c96ea3c6eb00a4ec520d1c27d7ac893cbc0ee2a2db73d0f3d23003d1",
+  "index_commit_sha": "732c8d01e567df8fe40375642d11c7eecaa8440e",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "732c8d01e567df8fe40375642d11c7eecaa8440e",
+  "report_path": "docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-105500Z-native-original-reopen/REPORT.md",
+  "report_sha256": "6eef953dcecb4fc5fc829bd317fc981bb92b516d34e58f629c5672fe0135ee55",
+  "run_id": "APA-RUN-20261015-105500Z-native-original-reopen",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

@@ -1,0 +1,86 @@
+{
+  "sceneId": "isolated-authored-20261011-reconciled",
+  "planHash": "1b1b64c45c56b3aad8b02cf3d6decc004cd71182f5c86c510bbba19cd755b43a",
+  "status": "COMPLETE_UNSAVED",
+  "plnSaved": false,
+  "automaticRetry": false,
+  "steps": {
+    "native-slab-level-1": {
+      "status": "REUSED_VERIFIED",
+      "guid": "2A99CBAB-342D-4F04-A382-2A669D8F5149",
+      "kind": "Slab",
+      "floorIndex": 0
+    },
+    "native-wall-east-level-1": {
+      "status": "REUSED_VERIFIED",
+      "guid": "0CA6A748-E5E1-41D4-AAE6-778ACE39D960",
+      "kind": "Wall",
+      "floorIndex": 0
+    },
+    "native-wall-north-level-1": {
+      "status": "REUSED_VERIFIED",
+      "guid": "FC9289A2-257C-4C41-A823-7FE104278A4B",
+      "kind": "Wall",
+      "floorIndex": 0
+    },
+    "native-wall-south-level-1": {
+      "status": "REUSED_VERIFIED",
+      "guid": "10B4A356-5618-4326-B7F6-8850113C2A6D",
+      "kind": "Wall",
+      "floorIndex": 0
+    },
+    "native-wall-west-level-1": {
+      "status": "REUSED_VERIFIED",
+      "guid": "C5D73BA8-EF22-4070-9967-38DDAB3A70D9",
+      "kind": "Wall",
+      "floorIndex": 0
+    },
+    "native-slab-level-2": {
+      "status": "REUSED_VERIFIED",
+      "guid": "B11481A3-AE24-4B64-8C32-9A5BDADF9562",
+      "kind": "Slab",
+      "floorIndex": 1
+    },
+    "native-wall-east-level-2": {
+      "status": "PASS",
+      "guid": "4E2BF074-C554-4284-A0EB-B4AE3DE11D90",
+      "kind": "Wall"
+    },
+    "native-wall-north-level-2": {
+      "status": "PASS",
+      "guid": "86B450AC-C2F2-4BDB-AC09-1E2FF483A89E",
+      "kind": "Wall"
+    },
+    "native-wall-south-level-2": {
+      "status": "PASS",
+      "guid": "F5A029CC-2B0E-44BE-A045-85E0D8677BC5",
+      "kind": "Wall"
+    },
+    "native-wall-west-level-2": {
+      "status": "PASS",
+      "guid": "488041D0-4406-4172-BB37-AED4EAB729F5",
+      "kind": "Wall"
+    }
+  },
+  "sceneDimensions": {
+    "width": 10.0,
+    "depth": 8.0,
+    "height": 6.0
+  },
+  "reusedCount": 6,
+  "createdCount": 10,
+  "newCreatedCount": 4,
+  "allGuidsReadback": true,
+  "modelWriteAttempts": 5,
+  "commandCounts": {
+    "GetProjectInfo": 23,
+    "GetStories": 20,
+    "GetAddOnVersion": 17,
+    "GetAllElements": 6,
+    "GetAttributesByType": 3,
+    "Get3DBoundingBoxes": 1,
+    "GetDetailsOfElements": 26,
+    "ModifySlabs": 1,
+    "CreateWalls": 4
+  }
+}

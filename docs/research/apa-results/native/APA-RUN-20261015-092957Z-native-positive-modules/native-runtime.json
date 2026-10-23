@@ -1,0 +1,172 @@
+{
+  "schema": "APA_NATIVE_POSITIVE_RUNTIME_V1",
+  "status": "SCOPED_NATIVE_POSITIVE_CREATE_READ_SAVE_OPEN_PASS_WITH_FINAL_REOPEN_LIMITATION",
+  "candidateSHA256": "68d0287fcfe48081d02f9eca2e7ac3ed97947e5c871aa764ffa650cbac5b23be",
+  "implementationCommit": "e0821c7cdd1c5bbff0546fb90b195ce901bda397",
+  "buildIdentity": "40b9e07f6b1ca0fede30d20bf46da4eae1815cc06707e0cec0436ee976b734c8",
+  "preparableTotal": 388,
+  "nativeAndOfficialPrepared": 378,
+  "localPrepared": 10,
+  "runtimeTapirExported": 290,
+  "otherNamespaceBuildRegistered": 1,
+  "otherNamespaceRuntimeProbeThisPass": "NOT_RUN_PRIOR_COMPATIBILITY_RETAINED",
+  "officialCompatibleContracts": 73,
+  "candidateCompatibleIncludingPriorDevKit": 364,
+  "originalCompatiblePriorVerified": 337,
+  "originalSourceOnly": 41,
+  "newContractsCallable": 3,
+  "enhancedPositiveReadGroups": 3,
+  "nativeModelWriteCalls": 3,
+  "samples": [
+    {
+      "sample": "positive-cw",
+      "nativeType": "CurtainWall",
+      "nativeTypeId": 37,
+      "homeStory": 0,
+      "newGUIDs": 56,
+      "nativeBodies": 23,
+      "bodyBounds": {
+        "xMin": 199.95,
+        "xMax": 202.050000005,
+        "yMin": -0.3,
+        "yMax": 0,
+        "zMin": -0.05,
+        "zMax": 2.05
+      },
+      "referenceGeometry": "EXPLICIT_TEST_PARAMETERS_FROM_PUBLISHED_SCENARIO",
+      "materialSource": "EXISTING_NATIVE_TOOL_DEFAULTS",
+      "nativeCreate": "LIVE_PASS",
+      "rootGUIDSHA256": "ab2b64f06c0fab1d03aded8f52fbbe11176ccb5271ebda2f6b4ece4a0d8c19fd"
+    },
+    {
+      "sample": "positive-railing",
+      "nativeType": "Railing",
+      "nativeTypeId": 51,
+      "homeStory": 0,
+      "newGUIDs": 94,
+      "nativeBodies": 34,
+      "bodyBounds": {
+        "xMin": 209.8,
+        "xMax": 212.2,
+        "yMin": -0.07,
+        "yMax": 0.033734099,
+        "zMin": 0,
+        "zMax": 1.1
+      },
+      "referenceGeometry": "EXPLICIT_TEST_PARAMETERS_FROM_PUBLISHED_SCENARIO",
+      "materialSource": "EXISTING_NATIVE_TOOL_DEFAULTS",
+      "nativeCreate": "LIVE_PASS",
+      "rootGUIDSHA256": "6bd74280cc80c75db81e3082b83d294b21ef88d16588c7b5f3557be22678d396"
+    },
+    {
+      "sample": "positive-shell",
+      "nativeType": "Shell",
+      "nativeTypeId": 43,
+      "homeStory": 0,
+      "newGUIDs": 1,
+      "nativeBodies": 1,
+      "bodyBounds": {
+        "xMin": 217.865835921,
+        "xMax": 222.134164079,
+        "yMin": 0,
+        "yMax": 4,
+        "zMin": 0,
+        "zMax": 1.335410197
+      },
+      "referenceGeometry": "EXPLICIT_TEST_PARAMETERS_FROM_PUBLISHED_SCENARIO",
+      "materialSource": "EXISTING_NATIVE_TOOL_DEFAULTS",
+      "nativeCreate": "LIVE_PASS",
+      "rootGUIDSHA256": "ad4c0f8d344c66949fe23e351ca62219f52fad0a62c3d0ba63bfa59d7482d860"
+    }
+  ],
+  "componentHeadersParentRootRead": 150,
+  "componentSpecificParameters": 50,
+  "componentParametersBoundary": "UNSUPPORTED_TYPES_EXPLICIT; ROOT_AND_PARENT_NOT_ASSUMED_EQUAL",
+  "opening": {
+    "status": "LIVE_PASS",
+    "nativeTypeId": 72,
+    "hostNativeTypeId": 1,
+    "homeStory": 0,
+    "hostStory": 0,
+    "forwardReverseHostAndCutAgree": true,
+    "cutElements": 1,
+    "resultantVoidBREP": "NOT_VERIFIED"
+  },
+  "shell": {
+    "status": "LIVE_PASS",
+    "shellClass": "Extruded",
+    "bodyFlags": 5,
+    "profileCoordinates": 4,
+    "baseTransformValues": 12,
+    "contours": 0,
+    "extrusionDepth": 4,
+    "profileRise": 1,
+    "resultantBodies": 1,
+    "contourEdgeAndRevolvedRuledPositive": "NOT_VERIFIED_NO_SAMPLE"
+  },
+  "gdlDefaults": {
+    "status": "LIVE_PASS",
+    "libraryParts": 2,
+    "parameters": 163,
+    "serializedParameters": 163,
+    "placedInstancesCreated": 0,
+    "authority": "LIBRARY_PART_STORED_DEFAULTS_NOT_PLACED_INSTANCE",
+    "arrayDictionaryBranches": "NOT_VERIFIED_NO_ARRAY_OR_DICTIONARY_SAMPLE_COUNTED"
+  },
+  "navigator": {
+    "status": "LIVE_PASS",
+    "knownItems": 16,
+    "knownIdentityMapMatches": 16,
+    "sourceLinkProbes": 12,
+    "sourceLinkExactMatches": 1,
+    "sourceIdentityMismatches": 3,
+    "nativeErrors": 8,
+    "drawingOwningLayouts": 4,
+    "exactViewDrawingLinks": 1,
+    "unresolvedViewDrawingLinks": 3,
+    "drawingUpdateStatus": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "freshness": "NOT_VERIFIED_MINUS_ONE_OTHER",
+    "documentUpdateCalls": 0
+  },
+  "attributes": {
+    "buildingMaterials": 59,
+    "surfaces": 132,
+    "mutationCalls": 0
+  },
+  "retention": {
+    "originalGUIDs": 258,
+    "allNativeGeometrySignaturesMatchBeforeWriteAndAfterSaveOpen": true,
+    "savedCopyGUIDs": 409,
+    "newNativeRoots": 3,
+    "newAssemblyAndLibraryChildren": 148,
+    "save": "LIVE_PASS",
+    "open": "LIVE_PASS",
+    "postRestoreReopen": "NOT_VERIFIED_COMPUTER_USE_HELPER_TIMEOUT_AFTER_RESET",
+    "protectedSourceBytesMatchCopyCheckpoint": true,
+    "sourceCloseSavedHashChanged": true,
+    "sourceCloseNativeGeometryAndDetails258Match": true,
+    "openingSavedBytesMatchedBeforeAndDuringRead": true,
+    "openingSavedBytesMatchAfterClose": false,
+    "openingPostCloseGeometry": "NOT_VERIFIED_PENDING_ORIGINAL_RUNTIME_REOPEN",
+    "savedFileHashDriftCause": "NOT_VERIFIED_NO_BLIND_RESTORE",
+    "sourceModelWriteCalls": 0
+  },
+  "idempotency": {
+    "existingJournal": "REUSED",
+    "newCreateIntents": 3,
+    "automaticRetries": 0,
+    "duplicateCreateCalls": 0,
+    "repeatedSubmissionNativeTest": "NOT_RUN_EXISTING_JOURNAL_RESERVATION_GUARD_REUSED"
+  },
+  "railingStairAssociation": "NOT_VERIFIED_DETACHED_SAMPLE_NO_PROXIMITY_INFERENCE",
+  "visualSampleInspection": "NOT_VERIFIED",
+  "originalAPXRestored": true,
+  "originalRegistrationMatch": true,
+  "quantityEngineCalled": false,
+  "engineering": "NOT_VERIFIED"
+}

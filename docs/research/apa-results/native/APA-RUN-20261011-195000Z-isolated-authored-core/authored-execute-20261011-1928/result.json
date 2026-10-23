@@ -1,0 +1,104 @@
+{
+  "status": "PARTIAL_OR_UNKNOWN_OUTCOME",
+  "evidenceKind": "LIVE",
+  "automaticRetry": false,
+  "plnSaved": false,
+  "intentHash": "d5ec817592f092a7ef300ef9763cab045a4fff39c4be66458855ed2e679f23b1",
+  "metrics": {
+    "dimensionsMeters": {
+      "width": 10.0,
+      "depth": 8.0,
+      "height": 6.0
+    },
+    "elementCount": 10,
+    "nativeCommands": {
+      "CreateSlabs": 2,
+      "CreateWalls": 8
+    },
+    "authoredRooms": 2,
+    "structuralVerified": false,
+    "normativeVerified": false
+  },
+  "archicadProduct": {
+    "version": 29,
+    "buildNumber": 5101,
+    "languageCode": "RUS"
+  },
+  "confirmPlanHash": "db9b0329f874784b86b486bfbcb8f4e3497c9ef67bdfc94ff466c5ab96ea4041",
+  "binding": {
+    "path": "C:\\LocalAI\\APA_Isolated_Writer_Test_01.pln",
+    "name": "APA_Isolated_Writer_Test_01",
+    "port": 19724,
+    "tapirVersion": "1.5.10",
+    "storyIndex": 0
+  },
+  "nativeElementsInspected": 20,
+  "scene": {
+    "sceneId": "isolated-authored-20261011-1928",
+    "planHash": "aaf54b8e7bed5c47a9c104770bfe30e27479c632a6dddd86cda14848ab4a1129",
+    "status": "PARTIAL_OR_UNKNOWN_OUTCOME",
+    "plnSaved": false,
+    "automaticRetry": false,
+    "steps": {
+      "native-slab-level-1": {
+        "status": "PASS",
+        "guid": "2A99CBAB-342D-4F04-A382-2A669D8F5149",
+        "kind": "Slab"
+      },
+      "native-wall-east-level-1": {
+        "status": "PASS",
+        "guid": "0CA6A748-E5E1-41D4-AAE6-778ACE39D960",
+        "kind": "Wall"
+      },
+      "native-wall-north-level-1": {
+        "status": "PASS",
+        "guid": "FC9289A2-257C-4C41-A823-7FE104278A4B",
+        "kind": "Wall"
+      },
+      "native-wall-south-level-1": {
+        "status": "PASS",
+        "guid": "10B4A356-5618-4326-B7F6-8850113C2A6D",
+        "kind": "Wall"
+      },
+      "native-wall-west-level-1": {
+        "status": "PASS",
+        "guid": "C5D73BA8-EF22-4070-9967-38DDAB3A70D9",
+        "kind": "Wall"
+      }
+    },
+    "sceneDimensions": {
+      "width": 10.0,
+      "depth": 8.0,
+      "height": 6.0
+    },
+    "reusedCount": 0,
+    "failedStep": "native-slab-level-2",
+    "reason": "ValueError: SLAB_READBACK_MISMATCH",
+    "manualReconciliationRequired": true
+  },
+  "addedGuids": [
+    "0ca6a748-e5e1-41d4-aae6-778ace39d960",
+    "10b4a356-5618-4326-b7f6-8850113c2a6d",
+    "2a99cbab-342d-4f04-a382-2a669d8f5149",
+    "b11481a3-ae24-4b64-8c32-9a5bdadf9562",
+    "c5d73ba8-ef22-4070-9967-38ddab3a70d9",
+    "fc9289a2-257c-4c41-a823-7fe104278a4b"
+  ],
+  "removedGuids": [],
+  "inventoryUnchanged": false,
+  "elapsedSeconds": 2.531458,
+  "commandCounts": {
+    "GetProjectInfo": 32,
+    "GetStories": 30,
+    "GetAddOnVersion": 26,
+    "GetAttributesByType": 4,
+    "API.GetProductInfo": 1,
+    "GetAllElements": 4,
+    "Get3DBoundingBoxes": 2,
+    "CreateSlabs": 2,
+    "GetDetailsOfElements": 7,
+    "ModifySlabs": 1,
+    "CreateWalls": 4
+  },
+  "modelWriteAttempts": 7
+}

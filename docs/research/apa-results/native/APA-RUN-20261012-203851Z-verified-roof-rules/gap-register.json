@@ -1,0 +1,108 @@
+{
+  "substep": "APA-P70.A11.S03",
+  "status": "PARTIAL",
+  "codeHead": "633c799da125622be6317ea9d09a9b7eb83fb98a",
+  "gaps": [
+    {
+      "id": "G01",
+      "status": "FIXED_VERIFIED_PR54_RETAINED",
+      "evidence": "546Windows host/Windows+LinuxCI; accepted PR54 SQLite fix retained",
+      "remaining": "No new SQLite development"
+    },
+    {
+      "id": "G02",
+      "status": "LIVE73_DETAILS_FOUR_ACTUAL_WALL_ROOF_COVERAGE_PLANS_PASS",
+      "remaining": "Four measurements VERIFIED; 39.44-59.06% cap coverage. Direct complete-cap SEO recipes NOT_APPLICABLE; native contour/design/copy authorization required"
+    },
+    {
+      "id": "G03",
+      "status": "REAL_NATIVE_C4_C5_BEAM_SUPPORT_PASS_FULL_ASSEMBLY_BLOCKED",
+      "dependency": "APA-P70.A11.S06",
+      "remaining": "25x150mm and50x50mm real Beams with75cm2contact; c5 vertical native end contact to original Morph batten73.1108100945cm2; eight full-assembly dimensions/source commit=false/grade/fixings/rafter bearing remain"
+    },
+    {
+      "id": "G04",
+      "status": "LIVE_REFERENCE200_DIAMETER_AND_RECIPROCAL_TERMINAL_CONNECTION_PASS_MAIN_BRIDGE_BLOCKED",
+      "dependency": "APA-P70.A11.S10",
+      "remaining": "Ø200pair preserved; no explicit sized transition factory/port setters; exposed routing Place supplies empty segment section maps; destructive ConnectLogically excluded. Two components remain."
+    },
+    {
+      "id": "G05",
+      "status": "SOURCE_VERIFIED_SINGLE_PLANE_SDK_MEMO_PATH_RUNTIME_GATE",
+      "dependency": "APA-P70.A11.S07",
+      "remaining": "Existing SDK GetMemo/ChangeMemo supports plane Roof source; native memo/underside footprint offset29.887626mm verified. Installed callable edit/source-binary correspondence not verified; exact design and separate authorized copy absent. Original4junctions unchanged; no APX change"
+    },
+    {
+      "id": "G06",
+      "status": "REAL_ANALYTICAL_ADAPTERS_RETAINED_EXTERNAL_SAM_SAF_ENGINE_LOAD_NORM_GATES",
+      "dependency": "APA-P70.A11.S08"
+    },
+    {
+      "id": "G07",
+      "status": "ACTUAL45_IFC_MAPPINGS_52_ELEMENTS_UNDERSIDE_WALL_ROOF_QUANTITIES_PASS",
+      "dependency": "APA-P70.A11.S09",
+      "remaining": "Historical PR63 actual IFC remains evidence; no new export because no model change. SEO/contact export and receiver compatibility still unverified"
+    },
+    {
+      "id": "G08",
+      "status": "ACTUAL_LOWER_FACE_FULL_CAP_COVERAGE_AND_RECIPROCAL_FLAG_CHECK_PASS",
+      "remaining": "Coverage/holes actual native geometry and complete/partial contact distinguished; requested true/target+operator readback false flag remains NOT_VERIFIED, no mutation/retry Native memo/reference contour matches upper face; actual lower XY footprint is offset29.887626mm. Both are retained explicitly, not normalized into false equality."
+    },
+    {
+      "id": "G09",
+      "status": "FUNCTIONAL_WORK_PRIORITIZED_NO_INSTALLER_OR_OPTIMIZATION_CLAIM",
+      "remaining": "A11.S04 waits actual S03 completion; S03 remainsPARTIAL andS10BLOCKED"
+    }
+  ],
+  "baselinePR56GuidCount": 95,
+  "currentGuidCount": 109,
+  "sharedContextRecords": 45,
+  "tests": 546,
+  "nextAction": "Qualify native SinglePlane Roof contour editing and an approved design in a separately authorized saved copy; rerun actual four-target coverage before permitting Wall height + SEO",
+  "baselinePR57GuidCount": 96,
+  "nativeToolPolicy": "NATIVE_PARAMETRIC_FIRST; MORPH_LAST_RESORT; real Beam for source c4/c5; missing APA adapter not exemption",
+  "historicalPR57Junctions": {
+    "interfacePairs": 49,
+    "PASS_GEOMETRY": 34,
+    "PASS_DOCUMENTED": 1,
+    "NOT_VERIFIED": 14,
+    "PASS_ENGINEERING": 0,
+    "completeFamilies": "NOT_VERIFIED"
+  },
+  "currentWorkingNativeFunctions": [
+    "REFERENCE200_CIRCULAR_TERMINAL_PAIR",
+    "REAL_BEAM25X150_BEAM50X50_CONTACT",
+    "NATIVE_WALL_ROOF_PERIMETER_ABUTMENT",
+    "SDK_SEGMENT_OWNERSHIP_IFC_QUANTITIES",
+    "ACTUAL_NATIVE_WALL_ROOF_UNDERSIDE_CONTACT",
+    "ACTUAL_SLOPED_FOUR_GAPS_MEASURED"
+  ],
+  "baselinePR59GuidCount": 107,
+  "newNativeWrites": 0,
+  "fourActualSourceJunctions": {
+    "measurement": "VERIFIED",
+    "completeCapDirectRecipe": "NOT_APPLICABLE",
+    "counts": {
+      "VERIFIED": 0,
+      "APPLICABLE_NOT_EXECUTED": 0,
+      "NOT_APPLICABLE": 4,
+      "NOT_VERIFIED": 0
+    }
+  },
+  "normative": {
+    "task": "APA-P70.A02.S02",
+    "status": "PARTIAL",
+    "sourceChecks": {
+      "PASS_DOCUMENTED_REFERENCE_ONLY": 4,
+      "NOT_VERIFIED_APPLICABILITY": 8
+    },
+    "jurisdiction": "RU/Central Russia USER_CONFIRMED; no climate values inferred",
+    "engineering": "ENGINEERING_NOT_VERIFIED",
+    "remaining": [
+      "Verified full technical clauses/table rows",
+      "Roof covering/layers/role and source-bound CSE",
+      "Building purpose/work/area/regime/exclusions",
+      "Structural loads and engineering evidence; A05.S01 dependency unsatisfied"
+    ]
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261015-230555Z-native-owner-recovery",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-owner-recovery-20261015",
+  "executor_run_id": "APA-CLAIM-OWNER-RECOVERY-20261015T200007Z",
+  "phase": "LIVE",
+  "started_at": "2026-10-15T20:00:07Z",
+  "finished_at": "2026-10-15T23:05:55Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "Current authorized409copy read-only owner identity; materials not restored,no native writes/APX changes",
+    "sdk": "Native owner and selected library diagnosis plus CW/Shell fields Release build,not installed",
+    "tapir": "Same DynamicCommands SceneWriter SQLite and DependencyImpact; no quantities or new executor",
+    "source_branch": "feature/apa-native-owner-recovery-20261015"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/111",
+      "revision": "14f5381dd971d56f7a693de651f13e572de78d65",
+      "source_sha": "14f5381dd971d56f7a693de651f13e572de78d65"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-OWNER-CURRENT",
+      "statement": "Current original runtime read:409signatures and128placedGDLparameters matchPR109. GeneratedObject names actualRailingRail owner distinct from previously edited physicalRail. No native writes,Save/Open or APX changes. Materials remainNOT_RESTORED.",
+      "status": "LIVE_PASS",
+      "evidence_ids": [
+        "EV-0"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-OWNER-BUILD",
+      "statement": "Existing native assembly state gains bounded actual-owner and rootmemo diagnosis, selected library private script reads;CW polygon allocation bounds and class-specificShellfields fullRelease71b8529a buildonly,notinstalled. No material recovery writer qualified or mutation ticket. No new command names.",
+      "status": "BUILD_PASS",
+      "evidence_ids": [
+        "EV-1",
+        "EV-4"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-OWNER-ACCEPTANCE",
+      "statement": "Existing shared assembly execution requires full geometry,typedmaterials,GDL,ownership,dependency and beforeproof by default;failure/success retains originalintent in existingSQLite. Oldfailedsetter proofmatched,legacy unscopedrowsNOT_VERIFIED. Actualdata graph347nodes474edges,observedRailimpact132;notfuturecausalityorwritepermission.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-2",
+        "EV-3"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-OWNER-NO-TEST-PUBLICATION",
+      "statement": "Inspected existing workflows unchanged,push/pull_request/manualonly. Allcommits skipCI,direct existingpublisher functions,no normalautomation,dispatch,offline tests or quantitycalls.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-5",
+        "EV-9"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/native-current.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "a30a9384940ffccc0ca49f36400a45ff18d20ed0657a91dee06cd223cf58b09a",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65"
+    },
+    {
+      "evidence_id": "EV-1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/SDK-build.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "df438ad78584b7b3243f91021598184eba969fffbccc28191736fe82f5b278df",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65"
+    },
+    {
+      "evidence_id": "EV-2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/preparation-flow.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "edf18b684daf2b4f9f7ea8f602449077eaacd4d361eed4d2693a7dfffb49e957",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65"
+    },
+    {
+      "evidence_id": "EV-3",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/compound-acceptance.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "dcf544a554af31d3b04e3f7921d5efd36db4fd2776851a39be9390d8da0c0ed8",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65"
+    },
+    {
+      "evidence_id": "EV-4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/source-audit.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "7f8f2d13eb96b79c2e40ea58658235e26f30ae12a8405aff5f85024b41bc2f25",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65"
+    },
+    {
+      "evidence_id": "EV-5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/publication-preflight.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "d8b3a2cdb4657f2901dfed756844950758ee3e20dafebbf64903eda762b80cc7",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65"
+    },
+    {
+      "evidence_id": "EV-6",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/gap-register.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "b91b9ade5e76e422296786afb715c350d7cc965ff43b1dc965979c40681c586f",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65"
+    },
+    {
+      "evidence_id": "EV-7",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/module-contracts.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "03103ce6341799cffa7d8c242109ec0690aebe5ddcd048c230bfb49c8f6b30d0",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65"
+    },
+    {
+      "evidence_id": "EV-8",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/module-coverage.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "e1926ded32f04e99ab34f9d958ac881c81edb4010f1f58296478dcbba821da08",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65"
+    },
+    {
+      "evidence_id": "EV-9",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-230555Z-native-owner-recovery/publication-actions.json",
+      "kind": "OTHER",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "bf52001d2790855b162ae1130062bdb1ad2a29fa5b83bb26a744a6855b7477bb",
+      "source_revision": "14f5381dd971d56f7a693de651f13e572de78d65"
+    }
+  ],
+  "report_markdown": "# Native owner recovery and compound MODIFY after PR109\n\nCurrent native read confirms all 409 GUID signatures and all 128 placed parameters unchanged from PR109. The generated Railing Object names a different native RailingRail owner from the physical Rail edited in PR108. The actual settings owner is absent from the ordinary physical-element inventory. Its root membership and material memo must therefore be queried explicitly; the previous physical Rail is not a proven settings owner.\n\nThe two material assignments remain at index 36; the expected BuildingMaterial GUID currently resolves uniquely to index 37. The existing generated-Object setter already returned APIERR_NOTSUPPORTED and is not retried. bmatFixing is Disabled; equal values or parameter names do not prove propagation. Geometry, Rail 0.17 m, Shell 4.5 m, source saved PLN and original APX remain unchanged in this package.\n\n## Implemented product behavior\n\n- Existing GetNativeAssemblyEditStateV1 now has a read-only generated-Railing-Object state: declared owner, native parent/root, independent Object/owner AddPars, root Railing rail memo, stamps, typed material identities and bounded allocations. It does not expose a material mutation.\n- The existing library-default command optionally reads the selected library part master and parameter scripts through the public SDK. Only one explicit library part is accepted; text is bounded and remains private. Protected/unavailable sections retain native errors. No script execution, password bypass or GDL interpreter.\n- Owner-aware recovery preparation resolves exactly two typed material changes from current attribute identity, snapshot hashes and current scope. It returns BLOCKED with no mutation ticket until a supported native owner write and fixing dependency are qualified.\n- Compound MODIFY now requires resultant BREP, per-element materials, GDL, ownership, dependent changes and a complete before snapshot by default. Missing or empty proof cannot produce PASS. Unexpected child GUID changes require reconciliation. Existing SceneWriter and SQLite retain the original intent in failure/success results; old ledger rows remain untouched. One old failed material setter is matched to its independent no-effect proof; legacy unscoped rows remain NOT_VERIFIED.\n- Existing CW polygon/pattern handling bounds SDK allocations. Existing Shell adds Extruded shape direction and class-specific Revolved distortion/segmentation fields; Ruled morphing rule remains read-only. These are BUILD_PASS, not LIVE_PASS.\n- The existing DependencyImpact consumes native generated-owner and observed edit-effect relationships, generated GDL observations and typed MEP dimension/system facts. Current captured slice: 347 nodes, 474 edges, 132 potential impacts from the previously edited Rail. Observed side effect is not a guaranteed future rule or authorization for dependent writes. This slice replaces, rather than adds to, previous graph counters.\n\n## Source limitations\n\nA [Graphisoft developer reply](https://community.graphisoft.com/t5/Archicad-C-API/Writing-GDL-AddPar-values-e-g-material-override-to-Railing-sub/m-p/715108/highlight/true) proposes editing AddPars on the editable component obtained from owner memo. The [AC29 follow-up](https://community.graphisoft.com/t5/Archicad-C-API/Writing-GDL-AddPar-values-e-g-material-override-to-Railing-sub/m-p/712199) reports APIERR_BADPARS on that route. This is a proposed contract, not a qualified recovery. SubElement enum names do not establish valid owner/component indices. No random masks, direct Disabled writes, regeneration, Undo or root-wide rollback are attempted.\n\n## Acceptance and continuation\n\nFull Windows Release build succeeds. New binary is not installed, registered or callable-verified. Next: exact-binary approval for a read-only owner/root-memo and selected-library-script diagnosis in the existing copy, restoration of original APX/registration, then qualify the smallest supported material recovery before requesting its write. Pending exact PR104 binary approval is separate and not repeated. Materials are NOT RESTORED. Full assembly MODIFY, positive MEP, IFC export and A11.S03 remain incomplete.\n\nNo offline tests, workflow dispatch, quantity computation, model writes, Save/Open, new samples or APX changes in this package. Existing code, journal, original projects and historical evidence are retained.\n\nEvidence: [build](https://github.com/dvikt33-ux/safe-bim-layer/blob/14f5381dd971d56f7a693de651f13e572de78d65/docs/evidence/APA_NATIVE_OWNER_BUILD.json), [current native state](https://github.com/dvikt33-ux/safe-bim-layer/blob/14f5381dd971d56f7a693de651f13e572de78d65/docs/evidence/APA_NATIVE_OWNER_CURRENT.json), [actual-data preparation and graph](https://github.com/dvikt33-ux/safe-bim-layer/blob/14f5381dd971d56f7a693de651f13e572de78d65/docs/evidence/APA_NATIVE_OWNER_PREPARATION.json), [acceptance contract](https://github.com/dvikt33-ux/safe-bim-layer/blob/14f5381dd971d56f7a693de651f13e572de78d65/docs/evidence/APA_NATIVE_OWNER_ACCEPTANCE.json), [public-source qualification](https://github.com/dvikt33-ux/safe-bim-layer/blob/14f5381dd971d56f7a693de651f13e572de78d65/docs/evidence/APA_NATIVE_OWNER_SOURCE_AUDIT.json).\n\n\nPublished [draft PR111](https://github.com/dvikt33-ux/safe-bim-layer/pull/111) at `14f5381dd971d56f7a693de651f13e572de78d65`. CAS claim revision181. S03PARTIAL; no tests/native writes/APX installation.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

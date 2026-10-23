@@ -1,0 +1,11 @@
+# Restored-runtime native acceptance supplement
+
+The user manually reopened the exact authorized positive-sample copy after original APX restoration. A fresh read-only identity gate passed. All409GUIDs and their full native geometry, material, home-story and relationship signatures match the saved candidate checkpoint. All258original serialized native detail rows also match. The3new native CurtainWall/Railing/Shell roots and their generated children survived reopening under the restored provider environment.
+
+The restored APX file SHA is `8f5a9341bb9d51cb98a0a58bdbc63d3d3623a0c9f74b3cd3f1a4732c06961969`. Archicad29 and Tapir1.5.10 were read; the3candidate-only command contracts are absent. This is independent saved-model readback, not acceptance of a new installed APX. No Create/Modify/Delete/Save, APX switch or quantity-engine call occurred. Saved bytes stayed unchanged throughout the read. The current file hash differs from the earlier saved checkpoint; full409native signatures provide the geometry/material/relationship reconciliation.
+
+This supplement closes only the previously pending original-runtime reopen of the409-GUID copy. The separate107-GUID Opening model was not opened; its post-close geometry/hash reconciliation and a visual inspection of the3samples remain NOT_VERIFIED. Shell contour/Revolved/Ruled samples, Railing/Stair associations and engineering acceptance are unchanged. A11.S03 remains PARTIAL. Quantity engine remains quarantined and was not called.
+
+Product code and PR97 head remain `8f134001ca0e3250eda587db61ac01dbd6357326`. [Existing Windows CI PASS](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38712200174) applies to that unchanged code; no offline tests were repeated. [PR97](https://github.com/dvikt33-ux/safe-bim-layer/pull/97) and the prior immutable native report remain in force. The main orchestrator queried the current GitHub plan through the existing Knowledge Graph at171, then acquired and byte-verified its own CAS claim at172. No second executor, journal, graph or search was introduced.
+
+Next: independently reconcile the separate Opening model after closing, then complete sample visual inspection. Do not recreate the successful assemblies or replay the quarantined engine.

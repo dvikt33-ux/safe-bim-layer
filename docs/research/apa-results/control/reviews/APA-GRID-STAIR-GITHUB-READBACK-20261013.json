@@ -1,0 +1,102 @@
+{
+  "status": "PUBLISHED_GRID_STAIR_BUILD_BYTE_READBACK_PASS",
+  "run": "APA-RUN-20261013-184337Z-grid-stair-exact",
+  "head": "158801e39c3a3d1782a864f9eae6bbc2a88f2fdf",
+  "files": {
+    "docs/research/apa-results/native/APA-RUN-20261013-184337Z-grid-stair-exact/build-and-test-reconciliation.json": {
+      "blob": "8d008bf2390bcf7a403aea4d452c6ec8d3a2051b",
+      "sha256": "0832cd161916eea6ed1c67fb22fe1c7f38fad0b9ea80412ee517be528d20f032",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-184337Z-grid-stair-exact/candidate-package.json": {
+      "blob": "daff3ddcfdea7c2a113b804ca970ffe64c500557",
+      "sha256": "fe3fcda4612a274bda905b345ed238eabf6fdafec4b8b1dde256c2a5bbe29ab1",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-184337Z-grid-stair-exact/ci.json": {
+      "blob": "10833276377183f86d92f153f70f3af2c4d7178d",
+      "sha256": "913b205f5e8e121fbe85ccafe7a2671ee1ca0de8165f746bfae108a28ee98a7c",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-184337Z-grid-stair-exact/code-readback.json": {
+      "blob": "3ee99c43a06f3dbb65da6754e8b6cbf99c511f9e",
+      "sha256": "b78637618d5c76f942b01d24a8ea1e509eee3f45f6d72d72eb64e266dd979640",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-184337Z-grid-stair-exact/core-knowledge-query.json": {
+      "blob": "c36bbc2fbdd2a046fe0e4ed1a9d54bec1d740909",
+      "sha256": "9bddcfef2c8ffcfc840d2807f5abec27dcf337f884dde48767cbc54ea79e4304",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-184337Z-grid-stair-exact/EVIDENCE_SHA256.json": {
+      "blob": "21b97bbbc286059799f073d011a32c683b434bdb",
+      "sha256": "aef78fa05f381d5f17d1d3be9d11894f5963af6df595191aecbad6a4f8a47374",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-184337Z-grid-stair-exact/favorite-source-constraints.json": {
+      "blob": "3d52d5525e1a55ab045e9d3e86dd1ea36e88bc6d",
+      "sha256": "4921a3de2b97e3feaa0ab7d5cc7abeb58ce5247cd5ac9edbc2f7e94e9fb99c00",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-184337Z-grid-stair-exact/gap-register.json": {
+      "blob": "7aa01d912adb6142c87ec574afcf3165617f71e3",
+      "sha256": "8d4eb901e750100e7d8946da930197b22ae0842382e33524e9647098d824c6f3",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-184337Z-grid-stair-exact/interfaces-and-isolated-test.json": {
+      "blob": "4d85ea37d048079b518a1d159c8403a0740cfd56",
+      "sha256": "9f02aa48a632616119b1e9676891084bf5bd4e98312f4edb53bb3bf72a731e6a",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-184337Z-grid-stair-exact/preserved-models.json": {
+      "blob": "a9255dc2138d020ce5ed442787850a10daf85c7d",
+      "sha256": "206f6979eb25ab76f2b83c5ee17f326c9d5fe4afbeef059b739c27e777726eb3",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-184337Z-grid-stair-exact/runtime-source-lock.json": {
+      "blob": "55d97d3436d7714d56b0dcf1c27ddf396389a2d5",
+      "sha256": "fb1a816171bbe1ae345cc9a32e13e4fa874faca74ad54f33a41eb24c6108947c",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/native/APA-RUN-20261013-184337Z-grid-stair-exact/sdk-build.json": {
+      "blob": "720e8d65743772dee4125971d4c5986557da0069",
+      "sha256": "7a1440f431b6053dfa5a676967c8e4ccc397db166635baef015a10edd44c040b",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/inbox/APA-RUN-20261013-184337Z-grid-stair-exact.json": {
+      "blob": "adda73dda19585e3f88577b9fdf0d6d7b48dbc05",
+      "sha256": "91303070141a5420bb653deea4a0997a497f33e334ffca66bb15a0ae9b89f7f5",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-184337Z-grid-stair-exact/evidence.json": {
+      "blob": "a855b447381e2697b177d29e481b11a697912c53",
+      "sha256": "10ed3cf5623e11c89a9f2afa1ecbac4a2266107bd32263fd96b27ca44d20b546",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-184337Z-grid-stair-exact/manifest.json": {
+      "blob": "6acbfeb0b651354cd244caa51919608807453169",
+      "sha256": "fc8037c584f71fe1cf963beb7c453fa6ed07d439534f799ba6aedec196704181",
+      "readback": "BYTE_EXACT_MATCH"
+    },
+    "docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-184337Z-grid-stair-exact/REPORT.md": {
+      "blob": "0ef38588353115916f8d9d7e4387cacd51c39a01",
+      "sha256": "2ef11279d297b688b049685ae9ac650f82d2bffdc21cf699ede800180c2c58e4",
+      "readback": "BYTE_EXACT_MATCH"
+    }
+  },
+  "receipt": {
+    "idempotency_key": "sha256:6b62f612d3659908d3b93071285148b18c837072244abdcd51d62e294cd10505",
+    "index_commit_sha": "908be31f14e573ff6eb856e3d8746735c0f83696",
+    "index_mode": "AUTOMATIC_V2_PROJECTION",
+    "indexed": true,
+    "readback_verified": true,
+    "report_commit_sha": "908be31f14e573ff6eb856e3d8746735c0f83696",
+    "report_path": "docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-184337Z-grid-stair-exact/REPORT.md",
+    "report_sha256": "2ef11279d297b688b049685ae9ac650f82d2bffdc21cf699ede800180c2c58e4",
+    "run_id": "APA-RUN-20261013-184337Z-grid-stair-exact",
+    "schema": "APA_PUBLISH_RECEIPT_V1",
+    "status": "DONE_PUBLISHED"
+  },
+  "receiptBlob": "15dbbf76de7b3e2ed6d6f924b78c42bc1daaaf37",
+  "reportAndReceiptVerified": true
+}

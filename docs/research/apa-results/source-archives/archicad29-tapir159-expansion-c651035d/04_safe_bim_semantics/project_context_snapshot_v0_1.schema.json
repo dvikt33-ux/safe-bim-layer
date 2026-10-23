@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safe-bim.local/schemas/project_context_snapshot_v0_1.schema.json",
+  "title": "Safe BIM external project context manifest v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "project", "snapshot", "backend", "context", "files", "sync"],
+  "properties": {
+    "schemaVersion": {"const": "0.1"},
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["logicalProjectId", "displayName", "projectModiStamp"],
+      "properties": {
+        "logicalProjectId": {"type": "string", "minLength": 1},
+        "ceipProjectId": {"type": ["string", "null"]},
+        "displayName": {"type": "string"},
+        "projectModiStamp": {"type": "integer", "minimum": 0},
+        "isTeamwork": {"type": "boolean"},
+        "forkStatus": {"enum": ["UNIQUE", "POSSIBLE_FORK", "CONFIRMED_FORK", "UNKNOWN"]}
+      }
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["snapshotId", "sequence", "capturedAt", "rootHash"],
+      "properties": {
+        "snapshotId": {"type": "string", "minLength": 1},
+        "sequence": {"type": "integer", "minimum": 0},
+        "parentSnapshotId": {"type": ["string", "null"]},
+        "capturedAt": {"type": "string", "format": "date-time"},
+        "rootHash": {"type": "string", "pattern": "^[0-9a-fA-F]{64}$"},
+        "reason": {"enum": ["EDIT_IDLE", "SAVE", "SAFE_BIM_STAGE_BEFORE", "SAFE_BIM_STAGE_AFTER", "MANUAL_SYNC", "AI_CONTEXT_REQUEST", "INITIAL_FULL"]}
+      }
+    },
+    "backend": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["archicadVersion", "safeBimVersion"],
+      "properties": {
+        "archicadVersion": {"type": "string"},
+        "tapirVersion": {"type": ["string", "null"]},
+        "safeBimVersion": {"type": "string"},
+        "schemaHash": {"type": ["string", "null"]}
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["archicadInstanceId", "activeStoryIndex", "selectedGuids"],
+      "properties": {
+        "archicadInstanceId": {"type": "string"},
+        "activeStoryIndex": {"type": ["integer", "null"]},
+        "activeWindowType": {"type": ["string", "null"]},
+        "selectedGuids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "selectionHash": {"type": ["string", "null"]}
+      }
+    },
+    "files": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stories", "selection", "modelSummary", "elementIndex", "recentChanges", "qaSummary"],
+      "properties": {
+        "stories": {"type": "string"},
+        "selection": {"type": "string"},
+        "modelSummary": {"type": "string"},
+        "elementIndex": {"type": "string"},
+        "elementShardPrefix": {"type": "string"},
+        "relationShardPrefix": {"type": "string"},
+        "attributeIndex": {"type": ["string", "null"]},
+        "recentChanges": {"type": "string"},
+        "qaSummary": {"type": "string"}
+      }
+    },
+    "sync": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["complete", "localDirtyAtPublish", "privacyScope"],
+      "properties": {
+        "complete": {"type": "boolean"},
+        "localDirtyAtPublish": {"type": "boolean"},
+        "privacyScope": {"enum": ["SELECTION", "ACTIVE_STORY", "FULL_PROJECT"]},
+        "redactions": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

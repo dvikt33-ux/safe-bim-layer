@@ -1,0 +1,87 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-wall-roof-underside-20261012",
+  "executor_run_id": "APA-RUN-20261012-172831Z-wall-roof-underside",
+  "phase": "SOURCE",
+  "started_at": "2026-10-12T17:28:31Z",
+  "finished_at": "2026-10-12T17:59:44Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 native evidence captured; publication makes zero native calls",
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-wall-roof-underside-20261012"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/63",
+      "revision": "7966db58ca8830b43938a03cc064bcc3e952a21e",
+      "source_sha": "7966db58ca8830b43938a03cc064bcc3e952a21e"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-WALL-ROOF-ACTUAL-UNDERSIDE-NATIVE109",
+      "statement": "True native Wall/Roof underside contact2.33623338255613m2 matches source-derived2.336233382576165m2, actual lower BREP plane and changed Wall body; no new volume collisions.109GUID/45context saved/reopened; all107accepted GUID/body/material/story retained. Requested skipPolygonHolestrue/readbackfalse remains metadata NOT_VERIFIED with actual geometry independently proven and no write replay. Four original gaps measured by actual face overlap, unchanged. Actual IFC52elements/45bounds/20quantitymatches/0mismatch/26materials/12portrelations/6openinghosts.469Windows host/Windows+LinuxCI PASS,6exact GitHubcode blobs. S03PARTIAL/S10BLOCKED; no exposed sized transition/segment maps, no APX/global preference/existing network changes. Publication zero native calls.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109/acceptance.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "de9254338b764727a24b5d1481deb147258b14a64f0dffef83920b91a0c2515a",
+      "source_revision": "7966db58ca8830b43938a03cc064bcc3e952a21e"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109/EVIDENCE_SHA256.json",
+      "kind": "LOCAL_LOG",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "31cc7cb2b850e44a794e987cda172245b308c35722e42e613ada0e32faf79c08",
+      "source_revision": "7966db58ca8830b43938a03cc064bcc3e952a21e"
+    }
+  ],
+  "report_markdown": "# APA — native Wall/Roof underside closure from PR59\n\nThe previous Trim specimen contacted a roof cutout perimeter. The existing SEO checker then treated a total shared area as an underside contact. This continuation uses the actual lower principal roof face and rejects top-face contact, retained operator holes, a physical gap, an unchanged Wall body and source-plane drift.\n\n`prepare_roof_underside_specimen` reuses the accepted native Wall/Roof recipe, measured source dimensions, building materials and story. It selects a separate vacant position from the current model extents and produces the existing BIM Graph/SceneWriter plan. Two native creations and one `SubtractionUpwards` SEO operation suffice; no new Morph, Trim, executor or geometry engine is introduced. Shapely compares actual planar BREP contours through the shared face reader. Source bodies are rechecked by SceneWriter for core and adapter writes.\n\nThe native test produced real Wall/Roof underside contact **2.33623338255613 m²**, versus the source-derived expected **2.336233382576165 m²**. Actual Wall vertices remain below the pinned lower plane; native pair and surrounding architecture collision queries are empty. Material GUIDs, story and native types match the input. Save/Open and independent readback preserve **109 GUID /45 shared context records**, including all **107 accepted GUID/body/material/story signatures**. The earlier perimeter specimen, Beam pair and Ø200 terminal connection remain intact.\n\nThe request included `skipPolygonHoles=true`; native relation readback reports it false. That discrepancy remains **NOT_VERIFIED_REQUEST_READBACK_DIFFERENCE**. Actual geometry and the SEO relationship are independently proven. The initial strict flag verification failure is retained in the journal, followed by read-only reconciliation; the native write was never repeated. No assertion that the flag was applied is made. The installed query also ignores the SDK return code for its flag read, so the cause cannot be established without a separately approved provider diagnostic.\n\nThe user explicitly authorized the renamed saved isolated test copy. Its exact identity and saved-file hash were bound locally, and all107 accepted signatures matched before any write. Full private paths, original PLN/IFC files and raw dumps remain local. The narrow `bind_authorized_saved_copy` entry point does not enable arbitrary CLI project overrides.\n\nAll four original upper Wall/Roof gaps are measured from actual face overlap and the sloped lower plane, rather than a bounding-box distance. They remain unchanged because this pass preserves accepted elements. The working separate native scenario does not approve a full construction family, bearing capacity, fastening system or manufacturer assembly.\n\nMEP remains BLOCKED for the circular/rectangular main-network bridge. The exposed `CreateMEPElements` offers only default Terminal/Accessory/Equipment/Fitting placement, without specified port sections. Installed routing placement passes empty rectangular/circular per-segment maps. The native SDK does support those maps, but the installed command does not expose them; `TransitionDefault` itself provides non-geometric settings rather than standalone sized placement. A future separately authorized provider extension could expose the existing route-local segment maps and qualify a transition with actual two-port readback. A GUID-preserving main-network connection remains a separate acceptance requirement. No global preferences, installed APX or existing routes were changed.\n\nActual IFC export: **52 elements,45/45 world bounds,26 material assignments,12 port relations,6 opening hosts and20 quantity matches/0 mismatches**. New `IfcWall` and `IfcRoof` match actual native BREP quantities and materials. SEO/contact relationship export semantics and full receiver compatibility remain NOT_VERIFIED.\n\nValidation:14 new focused checks;469/469 Windows host tests PASS. Windows/Linux CI evidence is published with the run. A11.S03 remains PARTIAL; A11.S10 remains BLOCKED. A04.S01–S03 stay DONE_PUBLISHED. No native Create, Modify or SEO replay; one successful Save and one Open.\n\nPublished code: [draft PR63](https://github.com/dvikt33-ux/safe-bim-layer/pull/63), exact head7966db58ca8830b43938a03cc064bcc3e952a21e on PR59 head744e0bd184a11f1de4a1cf16382d21aec6f8cfca. All6GitHub code blobs match committed bytes. [CI38287308901](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38287308901):469/469PASS on Windows and Ubuntu; Windows host469/469PASS. Native writes are already finished; publication makes zero native calls.\n\n\nEvidence: [APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109). Draft PR63, head 7966db58ca8830b43938a03cc064bcc3e952a21e. Stable SHA tokens replace private native identities; raw payloads stay local. Publication makes zero native calls.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

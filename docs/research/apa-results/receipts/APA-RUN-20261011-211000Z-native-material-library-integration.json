@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:48c15a3aa1175eb82574ba88bd82f380f3ec3e5fb5851d418e93902d195acef3",
+  "index_commit_sha": "462a6a6d015e842b35da67f39463a3c3b0ee567e",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "462a6a6d015e842b35da67f39463a3c3b0ee567e",
+  "report_path": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md",
+  "report_sha256": "029a3d204a618ea6ba62b3155e9969915a90dab5657cd78197bf776ccb18bb24",
+  "run_id": "APA-RUN-20261011-211000Z-native-material-library-integration",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:e7fb85912e631600ade7b864ccbe38eb40123cc526484c8dda9b609c80b0b933",
+  "index_commit_sha": "a9895ad6966c518f4f8984194220c4d74a16d760",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "a9895ad6966c518f4f8984194220c4d74a16d760",
+  "report_path": "docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-121132Z-native-stair-source350/REPORT.md",
+  "report_sha256": "265b094b53f3f7aa3263626c5fab68aa1fff67728034e28982ef364ff65ec174",
+  "run_id": "APA-RUN-20261014-121132Z-native-stair-source350",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

@@ -1,0 +1,224 @@
+{
+  "action_id": "APA-P00.A02",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-CURRENT-EIGHTY-TREES",
+      "evidence_ids": [
+        "EV-CENSUS-83",
+        "EV-AGGREGATE-80"
+      ],
+      "statement": "Complete current 83-branch snapshot contains 80 distinct HEAD SHA. Every HEAD tree was fetched, and each response was non-truncated.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-EXACT-BLOB-COUNT",
+      "evidence_ids": [
+        "EV-AGGREGATE-80",
+        "EV-EXCLUSIVE-422",
+        "EV-COLLISIONS"
+      ],
+      "statement": "Exactly 14920 file occurrences correspond to 1578 Git blob SHA, 1594 paths, 1748 path-SHA pairs; 422 blob SHA appear in only one HEAD; 44 blob SHA span multiple paths and 91 paths have multiple SHA.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-ARCHIVE-71-CONTEXT",
+      "evidence_ids": [
+        "EV-SOURCE-71-INDEX",
+        "EV-CANONICAL-COVERAGE",
+        "EV-EXCLUSIVE-422"
+      ],
+      "statement": "71 MD/JSON source blobs in old archicad29-tapir159 research branch are unique among captured HEADs; exact Git SHA overlap with the pinned canonical revision was zero. Their source URLs/SHA were saved, but raw files were not bulk-migrated.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-ARCHIVE-PROPOSALS-ONLY",
+      "evidence_ids": [
+        "EV-ARCH-DOC-1",
+        "EV-ARCH-DOC-2",
+        "EV-ARCH-DOC-3",
+        "EV-ARCH-DOC-4",
+        "EV-ARCH-DOC-5"
+      ],
+      "statement": "Archive findings about deterministic compiler, project context, transport, and optional local AI are historical source proposals; original Tapir 1.5.9 assumptions have not been revalidated against current installed 1.5.10.",
+      "status": "REPORTED"
+    },
+    {
+      "claim_id": "APA-CLAIM-NEW-HIGHLEVEL-SOURCE",
+      "evidence_ids": [
+        "EV-EXCLUSIVE-422",
+        "EV-ARCH-DOC-6",
+        "EV-ARCH-DOC-7"
+      ],
+      "statement": "Current highlevel whole-model branch has ten uniquely hashed files in the 80-head census; source docs describe offline/synthetic test evidence and a read-only partial-scene probe; no Archicad live creation was independently certified in this audit.",
+      "status": "SOURCE_VERIFIED"
+    },
+    {
+      "claim_id": "APA-CLAIM-SEMANTIC-COMPLETENESS-PENDING",
+      "evidence_ids": [
+        "EV-AGGREGATE-80",
+        "EV-EXCLUSIVE-422"
+      ],
+      "statement": "SHA-level Git audit alone does not establish semantic completeness of historic research, readiness for native BIM production, or safe deletion of any Git branch.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-CENSUS-83",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "88b37fb80091d6784821daa9bf5f5d9737c1e9e8",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CURRENT_BRANCH_HEADS_20261011.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-AGGREGATE-80",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "d5b73ee00c8da3455fbc6ae990423d31cda89077",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CURRENT_BLOB_AGGREGATE_20261011.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-EXCLUSIVE-422",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "6c014487f0c89ec32e23ab6956b900a4b1d8ec6e",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CURRENT_BLOB_EXCLUSIVE_20261011.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-COLLISIONS",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "c232da1192221bf89ad9de45b9d3e5810ab5a30d",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CURRENT_BLOB_COLLISIONS_20261011.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-SOURCE-71-INDEX",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "74b997204bbc26808baa73b46c09c5f4fe5aa62c",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-CANONICAL-COVERAGE",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "5d7ed7d8fd8132e57cf6524f718238ccbfd6dab9",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CANONICAL_BLOB_COVERAGE_20261011.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-ARCH-DOC-1",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "6935db635db7f1cba2581ccc87feb3a606b3adb1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Farchicad29-tapir159-expansion/research/archicad29-tapir159/09_final_audit/FINAL_RESEARCH_AUDIT_V2_AFTER_PASS_90.md",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-ARCH-DOC-2",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "208e807425f698b93838552ef15ed5ba53491ef0",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Farchicad29-tapir159-expansion/research/archicad29-tapir159/09_final_audit/FINAL_PROJECT_CONTEXT_BRIDGE_AUDIT_AFTER_160.md",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-ARCH-DOC-3",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "4f1b24559ca10b55e60f017bb0a4b7eb2895e453",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Farchicad29-tapir159-expansion/research/archicad29-tapir159/09_final_audit/FINAL_TRANSPORT_SYNC_OUT_OF_BOX_AUDIT_AFTER_200.md",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-ARCH-DOC-4",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "c85583dd42ed45b4e766f92f50c1981441ff1094",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Farchicad29-tapir159-expansion/research/archicad29-tapir159/06_integration_audits/INTEGRATION_BACKLOG.md",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-ARCH-DOC-5",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "dbc6abc9b83549f8dd352683bc407662c50749b4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Farchicad29-tapir159-expansion/research/archicad29-tapir159/07_live_probe_backlog/NEXT_CONTROLLED_PROBES.md",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-ARCH-DOC-6",
+      "kind": "OTHER",
+      "sha256": null,
+      "source_revision": "0ebe4e7b0efd526654a90512d537ce0b9c5cfcfe",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature%2Fapa-highlevel-whole-model-20261011/docs/APA_HIGHLEVEL_EXECUTION.md",
+      "verification": "SOURCE_READ"
+    },
+    {
+      "evidence_id": "EV-ARCH-DOC-7",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "82a4408599e12dcf2afbef24b1157c408aed1b21",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature%2Fapa-highlevel-whole-model-20261011/scripts/diagnose_apa_partial_scene.py",
+      "verification": "SOURCE_READ"
+    }
+  ],
+  "executor": "chatgpt-gpt6-branch-blob-inventory-20261011",
+  "executor_run_id": "APA-RUN-20261011T000452Z-branch-blobs-69",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-11T00:19:22Z",
+  "idempotency_key": "sha256:0101898e06ab5e3967091f35a7f45d8f9fcc99d1a77d513a91e67b78bb841d8c",
+  "inputs": [
+    "ART-REGISTER",
+    "ART-BRANCHES",
+    "ART-APA-BRANCH-DEDUP-20261011"
+  ],
+  "next_substep": "APA-P00.A02.S03",
+  "phase": "SOURCE",
+  "plan_id": "APA-P00",
+  "run_id": "APA-RUN-20261011-001922Z-eighty-head-blob-inventory",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "Archicad 29 not contacted",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": null,
+    "source_branch": "research/apa-verified-results-hub-20261010",
+    "tapir": null
+  },
+  "source_revisions": [
+    {
+      "revision": "2026-10-11T00:14:07.915Z",
+      "source_sha": "88b37fb80091d6784821daa9bf5f5d9737c1e9e8",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CURRENT_BRANCH_HEADS_20261011.json"
+    },
+    {
+      "revision": "GitHub rest complete trees",
+      "source_sha": "d5b73ee00c8da3455fbc6ae990423d31cda89077",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/CURRENT_BLOB_AGGREGATE_20261011.json"
+    },
+    {
+      "revision": "source index 71 pinned refs",
+      "source_sha": "74b997204bbc26808baa73b46c09c5f4fe5aa62c",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research%2Fapa-verified-results-hub-20261010/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json"
+    }
+  ],
+  "started_at": "2026-10-11T00:04:52Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P00.A02.S03"
+}

@@ -1,0 +1,1163 @@
+{
+  "schema": "APA_OPERATION_EFFECT_MANIFEST_V2",
+  "summary": {
+    "previousUnknown": 51,
+    "sourceClassified": 49,
+    "remainingUnknown": 2,
+    "remaining": {
+      "GetNativePhysicalGeometry": {
+        "reason": "Exact implementation absent from existing overlay; documentation alone insufficient to prove no side effects"
+      },
+      "API.ExecuteAddOnCommand": {
+        "reason": "Nested arbitrary add-on dispatch lacks inner effect/scope contract; use provider-qualified registered command instead"
+      }
+    },
+    "notRuntimeAcceptance": true,
+    "projectBindingExcludedFromContractHash": true
+  },
+  "operations": {
+    "QuitArchicad": {
+      "kind": "SERVICE",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "d89c808da3fd233907902ce915415a8156a73e364ab0586ff5086752d3532eeb",
+        "implementation": {
+          "file": "ApplicationCommands.cpp",
+          "lineStart": 144,
+          "lineEnd": 157,
+          "sha256": "d89c808da3fd233907902ce915415a8156a73e364ab0586ff5086752d3532eeb",
+          "fileSHA256": "aafce47625c17ad4e7d239875cf3b51cb8082351f80462aa27361ac26ba0d698"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
+    },
+    "GetPointFromUser": {
+      "kind": "SERVICE",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "529c10e94c08ca3dcded034d7f62be127ba980741cc793b8d17aca83d58724ca",
+        "implementation": {
+          "file": "ApplicationCommands.cpp",
+          "lineStart": 747,
+          "lineEnd": 767,
+          "sha256": "529c10e94c08ca3dcded034d7f62be127ba980741cc793b8d17aca83d58724ca",
+          "fileSHA256": "aafce47625c17ad4e7d239875cf3b51cb8082351f80462aa27361ac26ba0d698"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
+    },
+    "ChangeWindow": {
+      "kind": "SERVICE",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "2cf65398b717d9ee9d16afecf087cd13052554a512f763bf3596a4e164afd33a",
+        "implementation": {
+          "file": "ApplicationCommands.cpp",
+          "lineStart": 311,
+          "lineEnd": 409,
+          "sha256": "2cf65398b717d9ee9d16afecf087cd13052554a512f763bf3596a4e164afd33a",
+          "fileSHA256": "aafce47625c17ad4e7d239875cf3b51cb8082351f80462aa27361ac26ba0d698"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
+    },
+    "ShowAlert": {
+      "kind": "SERVICE",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "ca60ebef14069d1b7337f05c3142357eb9e622cce80191afb81919b34a211ea2",
+        "implementation": {
+          "file": "ApplicationCommands.cpp",
+          "lineStart": 477,
+          "lineEnd": 500,
+          "sha256": "ca60ebef14069d1b7337f05c3142357eb9e622cce80191afb81919b34a211ea2",
+          "fileSHA256": "aafce47625c17ad4e7d239875cf3b51cb8082351f80462aa27361ac26ba0d698"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
+    },
+    "CreateHotlinkInstances": {
+      "kind": "CREATE",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "9c404205277cc489bc37e1c5b3e5e64ec9609fb914e4ac303ce779eab36c9e11",
+        "implementation": {
+          "file": "ProjectCommands.cpp",
+          "lineStart": 2664,
+          "lineEnd": 2750,
+          "sha256": "9c404205277cc489bc37e1c5b3e5e64ec9609fb914e4ac303ce779eab36c9e11",
+          "fileSHA256": "4cb77079cc5b3df02cfdfbf83c62dc1164cd52bd9200c71610a366171288284f"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "MODEL",
+      "possibleSideEffects": "Places native Hotlink instances; module/story dependencies required",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Created GUIDs, module binding, placements and actual bodies",
+      "liveVerifiedThisPass": false
+    },
+    "PrintView": {
+      "kind": "SERVICE",
+      "impact": "EXTERNAL",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "992101617b4972c3ab3d756ec205b61acadff4dd61703a457e33dbcab79a0da6",
+        "implementation": {
+          "file": "ProjectCommands.cpp",
+          "lineStart": 2286,
+          "lineEnd": 2317,
+          "sha256": "992101617b4972c3ab3d756ec205b61acadff4dd61703a457e33dbcab79a0da6",
+          "fileSHA256": "4cb77079cc5b3df02cfdfbf83c62dc1164cd52bd9200c71610a366171288284f"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
+    },
+    "RebuildView": {
+      "kind": "SERVICE",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "b44761ab989f553fd4306bdc4b8dd2a3479ff788b05808f4426a618d028464aa",
+        "implementation": {
+          "file": "ProjectCommands.cpp",
+          "lineStart": 2352,
+          "lineEnd": 2364,
+          "sha256": "b44761ab989f553fd4306bdc4b8dd2a3479ff788b05808f4426a618d028464aa",
+          "fileSHA256": "4cb77079cc5b3df02cfdfbf83c62dc1164cd52bd9200c71610a366171288284f"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
+    },
+    "FilterElements": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "5ca411b4c838fcf3bcfa8ecb3ed01ba4b68ee1bbbcdeea9051d34bdb7edbd889",
+        "implementation": {
+          "file": "ElementCommands.cpp",
+          "lineStart": 3848,
+          "lineEnd": 3882,
+          "sha256": "5ca411b4c838fcf3bcfa8ecb3ed01ba4b68ee1bbbcdeea9051d34bdb7edbd889",
+          "fileSHA256": "a4405f831bbbb81d2392574fb46a2214cfdd32fa7679ade3c2730f28cf0abdae"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "READ_ONLY",
+      "possibleSideEffects": "Native filters, collision query and reciprocal trim query; no model setter",
+      "saveRequired": false,
+      "confirmationRequired": "IDENTITY_BOUND_QUERY",
+      "verification": "Query result and retained inventory",
+      "liveVerifiedThisPass": false
+    },
+    "GetCollisions": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "2fd062eb47e8f9e3a736b8412588f92a01450381f52c4d290841b76bdf932f45",
+        "implementation": {
+          "file": "ElementCommands.cpp",
+          "lineStart": 3454,
+          "lineEnd": 3496,
+          "sha256": "2fd062eb47e8f9e3a736b8412588f92a01450381f52c4d290841b76bdf932f45",
+          "fileSHA256": "a4405f831bbbb81d2392574fb46a2214cfdd32fa7679ade3c2730f28cf0abdae"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "READ_ONLY",
+      "possibleSideEffects": "Native filters, collision query and reciprocal trim query; no model setter",
+      "saveRequired": false,
+      "confirmationRequired": "IDENTITY_BOUND_QUERY",
+      "verification": "Query result and retained inventory",
+      "liveVerifiedThisPass": false
+    },
+    "HighlightElements": {
+      "kind": "SERVICE",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "ca2d34914d1d4eb739b34737cae5079d761fa76491b982cdf959ebafc53e2b8d",
+        "implementation": {
+          "file": "ElementCommands.cpp",
+          "lineStart": 3966,
+          "lineEnd": 4009,
+          "sha256": "ca2d34914d1d4eb739b34737cae5079d761fa76491b982cdf959ebafc53e2b8d",
+          "fileSHA256": "a4405f831bbbb81d2392574fb46a2214cfdd32fa7679ade3c2730f28cf0abdae"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
+    },
+    "LockElements": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "a8267491e383e0f36046e850daff6bc531d3fe8d58c6182a64a27f85a621fa22",
+        "implementation": {
+          "file": "ElementCommands.cpp",
+          "lineStart": 4354,
+          "lineEnd": 4369,
+          "sha256": "a8267491e383e0f36046e850daff6bc531d3fe8d58c6182a64a27f85a621fa22",
+          "fileSHA256": "a4405f831bbbb81d2392574fb46a2214cfdd32fa7679ade3c2730f28cf0abdae"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "MODEL",
+      "possibleSideEffects": "Target model mutation; MEP may merge/delete/split route GUIDs; trim modifies actual bodies; Favorite modifies settings/properties",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Target settings/relations/body and full GUID delta, preserved unrelated elements",
+      "liveVerifiedThisPass": false
+    },
+    "UnlockElements": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "8d2b637eed2f8972c667cffc15f53b3cc09fdf6219c07eace410f73d55f727f3",
+        "implementation": {
+          "file": "ElementCommands.cpp",
+          "lineStart": 4404,
+          "lineEnd": 4419,
+          "sha256": "8d2b637eed2f8972c667cffc15f53b3cc09fdf6219c07eace410f73d55f727f3",
+          "fileSHA256": "a4405f831bbbb81d2392574fb46a2214cfdd32fa7679ade3c2730f28cf0abdae"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "MODEL",
+      "possibleSideEffects": "Target model mutation; MEP may merge/delete/split route GUIDs; trim modifies actual bodies; Favorite modifies settings/properties",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Target settings/relations/body and full GUID delta, preserved unrelated elements",
+      "liveVerifiedThisPass": false
+    },
+    "SetElementNotificationClient": {
+      "kind": "SERVICE",
+      "impact": "EXTERNAL",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "1738ea11e5d7ceb1ffad110a1054a1be321f7a1a7617fb42563d9314028730a6",
+        "implementation": {
+          "file": "NotificationCommands.cpp",
+          "lineStart": 141,
+          "lineEnd": 195,
+          "sha256": "1738ea11e5d7ceb1ffad110a1054a1be321f7a1a7617fb42563d9314028730a6",
+          "fileSHA256": "875416fdd3b2091a1d4f84eef72c93cecee3ea0dbbd2ba311a69d48cf0bdae76"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
+    },
+    "RemoveElementNotificationClient": {
+      "kind": "SERVICE",
+      "impact": "EXTERNAL",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "6ec50bbe8e0af7af27aea366266f7b095a8a443b63d3cf84a2422f847eafe59f",
+        "implementation": {
+          "file": "NotificationCommands.cpp",
+          "lineStart": 393,
+          "lineEnd": 414,
+          "sha256": "6ec50bbe8e0af7af27aea366266f7b095a8a443b63d3cf84a2422f847eafe59f",
+          "fileSHA256": "875416fdd3b2091a1d4f84eef72c93cecee3ea0dbbd2ba311a69d48cf0bdae76"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
+    },
+    "GetNativePhysicalGeometry": {
+      "kind": "UNKNOWN",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "3a9be459e8efe716e43eb7d215d567077e99625d89052baf449bea3c36f0a59a",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      },
+      "blocker": "Exact implementation absent from existing overlay; documentation alone insufficient to prove no side effects"
+    },
+    "GetModelDumpV1": {
+      "kind": "SERVICE",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "f434a0504f26f6a30ef79b9c4b1454491359a05235b28a76b12e94da0559fb0b",
+        "implementation": {
+          "file": "ModelDumpCommands.cpp",
+          "lineStart": 277,
+          "lineEnd": 390,
+          "sha256": "f434a0504f26f6a30ef79b9c4b1454491359a05235b28a76b12e94da0559fb0b",
+          "fileSHA256": "336b3a63f2d3b3b36bdf938398fb473ead9f1933a8a9b31602c11e441e355ca6"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
+    },
+    "SetSuspendGroupsMode": {
+      "kind": "MODIFY",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "523c673aaf41853f8104886c02a736392fe2de70284cb70200cfb0743b9fc69a",
+        "implementation": {
+          "file": "ElementGroupingCommands.cpp",
+          "lineStart": 381,
+          "lineEnd": 403,
+          "sha256": "523c673aaf41853f8104886c02a736392fe2de70284cb70200cfb0743b9fc69a",
+          "fileSHA256": "4286566b1a6e077ba29f70d547f50a64c205d66cb0cf3db6c37b59e063430d05"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Defaults/favorite/group/library state mutation; library reload may affect dependent parts",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Defaults/favorites/libraries/group state snapshot and retained model",
+      "liveVerifiedThisPass": false
+    },
+    "ApplyFavoritesToElementDefaults": {
+      "kind": "MODIFY",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "16cc49bae7f4c3c396cc4716b0dee01fced4483959ab15146b22ba80f5ae7522",
+        "implementation": {
+          "file": "FavoritesCommands.cpp",
+          "lineStart": 229,
+          "lineEnd": 281,
+          "sha256": "16cc49bae7f4c3c396cc4716b0dee01fced4483959ab15146b22ba80f5ae7522",
+          "fileSHA256": "49f070b47ce1c80a32e2fc7f3039b7a9bc317843c32af9d29eee227cd8bad3c2"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Defaults/favorite/group/library state mutation; library reload may affect dependent parts",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Defaults/favorites/libraries/group state snapshot and retained model",
+      "liveVerifiedThisPass": false
+    },
+    "ImportFavorites": {
+      "kind": "MODIFY",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "dfe7e499b14b8af9195ffe5980e1d9bf9954f6fb01b8dc304f2afcac76a41b5f",
+        "implementation": {
+          "file": "FavoritesCommands.cpp",
+          "lineStart": 565,
+          "lineEnd": 612,
+          "sha256": "dfe7e499b14b8af9195ffe5980e1d9bf9954f6fb01b8dc304f2afcac76a41b5f",
+          "fileSHA256": "49f070b47ce1c80a32e2fc7f3039b7a9bc317843c32af9d29eee227cd8bad3c2"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Defaults/favorite/group/library state mutation; library reload may affect dependent parts",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Defaults/favorites/libraries/group state snapshot and retained model",
+      "liveVerifiedThisPass": false
+    },
+    "ExportFavorites": {
+      "kind": "SERVICE",
+      "impact": "EXTERNAL",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "ac2662757ea1e9df157665527b22f54bca50cc696e3d009898cb636fe0c4cf39",
+        "implementation": {
+          "file": "FavoritesCommands.cpp",
+          "lineStart": 652,
+          "lineEnd": 677,
+          "sha256": "ac2662757ea1e9df157665527b22f54bca50cc696e3d009898cb636fe0c4cf39",
+          "fileSHA256": "49f070b47ce1c80a32e2fc7f3039b7a9bc317843c32af9d29eee227cd8bad3c2"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
+    },
+    "ApplyFavoritesToElements": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "ae0254d9c3f2e6f895d136e4ea365408ee39313cfe4779400b07d2015d4ca2c9",
+        "implementation": {
+          "file": "FavoritesCommands.cpp",
+          "lineStart": 790,
+          "lineEnd": 898,
+          "sha256": "ae0254d9c3f2e6f895d136e4ea365408ee39313cfe4779400b07d2015d4ca2c9",
+          "fileSHA256": "49f070b47ce1c80a32e2fc7f3039b7a9bc317843c32af9d29eee227cd8bad3c2"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "MODEL",
+      "possibleSideEffects": "Target model mutation; MEP may merge/delete/split route GUIDs; trim modifies actual bodies; Favorite modifies settings/properties",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Target settings/relations/body and full GUID delta, preserved unrelated elements",
+      "liveVerifiedThisPass": false
+    },
+    "RenameFavorites": {
+      "kind": "MODIFY",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "a0d818098a5492138b047614ea039179b6b3567e3b4fddb53bcee88ee18b0270",
+        "implementation": {
+          "file": "FavoritesCommands.cpp",
+          "lineStart": 1061,
+          "lineEnd": 1084,
+          "sha256": "a0d818098a5492138b047614ea039179b6b3567e3b4fddb53bcee88ee18b0270",
+          "fileSHA256": "49f070b47ce1c80a32e2fc7f3039b7a9bc317843c32af9d29eee227cd8bad3c2"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Defaults/favorite/group/library state mutation; library reload may affect dependent parts",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Defaults/favorites/libraries/group state snapshot and retained model",
+      "liveVerifiedThisPass": false
+    },
+    "ImportPropertiesXml": {
+      "kind": "MODIFY",
+      "impact": "ATTRIBUTES",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "e58be1e9612aa478ab1b69937be7bacb0a8931ab36a84440b6cfa6608b37c668",
+        "implementation": {
+          "file": "PropertyCommands.cpp",
+          "lineStart": 2000,
+          "lineEnd": 2024,
+          "sha256": "e58be1e9612aa478ab1b69937be7bacb0a8931ab36a84440b6cfa6608b37c668",
+          "fileSHA256": "9a15f510959cbc6924eaed2d380248598535aec2dce469275a463cff72bc8501"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "ATTRIBUTES",
+      "possibleSideEffects": "Definitions import may create/remove/replace; folder rename changes attribute organization",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Before/after definition IDs, affected element properties and unrelated definitions",
+      "liveVerifiedThisPass": false
+    },
+    "ImportClassificationsXml": {
+      "kind": "MODIFY",
+      "impact": "ATTRIBUTES",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "4941eb3c6b282f33b05e632a882faf2219cdf7714831fc4059019dc0e4e32f70",
+        "implementation": {
+          "file": "ClassificationCommands.cpp",
+          "lineStart": 822,
+          "lineEnd": 849,
+          "sha256": "4941eb3c6b282f33b05e632a882faf2219cdf7714831fc4059019dc0e4e32f70",
+          "fileSHA256": "3f7472282aade56ac89c30f58a3b25f83d2e3ac561680da8b4ebbea1cf85fb3a"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "ATTRIBUTES",
+      "possibleSideEffects": "Definitions import may create/remove/replace; folder rename changes attribute organization",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Before/after definition IDs, affected element properties and unrelated definitions",
+      "liveVerifiedThisPass": false
+    },
+    "IFCFileOperation": {
+      "kind": "TRANSACTION",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "0fcbef09965340e74b3af0e10e72248d127bf553bbef8a1b587ef7ce77e7ca42",
+        "implementation": {
+          "file": "ProjectCommands.cpp",
+          "lineStart": 2167,
+          "lineEnd": 2238,
+          "sha256": "0fcbef09965340e74b3af0e10e72248d127bf553bbef8a1b587ef7ce77e7ca42",
+          "fileSHA256": "4cb77079cc5b3df02cfdfbf83c62dc1164cd52bd9200c71610a366171288284f"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "IFC method open/merge/save may switch model/import/write file; Teamwork sends/receives remote data",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact method/project/remote/file scope plus GUID/attributes; not granted by isolated geometry permission",
+      "liveVerifiedThisPass": false
+    },
+    "ReloadLibraries": {
+      "kind": "MODIFY",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "a742602580ce5b58d56ee8c85971b25e01bd583a8ec3a13c71cf0e4f8636f2ff",
+        "implementation": {
+          "file": "LibraryCommands.cpp",
+          "lineStart": 569,
+          "lineEnd": 577,
+          "sha256": "a742602580ce5b58d56ee8c85971b25e01bd583a8ec3a13c71cf0e4f8636f2ff",
+          "fileSHA256": "2cfad266adeb95336957b3b321576a9a14b5777cdc53dc070be1f35066206936"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Defaults/favorite/group/library state mutation; library reload may affect dependent parts",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Defaults/favorites/libraries/group state snapshot and retained model",
+      "liveVerifiedThisPass": false
+    },
+    "AddFilesToEmbeddedLibrary": {
+      "kind": "MODIFY",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "c08fc8998213af8e8485595ebe6e9e4a329482737a2632de5e1c170cbb4e1f92",
+        "implementation": {
+          "file": "LibraryCommands.cpp",
+          "lineStart": 54,
+          "lineEnd": 163,
+          "sha256": "c08fc8998213af8e8485595ebe6e9e4a329482737a2632de5e1c170cbb4e1f92",
+          "fileSHA256": "2cfad266adeb95336957b3b321576a9a14b5777cdc53dc070be1f35066206936"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Reads source files, writes embedded items, may delete existing and reload libraries",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Authorized source/destination and overwrite policy, library entries and dependent elements",
+      "liveVerifiedThisPass": false
+    },
+    "SetLibraries": {
+      "kind": "MODIFY",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "c8dbb430e9015bf65cf57bf3d73422b5e5bc6804bc60a2aa97bc3085d2d5e05e",
+        "implementation": {
+          "file": "LibraryCommands.cpp",
+          "lineStart": 413,
+          "lineEnd": 431,
+          "sha256": "c8dbb430e9015bf65cf57bf3d73422b5e5bc6804bc60a2aa97bc3085d2d5e05e",
+          "fileSHA256": "2cfad266adeb95336957b3b321576a9a14b5777cdc53dc070be1f35066206936"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Defaults/favorite/group/library state mutation; library reload may affect dependent parts",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Defaults/favorites/libraries/group state snapshot and retained model",
+      "liveVerifiedThisPass": false
+    },
+    "AddLibraries": {
+      "kind": "MODIFY",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "b373a8c7c21dd702a0ed0746c12cab627e6cacdc0facef7d03bb71e089f7bec8",
+        "implementation": {
+          "file": "LibraryCommands.cpp",
+          "lineStart": 455,
+          "lineEnd": 480,
+          "sha256": "b373a8c7c21dd702a0ed0746c12cab627e6cacdc0facef7d03bb71e089f7bec8",
+          "fileSHA256": "2cfad266adeb95336957b3b321576a9a14b5777cdc53dc070be1f35066206936"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Defaults/favorite/group/library state mutation; library reload may affect dependent parts",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Defaults/favorites/libraries/group state snapshot and retained model",
+      "liveVerifiedThisPass": false
+    },
+    "SafeBIMGlobalLibraryPart": {
+      "kind": "SERVICE",
+      "impact": "EXTERNAL",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "789e3482dd1ea07e215564be3a50e054e22d63612af92ec4eedbec536a5b22c4",
+        "implementation": {
+          "file": "GlobalLibraryCommands.cpp",
+          "lineStart": 865,
+          "lineEnd": 902,
+          "sha256": "789e3482dd1ea07e215564be3a50e054e22d63612af92ec4eedbec536a5b22c4",
+          "fileSHA256": "3542d0e95ee7290d611db136ab7c113e37b1bf0c8614ac1e8e063f29ed9a0ac3"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
+    },
+    "CreateLibraryPartFromScripts": {
+      "kind": "SERVICE",
+      "impact": "EXTERNAL",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "0bc4d6d3b07ad73c2c50729bc3ac1bfe8e541d2cc50238c83ab5797b5b0a1656",
+        "implementation": {
+          "file": "LibraryCommands.cpp",
+          "lineStart": 785,
+          "lineEnd": 792,
+          "sha256": "0bc4d6d3b07ad73c2c50729bc3ac1bfe8e541d2cc50238c83ab5797b5b0a1656",
+          "fileSHA256": "2cfad266adeb95336957b3b321576a9a14b5777cdc53dc070be1f35066206936"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
+    },
+    "TeamworkSend": {
+      "kind": "TRANSACTION",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "d60668a5080be69cbd25a75f560c2d867a4db47291ea189e40108844f52e938f",
+        "implementation": {
+          "file": "TeamworkCommands.cpp",
+          "lineStart": 23,
+          "lineEnd": 30,
+          "sha256": "d60668a5080be69cbd25a75f560c2d867a4db47291ea189e40108844f52e938f",
+          "fileSHA256": "8aee12c665015cd187d9bb82120c7531a391e5862ab6f55549da40c0be2d1405"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "IFC method open/merge/save may switch model/import/write file; Teamwork sends/receives remote data",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact method/project/remote/file scope plus GUID/attributes; not granted by isolated geometry permission",
+      "liveVerifiedThisPass": false
+    },
+    "TeamworkReceive": {
+      "kind": "TRANSACTION",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "d624b44c7557a0eedd5f82298c405785ba0683e32a83195adfdf5b51a4b7e6af",
+        "implementation": {
+          "file": "TeamworkCommands.cpp",
+          "lineStart": 49,
+          "lineEnd": 56,
+          "sha256": "d624b44c7557a0eedd5f82298c405785ba0683e32a83195adfdf5b51a4b7e6af",
+          "fileSHA256": "8aee12c665015cd187d9bb82120c7531a391e5862ab6f55549da40c0be2d1405"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "IFC method open/merge/save may switch model/import/write file; Teamwork sends/receives remote data",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact method/project/remote/file scope plus GUID/attributes; not granted by isolated geometry permission",
+      "liveVerifiedThisPass": false
+    },
+    "PublishPublisherSet": {
+      "kind": "SERVICE",
+      "impact": "EXTERNAL",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "a11f8e5e4e77c38d1f5b362a8fe5bb8a74ef377c1a2c656d0f38a1d09a4227a2",
+        "implementation": {
+          "file": "NavigatorCommands.cpp",
+          "lineStart": 63,
+          "lineEnd": 110,
+          "sha256": "a11f8e5e4e77c38d1f5b362a8fe5bb8a74ef377c1a2c656d0f38a1d09a4227a2",
+          "fileSHA256": "fc155c1d30c244f3a430798a47dd9b381e13917a28020f0237a9f2ac8e2e9354"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
+    },
+    "UpdateDrawings": {
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "ac74be844377afbc336030c9bb3d6038afde56d155849cb8e91a4e700bfc8651",
+        "implementation": {
+          "file": "NavigatorCommands.cpp",
+          "lineStart": 145,
+          "lineEnd": 161,
+          "sha256": "ac74be844377afbc336030c9bb3d6038afde56d155849cb8e91a4e700bfc8651",
+          "fileSHA256": "fc155c1d30c244f3a430798a47dd9b381e13917a28020f0237a9f2ac8e2e9354"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "DOCUMENTATION",
+      "possibleSideEffects": "Drawings/navigator/markup mutation; import reads external file",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Navigator/drawing/issue identifiers, data and native linked model",
+      "liveVerifiedThisPass": false
+    },
+    "ChangeDrawingLink": {
+      "kind": "TRANSACTION",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "678011cead8f5c1fb6dd1fdab476caab168efdbc4bed88a8b5b80b6016c859d6",
+        "implementation": {
+          "file": "DocumentCreationCommands.cpp",
+          "lineStart": 950,
+          "lineEnd": 1505,
+          "sha256": "678011cead8f5c1fb6dd1fdab476caab168efdbc4bed88a8b5b80b6016c859d6",
+          "fileSHA256": "1e7da50a53230faf38d89594d5ff2fc6b70c2d6b7bd6f9508cba02cedce6bdb9"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "DOCUMENTATION",
+      "possibleSideEffects": "Creates replacement Drawing then deletes original; GUID changes and title-position limitation",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Explicit old/new GUID mapping, link/layout and preserved other drawings",
+      "liveVerifiedThisPass": false
+    },
+    "FitInWindow": {
+      "kind": "SERVICE",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "01c803eff1a19d1e9d08eac4b05b690d9fe7687e608874546109e4cd35157a47",
+        "implementation": {
+          "file": "NavigatorCommands.cpp",
+          "lineStart": 905,
+          "lineEnd": 924,
+          "sha256": "01c803eff1a19d1e9d08eac4b05b690d9fe7687e608874546109e4cd35157a47",
+          "fileSHA256": "fc155c1d30c244f3a430798a47dd9b381e13917a28020f0237a9f2ac8e2e9354"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
+    },
+    "RenameNavigatorItem": {
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "3162047a42d967171abd5b9641ce419d93150d8b09956fe76786bbb132cdf07e",
+        "implementation": {
+          "file": "NavigatorCommands.cpp",
+          "lineStart": 1330,
+          "lineEnd": 1373,
+          "sha256": "3162047a42d967171abd5b9641ce419d93150d8b09956fe76786bbb132cdf07e",
+          "fileSHA256": "fc155c1d30c244f3a430798a47dd9b381e13917a28020f0237a9f2ac8e2e9354"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "DOCUMENTATION",
+      "possibleSideEffects": "Drawings/navigator/markup mutation; import reads external file",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Navigator/drawing/issue identifiers, data and native linked model",
+      "liveVerifiedThisPass": false
+    },
+    "AddCommentToIssue": {
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "cdbb16a4f2c891b3a2dd98069fcadac2eeb37c771f41f213b300001e96ca61bf",
+        "implementation": {
+          "file": "IssueCommands.cpp",
+          "lineStart": 370,
+          "lineEnd": 393,
+          "sha256": "cdbb16a4f2c891b3a2dd98069fcadac2eeb37c771f41f213b300001e96ca61bf",
+          "fileSHA256": "4a7db5003f72eb82aeb9c0ca84afe36bdccb41d9d4698f5e2a673caf0cfdde1e"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "DOCUMENTATION",
+      "possibleSideEffects": "Drawings/navigator/markup mutation; import reads external file",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Navigator/drawing/issue identifiers, data and native linked model",
+      "liveVerifiedThisPass": false
+    },
+    "AttachElementsToIssue": {
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "edf4a8bebf5d9cf9a06ad16040a7f42f210a25ef210f90eaa78a2df5a5bbf2dd",
+        "implementation": {
+          "file": "IssueCommands.cpp",
+          "lineStart": 556,
+          "lineEnd": 577,
+          "sha256": "edf4a8bebf5d9cf9a06ad16040a7f42f210a25ef210f90eaa78a2df5a5bbf2dd",
+          "fileSHA256": "4a7db5003f72eb82aeb9c0ca84afe36bdccb41d9d4698f5e2a673caf0cfdde1e"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "DOCUMENTATION",
+      "possibleSideEffects": "Drawings/navigator/markup mutation; import reads external file",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Navigator/drawing/issue identifiers, data and native linked model",
+      "liveVerifiedThisPass": false
+    },
+    "DetachElementsFromIssue": {
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "9910de2933cadfb46cdf9cf70bd2e43eb355473585cb7b50d09ad0127314a050",
+        "implementation": {
+          "file": "IssueCommands.cpp",
+          "lineStart": 616,
+          "lineEnd": 636,
+          "sha256": "9910de2933cadfb46cdf9cf70bd2e43eb355473585cb7b50d09ad0127314a050",
+          "fileSHA256": "4a7db5003f72eb82aeb9c0ca84afe36bdccb41d9d4698f5e2a673caf0cfdde1e"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "DOCUMENTATION",
+      "possibleSideEffects": "Drawings/navigator/markup mutation; import reads external file",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Navigator/drawing/issue identifiers, data and native linked model",
+      "liveVerifiedThisPass": false
+    },
+    "ExportIssuesToBCF": {
+      "kind": "SERVICE",
+      "impact": "EXTERNAL",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "f44c7f86f7153df08c702e375c25683290b762a1bba2be5b1b827c3dd9280462",
+        "implementation": {
+          "file": "IssueCommands.cpp",
+          "lineStart": 758,
+          "lineEnd": 791,
+          "sha256": "f44c7f86f7153df08c702e375c25683290b762a1bba2be5b1b827c3dd9280462",
+          "fileSHA256": "4a7db5003f72eb82aeb9c0ca84afe36bdccb41d9d4698f5e2a673caf0cfdde1e"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
+    },
+    "ImportIssuesFromBCF": {
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "f32249afd0d0bd47a84f8c54c3a567f209f27be1379eaa1ced63e91aa86406c6",
+        "implementation": {
+          "file": "IssueCommands.cpp",
+          "lineStart": 832,
+          "lineEnd": 852,
+          "sha256": "f32249afd0d0bd47a84f8c54c3a567f209f27be1379eaa1ced63e91aa86406c6",
+          "fileSHA256": "4a7db5003f72eb82aeb9c0ca84afe36bdccb41d9d4698f5e2a673caf0cfdde1e"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "DOCUMENTATION",
+      "possibleSideEffects": "Drawings/navigator/markup mutation; import reads external file",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Navigator/drawing/issue identifiers, data and native linked model",
+      "liveVerifiedThisPass": false
+    },
+    "ConnectMEPElements": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "39268a978b2eba0d0e0d8b140bbb2fe7335d404e6ccf293ba37e1c4a134e5661",
+        "implementation": {
+          "file": "MEPCommands.cpp",
+          "lineStart": 1157,
+          "lineEnd": 1220,
+          "sha256": "39268a978b2eba0d0e0d8b140bbb2fe7335d404e6ccf293ba37e1c4a134e5661",
+          "fileSHA256": "f2238e8e192e63cdce43ea4e1538d8fed4d1e3120167edd9ebc4c97015db4e7c"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "MODEL",
+      "possibleSideEffects": "Target model mutation; MEP may merge/delete/split route GUIDs; trim modifies actual bodies; Favorite modifies settings/properties",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Target settings/relations/body and full GUID delta, preserved unrelated elements",
+      "liveVerifiedThisPass": false
+    },
+    "TrimElements": {
+      "kind": "MODIFY",
+      "impact": "MODEL",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "0c30d30a9784df250024ce11dabb484c3a0526011eda061d99a64537e74e32ca",
+        "implementation": {
+          "file": "SolidElementOperationCommands.cpp",
+          "lineStart": 463,
+          "lineEnd": 493,
+          "sha256": "0c30d30a9784df250024ce11dabb484c3a0526011eda061d99a64537e74e32ca",
+          "fileSHA256": "2f15b4a437909dd558efa83291ea849f55ee21a2462426454c67c5a539530b6b"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "MODEL",
+      "possibleSideEffects": "Target model mutation; MEP may merge/delete/split route GUIDs; trim modifies actual bodies; Favorite modifies settings/properties",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Target settings/relations/body and full GUID delta, preserved unrelated elements",
+      "liveVerifiedThisPass": false
+    },
+    "GetElementTrims": {
+      "kind": "READ_ONLY",
+      "impact": "READ_ONLY",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "4982281882d5e1829ce1120c276ac52c72cdfaf0806adee4cedb71c54c245dc8",
+        "implementation": {
+          "file": "SolidElementOperationCommands.cpp",
+          "lineStart": 632,
+          "lineEnd": 679,
+          "sha256": "4982281882d5e1829ce1120c276ac52c72cdfaf0806adee4cedb71c54c245dc8",
+          "fileSHA256": "2f15b4a437909dd558efa83291ea849f55ee21a2462426454c67c5a539530b6b"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "READ_ONLY",
+      "possibleSideEffects": "Native filters, collision query and reciprocal trim query; no model setter",
+      "saveRequired": false,
+      "confirmationRequired": "IDENTITY_BOUND_QUERY",
+      "verification": "Query result and retained inventory",
+      "liveVerifiedThisPass": false
+    },
+    "ShowScriptUI": {
+      "kind": "SERVICE",
+      "impact": "PROJECT",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "7503553c61677234d0c94015604acbf2075d44d53698946e34cd4fbe0b85ef0a",
+        "implementation": {
+          "file": "ScriptUICommands.cpp",
+          "lineStart": 90,
+          "lineEnd": 120,
+          "sha256": "7503553c61677234d0c94015604acbf2075d44d53698946e34cd4fbe0b85ef0a",
+          "fileSHA256": "f88bafd23a1db0ef89fa22b1c5b6689271a0f2e3aa6717892c407047f36c8218"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "PROJECT",
+      "possibleSideEffects": "Session/UI effect. Quit closes instance; user input/modal can block JSON queue; views/redraw/cache affected. ModelDump explicitly shows/rebuilds3D and restores sight, not previous window",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Current window/UI/process completion; ModelDump BREP + retained model; explicit non-geometric scope",
+      "liveVerifiedThisPass": false
+    },
+    "GenerateDocumentation": {
+      "kind": "SERVICE",
+      "impact": "EXTERNAL",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "62ab41883467f8bc55c55e178e8bd50472aa948cc90ef0e4b6117e18d6c5e384",
+        "implementation": {
+          "file": "DeveloperTools.cpp",
+          "lineStart": 134,
+          "lineEnd": 144,
+          "sha256": "62ab41883467f8bc55c55e178e8bd50472aa948cc90ef0e4b6117e18d6c5e384",
+          "fileSHA256": "0d4e963e58c423b511690ed998824ecacda1eabfedae1f5d060ff26f610a1b6e"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "EXTERNAL",
+      "possibleSideEffects": "External file/printer/network/registration side effects. SafeBIM action dependent: compile writes, register changes library, inspect queries",
+      "saveRequired": false,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Exact authorized file/endpoint/printer/library/action scope; content/hash and registration/readback",
+      "liveVerifiedThisPass": false
+    },
+    "API.ExecuteAddOnCommand": {
+      "kind": "UNKNOWN",
+      "impact": "EXTERNAL",
+      "evidence": {
+        "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+        "sha256": "0a4152e793bbc0bcf39b974123f220585865445bba3c5a84952eb4e04d67ec13",
+        "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+        "effectConfidence": "UNREVIEWED"
+      },
+      "blocker": "Nested arbitrary add-on dispatch lacks inner effect/scope contract; use provider-qualified registered command instead"
+    },
+    "API.RenameAttributeFolders": {
+      "kind": "MODIFY",
+      "impact": "ATTRIBUTES",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "cb86f81922feb813dd9d831be9f905e41299afc0148de6a4393f96b1f46001f5",
+        "implementation": {
+          "file": "installed official Archicad29 Python SDK",
+          "sha256": "cb86f81922feb813dd9d831be9f905e41299afc0148de6a4393f96b1f46001f5"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "ATTRIBUTES",
+      "possibleSideEffects": "Definitions import may create/remove/replace; folder rename changes attribute organization",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Before/after definition IDs, affected element properties and unrelated definitions",
+      "liveVerifiedThisPass": false
+    },
+    "API.RenameNavigatorItem": {
+      "kind": "MODIFY",
+      "impact": "DOCUMENTATION",
+      "evidence": {
+        "source": "Bounded review of existing Tapir/SDK implementation and current exported contract; not execution permission",
+        "sha256": "972e4ab6bfc21421a145be0f20c5826b76126cf15895f73dcb1d05f400520732",
+        "implementation": {
+          "file": "installed official Archicad29 Python SDK",
+          "sha256": "972e4ab6bfc21421a145be0f20c5826b76126cf15895f73dcb1d05f400520732"
+        },
+        "classificationBasis": "ACTUAL_IMPLEMENTATION_EFFECT",
+        "effectConfidence": "SOURCE_REVIEWED"
+      },
+      "affectedData": "DOCUMENTATION",
+      "possibleSideEffects": "Drawings/navigator/markup mutation; import reads external file",
+      "saveRequired": true,
+      "confirmationRequired": "EXACT_AUTHORIZED_SCOPE_AND_OPERATION_PREFLIGHT",
+      "verification": "Navigator/drawing/issue identifiers, data and native linked model",
+      "liveVerifiedThisPass": false
+    }
+  }
+}

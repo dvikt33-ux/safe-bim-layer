@@ -1,0 +1,372 @@
+{
+  "source": "captured final current-code readback replay",
+  "components": [
+    {
+      "stepId": "connected-roof",
+      "elementToken": "test-identity-51fe26b6654ee6ca",
+      "kind": "Roof",
+      "nativeHomeStory": 1,
+      "nativeGenericType": "Roof",
+      "geometry": {
+        "roofClass": "SinglePlane",
+        "structureType": "Basic",
+        "thickness": 0.2,
+        "level": 3,
+        "zCoordinate": 6,
+        "angle": 0.15,
+        "pivotLine": {
+          "begin": {
+            "x": 40,
+            "y": 40
+          },
+          "end": {
+            "x": 50,
+            "y": 40
+          }
+        },
+        "polygonOutline": [
+          {
+            "x": 40,
+            "y": 40
+          },
+          {
+            "x": 50,
+            "y": 40
+          },
+          {
+            "x": 50,
+            "y": 48
+          },
+          {
+            "x": 40,
+            "y": 48
+          },
+          {
+            "x": 40,
+            "y": 40
+          }
+        ]
+      }
+    },
+    {
+      "stepId": "connected-ventilation-route",
+      "elementToken": "test-identity-5bd1280da374a3ac",
+      "kind": "MEPRouting",
+      "nativeHomeStory": 0,
+      "nativeGenericType": "Unknown",
+      "geometry": {
+        "domain": "Ventilation",
+        "nodeCoordinates": [
+          {
+            "x": 42.0,
+            "y": 46.0,
+            "z": 2.5
+          },
+          {
+            "x": 48.0,
+            "y": 46.0,
+            "z": 2.5
+          }
+        ],
+        "crossSectionWidth": 0.2,
+        "crossSectionHeight": 0.15,
+        "crossSectionShape": "Rectangular",
+        "ownedNativeIdentities": [
+          "test-identity-9e4d7bba4df1d8e6",
+          "test-identity-090d2f258b4e0154",
+          "test-identity-4717d5fa594add33",
+          "test-identity-60536d193a32708d"
+        ],
+        "physicalElementToken": "test-identity-60536d193a32708d",
+        "physicalBoundsMeters": [
+          [
+            [
+              42,
+              48
+            ],
+            [
+              45.869,
+              46.131
+            ],
+            [
+              2.394,
+              2.606
+            ]
+          ]
+        ],
+        "ports": [
+          {
+            "position": {
+              "x": 42,
+              "y": 46,
+              "z": 2.5
+            },
+            "direction": {
+              "x": -1,
+              "y": 0,
+              "z": 0
+            },
+            "shape": "Rectangular",
+            "width": 0.2,
+            "height": 0.15,
+            "domain": "Ventilation",
+            "isPhysicallyConnected": false
+          },
+          {
+            "position": {
+              "x": 48,
+              "y": 46,
+              "z": 2.5
+            },
+            "direction": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            },
+            "shape": "Rectangular",
+            "width": 0.2,
+            "height": 0.15,
+            "domain": "Ventilation",
+            "isPhysicallyConnected": false
+          }
+        ]
+      }
+    },
+    {
+      "stepId": "connected-dimension-specimen",
+      "elementToken": "test-identity-37e03a097129cc9a",
+      "kind": "Morph",
+      "nativeHomeStory": 1,
+      "nativeGenericType": "Morph",
+      "geometry": {
+        "origin": {
+          "x": 42,
+          "y": 44,
+          "z": 6.504540872
+        },
+        "bodyType": "Solid",
+        "vertexCount": 8,
+        "faceCount": 6,
+        "localVertices": [
+          {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "z": 0.15
+          },
+          {
+            "x": 0,
+            "y": 0.025,
+            "z": 0
+          },
+          {
+            "x": 0,
+            "y": 0.025,
+            "z": 0.15
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "z": 0
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "z": 0.15
+          },
+          {
+            "x": 2,
+            "y": 0.025,
+            "z": 0
+          },
+          {
+            "x": 2,
+            "y": 0.025,
+            "z": 0.15
+          }
+        ],
+        "orientedFaceVertexIds": [
+          [
+            0,
+            4,
+            5,
+            1
+          ],
+          [
+            3,
+            1,
+            5,
+            7
+          ],
+          [
+            6,
+            2,
+            3,
+            7
+          ],
+          [
+            2,
+            0,
+            1,
+            3
+          ],
+          [
+            4,
+            6,
+            7,
+            5
+          ],
+          [
+            0,
+            2,
+            6,
+            4
+          ]
+        ],
+        "actualNativeBoundsMeters": [
+          [
+            [
+              42,
+              44
+            ],
+            [
+              44,
+              44.025
+            ],
+            [
+              6.504540872,
+              6.654540872
+            ]
+          ]
+        ],
+        "closednessEvidence": {
+          "nativeBREPClosed": true,
+          "memoIsClosed": false,
+          "memoFlagAgreement": false
+        }
+      }
+    },
+    {
+      "stepId": "connected-cli-explicit-solid",
+      "elementToken": "test-identity-01b05eebb2aa6795",
+      "kind": "Morph",
+      "nativeHomeStory": 0,
+      "nativeGenericType": "Morph",
+      "geometry": {
+        "origin": {
+          "x": 60,
+          "y": 60,
+          "z": 0
+        },
+        "bodyType": "Solid",
+        "vertexCount": 8,
+        "faceCount": 6,
+        "localVertices": [
+          {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "z": 0.1
+          },
+          {
+            "x": 0,
+            "y": 0.1,
+            "z": 0
+          },
+          {
+            "x": 0,
+            "y": 0.1,
+            "z": 0.1
+          },
+          {
+            "x": 0.1,
+            "y": 0,
+            "z": 0
+          },
+          {
+            "x": 0.1,
+            "y": 0,
+            "z": 0.1
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "z": 0
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "z": 0.1
+          }
+        ],
+        "orientedFaceVertexIds": [
+          [
+            0,
+            2,
+            6,
+            4
+          ],
+          [
+            1,
+            0,
+            4,
+            5
+          ],
+          [
+            3,
+            1,
+            5,
+            7
+          ],
+          [
+            2,
+            0,
+            1,
+            3
+          ],
+          [
+            6,
+            2,
+            3,
+            7
+          ],
+          [
+            4,
+            6,
+            7,
+            5
+          ]
+        ],
+        "actualNativeBoundsMeters": [
+          [
+            [
+              60,
+              60.1
+            ],
+            [
+              60,
+              60.1
+            ],
+            [
+              0,
+              0.1
+            ]
+          ]
+        ],
+        "closednessEvidence": {
+          "nativeBREPClosed": true,
+          "memoIsClosed": true,
+          "memoFlagAgreement": true
+        }
+      }
+    }
+  ]
+}

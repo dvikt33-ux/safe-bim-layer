@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:bd89b4a3d76f0a7aa451872db32cc33344b3ae8525f6163246939f297e16f3de",
+  "index_commit_sha": "c7aef7a88a7436b59854e01e886f3b8be9b7972b",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "c7aef7a88a7436b59854e01e886f3b8be9b7972b",
+  "report_path": "docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-074612Z-universal-native-floor-contours/REPORT.md",
+  "report_sha256": "4f496415c776a23f8709da79e4b9f47238723471a4142077f8b68ca3ae11eaf5",
+  "run_id": "APA-RUN-20261014-074612Z-universal-native-floor-contours",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

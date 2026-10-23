@@ -1,0 +1,98 @@
+{
+  "sourceSHA256": "ae2ac9b234889b75835062356cd293ea9881d7a839e68d68dca5106de5a3296f",
+  "source": "EXISTING_FAVORITE_RULES_NOT_REGULATORY_ACCEPTANCE",
+  "rules": {
+    "RuleMinValue": 0.6,
+    "RuleMinApplied": true,
+    "RuleMaxValue": 0.65,
+    "RuleMaxApplied": true,
+    "TreadDepthMinValue": 0.25,
+    "TreadDepthMinApplied": true,
+    "TreadDepthMaxValue": 0.35,
+    "TreadDepthMaxApplied": true,
+    "RiserHeightMinValue": 0.15,
+    "RiserHeightMinApplied": true,
+    "RiserHeightMaxValue": 0.2,
+    "RiserHeightMaxApplied": true
+  },
+  "engineeringAcceptance": "NOT_VERIFIED",
+  "sourceDimensionsRole": "EXISTING_FAVORITE_RULE_PROFILE_NOT_SP_GOST",
+  "combinations": [
+    {
+      "status": "SOURCE_RULE_CONFLICT",
+      "height": 3.3,
+      "stepNum": 20,
+      "riser": 0.16499999999999998,
+      "requestedGoing": 0.35,
+      "twoRiserPlusGoing": 0.6799999999999999,
+      "violations": [
+        {
+          "rule": "RuleMax",
+          "actual": 0.6799999999999999,
+          "limit": 0.65
+        }
+      ],
+      "sourceSHA256": "ae2ac9b234889b75835062356cd293ea9881d7a839e68d68dca5106de5a3296f",
+      "nativeGeometry": "NOT_VERIFIED",
+      "engineeringAcceptance": "NOT_VERIFIED"
+    },
+    {
+      "status": "SOURCE_RULE_COMPATIBLE_NATIVE_SOLVER_NOT_VERIFIED",
+      "height": 3.3,
+      "stepNum": 20,
+      "riser": 0.16499999999999998,
+      "requestedGoing": 0.32,
+      "twoRiserPlusGoing": 0.6499999999999999,
+      "violations": [],
+      "sourceSHA256": "ae2ac9b234889b75835062356cd293ea9881d7a839e68d68dca5106de5a3296f",
+      "nativeGeometry": "NOT_VERIFIED",
+      "engineeringAcceptance": "NOT_VERIFIED"
+    },
+    {
+      "status": "SOURCE_RULE_COMPATIBLE_NATIVE_SOLVER_NOT_VERIFIED",
+      "height": 3,
+      "stepNum": 20,
+      "riser": 0.15,
+      "requestedGoing": 0.35,
+      "twoRiserPlusGoing": 0.6499999999999999,
+      "violations": [],
+      "sourceSHA256": "ae2ac9b234889b75835062356cd293ea9881d7a839e68d68dca5106de5a3296f",
+      "nativeGeometry": "NOT_VERIFIED",
+      "engineeringAcceptance": "NOT_VERIFIED"
+    },
+    {
+      "status": "SOURCE_RULE_COMPATIBLE_NATIVE_SOLVER_NOT_VERIFIED",
+      "height": 3.3,
+      "stepNum": 22,
+      "riser": 0.15,
+      "requestedGoing": 0.35,
+      "twoRiserPlusGoing": 0.6499999999999999,
+      "violations": [],
+      "sourceSHA256": "ae2ac9b234889b75835062356cd293ea9881d7a839e68d68dca5106de5a3296f",
+      "nativeGeometry": "NOT_VERIFIED",
+      "engineeringAcceptance": "NOT_VERIFIED"
+    },
+    {
+      "status": "SOURCE_RULE_CONFLICT",
+      "height": 3.3,
+      "stepNum": 23,
+      "riser": 0.14347826086956522,
+      "requestedGoing": 0.35,
+      "twoRiserPlusGoing": 0.6369565217391304,
+      "violations": [
+        {
+          "rule": "RiserHeightMin",
+          "actual": 0.14347826086956522,
+          "limit": 0.15
+        }
+      ],
+      "sourceSHA256": "ae2ac9b234889b75835062356cd293ea9881d7a839e68d68dca5106de5a3296f",
+      "nativeGeometry": "NOT_VERIFIED",
+      "engineeringAcceptance": "NOT_VERIFIED"
+    }
+  ],
+  "observedPR75PreciseNativeGoing": 0.32,
+  "observedPR75RequestedBaselineLengthMeters": 6.65,
+  "observedPR75NativeWalkingLineLengthMeters": 6.4,
+  "causality": "Active source RuleMax conflict explains going ceiling0.32; walking-line/baseline solving remains separately NOT_VERIFIED until detached native probe"
+}

@@ -1,0 +1,27 @@
+{
+  "head": "60a78e0cd55fc4951c1de3c8d060adf4f9538134",
+  "parent": "c1b4e1a565bcd903273933d8917608df156ac600",
+  "branch": "feature/apa-native-grid-stair-runtime-20261014",
+  "pr": 79,
+  "url": "https://github.com/dvikt33-ux/safe-bim-layer/pull/79",
+  "prReadback": {
+    "baseRefName": "feature/apa-grid-stair-live-20261013",
+    "headRefName": "feature/apa-native-grid-stair-runtime-20261014",
+    "headRefOid": "60a78e0cd55fc4951c1de3c8d060adf4f9538134",
+    "isDraft": true,
+    "number": 79,
+    "url": "https://github.com/dvikt33-ux/safe-bim-layer/pull/79"
+  },
+  "githubBlobReadback": "ALL_6_COMMITTED_BLOBS_BYTE_EXACT_MATCH",
+  "expected": {
+    ".github/workflows/archicad-contracts.yml": "5c177dade872dfe88b25c4eecf601df98857cf06",
+    "scripts/archicad_authored_extension.py": "70c4d9d1c111fc553ee5163a8c79ef23d0c74fa6",
+    "scripts/archicad_native_spatial_tools.py": "5acaf303ef1b5eb4fd3e9de0497935ed47b9ce38",
+    "scripts/archicad_project_accelerator.py": "ec6e95c6c9ce62a1927bdec8c4a8ad747fb2d952",
+    "tests/test_archicad_native_spatial_tools.py": "f567c423990d1871fb40406ed139e63a2f5d8b49",
+    "docs/APA_NATIVE_GRID_RUNTIME_CHECKPOINT.md": "2b379b3f264659b08d878782a1a7deb748568060"
+  },
+  "hostTests": 707,
+  "newTests": 10,
+  "hostLogSHA256": "bd7d77a1a2d4b3ea2e3def6d4a17f1ec9a1f61f7e32a534ebb986afb76e7994c"
+}

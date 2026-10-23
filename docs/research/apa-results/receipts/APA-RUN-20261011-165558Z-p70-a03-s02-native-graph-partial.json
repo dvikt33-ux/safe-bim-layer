@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:7a0dbedba95b6f889b64efe03078bb2dec5109ea54c4c959788e1d01524a1b56",
+  "index_commit_sha": "cfc5a3f02287f3648594093571dc82f44b6f5b33",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "cfc5a3f02287f3648594093571dc82f44b6f5b33",
+  "report_path": "docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial/REPORT.md",
+  "report_sha256": "83a65fd5e2403b2c0a51dd049b9692cbefc19d49d9e89b975b4f8c399fbdfb7f",
+  "run_id": "APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

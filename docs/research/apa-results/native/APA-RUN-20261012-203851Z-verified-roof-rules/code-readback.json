@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "head": "633c799da125622be6317ea9d09a9b7eb83fb98a",
+  "parent": "e43bc6055d648270b72dc573a22c9d52c71a83f8",
+  "files": [
+    {
+      "path": "scripts/archicad_project_accelerator.py",
+      "sha": "c77544b8543f82dfe7aa43e2ae227d5c3fb78008",
+      "match": true
+    },
+    {
+      "path": "scripts/archicad_normative_bindings.py",
+      "sha": "558d403f12690ddfcbe6a6d2837c27c1b0d76898",
+      "match": true
+    },
+    {
+      "path": "scripts/archicad_native_operations.py",
+      "sha": "a92dae042334e6b0c5d9ffd0acf5f0c8cc12f6d1",
+      "match": true
+    },
+    {
+      "path": "examples/accelerator/verified-roof-source-conditions-20261012.json",
+      "sha": "a146d61daa41fc4414038d80447d58cfb96b8ddd",
+      "match": true
+    },
+    {
+      "path": "tests/test_archicad_verified_source_conditions.py",
+      "sha": "f8b940cb563cee0c6067af6dd83b6bafa04bbbaa",
+      "match": true
+    },
+    {
+      "path": "tests/test_archicad_single_plane_contour.py",
+      "sha": "95481c20643c80fe9bdc81d85dac0429ab2185c8",
+      "match": true
+    },
+    {
+      "path": "docs/research/apa_verified_roof_conditions_2026-10-12.md",
+      "sha": "5203cd0d9041b8795e582e172b4e9094e368835e",
+      "match": true
+    }
+  ]
+}

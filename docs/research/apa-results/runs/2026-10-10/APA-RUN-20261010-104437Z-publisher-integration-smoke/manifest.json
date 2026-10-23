@@ -1,0 +1,65 @@
+{
+  "action_id": "APA-P00.A03",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-PUBLISHER-SYNTHETIC-20261010",
+      "evidence_ids": [
+        "EV-WORKFLOW-CODE"
+      ],
+      "statement": "Synthetic request tests the automatic GitHub publication pipeline; it is not an Archicad live, build, or geometry test.",
+      "status": "REPORTED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-WORKFLOW-CODE",
+      "kind": "SOURCE_CODE",
+      "sha256": null,
+      "source_revision": "901dd973293f3200749b5f37fd5bbfa7f7da4f21",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/.github/workflows/apa-research-publisher.yml",
+      "verification": "SOURCE_READ"
+    }
+  ],
+  "executor": "chatgpt-ordinary-github",
+  "executor_run_id": "apa-publisher-integration-20261010-104437Z",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-10T10:44:37Z",
+  "idempotency_key": "sha256:57b5d23a707c6a6fd0140acba3689d353f20b41ce2aa0bd085accfbf58a48a48",
+  "inputs": [
+    "tools/apa_publisher/publisher.py",
+    "tools/apa_publisher/tests/test_publisher.py"
+  ],
+  "next_substep": "APA-P00.A03.S04",
+  "phase": "SYNTHETIC",
+  "plan_id": "APA-P00",
+  "run_id": "APA-RUN-20261010-104437Z-publisher-integration-smoke",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": null,
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": null,
+    "source_branch": "research/apa-verified-results-hub-20261010",
+    "tapir": null
+  },
+  "source_revisions": [
+    {
+      "revision": "901dd973293f3200749b5f37fd5bbfa7f7da4f21",
+      "source_sha": "901dd973293f3200749b5f37fd5bbfa7f7da4f21",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/.github/workflows/apa-research-publisher.yml"
+    }
+  ],
+  "started_at": "2026-10-10T10:44:37Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P00.A03.S04"
+}

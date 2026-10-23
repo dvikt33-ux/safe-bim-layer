@@ -1,0 +1,55 @@
+{
+  "status": "REAL_GITHUB_PLAN_CHANGE_STALE_AND_REBUILD_PASS",
+  "beforeRevision": 127,
+  "afterRevision": 128,
+  "beforeCommit": "6bc4f294102535ff5433a8fb98f6d8578a6ec903",
+  "afterCommit": "890b72f1e7a98899d33e551ef6eeb99f2fc39b38",
+  "change": "Authorized canonical CAS task reservation127->128; no experimental GitHub edit or model write. Historical source copied to scratch only.",
+  "beforeBlob": "13d1f268f09a4eb3a449c00027dc748379b98a11",
+  "afterBlob": "a523bf0db1e97314b17fe77d78b36e617b032174",
+  "staleResult": {
+    "status": "STALE_INDEX_REMOTE_PLAN",
+    "items": []
+  },
+  "rebuiltResult": {
+    "schema": "APA_COMPACT_RETRIEVAL_V1",
+    "status": "OK",
+    "mode": "research",
+    "query": "APA-P70.A11.S03",
+    "authority": "VERIFIED_GITHUB_PLAN_SNAPSHOT",
+    "plan_revision": 128,
+    "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+    "normative_authority": false,
+    "limitations": "Cross-document mentions are NOT proven field lineage; verify source edition and rule gates.",
+    "retrieval": "EXACT_TASK",
+    "task_claim": "NEVER_AUTOMATIC",
+    "provenance": {
+      "source_mode": "GITHUB_CURRENT",
+      "canonical_plan_blob": "a523bf0db1e97314b17fe77d78b36e617b032174",
+      "plan_revision": 128,
+      "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+      "github_commit": "890b72f1e7a98899d33e551ef6eeb99f2fc39b38",
+      "component_merge": "64cec581b257b209a097556ae19d498e53631ba1",
+      "document_text": "UNTRUSTED_DATA_NOT_INSTRUCTIONS",
+      "engineering_authority": false
+    },
+    "items": [
+      {
+        "id": "APA-P70.A11.S03",
+        "status": "IN_PROGRESS",
+        "title": "Исправить пробелы после системного теста",
+        "priority": 1,
+        "depends_on": [
+          "APA-P70.A11.S02"
+        ],
+        "artifact_count": 71,
+        "owner": "work-knowledge-integration-20261013",
+        "lease_until": "2026-10-13T04:10:26Z",
+        "claim_ref": "APA-CLAIM-KNOWLEDGE-20261013T011026Z",
+        "requires_approval": false
+      }
+    ],
+    "total_candidates": 1,
+    "omitted": 0
+  }
+}

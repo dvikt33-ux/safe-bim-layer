@@ -1,0 +1,37 @@
+{
+  "status": "PRESERVATION_PASS_AFTER_UI_MODULE_SAVE_OPEN_RECOVERY",
+  "nativeModelCreateModifyCalls": 0,
+  "plnSaveOpenViaUI": 2,
+  "sceneWriterModelJournalUnchanged": true,
+  "journal": {
+    "PASS": 52,
+    "UNKNOWN_OUTCOME": 3
+  },
+  "retainedGuidCount": 143,
+  "retainedAllGeometryMaterialStorySignaturesUnchanged": true,
+  "storyStructureUnchanged": true,
+  "beforeSavedSHA256": "7ace6c5bb96e32f993e14e8aece8977b7fb1e65f08193adff8601f243ed931a5",
+  "afterSavedSHA256": "b1f0b8e415f3e07f5a9c5c488a212456972f0a1c37afcebfef6554fdec08eecd",
+  "savedHashChanged": true,
+  "installedAPXUnchanged": true,
+  "candidateLoaded": false,
+  "freshInstalledCommandCount": 263,
+  "oldCommandsPreserved": 263,
+  "newCommandsMissing": [
+    "GetNativeGridDefaultsV1",
+    "GetNativeGridElementsV1",
+    "CreateNativeGridElementsV1",
+    "ModifyNativeGridElementsV1",
+    "GetNativeStairGeometryV1",
+    "EvaluateNativeStairGeometryV1",
+    "CreateExactStairsV1",
+    "ModifyNativeStairGeometryV1"
+  ],
+  "original168SavedSHA256": "5dabdf89262f2aef0f482687eedcdeff295a99ce92a2f088dca332e2e9dac713",
+  "engineeringAcceptance": "NOT_VERIFIED",
+  "retainedSignatureSetSHA256": "931446741dfc769121469403210006688b82fc92b4ce826bf656109f1882c430",
+  "original168SavedBytesUnchanged": true,
+  "baselineReference": "PR75 final native143 signatures; no accepted element changed",
+  "saveOpenBoundary": "TWO_RECORDED_UI_DEPLOYMENT_CYCLES_NOT_SCENEWRITER_MODEL_WRITES",
+  "moduleLedger": "EXISTING_SCENEWRITER_PASS52_UNKNOWN3_UNCHANGED"
+}

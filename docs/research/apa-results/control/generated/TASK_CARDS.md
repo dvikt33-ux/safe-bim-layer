@@ -1,0 +1,1667 @@
+# APA — task cards / durable cross-chat context
+
+Generated from PROJECT_PLAN.json. Read before claiming a task.
+
+## APA-P00.A01.S01
+
+**Найти и прочитать исходный hub** — CONTROL / DONE_PUBLISHED / P0
+
+- Parent: APA-P00 → APA-P00.A01
+- Topic: HUB_GOVERNANCE
+- Work key: hub-discovery
+- Depends on: none
+- Related, check before duplicating: none
+- Acceptance: Перечень файлов с проверкой GitHub readback
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
+- Existing V2 runs: none
+- Expected output: Перечень файлов с проверкой GitHub readback
+
+## APA-P00.A01.S02
+
+**Найти архивные исследования и индекс** — CONTROL / DONE_PUBLISHED / P0
+
+- Parent: APA-P00 → APA-P00.A01
+- Topic: HUB_GOVERNANCE
+- Work key: archive-research-inventory
+- Depends on: none
+- Related, check before duplicating: none
+- Acceptance: Ссылки на архивные документы и происхождение
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
+- Existing V2 runs: none
+- Expected output: Ссылки на архивные документы и происхождение
+
+## APA-P00.A01.S03
+
+**Инвентаризировать 72 ветки и PR, проверить уникальные результаты и ancestry** — CONSOLIDATION / PARTIAL / P8
+
+- Parent: APA-P00 → APA-P00.A01
+- Topic: HUB_GOVERNANCE
+- Work key: branch-ancestry-forensics
+- Depends on: APA-P00.A01.S02
+- Related, check before duplicating: APA-P50.A01.S01
+- Acceptance: Список уникальных артефактов, SHA, дубликатов и неизвестного
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-BRANCHES](../../../../../docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md), [ART-BRANCH-JSON](../../../../../docs/research/apa-results/inventories/BRANCH_HEADS_20261010.json)
+- Existing V2 runs: none
+- Expected output: Список уникальных артефактов, SHA, дубликатов и неизвестного
+
+## APA-P00.A01.S04
+
+**Сопоставить локальные и удалённые SHA без догадок** — VALIDATION / BLOCKED / P8
+
+- Parent: APA-P00 → APA-P00.A01
+- Topic: HUB_GOVERNANCE
+- Work key: local-git-sha-parity
+- Depends on: APA-P00.A01.S03
+- Related, check before duplicating: none
+- Acceptance: Подтверждённый доступ к локальным источникам
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-BRANCHES](../../../../../docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md)
+- Existing V2 runs: none
+- Expected output: Подтверждённый доступ к локальным источникам
+
+## APA-P00.A02.S01
+
+**Установить единственную каноническую исследовательскую ветку** — CONTROL / DONE_PUBLISHED / P0
+
+- Parent: APA-P00 → APA-P00.A02
+- Topic: HUB_GOVERNANCE
+- Work key: canonical-branch-policy
+- Depends on: none
+- Related, check before duplicating: none
+- Acceptance: Каноническая ветка определена
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-PLAN](../../../../../docs/research/apa-results/MASTER_PLAN.md)
+- Existing V2 runs: none
+- Expected output: Каноническая ветка определена
+
+## APA-P00.A02.S02
+
+**Создать hub, план, реестр, очередь, протоколы** — CONTROL / DONE_PUBLISHED / P0
+
+- Parent: APA-P00 → APA-P00.A02
+- Topic: HUB_GOVERNANCE
+- Work key: hub-operating-documents
+- Depends on: none
+- Related, check before duplicating: none
+- Acceptance: Опубликованные документы с readback
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-PLAN](../../../../../docs/research/apa-results/MASTER_PLAN.md), [ART-QUEUE](../../../../../docs/research/apa-results/RESEARCH_QUEUE.md), [ART-STATUS](../../../../../docs/research/apa-results/CURRENT_STATUS.md)
+- Existing V2 runs: none
+- Expected output: Опубликованные документы с readback
+
+## APA-P00.A02.S03
+
+**Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов** — CONSOLIDATION / PARTIAL / P0
+
+- Parent: APA-P00 → APA-P00.A02
+- Topic: HUB_GOVERNANCE
+- Work key: legacy-evidence-dedup
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: APA-P50.A01.S02
+- Acceptance: Evidence map и superseded_by для дублей
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md), [ART-BRANCHES](../../../../../docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md)
+- Existing V2 runs: [APA-RUN-20261010-234200Z-slack-legacy-three-audit](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-234200Z-slack-legacy-three-audit/REPORT.md) (receipt verified), [APA-RUN-20261010-235301Z-branch-evidence-dedup](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-235301Z-branch-evidence-dedup/REPORT.md) (receipt verified), [APA-RUN-20261011-001922Z-eighty-head-blob-inventory](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-001922Z-eighty-head-blob-inventory/REPORT.md) (receipt verified), [APA-RUN-20261011-092155Z-source71-byte-archive](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-092155Z-source71-byte-archive/REPORT.md) (receipt verified), [APA-RUN-20261011-190658Z-roof-comp-context-map](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-190658Z-roof-comp-context-map/REPORT.md) (receipt verified)
+- Expected output: Evidence map и superseded_by для дублей
+
+## APA-P00.A02.S04
+
+**Контролировать receipt/commit/readback всех завершённых отчётов** — VALIDATION / PARTIAL / P8
+
+- Parent: APA-P00 → APA-P00.A02
+- Topic: HUB_GOVERNANCE
+- Work key: publication-completeness-audit
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: none
+- Acceptance: Нет ложных DONE без квитанции
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-PUB-RECEIPT](../../../../../docs/research/apa-results/receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json)
+- Existing V2 runs: none
+- Expected output: Нет ложных DONE без квитанции
+
+## APA-P00.A02.S05
+
+**Обновить действующий план CORE FIRST → EXPANSION по рабочей инструкции v2** — CONTROL / DONE_PUBLISHED / P0
+
+- Parent: APA-P00 → APA-P00.A02
+- Topic: HUB_GOVERNANCE
+- Work key: core-first-operating-plan-v2
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: none
+- Acceptance: Сохранены все прежние ID/статусы/доказательства; последовательный CORE FIRST DAG валиден; карта компонентов находится в каноническом реестре; инструкция и план опубликованы и прочитаны обратно
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-CONTROLLER](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md), [ART-APA-WORK-INSTRUCTION-V2](../../../../../docs/research/apa-results/control/WORK_OPERATING_INSTRUCTION.md)
+- Existing V2 runs: none
+- Expected output: IMPLEMENTATION_ROADMAP.md; WORK_OPERATING_INSTRUCTION.md; согласованный PROJECT_PLAN.json; GitHub CAS/readback
+
+## APA-P00.A03.S01
+
+**Проверить write/readback для всех классов исполнителей** — VALIDATION / PARTIAL / P8
+
+- Parent: APA-P00 → APA-P00.A03
+- Topic: PUBLISHER
+- Work key: executor-capability-matrix
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: none
+- Acceptance: Capability matrix по каждому исполнителю
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-PUB-RECEIPT](../../../../../docs/research/apa-results/receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json)
+- Existing V2 runs: none
+- Expected output: Capability matrix по каждому исполнителю
+
+## APA-P00.A03.S02
+
+**Выбрать разрешённый периодический research runner без платных API** — CONTROL / BLOCKED / P8
+
+- Parent: APA-P00 → APA-P00.A03
+- Topic: PUBLISHER
+- Work key: unattended-runner-selection
+- Depends on: APA-P00.A03.S01
+- Related, check before duplicating: none
+- Acceptance: Подтверждённый executor, бюджет, разрешения
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-OS-AUDIT](../../../../../docs/research/apa-results/runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md)
+- Existing V2 runs: none
+- Expected output: Подтверждённый executor, бюджет, разрешения
+
+## APA-P00.A03.S03
+
+**Publisher, дедупликация, retry, heartbeat и ошибки** — BUILD / PARTIAL / P8
+
+- Parent: APA-P00 → APA-P00.A03
+- Topic: PUBLISHER
+- Work key: publisher-and-recovery
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: APA-P60.A02.S02
+- Acceptance: Publisher E2E + оставшиеся recovery/heartbeat gates
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-PUBLISHER](../../../../../tools/apa_publisher/publisher.py), [ART-PUB-RECEIPT](../../../../../docs/research/apa-results/receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json)
+- Existing V2 runs: none
+- Expected output: Publisher E2E + оставшиеся recovery/heartbeat gates
+
+## APA-P00.A03.S04
+
+**Два независимых SOURCE цикла с GitHub readback** — VALIDATION / PARTIAL / P8
+
+- Parent: APA-P00 → APA-P00.A03
+- Topic: PUBLISHER
+- Work key: two-independent-source-publishes
+- Depends on: APA-P00.A03.S03
+- Related, check before duplicating: none
+- Acceptance: Два разных SOURCE run_id, оба DONE_PUBLISHED
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-PUB-RECEIPT](../../../../../docs/research/apa-results/receipts/APA-RUN-20261010-104437Z-publisher-integration-smoke.json)
+- Existing V2 runs: [APA-RUN-20261010-104437Z-publisher-integration-smoke](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-104437Z-publisher-integration-smoke/REPORT.md) (receipt verified)
+- Expected output: Два разных SOURCE run_id, оба DONE_PUBLISHED
+
+## APA-P10.A01.S01
+
+**AC29 SDK headers и native create/change/get сигнатуры** — RESEARCH / PARTIAL / P7
+
+- Parent: APA-P10 → APA-P10.A01
+- Topic: SDK_NATIVE
+- Work key: sdk-native-signatures
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: none
+- Acceptance: Версии SDK, первоисточники, проверенные сигнатуры
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-SDK-SEO](../../../../../docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md)
+- Existing V2 runs: none
+- Expected output: Версии SDK, первоисточники, проверенные сигнатуры
+
+## APA-P10.A01.S02
+
+**Этажи, building materials, surfaces, composites, profiles, связи** — RESEARCH / PARTIAL / P7
+
+- Parent: APA-P10 → APA-P10.A01
+- Topic: SDK_NATIVE
+- Work key: sdk-attributes-stories
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: none
+- Acceptance: Матрица native elements/attributes и readback
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
+- Existing V2 runs: none
+- Expected output: Матрица native elements/attributes и readback
+
+## APA-P10.A01.S03
+
+**Morph/Roof/Shell/Openings/SEO/3D dump** — RESEARCH / PARTIAL / P7
+
+- Parent: APA-P10 → APA-P10.A01
+- Topic: SDK_NATIVE
+- Work key: sdk-geometry-modeldump
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: none
+- Acceptance: Матрица покрытия и побочных эффектов
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-SDK-SEO](../../../../../docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md)
+- Existing V2 runs: [APA-RUN-20261010-143940Z-opening-shell-geom](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md) (receipt verified)
+- Expected output: Матрица покрытия и побочных эффектов
+
+## APA-P10.A02.S01
+
+**Tapir публичные версии и Python/JSON vs локальная 1.5.10** — RESEARCH / PARTIAL / P7
+
+- Parent: APA-P10 → APA-P10.A02
+- Topic: TAPIR_PYTHON
+- Work key: tapir-python-compatibility
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: APA-P50.A02.S01
+- Acceptance: Compatibility matrix с source SHA
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
+- Existing V2 runs: [APA-RUN-20261010-163950Z-tapir-compat-6f29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md) (receipt verified)
+- Expected output: Compatibility matrix с source SHA
+
+## APA-P10.A02.S02
+
+**GDL/TN, Unicode, target identity и 92 ошибок** — RESEARCH / READY / P7
+
+- Parent: APA-P10 → APA-P10.A02
+- Topic: GDL_TN
+- Work key: gdl-tn-identity-and-92-errors
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: APA-P50.A02.S01
+- Acceptance: Разбор blockers без ложного LIVE
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20)
+- Existing V2 runs: none
+- Expected output: Разбор blockers без ложного LIVE
+
+## APA-P10.A02.S03
+
+**MCP/IFC/openBIM и альтернативы** — RESEARCH / READY / P7
+
+- Parent: APA-P10 → APA-P10.A02
+- Topic: IFC_MCP
+- Work key: ifc-mcp-openbim
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: APA-P50.A02.S01
+- Acceptance: Матрица альтернатив с границами
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
+- Existing V2 runs: none
+- Expected output: Матрица альтернатив с границами
+
+## APA-P10.A02.S04
+
+**Native MEP/Tapir MEP команды, трассы, порты** — RESEARCH / PARTIAL / P7
+
+- Parent: APA-P10 → APA-P10.A02
+- Topic: MEP
+- Work key: native-and-tapir-mep
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: APA-P50.A02.S01
+- Acceptance: MEP command/route/port matrix
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
+- Existing V2 runs: [APA-RUN-20261010-200823Z-mep-route-port-gate](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md) (receipt verified)
+- Expected output: MEP command/route/port matrix
+
+## APA-P10.A03.S01
+
+**Сравнить native C++, Tapir/Python, IFC и hybrid** — INTEGRATION / READY / P8
+
+- Parent: APA-P10 → APA-P10.A03
+- Topic: ARCHITECTURE
+- Work key: architecture-option-matrix
+- Depends on: APA-P10.A01.S01, APA-P10.A02.S01, APA-P10.A02.S03
+- Related, check before duplicating: APA-P50.A02.S02
+- Acceptance: Decision alternatives и зависимости
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
+- Existing V2 runs: none
+- Expected output: Decision alternatives и зависимости
+
+## APA-P10.A03.S02
+
+**Сравнить performance, обратимость, тестируемость, стоимость** — INTEGRATION / READY / P8
+
+- Parent: APA-P10 → APA-P10.A03
+- Topic: ARCHITECTURE
+- Work key: architecture-constraints-cost
+- Depends on: APA-P10.A03.S01
+- Related, check before duplicating: none
+- Acceptance: Оценка без выдуманных измерений
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
+- Existing V2 runs: none
+- Expected output: Оценка без выдуманных измерений
+
+## APA-P20.A01.S01
+
+**Read-only provenance AC29 SDK/APX/source SHA** — VALIDATION / READY / P8
+
+- Parent: APA-P20 → APA-P20.A01
+- Topic: TESTS
+- Work key: ac29-sdk-apx-provenance
+- Depends on: APA-P10.A01.S01
+- Related, check before duplicating: none
+- Acceptance: Проверенные версии и commit
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20)
+- Existing V2 runs: none
+- Expected output: Проверенные версии и commit
+
+## APA-P20.A01.S02
+
+**Read-only доступность команд, GDL, MEP, model dump** — VALIDATION / READY / P8
+
+- Parent: APA-P20 → APA-P20.A01
+- Topic: TESTS
+- Work key: read-only-command-capabilities
+- Depends on: APA-P20.A01.S01
+- Related, check before duplicating: none
+- Acceptance: Raw evidence, no write
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
+- Existing V2 runs: none
+- Expected output: Raw evidence, no write
+
+## APA-P20.A01.S03
+
+**Сохранить PASS/FAIL с raw evidence** — VALIDATION / READY / P8
+
+- Parent: APA-P20 → APA-P20.A01
+- Topic: TESTS
+- Work key: raw-test-evidence-register
+- Depends on: APA-P20.A01.S02
+- Related, check before duplicating: none
+- Acceptance: Полные воспроизводимые логи
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
+- Existing V2 runs: none
+- Expected output: Полные воспроизводимые логи
+
+## APA-P20.A02.S01
+
+**План изолированных тестов, rollback, критерии** — CONTROL / READY / P8
+
+- Parent: APA-P20 → APA-P20.A02
+- Topic: TESTS
+- Work key: isolated-live-test-plan
+- Depends on: APA-P20.A01.S03
+- Related, check before duplicating: none
+- Acceptance: Test plan с защитами
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-PLAN](../../../../../docs/research/apa-results/MASTER_PLAN.md)
+- Existing V2 runs: none
+- Expected output: Test plan с защитами
+
+## APA-P20.A02.S02
+
+**Получить отдельное разрешение на изменение BIM/APX** — CONTROL / BLOCKED / P8
+
+- Parent: APA-P20 → APA-P20.A02
+- Topic: TESTS
+- Work key: owner-live-write-permission
+- Depends on: APA-P20.A02.S01
+- Related, check before duplicating: none
+- Acceptance: Явное разрешение владельца
+- Owner/lease: unclaimed
+- Requires owner approval: True
+- Source inputs: [ART-PLAN](../../../../../docs/research/apa-results/MASTER_PLAN.md)
+- Existing V2 runs: none
+- Expected output: Явное разрешение владельца
+
+## APA-P20.A02.S03
+
+**Протоколировать разрешённые live тесты** — VALIDATION / BLOCKED / P8
+
+- Parent: APA-P20 → APA-P20.A02
+- Topic: TESTS
+- Work key: isolated-live-test-results
+- Depends on: APA-P20.A02.S02
+- Related, check before duplicating: none
+- Acceptance: LIVE PASS только с разрешением и raw evidence
+- Owner/lease: unclaimed
+- Requires owner approval: True
+- Source inputs: [ART-PLAN](../../../../../docs/research/apa-results/MASTER_PLAN.md)
+- Existing V2 runs: none
+- Expected output: LIVE PASS только с разрешением и raw evidence
+
+## APA-P30.A01.S01
+
+**Decision matrix для нативной BIM-геометрии** — INTEGRATION / READY / P8
+
+- Parent: APA-P30 → APA-P30.A01
+- Topic: ARCHITECTURE
+- Work key: native-bim-shortest-path
+- Depends on: APA-P10.A03.S02, APA-P20.A01.S03
+- Related, check before duplicating: none
+- Acceptance: Выбран shortest credible path
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
+- Existing V2 runs: none
+- Expected output: Выбран shortest credible path
+
+## APA-P30.A01.S02
+
+**Блокировки и альтернативные маршруты** — INTEGRATION / READY / P8
+
+- Parent: APA-P30 → APA-P30.A01
+- Topic: ARCHITECTURE
+- Work key: architecture-blockers-fallbacks
+- Depends on: APA-P30.A01.S01
+- Related, check before duplicating: none
+- Acceptance: Fallback plan
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
+- Existing V2 runs: none
+- Expected output: Fallback plan
+
+## APA-P30.A02.S01
+
+**MVP: этажи → атрибуты → геометрия → библиотека → MEP** — BUILD / READY / P8
+
+- Parent: APA-P30 → APA-P30.A02
+- Topic: MVP
+- Work key: mvp-implementation-milestones
+- Depends on: APA-P30.A01.S01
+- Related, check before duplicating: APA-P50.A03.S01
+- Acceptance: Milestones и входные условия
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-PLAN](../../../../../docs/research/apa-results/MASTER_PLAN.md)
+- Existing V2 runs: none
+- Expected output: Milestones и входные условия
+
+## APA-P30.A02.S02
+
+**Acceptance gates и rollback по этапам MVP** — VALIDATION / READY / P8
+
+- Parent: APA-P30 → APA-P30.A02
+- Topic: MVP
+- Work key: mvp-acceptance-rollback
+- Depends on: APA-P30.A02.S01
+- Related, check before duplicating: none
+- Acceptance: PASS/FAIL, readback, rollback
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-PLAN](../../../../../docs/research/apa-results/MASTER_PLAN.md)
+- Existing V2 runs: none
+- Expected output: PASS/FAIL, readback, rollback
+
+## APA-P40.A01.S01
+
+**Настроить запуск через ChatGPT Scheduled Tasks и разрешённый GitHub доступ** — CONTROL / BLOCKED / P8
+
+- Parent: APA-P40 → APA-P40.A01
+- Topic: AUTOMATION
+- Work key: always-on-executor-auth
+- Depends on: APA-P00.A03.S02
+- Related, check before duplicating: none
+- Acceptance: Пользователь создал Scheduled Task; сохранены task ID, расписание/часовой пояс; реальный GitHub write/readback PASS; без Deep Research/платных API
+- Owner/lease: unclaimed
+- Requires owner approval: True
+- Source inputs: [ART-OS-AUDIT](../../../../../docs/research/apa-results/runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md)
+- Existing V2 runs: none
+- Expected output: ChatGPT Scheduled task ID, расписание, часовой пояс, подтверждённый GitHub write/readback
+
+## APA-P40.A01.S02
+
+**Проверить Scheduled → IN_PROGRESS → результат → DONE_PUBLISHED/PARTIAL** — BUILD / BLOCKED / P8
+
+- Parent: APA-P40 → APA-P40.A01
+- Topic: AUTOMATION
+- Work key: unattended-research-cycle
+- Depends on: APA-P40.A01.S01
+- Related, check before duplicating: none
+- Acceptance: Scheduled trigger реально сработал, в GitHub IN_PROGRESS записан до работы, затем verified receipt/evidence и DONE/PARTIAL, повторный чат не берёт тот же S-ID
+- Owner/lease: unclaimed
+- Requires owner approval: True
+- Source inputs: [ART-PUBLISHER](../../../../../tools/apa_publisher/publisher.py)
+- Existing V2 runs: none
+- Expected output: Два реальных расписанных запуска с уникальным executor_run_id, status/readback и receipt
+
+## APA-P40.A01.S03
+
+**Watchdog пропусков Scheduled Task, зависших IN_PROGRESS и журнал ошибок** — BUILD / BLOCKED / P8
+
+- Parent: APA-P40 → APA-P40.A01
+- Topic: AUTOMATION
+- Work key: watchdog-and-error-journal
+- Depends on: APA-P40.A01.S02
+- Related, check before duplicating: none
+- Acceptance: Heartbeat и alarm
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-OS-AUDIT](../../../../../docs/research/apa-results/runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md)
+- Existing V2 runs: none
+- Expected output: Heartbeat и alarm
+
+## APA-P40.A01.S04
+
+**Проверить 24 часа реальных запусков ChatGPT Scheduled Tasks без повторов** — VALIDATION / BLOCKED / P8
+
+- Parent: APA-P40 → APA-P40.A01
+- Topic: AUTOMATION
+- Work key: 24h-continuity-proof
+- Depends on: APA-P40.A01.S03
+- Related, check before duplicating: none
+- Acceptance: Реальные логи за 24h
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-OS-AUDIT](../../../../../docs/research/apa-results/runs/2026-10-10/apa-research-os-audit-user-supplied-20261010.md)
+- Existing V2 runs: none
+- Expected output: Реальные логи за 24h
+
+## APA-P50.A01.S01
+
+**Карта связей: исследования ↔ S-ID ↔ артефакты ↔ PR** — CONSOLIDATION / PARTIAL / P8
+
+- Parent: APA-P50 → APA-P50.A01
+- Topic: KNOWLEDGE_GRAPH
+- Work key: cross-research-traceability
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: APA-P00.A01.S03
+- Acceptance: Traceability matrix, orphan report list
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md), [ART-BRANCHES](../../../../../docs/research/apa-results/inventories/FULL_BRANCH_INVENTORY.md), [ART-TRACE-REPORT](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/REPORT.md)
+- Existing V2 runs: [APA-RUN-20261010-110048Z-legacy-traceability](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/REPORT.md) (receipt verified)
+- Expected output: Published first source-backed traceability map: five legacy flat reports + one V2; four explicit S-ID links, one candidate; 72-branch ancestry still open
+
+## APA-P50.A01.S02
+
+**Дедупликация по work_key/source revision/claim** — CONSOLIDATION / READY / P8
+
+- Parent: APA-P50 → APA-P50.A01
+- Topic: KNOWLEDGE_GRAPH
+- Work key: claim-and-evidence-dedup
+- Depends on: APA-P50.A01.S01
+- Related, check before duplicating: APA-P00.A02.S03
+- Acceptance: Duplicate map и superseded_by
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
+- Existing V2 runs: none
+- Expected output: Duplicate map и superseded_by
+
+## APA-P50.A01.S03
+
+**Сводить несколько исследований одной темы в решение** — INTEGRATION / READY / P8
+
+- Parent: APA-P50 → APA-P50.A01
+- Topic: KNOWLEDGE_GRAPH
+- Work key: theme-research-synthesis
+- Depends on: APA-P50.A01.S01
+- Related, check before duplicating: none
+- Acceptance: Theme synthesis с conflicts/unknown
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
+- Existing V2 runs: none
+- Expected output: Theme synthesis с conflicts/unknown
+
+## APA-P50.A02.S01
+
+**Единый каталог AC29 SDK/Tapir/Python/GDL/IFC/MEP инструментов** — RESEARCH / PARTIAL / P7
+
+- Parent: APA-P50 → APA-P50.A02
+- Topic: TOOL_INTEGRATION
+- Work key: tool-capability-catalog
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: APA-P10.A02.S01, APA-P10.A02.S02, APA-P10.A02.S03, APA-P10.A02.S04
+- Acceptance: Capability matrix, версии, пересечения
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
+- Existing V2 runs: none
+- Expected output: Capability matrix, версии, пересечения
+
+## APA-P50.A02.S02
+
+**Выявить дубли функций между инструментами и выбрать adapter boundaries** — INTEGRATION / READY / P8
+
+- Parent: APA-P50 → APA-P50.A02
+- Topic: TOOL_INTEGRATION
+- Work key: tool-adapter-overlap-map
+- Depends on: APA-P50.A02.S01
+- Related, check before duplicating: APA-P10.A03.S01
+- Acceptance: Integration architecture + canonical interfaces
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
+- Existing V2 runs: none
+- Expected output: Integration architecture + canonical interfaces
+
+## APA-P50.A02.S03
+
+**Спланировать безопасное объединение инструментов** — BUILD / READY / P8
+
+- Parent: APA-P50 → APA-P50.A02
+- Topic: TOOL_INTEGRATION
+- Work key: tool-consolidation-roadmap
+- Depends on: APA-P50.A02.S02, APA-P30.A01.S01
+- Related, check before duplicating: none
+- Acceptance: Non-invasive integration sequence
+- Owner/lease: unclaimed
+- Requires owner approval: True
+- Source inputs: [ART-PLAN](../../../../../docs/research/apa-results/MASTER_PLAN.md)
+- Existing V2 runs: none
+- Expected output: Non-invasive integration sequence
+
+## APA-P50.A03.S01
+
+**Синтез тем: источник → решение → MVP → тесты** — INTEGRATION / READY / P8
+
+- Parent: APA-P50 → APA-P50.A03
+- Topic: SYNTHESIS
+- Work key: research-to-mvp-synthesis
+- Depends on: APA-P50.A01.S03, APA-P50.A02.S02
+- Related, check before duplicating: APA-P30.A02.S01
+- Acceptance: One implementation map
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-PLAN](../../../../../docs/research/apa-results/MASTER_PLAN.md)
+- Existing V2 runs: none
+- Expected output: One implementation map
+
+## APA-P50.A03.S02
+
+**Проверка готовности интеграции и отсутствия повторов** — VALIDATION / READY / P8
+
+- Parent: APA-P50 → APA-P50.A03
+- Topic: SYNTHESIS
+- Work key: integration-go-no-go
+- Depends on: APA-P50.A03.S01
+- Related, check before duplicating: none
+- Acceptance: Evidence-backed go/no-go
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md)
+- Existing V2 runs: none
+- Expected output: Evidence-backed go/no-go
+
+## APA-P60.A01.S01
+
+**Зафиксировать единый машинный костяк проекта и ID** — CONTROL / DONE_PUBLISHED / P0
+
+- Parent: APA-P60 → APA-P60.A01
+- Topic: CONTROLLER
+- Work key: canonical-project-dag
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: none
+- Acceptance: Структурированный план сохранён и readback
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-CONTROLLER](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json)
+- Existing V2 runs: none
+- Expected output: Структурированный план сохранён и readback
+
+## APA-P60.A01.S02
+
+**Валидатор DAG, статусов, duplicate work и gates** — BUILD / DONE_PUBLISHED / P0
+
+- Parent: APA-P60 → APA-P60.A01
+- Topic: CONTROLLER
+- Work key: controller-dag-validator
+- Depends on: APA-P60.A01.S01
+- Related, check before duplicating: none
+- Acceptance: Offline tests + fail-closed validation
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-CONTROLLER](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json)
+- Existing V2 runs: none
+- Expected output: Offline tests + fail-closed validation
+
+## APA-P60.A01.S03
+
+**Генератор единого control board, next work, context pack** — BUILD / DONE_PUBLISHED / P0
+
+- Parent: APA-P60 → APA-P60.A01
+- Topic: CONTROLLER
+- Work key: controller-generated-views
+- Depends on: APA-P60.A01.S02
+- Related, check before duplicating: none
+- Acceptance: Автоматические views и provenance
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-CONTROLLER](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json)
+- Existing V2 runs: none
+- Expected output: Автоматические views и provenance
+
+## APA-P60.A01.S04
+
+**End-to-end controller workflow и readback** — VALIDATION / DONE_PUBLISHED / P0
+
+- Parent: APA-P60 → APA-P60.A01
+- Topic: CONTROLLER
+- Work key: controller-github-e2e
+- Depends on: APA-P60.A01.S03
+- Related, check before duplicating: none
+- Acceptance: Actions success и generated views readback
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-PUB-WORKFLOW](../../../../../.github/workflows/apa-research-publisher.yml)
+- Existing V2 runs: none
+- Expected output: Actions success и generated views readback
+
+## APA-P60.A02.S01
+
+**Handoff protocol: каждый чат читает control plan, берёт S-ID** — CONTROL / DONE_PUBLISHED / P0
+
+- Parent: APA-P60 → APA-P60.A02
+- Topic: CONTROLLER
+- Work key: cross-chat-handoff
+- Depends on: APA-P60.A01.S03
+- Related, check before duplicating: none
+- Acceptance: Контекст доступен без пересылки чатов
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-PLAN](../../../../../docs/research/apa-results/MASTER_PLAN.md)
+- Existing V2 runs: none
+- Expected output: Контекст доступен без пересылки чатов
+
+## APA-P60.A02.S02
+
+**Связать publisher inbox с controller plan, запретить orphan runs** — INTEGRATION / DONE_PUBLISHED / P1
+
+- Parent: APA-P60 → APA-P60.A02
+- Topic: CONTROLLER
+- Work key: publisher-plan-claim-gate
+- Depends on: APA-P60.A01.S02
+- Related, check before duplicating: APA-P00.A03.S03
+- Acceptance: Publisher rejects unknown S-ID
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-PUBLISHER](../../../../../tools/apa_publisher/publisher.py)
+- Existing V2 runs: none
+- Expected output: Publisher rejects unknown S-ID
+
+## APA-P60.A02.S03
+
+**Протестировать CAS-claim, lease, duplicate prevention** — VALIDATION / PARTIAL / P8
+
+- Parent: APA-P60 → APA-P60.A02
+- Topic: CONTROLLER
+- Work key: claim-concurrency-test
+- Depends on: APA-P60.A02.S01, APA-P60.A02.S02
+- Related, check before duplicating: APA-P60.A02.S04
+- Acceptance: Offline tests PASS; concurrent two-writer CAS and lease-expiry recovery NOT_VERIFIED
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-CONTROLLER](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json)
+- Existing V2 runs: none
+- Expected output: Два исполнителя не получают один work_key
+
+## APA-P60.A02.S04
+
+**Ввести сбор предложений задач исследователями и принятие аудитором в PROJECT_PLAN** — VALIDATION / PARTIAL / P8
+
+- Parent: APA-P60 → APA-P60.A02
+- Topic: CONTROLLER
+- Work key: research-proposals-audit-approval
+- Depends on: APA-P60.A02.S02
+- Related, check before duplicating: APA-P60.A02.S03
+- Acceptance: Процесс discovery proposal -> independent audit decision -> TASK registry admission задокументирован; CAS claim/readback и уникальность work_key/dependency DAG соблюдены; Scheduled instructions согласованы. End-to-end независимая публикация proposal, аудит, регистрация и валидатор контроллера подтверждены фактами. Не объявлять DONE по одним инструкциям.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-CONTROLLER](../../../../../docs/research/apa-results/control/PROJECT_PLAN.json), [ART-PLAN](../../../../../docs/research/apa-results/MASTER_PLAN.md)
+- Existing V2 runs: none
+- Expected output: Публичный protocol предложений задач; Инструкции трёх Scheduled исполнителей; Первый проверенный GitHub proposal + review + admission; Проверенный controller DAG и readback
+
+## APA-P70.A01.S01
+
+**Сопоставить полный продуктовый контракт с существующим кодом и исследованиями** — CONSOLIDATION / DONE_PUBLISHED / P1
+
+- Parent: APA-P70 → APA-P70.A01
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: product-contract-and-code-baseline
+- Depends on: APA-P00.A02.S02
+- Related, check before duplicating: none
+- Acceptance: Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md)
+- Existing V2 runs: [APA-RUN-20261011-091905Z-p70-source-integration-map](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-091905Z-p70-source-integration-map/REPORT.md) (receipt verified)
+- Expected output: Таблица требований полного цикла → исходные файлы/SHA → подтверждённые функции и ограничения; без новой реализации
+
+## APA-P70.A01.S02
+
+**Привязать все значимые наработки к функциям продукта, выявить пробелы** — CONSOLIDATION / READY / P8
+
+- Parent: APA-P70 → APA-P70.A01
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: product-evidence-to-capability-trace
+- Depends on: APA-P70.A01.S01, APA-P50.A01.S01
+- Related, check before duplicating: none
+- Acceptance: Матрица research → S-ID → код/PR → тест → функциональная возможность; дубликаты и пробелы явно отмечены
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-REGISTER](../../../../../docs/research/apa-results/ARTIFACT_REGISTER.md), [ART-TRACE-REPORT](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/REPORT.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Матрица research → S-ID → код/PR → тест → функциональная возможность; дубликаты и пробелы явно отмечены
+
+## APA-P70.A01.S03
+
+**Утвердить минимальные границы интеграции и порядок сквозных поставок** — INTEGRATION / DONE_PUBLISHED / P2
+
+- Parent: APA-P70 → APA-P70.A01
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: product-integration-boundaries
+- Depends on: APA-P70.A01.S01
+- Related, check before duplicating: none
+- Acceptance: Проверенный маршрут полного цикла, reuse map, отсутствие дублирования SceneWriter/графа/исполнителя, приёмочные ворота
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
+- Existing V2 runs: [APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze/REPORT.md) (receipt verified)
+- Expected output: Проверенный маршрут полного цикла, reuse map, отсутствие дублирования SceneWriter/графа/исполнителя, приёмочные ворота
+
+## APA-P70.A02.S01
+
+**Собрать семантический контракт задания, участка, этажей и помещений** — BUILD / DONE_PUBLISHED / P1
+
+- Parent: APA-P70 → APA-P70.A02
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: project-brief-and-story-contract
+- Depends on: APA-P70.A01.S03
+- Related, check before duplicating: none
+- Acceptance: Два режима GENERATE_FROM_ZERO/ADAPT_EXISTING; требования/ограничения, первый этаж на ±0.000, index только по GetStories
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md)
+- Existing V2 runs: [APA-RUN-20261011-161511Z-p70-semantic-brief-getstories](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md) (receipt verified)
+- Expected output: Два режима GENERATE_FROM_ZERO/ADAPT_EXISTING; требования/ограничения, первый этаж на ±0.000, index только по GetStories
+
+## APA-P70.A02.S02
+
+**Связать проектные требования с версиями нормативов и проверяемыми правилами** — BUILD / PARTIAL / P3
+
+- Parent: APA-P70 → APA-P70.A02
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: normative-applicability-pack
+- Depends on: APA-P70.A02.S01, APA-P70.A08.S04
+- Related, check before duplicating: none
+- Acceptance: Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-P70-A02-TDK-MACHINE-SOURCE-20261012](https://github.com/dvikt33-ux/tdk-course-project/tree/67f17d407d14aebb091daaf79f11c10178b87440/01_Normative_Base/_Machine)
+- Existing V2 runs: [APA-RUN-20261012-191815Z-normative-bindings](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-191815Z-normative-bindings/REPORT.md) (receipt verified), [APA-RUN-20261012-203851Z-verified-roof-rules](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-203851Z-verified-roof-rules/REPORT.md) (receipt verified), [APA-RUN-20261012-210815Z-machine-normative](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-210815Z-machine-normative/REPORT.md) (receipt verified)
+- Expected output: Rule pack с юрисдикцией/редакцией СП/ГОСТ, применимостью, требованиями, источниками и явными NOT_VERIFIED; Historical published draft PR66 head e43bc6055d648270b72dc573a22c9d52c71a83f8 on exact PR64 parent b056cb76929a62047c82fd66961b72eb4d9078a8.18newtests;513Windows host and Windows/LinuxCI38296039263 PASS. All5code and8source/report blobs match GitHub; publisher receipt DONE_PUBLISHED.; Working compile_project_normative_pack attaches an immutable source/edition/applicability digest to the existing provisional CSE/project pack. Actual native GUID/material/context/body signatures invalidate stale CSE evidence; existing selections and approval states remain unchanged. Cached current109GUID/fourjunction evidence reused, zero new native calls.; Six conditional requirement bindings reference five official registry metadata records verified2026-10-12: SP50.13330.2024, SP230.1325800.2015, SP17.13330.2017, SP2.13130.2020, GOST30971-2012. Full clauses and exact system/project applicability NOT_VERIFIED; metadata ACTIVE is not engineering compliance. No numerical norm or engineering class/load/result is invented.; Existing four actual Wall/Roof targets yield24rows:20NOT_VERIFIED and4window-familyNOT_APPLICABLE. Jurisdiction is not inferred from brief region or file name; native SinglePlane is not roofing technology. Unknown or stale system data never excludes a specific rule. Engineering remains ENGINEERING_NOT_VERIFIED.; External dependencies retained within A02.S02: source-backed actual site/jurisdiction, project thermal/fire/roof design facts, certified source-bound CSE layer/system evidence and qualified full clauses/table rows. Adapter is working and published; project-specific normative acceptance remainsPARTIAL. Native A11.S03PARTIAL and S10BLOCKED are independent and unchanged. Exact next available native step remains approved SinglePlane contour qualification followed by four-target remeasurement; no source-junction writes authorized or executed.; Current draft PR67 head 633c799da125622be6317ea9d09a9b7eb83fb98a on exact PR66 parent e43bc6055d648270b72dc573a22c9d52c71a83f8.33newtests,546Windows host/Windows+LinuxCI38305091756 PASS.7code and11source/report GitHub blobs exactly match; publisher receipt DONE_PUBLISHED.; Working existing normative adapter executes primary displayed roofing/thermal scope conditions and SP17 amendment5 thermal-reference replacement instruction against actual native bodies and a source-linked dependency graph. Four original targets yield12checks:4PASS_DOCUMENTED edition-reference edges only and8NOT_VERIFIED scope checks. Document PASS never certifies roof construction, thermal performance or engineering.; User directly confirmed jurisdiction RU/Central Russia and federal norms. Region confirmation supplies no city/climate design values, roof covering/layers/role, total building area, purpose or loads. Prior 24source bindings and CSE approvals remain unchanged; no invented normative or engineering value.; Primary current sources: SP17 registry amendments1-5, amendment5 effective2025-01-10 and its explicit current thermal reference; SP50.13330.2024 effective2024-06-16. Exact displayed source scope/conditions were reviewed, full consolidated technical slope/parapet/thermal clauses were not obtained. Official ministry/FCS fetches and local registry TLS retrieval failed. Existing GitHub research blob3396bfafb8e5bbfe4b539c5184f0ee0bd0c27561 retained without promoting research-only dimensions.; LIVE_READ_ONLY_PASS freshly verifies five target GUID/BREP/material/story signatures against accepted109 baseline, exact project identity/saved hash and unchanged existing SQLite journal. Actual shared Roof slope8.594366924degrees/15.1135218percent measured once; normative slope limit/verdict NOT_VERIFIED. No Create/Modify/Save/Open/IFC export/APX changes.; External dependencies retained within existing A02.S02: full primary applicable technical clauses/table rows, source-bound actual roof technology/layers, building work/purpose/area/regime/exclusions, engineering evidence. Next functional normative step uses these inputs in the existing evaluator, not a new library. A02.S02 remainsPARTIAL; A05.S01 requires its DONE_PUBLISHED dependency and cannot be dispatched or populated with invented loads.; Published draft PR68 head 29aa06a6e9bbef0d991bea922e1ad4101ab29bdd on exact PR67 base633c799da125622be6317ea9d09a9b7eb83fb98a;27newtests,573Windows host/Windows+LinuxCI38308362910 PASS.37code blobs and28pinned source files match GitHub; publisher receipt/readback verified.; Existing machine normative database dvikt33-ux/tdk-course-project normative-recovery-2026-10-06 commit67f17d407d14aebb091daaf79f11c10178b87440 is connected through the existing APA normative executor. Mandatory protocol read first; original source policies/schemas/routes/compiled blocks/aliases/evidence/rules unchanged. Byte-exact scoped source snapshot supplies existing CompiledBlockResolver and validate_confirmed, not a second normative engine.; Current project building type IZHS directly confirmed by user. Exact Project Profile -> Object/Module Route -> Applicable Rule -> Evidence Gate -> BIM Facts -> Rule Evaluation -> Result interface enforces defaultdeny and object/function/module/depth/stage isolation. MKD/TRC cannot borrow IZHS roof rules; one roof rules file read, inactive engineering libraries not loaded.; Four existing actual Wall/Roof junctions bind to nine existing canonical SP17 rules:36NOT_VERIFIED results. Stored evidence-field checks pass but source quarantine/design_only, unknown source-bound roof construction/applicability and declared-not-implemented upstream roof calculators prohibit authoritative stage pack, numeric evaluation or engineering acceptance. No normative values inferred or applied.; PR66/67 remain operational:24legacy bindings and12source checks preserved by digest and mapped to machine source identities without promotion. SP17 amendment1-5 chain and exact changed-table-row overlay gate retained; SP50.2024 passport identity is distinct from occurrence-level dependency resolution. No blanket pinning/floating or edition upgrade.; Prior109GUID native baseline, five source target signatures/material/story data and measured gaps reused as cached evidence. Zero new native calls, zero geometry rechecks, no PLN/APX modifications. Current live state is not independently refreshed in this package. NativeA11.S03PARTIAL/S10BLOCKED and prior accepted A04 evidence remain unchanged.; Next within existing A02.S02: source-bound actual roof system/layers/role and required block inputs; exact per-rule revision/clause/evidence/applicability closure and reviewed authoritative release; qualify an available existing roof calculator through the same interface. Unknown locality/load/engineering inputs remain unverified. Other domains extend the same reviewed exact route/source interface; no full library load or second engine. A02.S02PARTIAL; downstreamA05.S01 dependency remains unsatisfied.
+
+## APA-P70.A02.S03
+
+**Собрать проектный Library Pack из проверяемых строительных систем и узлов** — BUILD / DONE_PUBLISHED / P2
+
+- Parent: APA-P70 → APA-P70.A02
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: project-library-pack-assembly
+- Depends on: APA-P70.A02.S01, APA-P70.A01.S03
+- Related, check before duplicating: none
+- Acceptance: Отобранные CSE, источники/хэши/лицензии, интерфейсы, совместимые AC29 объекты и список неподтверждённых узлов
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
+- Existing V2 runs: [APA-RUN-20261011-163145Z-p70-a02-s03-library-pack](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-163145Z-p70-a02-s03-library-pack/REPORT.md) (receipt verified)
+- Expected output: Отобранные CSE, источники/хэши/лицензии, интерфейсы, совместимые AC29 объекты и список неподтверждённых узлов
+
+## APA-P70.A02.S04
+
+**Интегрировать реальные материалы, Composite/Profile и выбранные GDL-библиотеки** — INTEGRATION / DONE_PUBLISHED / P3
+
+- Parent: APA-P70 → APA-P70.A02
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: verified-project-material-library-integration
+- Depends on: APA-P70.A09.S01
+- Related, check before duplicating: none
+- Acceptance: Проверенные CSE/PLP и реальные проектные BM/Composite/Profile/Surface/GDL применены и прочитаны обратно; Unicode и стабильная identity Library Parts проверены; источники/лицензия/AC29 совместимость учтены; найденный файл не равен LIVE_VERIFIED.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md)
+- Existing V2 runs: [APA-RUN-20261011-211000Z-native-material-library-integration](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md) (receipt verified)
+- Expected output: Проверенные CSE/PLP и реальные проектные BM/Composite/Profile/Surface/GDL применены и прочитаны обратно; Unicode и стабильная identity Library Parts проверены; источники/лицензия/AC29 совместимость учтены; найденный файл не равен LIVE_VERIFIED.
+
+## APA-P70.A03.S01
+
+**Связать помещения, несущую схему, оси, уровни и конструктивные ограничения** — INTEGRATION / DONE_PUBLISHED / P1
+
+- Parent: APA-P70 → APA-P70.A03
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: semantic-spatial-structural-plan
+- Depends on: APA-P70.A02.S03
+- Related, check before duplicating: none
+- Acceptance: Проверяемый граф помещений/нагрузочных путей/осей с привязкой к CSE и этажам; без условных стен
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
+- Existing V2 runs: [APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md) (receipt verified)
+- Expected output: Проверяемый граф помещений/нагрузочных путей/осей с привязкой к CSE и этажам; без условных стен
+
+## APA-P70.A03.S02
+
+**Собрать модель средствами уже существующих BIM-исполнителей** — BUILD / DONE_PUBLISHED / P0
+
+- Parent: APA-P70 → APA-P70.A03
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: reuse-native-whole-building-builder
+- Depends on: APA-P70.A03.S01
+- Related, check before duplicating: none
+- Acceptance: Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md), [ART-APA-PLN-WRITE-AUTH-20261011](../../../../../docs/research/apa-results/control/IMPLEMENTATION_ROADMAP.md%23%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B4%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%B0)
+- Existing V2 runs: [APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-165558Z-p70-a03-s02-native-graph-partial/REPORT.md) (receipt verified), [APA-RUN-20261011-195000Z-isolated-authored-core](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-195000Z-isolated-authored-core/REPORT.md) (receipt verified)
+- Expected output: Создание полноценной BIM-геометрии из схемы через имеющиеся writer/graph; связные стены не дробятся без необходимости; тестовый PLN только после разрешения
+
+## APA-P70.A03.S03
+
+**Доказать редактируемость, GUID/host/story/material и инкрементальное обновление** — VALIDATION / DONE_PUBLISHED / P0
+
+- Parent: APA-P70 → APA-P70.A03
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: incremental-model-integrity-gates
+- Depends on: APA-P70.A03.S02
+- Related, check before duplicating: none
+- Acceptance: Тесты обновления проекта без лишних элементов/потери GUID, readback этажей, материалов, хостов и откат изменений
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-LIVE-SCRATCH-PARTIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-live-scratch-partial-slab-reconciliation.md)
+- Existing V2 runs: [APA-RUN-20261011-195800Z-incremental-native-edit](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-195800Z-incremental-native-edit/REPORT.md) (receipt verified)
+- Expected output: Тесты обновления проекта без лишних элементов/потери GUID, readback этажей, материалов, хостов и откат изменений
+
+## APA-P70.A03.S04
+
+**Дополнить авторскую модель до связного небольшого здания существующими writer-циклами** — BUILD / DONE_PUBLISHED / P0
+
+- Parent: APA-P70 → APA-P70.A03
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: authored-building-native-component-completeness
+- Depends on: APA-P70.A03.S02
+- Related, check before duplicating: none
+- Acceptance: Стены, перекрытия, колонны и hosted двери/окна из утверждённой схемы проходят typed GUID/host/story/material/geometry readback; требуемые неподдерживаемые элементы имеют конкретный blocker; один BIM Graph и SceneWriter.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
+- Existing V2 runs: [APA-RUN-20261011-200100Z-native-completeness](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200100Z-native-completeness/REPORT.md) (receipt verified)
+- Expected output: Стены, перекрытия, колонны и hosted двери/окна из утверждённой схемы проходят typed GUID/host/story/material/geometry readback; требуемые неподдерживаемые элементы имеют конкретный blocker; один BIM Graph и SceneWriter.
+
+## APA-P70.A04.S01
+
+**Вывести из модели обязательные семейства узлов и их условия применимости** — INTEGRATION / DONE_PUBLISHED / P4
+
+- Parent: APA-P70 → APA-P70.A04
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: required-junction-condition-coverage
+- Depends on: APA-P70.A03.S01, APA-P70.A02.S04
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: Матрица всех применимых примыканий/отверстий/армопоясов/связей/крепежа с точным source/detail ID и открытыми пробелами
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-CSE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-P70-A11-S03-NATIVE95-V32-20261012](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-110611Z-connected-native-continuation-v32/REPORT.md)
+- Existing V2 runs: [APA-RUN-20261012-122511Z-construction-junctions-s01](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-122511Z-construction-junctions-s01/REPORT.md) (receipt verified), [APA-RUN-20261012-123259Z-construction-junctions-s01-openings](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-123259Z-construction-junctions-s01-openings/REPORT.md) (receipt verified)
+- Expected output: Accepted-model construction junction/source coverage:47interfaces/34actual planar BREP contacts, actual0.4x0.6m Generic Opening host holes; seven model families incl absent cladding;73context/1142source Details;95GUID/body signatures retained;414Windows/LinuxPASS. Reinforcement/fastener/source-grade/full-assembly/engineering gaps explicit. Next ready bounded sub-junction:source PF001/PF002 batten/counterbatten contact.
+
+## APA-P70.A04.S02
+
+**Привязать выбранные узлы и композиции к нативным BIM элементам** — BUILD / DONE_PUBLISHED / P4
+
+- Parent: APA-P70 → APA-P70.A04
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: native-details-to-cse-binding
+- Depends on: APA-P70.A04.S01, APA-P70.A03.S02
+- Related, check before duplicating: none
+- Acceptance: Редактируемые системы и узлы с параметрами, классификацией, происхождением и invalidation при изменении
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md)
+- Existing V2 runs: [APA-RUN-20261012-130748Z-construction-junction-native-support-s02](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-130748Z-construction-junction-native-support-s02/REPORT.md) (receipt verified)
+- Expected output: Editable source-bound ARMO PF001/PF002 batten/counterbatten support sub-junction: native50x50mm structural-timber Morph, existing Archicad2.0Beam classification,5.9801000489m model span, actual75cm2contact/no new collisions, pinned source/body/material/story invalidation.95accepted GUID/body signatures preserved,96GUID/38context saved/reopened.426Windows/LinuxPASS. Full assembly/fixings/grade/capacity and other families not inferred.
+
+## APA-P70.A04.S03
+
+**Проверить узлы окон, облицовки, перекрытий и кровельных примыканий** — VALIDATION / DONE_PUBLISHED / P4
+
+- Parent: APA-P70 → APA-P70.A04
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: junction-evidence-acceptance
+- Depends on: APA-P70.A04.S02
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: Для каждого узла классификация PASS_GEOMETRY/PASS_DOCUMENTED/PASS_ENGINEERING/NOT_VERIFIED; ложные approvals запрещены
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12)
+- Existing V2 runs: [APA-RUN-20261012-132353Z-construction-junction-qualification-s03](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-132353Z-construction-junction-qualification-s03/REPORT.md) (receipt verified)
+- Expected output: All49actual candidate native interface pairs independently graded:34PASS_GEOMETRY,1PASS_DOCUMENTED bounded source support,14NOT_VERIFIED,0PASS_ENGINEERING. New50x50mm timber/Beam-classified Morph contact75cm2/material/story/placement validated after save/reopen.95accepted GUID/body signatures preserved,96current GUID/38context. Current IFC45elements/38bounds matches/new IfcBeam material/11port links/12quantitymatches0mismatch.432Windows/LinuxPASS. Complete families, cladding, fixings/grades/structural capacity and visible3D remain NOT_VERIFIED. Qualification complete; whole-family construction acceptance not inferred.
+
+## APA-P70.A05.S01
+
+**Получить проверяемую расчётную схему и исходные нагрузки** — INTEGRATION / READY / P4
+
+- Parent: APA-P70 → APA-P70.A05
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: load-bearing-design-and-load-cases
+- Depends on: APA-P70.A03.S01, APA-P70.A02.S02, APA-P70.A04.S03
+- Related, check before duplicating: none
+- Acceptance: Нагрузки, расчётная схема, несущие стены/пролёты/фундаменты/стропила, комбинации и неподтверждённые допущения отдельно
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
+- Existing V2 runs: none
+- Expected output: Нагрузки, расчётная схема, несущие стены/пролёты/фундаменты/стропила, комбинации и неподтверждённые допущения отдельно
+
+## APA-P70.A05.S02
+
+**Использовать SAM/SAF/IFC и доступный проверенный расчётный движок** — BUILD / READY / P4
+
+- Parent: APA-P70 → APA-P70.A05
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: structural-engine-adapter-handoff
+- Depends on: APA-P70.A05.S01, APA-P70.A03.S02
+- Related, check before duplicating: none
+- Acceptance: Экспорт и сверка идентичности элементов, материалов, уровней; расчёт только в доступном проверенном инструменте, отсутствие доступа явно BLOCKED
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Экспорт и сверка идентичности элементов, материалов, уровней; расчёт только в доступном проверенном инструменте, отсутствие доступа явно BLOCKED
+
+## APA-P70.A05.S03
+
+**Применить результаты инженерного расчёта и повторно проверить узлы** — VALIDATION / READY / P4
+
+- Parent: APA-P70 → APA-P70.A05
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: engineering-feedback-to-bim
+- Depends on: APA-P70.A05.S02, APA-P70.A04.S02
+- Related, check before duplicating: none
+- Acceptance: Контролируемое внесение инженерных изменений в BIM; сверка с расчётом и запись необходимости согласования специалистом
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Контролируемое внесение инженерных изменений в BIM; сверка с расчётом и запись необходимости согласования специалистом
+
+## APA-P70.A06.S01
+
+**Сформировать инженерные требования и трассы на базе штатного MEP** — INTEGRATION / READY / P5
+
+- Parent: APA-P70 → APA-P70.A06
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: native-mep-semantic-network
+- Depends on: APA-P70.A03.S02, APA-P70.A02.S02, APA-P70.A05.S03
+- Related, check before duplicating: none
+- Acceptance: Проверенные системы труб/воздуховодов с сетью и портами, применимые нормы и явные незакрытые расчёты
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md)
+- Existing V2 runs: none
+- Expected output: Проверенные системы труб/воздуховодов с сетью и портами, применимые нормы и явные незакрытые расчёты
+
+## APA-P70.A06.S02
+
+**Проверить инженерные сети, проходки, коллизии и узлы пересечений** — VALIDATION / READY / P5
+
+- Parent: APA-P70 → APA-P70.A06
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: mep-junction-collision-acceptance
+- Depends on: APA-P70.A06.S01, APA-P70.A04.S02
+- Related, check before duplicating: none
+- Acceptance: Readback связности и коллизий, согласованные проходки/узлы без ложных PASS и без потери идентичности
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Readback связности и коллизий, согласованные проходки/узлы без ложных PASS и без потери идентичности
+
+## APA-P70.A07.S01
+
+**Получить согласованные планы, разрезы, фасады, спецификации и узлы** — BUILD / READY / P7
+
+- Parent: APA-P70 → APA-P70.A07
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: native-project-documentation-views
+- Depends on: APA-P70.A03.S03, APA-P70.A04.S02, APA-P70.A10.S01
+- Related, check before duplicating: none
+- Acceptance: Чертежи и ведомости из одной BIM-модели, соответствие срезов/количеств/версий, без ручных дублирующих источников
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml)
+- Existing V2 runs: none
+- Expected output: Чертежи и ведомости из одной BIM-модели, соответствие срезов/количеств/версий, без ручных дублирующих источников
+
+## APA-P70.A07.S02
+
+**Выполнить поэлементную и общепроектную проверку нормативов** — VALIDATION / READY / P7
+
+- Parent: APA-P70 → APA-P70.A07
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: revisioned-compliance-and-coverage-report
+- Depends on: APA-P70.A07.S01, APA-P70.A05.S03, APA-P70.A06.S02
+- Related, check before duplicating: none
+- Acceptance: Матрица применимых требований: PASS/FAIL/NOT_VERIFIED/NEEDS_SPECIALIST с источниками и журналом пересчётов
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Матрица применимых требований: PASS/FAIL/NOT_VERIFIED/NEEDS_SPECIALIST с источниками и журналом пересчётов
+
+## APA-P70.A07.S03
+
+**Собрать итоговый пакет BIM/IFC/PDF и доказательства проверки** — BUILD / READY / P7
+
+- Parent: APA-P70 → APA-P70.A07
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: verified-final-project-release
+- Depends on: APA-P70.A07.S02
+- Related, check before duplicating: none
+- Acceptance: Ревизионно согласованный комплект проекта с provenance и инженерными ограничениями; выпуск только после всех gates
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md)
+- Existing V2 runs: none
+- Expected output: Ревизионно согласованный комплект проекта с provenance и инженерными ограничениями; выпуск только после всех gates
+
+## APA-P70.A08.S01
+
+**Проверить полный цикл создания проекта на эталонном ИЖС** — VALIDATION / READY / P8
+
+- Parent: APA-P70 → APA-P70.A08
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: full-cycle-new-project-e2e
+- Depends on: APA-P70.A07.S03
+- Related, check before duplicating: none
+- Acceptance: По одному brief сформирован редактируемый расчётно обоснованный проект; сохраняется, повторно открывается и читается; отдельное live-разрешение
+- Owner/lease: unclaimed
+- Requires owner approval: True
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-PR16](https://github.com/dvikt33-ux/safe-bim-layer/pull/16)
+- Existing V2 runs: none
+- Expected output: По одному brief сформирован редактируемый расчётно обоснованный проект; сохраняется, повторно открывается и читается; отдельное live-разрешение
+
+## APA-P70.A08.S02
+
+**Проверить доработку единственного открытого существующего PLN** — VALIDATION / READY / P8
+
+- Parent: APA-P70 → APA-P70.A08
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: full-cycle-adapt-existing-e2e
+- Depends on: APA-P70.A08.S01
+- Related, check before duplicating: none
+- Acceptance: ADAPT_EXISTING: проект дорабатывается без переключения/изменения чужого PLN; изменение только с разрешением, воспроизводимый readback
+- Owner/lease: unclaimed
+- Requires owner approval: True
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
+- Existing V2 runs: none
+- Expected output: ADAPT_EXISTING: проект дорабатывается без переключения/изменения чужого PLN; изменение только с разрешением, воспроизводимый readback
+
+## APA-P70.A08.S03
+
+**Доказать расширяемость на другом типе здания и системах** — VALIDATION / READY / P8
+
+- Parent: APA-P70 → APA-P70.A08
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: building-type-extension-contract
+- Depends on: APA-P70.A08.S02
+- Related, check before duplicating: none
+- Acceptance: Новый тип здания или конструктивная система подключается без нового параллельного генератора и без регрессии старого проекта
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
+- Existing V2 runs: none
+- Expected output: Новый тип здания или конструктивная система подключается без нового параллельного генератора и без регрессии старого проекта
+
+## APA-P70.A08.S04
+
+**Принять ядро: задание → связное редактируемое здание → правка → readback** — VALIDATION / DONE_PUBLISHED / P0
+
+- Parent: APA-P70 → APA-P70.A08
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: editable-native-core-e2e-acceptance
+- Depends on: APA-P70.A03.S03, APA-P70.A03.S04
+- Related, check before duplicating: none
+- Acceptance: Один brief создаёт связное небольшое здание; все требуемые типы поддержаны, GUID/этажи/материалы/host/геометрия подтверждены; согласованная правка сохраняет GUID и не дублирует модель; сохранение и повторное чтение подтверждены. Четыре элемента и offline CI не достаточны. Инженерная/нормативная приёмка отдельно.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md), [ART-APA-ASSEMBLY-PLAN](../../../../../docs/research/apa-results/control/APA_ASSEMBLY_INTEGRATION_PLAN.md)
+- Existing V2 runs: [APA-RUN-20261011-200500Z-editable-core-acceptance](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md) (receipt verified)
+- Expected output: Один brief создаёт связное небольшое здание; все требуемые типы поддержаны, GUID/этажи/материалы/host/геометрия подтверждены; согласованная правка сохраняет GUID и не дублирует модель; сохранение и повторное чтение подтверждены. Четыре элемента и offline CI не достаточны. Инженерная/нормативная приёмка отдельно.
+
+## APA-P70.A08.S05
+
+**Адаптировать готовое ядро под установленный Archicad 30** — INTEGRATION / READY / P8
+
+- Parent: APA-P70 → APA-P70.A08
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: archicad30-existing-core-adaptation
+- Depends on: APA-P70.A08.S03
+- Related, check before duplicating: none
+- Acceptance: После установки AC30 подтверждены API/библиотеки/проектный сценарий тем же ядром; нет отдельного генератора. Отсутствующая установка — конкретный BLOCKED, не ложный PASS.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FULL-CYCLE](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/FULL_CYCLE_PROJECT_GOAL_AND_STORY_CONTRACT.md)
+- Existing V2 runs: none
+- Expected output: После установки AC30 подтверждены API/библиотеки/проектный сценарий тем же ядром; нет отдельного генератора. Отсутствующая установка — конкретный BLOCKED, не ложный PASS.
+
+## APA-P70.A09.S01
+
+**Подключить Native Model Dump, графовую связность и реальные 3D-проверки** — INTEGRATION / DONE_PUBLISHED / P2
+
+- Parent: APA-P70 → APA-P70.A09
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: integrated-native-3d-geometry-precision
+- Depends on: APA-P70.A08.S04
+- Related, check before duplicating: none
+- Acceptance: Native dump/NetworkX/Shapely используются через существующий readback; стыки, XYZ, story и host проверены на подтверждённых ошибках; 2D пересечение не считается 3D коллизией; ядро сохраняет работоспособность.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-SDK-SEO](../../../../../docs/research/apa-results/runs/2026-10-10/apa-discovery-20261010-102440-slinktrim-9f2b7.md)
+- Existing V2 runs: [APA-RUN-20261011-202800Z-native-geometry-integration](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md) (receipt verified)
+- Expected output: Native dump/NetworkX/Shapely используются через существующий readback; стыки, XYZ, story и host проверены на подтверждённых ошибках; 2D пересечение не считается 3D коллизией; ядро сохраняет работоспособность.
+
+## APA-P70.A10.S01
+
+**Оптимизировать конкретный стабильный сценарий с измерением результата** — INTEGRATION / READY / P6
+
+- Parent: APA-P70 → APA-P70.A10
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: stable-native-pipeline-measured-optimization
+- Depends on: APA-P70.A06.S02
+- Related, check before duplicating: none
+- Acceptance: Есть воспроизводимый baseline и измеримое улучшение времени/числа native calls/ресурсов без потери точности; OR-Tools/CP-SAT внедряется лишь при явных ограничениях и критерии качества.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md)
+- Existing V2 runs: none
+- Expected output: Есть воспроизводимый baseline и измеримое улучшение времени/числа native calls/ресурсов без потери точности; OR-Tools/CP-SAT внедряется лишь при явных ограничениях и критерии качества.
+
+## APA-P70.A11.S01
+
+**Подключить готовые компоненты совместимым пакетом** — INTEGRATION / DONE_PUBLISHED / P1
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: compatible-component-batch-v31
+- Depends on: APA-P70.A02.S04
+- Related, check before duplicating: none
+- Acceptance: Ready donor functions execute through shared XYZ/GUID/story/material/host context. Functional geometry/Details/MEP/IFC adapters integrated where implementation exists; research-only and missing provider functions explicitly identified. Independent optional modules disabled safely; no second writer or placeholder/catalog-only PASS.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json)
+- Existing V2 runs: [APA-RUN-20261012-010000Z-compatible-integration-v31](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-010000Z-compatible-integration-v31/REPORT.md) (receipt verified)
+- Expected output: Ready donor functions execute through shared XYZ/GUID/story/material/host context. Functional geometry/Details/MEP/IFC adapters integrated where implementation exists; research-only and missing provider functions explicitly identified. Independent optional modules disabled safely; no second writer or placeholder/catalog-only PASS.
+
+## APA-P70.A11.S02
+
+**Проверить объединённую систему в тестовом PLN** — VALIDATION / DONE_PUBLISHED / P1
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: connected-system-native-test-v31
+- Depends on: APA-P70.A11.S01
+- Related, check before duplicating: none
+- Acceptance: Reproducible combined native scenario uses retained graph/journal/writer/readback; source elements preserved, save/reopen verified. Source/offline/live/engineering statuses separate. Unsupported mandatory module never silently omitted.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json)
+- Existing V2 runs: [APA-RUN-20261012-011500Z-connected-system-v31](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-011500Z-connected-system-v31/REPORT.md) (receipt verified)
+- Expected output: Reproducible combined native scenario uses retained graph/journal/writer/readback; source elements preserved, save/reopen verified. Source/offline/live/engineering statuses separate. Unsupported mandatory module never silently omitted.
+
+## APA-P70.A11.S03
+
+**Исправить пробелы после системного теста** — INTEGRATION / PARTIAL / P1
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: system-gap-driven-development-v31
+- Depends on: APA-P70.A11.S02
+- Related, check before duplicating: APA-P70.A11.S06, APA-P70.A11.S07, APA-P70.A11.S08, APA-P70.A11.S09, APA-P70.A11.S10, APA-P70.A04.S01, APA-P70.A04.S03, APA-P70.A11.S11, APA-P70.A11.S12, APA-P70.A11.S13, APA-P70.A11.S14, APA-P70.A11.S15, APA-P70.A11.S16, APA-P70.A11.S17, APA-P70.A11.S18, APA-P70.A11.S19, APA-P70.A11.S20, APA-P70.A11.S21, APA-P70.A11.S22, APA-P70.A11.S23
+- Acceptance: Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason. UNIVERSAL_NATIVE_FIRST_20261014: Universal APA Archicad29 Windows11 development resumes. TRC project is excluded from current trials and further analysis/writes require a separate task. Existing authorized native test PLN only; priority actual external candidate load, true Grid create/read/edit/reuse and exact Stair native readback, then Roof contour/slope and connected BIM operations. Windows-only CI. Functional completeness precedes scale; 2D counts are not BIM scalability evidence.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json), [ART-P70-A11-S03-SAFE01-SOURCE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/pull/175)
+- Existing V2 runs: [APA-RUN-20261012-012500Z-gap-windows-sqlite-v31](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-012500Z-gap-windows-sqlite-v31/REPORT.md) (receipt verified), [APA-RUN-20261012-075300Z-functional-gaps-v31](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-075300Z-functional-gaps-v31/REPORT.md) (receipt verified), [APA-RUN-20261012-095401Z-functional-expansion-v32](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-095401Z-functional-expansion-v32/REPORT.md) (receipt verified), [APA-RUN-20261012-110611Z-connected-native-continuation-v32](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-110611Z-connected-native-continuation-v32/REPORT.md) (receipt verified), [APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-144857Z-native-beam-mep-reference200-followon/REPORT.md) (receipt verified), [APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-175944Z-wall-roof-actual-underside-native109/REPORT.md) (receipt verified), [APA-RUN-20261012-185427Z-four-real-wall-roof-native109](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-185427Z-four-real-wall-roof-native109/REPORT.md) (receipt verified), [APA-RUN-20261012-235115Z-bim-documentation](../../../../../docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-235115Z-bim-documentation/REPORT.md) (receipt verified), [APA-RUN-20261013-013642Z-knowledge-core-mcp](../../../../../docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-013642Z-knowledge-core-mcp/REPORT.md) (receipt verified), [APA-RUN-20261013-082134Z-native-documentation-followon](../../../../../docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-082134Z-native-documentation-followon/REPORT.md) (receipt verified), [APA-RUN-20261013-121018Z-model-first-building](../../../../../docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-121018Z-model-first-building/REPORT.md) (receipt verified), [APA-RUN-20261013-165220Z-native-spatial](../../../../../docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-165220Z-native-spatial/REPORT.md) (receipt verified), [APA-RUN-20261013-184337Z-grid-stair-exact](../../../../../docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-184337Z-grid-stair-exact/REPORT.md) (receipt verified), [APA-RUN-20261013-200350Z-grid-stair-live-checkpoint](../../../../../docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-200350Z-grid-stair-live-checkpoint/REPORT.md) (receipt verified), [APA-RUN-20261013-234433Z-true-grid-live-stair-runtime](../../../../../docs/research/apa-results/runs/2026-10-13/APA-RUN-20261013-234433Z-true-grid-live-stair-runtime/REPORT.md) (receipt verified), [APA-RUN-20261014-074612Z-universal-native-floor-contours](../../../../../docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-074612Z-universal-native-floor-contours/REPORT.md) (receipt verified), [APA-RUN-20261014-095400Z-runtime-identity-live](../../../../../docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-095400Z-runtime-identity-live/REPORT.md) (receipt verified), [APA-RUN-20261014-121132Z-native-stair-source350](../../../../../docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-121132Z-native-stair-source350/REPORT.md) (receipt verified), [APA-RUN-20261014-172915Z-full-native-command-roofs](../../../../../docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-172915Z-full-native-command-roofs/REPORT.md) (receipt verified), [APA-RUN-20261014-193327Z-mass-capability-integration](../../../../../docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-193327Z-mass-capability-integration/REPORT.md) (receipt verified), [APA-RUN-20261014-215514Z-executable-bim-workflows](../../../../../docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-215514Z-executable-bim-workflows/REPORT.md) (receipt verified), [APA-RUN-20261014-224516Z-sdk-functional-module-expansion](../../../../../docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-224516Z-sdk-functional-module-expansion/REPORT.md) (receipt verified), [APA-RUN-20261015-011839Z-sdk-runtime-connected-memo](../../../../../docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-011839Z-sdk-runtime-connected-memo/REPORT.md) (receipt verified), [APA-RUN-20261015-071450Z-sdk-component-context](../../../../../docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-071450Z-sdk-component-context/REPORT.md) (receipt verified), [APA-RUN-20261015-092957Z-native-positive-modules](../../../../../docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-092957Z-native-positive-modules/REPORT.md) (receipt verified), [APA-RUN-20261015-105500Z-native-original-reopen](../../../../../docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-105500Z-native-original-reopen/REPORT.md) (receipt verified), [APA-RUN-20261015-123508Z-native-linked-data](../../../../../docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-123508Z-native-linked-data/REPORT.md) (receipt verified), [APA-RUN-20261015-140914Z-native-parametric-mep](../../../../../docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-140914Z-native-parametric-mep/REPORT.md) (receipt verified), [APA-RUN-20261015-192322Z-native-memo-modify](../../../../../docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-192322Z-native-memo-modify/REPORT.md) (receipt verified), [APA-RUN-20261015-230555Z-native-owner-recovery](../../../../../docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-230555Z-native-owner-recovery/REPORT.md) (receipt verified), [APA-RUN-20261015-233124Z-native-owner-runtime](../../../../../docs/research/apa-results/runs/2026-10-15/APA-RUN-20261015-233124Z-native-owner-runtime/REPORT.md) (receipt verified)
+- Expected output: Observed gaps reconciled against donors/archives and fixed with real behavior and regression proof; no duplicated subsystem without reason.; Historical PR55 baseline: Published PR55 head3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2 stacked on PR54;31new tests,371/371Windows/LinuxPASS.; Historical PR55 baseline: Details73context/source/host/material/fact exchange, reciprocal two-section MEP, Generic Opening/SEO, specialized metadata and IFC host/port observations work together.; Historical PR55 baseline: Saved/reopened isolated PLN:27primary/59totalGUID, all original48GUID/geometry preserved; SHA256da37fa0fe9b1b255f1618a881a79eb9d4ae8b66993a99cb75fdba30cddc69bb4. Engineering/visibleUI NOT_VERIFIED.; Historical PR56 baseline: Current published draft PR56 head3a743a4f96a98acdcbb837946603f0681d9a1f54:403/403Windows host and Windows/Linux CI PASS; all11GitHub code blobs and all15publication blobs exactly match committed/generated bytes.; Historical PR56 baseline: LIVE_PASS working routed graph:7routes/9segments/12physical members/11reciprocal edges, one three-port-connected tee and two elbows; exact architectural collisions empty. Native default terminal is separately read back but open/outside routed scope.; Historical PR56 baseline: LIVE_PASS independent Details c4 timber part:source25x150mm section, actual10mroof span/slope/story/material, model-bound placement and empty exact collision readback; full8-dimension manufacturer assembly and native roof-child relationship not claimed.; Historical PR56 baseline: Save/reopen95GUID and37context records; all95resultant geometry signatures unchanged, original48/baseline59preserved. PLN SHA256dea93fe0fd520747bf4fee5f12d86372f57d972a7021b65029419d2d127892c8.; Historical PR56 baseline: Actual IFC37/37world bounds and all11native/IFCowner-pair multiplicities agree;44elements/19materials/39classifications/26ports. Twelve verified quantity comparisons match,0verified mismatch. Engineering/full receiver semantics remain NOT_VERIFIED.; Historical PR57 qualification: Current continuation: A04.S01-S03 qualification/source-bound support published. S10 ready Create reference selector found read-only; actual transition/terminal connection unverified. S06-S09 retain existing source/Shell/analytical/receiver gates. S04 waits real A11.S03 completion.; Historical draft PR57 headb1abd584585feb0f286621337986c8a5d3077507:432/432Windows host and Windows/LinuxCI PASS;96GUID/38context saved/reopened, all95accepted GUID/body signatures preserved. Native source c4/c5support contact75cm2 and timber/Beam classification;49interface grades with no family/engineering promotion; IFC38/38bounds/45elements/20material assignments/11port links.; Historical draft PR59 head744e0bd184a11f1de4a1cf16382d21aec6f8cfca on exact PR57 headb1abd584585feb0f286621337986c8a5d3077507:455/455Windows host and Windows/LinuxCI PASS,23new checks. All13code and11evidence/report GitHub blobs exactly match; publisher receipt DONE_PUBLISHED.; LIVE_PASS actual new route-local crossSectionReferenceId200 gives circular diameter0.2m and automatically connects the original terminal with reciprocal physical ports. Unique current preference row/identity/journal verified; no global preferences/APX changes. Full8route graph has2components; main circular/rectangular bridge remains S10 BLOCKED.; LIVE_PASS real native Beam25x150mm and Beam50x50mm with actual75cm2Beam/Beam contact, source dimensions, Wood material/story/profile and SDK-owned BeamSegments. Native vertical end cut gives73.1108100945cm2contact to retained Morph batten, explicitly distinguished from nominal75cm2. Original Morph support is retained. Single confirmed profile edit and independent modulo2pi reconciliation; zero mutation replays.; LIVE_PASS bounded new Wall/Roof Trim perimeter abutment3.236340608m2 with no new volume collision; not underside bearing. Four original upper Wall/Roof gaps unchanged. Reverse Wall trim metadata returns installed provider target-row error. SEO relation accepted but no incremental body change/underside goal; engineering and full family remain NOT_VERIFIED.; Historical PR59: LIVE_PASS saved/reopened107GUID/43shared context; all96PR57GUID/geometry/material/story preserved. Independent final readback and baseline collision pairs agree. PLN SHA25647366e08ecdc7cd5340480c7e0bd455e8ab0aaea64b1321085d9fdbad1a2591c.; Actual IFC50elements/43of43world bounds,24material assignments,12port relations,6opening hosts and18native/IFCquantity matches with0mismatch. True nativeBeam/IfcBeam distinct from retained Morph/IfcBeam and Morph/IfcBuildingElementProxy. Structural contact/Trim/SEO relationship semantics and full receiver compatibility NOT_VERIFIED.; Permanent MORPH LAST RESORT published in canonical operating instruction/plan and feature AGENTS; runtime creation/geometry edit requires documented checked native tool rejection and preserved mandatory BIM properties/relationships. Source c4/c5 must use real Beam. A04.S01-S03 DONE_PUBLISHED retained; S03 remainsPARTIAL and S04 waits its acceptance.; Historical PR59 next work: qualify a supported sized circular/rectangular transition and main bridge preserving accepted96GUID, and independently qualify native Wall/Roof underside bearing from verified geometry/source. S06-S09 external source, Shell/edit, analytical and receiver dependencies remain explicit; no new roadmap or writer.; Historical draft PR63 head7966db58ca8830b43938a03cc064bcc3e952a21e, exact PR59 parent744e0bd184a11f1de4a1cf16382d21aec6f8cfca.469/469Windows host and Windows/LinuxCI38287308901 PASS;14new focused checks. All6code blobs and12native/source/report blobs match GitHub exactly; publisher receipt DONE_PUBLISHED.; LIVE_PASS new true native Wall/Roof lower-face contact2.33623338255613m2 versus measured-source expected2.336233382576165m2. Actual lower principal BREP plane and contact face contours/holes verified; Wall body changed, all Wall vertices below underside. Materials/story/native types correct; native pair and architecture collision checks empty.; Working existing SceneWriter recipe:2native creates and1SubtractionUpwardsSEO; no Morph/new executor/prior accepted experiment replay. Shared actual planar face reader and actual sloped wall-cap overlap measure all4original upper Wall/Roof gaps. Original4gaps and accepted perimeter specimen preserved.; Requested skipPolygonHoles=true but native relation reads false. Flag metadata NOT_VERIFIED_REQUEST_READBACK_DIFFERENCE; actual underside geometry/SEOrelation independently proven. Initial strict flag-check failure retained in journal and reconciled read-only, zero native replay. GetFlags source ignores SDK return code; cause/application is not inferred.; LIVE_PASS saved/reopened109GUID/45shared records; all107accepted GUID/body/material/story signatures preserved, including prior96. Independent final geometry/network/collision readback PASS. PLN SHA2560d87954de1a0b75f0510c4bbd1a7424db2eb09fa928d5e0fb746c58d9a18f14d. User authorized renamed isolated copy; exact identity/saved hash and107baseline verified before writing; full paths/raw files stay local.; Actual IFC52elements/45of45world bounds/26material assignments/12port relations/6opening hosts/20quantitymatches/0mismatch. New true native Wall/IfcWall and Roof/IfcRoof BREP/material quantities agree. Native contact/SEOexport semantics, full receiver and engineering remain NOT_VERIFIED.; S10BLOCKED remains only sized circular/rectangular transition/main bridge: closed CreateMEPElements default-placement enum lacks sized ports; exposed route Place supplies empty per-segment section maps despite SDK support. SDK TransitionDefault is non-geometric settings, not a sized standalone factory. Existing8routes/two components/Ø200terminal pair unchanged; no ConnectLogically on retained routes, APX or global preference change.; Exact continuation: qualify the tested native underside recipe for required actual building interfaces, explicitly binding any intended target geometry change and edge overlap; retain GUIDs and do not invent overhang/fastening/load dimensions. S10 needs an exposed qualified route-local mixed-section and GUID-preserving physical connection contract; installed APX changes require separate authorization. Existing S06-S09 dependencies and S04 acceptance gate remain. A11.S03PARTIAL; A04.S01-S03DONE_PUBLISHED retained.; Current draft PR64 headb056cb76929a62047c82fd66961b72eb4d9078a8 on exact PR63 parent7966db58ca8830b43938a03cc064bcc3e952a21e.495/495Windows host and Windows/LinuxCI38292933894 PASS;26new checks. All6code blobs and12native/source/report blobs match GitHub; publisher receipt DONE_PUBLISHED.; LIVE_READ_ONLY_PASS current109GUID/body/material/story signatures, saved-file SHA and existing SQLite scene journal unchanged; known diagnostic Morph collision retained, no new collisions. Zero Create/Modify/Save/Open/IFC export; accepted PR63 specimen was not repeated.; Working four-target CLI joins actual Native Model Dump lower-face contours/holes, native typed details/materials/story, existing73Details/CSE source candidates and one shared Roof dependency. Four measurements VERIFIED; direct complete-cap repair NOT_APPLICABLE for all4 current boundary walls. Actual cap coverage east48.192771percent/north59.063104percent/south39.436896percent/west50percent.; Four correction plans bind exact source hashes and actual uncovered-cap polygons. First qualify a native SinglePlane Roof contour/edge design; then remeasure coverage before Wall-height+SubtractionUpwardsSEO. Existing inspected ModifyRoofs implementation rejects SinglePlane roofs despite schema polygon fields; native UI/SDK single-plane memo path needs qualification. No invented overhang/fixing/bearing/load dimensions.; Same SceneWriter now supports narrowly qualified exact ModifyWalls height. Two-operation application has OFFLINE_PASS synthetic native/SQLite callback checks: exact reviewed plan and separately approved copy, complete baseline protection, actual cap/underside/contact/material/story/placement/SEO/collision checks, stop on unknown result. No new LIVE write acceptance. All four original target edits require separate copy and operation authorization.; Read-only retained SEO relation queried from target/operator sides: both skipPolygonHolesfalse vs recorded requesttrue. Metadata/cause/applied flag remain NOT_VERIFIED. SDK bit mapping agrees; source getter ignores SDK error code. Hole-free specimen geometry cannot establish hole-skip behavior. APX untouched.; Exact next native step: qualify source-bound SinglePlane contour editing and approved roof contour in a separate authorized saved copy, then rerun the existing four-target assessment; only APPLICABLE_NOT_EXECUTED complete-cap plans may enter the same writer. S10 remainsBLOCKED with existing source/port/GUID-safe main-bridge reason, no repeated MEP transition investigation. Existing independent eligible task continues after publication. S03PARTIAL; A04.S01-S03DONE_PUBLISHED retained.; PR67 source-verified installed Archicad29 DevKit polygon example explicitly accepts plane roofs and uses GetMemo/ChangeMemo with polygon/edge/side-material/roof-edge masks. Sample may clear edge customizations; preservation/synchronization must be qualified. Exposed installed callable edit and binary/source correspondence NOT_VERIFIED; inspected ModifyRoofs rejects SinglePlane. No installed APX change.; Working non-executable SinglePlane candidate in existing native adapter binds actual source body/details, native GUID/material/story, memo/principal contours and exact sourced design proposal. Current native memo/reference contour matches upper actual face; lower footprint has actual29.887626mmXY offset. Original four junctions and their geometry/plans remain unchanged. Source holes/topology changes reject without a qualified memo contract.; Exact native next step: approve actual roof design/contour and a separate saved copy, qualify an available exposed SDK/UI memo operation preserving all edge data/holes, then use the existing SceneWriter once with independent actual lower-contact/collision/GUID/material/story and Save/Open readback. Candidate/source contract is not LIVE write acceptance. S03PARTIAL/S10BLOCKED retained.; Published draft PR70 head f5aa4754a0ace251e8541001f17f6fa8eddfe8e5 based on exact PR68 head29aa06a6e9bbef0d991bea922e1ad4101ab29bdd.14newtests;587/587Windows host and Windows/Linux CI38323722458PASS. Six code blobs and architecture evidence/report/receipt independently matched GitHub.; Architectural documentation adapter uses the existing SceneWriter/SQLite ledger, Native Model Dump, BIM facts and existing IFC planar BREP quantity adapter. No second executor/drawing engine/controller. Normative database/executor/policies and GitHub search/token-optimization work excluded and untouched.; LIVE: native floor0 saved associative plan, one new native Section and one native InteriorElevation exterior projection;4explicit saved ViewMap entries. Section readback16selected owners; limited projection4selected owners (Column/Door/Wall/Window). Reused true Elevation view is empty: NOT_VERIFIED as full facade. CreateElevations and vertical2D primitive readback contracts absent; rendered/visible drawing acceptance not claimed.; Six CSV native-fact specifications share one immutable modelVersion for19primary elements:9Wall,2Slab,2Column,4Window,1Door,1Roof. Wall/Slab quantities use actual resultant bodies; Column parent body absent and Door quantities unsupported remain explicit. Native interactive schedule row/configuration contract absent; CSV is not native schedule acceptance. Some Native Model Dump display labels damaged; identities/numeric stories retained, damaged labels not promoted.; One new separate native Wall changed height1.0->1.2m and actual joined volume0.085->0.102m3. Native floor cutfills15->16; adjoining Column drawing facts changed while its native3D signature stayed unchanged. Explicit public refresh regenerated linked native databases and owner readback after change and after Open. No background watcher; full vertical drawn-coordinate synchronization NOT_VERIFIED. Original ambiguous Modify ledger event preserved and independently reconciled without repeat.; Save/Open PASS with independent final native readback: original109GUID/geometry/material/story signatures unchanged; full inventory121 includes newWall+CutPlane+InteriorElevation+9native Object markers/subordinates.112explicit retained persistence identities plus separate ViewMap/database checks. Authorized isolated testPLN savedSHA256c7350d717e223fd5ec8e82dbaa44197e4483a54b31c54c3913e317a0893054c9. No new testWall volume collision. No Morph/APX/global preference change; raw identities/PLN/paths remain local.; A11.S03 remains PARTIAL and A11.S10 remains BLOCKED. This is preparatory architectural functionality for A07.S01; dependencies and status unchanged, not closed. Normative/engineering acceptance NOT_EXECUTED, PDF/nativePublisher output NOT_EXECUTED. Next available documentation work: qualify true exterior Elevation placement, vertical primitive readback and native schedule rows through the same executor, then actual publisher-file proof. No normative/search re-research.; Published draft PR71 head88169d358e4c329f8959f557c944300adcec2df9 on exact PR70 f5aa4754a0ace251e8541001f17f6fa8eddfe8e5.19newtests;606/606APA and102/102upstream Windows host/Windows+Linux CI38332614305 PASS including actual separate MCP stdio client.29code blobs and evidence/report/receipt independently read back; publisher receipt DONE_PUBLISHED.; StageI DONE: existing PR69 component tools/apa_knowledge_graph transferred19files unchanged from merge64cec581b257b209a097556ae19d498e53631ba1, eight runtime source hashes pinned. APA core read-only feature-flag entry points directly call original gateway/graph/sections/multidoc/delta/bootstrap/machine/mcp modules. Default flag off; no second search engine/task controller/publisher/normative executor.; Current GitHub source capture at revision128: project/status/lease and S-ID/ART-ID, shared document references, scheduling dependencies, possible changed-artifact impact, next eligible suggestions without claim, source-bound TDK design_only trace and pinned small PR70 source fragment. Each live request checks current canonical commit/plan bytes, graph integrity and returned source bytes. LOCAL_CHECKOUT explicitly local-only, cache never task authority; source texts untrusted data.; Actual canonical plan127->128 CAS reservation is detected as STALE_INDEX_REMOTE_PLAN on an independently retained historical source copy; safe source refresh/original bootstrap rebuild restores verified response. Corrupt source/forged index/denied source class/unavailable remote reject without authority fallback. Caller SOURCE_VERIFIED labels do not grant verified field propagation; only operator-reviewed exact lineage digest allowed. No guessed semantic edges or engineering/normative promotion.; StageII localMCP DONE: official Python SDK2.3.0 actual client launches separate stdio server and calls only apa_retrieve for task/artifact and denied source class. No model-supplied paths, BIM writes or task management. Target ChatGPT registration/call NOT_VERIFIED; current official Secure MCP Tunnel/ChatGPT operator steps documented, account/workspace association unavailable here. No server registration, tunnel, external deployment or paid model calls.; StageIII measured five real core queries and ordinary GitHub plan GET separately: payload bytes/chars, latency, GET counts and o200k_base tokenizer proxy. Captured raw plan286718bytes/77867proxy tokens; compact query payloads approximately386-662proxy tokens. Exact requests use2freshness GETs, section case5, ordinary plan GET1; no universal token/latency/call saving claim. Exact oracle91tasks/173artifacts/40shared-reference pairs has0failures; broad semantic missed/false dependencies and actual billed GPT tokens NOT_MEASURED. Prior research benchmarks retained.; PR70 documentation/BIMGraph/SceneWriter and normative modules unchanged; full587prior tests retained within606. Zero Archicad calls, PLN/APX/main changes in this package; prior saved native121inventory is historical evidence, not newly checked live. Normative parallel system untouched. A11.S03 remainsPARTIAL/A11.S10BLOCKED; A07 status/dependencies unchanged. P50.A01.S04 not admitted: compatible core scope already usesA11.S03; broader80question semantic proposal remainsNEEDS_EVIDENCE for independent audit.; Next available knowledge step: operator-supported ChatGPT tunnel/endpoint registration and actual apa_retrieve call with fresh provenance. On any canonical revision change, fetch the operator-owned source checkout and rebuild the same cache or returnSTALE_INDEX; no automated CAS claim. Independent native documentation work still needs trueElevation/vertical primitive/native schedule-row contracts. No repeated normative research or new roadmap.; Published draft PR73 head93557ed0cd59c471b0f903a03708ed88c8feb31b on exact PR71 head88169d358e4c329f8959f557c944300adcec2df9.17newtests;623/623APA host and Windows/Linux CI38367671224PASS;102/102upstream graph tests and core/MCP integration in each environment. Six code blobs, native evidence/report/receipt independently read back. Full committed diff privacy scan PASS.; Real native exterior Elevation copied from an accepted template via retained SceneWriter/SQLite, without CreateElevations contract or InteriorElevation/Morph substitution. Initial finite segment captured half the building; user screenshot identified scope failure. Only newly created Elevation movedprojectY-5m. Rebuild/update/readback and rendered native PDF now show full west face, both stories/windows and complete roof. Native roof horizontal span8.029912m vs actual BREP projection8.029888m within0.0001m. Visible owners9->12 are not used alone as full-facade proof.; New associative native Section dimension reports0.20000006m actual Slab thickness with5native witness coordinates and verified SectionElement->Slab ownership. Native Drawing fill contours32plan/34section; inverse Drawing-transform vertical levels agree with dimension witnesses within0.000001m. Drawing2D/paperXY/UV are not projectXYZ. Facade fill contours, full line/text and per-contour model ownership remain unexposed/NOT_VERIFIED.; Three new saved views frame plan/Section/Elevation at1:100; one native A2 Layout/master with3printed native Drawings. Preliminary oversized new Drawing parked offsheet and retained. GUID domains distinguished. Provider source-link GUID differs from requested ViewMapGUID: metadata identity NOT_VERIFIED. Controlled newplan view scale100->125->100 produces native Drawing0.01->0.008->0.01, while clipping frame remains fixed; behavior independently proved.; Existing native Layout Publisher selected new sheet and generated oneA2PDFpage. File hash/pages/titles/scale/render verified afterSave/Open. Publisher2views produced65pages despite2selected items and is not accepted as a subset. New empty local output directories; native empty-success reply is insufficient without file proof. No global Publisher preferences/APX changes. Local native PDF and processed public PNG retained; raw paths/PLN/full dumps excluded.; Save/Open and independent final readback: original121GUID/BREP/material/story signatures unchanged, including original109; all126current main identities persist. Added Elevation+4native Objects. Native dimension/Layout/Drawings/ViewMap/database IDs separately verified. Physical primary modelVersion unchanged; no new physical BIM construction or testWall change. Historical PR70 edit-synchronization proof retained, not claimed as a fresh BIM-edit test.; Layout ShowAllIn3D error-2130313109 uses the same writer for a view-only floor0 activation, exact identity/saved-byte checks and subsequent complete native-signature proof. Historical UNKNOWN_OUTCOME events kept and independently reconciled, no blind Create/Modify retry. AfterOpen Drawing fill caches initially absent; known-success update onlynewDrawings restored32/34contours.; 13native Schedule definitions discovered; native rowread/configure contracts unsupported. Existing six-type CSV specification adapter retained without duplication. Main APA orchestrator actually queried existing read-only Knowledge Graph with GitHub-current revision129 beforeclaim130. KG/search implementation and normative-system code/branches/policies unchanged.; A11.S03 remainsPARTIAL; A07.S01 not closed and dependencies preserved; S10BLOCKED unchanged. No normative/engineering drawing acceptance. Next: supported native schedule row/configuration contract and complete vertical primitive/owner mapping; require actual rendered projection extent for all future facade placement acceptance.; User changed priority to MODEL_FIRST2026-10-13. Cancelled multi-sheet follow-on performed fresh126GUID/journal/identity read-only preflight and main APA Knowledge Graph query132, zero new native writes/artifacts. PR73 retained. New audited A11.S03 acceptance package creates/edits/verifies a complete separate native two-story building through existing generator/SceneWriter. Historical DONE_PUBLISHED criteria retained; no full-building DONE claim.; Model-first scope audit preserves historical DONE_PUBLISHED and cancelled documentation checkpoint. Draft PR74 head5a3a9201a715a5528c93bed4a5318e2acb32eea7 exact parentPR73 93557ed0cd59c471b0f903a03708ed88c8feb31b;10code blobs matchGitHub.15newtests;638/638APA Windows host/Windows/LinuxCI38394734173PASS;102upstream tests and actual core/MCP smoke each. Canonical native evidence/report/receipt and complete committed privacy scan verified.; Existing authored intent/BIMGraph/CSE/material pack/SceneWriter now creates one native21-element two-story test model:10Walls,2Slabs,6Windows,2Doors,1SinglePlaneRoof. NoMorph/newgenerator/secondexecutor. Actual storybindings0/3m; outerWall-face Slab footprint,0.2mSlab and lowerWall2.8m; upper editable uncutWall4m; testRoof slope0.05rad/thickness0.2m. Dimensions/materials/structural roles are explicit TEST inputs, not engineering design.; Actual native lowerRoof face/memo offset measured and corrected through an owned native translation. Five upperWalls receive SubtractionUpwardsSEO with actual sloped sharedface areas and native zero-volume collision proof. One connected component21using physicalBREPcontact/nativehost edges. Native Category_StructuralFunction actual editable enum resolved:8exteriorWalls bearing,2partitions nonbearing. Native readback afterSave/Open PASS; no structural-capacity inference.; SourceRoof level6.0->6.2m editsoneownedRoof withoutCreate; existingSEO makes all5upper resultantWall caps rise0.2m while memo.height4m remains. HostedWindow width1.2->1.4m preservesGUID/host and changes actualhostWallBREP. Existing snapshot/modelVersion delta6then2changednativefacts,0added/removedGUIDs. Exact sourceDiff scopes use sameSceneWriter/journal with retained126signature gates before each native write.; Two distinct clear-zone21-element scenarios verified. Public orchestrator createdall21successfully then failedread-onlyGetSolidElementLinks allowance. Fixedrouter and independently reconciledcomplete existingGUIDset with publicfinish_created_model, neverrepeatedCreate. Partial/unexpectedSEO sets remainmanualreconciliation, complete links and source areas persisted. Final completionreuse0Creates/0SEO/0propertywrites and168signaturesunchanged.; Final model168mainGUIDs saved/reopened with independent all168body/material/story signatures. Original126includes accepted121/109 preserved, editedprototype147 preserved. Primarysecondbuilding21oneconnectedcomponent and nointernal/new-to-retained nativevolume collisions. Additional firstprototype21vsoriginal126 nativecollision query zero. Historical diagnosticMorph/roof collision retained. NativeUI inspection notperformed; availablebody/regeneratedview/filter scope explicit.; Nativeaxes blocked:installedCreateObjects lacksSDKGridElement variationcontract; genericStructuralGridObject notacceptednativeGridtool. Globalstoryediting requires separatelyauthorizedstory-isolatedproject toprotectoriginalgeometry. SinglePlaneRoof contour/slope edits unqualified. NewhostedDoor/Windowvoidsverified; noGenericOpening/Staircreated; sourceStairrequirement remainsNOT_VERIFIED. RequestedSEOskipPolygonHolestrue readsfalse; holes rejected andflagNOT_VERIFIED. BodylessExternal semanticsNOT_VERIFIED. These are model-first acceptance gaps, not changes to historicalDONE criteria.; Existing plans/Sections/Elevations/PDF/CSV and PR73 code preserved; cancelledmultisheet expansion notcontinued. Normative/search/KnowledgeGraphimplementation/APX/main/master unchanged. Actual mainorchestrator read-onlyKnowledgeGraphquery atGitHubcurrentplan133. A11.S03PARTIAL/A07dependencies/S10BLOCKED preserved. Next:supportednativeaxescontract and separatelyauthorizedstory-isolatedcreate/editcycle, then broaderqualifiedhost/Roofedits and sourceStair.; Native spatial continuation published in draft PR75 head 8ee3fcd89efa5220dc4d1ceb4fb92a26e0d8c07f on exact PR74 base 5a3a9201a715a5528c93bed4a5318e2acb32eea7. 30 new tests; 668/668 APA Windows host and Windows/Linux CI 38416422147 PASS, 102 upstream tests and actual core/MCP smoke each. All 17 code blobs and processed canonical evidence/report/receipt match GitHub. Initial Linux synthetic target-path test corrected; no native replay.; Fresh separately authorized story-isolated project initially contains 20 native template marker/Elevation references and zero available physical bodies. Same-template shared GUIDs were initially misclassified as copied model; interpretation corrected by native body/library readback. All 20 references preserved. Previous 168 accepted model signatures and saved bytes independently unchanged.; Native SetStories inserts actual datum story ID4 while preserving floor IDs1/2/3. Existing generator creates 21 native elements in isolated project. Real global height change 3.0 -> 3.3m produces native levels 0/3.3/6.3/9.3m: two occupied floors plus two datum stories. Upper Walls/Slab/Roof move through global stories, not Z-only MoveElements. Five lower Walls change 2.8 -> 3.1m under 0.2mSlab. Four upper Window sills left at0.7m are restored to authored1.0m by exact ModifyWindows, preservingGUID/host. ZeroCreate/MoveElements during height edit; five actual sloped Roof contacts and nativeSEO remain.; One true native concrete Stair from installed source Favorite connects floors0/3.3m. Source width1m/20risers/preferred going0.35m and derived test riser0.165m are explicit test data. Actual native20Risers/20Treads/1Structure plus60auxiliary Objects. One nativeSlab hole derives actual1x6.4mBREP footprint. Slab outer ring/GUID/material/floor/thickness preserved by semantic native-ring comparison. Real upperSlab contact0.3342017047m2, zero upperSlab nativevolume collision; intentional lower foot0.1membed recorded separately from engineering capacity.; Native Stair solver changes requested going0.35 -> 0.32m. Official precise property readback gives going0.32/riser0.165/width1/line length6.4; rounded localized strings are not numeric acceptance. Source-going NOT_VERIFIED, installed contract lacks going-lock and nativeStair baseline/parameter Modify. Favorite export-7003 wrote mainXML scalar data but completeFavorite/GDL bundle remainsNOT_VERIFIED. Ten auxiliary Object owner GUIDs outside availabledump remainNOT_VERIFIED.; Final new saved revision Save/Open both return nativePASS under120sload timeout. All143identities/signatures persist:20template+21building+102Stair-related IDs (1root/41parts/60auxiliaryObjects). Twenty-two primary elements form one actual physical component by existing BREP/host/NetworkX logic; no other architectural volume collisions. Original168saved/live unchanged. ExistingStairpacket replay fails on baseline before anywrite. NoMorph/secondexecutor/nativepreferences change.; TrueGrid runtime BLOCKED: installedCreateObjects has no Grid tool variation contract. Source-only GetNativeGridDefaultsV1 uses SDK29API_ObjectID+APIVarId_GridElement actual defaults and parameter names, compiles C++20, registers through existing overlay. NoAPXinstalled/noaxescreated/fullAPXlinking notclaimed; unrelated documentation extended-pen compile gap left untouched. Minimum runtime: nativeGrid variation/defaultparameterread/create/readback/stableGUIDedit. Semantic BIMGraphaxes retained.; Historical UNKNOWN ledger rows preserved. Local Wall router refusal proved zero native dispatch before distinct reconciled scoped corrections. First41Open30s timeout independently reconciled without blind retry. One successful nativeSlab-hole write had literal-contour callback failure; actual rotated/closed/quantized contour, BREP and contacts independently proved without ModifySlabs repetition. Final143Save/Open has native repliesPASS. Private UTF8 story-label recovery recorded explicitly.; Canonical single task A11.S03 staysPARTIAL; historicalDONE/A07dependencies/S10BLOCKED preserved. Existing documentation/normative/KG/search/main/master/APX unchanged. Mainorchestrator read-only KnowledgeGraph used GitHub-current134 before CASclaim135; publication rechecks owncurrentclaim. Next: qualify trueGrid runtime and strictStairgoing edit using existingSDK overlay; installing changedAPX requires separate permission. Preserve original168and accepted143 and never replay creation.; Grid/exactStair package in draft PR76 head bc8f8575ed65e308e10c5ac5f573b7d8ad9466a6 on exactPR75 8ee3fcd89efa5220dc4d1ceb4fb92a26e0d8c07f. 21newtests;689/689APA Windows host and Windows/LinuxCI 38448023873 PASS,102upstream tests/core-MCPsmoke each. All15code blobs and canonical processed report/receipt verified. BUILD/OFFLINE/SOURCE proof is explicitly notLIVE or newSOURCE_DIMENSION_PASS.; Full WindowsReleaseSDK29/C++20 APX compiles/links with /WX. NativeGrid4contracts: trueAPI_ObjectID+APIVarId_GridElement defaults/read/create/edit, genericvariation rejection, actualsourceparameter names/types/descriptions, expectedposition editguard and retainedGUID. Existing semantic axes bind to verifiedactualnative library role mapping; missing mapping and renderedspan remainNOT_VERIFIED pendinglive. Mainorchestrator delegates to existingSceneWriter; completedSQLite creates reuseGUID, UNKNOWN neverretries. Coordinate edits return updatedsemanticaxis/nativebinding; no secondexecutor or genericObject/Morph substitute.; Actual FavoriteXML hash ae2ac9b234889b75835062356cd293ea9881d7a839e68d68dca5106de5a3296f has active2R+G0.60..0.65m,going0.25..0.35m,riser0.15..0.20m. Rise3.3/20 givesR0.165; requestedG0.35 ->0.68 conflicts0.65. NativeG0.32 reaches0.65 and matchesPR75independentprecise readback. Source-compatible testcases3.0/20/G0.35 and3.3/22/G0.35;23risers violatesminR. These are Favoriteconstraints, notSP/GOSTacceptance or nativecreatedsamples. Requestedbaseline6.65/nativewalkingline6.4 remainseparatefacts; completebaseline-solvingcausality pendingdetachedSDKprobe.; NativeStair4contracts: exacttype/count/locks/rules/baseline/walkingline read; detachedSDKsolving withoutmodel/defaultwrites; lockedsource creation through existingproviderFavorite handling; oneownedroot edit with expectedheight/going/count. SourceXMLhash/active-rules gate denies incompatible case beforeCreate. SDKsolver changedsource dimensions/baseline deniescreation; exactnativeNumeric/rule readback remains mandatory. Accepted0.32Stair untouched; hierarchicaledit onlynewtestsample becausechildGUIDchanges possible. MainFavorite export stayspartial, nofullGDLbundleacceptance.; Read-only94file runtime-source snapshot preserves originaldirty Tapir checkout. Candidate source registry includes all263old documentednames and predicts274names:8newGrid/Stair and3prior document endpoints registered by repairedoverlay. Source registry is not runtimeacceptance. ExistingLine extendedpenSDK29compilecast fixed usingeffectiveindex; originalTextshort unchanged. NoSheet/layout,normative,KG,search ormain/master edits. InstalledAPXhash dc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7 unchanged; accepted143/168savedfilebytesmatch. Zero native writes thispackage, no newSave/Open/livePASS.; READY candidateAPX SHA256 8ad672092aa93e4bf1b4d469cbf7840cb60acd538820183bb68d5d6786ea221d; package APA_Grid_Stair_SDK29_Candidate_20261013.zip SHA256 07715253d6a3a73ec6b61a408a0200c70b5c2048f49a8fa1cce33546525dee94. Binaries,fullprivatepaths,PLN andrawtechnicaldumps notcommitted. Separate deployment permission remainsDEP-APA-GRID-STAIR-APX-LOAD. Preparedisolatedcopy basenameAPA_Grid_Stair_Exact_Test_01.pln: freshidentity/port/hash/journal, installedschema and actualGridlibraryroles, detachedStaircases beforeonecompatible exactnewStair; nativeaxiscreate/edit/reuse, independentreadbackandSave/Open,retain143/168andacceptedStair. BuildcannotstandinforLive.; A11.S03 remainsPARTIAL and claimreleased afterpublished checkpoint. All91S-ID/history/A07dependencies/S10BLOCKED preserved. Mainorchestrator used read-onlyKGcurrent137 beforeCAS138. Next exactgate: userpermissiontocandidateAPXloadandisolatednativeprobe. NativeGridrenderedspan and0.35Stairsource-dimensioncriteria stillNOT_VERIFIED; ENGINEERING_NOT_VERIFIED. Roofcontour/slope development follows actualGrid/Staircriteria.; PR77 c1b4e1a565bcd903273933d8917608df156ac600 preserves exactPR76 parent bc8f8575ed65e308e10c5ac5f573b7d8ad9466a6. Eight new exactStair SQLite completion/drift tests;697/697APA host and Windows/LinuxCI 38459091689 PASS,102upstream graph tests/core-MCPsmoke each. Four committed code blobs and canonical report/receipt independently verified. Native Grid/Stair acceptance remains NOT_VERIFIED; no new samples created.; Existing authorized APA_Stories_Grid_Stair_Test_01.pln is the sole current target. Previous proposed new APA_Grid_Stair_Exact_Test_01.pln superseded by direct user instruction; no newPLN/building created. All143accepted GUID/geometry/material/story signatures and native story structure unchanged after two UI module-switch Save/Open cycles. Separate original168saved bytes match. Saved143filehash changed after Save and is recorded separately from unchanged signatures; local current-state hash updated with recovery provenance, historical snapshots/journal preserved.; User explicitly authorized temporary test-instance Tapir switching without installedfile overwrite. Candidate exactPR76APX SHA2568ad672092aa93e4bf1b4d469cbf7840cb60acd538820183bb68d5d6786ea221d verified. Manager displayed original installedpath for bothTapir entries after externalcandidate selection; automatic approval review rejected applying ambiguous configuration as potentially loading wrongmodule. Candidate notloaded; originalmodule restored and actualprocessmodules/schema read back. InstalledAPX bytes unchanged, otherinstances not reconfigured; verifiedlocalbackup retained. This is a pathidentity blocker, not missing general user authorization.; Freshactualschema retains263oldcommands; all8newGrid/Stair endpoints absent. NativeGrid defaults/actualrole mapping/renderedspan and detached3.3m/22R/0.15m/0.35m Stairsolver/newsource dimension remainNOT_VERIFIED. No Create/Modify/newnativeStair or acceptedStair edit. UIdeploymentSave/Open was separatelyrecorded and not mislabeled asSceneWriteroperation; existing modelledger unchangedPASS52/UNKNOWN3, no blindretry.; ExactStair completedPASS now reuses sameSceneWriterSQLite rootGUID with0Create, after sourceXML/rules/hash, targetbinding, currentsavedhash, retainedgeometry, exactnativefield/rule checks. Unknown/unverifiedhistory or changedsource cannotreplay; explicitownededit/reconciliation required. WorkingOFFLINE skeleton extends existingmainorchestrator, no secondexecutor. LiveREPEATABILITY and GridLIVE/StairSOURCE_DIMENSION remainNOT_VERIFIED, ENGINEERING_NOT_VERIFIED.; Publishedcheckpoint APA-RUN-20261013-200350Z-grid-stair-live-checkpoint with correctedgapregister/roadmap and exactGitHubreadback. A11.S03PARTIAL; A07deps, S10BLOCKED,91S-ID/history preserved. Nextgate: unambiguously load external exactcandidate in sameapprovedinstance, independentlyverify actualmodulepath/hash andfresh8commands, qualifyGRELdefaults and detachedStairsolve before newone-samplewrites, nativegeometry/renderedspan/edit/reuse andSceneWriterSave/Open. Userassistance may be necessary for ambiguousmanager selection; no installedAPXoverwrite or otherinstancechanges withoutspecificpermission. Roofcontour/slope follows actualGrid/Staircriteria.; Direct user priority override REAL_PROJECT_FIRST_20261014 recorded while APX restoration was completed; existing TRC has 1033 native 2D elements on three actual stories and zero available resultant 3D bodies. Two authored upper-floor contours with atrium holes selected for a bounded native Slab plan; no production write approval inferred from generic continue. Native execution awaits explicit scoped authorization; A11.S03 remains incomplete.; Direct user correction UNIVERSAL_NATIVE_FIRST_20261014 supersedes the previous practical TRC target. TRC read-only checkpoint is preserved separately; zero native Create/Modify/Save/Open there, proposed floorplates cancelled before authorization. Installed original APX SHA verified restored and legacy registration restored. User confirmed all Archicad closed; previously authorized external test-instance switching resumes without installed APX replacement. Historical completed tasks remain unchanged.; PR79 60a78e0cd55fc4951c1de3c8d060adf4f9538134 exact PR77 parent c1b4e1a565bcd903273933d8917608df156ac600. True native GREL Grid1created, independently read and edited same GUID; zeroCreate reuse before and after SceneWriter Save/Open. All143 original GUID/geometry/material/story signatures unchanged, saved144. GridCRUD/persistence LIVE_PASS; rendered complete wire-span NOT_VERIFIED, not inferred from marker BREP. No building recreated/newPLN/Morph/acceptedStair edit.; Native Grid parameter script uses degrees input while SDK memo uses radians; Object.angle and AC_Angle are distinct.90degrees readback1.570796327radians. Earlier wrong-unit edit remains UNKNOWN_OUTCOME, reconciled by actual read then separate corrective intent. UI-observed owned-axis placement drift corrected after143preservation proof; causeNOT_VERIFIED. JournalPASS59/UNKNOWN4 preserved; no blind repeats/deletions. Existing BIMGraph/SceneWriter and source bindings retained.; Candidate actual moduleSHA8ad672092aa93e4bf1b4d469cbf7840cb60acd538820183bb68d5d6786ea221d and fresh274schema/263oldcommands/new8 verified. Explicitly authorized temporary installed replacement unblocked loading. OriginalAPX SHA dc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7 and originalsingle registryvalue restored byte-exact. Post-restoration test-project opening/readback is PENDING_USER_OPEN. New commands are not claimed permanently installed.; Detached Stair3.3m/22risers/0.15m/0.35m source-compatible probe reset connection and Archicad process disappeared. Exactly1Evaluate,0CreateExact/ModifyStair; saved144 bytes unchanged. FailurecauseNOT_VERIFIED. Native baseline local vs request world; qualified frame absent. NewexactStair writes require pinned detached PASS bound to source/target/savedmodel/retainedgeometry/schema; missing/failed/stale proof and knownterminatingcandidate denied. CompletedverifiedSQLite reuse avoids solver/Create. SOURCE_DIMENSION and ENGINEERING_NOT_VERIFIED.; 707/707host and Windows-onlyCI 38485644027 PASS,10newtests,102upstream/coreMCP PASS. HistoricalLinux results preserved. Mainorchestrator KG read current145 before completion146; implementation unchanged. Report/evidence14files/receipt APA-RUN-20261013-234433Z-true-grid-live-stair-runtime GitHubbyte-readback verified. A11.S03PARTIAL, A07 dependencies/S10BLOCKED and other90tasks preserved. TRC excluded; normative/search/documentation implementation untouched. Next: correctedSDK detached memo/base-plane candidate, build then separateauthorization and detachedqualification beforewrite; Roofcontour/slope independent native contracts follow.; Resume same-owner native runtime/source-contour work after resource interruption. No competing claim overwritten; temporary review-limit denial executed no test action. Original APX and saved144 preserved; supplemental post-restoration144native readback completed with0modelwrites. Newcontour/stair candidate writes still require specific separate approval.; PR80 cb73cd578c7cd7577f80397920d9e81b8d09c6e1 begins at exactPR79 60a78e0cd55fc4951c1de3c8d060adf4f9538134 and preserves stacked ancestry. Existing compiler now accepts authored nonrectangular floor contours/trueholes by story and emits native Slab graphs; targeted contour/hole delta emits1ModifySlabs,0Creates, preserves GUID. SameSceneWriter/SQLite; no newgenerator/controller/renderer.; ARCHICAD_LIVE_PASS:1L-shaped nativeSlab10x8m/2x2mvoid/0.2m created, then outer11x8m/void3x2m edited sameGUID. Actual native memo and closed BREP top/hole contours prove60to62m2, exact current acceptedSlab material.3modelcalls=1CreateSlabs+2ModifySlabs,0extraCreate in delta; native collisionsnone. Testparameters only, engineeringNOT_VERIFIED. Save/Open and separate145readbackPASS; all144previous signatures includingoriginal143 unchanged, separate168/Trc untouched. Current savedSHA256 bfbae730dc65a8cd68dad707685406649f6a3e5ea79f4d63140241043b02f689.; OriginalAPX module/path/SHA dc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7 and263freshcommands verified; prior pendingpostrestore144readback completed. Actual Archicad29build5101. NewSDK candidate f6f0861ffb76aced7de89922bdfa5f271d9aa371795c3849cbfe6e585003187f source/build identity 0b929f11a7e892b5cab062a9a6dc7bdc77363cec3a59109245f95e18de770eef compiledWindowsRelease and embedded revision cb73cd578c7cd7577f80397920d9e81b8d09c6e1 checked; notinstalled. Staleincrementalbinary detected/rejected and cleanrebuilt; builder refuses mismatched outputreceipt. SharedTapirversion alone cannotqualifySDKdispatch.; Stair preparation remainsBLOCKED: stockcreate setter removesbaseline edge/vertexdata, leavesoldwalkingmemo beforeSolveStair. RootfaultcauseNOT_VERIFIED. Detacheddiagnostic candidate nowreads source/frame/buffers withoutsetter orsolver; exactwrite requires qualifieddetachedPASS andcompletebuffers. Oldterminatingrequest neverrepeated. Local/world baselineframe exposedsource/buildonly. DifferentAPXdeployment requires separateauthorization.; Livepreflight fixedforbodyless hiddenRiser/Tread sentinelbounds through slotcompleteNativeDump/actualStairowner/specializedmembership; parentgeometry stillchecked, no2Dsemanticguess. Nativecreate1.002s/edit1.446s/Save3.251s/Open11.458s includingreadback; sourcecompile0.489s separatePythonmeasurement. No largemodel/scalability/optimizationclaim.; 718/718WindowsAPA host/CI 38527855349 PASS,11newregressions,102upstream/coreMCP. Mainorchestrator unchangedKG fresh148 beforecompletion149. Code13blobs, canonicalreport/evidence14files/receipt APA-RUN-20261014-074612Z-universal-native-floor-contours GitHubbyte-readbackverified. A11.S03PARTIAL; other90tasks, historicalDONE, A07deps andS10BLOCKED preserved.; Directuserapproval: allnativeoperations in existingtestPLN areauthorized, with retained145protection/identity/journal/readback; no newPLN required. APXreplacement remains separatepermission. Nextqualify newruntimeidentity/safe read-onlyStairdiagnostic under separatelyauthorizedtemporarycandidate; SinglePlaneRoof contour/slope is nextindependent SDK/nativecontract. Normative/search/documentation/Trc/main untouched.; Runtime continuation afterPR80: directuser authorized f6f0861ffb76aced7de89922bdfa5f271d9aa371795c3849cbfe6e585003187f temporaryAPX, safe identity/Stair read-only diagnosis and agentfileopen/close. Retained145 independently rechecked before UIclose; test saved/closed, current SHA256 f25438ef700ef590a4f85634c14bc95384df866b039783b31e77479648cfe8c0 and backupverified. Windows RunAs cancelled before replacementhelper executed; installedoriginal dc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7 unchanged, registry unchanged,0modelgeometrywrites. Candidate LIVE NOT_VERIFIED; exactStair remainsBLOCKED. Windowsconfirmationretry pendinguser; no repeatedwrite and no repeated terminating solver. Supplemental readback afterUI Save requiresreopening. Published Slab LIVE/718Windows result remainsvalid in its original scope.; PR80 runtime continuation LIVE_PASS: actual loadeduserAPX f6f0861ffb76aced7de89922bdfa5f271d9aa371795c3849cbfe6e585003187f, buildIdentity0b929f11a7e892b5cab062a9a6dc7bdc77363cec3a59109245f95e18de770eef/sourcecb73cd578c7cd7577f80397920d9e81b8d09c6e1 and275freshcommands; maincore identity gate invoked with fresh schema PASS. ExistingtrueGrid reread, no repeats/duplicates. NativeStair source local/world frame and memo diagnostics readlive with0setter/solver/modelgeometrywrites.; Deploymentblock resolved through actual userregisteredmodule: original8f5a9341bb9d51cb98a0a58bdbc63d3d3623a0c9f74b3cd3f1a4732c06961969 restoredexact; ProgramFilesdc99af071d3dbcff9626653ccc37001613cb3fa4a8eff50c6000c1cc70e8d7c7 andregistrationunchanged. UAC didnotappear/userreported, ShellExecute canceledwithoutProgramFileswrite. Normaluserfilepermissions, noadmin/securitychange. AutoReviewrefusedrestorewhileArchicadclosing; freshno-processproof then sameauthorizedrestorePASS. AgentSave/Close/Open andindependent145native signatureproofPASS; currentSavedSHA256 5f6766eb2b4d6d5036196036361162cd3ef39fe37e68b585020ed1e215c4bff8. Other168/TRC untouched.; Stair exactcontract remainsBLOCKED_DETACHED_PREPARATION_NOT_QUALIFIED. Current3.3m/20rises/R0.165m withrequestedG0.35 yields2R+G0.68>nativeconfiguredMax0.65, min0.60. Thisisnativepreferredconstraint, notnormativeacceptance. OfficialDefaultGoing0.32 matches18regularBREPfront-edgepitches0.32; finalstructuraltoptransition0.275788383 recordedseparately NOT_VERIFIED. SDKtreadDepth0/lockfalse doesnotoverridephysicalDefaultGoing. SourceNative22rises/R0.15m/G0.35 iscompatible testproposal NOT_EXECUTED. NoacceptedStairchange oroldterminatingcallreplay; crashrootcauseNOT_VERIFIED.; ProductionheadPR80unchanged,718Windows/102upstream/coreMCP CI reusedwithoutunaffectedtestrepeat. Report/evidence13files andDONE_PUBLISHEDreceipt GitHubbyte-readbackverified. MainorchestratorKGfresh151/CAS152, completion153. Historicaltasks, A07deps/S10blocker preserved. Next: explicit22rise/350mm stocknativeCreateStairs test through existingSceneWriter withlive Favorite/source/freespace/journal/geometry guard, preserving145; thenSinglePlaneRoofcontour/slope.; PR81 3221b8e7a0b775ece1018caf622a32c6ca9cb9dc atop exactPR80 cb73cd578c7cd7577f80397920d9e81b8d09c6e1: existingNativeFavourite/Graph/SceneWriter nowprepare source-hashed explicit nativeStair dimensions compatible with captured nativeconfiguredrules and actualStories. No silent count/rise/going substitution; no secondexecutor/APXchange.; LIVE_PASS andSOURCE_DIMENSION_PASS newdetached nativeStair:22rises150mm,going350mm,width1m,totalHeight3.3m,walkingLine7.7m. Built-in preciseproperties and actualBREP22horizontallevels/20regular350mmpitches/21rises150mm independentlyverified afterSave/Open. Finalstructuraltoptransition0.309807621m separatelyNOT_VERIFIED asdefaultgoing. Notnewbuildingconnection/engineeringacceptance. SurfaceattributeBeton04 readback isnotstructuralBuildingMaterialverification.; Previous145GUIDgeometry/material/story signatures unchanged; all255current inventorysignatures preserved afterSave/Open andindependentread.1Create+45listedmembers+64bodylessObjects,0newcollisionpairs,0deletions/replays.54Objects explicitnativeobject.owner intoStairmembers;10ownerancestriesNOT_VERIFIED despite readableparenttypes. Generic/hierarchy/connectedqueries incomplete. Fullinventoryacceptance NOT_VERIFIED; initialCreate journalPARTIAL_OR_UNKNOWN_OUTCOME kept; factual dimension/persistence proofseparate, neverCreate retry. SavedSHA256 01f47ad21aa5aa6975d824cf9999b56b7e89578ce1baa7e4b594ab49bc22b59e.; 723/723Windows hosttests,5newsource/inventoryregressions andcurrentWindows CI PASS. DraftPR81/fourcodefiles/13published evidence+reportfiles/readbackreceipt verified. Existingnormative/search/KGimplementation/docs/layout/TRC/main/168project/APX preserved. A11.S03 PARTIAL,S10BLOCKED,A07deps unchanged. Next: resolve10supportObject ancestries read-only beforefullinventoryacceptance; independentlynativeSinglePlaneRoofcontour/slope.; PR82 1c27e7c4b66d5b225724e777719e6a675660494a atop exactPR81 3221b8e7a0b775ece1018caf622a32c6ca9cb9dc. Existing BIMGraph/SceneWriter/SQLite/EvidenceAPI now dynamically prepare and execute discovered typed commands without Python name handlers. Core KnowledgeGraph/GitHub freshness and same-owner CAS publication verified. One draftPR; no new executor/journal/search/normative system.; Candidate275registeredTapirSDK+73official=348routable; restoredoriginal264registeredTapir+73official=337routable.16distinctcommandsLIVE_VERIFIED acrosspass; all348inputs validated. Officialoutputschemas SDKkeys only, nestedcontract coveragepartial.33loadedAPX;32otherproviders NOT_EXPOSED withoutdiscoverednamespacecontract.12candidateSDKcommands absentafterrestore plusonelegacycommand restored; BLOCKED inoriginalruntime. Preparation isnotprojectwritepermission. Dynamicexactscope, binding/hash, affected/retainedinventory andindependentreadback preserveUNKNOWN no-replay. Explicitnativeoperation previews supportcompositionchanges withoutguessingtoolconversions; MorphLastResort preserved.; LIVE geometry/edit/saveOpen: gable2SinglePlaneRoof25to28degrees,hip1MultiPlaneRoof4actualplanes30to35degrees, bothwidth+1m withsameexperimentalGUIDs.1gable3Dridge/solidseam and5hip/ridgejoins,footprinterrorsbelow1e-5m2. SourceBuildingMaterial/thickness/floor/eavedatum preserved. Native3D PASS. Repeatedfinalpitch requests0writes/0duplicates. OriginalsourceRoof+5SEOwalls unchanged; specimensinfreeareas ofsameexistingtestPLN.3newRoofGUIDs,current258,allprevious255geometry/material/story/relationships unchanged afterSave/Open andoriginalAPXindependentread.; OriginalAPXfiles+registrations restoredbyteexact, noTRC/newPLN/main/normative/KGimplementation changes. SourceSurface transfer GableMATCH;HipMultiPlaneoverridesdiffer NOT_VERIFIED, donotinferfromBuildingMaterialPASS. InstalledSetDetailsRoofsurfacesetter absent; nextminimalexistingRoofcontract ispivotPolyEdges/levelEdgeData (APIMemoMask_PivotPolygon), no newSDKengine. NativeBADPOLY/BADPARS andsuccess-withoutpitch outcomes retained; no blindCreate/Modifyreplay.; WindowsCI PASS exact 1c27e7c4b66d5b225724e777719e6a675660494a; local7Roof+3dynamiccritical and15affectedexistingModelFirst tests only. Independentofflineaudit appliesolder3ad9961 snapshot; three historicalYAML parseerrors remain sourceingestionfollowup, notnativeBIMregressions. Publisherreport/evidence/receipt GitHubbyte-readback verified. A11.S03PARTIAL, A11.S10BLOCKED andA07dependencies preserved. Next: exactMultiPlaneSurface transfer, thenadditionalmodel functions viaexistingdynamiccatalog.; Current user priority: maximum mass capability integration and cross-provider dependency routing first. Roof Surface/Stair/MEP narrow fixes remain registered and deferred unless blocking the common interface. Do not infer native availability or safety from command names or source presence.; PR84 08527c0edde2096cf5d7be534b5e49f5c9038647 atop exact PR82 1c27e7c4b66d5b225724e777719e6a675660494a. MASS capability integration: existing dynamic router now carries provider namespaces, official typed result unions, source snapshots, result-pointer data dependencies compiled by existing BIM Graph and common native facts. No new executor, scheduler, journal, MCP, normative or KnowledgeGraph implementation.; 363unique prepared contracts:264registered originalTapirSDK+73official typed+12candidate-only+14registered DevKit sourceexamples.337current client-compatible; only5official methods called,68not individually runtime-probed.26source-only runtimefalse.15CALLABLE_VERIFIED and4independent LIVE effects thispass; prior16LIVE preserved not recounted.33loadedAPX PE inventory;32other standalone namespaces NOT_EXPOSED.848ACAPI source declarations,7702internalABI exports,2779GDL resources separate fromcommandcount. Alternatives250aliases deduplicated,2fork-only schemas incomplete/runtimeabsent,5MCPbroker tools not new native operations. Historical16provider ledger reconciled, originalsnapshotpreserved; NativeDump andIfcOpenShell stale statuses corrected in derivedledger.; Actual12step read-only workflow:10Walls GUIDs feed details/bounds/IFC; attributeIDs feed59BuildingMaterials; stories,navigator,MEP,2779libraryObjects queried. Shared NativeDump/IFCBREP/Shapely facts retainGUID,XYZ,stories,materials,relationships. Official9of10Wallboxes differ from actualBREP, bothstored separately; actual resultant nativebody isphysicalauthority, nofalseequality/IFCsemantics. All258accepted signatures unchanged. Existing SceneWriter/SQLite authorizedSaveProject service PASS,0geometrymutations,1journaledservicecall. NoAPXchanges/newPLN/unsafe replay.; Source-bound effects instead ofname-derived safety:142read,72create,46modify,18delete,7transaction,1service,51UNKNOWNblocked untilreview. Genericwrites require operation-specific preflight and independentreadback, exactidentity/hash, explicitimpact/scope andcompleteaffected/retained inventory. Registrationrechecked atselectedcall, concreteparameters revalidatedafterdataflowbinding. Fullschemas selectedondemand viaexistingKG. Sourceavailability never grantswritepermission.; WindowsCI PASS exact 08527c0edde2096cf5d7be534b5e49f5c9038647;7localcriticalroutingtests only. Publishedreport/receipt/evidence GitHubbyte-readbackverified. S03PARTIAL; S10/A07dependenciesunchanged. Currentpriority massintegration preserved, narrowRoofSurface/Stair/MEP defects deferred with priorcontext. Next: source-review remaining51UNKNOWN effects and safe category workflows; vendor namespace/MDCLABI/license oraccepted SDKproviders required forremainingexternal gaps.; Current user priority: maximum executable BIM workflows and cross-provider dependency routing first. Roof Surface/Stair/MEP narrow fixes remain registered and deferred unless blocking the common interface. Do not infer native availability or safety from command names or source presence.; PR85 45ef6b734e70c0e2c40ea57ed9a0099d70c4a917 atop exactPR84 08527c0edde2096cf5d7be534b5e49f5c9038647. Currentuserpriority executableBIMtasks throughexistinginterfaces. Maincompile_intent/compile_authored_intent andbuildingeditbridge supportGPTselected native-task graphs beyondlegacyfixedcomposition/tool/Rooflevel restrictions. OneBIMGraph,SceneWriter,SQLite;contextscopefactories andresultpointerdependencies validateactualproducerGUIDs beforeeachwrite. No secondexecutor/MCP/scheduler/normative/KG/searchengine.; 51UNKNOWN boundedsource review:49classified,2remainblocked. GetNativePhysicalGeometry exactimplementation absent;API.ExecuteAddOnCommand arbitraryinnerdispatch remainsUNKNOWN,useproviderqualifiednames.335of337currentstack policies sourceeffectqualified,not335LIVEacceptances. Contracthashes bindexpandedinput/output/provider/version/SDKimplementation yetallowfreshPLNbinding. UI/modal/quit/window/rebuild,externalfiles/printer/notifications/library,Teamwork andcompoundGUIDreplacement sideeffects explicit. Allwrites requireexactscope/identity/hash,operation-specificbefore/after,completepreservation anddurableintent;hostGUIDcannotimplicitlymutateretainedmodel.; LIVEcorrectedcoldscenario17typedgraphsteps/12journaledcalls:8modelmutationrequests+4Save/Openservices.4temporarynativeelements=2Wall+2Window created/copied thenall4deleted. Wall6mx.25m,height2.8to3.1m,Window1.2x1.2m/sill1m;actualnativeMaterial/Surface/classification/ElementID,movement.5m/copy3m,IFCmapping/MEP/collisiondataflow pass. NativeWallroughopening1.35m2 differsfromWindowoverall1.44m2;2holefaces andclosedBREPvolume4.3125m3 agree. Same258original GUID/geometry/material/story/relationships preservedafterSave/Open withtemporarymodel andaftercleanup. NoAPXchange,newPLN/building orengineeringacceptance.; Initial3successfulnativewrites stoppedonreadback/testframework defects;existingWall/Window/classification independentlyreconciled,oldUNKNOWNjournalrecords preservedunchanged,noidenticalCreate/Setreplay. ContinuationsuseprovenGUIDs;thenfreshcorrectedcoldscenario12SQLitePASS. Tapirclassificationoutputschemaflattenswrapper,currentofficialtypedgetterworks. WallGetElementTrims nativeerror-2130313103 remainsNOT_VERIFIED,notpromotedbyreadonlysourceclassification. 25distinctcommandsCALLABLEthispass,16correctedworkflow;9independentwrite/serviceLIVEeffects. Source-only26 andotherAPX32NOT_EXPOSED unchanged;363preparedcontracts preserved.; Natural-language toolselection verifiedfor7requiredcommands viaexistingKG shortqueries;readablecommandwords/canonicalIDs andonecommanddocument respectexistingdiversitypolicy. Onlyselectedschemas expanded,GPTprovidesgraph,noautonomousNLparser/inventeddimensions. Planpreparation0.186s+0.026s,guardedcycle58.331s,execution35.065s+21.431s,318APIcallsinclcompletepreservationchecks,49.202stransport/22.497sreadverificationtransport. Manualspeedupnotmeasured. WindowsCI PASS exact 45ef6b734e70c0e2c40ea57ed9a0099d70c4a917;localonlycriticalmodifiedtests. Code/report/proof/receipt GitHubbyte-readbackPASS. S03PARTIAL,A07/S10dependenciesunchanged. Next:reusecommonworkflow fornextmodelconstraints andprovideroutputcompatibility throughavailableAPIs;preservenarrowRoofSurface/Stair/MEPdeferredcontext.; Current user priority: maximum SDK and local module functional expansion and cross-provider dependency routing first. Roof Surface/Stair/MEP narrow fixes remain registered and deferred unless blocking the common interface. Do not infer native availability or safety from command names or source presence.; PR88 a444d5a6b481bfabd9c48f23c17df05c51ab0ea4 atop exact PR85 45ef6b734e70c0e2c40ea57ed9a0099d70c4a917. Current priority: functional SDK and installed-library module expansion before further broad native BIM scenarios. Main native_command_router attaches code-owned grouped SDK contracts and local analytics by default, with legacy opt-out. One existing catalog, Knowledge Graph summary selection, BIM Graph dependency routing and SceneWriter/SQLite; no new search/indexer/server/journal or normative changes.; Five new public SDK query groups: tool default headers for twelve native types, polygon memo coordinates/contour ends/arcs, working units, nested group roots, modern GDL library-part origin. Full Release APX compile/link PASS:280 Tapir source registration expressions plus reused DevKit AddOnCommandTest.ProtectionInfoCommand. Existing twelve candidate commands retained, not newly discovered. Binary source identity, published implementation commit 07e73f9c3f634ed93ea06be79bdf603bf0124abf and raw SHA verified; candidate NOT_INSTALLED, zero new native CALLABLE/LIVE this pass. Thirteen other DevKit examples remain duplicate/implicit selection/UI/library/BIMcloud dependencies. No installed APX or PLN changed.; Nine local catalog entries CALLABLE on saved actual NativeDump/Archicad IFC data. Six newly exposed analytical capabilities: NetworkX dependency impact/order with bounded cycle witness, Shapely indexed polygon holes/contact, OR-Tools CP-SAT explicit integer assignment, IfcOpenShell selector/property sets, schema/optional EXPRESS validation, kernel world-coordinate bounds/area/volume. Three old APA utilities gain shared catalog access without new algorithms: NativeDump normalization, planar BREP quantities, IFC exchange facts. Typed source/results, idempotent attachment, immutable source/contract checks and lazy installed dependencies. Local domain is separate from native runtime and grants no model write permission.; Existing BIM Graph passes normalized elements directly to quantity adapter; typed IFC selection to geometry preparation and existing Knowledge Graph selection verified. Archived126-element NativeDump:25 planar quantities,22 NOT_VERIFIED,79 no body. Actual IFC:9 walls selected, schema valid,3 positive geometry volumes/bounds,6 void relations,19 material assignments,0 analytical members. No fresh native model readback or engineering/normative/SAF acceptance. 377 prepared entries=368 native/official/source+9 local;337 last-verified original compatible contracts retained,31 native source contracts lack current runtime. Source hashes normalize CRLF/LF while binary/proof hashes use actual bytes.; All32 non-Tapir APX remain without independent public command contract. Bounded existing inventory mapped supported subsets to existing SDK/JSON providers and new local IFC modules, without internal ABI calls or false vendor integration.848 inventoried SDK declarations are not848commands. Schedule rows, complex Shell/Railing/CurtainWall memo/factories, closed-format/vendor/energy/AI interfaces and native SAF remain explicit gaps; old Roof Surface/Stair/MEP/S10 evidence retained. Windows CI PASS at exact a444d5a6b481bfabd9c48f23c17df05c51ab0ea4. Code15-file byte readback and canonical report/receipt verified. A11.S03 PARTIAL, A07 dependencies/history unchanged. Next: approved bounded candidate registration and selected read-only SDK/DevKit probes, then remaining useful complex memo/dependency adapters through the same executor; no repeat WallWindow or broad native geometry tests.; Current user priority after PR88: six SDK/DevKit runtime registration/read probes, atomic provider/schema registration fixes from PR87, then additional useful SDK module groups. Preserve existing executor and defer broad native BIM tests. Experimental APX replacement requires specific authorization if outside earlier test scope.; PR94 d758957f97cf1e347262da6f7e7b325ae6609ea4 on exact PR88 a444d5a6b481bfabd9c48f23c17df05c51ab0ea4. Core orchestrator used unchanged Knowledge Graph to verify current canonical revision165/own CAS claim; new code retains existing BIM Graph, dynamic router, SceneWriter and SQLite. Provider registration is atomic and namespace/schema collision aliases do not rewrite prior contracts (PR87 defects fixed). No new search, controller, journal, MCP or normative code.; Authorized PR88 candidate:281 actual add-on registrations and73 compatible official contracts=354; six SDK/DevKit read queries called with typed results. Twelve tool-default headers, four polygon memos with independent coordinates/holes/stories match, stable unit preferences, ungrouped-case roots, library part index/fileName/origin and eight suppressed boolean license flags. Nested group positive case, complex default geometry and engineering not verified.; Four additional grouped SDK contracts routed. Tested prototype d85a2b:285 actual add-on registrations +73 compatible official contracts=358. Three groups callable: seven Roof/Slab envelope parameter polygons match native details; two real Drawing source links with explicit update-status/content-box native errors;179 native hotspots from four walls match native reference-line endpoints. Shell has no current sample. Legacy GetDetails Drawing navigatorItemId differs from SDK source-link GUID; only one of two source GUIDs found in current ViewMap. Do not infer semantic equivalence, full Drawing update proof, resultant BREP or engineering acceptance.; Native GetNativeElementQuantitiesV1 batch (Wall/Slab/Roof/Stair) terminated AC29 with C0000005 ACCESS_VIOLATION. Failing element/root cause NOT_VERIFIED; identical call not replayed. Unsafe binary quarantined; current Python dispatcher blocks both new and already exported names, native entry returns refusal before calling quantity engine. Full safe rebuild 0bfd13924cf21083783a0384943d80a1d4ee0fce4542a6c1f27178caec22adc0 from 220fcabda14316037f0f0a4c259092a075880c4c compile/link/embedded identity PASS, not installed. Generated quantity field accessors are staged unused code and not functional quantity support. Next bounded debug needs per-element instrumentation and explicit SDK mask/output ownership checks before qualified native retest.; MemoPolygonInputs passes captured native straight contours/holes directly through existing BIM Graph result binding into existing PolygonRelations/Shapely. Actual seven native polygons and two holes computed; GUID/story/type bindings preserved separately; arcs explicitly unsupported rather than linearized.382 preparable contracts=372 native/official/source+10 local, including blocked/source-only. Restored original remains337 compatible;35 source contracts not in original runtime;13 DevKit examples unintegrated;32 other APX no independent public contract. Nine distinct SDK/DevKit reads callable this pass across two tested candidates; quantity failed. Old nine local analytical results retained, new two-step memo flow verified. No second writer or native permissions from local computation.; Both authorized temporary APX switches restored original raw SHA and Include configuration. Post-crash saved file matches pre-extended-probe control. Independent original-runtime reopen read-only retained all258 GUIDs and full serialized native parameter details. Zero model-write API calls. Earlier close/open changed saved bytes before SDK probes; cause NOT_VERIFIED, not silently called unchanged. No physical BREP before/after comparison. Windows CI PASS exact d758957f97cf1e347262da6f7e7b325ae6609ea4; all23 code files byte-readback; immutable report/receipt readback verified. A11.S03 PARTIAL, all earlier task history/A07/S10 dependencies preserved; quantity and Drawing auxiliary blockers recorded in existing gap registry.; Current user package after PR94: reuse existing APIs for hierarchical native components, envelope/host/material memo, Drawing database/window context and dependency chains; bounded quantity preflight diagnostics only, engine remains quarantined. New candidate installation requires explicit authorization. No repeat house/WallWindow/native quantity batch or independent audit suite.; PR96 76ab55c1c34fa327c2c71b7615e7cde5b090f69c on exact PR94 d758957f97cf1e347262da6f7e7b325ae6609ea4. Three new typed SDK reads plus enhanced envelope and database-qualified Drawing query use existing dynamic router/BIM Graph; no second SceneWriter/journal/KG/search. Main orchestrator read fresh canonical168 with own CAS lease; independent PR95 160/160 audit reused.; Exact user-authorized4074a1 APX full Release/source identity and runtime exported schemas verified:288 add-on registrations +73compatible official contracts=361.385preparable=375native/source+10local; original remains337compatible;38source-only original and14absent tested candidate. One registered quantity command execution-blocked. Five scoped grouped reads callable,3new and2enhanced; previous9distinct SDK/DevKit reads retained,12distinct across packages, not12new capabilities.; 86native Stair child parameter records: parent/root/declared owner independently match existing membership and native home story.7Roof/Slab memos expose edge trims, side surface overrides, bounded pivot levels; five raw PolyRoof pivot slots represent four unique edges including closure. Native parameter geometry not resultant BREP. Railing/CurtainWall/Shell code compiled but no current live sample.; Four distinct Drawing elements queried in correct owning Layout DB through existing database helper: CheckDrawingStatus and GetFullDrawingContentBox allNoError, context restored. Native updateStatus=-1 remains not-up-to-date/unclassified, no automatic updater added. One source GUID verified in current public ViewMap, three unresolved source links omitted from dependencies; legacy navigator GUID and SDK link GUID not equated.; Modern Generic Opening connected-host query succeeds on2Wall+1Slab with empty sets. Positive cut/host/extrusion sample NOT_VERIFIED. New quantity pre-engine query reads identity/type only; no quantity engine structures/masks/calls; native/Python quarantine retained. Official SDK API_Quantities constructor initializes all output pointers; missing brace initialization is not established crash cause. Future engine probe requires separately qualified diagnostic environment, not current PLN.; Captured new replies feed existing DependencyImpact through BIM Graph:96nodes/87verified edges,42entries in selected Stair impact set. Original membership-only chain88nodes/86edges. No physical contact inferred. All258GUID/full serialized native parameters match before/after and independently after original-runtime read-only reopen; saved bytes unchanged. Original APX SHA/registration restored. Windows CI exact head, all17code files and immutable report/receipt readback verified. S03PARTIAL, historical DONE/A07/S10 preserved. Next independent gaps: positive existing native samples and Shell memo frames/material relationships, avoid quantity engine replay.; Current user package after PR96: positive existing Opening/Host; native CW/Railing components where permitted samples exist; complete Shell memo fields, reuse GDL LibraryPart defaults and Drawing provenance. No new sample writes without separate copy permission; quantity engine quarantined. New exact APX permission required.; PR97 8f134001ca0e3250eda587db61ac01dbd6357326 on exact PR96 76ab55c1c34fa327c2c71b7615e7cde5b090f69c. Three new contracts use existing dynamic router, BIM Graph, SceneWriter and SQLite. Native factories reuse public SDK defaults+Create because existing JSON/Tapir had no exposed equivalent. No second executor, journal, KG, search, normative or quantity engine.; Exact68d028 APX full Release source identity and native runtime identity match.290Tapir commands exported;1other namespace compiled and prior compatibility retained, not re-probed.73official product-compatible contracts not newly executed.388preparable=378native/source+10local;337original-compatible,41source-only original,364candidate-compatible including priorDevKit.3new command groups called and3existing readers gained positive sample evidence.; One explicitly authorized copy: true native CurtainWall2x2, Railing2m/height1.1 and ExtrudedShell4x4/reference rise1 created with3journaled native CREATE calls, no retries.409total GUIDs=258retained+3roots+148native assembly/library children. Native types, stories, material defaults and resultant body bounds independently read.23CurtainWall,34Railing and1Shell resultant bodies. Save/Open confirms all409full native signatures; original258signatures and serialized parameters match before copy writes. No visual sample inspection or engineering acceptance.; 150new component headers independently resolve parent/root;50supported specific parameter rows. Nested railing parent differs from root and is not flattened. Detached Railing Stair association NOT_VERIFIED. Positive existing Generic Opening forward/reverse Wall host, cut GUID, native type and story match; no Opening write. Resultant void BREP NOT_VERIFIED. Shell Extruded memo confirms4profile coordinates,5raw body flags,12base transform values and4m extrusion; contour/hole/Revolved/Ruled branches have no positive sample.; Two actual library parts expose163stored default parameters without placement/context edits using bounded existing Tapir serializers.59building materials and132surfaces read without changes.16known Navigator identities/maps verified.12source-link/map probes:1exact,3identity mismatches excluded,8native errors.4Drawing owning Layout links,1exactView source and3unresolved links. Status-1=Other, freshness NOT_VERIFIED; no updater/rebuild/publisher native call.; Captured data feeds existing DependencyImpact/BIM Graph:213nodes290edges,56affected for CurtainWall root. Physical element GUIDs, Navigator GUIDs and source references have separate namespaces. Membership/logical dependencies are not physical contact. Quantity engine remains quarantined in Python/native and was not called.; Original APX SHA and registration values restored. Final restored-runtime reopen NOT_VERIFIED: Windows UI helper timed out after prescribed reset/retry and native endpoint unavailable. Saved-file hashes changed at closing source and Opening models; before/after snapshots preserved, no blind restore. Source258native geometry/details reconciled before any copy write and matched; source bytes unchanged from copy checkpoint onward. Opening bytes matched before/during read; post-close geometry pending. Do not claim unchanged-file or complete final acceptance. Exact Windows CI/code/report/receipt GitHub readback verified. Next: reopen saved409copy and107Opening model under original runtime, reconcile closing hash drift and inspect3native samples visually; do not replay Create or quantities.; User reopened the saved positive-sample copy. Read-only original-runtime check matches409GUIDs/full native geometry/material/relationship signatures and258original detail rows, zero writes. Publish this narrow acceptance supplement; Opening post-close and sample visual checks remain separate.; PR97 restored-runtime acceptance supplement published after user manually reopened the exact positive sample copy:409GUID/full native geometry, materials, home stories and relationship signatures match the saved candidate checkpoint;258original serialized detail rows match. Current saved bytes unchanged throughout the read. Original APX file SHA matches restored original; Archicad29/Tapir1.5.10 read and3candidate-only commands absent. Zero Create/Modify/Delete/Save/APX-switch/quantity calls. This closes only409copy original-runtime reopen. Separate107Opening post-close geometry/hash reconciliation and3sample visual inspection remain NOT_VERIFIED. Product PR97 head 8f134001ca0e3250eda587db61ac01dbd6357326 unchanged; prior exact-code Windows CI reused, no test replay. Immutable supplement/receipt independently byte-verified; S03 remains PARTIAL, historical statuses and other tasks retained.; Continue native integration after PR97 without offline tests: expand existing Shell/Opening/component parameter reads and native IFC/material dependency workflow. Preserve409copy/258source; new APX deployment requires exact separate permission. Do not repeat accepted samples or quantity engine.; PR104 6ae582b9f2a9666389fc06fd0528bbfff3fde6b4 reuses native IFC accessor commands and existing dynamic router/BIM Graph. Current read:13elements,12nonemptyIFCIDs,61propertyrows,59material132surface24compositeheaders;409GUID inventory/saved bytes unchanged, no model writes/APX switch/quantity call. Pinned prior150componentrows plus current attributes/IFC yield196nodes319edges,23material17surface12IFCidentity edges; material impact45nodes. Enhanced Opening polygon/anchor/surface, Shell/Roof material applicability and CW/Railing root readers compile/link in full Release:exactAPX2ed42a0d330df702524216ac6773312ff29aad8642792be35aab18427f7e91cb;new exact load permission pending, enhanced LIVE_NOT_VERIFIED. Product/manual offline tests and product CI not run. IMPORTANT ERRATUM:canonical push unintentionally triggered publisher infrastructure tests in38735805022/38735805051 and two test steps of38735797914; latter cancelled. Subsequent publication commits skip CI; immutable broad no-test wording superseded by linked CIerratum.11publicationfiles/receipt independently read back from GitHub. Prior results preserved; no recreation of accepted samples, no new executor/journal. S03 remainsPARTIAL; next exactAPXread-only validation/restoration in existing409copy and107Opening model; no quantities or unapproved sample writes.; After PR104: implement shared native assembly MODIFY with explicit fields/preconditions and component retention readback; expand public MEP contracts and existing GDL/IFC graph integration. No offline tests or workflow dispatch. Existing exact2ed42a APX permission still pending; no new request or deployment. No model writes without separately authorized isolated-copy operation.; PR107 9a3091638eaa1a9c72f9a08c17d02855d8419edc exact PR104 base. Shared GetNativeAssemblyEditStateV1/ModifyNativeAssemblyV1 across9nativekinds:SDK masks,modificationstamp,typedattributeGUIDs,same-topologyExtrudedprofile/vector and existingSceneWriter/SQLite callbacks. GetNativeMEPTopologyV1 adds public route/segment/node/rigid/transition ownership; existingports/systems reused,reciprocalphysicalfacts separated fromlogical/systemmembership. Full Release APX4e6cdf2a59e46c50b78f52558fe2e9f3cd19a51c4b1142898dda29d2bcc3aead notinstalled;3newcontracts absent originalruntime,NO_NATIVE_MODIFY_LIVE_PASS. Current originalruntime:oneplacedframe49GDLparams,2x2arrayrank-preserving setterpreview only;typedmaterial/surface identities+1IFCID+7propertyrows give60nodes59edges,materialimpact11nodes.3existingnative samples visuallyconfirmed inactualArchicad,selectionGUIDs andtargetedgeometrysignaturesmatch; savedbytesunchanged,no409reinventory,recreation,writes,Save,APXswitch,quantitycall,offline tests or workflowdispatch. Code/canonical/default workflow hashes checked;ownpublishedcommits havezeroworkflowruns. ExactPR1042ed42a approval stillpending/notreasked.107Openingread attemptedbutOpen cancelledatcurrentsaveprompt to preserveunknownunsavedstate; currentcopy hasnoMEPsample. IFCexport,threeDrawingsources,Shellnewholes/RevolvedRuled andarbitraryassemblypath editing remainNOT_VERIFIED/unsupported. Existingpublisher functions/index/receipt invoked directly;protectedpendingfilepreserved. Next: existingexactAPXread-onlyapproval, then separatelyauthorizednewcandidate+isolatedcopyMODIFY cycle,positiveMEPtopology andsequentialmemoextensions. A11.S03PARTIAL; nohistoricalDONErewrites orduplicatetasks.; After PR107: qualify shared MODIFY side effects and native memo bounds; extend existing assembly/Shell/MEP adapters and GDL readback. Preserve pending exact PR104 approval without reasking. New binary/copy writes require separate exact authorization; no offline tests or test workflows.; PR109 13139d6cd03340bff7fbde5ccac5735929843b7a exact PR107 base. Explicit authorized SaveAs copy preserves unsaved state and source savedPLN bytes. Exact4e6cdf PR107 runtime293commands:Shell extrusion4to4.5m native parameter/BREP/profile/frame/contour/typedmaterials/GUID/story/IFCID retention LIVE_PASS; Rail0.07to0.17m and18 dependent baluster bottoms +0.10m, but one nested Object bmatRail/bmatFixing37to36 causes RailingPARTIAL. Explicit approved restoration via existing GDLsetter:APIERR_NOTSUPPORTED(-2130312313),all409signatures/128params unchanged,no retry. CW scalarheight NoError/noeffect, originalUNKNOWN independently reconciled;new source rejects scalar and implements explicit bounded native contour/pattern memo. New84841037512024d1a2df5832453968422c1046575fd461a3c7555745ed3289ba fullRelease BUILD_PASS_NOT_INSTALLED:existing18contracts,zero newcommandnames;CW/Railingmemo,Extrudedtilts/Revolvedscalar subset,MEPElbow/Branch andTransitionangleDegrees. SameDynamicCommands/SceneWriter/SQLite; independent geometry/material callbacks and GDLbefore/after typedreadback. ExistingDependencyImpact nativefact slice346nodes472edges/materialimpact4; parent/root/declaredowner distinct.409GUIDs retained,20BREPchanges+1material-onlysignature,314outsideRailing/Shell andprevious258unchanged. Save thennew-process original-runtime independent409readback;originalAPX/registration restoredbyteexact. Pending exactPR104approval unchanged/notreasked. Nooffline tests/testworkflowdispatch/quantitycalls. IFCexport,positiveMEP,current3Drawinglinks,Opening107postclose andnewmemoLIVE remainNOT_VERIFIED. Next owner-aware native Railing material recovery; exactbinaryapproval then bounded CWmemo native trial. S03PARTIAL, historicalDONE retained, no duplicate tasks.; Publication metadata clarification only:current gap-register-after-scope-erratum.json supersedes ambiguous inherited historical top-level counters. Native409copy changed by2confirmedparameter effects/4mutation attempts;ShellLIVE,RailingmaterialdriftPARTIAL,CWnoeffect. Historical snapshots and all prior evidence retained. CAS revision179to180;claim remains released;no new functional work, native writes or tests.; After PR109: establish actual native Railing symbol/material owner and supported recovery without replaying failed nested-Object setter; strengthen compound MODIFY acceptance defaults, extend existing CW/Shell/MEP contracts. No new APX or model writes without exact approval; no offline tests.; PR111 61f56376e37755cfb4a15db29071970525297904 exactPR109base. Initial preapproval checkpoint retained separately; userthenapproved exact71b8529a8da39a478d5a1bc8a370ea97bf63fdc39e4801e793aa36e214074fa4 read-onlycycle. Candidateidentity/source106393a verified,runtime293commands,2extendedexistingcommands CALLABLE_VERIFIED:actualgeneratedObject RailingRailowner,parent/root,Objectandowner128AddPars,rootRailmemo,selectedlibrarymaster/parameterscriptsprivate. ActualsettingsownerabsentfromphysicalrootRailmemo;storedmemo flags1donotoverrideevaluatedDisabled/Child. Top-levelscriptsdelegate tomacros,no fixingruleproof. Bothmaterials36,expectedGUID37;NOT_RESTORED,BLOCKED,no setterretryorDisabledwrite. Newtypedownerfacts inexistingDependencyImpact:352nodes482edges,134observedRailimpacts. DefaultcompoundMODIFYfull BREP/material/GDL/ownership/dependent/beforeproofs;existingSQLiteintentretained,oldtargetfailureproofmatched,legacyunscopedscopeNOT_VERIFIED. OriginalAPX restored8f5a9341and77registrationvaluesbyteexact,newprocessoriginalruntime264commands. Unexpectedtestcopy savedbytechangeafterUIexit afcbdaaea880to0a9c01419823,causeNOT_VERIFIED,noexplicitSaveAPI/nativeMutationcommand. Independentoriginalruntime409signatures/128GDLmatchPR109;bothfilecheckpointsprivate,noblindrollback,sourcePLNunchanged. OverallpersistencePARTIAL; qualifyclosebehaviorbefore anynextnativewrite. Nooffline tests/workflowdispatch/quantitycall/newexecutor/graph/commandnames. CWbounds,newExtruded/RevolvedfieldsBUILDonly;publicmaterialrecoveryroute notAC29qualified. ExactPR104approvalseparatependingnotreasked. Nextsaved-fileprovenance,publicsettingsowner/macrodiagnosis,thenseparatelyapproved2materialrecovery. A11.S03PARTIAL;historicalDONE/evidenceretained.; 2026-10-19 PR179 published LIVE32native groups,44->172GUID,oneClone/oneSave,realGUIreopen; source44semanticBREP/materials preserved; corrected JSON tuple equality and dump-local material pools. S12 accepted, S13 installed APA integration pending; overall S03 remainsPARTIAL.; 2026-10-19 S13/PR180 installed accepted mass selector into current APA, preserved296contracts and30+4reads, combinedcatalog298; existingRouter/SceneWriter/registry retained. Native group32 LIVE receipt179 reused; individual MoveElements(copy=true) shared registry remains next S14.; 2026-10-19 S14/PR181 installed nativeindividualColumnLINEARcopy accepted and published; CI8success; no repeatLIVE. S15 finite diagonal line endpoints/count is next newcapability.; 2026-10-20 S15/PR183 installed finite diagonal line accepted/published. S16 selectednamedaxes with irregularpitch is next newfunction; oldcopy/grid not repeated.; 2026-10-20 S16/PR184 selectednamedaxisintersections installed/published; S17 sharednativegroupcreation is nextfunction, reuseexisting SDKcommand.; 2026-10-20 S17/PR185 sharednativegroupcreate installed/published. NextS18 nativeungroup edits acceptedgroup innewcopy, no recreatinggroup.; 2026-10-20 S18/PR186 nativeungroup installed/published; S19 nativewholegroup move next. Existingacceptedgroup snapshot reused, no recreation.; 2026-10-20 S19/PR188 wholegroupmove installed/published. Five newnativecapabilities S15..S19 acceptedonceeach; S20 ready DXFadapter from163 next independentthin integration usingexistingvenv.; 2026-10-20 S20/PR189 readyDXFadapter installed/published; nextS21 naturalgroupintent selectsacceptednativecommands usingfreshcapability read-onlyqualification, no oldnativeoperation repeats.; 2026-10-20 S21/PR190 installed automatic group intent published, codeCI8SUCCESS. NextS22 shared native standaloneWall batch copier; no repeats of accepted Column/group operations.
+
+## APA-P70.A11.S04
+
+**Измерить и ускорить объединённый контур** — INTEGRATION / READY / P1
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: combined-system-measured-optimization-v31
+- Depends on: APA-P70.A11.S03
+- Related, check before duplicating: none
+- Acceptance: Same scenario before/after timings/API counts with native semantics retained; optional optimizer verified within deterministic bounds.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json)
+- Existing V2 runs: none
+- Expected output: Same scenario before/after timings/API counts with native semantics retained; optional optimizer verified within deterministic bounds.
+
+## APA-P70.A11.S05
+
+**Собрать установщик стабилизированного APA** — INTEGRATION / READY / P1
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: integrated-apa-installer-ac29-v31
+- Depends on: APA-P70.A11.S04, APA-P70.A08.S02
+- Related, check before duplicating: none
+- Acceptance: Version-aware installer/diagnostics/uninstall tested on actual supported AC29 builds; installation/APX changes require separate authorization. AC30 separate.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json)
+- Existing V2 runs: none
+- Expected output: Version-aware installer/diagnostics/uninstall tested on actual supported AC29 builds; installation/APX changes require separate authorization. AC30 separate.
+
+## APA-P70.A11.S06
+
+**Получить подтверждённые размеры и источник сборки производителя** — INTEGRATION / BLOCKED / P2
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: manufacturer-dimensions-source-v31
+- Depends on: APA-P70.A11.S02
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: Qualified source/page/fact dimensions and product-to-native-material mapping; exact assembly waits for source compile gates.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json)
+- Existing V2 runs: none
+- Expected output: Qualified source/page/fact dimensions and product-to-native-material mapping; exact assembly waits for source compile gates.; REAL_NATIVE_C4_C5_BEAM_SUPPORT_PASS; full manufacturer assembly still requires eight dimensions/source commit/grade/fixings/rafter bearing.
+
+## APA-P70.A11.S07
+
+**Подтвердить доступный нативный контракт Shell и редактирования Opening** — INTEGRATION / BLOCKED / P2
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: shell-opening-edit-provider-v31
+- Depends on: APA-P70.A11.S02
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: Use an existing ready native path with GUID/story/material/body readback. Any installed APX change requires separate user authorization.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json)
+- Existing V2 runs: none
+- Expected output: Use an existing ready native path with GUID/story/material/body readback. Any installed APX change requires separate user authorization.; Native Wall/Roof Trim perimeter contact verified. Reverse Trim metadata provider error and ineffective underside SEO goal remain explicit; Shell/Opening-edit contract blocker unchanged.; Native Wall/Roof actual underside contact and SEOrelation are now LIVE_PASS in a separate specimen. Flag readback difference remains explicit; missing Shell/Opening-edit runtime contracts still BLOCKED.
+
+## APA-P70.A11.S08
+
+**Подключить фактический SAM/SAF обмен и входы расчётного движка** — INTEGRATION / BLOCKED / P2
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: sam-saf-qualified-exchange-v31
+- Depends on: APA-P70.A11.S02
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: Actual SAM/SAF artifact/provider and receiver mapping; approved inputs and available solver/results with provenance. No architectural-body-to-SAM inference.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json)
+- Existing V2 runs: none
+- Expected output: Actual SAM/SAF artifact/provider and receiver mapping; approved inputs and available solver/results with provenance. No architectural-body-to-SAM inference.; Native Beam structural identity and IFC quantities do not establish SAM/SAF or loads/norms/solver results; existing analytical gate retained.
+
+## APA-P70.A11.S09
+
+**Подтвердить семантический обмен с MCP/Twinmotion** — INTEGRATION / BLOCKED / P2
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: mcp-twinmotion-semantic-receiver-v31
+- Depends on: APA-P70.A11.S02
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: Use an existing actual receiver implementation and independently validate supported semantics, distinguished from IFC geometry coordination.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-APA-HIGHLEVEL-PR34](https://github.com/dvikt33-ux/safe-bim-layer/pull/34), [ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-200500Z-editable-core-acceptance/REPORT.md), [ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-161511Z-p70-semantic-brief-getstories/REPORT.md), [ART-P70-A03-S01-AUTHORED-SPATIAL-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-164748Z-p70-a03-s01-spatial-loadpaths/REPORT.md), [ART-APA-PLP-CONTRACT](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/project-library-pack-contract-v0.1.yaml), [ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-211000Z-native-material-library-integration/REPORT.md), [ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-spatial-clearance-20-owner-boxes-pr47-275-offline-20261011.md), [ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr46-original-scene-writer-preflight-contract-271-pass-20261011.md), [ART-APA-REUSE-NATIVE-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p50-a02-s01-anti-dup-native-geometry-pipeline-audit.md), [ART-APA-ATTR-STORY-SLAB-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/apa-p10-a01-s02-typed-attributes-stories-readback-slabs-20261011.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-SDK-GET3D](../../../../../docs/research/apa-results/runs/2026-10-10/apa-sdk-20261010-102452-get3d-connections-source.md), [ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011](../../../../../docs/research/apa-results/runs/2026-10-11/APA-RUN-20261011-202800Z-native-geometry-integration/REPORT.md), [ART-SDK-OPENING-SHELL-20261010-8E41](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-143940Z-opening-shell-geom/REPORT.md), [ART-PR20](https://github.com/dvikt33-ux/safe-bim-layer/pull/20), [ART-APA-DETAILS-V212](https://github.com/dvikt33-ux/safe-bim-layer/tree/feature/project-accelerator-integration-pr-20261009/details/releases/v2.12), [ART-APA-STRUCTURAL-HANDOFF](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_36_structural_handoff_accelerator_architecture_2026-10-08.md), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-APA-FAST-COMPILER](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_20_fast_project_compiler_layered_runtime_2026-10-08.md), [ART-APA-RU-JUNCTION-NORMS](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_29_russian_junction_norms_2026-10-08.md), [ART-APA-FULL-CYCLE-RESEARCH](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/project-accelerator-integration-pr-20261009/docs/research/architectural_ai_checkpoint_37_global_project_library_story_lira_fullcycle_2026-10-08.md), [ART-APA-SOURCE-71-INDEX-20261011](https://github.com/dvikt33-ux/safe-bim-layer/blob/6a8abe2ac4e5a3e664c94bc9e71f9e15da943e27/docs/research/apa-results/inventories/blob-scan-20261011/ARCHICAD29_TAPIR159_SOURCE_INDEX_20261011.json)
+- Existing V2 runs: none
+- Expected output: Use an existing actual receiver implementation and independently validate supported semantics, distinguished from IFC geometry coordination.; Actual IFC43mappings/50elements/18quantity matches/0mismatch/24material assignments/12port relations/6opening hosts verified. Structural contact/Trim/SEO export semantics and receiver compatibility remain unverified.; Actual IFC45mappings/52elements/26materials/20quantity matches/0mismatch; native new Wall/Roof bodies/materials agree. SEO/contact relationship export semantics and actual receiver compatibility remain unverified.
+
+## APA-P70.A11.S10
+
+**Подтвердить нативный круглый порт терминала, предпочтения диаметра и переход MEP** — INTEGRATION / BLOCKED / P2
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: mep-terminal-diameter-transition-provider-v32
+- Depends on: APA-P70.A11.S02
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: Actual terminal port and route sections agree through a verified native transition and reciprocal physical connections; preserve original baseline and persist readback.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-P70-A11-S03-PR56-20261012](https://github.com/dvikt33-ux/safe-bim-layer/pull/56), [ART-MEP-SOURCE-20261010-PORTGRAPH](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md), [ART-TAPIR-COMPAT-20261010-6F29](../../../../../docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-163950Z-tapir-compat-6f29/REPORT.md), [ART-P70-A11-S10-REFERENCE200-20261012](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-132353Z-construction-junction-qualification-s03/mep-preferences.json)
+- Existing V2 runs: none
+- Expected output: Reuse a ready exposed provider path; connect actual terminal port to routed network with native diameter/transition readback, original baseline preservation and save/reopen. No installed APX change without separate authorization.; LIVE_PASS unique live reference200/diameter0.2m row binding and one new circular route; original terminal now connected automatically with reciprocal actual0.2mports and saved/reopened independently. No preference/APX modification or Create/Connect replay.; The connected terminal/circular pair has one reciprocal edge and one open downstream port; full8route network still has2components. Existing rectangular network preserved. Native mixed-section transition and baseline-preserving main bridge not verified.; Read-only existing source/SDK/schema/native-port scope reconfirmed; minimally expose and qualify the existing route-local per-segment SDK maps on a new specimen before claiming a native transition. Retained-GUID-safe main connectivity is a separate contract/acceptance. No transition write was attempted.
+
+## APA-P70.A11.S11
+
+**SAFE-01: точный synchronous snapshot после native save, поздняя scratch-запись и GUI reopen** — VALIDATION / DONE_PUBLISHED / P0
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: ac29-safe01-live-synchronous-snapshot
+- Depends on: APA-P70.A11.S02
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: New disposable AC29 5101/Tapir1.5.10 copy: one native batch+one save; synchronous snapshot SHA; controlled late scratch drift rejected; exact snapshot opened twice separated by native4001; all119GUID/48owners/all69baselineBREP; immutable originals; published readback. Source CI queued is explicitly not release acceptance.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-P70-A11-S03-SAFE01-SOURCE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/pull/175)
+- Existing V2 runs: none
+- Expected output: PR178 LIVE receipt, source/module/snapshot SHA, original SQLite PASS, all69 retained BREP
+
+## APA-P70.A11.S12
+
+**Завершить native группы/сетки и единый mass-request selector с сохранением и reopen** — INTEGRATION / DONE_PUBLISHED / P0
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: ac29-native-group-grid-selector-persistence
+- Depends on: APA-P70.A11.S11
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: One source-qualified existing group, deterministic placements, runtime discovery, exact independent BREP/GUID/group ownership and collision preflight, one native clone, guarded save/snapshot and real reopen on safe copy; no offline->LIVE promotion, no retries or unverified group types.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-P70-A11-S11-SAFE01-LIVE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/d2d63d8045974bf5d6c49a77da1e013d4f9f7725/docs/evidence/apa-ac29-safe01-integration-20261019/live01/README_RU.md), [ART-P70-A11-S12-GROUPGRID-SOURCE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/pull/174)
+- Existing V2 runs: none
+- Expected output: Existing #172/#174 donor integration, same auto selector and SceneWriter, scoped native group evidence, saved snapshot/reopen; PR179 head0041bdb3e9ef3a82763083c70689a52f0c36d9e1: LIVE saved/reopened32groups and172GUID; full source44geometry/material semantics preserved; actual Clone0.3005511s/Save2.5871763s; no replay. Existing two single-segment Column group only. Installed stable update is separate S13.
+
+## APA-P70.A11.S13
+
+**Подключить принятый mass-request/native-group путь к установленному APA с сохранением 30+4 маршрутов** — INTEGRATION / DONE_PUBLISHED / P0
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: ac29-installed-mass-selector-preserve-sidecar34
+- Depends on: APA-P70.A11.S12
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: Preserve current installed core and read-only30/semantic4 registrations; integrate accepted mass selector through same entrypoint/registry, test staged installed bytes, runtime capability discovery and meaningful read-only route in actual accepted project. No unsupported native group/axis/boolean capability claims; bounded existing group LIVE acceptance reused.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-P70-A11-S12-GROUP32-LIVE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/0041bdb3e9ef3a82763083c70689a52f0c36d9e1/docs/evidence/apa-ac29-native-massops-integration-20261019/live03/README_RU.md), [ART-P70-A11-S11-SAFE01-LIVE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/d2d63d8045974bf5d6c49a77da1e013d4f9f7725/docs/evidence/apa-ac29-safe01-integration-20261019/live01/README_RU.md)
+- Existing V2 runs: none
+- Expected output: Additive staged update of existing installed APA, exact backups/readback; no duplicate Router or dependency installation; PR180 installed/readback accepted: all296contracts and34reads preserved; coreSHA30793c9538feacd11e86c6e6d688869f0506afb6e0ec19f74d50cdc143a26e03;130offline tests+8CIchecksPASS code650b0769; real172GUID read-only layout qualification. Current entrypoint apa_ac29_installed_factory.native_command_router().
+
+## APA-P70.A11.S14
+
+**Довести индивидуальное native пакетное копирование через общий selector/registry и сохранённую копию** — INTEGRATION / DONE_PUBLISHED / P0
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: ac29-mass-selector-native-move-copy-shared-registry
+- Depends on: APA-P70.A11.S13
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: Existing mass request selects oneMoveElements(copy=true) batch via sameRouter/SceneWriter and code-owned verifier; exact native source/targets/BREP/attributes/GUID/ownership/collision, no relocation or retries; one representative operation in newly isolated savedPLN with save/snapshot/realreopen and immutable source. Beam/Object claims only with supported real source specimens; missing specimen remains explicit, never offline->LIVE.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-P70-A11-S13-INSTALLED-SELECTOR-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/14a8922b2f0affd84205908ea8d7503d984348c1/docs/evidence/apa-ac29-installed-mass-selector-20261019/README_RU.md), [ART-P70-A11-S14-MULTICOPY-SOURCE-20261019](https://github.com/dvikt33-ux/safe-bim-layer/pull/143)
+- Existing V2 runs: none
+- Expected output: Reuse existing multi-prototype copier; attach exactCREATE verifier to existingregistry and execute representative safe-copy native batch with exactreadback/save/reopen; PR181 installed and published: oneMoveElements(copy=true) batch2Column, fullreadback/save/reopen accepted; all296contracts/30+4reads preserved, CI8SUCCESS. Immutable evidence c1338d2f. No repeatgroup32/copyLIVE.
+
+## APA-P70.A11.S15
+
+**Распределение нативных копий по конечной линии с явными концами и числом позиций** — INTEGRATION / DONE_PUBLISHED / P0
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: ac29-mass-finite-line-segment-native-copy
+- Depends on: APA-P70.A11.S14
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: Explicit SI start/end/count and verified prototype anchor -> existing mass selector -> oneMoveElements(copy=true) batch through existing registry/SceneWriter. Preserve source geometry and all existing groups; automatic newcontract tests and one meaningful diagonal-line LIVE in a new saved copy, exact targets/GUID/readback, guardedSave/snapshot/reopen. Never rerun acceptedgroup8x4/individualLINEAR proof.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-P70-A11-S14-COPY-RECEIPT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/README_RU.md), [ART-P70-A11-S14-COPY-AUDIT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/independent-audit.json)
+- Existing V2 runs: none
+- Expected output: PR183 finite LINE_SEGMENT installed and LIVE accepted: 3nativeColumn endpoints/midpoint,182GUID, SHAa72d5451; existing contracts296 preserved. Publishedc3d2c976. Priorworkingcopydrift stoppedbeforenative; usedaccepted immutable snapshot, no restoration/replay.
+
+## APA-P70.A11.S16
+
+**Размещение по выбранным пересечениям именованных осей с нерегулярными шагами** — INTEGRATION / DONE_PUBLISHED / P0
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: ac29-mass-selected-axis-intersections
+- Depends on: APA-P70.A11.S15
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: Explicit authoritative orthogonalaxis labels/coordinates and selectedpairs -> existing massselector/capability discovery -> one existing nativebatch; exact placement provenance labels retained. No nativeaxis object creation or inferredcoordinates. Automatic contract checks, one new meaningful sparse nonuniformaxis LIVE in safecopy with GUID/BREP/material/readback/guardedsave/reopen; publish and install without redoingacceptedLINEAR/grid8x4.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-P70-A11-S15-LINE-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/c3d2c9767bab54f4d7ec763e6af3ed0f736c452c/docs/evidence/apa-ac29-finite-line-distribution-20261020/README_RU.md), [ART-P70-A11-S15-LINE-AUDIT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/c3d2c9767bab54f4d7ec763e6af3ed0f736c452c/docs/evidence/apa-ac29-finite-line-distribution-20261020/independent-audit.json)
+- Existing V2 runs: none
+- Expected output: PR184 installedselectedAXIS_INTERSECTIONS accepted with3namedpairs only,188GUID, savedSHA439cb4c3. Published09133e81; source/protectedancestorsunchanged; no nativeaxiscreation claim.
+
+## APA-P70.A11.S17
+
+**Создание нативной группы через общий selector/registry/SceneWriter** — INTEGRATION / DONE_PUBLISHED / P0
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: ac29-shared-native-group-create
+- Depends on: APA-P70.A11.S16
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: Reuse actual existing CreateNativeGroupV1 SDKcontract. Request -> currentselector/capabilitydiscovery -> sameRouter/registry/SceneWriter. Group actual verified ungrouped same-story roots, exactmembers andallphysicalGUID/geometry/materials retained; one necessary safe-copy LIVE with guardedSave/snapshot/reopen. Existinggroupclone/copy scenarios not repeated. NoAPXchange or newexecutor.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-P70-A11-S16-AXES-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/09133e81a13098dc53fbe2e385bb30a3bcdbf27a/docs/evidence/apa-ac29-selected-axes-20261020/README_RU.md), [ART-P70-A11-S16-AXES-AUDIT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/09133e81a13098dc53fbe2e385bb30a3bcdbf27a/docs/evidence/apa-ac29-selected-axes-20261020/independent-audit.json)
+- Existing V2 runs: none
+- Expected output: PR185 installedsharednativegroupcreate accepted: groupfc0ee2e1 from2existingColumn, physical188unchanged, savedSHA186c14bd. Published3e20da6c. No priorcopy/grid/line/axes native repetition; CI9SUCCESS.
+
+## APA-P70.A11.S18
+
+**Редактирование групп: нативная разгруппировка через общий selector/registry** — INTEGRATION / DONE_PUBLISHED / P0
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: ac29-shared-native-group-ungroup
+- Depends on: APA-P70.A11.S17
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: ReuseactualUngroupNativeGroupV1 contract with exactflatColumnmembers; existingselector/capability/Router/registry/SceneWriter, preserveallphysicalGUID/geometry/materials andothergroups. One newnativeungroup in freshcopy ofacceptedgroup snapshot,guardedSave/exactsnapshot/reopen. Neverrecreateacceptedgroup or repeatoldcopies/grid.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-P70-A11-S17-GROUP-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/3e20da6c8447749bc2db7e09247a012a98f6b396/docs/evidence/apa-ac29-shared-group-create-20261020/README_RU.md), [ART-P70-A11-S17-GROUP-AUDIT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/3e20da6c8447749bc2db7e09247a012a98f6b396/docs/evidence/apa-ac29-shared-group-create-20261020/independent-audit.json)
+- Existing V2 runs: none
+- Expected output: PR186 installednativeungroup accepted innewcopy, groupCreateCalls0/ungroup1/Save1,188GUIDunchanged, savedSHA3db4c3fa. Published8a95c9e6 andCI9SUCCESS.
+
+## APA-P70.A11.S19
+
+**Перемещение целой нативной группы через общий selector/registry** — INTEGRATION / DONE_PUBLISHED / P0
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: ac29-shared-native-group-move
+- Depends on: APA-P70.A11.S18
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: ReuseactualMoveNativeGroupV1 contract,one horizontal translation ofsourceverifiedflatColumngroup. Scopeincludesmembersandownedsegments; keepallGUIDs/membership/fulltypedshape/materials,verifyexacttranslatedanchorsandcollision-freefootprint,retainedmodelunchanged. One safe-copyLIVE fromexistinggroup snapshot,guardedsave/snapshot/reopen; no group recreation or previousscenario repeat.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-P70-A11-S18-UNGROUP-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/8a95c9e6bb3af95d9a38a27bc1009aeec04b615e/docs/evidence/apa-ac29-shared-ungroup-20261020/README_RU.md), [ART-P70-A11-S18-UNGROUP-AUDIT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/8a95c9e6bb3af95d9a38a27bc1009aeec04b615e/docs/evidence/apa-ac29-shared-ungroup-20261020/independent-audit.json), [ART-P70-A11-S17-GROUP-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/3e20da6c8447749bc2db7e09247a012a98f6b396/docs/evidence/apa-ac29-shared-group-create-20261020/README_RU.md)
+- Existing V2 runs: none
+- Expected output: PR188 nativewholegroupmove installed/accepted,published426ea870. Groupfc0ee2e1 unchanged, exactnewtargets,188GUID,4moved/184retained, savedSHAebbd0574. CI9SUCCESS onexecutedc980code; no repeatedacceptedoperations.
+
+## APA-P70.A11.S20
+
+**Готовая лёгкая DXF интеграция: recover/audit, XREF/hash, MINSERT и единицы через общий Router** — INTEGRATION / DONE_PUBLISHED / P1
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: existing-ezdxf-dxf-source-preflight
+- Depends on: APA-P70.A11.S13
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: One realadapter onexistingRouter/registry, reuseinstalledezdxf1.4.5 andexistingV1venv, preserve30+4commands/all296contracts. Sourcehashbefore/after,failclosedonparse/audit/unknownunits/missingoroutsideXREF; noDXFrepairwrite, noPLN/APX/nativecalls. Automaticcontract checks andone realmanufacturerDXF safe-copy operation; publish/install/report. No duplicatedIDS/schema/geometry engines.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-P70-A11-S20-DXF-READY-SOURCE-20261020](https://github.com/dvikt33-ux/safe-bim-layer/pull/163)
+- Existing V2 runs: none
+- Expected output: PR189 readyDXFdiagnostics installed/publishedf0ca0e10,one newREAD_ONLYcommand viaexistingfactory defaultcatalog299. Actualsourcee220/report61bbSHA, old298contractspreserved, no package reinstall. Sourceunready correctlyreported; adapteracceptancePASS. Initialcandidate refinedbeforeauditinventory, stoppedstage loader fixed beforeapply; oldreceiptsretained.
+
+## APA-P70.A11.S21
+
+**Автовыбор команды группировки, перемещения и разгруппировки из запроса** — INTEGRATION / DONE_PUBLISHED / P0
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: ac29-natural-group-intent-existing-native-selector
+- Depends on: APA-P70.A11.S19
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: Usertext+explicitGUIDs/source/vector -> boundedintentrecognition -> existingtypedgroupadapters -> actualruntimecapabilitydiscovery -> existingregistry/SceneWriter. Ambiguous/composite/boolean/incompleteintents failclosed; no inventedmembers/coordinates. Automaticroutingcontracts andone currentAC29READ_ONLY qualification ofthree nativecommands againstfreshsources/scopes; reuseacceptedwrite/save/reopenreceipts185/186/188 without repeatingwrites.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-P70-A11-S17-GROUP-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/3e20da6c8447749bc2db7e09247a012a98f6b396/docs/evidence/apa-ac29-shared-group-create-20261020/README_RU.md), [ART-P70-A11-S18-UNGROUP-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/8a95c9e6bb3af95d9a38a27bc1009aeec04b615e/docs/evidence/apa-ac29-shared-ungroup-20261020/README_RU.md), [ART-P70-A11-S19-MOVE-RECEIPT-20261020](https://github.com/dvikt33-ux/safe-bim-layer/blob/426ea870ef6e2fce60a6354a3c6f335906100e18/docs/evidence/apa-ac29-shared-group-move-20261020/README_RU.md)
+- Existing V2 runs: none
+- Expected output: PR190 published773bfe60 and installed22bd5092. Three automatic group actions actual native READ_ONLY qualified; unchanged existing native adapters. CodeCI8SUCCESS. No new LIVE_WRITE_PASS claimed.
+
+## APA-P70.A11.S22
+
+**Расширить общий нативный пакетный copier на самостоятельные стены** — INTEGRATION / PARTIAL / P0
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: ac29-shared-native-batch-copy-standalone-wall
+- Depends on: APA-P70.A11.S14
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: Existing MoveElements(copy=true), same Router/registry/SceneWriter. Actual source typed wall coordinates and closed/materialized BREP, no hosted openings/dependents/group membership, story0, exact preserved source/new GUID/geometry/material facts, collision preflight. Necessary automatic tests and one new safe-copy LIVE operation/save/reopen only if eligible actual source. No new primitive creation or invented geometry; unsupported wall domains failclosed. Publish implementation and exact evidence.
+- Owner/lease: unclaimed
+- Requires owner approval: False
+- Source inputs: [ART-P70-A11-S14-COPY-RECEIPT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/README_RU.md)
+- Existing V2 runs: none
+- Expected output: Fresh native READ_ONLY source qualification: 4Walls,2hostDoor/Window;2withoutchildren still have joined/cut BREP differingfromisolatedtypedrectangle. No suitable independentlyunchanged standaloneWall donor; nativewrites0. Separate Slab candidate actualtypedrectangle+closedBREP exists; continue independent elementtype, do not create arbitrary donor or run predictable mismatching Wall write. Sourcequalification receipt will publish with next sharedcopier feature.
+
+## APA-P70.A11.S23
+
+**Нативное пакетное копирование самостоятельного прямоугольного перекрытия** — INTEGRATION / IN_PROGRESS / P0
+
+- Parent: APA-P70 → APA-P70.A11
+- Topic: PRODUCT_DEVELOPMENT
+- Work key: ac29-shared-native-batch-copy-standalone-slab
+- Depends on: APA-P70.A11.S14
+- Related, check before duplicating: APA-P70.A11.S03
+- Acceptance: Existing MoveElements(copy=true), same Router/registry/SceneWriter, actual straight rectangular BasicSlab floor0/noholes/nochildren/nohost/group, explicit horizontalplacements. Actual typed polygon+closed/materialized nativeBREP, exactGUID/type/geometry/materialreadback and retainedmodel; necessary automatic tests +one safe-copy nativebatch/save/reopen, install/publish. OtherSlabdomains failclosed, no CreateSlabs or newdependency.
+- Owner/lease: apa-mass-integration-20261019 / 2026-10-20T04:21:15Z
+- Requires owner approval: False
+- Source inputs: [ART-P70-A11-S14-COPY-RECEIPT-20261019](https://github.com/dvikt33-ux/safe-bim-layer/blob/c1338d2f659340bce7aa44fbb7d34165b8ac5fc9/docs/evidence/apa-ac29-native-copy-registry-20261019/README_RU.md)
+- Existing V2 runs: none
+- Expected output: 

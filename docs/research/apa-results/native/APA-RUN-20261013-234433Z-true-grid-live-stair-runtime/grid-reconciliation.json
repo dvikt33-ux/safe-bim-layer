@@ -1,0 +1,27 @@
+{
+  "status": "KNOWN_APPLIED_OWNED_GRID_CORRECTED_UNIQUE_INTENTS",
+  "historicalUnknownRetained": true,
+  "noBlindReplay": true,
+  "angleMismatch": {
+    "originalIntent": "universal-grid-angle-sync-20261014-01",
+    "originalState": "UNKNOWN_OUTCOME",
+    "nativeResponseSuccess": true,
+    "requestedGDLValue": 1.5707963267948966,
+    "actualMemoRadians": 0.027415568,
+    "correctiveIntent": "universal-grid-angle-degrees-fix-20261014-01",
+    "correctiveState": "PASS",
+    "correctiveGDLDegrees": 90,
+    "actualCorrectedRadians": 1.5707963267948966
+  },
+  "placementDrift": {
+    "cause": "NOT_VERIFIED_OBSERVED_DURING_UI_INSPECTION",
+    "onlyOwnedAxisChanged": true,
+    "correctiveIntent": "universal-grid-position-reconcile-20261014-01",
+    "correctiveState": "PASS"
+  },
+  "retained143": "INDEPENDENTLY_VERIFIED_UNCHANGED",
+  "journal": {
+    "PASS": 59,
+    "UNKNOWN_OUTCOME": 4
+  }
+}

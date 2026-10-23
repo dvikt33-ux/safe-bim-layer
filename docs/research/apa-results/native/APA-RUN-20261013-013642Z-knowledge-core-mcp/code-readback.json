@@ -1,0 +1,15 @@
+{
+  "head": "88169d358e4c329f8959f557c944300adcec2df9",
+  "parent": "f5aa4754a0ace251e8541001f17f6fa8eddfe8e5",
+  "branch": "feature/apa-knowledge-integration-20261013",
+  "pr": 71,
+  "all29BlobsMatchGitHub": true,
+  "unchanged19ComponentFilesMatchPR69GitBlobs": true,
+  "protected5ModulesUnchanged": [
+    "scripts/archicad_bim_documentation.py",
+    "scripts/archicad_scene_run.py",
+    "scripts/archicad_bim_graph.py",
+    "scripts/archicad_normative_machine.py",
+    "scripts/archicad_normative_bindings.py"
+  ]
+}

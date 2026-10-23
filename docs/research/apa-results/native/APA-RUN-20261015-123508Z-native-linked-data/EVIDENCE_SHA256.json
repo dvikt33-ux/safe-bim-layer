@@ -1,0 +1,8 @@
+{
+  "core-knowledge-query.json": "706a02f89a78c4183fb2b5bd06858a0fb854e07216bfb8a7ac4d8c5b90cd7f5e",
+  "gap-register.json": "f67a7cc42920471cd6b2b2ba670bb354aa9d06327320ab49377400aeb1fb5b60",
+  "module-contracts.json": "b4201638bbe7134d6e9279c668afa2193a8af3653cb5d483628972f242f263c7",
+  "module-coverage.json": "fff3fefd4ad7c6e3acb48f201f22e35d7824fe1d511d8ef833f597b3fb751be1",
+  "native-runtime.json": "68bf33c442909b875ded8609c5d5c7a17c8cb59665cf4d988555fde52af6d9b9",
+  "SDK-build.json": "f58cdb694304ed6ca440b14bcf25877fd63811738b67b4844d9034df7334c9e2"
+}

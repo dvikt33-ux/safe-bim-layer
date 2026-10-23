@@ -1,0 +1,76 @@
+{
+  "action_id": "APA-P70.A02",
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-SELECTED-NATIVE-MATERIAL-LIBRARY-INTEGRATED",
+      "evidence_ids": [
+        "EV-MATERIAL-ACCEPTANCE",
+        "EV-MATERIAL-RAW-BYTES"
+      ],
+      "statement": "Current code verifies local captured native material apply/restore and exact Unicode/GUID GDL instantiation/persistence; a bounded public proof excludes local paths, complete catalogs and original model GUIDs. Physical body310mm remains separate from parameter340mm. Broad library and engineering remain unverified.",
+      "status": "SOURCE_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-MATERIAL-ACCEPTANCE",
+      "kind": "TEST_RESULT",
+      "sha256": "6549336f7c18d9e9901d544bb8f0cebb474805bcd9270d2b5d3d55e3765584ac",
+      "source_revision": "9139124176e3114afd8f3b7733cf40f423d0d8e5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-211000Z-native-material-library-integration/acceptance.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-MATERIAL-RAW-BYTES",
+      "kind": "LOCAL_LOG",
+      "sha256": "2d6bcb42143d07a7c612f1d87725167b123b14ec10cc62cbeaf4bd6d1771ead7",
+      "source_revision": "9139124176e3114afd8f3b7733cf40f423d0d8e5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261011-211000Z-native-material-library-integration/EVIDENCE_SHA256.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "executor": "codex-apa-material-native-20261011",
+  "executor_run_id": "APA-RUN-20261011-203100Z-material-library-integration",
+  "files_to_publish": [
+    "REPORT.md",
+    "manifest.json",
+    "evidence.json"
+  ],
+  "finished_at": "2026-10-11T21:10:46Z",
+  "idempotency_key": "sha256:48c15a3aa1175eb82574ba88bd82f380f3ec3e5fb5851d418e93902d195acef3",
+  "inputs": [
+    "ART-APA-PLP-CONTRACT",
+    "ART-APA-CSE-RESEARCH",
+    "ART-PR20",
+    "ART-APA-ATTR-STORY-SLAB-20261011"
+  ],
+  "next_substep": "APA-P70.A04.S01",
+  "phase": "SOURCE",
+  "plan_id": "APA-P70",
+  "run_id": "APA-RUN-20261011-211000Z-native-material-library-integration",
+  "safety": {
+    "apx_modified": false,
+    "main_modified": false,
+    "paid_runtime_used": false,
+    "pln_modified": false,
+    "tested_branches_modified": false
+  },
+  "schema": "APA_RUN_EVENT_V2",
+  "scope": {
+    "archicad": "29build5101RUS(capturednative)",
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "sdk": null,
+    "source_branch": "feature/apa-material-library-20261011",
+    "tapir": "1.5.10"
+  },
+  "source_revisions": [
+    {
+      "revision": "9139124176e3114afd8f3b7733cf40f423d0d8e5",
+      "source_sha": "9139124176e3114afd8f3b7733cf40f423d0d8e5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/51"
+    }
+  ],
+  "started_at": "2026-10-11T21:10:46Z",
+  "status": "EVIDENCE_READY",
+  "substep_id": "APA-P70.A02.S04"
+}

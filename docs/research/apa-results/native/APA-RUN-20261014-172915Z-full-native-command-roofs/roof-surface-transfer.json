@@ -1,0 +1,18 @@
+{
+  "gable": {
+    "status": "NATIVE_ROOF_ASSEMBLY_GEOMETRY_PASS",
+    "actualSlopePlaneCount": 2,
+    "buildingMaterialTransfer": "PASS",
+    "surfaceTransfer": "SOURCE_MATCH"
+  },
+  "hip": {
+    "status": "NATIVE_ROOF_ASSEMBLY_GEOMETRY_PASS",
+    "actualSlopePlaneCount": 4,
+    "buildingMaterialTransfer": "PASS",
+    "surfaceTransfer": "NOT_VERIFIED_MULTIPLANE_FACE_OVERRIDES_DIFFER"
+  },
+  "status": "ACTUAL_NATIVE_CAPTURE_MATERIAL_BOUNDARY",
+  "newNativeWrites": 0,
+  "existing255MaterialsUnchanged": true,
+  "minimalMissingContract": "Existing ModifyRoofs needs explicit Roof surface overrides and API_ElementMemo.pivotPolyEdges/levelEdgeData (APIMemoMask_PivotPolygon); no Roof entry in installed SetDetailsOfElements typeSpecificSettings."
+}

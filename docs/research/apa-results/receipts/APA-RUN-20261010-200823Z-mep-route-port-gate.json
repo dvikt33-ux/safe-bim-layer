@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:2a488f5eafe6881bedaae103c9c97340e9ce30ca8f310d8fbf2186370e1836ab",
+  "index_commit_sha": "4e4fe2f9320f949058f56981ac77e0f5d2d4d4b0",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "4e4fe2f9320f949058f56981ac77e0f5d2d4d4b0",
+  "report_path": "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-200823Z-mep-route-port-gate/REPORT.md",
+  "report_sha256": "0ce12cca0e1e1239d75250d333e6de8f39c291acd3e488f469ac794d454dd3a0",
+  "run_id": "APA-RUN-20261010-200823Z-mep-route-port-gate",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

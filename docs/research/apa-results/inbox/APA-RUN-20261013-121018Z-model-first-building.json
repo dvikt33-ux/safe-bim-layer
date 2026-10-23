@@ -1,0 +1,105 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261013-121018Z-model-first-building",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-model-first-building-20261013",
+  "executor_run_id": "APA-CLAIM-MODEL-FIRST-20261013T085858Z",
+  "phase": "LIVE",
+  "started_at": "2026-10-13T08:58:58Z",
+  "finished_at": "2026-10-13T12:10:18Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 authorized isolated model-first copy saved; publication makes no native changes",
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-model-first-building-20261013"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/74",
+      "revision": "5a3a9201a715a5528c93bed4a5318e2acb32eea7",
+      "source_sha": "5a3a9201a715a5528c93bed4a5318e2acb32eea7"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-MODEL-FIRST-BUILDING",
+      "statement": "Connected native21-element two-story test model, five actual Roof underside contacts, explicit native roles, coordinated Roof/Window edits and Save/Open.168current identities preserve original126and prototype147. Axes/global-story/full-roof/stair criteria remain unmet; A11.S03PARTIAL.",
+      "status": "LIVE_PASS",
+      "evidence_ids": [
+        "EV-NATIVE",
+        "EV-GEOMETRY",
+        "EV-EDITS",
+        "EV-CI"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-NATIVE",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-121018Z-model-first-building/native-readback.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "1690a6ede95e80164982183d5f2bbe6b3975fc5fb94b39ec4be05c1fe152bbbb",
+      "source_revision": "5a3a9201a715a5528c93bed4a5318e2acb32eea7"
+    },
+    {
+      "evidence_id": "EV-GEOMETRY",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-121018Z-model-first-building/geometry-and-connections.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "8682066f2a6faefe78979aac4d68461e96afcdfd634a7e620a5d4b3302e8983d",
+      "source_revision": "5a3a9201a715a5528c93bed4a5318e2acb32eea7"
+    },
+    {
+      "evidence_id": "EV-EDITS",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-121018Z-model-first-building/parameter-edits.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "89404799fb5906a524abaa5221e5e7fc96f940ab2a2670f48769ec050939b945",
+      "source_revision": "5a3a9201a715a5528c93bed4a5318e2acb32eea7"
+    },
+    {
+      "evidence_id": "EV-CI",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-121018Z-model-first-building/ci.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "245d015b8b24b05dc19c7f7a88eccc05f8045cee2872fec650525ff89458e31c",
+      "source_revision": "5a3a9201a715a5528c93bed4a5318e2acb32eea7"
+    }
+  ],
+  "report_markdown": "# Native model-first creation and parameter edit package\n\nThe existing APA authored generator now creates a connected21-element two-story native test building from one structured intent:10Walls,2Slabs,6Windows,2Doors and1SinglePlaneRoof. Actual project stories0/3m, explicit native material, hosted openings and source-defined bearing/nonbearing roles use the existing BIMGraph/CSE/material pack and SceneWriter. No Morph, new generator or second executor. Documentation expansion was cancelled; accepted PR73 results remain intact.\n\n## Working model and edit cycle\n\nOpt-in outer-wall-face Slab footprints and lowerWall2.8m under0.2m intermediateSlab eliminate the former volumetric overlap. Actual native Roof lower face supplies a measured memo/body offset correction, followed by five native SubtractionUpwards links to upper Walls. Resultant native face/contact areas prove all five sloped underside contacts. Eight exterior Walls read native load-bearing roles and two partitions nonbearing; these are explicit test assignments without engineering capacity acceptance.\n\nRoof level6.0→6.2m preserves itsGUID and raises five dependent resultant Wall caps by0.2m through native SEO. Window width1.2→1.4m preserves itsGUID/host and changes hostWall BREP. Existing model snapshot delta records6then2changed native facts and no added/removedGUIDs. Test parameters are not inferred design dimensions. Drawing rebuild was intentionally excluded from this model-first package.\n\nTwo separate clear-zone21-element scenarios were used: creation/edit prototype, then public orchestrator creation/completion. The latter created all21elements, but its following read stage initially rejected GetSolidElementLinks. The route was fixed and known created GUIDs independently reconciled; no Create was repeated. The public completion method can resume a complete verified creation set, but partial or unexpected native relation sets still require manual reconciliation.\n\nFinal Save/Open and independent native readback preserve original126accepted signatures (including prior121/109) and edited prototype147. Current168mainGUIDs persist. The completed second building has one connected component of21, native BREP shared faces/host edges and no internal or new-to-retained native volume collisions. Re-evaluating complete junctions and properties makes zero Creates, zeroSEO and zeroproperty writes. Geometry scope remains available regenerated native bodies under existing view filters; bodyless External semantics remain NOT_VERIFIED. No visibleUI inspection is claimed.\n\n## Exact remaining boundaries\n\nTrue native Grid axes remain blocked: installed CreateObjects has no GridElement tool variation contract. Loaded generic Structural Grid Object is not a nativeGridtool acceptance. Global story edits require a separately authorized project that does not contain accepted geometry. SinglePlane Roof contour/slope editing is not proved by PolyRoof ModifyRoofs. Hosted Door/Window voids work; no new GenericOpening or Stair was created, and the source staircase requirement remains unverified. Requested SEO skipPolygonHoles=true readsfalse: NOT_VERIFIED; the tested Roof is hole-free and hole-bearing scenarios are rejected. Structural/normative acceptance remains NOT_VERIFIED.\n\nA11.S03 stays PARTIAL, A07 dependencies and S10BLOCKED retained. Normative/search/KG implementation, existing documentation and installedAPX/main/master are unchanged. Main orchestrator actually used the existing read-only KnowledgeGraph with GitHub-current plan133. No new roadmap/controller/indexer.\n\n## Published verification\n\n[draft PR74](https://github.com/dvikt33-ux/safe-bim-layer/pull/74), head`5a3a9201a715a5528c93bed4a5318e2acb32eea7`, exact parentPR73`93557ed0cd59c471b0f903a03708ed88c8feb31b`. Ten code blobs independently match GitHub;15newtests,638/638Windows host and [Windows/Linux CI](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38394734173)PASS;102upstream tests and actual core/MCP smoke in each environment. Processed [evidence](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-121018Z-model-first-building) excludes private paths, PLN and complete technical dumps. Publisher safety flags describe only publication; the approved live isolated test was changed and saved earlier.\n\nNext: supported true native axes contract, separately authorized story-isolated create/edit scenario, then broader qualified host/Roof edits and source staircase. Preserve current168 and never replay accepted creation.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-NATIVE-POSITIVE-ASSEMBLIES",
+      "evidence_ids": [
+        "EV-2"
+      ],
+      "statement": "One true CurtainWall, Railing and ExtrudedShell created through existing SceneWriter and journal; actual native bodies read. Save/Open preserves409GUIDs including258original signatures. Final original-runtime reopen and visual sample inspection remain unverified.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-NATIVE-POSITIVE-READS",
+      "evidence_ids": [
+        "EV-2"
+      ],
+      "statement": "150component parent/root rows,50specific parameter rows; positive existing Opening forward/reverse host and cut;163stored defaults from2library parts;16exact Navigator identities. No quantity-engine call.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-NATIVE-POSITIVE-BUILD",
+      "evidence_ids": [
+        "EV-3",
+        "EV-2"
+      ],
+      "statement": "Full Release exact68d028 candidate source/runtime identity verified;290Tapir commands exported; original APX SHA and registration restored. Final original-runtime reopen not completed.",
+      "status": "BUILD_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-NATIVE-POSITIVE-FLOW",
+      "evidence_ids": [
+        "EV-4"
+      ],
+      "statement": "Captured native facts feed existing BIM Graph and DependencyImpact:213nodes290edges,56node CurtainWall impact.4Drawing owning Layout links,1exact View source;3unresolved links omitted. GUID namespaces separated.",
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-NATIVE-POSITIVE-BOUNDARIES",
+      "evidence_ids": [
+        "EV-0",
+        "EV-2",
+        "EV-5"
+      ],
+      "statement": "388preparable=378native/source+10local;337original compatibility and41source-only entries. Candidate364 compatibility includes73official and priorDevKit, not364newly called commands. Opening post-close hash drift and final original-runtime reopen remain NOT_VERIFIED.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "kind": "TEST_RESULT",
+      "sha256": "ed55ce5ff5307ef2ea97b8755a392b8e4966dbfbec26424e6ec90d5fa6e45920",
+      "source_revision": "8f134001ca0e3250eda587db61ac01dbd6357326",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-092957Z-native-positive-modules/module-coverage.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-1",
+      "kind": "TEST_RESULT",
+      "sha256": "80025161a207a951ef6f90808adc05ddbefc540e230c1af0a3645c9930d902b8",
+      "source_revision": "8f134001ca0e3250eda587db61ac01dbd6357326",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-092957Z-native-positive-modules/module-contracts.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-2",
+      "kind": "TEST_RESULT",
+      "sha256": "e3f9abaa6048b9fe0a4b4a97df2df3a52e5ae9f367fd483bb0a065d05868aa4f",
+      "source_revision": "8f134001ca0e3250eda587db61ac01dbd6357326",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-092957Z-native-positive-modules/native-runtime.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-3",
+      "kind": "TEST_RESULT",
+      "sha256": "ad8fee49a0256cf980ba9e77810f991deb2aa11b565cf917dd74a855dd068c7b",
+      "source_revision": "8f134001ca0e3250eda587db61ac01dbd6357326",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-092957Z-native-positive-modules/SDK-build.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-4",
+      "kind": "TEST_RESULT",
+      "sha256": "56927dfef3bbe150774739f6a5455e22942116692cfdd9eee63c9bf9ecdf14b1",
+      "source_revision": "8f134001ca0e3250eda587db61ac01dbd6357326",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-092957Z-native-positive-modules/native-connected-dataflow.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-5",
+      "kind": "TEST_RESULT",
+      "sha256": "bfebc460fca85b0f74febea35edc813dece0456994a6d6aa2c8a2e05cd46ed7d",
+      "source_revision": "8f134001ca0e3250eda587db61ac01dbd6357326",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-092957Z-native-positive-modules/gap-register.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-6",
+      "kind": "TEST_RESULT",
+      "sha256": "bd1431224aa0b8e8028f5152a488fbbeec33a27dd4d38be56751340ee0fb8b03",
+      "source_revision": "8f134001ca0e3250eda587db61ac01dbd6357326",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-092957Z-native-positive-modules/windows-ci.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-7",
+      "kind": "TEST_RESULT",
+      "sha256": "c703dfd33424ad87c370f28010904927fdaf9a4d7e42b57081d79cd2ae3fbff7",
+      "source_revision": "8f134001ca0e3250eda587db61ac01dbd6357326",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-092957Z-native-positive-modules/core-knowledge-query.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261015-092957Z-native-positive-modules",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

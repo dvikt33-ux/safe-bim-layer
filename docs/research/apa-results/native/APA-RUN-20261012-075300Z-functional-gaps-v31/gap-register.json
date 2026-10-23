@@ -1,0 +1,59 @@
+{
+  "substep": "APA-P70.A11.S03",
+  "status": "PARTIAL",
+  "codePR": 55,
+  "gaps": [
+    {
+      "id": "G01",
+      "status": "FIXED_VERIFIED_PR54",
+      "evidence": "Prior Windows/Linux340PASS, current371PASS; no SQLite redevelop"
+    },
+    {
+      "id": "G02",
+      "status": "WORKING_CONTEXT_ADAPTER_SOURCE_GATES_PRESERVED",
+      "evidence": "All73source-verified records evaluate actual native host/material/context and exchange facts independently",
+      "next": "Qualified product/material mappings and source dimensions before exact assembly writes"
+    },
+    {
+      "id": "G03",
+      "status": "EXTERNAL_DEPENDENCY_SOURCE",
+      "evidence": "Eight required ARMOdimension entities missing; source commit=false preserved",
+      "next": "Qualified dimension/source input; existing independent source facts remain usable"
+    },
+    {
+      "id": "G04",
+      "status": "BOUNDED_NATIVE_CONNECTED_NETWORK_LIVE_PASS",
+      "evidence": "Two routes/two segments/four nodes/two ducts/one reciprocal join persist; CP-SAT and native collision proof",
+      "next": "Branch/terminal equipment scenarios and engineering sizing beyond this two-section network"
+    },
+    {
+      "id": "G05",
+      "status": "OPENING_SEO_LIVE_PASS_SHELL_AND_EDIT_CONTRACT_GAPS",
+      "evidence": "Native hosted0.4x0.6m Opening, independent hole geometry and SEOlink/reduced BREP persist",
+      "next": "Qualify a ready exposed Shell/Opening-edit provider path; installed APX changes require separate permission"
+    },
+    {
+      "id": "G06",
+      "status": "ACTUAL_IFC_ANALYTICAL_OBSERVER_EXTERNAL_SAM_SAF_DEPENDENCY",
+      "evidence": "Actual export has0analytical members/models/load groups; SDK/SAF/LIRA donors are research-only and are not a working native solver",
+      "next": "Actual native SAM/SAF artifact/provider, qualified mapping, approved loads/norms and available calculation engine"
+    },
+    {
+      "id": "G07",
+      "status": "BOUNDED_IFC_HOST_PORT_MATERIAL_OBSERVATIONS_PASS",
+      "evidence": "26whole world bounds plus1Opening effective host cut, exact void host and1IfcRelConnectsPorts relation",
+      "next": "Full semantic/quantity/face equivalence and verified MCP/Twinmotion receiver implementation"
+    },
+    {
+      "id": "G08",
+      "status": "INTERPRETATION_FIXED_PROVIDER_FIELDS_RETAINED",
+      "evidence": "Dedicated reciprocal port authority despite empty generic enumeration; BREPclosed over conflicting memo flag; effective Opening cut differs from extended IFC cutter",
+      "next": "Keep specialized observations authoritative; provider generic metadata completeness remains limited"
+    },
+    {
+      "id": "G09",
+      "status": "DEFERRED_UNTIL_FUNCTIONAL_ACCEPTANCE",
+      "next": "A11.S04 measured optimization after S03 acceptance; final installer deferred"
+    }
+  ]
+}

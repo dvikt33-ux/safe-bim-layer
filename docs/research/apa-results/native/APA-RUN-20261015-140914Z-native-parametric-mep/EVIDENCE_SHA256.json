@@ -1,0 +1,10 @@
+{
+  "gap-register.json": "568a83df42ae25afe4935fde6a38234875ab03dfcc6dc6e42f3aa384e16b3f03",
+  "module-contracts.json": "72b1a74ea540d6096608a42b8a5c8313d485c658c3ac0024b6432268a2d223ac",
+  "module-coverage.json": "8700c47b80af14a05784593eb3dedeb801e332422f44584e1976a933db3c4873",
+  "native-runtime.json": "c2269b5ad5b0e271bb2a4f17275596f383a636be6e5e911a752e21f76dcd4247",
+  "next-capability-proposals.json": "26276b4281b71319d7c22c03a0fd917e40e18a495f57e0d73553793948e99ca7",
+  "publication-actions.json": "0c5cc39a7148ce059342ab088234936cddf0f0b8dda73a93e323ef5215d9ad4d",
+  "publication-preflight.json": "915277d6ede4aa7e4e7eb07b59d15b05a2e8abee3f37b1ecb76e9bdf118fa1b2",
+  "SDK-build.json": "0af3d66025654d19375ce3e39c597ad9f3e3b9628e7dcfcf91ac3f8ea571bc54"
+}

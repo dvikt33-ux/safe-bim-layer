@@ -1,0 +1,383 @@
+{
+  "status": "LIVE_PARAMETER_EDITS_PASS",
+  "source": "EXISTING_AUTHORED_GRAPH_DIFF_SAME_SCENEWRITER",
+  "edits": {
+    "roof-level": {
+      "status": "NATIVE_BUILDING_PARAMETER_PROPAGATION_PASS",
+      "parameter": "roof-level",
+      "beforeModelVersion": "3acb86b1cf351c37b691357c3b1b9bccfa8728ad67b4b618ae1797bebb7773df",
+      "afterModelVersion": "bcf8159098cdcc5ca476d8c76c6c69226ce37178b60e170e4c612f37f2012e33",
+      "delta": {
+        "status": "BIM_FACTS_UPDATED",
+        "beforeVersion": "3acb86b1cf351c37b691357c3b1b9bccfa8728ad67b4b618ae1797bebb7773df",
+        "afterVersion": "bcf8159098cdcc5ca476d8c76c6c69226ce37178b60e170e4c612f37f2012e33",
+        "changedGuids": [
+          "id-sha256:14699e2f0e30e2ddf161",
+          "id-sha256:0e2ef54ad959007c6387",
+          "id-sha256:ffc8240c52c71d39b74b",
+          "id-sha256:f4060b7a3ce5a29db792",
+          "id-sha256:ba5b5e6c6bee0e7fcf57",
+          "id-sha256:dcba491bc5c6ff4e1a86"
+        ],
+        "changedNativeModelGuids": [
+          "id-sha256:14699e2f0e30e2ddf161",
+          "id-sha256:0e2ef54ad959007c6387",
+          "id-sha256:ffc8240c52c71d39b74b",
+          "id-sha256:f4060b7a3ce5a29db792",
+          "id-sha256:ba5b5e6c6bee0e7fcf57",
+          "id-sha256:dcba491bc5c6ff4e1a86"
+        ],
+        "changedDrawingFactGuids": [],
+        "addedGuids": [],
+        "removedGuids": [],
+        "nativeDrawingRegeneration": "REQUIRES_NATIVE_REBUILD_AND_INDEPENDENT_READBACK"
+      },
+      "effect": {
+        "native-wall-east-level-2": 0.1999999999999993,
+        "native-wall-north-level-2": 0.1999999999999993,
+        "native-wall-south-level-2": 0.1999999999999993,
+        "native-wall-west-level-2": 0.20000000000000018,
+        "test-partition-1": 0.20000000000000018
+      },
+      "roofContacts": {
+        "native-wall-east-level-2": {
+          "status": "ACTUAL_NATIVE_ROOF_UNDERSIDE_FACE_CONTACT_PASS",
+          "plane": {
+            "normal": [
+              -0.0,
+              -0.04997916920862571,
+              0.9987502603980715
+            ],
+            "distance": 4.201081,
+            "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+          },
+          "sharedAreaSquareMeters": 2.4931157454794106,
+          "actualFaceIndices": {
+            "wall": [
+              [
+                0,
+                1
+              ]
+            ],
+            "roof": [
+              [
+                0,
+                2
+              ]
+            ]
+          },
+          "wallEntirelyBelowUnderside": true,
+          "holesPreservedInContactCheck": true
+        },
+        "native-wall-north-level-2": {
+          "status": "ACTUAL_NATIVE_ROOF_UNDERSIDE_FACE_CONTACT_PASS",
+          "plane": {
+            "normal": [
+              -0.0,
+              -0.04997916920862571,
+              0.9987502603980715
+            ],
+            "distance": 4.201081,
+            "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+          },
+          "sharedAreaSquareMeters": 3.003753910216016,
+          "actualFaceIndices": {
+            "wall": [
+              [
+                0,
+                1
+              ]
+            ],
+            "roof": [
+              [
+                0,
+                2
+              ]
+            ]
+          },
+          "wallEntirelyBelowUnderside": true,
+          "holesPreservedInContactCheck": true
+        },
+        "native-wall-south-level-2": {
+          "status": "ACTUAL_NATIVE_ROOF_UNDERSIDE_FACE_CONTACT_PASS",
+          "plane": {
+            "normal": [
+              -0.0,
+              -0.04997916920862571,
+              0.9987502603980715
+            ],
+            "distance": 4.201081,
+            "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+          },
+          "sharedAreaSquareMeters": 3.003753910216016,
+          "actualFaceIndices": {
+            "wall": [
+              [
+                0,
+                1
+              ]
+            ],
+            "roof": [
+              [
+                0,
+                2
+              ]
+            ]
+          },
+          "wallEntirelyBelowUnderside": true,
+          "holesPreservedInContactCheck": true
+        },
+        "native-wall-west-level-2": {
+          "status": "ACTUAL_NATIVE_ROOF_UNDERSIDE_FACE_CONTACT_PASS",
+          "plane": {
+            "normal": [
+              -0.0,
+              -0.04997916920862571,
+              0.9987502603980715
+            ],
+            "distance": 4.201081,
+            "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+          },
+          "sharedAreaSquareMeters": 2.312890510866443,
+          "actualFaceIndices": {
+            "wall": [
+              [
+                0,
+                1
+              ]
+            ],
+            "roof": [
+              [
+                0,
+                2
+              ]
+            ]
+          },
+          "wallEntirelyBelowUnderside": true,
+          "holesPreservedInContactCheck": true
+        },
+        "test-partition-1": {
+          "status": "ACTUAL_NATIVE_ROOF_UNDERSIDE_FACE_CONTACT_PASS",
+          "plane": {
+            "normal": [
+              -0.0,
+              -0.04997916920862571,
+              0.9987502603980715
+            ],
+            "distance": 4.201081,
+            "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+          },
+          "sharedAreaSquareMeters": 0.7709635036220746,
+          "actualFaceIndices": {
+            "wall": [
+              [
+                0,
+                1
+              ]
+            ],
+            "roof": [
+              [
+                0,
+                2
+              ]
+            ]
+          },
+          "wallEntirelyBelowUnderside": true,
+          "holesPreservedInContactCheck": true
+        }
+      },
+      "allBuildingGuidsPreserved": true,
+      "newCreates": 0,
+      "old126Unchanged": true
+    },
+    "window-width": {
+      "status": "NATIVE_BUILDING_PARAMETER_PROPAGATION_PASS",
+      "parameter": "window-width",
+      "beforeModelVersion": "bcf8159098cdcc5ca476d8c76c6c69226ce37178b60e170e4c612f37f2012e33",
+      "afterModelVersion": "8da61b884ea127df2a5ad851580e8b03b4678608afb72fbbdf30aa920e87b519",
+      "delta": {
+        "status": "BIM_FACTS_UPDATED",
+        "beforeVersion": "bcf8159098cdcc5ca476d8c76c6c69226ce37178b60e170e4c612f37f2012e33",
+        "afterVersion": "8da61b884ea127df2a5ad851580e8b03b4678608afb72fbbdf30aa920e87b519",
+        "changedGuids": [
+          "id-sha256:17bf02c0bc97023963dc",
+          "id-sha256:5dc6759c1e1a4d5f9ac2"
+        ],
+        "changedNativeModelGuids": [
+          "id-sha256:17bf02c0bc97023963dc",
+          "id-sha256:5dc6759c1e1a4d5f9ac2"
+        ],
+        "changedDrawingFactGuids": [],
+        "addedGuids": [],
+        "removedGuids": [],
+        "nativeDrawingRegeneration": "REQUIRES_NATIVE_REBUILD_AND_INDEPENDENT_READBACK"
+      },
+      "effect": {
+        "windowGuid": "id-sha256:5dc6759c1e1a4d5f9ac2",
+        "hostWallGuid": "id-sha256:17bf02c0bc97023963dc",
+        "nativeWidthMeters": 1.4,
+        "hostBodyChanged": true
+      },
+      "roofContacts": {
+        "native-wall-east-level-2": {
+          "status": "ACTUAL_NATIVE_ROOF_UNDERSIDE_FACE_CONTACT_PASS",
+          "plane": {
+            "normal": [
+              -0.0,
+              -0.04997916920862571,
+              0.9987502603980715
+            ],
+            "distance": 4.201081,
+            "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+          },
+          "sharedAreaSquareMeters": 2.4931157454794106,
+          "actualFaceIndices": {
+            "wall": [
+              [
+                0,
+                1
+              ]
+            ],
+            "roof": [
+              [
+                0,
+                2
+              ]
+            ]
+          },
+          "wallEntirelyBelowUnderside": true,
+          "holesPreservedInContactCheck": true
+        },
+        "native-wall-north-level-2": {
+          "status": "ACTUAL_NATIVE_ROOF_UNDERSIDE_FACE_CONTACT_PASS",
+          "plane": {
+            "normal": [
+              -0.0,
+              -0.04997916920862571,
+              0.9987502603980715
+            ],
+            "distance": 4.201081,
+            "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+          },
+          "sharedAreaSquareMeters": 3.003753910216016,
+          "actualFaceIndices": {
+            "wall": [
+              [
+                0,
+                1
+              ]
+            ],
+            "roof": [
+              [
+                0,
+                2
+              ]
+            ]
+          },
+          "wallEntirelyBelowUnderside": true,
+          "holesPreservedInContactCheck": true
+        },
+        "native-wall-south-level-2": {
+          "status": "ACTUAL_NATIVE_ROOF_UNDERSIDE_FACE_CONTACT_PASS",
+          "plane": {
+            "normal": [
+              -0.0,
+              -0.04997916920862571,
+              0.9987502603980715
+            ],
+            "distance": 4.201081,
+            "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+          },
+          "sharedAreaSquareMeters": 3.003753910216016,
+          "actualFaceIndices": {
+            "wall": [
+              [
+                0,
+                1
+              ]
+            ],
+            "roof": [
+              [
+                0,
+                2
+              ]
+            ]
+          },
+          "wallEntirelyBelowUnderside": true,
+          "holesPreservedInContactCheck": true
+        },
+        "native-wall-west-level-2": {
+          "status": "ACTUAL_NATIVE_ROOF_UNDERSIDE_FACE_CONTACT_PASS",
+          "plane": {
+            "normal": [
+              -0.0,
+              -0.04997916920862571,
+              0.9987502603980715
+            ],
+            "distance": 4.201081,
+            "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+          },
+          "sharedAreaSquareMeters": 2.312890510866443,
+          "actualFaceIndices": {
+            "wall": [
+              [
+                0,
+                1
+              ]
+            ],
+            "roof": [
+              [
+                0,
+                2
+              ]
+            ]
+          },
+          "wallEntirelyBelowUnderside": true,
+          "holesPreservedInContactCheck": true
+        },
+        "test-partition-1": {
+          "status": "ACTUAL_NATIVE_ROOF_UNDERSIDE_FACE_CONTACT_PASS",
+          "plane": {
+            "normal": [
+              -0.0,
+              -0.04997916920862571,
+              0.9987502603980715
+            ],
+            "distance": 4.201081,
+            "authority": "ACTUAL_NATIVE_LOWER_PRINCIPAL_FACE_PLANE"
+          },
+          "sharedAreaSquareMeters": 0.7709635036220746,
+          "actualFaceIndices": {
+            "wall": [
+              [
+                0,
+                1
+              ]
+            ],
+            "roof": [
+              [
+                0,
+                2
+              ]
+            ]
+          },
+          "wallEntirelyBelowUnderside": true,
+          "holesPreservedInContactCheck": true
+        }
+      },
+      "allBuildingGuidsPreserved": true,
+      "newCreates": 0,
+      "old126Unchanged": true
+    }
+  },
+  "roofEditableHeightBehavior": "Uncut4m memo remains; five resultant Wall caps rise0.2m with owned Roof",
+  "noCreatesDuringEdits": true,
+  "original126Preserved": true,
+  "firstScenarioSaveOpen": {
+    "save": "PASS",
+    "open": "PASS"
+  },
+  "firstSavedModelVersion": "8da61b884ea127df2a5ad851580e8b03b4678608afb72fbbdf30aa920e87b519",
+  "drawingRebuild": "NOT_EXECUTED_CANCELLED_DOCUMENTATION_SCOPE",
+  "BIMFactsAndVersions": "Existing snapshot delta changes6native facts for Roof edit and2for Window edit; no new/removed GUIDs"
+}

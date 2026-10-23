@@ -1,0 +1,461 @@
+{
+  "primaryCount": 18,
+  "wholeInventoryCount": 40,
+  "selectedElements": [
+    {
+      "stepId": "native-slab-level-1",
+      "elementToken": "test-element-301c85f39127ffe9",
+      "type": "Slab",
+      "floorIndex": 0,
+      "details": {
+        "buildingMaterialId": {
+          "guid": "63DB2CE9-903D-45C0-B93C-B3C604C77394"
+        },
+        "level": 0,
+        "polygonOutline": [
+          {
+            "x": 40,
+            "y": 40
+          },
+          {
+            "x": 50,
+            "y": 40
+          },
+          {
+            "x": 50,
+            "y": 48
+          },
+          {
+            "x": 40,
+            "y": 48
+          },
+          {
+            "x": 40,
+            "y": 40
+          }
+        ],
+        "structureType": "Basic",
+        "thickness": 0.2,
+        "zCoordinate": 0
+      }
+    },
+    {
+      "stepId": "native-wall-east-level-1",
+      "elementToken": "test-element-6a94dc736ea21886",
+      "type": "Wall",
+      "floorIndex": 0,
+      "details": {
+        "arcAngle": 0,
+        "begCoordinate": {
+          "x": 50,
+          "y": 40
+        },
+        "begThickness": 0.3,
+        "buildingMaterialId": {
+          "guid": "63DB2CE9-903D-45C0-B93C-B3C604C77394"
+        },
+        "endCoordinate": {
+          "x": 50,
+          "y": 48
+        },
+        "endThickness": 0.3,
+        "height": 3,
+        "offset": 0,
+        "structureType": "Basic",
+        "zCoordinate": 0
+      }
+    },
+    {
+      "stepId": "native-wall-north-level-1",
+      "elementToken": "test-element-1e3ed023078481e2",
+      "type": "Wall",
+      "floorIndex": 0,
+      "details": {
+        "arcAngle": 0,
+        "begCoordinate": {
+          "x": 40,
+          "y": 48
+        },
+        "begThickness": 0.3,
+        "buildingMaterialId": {
+          "guid": "63DB2CE9-903D-45C0-B93C-B3C604C77394"
+        },
+        "endCoordinate": {
+          "x": 50,
+          "y": 48
+        },
+        "endThickness": 0.3,
+        "height": 3,
+        "offset": 0,
+        "structureType": "Basic",
+        "zCoordinate": 0
+      }
+    },
+    {
+      "stepId": "native-wall-south-level-1",
+      "elementToken": "test-element-74e13663688cd71e",
+      "type": "Wall",
+      "floorIndex": 0,
+      "details": {
+        "arcAngle": 0,
+        "begCoordinate": {
+          "x": 40,
+          "y": 40
+        },
+        "begThickness": 0.3,
+        "buildingMaterialId": {
+          "guid": "63DB2CE9-903D-45C0-B93C-B3C604C77394"
+        },
+        "endCoordinate": {
+          "x": 50,
+          "y": 40
+        },
+        "endThickness": 0.3,
+        "height": 3,
+        "offset": 0,
+        "structureType": "Basic",
+        "zCoordinate": 0
+      }
+    },
+    {
+      "stepId": "native-wall-west-level-1",
+      "elementToken": "test-element-f7a694272de27df7",
+      "type": "Wall",
+      "floorIndex": 0,
+      "details": {
+        "arcAngle": 0,
+        "begCoordinate": {
+          "x": 40,
+          "y": 40
+        },
+        "begThickness": 0.3,
+        "buildingMaterialId": {
+          "guid": "63DB2CE9-903D-45C0-B93C-B3C604C77394"
+        },
+        "endCoordinate": {
+          "x": 40,
+          "y": 48
+        },
+        "endThickness": 0.3,
+        "height": 3,
+        "offset": 0,
+        "structureType": "Basic",
+        "zCoordinate": 0
+      }
+    },
+    {
+      "stepId": "native-slab-level-2",
+      "elementToken": "test-element-f5f2c00fc1a32e21",
+      "type": "Slab",
+      "floorIndex": 1,
+      "details": {
+        "buildingMaterialId": {
+          "guid": "63DB2CE9-903D-45C0-B93C-B3C604C77394"
+        },
+        "level": 0,
+        "polygonOutline": [
+          {
+            "x": 40,
+            "y": 40
+          },
+          {
+            "x": 50,
+            "y": 40
+          },
+          {
+            "x": 50,
+            "y": 48
+          },
+          {
+            "x": 40,
+            "y": 48
+          },
+          {
+            "x": 40,
+            "y": 40
+          }
+        ],
+        "structureType": "Basic",
+        "thickness": 0.2,
+        "zCoordinate": 3
+      }
+    },
+    {
+      "stepId": "native-wall-east-level-2",
+      "elementToken": "test-element-497e0b19b9b41188",
+      "type": "Wall",
+      "floorIndex": 1,
+      "details": {
+        "arcAngle": 0,
+        "begCoordinate": {
+          "x": 50,
+          "y": 40
+        },
+        "begThickness": 0.3,
+        "buildingMaterialId": {
+          "guid": "63DB2CE9-903D-45C0-B93C-B3C604C77394"
+        },
+        "endCoordinate": {
+          "x": 50,
+          "y": 48
+        },
+        "endThickness": 0.3,
+        "height": 3,
+        "offset": 0,
+        "structureType": "Basic",
+        "zCoordinate": 3
+      }
+    },
+    {
+      "stepId": "native-wall-north-level-2",
+      "elementToken": "test-element-4b2c7d00e3d409a9",
+      "type": "Wall",
+      "floorIndex": 1,
+      "details": {
+        "arcAngle": 0,
+        "begCoordinate": {
+          "x": 40,
+          "y": 48
+        },
+        "begThickness": 0.3,
+        "buildingMaterialId": {
+          "guid": "63DB2CE9-903D-45C0-B93C-B3C604C77394"
+        },
+        "endCoordinate": {
+          "x": 50,
+          "y": 48
+        },
+        "endThickness": 0.3,
+        "height": 3,
+        "offset": 0,
+        "structureType": "Basic",
+        "zCoordinate": 3
+      }
+    },
+    {
+      "stepId": "native-wall-south-level-2",
+      "elementToken": "test-element-0f66b42e488c2972",
+      "type": "Wall",
+      "floorIndex": 1,
+      "details": {
+        "arcAngle": 0,
+        "begCoordinate": {
+          "x": 40,
+          "y": 40
+        },
+        "begThickness": 0.3,
+        "buildingMaterialId": {
+          "guid": "63DB2CE9-903D-45C0-B93C-B3C604C77394"
+        },
+        "endCoordinate": {
+          "x": 50,
+          "y": 40
+        },
+        "endThickness": 0.3,
+        "height": 3,
+        "offset": 0,
+        "structureType": "Basic",
+        "zCoordinate": 3
+      }
+    },
+    {
+      "stepId": "native-wall-west-level-2",
+      "elementToken": "test-element-3677c5da2430b7be",
+      "type": "Wall",
+      "floorIndex": 1,
+      "details": {
+        "arcAngle": 0,
+        "begCoordinate": {
+          "x": 40,
+          "y": 40
+        },
+        "begThickness": 0.3,
+        "buildingMaterialId": {
+          "guid": "63DB2CE9-903D-45C0-B93C-B3C604C77394"
+        },
+        "endCoordinate": {
+          "x": 40,
+          "y": 48
+        },
+        "endThickness": 0.3,
+        "height": 3,
+        "offset": 0,
+        "structureType": "Basic",
+        "zCoordinate": 3
+      }
+    },
+    {
+      "stepId": "authored-column-1",
+      "elementToken": "test-element-efd26943ca1678f8",
+      "type": "Column",
+      "floorIndex": 0,
+      "details": {
+        "buildingMaterialId": {
+          "guid": "63DB2CE9-903D-45C0-B93C-B3C604C77394"
+        },
+        "depth": 0.3,
+        "height": 3,
+        "origin": {
+          "x": 43,
+          "y": 44
+        },
+        "width": 0.3,
+        "zCoordinate": 0
+      }
+    },
+    {
+      "stepId": "authored-column-2",
+      "elementToken": "test-element-6ad65ff5e9324d47",
+      "type": "Column",
+      "floorIndex": 0,
+      "details": {
+        "buildingMaterialId": {
+          "guid": "63DB2CE9-903D-45C0-B93C-B3C604C77394"
+        },
+        "depth": 0.3,
+        "height": 3,
+        "origin": {
+          "x": 47,
+          "y": 44
+        },
+        "width": 0.3,
+        "zCoordinate": 0
+      }
+    },
+    {
+      "stepId": "authored-window-east-1",
+      "elementToken": "test-element-8ae117c09289712b",
+      "type": "Window",
+      "floorIndex": 0,
+      "details": {
+        "centerOffset": 4,
+        "height": 1.2,
+        "sillHeight": 1,
+        "width": 1.2,
+        "ownerToken": "test-element-6a94dc736ea21886",
+        "libraryPartName": "Окно",
+        "libraryPartGuid": "865AFCE6-2F67-432C-A37E-BC8A27FA0DDB"
+      }
+    },
+    {
+      "stepId": "authored-entry-door",
+      "elementToken": "test-element-96904ae0a9a643d0",
+      "type": "Door",
+      "floorIndex": 0,
+      "details": {
+        "centerOffset": 5,
+        "height": 2.1,
+        "sillHeight": 0,
+        "width": 1,
+        "ownerToken": "test-element-74e13663688cd71e",
+        "libraryPartName": "Однопольная Дверь",
+        "libraryPartGuid": "13D8EFA7-3FEE-4993-B7A5-D826A6830657"
+      }
+    },
+    {
+      "stepId": "authored-window-west-1",
+      "elementToken": "test-element-3940fd04267e7b5d",
+      "type": "Window",
+      "floorIndex": 0,
+      "details": {
+        "centerOffset": 4,
+        "height": 1.2,
+        "sillHeight": 1,
+        "width": 1.2,
+        "ownerToken": "test-element-f7a694272de27df7",
+        "libraryPartName": "Окно",
+        "libraryPartGuid": "865AFCE6-2F67-432C-A37E-BC8A27FA0DDB"
+      }
+    },
+    {
+      "stepId": "authored-window-east-2",
+      "elementToken": "test-element-d247a6d036a10f9f",
+      "type": "Window",
+      "floorIndex": 1,
+      "details": {
+        "centerOffset": 4,
+        "height": 1.2,
+        "sillHeight": 1,
+        "width": 1.2,
+        "ownerToken": "test-element-497e0b19b9b41188",
+        "libraryPartName": "Окно",
+        "libraryPartGuid": "865AFCE6-2F67-432C-A37E-BC8A27FA0DDB"
+      }
+    },
+    {
+      "stepId": "authored-window-west-2",
+      "elementToken": "test-element-b766ca8c720e1b6d",
+      "type": "Window",
+      "floorIndex": 1,
+      "details": {
+        "centerOffset": 4,
+        "height": 1.2,
+        "sillHeight": 1,
+        "width": 1.2,
+        "ownerToken": "test-element-3677c5da2430b7be",
+        "libraryPartName": "Окно",
+        "libraryPartGuid": "865AFCE6-2F67-432C-A37E-BC8A27FA0DDB"
+      }
+    },
+    {
+      "stepId": "selected-tn-aerator",
+      "elementToken": "test-element-9e0883de777aee5a",
+      "type": "Object",
+      "floorIndex": 0,
+      "details": {
+        "angle": 0,
+        "dimensions": {
+          "x": 0.27,
+          "y": 0.27,
+          "z": 0.34
+        },
+        "libPart": {
+          "name": "TN_Аэратор_Кровельный_ТехноНИКОЛЬ_ЭКО_75х340",
+          "ownUnID": {
+            "guid": "75DBC58A-E1D7-4096-9294-BB578516AD4C"
+          },
+          "parentUnID": {
+            "guid": "9A2D1C1C-6B58-4630-9B72-EF4484685FCF"
+          }
+        },
+        "origin": {
+          "x": 55,
+          "y": 45,
+          "z": 0
+        }
+      }
+    }
+  ],
+  "ownedColumnSegments": {
+    "test-element-efd26943ca1678f8": [
+      "test-element-35c4025dc9939b0c"
+    ],
+    "test-element-6ad65ff5e9324d47": [
+      "test-element-015987afd23bcbda"
+    ]
+  },
+  "fileHashAfterSave": "7607d265b3f6ec5bae26e5f397c378eb35b4a05024079115cd1b6fc6925e1210",
+  "fileHashAfterReopen": "7607d265b3f6ec5bae26e5f397c378eb35b4a05024079115cd1b6fc6925e1210",
+  "selectedGeometry": {
+    "bodies": 1,
+    "vertices": 685,
+    "bounds": {
+      "x": [
+        54.865,
+        55.135
+      ],
+      "y": [
+        44.865,
+        45.135
+      ],
+      "z": [
+        0,
+        0.31
+      ]
+    },
+    "parameterHeight": 0.34,
+    "physicalHeight": 0.31,
+    "parameterHeightEqualsPhysicalHeight": false
+  },
+  "fullSourcePlanHash": "5ad2e45c1cbe8460cf7ef1a4bebc68303772153c9da2c67197bef8f224862943"
+}

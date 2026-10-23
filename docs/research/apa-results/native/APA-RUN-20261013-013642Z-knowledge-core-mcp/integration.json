@@ -1,0 +1,555 @@
+{
+  "status": "APA_CORE_AND_STDIO_INTEGRATION_PASS",
+  "stageI": "DONE",
+  "stageII_localMCP": "DONE",
+  "chatGPTConnection": "NOT_VERIFIED",
+  "source_mode": "GITHUB_CURRENT",
+  "planRevision": 128,
+  "planUnchanged": true,
+  "setup": {
+    "status": "LOCAL_DERIVED_CACHE_READY",
+    "plan_revision": 128,
+    "task_count": 91,
+    "artifact_count": 173,
+    "document_count": 211,
+    "section_count": 2160,
+    "warning": "MCP subprocess is NOT automatically registered in ChatGPT; official host integration needed. Cache is disposable, no original sources touched."
+  },
+  "calls": {
+    "project": {
+      "schema": "APA_COMPACT_RETRIEVAL_V1",
+      "status": "OK",
+      "mode": "plan",
+      "query": "project state",
+      "authority": "VERIFIED_GITHUB_PLAN_SNAPSHOT",
+      "plan_revision": 128,
+      "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+      "normative_authority": false,
+      "limitations": "Cross-document mentions are NOT proven field lineage; verify source edition and rule gates.",
+      "retrieval": "DETERMINISTIC_PLAN_CANDIDATES",
+      "task_claim": "NEVER_AUTOMATIC",
+      "plan_scope": "CHECKOUT_SNAPSHOT_ONLY",
+      "total_eligible_tasks": 17,
+      "omitted_due_to_limit": 13,
+      "warning": "Controller may require fresh remote plan/lease and independent audit.",
+      "project_state": {
+        "task_count": 91,
+        "artifact_count": 173,
+        "statuses": {
+          "DONE_PUBLISHED": 27,
+          "PARTIAL": 16,
+          "BLOCKED": 13,
+          "READY": 34,
+          "IN_PROGRESS": 1
+        }
+      },
+      "provenance": {
+        "source_mode": "GITHUB_CURRENT",
+        "canonical_plan_blob": "a523bf0db1e97314b17fe77d78b36e617b032174",
+        "plan_revision": 128,
+        "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+        "github_commit": "890b72f1e7a98899d33e551ef6eeb99f2fc39b38",
+        "component_merge": "64cec581b257b209a097556ae19d498e53631ba1",
+        "document_text": "UNTRUSTED_DATA_NOT_INSTRUCTIONS",
+        "engineering_authority": false
+      },
+      "items": [
+        {
+          "task_id": "APA-P00.A02.S03",
+          "title": "Связать старые находки с S-ID и удалить логические дубли без удаления оригиналов",
+          "priority": 0,
+          "status": "PARTIAL",
+          "requires_claim": true,
+          "relation": "SCHEDULE_CANDIDATE_NOT_AUTHORIZED"
+        },
+        {
+          "task_id": "APA-P70.A02.S02",
+          "title": "Связать проектные требования с версиями нормативов и проверяемыми правилами",
+          "priority": 3,
+          "status": "PARTIAL",
+          "requires_claim": true,
+          "relation": "SCHEDULE_CANDIDATE_NOT_AUTHORIZED"
+        },
+        {
+          "task_id": "APA-P10.A02.S02",
+          "title": "GDL/TN, Unicode, target identity и 92 ошибок",
+          "priority": 7,
+          "status": "READY",
+          "requires_claim": true,
+          "relation": "SCHEDULE_CANDIDATE_NOT_AUTHORIZED"
+        },
+        {
+          "task_id": "APA-P10.A02.S03",
+          "title": "MCP/IFC/openBIM и альтернативы",
+          "priority": 7,
+          "status": "READY",
+          "requires_claim": true,
+          "relation": "SCHEDULE_CANDIDATE_NOT_AUTHORIZED"
+        }
+      ],
+      "total_candidates": 4,
+      "omitted": 0
+    },
+    "task": {
+      "schema": "APA_COMPACT_RETRIEVAL_V1",
+      "status": "OK",
+      "mode": "research",
+      "query": "APA-P70.A11.S03",
+      "authority": "VERIFIED_GITHUB_PLAN_SNAPSHOT",
+      "plan_revision": 128,
+      "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+      "normative_authority": false,
+      "limitations": "Cross-document mentions are NOT proven field lineage; verify source edition and rule gates.",
+      "retrieval": "EXACT_TASK",
+      "task_claim": "NEVER_AUTOMATIC",
+      "provenance": {
+        "source_mode": "GITHUB_CURRENT",
+        "canonical_plan_blob": "a523bf0db1e97314b17fe77d78b36e617b032174",
+        "plan_revision": 128,
+        "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+        "github_commit": "890b72f1e7a98899d33e551ef6eeb99f2fc39b38",
+        "component_merge": "64cec581b257b209a097556ae19d498e53631ba1",
+        "document_text": "UNTRUSTED_DATA_NOT_INSTRUCTIONS",
+        "engineering_authority": false
+      },
+      "items": [
+        {
+          "id": "APA-P70.A11.S03",
+          "status": "IN_PROGRESS",
+          "title": "Исправить пробелы после системного теста",
+          "priority": 1,
+          "depends_on": [
+            "APA-P70.A11.S02"
+          ],
+          "artifact_count": 71,
+          "owner": "work-knowledge-integration-20261013",
+          "lease_until": "2026-10-13T04:10:26Z",
+          "claim_ref": "APA-CLAIM-KNOWLEDGE-20261013T011026Z",
+          "requires_approval": false
+        }
+      ],
+      "total_candidates": 1,
+      "omitted": 0
+    },
+    "artifact": {
+      "schema": "APA_COMPACT_RETRIEVAL_V1",
+      "status": "OK",
+      "mode": "research",
+      "query": "ART-P70-A11-S03-DOCUMENTATION-PR70-20261013",
+      "authority": "VERIFIED_GITHUB_PLAN_SNAPSHOT",
+      "plan_revision": 128,
+      "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+      "normative_authority": false,
+      "limitations": "Cross-document mentions are NOT proven field lineage; verify source edition and rule gates.",
+      "retrieval": "EXACT_ARTIFACT",
+      "provenance": {
+        "source_mode": "GITHUB_CURRENT",
+        "canonical_plan_blob": "a523bf0db1e97314b17fe77d78b36e617b032174",
+        "plan_revision": 128,
+        "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+        "github_commit": "890b72f1e7a98899d33e551ef6eeb99f2fc39b38",
+        "component_merge": "64cec581b257b209a097556ae19d498e53631ba1",
+        "document_text": "UNTRUSTED_DATA_NOT_INSTRUCTIONS",
+        "engineering_authority": false
+      },
+      "items": [
+        {
+          "id": "ART-P70-A11-S03-DOCUMENTATION-PR70-20261013",
+          "kind": "CODE",
+          "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/70",
+          "verification": "EXACT_PR68_BASE_DRAFT_587_WINDOWS_LINUX_PASS_SIX_CODE_BLOBS_MATCH",
+          "task_reference_count": 1,
+          "task_ids": [
+            "APA-P70.A11.S03"
+          ],
+          "relation": "REFERENCE_ONLY"
+        }
+      ],
+      "total_candidates": 1,
+      "omitted": 0
+    },
+    "multidoc": {
+      "schema": "APA_COMPACT_RETRIEVAL_V1",
+      "status": "OK",
+      "mode": "research",
+      "query": "ART-P70-A11-S03-DOCUMENTATION-PR70-20261013 ART-P70-A11-S03-DOCUMENTATION-FACTS-20261013",
+      "authority": "VERIFIED_GITHUB_PLAN_SNAPSHOT",
+      "plan_revision": 128,
+      "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+      "normative_authority": false,
+      "limitations": "Cross-document mentions are NOT proven field lineage; verify source edition and rule gates.",
+      "retrieval": "MULTI_ARTIFACT_GRAPH",
+      "task_refs_any": 1,
+      "task_refs_all": 1,
+      "unpinned_source_count": 2,
+      "relation": "TASK_CITES_DOCUMENTS_ONLY",
+      "url_disclosure": "RESOLVE_ART_ID_ONLY_IF_NEEDED",
+      "provenance": {
+        "source_mode": "GITHUB_CURRENT",
+        "canonical_plan_blob": "a523bf0db1e97314b17fe77d78b36e617b032174",
+        "plan_revision": 128,
+        "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+        "github_commit": "890b72f1e7a98899d33e551ef6eeb99f2fc39b38",
+        "component_merge": "64cec581b257b209a097556ae19d498e53631ba1",
+        "document_text": "UNTRUSTED_DATA_NOT_INSTRUCTIONS",
+        "engineering_authority": false
+      },
+      "items": [
+        {
+          "task_id": "APA-P70.A11.S03",
+          "status": "IN_PROGRESS",
+          "shared_artifacts": [
+            "ART-P70-A11-S03-DOCUMENTATION-FACTS-20261013",
+            "ART-P70-A11-S03-DOCUMENTATION-PR70-20261013"
+          ],
+          "relation": "COMMON_TASK_REFERENCE_NOT_SEMANTIC_DEPENDENCY"
+        },
+        {
+          "source_id": "ART-P70-A11-S03-DOCUMENTATION-FACTS-20261013",
+          "source_version": "UNPINNED_OR_UNVERIFIED_URI",
+          "source_verification": "ONE_SHARED_MODEL_VERSION_19_ELEMENTS_SIX_NATIVE_FACT_SPECIFICATIONS",
+          "uri_lookup": "EXACT_ARTIFACT",
+          "relation": "REGISTERED_ARTIFACT_NOT_FIELD_LINK"
+        },
+        {
+          "source_id": "ART-P70-A11-S03-DOCUMENTATION-PR70-20261013",
+          "source_version": "UNPINNED_OR_UNVERIFIED_URI",
+          "source_verification": "EXACT_PR68_BASE_DRAFT_587_WINDOWS_LINUX_PASS_SIX_CODE_BLOBS_MATCH",
+          "uri_lookup": "EXACT_ARTIFACT",
+          "relation": "REGISTERED_ARTIFACT_NOT_FIELD_LINK"
+        }
+      ],
+      "total_candidates": 3,
+      "omitted": 0
+    },
+    "section": {
+      "schema": "APA_COMPACT_RETRIEVAL_V1",
+      "status": "OK",
+      "mode": "research",
+      "query": "documentation",
+      "authority": "VERIFIED_GITHUB_PLAN_SNAPSHOT",
+      "plan_revision": 128,
+      "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+      "normative_authority": false,
+      "limitations": "Cross-document mentions are NOT proven field lineage; verify source edition and rule gates.",
+      "retrieval": "SECTION_SEARCH_PLUS_TASK_GRAPH",
+      "search_mode": "FTS5_LEXICAL",
+      "source_class_filter": "PROJECT_CONTROL",
+      "bytes_verified": "MATCH_FOR_RETURNED_HITS",
+      "candidate_docs": 4,
+      "note": "Citation and task edges are preliminary; NO task claimed.",
+      "provenance": {
+        "source_mode": "GITHUB_CURRENT",
+        "canonical_plan_blob": "a523bf0db1e97314b17fe77d78b36e617b032174",
+        "plan_revision": 128,
+        "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+        "github_commit": "890b72f1e7a98899d33e551ef6eeb99f2fc39b38",
+        "component_merge": "64cec581b257b209a097556ae19d498e53631ba1",
+        "document_text": "UNTRUSTED_DATA_NOT_INSTRUCTIONS",
+        "engineering_authority": false
+      },
+      "items": [
+        {
+          "source": "docs/research/apa-results/control/generated/THEMES.md",
+          "line": 1,
+          "heading": "APA — тематическая карта исследований, разработки и интеграции",
+          "sha256": "d5702981ef1552ea26df52c6eb3e81e3705422365effb94efa310d41653fe67d",
+          "class": "PROJECT_CONTROL",
+          "excerpt": "… P70-A11-S03-DOCUMENTATION-PR70-20261013, ART-P70-A11-S03-DOCUMENTATION-FACTS-20261013, ART-P70-A11-S03-DOCUMENTATION-NATIVE-20261013, ART-P70-A11-S03-DOCUMEN…",
+          "artifact_ids": [],
+          "task_ids": [],
+          "unshown_task_refs": 0,
+          "relationship": "LEXICAL_AND_EXPLICIT_REFERENCES_ONLY",
+          "source_legal_authority": "NOT_VERIFIED"
+        },
+        {
+          "source": "docs/research/apa-results/control/generated/TASK_CARDS.md",
+          "line": 1141,
+          "heading": "APA-P70.A07.S01",
+          "sha256": "19ba18bbdcca0d4971152f7ff837f222430575391185ed47f476eb8766c727aa",
+          "class": "PROJECT_CONTROL",
+          "excerpt": "… native-project-documentation-views - Depends on: APA-P70.A03.S03, APA-P70.A04.S02, APA-P70.A10.S01 - Related, check before duplicating: none - Acceptance: Че…",
+          "artifact_ids": [],
+          "task_ids": [],
+          "unshown_task_refs": 0,
+          "relationship": "LEXICAL_AND_EXPLICIT_REFERENCES_ONLY",
+          "source_legal_authority": "NOT_VERIFIED"
+        }
+      ],
+      "total_candidates": 3,
+      "omitted": 1
+    },
+    "dependencies": {
+      "status": "OK",
+      "provenance": {
+        "source_mode": "GITHUB_CURRENT",
+        "canonical_plan_blob": "a523bf0db1e97314b17fe77d78b36e617b032174",
+        "plan_revision": 128,
+        "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+        "github_commit": "890b72f1e7a98899d33e551ef6eeb99f2fc39b38",
+        "component_merge": "64cec581b257b209a097556ae19d498e53631ba1",
+        "document_text": "UNTRUSTED_DATA_NOT_INSTRUCTIONS",
+        "engineering_authority": false
+      },
+      "items": [
+        {
+          "status": "OK",
+          "source_task": "APA-P70.A11.S02",
+          "count": 8,
+          "results": [
+            {
+              "id": "APA-P70.A11.S03",
+              "depth": 1
+            },
+            {
+              "id": "APA-P70.A11.S06",
+              "depth": 1
+            },
+            {
+              "id": "APA-P70.A11.S07",
+              "depth": 1
+            },
+            {
+              "id": "APA-P70.A11.S08",
+              "depth": 1
+            },
+            {
+              "id": "APA-P70.A11.S09",
+              "depth": 1
+            },
+            {
+              "id": "APA-P70.A11.S10",
+              "depth": 1
+            },
+            {
+              "id": "APA-P70.A11.S04",
+              "depth": 2
+            },
+            {
+              "id": "APA-P70.A11.S05",
+              "depth": 3
+            }
+          ],
+          "omitted": 0,
+          "relation_kind": "SCHEDULING_ONLY_NOT_PROVEN_DATA_IMPACT"
+        }
+      ],
+      "total_candidates": 1,
+      "omitted": 0
+    },
+    "impact": {
+      "status": "OK",
+      "provenance": {
+        "source_mode": "GITHUB_CURRENT",
+        "canonical_plan_blob": "a523bf0db1e97314b17fe77d78b36e617b032174",
+        "plan_revision": 128,
+        "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+        "github_commit": "890b72f1e7a98899d33e551ef6eeb99f2fc39b38",
+        "component_merge": "64cec581b257b209a097556ae19d498e53631ba1",
+        "document_text": "UNTRUSTED_DATA_NOT_INSTRUCTIONS",
+        "engineering_authority": false
+      },
+      "items": [
+        {
+          "status": "OK",
+          "artifact_id": "ART-P70-A11-S03-DOCUMENTATION-PR70-20261013",
+          "total_candidates": 1,
+          "results": [
+            {
+              "task_id": "APA-P70.A11.S03",
+              "title": "Исправить пробелы после системного теста",
+              "status": "IN_PROGRESS",
+              "impact": "POSSIBLE_IMPACT",
+              "reason": "ARTIFACT_REFERENCE_ONLY"
+            }
+          ],
+          "omitted": 0,
+          "field_lineage_coverage": "UNKNOWN",
+          "warning": "Artifact references and scheduling edges do not prove field-level impact"
+        }
+      ],
+      "total_candidates": 1,
+      "omitted": 0
+    },
+    "tdk": {
+      "status": "SOURCE_TRACE_ONLY_NOT_NORMATIVE_ACCEPTANCE",
+      "provenance": {
+        "source_mode": "GITHUB_CURRENT",
+        "canonical_plan_blob": "a523bf0db1e97314b17fe77d78b36e617b032174",
+        "plan_revision": 128,
+        "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+        "github_commit": "890b72f1e7a98899d33e551ef6eeb99f2fc39b38",
+        "component_merge": "64cec581b257b209a097556ae19d498e53631ba1",
+        "document_text": "UNTRUSTED_DATA_NOT_INSTRUCTIONS",
+        "engineering_authority": false
+      },
+      "items": [
+        {
+          "status": "SOURCE_TRACE_ONLY_NOT_NORMATIVE_ACCEPTANCE",
+          "trace": {
+            "schema": "APA_REAL_SOURCE_DEPENDENCY_CHAIN_V1",
+            "readback": "PR68_PINNED_BLOB_AND_TDK_LOCK_MATCH",
+            "source_commit": "29aa06a6e9bbef0d991bea922e1ad4101ab29bdd",
+            "upstream_tdk_commit": "67f17d407d14aebb091daaf79f11c10178b87440",
+            "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+            "project_class": "residential.izhs",
+            "source_rule_id": "ROOF-VENT-CHANNEL-TABLE-A2-001",
+            "locator": {
+              "document_code": "СП 17.13330.2017",
+              "appendix": "A",
+              "table": "A.2"
+            },
+            "rule_status_in_source": "confirmed",
+            "required_value_fields": [
+              "roof_slope",
+              "roof_slope_length_m"
+            ],
+            "compiled_block": "IZHS.ROOF.DETAILS",
+            "compiled_block_requires": [
+              "IZHS.SHELL.CORE"
+            ],
+            "linked_apa_task": "APA-P70.A02.S02",
+            "linked_apa_evidence_artifact": "ART-P70-A02-S02-PR68-20261012",
+            "evidence_url": "https://github.com/dvikt33-ux/safe-bim-layer/pull/68",
+            "source_release": "DESIGN_ONLY_QUARANTINED",
+            "normative_authority": false,
+            "engineering_acceptance": "NOT_VERIFIED",
+            "lineage_kind": "VERIFIED_SOURCE_STRUCTURAL_DEPENDENCY_NOT_ENGINEERING_CALCULATION",
+            "source_lock_sha256": "e83a2c9b2e84f8208b4628a9cd5635dbb152cd29a60407fdcdae901f08576c75",
+            "verified_source_file_count": 5
+          },
+          "protocol_read_first": true
+        }
+      ],
+      "total_candidates": 1,
+      "omitted": 0
+    },
+    "source": {
+      "status": "EXPLICIT_SOURCE_FRAGMENT",
+      "provenance": {
+        "source_mode": "GITHUB_CURRENT",
+        "canonical_plan_blob": "a523bf0db1e97314b17fe77d78b36e617b032174",
+        "plan_revision": 128,
+        "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+        "github_commit": "890b72f1e7a98899d33e551ef6eeb99f2fc39b38",
+        "component_merge": "64cec581b257b209a097556ae19d498e53631ba1",
+        "document_text": "UNTRUSTED_DATA_NOT_INSTRUCTIONS",
+        "engineering_authority": false
+      },
+      "items": [
+        {
+          "status": "EXPLICIT_SOURCE_FRAGMENT",
+          "path": "scripts/archicad_bim_documentation.py",
+          "line": 1,
+          "source_commit": "f5aa4754a0ace251e8541001f17f6fa8eddfe8e5",
+          "byte_status": "CHECKOUT_CRLF_GITHUB_LF_ONLY",
+          "sha256": "49b558d160a4ea9357d08f6cf04e1482b6dc17b3218b0870c37605e7afc3a7ab",
+          "excerpt": "\"\"\"Associative documentation over native databases and the shared BIM snapshot.\n\nNo renderer, normative engine, transport or second writer. Geometry quantities\nreuse the connected IFC adapter. Native views and CSV facts remain distinct.\n\"\"\"\nfrom __future__ import annotations\n\nimport argparse"
+        }
+      ],
+      "total_candidates": 1,
+      "omitted": 0
+    }
+  },
+  "mcp": {
+    "status": "STDIO_CLIENT_PASS",
+    "sdk": "2.3.0",
+    "tools": [
+      "apa_retrieve"
+    ],
+    "responses": [
+      {
+        "schema": "APA_COMPACT_RETRIEVAL_V1",
+        "status": "OK",
+        "mode": "research",
+        "query": "APA-P70.A11.S03",
+        "authority": "VERIFIED_GITHUB_PLAN_SNAPSHOT",
+        "plan_revision": 128,
+        "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+        "normative_authority": false,
+        "limitations": "Cross-document mentions are NOT proven field lineage; verify source edition and rule gates.",
+        "retrieval": "EXACT_TASK",
+        "task_claim": "NEVER_AUTOMATIC",
+        "provenance": {
+          "source_mode": "GITHUB_CURRENT",
+          "canonical_plan_blob": "a523bf0db1e97314b17fe77d78b36e617b032174",
+          "plan_revision": 128,
+          "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+          "github_commit": "890b72f1e7a98899d33e551ef6eeb99f2fc39b38",
+          "component_merge": "64cec581b257b209a097556ae19d498e53631ba1",
+          "document_text": "UNTRUSTED_DATA_NOT_INSTRUCTIONS",
+          "engineering_authority": false
+        },
+        "items": [
+          {
+            "id": "APA-P70.A11.S03",
+            "status": "IN_PROGRESS",
+            "title": "Исправить пробелы после системного теста",
+            "priority": 1,
+            "depends_on": [
+              "APA-P70.A11.S02"
+            ],
+            "artifact_count": 71,
+            "owner": "work-knowledge-integration-20261013",
+            "lease_until": "2026-10-13T04:10:26Z",
+            "claim_ref": "APA-CLAIM-KNOWLEDGE-20261013T011026Z",
+            "requires_approval": false
+          }
+        ],
+        "total_candidates": 1,
+        "omitted": 0
+      },
+      {
+        "schema": "APA_COMPACT_RETRIEVAL_V1",
+        "status": "OK",
+        "mode": "research",
+        "query": "ART-P70-A11-S03-DOCUMENTATION-PR70-20261013",
+        "authority": "VERIFIED_GITHUB_PLAN_SNAPSHOT",
+        "plan_revision": 128,
+        "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+        "normative_authority": false,
+        "limitations": "Cross-document mentions are NOT proven field lineage; verify source edition and rule gates.",
+        "retrieval": "EXACT_ARTIFACT",
+        "provenance": {
+          "source_mode": "GITHUB_CURRENT",
+          "canonical_plan_blob": "a523bf0db1e97314b17fe77d78b36e617b032174",
+          "plan_revision": 128,
+          "plan_sha256": "b3603ce4b3a86315920367e99ee25fad4bb0948c3889a140cd424861c495805f",
+          "github_commit": "890b72f1e7a98899d33e551ef6eeb99f2fc39b38",
+          "component_merge": "64cec581b257b209a097556ae19d498e53631ba1",
+          "document_text": "UNTRUSTED_DATA_NOT_INSTRUCTIONS",
+          "engineering_authority": false
+        },
+        "items": [
+          {
+            "id": "ART-P70-A11-S03-DOCUMENTATION-PR70-20261013",
+            "kind": "CODE",
+            "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/70",
+            "verification": "EXACT_PR68_BASE_DRAFT_587_WINDOWS_LINUX_PASS_SIX_CODE_BLOBS_MATCH",
+            "task_reference_count": 1,
+            "task_ids": [
+              "APA-P70.A11.S03"
+            ],
+            "relation": "REFERENCE_ONLY"
+          }
+        ],
+        "total_candidates": 1,
+        "omitted": 0
+      }
+    ],
+    "acl": "PASS",
+    "targetChatGPT": "NOT_CONNECTED_OR_VERIFIED"
+  },
+  "codeHead": "88169d358e4c329f8959f557c944300adcec2df9",
+  "nativeCalls": 0,
+  "plnOrAPXChanged": false,
+  "sourceStatus": "CAPTURED_CURRENT_GITHUB_PLAN_REVISION128_AT_TEST_TIME_NOT_A_FLOATING_LATEST_CLAIM",
+  "upstreamComponentCommit": "64cec581b257b209a097556ae19d498e53631ba1",
+  "protectedPR70Modules": [
+    "scripts/archicad_bim_documentation.py",
+    "scripts/archicad_scene_run.py",
+    "scripts/archicad_bim_graph.py",
+    "scripts/archicad_normative_machine.py",
+    "scripts/archicad_normative_bindings.py"
+  ]
+}

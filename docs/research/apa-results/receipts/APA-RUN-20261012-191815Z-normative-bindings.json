@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:47b85adab6b9f969bce23aaf5a1384d2f06809d7316546670fbc256114ce0610",
+  "index_commit_sha": "559a8164c3cb50d71a2b18272dc7e71605947496",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "559a8164c3cb50d71a2b18272dc7e71605947496",
+  "report_path": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-191815Z-normative-bindings/REPORT.md",
+  "report_sha256": "46e7a1f89fe584b60f47ff5b8ef0e903a17308eece4a6af6d2f4ca68ac28ca27",
+  "run_id": "APA-RUN-20261012-191815Z-normative-bindings",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

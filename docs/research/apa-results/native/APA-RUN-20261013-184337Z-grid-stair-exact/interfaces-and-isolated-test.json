@@ -1,0 +1,68 @@
+{
+  "status": "SOURCE_AND_BUILD_INTERFACES_READY_RUNTIME_PERMISSION_PENDING",
+  "newNativeCommands": [
+    "GetNativeGridDefaultsV1",
+    "GetNativeGridElementsV1",
+    "CreateNativeGridElementsV1",
+    "ModifyNativeGridElementsV1",
+    "GetNativeStairGeometryV1",
+    "EvaluateNativeStairGeometryV1",
+    "CreateExactStairsV1",
+    "ModifyNativeStairGeometryV1"
+  ],
+  "executor": "EXISTING_SCENEWRITER_SQLITE",
+  "mainEntries": [
+    "apply_native_axis_grid",
+    "apply_exact_native_stair"
+  ],
+  "axisEdit": "NATIVE_POSITION_SAME_GUID_UPDATED_SEMANTIC_BINDING",
+  "axisReplay": "COMPLETED_SQLITE_REUSE_OR_EXPLICIT_EXISTING_BINDING_ZERO_CREATES",
+  "unknownOutcome": "NO_BLIND_RETRY_MANUAL_RECONCILIATION",
+  "strictStair": "LOCKED_GOING_SOURCE_XML_HASH_RULE_GATE_DETACHED_SOLVER_PRECREATE_EXACT_NATIVE_READBACK",
+  "sourceSchema": "CANNOT_GRANT_RUNTIME_AUTHORIZATION_FRESH_INSTALLED_EXPORT_REQUIRED",
+  "acceptedStairEdited": false,
+  "preferencesOverridden": false,
+  "isolatedTest": {
+    "schema": "APA_NATIVE_GRID_STAIR_ISOLATED_TEST_V1",
+    "targetProjectBasename": "APA_Grid_Stair_Exact_Test_01.pln",
+    "status": "PREPARED_REQUIRES_SEPARATE_APX_DEPLOYMENT_PERMISSION",
+    "recreateBuilding": false,
+    "protectedPriorModelCounts": [
+      143,
+      168
+    ],
+    "gridSource": "EXISTING_SEMANTIC_LAYOUT_AXES_AND_ACTUAL_NATIVE_GRID_DEFAULTS",
+    "gridRoleMapping": "NOT_VERIFIED_UNTIL_NATIVE_DEFAULTS_LIBRARY_ROLE_READBACK",
+    "stairCases": [
+      {
+        "rise": 3.3,
+        "risers": 20,
+        "going": 0.35,
+        "sourceRuleStatus": "CONFLICT_RULE_MAX_2R_PLUS_G",
+        "nativeCreateAllowed": false
+      },
+      {
+        "rise": 3.0,
+        "risers": 20,
+        "going": 0.35,
+        "sourceRuleStatus": "COMPATIBLE_SOLVER_NOT_VERIFIED",
+        "nativeCreateAllowed": false
+      },
+      {
+        "rise": 3.3,
+        "risers": 22,
+        "going": 0.35,
+        "sourceRuleStatus": "COMPATIBLE_SOLVER_NOT_VERIFIED",
+        "nativeCreateAllowed": false
+      }
+    ],
+    "nextGate": "DEPLOYMENT_PERMISSION_THEN_EXACT_PROJECT_IDENTITY_AND_DETACHED_NATIVE_SOLVER",
+    "acceptance": [
+      "TRUE_GRID_VARIATION_GUID_CREATE_EDIT_REUSE",
+      "SOURCE_STAIR_GOING_0.35_INDEPENDENT_NATIVE_READBACK",
+      "OLD_SIGNATURES_PRESERVED",
+      "SAVE_OPEN_READBACK"
+    ],
+    "engineeringAcceptance": "NOT_VERIFIED"
+  }
+}

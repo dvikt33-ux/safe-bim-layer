@@ -1,0 +1,127 @@
+{
+  "sceneId": "isolated-authored-building17-20261011",
+  "planHash": "dc7fa97c737f8334587647d8d877315ec0850c8383ea7d07373eebc4dfd565de",
+  "status": "PARTIAL_OR_UNKNOWN_OUTCOME",
+  "plnSaved": false,
+  "automaticRetry": false,
+  "steps": {
+    "native-slab-level-1": {
+      "status": "REUSED_VERIFIED",
+      "guid": "2A99CBAB-342D-4F04-A382-2A669D8F5149",
+      "kind": "Slab",
+      "floorIndex": 0
+    },
+    "native-wall-east-level-1": {
+      "status": "REUSED_VERIFIED",
+      "guid": "0CA6A748-E5E1-41D4-AAE6-778ACE39D960",
+      "kind": "Wall",
+      "floorIndex": 0
+    },
+    "native-wall-north-level-1": {
+      "status": "REUSED_VERIFIED",
+      "guid": "FC9289A2-257C-4C41-A823-7FE104278A4B",
+      "kind": "Wall",
+      "floorIndex": 0
+    },
+    "native-wall-south-level-1": {
+      "status": "REUSED_VERIFIED",
+      "guid": "10B4A356-5618-4326-B7F6-8850113C2A6D",
+      "kind": "Wall",
+      "floorIndex": 0
+    },
+    "native-wall-west-level-1": {
+      "status": "REUSED_VERIFIED",
+      "guid": "C5D73BA8-EF22-4070-9967-38DDAB3A70D9",
+      "kind": "Wall",
+      "floorIndex": 0
+    },
+    "native-slab-level-2": {
+      "status": "REUSED_VERIFIED",
+      "guid": "B11481A3-AE24-4B64-8C32-9A5BDADF9562",
+      "kind": "Slab",
+      "floorIndex": 1
+    },
+    "native-wall-east-level-2": {
+      "status": "REUSED_VERIFIED",
+      "guid": "4E2BF074-C554-4284-A0EB-B4AE3DE11D90",
+      "kind": "Wall",
+      "floorIndex": 1
+    },
+    "native-wall-north-level-2": {
+      "status": "REUSED_VERIFIED",
+      "guid": "86B450AC-C2F2-4BDB-AC09-1E2FF483A89E",
+      "kind": "Wall",
+      "floorIndex": 1
+    },
+    "native-wall-south-level-2": {
+      "status": "REUSED_VERIFIED",
+      "guid": "F5A029CC-2B0E-44BE-A045-85E0D8677BC5",
+      "kind": "Wall",
+      "floorIndex": 1
+    },
+    "native-wall-west-level-2": {
+      "status": "REUSED_VERIFIED",
+      "guid": "488041D0-4406-4172-BB37-AED4EAB729F5",
+      "kind": "Wall",
+      "floorIndex": 1
+    },
+    "authored-column-1": {
+      "status": "PASS",
+      "guid": "8761CD95-BFBE-41BF-9B36-72B14EC7615B",
+      "kind": "Column"
+    },
+    "authored-column-2": {
+      "status": "PASS",
+      "guid": "EEB04639-35CA-4171-B511-04FD80788C99",
+      "kind": "Column"
+    },
+    "authored-window-east-1": {
+      "status": "PASS",
+      "guid": "1BE6CED6-AD75-47F0-8009-3791C957B50C",
+      "kind": "Window"
+    },
+    "authored-entry-door": {
+      "status": "PASS",
+      "guid": "FA851F24-B66C-48F9-B688-443D5B82AB40",
+      "kind": "Door"
+    },
+    "authored-window-west-1": {
+      "status": "PASS",
+      "guid": "3EE2AF7F-C4E8-44D0-8B4F-F34BAA1D4718",
+      "kind": "Window"
+    },
+    "authored-window-east-2": {
+      "status": "PASS",
+      "guid": "CD8753B0-2D63-468F-82E2-94EFA81C57F5",
+      "kind": "Window"
+    },
+    "authored-window-west-2": {
+      "status": "PASS",
+      "guid": "DA37FC9A-5B19-415F-8ED4-6E31842AB437",
+      "kind": "Window"
+    }
+  },
+  "sceneDimensions": {
+    "width": 10.0,
+    "depth": 8.0,
+    "height": 6.0
+  },
+  "reusedCount": 10,
+  "failedStep": "FINAL_READBACK",
+  "reason": "ValueError: EXTENSION_FINAL_WHOLE_MODEL_GUID_DIFF",
+  "manualReconciliationRequired": true,
+  "modelWriteAttempts": 8,
+  "commandCounts": {
+    "GetProjectInfo": 31,
+    "GetStories": 28,
+    "GetAddOnVersion": 25,
+    "GetAllElements": 5,
+    "GetDetailsOfElements": 59,
+    "GetAttributesByType": 4,
+    "Get3DBoundingBoxes": 1,
+    "ModifyWalls": 1,
+    "CreateColumns": 2,
+    "CreateWindows": 4,
+    "CreateDoors": 1
+  }
+}

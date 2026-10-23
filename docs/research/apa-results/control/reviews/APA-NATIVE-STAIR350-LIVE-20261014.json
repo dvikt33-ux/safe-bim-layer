@@ -1,0 +1,19 @@
+{
+  "status": "DONE_PUBLISHED_SOURCE_DIMENSION_BLOCK_S03_PARTIAL",
+  "revision": 155,
+  "codePR": 81,
+  "codeHead": "3221b8e7a0b775ece1018caf622a32c6ca9cb9dc",
+  "nativeSourceDimensions": "LIVE_PASS",
+  "retained145": true,
+  "inventory255Preserved": true,
+  "unresolvedObjectOwnerAncestries": 10,
+  "fullInventoryAcceptance": "NOT_VERIFIED",
+  "createJournal": "ORIGINAL_PARTIAL_OR_UNKNOWN_PRESERVED",
+  "nativeCreates": 1,
+  "createReplays": 0,
+  "saveOpen": "PASS",
+  "APXchanged": false,
+  "SDKexactEdit": "BLOCKED",
+  "engineering": "NOT_VERIFIED",
+  "receiptRun": "APA-RUN-20261014-121132Z-native-stair-source350"
+}

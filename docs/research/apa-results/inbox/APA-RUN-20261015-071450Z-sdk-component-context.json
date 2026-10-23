@@ -1,0 +1,187 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261015-071450Z-sdk-component-context",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-sdk-components-20261015",
+  "executor_run_id": "APA-CLAIM-SDK-COMPONENTS-20261015T020321Z",
+  "phase": "LIVE",
+  "started_at": "2026-10-15T02:03:21Z",
+  "finished_at": "2026-10-15T07:14:50Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "Windows11 Archicad29 existing authorized test PLN; scoped grouped reads, no model-write API",
+    "sdk": "Public component/Opening/memo/Drawing contracts; quantity pre-engine only",
+    "tapir": "Exact candidate temporarily user-authorized; original APX/config restored",
+    "source_branch": "feature/apa-sdk-component-context-20261015"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/96",
+      "revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c",
+      "source_sha": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-COMPONENT-NATIVE-READS",
+      "statement": "Five grouped read calls verified:86 native Stair child bindings/parameters,7 envelope memos,4 database-qualified Drawing auxiliary reads,3 empty Opening host lookups and1 pre-engine identity. Positive Opening/CW/Railing/Shell samples not verified.",
+      "status": "LIVE_PASS",
+      "evidence_ids": [
+        "EV-2"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-COMPONENT-DEPENDENCY-FLOW",
+      "statement": "Captured native ownership matches existing membership for86 children; existing BIM Graph and DependencyImpact process96nodes/87edges. One verified ViewMap source link;3 omitted. Relationships are not physical contact.",
+      "status": "OFFLINE_PASS",
+      "evidence_ids": [
+        "EV-4",
+        "EV-5"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-COMPONENT-BUILD",
+      "statement": "Full Release APX source/binary identity,288 registrations and five runtime-exported input schemas bound to tested candidate. Exact candidate explicitly authorized and original restored.",
+      "status": "BUILD_PASS",
+      "evidence_ids": [
+        "EV-3",
+        "EV-2"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-COMPONENT-RETENTION",
+      "statement": "Original APX SHA/registration restored; independent original runtime reopen matches258 GUIDs/full serialized native parameters and unchanged saved bytes. No physical BREP comparison or engineering acceptance.",
+      "status": "LIVE_PASS",
+      "evidence_ids": [
+        "EV-2"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-COMPONENT-BOUNDARIES",
+      "statement": "385preparable=375native/source+10local;337original/361tested candidate compatible including one quarantined command.38source-only original,14absent candidate,32APX without public contract. Quantity engine root cause unverified; no engine call or replay.",
+      "status": "NOT_VERIFIED",
+      "evidence_ids": [
+        "EV-0",
+        "EV-6",
+        "EV-7"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-0",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/module-coverage.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "a782feaf428b1f50a148204d80946c351dcfb4fc8a6d5facb3e924296e033443",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c"
+    },
+    {
+      "evidence_id": "EV-1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/module-contracts.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "74806d797fb4b6d9e577d565d094799df735dc66aaa9c26dd811ccda6b469782",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c"
+    },
+    {
+      "evidence_id": "EV-2",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/native-runtime.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "2b407e7388eea00952419e9e755d1658f4f4c877b461695f83a634a105adf9c5",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c"
+    },
+    {
+      "evidence_id": "EV-3",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/SDK-build.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "0e433f09aaf0e559d21a8f6b75c8af08b8e5e5dad37c653ab06058e860a20b4c",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c"
+    },
+    {
+      "evidence_id": "EV-4",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/native-connected-dataflow.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "8a332047d33bc54969d6a7e94e98fe526ec1ddcbff6bd208b4940ca420ae975c",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c"
+    },
+    {
+      "evidence_id": "EV-5",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/native-membership-dataflow.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "6558fe3dac7b44bc8e44bd060a071d92765613653e8b839cf3172d60931ade93",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c"
+    },
+    {
+      "evidence_id": "EV-6",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/quantity-source-preflight.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "c22087f27dc866654ed741843387c2a704235af06dc69ebf33e7335171d324b5",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c"
+    },
+    {
+      "evidence_id": "EV-7",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/gap-register.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "3f84f533f27aea6358fcfdc25757819502f4b6e418e0a2dfb01c52ac16ec8ba1",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c"
+    },
+    {
+      "evidence_id": "EV-8",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/windows-ci.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "c0bebc63424e2fb682fe250499a751c8f1c2cc990d0336c5d8c54d9ff6013b7a",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c"
+    },
+    {
+      "evidence_id": "EV-9",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261015-071450Z-sdk-component-context/core-knowledge-query.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "21c02c944c932ab65436dbbd45402c1ea542b84097d60f1f38dff01f3cd7e3af",
+      "source_revision": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c"
+    }
+  ],
+  "report_markdown": "# Native component, envelope and Drawing integration\n\nExact PR94 base: `d758957f97cf1e347262da6f7e7b325ae6609ea4`. A11.S03 remains PARTIAL.\n\nExisting hierarchical membership, element GDL parameters, material attributes, Navigator and ViewMap contracts are reused. Three new grouped read contracts add component parent/root and missing Stair/Railing/CurtainWall scalar parameters; modern AC29 Opening cut/host relationships and extrusion frames; and quantity pre-engine identity diagnostics without an engine call. Existing envelope query adds indexed trims, side surface overrides, bounded pivot-level overrides and Shell base plane. Existing Drawing query accepts an explicit database ID, runs the native status/content-box calls in that database through the existing context helper, restores it and reports restoration failure.\n\nThe same dynamic catalog provides lazy schemas. Native calls retain the existing read dispatcher; mutations retain SceneWriter and SQLite. A small relationship converter feeds the existing DependencyImpact operation through BIM Graph. It creates no executor, graph store or search subsystem. Parent/root edges and cut/host relationships are not physical contact or engineering acceptance.\n\n385 preparable = 375 native/source + 10 existing local operations. Original runtime remains337 compatible contracts; exact tested candidate has288 add-on registrations +73 official compatible contracts =361.73 is compatibility, not73 live calls. Source-only relative to original:38; candidate lacks14 catalog entries. Quantity command remains discoverable but execution is quarantined in Python and C++. No new executor, journal, KG or engine.\n\nFull Release candidate `4074a1926ec1b18ab89f2052e8309c62667aa170a836be8e70a2c90b945665e1`, compiled implementation `0c1c92548339d1389e68ec54ac1d870f7d706a49`, was installed with explicit user permission. Runtime build identity, registration, five actual exported input schemas and typed results matched. Five grouped reads are CALLABLE_VERIFIED: three new groups plus two enhanced existing groups. Scope-specific native facts:\n\n- 86 Stair child records: native parent/root/declared owner agree with the independent existing membership query; native story matches all86 baseline rows. Riser/Tread/Structure parameters read without invoking a solver.\n- 7 Roof/Slab memos: side overrides, edge trims and bounded pivot levels read. PolyRoof exposes5 raw memo slots representing4 unique pivot edges; closing slot is retained rather than counted as another physical edge. Shell remains unverified without a sample.\n- 4 distinct Drawings: explicit owning Layout database fixed the previous native auxiliary errors. Status and full content box returned NoError for all4; context restored. Native updateStatus=-1 for all4 means вЂњotherвЂќ; up-to-date is NOT_VERIFIED. Only1 source link resolves in the captured public ViewMap, so3 unresolved links are not invented dependencies.\n- 3 existing Wall/Slab hosts: modern connected-Opening query returns empty sets successfully. Positive Generic Opening cuts/extrusion remain NOT_VERIFIED because there is no sample.\n- 1 pre-engine diagnostic reads type/identity successfully. Quantity engine is never called; no crash batch replay.\n\nCaptured new native replies feed the existing BIM Graphв†’DependencyImpact:96 nodes,87 verified dependency edges,42 entries in the selected Stair impact set. Existing membership alone also verified88 nodes/86 edges. No physical contact, resultant BREP or engineering acceptance inferred.\n\nAll258 original GUIDs and serialized native parameter rows matched before/after reads; saved PLN bytes unchanged across this cycle. Original APX SHA and Include registration restored. Read-only reopening with the original runtime is recorded separately in runtime evidence. No model-write API or Save was invoked. Build/raw evidence stays private; only hashes, counts, scalar facts and processed diagnostics are published.\n\nFive focused changed-contract checks passed; independent PR95 160/160 audit is reused, not rerun. Windows CI and final exact-head publication/readback are recorded with the publication package. A11.S03 remains PARTIAL; no historical DONE is rewritten.\n\n\n## Source reuse and next gaps for independent audit\n\n| Source | Current gap / practical benefit | Dependencies | Effort / runtime / risk | Duplication check |\n| --- | --- | --- | --- | --- |\n| AC29 hierarchical editing + existing Tapir membership | Parent/root and Stair child parameters now integrated; Railing/CW subset awaits an existing live sample | Current grouped reader and membership contract | Implemented; new exact candidate live read required; no solver | Membership enumeration and existing CW frame geometry retained |\n| AC29 Opening modern API | Host/cut/extrusion frames now integrated; positive Generic Opening sample still needed | Existing explicit authorized Opening sample | Small follow-up; native sample required; read only | Existing ModelDump host-only field retained; new query supplies cut set and frame |\n| Existing envelope memo + AC29 Shell class structures | Shell bodyFlags/class axes and contour-edge details still omitted | Existing memo allocation checks, class-specific frame semantics | Small/medium; actual Shell sample needed; no write | No new geometry kernel or BREP claim |\n| AC29 Drawing API + existing LayoutBook context | Status/content-box read in correct owning database; verify native errors and restore | Existing layout IDs, actual Drawing GUID, ViewMap | Implemented context wrapper; native verification required | Navigator/Layout helper reused; no updater/controller |\n| AC29 LibraryPart_GetParams | Optional library-part default parameters without a placed instance | Existing GDL serializer and library identity | Small adapter only if useful; native library sample; handle lifecycle review | GetGDLParametersOfElements already reads placed instances, so do not wrap again |\n| Existing API Quantities + official Element_Test/Plan_Dump examples | Identify failing type and safe ownership/mask contract before any future engine retest | Separate qualified diagnostic context and exact permission | Diagnostic stage implemented; engine remains blocked; high risk | Current BREP-based quantities retained; no duplicate calculation engine |\n\nThese proposals are review inputs, not automatically appended task IDs or a new roadmap.32 other APX provider records and thirteen unintegrated DevKit examples remain inherited evidence; no private ABI or licensing bypass was attempted. Native model writes still use the one SceneWriter; this package only adds reads and captured-data conversion. Source/code availability never grants execution permission on an arbitrary PLN.\n\n\n## Publication evidence\n\n[Draft PR96](https://github.com/dvikt33-ux/safe-bim-layer/pull/96), exact head `76ab55c1c34fa327c2c71b7615e7cde5b090f69c`, PR94 code base `d758957f97cf1e347262da6f7e7b325ae6609ea4`. [Windows CI PASS](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38671969037) at this exact head; explicit workflow_dispatch because canonical-plan conflicts prevent automatic pull_request CI. Source implementation `0c1c92548339d1389e68ec54ac1d870f7d706a49` embedded in the exact tested candidate. Code readback: all17 changed files byte-exact. Main-orchestrator Knowledge Graph current canonical revision168 and own CAS lease confirmed. Original APX/config restored and258 native GUID/serialized parameter rows independently matched after read-only reopen, saved bytes unchanged, no model-write calls. Publication flags refer to final restored state. A11.S03 remains PARTIAL; dependencies, historical DONE and unrelated task records retained.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

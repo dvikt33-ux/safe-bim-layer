@@ -1,0 +1,35 @@
+{
+  "schema": "APA_NATIVE_LINKED_CI_ERRATUM_V1",
+  "status": "UNINTENDED_AUTOMATIC_OFFLINE_TEST_EXECUTION_DISCLOSED",
+  "productOfflineTestsRun": false,
+  "productCIStarted": false,
+  "manualOfflineTestsRun": false,
+  "automaticPublisherOfflineTestsRan": true,
+  "completedAutomaticRuns": [
+    {
+      "id": 38735805022,
+      "name": "APA Publisher immutable stage retry regression",
+      "conclusion": "success"
+    },
+    {
+      "id": 38735805051,
+      "name": "APA Publisher watchdog offline contracts",
+      "conclusion": "success"
+    }
+  ],
+  "cancelledRun": {
+    "id": 38735797914,
+    "name": "APA Research OS automatic publisher",
+    "conclusion": "cancelled",
+    "alreadyCompletedSteps": [
+      "Offline safety and idempotency tests",
+      "Project Controller DAG, claim and dispatch tests",
+      "Commit immutable reports with bounded retry"
+    ],
+    "cancellationStage": "Verify remote GitHub report and index bytes"
+  },
+  "correction": "Earlier broad statements that no offline tests or CI ran apply only to product/manual validation. They do NOT cover the automatic publisher tests triggered by the canonical evidence push. Those tests did run, contrary to the current user instruction. This erratum supersedes those broad statements without changing immutable historical reports.",
+  "remediation": "Automatic publisher cancelled; subsequent commits use skip ci. Publication receipt/readback completed with existing publisher functions only, no test invocation or workflow change.",
+  "nativeModelWrites": 0,
+  "APXInstalled": false
+}

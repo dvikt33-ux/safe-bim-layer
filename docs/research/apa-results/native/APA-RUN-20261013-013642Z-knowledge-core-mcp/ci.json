@@ -1,0 +1,26 @@
+{
+  "runId": 38332614305,
+  "head": "88169d358e4c329f8959f557c944300adcec2df9",
+  "conclusion": "success",
+  "hostAPA": 606,
+  "upstream": 102,
+  "newTests": 19,
+  "jobs": [
+    {
+      "name": "offline-contracts (windows-latest)",
+      "id": 115085539527,
+      "conclusion": "success",
+      "apaTests": 606,
+      "upstreamTests": 102,
+      "stdio": "PASS"
+    },
+    {
+      "name": "offline-contracts (ubuntu-latest)",
+      "id": 115085539824,
+      "conclusion": "success",
+      "apaTests": 606,
+      "upstreamTests": 102,
+      "stdio": "PASS"
+    }
+  ]
+}

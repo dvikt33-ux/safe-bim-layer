@@ -1,0 +1,29 @@
+{
+  "name": "TN_Аэратор_Кровельный_ТехноНИКОЛЬ_ЭКО_75х340",
+  "guid": "75DBC58A-E1D7-4096-9294-BB578516AD4C",
+  "sourceFormat": "GSM extracted from LCF using installed AC29 LP_XMLConverter",
+  "author": "ТехноНИКОЛЬ",
+  "licenseMetadata": {
+    "type": "CC0",
+    "version": "1.0"
+  },
+  "calledMacros": [
+    {
+      "name": "\"ui_object_listing\"",
+      "guid": "5E5E7258-404A-491C-940D-0DA037D87125"
+    }
+  ],
+  "defaultDimensions": {
+    "A": 0.27,
+    "B": 0.27,
+    "ZZYZX": 0.34
+  },
+  "packageFileHashes": {
+    "APA_Selected_TN_20261011/TN_Аэратор_Кровельный_ТехноНИКОЛЬ_ЭКО_75х340.gsm": "1b148ddbe138a5b77c336c174908ead3964c757b34fc89fb98d8375657e1882c",
+    "APA_Selected_TN_20261011/UI_TN.png": "b1445c312e2f66ed840e6f131e00363f97da375e6152ecc74f8b24af5b26abb5",
+    "APA_Selected_TN_20261011/TN_logo_full_50x216.jpg": "fbc04bf58932ca93e31d12b6ce69e177c0352b543d28894a623f94768ad65c90"
+  },
+  "uiMacroExactHistoricalGuid": "NOT_VERIFIED: installed macro same name has a newer/different GUID",
+  "sourceLCFSha256": "FFA4A846C488516E2C2153D5776CE0C61C94A49D90BDA656BE01F5B60BA9061E",
+  "scope": "One exact object plus two referenced UI pictures; original151-file library never bulk imported; no licensed binaries published"
+}

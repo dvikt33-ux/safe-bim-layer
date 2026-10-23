@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:3ed9ce2e1cf63ed04d931d39bf3669b446fdcaa58ce66f1873e10db1ebc27635",
+  "index_commit_sha": "429dd4506b438e69397a1514dbcb24c5e7556e73",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "429dd4506b438e69397a1514dbcb24c5e7556e73",
+  "report_path": "docs/research/apa-results/runs/2026-10-12/APA-RUN-20261012-185427Z-four-real-wall-roof-native109/REPORT.md",
+  "report_sha256": "ba9bfe7d2b96ae35602174af8d2d37d0104f24429e8c6fb603057af2e4d6f7ae",
+  "run_id": "APA-RUN-20261012-185427Z-four-real-wall-roof-native109",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:9b2acdb7c7d67274b20e8d3e9ea4362614c16530f78b7dc929598aad22996609",
+  "index_commit_sha": "61f8e05492b164b7ba6a3f7a74702a2e37dae1dc",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "61f8e05492b164b7ba6a3f7a74702a2e37dae1dc",
+  "report_path": "docs/research/apa-results/runs/2026-10-10/APA-RUN-20261010-110048Z-legacy-traceability/REPORT.md",
+  "report_sha256": "cac968592d7cbbddebde4459e84884c68e2b81bd399f6436e1c8c8dd8a2e6a98",
+  "run_id": "APA-RUN-20261010-110048Z-legacy-traceability",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

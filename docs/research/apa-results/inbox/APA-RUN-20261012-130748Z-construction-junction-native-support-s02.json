@@ -1,0 +1,67 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261012-130748Z-construction-junction-native-support-s02",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A04",
+  "substep_id": "APA-P70.A04.S02",
+  "executor": "work-construction-junctions-20261012",
+  "executor_run_id": "APA-RUN-20261012-123509Z-construction-junction-s02",
+  "phase": "SOURCE",
+  "started_at": "2026-10-12T12:35:09Z",
+  "finished_at": "2026-10-12T13:07:48Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 native evidence captured; publication makes zero native calls",
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-construction-junctions-20261012"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/57",
+      "revision": "b17c460e92e794de94149c8405a8fb48d885ab27",
+      "source_sha": "b17c460e92e794de94149c8405a8fb48d885ab27"
+    }
+  ],
+  "inputs": [
+    "ART-APA-PLP-CONTRACT",
+    "ART-APA-RU-JUNCTION-NORMS"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-CONSTRUCTION-JUNCTION-NATIVE-SUPPORT-S02",
+      "statement": "Working editable source-bound c4/c5 support sub-junction: native50x50mm timber member, actual75cm2face contact, existing Beam classification, source and dependency invalidation, no new collision;95old GUID/body signatures preserved,96current GUID/38context, saved/reopened.426Windows/Linux tests PASS. Complete roof assembly and engineering remain NOT_VERIFIED. Publication zero native calls; preceding execution modified only the approved isolated PLN.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-130748Z-construction-junction-native-support-s02/acceptance.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "0f1107d22f78d3c58919756b583fdb6813c620fcde7484d5d0de6aede872c72a",
+      "source_revision": "b17c460e92e794de94149c8405a8fb48d885ab27"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-130748Z-construction-junction-native-support-s02/EVIDENCE_SHA256.json",
+      "kind": "LOCAL_LOG",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "b8f4947d7d77ec3c190383d3e3bcb89cfd316a9a69debc983afda449850e51af",
+      "source_revision": "b17c460e92e794de94149c8405a8fb48d885ab27"
+    }
+  ],
+  "report_markdown": "# A04.S02 — working source-bound support junction\n\nThe existing ARMO c4 batten25×150mm is now physically supported by a new native c5 counterbatten50×50mm. Details source ARMO_SELFLOCK_ROOF__P0003, page3 PF001/PF002 provides both sections and the explicit support relation. The5.9801000489m span and placement follow actual accepted batten/roof and endpoint-wall geometry. No source construction dimension is invented.\n\nSceneWriter created one editable Morph using the accepted structural-timber Building Material on story1; the existing Archicad v2.0Beam classification was assigned only to this member. Native shared-face readback proves0.007500000016m²contact (75cm²); native collision readback is empty for the new member. Logical source relation, actual contact, intersection and structural capacity remain separate.\n\nAll95accepted GUID and body signatures are preserved. The saved/reopened model has96GUID and38shared-context records; the branched MEP network remains identical. Save returned success. First Open timed out at15seconds; exact current/saved state and ready project UI were reconciled before one separate controlled45-second Open, which acknowledged success. All96body signatures, material, story, classification, contact, network and saved file hash match after reopening. One Create, one classification Set, one Save, two Open attempts; no Create/Modify/Set replay.\n\nThe source archive and dependent native body/material/story pins invalidate stale graph plans. Existing source context, CSE selection, Native Model Dump, NetworkX, Shapely, BIM Graph and SceneWriter are reused. Existing classification systems and user defaults remain unchanged; no installed APX or main change.\n\n426/426 tests PASS locally and on Windows/Linux CI38251796931, including23construction-junction tests. Published code blobs were fetched independently and match the commit. Native classification provider direct rows are validated strictly alongside the catalog wrapper; the observed discrepancy was reconciled without setter replay.\n\nS02 meets its selected editable, parameterized, classified, sourced and invalidating sub-junction criterion. Full roof assembly, fixings, timber grade, rafter bearing and structural capacity remain ENGINEERING_NOT_VERIFIED. Other junction families are not declared complete. S03 follows with independent family qualification.\n\n\nEvidence: [APA-RUN-20261012-130748Z-construction-junction-native-support-s02](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-130748Z-construction-junction-native-support-s02). Draft PR57, head b17c460e92e794de94149c8405a8fb48d885ab27. Stable SHA tokens replace private native identities; raw payloads stay local. Publication makes zero native calls.\n",
+  "next_substep": "APA-P70.A04.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

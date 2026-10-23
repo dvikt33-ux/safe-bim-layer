@@ -1,0 +1,74 @@
+{
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-SOURCE-FLOORPLATE-LIVE",
+      "evidence_ids": [
+        "EV-FLOOR",
+        "EV-PRESERVE"
+      ],
+      "statement": "Native nonrectangular Slab/hole create and same-GUID contour/hole edit, actual BREP, collision query and Save/Open preserve144previous signatures; saved145.",
+      "status": "LIVE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-SOURCE-FLOORPLATE-WINDOWS",
+      "evidence_ids": [
+        "EV-CI",
+        "EV-SDK"
+      ],
+      "statement": "718Windows APA/102upstream/coreMCP pass; SDK full build and embedded identity verified; candidate not installed.",
+      "status": "OFFLINE_PASS"
+    },
+    {
+      "claim_id": "APA-CLAIM-STAIR-QUALIFIED-PREPARATION",
+      "evidence_ids": [
+        "EV-STAIR"
+      ],
+      "statement": "Stair exact dimensions/root crash cause not verified; diagnostic candidate excludes unqualified setter/solver calls.",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-FLOOR",
+      "kind": "TEST_RESULT",
+      "sha256": "31812ac96c580fecb8a42928be0440071c11cce831661c495b57dd3baccf91a0",
+      "source_revision": "cb73cd578c7cd7577f80397920d9e81b8d09c6e1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-074612Z-universal-native-floor-contours/native-floorplate.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-PRESERVE",
+      "kind": "TEST_RESULT",
+      "sha256": "13239191366e85c43e83be3783e9acba40e9f5a5483b2adb41a98767809943fd",
+      "source_revision": "cb73cd578c7cd7577f80397920d9e81b8d09c6e1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-074612Z-universal-native-floor-contours/preservation-runtime.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-CI",
+      "kind": "TEST_RESULT",
+      "sha256": "cfe6e33d4d5e3d472a68205dce9a9ca7adef933cfdc4bc324c1df67f2e3506ac",
+      "source_revision": "cb73cd578c7cd7577f80397920d9e81b8d09c6e1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-074612Z-universal-native-floor-contours/ci.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-SDK",
+      "kind": "TEST_RESULT",
+      "sha256": "02945b3a678cc87b99cedb146e40249315d7635a94e39b52fc68c234b3bcc917",
+      "source_revision": "cb73cd578c7cd7577f80397920d9e81b8d09c6e1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-074612Z-universal-native-floor-contours/sdk-build-identity.json",
+      "verification": "READBACK_VERIFIED"
+    },
+    {
+      "evidence_id": "EV-STAIR",
+      "kind": "TEST_RESULT",
+      "sha256": "e0d915332aab643d22d744d82c4c0bf16c8ffd6a82ecd79504bbcadbbd7493f3",
+      "source_revision": "cb73cd578c7cd7577f80397920d9e81b8d09c6e1",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261014-074612Z-universal-native-floor-contours/stair-preparation-blocker.json",
+      "verification": "READBACK_VERIFIED"
+    }
+  ],
+  "run_id": "APA-RUN-20261014-074612Z-universal-native-floor-contours",
+  "schema": "APA_EVIDENCE_INDEX_V1"
+}

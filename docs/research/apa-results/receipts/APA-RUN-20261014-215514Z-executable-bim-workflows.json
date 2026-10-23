@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "sha256:a719de78933dcc6072e69a2cf49a3ad602d3d4e687078ec77d7107b002b4db6b",
+  "index_commit_sha": "3a034e0f3341c7e9e7dd3f631e06a5edaede2eca",
+  "index_mode": "AUTOMATIC_V2_PROJECTION",
+  "indexed": true,
+  "readback_verified": true,
+  "report_commit_sha": "3a034e0f3341c7e9e7dd3f631e06a5edaede2eca",
+  "report_path": "docs/research/apa-results/runs/2026-10-14/APA-RUN-20261014-215514Z-executable-bim-workflows/REPORT.md",
+  "report_sha256": "4193a01b7ca837bdff0d6ffcc4cdcb25c3dd6c2b43b08098d7ccdba72d96ec60",
+  "run_id": "APA-RUN-20261014-215514Z-executable-bim-workflows",
+  "schema": "APA_PUBLISH_RECEIPT_V1",
+  "status": "DONE_PUBLISHED"
+}

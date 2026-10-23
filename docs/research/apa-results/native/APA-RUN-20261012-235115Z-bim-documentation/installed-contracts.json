@@ -1,0 +1,27 @@
+{
+  "installedTapir": "1.5.10",
+  "archicad": "29.2.1 RUS5101",
+  "availableUsed": [
+    "GetModelDumpV1",
+    "GetNavigatorItemTree",
+    "GetDatabaseIdFromNavigatorItemId",
+    "ChangeWindow",
+    "CreateSections",
+    "CreateInteriorElevations",
+    "CreateView",
+    "Rebuild",
+    "GetSectionElements",
+    "GetElementCutFillPolygons",
+    "CreateWalls",
+    "ModifyWalls",
+    "SaveProject",
+    "OpenProject"
+  ],
+  "readOnlyPublisherNames": "Official API.GetPublisherSetNames read; publication/export not executed",
+  "missing": [
+    "CreateElevations",
+    "Read vertical drawing 2D primitives",
+    "Read/configure interactive schedule rows"
+  ],
+  "APIContractBoundary": "ModifyRoofs PolyRoof is not evidence of SinglePlane support; no roof changes in this package. No APX or global preferences changed."
+}

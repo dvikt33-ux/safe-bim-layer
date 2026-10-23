@@ -1,0 +1,100 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261013-013642Z-knowledge-core-mcp",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-knowledge-integration-20261013",
+  "executor_run_id": "APA-CLAIM-KNOWLEDGE-20261013T011026Z",
+  "phase": "LIVE",
+  "started_at": "2026-10-13T01:10:26Z",
+  "finished_at": "2026-10-13T01:36:42Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "No Archicad calls or model changes; live read-only GitHub/MCP software integration only",
+    "source_branch": "feature/apa-knowledge-integration-20261013"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/71",
+      "revision": "88169d358e4c329f8959f557c944300adcec2df9",
+      "source_sha": "88169d358e4c329f8959f557c944300adcec2df9"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/69",
+      "revision": "64cec581b257b209a097556ae19d498e53631ba1",
+      "source_sha": "64cec581b257b209a097556ae19d498e53631ba1"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-KNOWLEDGE-CORE-MCP",
+      "statement": "APA core uses the existing knowledge module on source-verified data; real SDK stdio client passes. Actual ChatGPT registration and engineering acceptance not claimed.",
+      "status": "LIVE_PASS",
+      "evidence_ids": [
+        "EV-INTEGRATION",
+        "EV-STALE",
+        "EV-CI"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-INTEGRATION",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-013642Z-knowledge-core-mcp/integration.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "f2812200bd35319ccfae917edb8f209666454c5db42465f1b83d99d1bfb89381",
+      "source_revision": "88169d358e4c329f8959f557c944300adcec2df9"
+    },
+    {
+      "evidence_id": "EV-STALE",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-013642Z-knowledge-core-mcp/real-stale-rebuild.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "90cd74d3b89630d087bcc4d2f00d4d92b93ba5cca8f51ea0226fc85194444fa3",
+      "source_revision": "88169d358e4c329f8959f557c944300adcec2df9"
+    },
+    {
+      "evidence_id": "EV-CI",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-013642Z-knowledge-core-mcp/ci.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "f310fa8f0e3011d71d109ee1d5d585ac8fb3e74e0a3757e32193083a251c989f",
+      "source_revision": "88169d358e4c329f8959f557c944300adcec2df9"
+    }
+  ],
+  "report_markdown": "# APA existing knowledge graph core/MCP integration\n\nThe exact PR70 base retains all native documentation/BIM/SceneWriter/normative functions. The19-file PR69 component subtree is transferred unchanged from merge64cec581b257b209a097556ae19d498e53631ba1; a narrow opt-in core adapter calls existing gateway/graph/sections/multidoc/delta/bootstrap/machine/mcp implementations. No second engine/controller/publisher/evaluator.\n\nStageI DONE: actual APA core calls on current GitHub plan128 read project/status/lease, exact S-ID and ART-ID, shared document references, scheduling dependencies, possible source impact, TDK source-only trace and pinned small code fragment. Only original routing/release/quarantine checks supply the TDK trace; no normative acceptance. Read-only next-task suggestions never claim or mutate tasks. Local checkout/current GitHub/cache authority are separate. Damaged/forged sources, unreviewed relationships and denied source classes fail closed.\n\nActual canonical source change127→128 (the authorized CAS task reservation) produces STALE_INDEX_REMOTE_PLAN on a historical scratch copy; updating the scratch source and rebuilding the existing cache restores a verified response. No experimental authoritative source edit. A caller-provided SOURCE_VERIFIED edge cannot propagate without the operator-reviewed exact lineage digest.\n\nStageII localMCP DONE: official SDK2.3.0 client starts a separate stdio server, negotiates and calls apa_retrieve for task/artifact plus a denied class. One tool only, no BIM/task writes. Target ChatGPT registration/call NOT_VERIFIED. Exact operator setup and current official Secure MCP Tunnel/ChatGPT connection instructions are in docs/APA_KNOWLEDGE_INTEGRATION.md; no tunnel, external deployment or paid model calls launched.\n\n19 new tests;606/606Windows host and Windows/Linux CI PASS.102/102 upstream tests on full canonical corpus PASS on host and both CI platforms. Registry oracle covers91tasks/173artifacts/40shared-reference pairs with0failures. Five protected PR70 modules remain byte-identical Git objects.29code blobs match independent GitHub readback.\n\nMeasurements are separate: five live core query payloads, latency and GitHub call counts; ordinary full-plan GET; original o200k_base tokenizer proxy. Full-plan snapshot286718bytes/77867proxy tokens versus compact recorded payloads about386–662proxy tokens. Freshness verification adds2GETs per exact query and5 for the selected section case; ordinary full-plan read uses1GET. No universal token/network/latency saving claim, actual billed GPT tokens or independent semantic dependency recall measurement. See exact measurements.json for final values.\n\nZero Archicad calls, PLN/APX changes, normative engine changes or main/master writes. A11.S03 remains PARTIAL because its native gaps remain. A07 dependencies and S10BLOCKED unchanged. P50.A01.S04 is not admitted as a duplicate integration task; reviewed remaining80-question semantic benchmark requires independent evidence and is not represented as complete. Next: actual ChatGPT connection and, separately, existing native documentation contracts.\n\nCode: [draft PR71](https://github.com/dvikt33-ux/safe-bim-layer/pull/71), head `88169d358e4c329f8959f557c944300adcec2df9`. [CI](https://github.com/dvikt33-ux/safe-bim-layer/actions/runs/38332614305). [Evidence](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261013-013642Z-knowledge-core-mcp). Private config/credentials, absolute paths and raw model dumps are excluded.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

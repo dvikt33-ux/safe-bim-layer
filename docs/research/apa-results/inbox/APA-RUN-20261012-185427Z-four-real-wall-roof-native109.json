@@ -1,0 +1,87 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261012-185427Z-four-real-wall-roof-native109",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A11",
+  "substep_id": "APA-P70.A11.S03",
+  "executor": "work-four-real-wall-roof-20261012",
+  "executor_run_id": "APA-RUN-20261012T182429Z-four-real-wall-roof",
+  "phase": "SOURCE",
+  "started_at": "2026-10-12T18:24:29Z",
+  "finished_at": "2026-10-12T18:54:27Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 native evidence captured; publication makes zero native calls",
+    "tapir": "1.5.10",
+    "source_branch": "feature/apa-four-real-wall-roof-20261012"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/pull/64",
+      "revision": "b056cb76929a62047c82fd66961b72eb4d9078a8",
+      "source_sha": "b056cb76929a62047c82fd66961b72eb4d9078a8"
+    }
+  ],
+  "inputs": [
+    "ART-APA-HIGHLEVEL-PR34",
+    "ART-P70-A08-S04-EDITABLE-NATIVE-CORE-ACCEPTED-20261011",
+    "ART-P70-A02-S01-SEMANTIC-GETSTORIES-20261011",
+    "ART-P70-A03-S01-AUTHORED-SPATIAL-20261011",
+    "ART-APA-PLP-CONTRACT",
+    "ART-P70-A02-S04-NATIVE-MATERIAL-LIBRARY-20261011",
+    "ART-P70-A03-S02-PR47-SPATIAL-CLEARANCE-275-20261011",
+    "ART-P70-A03-S02-PR46-SCENEWRITER-READONLY-PREFLIGHT-271-20261011",
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-ATTR-STORY-SLAB-20261011",
+    "ART-TAPIR-COMPAT-20261010-6F29",
+    "ART-SDK-GET3D",
+    "ART-P70-A09-S01-NATIVE-GEOMETRY-INTEGRATED-20261011",
+    "ART-SDK-OPENING-SHELL-20261010-8E41",
+    "ART-PR20",
+    "ART-APA-DETAILS-V212",
+    "ART-APA-STRUCTURAL-HANDOFF",
+    "ART-MEP-SOURCE-20261010-PORTGRAPH",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-RU-JUNCTION-NORMS",
+    "ART-APA-FULL-CYCLE-RESEARCH",
+    "ART-APA-SOURCE-71-INDEX-20261011"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-FOUR-REAL-WALL-ROOF-NATIVE109",
+      "statement": "Working actual-native four-junction assessment and exact correction plans;73Details sources, one shared Roof dependency. All four measured gaps VERIFIED, only39.44-59.06percent of actual caps covered; direct complete-cap Wall height plus SEO NOT_APPLICABLE. SinglePlane contour edit requires qualified native SDK/UI contract; inspected ModifyRoofs accepts PolyRoof only. All109GUID/body/material/story, saved-file SHA and journal unchanged; zero native writes. Guarded same-SceneWriter two-operation application OFFLINE_PASS on synthetic callbacks with explicit separate-copy/plan authorization and no replay.495Windows host/Windows+LinuxCI PASS,6exact code blobs. Reciprocal skipPolygonHoles false readback vs true request remains NOT_VERIFIED; source getter ignores SDK errors. S03PARTIAL/S10BLOCKED; no APX/global preference/MEP mutation.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-JUNCTION-PROOF",
+        "EV-JUNCTION-BYTES"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-JUNCTION-PROOF",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-185427Z-four-real-wall-roof-native109/acceptance.json",
+      "kind": "TEST_RESULT",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "baf28a3c2c577205d0b4b7bd056e2e01993ff944e5c4a33bef6be214beca36a3",
+      "source_revision": "b056cb76929a62047c82fd66961b72eb4d9078a8"
+    },
+    {
+      "evidence_id": "EV-JUNCTION-BYTES",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-185427Z-four-real-wall-roof-native109/EVIDENCE_SHA256.json",
+      "kind": "LOCAL_LOG",
+      "verification": "READBACK_VERIFIED",
+      "sha256": "b89c78cd0e1454395ed42f0ec668c4928e8deffa5a7d7c8d5d5788fdc796eac4",
+      "source_revision": "b056cb76929a62047c82fd66961b72eb4d9078a8"
+    }
+  ],
+  "report_markdown": "# Four actual Wall–Roof junctions: native assessment and guarded application\n\nThe four original walls have flat caps at absolute Z=6 m. The actual roof underside slopes above them and covers only part of each cap. The working PR63 interior specimen therefore cannot be applied directly as a complete repair of these four boundary walls. Raising a whole wall and cutting only the covered strip would leave an untrimmed strip outside the roof operator.\n\nThe new batch adapter runs on current Native Model Dump faces, typed native details, SEO relations and existing Details/CSE context. It measures the real lower-face overlap with holes retained, produces four source-bound plans, and refuses automatic execution for all four current targets. No existing element was created, modified, saved or reopened in this cycle.\n\n| Actual wall | Gap over actual lower-face overlap, mm | Cap covered by lower roof face | Uncovered cap, m² | Direct complete-cap recipe |\n|---|---:|---:|---:|---|\n| East | 4.516900–1213.598644 | 48.192771% | 1.290000 | NOT_APPLICABLE |\n| North | 1186.411288–1213.598644 | 59.063104% | 1.228107 | NOT_APPLICABLE |\n| South | 4.516900–22.670110 | 39.436896% | 1.816893 | NOT_APPLICABLE |\n| West | 22.670110–1186.411288 | 50.000000% | 1.155000 | NOT_APPLICABLE |\n\nMeasurement status is **VERIFIED** for each row. Repair status is **NOT_APPLICABLE** to the unchanged complete-cap Wall-height + Roof SEO recipe. These statuses do not mean that native repair is impossible or that the geometry has been repaired. A selected partial strip could have contact, but that would not resolve the uncovered part of the same junction.\n\n## Four concrete correction plans\n\nEach machine plan binds the exact wall/roof identities, actual BREP hashes, material assignments, home story, native details and current SEO state. Public evidence uses stable identity hashes; exact local GUID payloads are retained for a later explicitly approved copy.\n\n1. **East:** qualify native lower-roof coverage of the measured 1.29 m² outside strip and the cap ends. Retain actual wall thickness/placement. The roof and wall reference lines coincide at the roof boundary; the actual 0.3 m thick wall straddles it. The rising roof also leaves a 4.5169–1213.5986 mm vertical gap over the covered strip. After an approved roof contour solution, remeasure complete cap coverage before preparing Wall height + SEO.\n2. **North:** qualify lower-roof coverage of 1.228106884 m² near the high roof edge and cap end. The flat cap is below the high side of the pitched lower face by 1186.4113–1213.5986 mm. Native wall height alone does not resolve the uncovered cap. After an approved native roof-edge solution, remeasure the resulting lower contour and wall joins before SEO.\n3. **South:** qualify lower-roof coverage of 1.816893116 m² at the low edge/end. The lower-face contour differs from the nominal roof outline because the actual roof has pitch, thickness and edge geometry. Even the small 4.5169–22.6701 mm vertical gap is not a complete repair while 60.5631% of the cap remains uncovered. Preserve the actual lower-face plane; lowering the whole roof would invalidate the other junctions.\n4. **West:** qualify coverage of the measured 1.155 m² outside half of the 2.31 m² cap. The source cap spans 7.7 m after native wall joins and is centered on the roof's west edge. Retain these actual resultant dimensions. The 22.6701–1186.4113 mm gap varies along the roof pitch. A benchmark placed at the roof center does not qualify this boundary case.\n\nFor every plan the suitable first alternative is **native SinglePlane Roof contour/edge editing**, retaining roof pitch, thickness, material and story, then the native Wall + SEO operation. The extracted uncovered-cap polygons specify the exact measured coverage requirement; they are not an approved roof overhang design. No extra eaves, fastener, bearing length or load value is invented.\n\nThe inspected `ModifyRoofs` source has a runtime guard that rejects all roofs except `API_PolyRoofID`. The actual shared roof is `SinglePlane`. Its schema's `polygonOutline` field alone is therefore insufficient evidence of a supported edit. A native UI or SDK single-plane polygon memo operation is the appropriate next contract to qualify. Converting the roof class or recreating the accepted roof would alter the accepted model and requires a separate target-bound plan and copy authorization. Installed APX is unchanged; exact source/binary correspondence remains NOT_VERIFIED.\n\nThe unexecuted Wall candidate uses temporary height **4.411353033 m**, derived only from actual roof highest vertex Z=7.411353033 m and actual wall base Z=3 m. This is an intermediate cutting envelope, not a final wall design height. Roof coverage must be independently qualified first; the blocked candidates cannot be compiled into an executable repair plan.\n\n## Working code path and limits\n\n`archicad_wall_roof_assessment.py` supplies a read-only CLI over captured native data. It reuses `wall_roof_face_overlap`, the existing planar BREP reader, Shapely, Details/CSE source candidates and NetworkX's shared roof dependency graph. Four current plans share one roof dependency. All 73 Details records retain source/assembly blockers; native structural concrete does not imply a manufacturer's product match.\n\nFor a qualified, completely covered, straight Basic Wall and Basic single-plane Roof with no holes or existing SEO dependencies, `prepare_wall_roof_repair` compiles the two existing native operations with the existing BIM Graph. `execute_wall_roof_repair` uses the same SceneWriter and SQLite ledger: one exact `ModifyWalls` height edit, then one `CreateSolidElementLinks` upward subtraction. It requires explicit operation/plan/hash authorization in a separately approved saved copy, preserving the source PLN.\n\nFresh copy identity, saved-file hash, complete native inventory, all protected native signatures, roof BREP/material/story and target typed details are checked. Height readback must preserve the actual cap footprint. Final readback must prove complete real lower-face area, target vertices below the pinned plane, unchanged materials/story/placement, preserved GUIDs and unchanged collision results. Failure or unknown outcome stops the sequence without replay. Save/Open remains a subsequent independent persistence gate.\n\nThis application path has **OFFLINE_PASS** with real callback/SQLite tests on synthetic native responses. It has **no new LIVE write qualification** for the four current boundary walls. The earlier PR63 native specimen is historical LIVE_PASS and was not repeated.\n\n## Targeted SEO metadata check\n\nRead-only queries of the retained PR63 specimen from the Wall target and Roof operator sides agree: `skipPolygonHoles=false`, while the recorded request is true. Keep **NOT_VERIFIED_REQUEST_READBACK_DIFFERENCE**.\n\nThe inspected serializer maps the boolean to SDK bit `0x00000004`, and the reverse serializer reads the same bit. Both getter branches initialize flags to zero and ignore the SDK `GetFlags` error result. SDK documentation allows database/ownership/argument/link errors. Consequently false does not prove either a successful flags query or the applied operation setting. The existing specimen has no roof holes, so its successful geometry cannot identify the flag's application. Cause and exact installed source/binary correspondence remain NOT_VERIFIED. No APX modification, flag rewrite or ambiguous native retry occurred.\n\n## Acceptance\n\n- Current read-only native baseline: **109 GUID**, all accepted BREP, material and story signatures unchanged; saved PLN hash unchanged.\n- Existing Ø200 terminal connection and MEP network unchanged. S10 remains BLOCKED; no repeated transition research or network mutation.\n- Four actual geometric measurements and four machine plans completed. No source junction repair executed.\n- **26 new tests**, covering cap coverage, holes, unsupported native geometry, typed source constraints, exact approval/plan binding, protected-source rejection, ordered graph, same-writer callbacks and stopping after an unknown outcome.\n- Full Windows host suite: **495/495 PASS**. Windows/Linux CI and exact GitHub publication readback are recorded with the published package.\n- No new native writes: Save/Open and IFC export are not repeated. The last accepted PR63 persistence/IFC result remains historical evidence, not a new acceptance.\n- A11.S03 remains PARTIAL. A04.S01–S03 remain DONE_PUBLISHED. Engineering/load-transfer/manufacturer-family acceptance remains ENGINEERING_NOT_VERIFIED.\n\nNext native step: qualify the single-plane roof contour operation and an approved contour design in a separate saved copy, then rerun the same four-target assessment. Only resulting APPLICABLE_NOT_EXECUTED plans may enter the existing writer after exact copy/operation authorization.\n\nPublished code: [draft PR64](https://github.com/dvikt33-ux/safe-bim-layer/pull/64), exact head b056cb76929a62047c82fd66961b72eb4d9078a8 on PR63 head7966db58ca8830b43938a03cc064bcc3e952a21e. All6 committed GitHub blobs match exactly. Windows host495/495PASS; Windows/Linux CI proof attached. Native109 and existing journal/saved-file hash unchanged.\n\n\nEvidence: [APA-RUN-20261012-185427Z-four-real-wall-roof-native109](https://github.com/dvikt33-ux/safe-bim-layer/tree/research/apa-verified-results-hub-20261010/docs/research/apa-results/native/APA-RUN-20261012-185427Z-four-real-wall-roof-native109). Draft PR64, head b056cb76929a62047c82fd66961b72eb4d9078a8. Stable SHA tokens replace private native identities; raw payloads stay local. Publication makes zero native calls.\n",
+  "next_substep": "APA-P70.A11.S03",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}

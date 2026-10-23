@@ -1,0 +1,118 @@
+{
+  "schema": "APA_NATIVE_OWNER_CURRENT_GAPS_V1",
+  "status": "PARTIAL",
+  "substep": "APA-P70.A11.S03",
+  "codeHead": "14f5381dd971d56f7a693de651f13e572de78d65",
+  "historicalGapDefinitions": [
+    {
+      "id": "G01",
+      "status": "FIXED_VERIFIED_PR54_RETAINED",
+      "evidence": "546Windows host/Windows+LinuxCI; accepted PR54 SQLite fix retained",
+      "remaining": "No new SQLite development"
+    },
+    {
+      "id": "G02",
+      "status": "LIVE73_DETAILS_FOUR_ACTUAL_WALL_ROOF_COVERAGE_PLANS_PASS",
+      "remaining": "Four measurements VERIFIED; 39.44-59.06% cap coverage. Direct complete-cap SEO recipes NOT_APPLICABLE; native contour/design/copy authorization required"
+    },
+    {
+      "id": "G03",
+      "status": "REAL_NATIVE_C4_C5_BEAM_SUPPORT_PASS_FULL_ASSEMBLY_BLOCKED",
+      "dependency": "APA-P70.A11.S06",
+      "remaining": "25x150mm and50x50mm real Beams with75cm2contact; c5 vertical native end contact to original Morph batten73.1108100945cm2; eight full-assembly dimensions/source commit=false/grade/fixings/rafter bearing remain"
+    },
+    {
+      "id": "G04",
+      "status": "LIVE_REFERENCE200_DIAMETER_AND_RECIPROCAL_TERMINAL_CONNECTION_PASS_MAIN_BRIDGE_BLOCKED",
+      "dependency": "APA-P70.A11.S10",
+      "remaining": "Ø200pair preserved; no explicit sized transition factory/port setters; exposed routing Place supplies empty segment section maps; destructive ConnectLogically excluded. Two components remain.",
+      "newWorkflowMEP": "NATIVE_QUERY_SHARED_WORKFLOW_PASS_NOT_NETWORK_BRIDGE_ACCEPTANCE"
+    },
+    {
+      "id": "G05",
+      "status": "LIVE_NATIVE_GABLE_HIP_EDIT_SAVE_OPEN_RETAINED_SURFACE_TRANSFER_NOT_VERIFIED",
+      "dependency": "APA-P70.A11.S07",
+      "remaining": "Prior PR82 native Roof geometry/contour/pitch acceptance retained; exact MultiPlane Surface overrides remain NOT_VERIFIED and deferred. Four original junctions and source SEO remain unchanged.",
+      "roofEditing": "LIVE_NATIVE_GABLE_TWO_SINGLEPLANE_AND_HIP_ONE_MULTIPLANE_EDIT_SAVE_OPEN",
+      "roofSurfaceTransfer": "GABLE_SOURCE_MATCH_HIP_MULTIPLANE_OVERRIDES_NOT_VERIFIED",
+      "previousSourceOnlyContext": "Existing SDK GetMemo/ChangeMemo supports plane Roof source; native memo/underside footprint offset29.887626mm verified. Installed callable edit/source-binary correspondence not verified; exact design and separate authorized copy absent. Original4junctions unchanged; no APX change",
+      "roofSurfacePriority": "DEFERRED_PER_CURRENT_MASS_INTEGRATION_TASK; prior NOT_VERIFIED unchanged",
+      "newSDK": "12_TOOL_DEFAULT_HEADERS_AND_POLYGON_MEMO_QUERY_BUILD_PASS_NOT_RUNTIME",
+      "ShellRailingCurtainWall": "DEFAULT_HEADERS_ONLY_CREATE_COMPLEX_MEMO_NOT_IMPLEMENTED",
+      "newSDKMemo": "SEVEN_ROOF_SLAB_PARAMETER_POLYGONS_COORDS_HOLES_STORIES_NATIVE_MATCH;SHELL_NO_SAMPLE",
+      "complexMemoWrite": "NOT_IMPLEMENTED_SIDEMATERIAL_EDGE_TRIM_PIVOT_OVERRIDE_FRAME_FIELDS_NOT_SERIALIZED",
+      "currentPackageOverlay": "Accepted ExtrudedShell vector editing; CW/Railing memo and additional class-specific Shell parameters built only. Earlier Roof acceptance retained; full assembly geometry/material acceptance incomplete."
+    },
+    {
+      "id": "G06",
+      "status": "REAL_ANALYTICAL_ADAPTERS_RETAINED_EXTERNAL_SAM_SAF_ENGINE_LOAD_NORM_GATES",
+      "dependency": "APA-P70.A11.S08"
+    },
+    {
+      "id": "G07",
+      "status": "ACTUAL45_IFC_MAPPINGS_52_ELEMENTS_UNDERSIDE_WALL_ROOF_QUANTITIES_PASS",
+      "dependency": "APA-P70.A11.S09",
+      "remaining": "Historical PR63 actual IFC remains evidence; no new export because no model change. SEO/contact export and receiver compatibility still unverified",
+      "newWorkflowIFC": "TEMPORARY_WALL_NATIVE_IFC_GUID_MAPPING_PASS_NO_SEMANTIC_EXPORT_CLAIM",
+      "newLocalIFC": "SELECT_PROPERTYSETS_SCHEMA_VALIDATE_KERNEL_GEOMETRY_LOCAL_CALLABLE_SAVED_EXPORT",
+      "semanticEngineering": "NOT_VERIFIED_NO_NATIVE_SAF_CONTRACT"
+    },
+    {
+      "id": "G08",
+      "status": "ACTUAL_LOWER_FACE_FULL_CAP_COVERAGE_AND_RECIPROCAL_FLAG_CHECK_PASS",
+      "remaining": "Coverage/holes actual native geometry and complete/partial contact distinguished; requested true/target+operator readback false flag remains NOT_VERIFIED, no mutation/retry Native memo/reference contour matches upper face; actual lower XY footprint is offset29.887626mm. Both are retained explicitly, not normalized into false equality.",
+      "nativeStairSentinelPreflight": "LIVE_READONLY_COMPLETE_SLOTS_REAL_OWNER_SPECIALIZED_MEMBERSHIP_BODYLESS_CHILDREN_NOT_2D_ANNOTATIONS",
+      "stairGoingInterpretation": "SDK_TREAD_DEPTH0_LOCKFALSE_MUST_NOT_OVERRIDE_OFFICIAL_PROPERTY0.32_AND_ACTUAL_BREP_PITCH0.32",
+      "stairSource350": "LIVE_BUILTIN_PROPERTIES_AND20REGULAR_BREP_PITCHES350MM_WITH22RISES150MM;10OBJECT_ANCESTRIES_NOT_VERIFIED",
+      "nativeInventory": "258_ORIGINAL_SIGNATURES_PRESERVED_AFTER_TEMPORARY_COLD_CRUD_SAVE_OPEN_CLEANUP",
+      "sharedGeometry": "ACTUAL_NATIVE_BREP_AUTHORITY; official9of10WallBoundsDiffer; preserve both sources",
+      "nativeQueryBoundaries": "TAPIR_CLASSIFICATION_OUTPUT_SCHEMA_MISMATCH_OFFICIAL_GETTER_PASS; WALL_GETELEMENTTRIMS_NATIVE_ERROR; WINDOW_OVERALL_NOT_ROUGH_OPENING",
+      "journal": "12_CORRECTED_SCENES_PASS;3OLD_UNKNOWN_IMMUTABLE_SEPARATELY_RECONCILED_NO_REPLAY",
+      "newLocalAnalytics": "ARCHIVED126ELEMENTS:25PLANAR_QUANTITIES_22NOT_VERIFIED_79NO_NATIVE_BODY;GUID_DEPENDENCY_ORDER_SOURCE_ONLY",
+      "newNativeData": "NINE_SDK_DEVKIT_SCOPED_READ_QUERIES_CALLABLE;179_HOTSPOTS_FOUR_WALL_ENDPOINTS_MATCH",
+      "quantityEngine": "BLOCKED_ACCESS_VIOLATION_QUARANTINED_PYTHON_AND_NATIVE_ENTRY_ROOT_CAUSE_NOT_VERIFIED",
+      "DrawingAssociations": "TWO_LINKS_READ;ONE_CURRENT_VIEWMAP_SOURCE;STATUS_AND_CONTENTBOX_NATIVE_ERRORS;LEGACY_DRAWING_GUID_DISTINCT_NOT_EQUIVALENT"
+    },
+    {
+      "id": "G09",
+      "status": "FUNCTIONAL_WORK_PRIORITIZED_NO_INSTALLER_OR_OPTIMIZATION_CLAIM",
+      "remaining": "Functional completeness precedes performance. A11.S03 PARTIAL; Stair solver requires corrected candidate/native frame qualification. A11.S04 and A07 dependencies remain unchanged."
+    }
+  ],
+  "current": {
+    "nativeModelGUIDs": 409,
+    "nativeModelWrites": 0,
+    "APXChanged": false,
+    "SaveOpenThisPackage": false,
+    "currentNativeSignaturesAnd128GDL": "MATCH_PR109",
+    "RailingMaterialRecovery": "NOT_RESTORED_BLOCKED_PUBLIC_OWNER_WRITE_NOT_QUALIFIED",
+    "actualSettingsOwner": "NATIVE_RAILING_RAIL_DISTINCT_FROM_EDITED_PHYSICAL_RAIL",
+    "ownerComponentRootMemo": "BUILD_ONLY_NOT_INSTALLED",
+    "disabledFixingDependency": "NOT_VERIFIED",
+    "legacyJournalScope": "NOT_VERIFIED_OLD_TARGET_SETTER_NO_EFFECT_PROOF_MATCHED_OTHER_UNSCOPED_ROWS_PRESERVED",
+    "compoundAcceptance": "DEFAULT_ALL_GEOMETRY_MATERIAL_GDL_OWNERSHIP_DEPENDENCY_PROOFS_REQUIRED",
+    "CW": "MEMO_BOUNDED_BUILD_ONLY_SCALAR_HEIGHT_STILL_REFUSED",
+    "Shell": "PR109_EXTRUDED_VECTOR_LIVE_RETAINED_NEW_FIELDS_BUILD_ONLY",
+    "MEP": "EXISTING_ELBOW_BRANCH_GRAPH_PARAMETERS_BUILD_ONLY_NO_CURRENT_POSITIVE_SAMPLE",
+    "graphNodes": 347,
+    "graphEdges": 474,
+    "observedRailImpactNodes": 132,
+    "IFCExport": "NOT_VERIFIED",
+    "newCommandNames": 0,
+    "offlineTests": "NOT_RUN",
+    "workflowDispatch": false,
+    "quantityEngine": "QUARANTINED_NOT_CALLED"
+  },
+  "limitations": [
+    "EXACT_NEW_BINARY_APPROVAL_REQUIRED_FOR_OWNER_MEMO_AND_LIBRARY_READ",
+    "NO_PROVEN_AC29_OWNER_GDL_MATERIAL_WRITE_CONTRACT",
+    "NO_DIRECT_DISABLED_PARAMETER_WRITE_OR_ASSUMED_FIXING_PROPAGATION",
+    "OLD_UNSCOPED_UNKNOWN_JOURNAL_ROWS_NOT_CLEARED",
+    "NEW_CW_SHELL_MEP_FIELDS_NOT_LIVE_VERIFIED",
+    "THREE_DRAWING_SOURCES_UNRESOLVED",
+    "OPENING107_POST_CLOSE_NOT_VERIFIED",
+    "IFC_EXPORT_NOT_VERIFIED",
+    "PR104_EXACT_BINARY_APPROVAL_PENDING_NOT_REASKED"
+  ],
+  "nextAction": "Approve exact published candidate for read-only actual owner/root memo and selected library parameter-script diagnosis; restore original APX/registration; qualify owner write before any separately approved two-material recovery."
+}

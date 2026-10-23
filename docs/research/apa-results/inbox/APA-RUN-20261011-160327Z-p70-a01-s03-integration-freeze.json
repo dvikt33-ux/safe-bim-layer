@@ -1,0 +1,186 @@
+{
+  "schema": "APA_PUBLISH_REQUEST_V1",
+  "run_id": "APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze",
+  "plan_id": "APA-P70",
+  "action_id": "APA-P70.A01",
+  "substep_id": "APA-P70.A01.S03",
+  "executor": "chatgpt-gpt6-manual",
+  "executor_run_id": "APA-RUN-20261011-1601Z-p70-a01-s03-integration-boundaries",
+  "phase": "SOURCE",
+  "started_at": "2026-10-11T16:01:25Z",
+  "finished_at": "2026-10-11T16:03:27Z",
+  "scope": {
+    "repository": "dvikt33-ux/safe-bim-layer",
+    "archicad": "29 (source-only; no new local Archicad run)",
+    "sdk": null,
+    "tapir": "1.5.10 (live evidence in prior user logs)",
+    "source_branch": "feature/apa-slab-basic-journaled-20261011"
+  },
+  "source_revisions": [
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_project_accelerator.py",
+      "revision": "59dadabf664326d8401a2514c5fd7436b7657cbb",
+      "source_sha": "59dadabf664326d8401a2514c5fd7436b7657cbb"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_bim_graph.py",
+      "revision": "fc68f82b1d0cf89d5d4576ac03225572a6ffadf2",
+      "source_sha": "fc68f82b1d0cf89d5d4576ac03225572a6ffadf2"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_scene_run.py",
+      "revision": "7905cfa237ec989da31b527aa931dd7f4663504e",
+      "source_sha": "7905cfa237ec989da31b527aa931dd7f4663504e"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_template_builder.py",
+      "revision": "eadef8875372578609985edbd30ceced5075d4e8",
+      "source_sha": "eadef8875372578609985edbd30ceced5075d4e8"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_building_shell.py",
+      "revision": "4e03a0143e62a416c1682129fefd4fab829c9e47",
+      "source_sha": "4e03a0143e62a416c1682129fefd4fab829c9e47"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_accelerator_integration.py",
+      "revision": "b4efd579d5acc723439a1553e79b4a4b1c0074cd",
+      "source_sha": "b4efd579d5acc723439a1553e79b4a4b1c0074cd"
+    },
+    {
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/working-archicad-mvp/scripts/archicad_executor.py",
+      "revision": "efbaf139c4a6707226a2e6bbe07a7cc9f5fafa28",
+      "source_sha": "efbaf139c4a6707226a2e6bbe07a7cc9f5fafa28"
+    }
+  ],
+  "inputs": [
+    "ART-APA-REUSE-NATIVE-20261011",
+    "ART-APA-FAST-COMPILER",
+    "ART-APA-ASSEMBLY-PLAN",
+    "ART-P70-A01-S01-REPO-SOURCE-MAP-20261011",
+    "ART-APA-HIGHLEVEL-PR34"
+  ],
+  "claims": [
+    {
+      "claim_id": "APA-CLAIM-P70-S03-ONE-WRITER-BOUNDARY",
+      "statement": "Use existing Project Accelerator + BIM Graph + SceneWriter, reuse Template Builder and slab helper as donors; prohibit parallel executable paths.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-P70-S03-COMPILER",
+        "EV-P70-S03-GRAPH",
+        "EV-P70-S03-WRITER",
+        "EV-P70-S03-TEMPLATE",
+        "EV-P70-S03-SLAB-DONOR"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S03-CREATE-ONLY-GAP",
+      "statement": "Current public compiler accepts one component; generic ADAPT_EXISTING and stable GUID diff/Modify remain unimplemented, thus next compiler/semantic gates must precede broad build task.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-P70-S03-COMPILER",
+        "EV-P70-S03-WRITER"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S03-25-REOPEN-SLICE",
+      "statement": "User-supplied logs show 25 typed planned elements and 45 native GUID after selecting copied PLN, but cannot generalize to full product.",
+      "status": "REPORTED",
+      "evidence_ids": [
+        "EV-P70-S03-LIVE-REPORT"
+      ]
+    },
+    {
+      "claim_id": "APA-CLAIM-P70-S03-ROADMAP",
+      "statement": "Reuse accepted D0-D6 priorities from the roadmap under existing PROJECT_PLAN.json S-IDs; next eligible dependent step is P70.A02.S01.",
+      "status": "SOURCE_VERIFIED",
+      "evidence_ids": [
+        "EV-P70-S03-ROADMAP",
+        "EV-P70-S03-COMPILER"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-P70-S03-COMPILER",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_project_accelerator.py",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "59dadabf664326d8401a2514c5fd7436b7657cbb"
+    },
+    {
+      "evidence_id": "EV-P70-S03-GRAPH",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_bim_graph.py",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "fc68f82b1d0cf89d5d4576ac03225572a6ffadf2"
+    },
+    {
+      "evidence_id": "EV-P70-S03-WRITER",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_scene_run.py",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "7905cfa237ec989da31b527aa931dd7f4663504e"
+    },
+    {
+      "evidence_id": "EV-P70-S03-TEMPLATE",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_template_builder.py",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "eadef8875372578609985edbd30ceced5075d4e8"
+    },
+    {
+      "evidence_id": "EV-P70-S03-SHELL",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_building_shell.py",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "4e03a0143e62a416c1682129fefd4fab829c9e47"
+    },
+    {
+      "evidence_id": "EV-P70-S03-CAPABILITIES",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-slab-basic-journaled-20261011/scripts/archicad_accelerator_integration.py",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "b4efd579d5acc723439a1553e79b4a4b1c0074cd"
+    },
+    {
+      "evidence_id": "EV-P70-S03-SLAB-DONOR",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/working-archicad-mvp/scripts/archicad_executor.py",
+      "kind": "SOURCE_CODE",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "efbaf139c4a6707226a2e6bbe07a7cc9f5fafa28"
+    },
+    {
+      "evidence_id": "EV-P70-S03-LIVE-REPORT",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr35-basic-slab-implementation-partial-20261011.md",
+      "kind": "USER_SUPPLIED",
+      "verification": "READBACK_VERIFIED",
+      "sha256": null,
+      "source_revision": null
+    },
+    {
+      "evidence_id": "EV-P70-S03-ROADMAP",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/control/APA_ACCELERATOR_DELIVERY_ROADMAP_20261011.md",
+      "kind": "OTHER",
+      "verification": "SOURCE_READ",
+      "sha256": null,
+      "source_revision": "10fb9eb468cae1c9bb8200b76440824b2469607e"
+    }
+  ],
+  "report_markdown": "# APA-P70.A01.S03 — утверждение границ интеграции рабочего ускорителя\n\n**Run:** `APA-RUN-20261011-160327Z-p70-a01-s03-integration-freeze` · **Дата:** 2026-10-11 · **Фаза:** SOURCE · **Исполнитель:** GPT-6 в обычном чате, GitHub connector.  \n**Авторитет задач:** `PROJECT_PLAN.json`, ревизия 57 при claim; эта публикация не создаёт конкурирующего плана или writer.  \n**Результат:** **SOURCE_DECISION_ACCEPTED** для архитектурных границ. Ни новый исполнитель, ни поддержка редактирования чужих проектов не реализованы этим отчётом. Синтетические тесты и пользовательские live-логи маркируются отдельно.\n\n## 1. Приёмка D0: фиксируем ОДИН путь\n\n```text\nОдин JSON/TZ input (archicad-project-intent/1)\n  └─ scripts/archicad_project_accelerator.py::compile_intent\n     ├─ capability gating: существующий capability-registry + ReadAdapter\n     ├─ story/attribute resolver: GetStories + existing template_builder READ-ONLY donors\n     ├─ component adapters (building-shell-v1, pavilion-frame-v1; следующие по мере приёмки)\n     └─ scripts/archicad_bim_graph.py::compile_graph (ONE DAG, hosts/dependencies/order)\n        └─ scripts/archicad_scene_run.py::SceneWriter (ONE guarded native writer)\n           └─ Tapir 1.5.10 / proven native API gap adapters\n              └─ native typed GUID/story/geometry/material/host readback\n                 └─ evidence + separate Save As/reopen verification\n```\n\nЭто **архитектурный контракт на последующие стадии**, а не утверждение, что все блоки уже соединены. Все Create/Modify должны проходить существующий writer и журнал; другие исполнительные модули — *доноры функций*, а не параллельные независимые точки записи.\n\n## 2. Source-proven reuse map (актуальная ветка PR #35)\n\n| Обязанность | Единственный хозяин / source SHA (Git blob) | Что доказано сейчас | Нужная минимальная дельта, без дублирования |\n|---|---|---|---|\n| Ввод и единый runtime orchestration | `scripts/archicad_project_accelerator.py` `59dadabf664326d8401a2514c5fd7436b7657cbb` | `compile_intent`, `run_project`; **ровно один** компонент, только pavilion или shell; old create-only mode | Поддержать typed project brief и несколько элементов/компонентов через существующий компилятор; не заводить `new_house_compiler.py` |\n| Проверка доступности | `scripts/archicad_accelerator_integration.py` `b4efd579d5acc723439a1553e79b4a4b1c0074cd` | `require_capabilities`, `ReadAdapter`, исходники и dump; current `run_integration` offline/preflight only | Связать с единым входом; провайдер не получает права записи по одному только наличию schema |\n| Единый BIM DAG | `scripts/archicad_bim_graph.py` `fc68f82b1d0cf89d5d4576ac03225572a6ffadf2` | Валидация команды, host `$createdGuid`, зависимости, топосортировка, fit/overlap проёмов | Ввести отдельные semantic-room/axis/structure ограничения как входные валидаторы этого DAG, а не второй graph |\n| Типовая оболочка | `scripts/archicad_building_shell.py` `4e03a0143e62a416c1682129fefd4fab829c9e47` | 10×8 м, 2 named stories, 25 создаваемых сущностей для конкретного ограниченного примитива | Расширять существующие типизированные компоненты по необходимости, не подменяя архитектуру fixed `roomBays` |\n| Единственная запись | `scripts/archicad_scene_run.py` `7905cfa237ec989da31b527aa931dd7f4663504e` | `SceneWriter`, точный PLN guard, durable SQLite до каждого native Create/Modify, typed readback; no replay; после ошибки GUID reconciliation | Вынести из одноразовых incident scripts обобщаемые proven `resolve existing GUID / resume only absent` и typed slab update *в тот же* SceneWriter. Не переносить hardcoded GUID/путь истории в общий runtime |\n| Проектные атрибуты | `scripts/archicad_template_builder.py` `eadef8875372578609985edbd30ceced5075d4e8` | `get_fill_runtime_index`, `material_dependency_plan`; read-only поиск/зависимости BM/Fill/Surface | Адаптер semantic role→unique active-project Attribute GUID/Composite/Favorite; неоднозначность→BLOCKED, никакой копии каталога |\n| Доноp slab material | `scripts/archicad_executor.py` `efbaf139c4a6707226a2e6bbe07a7cc9f5fafa28` из `feature/working-archicad-mvp` | Ранее известен `CreateSlabs` → `ModifySlabs` Basic/BM | Встроить только при подтверждении installed schema; native Create→Modify **не атомарен**, обе операции — durable intent before call |\n| Инцидентное восстановление и независимый saved-copy readback | `scripts/continue_apa_after_orphan_partition.py`, `scripts/verify_apa_saved_copy_read_only.py`, PR #35 | Пользовательские живые логи: **25/25 native entities**, 45/45 total GUID, `.bpn` отклонена guard, затем exact `.pln` passed; CI #38150899253 207/207 synthetic/offline | Считать подтверждением **конкретного scratch 25-element scene**, не универсального multi-story компилятора или штатного `ADAPT_EXISTING`. Не повторять эти smoke-тесты без найденной регрессии |\n\n**Историческая корректировка:** S01 и исходный предложенный roadmap писались до доказанного live 25/25 и saved-copy readback. Эти старые записи `LIVE NOT VERIFIED` относятся к тогдашнему состоянию. Текущая версия PR #35 и пользовательские source-safe логи повышают *только узкий shell slice*, а не всю P70.A03.S02.\n\n## 3. Минимальные интерфейсы, которые нужно соблюдать\n\n1. **Ввод:** `project_intent = {schemaVersion, projectId, units='meters', components[]}` — сохранять проектный hash, immutable authored intent, режим `GENERATE_FROM_ZERO` или `ADAPT_EXISTING`. Режимы — **планируемые**, существующая реализация `run_project` пока их полностью не поддерживает.\n2. **Проектный контекст:** один открытый PLN; `GetProjectInfo`, `GetStories`, Tapir/installed Add-On identity, role→attribute GUID, project snapshot. User-visible architectural \"1 этаж\" ≠ native `floorIndex=1`: на текущем тесте floor label 1 может соответствовать native index 0. Не сканировать или переключать другие файлы.\n3. **Операционный план:** детерминированные step ID/semantic entity ID, `{id, command, params, after?}`, topological host refs `$createdGuid`, BIM graph hash и binding story/project; неизвестная геометрия/отсутствующий атрибут блокируют соответствующую запись.\n4. **Executor contract:** один `SceneWriter` с durable scene+step reservation **до** native вызова. Никакого blind retry после timeout. Сначала reconciling existing GUID; новый план может создавать только отсутствующее, затем readback по каждому изменённому элементу. Короткие donors не имеют самостоятельного права писать в защищённый PLN.\n5. **Typed evidence:** GUID/type/story/global Z, ends/polygon/thickness, BM/Composite/Surface provenance, ownerWall GUID для дверей/окон; исходный 20-GUID inventory и итоговый 45-GUID test — отдельный зафиксированный факт, не универсальная метрика.\n6. **Пользовательское управление:** один высокий уровень `Build/Update/Inspect` с одним точным approval на набор операций, без ручных 5 JSON/token/GUID для каждого шага. Прямой ChatGPT→localhost transport **NOT_VERIFIED** и не часть ближайшей поставки.\n7. **Сложные алгоритмы:** HOT/WARM/COLD, Coverage Signature, provider arbitration, CSE, инженерию и тяжёлую оптимизацию подключать лениво после действующего редактируемого MVP; не ставить 104 MB dump, LLM или повторный нормативный поиск на путь каждого Wall Create.\n\n## 4. Ближайшие поставки: сохраняем controller DAG, не создаём второй roadmap\n\n| Порядок | Существующий S-ID | Измеримый результат и достаточный gate |\n|---|---|---|\n| **Сейчас — D0** | **P70.A01.S03** | Этот принятый interface/reuse contract, source SHA, точная граница одной точки записи, verified GitHub publisher receipt и controller readback |\n| **Следом — D2 вход** | **P70.A02.S01** | Реальный типизированный building brief: участок, named story / level и `GENERATE_FROM_ZERO` vs `ADAPT_EXISTING`, без фиктивного нулевого архитектурного этажа; offline positive/negative, no native write |\n| **Затем** | **P70.A02.S02 / S03** | Минимально достаточные атрибуты и CSE/PLP для 1 сценария; source/version/applicability и unknown→BLOCKED |\n| **Модель из задания** | **P70.A03.S01 → S02** | Semantic rooms/axes/host/structural constraints→same DAG→same writer; одно реальное здание, а не только фиксированный box; не начинать S02 по DAG до завершения S01 |\n| **Инкрементальный edit** | **P70.A03.S03** | Изменить 10→12 м и 1 проём в disposable PLN, **сохранить существующие GUID**, создать/изменить только delta; typed readback & separate Save As/reopen |\n| **После core** | **P70.A04–A08** | Roof/footing/stairs/detail→MEP/engineering→drawings/IFC/PDF; отдельные engineering/normative gates |\n\n**Не делать сейчас:** очередной ручной визуальный smoke-test тех же 25 элементов, третий generic writer, переписывание компилятора с нуля, повторное создание тестового PLN, инфраструктурную перестройку вместо предметного изменения.\n\n## 5. Решение аудита / критерии принятия\n\n**Принято:** reuse архитектуры; границы D0–D6 существующего roadmap согласуются с единственным controller. Узкие incident tests live-прошли в user logs, 25-step saved-copy typed readback воспроизводится по точной ветке PR #35. Доказано source (GitHub blob SHA), что typed semantics и append-only journal exist.\n\n**Отложено до своих S-ID:** реализация multi-component/ADAPT_EXISTING, semantic attribute adapter, generic incremental Modify, roof and structural semantics. Предлагаемые будущие AI/Ci/Husky providers не заменяют принятую AC29/Tapir reference реализацию до отдельной capability parity. Нет подтверждённого benchmark speedup, distributed transaction или product-level LIVE PASS.\n\n**Acceptance P70.A01.S03:** контракт `input → attribute/story resolver → one BIM graph → one SceneWriter → Tapir/native → readback` определён; определены владельцы интерфейсов/исходники с SHA, предотвращено логическое дублирование; обеспечена однозначная последовательность приёмочных ворот и сразу следующий eligible substep P70.A02.S01. **No source/PLN/APX/main mutation.** Результат этого SOURCE-аудита не означает live-внедрение всего product pipeline.\n",
+  "next_substep": "APA-P70.A02.S01",
+  "safety": {
+    "main_modified": false,
+    "pln_modified": false,
+    "apx_modified": false,
+    "tested_branches_modified": false,
+    "paid_runtime_used": false
+  }
+}
