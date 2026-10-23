@@ -1,0 +1,13 @@
+# APA №2 / 22Z — два независимых документарных контрааудита
+
+## Контрааудит A — «официальный GH→AC Object является безопасным библиотечным адаптером для BUILD-01»
+**Проверяемая гипотеза:** Graphisoft Object Settings Create New Library Part автоматически решает GDL библиотеку и сохраняет уже размещённые объекты при любом GH edit/delete.
+**Фальсификация:** руководство AC29 (https://help.graphisoft.com/AC/29/INT/GC.pdf, стр.45 индексированного PDF) говорит: удаление GH Object Settings либо переключение Use existing Library Part **удаляет** созданную Embedded Library Part; placed instances становятся Missing Objects. Множественные Geometry входят в одну Part, изменение входа меняет Part глобально. **Вердикт:** для APA-owned Doors/Windows/Objects автоматический GH-library writer НЕ ДОПУЩЕН; GDL нужно привязать к проверенной native library с readback ownUnID/host/GUID; полный rollback требует PLN+библиотечные ресурсы, не одного Undo. SOURCE_CONFIRMED, LIVE_NOT_RUN.
+
+## Контрааудит B — «Save/Open+Publisher детерминированны по одному PLN и GH Sync Changes to GH доказывает 3-way»
+**Гипотеза:** IFC export на двух машинах идентичен по PLN SHA; автоматический AC→GH означает симметричный AC↔GH↔Rhino↔APA sync.
+**Фальсификация 1:** AC29 Data Safety (https://help.graphisoft.com/AC/29/INT/_AC29_Help/140_UserInterfaceDialogBoxes/140_UserInterfaceDialogBoxes-15.htm) допускает auto Hotlink Update при Publish; выбор хранится в пользовательских Preferences, не PLN. Hotlink source может иметь статус Modified/Missing (https://help.graphisoft.com/AC/29/INT/_AC29_Help/080_Collaboration/080_Collaboration-60.htm); одинаковый PLN не гарантирует одинаковое состояние перед экспортом.
+**Фальсификация 2:** AC29 GH manual (https://help.graphisoft.com/AC/29/INT/GC.pdf) действительно даёт **условное автоматическое AC→GH обновление Parameter Components**, но GH-generated elements re-lock возвращает GH-controlled параметры к GH, а GH→AC native writer не участвует в SQLite APA (https://github.com/dvikt33-ux/safe-bim-layer/blob/5a3a9201a715a5528c93bed4a5318e2acb32eea7/scripts/archicad_project_accelerator.py, https://github.com/dvikt33-ux/safe-bim-layer/blob/5a3a9201a715a5528c93bed4a5318e2acb32eea7/scripts/archicad_scene_run.py). Нет единого lease/ownership/conflict resolver, GUID-preserving roundtrip NOT_FOUND.
+**Вердикт:** G4 обязан фиксировать hotlink source/Preferences и before/after inventory; full 3-way не доказан. SOURCE_CONFIRMED, OFFLINE/LIVE/ACCEPTED=0.
+
+Контрааудиты различаются предметом (жизненный цикл GDL против детерминизма публикации/ownership). Ни один не является тестом установленного ПО. MODEL_MODE_NOT_VERIFIABLE.
