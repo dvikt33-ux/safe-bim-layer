@@ -1,0 +1,38 @@
+{
+  "schema": "APA2_HOURLY_GIT_BLOB_MANIFEST_1",
+  "timestamp_utc": "2026-10-23T16Z",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "source_commit": "f7c37b84b76c040c417ccd58a5543326e50f673a",
+  "hash_method": "Git blob SHA-1 returned by fetch_file; exact UTF-8 content compared by equality; SHA256 not calculated",
+  "files": [
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T16Z-triad-report.md",
+      "commit": "49019ebc2298660b8ec65f46b9e9bad6a3d3da47",
+      "blob_sha1": "35e188a64f6c809006387576d27407967091fba4",
+      "exact_readback": true,
+      "chars": 8182
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T16Z-triad-checks.md",
+      "commit": "5d02ac6c9bf06a0d4e9dc35c348777e59f6c8632",
+      "blob_sha1": "bd5c4319a7f81dbf280e2c943784566d61e30ca5",
+      "exact_readback": true,
+      "chars": 7402
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T16Z-triad-matrix.md",
+      "commit": "52a311b1a7a67c6ab99dfdd0f5dcb2387d9d2ac8",
+      "blob_sha1": "37b8f8fc4444b2c45fee48838b045f538c83dbdc",
+      "exact_readback": true,
+      "chars": 3751
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T16Z-triad-audits.md",
+      "commit": "099f05460e59d0fb37976099e2248e7de0b538fa",
+      "blob_sha1": "be688ed8838ca95ca0873e2383dcdff57939ba16",
+      "exact_readback": true,
+      "chars": 3485
+    }
+  ],
+  "acceptance": "SOURCE_ONLY_NOT_BUILD01_ACCEPTED"
+}
