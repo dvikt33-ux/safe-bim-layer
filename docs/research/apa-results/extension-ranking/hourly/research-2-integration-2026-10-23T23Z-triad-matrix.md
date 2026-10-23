@@ -1,0 +1,18 @@
+# APA №2 — 23Z / 9 воспроизводимых маршрутов BUILD-01
+Все маршруты SOURCE_ONLY, а не выполненные испытания. Общая схема: назначить owner и программу → выполнить параметрическое изменение → завершить/freeze → направленная передача → GUID/BIM-type/parameter/material/BREP readback → Save/Close/Reopen → сравнить → rollback из защищённой копии. Без разрешения нативные операции не выполнять.
+
+| ID | Выбор программы / готовый инструмент | Изменение → передача → контроль | ГОТОВО / статус |
+|---|---|---|---|
+| 01 | Rhino8 → GH → jSwan Serialize Keys and Values → JSON | Сохранить .gh и .3dm (либо доказать internalized-only), Rhino object IDs, оба SHA256; x/y lowercase, meters, списки и null; отключить Panel Stream Contents после freeze | Reopen GH с тем же .3dm, идентичный JSON и schema hash; SOURCE_CANDIDATE, OFFLINE 0 |
+| 02 | AC29 GetProjectInfo/GetStories/GetAddOnVersion → PR74 G0 | Проверить build5101, APX SHA, Tapir 1.5.10 runtime commands, порт, scratch PLN, floorId/index/level, Favorites/библиотеки | RUNTIME_READY на отдельной scratch PLN; BLOCKED_RUNTIME |
+| 03 | GH оси → PR74 CreateWalls → AC29 native Wall | Relative wall zCoordinate к этажу, material GUID, native Wall GUID, junctions, bbox/BREP; прямой GH Synchronize на APA-owned запрещён | GUID/type/story/material after Save/Reopen; SOURCE_ONLY |
+| 04 | GH polygons+holes → PR74 CreateSlabs / qualified ModifySlabs | Absolute slab level; polygonOutline+holes сохранять вместе; material GUID, thickness, readback | Контур, отверстия, материал и BREP после Reopen; SOURCE_PARTIAL |
+| 05 | GH axes → PR74 CreateColumns; Tapir CreateBeams отдельно | Columns разрешены authored; Beam не включён в nativeComponents whitelist, прямой GH Beam writer — отдельный owner | Column native type/profile GUID; Beam authored NOT_WIRED |
+| 06 | GH SinglePlane Roof → PR74 CreateRoofs | Требуются pivotLine, Basic, buildingMaterialId; SEO/Trim только AC→AC ассоциативность; MultiPlane есть в Tapir, но не в authored | Roof GUID/BREP/underside/SEO readback; MultiPlane full route NOT_FOUND |
+| 07 | GH host coordinates → PR74 CreateDoors/CreateWindows → GDL | ownerWallId, width/height/sill, libPart.name/ownUnID, GetConnectedElements read-only вне EvidenceAPI | Native Door/Window + host GUID + library identity после Reopen; SOURCE_ONLY |
+| 08 | AC29 существующие Zones → GetZoneBoundaries/GetRelationsOfElements/GetConnectedElements | Story floorId → Zone GUID → 3D boundary/connected Wall GUID → Door/Window fromRoom/toRoom; boundary.area НЕ floor area; Zones не создавать | Ожидаемые связи доказаны, либо N/A если Zones нет; SOURCE_QA_NOT_WIRED |
+| 09 | AC29 GuardedSave/Close/Reopen → Publisher IFC → IfcOpenShell/IfcTester/Rhino QA | 3D visibility, translator, Hotlink Preferences, IFC GlobalId↔native GUID, independent BREP и IDS; mesh/3dm object не native BIM | Новая PLN, GUID/type/material/host/BREP/IFC readback; G4 NOT_RUN |
+
+**Двусторонность:** Graphisoft Live Connection имеет AC→GH параметрическое чтение и GH→AC native write, но это не общая Rhino↔GH↔APA↔AC транзакция. Для APA-owned элементов только SceneWriter/SQLite; конфликт, удаление или цикл без готового resolver → STOP, NOT_FOUND. **Нормативы:** GH constraints/IDS дают формальные проверки, но не заменяют СП-экспертизу. **Rollback:** отдельная защищённая копия PLN, GDL библиотеки, .gh, .3dm и JSON, не один Undo.
+
+**Версии:** Graphisoft GH–AC29 build3000 официально Rhino7/8 Windows (https://www.graphisoft.com/en-aw/downloads/add-ons/rhino-grasshopper/); Tapir pinned 1.5.10 MIT (https://github.com/ENZYME-APD/tapir-archicad-automation); jSwan MIT (https://github.com/andrewheumann/jSwan). AC29/Rhino8 — лицензируемые продукты; установки не проверены. SOURCE=30, OFFLINE/BUILD/INSTALLED/LIVE/ACCEPTED=0; MODEL_MODE_NOT_VERIFIABLE.
