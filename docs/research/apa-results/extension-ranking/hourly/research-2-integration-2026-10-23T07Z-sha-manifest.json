@@ -1,0 +1,84 @@
+{
+  "schema": "APA_R2_BUILD01_HOURLY_SHA256_MANIFEST_V1",
+  "cycle_utc": "2026-10-23T07Z",
+  "repository": "dvikt33-ux/safe-bim-layer",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "source_checks": 30,
+  "counteraudits": 2,
+  "matrix_routes": 9,
+  "status": "SOURCE_ARCHIVED_NOT_BUILD_ACCEPTED",
+  "gate_status": {
+    "G0": "BLOCKED",
+    "G1": "SOURCE_ONLY",
+    "G2": "SOURCE_ONLY",
+    "G3": "NOT_AUTHORIZED",
+    "G4": "NOT_RUN",
+    "G5": "NOT_RUN"
+  },
+  "model_tests": {
+    "OFFLINE": 0,
+    "BUILD": 0,
+    "INSTALLED": 0,
+    "LIVE": 0,
+    "ACCEPTED": 0
+  },
+  "historical_06Z": "PARTIAL_NOT_ACCEPTED",
+  "files": [
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T07Z-checks-A.md",
+      "git_blob_sha1": "c8035933c7d06a37e5686e702d174a32e6d591f6",
+      "sha256_utf8": "77f4b37395d7657c4ef74370e2068c5a134db9241339d2018beb0d434b5dd3bb",
+      "bytes_utf8": 2252,
+      "commit_sha": "33eeea5c3eb82c4f3823bf161369b37451d35bfe",
+      "readback": "FETCH_EXACT"
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T07Z-checks-B.md",
+      "git_blob_sha1": "887842044fbadb84efda8924db62602476bec177",
+      "sha256_utf8": "835e8c9972b6564b340440e5a1a39e5119ed5a78c2771dcc44fb7293d5928363",
+      "bytes_utf8": 3672,
+      "commit_sha": "d10a99adbfbcb28637f2998aaf5e96db05dd5d61",
+      "readback": "FETCH_EXACT"
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T07Z-matrix.md",
+      "git_blob_sha1": "04563a4d327fc788aaa72f4f83ef0c16253ebd1f",
+      "sha256_utf8": "7e6ebf2c3785a0dc1e2719298a3128d56842d50376021e1bf6fd1134e810b7d5",
+      "bytes_utf8": 2916,
+      "commit_sha": "2679d8ec9d0be03ab744dddfb64594e63799df2d",
+      "readback": "FETCH_EXACT"
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T07Z-audit-A.md",
+      "git_blob_sha1": "1b240cedcb49740973f454456453980e76385249",
+      "sha256_utf8": "aefd1c0e199b79eb608a1ac0d94e29eb8a83e1b329daacac8262954155b79bdc",
+      "bytes_utf8": 1333,
+      "commit_sha": "12e7fc72b0e6291a320d047c8f31df89a3f0724c",
+      "readback": "FETCH_EXACT"
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T07Z-audit-B.md",
+      "git_blob_sha1": "d65b93cf2aca75b9b1ec971ced465a2c7dd26a9e",
+      "sha256_utf8": "dbd874aab56abad88747695345e9dad60f5c243df983271a923f0a0b5f990f3b",
+      "bytes_utf8": 1229,
+      "commit_sha": "d5bb962dec626e9b1656399ebafa22210664ea74",
+      "readback": "FETCH_EXACT"
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T07Z-06Z-status.md",
+      "git_blob_sha1": "a0aaa9bee54fefdfa83b9389004af005c9fa16ac",
+      "sha256_utf8": "3c4c4628d0e1b04a41e54c1aaedf76294828927e364d88a69927a610fdf698c8",
+      "bytes_utf8": 526,
+      "commit_sha": "deeff798ad5fcea0bc4cfbaa3a7b06c8fe9ea5df",
+      "readback": "FETCH_EXACT"
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T07Z-report.md",
+      "git_blob_sha1": "961fa17c023cdef924ee2eb0636e68031dade7a8",
+      "sha256_utf8": "5e26420b9187d4306c9e960c46ae9f99060b7bb7622aa17279d9773056893ecc",
+      "bytes_utf8": 3610,
+      "commit_sha": "6bc8be2fad9899e4f4b03f84d9f5cd089be7dee0",
+      "readback": "FETCH_EXACT"
+    }
+  ]
+}
