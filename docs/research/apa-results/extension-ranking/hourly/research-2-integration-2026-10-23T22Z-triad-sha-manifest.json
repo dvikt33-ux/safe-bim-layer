@@ -1,0 +1,39 @@
+{
+  "schema": "APA2_RESEARCH_PUBLICATION_V1",
+  "utc": "2026-10-23T22Z",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "files": [
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T22Z-triad-report.md",
+      "blob_sha": "1281808f42b882f44fbdef7aca7eab8ebfb1792c",
+      "commit_sha": "c35e793d7e8d5fc8bb25e1d0ad47ccaef887eff8",
+      "bytes_utf8": 9714,
+      "exact_readback": true
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T22Z-triad-matrix.md",
+      "blob_sha": "b8172a5db82b5aa05133dd2dfe4251d89695d2b9",
+      "commit_sha": "d9337a03cdb4127818897e74299029cddb687f0c",
+      "bytes_utf8": 6116,
+      "exact_readback": true
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T22Z-triad-checks.md",
+      "blob_sha": "a09b41e2e1227f42810a19da5d5a7d4414e6f969",
+      "commit_sha": "2d6a1dde5d069ccba479f84c77b9a3775b0d4335",
+      "bytes_utf8": 7231,
+      "exact_readback": true
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T22Z-triad-audits.md",
+      "blob_sha": "0a307d3c796438aaaba91d3e8b9c7e9c3eed070b",
+      "commit_sha": "24d824895700f984919cac1c676c008816442ba0",
+      "bytes_utf8": 3601,
+      "exact_readback": true
+    }
+  ],
+  "source_assertions": 30,
+  "counteraudits": 2,
+  "acceptance": "SOURCE_ONLY",
+  "notes": "Blob SHA from fetch_file; exact UTF-8 string readback verified. Manifest and index are created later, so manifest does not self-hash."
+}
