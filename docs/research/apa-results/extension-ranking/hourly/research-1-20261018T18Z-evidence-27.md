@@ -1,0 +1,2 @@
+# APA check 27 — BCF 2.1
+IfcOpenShell issue 7152 is open as of 2026-10-18. PR 8390 is open, unmerged, head 99f738a5f9a72881606f8592facbafe77683bd05. The proposed change adjusts primary viewpoint filename to viewpoint.bcfv and snapshot filename to snapshot.png. This is not released verification. Source: https://github.com/IfcOpenShell/IfcOpenShell/issues/7152 .

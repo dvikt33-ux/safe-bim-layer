@@ -1,0 +1,26 @@
+# APA №2 — 2026-10-22T06Z — матрица BUILD-01 и два контрааудита
+
+## Матрица восьми воспроизводимых маршрутов
+Баллы — экспертный приоритет 0–100, НЕ benchmark. Источник: PR162 immutable f7c37b84b76c040c417ccd58a5543326e50f673a, PR74 immutable 5a3a9201a715a5528c93bed4a5318e2acb32eea7, PR126, PR149; Tapir pinned provider 1.5.10 (upstream MIT), лицензия кода APA в проверенном корне PR162 NOT_VERIFIED. Запрещено делать вывод INSTALLED из SOURCE.
+
+| Gate/балл | Конкретный барьер | Готовая функция / точный интерфейс | Минимальная интеграция и критерий ГОТОВО |
+|---|---|---|---|
+| G0 / 100 | APX binary/schema и build неизвестны | PR162 archicad_runtime_version_probe.py: GetProjectInfo, GetProductInfo, GetAddOnVersion, GetStories; официальный API AC29, Tapir MIT | Сохранить read-only probe; ДОПОЛНИТЕЛЬНО сверить exact APX SHA, registered command names/schema, build=5101, port/PLN. Текущий status READ_ONLY_VERSION_CHECK НЕ равен RUNTIME_READY. OFFLINE→INSTALLED read only; LIVE/ACCEPTED=нет. |
+| G0/G4 / 100 | Неизвестны несохранённые изменения | pinned Tapir GetProjectInfo возвращает isUntitled/isTeamwork/path/name, НЕТ dirty/readOnly | GUI/операторский dirty guard + изолированная scratch; без подтверждения STOP, автоматический Close/Open запрещён. Готово: безопасная независимая проверка GUI перед G4. |
+| G1 / 99 | Верхний этаж height и native bindings | PR74 authored_native_plan.py, GetStories, authoredStoryHeightsMeters/nativeStoryBindings; Tapir MIT | Высоты обоих этажей задавать явно; сравнить levels[i]+height[i]≈levels[i+1], последний этаж не выводить из отсутствующего GetStories.height. OFFLINE_PASS нового DAG и plan hash. |
+| G2 / 99 | Slab CREATE без материала | PR74 CreateSlabs→ModifySlabs→readback, pinned PR149 CreateSlabs без buildingMaterialId/structureType | Использовать существующий SceneWriter и сверить установленный ModifySlabs; поэтажный material GUID readback. До INSTALLED=BLOCKED. |
+| G2 / 98 | Doors/Windows host, roof basic geometry | PR74 native plan + extension; hostWall GUID, floorIndex; Roof pivotLine/structureType=Basic/buildingMaterialId | Typed host dependencies и Favorite/library/material по installed contract; DONE при GUID/host/floor/roof readback. |
+| G3 / 94 | Beam READY ложноположителен | PR162 BIM Graph CreateBeams + connected_components.adapters(['beam']), SceneWriter.allowed_writes | Не расширять writer: передать существующий beam adapter и проверять allowed_writes в preflight (изменения только после разрешения). Пока балки OPTIONAL_UNSUPPORTED, первый BUILD-01 не блокировать. |
+| G3/G4 / 100 | GetAllElements({}) только текущая база; packed GUID≠single GUID | PR126 execute_batch; PR74 created_guid; Navigator tree→database ID→GetAllElements(databases=[...]) | Для первого здания single create; для packed — детерминированный receipt mapping. Независимая поэтажная инвентаризация с provenance; DONE после GUID обоих этажей. |
+| G4/G5 / 100 | BREP не охватывает скрытые элементы; Save/Open не принят | APA GetModelDumpV1 source (ModelDumpCommands.cpp), Graphisoft 3D view APIs, SceneWriter/SQLite | Подтвердить runtime registration, зафиксировать 3D-фильтры, readback GUID/geometry; затем GuardedSave, GUI Close/Open и вторая независимая модель. Без этого NOT_ACCEPTED. |
+
+## Контрааудит А — G0: отрицательные сценарии готовности (SOURCE)
+Проверены: PR162 runtime_version_probe.py строки 52–94; pinned schema GetProjectInfo; PR162 source-tree и upstream Tapir LICENSE. При верном имени/пути PLN, но buildNumber != 5101 либо buildNumber отсутствует, функция всё равно возвращает status=READ_ONLY_VERSION_CHECK; поле buildMatchesUserScreenshot только false/null. Аналогично GetAddOnVersion требует лишь непустую строку, не равенство 1.5.10. SHA APX и реестр команд вообще не читаются. Вывод: этот статус диагностический, НЕ G0_PASS; точная версия, лицензия и регистрация должны быть проверены отдельно. Контрапример построен логическим анализом исходника, НЕ исполнением Windows.
+
+## Контрааудит Б — G1–G4: целостность native DAG и независимость приёмки (SOURCE)
+Проверены PR74/PR162 authored compiler, SceneWriter, BIM Graph, beam adapter, pinned Tapir, ModelDump; отчёт №1 и независимый аудит №3. Контрпример: typed CreateBeams проходит schema/BIM Graph, но SceneWriter.preflight не сверяет allowed_writes, execute останавливается с UNSUPPORTED_WRITE_RECIPE. Контрпример G4: GetProjectInfo не сообщает dirty; GetAllElements({}) не гарантирует все этажные базы; ModelDump зависит от 3D-фильтров. Следовательно даже удачный GUID readback не доказывает безопасный Save/Open и полную BREP. Снизить scope первого BUILD-01 до обязательных Walls/Slabs/Roof/Doors/Windows и двух этажей; beams/groups/batches не ставить в критический путь. Контрапримеры SOURCE, не выполненные LIVE.
+
+## Статусы
+SOURCE: 30 успешных уникальных целевых чтений GitHub в цикле + дополнительные уточнения. OFFLINE: 0; BUILD: 0; INSTALLED: 0; LIVE: 0; ACCEPTED: 0. Исторический 21-элементный LIVE не является BUILD-01. MODEL_MODE_NOT_VERIFIABLE.
+
+Ограничения: нет доступа к локальной Windows/Archicad/APX, поэтому G0 BLOCKED. Лицензия APA NOT_VERIFIED. Ни код, ни PLN/APX, ни NEXT, ни main не изменялись.

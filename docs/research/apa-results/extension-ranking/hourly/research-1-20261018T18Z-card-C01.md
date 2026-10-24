@@ -1,0 +1,2 @@
+# C01 — DXF MINSERT (94/100)
+Ready tool: ezdxf v1.4.5, MIT. Source: mozman/ezdxf tag v1.4.5, src/ezdxf/entities/insert.py lines 603–698. Functions: Insert.mcount, multi_insert(), virtual_entities(), matrix44(); units.conversion_factor. APA PR165 already reads raw INSERT properties but not all array placements. Risks: OCS/WCS, XCLIP ignored by virtual_entities, nonuniform text. Researcher 2: identify existing read-only route and prove 2x3 grid yields 6 positions with units and provenance. DONE: six distinct positions plus limitation flags, without new BIM writer.

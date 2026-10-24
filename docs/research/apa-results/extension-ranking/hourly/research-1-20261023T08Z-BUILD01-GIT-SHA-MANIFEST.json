@@ -1,0 +1,32 @@
+{
+  "schema": "APA_R1_GIT_BLOB_SHA_MANIFEST_V1",
+  "run": "2026-10-23T08Z",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "hash_type": "git_blob_sha1",
+  "sha256": "NOT_COMPUTED",
+  "readback": "Each file fetched after create_file and compared to exact authored UTF-8 content; re-fetched again before manifest",
+  "files": [
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-1-20261023T08Z-BUILD01-SOURCE.md",
+      "blob_sha1": "f4300bb9a441f536bdcd308c5261c3139820c3d2",
+      "commit_sha": "7f2b25d1b7a1bb148fa5fced1281b5e5a1111087",
+      "utf8_characters": 14386,
+      "verified": true
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-1-20261023T08Z-BUILD01-CARDS.md",
+      "blob_sha1": "57ad70aa8793019e4329ca98580214325959aa4e",
+      "commit_sha": "91880ba410ef1e1d4582cf998a5911f327502c1e",
+      "utf8_characters": 7864,
+      "verified": true
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-1-20261023T08Z-BUILD01-AUDITS.md",
+      "blob_sha1": "bc7c49e95782411b8d32cb4debbe28887dcc1923",
+      "commit_sha": "1c064b0bc402954ae7d23e234fdc90c3b1491c11",
+      "utf8_characters": 7139,
+      "verified": true
+    }
+  ],
+  "caveat": "Git blob SHA1 is not SHA256; exact fetch_file readback verified. SOURCE publication is not BUILD acceptance."
+}

@@ -1,0 +1,12 @@
+# APA №1 — 2026-10-23 13:56Z — два контрааудита
+
+## А. Источники, совместимость, лицензии
+Graphisoft GH-AC build3000 (01.10.2025) официально поддерживает AC29/Rhino7/8; AC29 FULL build5101 — 29.2.1 Hotfix от 28.07.2026. Локальная установка GH add-on и точная локализация не проверены. PDF AC29 22,8MB полностью не прочитан: Property Settings/Classification подтверждены индексированными фрагментами стр.49. GDL GLOB_ID ≠ GLOB_INTGUID; GUID не управляется пользователем. Hops free для Rhino8 Windows, но требует локального Rhino.compute; GH-AC connection в Hops не доказана. FloorPlan6 AGPL-3.0, README и CONTRIBUTING противоречат по Walls/Doors, STATE описывает активные проблемы выбора порта и этажа. FloorPlan4 GPL-3.0, Windows APX end-to-end не проверен. Magnetizing README не содержит явной лицензии и выводит curves. SOURCE не означает INSTALLED/LIVE.
+
+## Б. Инженерная применимость, недублирование, сохранность
+Issue #192 задаёт единственный существующий APA DynamicCommands→BIM Graph→SceneWriter→SQLite. PR #74 исторически создал два ограниченных 21-element native прототипа, но это не новый BUILD-01. GH Live Connection и FloorPlan4/6 способны быть альтернативными native writer; одновременный writer одного GUID без reconciliation запрещён. Отдельный риск G0: несколько AC процессов (порты 19723/19724), active story, library build и wrong target. Hops async/parallel/cache только для чистой геометрии; нельзя считать кэш или GH completion нативной записью. Польский WT2002 FloorPlan6 нельзя считать проверкой российских СП. Readback G4: native GUID, user ID, hostWall GUID, floor, composite/material, GDL library part, BREP/bbox, Save/Close/Reopen; при UNKNOWN STOP, не повторять CREATE.
+
+## Cross-report
+Прочитаны NEXT_RESEARCH_PRIORITIES.md (blob 6f074693360231c5cb42ada815984a6b0dd504c0), TRIAD-PIVOT (blob 896fa3af0953468ca58fca710f32cb926504f582), №1 13Z, GitHub issue #192 и PR #74. №2 11/14/15Z и №3 14/15Z по проверенным предполагаемым именам NOT_FOUND; прямой путь матрицы 61 не установлен, матрица не прочитана. PROJECT_PLAN rev182 не менялся; новой проверки его содержимого не заявляем. Нет нового BUILD/OFFLINE/INSTALLED/LIVE/ACCEPTED.
+
+G0 BLOCKED, G1 NOT_RUN, G2 SOURCE_ONLY, G3 NOT_AUTHORIZED, G4/G5 NOT_RUN. Main, код, PLN/APX, установки, LIVE, платные API, merge не тронуты. MODEL_MODE_NOT_VERIFIABLE.

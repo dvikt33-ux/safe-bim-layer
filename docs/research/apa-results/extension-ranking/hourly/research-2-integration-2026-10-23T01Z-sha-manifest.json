@@ -1,0 +1,24 @@
+{
+  "schema": "APA_R2_BUILD01_2026-10-23T01Z_SHA_MANIFEST",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "source": 30,
+  "counteraudits": 2,
+  "files": {
+    "checks-A.md": "9c7141776daf90f149b17dd4eb3391057c76e036",
+    "checks-B1.md": "b0695d290a6dcda1e43dea233bb89a1c34df698e",
+    "checks-B2.md": "52bc33fb9f600516a8bf61f96847f06a0a0e009c",
+    "matrix-short.md": "003e4e074a7a2fe8f7bfec4f593293a7660abcc7",
+    "audit-A-short.md": "87697cce9e8930f13101f2f1349908305b2ebb5f",
+    "audit-B-mini.md": "00652d9ca0dce12dcb51e0ecddb7744de77d703f",
+    "06Z-status-mini.md": "868b411b7fcc9d0b0a0588511f3033caa8c0fc34"
+  },
+  "verification": "Each fetched exact after create; seven files re-fetched and Git blob SHA-1 matched",
+  "stages": {
+    "OFFLINE": 0,
+    "BUILD": 0,
+    "INSTALLED": 0,
+    "LIVE": 0,
+    "ACCEPTED": 0
+  },
+  "archive06Z": "PARTIAL_NOT_ACCEPTED"
+}

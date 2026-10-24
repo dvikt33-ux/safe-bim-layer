@@ -1,0 +1,57 @@
+{
+  "schema": "APA2_TRIAD_PUBLICATION_MANIFEST_V1",
+  "date": "2026-10-23T14Z",
+  "repository": "dvikt33-ux/safe-bim-layer",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "evidence": "SOURCE_ONLY",
+  "hash_algorithm": "git_blob_sha1",
+  "verification": "create_file explicit branch; fetch_file same branch; exact full text comparison",
+  "files": [
+    {
+      "name": "checks.md",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T14Z-triad-checks.md",
+      "git_blob_sha1": "a796ef379207ab343c043b9e8743885b3a8737ac",
+      "commit_sha": "3a1b3881ed73655ca83beec6ae15a8a16e5a6917",
+      "exact_readback": true,
+      "characters": 5713
+    },
+    {
+      "name": "matrix.md",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T14Z-triad-matrix.md",
+      "git_blob_sha1": "0d8f20576e8250e8beb8ff0e8ebcc7ca1d6b6fe1",
+      "commit_sha": "83058d5352d2ef4a7866a64131ed9259d0bb2a93",
+      "exact_readback": true,
+      "characters": 4548
+    },
+    {
+      "name": "audits.md",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T14Z-triad-audits.md",
+      "git_blob_sha1": "aca38b75e670efcc9cdc3406803d6d7aff9aa4bd",
+      "commit_sha": "bd8433a7eddf82275bf41c4ee293b3e726e4453f",
+      "exact_readback": true,
+      "characters": 2985
+    },
+    {
+      "name": "report.md",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T14Z-triad-report.md",
+      "git_blob_sha1": "1e858b73bb46a170ae6b299254acbc2cadc38bf3",
+      "commit_sha": "08af28c7736d1ee16f203a4a5cbfaccfe651774c",
+      "exact_readback": true,
+      "characters": 8222
+    }
+  ],
+  "gates": {
+    "SOURCE": "28 checks; 2 self-counteraudits",
+    "OFFLINE": 0,
+    "BUILD": 0,
+    "INSTALLED": 0,
+    "LIVE": 0,
+    "ACCEPTED": 0
+  },
+  "limitations": [
+    "No SHA256 calculated; Git blob SHA-1 and commit SHA are explicitly recorded",
+    "GH→JSON no-code route SOURCE_CANDIDATE, Rhino8+jSwan not verified",
+    "06Z PARTIAL_NOT_ACCEPTED",
+    "MODEL_MODE_NOT_VERIFIABLE"
+  ]
+}

@@ -1,0 +1,5 @@
+# APA №2 16Z — контрааудит А: код, версии, лицензии
+Прочитаны Graphisoft AC29 JSON Python reference (IsAddOnCommandAvailable/ExecuteAddOnCommand), Tapir tag 1.7.2 C++ и MIT, ezdxf 1.4.5 MIT, IfcOpenShell 0.8.5 LGPL-3.0-or-later. SDK29 имеет отдельные условия Graphisoft. Tapir 1.7.2 опубликован 19.10.2026 11:49:43Z с AC29 Windows APX 5,914,112 байт; это не доказательство установленной локальной 1.5.10.
+Найдены multi-key early return в GraphicOverrideCriterion.cpp, silent skip GetGraphicOverrideRules, legacy same-name overwrite, Grid warnings, AC30-only ElectricalPanels, first-only get_connected_port, ZeroDivisionError suppression в cost.py, XCLIP ignored в recursive_decompose, parse-stage gap B3.
+Источники: https://github.com/ENZYME-APD/tapir-archicad-automation/tree/1.7.2/archicad-addon/Sources ; https://github.com/IfcOpenShell/IfcOpenShell/tree/ifcopenshell-python-0.8.5/src/ifcopenshell-python/ifcopenshell ; https://ezdxf.readthedocs.io/en/stable/disassemble.html ; https://archicadapi.graphisoft.com/archicadPythonPackage/archicad.releases.ac29.html
+Вердикт SOURCE_PASS_WITH_RUNTIME_BLOCKERS. SDK30 не принят за SDK29. Никаких новых runtime PASS.

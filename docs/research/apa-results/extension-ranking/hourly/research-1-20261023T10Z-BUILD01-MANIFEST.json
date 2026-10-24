@@ -1,0 +1,47 @@
+{
+  "schema": "APA_R1_BUILD01_SOURCE_MANIFEST_V1",
+  "utc_hour": "2026-10-23T10Z",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "repo": "dvikt33-ux/safe-bim-layer",
+  "source_checks": 28,
+  "cards": 6,
+  "counteraudits": 2,
+  "files": [
+    {
+      "file": "research-1-20261023T10Z-BUILD01-SOURCE-A.md",
+      "expected_git_blob_sha1": "b45f42a1b9548d420287f70af7a81200fdf21556",
+      "readback_git_blob_sha1": "b45f42a1b9548d420287f70af7a81200fdf21556",
+      "match": true,
+      "create_commit_sha": "5c077ffd966f5de82d5e26e70742384c6f8e9d87",
+      "utf8_chars": 8813
+    },
+    {
+      "file": "research-1-20261023T10Z-BUILD01-SOURCE-B.md",
+      "expected_git_blob_sha1": "95f568a75b92913db3dcf3a2b9740c05b22172fa",
+      "readback_git_blob_sha1": "95f568a75b92913db3dcf3a2b9740c05b22172fa",
+      "match": true,
+      "create_commit_sha": "98d6f104c65919c309d9280b93c4f766a8152467",
+      "utf8_chars": 8335
+    },
+    {
+      "file": "research-1-20261023T10Z-BUILD01-CARDS.md",
+      "expected_git_blob_sha1": "213b91fe3cd6898e557622f3d45896d02460aa9e",
+      "readback_git_blob_sha1": "213b91fe3cd6898e557622f3d45896d02460aa9e",
+      "match": true,
+      "create_commit_sha": "df260e112d72b6e507dad866da3536842c4b77c6",
+      "utf8_chars": 8107
+    },
+    {
+      "file": "research-1-20261023T10Z-BUILD01-AUDITS.md",
+      "expected_git_blob_sha1": "eb5d25ef26dc94b3db47cbd2347a1e00dbe4ccdf",
+      "readback_git_blob_sha1": "eb5d25ef26dc94b3db47cbd2347a1e00dbe4ccdf",
+      "match": true,
+      "create_commit_sha": "439744d92d8085835cd29ef95d872b4c72b89105",
+      "utf8_chars": 6461
+    }
+  ],
+  "sha_type": "git_blob_sha1",
+  "sha256_status": "NOT_COMPUTED",
+  "status": "READBACK_EXACT",
+  "disclaimer": "SOURCE_ONLY; not installed/live/accepted"
+}

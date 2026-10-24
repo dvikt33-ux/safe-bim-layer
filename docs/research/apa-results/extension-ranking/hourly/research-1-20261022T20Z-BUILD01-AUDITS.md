@@ -1,0 +1,5 @@
+# BUILD-01 20Z — two counteraudits
+
+**Audit A — primary-source/compatibility.** Thirty upstream PR descriptions were read using GitHub fetch_issue, but this verifies the *claim in a PR*, not its compilation or native behavior. Several explicitly say DevKit unavailable, untested in Archicad. #1429 and #1430 report tests on AC27 Mac, not target AC29 Windows build5101. Tapir LICENSE main is MIT; Graphisoft DevKit is under a different license. Official AC29 GetProductInfo and GetComponentsOfElements are documented. SOURCE is not INSTALLED/LIVE/ACCEPTED.
+
+**Audit B — applicability/nonduplication.** G0 still requires actual APX path/SHA, runtime registration/schema, scratch PLN identity. NewProject #952 is not an acceptable workaround because it can discard unsaved work. Navigator/layout/MEP/CW/Grasshopper coverage are not first-building blockers; exclude from P0 implementation. Reuse PR74 compiler, BIM Graph, SceneWriter, existing GuardedSave, and avoid duplicate PR34/48/74/82/97/126/131/149/154/159/160/162 and CloneNativeGroupV1. No new building test, no performance claim.

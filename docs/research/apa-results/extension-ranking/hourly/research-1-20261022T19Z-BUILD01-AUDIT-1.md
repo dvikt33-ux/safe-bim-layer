@@ -1,0 +1,2 @@
+# Counteraudit 1 — upstream provenance / compatibility
+Actual GitHub fetch_pr read for 24 upstream PRs 1335,1336,1337,1341,1345,1348,1350,1351,1352,1353,1357,1359,1364,1368,1369,1371,1373,1375,1395,1407,1408,1415,1417,1429. All returned OPEN/not merged. LICENSE main MIT, package_info.json main 1.7.3. Several explicitly untested, DevKit absent. PR1395 AC29 build5101 macOS, PR1429 AC27 macOS, neither proves Windows AC29. No installed local APX SHA. Conclusion SOURCE_ONLY, G0 BLOCKED. Task №2: actual loaded APX path/SHA and runtime command/schema.

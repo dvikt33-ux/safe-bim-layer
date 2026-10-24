@@ -1,0 +1,1 @@
+APA AC29 12Z dimension check 07-10: KR-12 PDF page 14 M1:50. Block 1.7 sum 14355 mm, total 14380 mm, vector length 815.242 pt =14379.963 mm. Segmented left offset 24.994 mm, right zero. PDF-only finding, no Archicad axis inferred.

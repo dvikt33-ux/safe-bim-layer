@@ -1,0 +1,3 @@
+# APA №3 20Z — APA и native receipts
+- [PR154](https://github.com/dvikt33-ux/safe-bim-layer/pull/154), [PR159](https://github.com/dvikt33-ux/safe-bim-layer/pull/159), [PR160](https://github.com/dvikt33-ux/safe-bim-layer/pull/160), [PR162](https://github.com/dvikt33-ux/safe-bim-layer/pull/162).
+- [PR164](https://github.com/dvikt33-ux/safe-bim-layer/pull/164), [PR165](https://github.com/dvikt33-ux/safe-bim-layer/pull/165), [PR168](https://github.com/dvikt33-ux/safe-bim-layer/pull/168), [PR170](https://github.com/dvikt33-ux/safe-bim-layer/pull/170), [PR171](https://github.com/dvikt33-ux/safe-bim-layer/pull/171), [PR173](https://github.com/dvikt33-ux/safe-bim-layer/pull/173).

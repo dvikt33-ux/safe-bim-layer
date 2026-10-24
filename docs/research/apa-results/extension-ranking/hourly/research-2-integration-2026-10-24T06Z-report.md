@@ -1,0 +1,49 @@
+# APA №2 | 2026-10-24 06Z | BUILD-01: GH Synchronize≠снимок, Multi-Plane Roof readback NOT_FOUND
+
+**Область:** issue #192; Archicad 29 build 5101 (ожидаемый), Tapir 1.5.10 (ожидаемый), Rhino 8, Grasshopper, официальный Graphisoft Grasshopper–Archicad 29 Live Connection build 3000, существующий PR74/SceneWriter/SQLite. Только документарный SOURCE; без LIVE, установки, изменения исходного кода, main, PLN/APX, merge. MODEL_MODE_NOT_VERIFIABLE.
+
+## P0 — новая проверенная дельта
+1. **GH Design/Document `Synchronize=False` не является сохранённым выходным снимком:** официальный AC29 GC, стр.17, прямо говорит, что компонент не создаёт элемент и выдаёт **один Null** независимо от числа входов. `True` включает автоматическую GH→AC передачу при работающем соединении. Один Boolean Toggle может управлять несколькими компонентами. Поэтому downstream, использующий выход генерирующего компонента, теряет типизированное значение при False. Что происходит с ранее созданным нативным элементом именно в AC29 при False — из одного описания Null не следует; **удаление НЕ утверждаем**. Старое обсуждение Graphisoft Community 2020 описывает сохранение ранее созданных элементов при паузе, но это не LIVE-доказательство AC29. Источники: https://help.graphisoft.com/AC/29/INT/GC.pdf, https://community.graphisoft.com/t5/Parametric-design/Synchronize-Bug/m-p/292446/highlight/true .
+2. **Deconstruct Roof в AC29 не поддерживает Multi-Plane Roof**; официально принимает только Single-Plane Roof. Поэтому `AC Multi-Plane Roof → GH Deconstruct Roof → редактирование → AC Multi-Plane Roof` — **NOT_FOUND**. Deconstruct Brep поддерживает Beam, Column, Slab, Wall, Mesh, Zone, Shell и Single-Plane Roof, возвращая поверхности, а не доказанную редактируемую нативную модель. Источник: https://help.graphisoft.com/AC/29/INT/GC.pdf, стр.40–41.
+3. **Реальная двусторонность ограничена.** AC29 `Sync Changes to GH` может автоматически обновлять GH references на подключённых элементах; `Synchronize=True` выполняет GH→AC для GH-owned элементов. Эти два направления не создают общего 3-way commit, Rhino Object ID↔AC GUID crosswalk, арбитража или atomic rollback. AC→GH reference не означает автоматическую запись в Rhino `.3dm`.
+4. **PR74 имеет иной контракт.** `nativeComponents` допускает CreateColumns/Doors/Windows/Walls/Roofs, но не CreateBeams. `CreateRoofs` ограничен Basic Single-Plane, обязательны pivotLine/material/story; допустимый выход контура за authored outline — 0.35 м. `CreateSlabs.level` использует абсолютный Z. Прямой импорт произвольного Rhino BREP в native Wall/Roof этим компилятором не найден. Пин кода: https://github.com/dvikt33-ux/safe-bim-layer/blob/5a3a9201a715a5528c93bed4a5318e2acb32eea7/scripts/archicad_project_accelerator.py ; https://github.com/dvikt33-ux/safe-bim-layer/blob/5a3a9201a715a5528c93bed4a5318e2acb32eea7/scripts/archicad_authored_native_plan.py .
+5. **GH Property Settings — альтернативная запись классификаций и свойств**; на APA-owned элементах запрещена как второй writer. GH `Create New Library Part` создаёт Embedded Library Part; удаление/переключение компонента удаляет generated part и делает размещённые экземпляры Missing Objects. Это не замена native Roof/Window/Door. Источник: https://help.graphisoft.com/AC/29/INT/GC.pdf, стр.45–46.
+
+## Версии, лицензии, подключение (не выполнялось)
+- Graphisoft AC29 Live Connection **build 3000**, Windows, поддержка Rhino 7/8, минимальный AC29 build 3000, публикация 01.10.2025. Скачать официальный add-on можно без отдельной подписки на мост, но **Archicad и Rhino требуют действующих лицензий**; Rhino8 trial 90 дней не подходит для постоянной производственной эксплуатации. Источники: https://www.graphisoft.com/en-aw/downloads/add-ons/rhino-grasshopper/ ; https://www.rhino3d.com/en/download/ .
+- Rhino 8 содержит Grasshopper. Tapir — MIT, готовый AC add-on, существует вариант GH-плагина `tapir`, однако он обозначен upstream как work-in-progress; отдельный GH Tapir для P0 **не обязателен**. Источник: https://github.com/ENZYME-APD/tapir-archicad-automation .
+- Только после отдельного разрешения: проверить Archicad 29 build5101/порт/PLN/Tapir registration, Rhino 8 SR/документ/единицы, GH definition/подключённый документ и Graphisoft add-on 3000. Установка и запуск не выполнялись. **G0 BLOCKED_RUNTIME**.
+
+## Архитектура без нового writer/router/synchronizer
+**APA-owned (источник истины AC/SceneWriter):** Rhino/GH могут вычислять контуры и параметры, но передача в существующий authored JSON требует **уже готового, проверенного преобразования**. Ни GH→JSON автоматический адаптер, ни универсальный Rhino BREP→authored JSON контракт не признаны установленными. Затем единственный путь записи: PR74 → BIM Graph/DynamicCommands → SceneWriter/SQLite → Tapir → AC29. На входе обязателен preflight; выход только native GUID/readback. AC→GH: reference/Deconstruct только чтение, `Sync Changes to GH` включать лишь после G0 и проверки отсутствия GH write branches.
+**GH-owned (только отдельная разрешённая scratch-зона):** GH Design `Synchronize=True` → Graphisoft Live Connection → нативные GH-generated AC elements. Это реальная запись **в обход SceneWriter**; нельзя применять к APA-owned GUID. `False` блокирует новую передачу, но возвращает Null на выходе и не служит доказательством транзакционного снимка.
+**Rhino-owned:** .3dm/Grasshopper geometric sources. Hotlink .3dm и импорт GDL — геометрические ссылки, не native Wall/Roof, не triad sync.
+**STOP:** неизвестный owner/PLN/GH document, конфликт GH Property Settings и APA, петля AC→GH→AC, отсутствие hostWall, GUID mismatch, multi-plane roundtrip, отсутствие сохранённого baseline.
+
+## Десять маршрутов BUILD-01 (все SOURCE, не ACCEPTED)
+| # | Операция / выбор | Завершение→синхронизация→проверка | Ограничение / ГОТОВО |
+|---|---|---|---|
+| 01 | Этажи: AC29 native Stories + PR74 story bindings | read-only floorIndex/floorId/elevation → authored JSON → G1 DAG; native story readback → Save/Open | GH не источник этажных GUID. ГОТОВО: уровни/индексы совпали после reopen. NOT_RUN |
+| 02 | Стены: Rhino линии→GH параметры→authored JSON→PR74 CreateWalls | один SceneWriter dispatch → native Wall GUID, floor, composite/material, BREP, IFC → reopen | GH↔AC reference возможен; автоматический JSON export NOT_PROVEN. |
+| 03 | Перекрытия: GH контур→PR74 CreateSlabs | абсолютный Z, floorIndex, толщина, материал по readback, footprint/holes, GUID | базовый authored контур прямоугольный, holes NOT_FOUND; нет материального PASS без native readback. |
+| 04 | Колонны: GH anchors→nativeComponents CreateColumns | проверить координаты, floorIndex, native Column, профиль/материал, BREP/GUID | только типизированный bounded маршрут, без arbitrary section. |
+| 05 | Балки: GH линии/сечения→PR74 | **NOT_FOUND:** CreateBeams отсутствует в allowlist authored nativeComponents; не считать Tapir API равным разрешённой записи. | ГОТОВО только после доказанного уже существующего разрешённого маршрута, не расширять код. |
+| 06 | Простая кровля: Rhino/GH плоскость→PR74 CreateRoofs | pivotLine, level, single-plane, material → SEO readback → Deconstruct Roof/Brep read-only → Save/Open | margin 0.35 м; GH Deconstruct поддерживает только Single-Plane; native GUID/SEO обязательны. |
+| 07 | Сложная кровля: Rhino8 NURBS/GH параметрика | **NOT_FOUND:** нет доказанного native Multi-Plane Create/Modify/Deconstruct roundtrip через PR74 + GH; IFC/Hotlink только геометрия | запрещено выдавать несколько плоскостей или GDL за один native Multi-Plane Roof. |
+| 08 | Окна/двери: PR74 nativeComponents CreateWindows/Doors | hostWall GUID, floor, size, library part, wall opening BREP, native GUID → reopen | без host/библиотеки BLOCKED; GH Property Settings не писать в APA-owned. |
+| 09 | Библиотеки/материалы: AC29 Libraries/Favorites/Attributes | read-only availability, skippedCount, library part GUID, material GUID, classifications → readback | GH generated GDL может удалиться с компонентом; ownership и Missing Objects контроль. |
+| 10 | Проверки и откат: AC native readback + IFC-BREP/parametric + GH read-only | GUID/BIM type/SEO/volume/material/host/IFC crosswalk → Save/Close/Reopen → compare | IFC type не доказывает native tool; G4 NOT_RUN; rollback только из сохранённой копии, не atomic across apps. |
+
+## Протокол окончания одной операции (проектный, не внедрённый)
+PREPARE: immutable .gh/.3dm + hash, PLN path/sha, story map, owner map, PR74 head, baseline GUIDs, disabled all unowned write branches.
+COMPUTE: Rhino/GH параметрика только в read-only/source mode; `Synchronize=False` для GH generating branches **не использовать как архив геометрии**: downstream Null. Сохранять upstream геометрию отдельно.
+GATE: существующий PR74 preflight, typed schema, no duplicate GUID, host and material check. При отсутствии авторизованного GH→JSON пути — **STOP**, не придумывать writer.
+COMMIT: только после отдельного разрешения — один SceneWriter на новую scratch PLN; сейчас **НЕ ВЫПОЛНЯТЬ**.
+READBACK: native GUID/type/story/material/geometry/SEO, независимая IFC BREP и parametric; no cycles, no duplicates.
+SAVE/OPEN: разрешённый PLN snapshot, close/reopen, повторить контроль. Откат — восстановление snapshot и повторная инвентаризация, а не кнопка GH.
+
+## Ворота и критерии
+G0 BLOCKED_RUNTIME; G1 NOT_RUN; G2 SOURCE_PARTIAL; G3 NOT_AUTHORIZED; G4/G5 NOT_RUN. Для каждой строки: SOURCE подтверждает лишь документированный API; OFFLINE только фактический preflight; INSTALLED только локальный manifest; LIVE только разрешённый scratch write; ACCEPTED только native readback + Save/Open + независимый аудит. **Полная трёхсторонняя синхронизация: NOT_FOUND. BUILD-01: NOT_CREATED.**
+
+## Два документарных контрааудита
+См. отдельный audits-файл. №3 не подменяется; его последний обнаруженный архив — 2026-10-20 18Z (устарел относительно текущего исследования). PROJECT_PLAN rev182 не редактировался.

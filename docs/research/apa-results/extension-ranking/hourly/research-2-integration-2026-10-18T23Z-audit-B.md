@@ -1,0 +1,2 @@
+# Independent counteraudit B — mounting/value/safety
+PR165 already supplies IFC port read-only report; PR167 BCF2.1/IFC extraction; V1 IfcTester/IfcClash; PR171/173 Hotlink. No second Router, SceneWriter, IFC parser or solver. IfcFM duplicate_keys overwrites rows; federate silently skips collisions. IFC document API mutates IFC copy, not PLN. IFC port missing relation does not prove native MEP defect. BCF3 and SAF remain deferred. No performance benchmark or acceptance. Gates SOURCE→OFFLINE→BUILD→INSTALLED→LIVE→ACCEPTED remain separate.

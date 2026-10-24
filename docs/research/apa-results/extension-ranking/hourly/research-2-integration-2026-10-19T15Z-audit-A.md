@@ -1,0 +1,6 @@
+# APA №2 — контрааудит А (15Z): исходники/версии/лицензии
+Вердикт SOURCE_PASS_WITH_BLOCKERS. Сопоставлены Tapir tags 1.5.9 и 1.7.2, официальный Graphisoft JSON AC29, SDK29 license, Tapir MIT, JSON Schema и C++ implementation. GetViewSettings — команда Tapir, возвращает имя graphicOverrideCombination, не GUID. Богатые GraphicOverrideRules зарегистрированы в 1.7.2, локальная сборка 1.5.10 не сверена. GraphicOverrideCriterion schema имеет 666 разрешённых полей без oneOf/required; EmitCriterionNode выбирает первый известный ключ и игнорирует второй. Поэтому schema-only validation недостаточна. Официальный готовый валидатор reverse-engineered criterionXML в просмотренных Graphisoft SDK29/Tapir источниках NOT_FOUND; минимальный недостающий адаптер — semantic exactly-one + readback+scope verifier. AC29 релизный APX не доказывает ABI на локальном build 5101.
+Источник 1: https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.7.2/archicad-addon/Sources/GraphicOverrideCriterion.cpp#L1073-L1150
+Источник 2: https://github.com/ENZYME-APD/tapir-archicad-automation/blob/1.7.2/archicad-addon/Sources/RFIX/Images/CommonSchemaDefinitions.json
+Источник 3: https://archicadapi.graphisoft.com/archicadPythonPackage/archicad.releases.ac29.html
+MODEL_MODE_NOT_VERIFIABLE.

@@ -1,0 +1,3 @@
+# BUILD-01 solution CARD-C5.md
+C5 G2: attribute manifest. API29 GetAttributesByType, GetAttributesIndices, GetCompositeAttributes; input attribute IDs, output GUID/index/error. №2 compare actual Slab assignment; attribute existence not usage. Expert 89/100.
+Source: https://archicadapi.graphisoft.com/archicadPythonPackage/archicad.releases.ac29.html (Graphisoft API29 b3000, Graphisoft license). SOURCE_ONLY; score not benchmark.

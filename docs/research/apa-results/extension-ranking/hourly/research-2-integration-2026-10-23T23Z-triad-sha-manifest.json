@@ -1,0 +1,42 @@
+{
+  "schema": "APA_RESEARCH_PUBLICATION_V1",
+  "researcher": 2,
+  "run_utc": "2026-10-23T23Z",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "repo": "dvikt33-ux/safe-bim-layer",
+  "source_checks": 30,
+  "counteraudits": 2,
+  "offline": 0,
+  "build": 0,
+  "installed": 0,
+  "live": 0,
+  "accepted": 0,
+  "sha_kind": "Git blob SHA-1 returned by fetch_file; no SHA256 computed",
+  "files": [
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T23Z-triad-report.md",
+      "git_blob_sha1": "2b4e910ca11bce7f43d7a0dd6aab9cc9284dbd98",
+      "create_commit_sha": "9799f0dc53be5586ac9f80c0a2252cfb3f2b272e",
+      "fetch_exact_match": true
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T23Z-triad-checks.md",
+      "git_blob_sha1": "006ca8e8bc075188ca07359688933e346b504800",
+      "create_commit_sha": "3ea1595efd6131f733c06fa740431b1bdd5856dc",
+      "fetch_exact_match": true
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T23Z-triad-audits.md",
+      "git_blob_sha1": "843f73e66f0330569a370dcadb4bcdd6856563c4",
+      "create_commit_sha": "2443ea663e044271879c0eff325d1abccb6ff7e9",
+      "fetch_exact_match": true
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T23Z-triad-matrix.md",
+      "git_blob_sha1": "0c2b53a509abf49e0eed2756c5542ae62dacffd6",
+      "create_commit_sha": "0e93adaeea1523103aff681e7bf503ccdd6f56bc",
+      "fetch_exact_match": true
+    }
+  ],
+  "model_mode": "MODEL_MODE_NOT_VERIFIABLE"
+}

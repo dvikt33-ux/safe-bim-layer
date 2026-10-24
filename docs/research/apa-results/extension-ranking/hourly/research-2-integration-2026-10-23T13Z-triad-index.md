@@ -1,0 +1,18 @@
+# APA №2 — 2026-10-23 13Z — проверенный индекс triad BUILD-01
+
+**G2 — конкретный вклад:** в existing `archicad_authored_extension.verify_model` уже есть условная проверка GDL `libPart.name + ownUnID.guid` по `nativeLibraryExpectations`; но sample BUILD-01 не задаёт expectations. Исправление прежнего слишком сильного `GDL_READBACK_NOT_FOUND` на `EXISTS_CONDITIONAL_NOT_WIRED`. Нового writer/checker не требуется; связывание источника GDL остаётся SOURCE_ONLY. Приоритет 99/100.
+
+**G2 — новый риск:** Graphisoft GH generated elements имеют собственную ID association, первоначально locked, GH-controlled параметры побеждают ручные AC edits после unlock; неуказанные GH параметры наследуют текущие Archicad Defaults. Это не общая трёхсторонняя синхронизация с SceneWriter/SQLite. Strict BUILD-01 = один native writer APA; GH только reference/preview для APA-owned.
+
+**Новый источник:** MIT Tapir GH plugin `tapir` через Rhino Package Manager существует, но upstream WIP и static coverage != runtime; SOURCE_CANDIDATE, не установлен.
+
+## Приложения — create_file(branch) → fetch_file(branch) → полное текстовое сравнение
+- [triad-checks.md](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-extension-ranking-hub-20261018/docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T13Z-triad-checks.md) — 30 прямых SOURCE-утверждений; blob SHA `2a1dfeafb93713037c97e67ba08b4f88873e5492`; commit `93b1cf8efde112a92a557cc3f59b41ef78245cee`; exact readback **PASS**.
+- [triad-matrix.md](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-extension-ranking-hub-20261018/docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T13Z-triad-matrix.md) — 9 операций BUILD-01, точные маршруты и DONE; blob SHA `371b3335f7e29f904671e094f3d5e92796ab6b3b`; commit `b58f0f3225ac98ddfa3ff09653219a0690c4a1ea`; exact readback **PASS**.
+- [triad-audits.md](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-extension-ranking-hub-20261018/docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T13Z-triad-audits.md) — 2 контрааудита: GH ownership и GDL/BIM native; blob SHA `78bc34ecd3ea43b19ffb21bc092eb0e9e452c2eb`; commit `5aabf08ebcd0a307e922321d66c2be6e5507a8d1`; exact readback **PASS**.
+- [triad-report.md](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-extension-ranking-hub-20261018/docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T13Z-triad-report.md) — инженерный отчёт и ограничения G0–G5; blob SHA `197b6d0e45b20a6f1415e877f8251cb7d5d0841d`; commit `c8f61c164766e5c2f257510cf072cf92a52bc0b6`; exact readback **PASS**.
+- [triad-sha-manifest.json](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-extension-ranking-hub-20261018/docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T13Z-triad-sha-manifest.json) — манифест Git blob SHA/commit/readback; blob SHA `336b5d2a39b9d30249b1cde506f6962bb032c003`; commit `dc2a09eb499f91d55ebbb29ae0c8ca96ed2f3d3a`; exact readback **PASS**.
+
+Проверено: 5/5 приложений exact readback, в том числе манифест. SHA выше — **Git blob SHA-1**, не SHA256. Основной индекс записан только после подтверждения каждого приложения.
+
+**SOURCE:** 30 утверждений, 9 сценариев, 2 собственных контрааудита; **OFFLINE=0, BUILD=0, INSTALLED=0, LIVE=0, ACCEPTED=0** для нового BUILD-01. G0 BLOCKED_RUNTIME; G1 NOT_RUN; G2 SOURCE_ONLY; G3 NOT_AUTHORIZED; G4/G5 NOT_RUN. 06Z PARTIAL_NOT_ACCEPTED. AC29 full PDF page audit NOT_DONE. Исторический PROJECT_PLAN rev182 не менялся; свежий №3 не подтверждён. Нет main/NEXT/code/PLN/APX/install/LIVE/merge. MODEL_MODE_NOT_VERIFIABLE.

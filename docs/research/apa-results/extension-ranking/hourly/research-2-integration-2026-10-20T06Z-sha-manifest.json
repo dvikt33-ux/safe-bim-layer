@@ -1,0 +1,44 @@
+{
+  "schema": "APA_RESEARCH2_06Z_ARCHIVE_SHA_V1",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "generatedUtc": "2026-10-21T06Z",
+  "status": "RECOVERED_PARTIAL_EVIDENCE_NOT_ACCEPTED",
+  "note": "SHA256 historical receipts; blob SHA independently rechecked on this run for main/B1/B2/B/matrix/audits, checks-A blob from prior exact readback. checks-B is a reconstructed index, not the byte-identical original.",
+  "files": [
+    {
+      "name": "research-2-integration-2026-10-20T06Z.md",
+      "blob_sha1": "b32d56fcfa77aa60ee98aedc0480210d0554eab4",
+      "sha256_utf8": "e12e9f8eb2cdeb164eb1bfe39e239aeb5d79480ef5599a47e7903e9baa2fee0c"
+    },
+    {
+      "name": "research-2-integration-2026-10-20T06Z-checks-A.md",
+      "blob_sha1": "19c9cca1ecdc755adbdba59a758ec8e2262b8d7f",
+      "sha256_utf8": "a6adf696cb95d76a2b2519eb54722b9f8219584610e71e8fc758d5fa51e52b9f"
+    },
+    {
+      "name": "research-2-integration-2026-10-20T06Z-checks-B1.md",
+      "blob_sha1": "faff219bc9d7c309cf4c108dad6845b9638d6ad7",
+      "sha256_utf8": "6a825965c5815d7ab442095065329b1930c433017b1945deb5b7e6ddd82074d6"
+    },
+    {
+      "name": "research-2-integration-2026-10-20T06Z-checks-B2.md",
+      "blob_sha1": "343a988bc491dfda723687b0f1cf76e044b0d683",
+      "sha256_utf8": "28438c0070faa63e6c9d56a90d8393966dacfd2d8a95849175dc2e1213e77fe9"
+    },
+    {
+      "name": "research-2-integration-2026-10-20T06Z-checks-B.md",
+      "blob_sha1": "86f8b237394e2afc35ca3b5f8e60b96961dbc70e",
+      "sha256_utf8": "a78cfb7fbb3f9027111cd85d7c30cf95ff772632432556e726e2d90c7f7d32fb"
+    },
+    {
+      "name": "research-2-integration-2026-10-20T06Z-matrix.md",
+      "blob_sha1": "7322329c1fc31eaa6cb7d27ff0fd92426442bf5e",
+      "sha256_utf8": "afcc1fdb47238bb1a92f58b85619a7b9756abc770d26fb7448745ec5c10db757"
+    },
+    {
+      "name": "research-2-integration-2026-10-20T06Z-audits.md",
+      "blob_sha1": "c22f38c9258110ac6dc73a884d08b8583a2529a9",
+      "sha256_utf8": "a0f85f092c27059d8af632d34f4e712cf4643ad664ad1082fbc722dd24c06ccd"
+    }
+  ]
+}

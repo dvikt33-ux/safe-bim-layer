@@ -1,0 +1,53 @@
+{
+  "schema": "APA_TRIAD_SOURCE_EVIDENCE_MANIFEST_20261023T19Z",
+  "repository": "dvikt33-ux/safe-bim-layer",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "created_utc": "2026-10-23T19Z",
+  "verification": "create_file explicit branch -> fetch_file exact content -> SHA256 UTF-8 and Git blob SHA; recheck before manifest",
+  "files": [
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T19Z-triad-report.md",
+      "commit_sha": "181cd60f6ed740813a49d560fdf8fd807732533d",
+      "git_blob_sha": "09d971e85d10ce1dd89dbf9a7d65366e39a0b55e",
+      "sha256_utf8": "ded2fe030eb6ebeb429187235ce1842989b8475c3f9b8da759c99f4e9b274643",
+      "bytes_utf8": 10553,
+      "exact_readback": true
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T19Z-triad-matrix.md",
+      "commit_sha": "a614ba628cddff6fc2de24050fb3ea7a59bdea55",
+      "git_blob_sha": "3cc52b4de9d8686e93dc329e6586900bade86d10",
+      "sha256_utf8": "b2205d1da2f4953a6885f57c53b9b07eeae206318afe1716c221f134fd0c7a77",
+      "bytes_utf8": 5557,
+      "exact_readback": true
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T19Z-triad-checks.md",
+      "commit_sha": "33c753025fe95950f7ce6c791eb637d01844df2b",
+      "git_blob_sha": "1f20a38c18b2fe109f98c647a722c7ecfeb83bfc",
+      "sha256_utf8": "b16d9f50610d18e3b6a377c8674f2d9eaeedd86b6569b3b85d05637b6886e64f",
+      "bytes_utf8": 7835,
+      "exact_readback": true
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T19Z-triad-audits.md",
+      "commit_sha": "810423d1a8266de117be103a84063b93ef6d2d39",
+      "git_blob_sha": "4120dd0e7e9f5dfaef2638b1ae467204c163192f",
+      "sha256_utf8": "f40b18c928c8a152e3e6d7c021767e66a05b8ed76ef583fca617b800b58de16c",
+      "bytes_utf8": 4016,
+      "exact_readback": true
+    }
+  ],
+  "source_assertions": 30,
+  "counteraudits": 2,
+  "offline": 0,
+  "build": 0,
+  "installed": 0,
+  "live": 0,
+  "accepted": 0,
+  "notes": [
+    "Manifest intentionally excludes itself and the final index to avoid self-referential hashes.",
+    "G0 blocked; provider 1.7.2 does not imply installed 1.5.10 upgraded.",
+    "06Z partial not accepted; historical rev182 not modified."
+  ]
+}
