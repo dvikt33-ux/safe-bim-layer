@@ -51,6 +51,6 @@
 
 ## Статусы и приоритеты
 
-SOURCE=31 документарных утверждений в companion checks (не 31 разных сайтов). OFFLINE=0 новых; BUILD=0; INSTALLED=NOT_VERIFIED; LIVE=0 новых; ACCEPTED=0. G0=BLOCKED_RUNTIME, G1=NOT_RUN, G2=SOURCE_PARTIAL, G3=NOT_AUTHORIZED, G4/G5=NOT_RUN. Нативная BUILD-01 не создана. Следующий P0 — read-only G0 manifest + roof-plane comparison contract для будущего preflight, не GH write.
+SOURCE=33 документарных утверждения в companion checks (не 33 разных сайта). OFFLINE=0 новых; BUILD=0; INSTALLED=NOT_VERIFIED; LIVE=0 новых; ACCEPTED=0. G0=BLOCKED_RUNTIME, G1=NOT_RUN, G2=SOURCE_PARTIAL, G3=NOT_AUTHORIZED, G4/G5=NOT_RUN. Нативная BUILD-01 не создана. Следующий P0 — read-only G0 manifest + roof-plane comparison contract для будущего preflight, не GH write.
 
 **Контрааудиты:** companion audits. **База:** issue #192, NEXT, TRIAD-PIVOT, 61 matrix, №1 08:02Z, №3 20.10 18Z, pinned PR74. Исторический PROJECT_PLAN rev182 не изменён.
