@@ -1,0 +1,44 @@
+{
+  "schema": "apa-hourly-evidence-manifest/1",
+  "utc": "2026-10-23T20Z",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "repo": "dvikt33-ux/safe-bim-layer",
+  "sha_type": "Git blob SHA-1; not SHA256",
+  "verified": [
+    {
+      "name": "report.md",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T20Z-triad-report.md",
+      "git_blob_sha1": "e8032462e324aba98a9da7ed5bb720b892b997aa",
+      "commit_sha": "db1b719caa19c8ef84460111198e8ff2eddacd9e",
+      "readback": "EXACT_MATCH",
+      "characters": 9324
+    },
+    {
+      "name": "matrix.md",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T20Z-triad-matrix.md",
+      "git_blob_sha1": "a8172daa65f702333f0acbf344459fd8350b1b6a",
+      "commit_sha": "239271068114ed96c039b0d4c4e5e7bf8a202651",
+      "readback": "EXACT_MATCH",
+      "characters": 4203
+    },
+    {
+      "name": "checks.md",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T20Z-triad-checks.md",
+      "git_blob_sha1": "4475afc43c1932d209a7d53c0610e1f403f9363c",
+      "commit_sha": "4809e9e6d44cdce49d9c7c6ca56f68dfc9967d65",
+      "readback": "EXACT_MATCH",
+      "characters": 5926
+    },
+    {
+      "name": "audits.md",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T20Z-triad-audits.md",
+      "git_blob_sha1": "9764bc4e024d559c7b4efa1d55afb4dce487bcdf",
+      "commit_sha": "0223d24671759c9e2d4cf1afcc8424ee345636c6",
+      "readback": "EXACT_MATCH",
+      "characters": 3140
+    }
+  ],
+  "checks_count": 30,
+  "counteraudits": 2,
+  "status": "SOURCE_ONLY_NOT_ACCEPTED"
+}

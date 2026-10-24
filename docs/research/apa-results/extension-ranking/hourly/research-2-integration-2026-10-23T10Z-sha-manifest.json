@@ -1,0 +1,76 @@
+{
+  "schema": "APA_R2_HOURLY_EVIDENCE_MANIFEST_1",
+  "cycle": "2026-10-23T10Z",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "source_commit": "f7c37b84b76c040c417ccd58a5543326e50f673a",
+  "evidence_kind": "SOURCE_ONLY",
+  "checks": 30,
+  "independent_counteraudits": 2,
+  "files": [
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T10Z-checks.md",
+      "git_blob_sha1": "feda6b37cf599dd96a349c979bd6f6429d77d93c",
+      "create_commit_sha": "26a2795468454809a5a83764ee60ad4dc9fb4af2",
+      "readback_blob_match": true,
+      "utf8_characters": 5258
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T10Z-matrix.md",
+      "git_blob_sha1": "e2b9cdd8586c5ac05b0acb96ec8bbe014d3ebe5f",
+      "create_commit_sha": "066a72d9572a808c10e7c31364a79951a6c1ada4",
+      "readback_blob_match": true,
+      "utf8_characters": 3694
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T10Z-audit-A.md",
+      "git_blob_sha1": "93e82d8c4659ec3878c24760356650a793a83231",
+      "create_commit_sha": "da129cf73bfa348e2c5020bfa5fc780ba974b262",
+      "readback_blob_match": true,
+      "utf8_characters": 1965
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T10Z-audit-B.md",
+      "git_blob_sha1": "094f2f13f58b168ab3bbbccc0fd3b294a2989c29",
+      "create_commit_sha": "2a85b854df903a617a07eccb8bb9e3a2a9d27b12",
+      "readback_blob_match": true,
+      "utf8_characters": 2142
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T10Z-06Z-status.md",
+      "git_blob_sha1": "3f66b190278d782c6a3f8087986eefc6d1428ae0",
+      "create_commit_sha": "3385faa5c23e59524134bbb80382c832863cef50",
+      "readback_blob_match": true,
+      "utf8_characters": 1108
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T10Z-report.md",
+      "git_blob_sha1": "84f43c5d362d1768fe2c75de0e8fcf0f76c6404f",
+      "create_commit_sha": "2a651dc071c25a7244d4228fd75fa5c99d8feed1",
+      "readback_blob_match": true,
+      "utf8_characters": 3891
+    }
+  ],
+  "prior_06Z": {
+    "status": "PARTIAL_NOT_ACCEPTED",
+    "existing_appendix_blob_sha1": [
+      "6fce90d6ff34e4e1228dae0e8e62ced4df09bff6",
+      "fd1401ed4d3c28a9f46f3ec2623a2e0f56e8e1d9",
+      "9796174239301b2a751f2b2cc02f14e651b95cb7",
+      "b6b944882d1b1c6165553b6f10e8a9b53ba9e747"
+    ],
+    "original_main": "NOT_FOUND"
+  },
+  "gates": {
+    "G0": "BLOCKED",
+    "G1": "NOT_RUN",
+    "G2": "DUAL_SCOPE_BLOCKED",
+    "G3": "NOT_AUTHORIZED",
+    "G4": "BREP_BLOCKED",
+    "G5": "NOT_RUN"
+  },
+  "offline": 0,
+  "build": 0,
+  "installed": 0,
+  "live": 0,
+  "accepted": 0
+}

@@ -1,0 +1,2 @@
+# C01 — Library identity, BUILD-01 G2
+Source: https://github.com/ENZYME-APD/tapir-archicad-automation/pull/1337 . Upstream MIT, proposed 1.7.3 OPEN; not installed local 1.5.10. Interface GetLibraryPartIdentities(index/path) → unId/mainGuid/revisionGuid/refGuid/lockStatus. Benefit: stable library part identity across Save/Open. Limit: no DevKit or Archicad LIVE test. Expert priority 80/100, not benchmark. Assignment №2: compare existing GetAvailableLibraryParts with source contract; do not install/update.

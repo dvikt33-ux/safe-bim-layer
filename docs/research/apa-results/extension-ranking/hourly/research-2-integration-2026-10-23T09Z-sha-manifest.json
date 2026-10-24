@@ -1,0 +1,63 @@
+{
+  "schema": "apa-research-source-manifest/1",
+  "timestamp_utc": "2026-10-23T09Z",
+  "repository": "dvikt33-ux/safe-bim-layer",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "sourceChecks": 30,
+  "prMetadataChecks": 14,
+  "fileContentChecks": 16,
+  "counteraudits": 2,
+  "status": "SOURCE_VERIFIED_BUILD01_NOT_ACCEPTED",
+  "legacy06Z": "PARTIAL_NOT_ACCEPTED",
+  "files": [
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T09Z-checks-A.md",
+      "gitBlobSha1": "3811fb56658516517193fc6167defa69155db1a5",
+      "sha256": "482e496e0bacedab5bbaa93539d1935f8757193e8968555292ae529697b0276b",
+      "utf8Bytes": 2993,
+      "commitSha": "1e81ce3aa118e18d55c9037b74b64cea33fd9480"
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T09Z-checks-B.md",
+      "gitBlobSha1": "cdd26835c57b39bc182f48038fd8ecf0ff82f38b",
+      "sha256": "585c733471b7868f05a24c7211bfad2560edc231e0ed70e4f77e9c66f11046df",
+      "utf8Bytes": 5852,
+      "commitSha": "c2d75f9574c43f0ea679ebdc608180913ad05cfb"
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T09Z-matrix.md",
+      "gitBlobSha1": "f50d88f76a3b6ed0b78bd57465d4608f31ac048d",
+      "sha256": "b8b14006183a0794ceaa8677ff510a5143d2d058bb3cc72f9e246a972bceae26",
+      "utf8Bytes": 4105,
+      "commitSha": "9bff500f3e8d7bd2d83e082746498cfbebc4ab33"
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T09Z-audit-A.md",
+      "gitBlobSha1": "82493001d138c9d9150150ab937ca2e96d6b0fe0",
+      "sha256": "a999ed27d7f153a55fd6ce0e47685a0f8fd8370d44971d0ae1b2efbcfe502d1f",
+      "utf8Bytes": 3441,
+      "commitSha": "5158c452435d6ef0e347a1a1d9e0997f804ce25c"
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T09Z-audit-B.md",
+      "gitBlobSha1": "a609e36ae9586fdd664b68407277469ddd5041d4",
+      "sha256": "b536910287939ec7b6bd8694405ef19b1807a7911d8ac291c2230497fe4a6dc0",
+      "utf8Bytes": 3351,
+      "commitSha": "7514a53cfe66826821d31f39f3acdbc52396afda"
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T09Z-06Z-status.md",
+      "gitBlobSha1": "3c458902437968e8df7be0815281eaee5be6dccb",
+      "sha256": "bb1e45b4b15bf6fa719bf955f145d1eb692e1ae9fc77c9804c64753ce08c55ee",
+      "utf8Bytes": 1311,
+      "commitSha": "d78b5c6771cf55630fef5692ed87ca5b8b63d568"
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T09Z-report.md",
+      "gitBlobSha1": "d6fb213715e4c2dedcdffebe456bd3e96d18045d",
+      "sha256": "3a256310438bfbb4a0ecfafe3df0bef4752e90ff022a9a7a69c616417ab042d8",
+      "utf8Bytes": 7245,
+      "commitSha": "e4b9934fb265ca4dc919a716068162f06e28ab4e"
+    }
+  ]
+}

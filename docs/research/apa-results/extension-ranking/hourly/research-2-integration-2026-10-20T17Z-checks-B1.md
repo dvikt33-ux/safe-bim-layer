@@ -1,0 +1,15 @@
+# APA №2 — BUILD-01 — SOURCE-проверки 16–22 · 20.10.2026 17Z
+
+16. **G1 — Story binding требует фактического совпадения уровня.** [PR74 authored native plan](https://github.com/dvikt33-ux/safe-bim-layer/blob/5a3a9201a715a5528c93bed4a5318e2acb32eea7/scripts/archicad_authored_native_plan.py#L24-L60) проверяет соседние уровни и высоты с допуском `1e-5`, а `nativeStoryBindings` сравнивает с текущим `resolve_stories`. Вердикт: fixture не переносить на новую PLN без реальных bindings.
+
+17. **G1 — пример PR74 не является новым заданием.** [model-first-building.json](https://github.com/dvikt33-ux/safe-bim-layer/blob/5a3a9201a715a5528c93bed4a5318e2acb32eea7/examples/accelerator/model-first-building.json) содержит `mode=ADAPT_EXISTING`, target `C:\LocalAI\APA_Isolated_Writer_Test_01.pln`, story index 0/1, floorId 1/2, заранее заданные имена этажей и roof material GUID. `nativeComponents` содержит 11 дополнений. Вердикт: использовать как форматный пример, не повторять CREATE.
+
+18. **G2 — CreateWalls имеет точный typed контракт.** [Tapir schema](https://github.com/dvikt33-ux/safe-bim-layer/blob/5a3a9201a715a5528c93bed4a5318e2acb32eea7/schemas/tapir-live-1.5.10/tapir-scene-live.json) указывает `CreateWalls v1.4.0`, обязательные `begCoordinate/endCoordinate/height/thickness`; optional `floorIndex/zCoordinate/structureType/buildingMaterialId/compositeId/profileId/favoriteName/referenceLineLocation`. Вердикт: перед dispatch проверять локальный runtime schema и GUID атрибута.
+
+19. **G2 — upstream Wall Favorite fix не является установленным контрактом.** [Tapir PR767](https://github.com/ENZYME-APD/tapir-archicad-automation/pull/767) merged, но его описание прямо сообщает `not built or reviewed`; явный `height` в изменении сбрасывает top link. Вердикт: не полагаться на merged PR как на AC29 build5101 binary; проверять Favorite/top-link readback.
+
+20. **G2 — CreateSlabs v1.0.3 не принимает структуру/материал.** В [pinned schema](https://github.com/dvikt33-ux/safe-bim-layer/blob/5a3a9201a715a5528c93bed4a5318e2acb32eea7/schemas/tapir-live-1.5.10/tapir-scene-live.json) `slabsData` включает `favoriteName,level,thickness,referencePlaneLocation,polygonCoordinates,polygonArcs,holes,floorIndex`; нет `structureType/buildingMaterialId/compositeId`. Вердикт: не отправлять неизвестные поля и не объявлять материал заданным.
+
+21. **G2 — ModifySlabs v1.4.0 имеет необходимые поля.** В той же schema `slabsWithDetails[]` допускает `elementId,thickness,structureType,buildingMaterialId,compositeId,referencePlaneLocation,polygonOutline,holes,polygonArcs`. Вердикт: это поддерживает существующий двухэтапный маршрут по source schema, но не доказывает локальную установленную schema.
+
+22. **G2 — PR74 уже имеет CREATE→MODIFY и durable intent.** [SceneWriter PR74, строки 840–890](https://github.com/dvikt33-ux/safe-bim-layer/blob/5a3a9201a715a5528c93bed4a5318e2acb32eea7/scripts/archicad_scene_run.py#L840-L890) сохраняет `ATTEMPTED` до CREATE, получает GUID, делает typed readback, затем пишет `BASIC_MODIFY_ATTEMPTED` до `ModifySlabs`. Вердикт: reuse того же writer/журнала; UNKNOWN требует reconcile, не повторный CREATE.

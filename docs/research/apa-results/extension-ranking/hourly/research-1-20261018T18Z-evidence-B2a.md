@@ -1,0 +1,4 @@
+# APA AC29 — checks 24–26 (18Z)
+24. Graphisoft AC29 IFC Geometry Conversion, `121_IFC-37.htm`: `Export gross geometry (Export holes separately)` and `IfcOpeningElement` in Model Filter. If gross option disabled, opening cuts may require BREP. Source https://help.graphisoft.com/AC/29/INT/_AC29_Help/121_IFC/121_IFC-37.htm . Implication: QA must be translator-aware; not a new IFC reader.
+25. Graphisoft AC29 IFC Model Filter, `121_IFC-34.htm`: `Structural Function` and `IFC Domain` All/Structural/MEP. Source https://help.graphisoft.com/AC/29/INT/_AC29_Help/121_IFC/121_IFC-34.htm . An IFC missing MEP is not proof the PLN has no MEP.
+26. Same AC29 Model Filter source: IFC4 Reference View does not allow annotations; IFC2x3 dimensions become lines and texts. Exported 2D text is not a physical dimension anchor. SOURCE verified, no LIVE.

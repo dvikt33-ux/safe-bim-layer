@@ -1,0 +1,2 @@
+# APA check 29 — STEP hierarchy
+kovacsv/occt-import-js package.json source version 0.0.24 LGPL-2.1; README documents ReadStepFile(Uint8Array,params) and JSON success,root{name,meshes,children},meshes. Source: https://github.com/kovacsv/occt-import-js . Hierarchy and triangulated meshes are supported; native BIM writer not provided.

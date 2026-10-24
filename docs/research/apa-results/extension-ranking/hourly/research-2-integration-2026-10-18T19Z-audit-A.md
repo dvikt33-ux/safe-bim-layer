@@ -1,0 +1,3 @@
+# Audit A — independent source/version/license repeat
+
+Tapir 1.5.9 IFCCommands.cpp exposes IFC ID mapping; 1.6.0 adds GetIFCExportTranslators (only name/preview). The local port 19724 receipt states version 1.5.10, but binary SHA and backport are unverified. PR164 forensic 0e4a3514 was compared with STOPPED fd9caf32 and reconciler e6641ba8; scope excludes other actors. PR165 12/12 is synthetic; PR166 B1 ODS ZIP CRC is not schema. TDF Validator 0.13.0 requires JRE11+. Tapir/ezdxf MIT, TDF Apache-2.0, BCF Python LGPL-3.0-or-later; BCF-XML 2.1 branch license NOT_VERIFIED. Source commit b139fe1c does not pin installed IfcOpenShell 0.8.5. No SDK30 evidence used.

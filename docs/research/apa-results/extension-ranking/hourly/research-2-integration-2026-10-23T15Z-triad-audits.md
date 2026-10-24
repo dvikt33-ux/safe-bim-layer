@@ -1,0 +1,13 @@
+# APA №2 — 2026-10-23 15Z — два независимых SOURCE-контрааудита
+
+## Контрааудит A — MultiPlane Roof: отрицательный и положительный контракты
+Проверены pinned Tapir 1.5.10 CreateRoofs v1.4.0, PR82 и PR74 compiler. Tapir без pivotLine создаёт MultiPlane, levels принимает 1–16; PR82 исторически описывает реальную четырёхплоскостную hip Roof и GUID-preserving edits. Однако PR74 compile_authored_intent для authored nativeComponents требует pivotLine + Basic + buildingMaterialId, т.е. только SinglePlane. Graphisoft GH Deconstruct Roof принимает только SinglePlane. Вердикт: утверждение «native MultiPlane невозможна» опровергнуто; утверждение «готовый one-brief MultiPlane маршрут» НЕ подтверждено. Отдельно произвольная NURBS→native Roof same GUID NOT_FOUND. Следующий шаг: квалифицировать existing PR82 typed route и reuse SceneWriter, не новый writer.
+
+Источники: https://github.com/dvikt33-ux/safe-bim-layer/blob/f7c37b84b76c040c417ccd58a5543326e50f673a/schemas/tapir-live-1.5.10/tapir-scene-live.json ; https://github.com/dvikt33-ux/safe-bim-layer/blob/f7c37b84b76c040c417ccd58a5543326e50f673a/scripts/archicad_project_accelerator.py ; https://github.com/dvikt33-ux/safe-bim-layer/pull/82 ; https://help.graphisoft.com/AC/29/INT/GC.pdf.
+
+## Контрааудит B — Slab Favorite shortcut: schema ≠ интеграция
+Pinned CreateSlabs v1.0.3 содержит favoriteName, но не structureType/buildingMaterialId. Graphisoft Favorites хранят параметры, классификации и свойства. PR74 compile_candidate создаёт Slab без favoriteName, а SceneWriter делает CreateSlabs→readback→ModifySlabs→readback и фиксирует BASIC_MODIFY_ATTEMPTED до второго native WRITE. Вердикт: Favorite может быть кандидатом для оптимизации в будущем, но не готовым zero-code обходом второго WRITE в текущем authored pipeline. Без отдельного разрешения ModifySlabs нельзя считать авторизованным. Готовый воспроизводимый маршрут — existing CREATE→MODIFY с независимой проверкой; ни одного native WRITE не запускалось.
+
+Источники: https://github.com/dvikt33-ux/safe-bim-layer/blob/f7c37b84b76c040c417ccd58a5543326e50f673a/schemas/tapir-live-1.5.10/tapir-scene-live.json ; https://github.com/dvikt33-ux/safe-bim-layer/blob/f7c37b84b76c040c417ccd58a5543326e50f673a/scripts/archicad_authored_native_plan.py ; https://github.com/dvikt33-ux/safe-bim-layer/blob/f7c37b84b76c040c417ccd58a5543326e50f673a/scripts/archicad_scene_run.py ; https://help.graphisoft.com/AC/29/INT/_AC29_Help/020_Configuration/020_Configuration-56.htm.
+
+**Оба контрааудита выполнены как SOURCE-сопоставления; это не внешняя инженерная экспертиза, не OFFLINE/BUILD/INSTALLED/LIVE/ACCEPTED.** MODEL_MODE_NOT_VERIFIABLE.

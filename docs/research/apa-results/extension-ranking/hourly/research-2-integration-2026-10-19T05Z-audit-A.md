@@ -1,0 +1,10 @@
+# APA №2 05Z — независимый контрааудит А: версии, лицензии, точность API
+
+1. [Graphisoft 29.3000](https://pypi.org/project/archicad/29.3000/): Apache Software License, Python>=3.7, wheel py3-none-any, 01.10.2025; версия binding не равна build5101. AC30 не подменяет AC29.
+2. [AC29 API](https://archicadapi.graphisoft.com/archicadPythonPackage/archicad.releases.ac29.html): проверены сигнатуры 7 групп: property ids, availability обе стороны, typed values, composite skins, attribute indices, classification systems, publisher names. Union `...OrError` нельзя молча отбросить.
+3. [Tapir snapshot](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-ac29-native-contract-gaps-d1-20261018/schemas/tapir-live-1.5.10/tapir-scene-live.json) SHA e8ad53b6: 262 source commands, `GetPropertyValuesOfAttributes`, `GetViewSettings`, `PublishPublisherSet` есть, четыре official-only метода отсутствуют. Локальная runtime registration не проверялась; публичную Tapir 1.5.10 не выдумывать.
+4. [Tapir MIT](https://github.com/ENZYME-APD/tapir-archicad-automation/blob/main/LICENSE); [IfcOpenShell LGPL](https://github.com/IfcOpenShell/IfcOpenShell). Лицензия программ не разрешает автоматически использовать любые исходные BIM данные.
+5. [PR165](https://github.com/dvikt33-ux/safe-bim-layer/blob/feature/apa-ac29-high-density-readonly-v2-20261018/scripts/apa_high_density_readonly_v2.py#L336-L407): Windows Python 3.11/3.12, 4 GiB source cap, 200 MiB report cap, pinned V1 vendor env, whitelisted commands; synthetic INSTALLED не означает native LIVE.
+6. [IFC4D 0.8.5](https://docs.ifcopenshell.org/autoapi/ifcopenshell/util/sequence/index.html): в docs `schedule` аннотирован entity_instance|None, а описание упоминает string name — расхождение. Проверить pinned callable в будущих OFFLINE, не заявлять точный runtime тип без теста.
+7. `onlySupportedTypes=true` может уменьшить выборку. Статусы `notAvailable`, `notEvaluated`, `Error`, `normal` неэквивалентны; прежний ComposeResult crash не объявлять исправленным.
+8. **Итог А:** SOURCE VERIFIED для описанных контрактов; OFFLINE/BUILD/INSTALLED/LIVE/ACCEPTED новых решений НЕ ПРОВОДИЛИСЬ. MODEL_MODE_NOT_VERIFIABLE.

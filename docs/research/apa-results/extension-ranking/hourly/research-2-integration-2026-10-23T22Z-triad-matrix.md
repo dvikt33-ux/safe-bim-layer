@@ -1,0 +1,23 @@
+# APA №2 / 22Z — 10 маршрутов BUILD-01
+Общая операция: назначить owner/программу → проверить источник/версию → заморозить GH solver и JSON → валидировать typed BIM DAG/planHash через PR74 read-only preflight → после отдельного разрешения SceneWriter/SQLite → GUID/BIM-type/material/host/BREP readback → GuardedSave/Close/Reopen → повторное сравнение/rollback только из защищённой копии. Ниже **план маршрута**, а не LIVE-результат.
+
+| ID | Операция, программа и готовый инструмент | Синхронизация, контроль и запрет | ГОТОВО / статус |
+|---|---|---|---|
+| T01 | Rhino8/GH геометрия → jSwan Serialize Keys and Values → JSON `apa-authored-project/1` → PR74 | `x/y` lowercase, meters, exact target path, no null, freeze source hash; preflight requires read-only AC; JSON не 3-way | Схема+DAG+hash при фактическом preflight; SOURCE_CANDIDATE |
+| T02 | AC29 GetProjectInfo/GetStories/GetAddOnVersion → PR74 guarded_project | real build5101, APX SHA, version 1.5.10, floorId/index/level, authorized scratch SHA; никаких SetStories | G0 manifest RUNTIME_READY; BLOCKED_RUNTIME |
+| T03 | GH wall axes → PR74 CreateWalls → AC29 native Wall | relative `zCoordinate` vs story; GUID, building material, BREP; GH Live Connection для этих GUID не включает auto-write | GUID/type/level/material after reopen; SOURCE_ONLY |
+| T04 | GH polygons/holes → PR74 CreateSlabs → guarded ModifySlabs if qualified | absolute `level`; holes persist if polygonOutline modified; material ID verified, Favorites cannot bypass allowlist | GUID+holes+material+BRep; SOURCE_PARTIAL |
+| T05 | GH axes → PR74 CreateColumns; GH native Beam Settings (Graphisoft) **отдельный owner** | Beam direct GH→AC существует как отдельный способ, но в PR74 authored whitelist его нет; нельзя использовать на APA-owned | Columns SOURCE_ONLY; APA-authored Beam NOT_WIRED |
+| T06 | GH SinglePlane → PR74 CreateRoofs → AC29 | Basic+pivotLine+material; roof underside/SEO/GUID/BREP; GH deconstruct roof limitations | SOURCE_ONLY |
+| T07 | Rhino NURBS/multi-plane roof → GH geometry | PR74 authored требует pivotLine; прямой GH write минует SQLite, roundtrip GUID/BREP не доказан | FULL ROUNDTRIP NOT_FOUND |
+| T08 | GH host coordinates → PR74 CreateWindows/CreateDoors, native GDL parts | GDL part name/ownUnID GUID, hostWall GUID, dimensions; **не** создавать Library Part из GH для APA-owned проёмов: удаление GH component удалит деталь и сделает Missing Objects | native GUID+host+lib part survives Save/Open; SOURCE_ONLY |
+| T09 | AC native hotlink/linked module, GH hotlink tools только в изолированном owner-контуре | before Publisher проверить Hotlink Update policy: Ignore / Ask / Auto; policy находится вне PLN, Auto может изменить геометрию при Publish; сравнить before/after inventory и Model Compare | no unexpected update; SOURCE_RISK_CONFIRMED; LIVE NOT_RUN |
+| T10 | AC29 GuardedSave/Close/Reopen → guarded Publisher IFC → IfcOpenShell/IfcTester → Rhino read-only QA | view visibility, translator, IFC GlobalId↔native GUID, explicit BREP mode; IDS проверяет IFC атрибуты, НЕ нормативную экспертизу; Publish Hotlink Auto blocked | independent GUID/type/material/BREP+IDS readback; G4 NOT_RUN |
+
+**Изменения в двух направлениях:** AC→GH параметрические ссылки действительно могут обновляться автоматически при включённом `Sync Changes to GH`; GH→AC через `Synchronize` — отдельный нативный writer Graphisoft; GH→JSON→PR74→AC — другой writer. Одновременное владение одним GUID запрещено без готового конфликтного протокола, который NOT_FOUND. Lock→manual AC edit→relock откатывает GH-controlled свойства; неподдерживаемые GH свойства могут сохраниться. **Rhino↔GH↔AC full GUID-preserving automatic sync: NOT_FOUND.**
+
+**Удаления/циклы:** ни ReplaceExisting, ни GH Library Part regeneration не считать GUID-preserving Modify. Удаление GH Object Settings может удалить Library Part и сломать размещённые Objects. Freeze solver, snapshot native inventory, one owner, no auto-retry CREATE. **Откат:** восстановить отдельную копию PLN и исходные библиотечные ресурсы; Undo/Recovery File не являются полным rollback.
+
+**Нормативные проверки:** GH числовые constraints + параметризованные требования с редакцией СП; IFC IDS/IfcTester для формальных IFC свойств, независимая проверка эвакуации/доступности/прочности не подтверждена. Параметры без точной нормы → NOT_VERIFIED.
+
+**Лицензии и версии:** Graphisoft GH–AC29 Live Connection build3000 бесплатный add-on, AC29/Rhino8 лицензируются отдельно; Rhino Grasshopper входит в Rhino8. Tapir MIT, pinned 1.5.10 (runtime не проверен). jSwan MIT, совместимость конкретной версии с Rhino8 INSTALLED_NOT_VERIFIED. IfcOpenShell/IfcTester open-source, локально не проверены. Прямое штатное GH→AC создание не проходит SceneWriter. SOURCE_ONLY.

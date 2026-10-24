@@ -1,0 +1,5 @@
+# APA №2 01Z — два независимых контрааудита
+
+**А: код, версии, лицензии, API.** Сверены tagged Tapir1.5.9 NavigatorCommands/AddOnMain/ExtendedElementCommands/IFCCommands; SDK29.3000 Hotlink/Navigator и 29.3100 Publish; ezdxf1.4.5 disassemble/xclip/insert; IfcOpenShell0.8.5 util.system/util.element; APA PR154/160/162/168/173/175. Tapir1.5.9 MIT, ezdxf1.4.5 MIT, IfcOpenShell0.8.5 LGPLv3+, Graphisoft DevKit29 EULA, archicad29.3000 Apache. Локальный APX 1.5.10 SHA и ABI build5101 не проверены. **Исправление:** Tapir уже имеет Publisher GUID tree и hosted CreateWindows/CreateDoors; NOT_FOUND касается полного error-aware census и PDF→qualified host adapter.
+
+**Б: монтажный граф, дубли, ценность, безопасность.** Выбраны существующие Router/DynamicCommands/BIM Graph/SceneWriter, C1/IFC V2/PDFVectors. Не создавать второй writer. Publisher []/silent tree→DENY; DXF RAW≠VISIBLE; IFC first-peer≠all; PDF label≠wall offset; PR173 receipt≠binary ACCEPTED; PR175 lease не блокирует внешние записи. Все проверки SOURCE, ускорение не измерено.

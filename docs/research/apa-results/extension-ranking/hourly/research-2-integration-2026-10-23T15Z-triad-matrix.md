@@ -1,0 +1,22 @@
+# APA №2 — 2026-10-23 15Z — 10 сценариев BUILD-01
+
+Приоритет экспертный (0–100), не benchmark. Уровень SOURCE — подтверждённые контракты, не установленная среда. Все критерии ГОТОВО ниже ещё НЕ выполнены.
+
+| ID/P | Операция | Готовые компоненты и поля | Маршрут, ограничение | Критерий ГОТОВО / статус |
+|---|---|---|---|---|
+| M01/100 | G0: фактический runtime | AC GetProjectInfo, GetStories, GetAddOnVersion, GetAttributesByType, GetFavoritesByType, APX SHA | READ only; provider version != installed binary | Runtime command inventory, project path, APX SHA, story/material/GDL map; BLOCKED_RUNTIME |
+| M02/99 | G1: GH→APA JSON | Rhino8/GH → jSwan MIT Serialize/Merge → Panel Stream Destination → PR74 --intent | staging only, stop stream, frozen SHA; Rhino8+jSwan compatibility NOT_VERIFIED; one-way | Full parseable apa-authored-project/1, exact path/story/units, READ preflight; SOURCE_CANDIDATE |
+| M03/100 | G1: этажи | Semantic Brief ADAPT_EXISTING + GetStories exact index/floorId/level | GENERATE_FROM_ZERO не создаёт PLN/stories | Два правильных этажа в новой scratch PLN; AUTO_STORY_CREATE NOT_FOUND |
+| M04/100 | G2: стены | GH bearingLines → JSON layout → PR74 CreateWalls | material GUID from real PLN, typed graph, single SceneWriter | Wall type/floor/height/thickness/material/GUID/BREP after reopen; SOURCE_ONLY |
+| M05/100 | G2: Basic Slabs | CreateSlabs level/floorIndex/polygon → GUID → ModifySlabs structureType=Basic/buildingMaterialId | CREATE has favoriteName, но authored PR74 не подаёт его; двойной WRITE отдельно санкционировать | Basic/material/contour/holes/host/story after reopen; FAVORITE_NOT_WIRED |
+| M06/98 | G2: колонны/балки | CreateColumns + existing NativeAdapter(CreateBeams) | run_project wired only roof; Beam requires existing adapter binding, no second writer | Column/Beam type/sections/GUID/BREP; BEAM_NOT_WIRED |
+| M07/99 | G2: SinglePlane Roof | GH slope/pivot → PR74 nativeComponents CreateRoofs pivotLine, Basic, buildingMaterialId | GH JSON one-way; Roof typed adapter existing | Native Roof angle/material/SEO/GUID/BREP after reopen; SOURCE_ONLY |
+| M08/97 | G2: MultiPlane/NURBS Roof | Tapir CreateRoofs no pivotLine, levels 1–16; PR82 historic 4-plane native hip roof | PR74 authored requires pivotLine: one-brief MultiPlane NOT_WIRED; arbitrary Rhino NURBS→native same-GUID NOT_FOUND | Qualify existing PR82 route without new writer, independent BREP; BLOCKED |
+| M09/99 | G2: двери/окна/GDL | CreateDoors/Windows ownerWallId.$createdGuid, favoriteName/libraryPartName, GetAvailableLibraryParts, nativeLibraryExpectations | create Walls first; readback libPart.name and ownUnID.guid | host/type/size/sill/GDL/GUID/BREP after reopen; CONDITIONAL |
+| M10/100 | G3–G5: sync/Save/Open/conflicts | GH solver/Panel Stream OFF → frozen JSON → PR74/SceneWriter SQLite → GuardedSave/GUI reopen | APA-owned native writer ONLY SceneWriter; GH Design WRITE separate and forbidden for same elements; UNKNOWN STOP no retry | Two different new scratch PLN and intents, GUID/material/BREP/no duplicates; NOT_RUN |
+
+**Направления:** Rhino→GH геометрия; GH→APA staging JSON (однонаправленно); APA→AC native WRITE после допуска; AC→GH Deconstruct/Send Changes READ для поддерживаемых типов; GH→AC Live Connection Design WRITE отдельно от APA ledger. Полноценная AC↔GH↔Rhino трёхсторонняя same-GUID синхронизация NOT_FOUND.
+
+**Версии/лицензии:** Graphisoft AC29 Live Connection build3000 01.10.2025 Windows/Rhino7–8 — официальное дополнение, не open source; Rhino8 и Archicad лицензируются отдельно. Tapir MIT pinned schema 1.5.10, installed contract не проверен. jSwan MIT, Rhino8 runtime не проверен. Rhino Grasshopper/GrasshopperPlayer — штатные функции Rhino. GH нормативные расчёты не являются экспертизой.
+
+Источники: https://github.com/dvikt33-ux/safe-bim-layer/blob/f7c37b84b76c040c417ccd58a5543326e50f673a/scripts/archicad_project_accelerator.py ; https://github.com/dvikt33-ux/safe-bim-layer/blob/f7c37b84b76c040c417ccd58a5543326e50f673a/scripts/archicad_authored_native_plan.py ; https://github.com/dvikt33-ux/safe-bim-layer/blob/f7c37b84b76c040c417ccd58a5543326e50f673a/scripts/archicad_scene_run.py ; https://github.com/dvikt33-ux/safe-bim-layer/blob/f7c37b84b76c040c417ccd58a5543326e50f673a/schemas/tapir-live-1.5.10/tapir-scene-live.json ; https://github.com/dvikt33-ux/safe-bim-layer/pull/82 ; https://www.graphisoft.com/en-de/downloads/add-ons/rhino-grasshopper/ ; https://github.com/ENZYME-APD/tapir-archicad-automation ; https://github.com/andrewheumann/jSwan .

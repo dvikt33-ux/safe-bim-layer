@@ -1,0 +1,5 @@
+# BUILD-01 — карточки решений C1–C3
+C1 **ListDLLs v3.21**; G0, экспертно 99/100. https://learn.microsoft.com/en-us/sysinternals/downloads/listdlls ; Windows11, Microsoft Sysinternals, опубликовано 15.10.2026. Вход PID/processname, -v/-d; выход загруженный APX путь/версия. Не даёт schema или SHA. №2: сопоставить PID и порт, хешировать путь отдельно; не устанавливать здесь.
+C2 **Process Explorer v17.2**; G0, 95/100. https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer ; Windows11, Microsoft, 15.10.2026. DLL pane выбранного процесса, независимая сверка C1. №2: подтвердить тот же APX. Не дублирует SceneWriter.
+C3 **GetElementsRelatedToZones**; G4, 77/100. https://archicadapi.graphisoft.com/archicadPythonPackage/archicad.releases.ac29.html ; Graphisoft Python API29 b3000, лицензия Graphisoft. Вход zones/elementTypes; выход ElementsOrError, порядок зон. Ограничение: нужны созданные Zone, не проверяет нормы эвакуации. №2: применять только после реального Zone inventory.
+Все SOURCE_ONLY, не INSTALLED/LIVE.

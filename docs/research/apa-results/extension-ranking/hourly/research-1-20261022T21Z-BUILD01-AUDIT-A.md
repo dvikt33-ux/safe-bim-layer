@@ -1,0 +1,2 @@
+# Контрааудит A BUILD-01
+Graphisoft API29 b3000 source https://archicadapi.graphisoft.com/archicadPythonPackage/archicad.releases.ac29.html ; Microsoft ListDLLs v3.21/Process Explorer v17.2 опубликованы 15.10.2026. 28 проверок — вопросы к 3 официальным страницам, не независимые источники. GetProjectInfo/GetStories/GetDetailsOfElements не обнаружены как штатные Python29 методы; Tapir требует отдельной схемы. Microsoft утилиты показывают путь APX, но не schema. Локальный APX SHA неизвестен. SDK Graphisoft имеет отдельную лицензию. SOURCE не INSTALLED.

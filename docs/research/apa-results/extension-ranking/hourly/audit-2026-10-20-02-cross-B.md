@@ -1,0 +1,2 @@
+# APA 02Z — контрааудит B: инженерия и недублирование
+Reuse existing PR154 PDFVectors; PR159/162/179 CloneNativeGroupV1; PR181/184 MoveElements(copy=true); PR185/186/188 group CRUD; PR189 DXF C1; PR190 group intent; Router/BIM Graph/SceneWriter/SQLite/IFC V2. Открыты PDF mark→host GUID/offset/story, Slab holes/composite/SEO, native GridElement, Publisher deny-empty, XCLIP RAW≠VISIBLE, IFC all-peer, Hotlink cached/proxy/source, Tapir ABI. Не создавать второй writer/Clone/parser, не повторять UNKNOWN native calls. Новых OFFLINE/BUILD/INSTALLED/LIVE/ACCEPTED=0.

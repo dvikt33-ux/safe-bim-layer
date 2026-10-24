@@ -1,0 +1,3 @@
+# BUILD-01 solution CARD-C4.md
+C4 G2/G4: classifications/property applicability. API29 GetClassificationsOfElements and GetPropertyDefinitionAvailability; input GUID/property, output IDs/errors. №2 verify property validity; not Russian code compliance. Expert 81/100.
+Source: https://archicadapi.graphisoft.com/archicadPythonPackage/archicad.releases.ac29.html (Graphisoft API29 b3000, Graphisoft license). SOURCE_ONLY; score not benchmark.

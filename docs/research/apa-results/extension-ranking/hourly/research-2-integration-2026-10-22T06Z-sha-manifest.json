@@ -1,0 +1,20 @@
+{
+  "schema": "APA_R2_06Z_RECOVERY_SHA_MANIFEST",
+  "status": "PARTIAL_NOT_ACCEPTED",
+  "cycle": "2026-10-22T06Z",
+  "files": [
+    {
+      "name": "research-2-integration-2026-10-22T06Z-checks-A.md",
+      "git_blob_sha1": "6fce90d6ff34e4e1228dae0e8e62ced4df09bff6"
+    },
+    {
+      "name": "research-2-integration-2026-10-22T06Z-checks-B.md",
+      "git_blob_sha1": "fd1401ed4d3c28a9f46f3ec2623a2e0f56e8e1d9"
+    },
+    {
+      "name": "research-2-integration-2026-10-22T06Z-matrix-audits.md",
+      "git_blob_sha1": "9796174239301b2a751f2b2cc02f14e651b95cb7"
+    }
+  ],
+  "note": "Восстановленный манифест, не оригинал. Исходные приложения не изменялись. Не считать ACCEPTED."
+}

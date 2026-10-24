@@ -1,0 +1,5 @@
+# APA №1 02Z — карточки C3–C4 для №2
+
+**C3 · 86/100 · Navigator pre-Publisher QA.** Источник: [SDK29 Navigator, L417–432](https://github.com/GRAPHISOFT/archicad-api-devkit/blob/29.3100/docs/group___navigator.html#L417). Функция: read-only состав Publisher Set и сохранённых видов. Не дубликат PR70 (создание видов) и Tapir Publish (исполнение). Найти готовый Navigator inspector; EULA, AC29/Tapir1.5.10 runtime NOT_VERIFIED. Вопрос №2: готовый JSON/SDK route списка видов и layouts? ГОТОВО: полный состав, отсутствующие ссылки, ноль публикаций.
+
+**C4 · 92/100 · IFC classification inheritance.** Источник: [IfcOpenShell 0.8.5 util.classification, L24](https://github.com/IfcOpenShell/IfcOpenShell/blob/ifcopenshell-python-0.8.5/src/ifcopenshell-python/ifcopenshell/util/classification.py#L24), add_reference L214. Не дубликат PR167 BCF/PR56 QTO. Найти готовый IFC type→occurrence classification diff. LGPL-3+, Windows wheel NOT_VERIFIED; IFC2X3 ItemReference vs IFC4 Identification. Вопрос №2: готовый read-only сравниватель? ГОТОВО: diff по IFC GlobalId, system/code, inherited/own.

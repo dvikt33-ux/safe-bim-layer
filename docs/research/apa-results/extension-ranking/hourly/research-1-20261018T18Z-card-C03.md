@@ -1,0 +1,2 @@
+# C03 — IFC2X3 and IFC4 geolocation (89/100)
+IfcOpenShell v0.8.0 geolocation.py lines 147–260 includes IFC2X3 ePSet_MapConversion and IFC4 IfcCoordinateOperation. PR165 only inventories map conversion, no roundtrip. Exact pinned 0.8.5 source is NOT_VERIFIED; do not transfer version contracts. Researcher 2: inspect actual pinned API and design three-anchor XYZ/ENH roundtrip with separate NO_GEOREFERENCE result. DONE: two schema fixtures and tolerance readback. No model write.

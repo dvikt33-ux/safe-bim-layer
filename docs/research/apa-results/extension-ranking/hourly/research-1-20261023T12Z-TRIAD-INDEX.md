@@ -1,0 +1,20 @@
+# APA №1 | 23.10.2026 12Z | Archicad 29 + Rhino 8 + Grasshopper
+
+## Воздействие на BUILD-01 — главное
+**Найден готовый официальный основной мост:** Graphisoft Grasshopper–Archicad 29 Live Connection build 3000 для Rhino8/Windows. Он поддерживает GH→AC native BIM Design и AC→GH Deconstruct/Extract Settings/Input; **полная симметричная синхронизация изменений любых трёх программ, ownership/GUID conflict resolution и автоматический выбор инструмента НЕ доказаны**. GH geometry может перезаписать правки AC; Synchronize FALSE не удаляет существующие элементы. Доступен native Rhino 3DM Hotlink, но он импортирует GDL объекты, **не** нативные Wall/Slab/Roof. Источники: https://www.graphisoft.com/en-de/downloads/add-ons/rhino-grasshopper/; https://help.graphisoft.com/AC/29/INT/GC.pdf; https://help.graphisoft.com/AC/29/INT/_AC29_Help/120_Interoperability/120_Interoperability-41.htm; https://community.graphisoft.com/t5/Collaboration-with-other/Working-Rhino-with-Archicad/m-p/681968.
+
+**Приближение ворот:** G1/G2 — найден готовый путь GH native element generator и получение материалов/этажей из AC; G4 — готовый Deconstruct/Extract Settings для дополнительного чтения. **Ни один gate не получил PASS**. G0 BLOCKED; G1 NOT_RUN; G2 SOURCE_ONLY; G3 NOT_AUTHORIZED; G4 NOT_RUN; G5 NOT_RUN. BUILD-01 issue https://github.com/dvikt33-ux/safe-bim-layer/issues/192; здание не создавалось.
+
+## Подтверждённые материалы публикации
+- SOURCE-A: S01–S15: [research-1-20261023T12Z-TRIAD-SOURCE-A.md](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-extension-ranking-hub-20261018/docs/research/apa-results/extension-ranking/hourly/research-1-20261023T12Z-TRIAD-SOURCE-A.md); Git blob SHA `2f232053a979508ab5e433e2fd69db47ab3e5b39`; commit `68d11891c85a6096583cc4510803498964664602`; exact readback PASS.
+- SOURCE-B: S16–S30: [research-1-20261023T12Z-TRIAD-SOURCE-B.md](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-extension-ranking-hub-20261018/docs/research/apa-results/extension-ranking/hourly/research-1-20261023T12Z-TRIAD-SOURCE-B.md); Git blob SHA `9221a8f7219c35df419be2f9cba38fd6c8f66773`; commit `6676eae958ee383cdc5af4693db8a71d2704f769`; exact readback PASS.
+- 7 полных карточек: [research-1-20261023T12Z-TRIAD-CARDS.md](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-extension-ranking-hub-20261018/docs/research/apa-results/extension-ranking/hourly/research-1-20261023T12Z-TRIAD-CARDS.md); Git blob SHA `4bc5d21a0d82c8519c1c1694f513b9bdb418e38c`; commit `acfb9e5cbed50b872947173cc8975db6c6c12e39`; exact readback PASS.
+- 2 контрааудита: [research-1-20261023T12Z-TRIAD-AUDITS.md](https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-extension-ranking-hub-20261018/docs/research/apa-results/extension-ranking/hourly/research-1-20261023T12Z-TRIAD-AUDITS.md); Git blob SHA `d30c2110c85c67c31ffd975ae99ebf8320310a66`; commit `2afaa878d8ab7f181255513427b724857c18df3d`; exact readback PASS.
+
+## Сводка проверки
+- 30 предметных SOURCE-вопросов; источников меньше 30, один официальный документ применяется к разным контрактам. Два контрааудита, семь карточек. Не benchmark.
+- Graphisoft AC29 Live Connection build3000 + Rhino8 — **SOURCE_COMPATIBLE**, INSTALLED_UNKNOWN. Лицензия AC/Rhino отдельно.
+- Стратегия: AC29 source-of-truth для BIM/GUID, GH для алгоритмического управления теми элементами, которыми он владеет, Rhino8 для геометрии; не предполагать автоматический обратный AC→GH write в тот же GUID.
+- Непосредственные задания №2: 1) локальная проверка наличия GH add-on и порта только READ; 2) матрица GH Design/Deconstruct по native типам; 3) ownership и Sync toggles; 4) two-story Story Plane/Composite/Favorite без literal GUID; 5) readback+Save/Open через существующий PR74/SceneWriter; 6) конфликтный тест только после отдельного допуска.
+- Прочитаны директива TRIAD-PIVOT, NEXT_RESEARCH_PRIORITIES, issue192, №2 11Z и исторический rev182; прямой read матрицы 61 и свежего №3 в этот час не выполнен (путь не установлен).
+- Ни main, ни код, ни PLN/APX, ни установка, ни LIVE не менялись. MODEL_MODE_NOT_VERIFIABLE.

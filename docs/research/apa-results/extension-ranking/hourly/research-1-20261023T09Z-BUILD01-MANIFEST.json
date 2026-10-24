@@ -1,0 +1,53 @@
+{
+  "schema": "APA_R1_BUILD01_SOURCE_MANIFEST_V1",
+  "research_hour_utc": "2026-10-23T09Z",
+  "repository": "dvikt33-ux/safe-bim-layer",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "source_checks": 30,
+  "solution_cards": 7,
+  "counteraudits": 2,
+  "proof_level": "SOURCE_ONLY",
+  "readback": "FETCH_FILE_BLOB_SHA_EXACT",
+  "files": [
+    {
+      "suffix": "SOURCE-A.md",
+      "sha": "ad730aca70b4a8daf074f22ced6faf7143d10366",
+      "commit": "08eb6c0e95c0af27abfaf0c87f1f83001263c990",
+      "checks": "S01-S15",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-1-20261023T09Z-BUILD01-SOURCE-A.md",
+      "actual_sha": "ad730aca70b4a8daf074f22ced6faf7143d10366",
+      "readback_sha_exact": true,
+      "chars": 9005
+    },
+    {
+      "suffix": "SOURCE-B.md",
+      "sha": "f663b708023d0a2ac7c653ff86d251f99e279b79",
+      "commit": "93718fcfc4231062b1956e709f7408742606e645",
+      "checks": "S16-S30",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-1-20261023T09Z-BUILD01-SOURCE-B.md",
+      "actual_sha": "f663b708023d0a2ac7c653ff86d251f99e279b79",
+      "readback_sha_exact": true,
+      "chars": 9039
+    },
+    {
+      "suffix": "CARDS.md",
+      "sha": "5d26b79531b1350d9e7cae261f6e9766cd96de2c",
+      "commit": "5d5ad48cb0c13d71c53d8827ec25a640ce2dc274",
+      "checks": "C01-C07",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-1-20261023T09Z-BUILD01-CARDS.md",
+      "actual_sha": "5d26b79531b1350d9e7cae261f6e9766cd96de2c",
+      "readback_sha_exact": true,
+      "chars": 10915
+    },
+    {
+      "suffix": "AUDITS.md",
+      "sha": "a121a27a017d6554875a004c59ca687eaa0dff83",
+      "commit": "8bdeb3319d5b1dd0bc99b3bf125303e8734ecdf9",
+      "checks": "A01-A02",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-1-20261023T09Z-BUILD01-AUDITS.md",
+      "actual_sha": "a121a27a017d6554875a004c59ca687eaa0dff83",
+      "readback_sha_exact": true,
+      "chars": 6279
+    }
+  ]
+}

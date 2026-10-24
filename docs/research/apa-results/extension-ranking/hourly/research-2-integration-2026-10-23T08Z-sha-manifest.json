@@ -1,0 +1,54 @@
+{
+  "schema": "apa-research-source-manifest/1",
+  "timestamp_utc": "2026-10-23T08Z",
+  "repository": "dvikt33-ux/safe-bim-layer",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "sourceChecks": 30,
+  "counteraudits": 2,
+  "files": [
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T08Z-checks-A.md",
+      "gitBlobSha1": "9e594bb0aa2a097769cc7780d6a392d634dc3b7c",
+      "sha256": "17ab509e85e598699c5478acc2aa111458b108446ace766e11581e514570553d",
+      "utf8Bytes": 3251
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T08Z-checks-B.md",
+      "gitBlobSha1": "3df0d24d4bb1a297644bb3b822cd83f202d7ab0d",
+      "sha256": "ff871accfd95a7ac56f388b3f86d7ef1cf3f7a6399bb7183763a6764717276f6",
+      "utf8Bytes": 5107
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T08Z-matrix.md",
+      "gitBlobSha1": "a970bb6c301d7101b48e0e1133489edd86e0d3d7",
+      "sha256": "d7626b880adb88a4453cf0e7c9a492fdfb486952fc74074c08e92188b0e8af72",
+      "utf8Bytes": 7685
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T08Z-audit-A.md",
+      "gitBlobSha1": "d2562f23f7cdf80cbdb6e88aa1cb5c684f076237",
+      "sha256": "39b16e7c7fa886749d204a11d1d5c3567c2f5e94d7e8a67316cef82e84b77c89",
+      "utf8Bytes": 3149
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T08Z-audit-B.md",
+      "gitBlobSha1": "2fe3a9caf1f79e3a7314a41248488133cf13fe70",
+      "sha256": "e9981b26e99e4be5d500cc23b5e7e0c63802e2acdda0d93a763d8fa1791aa701",
+      "utf8Bytes": 3885
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T08Z-06Z-status.md",
+      "gitBlobSha1": "cd04f46223c330037cbaae934c67e7cb7f05f935",
+      "sha256": "5c2f0d263f14dd6133734455ac02c0bbd97da318e82977192cf6c279bb80ac45",
+      "utf8Bytes": 1497
+    },
+    {
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T08Z-report.md",
+      "gitBlobSha1": "4156c7bdf90b5ce5e0ecaf92946be53e25bb9fae",
+      "sha256": "d0a17e6e0e3b5cc6530c6c1b51fa5140d371fc534d057903e072ddf2fa78d4d3",
+      "utf8Bytes": 7523
+    }
+  ],
+  "status": "SOURCE_VERIFIED_BUILD01_NOT_ACCEPTED",
+  "legacy06Z": "PARTIAL_NOT_ACCEPTED"
+}

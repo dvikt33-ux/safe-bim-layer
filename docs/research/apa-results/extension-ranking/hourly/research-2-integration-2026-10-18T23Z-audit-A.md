@@ -1,0 +1,2 @@
+# Independent counteraudit A — code/version/license
+Re-read V1, V2, B2, pinned IfcTester/IfcFM/IfcClash/BCF and Graphisoft SDK29. IfcTester CLI lacks explicit XSD validate=True. IfcFM source version 0.0.0 is not installed wheel 0.8.5. B2 runtime pin 0.8.5 is a code guard, not current installed proof. bcf-client pyproject GPLv3 classifier conflicts with repository LGPL listing: LEGAL_NOT_VERIFIED. SDK29 C++ function existence does not prove a callable Tapir JSON bridge. Windows import/build/ABI not checked. SOURCE only.

@@ -1,0 +1,3 @@
+# APA №1 02Z — C6 bSDD, 89/100
+
+Функция: version/license gate для классификационных словарей. Источник: [buildingSMART OpenAPI v1](https://github.com/buildingSMART/bSDD/blob/master/Documentation/bSDD%20OpenAPI.yaml#L37), Class/v1 и Property/v5; [identifier JSON deprecated](https://github.com/buildingSMART/bSDD/blob/master/Documentation/bSDD%20API.md#L30). BSDD уже есть в реестре 61, но не этот контроль. Найти готовый read-only клиент/cache с dictionary version и License/LicenseUrl. MIT документации ≠ права словарей; private paid исключить. Вопрос №2: есть ли официальный public REST клиент? ГОТОВО: URI классов, версия, лицензия, source SHA без PLN writes.

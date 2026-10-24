@@ -1,0 +1,22 @@
+# APA №2 — 2026-10-23 14Z — 10 маршрутов BUILD-01
+Экспертный приоритет 0–100, **не benchmark**. Все SOURCE_ONLY или SOURCE_CANDIDATE; OFFLINE/BUILD/INSTALLED/LIVE/ACCEPTED=0. Нативные команды из pinned Tapir 1.5.10 schema, установленный контракт неизвестен. Каждое «ГОТОВО» ниже — **условие будущей приёмки**, не выполненный PASS.
+
+| ID / P | Барьер → программа/инструмент → направление | Готовый контракт / минимум звеньев | ГОТОВО / текущий статус |
+|---|---|---|---|
+| T01 / 100 | G0: фактические версии, этажи, материалы | Archicad READ GetProjectInfo, GetStories, GetAddOnVersion, GetAttributesByType, GetAvailableLibraryParts; локальный APX SHA; GH AC29 installer build3000 | Runtime inventory + exact scratch identity + story/material/GDL map; **BLOCKED_RUNTIME** |
+| T02 / 99 | G1: Rhino/GH параметры → **staging JSON** → PR74 | jSwan MIT Serialize/Deserialize/Merge JSON **1.2.1 (Rhino8 NOT_VERIFIED)** + штатный GH Panel Stream Destination; PR74 `--intent`; GH→APA **файловая однонаправленная передача**, не live sync | Один parseable `apa-authored-project/1`, complete keys, exact story/path/units, frozen hash, read-only preflight; **SOURCE_CANDIDATE** |
+| T03 / 100 | G1/G2: этажи и стены | GH outline XY → JSON layout/storyHeights → PR74 compile_candidate → SceneWriter CreateWalls | Native Wall GUID/type/floorIndex/zCoordinate/height/thickness/material/BREP after reopen; story map из реального PLN; **SOURCE_ONLY** |
+| T04 / 100 | G2: Basic Slab материал | PR74 CreateSlabs → GUID/readback → **отдельно разрешённый** ModifySlabs → readback; pinned CREATE без structureType/buildingMaterialId | Polygon/thickness/Basic/material GUID/story/holes после reopen; оба WRITE санкционированы; **SOURCE_ONLY** |
+| T05 / 98 | G2: колонны и балки | SceneWriter CreateColumns; NativeAdapter(CreateBeams) уже существует, но run_project не wired | Native Column/Beam, profile/material/segments, GUID/BREP; Beam **BLOCKED_ADAPTER_WIRING** |
+| T06 / 99 | G2: SinglePlane Roof | Rhino GH slope/pivot geometry → JSON nativeComponents → PR74 existing roof adapter CreateRoofs | Native Roof GUID, angle/pivotLine, material, SEO/junction/BREP после reopen; **SOURCE_ONLY** |
+| T07 / 97 | G2: сложная NURBS/MultiPlane Roof | Rhino NURBS/GH preview; AC Deconstruct Roof только SinglePlane; произвольный same-GUID native Roof converter **NOT_FOUND** | Без нативной Roof семантики/геометрии не ACCEPTED; **NOT_FOUND** |
+| T08 / 99 | G2: окна/двери и GDL | Wall `$createdGuid` → CreateDoors/CreateWindows `ownerWallId/centerOffset`; READ GetAvailableLibraryParts/GetFavoritesByType; existing nativeLibraryExpectations | Host GUID, dimensions, `libPart.name`, `ownUnID.guid`, BREP after reopen; **CONDITIONAL_NOT_WIRED** |
+| T09 / 99 | G2/G3: AC↔GH/Rhino правки, циклы/удаление | AC→GH Deconstruct/Send Changes READ; GH→AC Design отдельный writer, **не APA ledger**; для APA-owned GH Sync=FALSE, изменения через existing prepare_building_parameter_edit | Same GUID edit only for qualified Wall-height/Window size/Roof level; произвольная 3-way sync **NOT_FOUND** |
+| T10 / 100 | G3–G5: конфликт/Save/Open/откат | GH Panel Stream OFF + immutable intent hash → existing SQLite journal SceneWriter → native readback → GuardedSave → GUI close/open → independent BREP; UNKNOWN→READ reconcile | Две разные scratch PLN и два intents, no duplicates, GUID/type/story/host/material/BREP match; **NOT_RUN** |
+
+### Лицензии и границы
+- Graphisoft Live Connection AC29 build3000 — официальное бесплатное дополнение для Rhino7/8, Windows, 01.10.2025; Archicad/Rhino отдельно лицензируются. https://www.graphisoft.com/en-de/downloads/add-ons/rhino-grasshopper/
+- Rhino8 Grasshopper/Panel/GrasshopperPlayer — функции Rhino, не отдельная бесплатная лицензия; trial 90 дней, после срока ограничения. https://docs.mcneel.com/rhino/8/help/en-us/commands/grasshopper.htm ; https://www.rhino3d.com/download/
+- jSwan MIT, 1.2.1 (2020); **совместимость Rhino8 не доказана**; если не работает, минимальный fallback — штатный GH Panel и ручное составление строго типизированного JSON (ошибкоопасно, не рекомендовано для большого здания). https://github.com/andrewheumann/jSwan
+- GH Panel streaming **перезаписывает файл** при изменении; только staging, не путь в native dispatch. https://smorgasbord.cdp.arch.columbia.edu/modules/5-computational-design-modeling-in-grasshopper/5-7_design-space/
+- Ни IFC/3DM/GDL import, ни GH-owned Design elements не доказывают native Wall/Slab/Roof same GUID через APA. Двусторонность ограниченная; нормативный/конструктивный расчёт не подтверждён.

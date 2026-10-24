@@ -1,0 +1,44 @@
+{
+  "schema": "APA_TRIAD_RESEARCH_2_GIT_BLOB_SHA1_MANIFEST",
+  "utc": "2026-10-23T12Z",
+  "branch": "research/apa-extension-ranking-hub-20261018",
+  "source_code_commit": "f7c37b84b76c040c417ccd58a5543326e50f673a",
+  "source_assertions": 31,
+  "scenarios": 9,
+  "counteraudits": 2,
+  "files": [
+    {
+      "name": "research-2-integration-2026-10-23T12Z-triad-checks.md",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T12Z-triad-checks.md",
+      "blob_sha": "6c4198cd7d363568f9ee254af672c905a4ef7412",
+      "commit_sha": "aa4ac76942db546d831c58236c086dd0c043f758",
+      "exact_readback": true,
+      "chars": 6153
+    },
+    {
+      "name": "research-2-integration-2026-10-23T12Z-triad-matrix.md",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T12Z-triad-matrix.md",
+      "blob_sha": "4204d2f240c5d049c600af8698310989841ada9c",
+      "commit_sha": "7564b964598ba719890c59dff406eab97bdbeca5",
+      "exact_readback": true,
+      "chars": 4441
+    },
+    {
+      "name": "research-2-integration-2026-10-23T12Z-triad-audits.md",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T12Z-triad-audits.md",
+      "blob_sha": "300af7b042fdd4bf83f014624608e8b3fea2896a",
+      "commit_sha": "5d8e27f0677224463ea78e7ad020873ffc24658e",
+      "exact_readback": true,
+      "chars": 3199
+    },
+    {
+      "name": "research-2-integration-2026-10-23T12Z-triad-report.md",
+      "path": "docs/research/apa-results/extension-ranking/hourly/research-2-integration-2026-10-23T12Z-triad-report.md",
+      "blob_sha": "602d1194877b0a61c47455b0577b8cc8c2fa8920",
+      "commit_sha": "17233f8744cdee316ad36f580c3c7814baf9f8b0",
+      "exact_readback": true,
+      "chars": 4422
+    }
+  ],
+  "notes": "Git blob SHA-1, not SHA-256; all files read back and compared exactly; no LIVE/BUILD/INSTALL"
+}

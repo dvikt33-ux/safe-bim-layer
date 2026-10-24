@@ -1,0 +1,30 @@
+# APA №1 BUILD-01 2026-10-22 21Z — VERIFIED INDEX
+
+**Impact:** Microsoft ListDLLs/Process Explorer offer a read-only path to identify loaded APX for G0; official Graphisoft API29 defines readback constraints for G2/G4. No gate PASS. 28 SOURCE checks, six solution cards, two counteraudits, four SHA manifests. All 24 targets fetched from research branch.
+
+[S01-07.md](research-1-20261022T21Z-BUILD01-S01-07.md)
+[S08-10.md](research-1-20261022T21Z-BUILD01-S08-10.md)
+[S11-14.md](research-1-20261022T21Z-BUILD01-S11-14.md)
+[S15.md](research-1-20261022T21Z-BUILD01-S15.md)
+[S16.md](research-1-20261022T21Z-BUILD01-S16.md)
+[S17.md](research-1-20261022T21Z-BUILD01-S17.md)
+[S18.md](research-1-20261022T21Z-BUILD01-S18.md)
+[S19.md](research-1-20261022T21Z-BUILD01-S19.md)
+[S20.md](research-1-20261022T21Z-BUILD01-S20.md)
+[S21.md](research-1-20261022T21Z-BUILD01-S21.md)
+[S22-24.md](research-1-20261022T21Z-BUILD01-S22-24.md)
+[S25.md](research-1-20261022T21Z-BUILD01-S25.md)
+[S26.md](research-1-20261022T21Z-BUILD01-S26.md)
+[S27-28.md](research-1-20261022T21Z-BUILD01-S27-28.md)
+[CARDS-A.md](research-1-20261022T21Z-BUILD01-CARDS-A.md)
+[CARD-C4.md](research-1-20261022T21Z-BUILD01-CARD-C4.md)
+[CARD-C5.md](research-1-20261022T21Z-BUILD01-CARD-C5.md)
+[CARD-C6.md](research-1-20261022T21Z-BUILD01-CARD-C6.md)
+[AUDIT-A.md](research-1-20261022T21Z-BUILD01-AUDIT-A.md)
+[AUDIT-B.md](research-1-20261022T21Z-BUILD01-AUDIT-B.md)
+[MANIFEST-1.md](research-1-20261022T21Z-BUILD01-MANIFEST-1.md)
+[MANIFEST-2.md](research-1-20261022T21Z-BUILD01-MANIFEST-2.md)
+[MANIFEST-3.md](research-1-20261022T21Z-BUILD01-MANIFEST-3.md)
+[MANIFEST-4.md](research-1-20261022T21Z-BUILD01-MANIFEST-4.md)
+
+G0 BLOCKED; G1 NOT_RUN; G2 SOURCE_ONLY; G3 NOT_AUTHORIZED; G4/G5 NOT_RUN. New OFFLINE/BUILD/INSTALLED/LIVE/ACCEPTED=0. No main/code/PLN/APX/install/LIVE/merge. MODEL_MODE_NOT_VERIFIABLE.

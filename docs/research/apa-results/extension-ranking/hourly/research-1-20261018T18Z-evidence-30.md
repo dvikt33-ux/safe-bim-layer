@@ -1,0 +1,2 @@
+# APA check 30 — STEP units and transforms
+occt-import-js README: linearUnit mm/cm/m/inch/foot default mm. importer-xcaf.cpp lines 198–275 yields nodes and shapes. Public JSON has no explicit per-node placement matrices. Git tree contains 7,604,031 byte WASM and cube-in/m/mm.step unit fixtures. Exact placement fidelity and Windows memory usage remain NOT_VERIFIED. Source: https://github.com/kovacsv/occt-import-js/blob/main/occt-import-js/src/importer-xcaf.cpp .
