@@ -7,15 +7,16 @@ on:
     paths:
       - 'scripts/archicad_template_builder.py'
       - 'scripts/promote_archicad_template_gate.py'
-      - 'scripts/promote_archicad_template_gate.py'
       - 'scripts/requirements-template.txt'
       - 'docs/archicad-template/**'
+      - 'tests/test_archicad_template_status.py'
       - '.github/workflows/archicad-template-validate.yml'
   pull_request:
     paths:
       - 'scripts/archicad_template_builder.py'
       - 'scripts/requirements-template.txt'
       - 'docs/archicad-template/**'
+      - 'tests/test_archicad_template_status.py'
       - '.github/workflows/archicad-template-validate.yml'
 
 jobs:
@@ -55,6 +56,9 @@ jobs:
               print(f'OK {path}')
           print(f'Parsed {len(files)} YAML files')
           PY
+
+      - name: Run offline launcher contract tests
+        run: python -m unittest discover -s tests -p 'test_archicad_template_status.py' -v
 
       - name: Run offline template validation
         run: |
