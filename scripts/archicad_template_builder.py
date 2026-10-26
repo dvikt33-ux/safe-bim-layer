@@ -1072,6 +1072,24 @@ def apply_safe_core(api: Tapir, allow_nonempty=False):
 
     # Read-back inventory is the authoritative postcondition.
     after = live_inventory(api)
+    if after.get("status") != "PASS":
+        raise RuntimeError(
+            f"Safe-core read-back inventory is incomplete: {after.get('readErrors', {})}"
+        )
+    project_fields = {
+        x["projectInfoName"]: x["projectInfoValue"]
+        for x in after["projectInfoFields"]
+        if x["projectInfoName"].startswith("SBIM.")
+    }
+    missing_or_wrong_fields = {
+        key: {"expected": expected, "actual": project_fields.get(key)}
+        for key, expected in project_info_targets().items()
+        if project_fields.get(key) != expected
+    }
+    if missing_or_wrong_fields:
+        raise RuntimeError(
+            f"SBIM Project Info read-back mismatch: {missing_or_wrong_fields}"
+        )
     outcome["postconditions"] = {
         "elementCountAfter": after["elementCount"],
         "geometryCountUnchanged": after["elementCount"] == len(elements),
@@ -1079,16 +1097,13 @@ def apply_safe_core(api: Tapir, allow_nonempty=False):
             key: len(value) if isinstance(value, list) else None
             for key, value in after["attributes"].items()
         },
-        "projectInfoFields": {
-            x["projectInfoName"]: x["projectInfoValue"]
-            for x in after["projectInfoFields"]
-            if x["projectInfoName"].startswith("SBIM.")
-        },
+        "projectInfoFields": project_fields,
     }
     if not outcome["postconditions"]["geometryCountUnchanged"]:
         raise RuntimeError(
             "Unexpected model element count change during safe-core build; inspect evidence."
         )
+    outcome["status"] = "PASS"
     return outcome
 
 
@@ -4164,6 +4179,11 @@ def main():
         choices=("confirm-project", "validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-master-coordinate-calibration", "plan-form3-geometry", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke", "apply-master-context-autotext-smoke", "apply-master-coordinate-calibration", "apply-form3-core-geometry", "apply-form3-static-labels", "apply-form3-autotext"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
+    parser.add_argument(
+        "--expected-project-path",
+        default="",
+        help="Exact active project path confirmed by the launcher before any apply-* call.",
+    )
     parser.add_argument(
         "--allow-nonempty",
         action="store_true",
