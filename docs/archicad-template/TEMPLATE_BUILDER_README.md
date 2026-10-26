@@ -100,6 +100,20 @@ Those remain gated by source/attribute-dependency resolution and additional regr
 
 ## Safety
 
+**Current launcher contract (26.10.2026):** use
+`powershell -ExecutionPolicy Bypass -File scripts/run_archicad_template_live.ps1 -Stage preflight`
+first. When `-Stage` is omitted, the launcher now defaults to **read-only preflight**, not `all-safe`.
+A standalone writing stage automatically repeats the full read-only preflight before
+its first write. The launcher obtains an interactive `confirm-project` and passes
+its exact returned path as `--expected-project-path` to every `apply-*` call;
+the direct Python CLI refuses writes if this path is absent or differs from the active project.
+The old standalone `python ... apply-core` sample above intentionally does not bypass
+this new project-identity gate: prefer the guarded PowerShell launcher for live operations.
+The template's pinned command contract remains the repo's Tapir **1.5.8** schema;
+the reported installed **1.5.10** provenance still requires local read-only verification
+(see `OCTOBER_2026_RESEARCH_INTAKE.md` on the research intake branch).
+
+
 Every Tapir request/response is retained below the normal `SAFE_BIM_MVP_EVIDENCE` directory.
 
 The safe-core phase does not create/delete model geometry. Element count is checked before and after the write pass.
