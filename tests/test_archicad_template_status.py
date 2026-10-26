@@ -130,9 +130,25 @@ class TemplateStatusContractTests(unittest.TestCase):
                 "create_layer_combinations",
             ):
                 stack.enter_context(patch.object(builder, name, return_value={}))
+            stack.enter_context(patch.object(
+                builder, "live_inventory",
+                return_value={
+                    "status": "PASS",
+                    "elementCount": 0,
+                    "attributes": {},
+                    "projectInfoFields": [
+                        {"projectInfoName": key, "projectInfoValue": val}
+                        for key, val in builder.project_info_targets().items()
+                    ],
+                },
+            ))
             result = builder.apply_safe_core(FakeTapir())
         self.assertEqual(result["status"], "PASS")
         self.assertTrue(result["postconditions"]["geometryCountUnchanged"])
+        self.assertEqual(
+            result["postconditions"]["projectInfoFields"],
+            builder.project_info_targets(),
+        )
 
     def test_apply_core_never_returns_pass_on_incomplete_readback(self):
         with contextlib.ExitStack() as stack:
@@ -150,6 +166,20 @@ class TemplateStatusContractTests(unittest.TestCase):
                 return_value={"status": "BLOCKED_INVENTORY", "readErrors": {"geoLocation": "offline test"}},
             ))
             with self.assertRaisesRegex(RuntimeError, "read-back inventory is incomplete"):
+                builder.apply_safe_core(FakeTapir())
+
+    def test_apply_core_blocks_missing_project_info_in_readback(self):
+        with contextlib.ExitStack() as stack:
+            stack.enter_context(patch.object(builder, "validate_specs", return_value={"status": "PASS"}))
+            for name in (
+                "create_project_info_fields",
+                "create_layers",
+                "create_pen_tables",
+                "create_line_types",
+                "create_layer_combinations",
+            ):
+                stack.enter_context(patch.object(builder, name, return_value={}))
+            with self.assertRaisesRegex(RuntimeError, "Project Info read-back mismatch"):
                 builder.apply_safe_core(FakeTapir())
 
     def test_apply_cli_without_expected_project_path_blocks_before_write(self):
