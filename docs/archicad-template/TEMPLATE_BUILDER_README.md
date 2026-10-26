@@ -168,3 +168,10 @@ Safety behavior:
 - model element count must remain unchanged.
 
 The next gate is a sacrificial Master Layout drawing test before automatic Form 3 frame/titleblock geometry is enabled.
+
+
+## Октябрьские исследования Archicad / APA (01–26.10.2026)
+
+Единая точка входа: [реестр включения исследований](OCTOBER_2026_RESEARCH_INTAKE.md), [снимок веток GitHub и SHA](OCTOBER_2026_GITHUB_BRANCH_SNAPSHOT.json), [каталог 188 октябрьских PR](OCTOBER_2026_PR_INDEX.json) и [матрица переиспользования APA в шаблоне](OCTOBER_2026_TEMPLATE_REUSE_DECISIONS.md).
+
+Содержимое исследований учитывается на уровне базы знаний. Это **не означает** обновления TAPIR, изменения сборщика или успешного запуска Archicad на Windows. Подтверждённые автономные тесты исправления preflight, проблемы происхождения версии Tapir 1.5.10, прототипы APA и планы Rhino/Grasshopper разделены по уровню доказательств. Пока нет реального read-only preflight, запись в проект и выпуск `.tpl` запрещено считать принятыми.

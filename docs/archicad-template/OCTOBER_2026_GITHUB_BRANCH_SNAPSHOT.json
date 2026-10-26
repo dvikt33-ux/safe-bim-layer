@@ -1,0 +1,1481 @@
+{
+  "title": "Снимок обнаруженных веток GitHub для консолидации исследований Archicad, октябрь 2026",
+  "snapshot_date": "2026-10-26",
+  "repo": "dvikt33-ux/safe-bim-layer",
+  "source": "GitHub REST /repos/dvikt33-ux/safe-bim-layer/branches?per_page=100&page=1..3",
+  "branch_count": 245,
+  "candidate_count": 206,
+  "scope_warning": "Тематика определяется по названию ветки, не по содержимому и не по датам коммитов. Все записи SOURCE_DISCOVERED, а не SOURCE_AUDITED. В реестр включены и исторические, и неотнесённые по теме ветки для недопущения тихих пропусков.",
+  "branches": [
+    {
+      "branch": "archicad-capability-registry",
+      "head_sha": "bdd38ef457ac1c56990f026aefecf14f623de4f8",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "arena/fix-house-offline-audit-f7d38af",
+      "head_sha": "c6ab4749e8784cc65170167d166daa6cc219a931",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "arena/fix-wall-readback-z-14bc0d2",
+      "head_sha": "ebbe7794ad9f7b7c9c921c3d0d8c0494fa6f4808",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "arena/house-primitives-offline-ebbe779",
+      "head_sha": "f7d38af825de57fc57660eeddf1186cc5b21ac71",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "arena/plinth-grade-runtime-audit-20260927",
+      "head_sha": "ac01adfd070e2994ccf7d30dbf0a531c632f3127",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "arena/runtime-hardening-v1",
+      "head_sha": "a2d5dc9f81854bedff29347f9ef9134631263fa5",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "arena/runtime-safety-fix-ac01",
+      "head_sha": "14bc0d2a37a751029381e506809025eb434aa721",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "arena/t0-probes",
+      "head_sha": "c55f404829e4e11004ea5c59c8b3aec18b663866",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "arena/tapir159-compat-geometry-c6ab474",
+      "head_sha": "c6ab4749e8784cc65170167d166daa6cc219a931",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "audit/apa-advanced-ref-workflow-ifc-20261015",
+      "head_sha": "d731d9e4a5e4a1f5d560d00f79487915343e20c2",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "audit/apa-boundaries-diamond-replies-20261015",
+      "head_sha": "e5598dace18e878147466961b5b3ba9580339369",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "audit/apa-brep-ifc-runtime-unique-20261015",
+      "head_sha": "0f7fa2233f2850f0dc6f3e4776ac08b65864e15b",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "audit/apa-dynamic-provider-regression-20261015",
+      "head_sha": "ca5f1eb2c6699d4eea5e064b536d9e13a6c36754",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "audit/apa-mass-parallel-offline-20261015",
+      "head_sha": "30c321c574bb4cf8c7abc8e95553cb8ce84953f1",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "audit/apa-novel-property-matrix-20261015",
+      "head_sha": "90ab6800a797bd1454756e9b2a425e43c3053ab2",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "audit/apa-pr82-full-extension-gap-20261014",
+      "head_sha": "98ea9101fc5a634bc1185f65199b578a5f3c75ae",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "audit/apa-pr94-memo-quarantine-qa-20261015",
+      "head_sha": "0ba6a8df0b20a8f0eaeeb6b3c1a863e0db5aee29",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "audit/apa-pr96-native-dependency-qa-20261015",
+      "head_sha": "8fa9621a6080f3d93dc0f65203ed7029216ed570",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "audit/apa-pr96-native-relations-abi-20261015",
+      "head_sha": "8b6333d11b6fe139032834e89669d1904f75f358",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "audit/apa-pr107-parametric-mep-192-20261015",
+      "head_sha": "d5565edf11751436274818c29d0cc200efc01b46",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "audit/arena-full-system-audit-20260928",
+      "head_sha": "181ca75229d9fd949797dbfa607c5245b121aaec",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "audit/arena-reconciliation-gpt-counter-audit-20260928",
+      "head_sha": "53d6b638b4e638c669ce169196088c3b3a5cdc30",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "audit/gpt-counter-audit-arena-20260928",
+      "head_sha": "59239ceac83529c1fb6ad5d97fdf3d74edacc848",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "audit/live-r0-r4-20260928",
+      "head_sha": "b7fa4d304263f6dccc9edc11f607c26942ba695c",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/accelerator-floor-offline-20261009",
+      "head_sha": "751fdfbc1be929f3da601e1094f74fed2f02b322",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/archicad-modeling-standard-v1",
+      "head_sha": "81344925f06523bb60ee300f48af458ab0288938",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/closed-loop-orchestrator-v1",
+      "head_sha": "f8b82ed3008c4669faf1424958b30f43aa4b5d92",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/construction-detail-library-v2.2-20261006",
+      "head_sha": "2ec5c001544a0eede73daa99c618ba53448f226c",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/detail-machine-db-v2.2-20261006",
+      "head_sha": "ebe46536c85111248234235c8e7ac8cbd2bffac5",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/detail-machine-db-v2.3-20261006",
+      "head_sha": "b8de871bce289240e0ee3694c6edb3b8d4c431f7",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/detail-machine-v2.2",
+      "head_sha": "4559bf13a2b17dd525cf91ed00521cabbdaf5a0c",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/detail-machine-v2.3",
+      "head_sha": "3cbfc4e379b54d4249badd508fb64c21886ac186",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/kaiman-exact-v2.4",
+      "head_sha": "a5eb3eee68817925ecfebb0fb22ab6b8fbe59f03",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/kaiman-exact-v2.5",
+      "head_sha": "0e7a312d7a7c491d877b6746b275acd0364c97ab",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/mailbox-graph-host-integration-20261009",
+      "head_sha": "d3c0dd51ba12eb6112822376b3aa05d3077b7afc",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/mailbox-wall-local-transfer-20261009",
+      "head_sha": "c0223e18370e5e3d5205ca401a68d7603b4be120",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/minimal-archicad-inventory",
+      "head_sha": "7bd2f7076933e31cdf6d24855ca703c0c6e67545",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/project-intake-stage0-v1",
+      "head_sha": "99326ff531dfa9cb19c906ee349304fdca92fc52",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/project-revision-consolidation-20261006",
+      "head_sha": "743b791504eb92805a18edf78d20b958a6220710",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/schema-driven-batch-20261008",
+      "head_sha": "1167e6bb1bc025e10855c12be14811e44d7ad42a",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/tapir-1510-offline-preflight-20261009",
+      "head_sha": "bbf332e692a75b06e7f6ac1590a6ea32790a3fa1",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/whole-scene-v1-20261009",
+      "head_sha": "f02a167eb73cb149713cf5e613911b144fce5be2",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt/working-first-development-rule",
+      "head_sha": "88cf532c70362b3f404aa5bae2c640527fca5616",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "chatgpt-write-test",
+      "head_sha": "02ed7a8a5a6e199bdfcb7cc7c7836dd7038deacb",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "ci/apa-offline-mass-parallel-20261015",
+      "head_sha": "31b4d39b35907ef21fa0fe7dbf13dd1c7c8ed82a",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "ci/apa-offline-mass-parallel-new-domains-20261015",
+      "head_sha": "2e93c10925a3c5d9ffc90a2b578cdb4c2f4e43d6",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "ci/apa-offline-parallel-contract-security-20261015",
+      "head_sha": "794457d28f4cc91f639f8d2487c5f4ba0dce97fb",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "docs/architectural-visualization-protocol-20261012",
+      "head_sha": "5579a9d3a8001bab2c156304ba5dd4019e4b3ef3",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "docs/chat-first-work-minimal",
+      "head_sha": "bf860e1557b9d54318c022191cdc1cef4a84e2d7",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-auto-group-intent-20261020",
+      "head_sha": "773bfe60797e162f5c1986ec141a4e24d2c7dae9",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-automatic-group-routing-20261018",
+      "head_sha": "f7c37b84b76c040c417ccd58a5543326e50f673a",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-autonomous-job-bridge-20261017",
+      "head_sha": "1ee4c8a52b0b7def1296b1fe414d419332b747f3",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-bdd114-one-shot-write-20261017",
+      "head_sha": "308d32d093ea2005ff99831b5e2f9ddd411110bf",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-dxf-geometry-c1-20261018",
+      "head_sha": "7589c5dcee1fb71edae64e1d3bc9b1de14693e8e",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-dynamic-write-scopes-20261017",
+      "head_sha": "e116a486f5b02b019b232b3a7c9313bf349b3aab",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-existing-create-verifiers-20261017",
+      "head_sha": "4c119428e9b1c24bd00774c91a6f33cbf26f0369",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-finite-line-distribution-20261019",
+      "head_sha": "c3d2c9767bab54f4d7ec763e6af3ed0f736c452c",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-group-acceptance-mailbox-20261018",
+      "head_sha": "f13b1dcd70e9cb63f795e09fd25ada299e56f017",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-group-grid-live-20261018",
+      "head_sha": "4ef970a1cef798aafbece4649af926b9f8f4e57a",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-group-grid-verified-20261018",
+      "head_sha": "9b7c2e93f93053c9ac306bc3a6a5c9f728b394aa",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-group-scenewriter-live-20261018",
+      "head_sha": "a04c6b44f2672cd58315eaba01708180f5a4d720",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-guarded-save-snapshot-20261019",
+      "head_sha": "24c198344a75dfa9a4515cca4df23badf3557d3d",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-high-density-readonly-v2-20261018",
+      "head_sha": "5c0dc009e729db9834301b4a369512490a205ef7",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-hotlink-coordinate-batch-20261018",
+      "head_sha": "eee149369e9f4bec44ba176d13daf2c07558ce92",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-ifc-artifacts-b2-20261018",
+      "head_sha": "d6996124246a20b6760fc4688142ac7a1d890a29",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-ifc-geometry-b3-20261018",
+      "head_sha": "35a8b7b2fd78e63a6e13254d4c4fde26171793c8",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-ifc-package-b1-20261018",
+      "head_sha": "357d920d59ed129b1143751fa96b27e4b3bc326a",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-installed-mass-selector-20261019",
+      "head_sha": "14a8922b2f0affd84205908ea8d7503d984348c1",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-local-controller-20261017",
+      "head_sha": "d66c9a5500afa4886738815de50a7c5dafdf24fd",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-mailbox-apx-build-20261018",
+      "head_sha": "a6b8cea99adcd04b18737f6596d5a294306164b2",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-multi-prototype-native-copy-20261017",
+      "head_sha": "49c676ce04b14c1376bc7629d6cb74426479bbdb",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-native-copy-registry-20261019",
+      "head_sha": "c1338d2f659340bce7aa44fbb7d34165b8ac5fc9",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-native-hotlink-oneshot-20261018",
+      "head_sha": "b3a373243e10a4a6752b0b379c9b51005a663f73",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-native-massops-integration-20261019",
+      "head_sha": "f5f1ad15d632a581be942d7effa717c1d29e10bf",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-native-slab-copy-20261020",
+      "head_sha": "7e318b1773e86a0edee4e95febdc99f3ff41ab59",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-reusable-copy-collision-gates-20261017",
+      "head_sha": "c155b1ed60a32cefb9bd5c4731786f31a5152ebb",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-reusable-native-copy-worker-20261017",
+      "head_sha": "20e718451212f9cdcbab2aeacf2609640b4fbfd1",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-runtime-selection-finish-20261017",
+      "head_sha": "467d66d89059bd7fc27ed34d6dd62095f38511cf",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-safe01-live-integration-20261019",
+      "head_sha": "d2d63d8045974bf5d6c49a77da1e013d4f9f7725",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-scope-execution-repair-20261017",
+      "head_sha": "e408dcc71914537e30e2c0dcd9b74e06d97c9a2e",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-scoped-native-mailbox-20261017",
+      "head_sha": "65eb58068f15fb2646e4a5a0464017741441bf6d",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-scoped-native-translation-20261017",
+      "head_sha": "48b36020e8c9528d0993c4474e89b0f8ecd0457e",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-selected-axis-intersections-20261020",
+      "head_sha": "09133e81a13098dc53fbe2e385bb30a3bcdbf27a",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-semantic-bulk-vs-single-selection-20261018",
+      "head_sha": "4b6cb12d9956f3f69a8bc377f0e5dc19396960bb",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-shared-native-group-create-20261020",
+      "head_sha": "3e20da6c8447749bc2db7e09247a012a98f6b396",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-shared-native-group-move-20261020",
+      "head_sha": "426ea870ef6e2fce60a6354a3c6f335906100e18",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-shared-native-ungroup-20261020",
+      "head_sha": "8a95c9e6bb3af95d9a38a27bc1009aeec04b615e",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ac29-six-verifier-live-upgrade-20261017",
+      "head_sha": "6d4487d6b4ef34a0573de694c179335827d3b1fc",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ap2-massops-preflight-20261018",
+      "head_sha": "e8cbbf97335d454b7d253061319bcf354a4eaf99",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-ap2-same-autonomous-receiver-20261018",
+      "head_sha": "78f56bed17259db4f75088352441895cb65dbca0",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-authored-native-bim-plan-20261011",
+      "head_sha": "a9b6d36790128789b8b82cdf7d0a2290a1c7b3eb",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-authored-preflight-contract-20261011",
+      "head_sha": "1a37e5d84bc87d18359db73cd2594d89981a81d0",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-authored-spatial-clearance-20261011",
+      "head_sha": "03f94e9bb67e01a0944813b25eaea50b1afa0ead",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-authored-spatial-loadpaths-20261011",
+      "head_sha": "6d336f4e625a3618f1f45136d281c0138561515c",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-auto-discovery-v2-20261017",
+      "head_sha": "75ae71dc60176225bb71928fb805e5adcc688b2e",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-bdd-live-router-readback-20261016",
+      "head_sha": "e036f32a6b47c7102b5b21e771e2e371c3bae1f5",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-bdd-native-batch-live-20261016",
+      "head_sha": "c56281b6ab042383dff6ae14c0784664a13ed76a",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-bdd-native-window-1p8-20261016",
+      "head_sha": "70436d15714f9c9371b62e6ae244fded1a01b655",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-bdd-north-two-windows-20261016",
+      "head_sha": "3dc7859f79bea1326cff3aa82212c3dbee73ab62",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-bim-documentation-20261013",
+      "head_sha": "f5aa4754a0ace251e8541001f17f6fa8eddfe8e5",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-capability-auto-discovery-20261017",
+      "head_sha": "331a8d4f4ca96e031a562406923ac91a28fd4b63",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-connected-batch-v31-20261012",
+      "head_sha": "286b1ae8614421b927af95c4c278147c8d55baba",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-connected-expansion-v32-20261012",
+      "head_sha": "3a743a4f96a98acdcbb837946603f0681d9a1f54",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-connected-gap-windows-20261012",
+      "head_sha": "2b499730ac4c52b70d796f2857fb15d7e3d3d676",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-connected-gaps-v31-20261012",
+      "head_sha": "3191e7ce5071e6de7401f6e520fbd8f3ef2a1ea2",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-connected-independent-offline-20261014",
+      "head_sha": "f994e388314ab671778eae5d3c6f3355216c7250",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-construction-junctions-20261012",
+      "head_sha": "b1abd584585feb0f286621337986c8a5d3077507",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-dxf-source-preflight-20261020",
+      "head_sha": "f0ca0e10aa067b7f9a2497b6974d458abe689aa8",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-executable-bim-workflows-20261015",
+      "head_sha": "45ef6b734e70c0e2c40ea57ed9a0099d70c4a917",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-external-pdf-lossless-20261018",
+      "head_sha": "ca28e9b8003eeb3a38ca201ea96c0096e07b677f",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-four-real-wall-roof-20261012",
+      "head_sha": "b056cb76929a62047c82fd66961b72eb4d9078a8",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-functional-house-bulk1000-20261018",
+      "head_sha": "1ac879bb9deaab843c01982c51b8953f98dae8bb",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-functional-house-recovery-20261017",
+      "head_sha": "ff2554c5c6b3b89b00710b71ff8de03c8635ecdd",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-grid-stair-exact-20261013",
+      "head_sha": "bc8f8575ed65e308e10c5ac5f573b7d8ad9466a6",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-grid-stair-live-20261013",
+      "head_sha": "c1b4e1a565bcd903273933d8917608df156ac600",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-highlevel-whole-model-20261011",
+      "head_sha": "e955ffb63d24d79e3068b27d16a89dfa9860f99f",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-isolated-authored-native-20261011",
+      "head_sha": "976c19cecebe3f6bb4352365d9a59051d5b2b61b",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-knowledge-integration-20261013",
+      "head_sha": "88169d358e4c329f8959f557c944300adcec2df9",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-live-catalog-binding-20261017",
+      "head_sha": "4caaf8cbb27345b35f18c1cc3fe0dd129df60ca4",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-machine-normative-integration-20261012",
+      "head_sha": "29aa06a6e9bbef0d991bea922e1ad4101ab29bdd",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-mass-capability-integration-20261014",
+      "head_sha": "08527c0edde2096cf5d7be534b5e49f5c9038647",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-material-library-20261011",
+      "head_sha": "9139124176e3114afd8f3b7733cf40f423d0d8e5",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-moag-evidence-topology-v1-20261019",
+      "head_sha": "2d8f8bb5fec663bc9d34ddcb1fa78ad1e5ee2f25",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-moag-graph-assembly-r06-20261020",
+      "head_sha": "51ebce6215e81ea2f16f18db75742d2f5b8c3754",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-model-first-building-20261013",
+      "head_sha": "5a3a9201a715a5528c93bed4a5318e2acb32eea7",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-native-beam-mep-20261012",
+      "head_sha": "744e0bd184a11f1de4a1cf16382d21aec6f8cfca",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-native-bulk-writer-20261016",
+      "head_sha": "f12aeba017ecd34a13989998f0b7700f6a0107d2",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-native-copy-first-20261016",
+      "head_sha": "50ee7f5cc6852ce32251ed3ace85540e1ae92ae1",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-native-documentation-followon-20261013",
+      "head_sha": "93557ed0cd59c471b0f903a03708ed88c8feb31b",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-native-gable-hip-roofs-20261014",
+      "head_sha": "1c27e7c4b66d5b225724e777719e6a675660494a",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-native-geometry-20261011",
+      "head_sha": "ec401314c185df4845ccb6ae7b15e57234a46cad",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-native-grid-stair-runtime-20261014",
+      "head_sha": "60a78e0cd55fc4951c1de3c8d060adf4f9538134",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-native-linked-data-20261015",
+      "head_sha": "6ae582b9f2a9666389fc06fd0528bbfff3fde6b4",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-native-memo-edit-20261015",
+      "head_sha": "13139d6cd03340bff7fbde5ccac5735929843b7a",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-native-owner-recovery-20261015",
+      "head_sha": "61f56376e37755cfb4a15db29071970525297904",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-native-parametric-mep-20261015",
+      "head_sha": "9a3091638eaa1a9c72f9a08c17d02855d8419edc",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-native-positive-modules-20261015",
+      "head_sha": "8f134001ca0e3250eda587db61ac01dbd6357326",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-native-stair-source-going-20261014",
+      "head_sha": "3221b8e7a0b775ece1018caf622a32c6ca9cb9dc",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-native-stories-grid-stair-20261013",
+      "head_sha": "8ee3fcd89efa5220dc4d1ceb4fb92a26e0d8c07f",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-normative-bindings-20261012",
+      "head_sha": "e43bc6055d648270b72dc573a22c9d52c71a83f8",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-project-library-pack-20261011",
+      "head_sha": "83fd72e150e96cb90db75145436d023969365bd3",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-publisher-report-receipt-safe-retry-20261011",
+      "head_sha": "37770e7b4867cec720a84060a29a7c969ee7e265",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-publisher-scheduled-watchdog-20261011",
+      "head_sha": "e559126eb84452d7b8e1040ef53174e66a8c5f76",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-readonly-tools-isolated-20261017",
+      "head_sha": "13d9ac866ab38bcc3e97bb383f68478e1b1242d8",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-roof-source-binding-20261017",
+      "head_sha": "74ad234c6975e2ea8a5139a17bf9ae63f820a3d8",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-sdk-component-context-20261015",
+      "head_sha": "76ab55c1c34fa327c2c71b7615e7cde5b090f69c",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-sdk-module-expansion-20261015",
+      "head_sha": "a444d5a6b481bfabd9c48f23c17df05c51ab0ea4",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-sdk-runtime-expansion-20261015",
+      "head_sha": "d758957f97cf1e347262da6f7e7b325ae6609ea4",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-semantic-brief-story-resolution-20261011",
+      "head_sha": "f0b81b784cb7a84d139d2356b51ff3d9b266f4b5",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-semantic-ready-tools-20261018",
+      "head_sha": "40f909022def27ea30c6c45cf804b6cf059a0543",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-slab-basic-journaled-20261011",
+      "head_sha": "62789eca361df59b7749f3930aa77f269c5258ed",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-slack-event-coordinator-20261010",
+      "head_sha": "1a6c5e62ab3bd0f262bd3ba89445e8d4199e9123",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-sync-api-error-codes-20261011",
+      "head_sha": "1b3f20fa6c7f1086348a388da7b1a64060d2be9c",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-sync-bootstrap-diagnostics-20261011",
+      "head_sha": "f118fb1b11eba20d6e71d4aa48594459de8a4267",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-sync-chatgpt-trailer-20261011",
+      "head_sha": "3a6fde05d1db6ee20cda7246e0b678f1097c18cf",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-sync-envelope-stage-probe-20261011",
+      "head_sha": "0ba3cc7408ba777546ae89fad4decd17d6421900",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-sync-fence-shapes-20261011",
+      "head_sha": "b7021647a1a0e9c2be59d91db285d236b3fab6dd",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-sync-live-readiness-20261010",
+      "head_sha": "e4d456cbd6b8bb4bdfcd8e22fea6c546932a5497",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-sync-raw-envelope-probe-20261011",
+      "head_sha": "235d7cbb2c619dd7e87fba4db5064637d084c5d2",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-sync-receipt-evidence-bridge-poc-20261011",
+      "head_sha": "860d2a8f9b6f594f142d1477ff1489c53b6d94ad",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-sync-schema-rejection-reasons-20261011",
+      "head_sha": "1d7b488e8484e3d16b7a25c5fad3a7d13ceefbd9",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-sync-slack-envelope-evidence-recovery-20261011",
+      "head_sha": "3bdf572b27b27a27335f24336625777f189fec4d",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-sync-slack-native-footer-20261011",
+      "head_sha": "e2083582485933af83feea802c379f03ad947217",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-tatarstan-build-house-20261012",
+      "head_sha": "303d9562d6f02b18ef1592e155cc0ffcbd7dbf36",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-tatarstan-snapshot-readonly-20261012",
+      "head_sha": "bb93221866423948f8c8770ed1dcf60da60cd8f0",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-unified-discovery-integration-20261017",
+      "head_sha": "30af6480860ff98995177b91acf47b676d4a52ac",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-universal-native-runtime-20261014",
+      "head_sha": "cb73cd578c7cd7577f80397920d9e81b8d09c6e1",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-unnamed-native-story-pins-20261011",
+      "head_sha": "65346da2f79b7427fefbcf18b7e9a02d1cae4b91",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-up-fast-downward-planner-20261017",
+      "head_sha": "b080ea36b39c0ef71358e1a5c4659fdc4f3f56da",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-verified-roof-rules-20261012",
+      "head_sha": "633c799da125622be6317ea9d09a9b7eb83fb98a",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/apa-wall-roof-underside-20261012",
+      "head_sha": "7966db58ca8830b43938a03cc064bcc3e952a21e",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/bdd-house-auto-selector-build-20261017",
+      "head_sha": "7a8b88275172da3b866648bc6f580ba762fb7f6a",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/bdd-house-native-build-20261016",
+      "head_sha": "8f3d13d0ab10e62af0cc19c3b394bb677f11545f",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/bdd-kr6-native-floor-correction-20261016",
+      "head_sha": "1d0b01850b9118dfbfbbf7ea4490209023fb0cdb",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/bdd-resume-live-wall-evidence-20261017",
+      "head_sha": "8b3bf90d676d6b837312e544d22f289e8dc17991",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/bureau-chat-activation-gateway-20261020",
+      "head_sha": "03de836e0bcb70c4c54419f1f939d406d22bbec1",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/bureau-testbed-architecture-r00-20261021",
+      "head_sha": "ea24968fea87dffd2da029f36c652889107f94dc",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/chat-bridge-wall-write-mvp",
+      "head_sha": "27906e2a1370146a8d740f02384ab02a584ce918",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/gpt-direct-bridge-20261002",
+      "head_sha": "a5a2af3a5b613b3303541aa2e1710a2faa28972d",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/gpt-mailbox-write-path-20261005",
+      "head_sha": "f5b7823abd7976bec580d3409b88ac418ea1f7a1",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/project-accelerator-integration-pr-20261009",
+      "head_sha": "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/somestuff-syncguids-source-20261009",
+      "head_sha": "1b3a43479343d65ce1a63d181c5b83f683530050",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/trc-sad-native-plan-preview-20261013",
+      "head_sha": "9a2833e71d7a98588deb8c6bde6c8a6938daa48a",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "feature/working-archicad-mvp",
+      "head_sha": "792f7d879bd62f0489eb0757179ed5efa198f016",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "fix/apa-ac29-bdd-paired-history-reconciliation-20261018",
+      "head_sha": "68b38925e040d8954d40364abbb35cbb5e477ea6",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "fix/apa-ac29-local-write-grants-update-20261017",
+      "head_sha": "06e85cf4f793207bd54503ceaa4183bcc61b165f",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "fix/apa-ac29-native-copy-brep-identity-20261017",
+      "head_sha": "886068737d1cec1c314b101a0afc860f09061577",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "fix/apa-ac29-six-verifier-release-20261017",
+      "head_sha": "8fbb311fc2f25fb8b2b6ff432e74d4e31b4c93fc",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "fix/apa-bdd-readonly-story-binding-20261016",
+      "head_sha": "e8b0b1d6fd03b6c47deddfa87cfb87b3e4456d4c",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "fix/apa-publisher-controller-race-rebuild-20261011",
+      "head_sha": "1b441da37e00432ee07f1fe954b31c210093cb90",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "fix/bdd-house-pile-count-diagnostic-20261016",
+      "head_sha": "5dad323e0c3b0eec0fc07e205d044e04116b1084",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "fix/bdd-house-resume-native-subcomponents-20261016",
+      "head_sha": "b4837efb43ee9a131e44f7d903e7ee5aca1803cb",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "fix/bdd-kr6-grillage-contact-20261016",
+      "head_sha": "6f9611cabe4ff9481237d18613f6011d2553be9d",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "main",
+      "head_sha": "10179659c8c2cd974ca6bd8ba9a57acb1f7a419c",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "prototype/s2.4-archicad-context-provider-20260929",
+      "head_sha": "1e87381693ef6467dfacd97374b8a990687881f7",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "prototype/s2.5-runtime-bootstrap-20260929",
+      "head_sha": "1de1ae7d598c9d32b3d80c8bb1119437a3f6ea11",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "prototype/s2.6-control-surface-20260929",
+      "head_sha": "7469b775f2552e41846c86512e87c13cdb864b6b",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "recovery/apa-pr59-interrupted-package-20261012",
+      "head_sha": "571c62b3d4813d9f7932acfc032854fd6b5f0474",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa01-kazan-house-concept-20261012",
+      "head_sha": "e456fab124627bb1d31993f9ee3db2a8d88014e8",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-20261009-api-mep-batching-audit",
+      "head_sha": "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-20261009-resource-mep-bridges-audit-v1",
+      "head_sha": "bcac2e821a95f927fa6ae9f5fa5742b45d9ca2dd",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-ac29-native-contract-gaps-d1-20261018",
+      "head_sha": "21c6610a2bdff6faf17e1844a01bcb2dee09fe78",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-ac30-local-api-inventory-20261016",
+      "head_sha": "9700836aa5a74f4b009b539e2363942eca5461e9",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-ai-candidates-registry-20261014",
+      "head_sha": "58fdcd72da75fef864de86618a73be377e4af950",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-archicad29-independent-audit-20261010",
+      "head_sha": "ee3d1a8e7d7d2bd7bd8ee3bc27cdac98c7f8decd",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-archive71-traceability-isolated-gpt6-20261012",
+      "head_sha": "7a2675393209c03f2018bbb013cfbd88dc509acc",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-bdd-house-native-workflow-20261016",
+      "head_sha": "cb706b0e06d82f8e00b205455cd0d240a414be0d",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-extension-ranking-20261018",
+      "head_sha": "59a14b04043a6e1917fcc55635074489b630c8b4",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-extension-ranking-hub-20261018",
+      "head_sha": "beebc11b6ee8ef2ff162e74a9a3e8d9b3979fb1e",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-gdl-factory-readonly-gap-gpt6-20261011",
+      "head_sha": "9e1bba28048399178f2650e11c3c4e36c5a345c1",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-json-pointer-contract-tests-20261015",
+      "head_sha": "e9165b70142ee80e8dee67323e6733963a7a8735",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-knowledge-impact-poc-20261013",
+      "head_sha": "77f697b1318e2326006a32a3889ce3f464e6d9c0",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-new-offline-domains-20261015",
+      "head_sha": "dd3997d695bb35fbcb10f817ee95c68ec64b723d",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-offline-parallel-evidence-20261015",
+      "head_sha": "139f4b418bcd1e78c1200ef3cdf3c86a5ff82fe4",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-offline-qa-router-edgecases-20261015",
+      "head_sha": "568261cc7e201807f8da4bdfc3edbfe5510a3f26",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-roof-composite-gap-review-20261011",
+      "head_sha": "d0dd2bcc032b4d6e8c3c66b80fa7e4bba696919e",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-tn-gdl-create-01-blocker1-audit-20261009",
+      "head_sha": "39231a1e63ab91ff05cabe484bf737c176434a44",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-tn-gdl-create-01-checkpoint-20261009",
+      "head_sha": "246f6768de552acac4110b86a2d8b62672ee3eae",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-tn-gdl-create-01-native-probe-20261009",
+      "head_sha": "9b75c2fed9d51301a7a620ca94df7a36d5545870",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/apa-verified-results-hub-20261010",
+      "head_sha": "5e87dec1b223f074af71a3635d5897e6762db5fd",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/archicad29-tapir159-expansion",
+      "head_sha": "c651035ddc77869fbc5a04bf23170b4f1188a9ab",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/archicad-full-capability-audit-20260928",
+      "head_sha": "4fedb7cb815f9109755a9174bbae709fa18fdab7",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/archicad-october-2026-intake",
+      "head_sha": "4c0017315a0f9b569be5e636baf59d6f2be0b488",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/architectural-model-quality-v2",
+      "head_sha": "e6962b612938cc399913246bc7e296f59704772e",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/bdd-house-kr9-reference-geometry-20261016",
+      "head_sha": "dfe3c83d76bb7c4e82c58c958160ea8000eb0e39",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/bdd-house-native-core-live-readback-20261016",
+      "head_sha": "af48fdd62e4e1500fe484f3f59520b5e8fdc63bc",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/bdd-house-readonly-inventory-20261016",
+      "head_sha": "617fd0a8d9968935453ec3bf7d6ad371e83b8727",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/bdd-live-apa-wall-hosts-20261016",
+      "head_sha": "8ad5002bef7c514191e6e694d0fbcefbc51dc7da",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "research/library-system-v3",
+      "head_sha": "7281bab2ec012933cf056d81d26822c017951ad6",
+      "candidate_archicad_october": true,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "work/audit-pack-fix",
+      "head_sha": "03c64733bb2b4f59970f5247a3ed89e1236f3090",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "work/constraint-compilation-v0",
+      "head_sha": "cc838c0fd0e40be7426ea991af54234a35f22544",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "work/design-engine-stage0",
+      "head_sha": "1d4b66ae36d955588dcf2276a3e7b0ccaf6f74ef",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "work/design-functional-program-v0",
+      "head_sha": "e273edbeb5bfd6337856fccf5e8c9834c0273a5a",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "work/design-intent-v0",
+      "head_sha": "3eb33b3c248a19088eb6868ddd997a69fab8d4a7",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "work/evidence-storage-lfs",
+      "head_sha": "06c503a424498a74e19507ae11a4cc48f6dc7c3f",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "work/planning-engine-v0",
+      "head_sha": "8881c46c222a7adaf6372941c185db4ac67598e1",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "work/project-constraint-input-v0",
+      "head_sha": "c75665feb8029116245dd1ec76733e599ebdc24a",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "work/project-normative-bundle-v0",
+      "head_sha": "6901fe69d834f8d571c53d3bbda57f46d2106943",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "work/site-context-model-v0",
+      "head_sha": "8cbbab827ee8a1bdde5e7d44ac3d1b06f5b4cc8b",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "work/stage1-v0-regression",
+      "head_sha": "27fc10267e71d1cd4f8322fe1d3c334e2cef1b4c",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "work/stage2-orchestrator-skeleton",
+      "head_sha": "d6ed3b071c1e7d17b8d819377e1984c80dd9ed33",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "work/stage3-live-wall-closed-loop",
+      "head_sha": "2674e1ebd7656fbdb306bcff294d8d17174be78a",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "work/stage4-live-hardening",
+      "head_sha": "faf2fd8adcfd3329ae77a137b37f739a9a462225",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "work/stage4-performance-pass",
+      "head_sha": "ad0c0ed127c068d2a7446f3bf03a31f7584decad",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    },
+    {
+      "branch": "work/stage5-hosted-window",
+      "head_sha": "06f6e04974bbea23c12cff63f93004048579ff3e",
+      "candidate_archicad_october": false,
+      "review_status": "ОБНАРУЖЕНО; содержимое ветки в рамках этого снимка не аудировано"
+    }
+  ]
+}
