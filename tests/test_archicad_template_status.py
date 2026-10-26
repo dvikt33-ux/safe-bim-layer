@@ -117,5 +117,100 @@ class TemplateStatusContractTests(unittest.TestCase):
             self.assertEqual(json.loads(destination.read_text(encoding="utf-8"))["status"], "PASS")
 
 
+
+    def test_apply_core_pass_only_after_successful_live_readback(self):
+        # Stub all mutations; the test exercises the returned contract only.
+        with contextlib.ExitStack() as stack:
+            stack.enter_context(patch.object(builder, "validate_specs", return_value={"status": "PASS"}))
+            for name in (
+                "create_project_info_fields",
+                "create_layers",
+                "create_pen_tables",
+                "create_line_types",
+                "create_layer_combinations",
+            ):
+                stack.enter_context(patch.object(builder, name, return_value={}))
+            result = builder.apply_safe_core(FakeTapir())
+        self.assertEqual(result["status"], "PASS")
+        self.assertTrue(result["postconditions"]["geometryCountUnchanged"])
+
+    def test_apply_core_never_returns_pass_on_incomplete_readback(self):
+        with contextlib.ExitStack() as stack:
+            stack.enter_context(patch.object(builder, "validate_specs", return_value={"status": "PASS"}))
+            for name in (
+                "create_project_info_fields",
+                "create_layers",
+                "create_pen_tables",
+                "create_line_types",
+                "create_layer_combinations",
+            ):
+                stack.enter_context(patch.object(builder, name, return_value={}))
+            stack.enter_context(patch.object(
+                builder, "live_inventory",
+                return_value={"status": "BLOCKED_INVENTORY", "readErrors": {"geoLocation": "offline test"}},
+            ))
+            with self.assertRaisesRegex(RuntimeError, "read-back inventory is incomplete"):
+                builder.apply_safe_core(FakeTapir())
+
+    def test_apply_cli_without_expected_project_path_blocks_before_write(self):
+        with tempfile.TemporaryDirectory() as folder:
+            destination = Path(folder) / "blocked.json"
+            with contextlib.ExitStack() as stack:
+                stack.enter_context(patch.object(builder, "Tapir", return_value=FakeTapir()))
+                stack.enter_context(patch.object(builder, "EVIDENCE_ROOT", Path(folder) / "evidence"))
+                apply = stack.enter_context(patch.object(builder, "apply_safe_core"))
+                stack.enter_context(patch.object(
+                    sys, "argv", ["builder", "apply-core", "--out", str(destination)]
+                ))
+                with contextlib.redirect_stdout(io.StringIO()):
+                    with self.assertRaises(SystemExit) as ctx:
+                        builder.main()
+            self.assertEqual(ctx.exception.code, 2)
+            self.assertEqual(json.loads(destination.read_text(encoding="utf-8"))["status"],
+                             "BLOCKED_PROJECT_CONFIRMATION")
+            apply.assert_not_called()
+
+    def test_apply_cli_mismatched_project_path_blocks_before_write(self):
+        with tempfile.TemporaryDirectory() as folder:
+            destination = Path(folder) / "blocked.json"
+            with contextlib.ExitStack() as stack:
+                stack.enter_context(patch.object(builder, "Tapir", return_value=FakeTapir()))
+                stack.enter_context(patch.object(builder, "EVIDENCE_ROOT", Path(folder) / "evidence"))
+                apply = stack.enter_context(patch.object(builder, "apply_safe_core"))
+                stack.enter_context(patch.object(
+                    sys, "argv", [
+                        "builder", "apply-core", "--expected-project-path", "C:\\other.pln",
+                        "--out", str(destination),
+                    ]
+                ))
+                with contextlib.redirect_stdout(io.StringIO()):
+                    with self.assertRaises(SystemExit) as ctx:
+                        builder.main()
+            self.assertEqual(ctx.exception.code, 2)
+            self.assertEqual(json.loads(destination.read_text(encoding="utf-8"))["status"],
+                             "BLOCKED_ACTIVE_PROJECT_CHANGED")
+            apply.assert_not_called()
+
+    def test_apply_cli_exact_project_path_accepts_guarded_stage(self):
+        with tempfile.TemporaryDirectory() as folder:
+            destination = Path(folder) / "passed.json"
+            with contextlib.ExitStack() as stack:
+                stack.enter_context(patch.object(builder, "Tapir", return_value=FakeTapir()))
+                stack.enter_context(patch.object(builder, "EVIDENCE_ROOT", Path(folder) / "evidence"))
+                apply = stack.enter_context(patch.object(
+                    builder, "apply_safe_core", return_value={"status": "PASS"}
+                ))
+                stack.enter_context(patch.object(
+                    sys, "argv", [
+                        "builder", "apply-core", "--expected-project-path",
+                        "C:\\candidate\\template.pln", "--out", str(destination),
+                    ]
+                ))
+                with contextlib.redirect_stdout(io.StringIO()):
+                    builder.main()
+            self.assertEqual(json.loads(destination.read_text(encoding="utf-8"))["status"],
+                             "PASS")
+            apply.assert_called_once()
+
 if __name__ == "__main__":
     unittest.main()
