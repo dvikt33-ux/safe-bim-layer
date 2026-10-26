@@ -776,7 +776,24 @@ def live_inventory(api: Tapir):
         stories = api.call("GetStories")
     except Exception as exc:
         stories = {"error": str(exc)}
+    # The live PowerShell launcher accepts only explicit status=PASS. A partial
+    # inventory must never masquerade as a successful prerequisite.
+    read_errors = {
+        f"attribute:{kind}": value["error"]
+        for kind, value in attrs.items()
+        if isinstance(value, dict) and "error" in value
+    }
+    for kind, value in (
+        ("calculationUnits", calculation_units),
+        ("geoLocation", geo),
+        ("stories", stories),
+    ):
+        if isinstance(value, dict) and "error" in value:
+            read_errors[kind] = value["error"]
     return {
+        "status": "PASS" if not read_errors else "BLOCKED_INVENTORY",
+        "writePerformed": False,
+        "readErrors": read_errors,
         "project": project,
         "elementCount": len(elements),
         "projectInfoFields": fields,
@@ -808,6 +825,12 @@ def plan_summary(inventory=None):
     graphics = load_yaml(GRAPHICS_SPEC)
     targets = project_info_targets()
     result = {
+        "status": (
+            inventory["status"] if inventory is not None
+            and inventory.get("status") != "PASS"
+            else validation["status"]
+        ),
+        "writePerformed": False,
         "validation": validation,
         "safeCore": {
             "projectInfoFields": list(targets),
@@ -4247,7 +4270,9 @@ def main():
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
     status = result.get("status") if isinstance(result, dict) else None
-    if status in ("FAIL", "BLOCKED_PLATFORM"):
+    # Any explicit BLOCKED_* state is a failing CLI outcome, not a warning.
+    # A missing status is also an invalid result contract for every action.
+    if status != "PASS":
         raise SystemExit(2)
 
 
