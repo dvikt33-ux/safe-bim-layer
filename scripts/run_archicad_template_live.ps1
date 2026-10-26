@@ -1,7 +1,7 @@
 param(
     [int]$Port = 19723,
     [ValidateSet("preflight","core","materials-data","navigator-master","autotext","master-smoke","layout-autotext-smoke","master-context-autotext-smoke","coordinate-calibration","form3-core","form3-static","form3-autotext","all-safe")]
-    [string]$Stage = "all-safe",
+    [string]$Stage = "preflight",
     [string]$OutDir = "outputs/archicad-template-live"
 )
 
@@ -139,6 +139,12 @@ $writeStages = @(
     "form3-autotext",
     "all-safe"
 )
+
+# Run the complete read-only gate before any standalone mutation stage.
+# all-safe already begins with $preflight; never dispatch a writer before it.
+if (($writeStages -contains $Stage) -and ($Stage -ne "all-safe")) {
+    $steps = $preflight + $steps
+}
 
 $ConfirmedProjectPath = ""
 if ($writeStages -contains $Stage) {
