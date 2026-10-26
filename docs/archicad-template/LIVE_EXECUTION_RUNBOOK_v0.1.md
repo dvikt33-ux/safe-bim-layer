@@ -9,6 +9,16 @@ It does **not** claim that Archicad has already been executed from GitHub or fro
 
 ## Launcher
 
+**Safety correction 26.10.2026 (proposed branch):** the launcher defaults to
+`-Stage preflight` (read-only), rather than `all-safe`. Even when a standalone
+writing stage is requested, the complete `font-preflight → validate → inspect → plan`
+sequence runs again before any `apply-*` action. Each write action requires the
+exact `--expected-project-path` obtained from interactive `confirm-project`.
+The Python CLI now declares that argument and `apply-core` now reports `PASS`
+only after a complete live read-back and element-count verification. These are
+offline-reviewed code changes, **not Windows LIVE results**.
+
+
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/run_archicad_template_live.ps1 -Stage preflight
 ```
