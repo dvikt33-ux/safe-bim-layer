@@ -41,6 +41,22 @@ class SourceAndScopeTests(unittest.TestCase):
         self.assertIn(("MOAG-G-0036","MOAG-G-0095"),
                       {(e["container"],e["upper"]) for e in self.third["envelopes"]})
 
+    def test_partial_vs_full_gallery_shapes_not_conflated(self):
+        allrecords={e["upper"]:e for p in (self.lower,self.second,self.third)
+                    for e in p["envelopes"]}
+        self.assertEqual(allrecords["MOAG-G-0058"]["plan_shape_claim"],
+                         "HALF_CIRCUMFERENCE_ARC_IN_ROUND_HALL")
+        self.assertEqual(allrecords["MOAG-G-0095"]["plan_shape_claim"],
+                         "FULL_CIRCUMFERENCE_ARC_IN_ROUND_HALL")
+        self.assertEqual(allrecords["MOAG-G-0079"]["plan_shape_claim"],
+                         "FULL_PERIMETER_GALLERY_ROOM_SHAPE_UNKNOWN")
+        self.assertTrue(all(not x["shape_dimensions_or_radius_proven"]
+                            for x in allrecords.values()))
+        bad=deepcopy(self.third)
+        bad["envelopes"][0]["plan_shape_claim"]="RECTANGLE"
+        with self.assertRaisesRegex(ValueError,"UNSUPPORTED_SHAPE_PROMOTION"):
+            r12.validate(bad)
+
     def test_indirect_base_routes_not_direct_access_or_metrics(self):
         links=self.lower["source_backed_routes_not_solver_constraints"]
         self.assertEqual({x["source"]["id"] for x in links},{"P-024","P-305"})
