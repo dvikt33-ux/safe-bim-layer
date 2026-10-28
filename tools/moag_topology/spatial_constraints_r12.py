@@ -114,6 +114,8 @@ def build(scope=1):
 def validate(p):
     entities = {e["id"] for e in p["r11"]["entities"]}
     original = {e["id"]: e for e in r11.build(p["scope"])["constraints"]}
+    if len(p["r11"]["constraints"]) != len(original):
+        raise ValueError("R11_PROVEN_CONSTRAINT_DROPPED")
     for c in p["r11"]["constraints"]:
         if c != original.get(c["id"]):
             raise ValueError("R11_PROVEN_CONSTRAINT_CHANGED")
@@ -239,7 +241,7 @@ def experiment(scope, executable, outdir):
     r11.write(outdir/"qualitative-model.json",p)
     cp=cp_solve(p)
     mz=mzn_solve(p,executable,outdir,"sat")
-    if cp["status"]!=mz["status"]!="SAT":
+    if not (cp["status"]==mz["status"]=="SAT"):
         raise RuntimeError("R12_SAT_NOT_CONFIRMED")
     replay=mzn_solve(p,executable,outdir,"cp-witness",fixed=cp["witness"])
     if replay["status"]!="SAT":
