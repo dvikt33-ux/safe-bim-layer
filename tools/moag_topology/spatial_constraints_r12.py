@@ -22,7 +22,7 @@ BASE = r11.BASE
 HERE = Path(__file__).parent
 R03_TYPES = {"HAS_INTERNAL_UPPER_ROOM", "HAS_UPPER_GALLERY", "ELEVATED_WITHIN"}
 # Exact R04 relationships: additional conceptual indexes, never alias-merged.
-R04_ENVELOPES = {"MOAG-RG-E21", "MOAG-RG-E66", "MOAG-RG-E91"}
+R04_ENVELOPES = {"MOAG-RG-E21", "MOAG-RG-E66", "MOAG-RG-E91", "MOAG-RG-E119"}
 # First source-backed tests of routes between named bases; not direct doors.
 BASE_ROUTES = ("P-024", "P-305")
 
@@ -286,7 +286,7 @@ def experiment(scope, executable, outdir):
 
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--scope",type=int,choices=(1,2),default=1)
+    ap.add_argument("--scope",type=int,choices=(1,2,3),default=1)
     ap.add_argument("--out",type=Path,required=True)
     portable=next((r11.ROOT/".runtime/minizinc").glob("*/bin/minizinc.exe"),None)
     portable=portable or next((r11.ROOT/".runtime/minizinc").glob("*/bin/minizinc"),None)
