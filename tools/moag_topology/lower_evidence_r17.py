@@ -68,6 +68,37 @@ def build():
        "status":"DIRECT_BOOK_FUNCTIONAL_SECTOR_DISTINCTION_NOT_XY_DISJOINTNESS",
        "any_of":True,"family":"r17_sector"}
     m["constraints"].append(distinct)
+    # Tie functional sectors to ACTUAL existing source indices and documented
+    # route visits. Do not tie to XY, create a station-wide two-sector claim,
+    # or interpret route chronology as a physical door.
+    memberships=[
+      ("MOAG-G-0008",lo,"INDEXED_LIVING_BASE"),
+      ("MOAG-G-0009",lo,"INDEXED_LIVING_BASE"),
+      ("MOAG-G-0017",hi,"INDEXED_HANGAR_MAIN_CORRIDOR"),
+      ("MOAG-G-0018",hi,"INDEXED_FIRST_HANGAR"),
+      ("RT030-D",hi,"OBSERVED_ANGAR_MAIN_CORRIDOR_VISIT"),
+      ("RT030-E",hi,"OBSERVED_FIRST_HANGAR_DOOR_VISIT"),
+    ]
+    index_ids={x["id"] for x in m["entities"]}
+    visit_ids={x["id"] for x in m["r14"]["steps"]}
+    member_vars={}
+    for eid,parent,reason in memberships:
+        if (eid not in index_ids and eid not in visit_ids) or (
+             eid in visit_ids and eid not in {"RT030-D","RT030-E"}):
+            raise ValueError("UNAPPROVED_SECTOR_MEMBERSHIP: "+eid)
+        n=len(m["variables"])
+        m["variables"].append({"name":"R17::SECTOR-OF::"+eid,
+                                "domain":[0,2],"interval":True})
+        member_vars[eid]=n
+        m["constraints"].append({
+          "id":"R17-MEMBER::"+eid,
+          "rows":[r15.row([(n,1),(parent,-1)],0),
+                  r15.row([(parent,1),(n,-1)],0)],
+          "sources":[{"id":"B2-014","page_id":"B2-014",
+                      "url":SOURCE_SECTOR_URL,"summary":reason}],
+          "status":"FUNCTIONAL_SECTOR_INDEX_MEMBERSHIP_NOT_XY_POSITION",
+          "any_of":False,"family":"r17_membership",
+        })
     portals=[]
     for eid in PORTAL_IDS:
         e=edges[eid]
@@ -143,6 +174,7 @@ def build():
           "metric_separation_proven":False,
           "new_disjoint_3d_boxes_created":False},
        "source_portal_relations":portals,"portal_flags":flag_ids,
+       "source_index_membership_variables":member_vars,
        "stairs_ambiguity":ambiguity,
        "existing_route_R14_stage_count":len(m["r14"]["steps"]),
        "R15_bound_visits_count":sum(p["id"] in m["order_variables"] and
@@ -175,6 +207,16 @@ def validate(m,info):
         raise ValueError("R17_SECTOR_INEQUALITY_CHANGED")
     if C[sector["relation_id"]]["any_of"] is not True:
         raise ValueError("R17_SECTOR_NOT_DISTINCT")
+    if set(info["source_index_membership_variables"])!={"MOAG-G-0008","MOAG-G-0009",
+            "MOAG-G-0017","MOAG-G-0018","RT030-D","RT030-E"}:
+        raise ValueError("R17_REAL_INDEX_SECTOR_BINDINGS_LOST")
+    for eid,var in info["source_index_membership_variables"].items():
+        parent=sector["base"] if eid in ("MOAG-G-0008","MOAG-G-0009") else sector["hangar"]
+        cid="R17-MEMBER::"+eid
+        if cid not in C or C[cid]["rows"]!=[
+                r15.row([(var,1),(parent,-1)],0),
+                r15.row([(parent,1),(var,-1)],0)]:
+            raise ValueError("R17_REAL_INDEX_MEMBERSHIP_NOT_COMPILED")
     for p in info["source_portal_relations"]:
         cid="R17-SOURCE-PASSAGE::"+p["id"]
         if cid not in C or C[cid]["rows"]!=[r15.row([(info["portal_flags"][p["id"]],1)],1)]:
@@ -219,6 +261,24 @@ def experiment(out, executable):
     mz_core=r15.mzn_solve(m,executable,out,"same-sector-core",[equal],active=ids)
     if core["status"]!=mz_core["status"] or core["status"]!="INFEASIBLE":
         raise RuntimeError("R17_CORE_NOT_INDEPENDENTLY_REPRODUCED")
+    # A documented visit must inherit its existing indexed corridor's
+    # functional sector. With the source family removed, it can be detached.
+    mv=info["source_index_membership_variables"]
+    detached=r15.probe("R17-SYNTHETIC-UNBIND-RT030-D",[
+       r15.row([(mv["RT030-D"],1),(mv["MOAG-G-0017"],-1)],1),
+       r15.row([(mv["MOAG-G-0017"],1),(mv["RT030-D"],-1)],1)])
+    # The two reversed comparisons are OR, rather than AND: one direction
+    # must be strictly larger. Probe uses r15.probe (AND), so mark any_of.
+    detached["any_of"]=True
+    detached_before=r15.cp_solve(m,[detached],exclude_families=("r17_membership",))
+    detached_after=r15.cp_solve(m,[detached])
+    detached_mz=r15.mzn_solve(m,executable,out,"detach-indexed-visit-unsat",[detached])
+    det_ids={x["id"] for x in detached_after["unsat_core"]}
+    if (detached_before["status"]!="SAT" or detached_after["status"]!="INFEASIBLE"
+        or detached_mz["status"]!="INFEASIBLE"
+        or detached["id"] not in det_ids
+        or not any(x.startswith("R17-MEMBER::") for x in det_ids)):
+        raise RuntimeError("R17_REAL_INDEX_VISIT_SECTOR_BINDING_NOT_PROVEN")
     # Also prove that the passage evidence is *enforced*, not decoration.
     source_id="MOAG-RG-E69"
     flag=info["portal_flags"][source_id]
@@ -242,6 +302,10 @@ def experiment(out, executable):
         "new_book_qualified_functional_sector_distinctions":1,
         "existing_direct_book_portal_relations_compiled":2,
         "existing_access_to_relations_compiled_as_access_not_exact_doors":1,
+        "real_index_and_visit_sector_memberships":len(mv),
+        "indexed_visit_detachment_without_membership":detached_before["status"],
+        "indexed_visit_detachment_with_membership":detached_after["status"],
+        "indexed_visit_detachment_minizinc":detached_mz["status"],
         "python_cp_sat":py["status"],"minizinc_cp_sat":mz["status"],
         "cross_backend_replay":replay["status"],
         "source_sector_contradiction_cp_sat":inverse["status"],
