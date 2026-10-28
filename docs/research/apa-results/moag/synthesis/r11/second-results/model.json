@@ -1,0 +1,4130 @@
+{
+  "schema": "MOAG-SOLVER-SIDECAR-R11/1",
+  "global_blocks": [
+    1,
+    2,
+    3
+  ],
+  "scope_global_block": 2,
+  "entities": [
+    {
+      "id": "M-L2-CONFERENCE-002",
+      "name": "Второй конференц-зал",
+      "kind": "room",
+      "source_refs": [
+        {
+          "id": "P-494",
+          "page_id": "B2-074",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=74",
+          "paraphrase": "В конце длинных ярко освещённых коридоров развилка: один проход ведёт ко второму конференц-залу, другой — к складам. За взломанной дверью обнаруживается широкое овальное помещение с пультом и рядами шкафов; на схеме связи между этими ветвями не заданы."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-CONFERENCE-002",
+        "kind": "room",
+        "name": "Второй конференц-зал",
+        "origin": "R05_ENTITY",
+        "source_ids": [
+          "P-494"
+        ],
+        "global_level": 2,
+        "area_role": "USABLE_FLOOR_SPACE",
+        "bounds": {
+          "min_module2": 5,
+          "max_module2": 500,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 20,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-DEADEND-001",
+      "name": "Тупик у кабельной лестницы",
+      "kind": "corridor",
+      "source_refs": [
+        {
+          "id": "P-633",
+          "page_id": "B2-127",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=127",
+          "paraphrase": "Планировочные свидетельства: тупиковый участок коридора, узкая лестница с решёткой и кабельные шахты, в которые герои спускаются через открываемую флешкой решётку. Для рендера конкретной сцены: баррикада из поваленных пекарей, укрытие людей и усики живого дерева, проникшие в шахты/коридор. Растение и баррикада — эпизодическое состояние, не постоянная планировка или отделка."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-DEADEND-001",
+        "kind": "corridor",
+        "name": "Тупик у кабельной лестницы",
+        "origin": "R05_ENTITY",
+        "source_ids": [
+          "P-633"
+        ],
+        "global_level": 2,
+        "area_role": "PATH_AREA",
+        "bounds": {
+          "min_module2": 8,
+          "max_module2": 18000,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 15,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-DINING-001",
+      "name": "Столовая детской группы",
+      "kind": "room",
+      "source_refs": [
+        {
+          "id": "P-478",
+          "page_id": "B2-061",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=61",
+          "paraphrase": "Восемнадцать детей собирают в столовой и рассаживают за столы на маленькие стулья. Отдельный пространственный идентификатор столовой в реестре не установлен; не следует автоматически отождествлять её с кафе или другой известной комнатой."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-DINING-001",
+        "kind": "room",
+        "name": "Столовая детской группы",
+        "origin": "R05_ENTITY",
+        "source_ids": [
+          "P-478"
+        ],
+        "global_level": 2,
+        "area_role": "USABLE_FLOOR_SPACE",
+        "bounds": {
+          "min_module2": 5,
+          "max_module2": 500,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 20,
+          "editable_area_min_m2": 24,
+          "editable_area_max_m2": 750,
+          "editable_height_min_m": 2.7,
+          "editable_height_max_m": 15
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": "18 seated children; functional initial human capacity scenario"
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-FOOD-STORES-OUT-001",
+      "name": "Продовольственные склады за Оранжевой",
+      "kind": "space_group",
+      "source_refs": [
+        {
+          "id": "P-506",
+          "page_id": "B2-081",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=81",
+          "paraphrase": "Внутри круга почти нет кафе и нет кладовых обычных продуктов; доступны лишь продуктовые автоматы с батончиками и подобной продукцией. Мука, сухое молоко, мясо и консервы хранятся во внешнем круге за Оранжевой магистралью, поэтому перекрытие доступа к ней ограничивает снабжение. Не выводить отсюда точное число кладовых или их план."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-FOOD-STORES-OUT-001",
+        "kind": "space_group",
+        "name": "Продовольственные склады за Оранжевой",
+        "origin": "R05_ENTITY",
+        "source_ids": [
+          "P-506"
+        ],
+        "global_level": 2,
+        "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+        "bounds": {
+          "min_module2": 10,
+          "max_module2": 90000,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 120,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-GRILLE-DOOR-001",
+      "name": "Кодовая решётка у лестницы",
+      "kind": "door",
+      "source_refs": [
+        {
+          "id": "P-633",
+          "page_id": "B2-127",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=127",
+          "paraphrase": "Планировочные свидетельства: тупиковый участок коридора, узкая лестница с решёткой и кабельные шахты, в которые герои спускаются через открываемую флешкой решётку. Для рендера конкретной сцены: баррикада из поваленных пекарей, укрытие людей и усики живого дерева, проникшие в шахты/коридор. Растение и баррикада — эпизодическое состояние, не постоянная планировка или отделка."
+        },
+        {
+          "id": "P-634",
+          "page_id": "B2-127",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=127",
+          "paraphrase": "Фактический локальный маршрут/доступ; точная отметка и конечное помещение не описаны."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-GRILLE-DOOR-001",
+        "kind": "door",
+        "name": "Кодовая решётка у лестницы",
+        "origin": "R05_ENTITY",
+        "source_ids": [
+          "P-633",
+          "P-634"
+        ],
+        "global_level": 2,
+        "area_role": "OPENING_NO_USABLE_AREA",
+        "bounds": null,
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": false,
+        "notes": null
+      },
+      "metric_intervals_status": "unknown",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-GRILLE-STAIR-001",
+      "name": "Лестница вниз у тупика",
+      "kind": "stair",
+      "source_refs": [
+        {
+          "id": "P-633",
+          "page_id": "B2-127",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=127",
+          "paraphrase": "Планировочные свидетельства: тупиковый участок коридора, узкая лестница с решёткой и кабельные шахты, в которые герои спускаются через открываемую флешкой решётку. Для рендера конкретной сцены: баррикада из поваленных пекарей, укрытие людей и усики живого дерева, проникшие в шахты/коридор. Растение и баррикада — эпизодическое состояние, не постоянная планировка или отделка."
+        },
+        {
+          "id": "P-634",
+          "page_id": "B2-127",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=127",
+          "paraphrase": "Фактический локальный маршрут/доступ; точная отметка и конечное помещение не описаны."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-GRILLE-STAIR-001",
+        "kind": "stair",
+        "name": "Лестница вниз у тупика",
+        "origin": "R05_ENTITY",
+        "source_ids": [
+          "P-633",
+          "P-634"
+        ],
+        "global_level": 2,
+        "area_role": "STAIR_FOOTPRINT",
+        "bounds": {
+          "min_module2": 3,
+          "max_module2": 1000,
+          "min_height_in_human_modules": 2,
+          "max_height_in_human_modules": 60,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-LIB-GLASS-DOOR-001",
+      "name": "Стеклянный вход в библиотеку собраний",
+      "kind": "door",
+      "source_refs": [
+        {
+          "id": "P-535",
+          "page_id": "B2-092",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=92",
+          "paraphrase": "Непосредственно у библиотеки героев встречают стеклянные двери. В комнате Ритка сидит на столе; видны книжные шкафы с проходом между ними, откуда выходят две девочки. Эмма располагается на полу у переносок. Это подтверждает помещение малой библиотеки из объявления p91. Возможное совпадение с маленькой библиотекой без окна на первом этаже из p84 остаётся гипотезой: прямого идентификатора уровня или однозначной связи нет."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-LIB-GLASS-DOOR-001",
+        "kind": "door",
+        "name": "Стеклянный вход в библиотеку собраний",
+        "origin": "R05_ENTITY",
+        "source_ids": [
+          "P-535"
+        ],
+        "global_level": 2,
+        "area_role": "OPENING_NO_USABLE_AREA",
+        "bounds": null,
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": false,
+        "notes": null
+      },
+      "metric_intervals_status": "unknown",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-LIB-MEETING-001",
+      "name": "Библиотека собраний со стеклянными дверями",
+      "kind": "library",
+      "source_refs": [
+        {
+          "id": "P-535",
+          "page_id": "B2-092",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=92",
+          "paraphrase": "Непосредственно у библиотеки героев встречают стеклянные двери. В комнате Ритка сидит на столе; видны книжные шкафы с проходом между ними, откуда выходят две девочки. Эмма располагается на полу у переносок. Это подтверждает помещение малой библиотеки из объявления p91. Возможное совпадение с маленькой библиотекой без окна на первом этаже из p84 остаётся гипотезой: прямого идентификатора уровня или однозначной связи нет."
+        },
+        {
+          "id": "P-537",
+          "page_id": "B2-093",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=93",
+          "paraphrase": "В малой библиотеке упоминаются стол, полки с книгами, погасшие мониторы и проход между шкафами. Внутренний монолог Эммы связывает хаос Второго уровня с отсутствием донов и лонов. Это описание состояния и зависимости бытовой инфраструктуры в данный период, а не новая постоянная планировка."
+        },
+        {
+          "id": "P-545",
+          "page_id": "B2-099",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=99",
+          "paraphrase": "Малая библиотека используется как место собрания детей; в сцене они сидят на полу, у книжного шкафа есть нижняя полка. Это подтверждает использование помещения и видимый предметный контекст, без размеров, новой планировки или дополнительной связи помещений."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-LIB-MEETING-001",
+        "kind": "library",
+        "name": "Библиотека собраний со стеклянными дверями",
+        "origin": "R05_ENTITY",
+        "source_ids": [
+          "P-535",
+          "P-537",
+          "P-545"
+        ],
+        "global_level": 2,
+        "area_role": "USABLE_FLOOR_SPACE",
+        "bounds": {
+          "min_module2": 10,
+          "max_module2": 1000,
+          "min_height_in_human_modules": 1.8,
+          "max_height_in_human_modules": 25,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-LIB-NOWINDOW-001",
+      "name": "Малая библиотека без окна",
+      "kind": "library",
+      "source_refs": [
+        {
+          "id": "P-520",
+          "page_id": "B2-084",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=84",
+          "paraphrase": "Коля сообщает о маленькой библиотеке на первом этаже, в которой нет окна. Не приравнивать её к большой библиотеке с овальным окном, описанной в B1 p20: идентичность и соотношение уровней не подтверждены."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-LIB-NOWINDOW-001",
+        "kind": "library",
+        "name": "Малая библиотека без окна",
+        "origin": "R05_ENTITY",
+        "source_ids": [
+          "P-520"
+        ],
+        "global_level": 2,
+        "area_role": "USABLE_FLOOR_SPACE",
+        "bounds": {
+          "min_module2": 10,
+          "max_module2": 1000,
+          "min_height_in_human_modules": 1.8,
+          "max_height_in_human_modules": 25,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-LIB-OVAL-001",
+      "name": "Библиотека с большим овальным окном",
+      "kind": "library",
+      "source_refs": [
+        {
+          "id": "P-488",
+          "page_id": "B2-068",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=68",
+          "paraphrase": "В библиотеке на Втором описано большое овальное окно, через которое видны крейсеры у станции; там же находится выпуклый красивый макет Второго, изготовленный выпускниками несколько лет назад. Форма окна зафиксирована как словесное описание, без размеров; модель уровня является представлением, точность/масштаб не подтверждены."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-LIB-OVAL-001",
+        "kind": "library",
+        "name": "Библиотека с большим овальным окном",
+        "origin": "R05_ENTITY",
+        "source_ids": [
+          "P-488"
+        ],
+        "global_level": 2,
+        "area_role": "USABLE_FLOOR_SPACE",
+        "bounds": {
+          "min_module2": 10,
+          "max_module2": 1000,
+          "min_height_in_human_modules": 1.8,
+          "max_height_in_human_modules": 25,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-ORANGE-001",
+      "name": "Оранжевая кольцевая магистраль",
+      "kind": "major_corridor",
+      "source_refs": [
+        {
+          "id": "P-467",
+          "page_id": "B2-055",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=55",
+          "paraphrase": "Оранжевая магистраль описана как широкая резиновая дорожка, замкнутая правильным кругом вокруг внутренних кают; за ней расположена жилая зона с детскими помещениями, яслями, каютами и кафе."
+        },
+        {
+          "id": "P-504",
+          "page_id": "B2-081",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=81",
+          "paraphrase": "Эмма возвращается на закрытый внутренний круг Второго уровня через туннель №2. В сцене отмечен лишь небольшой незанятый пауками участок Оранжевой магистрали около этого туннеля; пауки сторожат остальные одиннадцать туннелей, ведущих к Зелёной магистрали и Главной площади. Это топология и временное состояние во время нападения; точные узлы соединения и размеры не указаны."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-ORANGE-001",
+        "kind": "major_corridor",
+        "name": "Оранжевая кольцевая магистраль",
+        "origin": "R03_ENTITY",
+        "source_ids": [
+          "P-467",
+          "P-504"
+        ],
+        "global_level": 2,
+        "area_role": "PATH_AREA",
+        "bounds": {
+          "min_module2": 100,
+          "max_module2": 65000,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 16,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-OVAL-STORE-001",
+      "name": "Широкая овальная кладовая с пультом",
+      "kind": "room",
+      "source_refs": [
+        {
+          "id": "P-494",
+          "page_id": "B2-074",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=74",
+          "paraphrase": "В конце длинных ярко освещённых коридоров развилка: один проход ведёт ко второму конференц-залу, другой — к складам. За взломанной дверью обнаруживается широкое овальное помещение с пультом и рядами шкафов; на схеме связи между этими ветвями не заданы."
+        },
+        {
+          "id": "P-495",
+          "page_id": "B2-074",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=74",
+          "paraphrase": "Персонажи проходят в широкое овальное помещение с пультом и рядами шкафов, закрывают дверь, затем Коля указывает на следующий проём в ещё одну комнату. Позже они используют вторые двери кладовой для выхода в коридор, ведущий к мусорному отсеку; точная планировка не дана."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-OVAL-STORE-001",
+        "kind": "room",
+        "name": "Широкая овальная кладовая с пультом",
+        "origin": "R05_ENTITY",
+        "source_ids": [
+          "P-494",
+          "P-495"
+        ],
+        "global_level": 2,
+        "area_role": "USABLE_FLOOR_SPACE",
+        "bounds": {
+          "min_module2": 5,
+          "max_module2": 500,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 20,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-OVAL-STORE-ROOM-002",
+      "name": "Дальнее помещение за овальной кладовой",
+      "kind": "room",
+      "source_refs": [
+        {
+          "id": "P-495",
+          "page_id": "B2-074",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=74",
+          "paraphrase": "Персонажи проходят в широкое овальное помещение с пультом и рядами шкафов, закрывают дверь, затем Коля указывает на следующий проём в ещё одну комнату. Позже они используют вторые двери кладовой для выхода в коридор, ведущий к мусорному отсеку; точная планировка не дана."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-OVAL-STORE-ROOM-002",
+        "kind": "room",
+        "name": "Дальнее помещение за овальной кладовой",
+        "origin": "R05_ENTITY",
+        "source_ids": [
+          "P-495"
+        ],
+        "global_level": 2,
+        "area_role": "USABLE_FLOOR_SPACE",
+        "bounds": {
+          "min_module2": 5,
+          "max_module2": 500,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 20,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-PLAY-OUT-001",
+      "name": "Дальние игровые площадки за Оранжевой",
+      "kind": "space_group",
+      "source_refs": [
+        {
+          "id": "P-505",
+          "page_id": "B2-081",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=81",
+          "paraphrase": "Во внутреннем круге названы Главная площадь со скамейками, небольшими фонтанами и растениями, сервер уровня жизнеобеспечения и кают, а также детский сад с площадками. Часть площадок для старших детей находится за Оранжевой магистралью и включает спортивные комплексы и горки. Точные границы, взаимные расстояния и план не заданы."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-PLAY-OUT-001",
+        "kind": "space_group",
+        "name": "Дальние игровые площадки за Оранжевой",
+        "origin": "R05_ENTITY",
+        "source_ids": [
+          "P-505"
+        ],
+        "global_level": 2,
+        "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+        "bounds": {
+          "min_module2": 10,
+          "max_module2": 90000,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 120,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-PLAZA-001",
+      "name": "Главная площадь",
+      "kind": "public_hall",
+      "source_refs": [
+        {
+          "id": "P-484",
+          "page_id": "B2-066",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=66",
+          "paraphrase": "Каютный корпус Второго описан как двухэтажный и круглый; его галерея обходит Главную площадь и парк. Это подтверждает локальную двухэтажную структуру на Втором, не дополнительный глобальный уровень и не полную форму станции."
+        },
+        {
+          "id": "P-486",
+          "page_id": "B2-066",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=66",
+          "paraphrase": "Эмма кричит с галереи в сторону Главной площади, а Коля спускается по лестнице и примерно через полминуты оказывается у девочек на площади. Подтверждён вертикальный переход галерея → площадь без высоты или длины лестницы."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-PLAZA-001",
+        "kind": "public_hall",
+        "name": "Главная площадь",
+        "origin": "R03_ENTITY",
+        "source_ids": [
+          "P-484",
+          "P-486"
+        ],
+        "global_level": 2,
+        "area_role": "PUBLIC_FREE_VOLUME",
+        "bounds": {
+          "min_module2": 80,
+          "max_module2": 130000,
+          "min_height_in_human_modules": 2.4,
+          "max_height_in_human_modules": 100,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-PLAZA-ST-001",
+      "name": "Лестница с галереи вниз к Главной площади",
+      "kind": "stair",
+      "source_refs": [
+        {
+          "id": "P-486",
+          "page_id": "B2-066",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=66",
+          "paraphrase": "Эмма кричит с галереи в сторону Главной площади, а Коля спускается по лестнице и примерно через полминуты оказывается у девочек на площади. Подтверждён вертикальный переход галерея → площадь без высоты или длины лестницы."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-PLAZA-ST-001",
+        "kind": "stair",
+        "name": "Лестница с галереи вниз к Главной площади",
+        "origin": "R03_ENTITY",
+        "source_ids": [
+          "P-486"
+        ],
+        "global_level": 2,
+        "area_role": "STAIR_FOOTPRINT",
+        "bounds": {
+          "min_module2": 3,
+          "max_module2": 1000,
+          "min_height_in_human_modules": 2,
+          "max_height_in_human_modules": 60,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-RES-001",
+      "name": "Локально двухэтажное кольцо кают",
+      "kind": "building_zone",
+      "source_refs": [
+        {
+          "id": "P-193",
+          "page_id": "B1-056",
+          "url": "https://loveread.ec/read_book.php?id=48197&p=56",
+          "paraphrase": "На первом этаже кольцевого жилого блока магазины, игровые комнаты и туннели к Оранжевой магистрали; это не доказательство всей глобальной двухпалубности Второго."
+        },
+        {
+          "id": "P-484",
+          "page_id": "B2-066",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=66",
+          "paraphrase": "Каютный корпус Второго описан как двухэтажный и круглый; его галерея обходит Главную площадь и парк. Это подтверждает локальную двухэтажную структуру на Втором, не дополнительный глобальный уровень и не полную форму станции."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-RES-001",
+        "kind": "building_zone",
+        "name": "Локально двухэтажное кольцо кают",
+        "origin": "R03_ENTITY",
+        "source_ids": [
+          "P-193",
+          "P-484"
+        ],
+        "global_level": 2,
+        "area_role": "MULTIFLOOR_ZONE_AGGREGATE",
+        "bounds": {
+          "min_module2": 80,
+          "max_module2": 90000,
+          "min_height_in_human_modules": 3.6,
+          "max_height_in_human_modules": 100,
+          "editable_area_min_m2": 150,
+          "editable_area_max_m2": 190000,
+          "editable_height_min_m": 5.5,
+          "editable_height_max_m": 180
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": "Local two-storey residential ring"
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-RES-GAL-001",
+      "name": "Верхняя жилая галерея у Главной площади",
+      "kind": "internal_gallery",
+      "source_refs": [
+        {
+          "id": "P-484",
+          "page_id": "B2-066",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=66",
+          "paraphrase": "Каютный корпус Второго описан как двухэтажный и круглый; его галерея обходит Главную площадь и парк. Это подтверждает локальную двухэтажную структуру на Втором, не дополнительный глобальный уровень и не полную форму станции."
+        },
+        {
+          "id": "P-486",
+          "page_id": "B2-066",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=66",
+          "paraphrase": "Эмма кричит с галереи в сторону Главной площади, а Коля спускается по лестнице и примерно через полминуты оказывается у девочек на площади. Подтверждён вертикальный переход галерея → площадь без высоты или длины лестницы."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-RES-GAL-001",
+        "kind": "internal_gallery",
+        "name": "Верхняя жилая галерея у Главной площади",
+        "origin": "R03_ENTITY",
+        "source_ids": [
+          "P-484",
+          "P-486"
+        ],
+        "global_level": 2,
+        "area_role": "LOCAL_MEZZANINE_FLOOR",
+        "bounds": {
+          "min_module2": 6,
+          "max_module2": 40000,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 30,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-TUNNEL-002",
+      "name": "Туннель №2",
+      "kind": "tunnel",
+      "source_refs": [
+        {
+          "id": "P-504",
+          "page_id": "B2-081",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=81",
+          "paraphrase": "Эмма возвращается на закрытый внутренний круг Второго уровня через туннель №2. В сцене отмечен лишь небольшой незанятый пауками участок Оранжевой магистрали около этого туннеля; пауки сторожат остальные одиннадцать туннелей, ведущих к Зелёной магистрали и Главной площади. Это топология и временное состояние во время нападения; точные узлы соединения и размеры не указаны."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-TUNNEL-002",
+        "kind": "tunnel",
+        "name": "Туннель №2",
+        "origin": "R05_ENTITY",
+        "source_ids": [
+          "P-504"
+        ],
+        "global_level": 2,
+        "area_role": "PATH_AREA",
+        "bounds": {
+          "min_module2": 5,
+          "max_module2": 14000,
+          "min_height_in_human_modules": 1.3,
+          "max_height_in_human_modules": 15,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-TUNNEL-008",
+      "name": "Туннель №8",
+      "kind": "tunnel",
+      "source_refs": [
+        {
+          "id": "P-538",
+          "page_id": "B2-093",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=93",
+          "paraphrase": "После просьбы открыть доступ к туннелю №8 Колька с Егором уходят на Зелёную магистраль. В последующем фрагменте проход открыт: у решётки на Оранжевой магистрали пауки стоят ровной линией и не нападают, когда через проход выходят Рита с группой. Вооружённые жители остаются у границы внутреннего круга. Связь сцены указывает на проход между внутренним кругом и Оранжевой магистралью через туннель №8; не отождествлять с туннелем №2 и не выводить длину, ширину или вертикальную отметку."
+        },
+        {
+          "id": "P-540",
+          "page_id": "B2-094",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=94",
+          "paraphrase": "Колька нажимает сенсорную панель; решётка туннеля №8 опускается и перекрывает выход. После закрытия туннель пустеет, а группа уходит наверх. Это эпизодический режим доступа и подтверждённое управление решёткой сенсором; место панели относительно решётки, конструкция, размеры и целевой уровень неизвестны."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-TUNNEL-008",
+        "kind": "tunnel",
+        "name": "Туннель №8",
+        "origin": "R05_ENTITY",
+        "source_ids": [
+          "P-538",
+          "P-540"
+        ],
+        "global_level": 2,
+        "area_role": "PATH_AREA",
+        "bounds": {
+          "min_module2": 5,
+          "max_module2": 14000,
+          "min_height_in_human_modules": 1.3,
+          "max_height_in_human_modules": 15,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-L2-WATER-RESERVOIR-001",
+      "name": "Независимый резервуар Второго",
+      "kind": "technical",
+      "source_refs": [
+        {
+          "id": "P-509",
+          "page_id": "B2-082",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=82",
+          "paraphrase": "В диалоге Коля сообщает, что у Второго уровня есть собственный резервуар воды, отдельный от Первого и Третьего, ссылаясь на просмотренные им схемы уровня. Это прямое текстовое свидетельство о резервуаре, опосредованное схемами персонажа; точное положение, объём, форма и связь с магистралями не раскрыты."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-L2-WATER-RESERVOIR-001",
+        "kind": "technical",
+        "name": "Независимый резервуар Второго",
+        "origin": "R05_ENTITY",
+        "source_ids": [
+          "P-509"
+        ],
+        "global_level": 2,
+        "area_role": "WATER_OR_TECHNICAL_VOLUME",
+        "bounds": {
+          "min_module2": 5,
+          "max_module2": 40000,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 150,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "M-STA-L2-001",
+      "name": "Детский глобальный блок",
+      "kind": "global_block",
+      "source_refs": [
+        {
+          "id": "P-484",
+          "page_id": "B2-066",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=66",
+          "paraphrase": "Каютный корпус Второго описан как двухэтажный и круглый; его галерея обходит Главную площадь и парк. Это подтверждает локальную двухэтажную структуру на Втором, не дополнительный глобальный уровень и не полную форму станции."
+        },
+        {
+          "id": "P-467",
+          "page_id": "B2-055",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=55",
+          "paraphrase": "Оранжевая магистраль описана как широкая резиновая дорожка, замкнутая правильным кругом вокруг внутренних кают; за ней расположена жилая зона с детскими помещениями, яслями, каютами и кафе."
+        },
+        {
+          "id": "P-096",
+          "page_id": "B1-019",
+          "url": "https://loveread.ec/read_book.php?id=48197&p=19",
+          "paraphrase": "По реплике Фёдора главные коридоры и вентиляционные шахты трёх глобальных уровней совпадают по общей планировочной логике, без равенства радиусов."
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "M-STA-L2-001",
+        "kind": "global_block",
+        "name": "Детский глобальный блок",
+        "origin": "R03_ENTITY",
+        "source_ids": [
+          "P-484",
+          "P-467",
+          "P-096"
+        ],
+        "global_level": 2,
+        "area_role": "LEVEL_ENVELOPE_AREA_PROJECT_SCENARIO",
+        "bounds": {
+          "min_module2": null,
+          "max_module2": null,
+          "min_height_in_human_modules": null,
+          "max_height_in_human_modules": null,
+          "editable_area_min_m2": 120000,
+          "editable_area_max_m2": 1200000,
+          "editable_height_min_m": 8,
+          "editable_height_max_m": 250
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": "Adjustable broad level envelope range, not floor sum; structural height covers voids and local galleries, not repeated global floors"
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0002",
+      "name": "Второй / детский уровень",
+      "kind": "level",
+      "source_refs": [
+        {
+          "id": "B1-03",
+          "section": "Книга I, ч. I, гл. 2 «Эмма. Экзамен»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=3"
+        },
+        {
+          "id": "B1-04",
+          "section": "Книга I, ч. I, гл. 3 «Таис. Закон»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=4"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0002",
+        "kind": "level",
+        "name": "Второй / детский уровень",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "B1-03",
+          "B1-04"
+        ],
+        "global_level": 2,
+        "area_role": "ALIAS_LEVEL_NO_DOUBLE_COUNT",
+        "bounds": null,
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": false,
+        "notes": null
+      },
+      "metric_intervals_status": "unknown",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0022",
+      "name": "Внутренняя Зелёная магистраль",
+      "kind": "circulation",
+      "source_refs": [
+        {
+          "id": "B1-04",
+          "section": "Книга I, ч. I, гл. 3 «Таис. Закон»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=4"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0022",
+        "kind": "circulation",
+        "name": "Внутренняя Зелёная магистраль",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "B1-04"
+        ],
+        "global_level": 2,
+        "area_role": "PATH_AREA",
+        "bounds": {
+          "min_module2": 40,
+          "max_module2": 65000,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 16,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0023",
+      "name": "Оранжевая магистраль",
+      "kind": "circulation",
+      "source_refs": [
+        {
+          "id": "B1-04",
+          "section": "Книга I, ч. I, гл. 3 «Таис. Закон»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=4"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0023",
+        "kind": "circulation",
+        "name": "Оранжевая магистраль",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "B1-04"
+        ],
+        "global_level": 2,
+        "area_role": "PATH_AREA",
+        "bounds": {
+          "min_module2": 40,
+          "max_module2": 65000,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 16,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0024",
+      "name": "Главная площадь",
+      "kind": "space",
+      "source_refs": [
+        {
+          "id": "B1-03",
+          "section": "Книга I, ч. I, гл. 2 «Эмма. Экзамен»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=3"
+        },
+        {
+          "id": "B1-04",
+          "section": "Книга I, ч. I, гл. 3 «Таис. Закон»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=4"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0024",
+        "kind": "space",
+        "name": "Главная площадь",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "B1-03",
+          "B1-04"
+        ],
+        "global_level": 2,
+        "area_role": "USABLE_FLOOR_SPACE",
+        "bounds": {
+          "min_module2": 5,
+          "max_module2": 3500,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 70,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0025",
+      "name": "Жилая галерея над Главной площадью",
+      "kind": "circulation",
+      "source_refs": [
+        {
+          "id": "B1-03",
+          "section": "Книга I, ч. I, гл. 2 «Эмма. Экзамен»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=3"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0025",
+        "kind": "circulation",
+        "name": "Жилая галерея над Главной площадью",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "B1-03"
+        ],
+        "global_level": 2,
+        "area_role": "PATH_AREA",
+        "bounds": {
+          "min_module2": 40,
+          "max_module2": 65000,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 16,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0026",
+      "name": "Детские каюты",
+      "kind": "space_group",
+      "source_refs": [
+        {
+          "id": "B1-03",
+          "section": "Книга I, ч. I, гл. 2 «Эмма. Экзамен»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=3"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0026",
+        "kind": "space_group",
+        "name": "Детские каюты",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "B1-03"
+        ],
+        "global_level": 2,
+        "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+        "bounds": {
+          "min_module2": 10,
+          "max_module2": 90000,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 120,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0027",
+      "name": "Кафе и магазины",
+      "kind": "space_group",
+      "source_refs": [
+        {
+          "id": "B1-04",
+          "section": "Книга I, ч. I, гл. 3 «Таис. Закон»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=4"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0027",
+        "kind": "space_group",
+        "name": "Кафе и магазины",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "B1-04"
+        ],
+        "global_level": 2,
+        "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+        "bounds": {
+          "min_module2": 10,
+          "max_module2": 90000,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 120,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0028",
+      "name": "Шестые туннели",
+      "kind": "circulation",
+      "source_refs": [
+        {
+          "id": "B1-04",
+          "section": "Книга I, ч. I, гл. 3 «Таис. Закон»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=4"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0028",
+        "kind": "circulation",
+        "name": "Шестые туннели",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "B1-04"
+        ],
+        "global_level": 2,
+        "area_role": "PATH_AREA",
+        "bounds": {
+          "min_module2": 40,
+          "max_module2": 65000,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 16,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0029",
+      "name": "Семнадцатые туннели",
+      "kind": "circulation",
+      "source_refs": [
+        {
+          "id": "B1-04",
+          "section": "Книга I, ч. I, гл. 3 «Таис. Закон»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=4"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0029",
+        "kind": "circulation",
+        "name": "Семнадцатые туннели",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "B1-04"
+        ],
+        "global_level": 2,
+        "area_role": "PATH_AREA",
+        "bounds": {
+          "min_module2": 40,
+          "max_module2": 65000,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 16,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0030",
+      "name": "Школа / экзаменационный блок",
+      "kind": "space_group",
+      "source_refs": [
+        {
+          "id": "B1-03",
+          "section": "Книга I, ч. I, гл. 2 «Эмма. Экзамен»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=3"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0030",
+        "kind": "space_group",
+        "name": "Школа / экзаменационный блок",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "B1-03"
+        ],
+        "global_level": 2,
+        "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+        "bounds": {
+          "min_module2": 10,
+          "max_module2": 90000,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 120,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0068",
+      "name": "Ванная и встроенная прачечная жилой каюты",
+      "kind": "space",
+      "source_refs": [
+        {
+          "id": "LR-B1-024",
+          "section": "Книга I, электронная веб-страница 24 LoveRead",
+          "url": "https://loveread.ec/read_book.php?id=48197&p=24"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0068",
+        "kind": "space",
+        "name": "Ванная и встроенная прачечная жилой каюты",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "LR-B1-024"
+        ],
+        "global_level": 2,
+        "area_role": "USABLE_FLOOR_SPACE",
+        "bounds": {
+          "min_module2": 5,
+          "max_module2": 3500,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 70,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0069",
+      "name": "Детский сад Второго уровня",
+      "kind": "zone",
+      "source_refs": [
+        {
+          "id": "LR-B1-025",
+          "section": "Книга I, электронная веб-страница 25 LoveRead",
+          "url": "https://loveread.ec/read_book.php?id=48197&p=25"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0069",
+        "kind": "zone",
+        "name": "Детский сад Второго уровня",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "LR-B1-025"
+        ],
+        "global_level": 2,
+        "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+        "bounds": {
+          "min_module2": 50,
+          "max_module2": 180000,
+          "min_height_in_human_modules": 2,
+          "max_height_in_human_modules": 120,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0070",
+      "name": "Игровая младшего отделения",
+      "kind": "space",
+      "source_refs": [
+        {
+          "id": "LR-B1-025",
+          "section": "Книга I, электронная веб-страница 25 LoveRead",
+          "url": "https://loveread.ec/read_book.php?id=48197&p=25"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0070",
+        "kind": "space",
+        "name": "Игровая младшего отделения",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "LR-B1-025"
+        ],
+        "global_level": 2,
+        "area_role": "USABLE_FLOOR_SPACE",
+        "bounds": {
+          "min_module2": 5,
+          "max_module2": 3500,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 70,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0071",
+      "name": "Прогулочная площадка младшего отделения",
+      "kind": "space",
+      "source_refs": [
+        {
+          "id": "LR-B1-026",
+          "section": "Книга I, электронная веб-страница 26 LoveRead",
+          "url": "https://loveread.ec/read_book.php?id=48197&p=26"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0071",
+        "kind": "space",
+        "name": "Прогулочная площадка младшего отделения",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "LR-B1-026"
+        ],
+        "global_level": 2,
+        "area_role": "USABLE_FLOOR_SPACE",
+        "bounds": {
+          "min_module2": 5,
+          "max_module2": 3500,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 70,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0072",
+      "name": "Комнаты для новорождённых",
+      "kind": "space_group",
+      "source_refs": [
+        {
+          "id": "LR-B1-026",
+          "section": "Книга I, электронная веб-страница 26 LoveRead",
+          "url": "https://loveread.ec/read_book.php?id=48197&p=26"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0072",
+        "kind": "space_group",
+        "name": "Комнаты для новорождённых",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "LR-B1-026"
+        ],
+        "global_level": 2,
+        "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+        "bounds": {
+          "min_module2": 10,
+          "max_module2": 90000,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 120,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0084",
+      "name": "Кольцевой двухэтажный жилой блок Второго",
+      "kind": "zone",
+      "source_refs": [
+        {
+          "id": "LR-B1-056",
+          "section": "Книга I, LoveRead веб-страница 56",
+          "url": "https://loveread.ec/read_book.php?id=48197&p=56"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0084",
+        "kind": "zone",
+        "name": "Кольцевой двухэтажный жилой блок Второго",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "LR-B1-056"
+        ],
+        "global_level": 2,
+        "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+        "bounds": {
+          "min_module2": 50,
+          "max_module2": 180000,
+          "min_height_in_human_modules": 2,
+          "max_height_in_human_modules": 120,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0085",
+      "name": "Верхний этаж кают внутри жилого кольца",
+      "kind": "space_group",
+      "source_refs": [
+        {
+          "id": "LR-B1-056",
+          "section": "Книга I, LoveRead веб-страница 56",
+          "url": "https://loveread.ec/read_book.php?id=48197&p=56"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0085",
+        "kind": "space_group",
+        "name": "Верхний этаж кают внутри жилого кольца",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "LR-B1-056"
+        ],
+        "global_level": 2,
+        "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+        "bounds": {
+          "min_module2": 10,
+          "max_module2": 90000,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 120,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0086",
+      "name": "Нижний торгово-игровой этаж жилого кольца",
+      "kind": "space_group",
+      "source_refs": [
+        {
+          "id": "LR-B1-056",
+          "section": "Книга I, LoveRead веб-страница 56",
+          "url": "https://loveread.ec/read_book.php?id=48197&p=56"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0086",
+        "kind": "space_group",
+        "name": "Нижний торгово-игровой этаж жилого кольца",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "LR-B1-056"
+        ],
+        "global_level": 2,
+        "area_role": "AGGREGATE_UNION_NOT_ADDITIVE",
+        "bounds": {
+          "min_module2": 10,
+          "max_module2": 90000,
+          "min_height_in_human_modules": 1.7,
+          "max_height_in_human_modules": 120,
+          "editable_area_min_m2": null,
+          "editable_area_max_m2": null,
+          "editable_height_min_m": null,
+          "editable_height_max_m": null
+        },
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": true,
+        "notes": null
+      },
+      "metric_intervals_status": "hypothesis",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    },
+    {
+      "id": "MOAG-G-0099",
+      "name": "Вентиляционная решётка Второго около пола",
+      "kind": "portal",
+      "source_refs": [
+        {
+          "id": "LR-B1-64",
+          "section": "Книга I, LoveRead страница 64",
+          "url": "https://loveread.ec/read_book.php?id=48197&p=64"
+        }
+      ],
+      "global_level_domain": [
+        2
+      ],
+      "global_level_status": "fact_or_inherited_R09",
+      "local_height_domain": [
+        0,
+        41
+      ],
+      "height_units": "ORDINAL_WITNESS_ONLY",
+      "height_reference": "LOCAL_FLOOR_OR_ACCESS_REFERENCE",
+      "metric_z_m": null,
+      "metric_xy_m": null,
+      "area_volume_profile_R05": {
+        "id": "MOAG-G-0099",
+        "kind": "portal",
+        "name": "Вентиляционная решётка Второго около пола",
+        "origin": "R04_CONCEPT",
+        "source_ids": [
+          "LR-B1-64"
+        ],
+        "global_level": 2,
+        "area_role": "OPENING_NO_USABLE_AREA",
+        "bounds": null,
+        "metric_semantics": "SCENARIO_WIDE_RANGE_NOT_TEXT_CANON",
+        "allow_manual_revision": false,
+        "notes": null
+      },
+      "metric_intervals_status": "unknown",
+      "volume_interval_m3": null,
+      "status": "fact_exists_not_placed"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "MOAG-RG-E103",
+      "a": "MOAG-G-0085",
+      "b": "MOAG-G-0086",
+      "kind": 1,
+      "status": "fact",
+      "sources": [
+        {
+          "id": "LR-B1-056",
+          "section": "Книга I, LoveRead веб-страница 56",
+          "url": "https://loveread.ec/read_book.php?id=48197&p=56"
+        }
+      ],
+      "interpretation": "Второй этаж кают расположен выше первого этажа общественных помещений.",
+      "hard_in_this_projection": true,
+      "present_as_edge_in_R09": false,
+      "source_register": "R04 source-qualified relation / vertical_connections / supplied plan"
+    },
+    {
+      "id": "MOAG-R3-RC-023",
+      "a": "M-L2-RES-GAL-001",
+      "b": "M-L2-RES-001",
+      "kind": 1,
+      "status": "fact",
+      "sources": [
+        {
+          "id": "P-484",
+          "page_id": "B2-066",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=66",
+          "paraphrase": "Каютный корпус Второго описан как двухэтажный и круглый; его галерея обходит Главную площадь и парк. Это подтверждает локальную двухэтажную структуру на Втором, не дополнительный глобальный уровень и не полную форму станции."
+        }
+      ],
+      "interpretation": "HAS_UPPER_GALLERY",
+      "hard_in_this_projection": true,
+      "present_as_edge_in_R09": true,
+      "source_register": "R04 source-qualified relation / vertical_connections / supplied plan"
+    },
+    {
+      "id": "POS06-001",
+      "a": "M-L2-RES-GAL-001",
+      "b": "M-L2-PLAZA-001",
+      "kind": 1,
+      "status": "fact",
+      "sources": [
+        {
+          "id": "P-521",
+          "page_id": "B2-084",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=84",
+          "paraphrase": "Во время нападения детям разрешено передвигаться только по галерее; вниз к первому этажу и Главной площади спускаются только старшие. Это временное правило безопасности и подтверждает относительное движение вниз от галереи, но не отождествление с конкретным из трёх глобальных уровней."
+        }
+      ],
+      "interpretation": "Upper residential gallery can descend to the Main Square; not a fourth deck",
+      "hard_in_this_projection": true
+    }
+  ],
+  "retained_typed_relations_not_turned_into_geometry": [
+    {
+      "id": "MOAG-RG-E24",
+      "from": "MOAG-G-0002",
+      "to": "MOAG-G-0022",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "B1-04"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E25",
+      "from": "MOAG-G-0002",
+      "to": "MOAG-G-0023",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "B1-04"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E26",
+      "from": "MOAG-G-0002",
+      "to": "MOAG-G-0024",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "B1-03"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E27",
+      "from": "MOAG-G-0023",
+      "to": "MOAG-G-0022",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "B1-04"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E28",
+      "from": "MOAG-G-0022",
+      "to": "MOAG-G-0024",
+      "layer": "NONCONNECTING_CONTEXT",
+      "source_ids": [
+        "B1-04"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": false,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E30",
+      "from": "MOAG-G-0025",
+      "to": "MOAG-G-0026",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "B1-03"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E31",
+      "from": "MOAG-G-0022",
+      "to": "MOAG-G-0028",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "B1-04"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E32",
+      "from": "MOAG-G-0023",
+      "to": "MOAG-G-0029",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "B1-04"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E33",
+      "from": "MOAG-G-0028",
+      "to": "MOAG-G-0027",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "B1-04"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E81",
+      "from": "MOAG-G-0026",
+      "to": "MOAG-G-0068",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "LR-B1-024"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E82",
+      "from": "MOAG-G-0002",
+      "to": "MOAG-G-0069",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "LR-B1-025"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E83",
+      "from": "MOAG-G-0069",
+      "to": "MOAG-G-0070",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "LR-B1-025"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E84",
+      "from": "MOAG-G-0070",
+      "to": "MOAG-G-0071",
+      "layer": "EXPLICIT_ACCESS",
+      "source_ids": [
+        "LR-B1-026"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": true,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E85",
+      "from": "MOAG-G-0069",
+      "to": "MOAG-G-0072",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "LR-B1-026"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E97",
+      "from": "MOAG-G-0002",
+      "to": "MOAG-G-0082",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "LR-B1-047"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E100",
+      "from": "MOAG-G-0002",
+      "to": "MOAG-G-0084",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E101",
+      "from": "MOAG-G-0084",
+      "to": "MOAG-G-0085",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E102",
+      "from": "MOAG-G-0084",
+      "to": "MOAG-G-0086",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E105",
+      "from": "MOAG-G-0085",
+      "to": "MOAG-G-0026",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E106",
+      "from": "MOAG-G-0086",
+      "to": "MOAG-G-0023",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E125",
+      "from": "MOAG-G-0098",
+      "to": "MOAG-G-0099",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "LR-B1-64"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-RG-E126",
+      "from": "MOAG-G-0099",
+      "to": "MOAG-G-0026",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "LR-B1-64"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-R3-RC-005",
+      "from": "M-STA-CORE-001",
+      "to": "M-STA-L2-001",
+      "layer": "NONCONNECTING_CONTEXT",
+      "source_ids": [
+        "P-418"
+      ],
+      "relation": "SPANS_GLOBAL_LEVEL",
+      "joins_approved_evidence_component": false,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-R3-RC-023",
+      "from": "M-L2-RES-001",
+      "to": "M-L2-RES-GAL-001",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "P-484"
+      ],
+      "relation": "HAS_UPPER_GALLERY",
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-R3-RC-024",
+      "from": "M-L2-RES-GAL-001",
+      "to": "M-L2-PLAZA-001",
+      "layer": "NONCONNECTING_CONTEXT",
+      "source_ids": [
+        "P-486"
+      ],
+      "relation": "OVERLOOKS",
+      "joins_approved_evidence_component": false,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-R3-RC-025",
+      "from": "M-L2-PLAZA-ST-001",
+      "to": "M-L2-PLAZA-001",
+      "layer": "EXPLICIT_ACCESS",
+      "source_ids": [
+        "P-486"
+      ],
+      "relation": "CONNECTS_UPPER_TO_LOWER",
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": true,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-R05-007",
+      "from": "M-L2-LIB-MEETING-001",
+      "to": "M-L2-LIB-GLASS-DOOR-001",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "P-535"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-R05-010",
+      "from": "M-L2-TUNNEL-002",
+      "to": "M-L2-ORANGE-001",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "P-504"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-R05-011",
+      "from": "M-L2-TUNNEL-008",
+      "to": "M-L2-ORANGE-001",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "P-538"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-R05-013",
+      "from": "M-L2-FOOD-STORES-OUT-001",
+      "to": "M-L2-ORANGE-001",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "P-506"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-R05-014",
+      "from": "M-L2-PLAY-OUT-001",
+      "to": "M-L2-ORANGE-001",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "P-505"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-R05-015",
+      "from": "M-L2-DEADEND-001",
+      "to": "M-L2-GRILLE-STAIR-001",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "P-633"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-R05-016",
+      "from": "M-L2-GRILLE-STAIR-001",
+      "to": "M-L2-GRILLE-DOOR-001",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "P-634"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-R05-031",
+      "from": "M-L2-CONFERENCE-002",
+      "to": "M-L2-OVAL-STORE-001",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "P-494"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "MOAG-R05-032",
+      "from": "M-L2-OVAL-STORE-001",
+      "to": "M-L2-OVAL-STORE-ROOM-002",
+      "layer": "EXPLICIT_ACCESS",
+      "source_ids": [
+        "P-495"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": true,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "S06-005",
+      "from": "M-L2-RES-GAL-001",
+      "to": "M-L2-PLAZA-ST-001",
+      "layer": "EXPLICIT_ACCESS",
+      "source_ids": [
+        "P-486"
+      ],
+      "relation": "LOCAL_STAIR_FROM_GALLERY",
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": true,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "S06-006",
+      "from": "M-L2-RES-001",
+      "to": "M-L2-ORANGE-001",
+      "layer": "SOURCE_QUALITATIVE_ASSOCIATION",
+      "source_ids": [
+        "P-193"
+      ],
+      "relation": "ROUTE_VIA_UNMODELED_TUNNEL",
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-001::RT001-A",
+      "from": "ROUTE::RT-001::RT001-A",
+      "to": "MOAG-G-0025",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-036"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-008::RT008-D",
+      "from": "ROUTE::RT-008::RT008-D",
+      "to": "MOAG-G-0002",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-046"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-008::RT008-E",
+      "from": "ROUTE::RT-008::RT008-E",
+      "to": "MOAG-G-0026",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-046"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-009::RT009-A",
+      "from": "ROUTE::RT-009::RT009-A",
+      "to": "MOAG-G-0026",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-047"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-011::RT011-A",
+      "from": "ROUTE::RT-011::RT011-A",
+      "to": "MOAG-G-0085",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-056"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-011::RT011-B",
+      "from": "ROUTE::RT-011::RT011-B",
+      "to": "MOAG-G-0086",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-056"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-011::RT011-C",
+      "from": "ROUTE::RT-011::RT011-C",
+      "to": "MOAG-G-0023",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-056"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-013::RT013-I",
+      "from": "ROUTE::RT-013::RT013-I",
+      "to": "MOAG-G-0099",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-064"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-013::RT013-J",
+      "from": "ROUTE::RT-013::RT013-J",
+      "to": "MOAG-G-0002",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-064"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-014::RT014-A",
+      "from": "ROUTE::RT-014::RT014-A",
+      "to": "MOAG-G-0099",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-064"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-016::RT016-G",
+      "from": "ROUTE::RT-016::RT016-G",
+      "to": "MOAG-G-0030",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-079"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-016::RT016-H",
+      "from": "ROUTE::RT-016::RT016-H",
+      "to": "MOAG-G-0023",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-079"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-016::RT016-J",
+      "from": "ROUTE::RT-016::RT016-J",
+      "to": "MOAG-G-0023",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-080"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-016::RT016-K",
+      "from": "ROUTE::RT-016::RT016-K",
+      "to": "MOAG-G-0022",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-081"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-018::RT018-A",
+      "from": "ROUTE::RT-018::RT018-A",
+      "to": "MOAG-G-0002",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-088"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-018::RT018-B",
+      "from": "ROUTE::RT-018::RT018-B",
+      "to": "MOAG-G-0084",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-089"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-018::RT018-C",
+      "from": "ROUTE::RT-018::RT018-C",
+      "to": "MOAG-G-0023",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-089"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-018::RT018-D",
+      "from": "ROUTE::RT-018::RT018-D",
+      "to": "MOAG-G-0023",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-089"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-018::RT018-E",
+      "from": "ROUTE::RT-018::RT018-E",
+      "to": "MOAG-G-0030",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-089"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-018::RT018-F",
+      "from": "ROUTE::RT-018::RT018-F",
+      "to": "MOAG-G-0030",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-090"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-018::RT018-G",
+      "from": "ROUTE::RT-018::RT018-G",
+      "to": "MOAG-G-0030",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-090"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-019::RT019-A",
+      "from": "ROUTE::RT-019::RT019-A",
+      "to": "MOAG-G-0030",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-094"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-019::RT019-B",
+      "from": "ROUTE::RT-019::RT019-B",
+      "to": "MOAG-G-0030",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-094"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-019::RT019-D",
+      "from": "ROUTE::RT-019::RT019-D",
+      "to": "MOAG-G-0027",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-094"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-019::RT019-F",
+      "from": "ROUTE::RT-019::RT019-F",
+      "to": "MOAG-G-0023",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-095"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-019::RT019-G",
+      "from": "ROUTE::RT-019::RT019-G",
+      "to": "MOAG-G-0023",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-095"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-019::RT019-H",
+      "from": "ROUTE::RT-019::RT019-H",
+      "to": "MOAG-G-0084",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-095"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-019::RT019-I",
+      "from": "ROUTE::RT-019::RT019-I",
+      "to": "MOAG-G-0084",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-095"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-020::RT020-A",
+      "from": "ROUTE::RT-020::RT020-A",
+      "to": "MOAG-G-0002",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-096"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-020::RT020-G",
+      "from": "ROUTE::RT-020::RT020-G",
+      "to": "MOAG-G-0002",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-096"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-021::RT021-A",
+      "from": "ROUTE::RT-021::RT021-A",
+      "to": "MOAG-G-0002",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-097"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-022::RT022-A",
+      "from": "ROUTE::RT-022::RT022-A",
+      "to": "MOAG-G-0002",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B1-099"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-026::RT026-C",
+      "from": "ROUTE::RT-026::RT026-C",
+      "to": "MOAG-G-0026",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-005"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-027::RT027-A",
+      "from": "ROUTE::RT-027::RT027-A",
+      "to": "MOAG-G-0026",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-006"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-027::RT027-B",
+      "from": "ROUTE::RT-027::RT027-B",
+      "to": "MOAG-G-0023",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-006"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-027::RT027-C",
+      "from": "ROUTE::RT-027::RT027-C",
+      "to": "MOAG-G-0023",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-006"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-027::RT027-D",
+      "from": "ROUTE::RT-027::RT027-D",
+      "to": "MOAG-G-0023",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-006"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-027::RT027-E",
+      "from": "ROUTE::RT-027::RT027-E",
+      "to": "MOAG-G-0023",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-006"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-036::RT036-C",
+      "from": "ROUTE::RT-036::RT036-C",
+      "to": "MOAG-G-0002",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-047"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-036::RT036-D",
+      "from": "ROUTE::RT-036::RT036-D",
+      "to": "MOAG-G-0025",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-047"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-037::RT037-A",
+      "from": "ROUTE::RT-037::RT037-A",
+      "to": "MOAG-G-0002",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-048"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-038::RT038-G",
+      "from": "ROUTE::RT-038::RT038-G",
+      "to": "MOAG-G-0002",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-055"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-038::RT038-H",
+      "from": "ROUTE::RT-038::RT038-H",
+      "to": "MOAG-G-0023",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-055"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-038::RT038-I",
+      "from": "ROUTE::RT-038::RT038-I",
+      "to": "MOAG-G-0022",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-055"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-038::RT038-J",
+      "from": "ROUTE::RT-038::RT038-J",
+      "to": "MOAG-G-0024",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-055"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-039::RT039-A",
+      "from": "ROUTE::RT-039::RT039-A",
+      "to": "MOAG-G-0069",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-060"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-039::RT039-B",
+      "from": "ROUTE::RT-039::RT039-B",
+      "to": "MOAG-G-0070",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-060"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-040::RT040-A",
+      "from": "ROUTE::RT-040::RT040-A",
+      "to": "MOAG-G-0026",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-066"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-040::RT040-B",
+      "from": "ROUTE::RT-040::RT040-B",
+      "to": "MOAG-G-0025",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-066"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-040::RT040-C",
+      "from": "ROUTE::RT-040::RT040-C",
+      "to": "MOAG-G-0024",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-066"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-040::RT040-D",
+      "from": "ROUTE::RT-040::RT040-D",
+      "to": "MOAG-G-0022",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-066"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-040::RT040-F",
+      "from": "ROUTE::RT-040::RT040-F",
+      "to": "MOAG-G-0023",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-068"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "VISIT::RT-040::RT040-G",
+      "from": "ROUTE::RT-040::RT040-G",
+      "to": "MOAG-G-0027",
+      "layer": "OBSERVED_TRAJECTORY",
+      "source_ids": [
+        "B2-069"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": true,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": null
+    },
+    {
+      "id": "ALIAS-CONTEXT:MOAG-G-0002",
+      "from": "MOAG-G-0002",
+      "to": "M-STA-L2-001",
+      "layer": "REFERENT_CROSSWALK_NOT_PHYSICAL_IDENTITY",
+      "source_ids": [
+        "B1-03",
+        "B1-04"
+      ],
+      "relation": "CANDIDATE_REFERENT",
+      "joins_approved_evidence_component": false,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": "PROVISIONAL_EXPLICIT_DESCRIPTION"
+    },
+    {
+      "id": "ALIAS-CONTEXT:MOAG-G-0023",
+      "from": "MOAG-G-0023",
+      "to": "M-L2-ORANGE-001",
+      "layer": "REFERENT_CROSSWALK_NOT_PHYSICAL_IDENTITY",
+      "source_ids": [
+        "B1-04"
+      ],
+      "relation": "CANDIDATE_REFERENT",
+      "joins_approved_evidence_component": false,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": "PROVISIONAL_EXPLICIT_DESCRIPTION"
+    },
+    {
+      "id": "ALIAS-CONTEXT:MOAG-G-0024",
+      "from": "MOAG-G-0024",
+      "to": "M-L2-PLAZA-001",
+      "layer": "REFERENT_CROSSWALK_NOT_PHYSICAL_IDENTITY",
+      "source_ids": [
+        "B1-03",
+        "B1-04"
+      ],
+      "relation": "CANDIDATE_REFERENT",
+      "joins_approved_evidence_component": false,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": "PROVISIONAL_EXPLICIT_DESCRIPTION"
+    },
+    {
+      "id": "ALIAS-CONTEXT:MOAG-G-0025",
+      "from": "MOAG-G-0025",
+      "to": "M-L2-RES-GAL-001",
+      "layer": "REFERENT_CROSSWALK_NOT_PHYSICAL_IDENTITY",
+      "source_ids": [
+        "B1-03"
+      ],
+      "relation": "CANDIDATE_REFERENT",
+      "joins_approved_evidence_component": false,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": "REVIEW_SOURCE_IDENTITY_BEFORE_BINDING"
+    },
+    {
+      "id": "ALIAS-CONTEXT:MOAG-G-0084",
+      "from": "MOAG-G-0084",
+      "to": "M-L2-RES-001",
+      "layer": "REFERENT_CROSSWALK_NOT_PHYSICAL_IDENTITY",
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "relation": "CANDIDATE_REFERENT",
+      "joins_approved_evidence_component": false,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": "PROVISIONAL_EXPLICIT_DESCRIPTION"
+    },
+    {
+      "id": "R05-NEGATIVE:MOAG-R05-008",
+      "from": "M-L2-LIB-OVAL-001",
+      "to": "M-L2-LIB-NOWINDOW-001",
+      "layer": "PROHIBITED_IDENTITY_OR_INFERENCE",
+      "source_ids": [
+        "P-488",
+        "P-520"
+      ],
+      "relation": "NOT_SAME_AS",
+      "joins_approved_evidence_component": false,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": "DIRECT_TEXT"
+    },
+    {
+      "id": "R05-NEGATIVE:MOAG-R05-012",
+      "from": "M-L2-TUNNEL-002",
+      "to": "M-L2-TUNNEL-008",
+      "layer": "PROHIBITED_IDENTITY_OR_INFERENCE",
+      "source_ids": [
+        "P-504",
+        "P-538"
+      ],
+      "relation": "NOT_SAME_AS",
+      "joins_approved_evidence_component": false,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": "DIRECT_TEXT"
+    },
+    {
+      "id": "REJECTED:H06-003",
+      "from": "M-L3-OLD-ISOLATION-ROOM-001",
+      "to": "MOAG-G-0030",
+      "layer": "REJECTED_INFERENCE_NOT_A_CONNECTION",
+      "source_ids": [
+        "P-571",
+        "P-572"
+      ],
+      "relation": null,
+      "joins_approved_evidence_component": false,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "review_status": "REJECTED_WRONG_IDENTITY_AND_DISJOINT_GLOBAL_LEVELS"
+    },
+    {
+      "id": "H08-SCOPE::M-L2-DINING-001::L2",
+      "from": "M-L2-DINING-001",
+      "to": "M-STA-L2-001",
+      "source_ids": [
+        "P-478"
+      ],
+      "layer": "HYPOTHETICAL_LOCATION_SCOPE_NOT_ACCESS",
+      "model_status": "KNOWN_OR_CANDIDATE_GLOBAL_LEVEL_ONLY",
+      "connects_proven_components": false,
+      "direct_access_proven": false,
+      "metric_geometry_proven": false,
+      "asserts_floor_plate_or_xy": false,
+      "rejection_test": "Locate a source with an incompatible global level or establish an exact local sector"
+    },
+    {
+      "id": "H08-SCOPE::M-L2-LIB-NOWINDOW-001::L2",
+      "from": "M-L2-LIB-NOWINDOW-001",
+      "to": "M-STA-L2-001",
+      "source_ids": [
+        "P-520"
+      ],
+      "layer": "HYPOTHETICAL_LOCATION_SCOPE_NOT_ACCESS",
+      "model_status": "KNOWN_OR_CANDIDATE_GLOBAL_LEVEL_ONLY",
+      "connects_proven_components": false,
+      "direct_access_proven": false,
+      "metric_geometry_proven": false,
+      "asserts_floor_plate_or_xy": false,
+      "rejection_test": "Locate a source with an incompatible global level or establish an exact local sector"
+    },
+    {
+      "id": "H08-SCOPE::M-L2-LIB-OVAL-001::L2",
+      "from": "M-L2-LIB-OVAL-001",
+      "to": "M-STA-L2-001",
+      "source_ids": [
+        "P-488"
+      ],
+      "layer": "HYPOTHETICAL_LOCATION_SCOPE_NOT_ACCESS",
+      "model_status": "KNOWN_OR_CANDIDATE_GLOBAL_LEVEL_ONLY",
+      "connects_proven_components": false,
+      "direct_access_proven": false,
+      "metric_geometry_proven": false,
+      "asserts_floor_plate_or_xy": false,
+      "rejection_test": "Locate a source with an incompatible global level or establish an exact local sector"
+    },
+    {
+      "id": "H08-SCOPE::M-L2-WATER-RESERVOIR-001::L2",
+      "from": "M-L2-WATER-RESERVOIR-001",
+      "to": "M-STA-L2-001",
+      "source_ids": [
+        "P-509"
+      ],
+      "layer": "HYPOTHETICAL_LOCATION_SCOPE_NOT_ACCESS",
+      "model_status": "KNOWN_OR_CANDIDATE_GLOBAL_LEVEL_ONLY",
+      "connects_proven_components": false,
+      "direct_access_proven": false,
+      "metric_geometry_proven": false,
+      "asserts_floor_plate_or_xy": false,
+      "rejection_test": "Locate a source with an incompatible global level or establish an exact local sector"
+    },
+    {
+      "id": "R08-H005",
+      "from": "M-L2-RES-001",
+      "to": "M-L2-PLAZA-001",
+      "source_ids": [
+        "P-193",
+        "P-484",
+        "P-486"
+      ],
+      "layer": "HYPOTHETICAL_SYMMETRY_OR_FUNCTIONAL_LAYOUT",
+      "model_status": "OPTION_NOT_SELECTED_NOT_PROVEN",
+      "relation": "POSSIBLE_LOCALLY_REPEATED_GALLERY_SEGMENTS",
+      "basis": "LOCAL_RING_SYMMETRY_CONCEPT_ONLY",
+      "possible_global_levels": [
+        2
+      ],
+      "reason": "Жилое кольцо и частичная галерея допускают повторяемые секции с несколькими одинаковыми лестничными узлами, но все ступени не зафиксированы.",
+      "rejection_test": "Прямое описание лишь одной галереи или нерегулярного фронта с неравными пролётами",
+      "alternative_group": "R08-RESIDENTIAL-PLAZA",
+      "connects_proven_components": false,
+      "direct_access_proven": false,
+      "metric_geometry_proven": false,
+      "would_bridge_qualitative_components": false,
+      "does_not_assert_a_direct_door": true,
+      "does_not_infer_new_global_deck": true
+    },
+    {
+      "id": "R08-H006",
+      "from": "M-L2-RES-001",
+      "to": "M-L2-PLAZA-001",
+      "source_ids": [
+        "P-193",
+        "P-484",
+        "P-486"
+      ],
+      "layer": "HYPOTHETICAL_SYMMETRY_OR_FUNCTIONAL_LAYOUT",
+      "model_status": "OPTION_NOT_SELECTED_NOT_PROVEN",
+      "relation": "POSSIBLE_ASYMMETRIC_LOCAL_GALLERY_WITH_LIMITED_STAIRS",
+      "basis": "NON_SYMMETRIC_ALTERNATIVE",
+      "possible_global_levels": [
+        2
+      ],
+      "reason": "Повторение помещений не обязано означать геометрическую симметрию; галерея может занимать неполный сектор и иметь один подтверждённый спуск.",
+      "rejection_test": "Первичная схема либо текст о непрерывном симметричном обрамлении площади",
+      "alternative_group": "R08-RESIDENTIAL-PLAZA",
+      "connects_proven_components": false,
+      "direct_access_proven": false,
+      "metric_geometry_proven": false,
+      "would_bridge_qualitative_components": false,
+      "does_not_assert_a_direct_door": true,
+      "does_not_infer_new_global_deck": true
+    },
+    {
+      "id": "R08-H013",
+      "from": "M-L2-LIB-OVAL-001",
+      "to": "M-L2-PLAZA-001",
+      "source_ids": [
+        "P-488",
+        "P-484"
+      ],
+      "layer": "HYPOTHETICAL_SYMMETRY_OR_FUNCTIONAL_LAYOUT",
+      "model_status": "OPTION_NOT_SELECTED_NOT_PROVEN",
+      "relation": "POSSIBLE_PUBLIC_LIBRARY_ADJACENT_TO_MAIN_PLAZA_SECTOR",
+      "basis": "LOCAL_RING_SYMMETRY_CONCEPT_ONLY",
+      "possible_global_levels": [
+        2
+      ],
+      "reason": "Общественный зал с окном мог выходить к площади или общему пространству детского блока, но прямого прохода из библиотеки на площадь не установлено.",
+      "rejection_test": "Описание библиотеки вдали от площади или расположение окна на внешнюю обшивку",
+      "alternative_group": "R08-SECOND-LIBRARY-PLACEMENT",
+      "connects_proven_components": false,
+      "direct_access_proven": false,
+      "metric_geometry_proven": false,
+      "would_bridge_qualitative_components": true,
+      "does_not_assert_a_direct_door": true,
+      "does_not_infer_new_global_deck": true
+    },
+    {
+      "id": "R08-H014",
+      "from": "M-L2-LIB-OVAL-001",
+      "to": "M-L2-RES-001",
+      "source_ids": [
+        "P-488",
+        "P-484"
+      ],
+      "layer": "HYPOTHETICAL_SYMMETRY_OR_FUNCTIONAL_LAYOUT",
+      "model_status": "OPTION_NOT_SELECTED_NOT_PROVEN",
+      "relation": "POSSIBLE_LIBRARY_IN_RESIDENTIAL_RING_BRANCH",
+      "basis": "NON_SYMMETRIC_ALTERNATIVE",
+      "possible_global_levels": [
+        2
+      ],
+      "reason": "Библиотека может занимать секцию кольца кают с отдельным подходом; сходство использования помещений не доказывает повторяющийся модуль.",
+      "rejection_test": "Установлен отдельный центральный общественный блок библиотеки без общего жилого кольца",
+      "alternative_group": "R08-SECOND-LIBRARY-PLACEMENT",
+      "connects_proven_components": false,
+      "direct_access_proven": false,
+      "metric_geometry_proven": false,
+      "would_bridge_qualitative_components": true,
+      "does_not_assert_a_direct_door": true,
+      "does_not_infer_new_global_deck": true
+    },
+    {
+      "id": "R08-PLACE:M-L2-DINING-001:1",
+      "from": "M-L2-DINING-001",
+      "to": "M-L2-RES-001",
+      "layer": "R08_HYPOTHESIS_NOT_A_PHYSICAL_LINK",
+      "source_ids": [
+        "P-478"
+      ],
+      "hypothesis_type": "CHILDREN_DINING_FUNCTIONAL_NEIGHBOR",
+      "choice_group": "M-L2-DINING-001",
+      "reason": "Столовая детей вероятно обслуживает жилую/общественную часть второго блока, но ни место, ни вход не описаны",
+      "source_supports": "EXISTENCE_AND_CONTEXT_NOT_THIS_EXACT_PLACEMENT",
+      "confidence": "ANALOGY_OR_FUNCTIONAL_PLAUSIBILITY_NOT_BOOK_PROOF",
+      "joins_approved_evidence_component": false,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "geometry_approved": false,
+      "requires_new_primary_evidence": true,
+      "model_status": "OPTION_NOT_SELECTED_NOT_PROVEN",
+      "duplicate_source_register": "R08_PLACEMENT_OPTION",
+      "connects_proven_components": false,
+      "direct_access_proven": false,
+      "not_a_direct_door": true
+    },
+    {
+      "id": "R08-PLACE:M-L2-DINING-001:2",
+      "from": "M-L2-DINING-001",
+      "to": "M-L2-PLAZA-001",
+      "layer": "R08_HYPOTHESIS_NOT_A_PHYSICAL_LINK",
+      "source_ids": [
+        "P-478"
+      ],
+      "hypothesis_type": "CHILDREN_DINING_FUNCTIONAL_NEIGHBOR",
+      "choice_group": "M-L2-DINING-001",
+      "reason": "Столовая детей вероятно обслуживает жилую/общественную часть второго блока, но ни место, ни вход не описаны",
+      "source_supports": "EXISTENCE_AND_CONTEXT_NOT_THIS_EXACT_PLACEMENT",
+      "confidence": "ANALOGY_OR_FUNCTIONAL_PLAUSIBILITY_NOT_BOOK_PROOF",
+      "joins_approved_evidence_component": false,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "geometry_approved": false,
+      "requires_new_primary_evidence": true,
+      "model_status": "OPTION_NOT_SELECTED_NOT_PROVEN",
+      "duplicate_source_register": "R08_PLACEMENT_OPTION",
+      "connects_proven_components": false,
+      "direct_access_proven": false,
+      "not_a_direct_door": true
+    },
+    {
+      "id": "R08-PLACE:M-L2-LIB-NOWINDOW-001:1",
+      "from": "M-L2-LIB-NOWINDOW-001",
+      "to": "M-L2-RES-001",
+      "layer": "R08_HYPOTHESIS_NOT_A_PHYSICAL_LINK",
+      "source_ids": [
+        "P-520"
+      ],
+      "hypothesis_type": "WINDOWLESS_LOCAL_LOWER_STORY",
+      "choice_group": "M-L2-LIB-NOWINDOW-001",
+      "reason": "Малая библиотека без окна находится на локальном первом этаже внутри второго блока; её нельзя переносить на глобальный Нижний",
+      "source_supports": "EXISTENCE_AND_CONTEXT_NOT_THIS_EXACT_PLACEMENT",
+      "confidence": "ANALOGY_OR_FUNCTIONAL_PLAUSIBILITY_NOT_BOOK_PROOF",
+      "joins_approved_evidence_component": false,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "geometry_approved": false,
+      "requires_new_primary_evidence": true,
+      "model_status": "OPTION_NOT_SELECTED_NOT_PROVEN",
+      "duplicate_source_register": "R08_PLACEMENT_OPTION",
+      "connects_proven_components": false,
+      "direct_access_proven": false,
+      "not_a_direct_door": true
+    },
+    {
+      "id": "R08-PLACE:M-L2-LIB-NOWINDOW-001:2",
+      "from": "M-L2-LIB-NOWINDOW-001",
+      "to": "M-L2-PLAZA-001",
+      "layer": "R08_HYPOTHESIS_NOT_A_PHYSICAL_LINK",
+      "source_ids": [
+        "P-520"
+      ],
+      "hypothesis_type": "WINDOWLESS_LOCAL_LOWER_STORY",
+      "choice_group": "M-L2-LIB-NOWINDOW-001",
+      "reason": "Малая библиотека без окна находится на локальном первом этаже внутри второго блока; её нельзя переносить на глобальный Нижний",
+      "source_supports": "EXISTENCE_AND_CONTEXT_NOT_THIS_EXACT_PLACEMENT",
+      "confidence": "ANALOGY_OR_FUNCTIONAL_PLAUSIBILITY_NOT_BOOK_PROOF",
+      "joins_approved_evidence_component": false,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "geometry_approved": false,
+      "requires_new_primary_evidence": true,
+      "model_status": "OPTION_NOT_SELECTED_NOT_PROVEN",
+      "duplicate_source_register": "R08_PLACEMENT_OPTION",
+      "connects_proven_components": false,
+      "direct_access_proven": false,
+      "not_a_direct_door": true
+    },
+    {
+      "id": "R08-PLACE:M-L2-WATER-RESERVOIR-001:1",
+      "from": "M-L2-WATER-RESERVOIR-001",
+      "to": "M-STA-L2-001",
+      "layer": "R08_HYPOTHESIS_NOT_A_PHYSICAL_LINK",
+      "source_ids": [
+        "P-509"
+      ],
+      "hypothesis_type": "SECOND_DECK_WATER_SERVICE",
+      "choice_group": "M-L2-WATER-RESERVOIR-001",
+      "reason": "Собственный резервуар второго блока может иметь обслуживание от внутренних технических маршрутов, но точный проход не известен",
+      "source_supports": "EXISTENCE_AND_CONTEXT_NOT_THIS_EXACT_PLACEMENT",
+      "confidence": "ANALOGY_OR_FUNCTIONAL_PLAUSIBILITY_NOT_BOOK_PROOF",
+      "joins_approved_evidence_component": false,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "geometry_approved": false,
+      "requires_new_primary_evidence": true,
+      "model_status": "OPTION_NOT_SELECTED_NOT_PROVEN",
+      "duplicate_source_register": "R08_PLACEMENT_OPTION",
+      "connects_proven_components": false,
+      "direct_access_proven": false,
+      "not_a_direct_door": true
+    },
+    {
+      "id": "R08-PLACE:M-L2-WATER-RESERVOIR-001:2",
+      "from": "M-L2-WATER-RESERVOIR-001",
+      "to": "M-L2-ORANGE-001",
+      "layer": "R08_HYPOTHESIS_NOT_A_PHYSICAL_LINK",
+      "source_ids": [
+        "P-509"
+      ],
+      "hypothesis_type": "SECOND_DECK_WATER_SERVICE",
+      "choice_group": "M-L2-WATER-RESERVOIR-001",
+      "reason": "Собственный резервуар второго блока может иметь обслуживание от внутренних технических маршрутов, но точный проход не известен",
+      "source_supports": "EXISTENCE_AND_CONTEXT_NOT_THIS_EXACT_PLACEMENT",
+      "confidence": "ANALOGY_OR_FUNCTIONAL_PLAUSIBILITY_NOT_BOOK_PROOF",
+      "joins_approved_evidence_component": false,
+      "proves_direct_access": false,
+      "metric_geometry_proven": false,
+      "geometry_approved": false,
+      "requires_new_primary_evidence": true,
+      "model_status": "OPTION_NOT_SELECTED_NOT_PROVEN",
+      "duplicate_source_register": "R08_PLACEMENT_OPTION",
+      "connects_proven_components": false,
+      "direct_access_proven": false,
+      "not_a_direct_door": true
+    }
+  ],
+  "deferred_vertical_records": [],
+  "source_review": {
+    "schema": "MOAG-SOURCE-REVIEW-R11/1",
+    "review_date": "2026-10-28",
+    "assets": [
+      {
+        "id": "USER-PLAN-20261028",
+        "file": "docs/research/apa-results/moag/synthesis/r11/assets/station-plan.jpg",
+        "sha256": "33ee20c129fb352d7c679001d0fcd4358379d67660c8295863ba5bcfa03ab3fd",
+        "origin": "USER_SUPPLIED_IMAGE_20261028",
+        "provenance_status": "USER_PROVIDED_NOT_INDEPENDENTLY_AUTHENTICATED"
+      },
+      {
+        "id": "USER-EXTERIOR-20261028",
+        "file": "docs/research/apa-results/moag/synthesis/r11/assets/station-exterior.webp",
+        "sha256": "4a67135e8969d234ad9d1b8a52a53ab3735a8be39b9a86f0a0bb334dfa7613f7",
+        "origin": "USER_SUPPLIED_IMAGE_20261028",
+        "provenance_status": "USER_PROVIDED_NOT_INDEPENDENTLY_AUTHENTICATED"
+      }
+    ],
+    "plan_constraints": [
+      {
+        "id": "PLAN-001",
+        "kind": 2,
+        "a": "MOAG-G-0010",
+        "b": "MOAG-G-0008",
+        "reading": "На изображении Первого уровня подпись базы диких правее подписи Темной базы; ось рисунка, не азимут станции."
+      },
+      {
+        "id": "PLAN-002",
+        "kind": 2,
+        "a": "MOAG-G-0009",
+        "b": "MOAG-G-0008",
+        "reading": "На изображении Первого уровня подпись Овальной базы правее подписи Темной базы."
+      },
+      {
+        "id": "PLAN-003",
+        "kind": 3,
+        "a": "MOAG-G-0008",
+        "b": "MOAG-G-0010",
+        "reading": "На изображении Первого уровня Темная база ниже базы диких; plan_y направлена вниз страницы, это не высота Z."
+      },
+      {
+        "id": "PLAN-004",
+        "kind": 3,
+        "a": "MOAG-G-0009",
+        "b": "MOAG-G-0008",
+        "reading": "На изображении Первого уровня Овальная база ниже Темной базы; это порядок на плане, не вертикальный этаж."
+      }
+    ],
+    "primary_reviews": [
+      {
+        "id": "R11-PRIMARY-PIPE",
+        "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=4",
+        "section": "Книга I, часть I, глава 3: Таис. Закон",
+        "retrieval": "FULL_CHAPTER_RETRIEVED_TARGET_EPISODE_READ",
+        "existing_refs": [
+          "B1-04",
+          "P-073",
+          "P-074",
+          "P-075",
+          "P-076",
+          "P-077",
+          "P-078"
+        ],
+        "cross_edition_pages": [
+          "B1-012",
+          "B1-013"
+        ],
+        "finding": "Таис пропускает боковой выход при падении по вертикальной трубе; Фёдор спускается следом. Они оказываются на полу небольшого квадратного колодца с закрытой дверью и запаянным проходом напротив. Возвращаются вверх по скобам к близкому боковому повороту, затем долго ползут до выхода возле мусоропрессовщика.",
+        "entailed": "Локальная отметка бокового выхода к обитаемой части выше пола колодца. Наличие помещений ниже обитаемой части. Возвратный выход возле мусоропрессовщика тоже выше его пола, но не доказано равенство отметок всей длинной трубы.",
+        "not_entailed": [
+          "все базы выше всех ангаров",
+          "ещё один глобальный уровень",
+          "ровно один полный этаж разницы",
+          "точная высота",
+          "пространство за закрытой дверью известно",
+          "все боковые помещения имеют общий пол"
+        ],
+        "solver_binding": "MOAG-Z-Z01; z(MOAG-G-0006) represents the known side-exit reference, not every base floor"
+      },
+      {
+        "id": "R11-PRIMARY-ROUND-HALL",
+        "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=17",
+        "section": "Книга I, часть II, глава 8: Эмма. Дверь",
+        "retrieval": "FULL_CHAPTER_RETRIEVED_TARGET_EPISODE_READ",
+        "existing_refs": [
+          "B1-17",
+          "P-219",
+          "P-220",
+          "P-221",
+          "P-222"
+        ],
+        "finding": "Высокий зал; остатки лестницы ведут на небольшой мостик под потолком. Мостик занимает лишь половину периметра; дверь ведёт к пультам и следующая дверь в жилую комнату.",
+        "not_entailed": [
+          "сплошное перекрытие всего зала",
+          "равенство высот всех ангаров",
+          "тождество со старой диспетчерской P-313"
+        ]
+      },
+      {
+        "id": "R11-PRIMARY-HANGAR-1",
+        "url": "https://loveread.ec/read_book.php?id=53370&p=14",
+        "section": "Книга II, интернет-страница 14",
+        "retrieval": "PAGE_RETRIEVED_TARGET_EPISODE_READ",
+        "existing_refs": [
+          "P-364",
+          "P-365",
+          "MOAG-R3-RC-016"
+        ],
+        "finding": "В первом открытом ангаре стоят два катера; операторские кабины закреплены почти под потолком, к ним ведёт шаткая металлическая лестница. Это локальная поднятая комната внутри высокого объёма."
+      },
+      {
+        "id": "R11-PRIMARY-HANGAR-2",
+        "url": "https://loveread.ec/read_book.php?id=53370&p=15",
+        "section": "Книга II, интернет-страница 15",
+        "retrieval": "PAGE_RETRIEVED_TARGET_EPISODE_READ",
+        "existing_refs": [
+          "P-368",
+          "P-369",
+          "MOAG-R3-RC-018"
+        ],
+        "finding": "В соседнем ангаре три катера и лестница к диспетчерской. Сохраняется отдельная пара ангар/верхняя комната; прямой переход операторских не превращён в точное равенство Z."
+      },
+      {
+        "id": "R11-PRIMARY-BASES-34",
+        "url": "https://loveread.ec/read_book.php?id=48197&p=28",
+        "section": "Книга I, интернет-страница 28",
+        "retrieval": "PAGE_RETRIEVED_TARGET_DIALOGUE_READ",
+        "existing_refs": [
+          "LR-B1-028",
+          "MOAG-G-0073"
+        ],
+        "finding": "Фёдор рассказывает Илье об извлечённых из взломанных замков названии станции Млечный путь и номерах баз 3 и 4. В сцене нет индивидуального сопоставления номеров с современной Темной или Овальной базой и нет их двух раздельных контуров на плане.",
+        "not_entailed": [
+          "Темная = база 3",
+          "Овальная = база 4",
+          "два новых независимых помещения сверх существующих баз"
+        ]
+      }
+    ],
+    "visual_findings": [
+      "План явно подписывает 1, 2 и 3 уровень отдельно. Обитаемые базы Первого окружают внутреннюю неизведанную зону. Темная слева, дикие сверху, Овальная снизу в координатах листа.",
+      "На плане читается название Темной базы и подписи Овальной и базы диких. Приписывание им исторических номеров 3 и 4 не подтверждено этим изображением.",
+      "Внешняя иллюстрация показывает три крупных расположенных друг над другом дисковидных объёма, верхний купол, нижние выступы и внешние коммуникации. Она не задаёт число полных внутренних перекрытий и измеренные габариты.",
+      "Схематический порядок подписи на плане введён как обязательный ordinal check. Радиусы, точные углы, север/юг и метрические интервалы из рисунка не получены.",
+      "Рисунки предоставлены пользователем. Их авторство и издание не аутентифицированы по выходным данным; визуальное содержание проверено как предоставленный пользователем источник."
+    ],
+    "unresolved": [
+      {
+        "id": "R11-U01",
+        "status": "unknown",
+        "question": "Какие отдельные физические базы соответствуют историческим номерам 3 и 4 и где проходит их индивидуальная граница?",
+        "existing_index": "MOAG-G-0073",
+        "reason": "R09 содержит общий исторический индекс, а предоставленный план подписывает общины по именам, не номерами. Разделение индекса и тождество с Темной/Овальной не разрешены доказательствами."
+      },
+      {
+        "id": "R11-U02",
+        "status": "unknown",
+        "question": "Внутренняя пространственная геометрия всех протяжённых коридоров, промежуточные ярусы и помещения за закрытой дверью колодца.",
+        "reason": "Маршруты и неизвестные сегменты R09 сохранены без фиктивных дверей или координат."
+      },
+      {
+        "id": "R11-U03",
+        "status": "unknown",
+        "question": "Метрические площади и объёмы.",
+        "reason": "Все R05 диапазоны сохранены как сценарные гипотезы; в книжной SAT-модели они не стали жёсткими фактами."
+      },
+      {
+        "id": "R11-U04",
+        "status": "unknown",
+        "question": "Полная модель пространственных объёмов и геометрическая сверка внешней оболочки.",
+        "reason": "В этой минимальной модели реализован порядок локальных отметок и положение на плане; пересечения объёмов и совместимость с точной оболочкой ещё не проверяются. Иллюстрация не содержит метрической оболочки."
+      }
+    ]
+  },
+  "R09_fingerprint": "9b0cce9f97ff8cb4e100f0ffae77efb96186ab07530f7e204dfc025815a9ce45",
+  "R09_quantities": {
+    "total_vertices": 593,
+    "total_typed_edges": 845,
+    "hypothetical_vertices": 18,
+    "hypothetical_edges": 84,
+    "primary_layout_variant_count": 16,
+    "secondary_placement_variant_count": 24,
+    "cross_referenced_same_endpoint_candidates": 4,
+    "distinct_secondary_placement_edges_added": 20,
+    "fixed_objects_with_multiple_options": 12,
+    "unknown_route_gaps_reconciled": 18,
+    "observed_transitions_still_without_direct_geometry": 306,
+    "unselected_compositional_patterns": 3,
+    "edge_layers": {
+      "HYPOTHETICAL_GAP_SEGMENT_NOT_CONFIRMED_PATH": 36,
+      "HYPOTHETICAL_LOCATION_SCOPE_NOT_ACCESS": 12,
+      "HYPOTHETICAL_SYMMETRY_OR_FUNCTIONAL_LAYOUT": 16,
+      "R08_HYPOTHESIS_NOT_A_PHYSICAL_LINK": 20
+    }
+  },
+  "R09_mutated": false,
+  "hypothesis_edges_used_as_hard_constraints": 0,
+  "all_local_ranks_are_nonmetric": true,
+  "full_floor_decks_inferred": false,
+  "metric_area_constraints_enabled": false,
+  "area_profile_reason": "R05 bounds are project hypotheses; no silent promotion to book facts",
+  "archicad_write": false,
+  "geometry_approved": false
+}

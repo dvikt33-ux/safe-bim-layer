@@ -1,0 +1,40 @@
+name: MOAG R11 real MiniZinc and CP-SAT
+on:
+  pull_request:
+    paths:
+      - 'tools/moag_topology/**'
+      - 'tests/test_moag_solver_r11.py'
+      - 'docs/research/apa-results/moag/**'
+      - '.github/workflows/moag-solvers-r11.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-solvers:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned OR-Tools dependencies
+        run: python -m pip install -r tools/moag_topology/requirements-r11.txt
+      - name: Download hash-verified official portable MiniZinc
+        run: python tools/moag_topology/bootstrap_r11.py
+      - name: Run source-qualified real lower-block SAT UNSAT and alternatives
+        run: python tools/moag_topology/solver_r11.py --out moag-r11-run
+      - name: Test source boundaries and real CP-SAT conflict explanations
+        run: python -m unittest discover -s tests -p test_moag_solver_r11.py -v
+      - name: Require immutable pre-existing research sources
+        run: git diff --exit-code -- docs/research/apa-results/moag/v1 docs/research/apa-results/moag/v2 docs/research/apa-results/moag/synthesis
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: moag-r11-${{ matrix.os }}
+          path: moag-r11-run/
+          if-no-files-found: error
+          retention-days: 30
