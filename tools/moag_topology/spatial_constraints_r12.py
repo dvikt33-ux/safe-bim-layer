@@ -25,6 +25,13 @@ R03_TYPES = {"HAS_INTERNAL_UPPER_ROOM", "HAS_UPPER_GALLERY", "ELEVATED_WITHIN"}
 R04_ENVELOPES = {"MOAG-RG-E21", "MOAG-RG-E66", "MOAG-RG-E91", "MOAG-RG-E119"}
 # First source-backed tests of routes between named bases; not direct doors.
 BASE_ROUTES = ("P-024", "P-305")
+# Shape descriptions apply to individual rooms, never a generic station ring.
+UPPER_GALLERY_SHAPES = {
+    "M-L1-CH-GAL-001": "PARTIAL_CURVED_PERIMETER_GALLERY",
+    "MOAG-G-0058": "HALF_CIRCUMFERENCE_ARC_IN_ROUND_HALL",
+    "MOAG-G-0079": "FULL_PERIMETER_GALLERY_ROOM_SHAPE_UNKNOWN",
+    "MOAG-G-0095": "FULL_CIRCUMFERENCE_ARC_IN_ROUND_HALL",
+}
 
 
 def build(scope=1):
@@ -63,7 +70,9 @@ def build(scope=1):
                       "metric_height_proven": False,
                       "floor_plan_geometry_proven": False,
                       "full_upper_floor_inferred": False,
-                      "two_legacy_names_merged": False})
+                      "two_legacy_names_merged": False,
+                      "plan_shape_claim": UPPER_GALLERY_SHAPES.get(upper, "UNSPECIFIED"),
+                      "shape_dimensions_or_radius_proven": False})
 
     for e in originals["derived_r03_relationships"]:
         if e["relation"] not in R03_TYPES or e["evidence_state"] != "DIRECT_TEXT":
@@ -126,6 +135,8 @@ def validate(p):
             raise ValueError("ENVELOPE_WITHOUT_SOURCE_URL")
         if e["type"] != "PARTIAL_UPPER_AREA_IN_HIGH_VOLUME_NONMETRIC" or e["full_upper_floor_inferred"]:
             raise ValueError("GEOMETRIC_PROMOTION")
+        if e["plan_shape_claim"] != UPPER_GALLERY_SHAPES.get(e["upper"], "UNSPECIFIED") or e["shape_dimensions_or_radius_proven"]:
+            raise ValueError("UNSUPPORTED_SHAPE_PROMOTION")
     for r in p["source_backed_routes_not_solver_constraints"]:
         if r["direct_access_claim"] or r["numerical_length_m"] is not None:
             raise ValueError("INDIRECT_ROUTE_PROMOTED_TO_DIRECT_ACCESS")
