@@ -47,7 +47,6 @@ class R16EvidenceAuditTests(unittest.TestCase):
         self.assertEqual(set(overlay), {"B1-061","B1-063","B1-064","B1-065"})
         for page, record in overlay.items():
             self.assertIn("loveread.ec/read_book.php", record["url"])
-            self.assertIn(page, record["route_stages_with_page"][0].replace("RT013", "B1-") if False else page)
             self.assertTrue(record["route_stages_with_page"])
             self.assertFalse(record["primary_text_reaudited_in_R16"])
             self.assertFalse(record["R14_source_record_rewritten"])
