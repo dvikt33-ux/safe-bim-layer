@@ -15,6 +15,7 @@ class SourceAndScopeTests(unittest.TestCase):
     def setUpClass(cls):
         cls.lower=r12.build(1)
         cls.second=r12.build(2)
+        cls.third=r12.build(3)
 
     def test_r09_unchanged_and_no_geometry(self):
         self.assertEqual(self.lower["r11"]["R09_quantities"]["total_vertices"],593)
@@ -36,6 +37,9 @@ class SourceAndScopeTests(unittest.TestCase):
                             and not e["floor_plan_geometry_proven"]
                             for e in self.lower["envelopes"]))
         self.assertEqual(len(self.second["envelopes"]),1)
+        self.assertEqual(len(self.third["envelopes"]),1)
+        self.assertIn(("MOAG-G-0036","MOAG-G-0095"),
+                      {(e["container"],e["upper"]) for e in self.third["envelopes"]})
 
     def test_indirect_base_routes_not_direct_access_or_metrics(self):
         links=self.lower["source_backed_routes_not_solver_constraints"]
@@ -83,8 +87,8 @@ class RealR12SolverTests(unittest.TestCase):
         cls.lower=r12.build(1)
         cls.second=r12.build(2)
 
-    def test_real_satisfiability_both_scopes(self):
-        for p in (self.lower,self.second):
+    def test_real_satisfiability_three_scopes(self):
+        for p in (self.lower,self.second,self.third):
             r=r12.cp_solve(p)
             self.assertEqual(r["status"],"SAT")
             self.assertTrue(r12.verify(p,r["witness"]))
