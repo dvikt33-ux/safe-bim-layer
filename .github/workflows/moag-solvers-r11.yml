@@ -1,4 +1,4 @@
-name: MOAG R11-R14 real MiniZinc and CP-SAT
+name: MOAG R11-R15 real MiniZinc and CP-SAT
 on:
   pull_request:
     paths:
@@ -7,6 +7,7 @@ on:
       - 'tests/test_moag_spatial_r12.py'
       - 'tests/test_moag_volumes_r13.py'
       - 'tests/test_moag_routes_r14.py'
+      - 'tests/test_moag_integrated_r15.py'
       - 'docs/research/apa-results/moag/**'
       - '.github/workflows/moag-solvers-r11.yml'
   workflow_dispatch:
@@ -40,6 +41,10 @@ jobs:
         run: python tools/moag_topology/scenario_volumes_r13.py --out moag-r13-run
       - name: R14 actual full-route 52-path MiniZinc and OR-Tools ordinal feasibility
         run: python tools/moag_topology/route_constraints_r14.py --out moag-r14-run
+      - name: R15 joint volume visit and local-height feasibility, conflict replay and domain alternatives
+        run: python tools/moag_topology/integrated_spatial_r15.py --out moag-r15-run
+      - name: R15 source-safe integration and real coupling regression tests
+        run: python -m unittest discover -s tests -p test_moag_integrated_r15.py -v
       - name: R14 tests preserve all observation steps and reject unsourced direct corridors
         run: python -m unittest discover -s tests -p test_moag_routes_r14.py -v
       - name: Test R13 scenario evidence gates and true CP-SAT spatial contradictions
@@ -53,7 +58,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: moag-r11-r14-${{ matrix.os }}
+          name: moag-r11-r15-${{ matrix.os }}
           path: |
             moag-r11-run/
             moag-r12-lower/
@@ -61,5 +66,6 @@ jobs:
             moag-r12-third/
             moag-r13-run/
             moag-r14-run/
+            moag-r15-run/
           if-no-files-found: error
           retention-days: 30
