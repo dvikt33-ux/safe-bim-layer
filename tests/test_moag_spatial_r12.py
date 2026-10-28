@@ -102,6 +102,7 @@ class RealR12SolverTests(unittest.TestCase):
     def setUpClass(cls):
         cls.lower=r12.build(1)
         cls.second=r12.build(2)
+        cls.third=r12.build(3)
 
     def test_real_satisfiability_three_scopes(self):
         for p in (self.lower,self.second,self.third):
