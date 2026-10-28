@@ -1,9 +1,10 @@
-name: MOAG R11 real MiniZinc and CP-SAT
+name: MOAG R11-R12 real MiniZinc and CP-SAT
 on:
   pull_request:
     paths:
       - 'tools/moag_topology/**'
       - 'tests/test_moag_solver_r11.py'
+      - 'tests/test_moag_spatial_r12.py'
       - 'docs/research/apa-results/moag/**'
       - '.github/workflows/moag-solvers-r11.yml'
   workflow_dispatch:
@@ -27,6 +28,14 @@ jobs:
         run: python tools/moag_topology/bootstrap_r11.py
       - name: Run source-qualified real lower-block SAT UNSAT and alternatives
         run: python tools/moag_topology/solver_r11.py --out moag-r11-run
+      - name: R12 source-backed raised spaces, Lower
+        run: python tools/moag_topology/spatial_constraints_r12.py --scope 1 --out moag-r12-lower
+      - name: R12 local residential gallery, Second
+        run: python tools/moag_topology/spatial_constraints_r12.py --scope 2 --out moag-r12-second
+      - name: R12 circular-lounge upper gallery, Third
+        run: python tools/moag_topology/spatial_constraints_r12.py --scope 3 --out moag-r12-third
+      - name: Test R12 source preservation and actual CP-SAT geometry guards
+        run: python -m unittest discover -s tests -p test_moag_spatial_r12.py -v
       - name: Test source boundaries and real CP-SAT conflict explanations
         run: python -m unittest discover -s tests -p test_moag_solver_r11.py -v
       - name: Require immutable pre-existing research sources
@@ -34,7 +43,11 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: moag-r11-${{ matrix.os }}
-          path: moag-r11-run/
+          name: moag-r11-r12-${{ matrix.os }}
+          path: |
+            moag-r11-run/
+            moag-r12-lower/
+            moag-r12-second/
+            moag-r12-third/
           if-no-files-found: error
           retention-days: 30
