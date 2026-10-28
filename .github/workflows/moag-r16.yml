@@ -1,0 +1,38 @@
+name: MOAG R16 targeted evidence and fork CP-SAT
+on:
+  pull_request:
+    paths:
+      - 'tools/moag_topology/evidence_triage_r16.py'
+      - 'tests/test_moag_evidence_r16.py'
+      - 'docs/research/apa-results/moag/synthesis/r16/**'
+      - '.github/workflows/moag-r16.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  r16-evidence:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install official pinned OR-Tools dependencies
+        run: python -m pip install -r tools/moag_topology/requirements-r11.txt
+      - name: Download verified official MiniZinc distribution with CP-SAT
+        run: python tools/moag_topology/bootstrap_r11.py
+      - name: Run integrated R15 plus R16 source fork SAT UNSAT and provenance audit
+        run: python tools/moag_topology/evidence_triage_r16.py --out moag-r16-targeted
+      - name: Validate all 353 unbound stages and sourced branch-choice contradiction
+        run: python -m unittest discover -s tests -p test_moag_evidence_r16.py -v
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: moag-r16-targeted-${{ matrix.os }}
+          path: moag-r16-targeted/
+          if-no-files-found: warn
+          retention-days: 30
