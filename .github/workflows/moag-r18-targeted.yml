@@ -1,0 +1,38 @@
+name: MOAG R18 targeted physical identity
+on:
+  pull_request:
+    paths:
+      - 'tools/moag_topology/identity_alternatives_r18.py'
+      - 'tests/test_moag_identity_r18.py'
+      - 'docs/research/apa-results/moag/synthesis/r18/**'
+      - '.github/workflows/moag-r18-targeted.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  r18-identity:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned official OR-Tools
+        run: python -m pip install -r tools/moag_topology/requirements-r11.txt
+      - name: Install hash-checked official MiniZinc CP-SAT
+        run: python tools/moag_topology/bootstrap_r11.py
+      - name: Execute source-same and source-different identity and 6 ambiguous pairs
+        run: python tools/moag_topology/identity_alternatives_r18.py --out moag-r18-targeted
+      - name: Verify book provenance and actual identity ambiguity with CP-SAT
+        run: python -m unittest discover -s tests -p test_moag_identity_r18.py -v
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: moag-r18-identity-${{ matrix.os }}
+          path: moag-r18-targeted/
+          if-no-files-found: error
+          retention-days: 30
