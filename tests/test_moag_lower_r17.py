@@ -41,6 +41,14 @@ class SourceBoundaryR17(unittest.TestCase):
         self.assertEqual(c["family"],"r17_sector")
         self.assertIn("53370&p=14",c["sources"][0]["url"])
 
+    def test_real_named_indices_and_hangar_route_visits_inherit_sector(self):
+        v=self.info["source_index_membership_variables"]
+        self.assertEqual(set(v),{"MOAG-G-0008","MOAG-G-0009",
+                 "MOAG-G-0017","MOAG-G-0018","RT030-D","RT030-E"})
+        c={x["id"]:x for x in self.model["constraints"]}
+        self.assertTrue(all(c["R17-MEMBER::"+eid]["family"]=="r17_membership"
+                            for eid in v))
+
     def test_e69_e70_direct_doors_and_e20_access_not_identified_as_one_type(self):
         p={x["id"]:x for x in self.info["source_portal_relations"]}
         self.assertEqual(set(p),{"MOAG-RG-E69","MOAG-RG-E70","MOAG-RG-E20"})
@@ -104,6 +112,20 @@ class RealR17CPTests(unittest.TestCase):
         core={x["id"] for x in bad["unsat_core"]}
         self.assertIn(s["relation_id"],core)
         self.assertIn(same["id"],core)
+
+    def test_false_detachment_of_actual_indexed_corridor_visit_unsat(self):
+        v=self.info["source_index_membership_variables"]
+        p=r15.probe("TEST-R17-DETACH-REAL-ANGAR-VISIT",[
+            r15.row([(v["RT030-D"],1),(v["MOAG-G-0017"],-1)],1),
+            r15.row([(v["MOAG-G-0017"],1),(v["RT030-D"],-1)],1)])
+        p["any_of"]=True
+        self.assertEqual(r15.cp_solve(self.model,[p],
+                          exclude_families=("r17_membership",))["status"],"SAT")
+        bad=r15.cp_solve(self.model,[p])
+        self.assertEqual(bad["status"],"INFEASIBLE")
+        ids={x["id"] for x in bad["unsat_core"]}
+        self.assertIn(p["id"],ids)
+        self.assertTrue(any(x.startswith("R17-MEMBER::") for x in ids))
 
     def test_source_direct_bridge_door_cannot_be_marked_absent(self):
         var=self.info["portal_flags"]["MOAG-RG-E69"]
