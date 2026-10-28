@@ -1,4 +1,4 @@
-name: MOAG R11-R17 real MiniZinc and CP-SAT
+name: MOAG R11-R18 real MiniZinc and CP-SAT
 on:
   pull_request:
     paths:
@@ -10,6 +10,7 @@ on:
       - 'tests/test_moag_integrated_r15.py'
       - 'tests/test_moag_evidence_r16.py'
       - 'tests/test_moag_lower_r17.py'
+      - 'tests/test_moag_identity_r18.py'
       - 'docs/research/apa-results/moag/**'
       - '.github/workflows/moag-solvers-r11.yml'
   workflow_dispatch:
@@ -49,6 +50,10 @@ jobs:
         run: python tools/moag_topology/evidence_triage_r16.py --out moag-r16-run
       - name: R17 sourced Lower-base versus hangar sector and existing doors SAT UNSAT
         run: python tools/moag_topology/lower_evidence_r17.py --out moag-r17-run
+      - name: R18 book-backed same/different identities and multiple joint solver countermodels
+        run: python tools/moag_topology/identity_alternatives_r18.py --out moag-r18-run
+      - name: R18 source identities and ambiguous stair/hangar alternatives
+        run: python -m unittest discover -s tests -p test_moag_identity_r18.py -v
       - name: R17 source region, route ambiguity and solver negative controls
         run: python -m unittest discover -s tests -p test_moag_lower_r17.py -v
       - name: R16 review queue integrity, sourced ledger overlays and real fork SAT UNSAT
@@ -68,7 +73,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: moag-r11-r17-${{ matrix.os }}
+          name: moag-r11-r18-${{ matrix.os }}
           path: |
             moag-r11-run/
             moag-r12-lower/
@@ -79,5 +84,6 @@ jobs:
             moag-r15-run/
             moag-r16-run/
             moag-r17-run/
+            moag-r18-run/
           if-no-files-found: error
           retention-days: 30
