@@ -1,0 +1,12 @@
+{
+  "command": "python -m unittest discover -s tests -p test_moag_*.py -v",
+  "tests_run": 189,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "new_R15_tests": 11,
+  "test_log_sha256": "f9fb078d46e4f642f23d0c8e88705cf15a82e688ef0dfb1a51d7b4b8580fd5f7",
+  "source_base_PR": 200,
+  "baseline_CI": 40748847099,
+  "baseline_artifact": 12843276108
+}
