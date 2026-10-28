@@ -1,0 +1,38 @@
+name: MOAG R17 targeted source sector and access
+on:
+  pull_request:
+    paths:
+      - 'tools/moag_topology/lower_evidence_r17.py'
+      - 'tests/test_moag_lower_r17.py'
+      - 'docs/research/apa-results/moag/synthesis/r17/**'
+      - '.github/workflows/moag-r17-targeted.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  r17-source:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install official OR-Tools
+        run: python -m pip install -r tools/moag_topology/requirements-r11.txt
+      - name: Install hash-verified official MiniZinc
+        run: python tools/moag_topology/bootstrap_r11.py
+      - name: R17 real source-sector and portal chain SAT UNSAT
+        run: python tools/moag_topology/lower_evidence_r17.py --out moag-r17-fast
+      - name: R17 substantive source integrity and CP-SAT tests
+        run: python -m unittest discover -s tests -p test_moag_lower_r17.py -v
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: moag-r17-fast-${{ matrix.os }}
+          path: moag-r17-fast/
+          if-no-files-found: error
+          retention-days: 30
