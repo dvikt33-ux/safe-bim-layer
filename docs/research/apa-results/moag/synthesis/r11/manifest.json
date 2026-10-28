@@ -1,0 +1,186 @@
+[
+  {
+    "file": "assets/station-exterior.webp",
+    "sha256": "4a67135e8969d234ad9d1b8a52a53ab3735a8be39b9a86f0a0bb334dfa7613f7"
+  },
+  {
+    "file": "assets/station-plan.jpg",
+    "sha256": "33ee20c129fb352d7c679001d0fcd4358379d67660c8295863ba5bcfa03ab3fd"
+  },
+  {
+    "file": "local_validation.json",
+    "sha256": "d4428ec0457fb3ed516c2a2c8bbd3c561a73518780056eadafbe2badf2600649"
+  },
+  {
+    "file": "lower-results/alternative-1.mzn",
+    "sha256": "fe7cfdb81eb92558faa2b1b812218935c17179b5fb8c31e26a193bed67918d7a"
+  },
+  {
+    "file": "lower-results/alternative-1.stdout.txt",
+    "sha256": "2a71a32eb50334323452f69a4c1b524cad88bfde2371d3deff7938df7448f2ec"
+  },
+  {
+    "file": "lower-results/alternative-2.mzn",
+    "sha256": "192ff6ab75870fdab3bf2b51566ce742702f0c7958c724884d9e8a9afb9884c7"
+  },
+  {
+    "file": "lower-results/alternative-2.stdout.txt",
+    "sha256": "9b0745e0d2469ae050d67cfc269018b4666893d3192614539c8c7d3b088e1128"
+  },
+  {
+    "file": "lower-results/alternative-3.mzn",
+    "sha256": "d6cf29782d3e7e06ba3f065e941beebfd4dd6fb86656b411346bb4490caad66e"
+  },
+  {
+    "file": "lower-results/alternative-3.stdout.txt",
+    "sha256": "bf9f90e828b4843495d7be63231b89e4195d0acb5558a7fc16514c80833cb377"
+  },
+  {
+    "file": "lower-results/base-above-hangar-countermodel.dzn",
+    "sha256": "5d95d300dd038da12c82b71e25fed39225d2fbaa7d10de2a0688dc215a7d01ec"
+  },
+  {
+    "file": "lower-results/base-above-hangar-countermodel.stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "lower-results/base-above-hangar-countermodel.stdout.txt",
+    "sha256": "4f3634dc0e911052cb87c2161db976fbf643f1360c0ded5531ace23bda1147ee"
+  },
+  {
+    "file": "lower-results/base-below-hangar-countermodel.dzn",
+    "sha256": "a408eef94bf852f90371b0b16c199b7db3dde7c12f22533c7be10a10bb2715ac"
+  },
+  {
+    "file": "lower-results/base-below-hangar-countermodel.stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "lower-results/base-below-hangar-countermodel.stdout.txt",
+    "sha256": "6009065544e8db911aab4beba3c0988529286d09ab5da38d198f1294ed25c786"
+  },
+  {
+    "file": "lower-results/model.json",
+    "sha256": "74cdfdc2048e8ee9253646049456a3109e19d8f1ca9ae81bbaac9fd3c4a49965"
+  },
+  {
+    "file": "lower-results/results.json",
+    "sha256": "090dddfee5366f160e0bfc5cae28550294c10797ea72e11b5bdb33f1df3eda5e"
+  },
+  {
+    "file": "lower-results/sat.dzn",
+    "sha256": "6da3fcd82bea59a0984e634c841cd546483cef2327e24e7aa15d9d0bd06dc72f"
+  },
+  {
+    "file": "lower-results/sat.stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "lower-results/sat.stdout.txt",
+    "sha256": "2a71a32eb50334323452f69a4c1b524cad88bfde2371d3deff7938df7448f2ec"
+  },
+  {
+    "file": "lower-results/unsat-core.dzn",
+    "sha256": "10b703cf68b6f2b556cbe9fe8f29714dad384dcc1ff5aefc27b6c5ed9d6ae52c"
+  },
+  {
+    "file": "lower-results/unsat-core.stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "lower-results/unsat-core.stdout.txt",
+    "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da"
+  },
+  {
+    "file": "lower-results/unsat.dzn",
+    "sha256": "6eaa4ebe79c26560aeb0dc07196d080b0178ecf82e02c34e66056d7ca8d87945"
+  },
+  {
+    "file": "lower-results/unsat.stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "lower-results/unsat.stdout.txt",
+    "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da"
+  },
+  {
+    "file": "protected_sources.json",
+    "sha256": "fca5378d512c781cbaea5e5667fcbbfd1f37f75c6ce7b76f558ab3dea781a4b6"
+  },
+  {
+    "file": "README.md",
+    "sha256": "38b274b52a358b159603734b202fa6900f6e1bd39c101fced5a1d6ad51849c74"
+  },
+  {
+    "file": "second-results/alternative-1.mzn",
+    "sha256": "d82c08f50e090766159a6a4a26191b10f7c92c6d2df8cda615f1dfba810f59da"
+  },
+  {
+    "file": "second-results/alternative-1.stdout.txt",
+    "sha256": "ac5c830202ce288df2a27e64ca3e274c5607f5d7af3d5ca9d9651353bfde7bde"
+  },
+  {
+    "file": "second-results/alternative-2.mzn",
+    "sha256": "a4ef8ca6335a7b9e99317721f279a400621d4382769b5a666bb9ced8350185f1"
+  },
+  {
+    "file": "second-results/alternative-2.stdout.txt",
+    "sha256": "cac915e3e1ea20d938458af1ff96b678de443979d6b873751e68b384117efefc"
+  },
+  {
+    "file": "second-results/alternative-3.mzn",
+    "sha256": "db5e3cc711633578f0d31c7c27d34fe893c376370e2156b2ef0fef60e31d2ce0"
+  },
+  {
+    "file": "second-results/alternative-3.stdout.txt",
+    "sha256": "b0cdf2dc3550f02622e3c16d54ee21ce5e0131f8c29608536a119af4046d30b3"
+  },
+  {
+    "file": "second-results/model.json",
+    "sha256": "3b3cb96944ac264b3743b388ecd124ecb15da5288c4843e47e28d01180dac2c3"
+  },
+  {
+    "file": "second-results/results.json",
+    "sha256": "ed9ccf65b72cf5fafaf40a1df736b6267fdc826dbd556ad7a3a031190316e5f7"
+  },
+  {
+    "file": "second-results/sat.dzn",
+    "sha256": "6f6d7a0bcb33396c50a7f00b823235c93f655eacc4ec1934867867a1df0eaf39"
+  },
+  {
+    "file": "second-results/sat.stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "second-results/sat.stdout.txt",
+    "sha256": "ac5c830202ce288df2a27e64ca3e274c5607f5d7af3d5ca9d9651353bfde7bde"
+  },
+  {
+    "file": "second-results/unsat-core.dzn",
+    "sha256": "f23e93f3c5401bc37f9f180cf9033b3a76abd3bfdc9ff0a601a933ff4ae1d360"
+  },
+  {
+    "file": "second-results/unsat-core.stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "second-results/unsat-core.stdout.txt",
+    "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da"
+  },
+  {
+    "file": "second-results/unsat.dzn",
+    "sha256": "76cbef5a461219332d33175af66f6804b960a2ae31b4e9853588348aa1aa7280"
+  },
+  {
+    "file": "second-results/unsat.stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "second-results/unsat.stdout.txt",
+    "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da"
+  },
+  {
+    "file": "source_review.json",
+    "sha256": "5e45f280e02f80d379dd14e8da9ee3a6bb9cb1edfde6eb81d90486145dafa6d0"
+  }
+]

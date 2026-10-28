@@ -1,0 +1,11 @@
+{
+  "platform": "Windows x86_64",
+  "python": "3.11.9",
+  "command": "python -m unittest discover -s tests -p test_moag_*.py -v",
+  "tests_run": 149,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "test_output_sha256": "d3114a93a1a8e8a550f6a7cbb5dd583816dca4ea361c6eb6e6299040f5d6f076",
+  "portable_minizinc_archive_sha256": "7c50b01be3b52aabcfe35842228a962b666ddfc32ddf92199d94c52b0da39094"
+}

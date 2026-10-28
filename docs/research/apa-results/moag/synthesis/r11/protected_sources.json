@@ -1,0 +1,390 @@
+{
+  "base_commit": "51ebce6215e81ea2f16f18db75742d2f5b8c3754",
+  "all_preexisting_research_files_unchanged": true,
+  "files": [
+    {
+      "file": "docs/research/apa-results/moag/synthesis/B3_p15_17_station_identity_quarantine_r06.json",
+      "base_git_blob": "6fe142991fed99f5dd80ec2b2163dff717d3e954",
+      "current_normalized_git_blob": "6fe142991fed99f5dd80ec2b2163dff717d3e954",
+      "current_bytes_sha256": "b061ac72ba68a4905ff07a80becc1b87e801748941ce85c9f07276ec95c5171f"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_BLOCK_MODEL_R02.svg",
+      "base_git_blob": "c8c5c44eefff265ad012e06500ebd000e1bed404",
+      "current_normalized_git_blob": "c8c5c44eefff265ad012e06500ebd000e1bed404",
+      "current_bytes_sha256": "abe2ad0c6a65f973eda89e2967241215106f553c51d9fdc95ca7f06b84d84970"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_CRUISER_SCALE_SOURCE_ADDENDUM_R03A.md",
+      "base_git_blob": "7a54f16fdef25e1551eeb5f87e9889589bc76687",
+      "current_normalized_git_blob": "7a54f16fdef25e1551eeb5f87e9889589bc76687",
+      "current_bytes_sha256": "45680dc153ad63cd31338e66d67220429cecc3ada55f4ec4dfa324375e5ff0cb"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_ENERGY_CORE_R02.svg",
+      "base_git_blob": "8c701b760394c3b4f8eff79dca428022cfa11eaa",
+      "current_normalized_git_blob": "8c701b760394c3b4f8eff79dca428022cfa11eaa",
+      "current_bytes_sha256": "ce18ebf18ef20a8525b2b65590cfc0acdc3e3926fab5eaaec99c90f2ace7848a"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_L1_TOPOLOGY_R02.svg",
+      "base_git_blob": "9c83e65e43ef93af9bb8dca68429b6d902e5f9fd",
+      "current_normalized_git_blob": "9c83e65e43ef93af9bb8dca68429b6d902e5f9fd",
+      "current_bytes_sha256": "f86dff59c99dd2c76f4d9cd4d2ae0b5cc35b6da992ebae96736b8c02ebc86e86"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_L2_TOPOLOGY_R02.svg",
+      "base_git_blob": "fd01d8d4f3b83894803920a3351bcc04d47101cf",
+      "current_normalized_git_blob": "fd01d8d4f3b83894803920a3351bcc04d47101cf",
+      "current_bytes_sha256": "4a741cf22a22e0aa37209e9fab5dfac2cb1cd13d8c731a5233b3a2d88f6e8aa1"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_L3_TOPOLOGY_R02.svg",
+      "base_git_blob": "21e5356ceed1de8034cd724d436c2968f39d952a",
+      "current_normalized_git_blob": "21e5356ceed1de8034cd724d436c2968f39d952a",
+      "current_bytes_sha256": "61bdff45867b279ef35c369995724a30c20c397022ee67ecb51177fa37de2c04"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_PARAMETRIC_R04_README.md",
+      "base_git_blob": "e54377bad94d2e97943f2ec092c7221fbc98e617",
+      "current_normalized_git_blob": "e54377bad94d2e97943f2ec092c7221fbc98e617",
+      "current_bytes_sha256": "52824630d2aa4dc6228a831b0af6db68b6af9fe3bab0f30f1b8d2465630bb6ca"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_R04_ENGINEERING_STATUS.md",
+      "base_git_blob": "4bece9eba451ad4efeabf5b281024aeb2a09d55f",
+      "current_normalized_git_blob": "4bece9eba451ad4efeabf5b281024aeb2a09d55f",
+      "current_bytes_sha256": "e9d4b7f94dd513fd05ff44ce9bf586b546b764e6bb2f57bfdbe883d6e9742773"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_R05_AREAS_VOLUMES_REVIEW.md",
+      "base_git_blob": "0cde309d2a2f4a17c6ea0de5a6cedba48b5c215d",
+      "current_normalized_git_blob": "0cde309d2a2f4a17c6ea0de5a6cedba48b5c215d",
+      "current_bytes_sha256": "e3cc4eb248813ef9f4b4811c963c4996d2a6d31432bdfef09964d2f7b79edb29"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_R06_EVIDENCE_GRAPH_ASSEMBLY.md",
+      "base_git_blob": "f8a05ef72f74d82f4d1a7dd1d76de7ba94b824af",
+      "current_normalized_git_blob": "f8a05ef72f74d82f4d1a7dd1d76de7ba94b824af",
+      "current_bytes_sha256": "07febf05e7bfe901b8c86f9ac27dde44b75ecc61677da7cea87ae07c8d8984b1"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_R07_UNIFIED_EVIDENCE_GRAPH.md",
+      "base_git_blob": "266c47994d32d8c97f8e0ec5dee00208526e0e3f",
+      "current_normalized_git_blob": "266c47994d32d8c97f8e0ec5dee00208526e0e3f",
+      "current_bytes_sha256": "b07c39fe935e35b3f3559f86c94e613a2ef156e1fbc7d83800434f37b4d1436d"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_R08_HYPOTHESIS_OVERLAY.md",
+      "base_git_blob": "83b21636b12717b1a619e64bc27dcd7447a356db",
+      "current_normalized_git_blob": "83b21636b12717b1a619e64bc27dcd7447a356db",
+      "current_bytes_sha256": "d93f5d1c8cdaba4b3e9432856b75984f25cfd6bc397564573b84f5c9099d3542"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_R08_UNCERTAINTY_AND_SYMMETRY.md",
+      "base_git_blob": "427d58d65bb7d480043b8c00dd6c0bfb54b5cf77",
+      "current_normalized_git_blob": "427d58d65bb7d480043b8c00dd6c0bfb54b5cf77",
+      "current_bytes_sha256": "c8449c96a895d833a95cf13cc53a256d1b1475e44bd79a6dae54440edce18126"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_R09_RECONCILED_UNCERTAINTY_GRAPH.md",
+      "base_git_blob": "4102d772a988e5f98bdd2e11a6c183863ef9e0fc",
+      "current_normalized_git_blob": "4102d772a988e5f98bdd2e11a6c183863ef9e0fc",
+      "current_bytes_sha256": "4f9d450617331e1387a328da04a17b5eb9678d97977b2aaab91d12a4eb0aaac3"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_R10_SOURCE_BRIDGE_REVIEW_QUEUE.md",
+      "base_git_blob": "a65631c2bf54e79aae8ca0e13b1ed3d9f743a2a0",
+      "current_normalized_git_blob": "a65631c2bf54e79aae8ca0e13b1ed3d9f743a2a0",
+      "current_bytes_sha256": "74f70f1b227ea0bb6bb70cd5f1f40838a436b6d25bb445559d145a283781e39d"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_SPATIAL_SCALE_AUDIT_R03A.md",
+      "base_git_blob": "a64d766ddee00e9c48de581a39a43c81ae80b3ea",
+      "current_normalized_git_blob": "a64d766ddee00e9c48de581a39a43c81ae80b3ea",
+      "current_bytes_sha256": "9f9f5001ecfdfab3d73ab67a9ddebb852cd0d5523336da30a30fa0bd0a7b7696"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_SPATIAL_SYNTHESIS_R01_20261019.md",
+      "base_git_blob": "248d50e9bfd0fe305fd94aba4f75bd352c6876db",
+      "current_normalized_git_blob": "248d50e9bfd0fe305fd94aba4f75bd352c6876db",
+      "current_bytes_sha256": "3cdad0c7252afa9e1e56524c496f340748dfa98626f49c09cba7cd4a05bc9cb1"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_SPATIAL_SYNTHESIS_R02.md",
+      "base_git_blob": "37b961f968e784ede735b0309c69827fd7651c32",
+      "current_normalized_git_blob": "37b961f968e784ede735b0309c69827fd7651c32",
+      "current_bytes_sha256": "39aa5f03aef930b5e98328184c837cd3d0facd04a5ed4aca6e0dceb1c3b22e98"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/MOAG_VERTICAL_SECTION_R02.svg",
+      "base_git_blob": "f013627863d0d8f61ba581cb6feddafe12864a03",
+      "current_normalized_git_blob": "f013627863d0d8f61ba581cb6feddafe12864a03",
+      "current_bytes_sha256": "4fe2faa77347998326fc84296437f6b310190f103d19c22f1996d1c341d76908"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/area_volume_bounds_r05.json",
+      "base_git_blob": "13ed647d00267058467b980c247b66bc91a92f40",
+      "current_normalized_git_blob": "13ed647d00267058467b980c247b66bc91a92f40",
+      "current_bytes_sha256": "9e0baea14a6b7d1b87fe10fec6f67f040cae6fd216dbef1cc2d174b68f1318d1"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/demo_area_overrides_r05_NONCANON.json",
+      "base_git_blob": "374a992f44940d74c72a0fe780f57397cd54913a",
+      "current_normalized_git_blob": "374a992f44940d74c72a0fe780f57397cd54913a",
+      "current_bytes_sha256": "7c5cb774df320112a03b9558ba69277e12638589ede591b7852642685f6ed97f"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/demo_indexed_override_r04_NONCANON.json",
+      "base_git_blob": "e788a3a806be4d7ef3c363f1a3f8d04d9ad55e66",
+      "current_normalized_git_blob": "e788a3a806be4d7ef3c363f1a3f8d04d9ad55e66",
+      "current_bytes_sha256": "31e58301cee9572e43235c0f9b694773ff5d1cfbef7c8f811a49ae6e962dda48"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/demo_layout_candidates_r05_NONCANON.json",
+      "base_git_blob": "cf1b468633c52cb11fbdbfb435e6cba9bf70fbf0",
+      "current_normalized_git_blob": "cf1b468633c52cb11fbdbfb435e6cba9bf70fbf0",
+      "current_bytes_sha256": "d355df16b05b0dd437100fee294d7bf7f8f29f8bc9a9ddeed68d1f60282cc311"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/demo_override_r04_NONCANON.json",
+      "base_git_blob": "099f2ea2d6470ef94b34103076c5693144c3a09f",
+      "current_normalized_git_blob": "099f2ea2d6470ef94b34103076c5693144c3a09f",
+      "current_bytes_sha256": "1185fca50d47a140e695a05228e0956b4dc3349c12835f1c6f7cfbe8d559317b"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/explicit_spatial_bridges_r06.json",
+      "base_git_blob": "7a6b4386d53aa864b1d6e214342a74133ef0aa4e",
+      "current_normalized_git_blob": "7a6b4386d53aa864b1d6e214342a74133ef0aa4e",
+      "current_bytes_sha256": "d2aef01da0750806e0f486961a693dacae0d6befd4224d38086acd052e16ec90"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/full_indexed_parametric_graph_r04.json",
+      "base_git_blob": "91edc6e02d8c5a54251ae693bdd60abecb052339",
+      "current_normalized_git_blob": "91edc6e02d8c5a54251ae693bdd60abecb052339",
+      "current_bytes_sha256": "e3a006d93cd5760625472af560ba1128054a14dd324d1e9c1d5e3c422c860040"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/global_identity_review_r06.json",
+      "base_git_blob": "709d0f19b74eb879b8b8f437471ed7098efc3364",
+      "current_normalized_git_blob": "709d0f19b74eb879b8b8f437471ed7098efc3364",
+      "current_bytes_sha256": "974964e2b5c366b1585b6c532bb9f4178c4669c2bedfb1843155d1e7551c34e8"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/hypothetical_placement_options_r08.json",
+      "base_git_blob": "38e965bdc1c8a0432f619cec99aa9b6490703ca1",
+      "current_normalized_git_blob": "38e965bdc1c8a0432f619cec99aa9b6490703ca1",
+      "current_bytes_sha256": "84cec2df95cacef63d56343b2aa0f2ceaf0e583a747134b67a69c273642e9e17"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/identity_repair_r04.json",
+      "base_git_blob": "a3546a5ebcfec6ddf307f3c1369a0aeab15483a9",
+      "current_normalized_git_blob": "a3546a5ebcfec6ddf307f3c1369a0aeab15483a9",
+      "current_bytes_sha256": "cfde4ea4de1961997293556356ec7544edc35bef23451a7f2956f11ca4d0cc81"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/machine_validation_report.json",
+      "base_git_blob": "065b904bc2ea7bd05e9c354c719cb6b1fbd91798",
+      "current_normalized_git_blob": "065b904bc2ea7bd05e9c354c719cb6b1fbd91798",
+      "current_bytes_sha256": "d0afaa3caeaa7607c7d411a8a57edb2a0fd92c68884d84b85e43b0c2998dc89c"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/observation_identity_crosswalk_r03a.json",
+      "base_git_blob": "9997f97eb9e4f5b63a6f1c5f492ff68ebf21fc7f",
+      "current_normalized_git_blob": "9997f97eb9e4f5b63a6f1c5f492ff68ebf21fc7f",
+      "current_bytes_sha256": "c4c25091ce61b1221a88ea13032f2b5f36eb0ac8db149546dde1cf725392393b"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/parametric_graph_audit_r04.json",
+      "base_git_blob": "3b7b46b7e104436a0546dd079f354317fc2b27a4",
+      "current_normalized_git_blob": "3b7b46b7e104436a0546dd079f354317fc2b27a4",
+      "current_bytes_sha256": "fc464ab5d3545fc85eecae6b530e21c34b71d64ea475157a42571ed0d8a93eaf"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/progressive_fragments_r05.json",
+      "base_git_blob": "f43ca6d32260994ec75ea2e849278e1e58f2d1ac",
+      "current_normalized_git_blob": "f43ca6d32260994ec75ea2e849278e1e58f2d1ac",
+      "current_bytes_sha256": "708c1c3d1baf183dc5af75fe9b475c4c0922dd75ff8d20ea82a993170ee963fb"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/qualitative_placement_constraints_r06.json",
+      "base_git_blob": "8e99cd013169a493b02c042731b06f671a8f5de2",
+      "current_normalized_git_blob": "8e99cd013169a493b02c042731b06f671a8f5de2",
+      "current_bytes_sha256": "a0a3a064e0c3b52323d7ee279d7e8f2b1832ad526146ca00348842a772a721dc"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/qualitative_vehicle_clearance_r06.json",
+      "base_git_blob": "4aab93c70e9adc484c3a5c2becf4a5a340620116",
+      "current_normalized_git_blob": "4aab93c70e9adc484c3a5c2becf4a5a340620116",
+      "current_bytes_sha256": "12a4dd277a268a35fb01318ead5d8ceeef1cdc5e58248c5974c20cccd70ea136"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/room_boundary_matrix.json",
+      "base_git_blob": "5b9f26f78542d529deabe4af5aa5686e746c2e95",
+      "current_normalized_git_blob": "5b9f26f78542d529deabe4af5aa5686e746c2e95",
+      "current_bytes_sha256": "608bb3c47a8c27bece5c47ab38d57ecedc28e888a9fc7d823b17ec7992e3c961"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/route_context_corrections_r06.json",
+      "base_git_blob": "816d4b8c38623333cdf8af6c02661a9cb54b97f4",
+      "current_normalized_git_blob": "816d4b8c38623333cdf8af6c02661a9cb54b97f4",
+      "current_bytes_sha256": "c1f8464054dc002ab181fa2eb3d18d26ecc079aea82c8081004061e2fe053076"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/route_step_audit.json",
+      "base_git_blob": "94cdc424c4b9ec0c4f85a6d1832dfea6b17a62fd",
+      "current_normalized_git_blob": "94cdc424c4b9ec0c4f85a6d1832dfea6b17a62fd",
+      "current_bytes_sha256": "9d2d4b969b4f4dbb6d8f473feb446574ecf39e6263617c6db640f06f2ec49606"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/spatial_graph_integrated.json",
+      "base_git_blob": "3dfd25b77bb7af1869624a9afb81490776049328",
+      "current_normalized_git_blob": "3dfd25b77bb7af1869624a9afb81490776049328",
+      "current_bytes_sha256": "6a0acade204b6e601b157f3aa1debd55122c6c1db69f0815d580973f4d61965b"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/spatial_hypotheses_r08.json",
+      "base_git_blob": "94ebe9f4f579bc701c611ee0cad0d5a9a7812ea9",
+      "current_normalized_git_blob": "94ebe9f4f579bc701c611ee0cad0d5a9a7812ea9",
+      "current_bytes_sha256": "9345269196aab7c1d13ccb3fabff9407b239fe4587dbc32a856e98f93ba75778"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/unresolved_constraints.json",
+      "base_git_blob": "4d65c22cd3b9b30e6a13a6af36bfb7d81303ad85",
+      "current_normalized_git_blob": "4d65c22cd3b9b30e6a13a6af36bfb7d81303ad85",
+      "current_bytes_sha256": "e24522aebc1bb8f158223e9571ecf31bbaa151b91f3d40114a5118d2132059a7"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/vertical_connections.json",
+      "base_git_blob": "e5a45f51fab85a44f4ffe37b51392ab76b15d19a",
+      "current_normalized_git_blob": "e5a45f51fab85a44f4ffe37b51392ab76b15d19a",
+      "current_bytes_sha256": "b13a13b96d6e45ff5d0f1d357aa027efc008a1b79cfe81a155d3b1ea5bca560d"
+    },
+    {
+      "file": "docs/research/apa-results/moag/synthesis/volume_constraints_r03a.json",
+      "base_git_blob": "8fb2502f0862ed707aa7d4fddab2a44333e56be6",
+      "current_normalized_git_blob": "8fb2502f0862ed707aa7d4fddab2a44333e56be6",
+      "current_bytes_sha256": "12b2d0fb4edb8b956e9ca39387c41fc8685200c6f4912b24b27768c757f36f5b"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v1/README.md",
+      "base_git_blob": "82888bf1f4121267e4ffcda7ba9fa6aca7b22013",
+      "current_normalized_git_blob": "82888bf1f4121267e4ffcda7ba9fa6aca7b22013",
+      "current_bytes_sha256": "bcf6d501a152f78e8edba25539328c61d8703f6e26977407ef2bc62f3163ad42"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v1/evidence_graph.json",
+      "base_git_blob": "b09a07b9892f4f9d91549078b0067604a4b57223",
+      "current_normalized_git_blob": "b09a07b9892f4f9d91549078b0067604a4b57223",
+      "current_bytes_sha256": "c2a2cfcd607ad17a0dc796dfa8e8aeb96b8e6562326dfc9925aaea0caaf56949"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v1/passage_index.json",
+      "base_git_blob": "1ac36ea0da35b7048f2c814f9e175e627265b6b7",
+      "current_normalized_git_blob": "1ac36ea0da35b7048f2c814f9e175e627265b6b7",
+      "current_bytes_sha256": "7304158681aab0c1eb1134936015028cff5e0bc1cd46bc1a4863fe27447f21b6"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v1/topology_snapshot.json",
+      "base_git_blob": "159ccf70188bf577c3fb7980f1e69857147e4328",
+      "current_normalized_git_blob": "159ccf70188bf577c3fb7980f1e69857147e4328",
+      "current_bytes_sha256": "07d3f508064586bd4c3851421487cef6d78dd0e7c1e8d759f31092fdc0bde045"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v1/vertical_strata.json",
+      "base_git_blob": "f8db3b5abf44b7588ea51b685935af9828667818",
+      "current_normalized_git_blob": "f8db3b5abf44b7588ea51b685935af9828667818",
+      "current_bytes_sha256": "f6945c569e00eabf13a6c7dc5b318e52c717130dbd868dfd7f416c47fec525b8"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v2/README.md",
+      "base_git_blob": "539fb81ed948800d66dc0c7c41634e1c2709dcbf",
+      "current_normalized_git_blob": "539fb81ed948800d66dc0c7c41634e1c2709dcbf",
+      "current_bytes_sha256": "1994d2a86661815439020cf015e7e0fa17faff29ecd27396b0473aacda46011f"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v2/chapter_screening.json",
+      "base_git_blob": "f38b3168ff03b933f0e2dbbd7f2d1adcb419a8bc",
+      "current_normalized_git_blob": "f38b3168ff03b933f0e2dbbd7f2d1adcb419a8bc",
+      "current_bytes_sha256": "f612594d4c023d2d5191542adcf55ef7a6f37bce8ca9d298e59d25e17c7c69ec"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v2/character_routes.json",
+      "base_git_blob": "e4dbbdce30da507638324a5f10d0e55f36c94690",
+      "current_normalized_git_blob": "e4dbbdce30da507638324a5f10d0e55f36c94690",
+      "current_bytes_sha256": "d4743735bddde802b5557263b972161f8b6d708a257462ce6eacfb761461aa56"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v2/page_observations.json",
+      "base_git_blob": "09707aa1f0555b633623b5a7333573bff9aa943e",
+      "current_normalized_git_blob": "09707aa1f0555b633623b5a7333573bff9aa943e",
+      "current_bytes_sha256": "a11d789384882a24951fb0e5223a0605831c7a2a87680895185bf1c4510652f2"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v2/pages/B1.json",
+      "base_git_blob": "ec8bbf853b05d5f5f38b54d054fbb025b83a3b65",
+      "current_normalized_git_blob": "ec8bbf853b05d5f5f38b54d054fbb025b83a3b65",
+      "current_bytes_sha256": "c10f208b501564cdffdecde19dac03e424b2c88654c4a1ae12a23a32851af220"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v2/pages/B2.json",
+      "base_git_blob": "055a3c345e96fabe86fae29fe8ceaaa596fa3b81",
+      "current_normalized_git_blob": "055a3c345e96fabe86fae29fe8ceaaa596fa3b81",
+      "current_bytes_sha256": "183f1093a31495b9e31784193d246e56f349e96bec8cd2adf7b7696db7b5dc3a"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v2/pages/B3.json",
+      "base_git_blob": "dd747de90b5a3cbce691ef8d007d06e4b34bacf6",
+      "current_normalized_git_blob": "dd747de90b5a3cbce691ef8d007d06e4b34bacf6",
+      "current_bytes_sha256": "d876bc8a514397ccce85d80e7e8728b7c655abed8ce3baa77de70905ee115869"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v2/pages/B4.json",
+      "base_git_blob": "3f915fce3b3aa4b80053dece41b6f0ade65c66eb",
+      "current_normalized_git_blob": "3f915fce3b3aa4b80053dece41b6f0ade65c66eb",
+      "current_bytes_sha256": "51a5b9fe95319866e929cc96406fbedc33c0efcb7941a27e55a8f1b79055e2d4"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v2/reviews/B2_p09_29_primary_recheck_20261019.json",
+      "base_git_blob": "97bd668d331641652fdf4c46f114267de5b4cc25",
+      "current_normalized_git_blob": "97bd668d331641652fdf4c46f114267de5b4cc25",
+      "current_bytes_sha256": "65cfcd8958393a0c6dd7c59f67bf307c9a9190f030437042f39dceb13a5d87af"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v2/reviews/B2_p30_33_primary_recheck_20261019.json",
+      "base_git_blob": "29225ffc9ea39afde260b4ddcda1e369516d8f91",
+      "current_normalized_git_blob": "29225ffc9ea39afde260b4ddcda1e369516d8f91",
+      "current_bytes_sha256": "f91eba7bb130b94a70885400f501aa5079ef57aef13f977afa4e886bfce42e89"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v2/reviews/B2_p34_42_energy_vertical_and_exclusions_20261019.json",
+      "base_git_blob": "90ede0d291d81ef5fe0a213b225ddf09eb2cbf28",
+      "current_normalized_git_blob": "90ede0d291d81ef5fe0a213b225ddf09eb2cbf28",
+      "current_bytes_sha256": "fcbb01153103ba4c9b8ee17aa8b5348bd1845d062b1dd90a01d9bb063f1f2852"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v2/reviews/B3_p57_60_identity_context_screening_r06_20261020.json",
+      "base_git_blob": "904ad584521166404087635018726914981ba3a6",
+      "current_normalized_git_blob": "904ad584521166404087635018726914981ba3a6",
+      "current_bytes_sha256": "5f73fd941889f0ceb228476a821f48676d74ae350b06c6714b0e17b5f6f3b1c8"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v2/reviews/B3_p61_65_context_screening_r06_20261020.json",
+      "base_git_blob": "a36b6eb789c5dc99ac3b761959dbf191081ea452",
+      "current_normalized_git_blob": "a36b6eb789c5dc99ac3b761959dbf191081ea452",
+      "current_bytes_sha256": "d1614b2edc9651f0987a76e3a93b7159fa87a44745786179fb051d843197a493"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v2/station_identity.json",
+      "base_git_blob": "9721881aa6c4780f4f6362ed47ce7f869290f9a1",
+      "current_normalized_git_blob": "9721881aa6c4780f4f6362ed47ce7f869290f9a1",
+      "current_bytes_sha256": "e73f951a66236ac1eccd0b5d540526c27b96b691e8f4eee77251a80d6f5a96e0"
+    },
+    {
+      "file": "docs/research/apa-results/moag/v2/visual_hypotheses.json",
+      "base_git_blob": "34bf970e230d3acc6eb720f05805097ba2d7f0f2",
+      "current_normalized_git_blob": "34bf970e230d3acc6eb720f05805097ba2d7f0f2",
+      "current_bytes_sha256": "f8a40d74c95dec4253757501a8170d7bbf52b6e26cb0013e9c8c1de66e9837d3"
+    }
+  ]
+}
