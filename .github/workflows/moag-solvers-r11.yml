@@ -33,8 +33,20 @@ jobs:
           python-version: '3.11'
       - name: Install pinned OR-Tools dependencies
         run: python -m pip install -r tools/moag_topology/requirements-r11.txt
-      - name: Download hash-verified official portable MiniZinc
-        run: python tools/moag_topology/bootstrap_r11.py
+      - name: Download hash-verified official portable MiniZinc (retry transient network faults)
+        shell: bash
+        run: |
+          for attempt in 1 2 3; do
+            if python tools/moag_topology/bootstrap_r11.py; then
+              exit 0
+            fi
+            rm -f .runtime/minizinc.zip .runtime/minizinc.tar.gz
+            if [ "$attempt" -eq 3 ]; then
+              echo "Official SHA256-verified MiniZinc unavailable after three attempts" >&2
+              exit 1
+            fi
+            sleep $((attempt * 10))
+          done
       - name: Run source-qualified real lower-block SAT UNSAT and alternatives
         run: python tools/moag_topology/solver_r11.py --out moag-r11-run
       - name: R12 source-backed raised spaces, Lower
