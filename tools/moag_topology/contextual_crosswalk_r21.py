@@ -29,7 +29,7 @@ EVIDENCE={
     "RT031-F":("EPISODE_ONLY_WORKING_MILITARY_HANGAR","P-375"),
     "RT031-G":("EPISODE_ONLY_WORKING_MILITARY_HANGAR","P-376","P-377"),
     "RT015-G":("MOAG-G-0057","P-216"),
-    "RT030-D":("MOAG-G-0017","P-363")
+    "RT030-D":("MOAG-G-0017","P-362")
 }
 SOURCED_SAME=(
     ("RT024-F","M-L1-AH-OLD-001","P-313"),
@@ -190,8 +190,7 @@ def build():
 
 
 def validate(m,a,h19,a18):
-    r20.validate(m,{"R09_fingerprint":m["R09_fingerprint"],**{
-      k:v for k,v in r20.build()[1].items() if False}},h19,a18) if False else r15.validate(m)
+    r15.validate(m)
     # Do not call the full R20.build() again; check its characteristic constraints.
     existing={c["id"]:c for c in m["constraints"]}
     if not all(k in existing for k in (
