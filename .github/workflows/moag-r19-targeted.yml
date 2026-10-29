@@ -1,0 +1,38 @@
+name: MOAG R19 targeted cargo history
+on:
+  pull_request:
+    paths:
+      - 'tools/moag_topology/cargo_history_r19.py'
+      - 'tests/test_moag_cargo_r19.py'
+      - 'docs/research/apa-results/moag/synthesis/r19/**'
+      - '.github/workflows/moag-r19-targeted.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cargo-source-history:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Official OR-Tools dependency
+        run: python -m pip install -r tools/moag_topology/requirements-r11.txt
+      - name: Official verified MiniZinc with CP-SAT
+        run: python tools/moag_topology/bootstrap_r11.py
+      - name: R19 actual source-backed temporal and identity solver
+        run: python tools/moag_topology/cargo_history_r19.py --out moag-r19-targeted
+      - name: R19 source-history and epistemic-uncertainty tests
+        run: python -m unittest discover -s tests -p test_moag_cargo_r19.py -v
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: moag-r19-historic-${{ matrix.os }}
+          path: moag-r19-targeted/
+          if-no-files-found: error
+          retention-days: 30
