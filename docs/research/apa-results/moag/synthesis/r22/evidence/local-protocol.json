@@ -1,0 +1,213 @@
+{
+  "schema": "MOAG-R22-LOCAL-PROTOCOL/1",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "python": "3.11.9",
+  "ortools": "9.14.6206",
+  "minizinc": "MiniZinc to FlatZinc converter, version 2.10.1, build 33348285743\nCopyright (C) 2014-2026 Monash University, NICTA, Data61",
+  "minizinc_backend": "cp-sat 9.15 (portable official distribution)",
+  "base_commit": "d3620e4d6721ae0b0430522d5a7423fe46a3028c",
+  "main_before_publication": "10179659c8c2cd974ca6bd8ba9a57acb1f7a419c",
+  "solver_model_sha256": "4f73c5874f76cc92d7ef8e25a3b5b76621cb4c481f1cb7fc54a47115c74f3091",
+  "R09_fingerprint": "9b0cce9f97ff8cb4e100f0ffae77efb96186ab07530f7e204dfc025815a9ce45",
+  "real_solver_runs": 36,
+  "solver_stdout_receipts": [
+    {
+      "file": "false-hall-split-core.stdout.txt",
+      "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da",
+      "kind": "UNSAT"
+    },
+    {
+      "file": "false-hall-split.stdout.txt",
+      "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da",
+      "kind": "UNSAT"
+    },
+    {
+      "file": "false-independent-hangars-merge-core.stdout.txt",
+      "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da",
+      "kind": "UNSAT"
+    },
+    {
+      "file": "false-independent-hangars-merge.stdout.txt",
+      "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da",
+      "kind": "UNSAT"
+    },
+    {
+      "file": "false-sleeping-hall-merge-core.stdout.txt",
+      "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da",
+      "kind": "UNSAT"
+    },
+    {
+      "file": "false-sleeping-hall-merge.stdout.txt",
+      "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da",
+      "kind": "UNSAT"
+    },
+    {
+      "file": "open-0-different.stdout.txt",
+      "sha256": "abe97f5d994ccb455f3bf307b2f1185c6fb38d3477e4258735f75ae0210b179c",
+      "kind": "SAT"
+    },
+    {
+      "file": "open-0-same.stdout.txt",
+      "sha256": "a03fbd117b288ae20ee7752d7bb9156294bed7a53804de472d88b4f453dbe217",
+      "kind": "SAT"
+    },
+    {
+      "file": "open-1-different.stdout.txt",
+      "sha256": "3dbc1835fce0751e9fc3eb85a94e27fafddfe7d5d4618d0a91c284b6b4e5783b",
+      "kind": "SAT"
+    },
+    {
+      "file": "open-1-same.stdout.txt",
+      "sha256": "a03fbd117b288ae20ee7752d7bb9156294bed7a53804de472d88b4f453dbe217",
+      "kind": "SAT"
+    },
+    {
+      "file": "open-2-different.stdout.txt",
+      "sha256": "abe97f5d994ccb455f3bf307b2f1185c6fb38d3477e4258735f75ae0210b179c",
+      "kind": "SAT"
+    },
+    {
+      "file": "open-2-same.stdout.txt",
+      "sha256": "a03fbd117b288ae20ee7752d7bb9156294bed7a53804de472d88b4f453dbe217",
+      "kind": "SAT"
+    },
+    {
+      "file": "open-3-different.stdout.txt",
+      "sha256": "95d0cdf8562142f23ec05d95aa9e6dee58e2a82c43f7494f8b764b8cf8a781e4",
+      "kind": "SAT"
+    },
+    {
+      "file": "open-3-same.stdout.txt",
+      "sha256": "a03fbd117b288ae20ee7752d7bb9156294bed7a53804de472d88b4f453dbe217",
+      "kind": "SAT"
+    },
+    {
+      "file": "open-4-different.stdout.txt",
+      "sha256": "7dc48e6cb12b23a7b54869ac89e57a9c198b99cdddd4ca248360bd79a7325914",
+      "kind": "SAT"
+    },
+    {
+      "file": "open-4-same.stdout.txt",
+      "sha256": "a03fbd117b288ae20ee7752d7bb9156294bed7a53804de472d88b4f453dbe217",
+      "kind": "SAT"
+    },
+    {
+      "file": "open-5-different.stdout.txt",
+      "sha256": "9bc51de49286c2556b4a9f716fb281c90a010e67e78e96e8cfb66591fc931961",
+      "kind": "SAT"
+    },
+    {
+      "file": "open-5-same.stdout.txt",
+      "sha256": "a03fbd117b288ae20ee7752d7bb9156294bed7a53804de472d88b4f453dbe217",
+      "kind": "SAT"
+    },
+    {
+      "file": "open-6-different.stdout.txt",
+      "sha256": "6a49f6ce593b49338c753ce3354a28ad8e7a4a3f3620571d7f15d2dbad3a1feb",
+      "kind": "SAT"
+    },
+    {
+      "file": "open-6-same.stdout.txt",
+      "sha256": "a03fbd117b288ae20ee7752d7bb9156294bed7a53804de472d88b4f453dbe217",
+      "kind": "SAT"
+    },
+    {
+      "file": "python-witness.stdout.txt",
+      "sha256": "eb609f91873136fc8bc9664c64dd44abdd6af8252485e788d321a5ebb33a7b1b",
+      "kind": "SAT"
+    },
+    {
+      "file": "r22-sat.stdout.txt",
+      "sha256": "a03fbd117b288ae20ee7752d7bb9156294bed7a53804de472d88b4f453dbe217",
+      "kind": "SAT"
+    },
+    {
+      "file": "replay-open-0-different.stdout.txt",
+      "sha256": "84b78d6fedfdc5a8fcd65fc0a4b281d8caf072cba6405cc57df4422d85b8661e",
+      "kind": "SAT"
+    },
+    {
+      "file": "replay-open-0-same.stdout.txt",
+      "sha256": "eb609f91873136fc8bc9664c64dd44abdd6af8252485e788d321a5ebb33a7b1b",
+      "kind": "SAT"
+    },
+    {
+      "file": "replay-open-1-different.stdout.txt",
+      "sha256": "9607f41f0c723746fd83834dd3b24f653c01cff4ce651dc7d715f3529c0b863e",
+      "kind": "SAT"
+    },
+    {
+      "file": "replay-open-1-same.stdout.txt",
+      "sha256": "eb609f91873136fc8bc9664c64dd44abdd6af8252485e788d321a5ebb33a7b1b",
+      "kind": "SAT"
+    },
+    {
+      "file": "replay-open-2-different.stdout.txt",
+      "sha256": "9607f41f0c723746fd83834dd3b24f653c01cff4ce651dc7d715f3529c0b863e",
+      "kind": "SAT"
+    },
+    {
+      "file": "replay-open-2-same.stdout.txt",
+      "sha256": "eb609f91873136fc8bc9664c64dd44abdd6af8252485e788d321a5ebb33a7b1b",
+      "kind": "SAT"
+    },
+    {
+      "file": "replay-open-3-different.stdout.txt",
+      "sha256": "bf5725ce374ba92b4c5119a56eb7fe685bab1b20c8ca4588ef8e6899f408878d",
+      "kind": "SAT"
+    },
+    {
+      "file": "replay-open-3-same.stdout.txt",
+      "sha256": "102c12831b19cff8df4a51477cc6f7e3feac2c329c96e90e3b9e18f4a4926729",
+      "kind": "SAT"
+    },
+    {
+      "file": "replay-open-4-different.stdout.txt",
+      "sha256": "d912af6b8b92d8bc3031e899414a3ab10b168bddf63638168cddb3ddec1e58d3",
+      "kind": "SAT"
+    },
+    {
+      "file": "replay-open-4-same.stdout.txt",
+      "sha256": "67742f6a4d3aa6653725ddcfdae6c07a8207838a6884c520f8c51c442df29fc6",
+      "kind": "SAT"
+    },
+    {
+      "file": "replay-open-5-different.stdout.txt",
+      "sha256": "5bfdb2a1cb72c30b515f3f6c190e4db0f8637740a8401ba17a2b7b872f4968a4",
+      "kind": "SAT"
+    },
+    {
+      "file": "replay-open-5-same.stdout.txt",
+      "sha256": "eb609f91873136fc8bc9664c64dd44abdd6af8252485e788d321a5ebb33a7b1b",
+      "kind": "SAT"
+    },
+    {
+      "file": "replay-open-6-different.stdout.txt",
+      "sha256": "29765bb9a1a405776749d508ea4f247ea7c094f3012d651a26c5c743ad290912",
+      "kind": "SAT"
+    },
+    {
+      "file": "replay-open-6-same.stdout.txt",
+      "sha256": "f78c04ad02fb2a8ca134c09e5d1b7c16dbd3a96508cb623bae5ea0c7e19794b0",
+      "kind": "SAT"
+    }
+  ],
+  "local_targeted_tests": {
+    "count": 16,
+    "status": "PASS",
+    "skipped": 0
+  },
+  "local_full_tests": {
+    "count": 256,
+    "status": "PASS",
+    "skipped": 0,
+    "note": "Full run before addition of one further R22 preservation test; latest 16-test targeted run includes it. CI runs full current suite."
+  },
+  "commands": [
+    "python tools/moag_topology/physical_connectivity_r22.py --out .runtime/r22-run",
+    "python -m unittest discover -s tests -p test_moag_connectivity_r22.py -v",
+    "python -m unittest discover -s tests -p test_moag_*.py -v"
+  ],
+  "CI_acceptance": "Pending Windows/Linux targeted R22 and full real R11-R22, receipts in PR description and Actions artifacts",
+  "evidence_scope": "OFFLINE_REAL_SOLVERS; no native BIM verification or full reconciled XYZ embedding claimed"
+}

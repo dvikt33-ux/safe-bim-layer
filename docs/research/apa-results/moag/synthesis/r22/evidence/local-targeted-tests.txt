@@ -1,0 +1,21 @@
+test_593_nodes_845_edges_and_378_occurrences_preserved (test_moag_connectivity_r22.EvidenceConnectivityR22.test_593_nodes_845_edges_and_378_occurrences_preserved) ... ok
+test_all_30_and_dependent_31st_context (test_moag_connectivity_r22.EvidenceConnectivityR22.test_all_30_and_dependent_31st_context) ... ok
+test_all_known_hypotheses_gaps_and_unlocated_intervals_retained (test_moag_connectivity_r22.EvidenceConnectivityR22.test_all_known_hypotheses_gaps_and_unlocated_intervals_retained) ... ok
+test_all_previous_variables_and_constraints_preserved_exactly (test_moag_connectivity_r22.EvidenceConnectivityR22.test_all_previous_variables_and_constraints_preserved_exactly) ... ok
+test_direct_access_unchanged_and_not_added_by_identity (test_moag_connectivity_r22.EvidenceConnectivityR22.test_direct_access_unchanged_and_not_added_by_identity) ... ok
+test_episode_hangar_f_and_g_cannot_join_first_boat_hangar_by_legacy_anchor (test_moag_connectivity_r22.EvidenceConnectivityR22.test_episode_hangar_f_and_g_cannot_join_first_boat_hangar_by_legacy_anchor) ... ok
+test_forged_door_and_component_merge_fail_validation (test_moag_connectivity_r22.EvidenceConnectivityR22.test_forged_door_and_component_merge_fail_validation) ... ok
+test_no_metric_global_level_or_profile_rewrite (test_moag_connectivity_r22.EvidenceConnectivityR22.test_no_metric_global_level_or_profile_rewrite) ... ok
+test_one_new_source_union_without_stair_or_control_merges (test_moag_connectivity_r22.EvidenceConnectivityR22.test_one_new_source_union_without_stair_or_control_merges) ... ok
+test_reproducible_three_component_projections (test_moag_connectivity_r22.EvidenceConnectivityR22.test_reproducible_three_component_projections) ... ok
+test_sectors_and_corridors_never_assert_shared_room_identity (test_moag_connectivity_r22.EvidenceConnectivityR22.test_sectors_and_corridors_never_assert_shared_room_identity) ... ok
+test_source_qualified_repairs_do_not_downgrade_existing_r09_corrections (test_moag_connectivity_r22.EvidenceConnectivityR22.test_source_qualified_repairs_do_not_downgrade_existing_r09_corrections) ... ok
+test_joint_model_sat (test_moag_connectivity_r22.RealIdentityR22.test_joint_model_sat) ... ok
+test_new_identity_is_source_causal_and_source_core_replays (test_moag_connectivity_r22.RealIdentityR22.test_new_identity_is_source_causal_and_source_core_replays) ... ok
+test_seven_unknown_pairs_each_allow_same_and_different (test_moag_connectivity_r22.RealIdentityR22.test_seven_unknown_pairs_each_allow_same_and_different) ... ok
+test_sleeping_hall_and_independent_boat_hangars_not_merged (test_moag_connectivity_r22.RealIdentityR22.test_sleeping_hall_and_independent_boat_hangars_not_merged) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 29.329s
+
+OK

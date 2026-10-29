@@ -1,4 +1,4 @@
-name: MOAG R11-R21 real MiniZinc and CP-SAT
+name: MOAG R11-R22 real MiniZinc and CP-SAT
 on:
   pull_request:
     paths:
@@ -14,6 +14,7 @@ on:
       - 'tests/test_moag_cargo_r19.py'
       - 'tests/test_moag_sealed_r20.py'
       - 'tests/test_moag_crosswalk_r21.py'
+      - 'tests/test_moag_connectivity_r22.py'
       - 'docs/research/apa-results/moag/**'
       - '.github/workflows/moag-solvers-r11.yml'
   workflow_dispatch:
@@ -73,34 +74,16 @@ jobs:
         run: python tools/moag_topology/sealed_paths_r20.py --out moag-r20-run
       - name: R21 source-qualified 30 overloaded route aliases and cross-episode MiniZinc countermodels
         run: python tools/moag_topology/contextual_crosswalk_r21.py --out moag-r21-run
-      - name: R21 route crosswalk 10 source and CP-SAT tests
-        run: python -m unittest discover -s tests -p test_moag_crosswalk_r21.py -v
-      - name: R20 source room identity and corridor non-shortcut tests
-        run: python -m unittest discover -s tests -p test_moag_sealed_r20.py -v
-      - name: R19 source chronology and old cargo identity uncertainty tests
-        run: python -m unittest discover -s tests -p test_moag_cargo_r19.py -v
-      - name: R18 source identities and ambiguous stair/hangar alternatives
-        run: python -m unittest discover -s tests -p test_moag_identity_r18.py -v
-      - name: R17 source region, route ambiguity and solver negative controls
-        run: python -m unittest discover -s tests -p test_moag_lower_r17.py -v
-      - name: R16 review queue integrity, sourced ledger overlays and real fork SAT UNSAT
-        run: python -m unittest discover -s tests -p test_moag_evidence_r16.py -v
-      - name: R15 source-safe integration and real coupling regression tests
-        run: python -m unittest discover -s tests -p test_moag_integrated_r15.py -v
-      - name: R14 tests preserve all observation steps and reject unsourced direct corridors
-        run: python -m unittest discover -s tests -p test_moag_routes_r14.py -v
-      - name: Test R13 scenario evidence gates and true CP-SAT spatial contradictions
-        run: python -m unittest discover -s tests -p test_moag_volumes_r13.py -v
-      - name: Test R12 source preservation and actual CP-SAT geometry guards
-        run: python -m unittest discover -s tests -p test_moag_spatial_r12.py -v
-      - name: Test source boundaries and real CP-SAT conflict explanations
-        run: python -m unittest discover -s tests -p test_moag_solver_r11.py -v
+      - name: R22 physical identity quotient and source-qualified connectivity
+        run: python tools/moag_topology/physical_connectivity_r22.py --out moag-r22-run
+      - name: Full MOAG regression including R11-R22 with actual OR-Tools available
+        run: python -m unittest discover -s tests -p "test_moag_*.py" -v
       - name: Require immutable pre-existing research sources
         run: git diff --exit-code -- docs/research/apa-results/moag/v1 docs/research/apa-results/moag/v2 docs/research/apa-results/moag/synthesis
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: moag-r11-r21-${{ matrix.os }}
+          name: moag-r11-r22-${{ matrix.os }}
           path: |
             moag-r11-run/
             moag-r12-lower/
@@ -115,5 +98,6 @@ jobs:
             moag-r19-run/
             moag-r20-run/
             moag-r21-run/
+            moag-r22-run/
           if-no-files-found: error
           retention-days: 30
