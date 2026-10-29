@@ -1,0 +1,634 @@
+{
+  "base_commit": "d3620e4d6721ae0b0430522d5a7423fe46a3028c",
+  "files": [
+    {
+      "path": "docs/research/apa-results/moag/synthesis/B3_p15_17_station_identity_quarantine_r06.json",
+      "sha256": "b061ac72ba68a4905ff07a80becc1b87e801748941ce85c9f07276ec95c5171f"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_BLOCK_MODEL_R02.svg",
+      "sha256": "abe2ad0c6a65f973eda89e2967241215106f553c51d9fdc95ca7f06b84d84970"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_CRUISER_SCALE_SOURCE_ADDENDUM_R03A.md",
+      "sha256": "45680dc153ad63cd31338e66d67220429cecc3ada55f4ec4dfa324375e5ff0cb"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_ENERGY_CORE_R02.svg",
+      "sha256": "ce18ebf18ef20a8525b2b65590cfc0acdc3e3926fab5eaaec99c90f2ace7848a"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_L1_TOPOLOGY_R02.svg",
+      "sha256": "f86dff59c99dd2c76f4d9cd4d2ae0b5cc35b6da992ebae96736b8c02ebc86e86"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_L2_TOPOLOGY_R02.svg",
+      "sha256": "4a741cf22a22e0aa37209e9fab5dfac2cb1cd13d8c731a5233b3a2d88f6e8aa1"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_L3_TOPOLOGY_R02.svg",
+      "sha256": "61bdff45867b279ef35c369995724a30c20c397022ee67ecb51177fa37de2c04"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_PARAMETRIC_R04_README.md",
+      "sha256": "52824630d2aa4dc6228a831b0af6db68b6af9fe3bab0f30f1b8d2465630bb6ca"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_R04_ENGINEERING_STATUS.md",
+      "sha256": "e9d4b7f94dd513fd05ff44ce9bf586b546b764e6bb2f57bfdbe883d6e9742773"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_R05_AREAS_VOLUMES_REVIEW.md",
+      "sha256": "e3cc4eb248813ef9f4b4811c963c4996d2a6d31432bdfef09964d2f7b79edb29"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_R06_EVIDENCE_GRAPH_ASSEMBLY.md",
+      "sha256": "07febf05e7bfe901b8c86f9ac27dde44b75ecc61677da7cea87ae07c8d8984b1"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_R07_UNIFIED_EVIDENCE_GRAPH.md",
+      "sha256": "b07c39fe935e35b3f3559f86c94e613a2ef156e1fbc7d83800434f37b4d1436d"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_R08_HYPOTHESIS_OVERLAY.md",
+      "sha256": "d93f5d1c8cdaba4b3e9432856b75984f25cfd6bc397564573b84f5c9099d3542"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_R08_UNCERTAINTY_AND_SYMMETRY.md",
+      "sha256": "c8449c96a895d833a95cf13cc53a256d1b1475e44bd79a6dae54440edce18126"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_R09_RECONCILED_UNCERTAINTY_GRAPH.md",
+      "sha256": "4f9d450617331e1387a328da04a17b5eb9678d97977b2aaab91d12a4eb0aaac3"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_R10_SOURCE_BRIDGE_REVIEW_QUEUE.md",
+      "sha256": "74f70f1b227ea0bb6bb70cd5f1f40838a436b6d25bb445559d145a283781e39d"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_SPATIAL_SCALE_AUDIT_R03A.md",
+      "sha256": "9f9f5001ecfdfab3d73ab67a9ddebb852cd0d5523336da30a30fa0bd0a7b7696"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_SPATIAL_SYNTHESIS_R01_20261019.md",
+      "sha256": "3cdad0c7252afa9e1e56524c496f340748dfa98626f49c09cba7cd4a05bc9cb1"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_SPATIAL_SYNTHESIS_R02.md",
+      "sha256": "39aa5f03aef930b5e98328184c837cd3d0facd04a5ed4aca6e0dceb1c3b22e98"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/MOAG_VERTICAL_SECTION_R02.svg",
+      "sha256": "4fe2faa77347998326fc84296437f6b310190f103d19c22f1996d1c341d76908"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/area_volume_bounds_r05.json",
+      "sha256": "9e0baea14a6b7d1b87fe10fec6f67f040cae6fd216dbef1cc2d174b68f1318d1"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/demo_area_overrides_r05_NONCANON.json",
+      "sha256": "7c5cb774df320112a03b9558ba69277e12638589ede591b7852642685f6ed97f"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/demo_indexed_override_r04_NONCANON.json",
+      "sha256": "31e58301cee9572e43235c0f9b694773ff5d1cfbef7c8f811a49ae6e962dda48"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/demo_layout_candidates_r05_NONCANON.json",
+      "sha256": "d355df16b05b0dd437100fee294d7bf7f8f29f8bc9a9ddeed68d1f60282cc311"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/demo_override_r04_NONCANON.json",
+      "sha256": "1185fca50d47a140e695a05228e0956b4dc3349c12835f1c6f7cfbe8d559317b"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/explicit_spatial_bridges_r06.json",
+      "sha256": "d2aef01da0750806e0f486961a693dacae0d6befd4224d38086acd052e16ec90"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/full_indexed_parametric_graph_r04.json",
+      "sha256": "e3a006d93cd5760625472af560ba1128054a14dd324d1e9c1d5e3c422c860040"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/global_identity_review_r06.json",
+      "sha256": "974964e2b5c366b1585b6c532bb9f4178c4669c2bedfb1843155d1e7551c34e8"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/hypothetical_placement_options_r08.json",
+      "sha256": "84cec2df95cacef63d56343b2aa0f2ceaf0e583a747134b67a69c273642e9e17"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/identity_repair_r04.json",
+      "sha256": "cfde4ea4de1961997293556356ec7544edc35bef23451a7f2956f11ca4d0cc81"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/machine_validation_report.json",
+      "sha256": "d0afaa3caeaa7607c7d411a8a57edb2a0fd92c68884d84b85e43b0c2998dc89c"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/observation_identity_crosswalk_r03a.json",
+      "sha256": "c4c25091ce61b1221a88ea13032f2b5f36eb0ac8db149546dde1cf725392393b"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/parametric_graph_audit_r04.json",
+      "sha256": "fc464ab5d3545fc85eecae6b530e21c34b71d64ea475157a42571ed0d8a93eaf"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/progressive_fragments_r05.json",
+      "sha256": "708c1c3d1baf183dc5af75fe9b475c4c0922dd75ff8d20ea82a993170ee963fb"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/qualitative_placement_constraints_r06.json",
+      "sha256": "a0a3a064e0c3b52323d7ee279d7e8f2b1832ad526146ca00348842a772a721dc"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/qualitative_vehicle_clearance_r06.json",
+      "sha256": "12a4dd277a268a35fb01318ead5d8ceeef1cdc5e58248c5974c20cccd70ea136"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/README.md",
+      "sha256": "38b274b52a358b159603734b202fa6900f6e1bd39c101fced5a1d6ad51849c74"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/assets/station-exterior.webp",
+      "sha256": "4a67135e8969d234ad9d1b8a52a53ab3735a8be39b9a86f0a0bb334dfa7613f7"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/assets/station-plan.jpg",
+      "sha256": "33ee20c129fb352d7c679001d0fcd4358379d67660c8295863ba5bcfa03ab3fd"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/local_validation.json",
+      "sha256": "d4428ec0457fb3ed516c2a2c8bbd3c561a73518780056eadafbe2badf2600649"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/alternative-1.mzn",
+      "sha256": "fe7cfdb81eb92558faa2b1b812218935c17179b5fb8c31e26a193bed67918d7a"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/alternative-1.stdout.txt",
+      "sha256": "2a71a32eb50334323452f69a4c1b524cad88bfde2371d3deff7938df7448f2ec"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/alternative-2.mzn",
+      "sha256": "192ff6ab75870fdab3bf2b51566ce742702f0c7958c724884d9e8a9afb9884c7"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/alternative-2.stdout.txt",
+      "sha256": "9b0745e0d2469ae050d67cfc269018b4666893d3192614539c8c7d3b088e1128"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/alternative-3.mzn",
+      "sha256": "d6cf29782d3e7e06ba3f065e941beebfd4dd6fb86656b411346bb4490caad66e"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/alternative-3.stdout.txt",
+      "sha256": "bf9f90e828b4843495d7be63231b89e4195d0acb5558a7fc16514c80833cb377"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/base-above-hangar-countermodel.dzn",
+      "sha256": "5d95d300dd038da12c82b71e25fed39225d2fbaa7d10de2a0688dc215a7d01ec"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/base-above-hangar-countermodel.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/base-above-hangar-countermodel.stdout.txt",
+      "sha256": "4f3634dc0e911052cb87c2161db976fbf643f1360c0ded5531ace23bda1147ee"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/base-below-hangar-countermodel.dzn",
+      "sha256": "a408eef94bf852f90371b0b16c199b7db3dde7c12f22533c7be10a10bb2715ac"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/base-below-hangar-countermodel.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/base-below-hangar-countermodel.stdout.txt",
+      "sha256": "6009065544e8db911aab4beba3c0988529286d09ab5da38d198f1294ed25c786"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/model.json",
+      "sha256": "74cdfdc2048e8ee9253646049456a3109e19d8f1ca9ae81bbaac9fd3c4a49965"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/results.json",
+      "sha256": "090dddfee5366f160e0bfc5cae28550294c10797ea72e11b5bdb33f1df3eda5e"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/sat.dzn",
+      "sha256": "6da3fcd82bea59a0984e634c841cd546483cef2327e24e7aa15d9d0bd06dc72f"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/sat.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/sat.stdout.txt",
+      "sha256": "2a71a32eb50334323452f69a4c1b524cad88bfde2371d3deff7938df7448f2ec"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/unsat-core.dzn",
+      "sha256": "10b703cf68b6f2b556cbe9fe8f29714dad384dcc1ff5aefc27b6c5ed9d6ae52c"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/unsat-core.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/unsat-core.stdout.txt",
+      "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/unsat.dzn",
+      "sha256": "6eaa4ebe79c26560aeb0dc07196d080b0178ecf82e02c34e66056d7ca8d87945"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/unsat.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/lower-results/unsat.stdout.txt",
+      "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/manifest.json",
+      "sha256": "522786628f03309a0f15b0aa78d38bb8061c10c316a561167359ab1e52990ae1"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/protected_sources.json",
+      "sha256": "fca5378d512c781cbaea5e5667fcbbfd1f37f75c6ce7b76f558ab3dea781a4b6"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/second-results/alternative-1.mzn",
+      "sha256": "d82c08f50e090766159a6a4a26191b10f7c92c6d2df8cda615f1dfba810f59da"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/second-results/alternative-1.stdout.txt",
+      "sha256": "ac5c830202ce288df2a27e64ca3e274c5607f5d7af3d5ca9d9651353bfde7bde"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/second-results/alternative-2.mzn",
+      "sha256": "a4ef8ca6335a7b9e99317721f279a400621d4382769b5a666bb9ced8350185f1"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/second-results/alternative-2.stdout.txt",
+      "sha256": "cac915e3e1ea20d938458af1ff96b678de443979d6b873751e68b384117efefc"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/second-results/alternative-3.mzn",
+      "sha256": "db5e3cc711633578f0d31c7c27d34fe893c376370e2156b2ef0fef60e31d2ce0"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/second-results/alternative-3.stdout.txt",
+      "sha256": "b0cdf2dc3550f02622e3c16d54ee21ce5e0131f8c29608536a119af4046d30b3"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/second-results/model.json",
+      "sha256": "3b3cb96944ac264b3743b388ecd124ecb15da5288c4843e47e28d01180dac2c3"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/second-results/results.json",
+      "sha256": "ed9ccf65b72cf5fafaf40a1df736b6267fdc826dbd556ad7a3a031190316e5f7"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/second-results/sat.dzn",
+      "sha256": "6f6d7a0bcb33396c50a7f00b823235c93f655eacc4ec1934867867a1df0eaf39"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/second-results/sat.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/second-results/sat.stdout.txt",
+      "sha256": "ac5c830202ce288df2a27e64ca3e274c5607f5d7af3d5ca9d9651353bfde7bde"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/second-results/unsat-core.dzn",
+      "sha256": "f23e93f3c5401bc37f9f180cf9033b3a76abd3bfdc9ff0a601a933ff4ae1d360"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/second-results/unsat-core.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/second-results/unsat-core.stdout.txt",
+      "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/second-results/unsat.dzn",
+      "sha256": "76cbef5a461219332d33175af66f6804b960a2ae31b4e9853588348aa1aa7280"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/second-results/unsat.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/second-results/unsat.stdout.txt",
+      "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r11/source_review.json",
+      "sha256": "5e45f280e02f80d379dd14e8da9ee3a6bb9cb1edfde6eb81d90486145dafa6d0"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r12/README.md",
+      "sha256": "490f3e24a7a96b7f1c37bfc62a96ffa659223b37943f06b7fb695c8dd9f7a889"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r13/README.md",
+      "sha256": "9a8d3f73fa5d27b1a3df7c0088ea2b10999ebe09ca236af1d4433c86dc02c1b6"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r14/README.md",
+      "sha256": "d61f53d108af3cf4bf4e8c652d3d907b841e9b1f1900632c9f9e54ec7a3f26ed"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/README.md",
+      "sha256": "3cf82bc28a65e1e9efd341e96be16888ea306f20852fe2628b8f3af7b3fbf8b2"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/alternative-left.mzn",
+      "sha256": "a7b38fe56cd79cffda812e1a953e20b075caf6aeff0e1689ba0a90bb8384ac79"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/alternative-left.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/alternative-left.stdout.txt",
+      "sha256": "48f3408466af5dcf6cf46f67d33b217ad7692bb476e0849f00ed0264a5a226c1"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/alternative-right.mzn",
+      "sha256": "525a47c358170b7ddfc896df699eaccb3d8812ce1e0465bdd6defe305d6a5a35"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/alternative-right.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/alternative-right.stdout.txt",
+      "sha256": "28d3e6def89cefd6b5c0238497483542e951d74d23544780d8a47e55c051e325"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/detached-endpoint-unsat-core.mzn",
+      "sha256": "3d4a524bf61994da40cc976c788ad609cd5d0dd03d815f119b8645585ea48e32"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/detached-endpoint-unsat-core.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/detached-endpoint-unsat-core.stdout.txt",
+      "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/detached-endpoint-unsat.mzn",
+      "sha256": "e2017294d3b2eed73b1bf7992b20c195001498e19d378ae4152f5c741b1fbe8c"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/detached-endpoint-unsat.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/detached-endpoint-unsat.stdout.txt",
+      "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/joint-model.json",
+      "sha256": "3863bdd8805883952b7745d08197d9a5122e9732884b7f26efa3b79cb818f1ea"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/joint-sat.mzn",
+      "sha256": "8f1bff58fad768435771c43d736d03a28cd895cfebad6c90cc0391bf08c0d790"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/joint-sat.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/joint-sat.stdout.txt",
+      "sha256": "d1f58f394a1ba6a7c3bea49f954a896a19fc977c99d0fc2f068338f226c6b7a9"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/lost-stages-unsat-core.mzn",
+      "sha256": "e12537483b44ea7878f7ecfb5d196771a0119a7b054b80c7c9b4fed7be83fa59"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/lost-stages-unsat-core.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/lost-stages-unsat-core.stdout.txt",
+      "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/lost-stages-unsat.mzn",
+      "sha256": "e6c51dfb5caa485f7f411964fd55222eafe71086c8efd644c176572d2caea9ef"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/lost-stages-unsat.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/lost-stages-unsat.stdout.txt",
+      "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/missing_evidence.json",
+      "sha256": "94e8338a1dc8ee386521902721217d548f97f6e63d43a2d14304d6376d9e29fb"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/python-witness.mzn",
+      "sha256": "d6390cb44f0c5cd2c1fe8c918fc8ada8729c466ca43455e6f85d3f1e63528651"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/python-witness.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/python-witness.stdout.txt",
+      "sha256": "48f3408466af5dcf6cf46f67d33b217ad7692bb476e0849f00ed0264a5a226c1"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/results.json",
+      "sha256": "d55ac60a0bbecba23e39c6cdbd16dcf44594929e2c3102402df043b6a807a7d7"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/stair-unsat-core.mzn",
+      "sha256": "3a519e21954b5190fe56d7e362668e0f85da396790b65c8d2ed29195b9e61410"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/stair-unsat-core.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/stair-unsat-core.stdout.txt",
+      "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/stair-unsat.mzn",
+      "sha256": "1dfaf7738b30bdc9ebb86c64474166e0a451c1889945ef9f23f89df09bda0e6a"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/stair-unsat.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/calculation/stair-unsat.stdout.txt",
+      "sha256": "c36a181e15c8c5eca1bb641a30a3a8be88fe93640900750d9f847c53a10410da"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/local_validation.json",
+      "sha256": "9facd29f9b020cb7556a761fb47d79674530ce9fbd78587f8caa97a9fc6011c2"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/manifest.json",
+      "sha256": "5d132fe830a84775ba89aababdee941ed786474a5a66f206e9c5927a2545ae28"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r15/protected_inputs.json",
+      "sha256": "f8056614bfe4cce8b7c310fa49fe8c8c8fef565dd61dce7fbb464fddd69e453c"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r16/README.md",
+      "sha256": "07b7f6647b3937a9796f5849cd3b1399407ebfb65eaddcd75b6212df01e3ea7a"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r17/README.md",
+      "sha256": "e7f4f14bb67486f96151a3aeab43f12a13da49e3cae4967fb031f3b1f0f8158b"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r18/README.md",
+      "sha256": "5e20bca355d0e2b72d1661db63e62339c77eaf0b24c89c786370ca4e6e5ddd1b"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r19/README.md",
+      "sha256": "b90468d1db5b1ad93f36329628c9b83da9b63b37fd74959d501e3700351b12d8"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r20/README.md",
+      "sha256": "ec7c74ac4297743dbbec0fb29927e5a7633f9c08bd692de4589dcb8f90693870"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/r21/README.md",
+      "sha256": "eec356f6d661eb966d8c19b67730b74e5568d7897fca39942476808690218637"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/room_boundary_matrix.json",
+      "sha256": "608bb3c47a8c27bece5c47ab38d57ecedc28e888a9fc7d823b17ec7992e3c961"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/route_context_corrections_r06.json",
+      "sha256": "c1f8464054dc002ab181fa2eb3d18d26ecc079aea82c8081004061e2fe053076"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/route_step_audit.json",
+      "sha256": "9d2d4b969b4f4dbb6d8f473feb446574ecf39e6263617c6db640f06f2ec49606"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/spatial_graph_integrated.json",
+      "sha256": "6a0acade204b6e601b157f3aa1debd55122c6c1db69f0815d580973f4d61965b"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/spatial_hypotheses_r08.json",
+      "sha256": "9345269196aab7c1d13ccb3fabff9407b239fe4587dbc32a856e98f93ba75778"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/unresolved_constraints.json",
+      "sha256": "e24522aebc1bb8f158223e9571ecf31bbaa151b91f3d40114a5118d2132059a7"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/vertical_connections.json",
+      "sha256": "b13a13b96d6e45ff5d0f1d357aa027efc008a1b79cfe81a155d3b1ea5bca560d"
+    },
+    {
+      "path": "docs/research/apa-results/moag/synthesis/volume_constraints_r03a.json",
+      "sha256": "12b2d0fb4edb8b956e9ca39387c41fc8685200c6f4912b24b27768c757f36f5b"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v1/README.md",
+      "sha256": "bcf6d501a152f78e8edba25539328c61d8703f6e26977407ef2bc62f3163ad42"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v1/evidence_graph.json",
+      "sha256": "c2a2cfcd607ad17a0dc796dfa8e8aeb96b8e6562326dfc9925aaea0caaf56949"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v1/passage_index.json",
+      "sha256": "7304158681aab0c1eb1134936015028cff5e0bc1cd46bc1a4863fe27447f21b6"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v1/topology_snapshot.json",
+      "sha256": "07d3f508064586bd4c3851421487cef6d78dd0e7c1e8d759f31092fdc0bde045"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v1/vertical_strata.json",
+      "sha256": "f6945c569e00eabf13a6c7dc5b318e52c717130dbd868dfd7f416c47fec525b8"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v2/README.md",
+      "sha256": "1994d2a86661815439020cf015e7e0fa17faff29ecd27396b0473aacda46011f"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v2/chapter_screening.json",
+      "sha256": "f612594d4c023d2d5191542adcf55ef7a6f37bce8ca9d298e59d25e17c7c69ec"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v2/character_routes.json",
+      "sha256": "d4743735bddde802b5557263b972161f8b6d708a257462ce6eacfb761461aa56"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v2/page_observations.json",
+      "sha256": "a11d789384882a24951fb0e5223a0605831c7a2a87680895185bf1c4510652f2"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v2/pages/B1.json",
+      "sha256": "c10f208b501564cdffdecde19dac03e424b2c88654c4a1ae12a23a32851af220"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v2/pages/B2.json",
+      "sha256": "183f1093a31495b9e31784193d246e56f349e96bec8cd2adf7b7696db7b5dc3a"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v2/pages/B3.json",
+      "sha256": "d876bc8a514397ccce85d80e7e8728b7c655abed8ce3baa77de70905ee115869"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v2/pages/B4.json",
+      "sha256": "51a5b9fe95319866e929cc96406fbedc33c0efcb7941a27e55a8f1b79055e2d4"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v2/reviews/B2_p09_29_primary_recheck_20261019.json",
+      "sha256": "65cfcd8958393a0c6dd7c59f67bf307c9a9190f030437042f39dceb13a5d87af"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v2/reviews/B2_p30_33_primary_recheck_20261019.json",
+      "sha256": "f91eba7bb130b94a70885400f501aa5079ef57aef13f977afa4e886bfce42e89"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v2/reviews/B2_p34_42_energy_vertical_and_exclusions_20261019.json",
+      "sha256": "fcbb01153103ba4c9b8ee17aa8b5348bd1845d062b1dd90a01d9bb063f1f2852"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v2/reviews/B3_p57_60_identity_context_screening_r06_20261020.json",
+      "sha256": "5f73fd941889f0ceb228476a821f48676d74ae350b06c6714b0e17b5f6f3b1c8"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v2/reviews/B3_p61_65_context_screening_r06_20261020.json",
+      "sha256": "d1614b2edc9651f0987a76e3a93b7159fa87a44745786179fb051d843197a493"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v2/station_identity.json",
+      "sha256": "e73f951a66236ac1eccd0b5d540526c27b96b691e8f4eee77251a80d6f5a96e0"
+    },
+    {
+      "path": "docs/research/apa-results/moag/v2/visual_hypotheses.json",
+      "sha256": "f8a40d74c95dec4253757501a8170d7bbf52b6e26cb0013e9c8c1de66e9837d3"
+    }
+  ],
+  "count": 157
+}

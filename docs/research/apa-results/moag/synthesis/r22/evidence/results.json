@@ -1,0 +1,614 @@
+{
+  "schema": "MOAG-R22-REAL-SOLVER-RESULTS/1",
+  "base_commit": "d3620e4d6721ae0b0430522d5a7423fe46a3028c",
+  "python_cp_sat": "SAT",
+  "minizinc_cp_sat": "SAT",
+  "full_witness_replayed": true,
+  "conflicts": [
+    {
+      "test": "false-hall-split",
+      "python": "INFEASIBLE",
+      "minizinc": "INFEASIBLE",
+      "without_new_source": "SAT",
+      "core_replayed_both": true,
+      "unsat_core": [
+        {
+          "id": "R22-SAME-ROUND-AND-OLD-HALL",
+          "rows": [
+            {
+              "terms": [
+                [
+                  2791,
+                  1
+                ],
+                [
+                  2768,
+                  -1
+                ]
+              ],
+              "rhs": 0,
+              "when": null
+            },
+            {
+              "terms": [
+                [
+                  2768,
+                  1
+                ],
+                [
+                  2791,
+                  -1
+                ]
+              ],
+              "rhs": 0,
+              "when": null
+            }
+          ],
+          "sources": [
+            {
+              "id": "R22-B1-110-EMMA-RECOLLECTION",
+              "page_id": "B1-110",
+              "url": "https://loveread.ec/read_book.php?id=48197&p=110",
+              "summary": "Эмма направляет Таис и раненого Федора от первого перекрёстка по ориентиру разбитой прямоугольной лампы к ангару с рубками, водой и светом. Прямо сообщает, что была там с Колючим и Вовкой. Следует вход в старый высокий ангар и подъём к рубкам. Сопоставление с B1-075/076 связывает зал с прежним посещением этой тройки.",
+              "short_quote": "Мы там были с Колючим и Вовкой.",
+              "source_quality": "DIRECT_TEXT_WITH_EXPLICIT_CROSS_EPISODE_REFERENCE",
+              "inference_boundary": "Тождество зала; тождество каждой лестницы и каждой рубки не следует. Координаты и новый проход не следуют."
+            },
+            {
+              "id": "P-219",
+              "page_id": "B1-076",
+              "url": "https://loveread.ec/read_book.php?id=48197&p=76",
+              "summary": "Круглый зал высокий, содержит грузовые тележки; видимых челноков нет.",
+              "source_quality": "PREEXISTING_BOOK_PAGE_OBSERVATION"
+            },
+            {
+              "id": "P-313",
+              "page_id": "B1-110",
+              "url": "https://loveread.ec/read_book.php?id=48197&p=110",
+              "summary": "В высоком старом нижнем ангаре сбоку подвешена лестница, ведущая в поднятую диспетчерскую с рабочим светом, водой, кушеткой и креслом, но без тепла.",
+              "source_quality": "PREEXISTING_BOOK_PAGE_OBSERVATION"
+            }
+          ],
+          "status": "SOURCE_IDENTITY_NO_XYZ_OR_PORTAL",
+          "any_of": false,
+          "family": "r22_cross_episode_identity"
+        },
+        {
+          "id": "R22-TEST-false-hall-split",
+          "rows": [
+            {
+              "terms": [
+                [
+                  2791,
+                  1
+                ],
+                [
+                  2768,
+                  -1
+                ]
+              ],
+              "rhs": 1,
+              "when": null
+            },
+            {
+              "terms": [
+                [
+                  2768,
+                  1
+                ],
+                [
+                  2791,
+                  -1
+                ]
+              ],
+              "rhs": 1,
+              "when": null
+            }
+          ],
+          "sources": [],
+          "status": "SYNTHETIC_IDENTITY_COUNTERMODEL_NOT_SOURCE_PROOF",
+          "any_of": true,
+          "family": "test"
+        }
+      ]
+    },
+    {
+      "test": "false-sleeping-hall-merge",
+      "python": "INFEASIBLE",
+      "minizinc": "INFEASIBLE",
+      "without_new_source": "SAT",
+      "core_replayed_both": true,
+      "unsat_core": [
+        {
+          "id": "R20-RT015-I-ROUND-HALL",
+          "rows": [
+            {
+              "terms": [
+                [
+                  2777,
+                  1
+                ],
+                [
+                  2778,
+                  -1
+                ]
+              ],
+              "rhs": 0,
+              "when": null
+            },
+            {
+              "terms": [
+                [
+                  2778,
+                  1
+                ],
+                [
+                  2777,
+                  -1
+                ]
+              ],
+              "rhs": 0,
+              "when": null
+            }
+          ],
+          "sources": [
+            {
+              "id": "P-219",
+              "page_id": "B1-076",
+              "url": "https://loveread.ec/read_book.php?id=48197&p=76",
+              "summary": "Круглый зал высокий, содержит грузовые тележки; видимых челноков нет.",
+              "source_type": "PREEXISTING_BOOK_PAGE_OBSERVATION"
+            }
+          ],
+          "status": "SOURCE_STABLE_REFERENT_OVERLAY_NOT_METRIC_PLACEMENT",
+          "any_of": false,
+          "family": "r20_visit_identity"
+        },
+        {
+          "id": "R20-SLEEPERS-VS-ROUND-ARE-DIFFERENT",
+          "rows": [
+            {
+              "terms": [
+                [
+                  2769,
+                  1
+                ],
+                [
+                  2778,
+                  -1
+                ]
+              ],
+              "rhs": 1,
+              "when": null
+            },
+            {
+              "terms": [
+                [
+                  2778,
+                  1
+                ],
+                [
+                  2769,
+                  -1
+                ]
+              ],
+              "rhs": 1,
+              "when": null
+            }
+          ],
+          "sources": [
+            {
+              "id": "P-217",
+              "page_id": "B1-075",
+              "url": "https://loveread.ec/read_book.php?id=48197&p=75",
+              "summary": "Перед следующим круглым залом имеется локальный двухступенчатый спуск, без отдельного глобального этажа.",
+              "source_type": "PREEXISTING_BOOK_PAGE_OBSERVATION"
+            },
+            {
+              "id": "P-219",
+              "page_id": "B1-076",
+              "url": "https://loveread.ec/read_book.php?id=48197&p=76",
+              "summary": "Круглый зал высокий, содержит грузовые тележки; видимых челноков нет.",
+              "source_type": "PREEXISTING_BOOK_PAGE_OBSERVATION"
+            }
+          ],
+          "status": "SOURCE_TWO_DIFFERENT_HALLS_NOT_ASSERTED_DISTANCE_OR_FLOOR",
+          "any_of": true,
+          "family": "r20_hall_distinct"
+        },
+        {
+          "id": "R22-ROUND-INDEX-REFERENT",
+          "rows": [
+            {
+              "terms": [
+                [
+                  2791,
+                  1
+                ],
+                [
+                  2777,
+                  -1
+                ]
+              ],
+              "rhs": 0,
+              "when": null
+            },
+            {
+              "terms": [
+                [
+                  2777,
+                  1
+                ],
+                [
+                  2791,
+                  -1
+                ]
+              ],
+              "rhs": 0,
+              "when": null
+            }
+          ],
+          "sources": [
+            {
+              "id": "P-219",
+              "page_id": "B1-076",
+              "url": "https://loveread.ec/read_book.php?id=48197&p=76",
+              "summary": "Круглый зал высокий, содержит грузовые тележки; видимых челноков нет.",
+              "source_quality": "PREEXISTING_BOOK_PAGE_OBSERVATION"
+            }
+          ],
+          "status": "SOURCE_IDENTITY_NO_XYZ_OR_PORTAL",
+          "any_of": false,
+          "family": "r22_index_referent"
+        },
+        {
+          "id": "R22-SAME-ROUND-AND-OLD-HALL",
+          "rows": [
+            {
+              "terms": [
+                [
+                  2791,
+                  1
+                ],
+                [
+                  2768,
+                  -1
+                ]
+              ],
+              "rhs": 0,
+              "when": null
+            },
+            {
+              "terms": [
+                [
+                  2768,
+                  1
+                ],
+                [
+                  2791,
+                  -1
+                ]
+              ],
+              "rhs": 0,
+              "when": null
+            }
+          ],
+          "sources": [
+            {
+              "id": "R22-B1-110-EMMA-RECOLLECTION",
+              "page_id": "B1-110",
+              "url": "https://loveread.ec/read_book.php?id=48197&p=110",
+              "summary": "Эмма направляет Таис и раненого Федора от первого перекрёстка по ориентиру разбитой прямоугольной лампы к ангару с рубками, водой и светом. Прямо сообщает, что была там с Колючим и Вовкой. Следует вход в старый высокий ангар и подъём к рубкам. Сопоставление с B1-075/076 связывает зал с прежним посещением этой тройки.",
+              "short_quote": "Мы там были с Колючим и Вовкой.",
+              "source_quality": "DIRECT_TEXT_WITH_EXPLICIT_CROSS_EPISODE_REFERENCE",
+              "inference_boundary": "Тождество зала; тождество каждой лестницы и каждой рубки не следует. Координаты и новый проход не следуют."
+            },
+            {
+              "id": "P-219",
+              "page_id": "B1-076",
+              "url": "https://loveread.ec/read_book.php?id=48197&p=76",
+              "summary": "Круглый зал высокий, содержит грузовые тележки; видимых челноков нет.",
+              "source_quality": "PREEXISTING_BOOK_PAGE_OBSERVATION"
+            },
+            {
+              "id": "P-313",
+              "page_id": "B1-110",
+              "url": "https://loveread.ec/read_book.php?id=48197&p=110",
+              "summary": "В высоком старом нижнем ангаре сбоку подвешена лестница, ведущая в поднятую диспетчерскую с рабочим светом, водой, кушеткой и креслом, но без тепла.",
+              "source_quality": "PREEXISTING_BOOK_PAGE_OBSERVATION"
+            }
+          ],
+          "status": "SOURCE_IDENTITY_NO_XYZ_OR_PORTAL",
+          "any_of": false,
+          "family": "r22_cross_episode_identity"
+        },
+        {
+          "id": "R22-TEST-false-sleeping-hall-merge",
+          "rows": [
+            {
+              "terms": [
+                [
+                  2768,
+                  1
+                ],
+                [
+                  2769,
+                  -1
+                ]
+              ],
+              "rhs": 0,
+              "when": null
+            },
+            {
+              "terms": [
+                [
+                  2769,
+                  1
+                ],
+                [
+                  2768,
+                  -1
+                ]
+              ],
+              "rhs": 0,
+              "when": null
+            }
+          ],
+          "sources": [],
+          "status": "SYNTHETIC_IDENTITY_COUNTERMODEL_NOT_SOURCE_PROOF",
+          "any_of": false,
+          "family": "test"
+        }
+      ]
+    },
+    {
+      "test": "false-independent-hangars-merge",
+      "python": "INFEASIBLE",
+      "minizinc": "INFEASIBLE",
+      "without_new_source": null,
+      "core_replayed_both": true,
+      "unsat_core": [
+        {
+          "id": "R18-DIFFERENT::M-L1-FH-001::M-L1-FH-002",
+          "rows": [
+            {
+              "terms": [
+                [
+                  2770,
+                  1
+                ],
+                [
+                  2771,
+                  -1
+                ]
+              ],
+              "rhs": 1,
+              "when": null
+            },
+            {
+              "terms": [
+                [
+                  2771,
+                  1
+                ],
+                [
+                  2770,
+                  -1
+                ]
+              ],
+              "rhs": 1,
+              "when": null
+            }
+          ],
+          "sources": [
+            {
+              "id": "P-367",
+              "url": "https://loveread.ec/read_book.php?id=53370&p=15",
+              "page_id": "B2-015",
+              "summary": "Операторская первого ангара непосредственно соединена с операторской соседнего, подтверждено физическим прохождением одного из близнецов."
+            },
+            {
+              "id": "P-368",
+              "url": "https://loveread.ec/read_book.php?id=53370&p=15",
+              "page_id": "B2-015",
+              "summary": "В соседнем ангаре находятся три катера и повреждённое оборудование; освещение отключено. Степень пригодности каждого катера не установлена."
+            }
+          ],
+          "status": "SOURCED_ROOM_DISTINCTNESS_NOT_XYZ_DISJOINTNESS",
+          "any_of": true,
+          "family": "r18_distinct"
+        },
+        {
+          "id": "R22-TEST-false-independent-hangars-merge",
+          "rows": [
+            {
+              "terms": [
+                [
+                  2770,
+                  1
+                ],
+                [
+                  2771,
+                  -1
+                ]
+              ],
+              "rhs": 0,
+              "when": null
+            },
+            {
+              "terms": [
+                [
+                  2771,
+                  1
+                ],
+                [
+                  2770,
+                  -1
+                ]
+              ],
+              "rhs": 0,
+              "when": null
+            }
+          ],
+          "sources": [],
+          "status": "SYNTHETIC_IDENTITY_COUNTERMODEL_NOT_SOURCE_PROOF",
+          "any_of": false,
+          "family": "test"
+        }
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "a": "RT015-J",
+      "b": "RT024-G",
+      "kind": "same",
+      "python": "SAT",
+      "minizinc": "SAT",
+      "witness_replayed": true
+    },
+    {
+      "a": "RT015-J",
+      "b": "RT024-G",
+      "kind": "different",
+      "python": "SAT",
+      "minizinc": "SAT",
+      "witness_replayed": true
+    },
+    {
+      "a": "RT023-A",
+      "b": "RT015-J",
+      "kind": "same",
+      "python": "SAT",
+      "minizinc": "SAT",
+      "witness_replayed": true
+    },
+    {
+      "a": "RT023-A",
+      "b": "RT015-J",
+      "kind": "different",
+      "python": "SAT",
+      "minizinc": "SAT",
+      "witness_replayed": true
+    },
+    {
+      "a": "RT023-A",
+      "b": "RT024-G",
+      "kind": "same",
+      "python": "SAT",
+      "minizinc": "SAT",
+      "witness_replayed": true
+    },
+    {
+      "a": "RT023-A",
+      "b": "RT024-G",
+      "kind": "different",
+      "python": "SAT",
+      "minizinc": "SAT",
+      "witness_replayed": true
+    },
+    {
+      "a": "MOAG-G-0053",
+      "b": "M-L1-CG-001",
+      "kind": "same",
+      "python": "SAT",
+      "minizinc": "SAT",
+      "witness_replayed": true
+    },
+    {
+      "a": "MOAG-G-0053",
+      "b": "M-L1-CG-001",
+      "kind": "different",
+      "python": "SAT",
+      "minizinc": "SAT",
+      "witness_replayed": true
+    },
+    {
+      "a": "M-L1-CG-001",
+      "b": "M-L1-AH-OLD-001",
+      "kind": "same",
+      "python": "SAT",
+      "minizinc": "SAT",
+      "witness_replayed": true
+    },
+    {
+      "a": "M-L1-CG-001",
+      "b": "M-L1-AH-OLD-001",
+      "kind": "different",
+      "python": "SAT",
+      "minizinc": "SAT",
+      "witness_replayed": true
+    },
+    {
+      "a": "MOAG-G-0060",
+      "b": "M-L1-AH-OLD-CTRL-001",
+      "kind": "same",
+      "python": "SAT",
+      "minizinc": "SAT",
+      "witness_replayed": true
+    },
+    {
+      "a": "MOAG-G-0060",
+      "b": "M-L1-AH-OLD-CTRL-001",
+      "kind": "different",
+      "python": "SAT",
+      "minizinc": "SAT",
+      "witness_replayed": true
+    },
+    {
+      "a": "RT031-F",
+      "b": "M-L1-FH-001",
+      "kind": "same",
+      "python": "SAT",
+      "minizinc": "SAT",
+      "witness_replayed": true
+    },
+    {
+      "a": "RT031-F",
+      "b": "M-L1-FH-001",
+      "kind": "different",
+      "python": "SAT",
+      "minizinc": "SAT",
+      "witness_replayed": true
+    }
+  ],
+  "new_physical_unions": 1,
+  "unresolved_identity_pairs": 7,
+  "hypothetical_edges": 84,
+  "snapshots": {
+    "baseline_R21_raw": {
+      "indices": 197,
+      "identity_classes": 197,
+      "components": {
+        "direct_access": 173,
+        "physical_qualitative": 48,
+        "route_evidence": 39
+      }
+    },
+    "R21_source_qualified": {
+      "indices": 197,
+      "identity_classes": 197,
+      "components": {
+        "direct_access": 173,
+        "physical_qualitative": 48,
+        "route_evidence": 39
+      }
+    },
+    "R22_source_qualified_identity_quotient": {
+      "indices": 197,
+      "identity_classes": 196,
+      "components": {
+        "direct_access": 172,
+        "physical_qualitative": 47,
+        "route_evidence": 39
+      }
+    }
+  },
+  "routes": 52,
+  "occurrences": 378,
+  "bound": 25,
+  "unbound": 353,
+  "new_portals": 0,
+  "new_metric_constraints": 0,
+  "archicad_write": false
+}
