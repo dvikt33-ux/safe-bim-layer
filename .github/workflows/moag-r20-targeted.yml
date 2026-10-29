@@ -1,0 +1,38 @@
+name: MOAG R20 targeted source-safe route identity
+on:
+  pull_request:
+    paths:
+      - 'tools/moag_topology/sealed_paths_r20.py'
+      - 'tests/test_moag_sealed_r20.py'
+      - 'docs/research/apa-results/moag/synthesis/r20/**'
+      - '.github/workflows/moag-r20-targeted.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  r20-evidence:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned official OR-Tools
+        run: python -m pip install -r tools/moag_topology/requirements-r11.txt
+      - name: Install pinned verified official MiniZinc with CP-SAT
+        run: python tools/moag_topology/bootstrap_r11.py
+      - name: R20 source fact solver and five source-cited UNSAT counterexamples
+        run: python tools/moag_topology/sealed_paths_r20.py --out moag-r20-targeted
+      - name: R20 book-index correction and solver integrity tests
+        run: python -m unittest discover -s tests -p test_moag_sealed_r20.py -v
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: moag-r20-evidence-${{ matrix.os }}
+          path: moag-r20-targeted/
+          if-no-files-found: error
+          retention-days: 30

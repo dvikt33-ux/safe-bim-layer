@@ -1,4 +1,4 @@
-name: MOAG R11-R19 real MiniZinc and CP-SAT
+name: MOAG R11-R20 real MiniZinc and CP-SAT
 on:
   pull_request:
     paths:
@@ -12,6 +12,7 @@ on:
       - 'tests/test_moag_lower_r17.py'
       - 'tests/test_moag_identity_r18.py'
       - 'tests/test_moag_cargo_r19.py'
+      - 'tests/test_moag_sealed_r20.py'
       - 'docs/research/apa-results/moag/**'
       - '.github/workflows/moag-solvers-r11.yml'
   workflow_dispatch:
@@ -55,6 +56,10 @@ jobs:
         run: python tools/moag_topology/identity_alternatives_r18.py --out moag-r18-run
       - name: R19 historical cargo succession and residual Lower shuttles MiniZinc OR-Tools
         run: python tools/moag_topology/cargo_history_r19.py --out moag-r19-run
+      - name: R20 sealed fork sleeping-vs-round halls and book passage type CP-SAT
+        run: python tools/moag_topology/sealed_paths_r20.py --out moag-r20-run
+      - name: R20 source room identity and corridor non-shortcut tests
+        run: python -m unittest discover -s tests -p test_moag_sealed_r20.py -v
       - name: R19 source chronology and old cargo identity uncertainty tests
         run: python -m unittest discover -s tests -p test_moag_cargo_r19.py -v
       - name: R18 source identities and ambiguous stair/hangar alternatives
@@ -78,7 +83,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: moag-r11-r19-${{ matrix.os }}
+          name: moag-r11-r20-${{ matrix.os }}
           path: |
             moag-r11-run/
             moag-r12-lower/
@@ -91,5 +96,6 @@ jobs:
             moag-r17-run/
             moag-r18-run/
             moag-r19-run/
+            moag-r20-run/
           if-no-files-found: error
           retention-days: 30
