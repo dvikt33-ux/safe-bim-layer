@@ -1,0 +1,40 @@
+{
+  "archicad": {
+    "archicad_build": "",
+    "archicad_version": "",
+    "instance_hint": "port=19723",
+    "is_teamwork": false,
+    "is_untitled": false,
+    "port": 19723,
+    "project_name": "MCP_TEST",
+    "project_path": "C:\\Users\\Admin\\Downloads\\MCP_TEST.pln"
+  },
+  "backend": "tapir",
+  "generated_at": "2026-09-26T20:55:17Z",
+  "guid": "A0159B37-5EA0-48BB-A8C4-4DDE446DAF61",
+  "probe": "T0B",
+  "results": {
+    "element_id": {
+      "marker": "BX:PROBE:8eb82aee9aa6476bb7ec21751b65f1fe",
+      "ok": true,
+      "original": "ПЕР - 005",
+      "stages": {
+        "FIND_EXACT": true,
+        "FIND_PREFIX": true,
+        "READ_BACK": true,
+        "RESTORED": true,
+        "SAVED": true,
+        "VERIFY_RESTORE": true,
+        "WRITTEN": true
+      }
+    }
+  },
+  "verdicts": {
+    "carriers_verified": [
+      "element_id"
+    ],
+    "recommended_carrier": "element_id",
+    "t0b_go": true
+  },
+  "version": "1.3"
+}

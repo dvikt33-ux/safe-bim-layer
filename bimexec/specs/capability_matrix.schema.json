@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/dvikt33-ux/safe-bim-layer/blob/main/bimexec/specs/capability_matrix.schema.json",
+  "title": "BIMEXEC T0A capability matrix",
+  "description": "Output contract of bimexec/probes/probe_t0a.py. Every capability must carry backend attribution; supported is a tri-state: true = CERTIFIED by a real call, false = proven NOT available, null = UNKNOWN (never treat as OK). The matrix is measured evidence, not documentation: nothing may be treated as supported unless this file says supported = true.",
+  "type": "object",
+  "required": [
+    "probe",
+    "version",
+    "generated_at",
+    "archicad",
+    "discovery",
+    "backends",
+    "capabilities",
+    "marker_carriers_readable",
+    "duplicate_detection",
+    "operations",
+    "raw_dumps",
+    "t0b_candidates",
+    "verdicts"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "probe": { "const": "T0A" },
+    "version": { "type": "string", "description": "Probe version that produced this matrix." },
+    "generated_at": { "type": "string", "description": "UTC timestamp, %Y-%m-%dT%H:%M:%SZ." },
+
+    "archicad": {
+      "type": "object",
+      "description": "Identity of the Archicad instance the probe actually spoke to.",
+      "required": ["project_path", "project_name", "is_untitled", "is_teamwork"],
+      "additionalProperties": true,
+      "properties": {
+        "project_path": { "type": ["string", "null"] },
+        "project_name": { "type": ["string", "null"] },
+        "is_untitled": { "type": "boolean" },
+        "is_teamwork": { "type": "boolean" },
+        "archicad_version": { "type": "string" },
+        "archicad_build": { "type": "string" },
+        "port": { "type": ["integer", "null"] },
+        "instance_hint": { "type": "string" }
+      }
+    },
+
+    "discovery": {
+      "type": "array",
+      "description": "Read-only port scan: which API port answered and with which project. An entry with _error did not answer.",
+      "items": {
+        "type": "object",
+        "required": ["port"],
+        "additionalProperties": true,
+        "properties": {
+          "port": { "type": "integer" },
+          "_error": { "type": "string" },
+          "_backend": { "type": "string" },
+          "project_path": { "type": ["string", "null"] }
+        }
+      }
+    },
+
+    "backends": {
+      "type": "object",
+      "description": "Availability of each backend that was tried.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["available"],
+        "additionalProperties": true,
+        "properties": {
+          "available": { "type": "boolean" },
+          "detail": { "type": "string" }
+        }
+      }
+    },
+
+    "capabilities": {
+      "type": "object",
+      "description": "One entry per probed capability. Every entry MUST declare which backend supplied the answer.",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["supported", "backend", "notes", "evidence"],
+        "additionalProperties": false,
+        "properties": {
+          "supported": {
+            "type": ["boolean", "null"],
+            "description": "true = certified by a real call; false = proven unavailable; null = UNKNOWN, must fail closed."
+          },
+          "backend": {
+            "type": ["string", "null"],
+            "description": "Backend attribution: 'tapir', 'mcp', or null when no backend could answer."
+          },
+          "notes": { "type": "array", "items": { "type": "string" } },
+          "evidence": {
+            "type": "object",
+            "description": "Raw measured evidence. Shape is capability-specific; it is the audit trail and must not be empty for supported = true.",
+            "additionalProperties": true
+          }
+        }
+      }
+    },
+
+    "marker_carriers_readable": {
+      "type": "array",
+      "description": "Marker carriers that were actually read: 'element_id', 'property'.",
+      "items": { "type": "string", "enum": ["element_id", "property"] }
+    },
+
+    "duplicate_detection": {
+      "type": "string",
+      "enum": ["SCAN_PREFIX", "EMPTY_SCOPE_FALLBACK", "NONE"],
+      "description": "SCAN_PREFIX = duplicate detection by client-side scan of property values + prefix match. EMPTY_SCOPE_FALLBACK = property values cannot be read at all, so no search is possible and every mutating op must be blocked. NONE = not determined."
+    },
+
+    "operations": {
+      "type": "object",
+      "description": "Per-operation production-safety gate consumed by the executor.",
+      "additionalProperties": true,
+      "properties": {
+        "create_wall": {
+          "type": "object",
+          "required": ["production_safe", "implemented_here"],
+          "additionalProperties": true,
+          "properties": {
+            "production_safe": { "const": false },
+            "implemented_here": { "const": false },
+            "blocked_by": { "type": "array", "items": { "type": "string" } },
+            "hard_blocked_commands": { "type": "array", "items": { "type": "string" } },
+            "guard": { "type": "string" },
+            "note": { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "raw_dumps": {
+      "type": "object",
+      "description": "Unmodified responses kept for manual inspection. GetDetailsOfElements_sample is the evidence for wall endpoint geometry (begCoordinate / endCoordinate).",
+      "additionalProperties": true,
+      "properties": {
+        "GetDetailsOfElements_sample": { "type": ["object", "null"] },
+        "GetStories": { "type": ["array", "null"] }
+      }
+    },
+
+    "t0b_candidates": {
+      "type": "array",
+      "description": "Wall GUIDs offered as --guid input for T0B.",
+      "items": {
+        "type": "object",
+        "required": ["guid"],
+        "additionalProperties": true,
+        "properties": {
+          "guid": { "type": "string" },
+          "type": { "type": ["string", "null"] },
+          "element_id": { "type": ["string", "null"] },
+          "story_index": { "type": ["integer", "null"] },
+          "layer": { "type": ["string", "null"] }
+        }
+      }
+    },
+
+    "verdicts": {
+      "type": "object",
+      "required": ["executed", "t0a_go"],
+      "additionalProperties": true,
+      "properties": {
+        "executed": {
+          "type": "boolean",
+          "description": "true only means the probe ran. It is NOT a go decision: the decision is t0a_go."
+        },
+        "t0a_go": { "type": "boolean" },
+        "next_step": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "probe": "AUDIT_T2_CONNECTIONS",
+  "version": "1.0",
+  "recorded_at": "2026-09-27T01:08:00+03:00",
+  "machine_result": {
+    "status": "MACHINE_OK_VISUAL_PENDING",
+    "created_walls": 6,
+    "count_delta": {"Wall": 6},
+    "strict_geometry_all_ok": true,
+    "verify_spec_ready_for_connections": true,
+    "final_t2c_marker_sweep": 0
+  },
+  "visual_check": {
+    "status": "PASS",
+    "confirmed_by": "user",
+    "scope": [
+      "four-wall closed contour",
+      "four corners",
+      "inner T-junction",
+      "outer abutment",
+      "wall geometry and placement"
+    ],
+    "note": "User confirmed T2 visually normal in Archicad."
+  },
+  "capability_state_after_t2": {
+    "create_wall_machine_certified": true,
+    "connections_tested": true,
+    "connections_strict_ok": true,
+    "production_safe": false,
+    "blocked_by": ["live_T3_T7_not_run"]
+  }
+}

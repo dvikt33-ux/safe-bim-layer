@@ -1,0 +1,759 @@
+{
+  "archicad": {
+    "archicad_build": "",
+    "archicad_version": "",
+    "instance_hint": "port=19723",
+    "is_teamwork": false,
+    "is_untitled": false,
+    "port": 19723,
+    "project_name": "MCP_TEST",
+    "project_path": "C:\\Users\\Admin\\Downloads\\MCP_TEST.pln"
+  },
+  "backends": {
+    "mcp": {
+      "available": true,
+      "detail": "MCP http://127.0.0.1:8001/mcp proto=2025-06-18 server=archicad-mcp"
+    },
+    "tapir": {
+      "available": true,
+      "detail": "Tapir GetProjectInfo OK (port=19723); Tapir add-on 1.5.9"
+    }
+  },
+  "capabilities": {
+    "count_by_type": {
+      "backend": "tapir",
+      "evidence": {
+        "counts": {
+          "Column": 0,
+          "Door": 1,
+          "Slab": 1,
+          "Wall": 4,
+          "Window": 7,
+          "Zone": 0
+        }
+      },
+      "notes": [],
+      "supported": true
+    },
+    "elements_by_type": {
+      "backend": "tapir",
+      "evidence": {
+        "dropped_no_guid": 0,
+        "raw_count": 4,
+        "sample": [
+          "A0159B37-5EA0-48BB-A8C4-4DDE446DAF61",
+          "DBB51012-1D52-4531-83FC-FCF4BE7627A0",
+          "B5B78F40-3A3F-41AF-940D-65B6CA726EE0",
+          "5C46A395-47E2-4D3F-AD18-65230412C46B"
+        ],
+        "wall_count": 4
+      },
+      "notes": [],
+      "supported": true
+    },
+    "layer_name_via_property": {
+      "backend": "tapir",
+      "evidence": {
+        "address": "ModelView_LayerName",
+        "resolved": {
+          "A0159B37-5EA0-48BB-A8C4-4DDE446DAF61": "Конструктив - Несущие Элементы",
+          "B5B78F40-3A3F-41AF-940D-65B6CA726EE0": "Конструктив - Несущие Элементы",
+          "DBB51012-1D52-4531-83FC-FCF4BE7627A0": "Конструктив - Несущие Элементы"
+        }
+      },
+      "notes": [],
+      "supported": true
+    },
+    "list_guids": {
+      "backend": "tapir",
+      "evidence": {
+        "n": 16,
+        "sample": [
+          "A0159B37-5EA0-48BB-A8C4-4DDE446DAF61",
+          "DBB51012-1D52-4531-83FC-FCF4BE7627A0",
+          "B5B78F40-3A3F-41AF-940D-65B6CA726EE0",
+          "5C46A395-47E2-4D3F-AD18-65230412C46B",
+          "F66674AF-440F-4B17-9E8C-33B8B7849388"
+        ]
+      },
+      "notes": [],
+      "supported": true
+    },
+    "mcp_tools_list": {
+      "backend": "mcp",
+      "evidence": {
+        "count": 8,
+        "mode_inferred": "verdicts-only",
+        "mutating_tools_present": [],
+        "tools": [
+          "list_instances",
+          "get_model_summary",
+          "list_rules",
+          "run_rule",
+          "audit_delivery_readiness",
+          "verify_ifc_export_readiness",
+          "highlight_failures",
+          "create_issues_from_failures"
+        ]
+      },
+      "notes": [],
+      "supported": true
+    },
+    "port_project_discovery": {
+      "backend": "tapir",
+      "evidence": {
+        "answered": [
+          {
+            "_addon_version": "1.5.9",
+            "_backend": "tapir",
+            "archicad_build": "",
+            "archicad_version": "",
+            "instance_hint": "port=19723",
+            "is_teamwork": false,
+            "is_untitled": false,
+            "port": 19723,
+            "project_name": "MCP_TEST",
+            "project_path": "C:\\Users\\Admin\\Downloads\\MCP_TEST.pln"
+          }
+        ],
+        "note": "порт и проект подтверждены live read-only вызовом"
+      },
+      "notes": [],
+      "supported": true
+    },
+    "project_identity": {
+      "backend": "tapir",
+      "evidence": {
+        "archicad_build": "",
+        "archicad_version": "",
+        "instance_hint": "port=19723",
+        "is_teamwork": false,
+        "is_untitled": false,
+        "port": 19723,
+        "project_name": "MCP_TEST",
+        "project_path": "C:\\Users\\Admin\\Downloads\\MCP_TEST.pln"
+      },
+      "notes": [],
+      "supported": true
+    },
+    "read_custom_property": {
+      "backend": "tapir",
+      "evidence": {},
+      "notes": [
+        "BackendError: resolve_property_id(user:BIMEXEC/BIMEXEC_MARKER): AttributeError: 'ErrorItem' object has no attribute 'propertyId'"
+      ],
+      "supported": null
+    },
+    "read_element_id": {
+      "backend": "tapir",
+      "evidence": {
+        "address": "builtin:General_ElementID",
+        "resolved": {
+          "A0159B37-5EA0-48BB-A8C4-4DDE446DAF61": "ПЕР - 005",
+          "B5B78F40-3A3F-41AF-940D-65B6CA726EE0": "ПЕР - 007",
+          "DBB51012-1D52-4531-83FC-FCF4BE7627A0": "ПЕР - 006"
+        }
+      },
+      "notes": [],
+      "supported": true
+    },
+    "search_scan": {
+      "backend": "tapir",
+      "evidence": {
+        "address": "builtin:General_ElementID",
+        "method": "client-side scan of property values + startswith",
+        "negative_exact_hits": 0,
+        "negative_prefix_hits": 0,
+        "positive_exact_hits": 1,
+        "positive_prefix_hits": 7,
+        "probe_guid": "251D69EF-8BC1-4FAE-A483-D4B99AB5CE66",
+        "probe_value": "ОК - 004",
+        "scanned_elements": 16
+      },
+      "notes": [],
+      "supported": true
+    },
+    "stories_index_map": {
+      "backend": "tapir",
+      "evidence": {
+        "stories": [
+          {
+            "elevation": 0.0,
+            "index": 0,
+            "name": "Первый Этаж"
+          },
+          {
+            "elevation": 3.0,
+            "index": 1,
+            "name": "Второй этаж "
+          },
+          {
+            "elevation": 6.0,
+            "index": 2,
+            "name": "Третий этаж"
+          }
+        ]
+      },
+      "notes": [],
+      "supported": true
+    },
+    "tapir_addon_version": {
+      "backend": "tapir",
+      "evidence": {
+        "version": "1.5.9"
+      },
+      "notes": [],
+      "supported": true
+    },
+    "tapir_native_prefix_search": {
+      "backend": null,
+      "evidence": {},
+      "notes": [
+        "NOT FOUND: отдельной Tapir-команды поиска по префиксу user-defined property локально нет; поиск реализуется клиентским сканом"
+      ],
+      "supported": false
+    },
+    "tapir_read_commands": {
+      "backend": "tapir",
+      "evidence": {
+        "broken": [],
+        "commands": {
+          "tapir.GetAddOnVersion": {
+            "error": null,
+            "ok": true
+          },
+          "tapir.GetAllElements": {
+            "error": null,
+            "ok": true
+          },
+          "tapir.GetDetailsOfElements": {
+            "error": null,
+            "ok": true
+          },
+          "tapir.GetElementsByType": {
+            "error": null,
+            "ok": true
+          },
+          "tapir.GetProjectInfo": {
+            "error": null,
+            "ok": true
+          },
+          "tapir.GetPropertyValuesOfElements": {
+            "error": null,
+            "ok": true
+          },
+          "tapir.GetStories": {
+            "error": null,
+            "ok": true
+          }
+        }
+      },
+      "notes": [],
+      "supported": true
+    },
+    "wall_geometry_endpoints": {
+      "backend": "tapir",
+      "evidence": {
+        "guid": "A0159B37-5EA0-48BB-A8C4-4DDE446DAF61",
+        "missing": [
+          "thickness"
+        ],
+        "normalized": {
+          "angle": 0.0,
+          "element_id": "ПЕР - 005",
+          "floor_index": 0,
+          "has_floor_plan_polygons": true,
+          "height": 3.0,
+          "layer": null,
+          "layer_index": 33,
+          "length": 8.930121344,
+          "ref_line": {
+            "from": [
+              -82.103501371,
+              30.243410145
+            ],
+            "to": [
+              -73.173380027,
+              30.243410145
+            ]
+          },
+          "story": null,
+          "type": "Wall"
+        }
+      },
+      "notes": [
+        "нет полей: ['thickness']"
+      ],
+      "supported": true
+    }
+  },
+  "discovery": [
+    {
+      "_addon_version": "1.5.9",
+      "_backend": "tapir",
+      "archicad_build": "",
+      "archicad_version": "",
+      "instance_hint": "port=19723",
+      "is_teamwork": false,
+      "is_untitled": false,
+      "port": 19723,
+      "project_name": "MCP_TEST",
+      "project_path": "C:\\Users\\Admin\\Downloads\\MCP_TEST.pln"
+    },
+    {
+      "_error": "BackendError: ACConnection.connect() returned nothing",
+      "note": "порт не ответил; причина ниже",
+      "port": 19724
+    }
+  ],
+  "duplicate_detection": "SCAN_PREFIX",
+  "generated_at": "2026-09-26T20:44:42Z",
+  "marker_carriers_readable": [
+    "element_id"
+  ],
+  "operations": {
+    "create_wall": {
+      "blocked_by": [
+        "T0B_marker_roundtrip_not_run"
+      ],
+      "guard": "backends.py: _assert_not_forbidden() отклоняет любую команду из hard_blocked_commands до отправки в Archicad",
+      "hard_blocked_commands": [
+        "ChangeSelection",
+        "CreateColumns",
+        "CreateObjects",
+        "CreateSlabs",
+        "CreateWalls",
+        "CreateZones",
+        "DeleteElements",
+        "MoveElements",
+        "RotateElements",
+        "SetSelection"
+      ],
+      "implemented_here": false,
+      "note": "create_wall НЕ разрешён до T0B",
+      "production_safe": false
+    }
+  },
+  "probe": "T0A",
+  "raw_dumps": {
+    "GetDetailsOfElements_sample": {
+      "details": {
+        "arcAngle": 0,
+        "begCoordinate": {
+          "x": -82.103501371,
+          "y": 30.243410145
+        },
+        "begThickness": 0.3,
+        "bottomOffset": 0,
+        "compositeId": {
+          "guid": "29EE690D-089C-4573-94C8-DEC75CFA0950"
+        },
+        "cutFillBackgroundPen": {
+          "overridden": false
+        },
+        "cutFillPen": {
+          "overridden": false
+        },
+        "endCoordinate": {
+          "x": -73.173380027,
+          "y": 30.243410145
+        },
+        "endThickness": 0.3,
+        "flipped": true,
+        "geometryType": "Straight",
+        "height": 3,
+        "isAutoOnStoryVisibility": true,
+        "offset": 0,
+        "oppositeMaterial": {
+          "overridden": false
+        },
+        "profileType": "Normal",
+        "referenceLineLocation": "CoreOutside",
+        "referenceMaterial": {
+          "overridden": false
+        },
+        "relativeTopStory": 1,
+        "sideMaterial": {
+          "overridden": false
+        },
+        "slantAlpha": 1.570796327,
+        "slantBeta": 1.570796327,
+        "structureType": "Composite",
+        "topOffset": 0,
+        "visibility": {
+          "showAllAbove": false,
+          "showAllBelow": false,
+          "showOnHome": false,
+          "showRelAbove": 0,
+          "showRelBelow": 0
+        },
+        "zCoordinate": 0,
+        "zoneRel": "Boundary"
+      },
+      "drawIndex": 7,
+      "floorIndex": 0,
+      "floorPlanPolygons": [
+        {
+          "coordinates": [
+            {
+              "x": -82.153501371,
+              "y": 30.243410145
+            },
+            {
+              "x": -82.153501371,
+              "y": 30.193410145
+            },
+            {
+              "x": -82.103501371,
+              "y": 30.243410145
+            },
+            {
+              "x": -82.153501371,
+              "y": 30.243410145
+            }
+          ]
+        },
+        {
+          "coordinates": [
+            {
+              "x": -82.103501371,
+              "y": 30.493410145
+            },
+            {
+              "x": -82.103501371,
+              "y": 30.243410145
+            },
+            {
+              "x": -81.853501371,
+              "y": 30.493410145
+            },
+            {
+              "x": -82.103501371,
+              "y": 30.493410145
+            }
+          ]
+        },
+        {
+          "coordinates": [
+            {
+              "x": -73.123380027,
+              "y": 30.243410145
+            },
+            {
+              "x": -73.173380027,
+              "y": 30.243410145
+            },
+            {
+              "x": -73.123380027,
+              "y": 30.193410145
+            },
+            {
+              "x": -73.123380027,
+              "y": 30.243410145
+            }
+          ]
+        },
+        {
+          "coordinates": [
+            {
+              "x": -73.423380027,
+              "y": 30.493410145
+            },
+            {
+              "x": -73.173380027,
+              "y": 30.243410145
+            },
+            {
+              "x": -73.173380027,
+              "y": 30.493410145
+            },
+            {
+              "x": -73.423380027,
+              "y": 30.493410145
+            }
+          ]
+        },
+        {
+          "coordinates": [
+            {
+              "x": -82.153501371,
+              "y": 30.193410145
+            },
+            {
+              "x": -82.103501371,
+              "y": 30.193410145
+            },
+            {
+              "x": -82.103501371,
+              "y": 30.243410145
+            },
+            {
+              "x": -82.153501371,
+              "y": 30.193410145
+            }
+          ]
+        },
+        {
+          "coordinates": [
+            {
+              "x": -79.941037977,
+              "y": 30.243410139
+            },
+            {
+              "x": -82.103501371,
+              "y": 30.243410139
+            },
+            {
+              "x": -82.103501371,
+              "y": 30.193410145
+            },
+            {
+              "x": -79.941037977,
+              "y": 30.193410145
+            },
+            {
+              "x": -79.941037977,
+              "y": 30.243410139
+            }
+          ]
+        },
+        {
+          "coordinates": [
+            {
+              "x": -75.910093723,
+              "y": 30.243410139
+            },
+            {
+              "x": -79.041037986,
+              "y": 30.243410139
+            },
+            {
+              "x": -79.041037986,
+              "y": 30.193410145
+            },
+            {
+              "x": -75.910093723,
+              "y": 30.193410145
+            },
+            {
+              "x": -75.910093723,
+              "y": 30.243410139
+            }
+          ]
+        },
+        {
+          "coordinates": [
+            {
+              "x": -73.173380027,
+              "y": 30.243410138
+            },
+            {
+              "x": -75.01009372,
+              "y": 30.243410138
+            },
+            {
+              "x": -75.01009372,
+              "y": 30.193410145
+            },
+            {
+              "x": -73.173380027,
+              "y": 30.193410145
+            },
+            {
+              "x": -73.173380027,
+              "y": 30.243410138
+            }
+          ]
+        },
+        {
+          "coordinates": [
+            {
+              "x": -73.173380027,
+              "y": 30.193410145
+            },
+            {
+              "x": -73.123380027,
+              "y": 30.193410145
+            },
+            {
+              "x": -73.173380027,
+              "y": 30.243410145
+            },
+            {
+              "x": -73.173380027,
+              "y": 30.193410145
+            }
+          ]
+        },
+        {
+          "coordinates": [
+            {
+              "x": -81.853501371,
+              "y": 30.493410145
+            },
+            {
+              "x": -82.103501371,
+              "y": 30.243410145
+            },
+            {
+              "x": -81.853501371,
+              "y": 30.243410145
+            },
+            {
+              "x": -81.853501371,
+              "y": 30.493410145
+            }
+          ]
+        },
+        {
+          "coordinates": [
+            {
+              "x": -81.853501371,
+              "y": 30.243410144
+            },
+            {
+              "x": -79.941038006,
+              "y": 30.243410144
+            },
+            {
+              "x": -79.941038006,
+              "y": 30.493410139
+            },
+            {
+              "x": -81.853501371,
+              "y": 30.493410139
+            },
+            {
+              "x": -81.853501371,
+              "y": 30.243410144
+            }
+          ]
+        },
+        {
+          "coordinates": [
+            {
+              "x": -79.041037934,
+              "y": 30.493410139
+            },
+            {
+              "x": -79.041037934,
+              "y": 30.243410144
+            },
+            {
+              "x": -75.910093726,
+              "y": 30.243410144
+            },
+            {
+              "x": -75.910093726,
+              "y": 30.493410139
+            },
+            {
+              "x": -79.041037934,
+              "y": 30.493410139
+            }
+          ]
+        },
+        {
+          "coordinates": [
+            {
+              "x": -75.010093781,
+              "y": 30.493410127
+            },
+            {
+              "x": -75.010093781,
+              "y": 30.243410163
+            },
+            {
+              "x": -73.423380027,
+              "y": 30.243410163
+            },
+            {
+              "x": -73.423380027,
+              "y": 30.493410127
+            },
+            {
+              "x": -75.010093781,
+              "y": 30.493410127
+            }
+          ]
+        },
+        {
+          "coordinates": [
+            {
+              "x": -73.423380027,
+              "y": 30.243410145
+            },
+            {
+              "x": -73.173380027,
+              "y": 30.243410145
+            },
+            {
+              "x": -73.423380027,
+              "y": 30.493410145
+            },
+            {
+              "x": -73.423380027,
+              "y": 30.243410145
+            }
+          ]
+        }
+      ],
+      "id": "ПЕР - 005",
+      "layerIndex": 33,
+      "type": "Wall"
+    },
+    "GetStories": [
+      {
+        "elevation": 0.0,
+        "index": 0,
+        "name": "Первый Этаж"
+      },
+      {
+        "elevation": 3.0,
+        "index": 1,
+        "name": "Второй этаж "
+      },
+      {
+        "elevation": 6.0,
+        "index": 2,
+        "name": "Третий этаж"
+      }
+    ]
+  },
+  "t0b_candidates": [
+    {
+      "element_id": "ПЕР - 005",
+      "guid": "A0159B37-5EA0-48BB-A8C4-4DDE446DAF61",
+      "layer": null,
+      "story_index": 0,
+      "type": "Wall"
+    },
+    {
+      "element_id": "ПЕР - 006",
+      "guid": "DBB51012-1D52-4531-83FC-FCF4BE7627A0",
+      "layer": null,
+      "story_index": 0,
+      "type": "Wall"
+    },
+    {
+      "element_id": "ПЕР - 007",
+      "guid": "B5B78F40-3A3F-41AF-940D-65B6CA726EE0",
+      "layer": null,
+      "story_index": 0,
+      "type": "Wall"
+    },
+    {
+      "element_id": "ПЕР - 008",
+      "guid": "5C46A395-47E2-4D3F-AD18-65230412C46B",
+      "layer": null,
+      "story_index": 0,
+      "type": "Wall"
+    }
+  ],
+  "verdicts": {
+    "executed": true,
+    "next_step": "T0B",
+    "t0a_go": true
+  },
+  "version": "1.3"
+}

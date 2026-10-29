@@ -1,0 +1,14 @@
+{
+  "probe": "AUDIT_T5_PROCESS_KILL_HUMAN_DECISION",
+  "version": "1.0",
+  "source_classification": "APPLIED_ADOPTABLE_BY_ANCHOR",
+  "candidate_guid": "C4B0D1A3-0F13-4EDC-9324-B38D82199D86",
+  "human_decision": "ADOPT",
+  "audit_disposition": "ADOPT_ACCEPTED",
+  "runtime_resume_performed": false,
+  "automatic_retry_allowed": false,
+  "automatic_adopt_performed": false,
+  "model_mutation_performed_by_decision": false,
+  "artifact_policy": "keep existing T5 wall as the result of the single dispatched operation; no retry, duplicate create, delete, undo, move, or rotate",
+  "note": "Human explicitly selected ADOPT for the unique wall offered by the read-only T5 restart/reconcile. This records the audit decision only; no Archicad mutation, retry, or automatic runtime resume was performed."
+}
