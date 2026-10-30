@@ -1,0 +1,201 @@
+{
+  "python_cp_sat": "SAT",
+  "minizinc": "SAT",
+  "minizinc_python_witness_replay": "SAT",
+  "false_hall_split_python": "INFEASIBLE",
+  "false_hall_split_minizinc": "INFEASIBLE",
+  "false_boat_merge_python": "INFEASIBLE",
+  "false_boat_merge_minizinc": "INFEASIBLE",
+  "actual_nonparent_aabb_intersections": [],
+  "parent_aabb_containment": "PASS",
+  "hall_ellipse_control_and_bound_points": "PASS",
+  "partial_gallery_containment": "PASS",
+  "R05_symbolic_scale_check": {
+    "status": "SYMBOLIC_COMMON_SCALE_EXISTS_NOT_SELECTED",
+    "scale_interval_modules_per_scenario_unit": [
+      1.9775486391517754,
+      4.185681523783845
+    ],
+    "human_module_reference_m": 1.6,
+    "human_module_reference_source": "USER_ARCHITECTURAL_REFERENCE",
+    "checks": [
+      {
+        "object_id": "M-L1-AH-OLD-001",
+        "profile_id": "M-L1-AH-OLD-001",
+        "area_scenario_units2": 199.77248974451533,
+        "height_scenario_units": 16,
+        "height_comparison": "SCENARIO_HEIGHT",
+        "compatible_scale_interval_modules_per_unit": [
+          1.9775486391517754,
+          10.9375
+        ]
+      },
+      {
+        "object_id": "M-L1-AH-OLD-001",
+        "profile_id": "M-L1-CH-001",
+        "area_scenario_units2": 199.77248974451533,
+        "height_scenario_units": 16,
+        "height_comparison": "SCENARIO_HEIGHT",
+        "compatible_scale_interval_modules_per_unit": [
+          1.3236287175241195,
+          7.03125
+        ]
+      },
+      {
+        "object_id": "M-L1-FH-001",
+        "profile_id": "M-L1-FH-001",
+        "area_scenario_units2": 252,
+        "height_scenario_units": 14,
+        "height_comparison": "SCENARIO_HEIGHT",
+        "compatible_scale_interval_modules_per_unit": [
+          1.1785113019775793,
+          5.357142857142857
+        ]
+      },
+      {
+        "object_id": "M-L1-FH-002",
+        "profile_id": "M-L1-FH-002",
+        "area_scenario_units2": 252,
+        "height_scenario_units": 14,
+        "height_comparison": "SCENARIO_HEIGHT",
+        "compatible_scale_interval_modules_per_unit": [
+          1.1785113019775793,
+          5.357142857142857
+        ]
+      },
+      {
+        "object_id": "M-L2-PLAZA-001",
+        "profile_id": "M-L2-PLAZA-001",
+        "area_scenario_units2": 400,
+        "height_scenario_units": 10,
+        "height_comparison": "SCENARIO_HEIGHT",
+        "compatible_scale_interval_modules_per_unit": [
+          0.4472135954999579,
+          10.0
+        ]
+      },
+      {
+        "object_id": "MOAG-G-0008",
+        "profile_id": "MOAG-G-0008",
+        "area_scenario_units2": 100,
+        "height_scenario_units": 11,
+        "height_comparison": "SCENARIO_HEIGHT",
+        "compatible_scale_interval_modules_per_unit": [
+          0.22360679774997896,
+          5.916079783099616
+        ]
+      },
+      {
+        "object_id": "MOAG-G-0009",
+        "profile_id": "MOAG-G-0009",
+        "area_scenario_units2": 77.25576751838679,
+        "height_scenario_units": 9,
+        "height_comparison": "SCENARIO_HEIGHT",
+        "compatible_scale_interval_modules_per_unit": [
+          0.2544014289743268,
+          6.730829142455305
+        ]
+      },
+      {
+        "object_id": "MOAG-G-0010",
+        "profile_id": "MOAG-G-0010",
+        "area_scenario_units2": 64,
+        "height_scenario_units": 9,
+        "height_comparison": "SCENARIO_HEIGHT",
+        "compatible_scale_interval_modules_per_unit": [
+          0.2795084971874737,
+          7.39509972887452
+        ]
+      },
+      {
+        "object_id": "MOAG-G-0036",
+        "profile_id": "MOAG-G-0036",
+        "area_scenario_units2": 199.77248974451533,
+        "height_scenario_units": 12,
+        "height_comparison": "SCENARIO_HEIGHT",
+        "compatible_scale_interval_modules_per_unit": [
+          0.15820389113214203,
+          4.185681523783845
+        ]
+      },
+      {
+        "object_id": "MOAG-G-0057",
+        "profile_id": "MOAG-G-0057",
+        "area_scenario_units2": 120,
+        "height_scenario_units": 8,
+        "height_comparison": "SCENARIO_HEIGHT",
+        "compatible_scale_interval_modules_per_unit": [
+          0.2125,
+          5.400617248673217
+        ]
+      },
+      {
+        "object_id": "M-L1-AH-OLD-CTRL-001",
+        "profile_id": "M-L1-AH-OLD-CTRL-001",
+        "area_scenario_units2": 30,
+        "height_scenario_units": 4,
+        "height_comparison": "SCENARIO_HEIGHT",
+        "compatible_scale_interval_modules_per_unit": [
+          0.5163977794943222,
+          6.324555320336759
+        ]
+      },
+      {
+        "object_id": "M-L1-CH-GAL-001",
+        "profile_id": "M-L1-CH-GAL-001",
+        "area_scenario_units2": 20.289393489677337,
+        "height_scenario_units": 1,
+        "height_comparison": "NOT_COMPARABLE_VISUAL_SLAB_IS_NOT_CLEARANCE",
+        "compatible_scale_interval_modules_per_unit": [
+          0.5438023659390818,
+          44.40127724896684
+        ]
+      },
+      {
+        "object_id": "M-L1-FH-001-CTRL",
+        "profile_id": "M-L1-FH-001-CTRL",
+        "area_scenario_units2": 30,
+        "height_scenario_units": 3,
+        "height_comparison": "SCENARIO_HEIGHT",
+        "compatible_scale_interval_modules_per_unit": [
+          0.5666666666666667,
+          6.324555320336759
+        ]
+      },
+      {
+        "object_id": "M-L1-FH-002-CTRL",
+        "profile_id": "M-L1-FH-002-CTRL",
+        "area_scenario_units2": 30,
+        "height_scenario_units": 3,
+        "height_comparison": "SCENARIO_HEIGHT",
+        "compatible_scale_interval_modules_per_unit": [
+          0.5666666666666667,
+          6.324555320336759
+        ]
+      }
+    ],
+    "limits": "Per-object area and comparable height intervals only; gallery visual thickness is not clearance. No global area/volume accounting or real dimensions proven."
+  },
+  "APA_scene_graph_topological_order": [
+    "M-L1-AH-OLD-001",
+    "M-L1-FH-001",
+    "M-L1-FH-002",
+    "M-L2-PLAZA-001",
+    "MOAG-G-0008",
+    "MOAG-G-0009",
+    "MOAG-G-0010",
+    "MOAG-G-0036",
+    "MOAG-G-0057",
+    "M-L1-AH-OLD-CTRL-001",
+    "M-L1-CH-GAL-001",
+    "M-L1-FH-001-CTRL",
+    "M-L1-FH-002-CTRL"
+  ],
+  "APA_independent_sample": {
+    "status": "SCENE_PREVIEW_OFFLINE",
+    "operations": 12,
+    "applies_to_moag": "NO"
+  },
+  "R22_fingerprint": "9b0cce9f97ff8cb4e100f0ffae77efb96186ab07530f7e204dfc025815a9ce45",
+  "warning": "No physical coordinates proven. Disjointness assumptions apply only to this particular scenario; unsupported indexed rooms remain unplaced."
+}
