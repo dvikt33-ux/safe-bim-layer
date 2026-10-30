@@ -3,3 +3,8 @@
 # Generated JS has native trailing spaces; preserve its provenance bytes.
 schemas/tapir-live-1.5.10/*.js -text -whitespace
 docs/research/** -text
+
+# VIS-01 release hashes bind exact artifact and generator bytes.
+outputs/moag-vis-01/** -text
+tools/moag_vis/generate_vis01.py -text
+outputs/moag-vis-01/generated/station.html -whitespace

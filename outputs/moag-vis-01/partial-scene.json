@@ -1,0 +1,3019 @@
+{
+  "status": "PARTIAL_SCENARIO_NOT_A_STATION_RECONSTRUCTION",
+  "base_r22": "b6b333d62cd9a4de6afcd8262d5882bf668086f8",
+  "solver": "OR-Tools CP-SAT SAT, R22 model; geometry after quotient has not been validated",
+  "units": "arbitrary, not metres",
+  "volumes": [
+    {
+      "id": "MOAG-G-0008",
+      "name": "Темная база",
+      "level": 1,
+      "origin": [
+        1,
+        0,
+        9
+      ],
+      "size": [
+        10,
+        10,
+        11
+      ],
+      "parent": null,
+      "status": "SCENARIO_ARBITRARY_UNITS_NOT_METRES",
+      "sources": [
+        {
+          "id": "B1-10",
+          "section": "Книга I, ч. II, гл. 1 «Таис. Дикие»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=10"
+        },
+        {
+          "id": "B1-13",
+          "section": "Книга I, ч. II, гл. 4 «Эмма. Фрик»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=13"
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "id": "MOAG-G-0009",
+      "name": "Овальная база",
+      "level": 1,
+      "origin": [
+        1,
+        36,
+        0
+      ],
+      "size": [
+        11,
+        9,
+        9
+      ],
+      "parent": null,
+      "status": "SCENARIO_ARBITRARY_UNITS_NOT_METRES",
+      "sources": [
+        {
+          "id": "B1-06",
+          "section": "Книга I, ч. I, гл. 5 «Таис. Дорога на Третий уровень»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=6"
+        },
+        {
+          "id": "B1-10",
+          "section": "Книга I, ч. II, гл. 1 «Таис. Дикие»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=10"
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "id": "MOAG-G-0010",
+      "name": "База диких",
+      "level": 1,
+      "origin": [
+        12,
+        0,
+        0
+      ],
+      "size": [
+        8,
+        8,
+        9
+      ],
+      "parent": null,
+      "status": "SCENARIO_ARBITRARY_UNITS_NOT_METRES",
+      "sources": [
+        {
+          "id": "B1-10",
+          "section": "Книга I, ч. II, гл. 1 «Таис. Дикие»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=10"
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "id": "M-L1-FH-001",
+      "name": "Первый нижний ангар двух малых катеров",
+      "level": 1,
+      "origin": [
+        0,
+        14,
+        0
+      ],
+      "size": [
+        18,
+        14,
+        14
+      ],
+      "parent": null,
+      "status": "SCENARIO_ARBITRARY_UNITS_NOT_METRES",
+      "sources": [
+        {
+          "id": "P-364",
+          "page_id": "B2-014",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=14",
+          "paraphrase": "В первом открытом ангаре стоят два малых одноместных катера перед выходом к шлюзу; у каждого кабина пилота с люком."
+        },
+        {
+          "id": "P-365",
+          "page_id": "B2-014",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=14",
+          "paraphrase": "В первом ангаре операторские кабины расположены в верхней зоне объёма, доступ по шаткой металлической лестнице."
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "id": "M-L1-FH-002",
+      "name": "Соседний нижний ангар трёх катеров",
+      "level": 1,
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "size": [
+        18,
+        14,
+        14
+      ],
+      "parent": null,
+      "status": "SCENARIO_ARBITRARY_UNITS_NOT_METRES",
+      "sources": [
+        {
+          "id": "P-368",
+          "page_id": "B2-015",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=15",
+          "paraphrase": "В соседнем ангаре находятся три катера и повреждённое оборудование; освещение отключено. Степень пригодности каждого катера не установлена."
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "id": "M-L1-AH-OLD-001",
+      "name": "Высокий старый ангар из эпизода B1-110",
+      "level": 1,
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "size": [
+        20,
+        16,
+        16
+      ],
+      "parent": null,
+      "status": "SCENARIO_ARBITRARY_UNITS_NOT_METRES",
+      "sources": [
+        {
+          "id": "P-313",
+          "page_id": "B1-110",
+          "url": "https://loveread.ec/read_book.php?id=48197&p=110",
+          "paraphrase": "В высоком старом нижнем ангаре сбоку подвешена лестница, ведущая в поднятую диспетчерскую с рабочим светом, водой, кушеткой и креслом, но без тепла."
+        }
+      ],
+      "aliases": [
+        "M-L1-CH-001"
+      ]
+    },
+    {
+      "id": "M-L1-FH-001-CTRL",
+      "name": "Высокая операторская первого ангара катеров",
+      "level": 1,
+      "origin": [
+        0,
+        14,
+        1
+      ],
+      "size": [
+        6,
+        5,
+        3
+      ],
+      "parent": "M-L1-FH-001",
+      "status": "SCENARIO_ARBITRARY_UNITS_NOT_METRES",
+      "sources": [
+        {
+          "id": "P-365",
+          "page_id": "B2-014",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=14",
+          "paraphrase": "В первом ангаре операторские кабины расположены в верхней зоне объёма, доступ по шаткой металлической лестнице."
+        },
+        {
+          "id": "P-367",
+          "page_id": "B2-015",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=15",
+          "paraphrase": "Операторская первого ангара непосредственно соединена с операторской соседнего, подтверждено физическим прохождением одного из близнецов."
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "id": "M-L1-FH-002-CTRL",
+      "name": "Операторская соседнего ангара",
+      "level": 1,
+      "origin": [
+        0,
+        0,
+        1
+      ],
+      "size": [
+        6,
+        5,
+        3
+      ],
+      "parent": "M-L1-FH-002",
+      "status": "SCENARIO_ARBITRARY_UNITS_NOT_METRES",
+      "sources": [
+        {
+          "id": "P-367",
+          "page_id": "B2-015",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=15",
+          "paraphrase": "Операторская первого ангара непосредственно соединена с операторской соседнего, подтверждено физическим прохождением одного из близнецов."
+        },
+        {
+          "id": "P-369",
+          "page_id": "B2-015",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=15",
+          "paraphrase": "В соседнем ангаре есть лестничный подход к высокой операторской зоне, но геометрическая отметка не указана."
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "id": "M-L1-AH-OLD-CTRL-001",
+      "name": "Верхняя диспетчерская старого ангара B1-110",
+      "level": 1,
+      "origin": [
+        0,
+        0,
+        1
+      ],
+      "size": [
+        6,
+        5,
+        4
+      ],
+      "parent": "M-L1-AH-OLD-001",
+      "status": "SCENARIO_ARBITRARY_UNITS_NOT_METRES",
+      "sources": [
+        {
+          "id": "P-313",
+          "page_id": "B1-110",
+          "url": "https://loveread.ec/read_book.php?id=48197&p=110",
+          "paraphrase": "В высоком старом нижнем ангаре сбоку подвешена лестница, ведущая в поднятую диспетчерскую с рабочим светом, водой, кушеткой и креслом, но без тепла."
+        },
+        {
+          "id": "P-316",
+          "page_id": "B1-113",
+          "url": "https://loveread.ec/read_book.php?id=48197&p=113",
+          "paraphrase": "В верхней старой диспетчерской закрытого Нижнего часть облицовки стены сдвигается, открывая обзорное остекление примерно на половину стены и действительный вид на Землю; точный размер и ориентация неизвестны."
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "id": "M-L2-PLAZA-001",
+      "name": "Главная площадь",
+      "level": 2,
+      "origin": [
+        8,
+        8,
+        36
+      ],
+      "size": [
+        20,
+        20,
+        10
+      ],
+      "parent": null,
+      "status": "SCENARIO_ARBITRARY_UNITS_NOT_METRES",
+      "sources": [
+        {
+          "id": "P-484",
+          "page_id": "B2-066",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=66",
+          "paraphrase": "Каютный корпус Второго описан как двухэтажный и круглый; его галерея обходит Главную площадь и парк. Это подтверждает локальную двухэтажную структуру на Втором, не дополнительный глобальный уровень и не полную форму станции."
+        },
+        {
+          "id": "P-486",
+          "page_id": "B2-066",
+          "url": "https://loveread.ec/read_book.php?id=53370&p=66",
+          "paraphrase": "Эмма кричит с галереи в сторону Главной площади, а Коля спускается по лестнице и примерно через полминуты оказывается у девочек на площади. Подтверждён вертикальный переход галерея → площадь без высоты или длины лестницы."
+        }
+      ],
+      "aliases": []
+    },
+    {
+      "id": "MOAG-G-0036",
+      "name": "Круглый зал отдыха",
+      "level": 3,
+      "origin": [
+        16,
+        16,
+        62
+      ],
+      "size": [
+        16,
+        16,
+        12
+      ],
+      "parent": null,
+      "status": "SCENARIO_ARBITRARY_UNITS_NOT_METRES",
+      "sources": [
+        {
+          "id": "B1-15",
+          "section": "Книга I, ч. II, гл. 6 «Эмма. Я не хочу умирать»",
+          "url": "https://knigalit.ru/avtori/varvara-enal/book2364884/chitat/?page=15"
+        }
+      ],
+      "aliases": []
+    }
+  ],
+  "unrepresented_indices": [
+    {
+      "id": "MOAG-G-0001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "level",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-06",
+        "B2-01"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0002",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "level",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "B1-03",
+        "B1-04"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0003",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "level",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "B1-06",
+        "B1-15"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0004",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-06"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0005",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-06"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0006",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "zone",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-06",
+        "B2-01"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0007",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "zone",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B2-14"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0011",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-13"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0012",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-10",
+        "B1-13"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0013",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-02"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0014",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-06",
+        "B1-14"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0015",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "vertical_route",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-06"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0016",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "utility",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-02",
+        "B1-06"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0017",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B2-14"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0018",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B2-14"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0019",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B2-14"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0020",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "utility",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B2-14"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0021",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "zone",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-06",
+        "B2-01"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0022",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "B1-04"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0023",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "B1-04"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0024",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "B1-03",
+        "B1-04"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0025",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "B1-03"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0026",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "B1-03"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0027",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "B1-04"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0028",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "B1-04"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0029",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "B1-04"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0030",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "B1-03"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0031",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "B1-06",
+        "B1-15"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0032",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "B1-06"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0033",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "B1-06"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0034",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "B1-06",
+        "B1-15"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0035",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "B1-15"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0037",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "B1-14"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0038",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "zone",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "B1-14"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0039",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "zone",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "B1-06",
+        "B1-14"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0040",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "B1-14"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0041",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "utility",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "B2-01",
+        "LR-B2-034",
+        "LR-B2-035"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0042",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B2-15"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0043",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B2-15"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0044",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B2-15"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0045",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "vertical_route",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "B2-13"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0046",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "B2-13"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0047",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "B2-13"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0048",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "portal",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "B2-13"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0049",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "vertical_route",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "B1-04"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0050",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "B1-04"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0051",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "portal",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "B1-04"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0052",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "portal",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "B1-04"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0053",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-19"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0054",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-17",
+        "B1-19"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0055",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-17"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0056",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "vertical_route",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-17"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0057",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-17"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0058",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-17"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0059",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "vertical_route",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-17"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0060",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-17"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0061",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-17"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0062",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "spatial_constraint",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "B1-17"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0063",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0064",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0065",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-022"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0066",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "vertical_route",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "LR-B1-023"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0067",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "portal",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "LR-B1-023"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0068",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "LR-B1-024"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0069",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "zone",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "LR-B1-025"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0070",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "LR-B1-025"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0071",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "LR-B1-026"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0072",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "LR-B1-026"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0073",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "historical_zone",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "LR-B1-028"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0074",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "LR-B1-028"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0075",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "LR-B1-028"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0076",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "utility",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "LR-B1-029"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0077",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "vertical_route",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-032"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0078",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-032"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0079",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "LR-B1-049"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0080",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "LR-B1-044"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0081",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "utility",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "LR-B1-045"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0082",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "vertical_route",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "LR-B1-047"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0083",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "portal",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "LR-B1-045"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0084",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "zone",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0085",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0086",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "LR-B1-056"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0087",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "furniture",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "LR-B1-052"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0088",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "furniture",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "LR-B1-052"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0089",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "portal",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "LR-B1-055"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0090",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "portal",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "LR-B1-055"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0091",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "LR-B1-055"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0092",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "portal",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-060"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0093",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "portal",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-060"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0094",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-059"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0095",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0096",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "vertical_route",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0097",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-61"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0098",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "utility",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-63"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0099",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "portal",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "LR-B1-64"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0100",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "circulation",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "LR-B1-65"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0101",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "interior_attribute",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "LR-B1-65"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0102",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0103",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0104",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-067"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0105",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-068"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0106",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "system",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-070"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0107",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "equipment",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-069"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0108",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B1-070"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0109",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "opening",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "LR-B2-021"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0110",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "corridor",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B2-027"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0111",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "corridor",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0112",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "opening",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0113",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "vertical_void",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0114",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "local_gallery",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0115",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "logical_access",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B2-034"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0116",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "vertical_access",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B2-040"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "MOAG-G-0117",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "medical_room",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "LR-B2-042"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-STA-L1-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "global_block",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-592",
+        "P-096"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-STA-L2-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "global_block",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-484",
+        "P-467",
+        "P-096"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-STA-L3-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "global_block",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "P-096",
+        "P-200"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-STA-CORE-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "vertical_industrial_volume",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "P-418",
+        "P-421"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L1-CG-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "complex",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-240",
+        "P-243"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L1-CG-CTRL-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-240"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L1-AH-OLD-ST-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "stair",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-313"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L1-CH-GAL-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "internal_gallery",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-220"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L1-CH-ST-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "stair",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-220"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L1-CH-CTRL-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "control_room",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-221"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L1-FH-001-ST",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "stair",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-365",
+        "P-376"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L1-FH-002-ST",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "stair",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-369"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L1-FH-LOCK-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "airlock_chamber",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-384"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L1-WASTE-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "production_hall",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-107",
+        "P-108"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L1-WASTE-FURNACE-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "industrial_equipment",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-108"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L1-LOG-COR-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "cargo_corridor",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-169"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-RES-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "building_zone",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-193",
+        "P-484"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-RES-GAL-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "internal_gallery",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-484",
+        "P-486"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-PLAZA-ST-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "stair",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-486"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-ORANGE-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "major_corridor",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-467",
+        "P-504"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L3-CG-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "complex",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "P-243",
+        "P-200"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L3-LOG-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "cargo_corridor",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "P-200"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L3-LIFT-LOG-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "vertical_transport_group",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "P-200"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "V-BOAT-L1-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "small_combat_craft",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-364"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "V-STAR-OBS-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "starship",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "P-611"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "V-SPHERE-OBS-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "spherical_craft",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "P-621"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "V-CARGO-CRUISER-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "cargo_cruiser_class",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-240"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "V-DRAGON-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "cruiser",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "P-664"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "V-IMINUYA-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "cruiser",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [],
+      "source_location_needs_review": true,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-DINING-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "room",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-478"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-LIB-OVAL-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "library",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-488"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-LIB-NOWINDOW-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "library",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-520"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-LIB-MEETING-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "library",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-535",
+        "P-537",
+        "P-545"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-LIB-GLASS-DOOR-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "door",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-535"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-CONFERENCE-002",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "room",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-494"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-OVAL-STORE-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "room",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-494",
+        "P-495"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-OVAL-STORE-ROOM-002",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "room",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-495"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-TUNNEL-002",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "tunnel",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-504"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-TUNNEL-008",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "tunnel",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-538",
+        "P-540"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-FOOD-STORES-OUT-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-506"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-WATER-RESERVOIR-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "technical",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-509"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-EMMA-SUITE-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "suite",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "P-507",
+        "P-511"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-EMMA-KITCHEN-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "room",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "P-507",
+        "P-511"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-EMMA-LIVING-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "room",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "P-507",
+        "P-511"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-EMMA-BEDROOMS-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "P-511"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-EMMA-BATH-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "room",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "P-511"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-FREE-SUITE-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "suite",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "P-533"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-FREE-BED-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "room",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "P-533"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-FREE-BATH-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "room",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "P-533"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-PLAY-OUT-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-505"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-DEADEND-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "corridor",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-633"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-GRILLE-STAIR-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "stair",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-633",
+        "P-634"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L2-GRILLE-DOOR-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "door",
+      "possible_global_levels": [
+        2
+      ],
+      "source_ids": [
+        "P-633",
+        "P-634"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L3-ARMORY-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "room",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "P-498"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L3-BRIDGE-GLASS-DOOR-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "door",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "P-499",
+        "P-643"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L3-PRODUCTION-ROUND-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "industrial_hall",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "P-646",
+        "P-647"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L3-PRODUCTION-RADIAL-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "P-646",
+        "P-648"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L3-PRODUCTION-VESSEL-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "equipment",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "P-647"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L3-PRODUCTION-HUMANOID-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "P-649"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L3-CABLE-HATCH-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "hatch",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "P-671"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": false
+    },
+    {
+      "id": "M-L3-CABLE-HATCH-002",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "hatch",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "P-671"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": false
+    },
+    {
+      "id": "M-L3-COMMS-HATCHES-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "hatch_group",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "P-674"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": false
+    },
+    {
+      "id": "M-L1-SEMICIRC-CORRIDOR-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "corridor",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-656",
+        "P-657"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L1-SEMICIRC-STORES-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-657",
+        "P-658"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L1-STARSHIP-HANGAR-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "hangar",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-611",
+        "P-612",
+        "P-614"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L1-STARSHIP-LOCK-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "airlock",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-612",
+        "P-613",
+        "P-621",
+        "P-622"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L1-STARSHIP-INNER-DOOR-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "door",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-612"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L1-STARSHIP-OUTER-GATE-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "gate",
+      "possible_global_levels": [
+        1
+      ],
+      "source_ids": [
+        "P-613"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L3-OLD-ISOLATION-ROOM-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "room",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "P-571",
+        "P-572"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-L3-SMALL-STORES-ARC-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "space_group",
+      "possible_global_levels": [
+        3
+      ],
+      "source_ids": [
+        "P-570"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-STA-CABLE-CRAWL-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "technical_route",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "P-559",
+        "P-560",
+        "P-561",
+        "P-562"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    },
+    {
+      "id": "M-STA-CABLE-HATCH-001",
+      "layer": "PHYSICAL_INDEX",
+      "kind": "hatch",
+      "possible_global_levels": [
+        1,
+        2,
+        3
+      ],
+      "source_ids": [
+        "P-559"
+      ],
+      "source_location_needs_review": false,
+      "coordinates_known": false,
+      "moag_station_identity_verified": true
+    }
+  ],
+  "warning": "R13 witness used two separate boxes for one hall. One has been suppressed; this projection is not a proven feasible unified 3D model."
+}

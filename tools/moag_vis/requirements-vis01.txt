@@ -1,0 +1,6 @@
+-r ../moag_topology/requirements-r11.txt
+jsonschema==4.26.0
+matplotlib==3.11.2
+trimesh==5.2.0
+plotly==7.1.0
+pillow==13.0.0
