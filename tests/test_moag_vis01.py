@@ -1,15 +1,18 @@
 """Offline acceptance for delivered VIS-01 scene, preserving source semantics."""
-import json,struct,unittest,sys,hashlib
-import numpy as np
-import trimesh
+import json,struct,unittest,sys,hashlib,importlib.util
 from collections import Counter
 from pathlib import Path
-from PIL import Image
+VIS_DEPS=all(importlib.util.find_spec(name) for name in ("numpy","trimesh","PIL"))
+if VIS_DEPS:
+ import numpy as np
+ import trimesh
+ from PIL import Image
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'outputs/moag-vis-01/generated'
 sys.path.insert(0,str(ROOT/'tools/moag_topology'))
 import solver_r11 as r11
 import physical_connectivity_r22 as r22
+@unittest.skipUnless(VIS_DEPS,"VIS-01 geometric dependencies not installed in offline topology job")
 class VIS01(unittest.TestCase):
  @classmethod
  def setUpClass(cls):
