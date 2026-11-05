@@ -1,0 +1,24 @@
+name: BDD House Native Builder Offline Check
+on:
+  pull_request:
+    paths:
+      - "scripts/apa_bdd_house_native_builder.py"
+      - "tests/test_bdd_house_builder.py"
+      - ".github/workflows/bdd-native-build-check.yml"
+  workflow_dispatch:
+
+jobs:
+  source-geometry-and-syntax:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile only (never connect or build)
+        run: python -m py_compile scripts/apa_bdd_house_native_builder.py
+      - name: Verify dimensional chains, pile layout, geometry plan
+        run: python -m unittest discover -s tests -p test_bdd_house_builder.py -v
