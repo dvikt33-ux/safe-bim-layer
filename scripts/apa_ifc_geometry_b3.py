@@ -129,8 +129,9 @@ def call(action, params, python):
     V2.require(action in FILES, "B3_UNKNOWN_ACTION")
     source, out = B2.inputs("extract", params)
     before, adapter = V2.digest(source), V2.digest(__file__)
-    process = subprocess.run([str(python), "-B", str(Path(__file__).resolve()), action,
-                              "--parameters", json.dumps(params)], capture_output=True, text=True, timeout=1200)
+    process = subprocess.run([str(python), "-X", "utf8", "-B", str(Path(__file__).resolve()), action,
+                              "--parameters", json.dumps(params)], capture_output=True,
+                             encoding="utf-8", errors="replace", timeout=1200)
     V2.require(process.returncode == 0, "B3_VENDOR_FAILED:" + process.stderr[-1200:])
     report = out / "report.json"
     V2.require(report.is_file() and report.stat().st_size < 200 * 1024**2, "B3_REPORT_INVALID")
@@ -144,15 +145,19 @@ def call(action, params, python):
     return data
 
 
-def register(router, python):
-    python = Path(python).resolve(strict=True)
+def register(router, python=None, *, runner=None):
+    if runner is None:
+        python = Path(python).resolve(strict=True)
+
+        def runner(action, parameters):
+            return call(action, parameters, python)
     contracts, handlers = {}, {}
     for name, action in COMMANDS.items():
         props = B2.fields("extract")
         contracts[name] = {"name": name, "version": "1", "category": "APA_IFC_GEOMETRY",
             "parameters": {"type": "object", "properties": props, "required": list(props), "additionalProperties": False},
             "returns": {"type": "object", "required": ["schema", "source", "artifact", "processedElements", "nativeCalls", "modelWrites"]}}
-        handlers[name] = (lambda act: lambda **kw: call(act, kw, python))(action)
+        handlers[name] = (lambda act: lambda **kw: runner(act, kw))(action)
     router.add_local_provider(NAMESPACE, contracts, handlers, SCHEMA, {name: [] for name in COMMANDS})
     for name in COMMANDS:
         key = "AddOn." + NAMESPACE + "." + name

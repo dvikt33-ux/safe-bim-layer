@@ -124,15 +124,17 @@ def call(action, params):
     return data
 
 
-def register(router):
-    V2.verified_python()
+def register(router, *, runner=None):
+    if runner is None:
+        V2.verified_python()
+        runner = call
     contracts, handlers = {}, {}
     for name, action in COMMANDS.items():
         contracts[name] = {"name": name, "version": "1", "category": "APA_DXF_SOURCE_GEOMETRY",
             "parameters": {"type": "object", "properties": {k: {"type": "string", "minLength": 1} for k in ("a", "output")},
                            "required": ["a", "output"], "additionalProperties": False},
             "returns": {"type": "object", "required": ["schema", "source", "result", "sourceUnchanged", "nativeCalls", "modelWrites"]}}
-        handlers[name] = (lambda act: lambda **kw: call(act, kw))(action)
+        handlers[name] = (lambda act: lambda **kw: runner(act, kw))(action)
     router.add_local_provider(NAMESPACE, contracts, handlers, SCHEMA, {name: [] for name in COMMANDS})
     for name in COMMANDS:
         key = "AddOn." + NAMESPACE + "." + name

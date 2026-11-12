@@ -525,15 +525,19 @@ def original_plan_native(state, manifest, planned):
     return native
 
 
-def main():
+def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("phase", choices=("stage", "plan", "execute", "check-closed", "verify-reopen"))
+    p.add_argument("phase", choices=("stage", "plan", "execute", "reconcile", "save-reconciled",
+                                     "check-closed", "verify-reopen"))
     p.add_argument("--state", required=True)
     p.add_argument("--source"); p.add_argument("--scratch"); p.add_argument("--baseline-trace")
     p.add_argument("--safe01-state"); p.add_argument("--source-group"); p.add_argument("--placements-json")
     p.add_argument("--adopt-prior174-stage")
     p.add_argument("--port", type=int, default=19727)
-    args = p.parse_args()
+    p.add_argument("--reopen-port", type=int, help="Explicit port for an independently reopened saved copy")
+    args = p.parse_args(argv)
+    if args.reopen_port is not None and args.phase != "verify-reopen":
+        p.error("--reopen-port requires verify-reopen")
     if args.phase == "stage":
         need(all((args.source,args.scratch,args.baseline_trace,args.safe01_state,args.source_group,args.placements_json)),
              "GROUP_BATCH_STAGE_EXPLICIT_INPUTS_REQUIRED")
@@ -543,7 +547,11 @@ def main():
     else:
         need(not any((args.source,args.scratch,args.baseline_trace,args.safe01_state,args.source_group,args.placements_json,args.adopt_prior174_stage)),
              "GROUP_BATCH_REUSE_ONLY_PINNED_MANIFEST")
-        out = {"plan":plan,"execute":execute,"check-closed":check_closed,"verify-reopen":verify_reopen}[args.phase](args.state)
+        if args.phase == "verify-reopen":
+            out = verify_reopen(args.state, reopen_port=args.reopen_port)
+        else:
+            out = {"plan": plan, "execute": execute, "reconcile": reconcile_completed_clone,
+                   "save-reconciled": save_reconciled_clone, "check-closed": check_closed}[args.phase](args.state)
     print(json.dumps(out,ensure_ascii=False,indent=2))
 
 

@@ -267,6 +267,41 @@ def raster2seq_infer(source, config):
             "engineeringAcceptance": "NOT_VERIFIED"}
 
 
+def execute(action, params, *, ml_config=None):
+    src = Path(params["a"]).resolve(strict=True)
+    dest = Path(params["output"]).resolve()
+    installed = Path(r"C:\LocalAI\APA_AC29_Stable").resolve()
+    require(dest.suffix.lower() == ".json" and dest.parent.is_dir()
+            and not dest.exists() and dest != src and installed not in dest.parents,
+            "SEMANTIC_OUTPUT_MUST_BE_NEW_JSON_OUTSIDE_INSTALLED_APA")
+    require(src.is_file() and src.suffix.lower() in KINDS[action],
+            "SEMANTIC_INPUT_SUFFIX_INVALID")
+    require(src.stat().st_size <= 1024**3, "SEMANTIC_SOURCE_OVER_1GB")
+    before = digest(src)
+    if action == "pdf-paths":
+        result = pdf_paths(src, params["page"])
+    elif action == "pdf-raster":
+        result = pdf_raster(src, params["page"], dest)
+    elif action == "openbim":
+        result = openbim_infer(src, ml_config, dest)
+    else:
+        result = raster2seq_infer(src, ml_config)
+    require(digest(src) == before, "SEMANTIC_SOURCE_CHANGED_DURING_EXECUTION")
+    envelope = {
+        "schema": SCHEMA,
+        "status": "SOURCE_ONLY_NOT_BIM_ACCEPTANCE",
+        "action": action,
+        "sources": [{"name": src.name, "sha256": before}],
+        "result": result,
+        "nativeCalls": 0, "modelWrites": 0,
+        "sourceNotModified": True,
+    }
+    with dest.open("x", encoding="utf-8") as fd:
+        json.dump(envelope, fd, ensure_ascii=False, allow_nan=False)
+        fd.write("\n")
+    return envelope
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("action", choices=[*sorted(OPERATIONS), "_vendor_openbim"])
@@ -277,40 +312,18 @@ def main(argv=None):
     p.add_argument("--vendor-root")
     p.add_argument("--model")
     args = p.parse_args(argv)
+    if args.action != "_vendor_openbim":
+        execute(args.action, vars(args), ml_config=args.ml_config)
+        print("APA_SEMANTIC_REPORT_CREATED:" + str(Path(args.output).resolve()))
+        return
     src = Path(args.a).resolve(strict=True)
     dest = Path(args.output).resolve()
     require(src.is_file() and dest.suffix.lower() == ".json"
             and dest.parent.is_dir() and not dest.exists()
             and dest != src, "SEMANTIC_INPUT_OR_NEW_OUTPUT_INVALID")
-    if args.action == "_vendor_openbim":
-        require(src.suffix.lower() in {".png", ".jpg", ".jpeg"},
-                "VENDOR_IMAGE_SUFFIX_INVALID")
-        _vendor_openbim(src, Path(args.vendor_root), Path(args.model), dest)
-        return
-    require(src.suffix.lower() in KINDS[args.action],
-            "SEMANTIC_INPUT_SUFFIX_INVALID")
-    require(src.stat().st_size <= 1024**3, "SEMANTIC_SOURCE_OVER_1GB")
-    if args.action == "pdf-paths":
-        result = pdf_paths(src, args.page)
-    elif args.action == "pdf-raster":
-        result = pdf_raster(src, args.page, dest)
-    elif args.action == "openbim":
-        result = openbim_infer(src, args.ml_config, dest)
-    else:
-        result = raster2seq_infer(src, args.ml_config)
-    envelope = {
-        "schema": SCHEMA,
-        "status": "SOURCE_ONLY_NOT_BIM_ACCEPTANCE",
-        "action": args.action,
-        "sources": [{"name": src.name, "sha256": digest(src)}],
-        "result": result,
-        "nativeCalls": 0, "modelWrites": 0,
-        "sourceNotModified": True,
-    }
-    with dest.open("x", encoding="utf-8") as fd:
-        json.dump(envelope, fd, ensure_ascii=False, allow_nan=False)
-        fd.write("\n")
-    print("APA_SEMANTIC_REPORT_CREATED:" + str(dest))
+    require(src.suffix.lower() in {".png", ".jpg", ".jpeg"},
+            "VENDOR_IMAGE_SUFFIX_INVALID")
+    _vendor_openbim(src, Path(args.vendor_root), Path(args.model), dest)
 
 
 if __name__ == "__main__":

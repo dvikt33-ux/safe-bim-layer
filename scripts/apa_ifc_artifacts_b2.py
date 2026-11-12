@@ -147,6 +147,7 @@ def execute(action, params):
     receipt = {"schema": SCHEMA, "action": action, "vendors": versions,
                "source": {"name": source.name, "sha256": before}, "sourceUnchanged": True,
                "adapterSha256": V2.digest(__file__), "artifact": metadata, "result": result,
+               "artifactPath": str(artifact),
                "nativeCalls": 0, "modelWrites": 0, "copyOnly": True}
     with (out / "report.json").open("x", encoding="utf-8") as stream:
         json.dump(receipt, stream, indent=2, ensure_ascii=False, allow_nan=False)
@@ -156,9 +157,9 @@ def execute(action, params):
 def call(action, params, python):
     source, out = inputs(action, params)
     before, adapter = V2.digest(source), V2.digest(__file__)
-    completed = subprocess.run([str(python), "-B", str(Path(__file__).resolve()), action,
+    completed = subprocess.run([str(python), "-X", "utf8", "-B", str(Path(__file__).resolve()), action,
                                 "--parameters", json.dumps(params)], capture_output=True,
-                               text=True, timeout=1200)
+                               encoding="utf-8", errors="replace", timeout=1200)
     V2.require(completed.returncode == 0, "B2_VENDOR_FAILED:" + completed.stderr[-1200:])
     report = out / "report.json"
     V2.require(report.is_file() and report.stat().st_size < 200 * 1024**2, "B2_REPORT_INVALID")
@@ -172,16 +173,21 @@ def call(action, params, python):
     return data
 
 
-def register(router, python):
+def register(router, python=None, *, runner=None):
     """python is trusted deployment configuration, not a routed user parameter."""
-    python = Path(python).resolve(strict=True)
+    if runner is None:
+        python = Path(python).resolve(strict=True)
+
+        def runner(action, parameters):
+            return call(action, parameters, python)
     contracts, handlers = {}, {}
     for name, action in COMMANDS.items():
         props = fields(action)
         contracts[name] = {"name": name, "version": "1", "category": "APA_IFC_ARTIFACTS",
             "parameters": {"type": "object", "properties": props, "required": list(props), "additionalProperties": False},
-            "returns": {"type": "object", "required": ["schema", "artifact", "source", "copyOnly", "nativeCalls", "modelWrites"]}}
-        handlers[name] = (lambda a: lambda **kw: call(a, kw, python))(action)
+            "returns": {"type": "object", "required": ["schema", "artifact", "source", "copyOnly", "nativeCalls", "modelWrites"],
+                        "properties": {"artifactPath": {"type": "string", "minLength": 1}}}}
+        handlers[name] = (lambda a: lambda **kw: runner(a, kw))(action)
     router.add_local_provider(NAMESPACE, contracts, handlers, SCHEMA, {x: [] for x in COMMANDS})
     for name in COMMANDS:
         key = "AddOn." + NAMESPACE + "." + name

@@ -73,10 +73,15 @@ def run(action, params):
     return report
 
 
-def register(router):
-    installed()
+def register(router, *, runner=None, names=None):
+    if runner is None:
+        installed()
+
+        def runner(action, parameters):
+            return run(action, parameters)
+    commands = COMMANDS if names is None else {name: COMMANDS[name] for name in names}
     contracts, handlers, deps = {}, {}, {}
-    for name, (action, required) in COMMANDS.items():
+    for name, (action, required) in commands.items():
         props = {"a": {"type": "string", "minLength": 1},
                  "output": {"type": "string", "minLength": 1}}
         if name in {"PDFPaths", "PDFPageRaster"}:
@@ -104,11 +109,11 @@ def register(router):
             },
         }
         handlers[name] = (lambda selected:
-                          lambda **kwargs: run(selected, kwargs))(action)
+                          lambda **kwargs: runner(selected, kwargs))(action)
         deps[name] = []
     router.add_local_provider(NAMESPACE, contracts, handlers,
                               "APA_SEMANTIC_VENDOR_ANALYSIS_V1", deps)
-    for name in COMMANDS:
+    for name in commands:
         key = "AddOn." + NAMESPACE + "." + name
         router.review_policy(key, "READ_ONLY", "READ_ONLY",
                              {"source": "APA_SEMANTIC_V1",
@@ -116,6 +121,6 @@ def register(router):
     return {
         "schema": "APA_SEMANTIC_PROVIDER_V1",
         "registered": sorted("AddOn." + NAMESPACE + "." + n
-                             for n in COMMANDS),
+                             for n in commands),
         "nativeCalls": 0, "modelWrites": 0,
     }

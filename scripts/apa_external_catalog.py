@@ -69,13 +69,17 @@ def call(action, params):
     return result
 
 
-def register(router):
+def register(router, *, runner=None):
     """Register all six REVIEWED READ_ONLY local handlers on the original router.
 
     Caller selects commands via the existing DynamicCommands catalog.
     No auto-execution or Archicad write permission follows from registration.
     """
-    verified_environment()
+    if runner is None:
+        verified_environment()
+
+        def runner(action, parameters):
+            return call(action, parameters)
     contracts, handlers, dependencies = {}, {}, {}
     for command, (action, required) in COMMANDS.items():
         props = {name: {"type": "string", "minLength": 1}
@@ -98,7 +102,7 @@ def register(router):
                             "result": {"type": "object"},
                             "modelWrites": {"type": "integer"},
                             "nativeCalls": {"type": "integer"}}}}
-        handlers[command] = (lambda a: lambda **kwargs: call(a, kwargs))(action)
+        handlers[command] = (lambda a: lambda **kwargs: runner(a, kwargs))(action)
         # The original APA interpreter needs only Python stdlib.
         # All installed vendor versions are checked in the isolated interpreter.
         dependencies[command] = []

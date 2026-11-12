@@ -378,9 +378,11 @@ def call(action, params):
     return data
 
 
-def register(router):
+def register(router, *, runner=None):
     """Opt-in attachment to existing DynamicCommands; does not alter V1 six."""
-    verified_python()
+    if runner is None:
+        verified_python()
+        runner = call
     props = {"a": {"type": "string", "minLength": 1},
              "output": {"type": "string", "minLength": 1}}
     contracts, handlers, dependencies = {}, {}, {}
@@ -395,7 +397,7 @@ def register(router):
             "returns": {"type": "object",
                         "required": ["schema", "action", "sources", "result",
                                      "modelWrites", "nativeCalls"]}}
-        handlers[command] = (lambda act: lambda **kw: call(act, kw))(action)
+        handlers[command] = (lambda act: lambda **kw: runner(act, kw))(action)
         dependencies[command] = []
     router.add_local_provider(NAMESPACE, contracts, handlers,
                               "APA_HIGH_DENSITY_READONLY_V2_SOURCE_DRAFT",
@@ -410,6 +412,31 @@ def register(router):
             "addedCommands": len(COMMANDS), "nativeCalls": 0, "modelWrites": 0}
 
 
+def execute(action, params):
+    src = input_file(params["a"], ACTIONS[action])
+    out = output_file(params["output"], src)
+    before = digest(src)
+    if action in IFC_HANDLERS:
+        import ifcopenshell
+        result = IFC_HANDLERS[action](ifcopenshell.open(str(src)))
+    else:
+        import ezdxf
+        result = DXF_HANDLERS[action](ezdxf.readfile(str(src)))
+    require(digest(src) == before, "V2_SOURCE_CHANGED_DURING_EXECUTION")
+    report = {"schema": "APA_HIGH_DENSITY_READONLY_V2",
+              "status": "SOURCE_FILE_FACTS_NOT_BIM_ACCEPTANCE",
+              "action": action,
+              "sources": [{"name": src.name, "sha256": before}],
+              "adapterSha256": digest(Path(__file__)),
+              "result": result,
+              "modelWrites": 0, "nativeCalls": 0}
+    with out.open("x", encoding="utf-8") as stream:
+        json.dump(report, stream, indent=2, ensure_ascii=False,
+                  allow_nan=False, default=str)
+        stream.write("\n")
+    return report
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=sorted(ACTIONS))
@@ -418,25 +445,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
     require(sys.version_info[:2] in {(3, 11), (3, 12)} and
             platform.system() == "Windows", "V2_VENDOR_PYTHON_311_OR_312_REQUIRED")
-    src = input_file(args.a, ACTIONS[args.action])
-    out = output_file(args.output, src)
-    if args.action in IFC_HANDLERS:
-        import ifcopenshell
-        result = IFC_HANDLERS[args.action](ifcopenshell.open(str(src)))
-    else:
-        import ezdxf
-        result = DXF_HANDLERS[args.action](ezdxf.readfile(str(src)))
-    report = {"schema": "APA_HIGH_DENSITY_READONLY_V2",
-              "status": "SOURCE_FILE_FACTS_NOT_BIM_ACCEPTANCE",
-              "action": args.action,
-              "sources": [{"name": src.name, "sha256": digest(src)}],
-              "adapterSha256": digest(Path(__file__)),
-              "result": result,
-              "modelWrites": 0, "nativeCalls": 0}
-    with out.open("x", encoding="utf-8") as stream:
-        json.dump(report, stream, indent=2, ensure_ascii=False,
-                  allow_nan=False, default=str)
-        stream.write("\n")
+    execute(args.action, vars(args))
     print("APA_STATUS: V2_READONLY_EVIDENCE_CREATED")
     return 0
 

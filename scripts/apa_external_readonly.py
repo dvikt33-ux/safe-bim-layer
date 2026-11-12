@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import importlib.metadata
 import json
+import os
 import platform
 from pathlib import Path
 import subprocess
@@ -81,7 +82,8 @@ def invoke_module(module, arguments, output):
                "-o", str(destination)]
         try:
             completed = subprocess.run(cmd, check=True, timeout=1200,
-                                       capture_output=True, text=True)
+                                       capture_output=True, encoding="utf-8", errors="replace",
+                                       env={**os.environ, "PYTHONUTF8": "1"})
         except subprocess.CalledProcessError as e:
             raise ValueError("UPSTREAM_ANALYSIS_FAILED:" + module
                              + ":returncode=" + str(e.returncode)
@@ -124,7 +126,9 @@ def ids_validate(args):
 def ifc_qto(args):
     """Delegate to existing production IFC reader. No separate formula engine."""
     model = source(args.a, "ifc")
-    module = ROOT / "scripts" / "archicad_connected_ifc.py"
+    module = Path(__file__).with_name("archicad_connected_ifc.py")
+    if not module.is_file():
+        module = ROOT / "scripts" / "archicad_connected_ifc.py"
     require(module.is_file(), "EXISTING_APA_IFC_READER_NOT_INSTALLED")
     sys.path.insert(0, str(module.parent))
     from archicad_connected_ifc import inspect_quantified_exchange
@@ -309,6 +313,34 @@ OPERATIONS = {
 }
 
 
+def execute(action, params):
+    kinds = {"a": {"pdf-vectors": "pdf", "dxf-vectors": "dxf"}.get(action, "ifc"),
+             "b": "ifc", "ids": "ids"}
+    inputs = {source(params[key], kind) for key, kind in kinds.items() if params.get(key)}
+    before = {path: sha256(path) for path in inputs}
+    out = Path(params["output"]).resolve()
+    require(out.suffix.lower() == ".json" and out.parent.is_dir(),
+            "OUTPUT_EXISTING_DIRECTORY_AND_JSON_REQUIRED")
+    require(not out.exists() and out not in inputs, "OUTPUT_ALREADY_EXISTS_OR_COLLIDES_WITH_SOURCE")
+    require(out != ROOT.resolve() and ROOT.resolve() not in out.parents,
+            "OUTPUT_MUST_BE_OUTSIDE_INSTALLED_APA")
+    args = argparse.Namespace(**{key: params.get(key) for key in (*kinds, "output")})
+    result, sources = OPERATIONS[action](args)
+    require(all(sha256(path) == digest for path, digest in before.items()),
+            "EXTERNAL_ANALYSIS_SOURCE_CHANGED")
+    document = {"schema": "APA_EXTERNAL_READONLY_EVIDENCE_V1",
+                "status": "SOURCE_ANALYSIS_ONLY_NOT_ENGINEERING_ACCEPTANCE",
+                "action": action, "sources": [
+                    {"name": path.name, "sha256": before[path]} for path in sources],
+                "result": result, "modelWrites": 0, "nativeCalls": 0,
+                "existingAPAUnchanged": True}
+    payload = json.dumps(document, indent=2, ensure_ascii=False, allow_nan=False,
+                         default=str)
+    with out.open("x", encoding="utf-8") as stream:
+        stream.write(payload + "\n")
+    return document
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description="APA AC29 isolated read-only evidence adapter")
     parser.add_argument("action", choices=["doctor", *OPERATIONS])
@@ -324,24 +356,9 @@ def main(argv=None):
     require(args.output, "EXPLICIT_NEW_OUTPUT_PATH_REQUIRED")
     status = check_environment()
     require(status["status"] == "READY", "ISOLATED_DEPENDENCIES_NOT_READY")
-    report, sources = OPERATIONS[args.action](args)
-    out = Path(args.output).resolve()
-    require(out.suffix.lower() == ".json" and out.parent.is_dir(),
-            "OUTPUT_EXISTING_DIRECTORY_AND_JSON_REQUIRED")
-    require(not out.exists() and all(out != src for src in sources),
-            "OUTPUT_ALREADY_EXISTS_OR_COLLIDES_WITH_SOURCE")
-    document = {"schema": "APA_EXTERNAL_READONLY_EVIDENCE_V1",
-                "status": "SOURCE_ANALYSIS_ONLY_NOT_ENGINEERING_ACCEPTANCE",
-                "action": args.action, "sources": [
-                    {"name": p.name, "sha256": sha256(p)} for p in sources],
-                "result": report, "modelWrites": 0, "nativeCalls": 0,
-                "existingAPAUnchanged": True}
-    with out.open("x", encoding="utf-8") as f:
-        json.dump(document, f, indent=2, ensure_ascii=False, allow_nan=False,
-                  default=str)
-        f.write("\n")
+    execute(args.action, vars(args))
     print("APA_STATUS: READ_ONLY_REPORT_CREATED")
-    print("EVIDENCE:", out)
+    print("EVIDENCE:", Path(args.output).resolve())
     return 0
 
 

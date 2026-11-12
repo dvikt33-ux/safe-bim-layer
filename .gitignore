@@ -57,3 +57,7 @@ Thumbs.db
 
 # Local native add-on build products
 .build/
+.venv-apa/
+.apa-pip-install.log
+.apa-regressions.log
+.apa-unified-test.log

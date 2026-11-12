@@ -109,13 +109,28 @@ def call(a,output):
          report['nativeCalls']==report['modelWrites']==0,'DXF_PREFLIGHT_REPORT_CONTRACT_DRIFT')
     return dict(report,artifact=dict(path=str(out),sha256=digest(out)))
 
-def register(router):
+def execute(a, output):
+    from apa_high_density_readonly_v2 import input_file, output_file
+
+    source = input_file(a, '.dxf')
+    out = output_file(output, source)
+    report = analyze_file(source)
+    payload = json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False) + '\n'
+    need(len(payload.encode('utf8')) < 4 * 1024 * 1024, 'DXF_PREFLIGHT_REPORT_TOO_LARGE')
+    with out.open('x', encoding='utf8') as stream:
+        stream.write(payload)
+        stream.flush()
+        os.fsync(stream.fileno())
+    return dict(report, artifact=dict(path=str(out), sha256=digest(out)))
+
+
+def register(router, *, handler=call):
     need(CMD not in router.catalog['commands'],'DXF_PREFLIGHT_ALREADY_REGISTERED')
     contract=dict(version='1',implementationSHA256=hashlib.sha256(Path(__file__).read_bytes().replace(b'\r\n',b'\n')).hexdigest(),
         description='Source DXF recover/audit, local XREF hashes, bounded MINSERT counts and declared units; no model writes',
         parameters=dict(type='object',properties={k:dict(type='string',minLength=1) for k in ('a','output')},required=['a','output'],additionalProperties=False),
         returns=dict(type='object',required=['schema','source','result','sourceUnchanged','nativeCalls','modelWrites','artifact']))
-    router.add_local_provider('APADXFPreflight',{'DXFSourcePreflight':contract},{'DXFSourcePreflight':call},SCHEMA,{'DXFSourcePreflight':[]})
+    router.add_local_provider('APADXFPreflight',{'DXFSourcePreflight':contract},{'DXFSourcePreflight':handler},SCHEMA,{'DXFSourcePreflight':[]})
     router.review_policy(CMD,'READ_ONLY','READ_ONLY',dict(source=SCHEMA,sha256=router.contract_hash(CMD)))
 
 def main():

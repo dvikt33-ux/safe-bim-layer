@@ -121,10 +121,10 @@ def call(action, params):
     before = [V2.digest(p) for p in sources]
     script = Path(__file__).resolve()
     adapter = V2.digest(script)
-    args = [str(V2.verified_python()), "-B", str(script), action]
+    args = [str(V2.verified_python()), "-X", "utf8", "-B", str(script), action]
     for key, value in params.items():
         args.extend(["--" + key, value])
-    process = subprocess.run(args, capture_output=True, text=True, timeout=1200)
+    process = subprocess.run(args, capture_output=True, encoding="utf-8", errors="replace", timeout=1200)
     V2.require(process.returncode == 0, "B1_VENDOR_FAILED:" + process.stderr[-1200:])
     path = out / "report.json"
     V2.require(path.is_file() and path.stat().st_size <= 200 * 1024**2, "B1_REPORT_MISSING_OR_LARGE")
@@ -141,9 +141,11 @@ def call(action, params):
     return data
 
 
-def register(router):
+def register(router, *, runner=None):
     """Extend the caller's existing router; never create a second router."""
-    V2.verified_python()
+    if runner is None:
+        V2.verified_python()
+        runner = call
     contracts, handlers = {}, {}
     for name, action in COMMANDS.items():
         fields = parameters(action)
@@ -152,7 +154,7 @@ def register(router):
                            "required": list(fields), "additionalProperties": False},
             "returns": {"type": "object", "required": ["schema", "sources", "result",
                                                            "artifacts", "nativeCalls", "modelWrites"]}}
-        handlers[name] = (lambda act: lambda **kw: call(act, kw))(action)
+        handlers[name] = (lambda act: lambda **kw: runner(act, kw))(action)
     router.add_local_provider(NAMESPACE, contracts, handlers, SCHEMA,
                               {name: [] for name in COMMANDS})
     for name in COMMANDS:
