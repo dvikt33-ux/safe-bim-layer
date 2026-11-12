@@ -41,6 +41,18 @@ ID = re.compile(r"^[a-z][a-z0-9-]{7,63}$")
 REVIEW = ROOT / "controllers" / "apa_bdd114_native_roof_face_review.py"
 ALLOWED = frozenset({"BDD114_ROOF_FINALIZE", "SOURCE_QUALIFIED_NATIVE_READ"})
 
+# Reviewed A-GRID-02 experiment. This is a separate, saved COPY of a 44-GUID
+# Archicad PLN. No user input can select another project or executable.
+GRID_SCRIPT = Path(r"C:\LocalAI\APA_AC29_Build_Source\scripts\apa_ac29_group_grid_live_8x4.py")
+GRID_STATE = Path(r"C:\LocalAI\APA_AC29_Group_Grid_State\group-grid-8x4-20261018-01")
+GRID_SCRATCH = Path(r"C:\LocalAI\APA_Group_Acceptance\group-ac29-grid-8x4-20261018-01.pln")
+GRID_SOURCE_COMMIT = "4ef970a1cef798aafbece4649af926b9f8f4e57a"
+GRID_SCRIPT_BLOB_SHA1 = "40e85e37232e3d6149f82178785c06d2910cc6d1"
+GRID_SOURCE_GROUP = "40D5303F-18CA-4117-9DE0-E06BFD8E64B9"
+GRID_APPROVAL = "USER_APPROVED_AC29_GROUP_GRID_8X4_TEST_20261113"
+GRID_ACTIONS = frozenset({"GRID_8X4_CHECK", "GRID_8X4_EXECUTE"})
+
+
 
 def require(ok, reason):
     if not ok:
@@ -254,6 +266,162 @@ def upload_result(name, folder):
     print("PUBLISHED:", result["content"]["html_url"], flush=True)
 
 
+
+def validate_grid_job(job, name):
+    """A separate strict envelope: no shell, arbitrary path or dynamic command."""
+    keys = {"schema", "jobId", "action", "createdAt", "expiresAt",
+            "target", "sourceCommit", "preflightSha256", "authorizationRef"}
+    require(isinstance(job, dict) and set(job) == keys,
+            "GRID_JOB_ENVELOPE_KEYS_INVALID")
+    require(job["schema"] == "APA_AC29_GROUP_GRID_JOB_V1"
+            and job["jobId"] == name and ID.fullmatch(name)
+            and job["action"] in GRID_ACTIONS,
+            "GRID_JOB_SCHEMA_ID_OR_ACTION_INVALID")
+    require(job["target"] == GRID_SCRATCH.name
+            and job["sourceCommit"] == GRID_SOURCE_COMMIT
+            and job["authorizationRef"] == GRID_APPROVAL,
+            "GRID_JOB_TARGET_SOURCE_OR_AUTHORIZATION_INVALID")
+    created, expires, now = date(job["createdAt"]), date(job["expiresAt"]), current_utc()
+    require(created <= now < expires and
+            0 < (expires-created).total_seconds() <= 2 * 86400,
+            "GRID_JOB_TIME_WINDOW_INVALID")
+    if job["action"] == "GRID_8X4_EXECUTE":
+        require(isinstance(job["preflightSha256"], str)
+                and re.fullmatch("[0-9a-f]{64}", job["preflightSha256"]),
+                "GRID_EXECUTE_REQUIRES_PINNED_PREFLIGHT_SHA256")
+    else:
+        require(job["preflightSha256"] is None,
+                "GRID_CHECK_MUST_NOT_INCLUDE_EXECUTION_PIN")
+    return job
+
+
+def grid_scope_preflight(job):
+    """Fail closed before touching Archicad; original source is never a target."""
+    require(GRID_SCRIPT.is_file() and GRID_SCRATCH.is_file()
+            and (GRID_STATE / "stage.json").is_file(),
+            "GRID_SCRIPT_STAGE_OR_SAVED_COPY_MISSING")
+    local_script = GRID_SCRIPT.read_bytes()
+    require(git_sha(local_script) == GRID_SCRIPT_BLOB_SHA1,
+            "GRID_LOCAL_EXECUTABLE_SCRIPT_DRIFT")
+    git = subprocess.run(["git", "-C", str(GRID_SCRIPT.parent.parent),
+                          "rev-parse", "HEAD"], capture_output=True,
+                         text=True, timeout=20, check=False)
+    require(git.returncode == 0
+            and git.stdout.strip() == GRID_SOURCE_COMMIT,
+            "GRID_LOCAL_GIT_REVISION_DRIFT")
+    stage = json.loads((GRID_STATE / "stage.json").read_text(encoding="utf-8"))
+    require(stage.get("schema") == "APA_AC29_GROUP_GRID_STAGE_V1"
+            and stage.get("status") == "STAGED_SAVED_COPY_ONLY_NO_ARCHICAD_CALLS"
+            and stage.get("scratchProject") == str(GRID_SCRATCH)
+            and isinstance(stage.get("sourceSavedSha256"), str)
+            and re.fullmatch("[0-9a-f]{64}", stage["sourceSavedSha256"])
+            and stage.get("sourceGroupId", "").lower() == GRID_SOURCE_GROUP.lower()
+            and stage.get("expectedOriginalGuids") == 44
+            and stage.get("expectedPostGuids") == 172,
+            "GRID_REVIEWED_STAGE_RECEIPT_MISMATCH")
+    original_path = Path(stage["sourceProject"])
+    require(original_path != GRID_SCRATCH and original_path.is_file()
+            and sha(original_path) == stage["sourceSavedSha256"]
+            and sha(GRID_SCRATCH) == stage["sourceSavedSha256"],
+            "GRID_ORIGINAL_OR_COPY_SHA256_DRIFT")
+    attempted = (GRID_STATE / "attempted.json",
+                 GRID_STATE / "before-native-dispatch.json",
+                 GRID_STATE / "result.json")
+    require(not any(p.exists() for p in attempted),
+            "GRID_PREVIOUS_NATIVE_ATTEMPT_NEVER_REPLAY")
+    preflight = GRID_STATE / "preflight.json"
+    if job["action"] == "GRID_8X4_CHECK":
+        require(not preflight.exists()
+                and not (GRID_STATE / "original-scenewriter.sqlite").exists(),
+                "GRID_CHECK_ALREADY_PERFORMED_OR_WRITER_OPENED")
+    else:
+        require(preflight.is_file()
+                and sha(preflight) == job["preflightSha256"],
+                "GRID_EXECUTION_PREFLIGHT_RECEIPT_SHA256_DRIFT")
+        previous = json.loads(preflight.read_text(encoding="utf-8"))
+        require(previous.get("status") ==
+                "GRID_8X4_NATIVE_BREP_AND_RUNTIME_PREFLIGHT_PASS"
+                and previous.get("sourceRevision") == GRID_SOURCE_COMMIT
+                and previous.get("sourcePlnSha256") == stage["sourceSavedSha256"]
+                and previous.get("scratchPath") == str(GRID_SCRATCH)
+                and previous.get("originalSourceGuidCount") == 44
+                and previous.get("expectedGuidCountAfter") == 172
+                and previous.get("nativeCallCountIfAuthorized") == 1
+                and previous.get("archicadWrites") == 0
+                and previous.get("saveCalls") == 0
+                and previous.get("automaticRetry") is False,
+                "GRID_EXECUTION_WITHOUT_PINNED_SUCCESSFUL_PREFLIGHT")
+        require(not (GRID_STATE / "original-scenewriter.sqlite").exists(),
+                "GRID_JOURNAL_ALREADY_EXISTS_NEVER_EXECUTE")
+    return stage
+
+
+def capture_grid_job(job, folder):
+    """Use the ORIGINAL grid one-shot; never reinterpret GitHub fields as CLI."""
+    stage = grid_scope_preflight(job)
+    action = job["action"]
+    flag = "--check" if action == "GRID_8X4_CHECK" else "--execute"
+    # The durable receiver attempt is written by process_grid_job before this.
+    proc = subprocess.run([sys.executable, str(GRID_SCRIPT), flag],
+                          cwd=str(GRID_SCRIPT.parent.parent),
+                          capture_output=True, text=True, errors="replace",
+                          timeout=300 if flag == "--check" else 900,
+                          check=False)
+    output = (proc.stdout + "\n" + proc.stderr)[-20000:]
+    durable_write(folder / "run-output.json", {
+        "exitCode": proc.returncode, "output": output,
+        "action": action, "automaticRetry": False,
+    })
+    require(proc.returncode == 0, "GRID_SCRIPT_NONZERO_OR_UNKNOWN_OUTCOME")
+    if flag == "--check":
+        preflight = GRID_STATE / "preflight.json"
+        require(preflight.is_file(), "GRID_PREFLIGHT_RECEIPT_MISSING")
+        receipt = json.loads(preflight.read_text(encoding="utf-8"))
+        require(receipt.get("status") ==
+                "GRID_8X4_NATIVE_BREP_AND_RUNTIME_PREFLIGHT_PASS"
+                and receipt.get("archicadWrites") == 0
+                and receipt.get("saveCalls") == 0
+                and sha(GRID_SCRATCH) == stage["sourceSavedSha256"],
+                "GRID_PREFLIGHT_RESULT_INCOMPLETE")
+        return {"jobStatus": "COMPLETE", "status": receipt["status"],
+                "preflightSha256": sha(preflight),
+                "port": receipt.get("port"), "modelWrites": 0,
+                "nativeExecutionAuthorized": False}
+    require("LIVE_GRID_8X4_SCENEWRITER_NATIVE_GROUP_PASS" in proc.stdout
+            and (GRID_STATE / "attempted.json").is_file(),
+            "GRID_NATIVE_RESULT_NOT_PROVEN_NO_RETRY")
+    # The reviewed runner deliberately does not invoke SaveProject.
+    return {"jobStatus": "COMPLETE",
+            "status": "GRID_NATIVE_EXECUTION_REPORTED_PASS_SAVE_REOPEN_NOT_PROVEN",
+            "modelWritesAuthorized": True,
+            "saveReopenVerified": False, "automaticRetry": False,
+            "note": "Only a separate saved copy was eligible for mutation."}
+
+
+def process_grid_job(name, job, source_blob, folder):
+    validate_grid_job(job, name)
+    grid_scope_preflight(job)
+    folder.mkdir(parents=False, exist_ok=False)
+    durable_write(folder / "attempted.json", {
+        "job": name, "sourceBlob": source_blob,
+        "startedAt": current_utc().isoformat(), "action": job["action"],
+        "target": str(GRID_SCRATCH), "automaticRetry": False
+    })
+    try:
+        response = capture_grid_job(job, folder)
+    except Exception as exc:
+        response = {"jobStatus": "STOPPED_RECONCILE_NO_AUTORETRY",
+                    "error": type(exc).__name__ + ": " + str(exc)[:400],
+                    "saveReopenVerified": False}
+    payload = {"schema": "APA_AC29_JOB_RESULT_V1", "jobId": name,
+               "action": job["action"], "sourceBlob": source_blob,
+               "finishedAt": current_utc().isoformat(),
+               "result": response, "automaticRetry": False,
+               "modelWritesAuthorized": job["action"] == "GRID_8X4_EXECUTE"}
+    durable_write(folder / "result.json", payload)
+    upload_result(name, folder)
+
+
 def process_job(name):
     require(ID.fullmatch(name), "UNSAFE_JOB_ID")
     folder = STATE / name
@@ -263,6 +431,8 @@ def process_job(name):
             upload_result(name, folder)
         return
     job, source_blob = remote_json(BRIDGE, f"{INBOX}/{name}.json", "main")
+    if job.get("schema") == "APA_AC29_GROUP_GRID_JOB_V1":
+        return process_grid_job(name, job, source_blob, folder)
     validate_job(job, name)
     stable_preflight()
     folder.mkdir(parents=False, exist_ok=False)
