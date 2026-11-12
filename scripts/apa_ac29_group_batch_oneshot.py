@@ -23,7 +23,8 @@ from apa_ac29_dynamic_write_scopes import build_existing_workflow_scopes
 from apa_ac29_dynamic_native_verifiers import installed_verifiers
 from apa_ac29_reusable_native_copy import GuardedSaveTransport
 from apa_ac29_save_isolation import (ScratchWriteLease, preserve_guarded_save,
-                                    copy_exclusive, sha256, write_new_json)
+                                    copy_exclusive, reservation_owner_exited, sha256,
+                                    timestamp, write_new_json)
 from apa_ac29_mass_request import placement_offsets, SCHEMA as MASS_SCHEMA
 
 SCHEMA = "APA_AC29_NATIVE_GROUP_BATCH_V1"
@@ -56,20 +57,8 @@ def safe01_gate(path):
     return sha256(state / "reopened.json")
 
 
-def stage(source, scratch, state, baseline_trace, safe01, group, placements, port, *, prior_stage=None):
-    source, scratch, state, baseline_trace, safe01 = [Path(p).resolve()
-        for p in (source, scratch, state, baseline_trace, safe01)]
-    shifts = placement_offsets(placements)
-    need(source.is_file() and source.suffix.lower() == scratch.suffix.lower() == ".pln"
-         and source != scratch and scratch.parent.is_dir() and state.parent.is_dir()
-         and not state.exists() and type(port) is int
-         and ((prior_stage is None and not scratch.exists() and 19727 <= port <= 19735)
-              or (prior_stage is not None and port == 19726 and scratch == PRIOR174_SCRATCH.resolve()))
-         and V.GROUP_GUID.fullmatch(group or "")
-         and 1 <= len(shifts) <= 32 and all(r["dz"] == 0 for r in shifts),
-         "GROUP_BATCH_NEW_ISOLATED_PLN_AND_VALID_GROUP_REQUIRED")
-    safe_hash = safe01_gate(safe01)
-    rows = [json.loads(line) for line in baseline_trace.read_text(encoding="utf8").splitlines()]
+def accepted_baseline(baseline_trace):
+    rows = [json.loads(line) for line in Path(baseline_trace).read_text(encoding="utf8").splitlines()]
     dumps = [r["response"] for r in rows if r.get("command") == "GetModelDumpV1"
              and isinstance(r.get("response"), dict) and "error" not in r["response"]]
     need(bool(dumps), "GROUP_BATCH_ACCEPTED_NATIVE_BASELINE_REQUIRED")
@@ -77,6 +66,27 @@ def stage(source, scratch, state, baseline_trace, safe01, group, placements, por
     ids = sorted(r["guid"].lower() for r in baseline["elements"])
     need(len(ids) == 44 and len(set(ids)) == 44,
          "GROUP_BATCH_ACCEPTED_44_GUID_BASELINE_REQUIRED")
+    return baseline, ids
+
+
+def stage(source, scratch, state, baseline_trace, safe01, group, placements, port, *,
+          prior_stage=None, authorization_ref=None):
+    source, scratch, state, baseline_trace, safe01 = [Path(p).resolve()
+        for p in (source, scratch, state, baseline_trace, safe01)]
+    shifts = placement_offsets(placements)
+    need(source.is_file() and source.suffix.lower() == scratch.suffix.lower() == ".pln"
+         and source != scratch and scratch.parent.is_dir() and state.parent.is_dir()
+         and not state.exists() and type(port) is int
+         and ((prior_stage is None and not scratch.exists() and
+               ((19727 <= port <= 19735) if authorization_ref is None else
+                (19723 <= port <= 19743 and isinstance(authorization_ref, str) and
+                 re.fullmatch(r"USER_APPROVED_APA_R03_[A-Za-z0-9_-]{4,80}", authorization_ref))))
+              or (prior_stage is not None and port == 19726 and scratch == PRIOR174_SCRATCH.resolve()))
+         and V.GROUP_GUID.fullmatch(group or "")
+         and 1 <= len(shifts) <= 32 and all(r["dz"] == 0 for r in shifts),
+         "GROUP_BATCH_NEW_ISOLATED_PLN_AND_VALID_GROUP_REQUIRED")
+    safe_hash = safe01_gate(safe01)
+    baseline, ids = accepted_baseline(baseline_trace)
     original_sha = sha256(source)
     adoption = {}
     if prior_stage is None:
@@ -109,6 +119,8 @@ def stage(source, scratch, state, baseline_trace, safe01, group, placements, por
         safe01State=str(safe01), safe01ReceiptSHA256=safe_hash,
         status="STAGED_NO_MODEL_WRITES", automaticReplay=False)
     manifest.update(adoption)
+    if authorization_ref is not None:
+        manifest["authorizationRef"] = authorization_ref
     write_new_json(state / "manifest.json", manifest)
     return manifest
 
@@ -133,7 +145,8 @@ def manifest_for(state, *, initial=False):
     return m
 
 
-def prepare_api(m, state, *, execute, saved_sha=None, authorization_ref=AUTH):
+def prepare_api(m, state, *, execute, saved_sha=None, authorization_ref=None):
+    authorization_ref = authorization_ref or m.get("authorizationRef", AUTH)
     R.bind_authorized_saved_copy(m["port"], m["scratch"], Path(m["scratch"]).stem,
                                  saved_sha or m["scratchInitialSHA256"], authorization_ref)
     def bounded(command, params):
@@ -241,8 +254,12 @@ def execute(state):
          "GROUP_BATCH_CURRENT_PLAN_DRIFT")
     lease = ScratchWriteLease(m["scratch"], state, m["scratchInitialSHA256"])
     lease.acquire()
-    write_new_json(state / "attempted.json", dict(schema=SCHEMA, status="ONE_SHOT_RESERVED",
-        planSHA256=sha256(state / "plan.json"), automaticReplay=False))
+    attempt = dict(schema=SCHEMA, status="ONE_SHOT_RESERVED",
+        planSHA256=sha256(state / "plan.json"), automaticReplay=False)
+    if m.get("authorizationRef", "").startswith("USER_APPROVED_APA_R03_"):
+        attempt.update(jobId=state.parent.name, atUTC=timestamp())
+        attempt["attemptId"] = R.digest([attempt["jobId"], attempt["planSHA256"], lease.lock_sha])
+    write_new_json(state / "attempted.json", attempt)
     try:
         api, guard = prepare_api(m, state, execute=True)
         router, runtime = router_for(api)
@@ -260,7 +277,8 @@ def execute(state):
                                schema_path=SCHEMA_PATH, allow_3d_view_for_write=True)
         spec = dict(schemaVersion="apa-ac29-dynamic-mutation-scope/1",
             projectSha256=m["scratchInitialSHA256"], sourcePlanHash=graph["sourcePlanHash"],
-            authorizationRef=AUTH, sourceEvidenceRef=SOURCE_REF, sceneId=CREATE_SCENE,
+            authorizationRef=m.get("authorizationRef", AUTH),
+            sourceEvidenceRef=SOURCE_REF, sceneId=CREATE_SCENE,
             stepId=op["id"], command=V.CMD, effect="CREATE", impact="MODEL",
             commandContractHash=planned["contractSHA256"], parametersHash=R.digest(op["params"]),
             expectedBeforeGuidSetHash=m["baselineGuidSetSHA256"],
@@ -269,7 +287,8 @@ def execute(state):
         scopes = build_existing_workflow_scopes(spec=spec, plan=graph, router=router,
             registry=installed_verifiers(), writer=writer, api=api, capture_model=D.capture_full_model,
             guid_inventory=A.inventory_guids, current_project_sha=lambda:sha256(m["scratch"]),
-            approved_project_sha=m["scratchInitialSHA256"], local_authorization=AUTH)
+            approved_project_sha=m["scratchInitialSHA256"],
+            local_authorization=m.get("authorizationRef", AUTH))
         result = A.run_auto_optimized_native_task(router, api, preview, writer, scopes)
         need(result["status"] == "WORKFLOW_CALLABLE_VERIFIED" and api.calls[V.CMD] == 1,
              "GROUP_BATCH_ONE_VERIFIED_SCENEWRITER_CLONE_REQUIRED")
@@ -307,7 +326,8 @@ def save_verified_batch(state, m, planned, api, guard, router, lease, response):
         write_new_json(state / "guarded-snapshot.json", snap)
         return dict(status="GROUP_BATCH_SAVED_SNAPSHOT_PASS", savedSHA256=guard.new_saved_sha)
     saved = router.execute(writer, SAVE_SCENE, router.prepare("SaveProject", {}), [],
-        signatures, m["scratchInitialSHA256"], AUTH, "PROJECT", after_save, verify_before=before_save)
+        signatures, m["scratchInitialSHA256"], m.get("authorizationRef", AUTH),
+        "PROJECT", after_save, verify_before=before_save)
     need(saved["status"] == "PASS" and api.calls["SaveProject"] == 1
          and api.write_attempts == writes_before + 1 and sha256(m["scratch"]) == guard.new_saved_sha,
          "GROUP_BATCH_EXACT_ONE_CLONE_ONE_SAVE_REQUIRED")
@@ -323,17 +343,20 @@ def save_verified_batch(state, m, planned, api, guard, router, lease, response):
 
 
 def reconcile_completed_clone(state):
-    """Read-only reconciliation of the specific post-JSON comparison stop.
+    """Read-only reconciliation of a journaled clone that never reached Save.
 
     Requires an already PASS native SceneWriter scene, never an unknown clone.
     Leaves every original attempted/failed record and the lease unchanged.
     """
     state = Path(state).resolve()
     m = manifest_for(state)
-    failure = read(state / "failed.json")
-    need(failure.get("error") == "GROUP_WRITER_TRANSLATED_BREP_OR_ATTRIBUTES_MISMATCH"
+    failure_path = state / "failed.json"
+    r03 = m.get("authorizationRef", "").startswith("USER_APPROVED_APA_R03_")
+    legacy_failure = (failure_path.is_file() and
+                      read(failure_path).get("error") == "GROUP_WRITER_TRANSLATED_BREP_OR_ATTRIBUTES_MISMATCH")
+    need((r03 or legacy_failure)
          and not any((state / n).exists() for n in
-                     ("saved.json", "reconciled-save-attempted.json"))
+                     ("saved.json", "guarded-snapshot.json", "reconciled-save-attempted.json"))
          and sha256(m["scratch"]) == m["scratchInitialSHA256"],
          "GROUP_BATCH_ONLY_COMPLETED_UNSAVED_CLONE_CAN_BE_RECONCILED")
     planned = read(state / "plan.json")
@@ -342,7 +365,12 @@ def reconcile_completed_clone(state):
     trace_path = state / "trace-write" / "raw.jsonl"
     rows = [json.loads(r) for r in trace_path.read_text(encoding="utf8").splitlines()]
     clones = [r for r in rows if r["command"] == V.CMD]
+    dispatch_path = trace_path.with_name("dispatch.jsonl")
+    dispatch = ([json.loads(r) for r in dispatch_path.read_text(encoding="utf8").splitlines()]
+                if r03 else rows)
     need(len(clones) == 1 and not any(r["command"] == "SaveProject" for r in rows)
+         and sum(r["command"] == V.CMD for r in dispatch) == 1
+         and not any(r["command"] == "SaveProject" for r in dispatch)
          and clones[0]["parameters"] == planned["params"],
          "GROUP_BATCH_RECONCILIATION_EXACTLY_ONE_CLONE_NO_SAVE_REQUIRED")
     with sqlite3.connect(f"file:{(state / 'batch-scenewriter.sqlite').as_posix()}?mode=ro", uri=True) as db:
@@ -361,6 +389,8 @@ def reconcile_completed_clone(state):
     need(record.get("state") == str(state) and record.get("scratch") == m["scratch"]
          and record.get("expectedInitialSHA256") == m["scratchInitialSHA256"],
          "GROUP_BATCH_RECONCILIATION_ORIGINAL_LEASE_REQUIRED")
+    if r03:
+        need(reservation_owner_exited(record["pid"]), "GROUP_BATCH_ORIGINAL_WRITER_STILL_RUNNING")
     api, _ = prepare_api(m,state,execute=False)
     _, runtime = router_for(api)
     need(runtime == planned["runtimeIdentity"], "GROUP_BATCH_RECONCILIATION_RUNTIME_DRIFT")
@@ -368,12 +398,14 @@ def reconcile_completed_clone(state):
     need(api.write_attempts == 0, "GROUP_BATCH_RECONCILIATION_READ_ONLY_REQUIRED")
     evidence = dict(status="COMPLETED_CLONE_FULL_NATIVE_READONLY_RECONCILED",
         sourceSHA256=m["sourceSHA256"], planSHA256=sha256(state / "plan.json"),
-        originalFailureSHA256=sha256(state / "failed.json"),
+        originalFailureSHA256=sha256(failure_path) if failure_path.is_file() else None,
         originalAttemptSHA256=sha256(state / "attempted.json"),
         traceSHA256=sha256(trace_path), sqliteSHA256=sha256(state / "batch-scenewriter.sqlite"),
         originalLeaseSHA256=sha256(lease.lock), finalGuidSetSHA256=R.digest(ids),
         finalBrepSHA256=fingerprint(native), nativeReadback=proof,
         nativeResponse=response, nativeWrites=0, automaticReplay=False)
+    if r03:
+        evidence["dispatchSHA256"] = sha256(dispatch_path)
     return evidence
 
 
@@ -427,12 +459,20 @@ def check_closed(state):
     return record
 
 
-def verify_reopen(state):
+def verify_reopen(state, *, reopen_port=None):
     state = Path(state).resolve()
     m, saved = saved_state(state)
     closed = read(state / "closed.json")
-    need(not (state / "reopened.json").exists() and closed["status"] == "NATIVE_NO_OPEN_PROJECT_CONFIRMED"
+    native_close = closed["status"] == "NATIVE_NO_OPEN_PROJECT_CONFIRMED"
+    r03_process_exit = (m.get("authorizationRef", "").startswith("USER_APPROVED_APA_R03_")
+                        and closed["status"] == "ARCHICAD_QUIT_PROCESS_EXIT_CONFIRMED"
+                        and closed["quitReceiptSHA256"] == sha256(state / "quit-attempted.json"))
+    need((native_close or r03_process_exit)
          and closed["savedSHA256"] == saved["savedSHA256"], "GROUP_BATCH_REAL_CLOSE_REQUIRED")
+    if reopen_port is not None:
+        need(r03_process_exit and type(reopen_port) is int and 19723 <= reopen_port <= 19743,
+             "GROUP_BATCH_REOPEN_PORT_REQUIRES_ISOLATED_NEW_PROCESS")
+        m = dict(m, port=reopen_port)
     api, _ = prepare_api(m, state, execute=False, saved_sha=saved["savedSHA256"])
     _, runtime = router_for(api)
     need(runtime == read(state / "plan.json")["runtimeIdentity"], "GROUP_BATCH_REOPEN_RUNTIME_DRIFT")
@@ -444,13 +484,26 @@ def verify_reopen(state):
         baseline = original_plan_native(state, m, planned)
     ids, native, proof = verify_group_model(m, api, planned,
         saved["nativeResponse"], baseline)
-    need(len(ids) == saved["finalGuidCount"] and R.digest(ids) == saved["finalGuidSetSHA256"]
-         and fingerprint(native) == saved["finalBrepSHA256"] and api.write_attempts == 0,
+    expected_ids = sorted(planned["baselineGuids"] + saved["nativeReadback"]["newRootGuids"]
+                          + saved["nativeReadback"]["newSegmentGuids"])
+    guid_hash, brep_hash = R.digest(ids), fingerprint(native)
+    need(ids == expected_ids and len(ids) == saved["finalGuidCount"]
+         and guid_hash == saved["finalGuidSetSHA256"] and brep_hash == saved["finalBrepSHA256"]
+         and sha256(m["scratch"]) == saved["savedSHA256"] and api.write_attempts == 0,
          "GROUP_BATCH_REOPEN_FULL_NATIVE_BREP_OR_GUID_DRIFT")
     result = dict(saved, status="LIVE_NATIVE_GROUP_BATCH_SAVED_REOPENED_PASS",
                   reopenVerified=True, reopenedReadback=proof, sourceUnchanged=True,
-                  verificationNativeWrites=0)
-    write_new_json(state / "reopened.json", result)
+                  verificationNativeWrites=0, reopenPort=m["port"], reopenedGuids=ids,
+                  reopenedGuidSetSHA256=guid_hash, reopenedBrepSHA256=brep_hash)
+    path = state / "reopened.json"
+    if path.exists():
+        prior = read(path)
+        need(prior["status"] == result["status"] and prior["reopenVerified"] is True
+             and all(prior[key] == result[key] for key in
+                     ("savedSHA256", "finalGuidCount", "finalGuidSetSHA256", "finalBrepSHA256")),
+             "GROUP_BATCH_EXISTING_REOPEN_RECEIPT_DRIFT")
+    else:
+        write_new_json(path, result)
     return result
 
 

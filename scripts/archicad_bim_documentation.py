@@ -339,6 +339,8 @@ def bundle(snapshot, plan_story, native_views=None):
     if plan_story not in {s['index'] for s in snapshot['stories']}:
         raise ValueError('DOCUMENTATION_PLAN_STORY_MISSING')
     version = snapshot['modelVersion']
+    plan_elements = [e for e in elements if e['storyIndex'] == plan_story]
+    available_cut_fills = sum(bool(e['floorPlanPolygons']) for e in plan_elements)
     schedules = {}
     for kind in sorted({e['nativeType'] for e in elements}):
         rows = [e for e in elements if e['nativeType'] == kind]
@@ -347,8 +349,10 @@ def bundle(snapshot, plan_story, native_views=None):
             'quantityAuthority': 'Existing IFC planar resultant BREP adapter; no gross box volumes',
             'nativeInteractiveScheduleRows': 'NOT_VERIFIED_NO_INSTALLED_ROW_READ_OR_CONFIGURE_CONTRACT'}
     return {'schema': 'APA_BIM_DOCUMENTATION_PACKAGE_V1', 'modelVersion': version,
-        'plan': {'status': 'BIM_FACTS_WITH_NATIVE_CUT_FILLS', 'modelVersion': version,
-            'storyIndex': plan_story, 'elements': [e for e in elements if e['storyIndex'] == plan_story]},
+        'plan': {'status': ('BIM_FACTS_WITH_NATIVE_CUT_FILLS' if available_cut_fills
+                            else 'BIM_FACTS_NATIVE_CUT_FILLS_UNAVAILABLE'),
+            'modelVersion': version, 'storyIndex': plan_story, 'elements': plan_elements,
+            'nativeCutFillElementCount': available_cut_fills},
         'verticalGeometry': {'status': 'PREPARED_ACTUAL_3D_FACTS_NOT_A_NATIVE_DRAWING',
             'modelVersion': version, 'elements': elements},
         'specifications': schedules, 'nativeViews': native_views or {},

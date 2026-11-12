@@ -53,6 +53,34 @@ def copy_exclusive(source, destination):
             os.fsync(dst.fileno())
 
 
+def reservation_owner_exited(pid):
+    """Treat an active or unreadable process as still owning its reservation."""
+    require(type(pid) is int and pid > 0, "APA_SAVE_LEASE_INVALID_OWNER_PID")
+    if os.name != "nt":
+        try:
+            os.kill(pid, 0)
+        except ProcessLookupError:
+            return True
+        except PermissionError:
+            pass
+        return False
+    import ctypes
+    from ctypes import wintypes
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    kernel.OpenProcess.argtypes = (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD)
+    kernel.OpenProcess.restype = wintypes.HANDLE
+    kernel.WaitForSingleObject.argtypes = (wintypes.HANDLE, wintypes.DWORD)
+    kernel.WaitForSingleObject.restype = wintypes.DWORD
+    kernel.CloseHandle.argtypes = (wintypes.HANDLE,)
+    handle = kernel.OpenProcess(0x00100000, False, pid)  # SYNCHRONIZE only
+    if not handle:
+        return ctypes.get_last_error() == 87  # ERROR_INVALID_PARAMETER: no such PID
+    try:
+        return kernel.WaitForSingleObject(handle, 0) == 0  # WAIT_OBJECT_0
+    finally:
+        kernel.CloseHandle(handle)
+
+
 class ScratchWriteLease:
     """Persistent, cooperative APA-only lease keyed by exact scratch path.
 

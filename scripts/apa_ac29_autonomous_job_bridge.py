@@ -103,15 +103,18 @@ def approved_guid_count():
     return receipt['expectedGuidCount'] if receipt else 290
 
 
-def gh_api(path, *, body=None):
+def gh_api(path, *, body=None, allow_missing=False):
     cmd = ["gh", "api"]
     if body is not None:
         cmd += ["--method", "PUT", path, "--input", str(body)]
     else:
         cmd.append(path)
     p = subprocess.run(cmd, capture_output=True, timeout=50)
-    require(p.returncode == 0, "GITHUB_UNAVAILABLE:" +
-            p.stderr.decode("utf-8", errors="replace")[-250:])
+    error = p.stderr.decode("utf-8", errors="replace")
+    if allow_missing and body is None and p.returncode != 0 and re.search(
+            r"(?m)^gh: .* \(HTTP 404\)\s*$", error):
+        return None
+    require(p.returncode == 0, "GITHUB_UNAVAILABLE:" + error[-250:])
     return json.loads(p.stdout.decode("utf-8"))
 
 
@@ -585,29 +588,76 @@ def durable_write(path, obj):
 def upload_result(name, folder):
     report = folder / "result.json"
     require(report.is_file(), "NO_DURABLE_REPORT_TO_PUBLISH")
+    data = report.read_bytes()
+    expected_blob = git_sha(data)
     marker = folder / "published.json"
     if marker.exists():
-        return
-    content = base64.b64encode(report.read_bytes()).decode("ascii")
-    payload = {"branch": "main",
-               "message": "APA AC29 one-shot source-qualified job result " + name,
-               "content": content}
-    manifest = folder / "upload.json"
-    durable_write(manifest, payload)
+        saved_marker = json.loads(marker.read_text(encoding="utf-8"))
+        require(saved_marker["sha"] == expected_blob, "PUBLISHED_LOCAL_REPORT_DRIFT")
+        if saved_marker.get("verifiedBytes") is True:
+            return
     remote = f"{RESULTS}/{name}.json"
-    result = gh_api(f"repos/{BRIDGE}/contents/{remote}", body=manifest)
-    durable_write(marker, {"sha": result["content"]["sha"],
-                           "url": result["content"]["html_url"]})
-    print("PUBLISHED:", result["content"]["html_url"], flush=True)
+    endpoint = f"repos/{BRIDGE}/contents/{remote}"
+    read_path = endpoint + "?ref=main"
+    observed = gh_api(read_path, allow_missing=True)
+    if observed is None:
+        manifest = folder / "upload.json"
+        durable_write(manifest, {
+            "branch": "main", "message": "APA AC29 one-shot source-qualified job result " + name,
+            "content": base64.b64encode(data).decode("ascii")})
+        try:
+            gh_api(endpoint, body=manifest)
+        except (ValueError, OSError, subprocess.TimeoutExpired):
+            # A lost reply can follow a successful create. Reconcile before
+            # any subsequent PUT and never supply an overwrite SHA.
+            observed = gh_api(read_path, allow_missing=True)
+            if observed is None:
+                raise
+        else:
+            observed = gh_api(read_path, allow_missing=True)
+    require(isinstance(observed, dict) and observed.get("type") == "file"
+            and observed.get("sha") == expected_blob and observed.get("encoding") == "base64"
+            and base64.b64decode(observed.get("content", "")) == data
+            and report.read_bytes() == data,
+            "REMOTE_RESULT_CONFLICT_OR_READBACK_MISSING")
+    durable_write(marker, {"sha": expected_blob, "url": observed["html_url"], "verifiedBytes": True})
+    print("PUBLISHED:", observed["html_url"], flush=True)
+
+
+def result_payload(name, action, source_blob, response):
+    return {"schema": "APA_AC29_JOB_RESULT_V1", "jobId": name, "action": action,
+            "sourceBlob": source_blob, "finishedAt": current_utc().isoformat(),
+            "result": response, "automaticRetry": False,
+            "modelWritesAuthorized": response.get("authorizedNativeExecution") is True}
+
+
+def record_interrupted_job(name, folder):
+    """Called by the singleton after restart, with no live attempt to wait for."""
+    path = folder / "attempted.json"
+    require(path.is_file(), "JOB_RESERVATION_WITHOUT_DURABLE_INTENT_INSPECT_LOCALLY")
+    attempt = json.loads(path.read_text(encoding="utf-8"))
+    require(attempt["job"] == name and attempt["action"] in ALLOWED
+            and re.fullmatch("[a-f0-9]{40}", attempt["sourceBlob"])
+            and attempt["currentProject"] == str(WORKING),
+            "INTERRUPTED_JOB_IDENTITY_DRIFT")
+    durable_write(folder / "result.json", result_payload(
+        name, attempt["action"], attempt["sourceBlob"], {
+            "jobStatus": "STOPPED_RECONCILE_NO_AUTORETRY",
+            "error": "PROCESS_INTERRUPTED_AFTER_DURABLE_INTENT",
+            "nativeOutcome": "UNKNOWN",
+            "nativeReplayAttempted": False,
+        }))
 
 
 def process_job(name):
     require(ID.fullmatch(name), "UNSAFE_JOB_ID")
     folder = STATE / name
     if folder.is_dir():
-        # Never re-execute a previously attempted job; retry publication only.
-        if (folder / "result.json").exists():
-            upload_result(name, folder)
+        # Never re-execute a previously attempted job. Expose interrupted
+        # work explicitly, then reconcile result publication separately.
+        if not (folder / "result.json").exists():
+            record_interrupted_job(name, folder)
+        upload_result(name, folder)
         return
     job, source_blob = remote_json(BRIDGE, f"{INBOX}/{name}.json", "main")
     validate_job(job, name)
@@ -633,16 +683,12 @@ def process_job(name):
             response = capture_approved_native_copy(job, folder)
         else:
             response = capture_read_task(job, folder)
-        response["jobStatus"] = "COMPLETE"
+        response["jobStatus"] = ("BLOCKED" if response.get("requiresIndependentReconciliationPerScene")
+                                 else "COMPLETE")
     except Exception as e:
         response = {"jobStatus": "STOPPED_RECONCILE_NO_AUTORETRY",
                     "error": type(e).__name__ + ": " + str(e)[:400]}
-    payload = {"schema": "APA_AC29_JOB_RESULT_V1",
-               "jobId": name, "action": job["action"],
-               "sourceBlob": source_blob,
-               "finishedAt": current_utc().isoformat(),
-               "result": response, "automaticRetry": False,
-               "modelWritesAuthorized": response.get("authorizedNativeExecution") is True}
+    payload = result_payload(name, job["action"], source_blob, response)
     durable_write(folder / "result.json", payload)
     upload_result(name, folder)
 
@@ -715,6 +761,7 @@ def main():
         print('APA_BRIDGE_HEALTHCHECK_PASS_NO_NATIVE_CALLS',flush=True)
         return
     require(10 <= args.interval_seconds <= 3600, "BAD_POLL_INTERVAL")
+    stable_preflight()
     STATE.mkdir(parents=True, exist_ok=True)
     handle = acquire_singleton()
     try:
