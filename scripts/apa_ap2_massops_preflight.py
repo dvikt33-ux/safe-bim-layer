@@ -166,6 +166,7 @@ def inspect(pdf, crop_receipt, model_report=None, *, page=AP2_PAGE,
             "requiresHumanReview": True,
         })
     count = Counter(p["family"] for p in placements)
+    require(digest(pdf) == expected_source_hash, "SOURCE_PDF_CHANGED_DURING_PREFLIGHT")
     return {
         "schema": SCHEMA,
         "status": "READ_ONLY_CANDIDATE_PREVIEW_NO_NATIVE_WRITE",

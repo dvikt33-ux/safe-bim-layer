@@ -94,6 +94,36 @@ class UnifiedAcceptance(unittest.TestCase):
         self.assertEqual(image["modelRealWorldScale"], "NOT_VERIFIED")
         self.assertEqual(digest(source), before)
 
+    def test_pdf_plan_crop_feeds_ap2_hosted_candidates_without_native_authority(self):
+        source = self.work / "Этаж.pdf"
+        with pymupdf.open() as pdf:
+            page = pdf.new_page(width=200, height=200)
+            page.insert_text((20, 30), "OK-3")
+            page.insert_text((50, 60), "OK-3")
+            page.insert_text((160, 160), "OK-3")
+            pdf.save(source)
+        folder = self.work / "crop"
+        candidates = self.work / "candidates.json"
+        common = {"a": str(source), "page": 1, "clip": [10, 10, 130, 130]}
+        graph = self.save("floorplan.json", {"operations": [
+            {"id": "crop", "command": "AddOn.APAArchitecturalSources.PDFPlanCrop",
+             "params": {**common, "output": str(folder)}},
+            {"id": "candidates", "command": "AddOn.APAArchitecturalSources.HostedOpeningCandidates",
+             "params": {**common, "output": str(candidates),
+                        "cropReceipt": {"$result": {"step": "crop", "pointer": "/outputEvidence"}},
+                        "sourceSha256": {"$result": {"step": "crop", "pointer": "/sourceSHA256"}}}},
+        ]})
+        result = self.invoke("run-read-workflow", "--graph", graph,
+                             "--output", self.work / "plan-workflow.json")
+        crop = apa.read_json(folder / "evidence.json")
+        self.assertEqual(crop["rasterSHA256"], digest(folder / "floorplan.png"))
+        preview = result["results"]["candidates"]
+        self.assertEqual(preview, apa.read_json(candidates))
+        self.assertEqual(preview["markCounts"], {"ОК-3": 2})
+        self.assertIsNone(preview["candidateBatches"][0]["nativeOperationChosen"])
+        self.assertFalse(preview["readyForModelWrite"])
+        self.assertEqual(preview["sourceSHA256"], digest(source))
+
     def test_architecture_and_mass_intents_share_existing_scene_writer_routes(self):
         source = apa.ROOT / "examples/accelerator/building-shell.intent.json"
         shell = self.invoke("plan", "--intent", source, "--output", self.work / "shell.json")

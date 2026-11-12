@@ -53,6 +53,8 @@ jobs:
           test_apa_dxf_geometry_c1
           test_apa_dxf_source_preflight
           test_apa_semantic_integration
+          test_apa_arch_plan_benchmark
+          test_apa_ap2_massops_preflight
           test_apa_ac29_mass_request
           test_archicad_building_shell_integration
           test_archicad_bim_documentation

@@ -173,6 +173,7 @@ def parser():
     cmd.add_argument("--story", type=int, required=True)
     cmd.add_argument("--output", type=Path, required=True)
     commands.add_parser("template-check", help="Проверить локальные спецификации шаблона")
+    commands.add_parser("template-runtime", help="Действующий интерфейс инвентаризации и настройки шаблона")
     commands.add_parser("project-runtime", help="Действующий интерфейс SceneWriter для проекта")
     commands.add_parser("group-runtime", help="Действующий протокол нативных групп и сверки PLN")
     return cli
@@ -189,6 +190,10 @@ def main(argv=None):
             from apa_ac29_group_batch_oneshot import main as group_main
 
             return group_main(argv[1:])
+        if argv and argv[0] == "template-runtime":
+            from archicad_template_builder import main as template_main
+
+            return template_main(argv[1:])
         args = parser().parse_args(argv)
         code = 0
         if args.mode == "doctor":

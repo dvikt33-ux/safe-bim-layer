@@ -91,6 +91,17 @@ class ExternalReadonlyTests(unittest.TestCase):
             self.assertEqual(proof["sources"][0]["sha256"], A.sha256(inp))
             self.assertEqual(proof["action"], "dxf-vectors")
 
+    def test_equivalent_worker_path_is_bound_to_original_source(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            source = root / "source.dxf"
+            source.write_bytes(b"DXF")
+            (root / "child").mkdir()
+            alias = root / "child" / ".." / source.name
+            with mock.patch.dict(A.OPERATIONS, {"dxf-vectors": lambda args: ({}, [alias])}):
+                result = A.execute("dxf-vectors", {"a": str(source), "output": str(root / "proof.json")})
+            self.assertEqual(result["sources"], [{"name": source.name, "sha256": A.sha256(source)}])
+
 
     def test_existing_dynamic_router_local_provider_registration(self):
         class Router:

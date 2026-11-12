@@ -61,3 +61,4 @@ Thumbs.db
 .apa-pip-install.log
 .apa-regressions.log
 .apa-unified-test.log
+.apa-followup-test.log

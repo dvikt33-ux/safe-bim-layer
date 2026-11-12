@@ -53,6 +53,63 @@ def document(a, guids, story, output):
             "nativeCalls": 0, "modelWrites": 0}
 
 
+def crop_plan(a, page, clip, output, dpi=144):
+    from apa_arch_plan_benchmark import extract
+
+    source = v2.input_file(a, ".pdf")
+    destination = Path(output).resolve()
+    v2.require(destination.parent.is_dir() and v2.STABLE.resolve() not in destination.parents,
+               "PDF_PLAN_CROP_OUTPUT_OUTSIDE_INSTALLED_APA_REQUIRED")
+    return extract(source, page, clip, destination, dpi)
+
+
+def opening_candidates(a, cropReceipt, sourceSha256, page, clip, output, modelReport=None):
+    from apa_ap2_massops_preflight import inspect
+
+    source = v2.input_file(a, ".pdf")
+    destination = v2.output_file(output, source)
+    result = inspect(source, cropReceipt, modelReport, page=page, clip=clip,
+                     expected_source_hash=sourceSha256)
+    payload = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
+    with destination.open("x", encoding="utf-8") as stream:
+        stream.write(payload + "\n")
+    return result
+
+
+def attach_architectural_sources(router):
+    string = {"type": "string", "minLength": 1}
+    digest = {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    common = {"a": string, "output": string, "page": {"type": "integer", "minimum": 1},
+              "clip": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "number"}}}
+    fields = {
+        "PDFPlanCrop": {**common, "dpi": {"type": "integer", "minimum": 72, "maximum": 400}},
+        "HostedOpeningCandidates": {**common, "cropReceipt": string, "sourceSha256": string,
+                                    "modelReport": string},
+    }
+    output_fields = {
+        "PDFPlanCrop": {"sourceSHA256": digest, "outputEvidence": string, "outputImage": string,
+                        "rasterSHA256": digest},
+        "HostedOpeningCandidates": {"sourceSHA256": digest, "readyForModelWrite": {"const": False},
+                                    "candidateBatches": {"type": "array"}},
+    }
+    namespace = "APAArchitecturalSources"
+    contracts = {}
+    for name, props in fields.items():
+        result = {**output_fields[name], "nativeCalls": {"const": 0}, "modelWrites": {"const": 0}}
+        contracts[name] = {"version": "1", "category": "APA_ARCHITECTURAL_SOURCE_ANALYSIS",
+                           "parameters": {"type": "object", "properties": props,
+                                          "required": [k for k in props if k not in ("dpi", "modelReport")],
+                                          "additionalProperties": False},
+                           "returns": {"type": "object", "properties": result, "required": list(result)}}
+    router.add_local_provider(namespace, contracts,
+                              {"PDFPlanCrop": crop_plan, "HostedOpeningCandidates": opening_candidates},
+                              "AP2 source-qualified PDF planning", {name: ["PyMuPDF"] for name in fields})
+    for name in contracts:
+        command = f"AddOn.{namespace}.{name}"
+        router.review_policy(command, "READ_ONLY", "READ_ONLY",
+                             {"source": "AP2 source-qualified PDF planning", "sha256": router.contract_hash(command)})
+
+
 def attach(router, *, semantic_profile=None):
     external.register(router, runner=external_worker.execute)
     v2.register(router, runner=v2.execute)
@@ -63,6 +120,7 @@ def attach(router, *, semantic_profile=None):
     dxf_preflight.register(router, handler=dxf_preflight.execute)
     semantic.register(router, runner=partial(semantic_worker.execute, ml_config=semantic_profile),
                       names=None if semantic_profile else ("PDFPaths", "PDFPageRaster"))
+    attach_architectural_sources(router)
 
     fields = {
         "a": {"type": "string", "minLength": 1},

@@ -4172,7 +4172,7 @@ def check_windows_fonts():
 
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
@@ -4194,7 +4194,7 @@ def main():
         default=None,
         help="Optional JSON result path.",
     )
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     run_id = time.strftime("%Y%m%d-%H%M%S")
     evidence = EVIDENCE_ROOT / run_id

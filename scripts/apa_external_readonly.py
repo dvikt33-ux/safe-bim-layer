@@ -314,8 +314,11 @@ OPERATIONS = {
 
 
 def execute(action, params):
-    kinds = {"a": {"pdf-vectors": "pdf", "dxf-vectors": "dxf"}.get(action, "ifc"),
-             "b": "ifc", "ids": "ids"}
+    kinds = {"a": {"pdf-vectors": "pdf", "dxf-vectors": "dxf"}.get(action, "ifc")}
+    if action in {"ifc-diff", "ifc-clash"}:
+        kinds["b"] = "ifc"
+    if action == "ids-validate":
+        kinds["ids"] = "ids"
     inputs = {source(params[key], kind) for key, kind in kinds.items() if params.get(key)}
     before = {path: sha256(path) for path in inputs}
     out = Path(params["output"]).resolve()
@@ -324,8 +327,10 @@ def execute(action, params):
     require(not out.exists() and out not in inputs, "OUTPUT_ALREADY_EXISTS_OR_COLLIDES_WITH_SOURCE")
     require(out != ROOT.resolve() and ROOT.resolve() not in out.parents,
             "OUTPUT_MUST_BE_OUTSIDE_INSTALLED_APA")
-    args = argparse.Namespace(**{key: params.get(key) for key in (*kinds, "output")})
+    args = argparse.Namespace(**{key: params.get(key) for key in ("a", "b", "ids", "output")})
     result, sources = OPERATIONS[action](args)
+    sources = [Path(path).resolve(strict=True) for path in sources]
+    require(set(sources) == inputs, "EXTERNAL_ANALYSIS_UNBOUND_SOURCE")
     require(all(sha256(path) == digest for path, digest in before.items()),
             "EXTERNAL_ANALYSIS_SOURCE_CHANGED")
     document = {"schema": "APA_EXTERNAL_READONLY_EVIDENCE_V1",
