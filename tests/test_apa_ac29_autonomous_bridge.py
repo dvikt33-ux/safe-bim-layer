@@ -183,6 +183,9 @@ class BddPairedLiveReadOnlyPreflight(TestCase):
                 "SCOPED_REGISTRY_PAIRED_HISTORY_READ_ONLY_PASS")
             self.assertEqual(result["modelWrites"],0)
             self.assertEqual(result["nativeSaveCalls"],0)
+            from apa_ac29_dynamic_native_verifiers import installed_verifiers
+            self.assertGreater(len(installed_verifiers()), len(result["registeredCodeOwnedCommands"]))
+            self.assertEqual(set(result["registeredCodeOwnedCommands"]), set(bridge.SCOPED_VERIFIER_ROUTES))
             self.assertEqual(len(result["unresolvedScenes"]),2)
             self.assertFalse(result["requiresIndependentReconciliationPerScene"])
             self.assertIs(opened.call_args.kwargs["execute"],False)
@@ -194,6 +197,16 @@ class GateTests(TestCase):
         # Unit ingress cases must never consult a real installed deployment.
         deployment=patch.object(bridge,'runtime_release',return_value=None)
         deployment.start();self.addCleanup(deployment.stop)
+
+    def test_scoped_verifier_effect_drift_fails_closed(self):
+        from dataclasses import replace
+        from apa_ac29_dynamic_native_verifiers import installed_verifiers
+
+        registry = installed_verifiers()
+        verifier_id = "VerifiedNativeColumns"
+        registry[verifier_id] = replace(registry[verifier_id], effect="MODIFY")
+        with self.assertRaisesRegex(ValueError, "SCOPED_PREFLIGHT_VERIFIER_MISSING_OR_DRIFTED"):
+            bridge.reviewed_verifiers(registry, bridge.SCOPED_VERIFIER_ROUTES)
 
     def test_model_fingerprint_consumes_existing_normalized_capture_once(self):
         import archicad_project_accelerator as A

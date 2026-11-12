@@ -44,10 +44,30 @@ ALLOWED = frozenset({"BDD114_ROOF_FINALIZE", "SOURCE_QUALIFIED_NATIVE_READ",
                      "CURRENT_MODEL_FINGERPRINT", "SCOPED_NATIVE_REGISTRY_PREFLIGHT",
                      "APPROVED_SCOPED_NATIVE_MUTATION"})
 
+SCOPED_VERIFIER_ROUTES = {
+    "CreateColumns": ("CREATE", "VerifiedNativeColumns"),
+    "CreateBeams": ("CREATE", "VerifiedNativeBasicBeam"),
+    "CreateWalls": ("CREATE", "VerifiedNativeBasicWall"),
+    "CreateRoofs": ("CREATE", "VerifiedNativeBasicRoof"),
+    "ModifySlabs": ("MODIFY", "VerifiedBasicSlabMaterial"),
+    "MoveElements": ("MODIFY", "VerifiedNativeTranslation"),
+}
+
 
 def require(ok, reason):
     if not ok:
         raise ValueError(reason)
+
+
+def reviewed_verifiers(registry, routes):
+    reviewed = {}
+    for command, (effect, verifier_id) in routes.items():
+        verifier = registry.get(verifier_id)
+        require(verifier is not None and
+                (verifier.command, verifier.effect, verifier.verifier_id) == (command, effect, verifier_id),
+                "SCOPED_PREFLIGHT_VERIFIER_MISSING_OR_DRIFTED:" + verifier_id)
+        reviewed[command] = verifier
+    return reviewed
 
 
 def sha(path):
@@ -340,13 +360,7 @@ def capture_scoped_registry_preflight(job, folder):
             sha(WORKING) == approved_saved_sha() and sha(ORIGINAL) == SOURCE_SHA,
             "SCOPED_PREFLIGHT_MODEL_CHANGED_DURING_READ")
 
-    registry = V.installed_verifiers()
-    require(len(registry) == 6 and
-            {(v.command, v.effect) for v in registry.values()} == {
-                ("CreateColumns", "CREATE"), ("MoveElements", "MODIFY"),
-                ("CreateBeams", "CREATE"), ("CreateWalls", "CREATE"),
-                ("CreateRoofs", "CREATE"), ("ModifySlabs", "MODIFY")},
-            "SCOPED_PREFLIGHT_INSTALLED_VERIFIER_SET_UNEXPECTED")
+    registry = reviewed_verifiers(V.installed_verifiers(), SCOPED_VERIFIER_ROUTES)
     schema_path = ROOT / "schemas/tapir-live-1.5.10/tapir-scene-live.json"
     require(schema_path.is_file(), "SCOPED_PREFLIGHT_INSTALLED_TAPIR_SCHEMA_MISSING")
     router = APA.native_command_router(schema_path, include_functional_modules=False)
@@ -741,22 +755,18 @@ def main():
         import apa_ac29_dynamic_native_verifiers as VERIFIERS
         import apa_ac29_multi_prototype_native_copy as MULTI
         require(callable(APA.run_scoped_native_task),'SCOPED_CORE_ENTRY_POINT_MISSING')
-        expected={'VerifiedNativeColumns','VerifiedNativeTranslation'}
+        pinned = (runtime_release() or {}).get('moduleHashes', {})
+        routes = {name: SCOPED_VERIFIER_ROUTES[name] for name in ('CreateColumns', 'MoveElements')}
         if {'apa_ac29_existing_create_verifiers.py',
-            'apa_ac29_existing_modify_verifiers.py'} <= set(
-                (runtime_release() or {}).get('moduleHashes',{})):
-            expected|={'VerifiedNativeBasicBeam','VerifiedNativeBasicWall',
-                       'VerifiedNativeBasicRoof','VerifiedBasicSlabMaterial'}
-        require(set(VERIFIERS.installed_verifiers())==expected and
-                callable(MULTI.reconcile_existing_multi_task),
+            'apa_ac29_existing_modify_verifiers.py'} <= set(pinned):
+            routes = SCOPED_VERIFIER_ROUTES
+        reviewed_verifiers(VERIFIERS.installed_verifiers(), routes)
+        require(callable(MULTI.reconcile_existing_multi_task),
                 'SCOPED_RUNTIME_DEPENDENCIES_MISSING')
-        if 'apa_ac29_scoped_native_executor.py' in (
-                runtime_release() or {}).get('moduleHashes',{}):
+        if 'apa_ac29_scoped_native_executor.py' in pinned:
             import apa_ac29_scoped_native_executor as SCOPED
             require(callable(SCOPED.execute) and
-                    len(SCOPED.SUPPORTED)==6 and
-                    SCOPED.SUPPORTED['CreateRoofs']==(
-                        'CREATE','VerifiedNativeBasicRoof'),
+                    SCOPED.SUPPORTED == SCOPED_VERIFIER_ROUTES,
                     'SCOPED_NATIVE_MAILBOX_EXECUTOR_NOT_INSTALLED')
         print('APA_BRIDGE_HEALTHCHECK_PASS_NO_NATIVE_CALLS',flush=True)
         return
