@@ -1,0 +1,76 @@
+name: APA unified integration
+
+on:
+  pull_request:
+    branches:
+      - feature/apa-ac29-native-slab-copy-20261020
+    paths:
+      - apa.py
+      - requirements-apa.lock
+      - scripts/**
+      - schemas/**
+      - examples/**
+      - archicad-addon/**
+      - tests/**
+      - docs/APA-UNIFIED.md
+      - .github/workflows/apa-unified.yml
+
+permissions:
+  contents: read
+
+jobs:
+  windows-offline:
+    runs-on: windows-latest
+    timeout-minutes: 12
+    env:
+      PYTHONUTF8: '1'
+      PYTHONPATH: 'scripts;tests'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.9'
+          cache: pip
+          cache-dependency-path: requirements-apa.lock
+      - name: Install locked runtime
+        run: |
+          python -m pip install -r requirements-apa.lock
+          python -m pip check
+          python -m apa doctor
+      - name: CLI workflows and existing contracts
+        run: >-
+          python -m unittest -v
+          test_apa_unified
+          test_apa_external_readonly
+          test_apa_external_pdfvectors_lossless
+          test_apa_high_density_readonly_v2
+          test_apa_ifc_reports_b1
+          test_apa_ifc_reports_contracts
+          test_apa_ifc_artifacts_b2
+          test_apa_ifc_geometry_b3
+          test_apa_dxf_geometry_c1
+          test_apa_dxf_source_preflight
+          test_apa_semantic_integration
+          test_apa_arch_plan_benchmark
+          test_apa_ap2_massops_preflight
+          test_apa_ac29_mass_request
+          test_archicad_building_shell_integration
+          test_archicad_bim_documentation
+          test_archicad_template_status
+          test_r03_recovery
+          test_r03_resume
+      - name: Package the tested commit
+        shell: pwsh
+        run: |
+          git archive --format=zip --prefix=APA-R03.1/ --output=APA-R03.1.zip HEAD
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $sha = (Get-FileHash APA-R03.1.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$sha  APA-R03.1.zip" | Set-Content -Encoding ascii APA-R03.1.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: APA-R03.1-${{ github.event.pull_request.head.sha }}
+          path: |
+            APA-R03.1.zip
+            APA-R03.1.sha256

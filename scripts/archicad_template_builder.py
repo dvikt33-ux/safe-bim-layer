@@ -776,7 +776,24 @@ def live_inventory(api: Tapir):
         stories = api.call("GetStories")
     except Exception as exc:
         stories = {"error": str(exc)}
+    # The live PowerShell launcher accepts only explicit status=PASS. A partial
+    # inventory must never masquerade as a successful prerequisite.
+    read_errors = {
+        f"attribute:{kind}": value["error"]
+        for kind, value in attrs.items()
+        if isinstance(value, dict) and "error" in value
+    }
+    for kind, value in (
+        ("calculationUnits", calculation_units),
+        ("geoLocation", geo),
+        ("stories", stories),
+    ):
+        if isinstance(value, dict) and "error" in value:
+            read_errors[kind] = value["error"]
     return {
+        "status": "PASS" if not read_errors else "BLOCKED_INVENTORY",
+        "writePerformed": False,
+        "readErrors": read_errors,
         "project": project,
         "elementCount": len(elements),
         "projectInfoFields": fields,
@@ -808,6 +825,12 @@ def plan_summary(inventory=None):
     graphics = load_yaml(GRAPHICS_SPEC)
     targets = project_info_targets()
     result = {
+        "status": (
+            inventory["status"] if inventory is not None
+            and inventory.get("status") != "PASS"
+            else validation["status"]
+        ),
+        "writePerformed": False,
         "validation": validation,
         "safeCore": {
             "projectInfoFields": list(targets),
@@ -1049,6 +1072,24 @@ def apply_safe_core(api: Tapir, allow_nonempty=False):
 
     # Read-back inventory is the authoritative postcondition.
     after = live_inventory(api)
+    if after.get("status") != "PASS":
+        raise RuntimeError(
+            f"Safe-core read-back inventory is incomplete: {after.get('readErrors', {})}"
+        )
+    project_fields = {
+        x["projectInfoName"]: x["projectInfoValue"]
+        for x in after["projectInfoFields"]
+        if x["projectInfoName"].startswith("SBIM.")
+    }
+    missing_or_wrong_fields = {
+        key: {"expected": expected, "actual": project_fields.get(key)}
+        for key, expected in project_info_targets().items()
+        if project_fields.get(key) != expected
+    }
+    if missing_or_wrong_fields:
+        raise RuntimeError(
+            f"SBIM Project Info read-back mismatch: {missing_or_wrong_fields}"
+        )
     outcome["postconditions"] = {
         "elementCountAfter": after["elementCount"],
         "geometryCountUnchanged": after["elementCount"] == len(elements),
@@ -1056,16 +1097,13 @@ def apply_safe_core(api: Tapir, allow_nonempty=False):
             key: len(value) if isinstance(value, list) else None
             for key, value in after["attributes"].items()
         },
-        "projectInfoFields": {
-            x["projectInfoName"]: x["projectInfoValue"]
-            for x in after["projectInfoFields"]
-            if x["projectInfoName"].startswith("SBIM.")
-        },
+        "projectInfoFields": project_fields,
     }
     if not outcome["postconditions"]["geometryCountUnchanged"]:
         raise RuntimeError(
             "Unexpected model element count change during safe-core build; inspect evidence."
         )
+    outcome["status"] = "PASS"
     return outcome
 
 
@@ -4134,13 +4172,18 @@ def check_windows_fonts():
 
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
         choices=("confirm-project", "validate", "font-preflight", "inspect", "plan", "plan-materials", "plan-data-schema", "plan-navigator", "plan-master-layouts", "plan-master-coordinate-calibration", "plan-form3-geometry", "plan-autotext", "apply-core", "apply-surfaces", "apply-ready-materials", "apply-data-schema", "apply-navigator-shell", "apply-master-layout-shell", "apply-master-layout-smoke", "apply-layout-autotext-smoke", "apply-master-context-autotext-smoke", "apply-master-coordinate-calibration", "apply-form3-core-geometry", "apply-form3-static-labels", "apply-form3-autotext"),
     )
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
+    parser.add_argument(
+        "--expected-project-path",
+        default="",
+        help="Exact active project path confirmed by the launcher before any apply-* call.",
+    )
     parser.add_argument(
         "--allow-nonempty",
         action="store_true",
@@ -4151,7 +4194,7 @@ def main():
         default=None,
         help="Optional JSON result path.",
     )
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     run_id = time.strftime("%Y%m%d-%H%M%S")
     evidence = EVIDENCE_ROOT / run_id
@@ -4247,7 +4290,9 @@ def main():
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
     status = result.get("status") if isinstance(result, dict) else None
-    if status in ("FAIL", "BLOCKED_PLATFORM"):
+    # Any explicit BLOCKED_* state is a failing CLI outcome, not a warning.
+    # A missing status is also an invalid result contract for every action.
+    if status != "PASS":
         raise SystemExit(2)
 
 

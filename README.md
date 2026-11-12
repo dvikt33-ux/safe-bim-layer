@@ -1,5 +1,7 @@
 # Working Archicad MVP
 
+[APA R03.1 — запуск интеграционной сборки](docs/APA-UNIFIED.md)
+
 > **Current installed application (2026-10-09): Archicad 29.2.1 (5101) RUS FULL (x86-64).**
 > See [current runtime and post-update verification](docs/ARCHICAD_RUNTIME_CURRENT.md).
 > References to `Archicad 29 DevKit` / `AC29` below denote major-version compatibility, not an older installation.

@@ -44,10 +44,30 @@ ALLOWED = frozenset({"BDD114_ROOF_FINALIZE", "SOURCE_QUALIFIED_NATIVE_READ",
                      "CURRENT_MODEL_FINGERPRINT", "SCOPED_NATIVE_REGISTRY_PREFLIGHT",
                      "APPROVED_SCOPED_NATIVE_MUTATION"})
 
+SCOPED_VERIFIER_ROUTES = {
+    "CreateColumns": ("CREATE", "VerifiedNativeColumns"),
+    "CreateBeams": ("CREATE", "VerifiedNativeBasicBeam"),
+    "CreateWalls": ("CREATE", "VerifiedNativeBasicWall"),
+    "CreateRoofs": ("CREATE", "VerifiedNativeBasicRoof"),
+    "ModifySlabs": ("MODIFY", "VerifiedBasicSlabMaterial"),
+    "MoveElements": ("MODIFY", "VerifiedNativeTranslation"),
+}
+
 
 def require(ok, reason):
     if not ok:
         raise ValueError(reason)
+
+
+def reviewed_verifiers(registry, routes):
+    reviewed = {}
+    for command, (effect, verifier_id) in routes.items():
+        verifier = registry.get(verifier_id)
+        require(verifier is not None and
+                (verifier.command, verifier.effect, verifier.verifier_id) == (command, effect, verifier_id),
+                "SCOPED_PREFLIGHT_VERIFIER_MISSING_OR_DRIFTED:" + verifier_id)
+        reviewed[command] = verifier
+    return reviewed
 
 
 def sha(path):
@@ -103,15 +123,18 @@ def approved_guid_count():
     return receipt['expectedGuidCount'] if receipt else 290
 
 
-def gh_api(path, *, body=None):
+def gh_api(path, *, body=None, allow_missing=False):
     cmd = ["gh", "api"]
     if body is not None:
         cmd += ["--method", "PUT", path, "--input", str(body)]
     else:
         cmd.append(path)
     p = subprocess.run(cmd, capture_output=True, timeout=50)
-    require(p.returncode == 0, "GITHUB_UNAVAILABLE:" +
-            p.stderr.decode("utf-8", errors="replace")[-250:])
+    error = p.stderr.decode("utf-8", errors="replace")
+    if allow_missing and body is None and p.returncode != 0 and re.search(
+            r"(?m)^gh: .* \(HTTP 404\)\s*$", error):
+        return None
+    require(p.returncode == 0, "GITHUB_UNAVAILABLE:" + error[-250:])
     return json.loads(p.stdout.decode("utf-8"))
 
 
@@ -337,13 +360,7 @@ def capture_scoped_registry_preflight(job, folder):
             sha(WORKING) == approved_saved_sha() and sha(ORIGINAL) == SOURCE_SHA,
             "SCOPED_PREFLIGHT_MODEL_CHANGED_DURING_READ")
 
-    registry = V.installed_verifiers()
-    require(len(registry) == 6 and
-            {(v.command, v.effect) for v in registry.values()} == {
-                ("CreateColumns", "CREATE"), ("MoveElements", "MODIFY"),
-                ("CreateBeams", "CREATE"), ("CreateWalls", "CREATE"),
-                ("CreateRoofs", "CREATE"), ("ModifySlabs", "MODIFY")},
-            "SCOPED_PREFLIGHT_INSTALLED_VERIFIER_SET_UNEXPECTED")
+    registry = reviewed_verifiers(V.installed_verifiers(), SCOPED_VERIFIER_ROUTES)
     schema_path = ROOT / "schemas/tapir-live-1.5.10/tapir-scene-live.json"
     require(schema_path.is_file(), "SCOPED_PREFLIGHT_INSTALLED_TAPIR_SCHEMA_MISSING")
     router = APA.native_command_router(schema_path, include_functional_modules=False)
@@ -585,29 +602,76 @@ def durable_write(path, obj):
 def upload_result(name, folder):
     report = folder / "result.json"
     require(report.is_file(), "NO_DURABLE_REPORT_TO_PUBLISH")
+    data = report.read_bytes()
+    expected_blob = git_sha(data)
     marker = folder / "published.json"
     if marker.exists():
-        return
-    content = base64.b64encode(report.read_bytes()).decode("ascii")
-    payload = {"branch": "main",
-               "message": "APA AC29 one-shot source-qualified job result " + name,
-               "content": content}
-    manifest = folder / "upload.json"
-    durable_write(manifest, payload)
+        saved_marker = json.loads(marker.read_text(encoding="utf-8"))
+        require(saved_marker["sha"] == expected_blob, "PUBLISHED_LOCAL_REPORT_DRIFT")
+        if saved_marker.get("verifiedBytes") is True:
+            return
     remote = f"{RESULTS}/{name}.json"
-    result = gh_api(f"repos/{BRIDGE}/contents/{remote}", body=manifest)
-    durable_write(marker, {"sha": result["content"]["sha"],
-                           "url": result["content"]["html_url"]})
-    print("PUBLISHED:", result["content"]["html_url"], flush=True)
+    endpoint = f"repos/{BRIDGE}/contents/{remote}"
+    read_path = endpoint + "?ref=main"
+    observed = gh_api(read_path, allow_missing=True)
+    if observed is None:
+        manifest = folder / "upload.json"
+        durable_write(manifest, {
+            "branch": "main", "message": "APA AC29 one-shot source-qualified job result " + name,
+            "content": base64.b64encode(data).decode("ascii")})
+        try:
+            gh_api(endpoint, body=manifest)
+        except (ValueError, OSError, subprocess.TimeoutExpired):
+            # A lost reply can follow a successful create. Reconcile before
+            # any subsequent PUT and never supply an overwrite SHA.
+            observed = gh_api(read_path, allow_missing=True)
+            if observed is None:
+                raise
+        else:
+            observed = gh_api(read_path, allow_missing=True)
+    require(isinstance(observed, dict) and observed.get("type") == "file"
+            and observed.get("sha") == expected_blob and observed.get("encoding") == "base64"
+            and base64.b64decode(observed.get("content", "")) == data
+            and report.read_bytes() == data,
+            "REMOTE_RESULT_CONFLICT_OR_READBACK_MISSING")
+    durable_write(marker, {"sha": expected_blob, "url": observed["html_url"], "verifiedBytes": True})
+    print("PUBLISHED:", observed["html_url"], flush=True)
+
+
+def result_payload(name, action, source_blob, response):
+    return {"schema": "APA_AC29_JOB_RESULT_V1", "jobId": name, "action": action,
+            "sourceBlob": source_blob, "finishedAt": current_utc().isoformat(),
+            "result": response, "automaticRetry": False,
+            "modelWritesAuthorized": response.get("authorizedNativeExecution") is True}
+
+
+def record_interrupted_job(name, folder):
+    """Called by the singleton after restart, with no live attempt to wait for."""
+    path = folder / "attempted.json"
+    require(path.is_file(), "JOB_RESERVATION_WITHOUT_DURABLE_INTENT_INSPECT_LOCALLY")
+    attempt = json.loads(path.read_text(encoding="utf-8"))
+    require(attempt["job"] == name and attempt["action"] in ALLOWED
+            and re.fullmatch("[a-f0-9]{40}", attempt["sourceBlob"])
+            and attempt["currentProject"] == str(WORKING),
+            "INTERRUPTED_JOB_IDENTITY_DRIFT")
+    durable_write(folder / "result.json", result_payload(
+        name, attempt["action"], attempt["sourceBlob"], {
+            "jobStatus": "STOPPED_RECONCILE_NO_AUTORETRY",
+            "error": "PROCESS_INTERRUPTED_AFTER_DURABLE_INTENT",
+            "nativeOutcome": "UNKNOWN",
+            "nativeReplayAttempted": False,
+        }))
 
 
 def process_job(name):
     require(ID.fullmatch(name), "UNSAFE_JOB_ID")
     folder = STATE / name
     if folder.is_dir():
-        # Never re-execute a previously attempted job; retry publication only.
-        if (folder / "result.json").exists():
-            upload_result(name, folder)
+        # Never re-execute a previously attempted job. Expose interrupted
+        # work explicitly, then reconcile result publication separately.
+        if not (folder / "result.json").exists():
+            record_interrupted_job(name, folder)
+        upload_result(name, folder)
         return
     job, source_blob = remote_json(BRIDGE, f"{INBOX}/{name}.json", "main")
     validate_job(job, name)
@@ -633,16 +697,12 @@ def process_job(name):
             response = capture_approved_native_copy(job, folder)
         else:
             response = capture_read_task(job, folder)
-        response["jobStatus"] = "COMPLETE"
+        response["jobStatus"] = ("BLOCKED" if response.get("requiresIndependentReconciliationPerScene")
+                                 else "COMPLETE")
     except Exception as e:
         response = {"jobStatus": "STOPPED_RECONCILE_NO_AUTORETRY",
                     "error": type(e).__name__ + ": " + str(e)[:400]}
-    payload = {"schema": "APA_AC29_JOB_RESULT_V1",
-               "jobId": name, "action": job["action"],
-               "sourceBlob": source_blob,
-               "finishedAt": current_utc().isoformat(),
-               "result": response, "automaticRetry": False,
-               "modelWritesAuthorized": response.get("authorizedNativeExecution") is True}
+    payload = result_payload(name, job["action"], source_blob, response)
     durable_write(folder / "result.json", payload)
     upload_result(name, folder)
 
@@ -695,26 +755,23 @@ def main():
         import apa_ac29_dynamic_native_verifiers as VERIFIERS
         import apa_ac29_multi_prototype_native_copy as MULTI
         require(callable(APA.run_scoped_native_task),'SCOPED_CORE_ENTRY_POINT_MISSING')
-        expected={'VerifiedNativeColumns','VerifiedNativeTranslation'}
+        pinned = (runtime_release() or {}).get('moduleHashes', {})
+        routes = {name: SCOPED_VERIFIER_ROUTES[name] for name in ('CreateColumns', 'MoveElements')}
         if {'apa_ac29_existing_create_verifiers.py',
-            'apa_ac29_existing_modify_verifiers.py'} <= set(
-                (runtime_release() or {}).get('moduleHashes',{})):
-            expected|={'VerifiedNativeBasicBeam','VerifiedNativeBasicWall',
-                       'VerifiedNativeBasicRoof','VerifiedBasicSlabMaterial'}
-        require(set(VERIFIERS.installed_verifiers())==expected and
-                callable(MULTI.reconcile_existing_multi_task),
+            'apa_ac29_existing_modify_verifiers.py'} <= set(pinned):
+            routes = SCOPED_VERIFIER_ROUTES
+        reviewed_verifiers(VERIFIERS.installed_verifiers(), routes)
+        require(callable(MULTI.reconcile_existing_multi_task),
                 'SCOPED_RUNTIME_DEPENDENCIES_MISSING')
-        if 'apa_ac29_scoped_native_executor.py' in (
-                runtime_release() or {}).get('moduleHashes',{}):
+        if 'apa_ac29_scoped_native_executor.py' in pinned:
             import apa_ac29_scoped_native_executor as SCOPED
             require(callable(SCOPED.execute) and
-                    len(SCOPED.SUPPORTED)==6 and
-                    SCOPED.SUPPORTED['CreateRoofs']==(
-                        'CREATE','VerifiedNativeBasicRoof'),
+                    SCOPED.SUPPORTED == SCOPED_VERIFIER_ROUTES,
                     'SCOPED_NATIVE_MAILBOX_EXECUTOR_NOT_INSTALLED')
         print('APA_BRIDGE_HEALTHCHECK_PASS_NO_NATIVE_CALLS',flush=True)
         return
     require(10 <= args.interval_seconds <= 3600, "BAD_POLL_INTERVAL")
+    stable_preflight()
     STATE.mkdir(parents=True, exist_ok=True)
     handle = acquire_singleton()
     try:
