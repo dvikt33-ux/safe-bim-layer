@@ -77,6 +77,10 @@ def compile_plan(router, intent):
         return core.compile_intent(intent, core.RUN.DEFAULT_SCENE_SCHEMA, router)
     if schema == "apa-native-optimizer/1":
         return core.prepare_optimized_native_task(router, intent)
+    if schema == "apa-native-mass-request/1":
+        from apa_ac29_mass_request import prepare_mass_request
+
+        return prepare_mass_request(router, intent)
     return core.prepare_auto_optimized_native_task(router, intent)
 
 
