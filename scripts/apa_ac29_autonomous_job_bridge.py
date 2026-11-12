@@ -23,6 +23,9 @@ import time
 ROOT = Path(r"C:\LocalAI\APA_AC29_Stable")
 SCRIPTS = ROOT / "scripts"
 STATE = ROOT / "apa-job-bridge-state"
+INSTALLED_STATE = STATE
+PACKAGE_PROFILE = None
+PORT = 19727
 WORKING = Path(r"C:\LocalAI\SafeBIM_Global_Library_Test_Projects\BDD дом - по чертежам 2022.pln")
 ORIGINAL = Path(r"C:\LocalAI\SafeBIM_Global_Library_Test_Projects\BDD дом .pln")
 SOURCE_SHA = "33b96850ad07547a9b12524de8bc46479fd98fbbce6772436d388be679836d66"
@@ -114,11 +117,15 @@ def runtime_release():
 
 
 def approved_saved_sha():
+    if PACKAGE_PROFILE:
+        return PACKAGE_PROFILE.saved["savedSHA256"]
     receipt=runtime_release()
     return receipt['workingPlnSha256'] if receipt else BASE_SHA
 
 
 def approved_guid_count():
+    if PACKAGE_PROFILE:
+        return PACKAGE_PROFILE.guid_count
     receipt=runtime_release()
     return receipt['expectedGuidCount'] if receipt else 290
 
@@ -197,6 +204,9 @@ def validate_job(job, name):
 
 
 def stable_preflight():
+    if PACKAGE_PROFILE:
+        PACKAGE_PROFILE.check_package()
+        return
     require(SCRIPTS.is_dir() and
             (ROOT / "apa-selector-install-receipt.json").is_file(),
             "STABLE_APA_DEPLOYMENT_ABSENT")
@@ -215,6 +225,23 @@ def stable_preflight():
             "STABLE_INSTALL_RECEIPT_NOT_PASS")
 
 
+def configure_packaged_readonly(path):
+    """Use this release's router and an explicit saved-copy profile."""
+    from apa_mailbox_profile import PackageProfile
+
+    global PACKAGE_PROFILE, ROOT, SCRIPTS, STATE, WORKING, ORIGINAL, SOURCE_SHA, ALLOWED, PORT
+    require(PACKAGE_PROFILE is None, "PACKAGE_RECEIVER_ALREADY_CONFIGURED")
+    profile = PackageProfile(Path(__file__).resolve().parents[1], path)
+    PACKAGE_PROFILE = profile
+    ROOT, SCRIPTS, STATE = profile.root, profile.root / "scripts", profile.history
+    WORKING, ORIGINAL = profile.working, profile.donor
+    SOURCE_SHA, PORT = profile.saved["sourceSHA256"], profile.port
+    ALLOWED = frozenset({"SOURCE_QUALIFIED_NATIVE_READ"})
+    return {"status": "PACKAGE_RECEIVER_PROFILE_VERIFIED", "revision": profile.release["revision"],
+            "projectSHA256": approved_saved_sha(), "expectedGuidCount": approved_guid_count(),
+            "port": PORT, "actions": sorted(ALLOWED), "nativeCalls": 0}
+
+
 def capture_read_task(job, folder):
     """End-to-end typed read through the ORIGINAL APA selector and executor."""
     spec = job["sourceTask"]
@@ -230,14 +257,16 @@ def capture_read_task(job, folder):
     import archicad_strategy_discovery as DISC
     import archicad_scene_run as RUN
     RUN.bind_authorized_saved_copy(
-        19727, str(WORKING), WORKING.stem, approved_saved_sha(),
+        PORT, str(WORKING), WORKING.stem, approved_saved_sha(),
         "APA_AC29_GITHUB_JOB_READ_ONLY_" + job["jobId"]
     )
-    export = folder / "live-schema"
-    exported = APA.export_schema(export, APA.native_transport)
     raw = folder / "raw"
     raw.mkdir()
     api = APA.EvidenceAPI(APA.native_transport, raw, execute=False)
+    if PACKAGE_PROFILE:
+        PACKAGE_PROFILE.check_native(api)
+    export = folder / "live-schema"
+    exported = APA.export_schema(export, APA.native_transport)
     guids_before = APA.inventory_guids(api)
     require(len(guids_before) == approved_guid_count(), "BDD_NATIVE_GUID_COUNT_DRIFT")
     writer = RUN.SceneWriter(api, folder / "read-only-unused.sqlite",
@@ -665,6 +694,9 @@ def record_interrupted_job(name, folder):
 
 def process_job(name):
     require(ID.fullmatch(name), "UNSAFE_JOB_ID")
+    if PACKAGE_PROFILE and (INSTALLED_STATE / name).exists():
+        # A different profile cannot reconcile or replay an installed attempt.
+        return
     folder = STATE / name
     if folder.is_dir():
         # Never re-execute a previously attempted job. Expose interrupted
@@ -728,13 +760,13 @@ def poll_once():
 def acquire_singleton():
     """Windows process lock; no duplicate autostart worker may execute jobs."""
     import msvcrt
-    lock = STATE / ".single-instance.lock"
-    file = lock.open("a+b")
+    file = PACKAGE_PROFILE.mutex() if PACKAGE_PROFILE else (STATE / ".single-instance.lock").open("a+b")
     file.seek(0)
     try:
-        file.write(b"\0")
-        file.flush()
-        file.seek(0)
+        if PACKAGE_PROFILE is None:
+            file.write(b"\0")
+            file.flush()
+            file.seek(0)
         msvcrt.locking(file.fileno(), msvcrt.LK_NBLCK, 1)
     except OSError:
         file.close()
@@ -742,12 +774,18 @@ def acquire_singleton():
     return file
 
 
-def main():
+def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--loop", action="store_true", help="Persistent single worker")
     ap.add_argument('--healthcheck',action='store_true',help='Local integrity/import check; no inbox or Archicad calls')
     ap.add_argument("--interval-seconds", type=int, default=30)
-    args = ap.parse_args()
+    ap.add_argument("--package-profile", type=Path, help="Local profile for the packaged read-only receiver")
+    args = ap.parse_args(argv)
+    if args.package_profile:
+        profile_status = configure_packaged_readonly(args.package_profile)
+        if args.healthcheck:
+            print(json.dumps(profile_status, ensure_ascii=False, indent=2))
+            return
     if args.healthcheck:
         stable_preflight()
         sys.path.insert(0,str(SCRIPTS))

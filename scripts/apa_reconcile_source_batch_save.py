@@ -86,6 +86,9 @@ def reconcile(args):
     finally:
         if api:result.update(createCalls=sum(v for k,v in api.calls.items() if k.startswith('Create')),saveCalls=api.calls['SaveProject'],calls=dict(api.calls))
         B.write(out/'reconciliation-report.json',result)
-if __name__=='__main__':
+def cli(argv=None):
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run',required=True)
-    reconcile(p.parse_args())
+    reconcile(p.parse_args(argv))
+
+if __name__=='__main__':
+    cli()

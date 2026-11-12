@@ -1,0 +1,139 @@
+{
+  "operaExe": "C:\\Program Files\\Opera\\launcher.exe",
+  "extensionId": "infppggnoaenmfagbfknfkancpbljcca",
+  "targets": {
+    "D-01": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "DIR-01": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "D-02": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "DIR-02": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "D-03": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "DIR-03": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "D-04": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "DIR-04": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "D-05": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "DIR-05": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "D-06": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "DIR-06": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "D-07": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "DIR-07": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "D-08": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "DIR-08": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "SECRETARIAT": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "HQ": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    },
+    "APA-CONTROL": {
+      "workflowId": "REPLACE_SHARED_AUTOMA_WORKFLOW_ID",
+      "chatUrl": "REPLACE_WITH_EXISTING_CHAT_URL"
+    }
+  },
+  "routes": {
+    "D-01": {
+      "REPORT_READY": "DIR-01"
+    },
+    "DIR-01": {
+      "DEPARTMENT_REPORT_READY": "SECRETARIAT"
+    },
+    "D-02": {
+      "REPORT_READY": "DIR-02"
+    },
+    "DIR-02": {
+      "DEPARTMENT_REPORT_READY": "SECRETARIAT"
+    },
+    "D-03": {
+      "REPORT_READY": "DIR-03"
+    },
+    "DIR-03": {
+      "DEPARTMENT_REPORT_READY": "SECRETARIAT"
+    },
+    "D-04": {
+      "REPORT_READY": "DIR-04"
+    },
+    "DIR-04": {
+      "DEPARTMENT_REPORT_READY": "SECRETARIAT"
+    },
+    "D-05": {
+      "REPORT_READY": "DIR-05"
+    },
+    "DIR-05": {
+      "DEPARTMENT_REPORT_READY": "SECRETARIAT"
+    },
+    "D-06": {
+      "REPORT_READY": "DIR-06"
+    },
+    "DIR-06": {
+      "DEPARTMENT_REPORT_READY": "SECRETARIAT"
+    },
+    "D-07": {
+      "REPORT_READY": "DIR-07"
+    },
+    "DIR-07": {
+      "DEPARTMENT_REPORT_READY": "SECRETARIAT"
+    },
+    "D-08": {
+      "REPORT_READY": "HQ"
+    },
+    "SECRETARIAT": {
+      "HQ_BRIEF_READY": "HQ"
+    }
+  },
+  "externalEntryTargets": ["D-01", "D-02", "D-03", "D-04", "D-05", "D-06", "D-07", "D-08"],
+  "pollSeconds": 5,
+  "callbackPort": 18765,
+  "apaEnabled": true,
+  "apaBridgePath": "C:\\LocalAI\\APA_AC29_Stable\\controllers\\apa_ac29_autonomous_job_bridge.py",
+  "apaBridgeSha256": "AUTO_PIN_INSTALLED_BRIDGE",
+  "dispatchArmed": false
+}

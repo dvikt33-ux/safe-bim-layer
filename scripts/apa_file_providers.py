@@ -41,7 +41,8 @@ def document(a, guids, story, output):
     else:
         v2.require(all(isinstance(row.get("bodies"), list) for row in model["elements"]),
                    "DOCUMENTATION_NORMALIZED_BODIES_REQUIRED")
-    package = bundle(make_snapshot(model, guids), story)
+    selection = [element["guid"] for element in model["elements"]] if guids is None else guids
+    package = bundle(make_snapshot(model, selection), story)
     v2.require(v2.digest(source) == source_hash, "DOCUMENTATION_SOURCE_CHANGED")
     write_package(package, destination)
     report = destination / "documentation.json"
@@ -124,8 +125,8 @@ def attach(router, *, semantic_profile=None):
 
     fields = {
         "a": {"type": "string", "minLength": 1},
-        "guids": {"type": "array", "items": {"type": "string", "format": "uuid"},
-                  "minItems": 1, "uniqueItems": True},
+        "guids": {"anyOf": [{"type": "array", "items": {"type": "string", "format": "uuid"},
+                             "minItems": 1, "uniqueItems": True}, {"type": "null"}]},
         "story": {"type": "integer"},
         "output": {"type": "string", "minLength": 1},
     }

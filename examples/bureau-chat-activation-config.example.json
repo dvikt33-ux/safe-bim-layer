@@ -1,0 +1,9 @@
+{
+  "operaExe": "C:\\Program Files\\Opera\\launcher.exe",
+  "extensionId": "infppggnoaenmfagbfknfkancpbljcca",
+  "targets": {
+    "D-03": {
+      "workflowId": "REPLACE_WITH_EXISTING_AUTOMA_WORKFLOW_ID"
+    }
+  }
+}

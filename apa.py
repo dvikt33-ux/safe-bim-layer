@@ -169,31 +169,70 @@ def parser():
     cmd.add_argument("--page", type=int, default=1)
     cmd = commands.add_parser("documentation", help="Собрать документацию по снимку модели")
     cmd.add_argument("--native-dump", type=Path, required=True)
-    cmd.add_argument("--guids", type=Path, required=True)
+    selection = cmd.add_mutually_exclusive_group(required=True)
+    selection.add_argument("--guids", type=Path)
+    selection.add_argument("--all-dump-elements", action="store_true")
     cmd.add_argument("--story", type=int, required=True)
     cmd.add_argument("--output", type=Path, required=True)
     commands.add_parser("template-check", help="Проверить локальные спецификации шаблона")
     commands.add_parser("template-runtime", help="Действующий интерфейс инвентаризации и настройки шаблона")
     commands.add_parser("project-runtime", help="Действующий интерфейс SceneWriter для проекта")
+    commands.add_parser("connected-runtime", help="Существующие связные операции крыши и MEP через SceneWriter")
+    cmd = commands.add_parser("architecture-runtime", help="Операции оболочки на подготовленной изолированной копии")
+    cmd.add_argument("phase", choices=("status", "preflight", "execute"))
+    cmd.add_argument("--job", type=Path, required=True)
+    cmd.add_argument("--port", type=int)
     commands.add_parser("group-runtime", help="Действующий протокол нативных групп и сверки PLN")
+    commands.add_parser("source-batch", help="Существующий протокол пакетного создания по подтверждённым источникам")
+    commands.add_parser("source-batch-reconcile", help="Сверка прерванного пакетного создания по источникам")
+    commands.add_parser("mailbox", help="Приёмник APA с квитанциями и профилем чтения")
+    commands.add_parser("bureau", help="Очередь и существующий диспетчер бюро")
+    commands.add_parser("knowledge", help="Запросы, пересборка индекса и MCP для настроенного источника")
+    cmd = commands.add_parser("mailbox-profile", help="Связать приёмник чтения с проверенной копией PLN")
+    cmd.add_argument("--state", type=Path, required=True)
+    cmd.add_argument("--port", type=int, required=True)
+    cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("bureau-profile", help="Подготовить отдельную конфигурацию бюро для этой сборки")
+    cmd.add_argument("--config", type=Path, required=True)
+    cmd.add_argument("--profile", type=Path, required=True)
+    cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("tdk-wall", help="Подготовить или сверить Wall.Ensure")
+    cmd.add_argument("--payload", type=Path, required=True)
+    cmd.add_argument("--profile", type=Path)
+    cmd.add_argument("--journal", type=Path)
+    cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("library-pack", help="Подготовить привязанный к источнику комплект проекта")
+    cmd.add_argument("--brief", type=Path, required=True)
+    cmd.add_argument("--candidate", type=Path, required=True)
+    cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("knowledge-query", help="Запрос к включённому снимку реестра APA")
+    cmd.add_argument("--query", required=True)
+    cmd.add_argument("--mode", dest="knowledge_mode", choices=("plan", "research"), default="plan")
+    cmd.add_argument("--cache", type=Path, required=True)
+    cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("arena-receipt", help="Прочитать локальную квитанцию завершения Arena")
+    cmd.add_argument("--receipt", type=Path, required=True)
+    cmd.add_argument("--output", type=Path, required=True)
     return cli
 
 
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
     try:
-        if argv and argv[0] == "project-runtime":
-            from archicad_project_accelerator import main as project_main
+        routes = {"project-runtime": ("archicad_project_accelerator", "main"),
+                  "connected-runtime": ("archicad_connected_components", "main"),
+                  "group-runtime": ("apa_ac29_group_batch_oneshot", "main"),
+                  "template-runtime": ("archicad_template_builder", "main"),
+                  "source-batch": ("apa_source_qualified_native_batch", "cli"),
+                  "source-batch-reconcile": ("apa_reconcile_source_batch_save", "cli"),
+                  "mailbox": ("apa_ac29_autonomous_job_bridge", "main"),
+                  "bureau": ("bureau_unified_service", "main"),
+                  "knowledge": ("archicad_knowledge_access", "main")}
+        if argv and argv[0] in routes:
+            from importlib import import_module
 
-            return project_main(argv[1:])
-        if argv and argv[0] == "group-runtime":
-            from apa_ac29_group_batch_oneshot import main as group_main
-
-            return group_main(argv[1:])
-        if argv and argv[0] == "template-runtime":
-            from archicad_template_builder import main as template_main
-
-            return template_main(argv[1:])
+            module, entry = routes[argv[0]]
+            return getattr(import_module(module), entry)(argv[1:])
         args = parser().parse_args(argv)
         code = 0
         if args.mode == "doctor":
@@ -204,6 +243,53 @@ def main(argv=None):
 
             result = validate_specs()
             code = 0 if result["status"] == "PASS" else 2
+        elif args.mode == "mailbox-profile":
+            from apa_mailbox_profile import make_profile
+
+            result = make_profile(ROOT, args.state, args.port)
+            write_json(args.output, result)
+        elif args.mode == "bureau-profile":
+            from apa_mailbox_profile import PackageProfile
+            from bureau_unified_service import validate_config
+
+            profile_path = args.profile.resolve(strict=True)
+            profile = PackageProfile(ROOT, profile_path)
+            config = validate_config(dict(read_json(args.config), apaEnabled=True,
+                                          apaProfile=str(profile_path), dispatchArmed=False))
+            write_json(args.output, config)
+            result = {"status": "BUREAU_CONFIGURATION_PREPARED", "revision": profile.release["revision"],
+                      "configuration": str(args.output.resolve()), "targets": len(config["targets"]),
+                      "dispatchArmed": False, "nativeCalls": 0}
+        elif args.mode == "tdk-wall":
+            from apa_tdk_wall import inspect_wall
+
+            if args.output.exists():
+                raise FileExistsError(args.output)
+            result = inspect_wall(ROOT, args.payload, args.profile, args.journal,
+                                  args.output.with_suffix(".evidence"))
+            write_json(args.output, result)
+        elif args.mode == "library-pack":
+            from archicad_project_library_pack import compile_pack
+
+            result = compile_pack(read_json(args.brief), read_json(args.candidate))
+            write_json(args.output, result)
+        elif args.mode == "architecture-runtime":
+            from apa_integrated_services import architecture_phase
+
+            result = architecture_phase(ROOT, args.job, args.phase, args.port)
+            if args.phase == "preflight" and result.get("status") != "READY_FOR_EXPLICIT_TEST_RUN":
+                code = 2
+        elif args.mode == "knowledge-query":
+            from apa_integrated_services import knowledge_query
+
+            result = knowledge_query(ROOT, args.cache, args.query, args.knowledge_mode)
+            write_json(args.output, result)
+            code = 0 if result["status"] == "OK" else 2
+        elif args.mode == "arena-receipt":
+            from apa_integrated_services import arena_receipt
+
+            result = arena_receipt(args.receipt)
+            write_json(args.output, result)
         else:
             router = load_router(args.semantic_profile)
             if args.mode == "catalog":
@@ -227,7 +313,7 @@ def main(argv=None):
                 from apa_file_providers import DOCUMENTATION
 
                 result = run_local(router, DOCUMENTATION, {
-                    "a": str(args.native_dump), "guids": read_json(args.guids),
+                    "a": str(args.native_dump), "guids": None if args.all_dump_elements else read_json(args.guids),
                     "story": args.story, "output": str(args.output),
                 })
         print(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False))

@@ -58,3 +58,24 @@ urllib3==2.8.0
 Werkzeug==3.1.9
 xmlschema==4.3.2
 xsdata==26.10
+# Existing Knowledge MCP and tokenizer, resolved for the same Windows runtime.
+annotated-types==0.8.0
+anyio==4.16.0
+h11==0.16.0
+httpcore2==2.16.0
+httpx2==2.16.0
+mcp==2.3.0
+mcp-types==2.3.0
+opentelemetry-api==1.45.2
+pydantic==2.14.3
+pydantic_core==2.50.4
+PyJWT==2.15.1
+python-multipart==0.0.33
+pywin32==312
+regex==2026.11.9
+sse-starlette==3.7.0
+starlette==1.10.0
+tiktoken==0.14.0
+truststore==0.10.5
+typing-inspection==0.4.5
+uvicorn==0.54.0

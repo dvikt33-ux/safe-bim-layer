@@ -1,5 +1,7 @@
 # Working Archicad MVP
 
+[APA для Windows — единый запуск и настройка](docs/APA-WINDOWS.md)
+
 [APA R03.1 — запуск интеграционной сборки](docs/APA-UNIFIED.md)
 
 > **Current installed application (2026-10-09): Archicad 29.2.1 (5101) RUS FULL (x86-64).**

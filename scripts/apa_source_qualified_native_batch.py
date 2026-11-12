@@ -205,10 +205,13 @@ def main(args):
             report['nativeCreateTransportSeconds']=[r['elapsedSeconds'] for r in records if r['command']==m['command']]
         write(report_path,report)
 
-if __name__=='__main__':
+def cli(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--manifest',required=True)
     parser.add_argument('--ledger',required=True)
     parser.add_argument('--output',required=True)
     parser.add_argument('--apply',action='store_true')
-    main(parser.parse_args())
+    main(parser.parse_args(argv))
+
+if __name__=='__main__':
+    cli()
