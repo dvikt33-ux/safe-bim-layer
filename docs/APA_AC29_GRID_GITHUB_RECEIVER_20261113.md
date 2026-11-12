@@ -1,6 +1,6 @@
 # APA AC29 — GitHub receiver for reviewed 8×4 native grid
 
-Status: **SOURCE IMPLEMENTED / CI AND WINDOWS INSTALLATION PENDING**. This branch extends the historical PR #139 receiver; it has **not** been installed on the user's laptop.
+Status: **SOURCE IMPLEMENTED / OFFLINE CI PASS (14/14) / WINDOWS INSTALLATION PENDING**. This branch extends the historical PR #139 receiver; it has **not** been installed on the user's laptop. GitHub Actions run #43322444330 passed 14/14 tests; this is not an Archicad live acceptance.
 
 ## Scope
 
