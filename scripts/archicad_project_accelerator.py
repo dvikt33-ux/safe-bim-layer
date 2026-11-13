@@ -793,7 +793,7 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
                 raise ValueError("AUTHORED_NATIVE_REQUIRES_EXPLICIT_READ_ONLY_PREFLIGHT")
             # Exact identity is checked before resolving any authored native data.
             api = EvidenceAPI(transport, folder, execute=mode == "execute")
-            RUN.guarded_project(api)
+            RUN.guarded_scene_project(api, allow_3d_view_for_write=allow_3d_view_for_write)
             compiled = compile_authored_intent(intent, schema, api)
         else:
             compiled = compile_intent(intent, schema)

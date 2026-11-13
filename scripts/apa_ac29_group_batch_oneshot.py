@@ -470,9 +470,7 @@ def check_closed(state):
     return record
 
 
-def verify_reopen(state, *, reopen_port=None):
-    state = Path(state).resolve()
-    m, saved = saved_state(state)
+def group_close_proof(state, m, saved):
     closed = read(state / "closed.json")
     native_close = closed["status"] == "NATIVE_NO_OPEN_PROJECT_CONFIRMED"
     r03_process_exit = (m.get("authorizationRef", "").startswith("USER_APPROVED_APA_R03_")
@@ -483,13 +481,37 @@ def verify_reopen(state, *, reopen_port=None):
                      and closed["nativeWrites"] == 0 and reservation_owner_exited(closed["pid"]))
     need((native_close or r03_process_exit or observed_exit)
          and closed["savedSHA256"] == saved["savedSHA256"], "GROUP_BATCH_REAL_CLOSE_REQUIRED")
+    return closed, native_close
+
+
+def verify_reopen(state, *, reopen_port=None, reopened_copy=None, evidence_dir=None):
+    state = Path(state).resolve()
+    m, saved = saved_state(state)
+    closed, native_close = group_close_proof(state, m, saved)
     if reopen_port is not None:
         same_port = native_close and closed.get("port", m["port"]) == reopen_port
-        need((same_port or r03_process_exit or observed_exit)
+        need((same_port or not native_close)
              and type(reopen_port) is int and 19723 <= reopen_port <= 19743,
              "GROUP_BATCH_REOPEN_PORT_NOT_PROVEN")
         m = dict(m, port=reopen_port)
-    api, _ = prepare_api(m, state, execute=False, saved_sha=saved["savedSHA256"])
+    saved_project = Path(m["scratch"])
+    if evidence_dir is not None:
+        evidence_dir = Path(evidence_dir).resolve(strict=True)
+        startup = read(evidence_dir / "startup.json")
+        project = saved_project if reopened_copy is None else Path(reopened_copy).resolve(strict=True)
+        need(reopen_port is not None and evidence_dir != state
+             and startup["status"] == "PROJECT_IDENTITY_VERIFIED"
+             and startup["project"] == str(project) and startup["originalProject"] == str(saved_project)
+             and startup["projectSha256"] == saved["savedSHA256"] and startup["verifiedPort"] == reopen_port
+             and startup["plnBytesUnchanged"] is True and startup["nativeModelWrites"] == 0
+             and sha256(project) == saved["savedSHA256"], "GROUP_BATCH_REOPENED_STARTUP_PROOF_REQUIRED")
+        if reopened_copy is not None:
+            need(project == evidence_dir / "model" / saved_project.name and not project.samefile(saved_project),
+                 "GROUP_BATCH_REOPENED_COPY_PROOF_REQUIRED")
+        m = dict(m, scratch=str(project))
+    else:
+        need(reopened_copy is None, "GROUP_BATCH_REOPENED_COPY_PROOF_REQUIRED")
+    api, _ = prepare_api(m, evidence_dir or state, execute=False, saved_sha=saved["savedSHA256"])
     _, runtime = router_for(api)
     need(runtime == read(state / "plan.json")["runtimeIdentity"], "GROUP_BATCH_REOPEN_RUNTIME_DRIFT")
     planned = read(state / "plan.json")
@@ -505,16 +527,19 @@ def verify_reopen(state, *, reopen_port=None):
     guid_hash, brep_hash = R.digest(ids), fingerprint(native)
     need(ids == expected_ids and len(ids) == saved["finalGuidCount"]
          and guid_hash == saved["finalGuidSetSHA256"] and brep_hash == saved["finalBrepSHA256"]
-         and sha256(m["scratch"]) == saved["savedSHA256"] and api.write_attempts == 0,
+         and sha256(m["scratch"]) == sha256(saved_project) == saved["savedSHA256"] and api.write_attempts == 0,
          "GROUP_BATCH_REOPEN_FULL_NATIVE_BREP_OR_GUID_DRIFT")
     result = dict(saved, status="LIVE_NATIVE_GROUP_BATCH_SAVED_REOPENED_PASS",
                   reopenVerified=True, reopenedReadback=proof, sourceUnchanged=True,
                   verificationNativeWrites=0, reopenPort=m["port"], reopenedGuids=ids,
                   reopenedGuidSetSHA256=guid_hash, reopenedBrepSHA256=brep_hash)
-    path = state / "reopened.json"
+    if reopened_copy is not None:
+        result.update(status="LIVE_NATIVE_GROUP_BATCH_SAVED_COPY_READBACK_PASS", reopenVerified=False,
+                      reopenedSavedBytesVerified=True, reopenedCopy=m["scratch"], originalSavedPath=str(saved_project))
+    path = (evidence_dir or state) / "reopened.json"
     if path.exists():
         prior = read(path)
-        need(prior["status"] == result["status"] and prior["reopenVerified"] is True
+        need(prior["status"] == result["status"] and prior["reopenVerified"] == result["reopenVerified"]
              and all(prior[key] == result[key] for key in
                      ("savedSHA256", "finalGuidCount", "finalGuidSetSHA256", "finalBrepSHA256")),
              "GROUP_BATCH_EXISTING_REOPEN_RECEIPT_DRIFT")
@@ -551,9 +576,13 @@ def main(argv=None):
     p.add_argument("--adopt-prior174-stage")
     p.add_argument("--port", type=int, default=19727)
     p.add_argument("--reopen-port", type=int, help="Explicit port for an independently reopened saved copy")
+    p.add_argument("--reopened-copy", help="Optional byte-exact recovery copy, with its startup receipt")
+    p.add_argument("--evidence-dir", help="Write separate readback evidence beside its startup receipt")
     args = p.parse_args(argv)
     if args.reopen_port is not None and args.phase != "verify-reopen":
         p.error("--reopen-port requires verify-reopen")
+    if (args.reopened_copy and not args.evidence_dir) or (args.evidence_dir and args.phase != "verify-reopen"):
+        p.error("--evidence-dir requires verify-reopen and is mandatory with --reopened-copy")
     if args.phase == "stage":
         need(all((args.source,args.scratch,args.baseline_trace,args.safe01_state,args.source_group,args.placements_json)),
              "GROUP_BATCH_STAGE_EXPLICIT_INPUTS_REQUIRED")
@@ -564,7 +593,8 @@ def main(argv=None):
         need(not any((args.source,args.scratch,args.baseline_trace,args.safe01_state,args.source_group,args.placements_json,args.adopt_prior174_stage)),
              "GROUP_BATCH_REUSE_ONLY_PINNED_MANIFEST")
         if args.phase == "verify-reopen":
-            out = verify_reopen(args.state, reopen_port=args.reopen_port)
+            out = verify_reopen(args.state, reopen_port=args.reopen_port,
+                                reopened_copy=args.reopened_copy, evidence_dir=args.evidence_dir)
         else:
             out = {"plan": plan, "execute": execute, "reconcile": reconcile_completed_clone,
                    "save-reconciled": save_reconciled_clone, "check-closed": check_closed}[args.phase](args.state)

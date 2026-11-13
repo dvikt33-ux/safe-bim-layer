@@ -196,11 +196,20 @@ def parser():
     commands.add_parser("template-runtime", help="Действующий интерфейс инвентаризации и настройки шаблона")
     commands.add_parser("project-runtime", help="Действующий интерфейс SceneWriter для проекта")
     commands.add_parser("connected-runtime", help="Существующие связные операции крыши и MEP через SceneWriter")
-    cmd = commands.add_parser("architecture-runtime", help="Операции оболочки на подготовленной изолированной копии")
+    cmd = commands.add_parser("architecture-stage", help="Подготовить свежую тестовую копию для оболочки или выбранного варианта")
+    cmd.add_argument("--job", type=Path, required=True)
+    cmd.add_argument("--intent", type=Path, required=True)
+    cmd.add_argument("--donor", type=Path, required=True)
+    cmd.add_argument("--donor-sha256", required=True)
+    cmd.add_argument("--baseline-trace", type=Path, required=True)
+    cmd.add_argument("--port", type=int, default=19723)
+    cmd = commands.add_parser("architecture-runtime", help="Операции на подготовленной изолированной копии")
     cmd.add_argument("phase", choices=("status", "preflight", "execute", "check-closed", "verify-reopen"))
     cmd.add_argument("--job", type=Path, required=True)
     cmd.add_argument("--port", type=int)
+    cmd.add_argument("--confirm-preflight", help="SHA-256 approved-preflight.json для записи авторского варианта")
     commands.add_parser("group-runtime", help="Действующий протокол нативных групп и сверки PLN")
+    commands.add_parser("archicad-startup", help="Диагностика запуска проверенной тестовой копии Archicad")
     commands.add_parser("source-batch", help="Существующий протокол пакетного создания по подтверждённым источникам")
     commands.add_parser("source-batch-reconcile", help="Сверка прерванного пакетного создания по источникам")
     commands.add_parser("mailbox", help="Приёмник APA с квитанциями и профилем чтения")
@@ -249,6 +258,7 @@ def main(argv=None):
         routes = {"project-runtime": ("archicad_project_accelerator", "main"),
                   "connected-runtime": ("archicad_connected_components", "main"),
                   "group-runtime": ("apa_ac29_group_batch_oneshot", "main"),
+                  "archicad-startup": ("apa_archicad_startup", "main"),
                   "template-runtime": ("archicad_template_builder", "main"),
                   "source-batch": ("apa_source_qualified_native_batch", "cli"),
                   "source-batch-reconcile": ("apa_reconcile_source_batch_save", "cli"),
@@ -326,10 +336,16 @@ def main(argv=None):
 
             result = compile_pack(read_json(args.brief), read_json(args.candidate))
             write_json(args.output, result)
+        elif args.mode == "architecture-stage":
+            from apa_r03_architecture import stage
+
+            result = stage(args.job.resolve(), args.intent.resolve(strict=True), args.port,
+                           args.donor.resolve(strict=True), args.donor_sha256, args.baseline_trace.resolve(strict=True))
         elif args.mode == "architecture-runtime":
             from apa_integrated_services import architecture_phase
 
-            result = architecture_phase(ROOT, args.job, args.phase, args.port)
+            result = architecture_phase(ROOT, args.job, args.phase, args.port,
+                                        confirm_preflight=args.confirm_preflight)
             if args.phase == "preflight" and result.get("status") != "READY_FOR_EXPLICIT_TEST_RUN":
                 code = 2
         elif args.mode == "knowledge-query":

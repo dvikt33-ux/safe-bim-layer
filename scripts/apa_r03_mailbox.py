@@ -85,19 +85,24 @@ def listener(port):
     return dict(json.loads(response.stdout), port=port)
 
 
-def open_test_port(project):
-    """Discover only loopback listeners that already report this exact test PLN."""
+def project_ports(pid=None):
     script = (
         "$ports = @(Get-NetTCPConnection -State Listen -ErrorAction Stop | "
-        "Where-Object {$_.LocalPort -ge 19723 -and $_.LocalPort -le 19743} | "
+        "Where-Object {$_.LocalPort -ge 19723 -and $_.LocalPort -le 19743"
+        + (f" -and $_.OwningProcess -eq {pid}" if pid is not None else "") + "} | "
         "Select-Object -ExpandProperty LocalPort -Unique)\n"
         "ConvertTo-Json -InputObject $ports -Compress"
     )
     response = subprocess.run(["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", script],
                               capture_output=True, timeout=15)
     require(response.returncode == 0, "R03_MAILBOX_LISTENER_ENUMERATION_FAILED")
+    return json.loads(response.stdout)
+
+
+def open_test_port(project):
+    """Discover only loopback listeners that already report this exact test PLN."""
     matches = []
-    for port in json.loads(response.stdout):
+    for port in project_ports():
         try:
             listener(port)
             info = group.R.tapir(port, "GetProjectInfo", {}, timeout=2)

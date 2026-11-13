@@ -52,7 +52,7 @@ def knowledge_query(root, cache, query, mode):
     return dict(result, releaseKnowledgeRevision=release["knowledgeRevision"], executionPermission=False)
 
 
-def architecture_phase(root, job, phase, port):
+def architecture_phase(root, job, phase, port, *, confirm_preflight=None):
     import apa_r03_architecture as architecture
     from apa_mailbox_profile import APX
 
@@ -67,13 +67,32 @@ def architecture_phase(root, job, phase, port):
     if sha256(APX) != native["apxSHA256"]:
         raise ValueError("Установленный APX отличается от проверенного комплекта APA")
     pinned = (native["sourceRevision"], native["buildIdentity"])
+    authored = "authoredIntentHash" in manifest
+    if authored:
+        from apa_r03_mailbox import listener
+    else:
+        listener = None
+
     if phase == "preflight":
-        return architecture.preflight(job, manifest, port or manifest["port"], pinned)
+        return architecture.preflight(job, manifest, port or manifest["port"], pinned,
+                                      local_listener=listener)
     if phase == "verify-reopen":
         approved = read_json(job / "approved-preflight.json")
         return architecture.verify_reopen(job, manifest, pinned, port or approved["port"])
     if port is not None:
         raise ValueError("Исполнение использует порт сохранённого предконтроля")
+    if phase == "execute" and architecture.status(job, manifest)["status"] in {
+            "LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN", "LIVE_ARCHITECTURE_SAVED_REOPENED_PASS"}:
+        return architecture.execute(job, manifest, pinned, confirm_preflight=confirm_preflight)
+    if authored:
+        from apa_ac29_save_isolation import reservation_owner_exited
+
+        approval = read_json(job / "approved-preflight.json")
+        expected = approval["listener"]
+        if phase == "check-closed" and reservation_owner_exited(expected["pid"]):
+            return architecture.check_closed(job, manifest, pinned, process_id=expected["pid"])
+        if listener(approval["port"]) != expected:
+            raise ValueError("APA_AUTHORED_PREFLIGHT_PROCESS_DRIFT")
     if phase == "check-closed":
         return architecture.check_closed(job, manifest, pinned)
-    return architecture.execute(job, manifest, pinned)
+    return architecture.execute(job, manifest, pinned, confirm_preflight=confirm_preflight)

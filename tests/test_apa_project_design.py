@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import apa_project_design as design
+import apa_r03_architecture as architecture
 import archicad_project_accelerator as core
 from test_archicad_isolated_authored_execution import IsolatedNative
 
@@ -122,6 +123,33 @@ class DesignTests(unittest.TestCase):
                     self.assertEqual(feedback["front-door"]["nativeReadback"], "LINKED_ELEMENTS_READ_BACK")
                 self.assertIn(feedback["front-door"]["operations"]["native-opening-entry-door"]["guid"],
                               result["addedGuids"])
+
+    def test_selected_variant_is_staged_on_a_distinct_copy_and_write_needs_exact_grant(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder).resolve()
+            job = root / "r03-authored-test"
+            donor = root / "donor.pln"
+            donor.write_bytes(b"untouched donor fixture")
+            brief = self.input["brief"]
+            brief.update(mode="ADAPT_EXISTING", targetProjectPath=str(job / "model" / architecture.MODEL))
+            brief["stories"][0]["existingNativeLabel"] = "Первый Этаж"
+            intent = root / "authored.json"
+            architecture.write_new_json(intent, design.select_variant(self.input, "variant-a"))
+            with (patch.object(architecture.group, "accepted_baseline", return_value=({}, [])),
+                  patch.object(architecture.group, "fingerprint", return_value="fixture-brep")):
+                m = architecture.stage(job, intent, 19723, donor, architecture.sha256(donor), root / "trace")
+            scratch = Path(m["project"])
+            self.assertFalse(scratch.samefile(donor))
+            self.assertEqual(architecture.sha256(scratch), architecture.sha256(donor))
+            self.assertEqual(m["authoredCommands"], ["CreateDoors", "CreateSlabs", "CreateWalls", "CreateWindows"])
+            architecture.write_new_json(job / "approved-preflight.json", {"fixture": True})
+            with (patch.object(architecture, "status", return_value={"status": "READY_FOR_EXPLICIT_TEST_RUN"}),
+                  patch.object(architecture, "bind") as bind):
+                with self.assertRaisesRegex(ValueError, "AUTHORED_EXACT_PREFLIGHT_GRANT_REQUIRED"):
+                    architecture.execute(job, m, ("revision", "identity"), confirm_preflight="wrong")
+                bind.assert_not_called()
+            self.assertFalse((job / "attempted.json").exists())
+            self.assertFalse(Path(str(scratch) + ".apa-write.lock").exists())
 
     def test_cli_reads_utf8_request_without_claiming_interpretation(self):
         with tempfile.TemporaryDirectory() as folder:

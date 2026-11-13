@@ -58,6 +58,23 @@ class ReopenReadbackTests(unittest.TestCase):
                 self.assertEqual(verified["reopenedBrepSHA256"], saved["finalBrepSHA256"])
                 self.assertEqual(verified["verificationNativeWrites"], 0)
 
+                evidence = state / "separate-proof"
+                model = evidence / "model"
+                model.mkdir(parents=True)
+                copy = model / scratch.name
+                copy.write_bytes(scratch.read_bytes())
+                group.write_new_json(evidence / "startup.json", dict(
+                    status="PROJECT_IDENTITY_VERIFIED", project=str(copy), originalProject=str(scratch),
+                    projectSha256=saved_sha, verifiedPort=19723, plnBytesUnchanged=True, nativeModelWrites=0))
+                original_receipt = (state / "reopened.json").read_bytes()
+                observed = group.verify_reopen(state, reopen_port=19723, reopened_copy=copy, evidence_dir=evidence)
+                self.assertEqual(observed["status"], "LIVE_NATIVE_GROUP_BATCH_SAVED_COPY_READBACK_PASS")
+                self.assertFalse(observed["reopenVerified"])
+                self.assertEqual((state / "reopened.json").read_bytes(), original_receipt)
+                copy.write_bytes(b"changed fixture")
+                with self.assertRaisesRegex(ValueError, "REOPENED_STARTUP_PROOF_REQUIRED"):
+                    group.verify_reopen(state, reopen_port=19723, reopened_copy=copy, evidence_dir=evidence)
+
 
 class ArchitectureRetryTests(unittest.TestCase):
     def test_failed_readonly_attempt_preserved_and_fresh_port_can_be_used(self):

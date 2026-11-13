@@ -26,17 +26,36 @@ def stage(job, intent_path, port, donor, donor_sha, baseline_trace):
             "APA_ARCHITECTURE_PINNED_DONOR_AND_PORT_REQUIRED")
     intent_sha = sha256(intent_path)
     intent = read(intent_path)
-    compiled = A.compile_intent(intent, SCHEMA)
-    steps = compiled["graph"]["operations"]
-    require(intent["components"][0]["primitive"] == "building-shell-v1"
-            and all(row["command"] in MODEL_COMMANDS for row in steps)
-            and sha256(intent_path) == intent_sha, "APA_ARCHITECTURE_UNSUPPORTED_INTENT")
+    scratch = job / "model" / MODEL
+    design = intent.get("schemaVersion") == "apa-authored-project/1"
+    if design:
+        from apa_project_design import SCHEMA as DESIGN_SCHEMA, compile_design
+
+        variant_fields = {key: intent[key] for key in ("layout", "storyHeights", "floorPlans") if key in intent}
+        proposal = dict(schemaVersion=DESIGN_SCHEMA, brief=intent["brief"],
+                        cseCandidate=intent["cseCandidate"], variants=[dict(id="selected-variant", **variant_fields)])
+        report = compile_design(proposal)
+        variant = report["variants"][0]
+        require(set(intent) == {"schemaVersion", "units", "projectId", "brief", "cseCandidate",
+                                *variant_fields}
+                and intent["units"] == "meters" and intent["projectId"] == report["brief"]["projectId"]
+                and report["brief"]["mode"] == "ADAPT_EXISTING"
+                and intent["brief"]["targetProjectPath"] == str(scratch)
+                and len(report["brief"]["stories"]) == 1 and variant["status"] == "DESIGN_CHECKS_REVIEWABLE",
+                "APA_ARCHITECTURE_AUTHORED_TEST_SCOPE_REQUIRED")
+        compiled = variant["candidate"]
+    else:
+        compiled = A.compile_intent(intent, SCHEMA)
+        require(intent["components"][0]["primitive"] == "building-shell-v1",
+                "APA_ARCHITECTURE_UNSUPPORTED_INTENT")
+    commands = {row["command"] for row in compiled["graph"]["operations"]}
+    require(commands <= MODEL_COMMANDS and sha256(intent_path) == intent_sha,
+            "APA_ARCHITECTURE_UNSUPPORTED_INTENT")
     baseline, ids = group.accepted_baseline(baseline_trace)
     job.parent.mkdir(exist_ok=True)
     job.mkdir()
     model = job / "model"
     model.mkdir()
-    scratch = model / MODEL
     copy_exclusive(donor, scratch)
     require(sha256(scratch) == sha256(donor) == donor_sha, "APA_ARCHITECTURE_COPY_SHA_DRIFT")
     copy_exclusive(intent_path, job / "intent.json")
@@ -47,6 +66,9 @@ def stage(job, intent_path, port, donor, donor_sha, baseline_trace):
                   baselineGuidSetSHA256=R.digest(ids), baselineBrepSHA256=group.fingerprint(baseline),
                   authorizationRef=f"USER_APPROVED_APA_R03_{job.name}", stagedAt=timestamp(),
                   authorization="APA R03 §11.1 / R03.1: newly created disposable test copy")
+    if design:
+        record.update(authoredIntentHash=R.digest(intent), authoredCommands=sorted(commands),
+                      authorization="R04 TEST_REQUEST: local preflight grant pending")
     write_new_json(job / "job.json", record)
     return record
 
@@ -155,8 +177,15 @@ def probe_shell_runtime(job, trace):
     folder.mkdir(parents=True)
     api = A.EvidenceAPI(A.native_transport, folder, execute=False)
     intent = read(job / "intent.json")
-    commands = MODEL_COMMANDS | {"SaveProject"}
-    if intent["components"][0]["specification"].get("slabBasicMaterialName"):
+    if intent.get("schemaVersion") == "apa-authored-project/1":
+        staged = read(job / "job.json")
+        require(staged.get("authoredIntentHash") == R.digest(intent)
+                and set(staged["authoredCommands"]) <= MODEL_COMMANDS,
+                "APA_ARCHITECTURE_AUTHORED_STAGE_DRIFT")
+        commands = set(staged["authoredCommands"]) | {"SaveProject", "ModifySlabs"}
+    else:
+        commands = MODEL_COMMANDS | {"SaveProject"}
+    if "components" in intent and intent["components"][0]["specification"].get("slabBasicMaterialName"):
         commands |= {"ModifySlabs"}
     router = A.native_command_router(SCHEMA, include_functional_modules=False)
     for command in sorted(commands):
@@ -170,8 +199,9 @@ def prove_retained(m, ids, native):
             "APA_ARCHITECTURE_BASELINE_GUID_OR_BREP_DRIFT")
 
 
-def preflight(job, m, port, pinned_runtime):
+def preflight(job, m, port, pinned_runtime, *, local_listener=None):
     require(status(job, m)["status"] == "STAGED", "APA_ARCHITECTURE_ALREADY_PREFLIGHTED_OR_ATTEMPTED")
+    before = local_listener(port) if local_listener else None
     runtime = bind(m, port, pinned_runtime)
     attempts = job / "preflight-attempts"
     require(attempts.resolve() == attempts, "APA_ARCHITECTURE_PREFLIGHT_PATH_DRIFT")
@@ -184,22 +214,33 @@ def preflight(job, m, port, pinned_runtime):
                            allow_3d_view_for_write=True)
     result_path = attempt / "result.json"
     if result["status"] == "READY_FOR_EXPLICIT_TEST_RUN":
-        require(result["modelWriteAttempts"] == 0
-                and read(attempt / "plan.json")["sourcePlanHash"] == m["offlinePlanHash"],
+        compiled = read(attempt / "plan.json")
+        if "authoredIntentHash" in m:
+            commands = {row["command"] for row in compiled["graph"]["operations"]}
+            same_plan = compiled["intentHash"] == m["authoredIntentHash"] and commands == set(m["authoredCommands"])
+        else:
+            same_plan = compiled["sourcePlanHash"] == m["offlinePlanHash"]
+        require(result["modelWriteAttempts"] == 0 and same_plan,
                 "APA_ARCHITECTURE_PREFLIGHT_DRIFT")
+        if local_listener:
+            require(local_listener(port) == before, "APA_ARCHITECTURE_PREFLIGHT_PROCESS_DRIFT")
         write_new_json(job / "approved-preflight.json", dict(
             jobId=job.name, port=port, runtime=runtime, confirmHash=result["confirmPlanHash"],
             resultPath=result_path.relative_to(job).as_posix(), preflightSHA256=sha256(result_path),
+            **({"listener": before} if before is not None else {}),
         ))
     return dict(result, evidencePath=str(result_path))
 
 
-def execute(job, m, pinned_runtime):
+def execute(job, m, pinned_runtime, *, confirm_preflight=None):
     state = status(job, m)["status"]
     if state in {"LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN", "LIVE_ARCHITECTURE_SAVED_REOPENED_PASS"}:
         return dict(status="ALREADY_APPLIED", receipt=saved_record(job, m), newNativeWrites=0)
     require(state == "READY_FOR_EXPLICIT_TEST_RUN", "APA_ARCHITECTURE_READY_PREFLIGHT_REQUIRED")
     approval = read(job / "approved-preflight.json")
+    if "authoredIntentHash" in m:
+        require(confirm_preflight == sha256(job / "approved-preflight.json"),
+                "APA_ARCHITECTURE_AUTHORED_EXACT_PREFLIGHT_GRANT_REQUIRED")
     approved_result(job, approval)
     require(bind(m, approval["port"], pinned_runtime) == approval["runtime"],
             "APA_ARCHITECTURE_APPROVED_PLAN_OR_RUNTIME_DRIFT")
@@ -272,6 +313,7 @@ def execute(job, m, pinned_runtime):
                              "PROJECT", after_save, verify_before=before_save)
     require(outcome["status"] == "PASS" and api.calls["SaveProject"] == 1,
             "APA_ARCHITECTURE_SAVE_UNKNOWN_NO_REPLAY")
+    requirements = result.get("requirementReadback")
     result = dict(status="LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN", jobId=job.name,
                   savedSHA256=guard.new_saved_sha, elementCount=len(ids),
                   addedGuids=result["addedGuids"], finalGuidSetSHA256=R.digest(ids),
@@ -279,6 +321,8 @@ def execute(job, m, pinned_runtime):
                   finalSignaturesSHA256=R.digest(signatures), addedByKind=dict(kinds),
                   bodyCountByAddedGuid=bodies, nativeModelWriteAttempts=result["modelWriteAttempts"],
                   snapshotReceiptSHA256=sha256(job / "snapshot.json"), nativeSaveCalls=1)
+    if requirements is not None:
+        result["requirementReadback"] = requirements
     write_new_json(job / "saved.json", result)
     return result
 
