@@ -1,5 +1,6 @@
 """Existing parametric BuildingShell -> SceneWriter on a staged R03 copy."""
 from collections import Counter
+import hashlib
 import json
 from pathlib import Path
 from uuid import uuid4
@@ -172,6 +173,35 @@ def baseline_capture(job, m, trace):
     return ids, signatures
 
 
+def read_native(job, m, port, pinned_runtime, output):
+    """Return a bounded inventory and native geometry fingerprints for one test PLN."""
+    from apa_r03_mailbox import listener
+
+    require(output is not None and not output.exists(), "APA_ARCHITECTURE_NEW_INVENTORY_PATH_REQUIRED")
+    project = Path(m["project"])
+    stage_status = status(job, m)["status"]
+    if (job / "saved.json").is_file():
+        expected = saved_record(job, m)["savedSHA256"]
+    else:
+        expected = m["initialSHA256"]
+    session = listener(port)
+    runtime = bind(m, port, pinned_runtime, saved_sha=expected)
+    trace = output.with_suffix(".trace")
+    trace.mkdir()
+    api = A.EvidenceAPI(A.native_transport, trace, execute=False)
+    ids, model, signatures = capture(m, api)
+    require(listener(port) == session and bind(m, port, pinned_runtime, saved_sha=expected) == runtime
+            and sha256(project) == expected and api.write_attempts == 0,
+            "APA_ARCHITECTURE_NATIVE_INVENTORY_SCOPE_DRIFT")
+    facts = dict(status="LIVE_TEST_PLN_READBACK", campaignStatus=stage_status, projectSha256=expected,
+                 listener=session, runtime=runtime, guidCount=len(ids), guidSetSha256=R.digest(ids),
+                 brepSha256=group.fingerprint(model), signaturesSha256=R.digest(signatures), nativeWrites=0)
+    elements = [dict(guid=row["guid"], type=row["type"], bodyCount=len(row.get("bodies", [])))
+                for row in model["elements"]]
+    write_new_json(output, dict(facts, guids=ids, elements=elements))
+    return dict(facts, evidenceSha256=sha256(output))
+
+
 def probe_shell_runtime(job, trace):
     folder = job / trace
     folder.mkdir(parents=True)
@@ -237,9 +267,11 @@ def execute(job, m, pinned_runtime, *, confirm_preflight=None):
     if state in {"LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN", "LIVE_ARCHITECTURE_SAVED_REOPENED_PASS"}:
         return dict(status="ALREADY_APPLIED", receipt=saved_record(job, m), newNativeWrites=0)
     require(state == "READY_FOR_EXPLICIT_TEST_RUN", "APA_ARCHITECTURE_READY_PREFLIGHT_REQUIRED")
-    approval = read(job / "approved-preflight.json")
+    approval_path = job / "approved-preflight.json"
+    approval_bytes = approval_path.read_bytes()
+    approval = json.loads(approval_bytes)
     if "authoredIntentHash" in m:
-        require(confirm_preflight == sha256(job / "approved-preflight.json"),
+        require(confirm_preflight == hashlib.sha256(approval_bytes).hexdigest(),
                 "APA_ARCHITECTURE_AUTHORED_EXACT_PREFLIGHT_GRANT_REQUIRED")
     approved_result(job, approval)
     require(bind(m, approval["port"], pinned_runtime) == approval["runtime"],

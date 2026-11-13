@@ -48,6 +48,8 @@ jobs:
           python -m unittest -v
           test_apa_unified
           test_apa_project_design
+          test_apa_control_mcp
+          test_archicad_functional_modules
           test_archicad_semantic_brief
           test_archicad_semantic_spatial
           test_archicad_project_library_pack

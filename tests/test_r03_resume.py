@@ -71,9 +71,21 @@ class ReopenReadbackTests(unittest.TestCase):
                 self.assertEqual(observed["status"], "LIVE_NATIVE_GROUP_BATCH_SAVED_COPY_READBACK_PASS")
                 self.assertFalse(observed["reopenVerified"])
                 self.assertEqual((state / "reopened.json").read_bytes(), original_receipt)
+                resumed = evidence / ("startup-resume-" + "a"*32 + ".json")
+                process = {"pid": 99, "startedAt": "fresh-pid", "port": 19723}
+                receipt = group.read(evidence / "startup.json")
+                (evidence / "startup.json").write_text(group.R.canonical(dict(receipt, status="WAITING_FOR_OPERATOR",
+                    events=[dict(status="WAITING_FOR_OPERATOR", pid=99, process={"ProcessId": 99})])), encoding="utf-8")
+                prior = group.sha256(evidence / "startup.json")
+                group.write_new_json(resumed, dict(receipt, priorStartupSha256=prior, verifiedListener=process))
+                with patch("apa_r03_mailbox.listener", side_effect=[process, dict(process, pid=100)]):
+                    with self.assertRaisesRegex(ValueError, "REOPEN_LISTENER_DRIFT"):
+                        group.verify_reopen(state, reopen_port=19723, reopened_copy=copy,
+                                            evidence_dir=evidence, startup_receipt=resumed)
                 copy.write_bytes(b"changed fixture")
                 with self.assertRaisesRegex(ValueError, "REOPENED_STARTUP_PROOF_REQUIRED"):
-                    group.verify_reopen(state, reopen_port=19723, reopened_copy=copy, evidence_dir=evidence)
+                    group.verify_reopen(state, reopen_port=19723, reopened_copy=copy, evidence_dir=evidence,
+                                        startup_receipt=resumed)
 
 
 class ArchitectureRetryTests(unittest.TestCase):

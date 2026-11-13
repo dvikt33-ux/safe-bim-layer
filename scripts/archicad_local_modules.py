@@ -131,6 +131,16 @@ def attach(router,manifest):
         for name,row in manifest['commands'].items():
             current=router.catalog['commands']['AddOn.APAAnalysis.'+name]
             if current.get('implementationSHA256')!=expected or any(current.get(k)!=row[k] for k in ['parameters','returns','version']):raise ValueError('LOCAL_MODULE_CONTRACT_DRIFT')
+        for name, handler in names.items():
+            key = 'AddOn.APAAnalysis.' + name
+            entry = router.catalog['commands'][key]
+            if entry.get('api') != 'local-python' or entry.get('dependencies') != manifest['dependencies'][name]:
+                raise ValueError('LOCAL_MODULE_DISPATCH_CONTRACT_DRIFT')
+            existing = router.local_handlers.get(key)
+            if existing is not None and existing is not handler:
+                raise ValueError('LOCAL_MODULE_HANDLER_DRIFT')
+        # A serialized catalog carries contracts, but it cannot carry Python callables.
+        router.local_handlers.update({'AddOn.APAAnalysis.' + name: handler for name, handler in names.items()})
     else:
         router.add_local_provider('APAAnalysis',manifest['commands'],names,'archicad_local_modules.py',manifest['dependencies'])
     for name in names:router.catalog['commands']['AddOn.APAAnalysis.'+name]['implementationSHA256']=expected

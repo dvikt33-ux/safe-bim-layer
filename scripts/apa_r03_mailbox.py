@@ -87,8 +87,9 @@ def listener(port):
 
 def project_ports(pid=None):
     script = (
-        "$ports = @(Get-NetTCPConnection -State Listen -ErrorAction Stop | "
+        "$ports = @(Get-NetTCPConnection -ErrorAction Stop | "
         "Where-Object {$_.LocalPort -ge 19723 -and $_.LocalPort -le 19743"
+        + " -and $_.State -eq 'Listen'"
         + (f" -and $_.OwningProcess -eq {pid}" if pid is not None else "") + "} | "
         "Select-Object -ExpandProperty LocalPort -Unique)\n"
         "ConvertTo-Json -InputObject $ports -Compress"
@@ -106,7 +107,7 @@ def open_test_port(project):
         try:
             listener(port)
             info = group.R.tapir(port, "GetProjectInfo", {}, timeout=2)
-        except (RuntimeError, urllib.error.URLError, OSError):
+        except (ValueError, RuntimeError, urllib.error.URLError, OSError):
             continue
         if (info.get("projectPath") == str(project) and info.get("isUntitled") is False
                 and info.get("isTeamwork") is False):

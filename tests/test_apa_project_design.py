@@ -151,6 +151,33 @@ class DesignTests(unittest.TestCase):
             self.assertFalse((job / "attempted.json").exists())
             self.assertFalse(Path(str(scratch) + ".apa-write.lock").exists())
 
+    def test_access_path_tracks_both_doors_and_detects_insufficient_width(self):
+        self.input["brief"]["constraints"].append(dict(id="access-to-living", text="Путь в гостиную",
+            evidenceStatus="UNVERIFIED", priority="REQUIRED", sourceRef="ТЗ §4", criterion=dict(
+                kind="ACCESS_PATH", **{"from": "$outside", "to": "living"}, minimumOpeningWidthM=.8)))
+        before = deepcopy(self.input)
+        result = design.compile_design(before)["variants"][0]["candidate"]
+        req = next(row for row in result["requirements"] if row["id"] == "access-to-living")
+        self.assertEqual(req["bimOperationIds"], ["native-opening-entry-door", "native-opening-hall-door"])
+        self.input["variants"][0]["layout"]["passages"][1]["width"] = .75
+        after = design.compile_design(self.input)["variants"][0]
+        self.assertEqual(after["status"], "REQUIREMENTS_OPEN")
+        self.assertEqual(after["candidate"]["requiredOpenIds"], ["access-to-living"])
+        impact = design.changes_between(before, self.input, "variant-a")
+        self.assertIn("requirement:access-to-living", impact["affected"])
+
+    def test_openings_with_overlapping_footprints_or_excess_height_are_rejected(self):
+        layout = self.input["variants"][0]["layout"]
+        door = layout["passages"][0]
+        duplicate = dict(door, id="overlapping-door", centerOffset=door["centerOffset"]+.2)
+        layout["passages"].append(duplicate)
+        invalid = design.compile_design(self.input)["variants"][0]
+        self.assertEqual(invalid["reason"], "PASSAGES_OVERLAP_ON_HOST")
+        layout["passages"].pop()
+        layout["passages"][2]["height"] = 2.8
+        invalid = design.compile_design(self.input)["variants"][0]
+        self.assertEqual(invalid["reason"], "PASSAGE_EXCEEDS_STORY_HEIGHT")
+
     def test_cli_reads_utf8_request_without_claiming_interpretation(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)

@@ -52,7 +52,8 @@ def knowledge_query(root, cache, query, mode):
     return dict(result, releaseKnowledgeRevision=release["knowledgeRevision"], executionPermission=False)
 
 
-def architecture_phase(root, job, phase, port, *, confirm_preflight=None):
+def architecture_phase(root, job, phase, port, *, confirm_preflight=None, output=None, discover_port=False,
+                       expected_stage_sha=None):
     import apa_r03_architecture as architecture
     from apa_mailbox_profile import APX
 
@@ -60,6 +61,9 @@ def architecture_phase(root, job, phase, port, *, confirm_preflight=None):
     recorded = read_json(job / "job.json")
     donor = Path(recorded["original"]).resolve(strict=True)
     manifest = architecture.check(job, donor, recorded["initialSHA256"])
+    if expected_stage_sha is not None and (
+            sha256(job / "job.json") != expected_stage_sha or manifest != recorded):
+        raise ValueError("APA_ARCHITECTURE_MCP_STAGE_DRIFT")
     if phase == "status":
         return architecture.status(job, manifest)
     release = read_release(root)
@@ -67,6 +71,16 @@ def architecture_phase(root, job, phase, port, *, confirm_preflight=None):
     if sha256(APX) != native["apxSHA256"]:
         raise ValueError("Установленный APX отличается от проверенного комплекта APA")
     pinned = (native["sourceRevision"], native["buildIdentity"])
+    if discover_port:
+        from apa_r03_mailbox import open_test_port
+
+        if port is not None or phase not in {"native-read", "preflight", "verify-reopen"}:
+            raise ValueError("APA_ARCHITECTURE_PORT_DISCOVERY_PHASE_INVALID")
+        port = open_test_port(Path(manifest["project"]))
+        if port is None:
+            raise ValueError("APA_ARCHITECTURE_EXACT_TEST_PLN_NOT_OPEN_OR_API_UNAVAILABLE")
+    if phase == "native-read":
+        return architecture.read_native(job, manifest, port or manifest["port"], pinned, output)
     authored = "authoredIntentHash" in manifest
     if authored:
         from apa_r03_mailbox import listener

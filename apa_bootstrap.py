@@ -60,8 +60,12 @@ def launch(argv=None):
     parser = argparse.ArgumentParser(description="Запуск APA для Windows")
     parser.add_argument("--receiver-profile", type=Path, action="append")
     parser.add_argument("--stop-receiver", action="store_true")
+    parser.add_argument("--mcp-profile", type=Path, help="Запустить MCP APA в пользовательском сеансе")
+    parser.add_argument("--mcp-port", type=int, default=18787)
     args = parser.parse_args(argv)
     receiver = ROOT / ".apa-runtime" / "receiver"
+    if args.mcp_profile and (args.receiver_profile or args.stop_receiver):
+        parser.error("--mcp-profile используется отдельно от управления GitHub-приёмником")
     if args.stop_receiver:
         if args.receiver_profile or not (receiver / "receiver-started.json").is_file():
             raise ValueError("Локальный фоновый приёмник ещё не запускался")
@@ -69,6 +73,11 @@ def launch(argv=None):
         print("Приёмник остановится после текущего задания")
         return
     python, pythonw = prepare_environment()
+    if args.mcp_profile:
+        subprocess.run([str(python), "-I", "-B", "-X", "utf8", str(ROOT / "apa.py"),
+                        "mcp-control", "--profile", str(args.mcp_profile.resolve(strict=True)),
+                        "--port", str(args.mcp_port)], cwd=ROOT, check=True)
+        return
     if args.receiver_profile:
         stop = receiver / "receiver-stop"
         if stop.exists():

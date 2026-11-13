@@ -7,7 +7,7 @@ story indices, and feed existing archicad_bim_graph.compile_graph/SceneWriter.
 """
 from __future__ import annotations
 
-from collections import Counter
+from collections import Counter, defaultdict, deque
 import copy
 import math
 
@@ -45,6 +45,32 @@ def overlap_area(a,b):
         0,min(a["yMax"],b["yMax"])-max(a["yMin"],b["yMin"]))
 
 
+def access_path(criterion, openings):
+    """Find one deterministic path through authored, hosted doors."""
+    source, destination = criterion["from"], criterion["to"]
+    width = criterion.get("minimumOpeningWidthM", 0.0)
+    links = defaultdict(list)
+    for door in sorted(openings, key=lambda row: row["id"]):
+        if "connects" not in door or door["width"] + EPS < width:
+            continue
+        a, b = door["connects"]
+        if BRIEF.EXTERIOR in (a, b) and source != BRIEF.EXTERIOR:
+            continue
+        links[a].append((b, door["id"]))
+        links[b].append((a, door["id"]))
+    pending = deque([(source, [])])
+    seen = {source}
+    while pending:
+        room, path = pending.popleft()
+        if room == destination:
+            return path
+        for neighbor, door_id in links[room]:
+            if neighbor not in seen:
+                seen.add(neighbor)
+                pending.append((neighbor, path + [door_id]))
+    return []
+
+
 def design_checks(doc, outline, rooms, members, passages):
     """Trace authored geometry to source IDs without assigning BIM or code approval."""
     room_by_id = {row["id"]: row for row in rooms}
@@ -67,6 +93,7 @@ def design_checks(doc, outline, rooms, members, passages):
     if not isinstance(passages, list) or len(passages) > 100:
         raise ValueError("INVALID_AUTHORED_PASSAGES")
     openings, visited = [], set()
+    host_openings = defaultdict(list)
     for row in passages:
         fields = {"id", "kind", "hostMemberId", "centerOffset", "width", "height", "sillHeight"}
         if (not isinstance(row, dict) or not fields <= row.keys()
@@ -85,6 +112,11 @@ def design_checks(doc, outline, rooms, members, passages):
         if (width <= 0 or height <= 0 or sill < 0
                 or start < wall["fromCoordinate"] - EPS or end > wall["toCoordinate"] + EPS):
             raise ValueError("PASSAGE_OUTSIDE_STRAIGHT_HOST")
+        if any(min(end, prev_end) - max(start, prev_start) > EPS
+               and min(sill + height, prev_top) - max(sill, prev_sill) > EPS
+               for prev_start, prev_end, prev_sill, prev_top in host_openings[wall["id"]]):
+            raise ValueError("PASSAGES_OVERLAP_ON_HOST")
+        host_openings[wall["id"]].append((start, end, sill, sill + height))
         if "connects" in row:
             pair = row["connects"]
             if (row["kind"] != "DOOR" or sill != 0 or not isinstance(pair, list) or len(pair) != 2
@@ -132,6 +164,11 @@ def design_checks(doc, outline, rooms, members, passages):
             finding.update(status="DESIGN_CHECKED" if matches else "MISSING",
                            reason="EXPLICIT_HOSTED_CONNECTION" if matches else "HOSTED_CONNECTION_REQUIRED",
                            designObjectIds=matches)
+        if kind == "ACCESS_PATH":
+            path = access_path(criterion, openings)
+            finding.update(status="DESIGN_CHECKED" if path else "MISSING",
+                           reason="EXPLICIT_HOSTED_DOOR_PATH" if path else "HOSTED_DOOR_PATH_REQUIRED",
+                           designObjectIds=path)
         if kind == "STAIR_LINK":
             finding.update(status="MISSING", reason="SOURCE_BOUND_STAIR_AND_SLAB_VOID_REQUIRED")
         checks.append(dict({"priority": "UNSPECIFIED", "sourceRef": "brief.constraints#" + row["id"]},

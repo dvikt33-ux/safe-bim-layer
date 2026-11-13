@@ -71,6 +71,17 @@ def normalize_constraint(row):
                 for key in ("from", "to"))
         if a == b or (EXTERIOR in (a, b)) != (kind == "ENTRANCE"):
             raise ValueError("INVALID_FUNCTIONAL_CONNECTION_ENDPOINTS")
+    elif kind == "ACCESS_PATH" and {"kind", "from", "to"} <= set(criterion) <= {
+            "kind", "from", "to", "minimumOpeningWidthM"}:
+        a = criterion["from"] if criterion["from"] == EXTERIOR else _id(criterion["from"], "ACCESS_FROM")
+        b = _id(criterion["to"], "ACCESS_TO")
+        if a == b:
+            raise ValueError("INVALID_ACCESS_PATH_ENDPOINTS")
+        if "minimumOpeningWidthM" in criterion:
+            width = _nonneg(criterion["minimumOpeningWidthM"], "ACCESS_OPENING_WIDTH")
+            if width <= 0:
+                raise ValueError("INVALID_ACCESS_OPENING_WIDTH")
+            result["criterion"] = dict(criterion, minimumOpeningWidthM=width)
     elif kind == "STAIR_LINK" and set(criterion) == {"kind", "lowerStoryId", "upperStoryId"}:
         for key in ("lowerStoryId", "upperStoryId"):
             _id(criterion[key], "STAIR_STORY_ID")
@@ -190,7 +201,7 @@ def normalize(doc):
             raise ValueError("DUPLICATE_OR_UNVERIFIED_PROVENANCE_CANNOT_ASSERT_RULE_PASS")
         seen_cons.add(cid)
         criterion = item.get("criterion", {})
-        if criterion.get("kind") in ("ENTRANCE", "ROOM_CONNECTION"):
+        if criterion.get("kind") in ("ENTRANCE", "ROOM_CONNECTION", "ACCESS_PATH"):
             if {criterion["from"], criterion["to"]} - used_rooms - {EXTERIOR}:
                 raise ValueError("REQUIREMENT_REFERENCES_UNKNOWN_ROOM")
         if criterion.get("kind") == "STAIR_LINK":

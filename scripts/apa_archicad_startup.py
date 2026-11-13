@@ -8,7 +8,7 @@ import subprocess
 import time
 from types import SimpleNamespace
 
-from apa_ac29_save_isolation import require, write_new_json
+from apa_ac29_save_isolation import require, timestamp, write_new_json
 from apa_r03_mailbox import Campaign, group, listener, project_ports
 from apa_mailbox_profile import APX
 from apa_release import read_json, read_release, sha256, verify_member
@@ -154,13 +154,39 @@ def observe(campaign, processes):
     for process in processes:
         pid = process["ProcessId"]
         try:
-            ports = [port for port in project_ports(pid) if listener(port)["pid"] == pid]
+            candidates = {port: listener(port) for port in project_ports(pid)}
+            ports = [port for port, identity in candidates.items() if identity["pid"] == pid]
             row = inspect_project(campaign, pid, ports, process_windows(pid), read)
+            if row["status"] == "PROJECT_IDENTITY_VERIFIED":
+                port = row["port"]
+                identity = listener(port)
+                require(identity == candidates[port], "APA_STARTUP_API_LISTENER_CHANGED")
+                row["listener"] = identity
             observations.append(dict(row, process=process))
         except PROBE_ERRORS as exc:
             observations.append(dict(status="OBSERVATION_UNAVAILABLE", pid=pid, error=str(exc),
                                      nativeModelWrites=0))
     return observations
+
+
+def resume_session(folder, source, expected, pid):
+    """Reobserve a previously blocked recovery copy in the exact same instance."""
+    path = folder / "startup.json"
+    previous = read_json(path)
+    launch = read_json(folder / "launch-intent.json")
+    project = folder / "model" / source.name
+    require(path.resolve(strict=True) == path and project.resolve(strict=True) == project
+            and previous["status"] == "WAITING_FOR_OPERATOR"
+            and previous["project"] == launch["project"] == str(project)
+            and previous["originalProject"] == str(source)
+            and previous["projectSha256"] == launch["sha256"] == sha256(project) == expected
+            and previous["plnBytesUnchanged"] is True and previous["nativeModelWrites"] == 0
+            and not project.samefile(source), "APA_STARTUP_RESUME_SOURCE_DRIFT")
+    last = next((row for row in reversed(previous["events"])
+                 if row.get("status") == "WAITING_FOR_OPERATOR" and row.get("pid") == pid), None)
+    require(last is not None and last.get("process", {}).get("ProcessId") == pid
+            and last["process"].get("startedAt"), "APA_STARTUP_RESUME_PID_NOT_PROVEN")
+    return project, last["process"], sha256(path)
 
 
 def main(argv=None):
@@ -172,11 +198,15 @@ def main(argv=None):
     cli.add_argument("--phase", choices=("staged", "saved"), required=True)
     cli.add_argument("--output", type=Path, required=True)
     cli.add_argument("--recovery-copy", type=Path, help="A fresh diagnostic PLN from a closed saved group")
+    cli.add_argument("--resume", action="store_true",
+                     help="Append an observation in an existing saved-group recovery-copy directory")
     mode = cli.add_mutually_exclusive_group(required=True)
     mode.add_argument("--launch", choices=STARTERS)
     mode.add_argument("--pid", type=int)
     cli.add_argument("--timeout", type=int, default=45)
     args = cli.parse_args(argv)
+    require(not args.resume or (args.saved_group_state and args.pid and args.recovery_copy is None),
+            "APA_STARTUP_RESUME_REQUIRES_SAVED_GROUP_PID")
     if args.saved_group_state:
         require(args.phase == "saved", "APA_STARTUP_HISTORICAL_GROUP_REQUIRES_SAVED_PHASE")
         state = args.saved_group_state.resolve(strict=True)
@@ -196,8 +226,16 @@ def main(argv=None):
         expected = campaign.saved()["savedSHA256"] if args.phase == "saved" else campaign.initial_sha
     require(sha256(campaign.project) == expected and 5 <= args.timeout <= 120
             and (args.pid is None or args.pid > 0), "APA_STARTUP_TEST_BYTES_OR_OPTIONS_INVALID")
-    args.output.mkdir()
+    args.output = args.output.resolve()
+    if not args.resume:
+        args.output.mkdir()
     source_project = campaign.project
+    prior_process = None
+    resume_proof = None
+    if args.resume:
+        campaign.project, prior_process, resume_proof = resume_session(
+            args.output, source_project, expected, args.pid)
+        require(prior_process in archicad_processes(), "APA_STARTUP_RESUME_PROCESS_CHANGED")
     if args.recovery_copy:
         from apa_ac29_save_isolation import copy_exclusive
 
@@ -225,12 +263,14 @@ def main(argv=None):
                        project=str(campaign.project), sha256=expected))
         child = subprocess.Popen([str(exe), str(campaign.project)], cwd=exe.parent)
         events.append(dict(status="PROCESS_CREATED", pid=child.pid, executable=str(exe)))
-    tracked = {child.pid if child else args.pid: None}
+    tracked = {child.pid if child else args.pid: prior_process["startedAt"] if prior_process else None}
     deadline = time.monotonic() + args.timeout
     last_rows = None
     while True:
         try:
-            rows = observe(campaign, followed_processes(archicad_processes(), tracked))
+            snapshot = archicad_processes()
+            processes = ([prior_process] if prior_process in snapshot else []) if args.resume else followed_processes(snapshot, tracked)
+            rows = observe(campaign, processes)
         except PROBE_ERRORS as exc:
             rows = [dict(status="OBSERVATION_UNAVAILABLE", error=str(exc), nativeModelWrites=0)]
         if rows != last_rows:
@@ -252,11 +292,20 @@ def main(argv=None):
                        and source_project.is_file() and sha256(source_project) == expected)
     if not bytes_unchanged:
         status = "TEST_PLN_BYTES_DRIFT"
+    verified_row = verified[0] if status == "PROJECT_IDENTITY_VERIFIED" else {}
     receipt = dict(status=status, project=str(campaign.project), projectSha256=expected, events=events,
                    originalProject=str(source_project),
                    plnBytesUnchanged=bytes_unchanged, processExitCode=child.poll() if child else None,
-                   verifiedPort=verified[0]["port"] if status == "PROJECT_IDENTITY_VERIFIED" else None,
-                   nativeModelWrites=0)
-    write_new_json(args.output / "startup.json", receipt)
+                   verifiedPort=verified_row.get("port"), verifiedListener=verified_row.get("listener"),
+                   observedAt=timestamp(), nativeModelWrites=0)
+    receipt_path = args.output / "startup.json"
+    if args.resume:
+        require(sha256(receipt_path) == resume_proof, "APA_STARTUP_RESUME_PRIOR_PROOF_DRIFT")
+        from uuid import uuid4
+
+        receipt["priorStartupSha256"] = resume_proof
+        receipt_path = args.output / f"startup-resume-{uuid4().hex}.json"
+    write_new_json(receipt_path, receipt)
+    receipt["receiptPath"] = str(receipt_path)
     print(json.dumps(receipt, ensure_ascii=False, indent=2))
     return 0 if status == "PROJECT_IDENTITY_VERIFIED" else 2

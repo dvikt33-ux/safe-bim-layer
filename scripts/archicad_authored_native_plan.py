@@ -144,6 +144,8 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
                 BUILD.wall(p1,p2,native,wall_height,wall["thicknessMeters"])))
     for opening in geometry["openings"]:
         kind = "CreateDoors" if opening["kind"] == "DOOR" else "CreateWindows"
+        if opening["sillHeight"] + opening["height"] > float(heights[opening["storyId"]]) + SPATIAL.EPS:
+            raise ValueError("PASSAGE_EXCEEDS_STORY_HEIGHT")
         ops.append(BUILD.step("native-opening-" + opening["id"], kind,
             BUILD.opening("native-" + opening["hostMemberId"], opening["centerOffset"],
                           opening["width"], opening["height"], opening["sillHeight"])))
@@ -167,7 +169,7 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
     }
     requirements = copy.deepcopy(geometry["requirements"])
     for row in requirements:
-        if row.get("criterion", {}).get("kind") in ("ENTRANCE", "ROOM_CONNECTION"):
+        if row.get("criterion", {}).get("kind") in ("ENTRANCE", "ROOM_CONNECTION", "ACCESS_PATH"):
             row["bimOperationIds"] = ["native-opening-" + oid for oid in row["designObjectIds"]]
     requirements_pending = [row["id"] for row in requirements
                             if row.get("priority") == "REQUIRED" and row["status"] != "DESIGN_CHECKED"]

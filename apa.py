@@ -10,6 +10,7 @@ import sys
 
 
 ROOT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 
@@ -204,12 +205,17 @@ def parser():
     cmd.add_argument("--baseline-trace", type=Path, required=True)
     cmd.add_argument("--port", type=int, default=19723)
     cmd = commands.add_parser("architecture-runtime", help="Операции на подготовленной изолированной копии")
-    cmd.add_argument("phase", choices=("status", "preflight", "execute", "check-closed", "verify-reopen"))
+    cmd.add_argument("phase", choices=("status", "native-read", "preflight", "execute", "check-closed", "verify-reopen"))
     cmd.add_argument("--job", type=Path, required=True)
     cmd.add_argument("--port", type=int)
+    cmd.add_argument("--output", type=Path, help="Новый файл инвентаря для native-read")
+    cmd.add_argument("--shared-native-lock", action="store_true", help=argparse.SUPPRESS)
+    cmd.add_argument("--discover-test-port", action="store_true", help=argparse.SUPPRESS)
+    cmd.add_argument("--expected-stage-sha", help=argparse.SUPPRESS)
     cmd.add_argument("--confirm-preflight", help="SHA-256 approved-preflight.json для записи авторского варианта")
     commands.add_parser("group-runtime", help="Действующий протокол нативных групп и сверки PLN")
     commands.add_parser("archicad-startup", help="Диагностика запуска проверенной тестовой копии Archicad")
+    commands.add_parser("mcp-control", help="Приватный MCP для типизированных операций APA")
     commands.add_parser("source-batch", help="Существующий протокол пакетного создания по подтверждённым источникам")
     commands.add_parser("source-batch-reconcile", help="Сверка прерванного пакетного создания по источникам")
     commands.add_parser("mailbox", help="Приёмник APA с квитанциями и профилем чтения")
@@ -259,6 +265,7 @@ def main(argv=None):
                   "connected-runtime": ("archicad_connected_components", "main"),
                   "group-runtime": ("apa_ac29_group_batch_oneshot", "main"),
                   "archicad-startup": ("apa_archicad_startup", "main"),
+                  "mcp-control": ("apa_control_mcp", "main"),
                   "template-runtime": ("archicad_template_builder", "main"),
                   "source-batch": ("apa_source_qualified_native_batch", "cli"),
                   "source-batch-reconcile": ("apa_reconcile_source_batch_save", "cli"),
@@ -342,10 +349,17 @@ def main(argv=None):
             result = stage(args.job.resolve(), args.intent.resolve(strict=True), args.port,
                            args.donor.resolve(strict=True), args.donor_sha256, args.baseline_trace.resolve(strict=True))
         elif args.mode == "architecture-runtime":
+            from contextlib import nullcontext
+            from apa_ac29_autonomous_job_bridge import acquire_singleton
             from apa_integrated_services import architecture_phase
 
-            result = architecture_phase(ROOT, args.job, args.phase, args.port,
-                                        confirm_preflight=args.confirm_preflight)
+            if (args.output is not None) != (args.phase == "native-read"):
+                raise ValueError("APA_ARCHITECTURE_OUTPUT_ONLY_FOR_NATIVE_READ")
+            with acquire_singleton(shared=True) if args.shared_native_lock else nullcontext():
+                result = architecture_phase(ROOT, args.job, args.phase, args.port,
+                                            confirm_preflight=args.confirm_preflight, output=args.output,
+                                            discover_port=args.discover_test_port,
+                                            expected_stage_sha=args.expected_stage_sha)
             if args.phase == "preflight" and result.get("status") != "READY_FOR_EXPLICIT_TEST_RUN":
                 code = 2
         elif args.mode == "knowledge-query":

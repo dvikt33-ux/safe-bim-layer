@@ -113,7 +113,7 @@ def changes_between(previous, current, variant):
                 edges.add(("review:areas", key))
             if req.get("criterion", {}).get("kind") == "STAIR_LINK":
                 edges.update(("story:" + req["criterion"][slot], key) for slot in ("lowerStoryId", "upperStoryId"))
-            if req.get("criterion", {}).get("kind") in ("ENTRANCE", "ROOM_CONNECTION"):
+            if req.get("criterion", {}).get("kind") in ("ENTRANCE", "ROOM_CONNECTION", "ACCESS_PATH"):
                 edges.update(("room:" + req["criterion"][slot], key) for slot in ("from", "to")
                              if req["criterion"][slot] != BRIEF.EXTERIOR)
         for target in ("areas", "facades", "sections", "documentation"):
@@ -143,5 +143,7 @@ def read_request(path, template_path):
                 exampleInput=json.loads(Path(template_path).read_text(encoding="utf-8")),
                 instructions=["Предложите явно заданные варианты. Сохраните исходный текст и идентификаторы требований.",
                               "Если данных для вариантов мало, сначала верните только brief с openQuestions.",
-                              "Задавайте тип и допуск площади только при известной методике."],
+                              "Задавайте тип и допуск площади только при известной методике.",
+                              "Для маршрута через несколько помещений задайте ACCESS_PATH. Минимальную ширину проёма укажите только при наличии требования.",
+                              "Отдельно зафиксируйте неизвестные площадки, зоны открывания и межэтажные связи."],
                 executionPermission=False, nativeWriteCalls=0)
