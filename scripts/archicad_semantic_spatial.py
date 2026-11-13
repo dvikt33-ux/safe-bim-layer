@@ -7,13 +7,14 @@ story indices, and feed existing archicad_bim_graph.compile_graph/SceneWriter.
 """
 from __future__ import annotations
 
-from collections import Counter
+from collections import Counter, defaultdict, deque
 import copy
 import math
 
 import archicad_semantic_brief as BRIEF
 
 SCHEMA="apa-authored-spatial-layout/1"
+LAYOUT_FIELDS = {"schemaVersion", "outline", "rooms", "axes", "bearingLines", "loadPaths"}
 EPS=1e-6
 
 
@@ -44,6 +45,137 @@ def overlap_area(a,b):
         0,min(a["yMax"],b["yMax"])-max(a["yMin"],b["yMin"]))
 
 
+def access_path(criterion, openings):
+    """Find one deterministic path through authored, hosted doors."""
+    source, destination = criterion["from"], criterion["to"]
+    width = criterion.get("minimumOpeningWidthM", 0.0)
+    links = defaultdict(list)
+    for door in sorted(openings, key=lambda row: row["id"]):
+        if "connects" not in door or door["width"] + EPS < width:
+            continue
+        a, b = door["connects"]
+        if BRIEF.EXTERIOR in (a, b) and source != BRIEF.EXTERIOR:
+            continue
+        links[a].append((b, door["id"]))
+        links[b].append((a, door["id"]))
+    pending = deque([(source, [])])
+    seen = {source}
+    while pending:
+        room, path = pending.popleft()
+        if room == destination:
+            return path
+        for neighbor, door_id in links[room]:
+            if neighbor not in seen:
+                seen.add(neighbor)
+                pending.append((neighbor, path + [door_id]))
+    return []
+
+
+def design_checks(doc, outline, rooms, members, passages):
+    """Trace authored geometry to source IDs without assigning BIM or code approval."""
+    room_by_id = {row["id"]: row for row in rooms}
+    member_by_id = {row["id"]: row for row in members}
+    envelope_area = (outline["xMax"] - outline["xMin"]) * (outline["yMax"] - outline["yMin"])
+    balance = []
+    for story in doc["stories"]:
+        sid = story["id"]
+        assigned = sum((row["rectangle"]["xMax"] - row["rectangle"]["xMin"])
+                       * (row["rectangle"]["yMax"] - row["rectangle"]["yMin"])
+                       for row in rooms if row["storyId"] == sid)
+        balance.append(dict(storyId=sid, outlineAreaM2=envelope_area, roomRectangleSumM2=assigned,
+                            unclassifiedAreaM2=max(0, envelope_area - assigned)))
+    measures = {
+        "ROOM_RECTANGLE_SUM": dict(valueM2=sum(row["roomRectangleSumM2"] for row in balance),
+                                   basis="SUM_OF_NONOVERLAPPING_AUTHORED_ROOM_RECTANGLES"),
+        **{key: dict(valueM2=None, basis="MEASUREMENT_METHOD_OR_EVIDENCE_REQUIRED")
+           for key in BRIEF.AREA_METRICS if key != "ROOM_RECTANGLE_SUM"},
+    }
+    if not isinstance(passages, list) or len(passages) > 100:
+        raise ValueError("INVALID_AUTHORED_PASSAGES")
+    openings, visited = [], set()
+    host_openings = defaultdict(list)
+    for row in passages:
+        fields = {"id", "kind", "hostMemberId", "centerOffset", "width", "height", "sillHeight"}
+        if (not isinstance(row, dict) or not fields <= row.keys()
+                or row.keys() - fields - {"connects"} or row["kind"] not in ("DOOR", "WINDOW")):
+            raise ValueError("INVALID_AUTHORED_PASSAGE")
+        oid = BRIEF._id(row["id"], "PASSAGE_ID")
+        if oid in visited or row["hostMemberId"] not in member_by_id:
+            raise ValueError("UNKNOWN_PASSAGE_HOST_OR_DUPLICATE_ID")
+        visited.add(oid)
+        wall = member_by_id[row["hostMemberId"]]
+        offset, width, height, sill = (number(row[key], "PASSAGE_" + key.upper())
+                                     for key in ("centerOffset", "width", "height", "sillHeight"))
+        half = width / 2
+        start = wall["fromCoordinate"] + offset - half
+        end = start + width
+        if (width <= 0 or height <= 0 or sill < 0
+                or start < wall["fromCoordinate"] - EPS or end > wall["toCoordinate"] + EPS):
+            raise ValueError("PASSAGE_OUTSIDE_STRAIGHT_HOST")
+        if any(min(end, prev_end) - max(start, prev_start) > EPS
+               and min(sill + height, prev_top) - max(sill, prev_sill) > EPS
+               for prev_start, prev_end, prev_sill, prev_top in host_openings[wall["id"]]):
+            raise ValueError("PASSAGES_OVERLAP_ON_HOST")
+        host_openings[wall["id"]].append((start, end, sill, sill + height))
+        if "connects" in row:
+            pair = row["connects"]
+            if (row["kind"] != "DOOR" or sill != 0 or not isinstance(pair, list) or len(pair) != 2
+                    or any(not isinstance(item, str) for item in pair) or pair[0] == pair[1]
+                    or set(pair) - room_by_id.keys() - {BRIEF.EXTERIOR}):
+                raise ValueError("INVALID_FUNCTIONAL_DOOR_CONNECTION")
+            fixed, along = ("x", "y") if wall["direction"] == "X" else ("y", "x")
+            coordinate = wall["constantCoordinate"]
+            sides = []
+            for space in pair:
+                outside = space == BRIEF.EXTERIOR
+                box = outline if outside else room_by_id[space]["rectangle"]
+                boundaries = [side for side in ("Min", "Max") if abs(box[fixed + side] - coordinate) <= EPS]
+                if (len(boundaries) != 1 or start < box[along + "Min"] - EPS
+                        or end > box[along + "Max"] + EPS
+                        or not outside and room_by_id[space]["storyId"] != wall["storyId"]):
+                    raise ValueError("DOOR_DOES_NOT_CROSS_DECLARED_ROOM_BOUNDARIES")
+                if outside:
+                    sides.append("Max" if boundaries[0] == "Min" else "Min")
+                else:
+                    sides.extend(boundaries)
+            if len(set(sides)) != 2:
+                raise ValueError("DOOR_ROOMS_MUST_BE_ON_OPPOSITE_SIDES")
+        openings.append(dict(row, storyId=wall["storyId"], centerOffset=offset,
+                             width=width, height=height, sillHeight=sill))
+
+    checks = []
+    for row in doc["constraints"]:
+        criterion = row.get("criterion")
+        kind = criterion["kind"] if criterion else None
+        finding = dict(status="UNVERIFIED", reason="TYPED_CRITERION_REQUIRED",
+                       designObjectIds=[], bimOperationIds=[])
+        if kind == "AREA_TARGET":
+            measure = measures[criterion["metric"]]
+            finding.update(measurement=measure, reason="MATCHING_AREA_MEASUREMENT_REQUIRED")
+            if measure["valueM2"] is not None:
+                delta = measure["valueM2"] - criterion["targetM2"]
+                matched = abs(delta) <= criterion["toleranceM2"] + EPS
+                finding.update(status="DESIGN_CHECKED" if matched else "CONFLICT",
+                               reason="AREA_WITHIN_TOLERANCE" if matched else "AREA_OUTSIDE_TOLERANCE",
+                               deltaM2=delta, designObjectIds=list(room_by_id))
+        if kind in ("ENTRANCE", "ROOM_CONNECTION"):
+            pair = {criterion["from"], criterion["to"]}
+            matches = [x["id"] for x in openings if set(x.get("connects", [])) == pair]
+            finding.update(status="DESIGN_CHECKED" if matches else "MISSING",
+                           reason="EXPLICIT_HOSTED_CONNECTION" if matches else "HOSTED_CONNECTION_REQUIRED",
+                           designObjectIds=matches)
+        if kind == "ACCESS_PATH":
+            path = access_path(criterion, openings)
+            finding.update(status="DESIGN_CHECKED" if path else "MISSING",
+                           reason="EXPLICIT_HOSTED_DOOR_PATH" if path else "HOSTED_DOOR_PATH_REQUIRED",
+                           designObjectIds=path)
+        if kind == "STAIR_LINK":
+            finding.update(status="MISSING", reason="SOURCE_BOUND_STAIR_AND_SLAB_VOID_REQUIRED")
+        checks.append(dict({"priority": "UNSPECIFIED", "sourceRef": "brief.constraints#" + row["id"]},
+                           **row) | finding)
+    return dict(requirements=checks, openings=openings, areaMeasures=measures, areaBalance=balance)
+
+
 def compile_spatial(brief,pack,layout):
     """Return proof-carrying spatial facts; ALWAYS no-native-writes and not engineered."""
     doc=BRIEF.normalize(brief)
@@ -63,8 +195,7 @@ def compile_spatial(brief,pack,layout):
     if (slab.get("engineeringApproved") is not False or
             slab.get("detailApproved") is not False):
         raise ValueError("UNTRUSTED_SELF_APPROVED_CSE")
-    if (not isinstance(layout,dict) or set(layout)!={
-            "schemaVersion","outline","rooms","axes","bearingLines","loadPaths"} or
+    if (not isinstance(layout,dict) or not LAYOUT_FIELDS <= set(layout) <= LAYOUT_FIELDS | {"passages"} or
             layout["schemaVersion"]!=SCHEMA):
         raise ValueError("SPATIAL_LAYOUT_SCHEMA_MISMATCH")
     outline=rectangle(layout["outline"],"OUTLINE")
@@ -211,13 +342,14 @@ def compile_spatial(brief,pack,layout):
         raise ValueError("CSE_UNRESOLVED_CONDITIONS_UNAVAILABLE")
     slab_stories=set(slab.get("storyIds",[]))
     missing_slabs=sorted(story_ids-slab_stories)
+    design = design_checks(doc, outline, vals, seq, layout.get("passages", []))
     return {
         "status":"AUTHORED_SPATIAL_GEOMETRY_CHECKED_ENGINEERING_PENDING",
         "schemaVersion":SCHEMA,"projectId":doc["projectId"],
         "sourcePackStatus":pack["status"],
         "outline":outline,
         "rooms":vals,"axes":list(by_axis.values()),
-        "bearingLines":seq,"loadPaths":links,
+        "bearingLines":seq,"loadPaths":links,**design,
         "floorSlabCseCandidateId":slab["id"],
         "floorSlabCandidateStoryIds":sorted(slab_stories),
         "unresolvedWallCseMemberIds":cse_missing,
@@ -244,9 +376,8 @@ def relocate_authored_xy(layout, dx, dy):
     """
     delta_x=number(dx,"TRANSLATION_X")
     delta_y=number(dy,"TRANSLATION_Y")
-    if not isinstance(layout,dict) or set(layout)!={
-            "schemaVersion","outline","rooms","axes","bearingLines","loadPaths"
-            } or layout["schemaVersion"]!=SCHEMA:
+    if (not isinstance(layout,dict) or not LAYOUT_FIELDS <= set(layout) <= LAYOUT_FIELDS | {"passages"}
+            or layout["schemaVersion"]!=SCHEMA):
         raise ValueError("AUTHORED_LAYOUT_REQUIRED_FOR_TRANSLATION")
     copied=copy.deepcopy(layout)
     def add(obj,key,delta):

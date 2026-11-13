@@ -13,6 +13,17 @@ LEGACY_HISTORY = LEGACY_ROOT / "apa-job-bridge-state"
 APX = Path(r"C:\Program Files\Graphisoft\Archicad 29\Add-Ons\Tapir\TapirAddOn_AC29_Win.apx")
 
 
+def mailbox_mutex():
+    old = LEGACY_HISTORY / ".single-instance.lock"
+    if old.is_file():
+        return old.open("r+b")
+    if LEGACY_ROOT.exists():
+        raise ValueError("В установленной APA отсутствует общий файл блокировки приёмника")
+    path = Path(os.environ["LOCALAPPDATA"]) / "APA" / "mailbox-owner.lock"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    return path.open("a+b")
+
+
 def saved_copy(state):
     from archicad_scene_run import digest
 
@@ -94,12 +105,4 @@ class PackageProfile:
         if any(current.get(key) != self.native[key] for key in ("sourceRevision", "buildIdentity")):
             raise ValueError("Загруженный APX отличается от сборки профиля")
 
-    def mutex(self):
-        old = LEGACY_HISTORY / ".single-instance.lock"
-        if old.is_file():
-            return old.open("r+b")
-        if LEGACY_ROOT.exists():
-            raise ValueError("В установленной APA отсутствует общий файл блокировки приёмника")
-        path = Path(os.environ["LOCALAPPDATA"]) / "APA" / "mailbox-owner.lock"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        return path.open("a+b")
+    mutex = staticmethod(mailbox_mutex)

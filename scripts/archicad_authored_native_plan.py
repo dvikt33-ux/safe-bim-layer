@@ -21,9 +21,10 @@ import archicad_scene_run as RUN
 READS=frozenset({"GetProjectInfo","GetStories","GetAttributesByType"})
 
 
-def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junction_policy=None,floor_plans=None):
+def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junction_policy=None,
+                      floor_plans=None,design_only=False):
     """Native-schema validated single DAG, but never executable by this adapter."""
-    if not callable(read_api):
+    if not design_only and not callable(read_api):
         raise ValueError("EXPLICIT_READ_ONLY_NATIVE_SOURCE_REQUIRED")
     def api(cmd,params):
         if cmd not in READS:
@@ -44,14 +45,16 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
             if abs(story["level"]+h-next_level)>1e-5:
                 raise ValueError("STORY_HEIGHT_INCONSISTENT_WITH_LEVELS")
 
-    if pack.get("status")!="PROJECT_NATIVE_MATERIAL_RESOLVED_NOT_ENGINEER_APPROVED":
-        raise ValueError("PROJECT_NATIVE_CSE_BINDING_NOT_ESTABLISHED")
-    known=pack.get("nativeStoryBindings")
-    resolved=BRIEF.resolve_stories(doc,api)
-    if resolved["nativeResolution"]!="READY_FOR_ATTRIBUTE_RESOLUTION":
-        raise ValueError("REAL_STORY_MAP_UNRESOLVED")
-    if known!=resolved["nativeStoryBindings"]:
-        raise ValueError("PROJECT_STORY_MAPPING_CHANGED_SINCE_CSE_READ")
+    known=[]
+    if not design_only:
+        if pack.get("status")!="PROJECT_NATIVE_MATERIAL_RESOLVED_NOT_ENGINEER_APPROVED":
+            raise ValueError("PROJECT_NATIVE_CSE_BINDING_NOT_ESTABLISHED")
+        known=pack.get("nativeStoryBindings")
+        resolved=BRIEF.resolve_stories(doc,api)
+        if resolved["nativeResolution"]!="READY_FOR_ATTRIBUTE_RESOLUTION":
+            raise ValueError("REAL_STORY_MAP_UNRESOLVED")
+        if known!=resolved["nativeStoryBindings"]:
+            raise ValueError("PROJECT_STORY_MAPPING_CHANGED_SINCE_CSE_READ")
     candidates=pack["selectedCseCandidates"]
     slab=next(x for x in candidates if x.get("role")=="floor-slab")
     if junction_policy is not None and junction_policy != {
@@ -62,15 +65,17 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
     if geometry["missingSlabCseStoryIds"]:
         raise ValueError("FLOOR_SLAB_CSE_REQUIRED_ALL_STORIES")
     material_name=slab["native"]["name"]
-    before=api("GetProjectInfo",{})
-    actual_guid=RUN.resolve_basic_slab_material(api,material_name)
-    after=api("GetProjectInfo",{})
-    if before!=after:
-        raise ValueError("ACTIVE_PROJECT_IDENTITY_CHANGED")
-    expected_guid=slab["native"].get("guid")
-    if (not isinstance(expected_guid,str)
-            or actual_guid.casefold()!=expected_guid.casefold()):
-        raise ValueError("PROJECT_SLAB_MATERIAL_CHANGED_AFTER_PACK_BINDING")
+    actual_guid=None
+    if not design_only:
+        before=api("GetProjectInfo",{})
+        actual_guid=RUN.resolve_basic_slab_material(api,material_name)
+        after=api("GetProjectInfo",{})
+        if before!=after:
+            raise ValueError("ACTIVE_PROJECT_IDENTITY_CHANGED")
+        expected_guid=slab["native"].get("guid")
+        if (not isinstance(expected_guid,str)
+                or actual_guid.casefold()!=expected_guid.casefold()):
+            raise ValueError("PROJECT_SLAB_MATERIAL_CHANGED_AFTER_PACK_BINDING")
 
     story_map={b["architecturalStoryId"]:b for b in known}
     ops=[]
@@ -83,7 +88,7 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
     ]
     for story_number,s in enumerate(doc["stories"]):
         sid=s["id"]
-        native=story_map[sid]["nativeIndex"]
+        native=story_number if design_only else story_map[sid]["nativeIndex"]
         # One authored footprint slab per storey; no guessed room partitions.
         step_id="native-slab-"+sid
         walls=sorted((m for m in geometry["bearingLines"]
@@ -137,6 +142,13 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
                 p2=BUILD.xy(wall["toCoordinate"],wall["constantCoordinate"])
             ops.append(BUILD.step("native-"+wall["id"],"CreateWalls",
                 BUILD.wall(p1,p2,native,wall_height,wall["thicknessMeters"])))
+    for opening in geometry["openings"]:
+        kind = "CreateDoors" if opening["kind"] == "DOOR" else "CreateWindows"
+        if opening["sillHeight"] + opening["height"] > float(heights[opening["storyId"]]) + SPATIAL.EPS:
+            raise ValueError("PASSAGE_EXCEEDS_STORY_HEIGHT")
+        ops.append(BUILD.step("native-opening-" + opening["id"], kind,
+            BUILD.opening("native-" + opening["hostMemberId"], opening["centerOffset"],
+                          opening["width"], opening["height"], opening["sillHeight"])))
     schema=Path(schema_path or RUN.DEFAULT_SCENE_SCHEMA)
     if not schema.is_file():
         raise ValueError("NATIVE_TAPIR_SCHEMA_MISSING")
@@ -155,8 +167,16 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
         "engineeringChecks":["STRUCTURAL_LOAD_PATH_UNVERIFIED",
                              "BUILDING_CODE_APPLICABILITY_UNVERIFIED"]
     }
+    requirements = copy.deepcopy(geometry["requirements"])
+    for row in requirements:
+        if row.get("criterion", {}).get("kind") in ("ENTRANCE", "ROOM_CONNECTION", "ACCESS_PATH"):
+            row["bimOperationIds"] = ["native-opening-" + oid for oid in row["designObjectIds"]]
+    requirements_pending = [row["id"] for row in requirements
+                            if row.get("priority") == "REQUIRED" and row["status"] != "DESIGN_CHECKED"]
     return {
-        "status":"OFFLINE_EXISTING_BIM_GRAPH_COMPILED_NOT_AUTHORIZED",
+        "status":("BIM_GRAPH_PREVIEW_NEEDS_NATIVE_BINDINGS" if design_only
+                  else "OFFLINE_EXISTING_BIM_GRAPH_COMPILED_NOT_AUTHORIZED"),
+        "floorIndexBasis": "SEMANTIC_STORY_ORDINAL_PREVIEW_ONLY" if design_only else "NATIVE_STORY_READBACK",
         "projectId":doc["projectId"],"nativeTargetProjectPath":doc["targetProjectPath"],
         "sourceLayoutStatus":geometry["status"],
         "sourcePackStatus":pack["status"],
@@ -172,12 +192,18 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
         "provisionalBasicSlabMaterialGuid":actual_guid,
         "storyBindings":known,
         "authoredRoomIds":[r["id"] for r in geometry["rooms"]],
+        "requirements": requirements,
+        "requiredOpenIds": requirements_pending,
+        "areaMeasures": geometry["areaMeasures"],
+        "areaBalance": geometry["areaBalance"],
         "plannedNativeCommands":dict(Counter(x["command"] for x in ops)),
         "unresolved":unresolved,
         "operationCount":len(ops),
         "graphValidator":"EXISTING_ARCHICAD_BIM_GRAPH_COMPILE_GRAPH",
         "nativeWriter":"EXISTING_SCENE_WRITER_NOT_CALLED",
         "liveWriteAuthorized":False,
+        "engineeringApproved":False,
+        "normativeApproved":False,
         "sceneReservationCreated":False,
         "plnChanged":False,
         "nativeWriteCalls":0

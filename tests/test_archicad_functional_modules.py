@@ -57,6 +57,16 @@ class FunctionalModules(unittest.TestCase):
         facts=call('PolygonRelations',dict(polygons=[dict(id='slab',outline=[[0,0],[6,0],[6,6],[0,6]],holes=[[[2,2],[4,2],[4,4],[2,4]]]),dict(id='inside-hole',outline=[[2.1,2.1],[3.9,2.1],[3.9,3.9],[2.1,3.9]])]))
         self.assertEqual(facts['polygons'][0]['area'],32);self.assertEqual(facts['relations'],[])
         self.assertTrue(all(e['nativeWrites']==0 for e in r.local_events))
+    def test_serialized_catalog_rebinds_local_handlers_without_live_permission(self):
+        original = connected()
+        restored = DynamicCommands(json.loads(json.dumps(original.catalog)))
+        key = 'AddOn.APAAnalysis.PolygonRelations'
+        self.assertNotIn(key, restored.local_handlers)
+        A.connect_functional_modules(restored)
+        polygons = [dict(id='rectangle', outline=[[0, 0], [2, 0], [2, 1], [0, 1]])]
+        result = restored.read(None, restored.prepare(key, dict(polygons=polygons)), True)
+        self.assertEqual(result['polygons'][0]['area'], 2.0)
+        self.assertNotIn(key, restored.live)
     def test_local_schema_validation_dependency_flow_and_cpsat(self):
         r=connected()
         with self.assertRaises(Exception):r.prepare('AddOn.APAAnalysis.PolygonRelations',dict(polygons=[],tolerance=-1))

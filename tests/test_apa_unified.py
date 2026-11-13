@@ -141,6 +141,46 @@ class UnifiedAcceptance(unittest.TestCase):
         self.assertEqual([op["command"] for op in steps], ["AddOn.TapirCommand.CloneNativeGroupV1"])
         self.assertEqual(len(steps[0]["params"]["translations"]), 32)
 
+    def test_arena_terminal_ack_binds_only_an_explicit_typed_input(self):
+        receipt = self.save("arena.json", {"protocol": 1, "kind": "terminal_ack", "turn_id": 87,
+            "ack_verified": True, "signal_status": "done", "signal_target": "NONE",
+            "signal_blob_sha": "a" * 40, "report_marker": "fixture"})
+        source = apa.ROOT / "examples/accelerator/r03-gpt-shell-e2e.intent.json"
+        output = self.work / "arena-plan.json"
+        result = self.invoke("arena-receipt", "--receipt", receipt, "--intent", source, "--output", output)
+        self.assertEqual(result["status"], "ARENA_APA_PLAN_PREPARED")
+        self.assertEqual(result["receiptSha256"], digest(receipt))
+        self.assertEqual(result["intentSha256"], digest(source))
+        self.assertEqual(result["plan"]["metrics"]["elementCount"], 10)
+        self.assertFalse(result["executionPermission"])
+        self.assertFalse(result["plan"]["executionPermission"])
+        self.assertEqual(result, apa.read_json(output))
+
+    def test_tdk_trace_delta_compiles_with_scene_writer_and_exact_wall_guid(self):
+        from types import SimpleNamespace
+        from apa_tdk_wall import trace_candidate
+
+        name = "AI_SOURCE_PACK"
+        wall, prop = "11111111-1111-4111-8111-111111111111", "22222222-2222-4222-8222-222222222222"
+        runtime = SimpleNamespace(trace_values=lambda *_: {name: "pack-02"}, properties={
+            name: dict(propertyId={"guid": prop}, propertyName=name, propertyGroupName="AI_TRACE",
+                       propertyCollectionType="Single", propertyValueType="String", propertyIsEditable=True)
+        })
+        decision = dict(status="WOULD_UPDATE_TRACE", dryRun=True, guid=wall,
+                        traceDelta={name: {"actual": "pack-01", "desired": "pack-02"}})
+        router = apa.load_router()
+        result = trace_candidate(router, runtime, {}, "unused-fixture", decision)
+        self.assertEqual(result["executor"], "SceneWriter")
+        self.assertFalse(result["executionPermission"])
+        operation, = result["workflow"]["graph"]["operations"]
+        self.assertEqual(operation["command"], "SetPropertyValuesOfElements")
+        self.assertEqual(operation["params"]["elementPropertyValues"],
+                         [dict(elementId={"guid": wall}, propertyId={"guid": prop},
+                               propertyValue={"value": "pack-02"})])
+        runtime.properties[name]["propertyGroupName"] = "Another group"
+        with self.assertRaisesRegex(ValueError, "TRACE_PROPERTY_DEFINITION_DRIFT"):
+            trace_candidate(router, runtime, {}, "unused-fixture", decision)
+
     def test_native_dump_generates_same_revision_documentation_and_csv(self):
         sample = apa.ROOT / "examples/model_dump_v1.sample.json"
         ids = [e["guid"] for e in apa.read_json(sample)["elements"]]

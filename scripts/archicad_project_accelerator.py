@@ -755,8 +755,29 @@ def approval_hash(compiled, preflight):
                        "scenePlanHash": preflight["sourcePlanHash"]})
 
 
+def requirement_readback(result):
+    steps = result.get("bimOperationReadback", {})
+    discrepancy = result.get("assemblyDiscrepancy", {})
+    discrepant = discrepancy.get("operationId")
+    feedback = []
+    for requirement in result["requirements"]:
+        ids = requirement["bimOperationIds"]
+        observed = {sid: steps.get(sid, {}) for sid in ids}
+        if not ids:
+            state = "NO_LINKED_BIM_OPERATIONS"
+        elif discrepant in ids:
+            state = discrepancy.get("outcome", "MISMATCH")
+        elif result.get("wholeAssemblyReadback") and all(row.get("status") == "PASS" for row in observed.values()):
+            state = "LINKED_ELEMENTS_READ_BACK"
+        else:
+            state = "INCOMPLETE"
+        feedback.append(dict(requirementId=requirement["id"], designStatus=requirement["status"],
+                             nativeReadback=state, operations=observed))
+    return feedback
+
+
 def run_project(intent, schema, folder, state_dir, mode="offline", transport=None,
-                run_id=None, confirm_hash=None):
+                run_id=None, confirm_hash=None, *, allow_3d_view_for_write=False):
     """All evidence stays local. Execute requires an exact preflight approval hash."""
     folder = Path(folder)
     folder.mkdir(parents=True, exist_ok=False)
@@ -772,12 +793,19 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
                 raise ValueError("AUTHORED_NATIVE_REQUIRES_EXPLICIT_READ_ONLY_PREFLIGHT")
             # Exact identity is checked before resolving any authored native data.
             api = EvidenceAPI(transport, folder, execute=mode == "execute")
-            RUN.guarded_project(api)
+            RUN.guarded_scene_project(api, allow_3d_view_for_write=allow_3d_view_for_write)
             compiled = compile_authored_intent(intent, schema, api)
         else:
             compiled = compile_intent(intent, schema)
         write_json(folder / "plan.json", compiled)
         result.update(intentHash=compiled["intentHash"], metrics=compiled["metrics"])
+        if authored:
+            candidate = compiled["authoredCandidate"]
+            result.update(sourcePlanHash=candidate["sourcePlanHash"],
+                          requirements=candidate["requirements"], requiredOpenIds=candidate["requiredOpenIds"])
+            if candidate["requiredOpenIds"]:
+                result.update(status="BLOCKED", reason="AUTHORED_REQUIRED_DESIGN_CHECKS_OPEN")
+                return result
         if mode == "offline":
             result["status"] = compiled["status"]
             return result
@@ -786,7 +814,11 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
         if api is None:
             api = EvidenceAPI(transport, folder, execute=mode == "execute")
         required_story = (compiled.get("storyBindings") or [None])[0]
-        binding = RUN.guarded_project(api, required_story)  # Identity before inventory.
+        def project_binding():
+            return RUN.guarded_scene_project(api, required_story,
+                allow_3d_view_for_write=allow_3d_view_for_write)
+
+        binding = project_binding()  # Identity before inventory.
         result["archicadProduct"] = archicad29(api)
         before = inventory_guids(api)
         write_json(folder / "inventory-before.json", before)
@@ -800,7 +832,8 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
                                      AUTHORED_NATIVE.make_read_only_scene_writer_preview_factory(
                                          compiled["authoredCandidate"]) if authored else
                                      (lambda x, y, path: BUILD.prepare(intent["components"][0], path))
-                                     if required_story is not None else None), adapters=typed_adapters)
+                                     if required_story is not None else None), adapters=typed_adapters,
+                                 allow_3d_view_for_write=allow_3d_view_for_write)
         anchor = ({"x": compiled["envelope"]["xMin"], "y": compiled["envelope"]["yMin"]}
                   if authored else intent["components"][0]["anchor"])
         ticket = writer.preflight(anchor["x"], anchor["y"])
@@ -827,6 +860,12 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
             # Reuse the original one-shot reservation/host/readback implementation.
             result["scene"] = writer.execute(anchor["x"], anchor["y"], run_id, ticket["sourcePlanHash"])
             result["status"] = result["scene"]["status"]
+            if authored:
+                result["bimOperationReadback"] = result["scene"]["steps"]
+                if result["scene"].get("failedStep") in {step["id"] for step in compiled["graph"]["operations"]}:
+                    result["assemblyDiscrepancy"] = dict(operationId=result["scene"]["failedStep"],
+                                                         reason=result["scene"].get("reason"),
+                                                         outcome="MISMATCH_OR_UNKNOWN")
             if result['status']=='COMPLETE_UNSAVED' and protected is not None:
                 import archicad_authored_extension as EXTENSION
                 owned={sid:{'guid':v['guid'],'kind':v['kind'],
@@ -850,7 +889,7 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
                         'Explicit source intent structuralFunctions; no engineering capacity inference',saved_hash)
         after = inventory_guids(api)
         write_json(folder / "inventory-after.json", after)
-        if RUN.guarded_project(api, required_story) != binding:
+        if project_binding() != binding:
             raise ValueError("PROJECT_CHANGED_AFTER_RUN")
         added, removed = sorted(set(after)-set(before)), sorted(set(before)-set(after))
         result.update(addedGuids=added, removedGuids=removed, inventoryUnchanged=before == after)
@@ -868,7 +907,10 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
             created = {"__plan__": compiled["graph"], **{k: {"guid": v["guid"], "kind": v["kind"]}
                        for k, v in result["scene"]["steps"].items()}}
             for step in compiled["graph"]["operations"]:
-                RUN.guarded_project(api, required_story)
+                if authored:
+                    result["assemblyDiscrepancy"] = dict(operationId=step["id"], command=step["command"],
+                                                         guid=created[step["id"]]["guid"])
+                project_binding()
                 params = RUN.resolve_params(step, created)
                 host = (RUN.check_previous_wall(
                             api, step, created, ticket.get("storyBindings"))
@@ -896,9 +938,10 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
                         ticket.get("slabBasicMaterialGuid")
                         if step["command"] == "CreateSlabs" else None),
                     slab_level_is_absolute=(ticket.get("slabLevelConvention")=="PROJECT_ABSOLUTE"))
-            if RUN.guarded_project(api, required_story) != binding:
+            if project_binding() != binding:
                 raise ValueError("PROJECT_CHANGED_DURING_WHOLE_ASSEMBLY_READBACK")
             result["wholeAssemblyReadback"] = True
+            result.pop("assemblyDiscrepancy", None)
             if authored and intent.get('nativeGeometryAudit'):
                 import archicad_authored_geometry as GEOMETRY
                 result['nativeGeometry']=GEOMETRY.run(api,ticket,result['scene']['steps'],after,folder/'native-geometry')
@@ -907,7 +950,11 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
                       reason=type(exc).__name__ + ": " + str(exc))
         if api and api.write_attempts:
             result["manualReconciliationRequired"] = True
+        if "assemblyDiscrepancy" in result:
+            result["assemblyDiscrepancy"]["reason"] = result["reason"]
     finally:
+        if "requirements" in result:
+            result["requirementReadback"] = requirement_readback(result)
         result.update(elapsedSeconds=round(time.perf_counter()-start, 6),
                       commandCounts=dict(api.calls) if api else {},
                       modelWriteAttempts=api.write_attempts if api else 0)

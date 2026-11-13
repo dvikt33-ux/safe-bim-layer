@@ -66,11 +66,27 @@ class StoryReadOnlyGuard(TestCase):
     def test_read_path_and_writer_path_stay_distinct(self):
         dynamic_source=inspect.getsource(DYNAMIC.DynamicCommands.read)
         self.assertIn("RUN.guarded_project_for_read(api)",dynamic_source)
-        writer_source=inspect.getsource(RUN.SceneWriter.guarded_binding)
-        self.assertIn("guarded_project(self.api, self.required_story)",writer_source)
-        self.assertIn("if not self.allow_3d_view_for_write:",writer_source)
-        self.assertIn("3D_WRITER_REQUIRES_EXACT_SAVED_COPY_AUTHORIZATION",writer_source)
-        self.assertIn("guarded_project_for_read",writer_source)
+        with patch.object(RUN, "PORT", 19727), \
+             patch.object(RUN, "EXPECTED_PATH", EXPECTED_PATH), \
+             patch.object(RUN, "EXPECTED_NAME", EXPECTED_NAME), \
+             patch.object(RUN, "_SAVED_COPY_AUTHORIZATION", None):
+            api = fake_api(-1)
+            standard = RUN.SceneWriter(api, "unused.sqlite3")
+            with self.assertRaisesRegex(ValueError, "STORY_MISMATCH"):
+                standard.guarded_binding()
+            writer = RUN.SceneWriter(api, "unused.sqlite3", allow_3d_view_for_write=True)
+            with self.assertRaisesRegex(ValueError, "EXACT_SAVED_COPY_AUTHORIZATION"):
+                writer.guarded_binding()
+            with patch.object(RUN, "_SAVED_COPY_AUTHORIZATION", {"path": EXPECTED_PATH}), \
+                 patch.object(RUN, "authorized_authored_target", return_value=True):
+                self.assertEqual(writer.guarded_binding()["storyIndex"], 0)
+                writer.required_story = {"nativeIndex": 0, "floorId": 1, "level": 0.0, "label": "Wrong"}
+                with self.assertRaisesRegex(ValueError, "NAMED_FIRST_STORY_MISMATCH"):
+                    writer.guarded_binding()
+                writer.required_story = None
+                writer.api = fake_api(2)
+                with self.assertRaisesRegex(ValueError, "REQUIRES_3D_OR_STORY_ZERO"):
+                    writer.guarded_binding()
 
 if __name__=="__main__":
     main()
