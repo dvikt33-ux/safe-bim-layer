@@ -47,6 +47,12 @@ jobs:
         run: >-
           python -m unittest -v
           test_apa_unified
+          test_apa_project_design
+          test_archicad_semantic_brief
+          test_archicad_semantic_spatial
+          test_archicad_project_library_pack
+          test_archicad_authored_native_plan
+          test_archicad_isolated_authored_execution
           test_apa_external_readonly
           test_apa_external_pdfvectors_lossless
           test_apa_high_density_readonly_v2

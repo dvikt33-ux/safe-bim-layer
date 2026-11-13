@@ -73,6 +73,12 @@ def compile_plan(router, intent):
     import archicad_project_accelerator as core
 
     schema = intent.get("schemaVersion")
+    if schema == "apa-semantic-project-brief/1":
+        return core.compile_project_brief(intent)
+    if schema == "apa-project-design/1":
+        from apa_project_design import compile_design
+
+        return compile_design(intent)
     if schema in {"archicad-project-intent/1", "apa-native-task/1"}:
         return core.compile_intent(intent, core.RUN.DEFAULT_SCENE_SCHEMA, router)
     if schema == "apa-native-optimizer/1":
@@ -156,6 +162,18 @@ def parser():
     cmd.add_argument("--contracts", action="store_true")
     cmd = commands.add_parser("plan", help="Подготовить BIM Graph или нативное задание")
     cmd.add_argument("--intent", type=Path, required=True)
+    cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("design-request", help="Подготовить исходное текстовое задание для GPT")
+    cmd.add_argument("--source", type=Path, required=True)
+    cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("design-select", help="Выбрать проверенный проектный вариант для предконтроля")
+    cmd.add_argument("--intent", type=Path, required=True)
+    cmd.add_argument("--variant", required=True)
+    cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("design-diff", help="Определить, что требует сверки после изменения проектного варианта")
+    cmd.add_argument("--previous", type=Path, required=True)
+    cmd.add_argument("--current", type=Path, required=True)
+    cmd.add_argument("--variant", required=True)
     cmd.add_argument("--output", type=Path, required=True)
     cmd = commands.add_parser("run-local", help="Выполнить локальную аналитическую команду")
     cmd.add_argument("command")
@@ -247,6 +265,23 @@ def main(argv=None):
         if args.mode == "doctor":
             result = doctor()
             code = 0 if result["status"] == "LOCAL_ENV_READY" else 2
+        elif args.mode == "design-request":
+            from apa_project_design import read_request
+
+            result = read_request(args.source, ROOT / "examples/accelerator/r04-project-design.json")
+            write_json(args.output, result)
+        elif args.mode == "design-select":
+            from apa_project_design import select_variant
+
+            selected = select_variant(read_json(args.intent), args.variant)
+            write_json(args.output, selected)
+            result = dict(status="AUTHORED_INPUT_FOR_NATIVE_PREFLIGHT", variant=args.variant,
+                          executionPermission=False, output=str(args.output))
+        elif args.mode == "design-diff":
+            from apa_project_design import changes_between
+
+            result = changes_between(read_json(args.previous), read_json(args.current), args.variant)
+            write_json(args.output, result)
         elif args.mode == "template-check":
             from archicad_template_builder import validate_specs
 
@@ -314,7 +349,13 @@ def main(argv=None):
                 result = catalog(router, args.query, args.contracts)
             elif args.mode == "plan":
                 raw = args.intent.read_bytes()
-                result = compile_plan(router, json.loads(raw.decode("utf-8-sig")))
+                try:
+                    intent = json.loads(raw.decode("utf-8-sig"))
+                except json.JSONDecodeError as exc:
+                    raise ValueError("Текстовое задание подайте через apa design-request") from exc
+                if not isinstance(intent, dict):
+                    raise ValueError("APA_PLAN_REQUIRES_JSON_OBJECT")
+                result = compile_plan(router, intent)
                 result = dict(result, inputSha256=hashlib.sha256(raw).hexdigest(), executionPermission=False)
                 write_json(args.output, result)
             elif args.mode == "run-local":

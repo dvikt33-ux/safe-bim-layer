@@ -14,6 +14,8 @@ import re
 
 SCHEMA = "apa-semantic-project-brief/1"
 MODES = frozenset({"GENERATE_FROM_ZERO", "ADAPT_EXISTING"})
+EXTERIOR = "$outside"
+AREA_METRICS = ("ROOM_RECTANGLE_SUM", "GROSS_BUILDING", "USABLE", "LIVING")
 _ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{2,79}$")
 
 
@@ -36,11 +38,54 @@ def _id(value, field):
     return value
 
 
+def normalize_constraint(row):
+    base = {"id", "text", "evidenceStatus"}
+    optional = {"priority", "sourceRef", "criterion"}
+    if not isinstance(row, dict) or not base <= set(row) <= base | optional:
+        raise ValueError("INVALID_CONSTRAINT_FIELDS")
+    cid = _id(row["id"], "CONSTRAINT_ID")
+    if row["evidenceStatus"] != "UNVERIFIED":
+        raise ValueError("DUPLICATE_OR_UNVERIFIED_PROVENANCE_CANNOT_ASSERT_RULE_PASS")
+    result = {**row, "id": cid, "text": _name(row["text"], "CONSTRAINT_TEXT")}
+    if optional & row.keys():
+        if (not {"priority", "sourceRef"} <= row.keys()
+                or row["priority"] not in ("REQUIRED", "PREFERENCE")):
+            raise ValueError("EXPLICIT_REQUIREMENT_PRIORITY_AND_SOURCE_REQUIRED")
+        _name(row["sourceRef"], "REQUIREMENT_SOURCE")
+    if "criterion" not in row:
+        return result
+    criterion = row["criterion"]
+    if not isinstance(criterion, dict):
+        raise ValueError("INVALID_REQUIREMENT_CRITERION")
+    kind = criterion.get("kind")
+    if kind == "AREA_TARGET" and set(criterion) == {"kind", "metric", "targetM2", "toleranceM2"}:
+        if criterion["metric"] not in AREA_METRICS:
+            raise ValueError("UNKNOWN_AREA_MEASUREMENT_DEFINITION")
+        target = _nonneg(criterion["targetM2"], "AREA_TARGET")
+        tolerance = _nonneg(criterion["toleranceM2"], "AREA_TOLERANCE")
+        if target <= 0 or tolerance < 0:
+            raise ValueError("INVALID_AREA_TARGET_OR_TOLERANCE")
+        result["criterion"] = dict(criterion, targetM2=target, toleranceM2=tolerance)
+    elif kind in ("ENTRANCE", "ROOM_CONNECTION") and set(criterion) == {"kind", "from", "to"}:
+        a, b = (criterion[key] if criterion[key] == EXTERIOR else _id(criterion[key], "CONNECTION_SPACE")
+                for key in ("from", "to"))
+        if a == b or (EXTERIOR in (a, b)) != (kind == "ENTRANCE"):
+            raise ValueError("INVALID_FUNCTIONAL_CONNECTION_ENDPOINTS")
+    elif kind == "STAIR_LINK" and set(criterion) == {"kind", "lowerStoryId", "upperStoryId"}:
+        for key in ("lowerStoryId", "upperStoryId"):
+            _id(criterion[key], "STAIR_STORY_ID")
+        if criterion["lowerStoryId"] == criterion["upperStoryId"]:
+            raise ValueError("DISTINCT_STAIR_STORIES_REQUIRED")
+    else:
+        raise ValueError("UNSUPPORTED_REQUIREMENT_CRITERION")
+    return result
+
+
 def normalize(doc):
     """Validate user brief; never assign a native story index or BIM GUID."""
     fields={"schemaVersion","projectId","mode","units","site",
             "stories","rooms","constraints"}
-    if not isinstance(doc,dict) or not fields<=set(doc) or set(doc)-fields-{"targetProjectPath"}:
+    if not isinstance(doc,dict) or not fields<=set(doc) or set(doc)-fields-{"targetProjectPath", "openQuestions"}:
         raise ValueError("INVALID_SEMANTIC_BRIEF_FIELDS")
     if doc["schemaVersion"]!=SCHEMA or doc["units"]!="meters" or doc["mode"] not in MODES:
         raise ValueError("UNSUPPORTED_BRIEF_SCHEMA_MODE_OR_UNITS")
@@ -139,18 +184,30 @@ def normalize(doc):
         raise ValueError("INVALID_CONSTRAINT_LIST")
     seen_cons=set(); checked_cons=[]
     for row in constraints:
-        if not isinstance(row,dict) or set(row)!={"id","text","evidenceStatus"}:
-            raise ValueError("INVALID_CONSTRAINT_FIELDS")
-        cid=_id(row["id"],"CONSTRAINT_ID")
-        if cid in seen_cons or row["evidenceStatus"] != "UNVERIFIED":
+        item = normalize_constraint(row)
+        cid = item["id"]
+        if cid in seen_cons:
             raise ValueError("DUPLICATE_OR_UNVERIFIED_PROVENANCE_CANNOT_ASSERT_RULE_PASS")
         seen_cons.add(cid)
-        checked_cons.append({"id":cid,"text":_name(row["text"],"CONSTRAINT_TEXT"),
-                             "evidenceStatus":row["evidenceStatus"]})
+        criterion = item.get("criterion", {})
+        if criterion.get("kind") in ("ENTRANCE", "ROOM_CONNECTION"):
+            if {criterion["from"], criterion["to"]} - used_rooms - {EXTERIOR}:
+                raise ValueError("REQUIREMENT_REFERENCES_UNKNOWN_ROOM")
+        if criterion.get("kind") == "STAIR_LINK":
+            order = {story["id"]: i for i, story in enumerate(normalized)}
+            lower, upper = criterion["lowerStoryId"], criterion["upperStoryId"]
+            if lower not in order or upper not in order or order[upper] != order[lower] + 1:
+                raise ValueError("REQUIREMENT_STAIR_MUST_CONNECT_ADJACENT_STORIES")
+        checked_cons.append(item)
+    questions = doc.get("openQuestions", [])
+    if not isinstance(questions, list) or len(questions) > 100:
+        raise ValueError("INVALID_BRIEF_OPEN_QUESTIONS")
+    questions = [_name(question, "OPEN_QUESTION") for question in questions]
     return {"schemaVersion":SCHEMA,"projectId":project,
             "mode":doc["mode"],"units":"meters",
             "site":dict(site),"stories":normalized,"rooms":accepted,
             "constraints":checked_cons,"targetProjectPath":target,
+            **({"openQuestions": questions} if "openQuestions" in doc else {}),
             "nativeStoryBindings":[],"nativeResolution":"NOT_ATTEMPTED",
             "nativeWriteCalls":0}
 
