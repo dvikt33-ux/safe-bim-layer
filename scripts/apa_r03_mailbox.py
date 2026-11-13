@@ -3,9 +3,11 @@ from __future__ import annotations
 
 from datetime import timedelta
 import json
+import os
 from pathlib import Path
 import re
 import subprocess
+import urllib.error
 
 import apa_ac29_group_batch_oneshot as group
 import apa_r03_architecture as architecture
@@ -25,6 +27,7 @@ SOURCES = {
 }
 PHASES = {"plan": "PLAN", "execute": "EXECUTE", "closed": "CHECK_CLOSED", "reopen": "VERIFY_REOPEN"}
 HEX40 = re.compile(r"[0-9a-f]{40}")
+HEX64 = re.compile(r"[0-9a-f]{64}")
 
 
 def staging(job_dir, kind):
@@ -82,7 +85,33 @@ def listener(port):
     return dict(json.loads(response.stdout), port=port)
 
 
+def open_test_port(project):
+    """Discover only loopback listeners that already report this exact test PLN."""
+    script = (
+        "$ports = @(Get-NetTCPConnection -State Listen -ErrorAction Stop | "
+        "Where-Object {$_.LocalPort -ge 19723 -and $_.LocalPort -le 19743} | "
+        "Select-Object -ExpandProperty LocalPort -Unique)\n"
+        "ConvertTo-Json -InputObject $ports -Compress"
+    )
+    response = subprocess.run(["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", script],
+                              capture_output=True, timeout=15)
+    require(response.returncode == 0, "R03_MAILBOX_LISTENER_ENUMERATION_FAILED")
+    matches = []
+    for port in json.loads(response.stdout):
+        try:
+            listener(port)
+            info = group.R.tapir(port, "GetProjectInfo", {}, timeout=2)
+        except (RuntimeError, urllib.error.URLError, OSError):
+            continue
+        if (info.get("projectPath") == str(project) and info.get("isUntitled") is False
+                and info.get("isTeamwork") is False):
+            matches.append(port)
+    require(len(matches) <= 1, "R03_MAILBOX_EXACT_PROJECT_OPEN_IN_MULTIPLE_INSTANCES")
+    return next(iter(matches), None)
+
+
 class Campaign:
+    job_schema = JOB
     def __init__(self, root, path, *, config=None):
         self.root = Path(root).resolve()
         self.path = Path(path).absolute()
@@ -104,8 +133,8 @@ class Campaign:
                 and sha256(self.root / MANIFEST) == self.config["releaseManifestSha256"],
                 "R03_MAILBOX_RELEASE_DRIFT")
         self.kind = self.config["kind"]
-        self.state, stage, self.manifest, self.project, self.initial_sha = staging(self.job_dir, self.kind)
-        require(sha256(stage) == self.config["stageReceiptSha256"], "R03_MAILBOX_STAGE_RECEIPT_DRIFT")
+        self.state, self.stage, self.manifest, self.project, self.initial_sha = staging(self.job_dir, self.kind)
+        require(sha256(self.stage) == self.config["stageReceiptSha256"], "R03_MAILBOX_STAGE_RECEIPT_DRIFT")
         self.history = self.job_dir / "mailbox-jobs"
         self.session_path = self.job_dir / "mailbox-plan-session.json"
         self.closed_path = self.job_dir / "mailbox-closed-phase.json"
@@ -118,13 +147,16 @@ class Campaign:
         else:
             matches = json.loads(self.source) == self.manifest["placements"]
         require(matches, "R03_MAILBOX_SOURCE_DOES_NOT_MATCH_STAGING")
-        for relative in self.release["files"]:
-            if relative.startswith(("scripts/", "schemas/")) or relative in ("apa.py", "apa_release.py"):
-                verify_member(self.root, self.release, relative)
+        self.verify_code()
         binary = read_json(verify_member(self.root, self.release, "native/binary-receipt.json"))["binary"]
         require(sha256(APX) == binary["apxSHA256"], "R03_MAILBOX_INSTALLED_APX_DRIFT")
         self.pinned_runtime = binary["sourceRevision"], binary["buildIdentity"]
         self.apx_sha = binary["apxSHA256"]
+
+    def verify_code(self):
+        for relative in self.release["files"]:
+            if relative.startswith(("scripts/", "schemas/")) or relative in ("apa.py", "apa_release.py"):
+                verify_member(self.root, self.release, relative)
 
     def health(self):
         return dict(status="R03_MAILBOX_LOCAL_BINDING_VERIFIED", target=self.target, kind=self.kind,
@@ -191,7 +223,7 @@ class Campaign:
     def grant(self, bridge, name, *, create=False, confirm=None):
         require(self.phase(name) == "EXECUTE", "R03_MAILBOX_GRANT_ONLY_FOR_EXECUTE")
         job, blob = self.fetch(bridge, name)
-        self.require_plan_result(bridge)
+        self.require_plan_result(bridge, read_only=create)
         grant = dict(schema="APA_AC29_R03_LOCAL_GRANT_V1", job=job, jobBlobSha1=blob,
                      stageReceiptSha256=self.config["stageReceiptSha256"])
         path = self.job_dir / "mailbox-local-grant.json"
@@ -199,7 +231,14 @@ class Campaign:
         if create:
             require(confirm == job["preflightSha256"], "R03_MAILBOX_EXPLICIT_PREFLIGHT_SHA_REQUIRED")
             require(not (self.history / name).exists(), "R03_MAILBOX_ALREADY_ATTEMPTED")
-            write_new_json(path, grant)
+            temporary = path.with_name("mailbox-local-grant.pending")
+            write_new_json(temporary, grant)
+            # Publish a complete grant as one exclusive operation. A worker
+            # never sees a partial JSON file or a reissued authorization.
+            try:
+                os.link(temporary, path)
+            finally:
+                temporary.unlink()
         else:
             require(path.is_file() and read_json(path) == grant, "R03_MAILBOX_LOCAL_GRANT_MISSING_OR_DRIFTED")
         return job, blob
@@ -212,7 +251,7 @@ class Campaign:
                 and marker["verifiedBytes"] is True, "R03_MAILBOX_PREVIOUS_RESULT_MISSING_OR_DRIFTED")
         return result["result"]
 
-    def require_plan_result(self, bridge):
+    def require_plan_result(self, bridge, *, read_only=False):
         session = read_json(self.session_path)
         self.planned_session()
         require(self.phase(session["planJob"]) == "PLAN", "R03_MAILBOX_PLAN_JOB_DRIFT")
@@ -220,7 +259,12 @@ class Campaign:
         result = self.require_published_result(folder, "PLAN")
         require(result["jobStatus"] == "READY_FOR_EXPLICIT_TEST_RUN"
                 and result["preflightSha256"] == sha256(self.preflight_path()), "R03_MAILBOX_PLAN_NOT_PUBLISHED")
-        bridge.upload_result(session["planJob"], folder, verify_existing=True)
+        if read_only:
+            remote, _ = bridge.remote_json(bridge.BRIDGE,
+                f"{bridge.RESULTS}/{session['planJob']}.json", "main", bridge.git_sha((folder / "result.json").read_bytes()))
+            require(remote["result"] == result, "R03_MAILBOX_PLAN_READBACK_DRIFT")
+        else:
+            bridge.upload_result(session["planJob"], folder, verify_existing=True)
 
     def require_saved_result(self, bridge):
         name = f"{self.target}-execute"
@@ -354,6 +398,71 @@ class Campaign:
                     guidSetSha256=result["reopenedGuidSetSHA256"], brepSha256=result["reopenedBrepSHA256"],
                     reopenedReceiptSha256=sha256(self.state / "reopened.json"))
 
+    def poll_job(self, bridge, name):
+        action = self.phase(name)
+        folder = self.history / name
+        require(folder.resolve() == folder, "R03_MAILBOX_JOB_HISTORY_PATH_DRIFT")
+        if (folder / "published.json").is_file():
+            return
+        if folder.exists():
+            return self.process(bridge, name)
+        require(self.path.resolve() == self.path and read_json(self.path) == self.config
+                and sha256(self.stage) == self.config["stageReceiptSha256"]
+                and sha256(self.root / MANIFEST) == self.config["releaseManifestSha256"]
+                and sha256(APX) == self.apx_sha, "R03_MAILBOX_CONFIG_OR_RELEASE_DRIFT")
+        if self.kind == "ARCHITECTURE":
+            architecture.check(self.job_dir, Path(self.manifest["original"]), self.initial_sha)
+        else:
+            group.manifest_for(self.state)
+        if action == "EXECUTE":
+            if not (self.job_dir / "mailbox-local-grant.json").is_file():
+                return
+            session = self.planned_session()
+            if open_test_port(self.project) != session["port"] or listener(session["port"]) != session:
+                return
+        if action in {"CHECK_CLOSED", "VERIFY_REOPEN"}:
+            if not (self.state / "saved.json").is_file():
+                return
+            if action == "VERIFY_REOPEN" and not self.closed_path.is_file():
+                return
+        self.fetch(bridge, name)
+        port = open_test_port(self.project) if action in {"PLAN", "VERIFY_REOPEN"} else None
+        if action in {"PLAN", "VERIFY_REOPEN"} and port is None:
+            return
+        if action == "CHECK_CLOSED":
+            session = self.planned_session()
+            if not reservation_owner_exited(session["pid"]):
+                try:
+                    if listener(session["port"]) != session:
+                        return
+                    confirm_project_closed(lambda cmd, params: group.R.tapir(session["port"], cmd, params,
+                                                                          timeout=2))
+                except (ValueError, RuntimeError, OSError):
+                    return
+        self.verify_code()
+        return self.process(bridge, name, port=port)
+
+    def record_failure(self, bridge, folder, action, exc):
+        error = type(exc).__name__ + ": " + str(exc)
+        bridge.durable_write(folder / "diagnostic.json", dict(error=error, action=action))
+        if action != "EXECUTE":
+            return dict(jobStatus="BLOCKED", nativeOutcome="NO_MODEL_WRITE",
+                        error=error.replace(str(self.job_dir), self.target)[:360], saveReopenVerified=False)
+        reserved = (self.state / "attempted.json").exists() or Path(str(self.project) + ".apa-write.lock").exists()
+        outcome = "UNKNOWN" if reserved else "NOT_EXECUTED"
+        if self.kind == "ARCHITECTURE" and outcome == "UNKNOWN":
+            try:
+                creation = read_json(self.state / "build" / "result.json")
+                if creation["status"] == "COMPLETE_UNSAVED" and not (self.state / "saved.json").exists():
+                    trace = self.state / "save-trace" / "dispatch.jsonl"
+                    if not trace.exists() or not any(json.loads(line)["command"] == "SaveProject"
+                                                      for line in trace.read_text(encoding="utf-8").splitlines()):
+                        outcome = "EXECUTED_UNSAVED"
+            except (OSError, ValueError, KeyError, TypeError):
+                pass  # The evidence cannot narrow the unknown native outcome.
+        return dict(jobStatus="STOPPED_RECONCILE_NO_AUTORETRY", nativeOutcome=outcome,
+                    error=error.replace(str(self.job_dir), self.target)[:360], saveReopenVerified=False)
+
     def process(self, bridge, name, *, port=None):
         """Reserve once, dispatch to existing runtime, publish only durable results."""
         action = self.phase(name)
@@ -367,7 +476,8 @@ class Campaign:
                     and attempt["bindingSha256"] == binding_sha and HEX40.fullmatch(attempt["sourceBlob"]),
                     "R03_MAILBOX_ATTEMPT_IDENTITY_DRIFT")
             if not (folder / "result.json").exists():
-                response = dict(common, jobStatus="STOPPED_RECONCILE_NO_AUTORETRY", nativeOutcome="UNKNOWN",
+                response = dict(common, jobStatus="STOPPED_RECONCILE_NO_AUTORETRY",
+                                nativeOutcome="UNKNOWN" if action == "EXECUTE" else "NO_MODEL_WRITE",
                                 saveReopenVerified=False, error="INTERRUPTED_AFTER_DURABLE_RESERVATION")
                 bridge.durable_write(folder / "result.json",
                                      bridge.result_payload(name, action, attempt["sourceBlob"], response))
@@ -409,11 +519,7 @@ class Campaign:
             else:
                 response = self.run_reopen(session, port if port is not None else session["port"])
         except Exception as exc:
-            error = type(exc).__name__ + ": " + str(exc)
-            bridge.durable_write(folder / "diagnostic.json", dict(error=error, action=action))
-            response = dict(jobStatus=("STOPPED_RECONCILE_NO_AUTORETRY" if action == "EXECUTE" else "BLOCKED"),
-                            nativeOutcome="UNKNOWN" if action == "EXECUTE" else "NO_MODEL_WRITE",
-                            error=error.replace(str(self.job_dir), self.target)[:360], saveReopenVerified=False)
+            response = self.record_failure(bridge, folder, action, exc)
         response.update(common)
         payload = bridge.result_payload(name, action, blob, response)
         bridge.durable_write(folder / "result.json", payload)

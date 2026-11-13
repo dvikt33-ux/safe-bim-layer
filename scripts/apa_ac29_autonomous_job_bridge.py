@@ -695,7 +695,7 @@ def record_interrupted_job(name, folder):
         }))
 
 
-def process_job(name):
+def process_job(name, *, inbox_job=None):
     require(ID.fullmatch(name), "UNSAFE_JOB_ID")
     if PACKAGE_PROFILE and (INSTALLED_STATE / name).exists():
         # A different profile cannot reconcile or replay an installed attempt.
@@ -708,7 +708,7 @@ def process_job(name):
             record_interrupted_job(name, folder)
         upload_result(name, folder)
         return
-    job, source_blob = remote_json(BRIDGE, f"{INBOX}/{name}.json", "main")
+    job, source_blob = inbox_job or remote_json(BRIDGE, f"{INBOX}/{name}.json", "main")
     validate_job(job, name)
     stable_preflight()
     folder.mkdir(parents=False, exist_ok=False)
@@ -742,7 +742,7 @@ def process_job(name):
     upload_result(name, folder)
 
 
-def poll_once():
+def poll_once(campaigns=(), *, legacy=True, stop=None):
     """One pass for queued jobs; no repeated native functional testing."""
     items = gh_api(f"repos/{BRIDGE}/contents/{INBOX}?ref=main")
     require(isinstance(items, list) and len(items) < 750,
@@ -752,12 +752,57 @@ def poll_once():
                   item["name"].endswith(".json") and
                   ID.fullmatch(item["name"][:-5]))
     for name in jobs:
+        if stop is not None and stop.exists():
+            break
         try:
-            process_job(name)
+            campaign = next((item for item in campaigns if name.startswith(item.target + "-")), None)
+            if campaign is not None:
+                campaign.poll_job(sys.modules[__name__], name)
+            elif legacy:
+                folder = STATE / name
+                if not campaigns or folder.is_dir() or (INSTALLED_STATE / name).exists():
+                    process_job(name)
+                else:
+                    inbox_job = remote_json(BRIDGE, f"{INBOX}/{name}.json", "main")
+                    if inbox_job[0].get("schema") != campaigns[0].job_schema:
+                        process_job(name, inbox_job=inbox_job)
         except Exception as e:
             print("JOB_PENDING_OR_BLOCKED:", name, type(e).__name__, str(e)[:200],
                   flush=True)
     return len(jobs)
+
+
+def receive(*, state, loop, interval, shared=False, campaigns=(), legacy=True):
+    require(10 <= interval <= 3600, "BAD_POLL_INTERVAL")
+    state.mkdir(parents=True, exist_ok=True)
+    stop = state / "receiver-stop"
+    require(not loop or not stop.exists(), "REMOVE_PREVIOUS_RECEIVER_STOP_REQUEST_BEFORE_START")
+    handle = acquire_singleton(shared=True) if shared else acquire_singleton()
+    try:
+        durable_write(state / "receiver-started.json", {
+            "pid": os.getpid(), "workerSHA256": sha(Path(__file__)),
+            "startedAt": current_utc().isoformat(), "nativeCalls": 0,
+            **({"campaigns": [item.target for item in campaigns], "legacyReadProfileEnabled": legacy}
+               if campaigns else {}),
+        })
+        while not loop or not stop.exists():
+            try:
+                print("APA_BRIDGE_SCAN:", poll_once(campaigns, legacy=legacy, stop=stop if loop else None),
+                      flush=True)
+            except Exception as exc:
+                print("APA_BRIDGE_OFFLINE_OR_BLOCKED:", type(exc).__name__, str(exc)[:240], flush=True)
+            if not loop:
+                break
+            deadline = time.monotonic() + interval
+            while time.monotonic() < deadline and not stop.exists():
+                time.sleep(1)
+    except KeyboardInterrupt:
+        print("APA_BRIDGE_INTERRUPTED_CHECK_DURABLE_JOURNAL", flush=True)
+    finally:
+        handle.close()
+    if loop:
+        print("APA_BRIDGE_STOPPED", flush=True)
+    return 0
 
 
 def acquire_singleton(*, shared=False):
@@ -789,7 +834,22 @@ def run_r03(args):
 
     root = Path(__file__).resolve().parents[1]
     bridge = sys.modules[__name__]
-    require(not args.loop and not args.package_profile, "R03_MAILBOX_ONE_EXPLICIT_PHASE_ONLY")
+    if args.loop:
+        require(args.r03_profile and not any((args.healthcheck, args.prepare_r03_profile,
+                args.make_job, args.authorize_job, args.job, args.kind, args.confirm_preflight, args.local_port)),
+                "R03_MAILBOX_LOOP_REQUIRES_LOCAL_PROFILES_ONLY")
+        campaigns = [Campaign(root, path) for path in args.r03_profile]
+        targets = [item.target for item in campaigns]
+        require(len(targets) == len(set(targets)) and
+                not any(a != b and a.startswith(b + "-") for a in targets for b in targets),
+                "R03_MAILBOX_PROFILE_TARGETS_MUST_BE_DISTINCT")
+        if args.package_profile:
+            configure_packaged_readonly(args.package_profile)
+        return receive(state=root / ".apa-runtime" / "receiver", loop=True,
+                       interval=args.interval_seconds, shared=True, campaigns=campaigns,
+                       legacy=bool(args.package_profile))
+    require(not args.package_profile, "R03_MAILBOX_ONE_EXPLICIT_PHASE_ONLY")
+    require(args.r03_profile is None or len(args.r03_profile) == 1, "R03_MAILBOX_ONE_EXPLICIT_PHASE_ONLY")
     commands = [args.healthcheck, args.prepare_r03_profile, args.make_job, args.authorize_job, args.job]
     require(sum(bool(value) for value in commands) == 1, "R03_MAILBOX_SELECT_ONE_ACTION")
     require(args.local_port is None or args.job, "R03_MAILBOX_LOCAL_PORT_ONLY_FOR_EXECUTION")
@@ -798,21 +858,23 @@ def run_r03(args):
         require(args.kind and not args.r03_profile, "R03_MAILBOX_STAGE_KIND_REQUIRED")
         result = prepare_profile(root, args.prepare_r03_profile, args.kind)
     else:
-        require(args.r03_profile and not args.kind, "R03_MAILBOX_LOCAL_PROFILE_REQUIRED")
-        campaign = Campaign(root, args.r03_profile)
+        require(args.r03_profile and len(args.r03_profile) == 1 and not args.kind,
+                "R03_MAILBOX_LOCAL_PROFILE_REQUIRED")
+        campaign = Campaign(root, args.r03_profile[0])
         if args.healthcheck:
             result = campaign.health()
         elif args.make_job:
             result = campaign.envelope(bridge, args.make_job)
+        elif args.authorize_job:
+            # This action creates one immutable local grant and never touches
+            # Archicad. The worker still owns the shared lock for all dispatch.
+            job, blob = campaign.grant(bridge, args.authorize_job, create=True,
+                                      confirm=args.confirm_preflight)
+            result = dict(status="R03_MAILBOX_LOCAL_GRANT_RECORDED", jobId=job["jobId"],
+                          jobBlobSha1=blob, preflightSha256=job["preflightSha256"], nativeCalls=0)
         else:
             with acquire_singleton(shared=True):
-                if args.authorize_job:
-                    job, blob = campaign.grant(bridge, args.authorize_job, create=True,
-                                              confirm=args.confirm_preflight)
-                    result = dict(status="R03_MAILBOX_LOCAL_GRANT_RECORDED", jobId=job["jobId"],
-                                  jobBlobSha1=blob, preflightSha256=job["preflightSha256"], nativeCalls=0)
-                else:
-                    result = campaign.process(bridge, args.job, port=args.local_port)
+                result = campaign.process(bridge, args.job, port=args.local_port)
     print(json.dumps(result, ensure_ascii=True, indent=2), flush=True)
     return 2 if result.get("result", {}).get("jobStatus") in {"BLOCKED", "STOPPED_RECONCILE_NO_AUTORETRY"} else 0
 
@@ -825,7 +887,8 @@ def main(argv=None):
     ap.add_argument("--package-profile", type=Path, help="Local profile for the packaged read-only receiver")
     ap.add_argument("--prepare-r03-profile", type=Path, metavar="STAGED_JOB_DIR")
     ap.add_argument("--kind", choices=("ARCHITECTURE", "GROUP"))
-    ap.add_argument("--r03-profile", type=Path, help="Local binding for one staged disposable R03 project")
+    ap.add_argument("--r03-profile", type=Path, action="append",
+                    help="Local binding for one staged disposable R03 project, repeatable with --loop")
     ap.add_argument("--make-job", help="Print the exact JSON to be submitted from the acceptance chat")
     ap.add_argument("--authorize-job", help="Record a local grant for a GitHub EXECUTE blob already read back")
     ap.add_argument("--confirm-preflight", help="SHA-256 of the published and reviewed PLAN receipt")
@@ -862,25 +925,8 @@ def main(argv=None):
                     'SCOPED_NATIVE_MAILBOX_EXECUTOR_NOT_INSTALLED')
         print('APA_BRIDGE_HEALTHCHECK_PASS_NO_NATIVE_CALLS',flush=True)
         return
-    require(10 <= args.interval_seconds <= 3600, "BAD_POLL_INTERVAL")
     stable_preflight()
-    STATE.mkdir(parents=True, exist_ok=True)
-    handle = acquire_singleton()
-    try:
-        durable_write(STATE/'receiver-started.json',{
-            'pid':os.getpid(),'workerSHA256':sha(Path(__file__)),
-            'startedAt':current_utc().isoformat(),'nativeCalls':0})
-        while True:
-            try:
-                print("APA_BRIDGE_SCAN:", poll_once(), flush=True)
-            except Exception as exc:
-                print("APA_BRIDGE_OFFLINE_OR_BLOCKED:",
-                      type(exc).__name__, str(exc)[:240], flush=True)
-            if not args.loop:
-                break
-            time.sleep(args.interval_seconds)
-    finally:
-        handle.close()
+    return receive(state=STATE, loop=args.loop, interval=args.interval_seconds)
 
 
 if __name__ == "__main__":

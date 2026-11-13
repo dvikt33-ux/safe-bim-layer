@@ -192,6 +192,53 @@ class MailboxContract(unittest.TestCase):
                 self.c.process(bridge, name, port=19725)
         run.assert_not_called()
 
+    def test_background_waits_for_local_project_and_grant_then_dispatches_once(self):
+        plan = self.submit("plan")
+        with patch.object(mailbox, "open_test_port", return_value=None), \
+                patch.object(self.c, "run_plan") as run:
+            self.c.poll_job(bridge, plan)
+        run.assert_not_called()
+        self.assertFalse((self.c.history / plan).exists())
+        sha = self.stage_plan()
+        execute = self.submit("execute")
+        with patch.object(self.c, "run_execute") as run:
+            self.c.poll_job(bridge, execute)
+        run.assert_not_called()
+        self.assertFalse((self.c.history / execute).exists())
+        self.c.grant(bridge, execute, create=True, confirm=sha)
+        with (patch.object(mailbox, "open_test_port", return_value=19725),
+              patch.object(mailbox, "listener", return_value=self.session),
+              patch.object(self.c, "run_execute", return_value=dict(jobStatus="WAITING_CLOSE_AND_REOPEN")) as run):
+            self.c.poll_job(bridge, execute)
+            self.c.poll_job(bridge, execute)
+        run.assert_called_once_with(self.session)
+        self.assertEqual(len(self.puts), 2)
+
+    def test_persistent_dispatch_keeps_legacy_jobs_and_filters_unconfigured_campaigns(self):
+        plan = self.submit("plan")
+        endpoint = self.endpoint + bridge.INBOX + "?ref=main"
+        contents = self.gh_api
+
+        def inbox(path, **kwargs):
+            if path == endpoint:
+                return [dict(type="file", name=name + ".json") for name in
+                        (plan, "r03-not-configured-01-plan", "legacy-test-01")]
+            return contents(path, **kwargs)
+
+        with (patch.object(bridge, "gh_api", side_effect=inbox),
+              patch.object(bridge, "STATE", self.root / "legacy-state"),
+              patch.object(bridge, "INSTALLED_STATE", self.root / "installed-state"),
+              patch.object(bridge, "process_job") as legacy,
+              patch.object(self.c, "poll_job") as r03,
+              patch.object(bridge, "remote_json", side_effect=[
+                  ({"schema": "APA_AC29_AUTONOMOUS_JOB_V1"}, "a" * 40),
+                  ({"schema": mailbox.JOB}, "b" * 40),
+              ])):
+            bridge.poll_once([self.c])
+        r03.assert_called_once_with(bridge, plan)
+        legacy.assert_called_once_with("legacy-test-01",
+                                       inbox_job=({"schema": "APA_AC29_AUTONOMOUS_JOB_V1"}, "a" * 40))
+
     def test_conflicting_result_cannot_start_native_and_remotely_changed_report_fails_readback(self):
         name = self.submit("plan")
         key = self.endpoint + f"{bridge.RESULTS}/{name}.json?ref=main"
