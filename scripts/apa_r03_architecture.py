@@ -1,13 +1,14 @@
 """Existing parametric BuildingShell -> SceneWriter on a staged R03 copy."""
-from pathlib import Path
+from collections import Counter
 import json
+from pathlib import Path
 from uuid import uuid4
 
 import apa_ac29_group_batch_oneshot as group
 from apa_ac29_reusable_native_copy import GuardedSaveTransport
 from apa_ac29_save_isolation import (
-    ScratchWriteLease, copy_exclusive, preserve_guarded_save, require, sha256,
-    timestamp, write_new_json,
+    ScratchWriteLease, confirm_project_closed, copy_exclusive, preserve_guarded_save, require,
+    reservation_owner_exited, sha256, timestamp, write_new_json,
 )
 
 A, R, C = group.A, group.R, group.C
@@ -53,8 +54,9 @@ def stage(job, intent_path, port, donor, donor_sha, baseline_trace):
 def check(job, donor, donor_sha):
     m = read(job / "job.json")
     path = job / "model" / MODEL
-    require(m["schema"] == "APA_R03_ARCHITECTURE_JOB_V1" and m["jobId"] == job.name
-            and m["project"] == str(path) and path.resolve() == path
+    require(m["schema"] == "APA_R03_ARCHITECTURE_JOB_V1" and m["status"] == "STAGED"
+            and m["jobId"] == job.name and m["project"] == str(path) and path.resolve() == path
+            and path.is_file() and donor.is_file() and not path.samefile(donor)
             and m["initialSHA256"] == donor_sha and m["original"] == str(donor)
             and m["authorizationRef"] == f"USER_APPROVED_APA_R03_{job.name}"
             and sha256(donor) == donor_sha and sha256(job / "intent.json") == m["intentSHA256"],
@@ -64,8 +66,16 @@ def check(job, donor, donor_sha):
 
 def saved_record(job, m):
     result = read(job / "saved.json")
-    require(sha256(m["project"]) == sha256(job / "guarded-save.snapshot") == result["savedSHA256"]
-            and sha256(job / "snapshot.json") == result["snapshotReceiptSHA256"],
+    snapshot = read(job / "snapshot.json")
+    require(result.get("status") == "LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN"
+            and result.get("jobId") == m["jobId"]
+            and snapshot.get("schema") == "APA_SAVE_EXACT_SNAPSHOT_V1"
+            and snapshot.get("source") == m["project"]
+            and snapshot.get("savedSHA256") == snapshot.get("snapshotSHA256") == result["savedSHA256"]
+            and sha256(m["project"]) == sha256(job / "guarded-save.snapshot") == result["savedSHA256"]
+            and sha256(job / "snapshot.json") == result["snapshotReceiptSHA256"]
+            and snapshot.get("protectedSHA256") == {m["original"]: m["initialSHA256"]}
+            and sha256(m["original"]) == m["initialSHA256"],
             "APA_ARCHITECTURE_SAVED_BYTES_DRIFT")
     return result
 
@@ -89,7 +99,17 @@ def approved_result(job, approval):
 
 def status(job, m):
     if (job / "saved.json").is_file():
-        state = saved_record(job, m)["status"]
+        saved = saved_record(job, m)
+        state = saved["status"]
+        if (job / "reopened.json").is_file():
+            reopened = read(job / "reopened.json")
+            require(reopened.get("status") == "LIVE_ARCHITECTURE_SAVED_REOPENED_PASS"
+                    and reopened.get("reopenVerified") is True
+                    and reopened.get("savedSHA256") == saved["savedSHA256"]
+                    and reopened.get("reopenedGuidSetSHA256") == saved["finalGuidSetSHA256"]
+                    and reopened.get("reopenedBrepSHA256") == saved["finalBrepSHA256"],
+                    "APA_ARCHITECTURE_REOPEN_RECEIPT_DRIFT")
+            state = reopened["status"]
     elif (job / "attempted.json").exists() or Path(m["project"] + ".apa-write.lock").exists():
         state = "UNKNOWN_NO_REPLAY_READONLY_RECONCILIATION_REQUIRED"
     elif (job / "approved-preflight.json").is_file():
@@ -99,21 +119,49 @@ def status(job, m):
     return dict(jobId=job.name, status=state, project=m["project"], port=m["port"])
 
 
+def runtime_identity(api, pinned_runtime):
+    runtime = api("GetAPARuntimeInfoV1", {})
+    require(runtime.get("contract") == "APA_NATIVE_RUNTIME_IDENTITY_V1"
+            and runtime.get("sdkMajor") == 29 and runtime.get("nativeModelWrites") == 0
+            and runtime.get("sourceRevision") == pinned_runtime[0]
+            and runtime.get("buildIdentity") == pinned_runtime[1], "APA_ARCHITECTURE_WRONG_LOADED_APX")
+    return runtime
+
+
 def bind(m, port, pinned_runtime, *, saved_sha=None):
     require(19723 <= port <= 19743, "APA_ARCHITECTURE_INVALID_PORT")
     R.bind_authorized_saved_copy(port, m["project"], MODEL.removesuffix(".pln"),
                                  saved_sha or m["initialSHA256"], m["authorizationRef"])
     group.IDENTITY.current_project(A.native_transport, m["project"])
-    runtime = A.native_transport("GetAPARuntimeInfoV1", {})
-    require(runtime.get("sourceRevision") == pinned_runtime[0]
-            and runtime.get("buildIdentity") == pinned_runtime[1],
-            "APA_ARCHITECTURE_WRONG_LOADED_APX")
-    return runtime
+    return runtime_identity(A.native_transport, pinned_runtime)
 
 
 def capture(m, api):
     ids, native = group.capture({"scratch": m["project"]}, api)
     return ids, native, C.retained_geometry_signatures(native, ids)
+
+
+def baseline_capture(job, m, trace):
+    folder = job / trace
+    folder.mkdir(parents=True)
+    api = A.EvidenceAPI(A.native_transport, folder, execute=False)
+    ids, native, signatures = capture(m, api)
+    prove_retained(m, ids, native)
+    return ids, signatures
+
+
+def probe_shell_runtime(job, trace):
+    folder = job / trace
+    folder.mkdir(parents=True)
+    api = A.EvidenceAPI(A.native_transport, folder, execute=False)
+    intent = read(job / "intent.json")
+    commands = MODEL_COMMANDS | {"SaveProject"}
+    if intent["components"][0]["specification"].get("slabBasicMaterialName"):
+        commands |= {"ModifySlabs"}
+    router = A.native_command_router(SCHEMA, include_functional_modules=False)
+    for command in sorted(commands):
+        router.probe_runtime(api, command)
+    require(api.write_attempts == 0, "APA_ARCHITECTURE_REGISTRATION_MUST_BE_READ_ONLY")
 
 
 def prove_retained(m, ids, native):
@@ -125,14 +173,15 @@ def prove_retained(m, ids, native):
 def preflight(job, m, port, pinned_runtime):
     require(status(job, m)["status"] == "STAGED", "APA_ARCHITECTURE_ALREADY_PREFLIGHTED_OR_ATTEMPTED")
     runtime = bind(m, port, pinned_runtime)
-    ids, model, _ = capture(m, A.native_transport)
-    prove_retained(m, ids, model)
     attempts = job / "preflight-attempts"
     require(attempts.resolve() == attempts, "APA_ARCHITECTURE_PREFLIGHT_PATH_DRIFT")
     attempts.mkdir(exist_ok=True)
     attempt = attempts / uuid4().hex
+    probe_shell_runtime(job, Path("registration-traces") / attempt.name)
+    baseline_capture(job, m, Path("baseline-traces") / attempt.name)
     result = A.run_project(read(job / "intent.json"), SCHEMA, attempt, job / "ledger",
-                           mode="preflight", transport=A.native_transport)
+                           mode="preflight", transport=A.native_transport,
+                           allow_3d_view_for_write=True)
     result_path = attempt / "result.json"
     if result["status"] == "READY_FOR_EXPLICIT_TEST_RUN":
         require(result["modelWriteAttempts"] == 0
@@ -147,28 +196,42 @@ def preflight(job, m, port, pinned_runtime):
 
 def execute(job, m, pinned_runtime):
     state = status(job, m)["status"]
-    if state == "LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN":
+    if state in {"LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN", "LIVE_ARCHITECTURE_SAVED_REOPENED_PASS"}:
         return dict(status="ALREADY_APPLIED", receipt=saved_record(job, m), newNativeWrites=0)
     require(state == "READY_FOR_EXPLICIT_TEST_RUN", "APA_ARCHITECTURE_READY_PREFLIGHT_REQUIRED")
     approval = read(job / "approved-preflight.json")
     approved_result(job, approval)
     require(bind(m, approval["port"], pinned_runtime) == approval["runtime"],
             "APA_ARCHITECTURE_APPROVED_PLAN_OR_RUNTIME_DRIFT")
-    old_ids, old_model, old_signatures = capture(m, A.native_transport)
-    prove_retained(m, old_ids, old_model)
+    probe_shell_runtime(job, Path("registration-traces") / uuid4().hex)
+    old_ids, old_signatures = baseline_capture(job, m, Path("baseline-traces") / uuid4().hex)
+    ledger = job / "ledger"
+    require(ledger.resolve() == ledger and not (ledger / "scene-v1-attempts.sqlite3").exists(),
+            "APA_ARCHITECTURE_EXISTING_LEDGER_NO_REPLAY")
+    ledger.mkdir(exist_ok=True)
     lease = ScratchWriteLease(m["project"], job, m["initialSHA256"])
     lease.acquire()
     write_new_json(job / "attempted.json", dict(jobId=job.name, atUTC=timestamp(),
                    confirmHash=approval["confirmHash"], automaticReplay=False))
-    result = A.run_project(read(job / "intent.json"), SCHEMA, job / "build", job / "ledger",
+    result = A.run_project(read(job / "intent.json"), SCHEMA, job / "build", ledger,
                            mode="execute", transport=A.native_transport,
-                           run_id=job.name, confirm_hash=approval["confirmHash"])
+                           run_id=job.name, confirm_hash=approval["confirmHash"],
+                           allow_3d_view_for_write=True)
     if result["status"] != "COMPLETE_UNSAVED" or not result.get("wholeAssemblyReadback"):
         return result
-    ids, model, signatures = capture(m, A.native_transport)
+    final_trace = job / "before-save-trace"
+    final_trace.mkdir()
+    readback = A.EvidenceAPI(A.native_transport, final_trace, execute=False)
+    ids, model, signatures = capture(m, readback)
     require(set(ids) == set(old_ids) | set(result["addedGuids"])
             and all(signatures[guid] == value for guid, value in old_signatures.items()),
             "APA_ARCHITECTURE_FINAL_MODEL_NOT_VERIFIED")
+    added = set(result["addedGuids"])
+    bodies = {row["guid"].lower(): len(row.get("bodies", [])) for row in model["elements"]
+              if row["guid"].lower() in added}
+    kinds = Counter(row["kind"] for row in result["scene"]["steps"].values())
+    require(all(bodies[row["guid"].lower()] > 0 for row in result["scene"]["steps"].values()
+                if row["kind"] in {"Wall", "Slab"}), "APA_ARCHITECTURE_NEW_PHYSICAL_BREP_UNAVAILABLE")
     write_new_json(job / "native-before-save.json", model)
     guard = GuardedSaveTransport(
         A.native_transport, R.bind_authorized_saved_copy, m["project"], m["original"],
@@ -194,7 +257,8 @@ def execute(job, m, pinned_runtime):
         return dict(status="ARCHITECTURE_ALL_RETAINED_BREP_AND_NEW_GUIDS_VERIFIED")
 
     def after_save(reply, _):
-        require(reply == {"success": True} and guard.new_saved_sha, "APA_ARCHITECTURE_SAVE_UNCONFIRMED")
+        require(reply == {"success": True} and guard.new_saved_sha and lease.verify(),
+                "APA_ARCHITECTURE_SAVE_UNCONFIRMED")
         record = preserve_guarded_save(m["project"], job / "guarded-save.snapshot",
                                       guard.new_saved_sha, {m["original"]: m["initialSHA256"]})
         write_new_json(job / "snapshot.json", record)
@@ -210,6 +274,69 @@ def execute(job, m, pinned_runtime):
                   savedSHA256=guard.new_saved_sha, elementCount=len(ids),
                   addedGuids=result["addedGuids"], finalGuidSetSHA256=R.digest(ids),
                   finalBrepSHA256=group.fingerprint(model), wholeAssemblyReadback=True,
+                  finalSignaturesSHA256=R.digest(signatures), addedByKind=dict(kinds),
+                  bodyCountByAddedGuid=bodies, nativeModelWriteAttempts=result["modelWriteAttempts"],
                   snapshotReceiptSHA256=sha256(job / "snapshot.json"), nativeSaveCalls=1)
     write_new_json(job / "saved.json", result)
+    return result
+
+
+def check_closed(job, m, pinned_runtime, *, process_id=None):
+    saved = saved_record(job, m)
+    approval = read(job / "approved-preflight.json")
+    approved_result(job, approval)
+    path = job / "closed.json"
+    require(not path.exists(), "APA_ARCHITECTURE_CLOSE_ALREADY_RECORDED")
+    port = approval["port"]
+    status_name = "NATIVE_NO_OPEN_PROJECT_CONFIRMED"
+    if process_id is not None and reservation_owner_exited(process_id):
+        status_name = "ARCHICAD_TEST_PROCESS_EXIT_CONFIRMED"
+    else:
+        R.bind_authorized_saved_copy(port, m["project"], MODEL.removesuffix(".pln"),
+                                     saved["savedSHA256"], m["authorizationRef"])
+        require(A.archicad29(A.native_transport)["buildNumber"] == 5101
+                and runtime_identity(A.native_transport, pinned_runtime) == approval["runtime"],
+                "APA_ARCHITECTURE_CLOSE_WRONG_RUNTIME")
+        confirm_project_closed(A.native_transport)
+    require(saved_record(job, m) == saved, "APA_ARCHITECTURE_SAVE_CHANGED_AT_CLOSE")
+    result = dict(status=status_name, jobId=m["jobId"], port=port,
+                  savedSHA256=saved["savedSHA256"], nativeWrites=0)
+    if process_id is not None:
+        result["pid"] = process_id
+    write_new_json(path, result)
+    return result
+
+
+def verify_reopen(job, m, pinned_runtime, port):
+    saved = saved_record(job, m)
+    closed = read(job / "closed.json")
+    approval = read(job / "approved-preflight.json")
+    approved_result(job, approval)
+    native_close = closed["status"] == "NATIVE_NO_OPEN_PROJECT_CONFIRMED" and port == approval["port"]
+    process_exit = (closed["status"] == "ARCHICAD_TEST_PROCESS_EXIT_CONFIRMED"
+                    and reservation_owner_exited(closed["pid"]))
+    require((native_close or process_exit) and closed["jobId"] == m["jobId"]
+            and closed["port"] == approval["port"]
+            and closed["savedSHA256"] == saved["savedSHA256"] and closed["nativeWrites"] == 0,
+            "APA_ARCHITECTURE_REAL_CLOSE_REQUIRED")
+    require(bind(m, port, pinned_runtime, saved_sha=saved["savedSHA256"]) == approval["runtime"],
+            "APA_ARCHITECTURE_REOPEN_RUNTIME_DRIFT")
+    folder = job / "reopen-attempts" / uuid4().hex
+    folder.mkdir(parents=True)
+    api = A.EvidenceAPI(A.native_transport, folder, execute=False)
+    ids, model, signatures = capture(m, api)
+    guid_hash, brep_hash = R.digest(ids), group.fingerprint(model)
+    require(len(ids) == saved["elementCount"] and guid_hash == saved["finalGuidSetSHA256"]
+            and brep_hash == saved["finalBrepSHA256"]
+            and R.digest(signatures) == saved["finalSignaturesSHA256"]
+            and saved_record(job, m) == saved and api.write_attempts == 0,
+            "APA_ARCHITECTURE_REOPEN_GUID_BREP_OR_ATTRIBUTES_DRIFT")
+    result = dict(saved, status="LIVE_ARCHITECTURE_SAVED_REOPENED_PASS", reopenVerified=True,
+                  reopenedGuids=ids, reopenedGuidSetSHA256=guid_hash, reopenedBrepSHA256=brep_hash,
+                  verificationNativeWrites=0, sourceUnchanged=True, reopenPort=port)
+    path = job / "reopened.json"
+    if path.exists():
+        require(read(path) == result, "APA_ARCHITECTURE_REOPEN_RECEIPT_DRIFT")
+    else:
+        write_new_json(path, result)
     return result

@@ -1,9 +1,13 @@
 name: APA unified integration
 
 on:
+  push:
+    branches:
+      - integration/apa-r03-native-acceptance-20261113
   pull_request:
     branches:
       - feature/apa-ac29-native-slab-copy-20261020
+      - integration/apa-full-system-20261112
     paths:
       - apa.py
       - requirements-apa.lock
@@ -28,7 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11.9'
@@ -61,6 +65,13 @@ jobs:
           test_archicad_template_status
           test_r03_recovery
           test_r03_resume
+          test_apa_r03_mailbox
+          test_apa_ac29_autonomous_bridge
+          test_apa_ac29_scoped_native_mailbox
+          test_apa_ac29_group_batch_oneshot
+          test_apa_ac29_native_group_grid
+          test_apa_ac29_native_group_writer_integration
+          test_apa_ac29_save_isolation
       - name: Package the tested commit
         shell: pwsh
         run: |
@@ -70,7 +81,7 @@ jobs:
           "$sha  APA-R03.1.zip" | Set-Content -Encoding ascii APA-R03.1.sha256
       - uses: actions/upload-artifact@v4
         with:
-          name: APA-R03.1-${{ github.event.pull_request.head.sha }}
+          name: APA-R03.1-${{ github.event.pull_request.head.sha || github.sha }}
           path: |
             APA-R03.1.zip
             APA-R03.1.sha256

@@ -4,6 +4,7 @@ import importlib.util
 import hashlib
 import json
 from pathlib import Path
+import re
 
 from apa_release import read_release, verify_member
 
@@ -12,6 +13,7 @@ VENDOR = "local-components/tdk_wall_ensure.py"
 READS = frozenset({"GetElementsByType", "GetAddOnVersion",
                    "GetFavoritesByType", "GetAllProperties", "GetPropertyValuesOfElements",
                    "GetDetailsOfElements"})
+GUID = re.compile(r"[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}", re.IGNORECASE)
 
 
 def vendor_module(root):
@@ -44,6 +46,49 @@ class ReadOnlyTransport:
         return self.router.read(self.evidence_api, ticket, reviewed_read_only=True)
 
     tapir = api
+
+
+def trace_candidate(router, runtime, payload, desired_hash, decision):
+    """Compile the TDK-owned AI_TRACE values into APA's existing native graph."""
+    from archicad_project_accelerator import prepare_native_task
+
+    if decision.get("status") != "WOULD_UPDATE_TRACE" or decision.get("dryRun") is not True:
+        return None
+    guid = decision["guid"]
+    if not GUID.fullmatch(guid):
+        raise ValueError("TDK_WALL_TRACE_TARGET_GUID_REQUIRED")
+    values = runtime.trace_values(payload, desired_hash)
+    changes = decision["traceDelta"]
+    rows, seen = [], set()
+    for name in sorted(changes):
+        value = values.get(name)
+        prop = runtime.properties.get(name, {})
+        identity = prop.get("propertyId", {})
+        key = identity.get("guid", "").lower()
+        if (not GUID.fullmatch(key) or key in seen or not isinstance(value, str)
+                or changes[name]["desired"] != value
+                or prop.get("propertyGroupName") != "AI_TRACE"
+                or prop.get("propertyName") != name
+                or prop.get("propertyCollectionType") != "Single"
+                or prop.get("propertyValueType") != "String"
+                or prop.get("propertyIsEditable") is not True
+                or prop.get("isExpressionBased") is True):
+            raise ValueError("TDK_WALL_TRACE_PROPERTY_DEFINITION_DRIFT:" + name)
+        seen.add(key)
+        rows.append(dict(elementId={"guid": guid}, propertyId={"guid": identity["guid"]},
+                         propertyValue={"value": value}))
+    if not rows:
+        raise ValueError("TDK_WALL_TRACE_DELTA_REQUIRED")
+    command = "SetPropertyValuesOfElements"
+    router.review_policy(command, "MODIFY", "MODEL", {
+        "source": "TDK Wall.Ensure AI_TRACE definitions and pinned Tapir contract",
+        "sha256": router.contract_hash(command),
+    })
+    intent = dict(schemaVersion="apa-native-task/1",
+                  request="Синхронизировать AI_TRACE для проверенного GUID стены",
+                  graph={"operations": [dict(id="tdk-trace", command=command,
+                                             params={"elementPropertyValues": rows})]})
+    return dict(prepare_native_task(router, intent), executionPermission=False)
 
 
 def inspect_wall(root, payload_path, profile_path=None, journal_path=None, evidence_dir=None):
@@ -86,4 +131,5 @@ def inspect_wall(root, payload_path, profile_path=None, journal_path=None, evide
         raise ValueError("Состав модели изменился при сверке Wall.Ensure")
     profile.check_model_files()
     return dict(receipt, status="TDK_WALL_READBACK_PREVIEW", decision=decision,
+                traceCandidate=trace_candidate(router, runtime, payload, receipt["desiredStateSha256"], decision),
                 nativeCalls=sum(api.calls.values()))

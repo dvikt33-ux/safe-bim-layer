@@ -1,9 +1,8 @@
 """APA AC29 autonomous GitHub job bridge; one persistent receiver, EXISTING APA engine.
 
-No UI Dispatcher/Arena changes. No second BIM router or writer. The inbox may
-request only source-verified READ_ONLY graphs or a pre-reviewed BDD production
-preflight. Native model writes remain ungranted; any future CREATE/MODIFY path
-must add a separate locally approved, fully scoped SceneWriter adapter.
+The legacy receiver and packaged read-only mode keep their existing contracts.
+An explicit R03 job uses the same inbox, lock and result publication, with a
+local disposable-PLN profile and a grant tied to one exact GitHub job blob.
 """
 from __future__ import annotations
 
@@ -628,22 +627,25 @@ def durable_write(path, obj):
     temp.replace(path)
 
 
-def upload_result(name, folder):
+def upload_result(name, folder, *, verify_existing=False):
     report = folder / "result.json"
     require(report.is_file(), "NO_DURABLE_REPORT_TO_PUBLISH")
     data = report.read_bytes()
     expected_blob = git_sha(data)
     marker = folder / "published.json"
+    previously_verified = False
     if marker.exists():
         saved_marker = json.loads(marker.read_text(encoding="utf-8"))
         require(saved_marker["sha"] == expected_blob, "PUBLISHED_LOCAL_REPORT_DRIFT")
-        if saved_marker.get("verifiedBytes") is True:
+        previously_verified = saved_marker.get("verifiedBytes") is True
+        if previously_verified and not verify_existing:
             return
     remote = f"{RESULTS}/{name}.json"
     endpoint = f"repos/{BRIDGE}/contents/{remote}"
     read_path = endpoint + "?ref=main"
     observed = gh_api(read_path, allow_missing=True)
     if observed is None:
+        require(not previously_verified, "PUBLISHED_REMOTE_RESULT_DISAPPEARED")
         manifest = folder / "upload.json"
         durable_write(manifest, {
             "branch": "main", "message": "APA AC29 one-shot source-qualified job result " + name,
@@ -663,7 +665,8 @@ def upload_result(name, folder):
             and base64.b64decode(observed.get("content", "")) == data
             and report.read_bytes() == data,
             "REMOTE_RESULT_CONFLICT_OR_READBACK_MISSING")
-    durable_write(marker, {"sha": expected_blob, "url": observed["html_url"], "verifiedBytes": True})
+    if not previously_verified:
+        durable_write(marker, {"sha": expected_blob, "url": observed["html_url"], "verifiedBytes": True})
     print("PUBLISHED:", observed["html_url"], flush=True)
 
 
@@ -757,13 +760,20 @@ def poll_once():
     return len(jobs)
 
 
-def acquire_singleton():
+def acquire_singleton(*, shared=False):
     """Windows process lock; no duplicate autostart worker may execute jobs."""
     import msvcrt
-    file = PACKAGE_PROFILE.mutex() if PACKAGE_PROFILE else (STATE / ".single-instance.lock").open("a+b")
+    if shared:
+        from apa_mailbox_profile import mailbox_mutex
+
+        file = mailbox_mutex()
+    elif PACKAGE_PROFILE:
+        file = PACKAGE_PROFILE.mutex()
+    else:
+        file = (STATE / ".single-instance.lock").open("a+b")
     file.seek(0)
     try:
-        if PACKAGE_PROFILE is None:
+        if not shared and PACKAGE_PROFILE is None:
             file.write(b"\0")
             file.flush()
             file.seek(0)
@@ -774,13 +784,57 @@ def acquire_singleton():
     return file
 
 
+def run_r03(args):
+    from apa_r03_mailbox import Campaign, prepare_profile
+
+    root = Path(__file__).resolve().parents[1]
+    bridge = sys.modules[__name__]
+    require(not args.loop and not args.package_profile, "R03_MAILBOX_ONE_EXPLICIT_PHASE_ONLY")
+    commands = [args.healthcheck, args.prepare_r03_profile, args.make_job, args.authorize_job, args.job]
+    require(sum(bool(value) for value in commands) == 1, "R03_MAILBOX_SELECT_ONE_ACTION")
+    require(args.local_port is None or args.job, "R03_MAILBOX_LOCAL_PORT_ONLY_FOR_EXECUTION")
+    require(args.confirm_preflight is None or args.authorize_job, "R03_MAILBOX_CONFIRM_ONLY_FOR_GRANT")
+    if args.prepare_r03_profile:
+        require(args.kind and not args.r03_profile, "R03_MAILBOX_STAGE_KIND_REQUIRED")
+        result = prepare_profile(root, args.prepare_r03_profile, args.kind)
+    else:
+        require(args.r03_profile and not args.kind, "R03_MAILBOX_LOCAL_PROFILE_REQUIRED")
+        campaign = Campaign(root, args.r03_profile)
+        if args.healthcheck:
+            result = campaign.health()
+        elif args.make_job:
+            result = campaign.envelope(bridge, args.make_job)
+        else:
+            with acquire_singleton(shared=True):
+                if args.authorize_job:
+                    job, blob = campaign.grant(bridge, args.authorize_job, create=True,
+                                              confirm=args.confirm_preflight)
+                    result = dict(status="R03_MAILBOX_LOCAL_GRANT_RECORDED", jobId=job["jobId"],
+                                  jobBlobSha1=blob, preflightSha256=job["preflightSha256"], nativeCalls=0)
+                else:
+                    result = campaign.process(bridge, args.job, port=args.local_port)
+    print(json.dumps(result, ensure_ascii=True, indent=2), flush=True)
+    return 2 if result.get("result", {}).get("jobStatus") in {"BLOCKED", "STOPPED_RECONCILE_NO_AUTORETRY"} else 0
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--loop", action="store_true", help="Persistent single worker")
     ap.add_argument('--healthcheck',action='store_true',help='Local integrity/import check; no inbox or Archicad calls')
     ap.add_argument("--interval-seconds", type=int, default=30)
     ap.add_argument("--package-profile", type=Path, help="Local profile for the packaged read-only receiver")
+    ap.add_argument("--prepare-r03-profile", type=Path, metavar="STAGED_JOB_DIR")
+    ap.add_argument("--kind", choices=("ARCHITECTURE", "GROUP"))
+    ap.add_argument("--r03-profile", type=Path, help="Local binding for one staged disposable R03 project")
+    ap.add_argument("--make-job", help="Print the exact JSON to be submitted from the acceptance chat")
+    ap.add_argument("--authorize-job", help="Record a local grant for a GitHub EXECUTE blob already read back")
+    ap.add_argument("--confirm-preflight", help="SHA-256 of the published and reviewed PLAN receipt")
+    ap.add_argument("--job", help="Dispatch exactly one R03 inbox job")
+    ap.add_argument("--local-port", type=int, help="Observed local JSON API port for PLAN or VERIFY_REOPEN")
     args = ap.parse_args(argv)
+    if any((args.r03_profile, args.prepare_r03_profile, args.kind, args.make_job,
+            args.authorize_job, args.confirm_preflight, args.job, args.local_port is not None)):
+        return run_r03(args)
     if args.package_profile:
         profile_status = configure_packaged_readonly(args.package_profile)
         if args.healthcheck:
@@ -830,4 +884,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

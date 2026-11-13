@@ -75,8 +75,11 @@ class ArchitectureRetryTests(unittest.TestCase):
                 return payload
 
             with (patch.object(arch, "bind", return_value={"buildIdentity": "fixture"}),
+                  patch.object(arch, "probe_shell_runtime"),
                   patch.object(arch, "capture", return_value=([], {}, {})),
                   patch.object(arch, "prove_retained"),
+                  patch.object(arch.R, "_SAVED_COPY_AUTHORIZATION", {"fixture": True}),
+                  patch.object(arch.R, "authorized_authored_target", return_value=True),
                   patch.object(arch.A, "native_transport", transport)):
                 failed = arch.preflight(job, manifest, 19723, ("fixture", "fixture"))
                 self.assertEqual(failed["status"], "BLOCKED", failed)

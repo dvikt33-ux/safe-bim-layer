@@ -179,7 +179,7 @@ def parser():
     commands.add_parser("project-runtime", help="Действующий интерфейс SceneWriter для проекта")
     commands.add_parser("connected-runtime", help="Существующие связные операции крыши и MEP через SceneWriter")
     cmd = commands.add_parser("architecture-runtime", help="Операции оболочки на подготовленной изолированной копии")
-    cmd.add_argument("phase", choices=("status", "preflight", "execute"))
+    cmd.add_argument("phase", choices=("status", "preflight", "execute", "check-closed", "verify-reopen"))
     cmd.add_argument("--job", type=Path, required=True)
     cmd.add_argument("--port", type=int)
     commands.add_parser("group-runtime", help="Действующий протокол нативных групп и сверки PLN")
@@ -212,6 +212,7 @@ def parser():
     cmd.add_argument("--output", type=Path, required=True)
     cmd = commands.add_parser("arena-receipt", help="Прочитать локальную квитанцию завершения Arena")
     cmd.add_argument("--receipt", type=Path, required=True)
+    cmd.add_argument("--intent", type=Path, help="Отдельный типизированный вход APA для подготовки плана")
     cmd.add_argument("--output", type=Path, required=True)
     return cli
 
@@ -288,7 +289,7 @@ def main(argv=None):
         elif args.mode == "arena-receipt":
             from apa_integrated_services import arena_receipt
 
-            result = arena_receipt(args.receipt)
+            result = arena_receipt(args.receipt, args.intent)
             write_json(args.output, result)
         else:
             router = load_router(args.semantic_profile)

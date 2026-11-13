@@ -81,6 +81,23 @@ def reservation_owner_exited(pid):
         kernel.CloseHandle(handle)
 
 
+def confirm_project_closed(api):
+    """Only a responding endpoint with no saved project can prove a close."""
+    try:
+        info = api("GetProjectInfo", {})
+    except RuntimeError as exc:
+        require("4001" in str(exc) and "no open project" in str(exc).lower(),
+                "APA_NATIVE_CLOSE_NOT_CONFIRMED")
+        return
+    error = info.get("error")
+    if isinstance(error, dict):
+        require(str(error.get("code")) == "4001" and
+                "no open project" in str(error.get("message", "")).lower(), "APA_NATIVE_CLOSE_NOT_CONFIRMED")
+        return
+    require(info.get("isUntitled") is True and info.get("isTeamwork") is False
+            and not info.get("projectPath") and not info.get("projectLocation"), "APA_NATIVE_PROJECT_STILL_OPEN")
+
+
 class ScratchWriteLease:
     """Persistent, cooperative APA-only lease keyed by exact scratch path.
 

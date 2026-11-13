@@ -1,0 +1,50 @@
+# Независимая приёмка записи APA R03
+
+APA запускает одну фазу по точному ID задания из действующего GitHub-репозитория `dvikt33-ux/safe-bim-bridge`. Источник команды закреплён в Git-коммите выпуска. Параметры задания ограничены одной подготовленной тестовой копией и одним сценарием. Обычный чат создаёт JSON-файлы заданий и читает GitHub-квитанции. Запуск Windows-команды выполняется с доступом к установленным Python 3.11 x64, GitHub CLI и Archicad 29.2.1 (5101) с APX из квитанции выпуска.
+
+## Запуск
+
+Путь к пакету, папке задания и конкретной копии PLN берите из выданного `TEST_REQUEST`. Выполняйте команды в папке `APA-Windows`. `$Py` указывает на подготовленный Python. `$Job` — на каталог выбранного испытания.
+
+```powershell
+$Profile = Join-Path $Job 'mailbox-profile.json'
+$Target = Split-Path -Leaf $Job
+& $Py -B -X utf8 -m apa mailbox --r03-profile $Profile --healthcheck
+```
+
+Проверка должна вывести `R03_MAILBOX_LOCAL_BINDING_VERIFIED`. Если профиль ещё не создан, сформируйте его командой `apa mailbox --prepare-r03-profile $Job --kind ARCHITECTURE` или с `GROUP` для тиражирования. После создания используйте исходные файлы профиля и журнала.
+
+Перед `PLAN` сверьте действующий аккаунт GitHub командой `gh api user --jq .login`. Проверьте, что `GetProjectInfo.projectPath` на выбранном порту точно совпадает с PLN из задания. Для управления приёмником используется его существующая блокировка. При `APA_BRIDGE_ALREADY_RUNNING` завершите приёмник штатно после его текущего цикла и проверьте, что блокировка освободилась. Окна Archicad и SQLite приёмника в этот шаг не входят.
+
+## Фазы
+
+Для каждой фазы задайте `$Id = "$Target-<суффикс>"` и получите JSON локальной командой.
+
+```powershell
+& $Py -B -X utf8 -m apa mailbox --r03-profile $Profile --make-job $Id
+```
+
+Обычный чат создаёт именно эти байты JSON в `safe-bim-mailbox/apa-ac29/jobs/<ID>.json` на `main` через GitHub, без перезаписи. Сверьте Git blob SHA-1. Результат появится в `safe-bim-mailbox/apa-ac29/results/<ID>.json`. Для начала следующей фазы сверьте байты результата, `sourceBlob` и `result.jobStatus`. На одну фазу отводится окно, указанное в `expiresAt`.
+
+| Суффикс | Действие | Ожидаемый результат |
+| --- | --- | --- |
+| `plan` | `--job $Id --local-port $Port` на открытой копии. | `READY_FOR_EXPLICIT_TEST_RUN`, `nativeWrites=0`, SHA-256 предконтроля и базовой геометрии. |
+| `execute` | Сначала оформите локальный допуск по опубликованному плану и точному GitHub blob. Затем вызовите `--job $Id`. | `WAITING_CLOSE_AND_REOPEN`, SHA-256 сохранённой PLN, новые GUID, отпечаток BREP и одна команда SaveProject. |
+| `closed` | Закройте только тестовую PLN или штатно выйдите из её отдельного экземпляра. Вызовите `--job $Id` до повторного открытия. | `READY_FOR_REOPEN` и свидетельство отсутствия открытой сохранённой PLN в том же процессе либо завершения процесса из предконтроля. |
+| `reopen` | Откройте сохранённую копию, сверьте точный путь через JSON API и вызовите `--job $Id --local-port $Port`. | `COMPLETE`, `SAVE_REOPEN_VERIFIED`, точные GUID и BREP из квитанции сохранения, `nativeWrites=0`. |
+
+Допуск оформляется после чтения команды `execute` из GitHub и проверки условий теста.
+
+```powershell
+& $Py -B -X utf8 -m apa mailbox --r03-profile $Profile --authorize-job $Id --confirm-preflight $PlanSha
+& $Py -B -X utf8 -m apa mailbox --r03-profile $Profile --job $Id
+```
+
+Успешный повтор той же команды `--job` сверяет опубликованный результат и возвращает исходную квитанцию. Фактическую запись выполняет один `execute`. При `STOPPED_RECONCILE_NO_AUTORETRY` сохраните `attempted.json`, `diagnostic.json`, SQLite, логи и снимок. Для ошибки раннего чтения допускается новый ID `plan-2`, `closed-2` или `reopen-2`, если по фазе ещё нет локальной квитанции успеха. Если подготовка уже записала часть квитанций, остановитесь на сверке этих файлов.
+
+## Квитанции
+
+- В папке задания `mailbox-jobs/<ID>/attempted.json` фиксирует исходный blob и цель. `result.json` и `published.json` содержат результат и подтверждение его чтения из GitHub.
+- Для оболочки в папке задания хранятся `approved-preflight.json`, `ledger/scene-v1-attempts.sqlite3`, `saved.json`, `closed.json`, `reopened.json` и сырые трассы.
+- Для группы квитанции и `batch-scenewriter.sqlite` находятся в `state`. `saved.json` содержит 32 GUID групп, корневые GUID и GUID сегментов при успешном испытании 8×4.
+- После завершения испытания повторный запуск штатного приёмника делается из ранее использовавшегося ярлыка или команды, если он был остановлен для теста. Перед запуском проверьте, что блокировка свободна.

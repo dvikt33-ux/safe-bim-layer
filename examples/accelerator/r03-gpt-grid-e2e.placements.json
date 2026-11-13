@@ -1,0 +1,9 @@
+{
+  "mode": "GRID",
+  "columns": 8,
+  "rows": 4,
+  "stepX": 25,
+  "stepY": 8,
+  "startDx": 25,
+  "startDy": 0
+}

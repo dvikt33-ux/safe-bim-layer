@@ -186,13 +186,23 @@ def router_for(api):
     return router, runtime
 
 
-def build_plan(state):
+def campaign_port(manifest, port):
+    if port is None:
+        return manifest
+    need(manifest.get("authorizationRef", "").startswith("USER_APPROVED_APA_R03_")
+         and type(port) is int and 19723 <= port <= 19743, "GROUP_BATCH_R03_LOCAL_PORT_REQUIRED")
+    return dict(manifest, port=port)
+
+
+def build_plan(state, *, port=None):
     state = Path(state).resolve()
-    m = manifest_for(state, initial=True)
+    m = campaign_port(manifest_for(state, initial=True), port)
     api, _ = prepare_api(m, state, execute=False)
     # Availability belongs to this exact process. A matching Tapir version
     # from another AC29 instance cannot qualify these SDK extensions.
     router, runtime = router_for(api)
+    if m.get("authorizationRef", "").startswith("USER_APPROVED_APA_R03_"):
+        router.probe_runtime(api, "SaveProject")
     ids, native = capture(m, api)
     need(R.digest(ids) == m["baselineGuidSetSHA256"] and
          fingerprint(native) == m["baselineBrepSHA256"], "GROUP_BATCH_ACCEPTED_BASELINE_DRIFT")
@@ -224,9 +234,9 @@ def build_plan(state):
         baselineGuids=ids, contractSHA256=router.contract_hash(V.CMD), nativeWrites=0)
 
 
-def plan(state):
+def plan(state, *, port=None):
     need(not (Path(state) / "plan.json").exists(), "GROUP_BATCH_PLAN_ALREADY_EXISTS")
-    result = build_plan(state)
+    result = build_plan(state, port=port) if port is not None else build_plan(state)
     write_new_json(Path(state) / "plan.json", result)
     return result
 
@@ -244,13 +254,14 @@ def verify_group_model(m, api, plan, response, baseline):
     return ids, native, proof
 
 
-def execute(state):
+def execute(state, *, port=None):
     state = Path(state).resolve()
-    m = manifest_for(state, initial=True)
+    m = campaign_port(manifest_for(state, initial=True), port)
     planned = read(state / "plan.json")
     # The pinned plan has crossed JSON: tuples in native geometry become arrays.
     # Compare the complete canonical content, retaining every field and value.
-    need(R.canonical(build_plan(state)) == R.canonical(planned),
+    current_plan = build_plan(state, port=port) if port is not None else build_plan(state)
+    need(R.canonical(current_plan) == R.canonical(planned),
          "GROUP_BATCH_CURRENT_PLAN_DRIFT")
     lease = ScratchWriteLease(m["scratch"], state, m["scratchInitialSHA256"])
     lease.acquire()
@@ -467,11 +478,16 @@ def verify_reopen(state, *, reopen_port=None):
     r03_process_exit = (m.get("authorizationRef", "").startswith("USER_APPROVED_APA_R03_")
                         and closed["status"] == "ARCHICAD_QUIT_PROCESS_EXIT_CONFIRMED"
                         and closed["quitReceiptSHA256"] == sha256(state / "quit-attempted.json"))
-    need((native_close or r03_process_exit)
+    observed_exit = (m.get("authorizationRef", "").startswith("USER_APPROVED_APA_R03_")
+                     and closed["status"] == "ARCHICAD_TEST_PROCESS_EXIT_CONFIRMED"
+                     and closed["nativeWrites"] == 0 and reservation_owner_exited(closed["pid"]))
+    need((native_close or r03_process_exit or observed_exit)
          and closed["savedSHA256"] == saved["savedSHA256"], "GROUP_BATCH_REAL_CLOSE_REQUIRED")
     if reopen_port is not None:
-        need(r03_process_exit and type(reopen_port) is int and 19723 <= reopen_port <= 19743,
-             "GROUP_BATCH_REOPEN_PORT_REQUIRES_ISOLATED_NEW_PROCESS")
+        same_port = native_close and closed.get("port", m["port"]) == reopen_port
+        need((same_port or r03_process_exit or observed_exit)
+             and type(reopen_port) is int and 19723 <= reopen_port <= 19743,
+             "GROUP_BATCH_REOPEN_PORT_NOT_PROVEN")
         m = dict(m, port=reopen_port)
     api, _ = prepare_api(m, state, execute=False, saved_sha=saved["savedSHA256"])
     _, runtime = router_for(api)

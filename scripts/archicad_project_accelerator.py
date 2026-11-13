@@ -756,7 +756,7 @@ def approval_hash(compiled, preflight):
 
 
 def run_project(intent, schema, folder, state_dir, mode="offline", transport=None,
-                run_id=None, confirm_hash=None):
+                run_id=None, confirm_hash=None, *, allow_3d_view_for_write=False):
     """All evidence stays local. Execute requires an exact preflight approval hash."""
     folder = Path(folder)
     folder.mkdir(parents=True, exist_ok=False)
@@ -786,7 +786,11 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
         if api is None:
             api = EvidenceAPI(transport, folder, execute=mode == "execute")
         required_story = (compiled.get("storyBindings") or [None])[0]
-        binding = RUN.guarded_project(api, required_story)  # Identity before inventory.
+        def project_binding():
+            return RUN.guarded_scene_project(api, required_story,
+                allow_3d_view_for_write=allow_3d_view_for_write)
+
+        binding = project_binding()  # Identity before inventory.
         result["archicadProduct"] = archicad29(api)
         before = inventory_guids(api)
         write_json(folder / "inventory-before.json", before)
@@ -800,7 +804,8 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
                                      AUTHORED_NATIVE.make_read_only_scene_writer_preview_factory(
                                          compiled["authoredCandidate"]) if authored else
                                      (lambda x, y, path: BUILD.prepare(intent["components"][0], path))
-                                     if required_story is not None else None), adapters=typed_adapters)
+                                     if required_story is not None else None), adapters=typed_adapters,
+                                 allow_3d_view_for_write=allow_3d_view_for_write)
         anchor = ({"x": compiled["envelope"]["xMin"], "y": compiled["envelope"]["yMin"]}
                   if authored else intent["components"][0]["anchor"])
         ticket = writer.preflight(anchor["x"], anchor["y"])
@@ -850,7 +855,7 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
                         'Explicit source intent structuralFunctions; no engineering capacity inference',saved_hash)
         after = inventory_guids(api)
         write_json(folder / "inventory-after.json", after)
-        if RUN.guarded_project(api, required_story) != binding:
+        if project_binding() != binding:
             raise ValueError("PROJECT_CHANGED_AFTER_RUN")
         added, removed = sorted(set(after)-set(before)), sorted(set(before)-set(after))
         result.update(addedGuids=added, removedGuids=removed, inventoryUnchanged=before == after)
@@ -868,7 +873,7 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
             created = {"__plan__": compiled["graph"], **{k: {"guid": v["guid"], "kind": v["kind"]}
                        for k, v in result["scene"]["steps"].items()}}
             for step in compiled["graph"]["operations"]:
-                RUN.guarded_project(api, required_story)
+                project_binding()
                 params = RUN.resolve_params(step, created)
                 host = (RUN.check_previous_wall(
                             api, step, created, ticket.get("storyBindings"))
@@ -896,7 +901,7 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
                         ticket.get("slabBasicMaterialGuid")
                         if step["command"] == "CreateSlabs" else None),
                     slab_level_is_absolute=(ticket.get("slabLevelConvention")=="PROJECT_ABSOLUTE"))
-            if RUN.guarded_project(api, required_story) != binding:
+            if project_binding() != binding:
                 raise ValueError("PROJECT_CHANGED_DURING_WHOLE_ASSEMBLY_READBACK")
             result["wholeAssemblyReadback"] = True
             if authored and intent.get('nativeGeometryAudit'):

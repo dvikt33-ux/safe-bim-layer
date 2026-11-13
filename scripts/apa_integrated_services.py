@@ -8,7 +8,7 @@ import re
 from apa_release import read_json, read_release, sha256, verify_member
 
 
-def arena_receipt(path):
+def arena_receipt(path, intent_path=None):
     raw = path.read_bytes()
     row = json.loads(raw.decode("utf-8-sig"))
     turn = row.get("turn_id")
@@ -17,10 +17,23 @@ def arena_receipt(path):
             or row.get("signal_status") != "done" or row.get("signal_target") != "NONE"
             or not re.fullmatch(r"[a-f0-9]{40}", row.get("signal_blob_sha", ""))):
         raise ValueError("Выберите квитанцию завершённого обмена Arena с терминальным ACK")
-    return {"status": "ARENA_TERMINAL_RECEIPT_IMPORTED", "turn": turn,
-            "signalBlobSha1": row["signal_blob_sha"], "receiptSha256": hashlib.sha256(raw).hexdigest(),
-            "source": row.get("source"), "reportMarker": row.get("report_marker"),
-            "executionPermission": False}
+    receipt = {"status": "ARENA_TERMINAL_RECEIPT_IMPORTED", "turn": turn,
+               "signalBlobSha1": row["signal_blob_sha"], "receiptSha256": hashlib.sha256(raw).hexdigest(),
+               "source": row.get("source"), "reportMarker": row.get("report_marker"),
+               "executionPermission": False}
+    if intent_path is None:
+        return receipt
+
+    from apa import compile_plan, load_router
+
+    intent_bytes = intent_path.read_bytes()
+    intent = json.loads(intent_bytes.decode("utf-8-sig"))
+    if not isinstance(intent, dict) or not isinstance(intent.get("schemaVersion"), str):
+        raise ValueError("Для Arena нужен отдельный типизированный вход APA")
+    plan = dict(compile_plan(load_router(), intent), executionPermission=False)
+    return dict(receipt, status="ARENA_APA_PLAN_PREPARED",
+                intentSchema=intent["schemaVersion"], intentSha256=hashlib.sha256(intent_bytes).hexdigest(),
+                plan=plan)
 
 
 def knowledge_query(root, cache, query, mode):
@@ -56,6 +69,11 @@ def architecture_phase(root, job, phase, port):
     pinned = (native["sourceRevision"], native["buildIdentity"])
     if phase == "preflight":
         return architecture.preflight(job, manifest, port or manifest["port"], pinned)
+    if phase == "verify-reopen":
+        approved = read_json(job / "approved-preflight.json")
+        return architecture.verify_reopen(job, manifest, pinned, port or approved["port"])
     if port is not None:
         raise ValueError("Исполнение использует порт сохранённого предконтроля")
+    if phase == "check-closed":
+        return architecture.check_closed(job, manifest, pinned)
     return architecture.execute(job, manifest, pinned)
