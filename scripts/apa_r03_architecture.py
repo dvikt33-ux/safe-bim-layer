@@ -253,8 +253,9 @@ def execute(job, m, pinned_runtime):
     def before_save(live):
         current_ids, _, current_signatures = capture(m, live)
         require(lease.verify() and current_ids == ids and current_signatures == signatures
-                and sha256(m["project"]) == m["initialSHA256"], "APA_ARCHITECTURE_PRE_SAVE_DRIFT")
-        return dict(status="ARCHITECTURE_ALL_RETAINED_BREP_AND_NEW_GUIDS_VERIFIED")
+                and sha256(m["project"]) == sha256(m["original"]) == m["initialSHA256"],
+                "APA_ARCHITECTURE_PRE_SAVE_DRIFT")
+        return dict(status="PASS", check="ARCHITECTURE_ALL_RETAINED_BREP_AND_NEW_GUIDS")
 
     def after_save(reply, _):
         require(reply == {"success": True} and guard.new_saved_sha and lease.verify(),
@@ -262,7 +263,8 @@ def execute(job, m, pinned_runtime):
         record = preserve_guarded_save(m["project"], job / "guarded-save.snapshot",
                                       guard.new_saved_sha, {m["original"]: m["initialSHA256"]})
         write_new_json(job / "snapshot.json", record)
-        return dict(status="ARCHITECTURE_SAVED_BYTES_CONFIRMED", savedSHA256=guard.new_saved_sha)
+        return dict(status="PASS", check="ARCHITECTURE_SAVED_BYTES_CONFIRMED",
+                    savedSHA256=guard.new_saved_sha)
 
     save_scene_id = "Save-" + R.digest(job.name)[:24]
     outcome = router.execute(writer, save_scene_id, router.prepare("SaveProject", {}),
