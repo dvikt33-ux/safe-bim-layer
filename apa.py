@@ -201,6 +201,14 @@ def parser():
     cmd.add_argument("--profile", type=Path)
     cmd.add_argument("--journal", type=Path)
     cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("tdk-trace-stage", help="Подготовить новую копию PLN для испытания AI_TRACE")
+    cmd.add_argument("--source", type=Path, required=True)
+    cmd.add_argument("--payload", type=Path, required=True)
+    cmd.add_argument("--job", type=Path, required=True)
+    cmd = commands.add_parser("tdk-trace", help="Сверить или применить изменение AI_TRACE в тестовой копии")
+    cmd.add_argument("--job", type=Path, required=True)
+    cmd.add_argument("--port", type=int, required=True)
+    cmd.add_argument("--confirm-preflight", help="SHA-256 проверенного предконтроля для одной записи")
     cmd = commands.add_parser("library-pack", help="Подготовить привязанный к источнику комплект проекта")
     cmd.add_argument("--brief", type=Path, required=True)
     cmd.add_argument("--candidate", type=Path, required=True)
@@ -269,6 +277,15 @@ def main(argv=None):
             result = inspect_wall(ROOT, args.payload, args.profile, args.journal,
                                   args.output.with_suffix(".evidence"))
             write_json(args.output, result)
+        elif args.mode == "tdk-trace-stage":
+            from apa_tdk_wall import stage_trace
+
+            result = stage_trace(ROOT, args.job, args.source, args.payload)
+        elif args.mode == "tdk-trace":
+            from apa_tdk_wall import run_trace
+
+            result = run_trace(ROOT, args.job, args.port, confirm=args.confirm_preflight)
+            code = 2 if result["status"] == "STOPPED_RECONCILE_NO_AUTORETRY" else 0
         elif args.mode == "library-pack":
             from archicad_project_library_pack import compile_pack
 

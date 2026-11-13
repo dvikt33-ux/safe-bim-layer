@@ -66,6 +66,9 @@ jobs:
           test_r03_recovery
           test_r03_resume
           test_apa_r03_mailbox
+          test_apa_tdk_trace
+          test_apa_bdd_readonly_story_guard
+          test_apa_bdd_existing_router_readback
           test_apa_ac29_autonomous_bridge
           test_apa_ac29_scoped_native_mailbox
           test_apa_ac29_group_batch_oneshot
