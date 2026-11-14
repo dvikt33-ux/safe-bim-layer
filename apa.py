@@ -176,6 +176,10 @@ def parser():
     cmd.add_argument("--current", type=Path, required=True)
     cmd.add_argument("--variant", required=True)
     cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("design-evidence", help="Связать проверенную модель с источниками требований")
+    cmd.add_argument("--job", type=Path, required=True)
+    cmd.add_argument("--cache", type=Path, required=True)
+    cmd.add_argument("--output", type=Path, required=True)
     cmd = commands.add_parser("run-local", help="Выполнить локальную аналитическую команду")
     cmd.add_argument("command")
     cmd.add_argument("--params", type=Path, required=True)
@@ -298,6 +302,14 @@ def main(argv=None):
             from apa_project_design import changes_between
 
             result = changes_between(read_json(args.previous), read_json(args.current), args.variant)
+            write_json(args.output, result)
+        elif args.mode == "design-evidence":
+            from apa_integrated_services import design_evidence
+
+            job = args.job.resolve(strict=True)
+            if any(path.resolve().is_relative_to(job) for path in (args.output, args.cache)):
+                raise ValueError("Папка индекса и новый отчёт должны находиться вне исторического задания")
+            result = design_evidence(ROOT, job, args.cache)
             write_json(args.output, result)
         elif args.mode == "template-check":
             from archicad_template_builder import validate_specs

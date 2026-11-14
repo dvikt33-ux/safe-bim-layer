@@ -20,6 +20,8 @@ WORKFLOWS = {
         [("Файл технического задания", "--source", "file", "")], "задание-для-gpt.json"),
     "Выбрать проектный вариант для предконтроля": (["design-select"],
         [("Файл вариантов", "--intent", "file", ""), ("ID варианта", "--variant", "text", "")], "проект.json"),
+    "Связать требования с проверенной моделью": (["design-evidence"],
+        [("Каталог задания с квитанцией reopened.json", "--job", "directory", "")], "доказательства-проекта.json"),
     "Выполнить предконтроль оболочки в тестовой PLN": (["architecture-runtime", "preflight"],
         [("Каталог подготовленного задания оболочки", "--job", "directory", ""),
          ("Порт JSON API", "--port", "text", "19723")], None),
@@ -158,7 +160,7 @@ class Application:
             self.job.mkdir(parents=True)
             if output:
                 args.extend(["--output", str(self.job / output)])
-            if command[0] == "knowledge-query":
+            if command[0] in {"knowledge-query", "design-evidence"}:
                 args.extend(["--cache", str(workspace / ("Индекс-" + self.release["knowledgeRevision"][:10]))])
             python = Path(sys.executable).with_name("python.exe")
             with (self.job / "журнал.txt").open("xb") as log:
