@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import apa_project_design as design
 import apa_r03_architecture as architecture
 import archicad_project_accelerator as core
+import archicad_native_stair_connection as stairs
 from test_archicad_isolated_authored_execution import IsolatedNative
 
 
@@ -223,6 +224,52 @@ class DesignTests(unittest.TestCase):
         self.assertIn("bim:native-slab-level-2", impact["changed"])
         self.assertIn("requirement:stairs", impact["affected"])
         self.assertIn("review:sections", impact["affected"])
+
+    def test_stair_readback_reuses_native_connection_and_reports_solver_drift(self):
+        intent, row = self.stair_design()
+        candidate = design.compile_design(intent)["variants"][0]["candidate"]
+        native_indices = {"level-1": 3, "level-2": 4}
+        guids = {slot: f"00000000-0000-4000-8000-{i:012d}"
+                 for i, slot in enumerate(("stair", "lowerSlab", "upperSlab"), 1)}
+        layouts = row["floorPlans"]
+        def read(command, params):
+            self.assertEqual(command, "GetDetailsOfElements")
+            lower = params["elements"][0]["elementId"]["guid"] == guids["lowerSlab"]
+            floor, level, story = (3, 0, "level-1") if lower else (4, 3, "level-2")
+            return {"detailsOfElements": [dict(type="Slab", floorIndex=floor, details=dict(
+                level=0, zCoordinate=level, thickness=.2, polygonOutline=layouts[story]["polygonCoordinates"],
+                holes=layouts[story]["holes"]))]}
+        proof = dict(status="NATIVE_STAIR_SLAB_CONNECTION_GEOMETRY_PASS",
+                     sourceGoingAcceptance="PASS", lowerSlabSurfaceContacts=[{"sharedAreaSquareMeters": .2}],
+                     lowerSlabVolumeCollisions=[], stair=dict(bounds=dict(xMin=5, xMax=6, yMin=1, yMax=5),
+                     nativePartCounts={"stairRisers": 16}))
+        with patch.object(stairs, "connection_readback", return_value=proof) as native:
+            result = stairs.verify_planned_connection(read, candidate, "stairs", guids, native_indices)
+            self.assertEqual(result["status"], "NATIVE_STAIR_PLAN_GEOMETRY_MATCH")
+            self.assertEqual(result["requirement"]["sourceRef"], "ТЗ §4")
+            self.assertEqual(result["bimOperationGuids"]["native-slab-level-2"], guids["upperSlab"])
+            self.assertEqual(native.call_args.args[2]["floorIndex"], 3)
+            proof["sourceGoingAcceptance"] = "NOT_VERIFIED_NATIVE_SOLVER_CHANGED_GOING"
+            result = stairs.verify_planned_connection(read, candidate, "stairs", guids, native_indices)
+            self.assertIn("STAIR_NATIVE_GOING_CHANGED", result["openChecks"])
+            self.assertEqual(result["status"], "NATIVE_STAIR_PLAN_PARTIAL")
+            layouts["level-2"]["holes"].clear()
+            with self.assertRaisesRegex(ValueError, "SLAB_HOLE_READBACK_COUNT_MISMATCH"):
+                stairs.verify_planned_connection(read, candidate, "stairs", guids, native_indices)
+
+    def test_stair_cli_refuses_unpinned_copy_before_native_read(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            folder = Path(temporary)
+            project = folder / "changed.pln"
+            project.write_bytes(b"different saved bytes")
+            command = [sys.executable, "-B", "-X", "utf8", "-m", "apa", "design-stair-readback",
+                       "--intent", INPUT, "--variant", "variant-a", "--requirement", "stairs",
+                       "--bindings", folder / "unused.json", "--project", project,
+                       "--project-sha256", "0" * 64, "--port", "19723", "--output", folder / "report.json"]
+            result = subprocess.run(command, cwd=ROOT, capture_output=True, encoding="utf-8", timeout=30)
+            self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
+            self.assertEqual(json.loads(result.stderr)["reason"], "STAIR_READBACK_EXACT_PLN_AND_NEW_OUTPUT_REQUIRED")
+            self.assertFalse((folder / "report.trace").exists())
 
     def test_wrong_room_on_entrance_is_rejected_and_other_variant_is_kept(self):
         self.input["variants"][0]["layout"]["passages"][0]["connects"] = ["$outside", "living"]

@@ -177,6 +177,61 @@ def _design_window_junctions(graph, readback, elements, added_guids):
     return targets
 
 
+def design_stair_readback(root, intent_path, variant, requirement, bindings_path, project, project_sha, port, output):
+    """Inspect one existing stair on an exact open test copy, without saving it."""
+    import apa_project_design as design
+    import apa_r03_architecture as architecture
+    from apa_r03_mailbox import listener
+    from apa_ac29_save_isolation import require
+    from apa_mailbox_profile import APX
+    from archicad_native_stair_connection import verify_planned_connection
+    from archicad_semantic_brief import resolve_stories
+
+    project = project.resolve(strict=True)
+    require(project.suffix.lower() == ".pln" and not output.exists()
+            and re.fullmatch(r"[a-f0-9]{64}", project_sha) and sha256(project) == project_sha,
+            "STAIR_READBACK_EXACT_PLN_AND_NEW_OUTPUT_REQUIRED")
+    intent, intent_sha = _matching_json(intent_path)
+    bindings, bindings_sha = _matching_json(bindings_path)
+    report = design.compile_design(intent)
+    candidate = next((row.get("candidate") for row in report["variants"] if row["id"] == variant), None)
+    require(candidate and report["brief"]["targetProjectPath"] == str(project)
+            and any(row["requirementId"] == requirement for row in candidate.get("stairConnections", [])),
+            "STAIR_READBACK_REQUIRES_EXACT_DESIGN_TARGET_AND_LINK")
+    release = read_release(root)
+    pinned = read_json(verify_member(root, release, "native/binary-receipt.json"))["binary"]
+    require(sha256(APX) == pinned["apxSHA256"], "STAIR_READBACK_INSTALLED_APX_DRIFT")
+
+    session = listener(port)
+    core = architecture.A
+    core.RUN.bind_authorized_saved_copy(port, str(project), project.stem, project_sha, "EXACT_STAIR_READBACK_ONLY")
+    trace = output.with_suffix(".trace")
+    trace.mkdir()
+    api = core.EvidenceAPI(core.native_transport, trace, execute=False)
+    facts = core.RUN.guarded_project_for_read(api)
+    runtime = architecture.runtime_identity(api, (pinned["sourceRevision"], pinned["buildIdentity"]))
+    require(core.archicad29(api)["buildNumber"] == 5101, "STAIR_READBACK_ARCHICAD_BUILD_DRIFT")
+    resolved = resolve_stories(report["brief"], api)
+    require(resolved["nativeResolution"] == "READY_FOR_ATTRIBUTE_RESOLUTION", "STAIR_READBACK_STORY_BINDING_UNRESOLVED")
+    indices = {row["architecturalStoryId"]: row["nativeIndex"] for row in resolved["nativeStoryBindings"]}
+    before = core.inventory_guids(api)
+    try:
+        result = verify_planned_connection(api, candidate, requirement, bindings, indices)
+    except ValueError as exc:
+        result = dict(status="NATIVE_STAIR_PLAN_NOT_VERIFIED", reason=str(exc), requirementId=requirement)
+    after = core.inventory_guids(api)
+    require(set(result.get("bimOperationGuids", {}).values()) <= set(after)
+            and before == after and api.write_attempts == 0 and sha256(project) == project_sha
+            and core.RUN.guarded_project_for_read(api)["storyTopology"] == facts["storyTopology"]
+            and architecture.runtime_identity(api, (pinned["sourceRevision"], pinned["buildIdentity"])) == runtime
+            and listener(port) == session and sha256(intent_path) == intent_sha and sha256(bindings_path) == bindings_sha,
+            "STAIR_READBACK_PLN_INVENTORY_OR_INPUT_DRIFT")
+    return dict(result, projectPath=str(project), projectSha256=project_sha, listener=session, runtime=runtime,
+                intentSha256=intent_sha, bindingsSha256=bindings_sha, planHash=candidate["sourcePlanHash"],
+                guidSetSha256=core.RUN.digest(before), nativeReadCalls=sum(api.calls.values()), nativeWriteCalls=0,
+                traceSha256=sha256(trace / "raw.jsonl"), executionPermission=False)
+
+
 def architecture_phase(root, job, phase, port, *, confirm_preflight=None, output=None, discover_port=False,
                        expected_stage_sha=None):
     import apa_r03_architecture as architecture

@@ -180,6 +180,16 @@ def parser():
     cmd.add_argument("--job", type=Path, required=True)
     cmd.add_argument("--cache", type=Path, required=True)
     cmd.add_argument("--output", type=Path, required=True)
+
+    cmd = commands.add_parser("design-stair-readback", help="Сверить лестницу и плиты с вариантом в открытой копии PLN")
+    cmd.add_argument("--intent", type=Path, required=True)
+    cmd.add_argument("--variant", required=True)
+    cmd.add_argument("--requirement", required=True)
+    cmd.add_argument("--bindings", type=Path, required=True, help="JSON с GUID stair, lowerSlab и upperSlab")
+    cmd.add_argument("--project", type=Path, required=True)
+    cmd.add_argument("--project-sha256", required=True)
+    cmd.add_argument("--port", type=int, required=True)
+    cmd.add_argument("--output", type=Path, required=True)
     cmd = commands.add_parser("run-local", help="Выполнить локальную аналитическую команду")
     cmd.add_argument("command")
     cmd.add_argument("--params", type=Path, required=True)
@@ -311,6 +321,14 @@ def main(argv=None):
                 raise ValueError("Папка индекса и новый отчёт должны находиться вне исторического задания")
             result = design_evidence(ROOT, job, args.cache)
             write_json(args.output, result)
+        elif args.mode == "design-stair-readback":
+            from apa_integrated_services import design_stair_readback
+
+            result = design_stair_readback(ROOT, args.intent, args.variant, args.requirement, args.bindings,
+                                           args.project, args.project_sha256, args.port, args.output)
+            write_json(args.output, result)
+            if result["status"] == "NATIVE_STAIR_PLAN_NOT_VERIFIED":
+                code = 2
         elif args.mode == "template-check":
             from archicad_template_builder import validate_specs
 

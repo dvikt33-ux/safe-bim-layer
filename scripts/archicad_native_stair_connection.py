@@ -242,6 +242,48 @@ def connection_readback(api,stair_guid,expected,lower_slab,upper_slab):
         engineeringAcceptance='NOT_VERIFIED',sourceGoingAcceptance=proof['requestedGoingAcceptance'])
 
 
+def verify_planned_connection(api, candidate, requirement_id, guids, native_indices):
+    """Bind the existing Stair/Slab reader to the authored operation IDs."""
+    link = next((row for row in candidate.get("stairConnections", [])
+                 if row["requirementId"] == requirement_id), None)
+    slots = {"stair": "stairOperationId", "lowerSlab": "lowerSlabOperationId", "upperSlab": "upperSlabOperationId"}
+    if (link is None or not isinstance(guids, dict) or guids.keys() != slots.keys()
+            or any(not isinstance(guid, str) or not RUN._GUID.fullmatch(guid) for guid in guids.values())
+            or len({guid.lower() for guid in guids.values()}) != 3):
+        raise ValueError("STAIR_READBACK_REQUIRES_LINK_AND_THREE_DISTINCT_GUIDS")
+    guids = {slot: guid.lower() for slot, guid in guids.items()}
+    requirement = next(row for row in candidate["requirements"] if row["id"] == requirement_id)
+    criterion = requirement["criterion"]
+    lower, upper = criterion["lowerStoryId"], criterion["upperStoryId"]
+    operations = {row["id"]: row for row in candidate["graph"]["operations"]}
+    stair = operations[link["stairOperationId"]]
+    expected = dict(stair["params"]["stairsData"][0], floorIndex=native_indices[lower])
+    for slot, story in (("lowerSlab", lower), ("upperSlab", upper)):
+        slab = operations[link[slots[slot]]]
+        row = RUN.requested_details(api, guids[slot])
+        RUN.verify_readback(slab["command"], slab["params"], row, expected_floor=native_indices[story],
+                            expected_story_level=slab["params"]["slabsData"][0]["level"], slab_level_is_absolute=True)
+    proof = connection_readback(api, guids["stair"], expected, guids["lowerSlab"], guids["upperSlab"])
+    bounds = proof["stair"]["bounds"]
+    start, end = expected["baseLinePoints"]
+    open_checks = []
+    if proof["sourceGoingAcceptance"] != "PASS":
+        open_checks.append("STAIR_NATIVE_GOING_CHANGED")
+    if not all(RUN.close(bounds[key], value) for key, value in
+               dict(xMin=start["x"], xMax=start["x"] + expected["flightWidth"], yMin=start["y"], yMax=end["y"]).items()):
+        open_checks.append("STAIR_NATIVE_FLIGHT_FOOTPRINT_DRIFT")
+    if proof["stair"]["nativePartCounts"].get("stairRisers") != expected["stepNum"]:
+        open_checks.append("STAIR_NATIVE_RISER_COUNT_NOT_CONFIRMED")
+    if proof["lowerSlabVolumeCollisions"]:
+        open_checks.append("STAIR_LOWER_SLAB_VOLUME_INTERSECTION")
+    if not proof["lowerSlabSurfaceContacts"]:
+        open_checks.append("STAIR_LOWER_SLAB_CONTACT_NOT_CONFIRMED")
+    return dict(status="NATIVE_STAIR_PLAN_PARTIAL" if open_checks else "NATIVE_STAIR_PLAN_GEOMETRY_MATCH",
+                requirement=requirement, designSource=link["source"], designSourceStatus=link["sourceStatus"],
+                bimOperationGuids={link[ref]: guids[key] for key, ref in slots.items()},
+                openChecks=open_checks, connection=proof, headroom="UNVERIFIED", engineeringApproval="UNVERIFIED")
+
+
 def verify_connected_model(api,building_plan,created,stair_guid,stair_data,connection,output):
     """Attach actual Stair/Slab contacts to the existing native building graph."""
     import networkx as nx
