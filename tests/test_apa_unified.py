@@ -37,6 +37,19 @@ class UnifiedAcceptance(unittest.TestCase):
         apa.write_json(path, value)
         return path
 
+    def test_plan_reports_validated_semantic_brief_without_native_resolution(self):
+        source = apa.read_json(apa.ROOT / "examples/accelerator/rectangular-layout-study.json")["brief"]
+        source["openQuestions"] = ["Уточнить исходную привязку и методику общей площади"]
+        intent = self.save("brief.json", source)
+        output = self.work / "plan.json"
+        result = self.invoke("plan", "--intent", intent, "--output", output)
+        self.assertEqual(result, apa.read_json(output))
+        self.assertEqual(result["status"], "SEMANTIC_BRIEF_VALIDATED")
+        self.assertEqual(result["inputSha256"], digest(intent))
+        self.assertEqual(result["nativeResolution"], "NEEDS_NEW_PROJECT_SETUP")
+        self.assertEqual(result["openQuestions"], source["openQuestions"])
+        self.assertFalse(result["executionPermission"])
+
     def test_dxf_preflight_layer_and_block_reports_read_back(self):
         source = self.work / "Разрез.dxf"
         drawing = ezdxf.new("R2018", units=6)

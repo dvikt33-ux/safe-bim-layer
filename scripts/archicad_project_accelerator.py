@@ -771,8 +771,12 @@ def requirement_readback(result):
             state = "LINKED_ELEMENTS_READ_BACK"
         else:
             state = "INCOMPLETE"
-        feedback.append(dict(requirementId=requirement["id"], designStatus=requirement["status"],
-                             nativeReadback=state, operations=observed))
+        provenance = {key: requirement[key] for key in ("text", "sourceRef", "priority", "evidenceStatus",
+                                                        "criterion", "measurement", "deltaM2")
+                      if key in requirement}
+        feedback.append(dict(provenance, requirementId=requirement["id"], designStatus=requirement["status"],
+                             designReason=requirement.get("reason"), nativeReadback=state,
+                             bimOperationIds=ids, operations=observed))
     return feedback
 
 

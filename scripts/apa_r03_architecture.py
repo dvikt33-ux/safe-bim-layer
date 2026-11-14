@@ -429,10 +429,14 @@ def verify_reopen(job, m, pinned_runtime, port, *, expected_listener=None):
     require(listener(port) == observed, "APA_ARCHITECTURE_REOPEN_PROCESS_DRIFT")
     result = dict(saved, status="LIVE_ARCHITECTURE_SAVED_REOPENED_PASS", reopenVerified=True,
                   reopenedGuids=ids, reopenedGuidSetSHA256=guid_hash, reopenedBrepSHA256=brep_hash,
-                  verificationNativeWrites=0, sourceUnchanged=True, reopenPort=port)
+                  verificationNativeWrites=0, sourceUnchanged=True, reopenPort=port,
+                  reopenListener=observed)
     path = job / "reopened.json"
     if path.exists():
-        require(read(path) == result, "APA_ARCHITECTURE_REOPEN_RECEIPT_DRIFT")
-    else:
-        write_new_json(path, result)
+        previous = read(path)
+        require({key: value for key, value in previous.items() if key != "reopenListener"}
+                == {key: value for key, value in result.items() if key != "reopenListener"},
+                "APA_ARCHITECTURE_REOPEN_RECEIPT_DRIFT")
+        return previous
+    write_new_json(path, result)
     return result

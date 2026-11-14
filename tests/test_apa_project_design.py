@@ -180,6 +180,13 @@ class DesignTests(unittest.TestCase):
                                               "r04-unit-test", plan["confirmPlanHash"])
                 feedback = {row["requirementId"]: row for row in result["requirementReadback"]}
                 self.assertEqual(len(result["addedGuids"]), 9, result)
+                self.assertEqual(feedback["front-door"]["text"], "Вход снаружи в холл")
+                self.assertEqual(feedback["front-door"]["sourceRef"], "Исходное задание §1")
+                self.assertEqual(feedback["front-door"]["priority"], "REQUIRED")
+                self.assertEqual(feedback["front-door"]["criterion"],
+                                 {"kind": "ENTRANCE", "from": "$outside", "to": "hall"})
+                self.assertEqual(feedback["front-door"]["evidenceStatus"], "UNVERIFIED")
+                self.assertEqual(feedback["gross-area"]["nativeReadback"], "NO_LINKED_BIM_OPERATIONS")
                 if drift:
                     self.assertEqual(result["status"], "PARTIAL_OR_UNKNOWN_OUTCOME", result)
                     self.assertEqual(feedback["front-door"]["nativeReadback"], "MISMATCH")

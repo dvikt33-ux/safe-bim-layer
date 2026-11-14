@@ -75,7 +75,7 @@ def compile_plan(router, intent):
 
     schema = intent.get("schemaVersion")
     if schema == "apa-semantic-project-brief/1":
-        return core.compile_project_brief(intent)
+        return dict(core.compile_project_brief(intent), status="SEMANTIC_BRIEF_VALIDATED")
     if schema == "apa-project-design/1":
         from apa_project_design import compile_design
 

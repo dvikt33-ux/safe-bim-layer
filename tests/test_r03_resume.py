@@ -193,6 +193,7 @@ class ArchitectureReopenListenerTests(unittest.TestCase):
             result = arch.verify_reopen(self.job, self.manifest, self.pins, self.other["port"])
         exited.assert_called_once_with(self.session["pid"])
         self.assertEqual(result["status"], "LIVE_ARCHITECTURE_SAVED_REOPENED_PASS")
+        self.assertEqual(result["reopenListener"], self.other)
         self.assertEqual(arch.read(self.job / "reopened.json"), result)
 
     def test_close_cannot_use_different_listener_even_when_api_reports_empty(self):
