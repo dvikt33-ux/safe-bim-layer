@@ -28,6 +28,8 @@ SOURCES = {
 PHASES = {"plan": "PLAN", "execute": "EXECUTE", "closed": "CHECK_CLOSED", "reopen": "VERIFY_REOPEN"}
 HEX40 = re.compile(r"[0-9a-f]{40}")
 HEX64 = re.compile(r"[0-9a-f]{64}")
+DESIGN_SOURCE = "mailbox-design-source.json"
+DESIGN_PATH = re.compile(r"examples/accelerator/(?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_-]+\.json")
 
 
 def staging(job_dir, kind):
@@ -53,9 +55,38 @@ def staging(job_dir, kind):
     return state, record, manifest, project, initial_sha
 
 
-def prepare_profile(root, job_dir, kind):
+def authored_source(source, project, local_intent, variant):
+    """A remote design may only reproduce the exact, already staged local intent."""
+    from copy import deepcopy
+    from apa_project_design import select_variant
+
+    require(isinstance(source, dict) and source.get("schemaVersion") == "apa-project-design/1",
+            "R03_MAILBOX_AUTHORED_SOURCE_DESIGN_REQUIRED")
+    proposal = deepcopy(source)
+    brief = proposal["brief"]
+    local = local_intent["brief"]
+    native_fields = ("existingNativeLabel", "existingNativeIndex", "existingFloorId")
+    require(brief["mode"] == "GENERATE_FROM_ZERO" and "targetProjectPath" not in brief
+            and len(brief["stories"]) == len(local["stories"]) == 1
+            and not any(field in brief["stories"][0] for field in native_fields),
+            "R03_MAILBOX_AUTHORED_SOURCE_REQUIRES_ONE_UNBOUND_STORY")
+    brief.update(mode="ADAPT_EXISTING", targetProjectPath=str(project))
+    for field in native_fields:
+        if field in local["stories"][0]:
+            brief["stories"][0][field] = local["stories"][0][field]
+    require(select_variant(proposal, variant) == local_intent, "R03_MAILBOX_DESIGN_DOES_NOT_MATCH_STAGED_INTENT")
+
+
+def validate_design_ref(ref):
+    require(isinstance(ref, dict) and set(ref) == {"ref", "path", "variant", "blobSha1"}
+            and all(isinstance(value, str) for value in ref.values())
+            and HEX40.fullmatch(ref["ref"]) and HEX40.fullmatch(ref["blobSha1"])
+            and DESIGN_PATH.fullmatch(ref["path"]) and bool(ref["variant"]), "R03_MAILBOX_INVALID_DESIGN_REF")
+
+
+def prepare_profile(root, job_dir, kind, *, design_binding=None, bridge=None):
     job_dir = job_dir.resolve(strict=True)
-    state, record, _, project, initial_sha = staging(job_dir, kind)
+    state, record, stage, project, initial_sha = staging(job_dir, kind)
     require(sha256(project) == initial_sha and not (state / "attempted.json").exists()
             and not Path(str(project) + ".apa-write.lock").exists(), "R03_MAILBOX_ALREADY_ATTEMPTED")
     release = read_release(root)
@@ -63,6 +94,21 @@ def prepare_profile(root, job_dir, kind):
     config = dict(schema=PROFILE, kind=kind, target=job_dir.name,
                   releaseRevision=release["revision"], releaseManifestSha256=sha256(root / MANIFEST),
                   stageReceiptSha256=sha256(record))
+    require(not path.exists(), "R03_MAILBOX_PROFILE_ALREADY_EXISTS")
+    is_authored = kind == "ARCHITECTURE" and "authoredIntentHash" in stage
+    require((design_binding is not None) == is_authored, "R03_MAILBOX_AUTHORED_DESIGN_BINDING_REQUIRED")
+    if is_authored:
+        require(bridge is not None, "R03_MAILBOX_GITHUB_SOURCE_REQUIRED")
+        ref = read_json(design_binding)
+        validate_design_ref(ref)
+        source, _ = bridge.remote_json(SOURCE_REPO, ref["path"], ref["ref"], ref["blobSha1"])
+        authored_source(source, project, read_json(job_dir / "intent.json"), ref["variant"])
+        local = job_dir / DESIGN_SOURCE
+        if local.exists():
+            require(local.resolve() == local and read_json(local) == source, "R03_MAILBOX_DESIGN_SOURCE_DRIFT")
+        else:
+            write_new_json(local, source)
+        config.update(designRef=ref, designSourceSha256=sha256(local))
     profile = Campaign(root, path, config=config)
     write_new_json(path, config)
     return profile.health() | {"profile": str(path), "bindingSha256": sha256(path)}
@@ -130,7 +176,8 @@ class Campaign:
                 and re.fullmatch(r"r03-[a-z0-9-]{5,40}", self.target),
                 "R03_MAILBOX_PROFILE_PATH_INVALID")
         keys = {"schema", "kind", "target", "releaseRevision", "releaseManifestSha256", "stageReceiptSha256"}
-        require(set(self.config) == keys and self.config["schema"] == PROFILE
+        optional = {"designRef", "designSourceSha256"}
+        require(set(self.config) in (keys, keys | optional) and self.config["schema"] == PROFILE
                 and self.config["target"] == self.target and self.config["kind"] in SOURCES,
                 "R03_MAILBOX_PROFILE_SCHEMA_INVALID")
         self.release = read_release(self.root)
@@ -146,13 +193,20 @@ class Campaign:
         self.closed_path = self.job_dir / "mailbox-closed-phase.json"
         require(all(path.resolve() == path for path in (self.history, self.session_path, self.closed_path)),
                 "R03_MAILBOX_HISTORY_PATH_DRIFT")
-        self.source_path = SOURCES[self.kind]
-        self.source = verify_member(self.root, self.release, self.source_path).read_bytes()
-        if self.kind == "ARCHITECTURE":
-            matches = self.source == (self.job_dir / "intent.json").read_bytes()
+        self.design_ref = self.config.get("designRef")
+        self.is_authored = self.kind == "ARCHITECTURE" and "authoredIntentHash" in self.manifest
+        require((optional <= self.config.keys()) == self.is_authored, "R03_MAILBOX_AUTHORED_DESIGN_BINDING_REQUIRED")
+        if self.is_authored:
+            validate_design_ref(self.design_ref)
+            self.source_path = self.design_ref["path"]
+            self.source = None
+            self.read_design_source()
         else:
-            matches = json.loads(self.source) == self.manifest["placements"]
-        require(matches, "R03_MAILBOX_SOURCE_DOES_NOT_MATCH_STAGING")
+            self.source_path = SOURCES[self.kind]
+            self.source = verify_member(self.root, self.release, self.source_path).read_bytes()
+            matches = (self.source == (self.job_dir / "intent.json").read_bytes() if self.kind == "ARCHITECTURE"
+                       else json.loads(self.source) == self.manifest["placements"])
+            require(matches, "R03_MAILBOX_SOURCE_DOES_NOT_MATCH_STAGING")
         self.verify_code()
         binary = read_json(verify_member(self.root, self.release, "native/binary-receipt.json"))["binary"]
         require(sha256(APX) == binary["apxSHA256"], "R03_MAILBOX_INSTALLED_APX_DRIFT")
@@ -164,11 +218,23 @@ class Campaign:
             if relative.startswith(("scripts/", "schemas/")) or relative in ("apa.py", "apa_release.py"):
                 verify_member(self.root, self.release, relative)
 
+    def read_design_source(self):
+        path = self.job_dir / DESIGN_SOURCE
+        require(path.resolve() == path and sha256(path) == self.config["designSourceSha256"],
+                "R03_MAILBOX_DESIGN_SOURCE_DRIFT")
+        source = read_json(path)
+        intent = read_json(self.job_dir / "intent.json")
+        require(architecture.R.digest(intent) == self.manifest["authoredIntentHash"],
+                "R03_MAILBOX_AUTHORED_INTENT_DRIFT")
+        authored_source(source, self.project, intent, self.design_ref["variant"])
+        return source
+
     def health(self):
         return dict(status="R03_MAILBOX_LOCAL_BINDING_VERIFIED", target=self.target, kind=self.kind,
                     releaseRevision=self.release["revision"], stagedPlnSha256=self.initial_sha,
                     currentPlnSha256=sha256(self.project), apxSha256=self.apx_sha,
-                    sourcePath=self.source_path, nativeCalls=0)
+                    sourcePath=self.source_path, nativeCalls=0,
+                    **({"designRef": self.design_ref} if self.is_authored else {}))
 
     def phase(self, name):
         tail = name.removeprefix(self.target + "-")
@@ -205,13 +271,15 @@ class Campaign:
         project_sha, plan_sha = self.phase_file_hashes(action)
         require(sha256(self.project) == project_sha, "R03_MAILBOX_LOCAL_PLN_DRIFT")
         now = bridge.current_utc()
+        source = (dict(repo=SOURCE_REPO, **{key: self.design_ref[key] for key in ("ref", "path", "blobSha1")})
+                  if self.is_authored else dict(repo=SOURCE_REPO, ref=self.release["revision"],
+                                               path=self.source_path, blobSha1=bridge.git_sha(self.source)))
         return dict(schema=JOB, jobId=name, target=self.target, action=action,
                     createdAt=now.isoformat().replace("+00:00", "Z"),
                     expiresAt=(now + timedelta(hours=2)).isoformat().replace("+00:00", "Z"),
                     releaseRevision=self.release["revision"], bindingSha256=sha256(self.path),
                     projectSha256=project_sha, preflightSha256=plan_sha,
-                    sourceTask=dict(repo=SOURCE_REPO, ref=self.release["revision"],
-                                    path=self.source_path, blobSha1=bridge.git_sha(self.source)))
+                    sourceTask=source)
 
     def fetch(self, bridge, name):
         expected = self.envelope(bridge, name)
@@ -223,7 +291,8 @@ class Campaign:
                 "R03_MAILBOX_JOB_TIME_WINDOW_INVALID")
         ref = job["sourceTask"]
         source, _ = bridge.remote_json(ref["repo"], ref["path"], ref["ref"], ref["blobSha1"])
-        require(source == json.loads(self.source), "R03_MAILBOX_SOURCE_READBACK_DRIFT")
+        expected_source = self.read_design_source() if self.is_authored else json.loads(self.source)
+        require(source == expected_source, "R03_MAILBOX_SOURCE_READBACK_DRIFT")
         return job, blob
 
     def grant(self, bridge, name, *, create=False, confirm=None):
@@ -303,7 +372,8 @@ class Campaign:
         before = listener(port)
         require(not self.session_path.exists(), "R03_MAILBOX_PREFLIGHT_ALREADY_BOUND")
         if self.kind == "ARCHITECTURE":
-            result = architecture.preflight(self.state, self.manifest, port, self.pinned_runtime)
+            options = {"local_listener": listener} if self.is_authored else {}
+            result = architecture.preflight(self.state, self.manifest, port, self.pinned_runtime, **options)
             if result["status"] != "READY_FOR_EXPLICIT_TEST_RUN":
                 return dict(jobStatus="BLOCKED", detail=result.get("reason"), nativeWrites=0)
             plan = read_json(self.preflight_path())
@@ -325,11 +395,18 @@ class Campaign:
                     baselineBrepSha256=self.manifest["baselineBrepSHA256"],
                     nativeWrites=0, saveReopenVerified=False, **facts)
 
-    def run_execute(self, session):
+    def run_execute(self, session, preflight_sha=None):
         port = session["port"]
         require(listener(port) == session, "R03_MAILBOX_EXECUTE_PROCESS_DRIFT")
         if self.kind == "ARCHITECTURE":
-            result = architecture.execute(self.state, self.manifest, self.pinned_runtime)
+            options = {}
+            if self.is_authored:
+                approval_path = self.preflight_path()
+                require(preflight_sha is not None and sha256(approval_path) == preflight_sha
+                        and read_json(approval_path).get("listener") == session,
+                        "R03_MAILBOX_AUTHORED_PREFLIGHT_HASH_DRIFT")
+                options["confirm_preflight"] = preflight_sha
+            result = architecture.execute(self.state, self.manifest, self.pinned_runtime, **options)
             require(result["status"] == "LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN",
                     "R03_MAILBOX_ARCHITECTURE_INCOMPLETE:" + str(result.get("reason", result["status"])))
             facts = dict(guidCount=result["elementCount"], addedGuids=result["addedGuids"],
@@ -521,7 +598,8 @@ class Campaign:
             if action == "PLAN":
                 response = self.run_plan(name, port)
             elif action == "EXECUTE":
-                response = self.run_execute(session)
+                response = (self.run_execute(session, job["preflightSha256"]) if self.is_authored
+                            else self.run_execute(session))
             elif action == "CHECK_CLOSED":
                 response = self.run_closed(name, session)
             else:

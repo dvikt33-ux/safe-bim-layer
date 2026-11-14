@@ -16,6 +16,17 @@ $Target = Split-Path -Leaf $Job
 
 Перед `PLAN` сверьте действующий аккаунт GitHub командой `gh api user --jq .login`. Проверьте, что `GetProjectInfo.projectPath` на выбранном порту точно совпадает с PLN из задания. Для управления приёмником используется его существующая блокировка. При `APA_BRIDGE_ALREADY_RUNNING` завершите приёмник штатно после его текущего цикла и проверьте, что блокировка освободилась. Окна Archicad и SQLite приёмника в этот шаг не входят.
 
+### Авторский вариант
+
+Тот же приёмник может передать выбранный одноэтажный вариант из `apa-project-design/1`. Исходный JSON в `dvikt33-ux/safe-bim-layer` размещается в `examples/accelerator/`, содержит режим `GENERATE_FROM_ZERO` и остаётся без местного пути PLN. В локальной копии привяжите к brief точную будущую тестовую PLN и имя её этажа, затем выполните `design-select` и `architecture-stage`. Файл `$Binding` указывает четыре поля `ref` (полный SHA коммита), `path`, `variant` и `blobSha1` (SHA-1 Git blob). Получите его по GitHub после чтения исходных байтов.
+
+```powershell
+& $Py -B -X utf8 -m apa mailbox --prepare-r03-profile $Job --kind ARCHITECTURE --design-binding $Binding
+& $Py -B -X utf8 -m apa mailbox --r03-profile $Profile --healthcheck
+```
+
+Приёмник подтянет закреплённый Git blob, заново выберет вариант с локальными привязками и сверит весь итоговый авторский вход с уже подготовленным заданием. Успешное чтение профиля показывает `designRef`. Фазы используют тот же Git blob и тот же локальный допуск к SHA предконтроля. Для `EXECUTE` полученный SHA передаётся действующему исполнителю авторского варианта. Для ведомостей после `VERIFY_REOPEN` используется существующий `apa documentation --job $Job --output <новая папка>`.
+
 ## Фазы
 
 Для каждой фазы задайте `$Id = "$Target-<суффикс>"` и получите JSON локальной командой.

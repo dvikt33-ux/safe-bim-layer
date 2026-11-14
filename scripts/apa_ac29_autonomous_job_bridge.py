@@ -836,7 +836,8 @@ def run_r03(args):
     bridge = sys.modules[__name__]
     if args.loop:
         require(args.r03_profile and not any((args.healthcheck, args.prepare_r03_profile,
-                args.make_job, args.authorize_job, args.job, args.kind, args.confirm_preflight, args.local_port)),
+                args.make_job, args.authorize_job, args.job, args.kind, args.confirm_preflight, args.local_port,
+                args.design_binding)),
                 "R03_MAILBOX_LOOP_REQUIRES_LOCAL_PROFILES_ONLY")
         campaigns = [Campaign(root, path) for path in args.r03_profile]
         targets = [item.target for item in campaigns]
@@ -854,9 +855,11 @@ def run_r03(args):
     require(sum(bool(value) for value in commands) == 1, "R03_MAILBOX_SELECT_ONE_ACTION")
     require(args.local_port is None or args.job, "R03_MAILBOX_LOCAL_PORT_ONLY_FOR_EXECUTION")
     require(args.confirm_preflight is None or args.authorize_job, "R03_MAILBOX_CONFIRM_ONLY_FOR_GRANT")
+    require(args.design_binding is None or args.prepare_r03_profile, "R03_MAILBOX_DESIGN_BINDING_ONLY_FOR_STAGE")
     if args.prepare_r03_profile:
         require(args.kind and not args.r03_profile, "R03_MAILBOX_STAGE_KIND_REQUIRED")
-        result = prepare_profile(root, args.prepare_r03_profile, args.kind)
+        result = prepare_profile(root, args.prepare_r03_profile, args.kind,
+                                 design_binding=args.design_binding, bridge=bridge)
     else:
         require(args.r03_profile and len(args.r03_profile) == 1 and not args.kind,
                 "R03_MAILBOX_LOCAL_PROFILE_REQUIRED")
@@ -887,6 +890,7 @@ def main(argv=None):
     ap.add_argument("--package-profile", type=Path, help="Local profile for the packaged read-only receiver")
     ap.add_argument("--prepare-r03-profile", type=Path, metavar="STAGED_JOB_DIR")
     ap.add_argument("--kind", choices=("ARCHITECTURE", "GROUP"))
+    ap.add_argument("--design-binding", type=Path, help="Git commit, path, blob SHA and variant for a staged authored job")
     ap.add_argument("--r03-profile", type=Path, action="append",
                     help="Local binding for one staged disposable R03 project, repeatable with --loop")
     ap.add_argument("--make-job", help="Print the exact JSON to be submitted from the acceptance chat")
@@ -895,7 +899,7 @@ def main(argv=None):
     ap.add_argument("--job", help="Dispatch exactly one R03 inbox job")
     ap.add_argument("--local-port", type=int, help="Observed local JSON API port for PLAN or VERIFY_REOPEN")
     args = ap.parse_args(argv)
-    if any((args.r03_profile, args.prepare_r03_profile, args.kind, args.make_job,
+    if any((args.r03_profile, args.prepare_r03_profile, args.kind, args.make_job, args.design_binding,
             args.authorize_job, args.confirm_preflight, args.job, args.local_port is not None)):
         return run_r03(args)
     if args.package_profile:

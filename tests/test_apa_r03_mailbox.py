@@ -174,6 +174,67 @@ class MailboxContract(unittest.TestCase):
                 self.c.process(bridge, name)
         run.assert_not_called()
 
+    def test_authored_mailbox_pins_the_project_design_and_passes_the_local_grant(self):
+        import apa_project_design as design
+
+        self.profile.unlink()
+        source = "examples/accelerator/r04-project-design.json"
+        raw = (ROOT / source).read_bytes()
+        ref = "4" * 40
+        self.remote[f"repos/{mailbox.SOURCE_REPO}/contents/{source}?ref={ref}"] = raw
+        proposal = json.loads(raw)
+        bound = dict(proposal, brief=dict(proposal["brief"], mode="ADAPT_EXISTING", targetProjectPath=str(self.project)))
+        bound["brief"]["stories"][0]["existingNativeLabel"] = "Первый Этаж"
+        selected = design.select_variant(bound, "variant-a")
+        intent = self.job / "intent.json"
+        intent.write_text(json.dumps(selected, ensure_ascii=False), encoding="utf-8")
+        stage = self.job / "job.json"
+        staged = json.loads(stage.read_bytes())
+        staged.update(authoredIntentHash=core.RUN.digest(selected), intentSHA256=sha256(intent))
+        stage.write_text(json.dumps(staged), encoding="utf-8")
+        binding = self.root / "design-binding.json"
+        write_new_json(binding, dict(ref=ref, path=source, variant="variant-a", blobSha1=bridge.git_sha(raw)))
+        wrong = self.root / "different-variant.json"
+        write_new_json(wrong, dict(json.loads(binding.read_bytes()), variant="missing-variant"))
+        with self.assertRaisesRegex(ValueError, "REQUIRED_CHECKS_OPEN"):
+            mailbox.prepare_profile(self.package, self.job, "ARCHITECTURE", design_binding=wrong, bridge=bridge)
+        self.assertFalse(self.profile.exists())
+        mailbox.prepare_profile(self.package, self.job, "ARCHITECTURE", design_binding=binding, bridge=bridge)
+        self.c = mailbox.Campaign(self.package, self.profile)
+        name = f"{self.job.name}-plan"
+        self.assertEqual(self.c.envelope(bridge, name)["sourceTask"], dict(repo=mailbox.SOURCE_REPO,
+                         ref=ref, path=source, blobSha1=bridge.git_sha(raw)))
+        preflight = self.c.preflight_path()
+        def preflight_native(*_, local_listener):
+            self.assertIs(local_listener, mailbox.listener)
+            write_new_json(preflight, dict(confirmHash="approved", listener=self.session))
+            return dict(status="READY_FOR_EXPLICIT_TEST_RUN", metrics={"elementCount": 9})
+
+        with (patch.object(mailbox, "listener", return_value=self.session),
+              patch.object(mailbox.architecture, "preflight", side_effect=preflight_native)):
+            self.c.process(bridge, self.submit("plan"), port=self.session["port"])
+        job = self.submit("execute")
+        preflight_sha = sha256(preflight)
+        self.c.grant(bridge, job, create=True, confirm=preflight_sha)
+        saved = dict(status="LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN", savedSHA256="a" * 64,
+                     elementCount=44, addedGuids=[], addedByKind={}, bodyCountByAddedGuid={},
+                     nativeModelWriteAttempts=0, nativeSaveCalls=0, finalGuidSetSHA256="b", finalBrepSHA256="c")
+        write_new_json(self.job / "saved.json", saved)
+        with (patch.object(mailbox, "listener", return_value=self.session),
+              patch.object(self.c, "saved", return_value=saved),
+              patch.object(mailbox.architecture, "execute", return_value=saved) as execute):
+            result = self.c.process(bridge, job)
+            self.assertEqual(result["result"]["jobStatus"], "WAITING_CLOSE_AND_REOPEN")
+            self.assertEqual(result, self.c.process(bridge, job))
+            execute.assert_called_once_with(self.job, self.c.manifest, self.pin, confirm_preflight=preflight_sha)
+            with self.assertRaisesRegex(ValueError, "AUTHORED_PREFLIGHT_HASH_DRIFT"):
+                self.c.run_execute(self.session, "0" * 64)
+            self.assertEqual(execute.call_count, 1)
+        local = self.job / "mailbox-design-source.json"
+        local.write_text("{}", encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "DESIGN_SOURCE_DRIFT"):
+            mailbox.Campaign(self.package, self.profile)
+
     def test_interrupted_execute_is_reconciled_as_unknown_without_retry(self):
         folder = self.c.history / f"{self.job.name}-execute"
         folder.mkdir(parents=True)
