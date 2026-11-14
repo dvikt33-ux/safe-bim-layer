@@ -269,6 +269,10 @@ class UnifiedAcceptance(unittest.TestCase):
             self.assertFalse(review["executionPermission"])
             self.assertFalse(review["knowledge"]["normativeAuthority"])
             self.assertFalse(review["normative"]["nativeWriteCalls"])
+            out = self.work.parent / (self.work.name + "-invalid-export")
+            with self.assertRaisesRegex(ValueError, "DOCUMENTATION_REOPENED_GUIDS_NOT_VERIFIED"):
+                services.document_reopened_job(self.work, out)
+            self.assertFalse(out.exists())
             tampered = deepcopy(native)
             tampered["elements"][1]["relationships"]["hostGuid"] = window
             native_path.write_text(json.dumps(tampered), encoding="utf-8")
@@ -292,6 +296,15 @@ class UnifiedAcceptance(unittest.TestCase):
         self.assertEqual(proof["artifact"]["sha256"], digest(out / "documentation.json"))
         self.assertEqual(proof["specifications"], {"Morph": 1})
         self.assertIn(proof["modelVersion"], (out / "Morph.csv").read_text(encoding="utf-8-sig"))
+
+    def test_documentation_job_rejects_unverified_history_before_export(self):
+        job = self.work / "not-reopened"
+        job.mkdir()
+        output = self.work / "documents"
+        result = self.invoke("documentation", "--job", job, "--output", output, code=2)
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertIn("job.json", result["reason"])
+        self.assertFalse(output.exists())
 
     def test_graph_rejects_native_dispatch_before_first_local_artifact(self):
         graph = self.save("invalid.json", {"operations": [

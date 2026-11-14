@@ -52,9 +52,8 @@ def knowledge_query(root, cache, query, mode):
     return dict(result, releaseKnowledgeRevision=release["knowledgeRevision"], executionPermission=False)
 
 
-def design_evidence(root, job, cache):
-    """Apply the existing source-binding rules to one accepted authored model."""
-    import archicad_normative_bindings as normative
+def _verified_authored_job(job):
+    """Read the same intent, assembly and persisted geometry used for acceptance."""
     import apa_r03_architecture as architecture
     from apa_ac29_save_isolation import require
 
@@ -104,7 +103,21 @@ def design_evidence(root, job, cache):
             "DESIGN_EVIDENCE_NATIVE_GUID_OR_BREP_DRIFT")
     signatures = architecture.C.retained_geometry_signatures(native, guids)
     require(digest(signatures) == saved["finalSignaturesSHA256"], "DESIGN_EVIDENCE_NATIVE_SIGNATURE_DRIFT")
-    targets = _design_window_junctions(plan["graph"], result["bimOperationReadback"], elements, saved["addedGuids"])
+    provenance = dict(intentSha256=intent_sha, planSha256=manifest["plan.json"], resultSha256=manifest["result.json"],
+                      nativeDumpSha256=native_sha, reopenedReceiptSha256=sha256(reopened_path),
+                      savedPlnSha256=saved["savedSHA256"], guidSetSha256=saved["finalGuidSetSHA256"],
+                      brepSha256=saved["finalBrepSHA256"])
+    return intent, plan, result, native, signatures, reopened, provenance
+
+
+def design_evidence(root, job, cache):
+    """Apply the existing source-binding rules to one accepted authored model."""
+    import archicad_normative_bindings as normative
+    import archicad_project_accelerator as core
+
+    intent, plan, result, native, signatures, _, provenance = _verified_authored_job(job)
+    elements = {row["guid"].lower(): row for row in native["elements"]}
+    targets = _design_window_junctions(plan["graph"], result["bimOperationReadback"], elements, result["addedGuids"])
 
     brief = intent["brief"]
     pack = core.compile_project_library_pack(brief, intent["cseCandidate"])
@@ -124,13 +137,69 @@ def design_evidence(root, job, cache):
                 knowledge=dict(references=references, normativeAuthority=False,
                                status="REFERENCES_RESOLVED" if all(row["uri"] for row in references)
                                else "REFERENCES_INCOMPLETE"),
-                provenance=dict(intentSha256=intent_sha, planSha256=manifest["plan.json"],
-                                resultSha256=manifest["result.json"], nativeDumpSha256=native_sha,
-                                reopenedReceiptSha256=sha256(reopened_path), savedPlnSha256=saved["savedSHA256"],
-                                guidSetSha256=saved["finalGuidSetSHA256"], brepSha256=saved["finalBrepSHA256"],
+                provenance=dict(provenance,
                                 briefInputDigest=binding["normative"]["briefInputDigest"],
                                 ruleCatalogSha256=sha256(normative.CATALOG)),
                 executionPermission=False, nativeCalls=0, **binding)
+
+
+def document_reopened_job(job, destination, story=None):
+    """Publish existing BIM facts for the accepted operation GUIDs in one job."""
+    from apa_ac29_save_isolation import require, write_new_json
+    from archicad_bim_documentation import bundle, make_snapshot, write_package
+    from archicad_bim_graph import CREATES
+    from archicad_project_accelerator import requirement_readback
+    from apa_high_density_readonly_v2 import STABLE
+
+    job, destination = job.resolve(strict=True), destination.resolve()
+    require(destination.parent.is_dir() and not destination.exists()
+            and not destination.is_relative_to(job) and not destination.is_relative_to(STABLE.resolve()),
+            "DOCUMENTATION_JOB_REQUIRES_NEW_DIRECTORY_OUTSIDE_HISTORY")
+    intent, plan, result, native, signatures, reopened, provenance = _verified_authored_job(job)
+    require(reopened.get("reopenedGuids") == sorted(signatures), "DOCUMENTATION_REOPENED_GUIDS_NOT_VERIFIED")
+    selected = result["addedGuids"]
+    elements = {row["guid"].lower(): row for row in native["elements"]}
+    readback = result["bimOperationReadback"]
+    operations = {op["id"]: op for op in plan["graph"]["operations"]}
+    require(selected and set(readback) == operations.keys() and len(set(selected)) == len(selected)
+            and set(selected) <= elements.keys(), "DOCUMENTATION_OPERATION_SCOPE_INCOMPLETE")
+    bound = {}
+    for key, operation in operations.items():
+        row = readback[key]
+        guid, kind = row["guid"].lower(), CREATES.get(operation["command"])
+        require(guid in selected and kind is not None and row["status"] == "PASS"
+                and row["kind"] == elements[guid]["type"] == kind, "DOCUMENTATION_BIM_READBACK_MISMATCH:" + key)
+        bound[key] = guid
+    segments = result.get("ownedColumnSegments", {})
+    children = set()
+    for parent, guids in segments.items():
+        for guid in guids:
+            require(parent in bound.values() and elements[parent]["type"] == "Column"
+                    and guid in selected and guid not in children and elements[guid]["type"] == "ColumnSegment"
+                    and elements[guid].get("relationships", {}).get("hostGuid", "").lower() == parent,
+                    "DOCUMENTATION_COLUMN_SEGMENT_BINDING_MISMATCH")
+            children.add(guid)
+    require(len(set(bound.values())) == len(bound) and set(bound.values()) | children == set(selected),
+            "DOCUMENTATION_UNEXPLAINED_OPERATION_GUIDS")
+
+    snapshot = make_snapshot(native, selected)
+    occupied = sorted({row["storyIndex"] for row in snapshot["elements"]})
+    stories = occupied if story is None else [story]
+    require(set(stories) <= set(occupied), "DOCUMENTATION_STORY_OUTSIDE_VERIFIED_ASSEMBLY")
+    package = bundle(snapshot, stories[0])
+    plans = {str(stories[0]): package["plan"]}
+    plans.update({str(index): bundle(snapshot, index)["plan"] for index in stories[1:]})
+    package.update(plansByStory=plans,
+                   projectId=intent["projectId"], operationGuids=bound,
+                   requirements=requirement_readback(result), provenance=provenance)
+    write_package(package, destination)
+    files = {path.name: sha256(path) for path in sorted(destination.iterdir())}
+    receipt = dict(status="REOPENED_ASSEMBLY_DOCUMENTATION_WRITTEN", jobId=job.name,
+                   modelVersion=package["modelVersion"], stories=stories, elementCount=len(selected),
+                   specifications={key: row["count"] for key, row in package["specifications"].items()},
+                   provenance=provenance, files=files, nativeCalls=0, modelWrites=0)
+    write_new_json(destination / "receipt.json", receipt)
+    return receipt
 
 
 def _matching_json(path, expected=None):

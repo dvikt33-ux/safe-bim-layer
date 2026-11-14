@@ -201,11 +201,13 @@ def parser():
     cmd.add_argument("--output", type=Path, required=True)
     cmd.add_argument("--page", type=int, default=1)
     cmd = commands.add_parser("documentation", help="Собрать документацию по снимку модели")
-    cmd.add_argument("--native-dump", type=Path, required=True)
-    selection = cmd.add_mutually_exclusive_group(required=True)
+    source = cmd.add_mutually_exclusive_group(required=True)
+    source.add_argument("--native-dump", type=Path)
+    source.add_argument("--job", type=Path, help="Каталог авторского задания с подтверждённым повторным открытием")
+    selection = cmd.add_mutually_exclusive_group()
     selection.add_argument("--guids", type=Path)
     selection.add_argument("--all-dump-elements", action="store_true")
-    cmd.add_argument("--story", type=int, required=True)
+    cmd.add_argument("--story", type=int)
     cmd.add_argument("--output", type=Path, required=True)
     commands.add_parser("template-check", help="Проверить локальные спецификации шаблона")
     commands.add_parser("template-runtime", help="Действующий интерфейс инвентаризации и настройки шаблона")
@@ -329,6 +331,12 @@ def main(argv=None):
             write_json(args.output, result)
             if result["status"] == "NATIVE_STAIR_PLAN_NOT_VERIFIED":
                 code = 2
+        elif args.mode == "documentation" and args.job is not None:
+            from apa_integrated_services import document_reopened_job
+
+            if args.guids is not None or args.all_dump_elements:
+                raise ValueError("Для задания состав элементов берётся из квитанции повторного открытия")
+            result = document_reopened_job(args.job, args.output, args.story)
         elif args.mode == "template-check":
             from archicad_template_builder import validate_specs
 
@@ -431,6 +439,8 @@ def main(argv=None):
             else:
                 from apa_file_providers import DOCUMENTATION
 
+                if args.story is None or (args.guids is None and not args.all_dump_elements):
+                    raise ValueError("Для снимка укажите этаж и состав элементов")
                 result = run_local(router, DOCUMENTATION, {
                     "a": str(args.native_dump), "guids": None if args.all_dump_elements else read_json(args.guids),
                     "story": args.story, "output": str(args.output),
