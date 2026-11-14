@@ -72,7 +72,9 @@ class NativeDocumentationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             with self.assertRaisesRegex(ValueError, 'NO_FILE'): N.publication_files(temp)
             file = Path(temp) / 'native.pdf'; file.write_bytes(b'%PDF-test')
-            proof = N.publication_files(temp)
+            logical = Path(temp) / 'logical-root'
+            logical.mkdir()
+            proof = N.publication_files(logical / '..')
             self.assertTrue(proof['files'][0]['pdfSignature'])
             self.assertIn('NOT_VERIFIED', proof['selectedPublisherSubset'])
             file.write_bytes(b'')

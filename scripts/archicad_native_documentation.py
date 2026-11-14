@@ -124,9 +124,7 @@ def projection_span_check(expected_span, actual_coordinates, tolerance=1e-5):
         'requiresIndependentProjectionAxisAndSourceScope': True}
 
 def publication_files(folder):
-    root = Path(folder).absolute()
-    if root.resolve() != root:
-        raise ValueError('NATIVE_EXPORT_PATH_ESCAPE')
+    root = Path(folder).resolve()
     if not root.is_dir():
         raise ValueError('NATIVE_EXPORT_NO_FILE')
     files = []
