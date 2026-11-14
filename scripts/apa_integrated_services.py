@@ -81,11 +81,7 @@ def architecture_phase(root, job, phase, port, *, confirm_preflight=None, output
             raise ValueError("APA_ARCHITECTURE_EXACT_TEST_PLN_NOT_OPEN_OR_API_UNAVAILABLE")
     if phase == "native-read":
         return architecture.read_native(job, manifest, port or manifest["port"], pinned, output)
-    authored = "authoredIntentHash" in manifest
-    if authored:
-        from apa_r03_mailbox import listener
-    else:
-        listener = None
+    from apa_r03_mailbox import listener
 
     if phase == "preflight":
         return architecture.preflight(job, manifest, port or manifest["port"], pinned,
@@ -95,18 +91,12 @@ def architecture_phase(root, job, phase, port, *, confirm_preflight=None, output
         return architecture.verify_reopen(job, manifest, pinned, port or approved["port"])
     if port is not None:
         raise ValueError("Исполнение использует порт сохранённого предконтроля")
+    if phase == "check-closed":
+        return architecture.check_closed(job, manifest, pinned)
     if phase == "execute" and architecture.status(job, manifest)["status"] in {
             "LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN", "LIVE_ARCHITECTURE_SAVED_REOPENED_PASS"}:
         return architecture.execute(job, manifest, pinned, confirm_preflight=confirm_preflight)
-    if authored:
-        from apa_ac29_save_isolation import reservation_owner_exited
-
-        approval = read_json(job / "approved-preflight.json")
-        expected = approval["listener"]
-        if phase == "check-closed" and reservation_owner_exited(expected["pid"]):
-            return architecture.check_closed(job, manifest, pinned, process_id=expected["pid"])
-        if listener(approval["port"]) != expected:
-            raise ValueError("APA_AUTHORED_PREFLIGHT_PROCESS_DRIFT")
-    if phase == "check-closed":
-        return architecture.check_closed(job, manifest, pinned)
+    approval = read_json(job / "approved-preflight.json")
+    if not approval.get("listener") or listener(approval["port"]) != approval["listener"]:
+        raise ValueError("APA_ARCHITECTURE_PREFLIGHT_PROCESS_DRIFT")
     return architecture.execute(job, manifest, pinned, confirm_preflight=confirm_preflight)

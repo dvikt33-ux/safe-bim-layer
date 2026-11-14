@@ -356,7 +356,8 @@ class Campaign:
         if not exited:
             require(listener(port) == session, "R03_MAILBOX_CLOSE_PROCESS_DRIFT")
         if self.kind == "ARCHITECTURE":
-            closed = architecture.check_closed(self.state, self.manifest, self.pinned_runtime, process_id=pid)
+            closed = architecture.check_closed(self.state, self.manifest, self.pinned_runtime,
+                                               expected_listener=session)
             if closed["status"] == "NATIVE_NO_OPEN_PROJECT_CONFIRMED":
                 require(listener(port) == session, "R03_MAILBOX_CLOSE_PROCESS_DRIFT")
         else:
@@ -389,7 +390,8 @@ class Campaign:
         else:
             require(reservation_owner_exited(session["pid"]), "R03_MAILBOX_OLD_PROCESS_STILL_RUNNING")
         if self.kind == "ARCHITECTURE":
-            result = architecture.verify_reopen(self.state, self.manifest, self.pinned_runtime, port)
+            result = architecture.verify_reopen(self.state, self.manifest, self.pinned_runtime, port,
+                                                 expected_listener=session)
         else:
             self.group_identity(port, saved_sha=self.saved()["savedSHA256"])
             result = group.verify_reopen(self.state, reopen_port=port)

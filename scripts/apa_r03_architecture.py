@@ -359,44 +359,61 @@ def execute(job, m, pinned_runtime, *, confirm_preflight=None):
     return result
 
 
-def check_closed(job, m, pinned_runtime, *, process_id=None):
+def check_closed(job, m, pinned_runtime, *, expected_listener=None):
+    from apa_r03_mailbox import listener
+
     saved = saved_record(job, m)
     approval = read(job / "approved-preflight.json")
     approved_result(job, approval)
     path = job / "closed.json"
     require(not path.exists(), "APA_ARCHITECTURE_CLOSE_ALREADY_RECORDED")
     port = approval["port"]
+    planned = approval.get("listener", expected_listener)
+    require(planned is not None and planned["port"] == port
+            and (expected_listener is None or planned == expected_listener),
+            "APA_ARCHITECTURE_PREFLIGHT_LISTENER_REQUIRED")
+    pid = planned["pid"]
     status_name = "NATIVE_NO_OPEN_PROJECT_CONFIRMED"
-    if process_id is not None and reservation_owner_exited(process_id):
+    if reservation_owner_exited(pid):
         status_name = "ARCHICAD_TEST_PROCESS_EXIT_CONFIRMED"
     else:
+        require(listener(port) == planned, "APA_ARCHITECTURE_CLOSE_PROCESS_DRIFT")
         R.bind_authorized_saved_copy(port, m["project"], MODEL.removesuffix(".pln"),
                                      saved["savedSHA256"], m["authorizationRef"])
         require(A.archicad29(A.native_transport)["buildNumber"] == 5101
                 and runtime_identity(A.native_transport, pinned_runtime) == approval["runtime"],
                 "APA_ARCHITECTURE_CLOSE_WRONG_RUNTIME")
         confirm_project_closed(A.native_transport)
+        require(listener(port) == planned, "APA_ARCHITECTURE_CLOSE_PROCESS_DRIFT")
     require(saved_record(job, m) == saved, "APA_ARCHITECTURE_SAVE_CHANGED_AT_CLOSE")
-    result = dict(status=status_name, jobId=m["jobId"], port=port,
+    result = dict(status=status_name, jobId=m["jobId"], port=port, pid=pid, listener=planned,
                   savedSHA256=saved["savedSHA256"], nativeWrites=0)
-    if process_id is not None:
-        result["pid"] = process_id
     write_new_json(path, result)
     return result
 
 
-def verify_reopen(job, m, pinned_runtime, port):
+def verify_reopen(job, m, pinned_runtime, port, *, expected_listener=None):
+    from apa_r03_mailbox import listener
+
     saved = saved_record(job, m)
     closed = read(job / "closed.json")
     approval = read(job / "approved-preflight.json")
     approved_result(job, approval)
+    planned = approval.get("listener", expected_listener)
+    require(planned is not None and planned["port"] == approval["port"]
+            and (expected_listener is None or planned == expected_listener),
+            "APA_ARCHITECTURE_PREFLIGHT_LISTENER_REQUIRED")
     native_close = closed["status"] == "NATIVE_NO_OPEN_PROJECT_CONFIRMED" and port == approval["port"]
     process_exit = (closed["status"] == "ARCHICAD_TEST_PROCESS_EXIT_CONFIRMED"
-                    and reservation_owner_exited(closed["pid"]))
+                    and closed.get("pid") == planned["pid"] and reservation_owner_exited(planned["pid"]))
     require((native_close or process_exit) and closed["jobId"] == m["jobId"]
+            and closed.get("pid", planned["pid"]) == planned["pid"]
+            and closed.get("listener", planned) == planned
             and closed["port"] == approval["port"]
             and closed["savedSHA256"] == saved["savedSHA256"] and closed["nativeWrites"] == 0,
             "APA_ARCHITECTURE_REAL_CLOSE_REQUIRED")
+    observed = listener(port)
+    require(not native_close or observed == planned, "APA_ARCHITECTURE_REOPEN_PROCESS_DRIFT")
     require(bind(m, port, pinned_runtime, saved_sha=saved["savedSHA256"]) == approval["runtime"],
             "APA_ARCHITECTURE_REOPEN_RUNTIME_DRIFT")
     folder = job / "reopen-attempts" / uuid4().hex
@@ -409,6 +426,7 @@ def verify_reopen(job, m, pinned_runtime, port):
             and R.digest(signatures) == saved["finalSignaturesSHA256"]
             and saved_record(job, m) == saved and api.write_attempts == 0,
             "APA_ARCHITECTURE_REOPEN_GUID_BREP_OR_ATTRIBUTES_DRIFT")
+    require(listener(port) == observed, "APA_ARCHITECTURE_REOPEN_PROCESS_DRIFT")
     result = dict(saved, status="LIVE_ARCHITECTURE_SAVED_REOPENED_PASS", reopenVerified=True,
                   reopenedGuids=ids, reopenedGuidSetSHA256=guid_hash, reopenedBrepSHA256=brep_hash,
                   verificationNativeWrites=0, sourceUnchanged=True, reopenPort=port)

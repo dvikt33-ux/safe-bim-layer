@@ -132,6 +132,81 @@ class ArchitectureRetryTests(unittest.TestCase):
                 arch.status(job, manifest)
 
 
+class ArchitectureReopenListenerTests(unittest.TestCase):
+    def setUp(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        self.job = Path(directory.name).resolve()
+        self.manifest = {"jobId": self.job.name}
+        self.session = dict(port=19725, pid=101, startedAt="first-instance")
+        self.other = dict(self.session, pid=102, startedAt="another-instance")
+        self.runtime = {"buildIdentity": "fixture"}
+        self.pins = ("fixture", "fixture")
+        self.ids = ["existing-wall", "new-wall"]
+        self.signatures = dict.fromkeys(self.ids, "fixture-geometry")
+        self.saved = dict(savedSHA256="saved-pln", elementCount=len(self.ids),
+                          finalGuidSetSHA256=arch.R.digest(self.ids),
+                          finalBrepSHA256="fixture-brep", finalSignaturesSHA256=arch.R.digest(self.signatures))
+        arch.write_new_json(self.job / "approved-preflight.json",
+                            dict(port=self.session["port"], runtime=self.runtime, listener=self.session))
+
+    def close_receipt(self, status="NATIVE_NO_OPEN_PROJECT_CONFIRMED", **fields):
+        record = dict(status=status, jobId=self.job.name, port=self.session["port"],
+                      pid=self.session["pid"], savedSHA256=self.saved["savedSHA256"], nativeWrites=0)
+        arch.write_new_json(self.job / "closed.json", record | fields)
+
+    def test_same_port_without_same_session_cannot_prove_reopen(self):
+        self.close_receipt()
+        with (patch.object(arch, "saved_record", return_value=self.saved),
+              patch.object(arch, "approved_result"),
+              patch("apa_r03_mailbox.listener", return_value=self.other),
+              patch.object(arch, "bind", return_value=self.runtime),
+              patch.object(arch, "capture", return_value=(self.ids, {}, self.signatures)) as capture,
+              patch.object(group, "fingerprint", return_value=self.saved["finalBrepSHA256"])):
+            with self.assertRaisesRegex(ValueError, "REOPEN_PROCESS_DRIFT"):
+                arch.verify_reopen(self.job, self.manifest, self.pins, self.session["port"])
+        capture.assert_not_called()
+        self.assertFalse((self.job / "reopened.json").exists())
+
+    def test_matching_geometry_after_listener_switch_cannot_emit_receipt(self):
+        self.close_receipt()
+        drift = dict(self.session, startedAt="pid-reused-during-readback")
+        with (patch.object(arch, "saved_record", return_value=self.saved),
+              patch.object(arch, "approved_result"),
+              patch("apa_r03_mailbox.listener", side_effect=[self.session, drift]),
+              patch.object(arch, "bind", return_value=self.runtime),
+              patch.object(arch, "capture", return_value=(self.ids, {}, self.signatures)),
+              patch.object(group, "fingerprint", return_value=self.saved["finalBrepSHA256"])):
+            with self.assertRaisesRegex(ValueError, "REOPEN_PROCESS_DRIFT"):
+                arch.verify_reopen(self.job, self.manifest, self.pins, self.session["port"])
+        self.assertFalse((self.job / "reopened.json").exists())
+
+    def test_new_instance_can_prove_reopen_after_exact_preflight_pid_exited(self):
+        self.close_receipt("ARCHICAD_TEST_PROCESS_EXIT_CONFIRMED")
+        with (patch.object(arch, "saved_record", return_value=self.saved),
+              patch.object(arch, "approved_result"),
+              patch.object(arch, "reservation_owner_exited", return_value=True) as exited,
+              patch("apa_r03_mailbox.listener", return_value=self.other),
+              patch.object(arch, "bind", return_value=self.runtime),
+              patch.object(arch, "capture", return_value=(self.ids, {}, self.signatures)),
+              patch.object(group, "fingerprint", return_value=self.saved["finalBrepSHA256"])):
+            result = arch.verify_reopen(self.job, self.manifest, self.pins, self.other["port"])
+        exited.assert_called_once_with(self.session["pid"])
+        self.assertEqual(result["status"], "LIVE_ARCHITECTURE_SAVED_REOPENED_PASS")
+        self.assertEqual(arch.read(self.job / "reopened.json"), result)
+
+    def test_close_cannot_use_different_listener_even_when_api_reports_empty(self):
+        with (patch.object(arch, "saved_record", return_value=self.saved),
+              patch.object(arch, "approved_result"),
+              patch.object(arch, "reservation_owner_exited", return_value=False),
+              patch("apa_r03_mailbox.listener", return_value=self.other),
+              patch.object(arch, "confirm_project_closed") as confirm):
+            with self.assertRaisesRegex(ValueError, "CLOSE_PROCESS_DRIFT"):
+                arch.check_closed(self.job, self.manifest, self.pins)
+        confirm.assert_not_called()
+        self.assertFalse((self.job / "closed.json").exists())
+
+
 class ArchitectureSaveContractTests(unittest.TestCase):
     def test_create_receipt_passes_both_save_checks_and_never_replays(self):
         for drift in (False, True):

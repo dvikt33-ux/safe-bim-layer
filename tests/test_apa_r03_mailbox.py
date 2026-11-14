@@ -139,11 +139,13 @@ class MailboxContract(unittest.TestCase):
             execute_native.assert_called_once()
 
             def close(*_, **kwargs):
-                row = dict(status="NATIVE_NO_OPEN_PROJECT_CONFIRMED", port=19725, pid=kwargs["process_id"])
+                row = dict(status="NATIVE_NO_OPEN_PROJECT_CONFIRMED", port=19725,
+                           pid=kwargs["expected_listener"]["pid"])
                 write_new_json(self.job / "closed.json", row)
                 return row
 
-            def reopen(*_):
+            def reopen(*_, expected_listener):
+                self.assertEqual(expected_listener, self.session)
                 row = dict(reopenVerified=True, reopenedGuidSetSHA256=guid_sha, reopenedBrepSHA256=brep_sha,
                            verificationNativeWrites=0, savedSHA256=saved["savedSHA256"], reopenedGuids=guids)
                 write_new_json(self.job / "reopened.json", row)
