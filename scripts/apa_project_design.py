@@ -13,25 +13,38 @@ SCHEMA = "apa-project-design/1"
 
 
 def compile_design(intent):
-    fields = {"schemaVersion", "brief", "cseCandidate", "variants"}
-    if not isinstance(intent, dict) or set(intent) != fields or intent["schemaVersion"] != SCHEMA:
+    return _review_design(intent)[0]
+
+
+def _review_design(intent):
+    fields = {"schemaVersion", "brief", "cseCandidate"}
+    if (not isinstance(intent, dict) or set(intent) not in (fields | {"variants"}, fields | {"layoutStudy"})
+            or intent["schemaVersion"] != SCHEMA):
         raise ValueError("APA_PROJECT_DESIGN_INPUT_FIELDS_REQUIRED")
     brief = intent["brief"]
     normalized = APA.compile_project_brief(brief)
     pack = APA.compile_project_library_pack(brief, intent["cseCandidate"])
-    variants = intent["variants"]
-    if not isinstance(variants, list) or not 1 <= len(variants) <= 12:
-        raise ValueError("APA_DESIGN_REQUIRES_EXPLICIT_VARIANTS")
-    output, seen = [], set()
+    generation = None
+    if "layoutStudy" in intent:
+        from apa_layout_study import generate
+
+        variants, generation = generate(normalized, intent["layoutStudy"])
+    else:
+        variants = intent["variants"]
+        if not isinstance(variants, list) or not 1 <= len(variants) <= 12:
+            raise ValueError("APA_DESIGN_REQUIRES_EXPLICIT_VARIANTS")
+    output, sources = [], {}
     for row in variants:
         needed = {"id", "layout", "storyHeights"}
         if not isinstance(row, dict) or not needed <= set(row) <= needed | {"floorPlans"}:
             raise ValueError("APA_DESIGN_VARIANT_FIELDS_REQUIRED")
         variant = BRIEF._id(row["id"], "DESIGN_VARIANT_ID")
-        if variant in seen:
+        if variant in sources:
             raise ValueError("APA_DESIGN_DUPLICATE_VARIANT_ID")
-        seen.add(variant)
+        sources[variant] = row
         result = dict(id=variant, inputHash=APA.RUN.digest(row))
+        if generation is not None:
+            result.update(layout=row["layout"], storyHeights=row["storyHeights"])
         try:
             candidate = NATIVE.compile_candidate(brief, pack, row["layout"], row["storyHeights"],
                                                None, floor_plans=row.get("floorPlans"), design_only=True)
@@ -43,20 +56,27 @@ def compile_design(intent):
             result.update(status="REQUIREMENTS_OPEN" if candidate["requiredOpenIds"] else "DESIGN_CHECKS_REVIEWABLE",
                           candidate=candidate)
         output.append(result)
-    return dict(schemaVersion=SCHEMA, status="DESIGN_VARIANTS_REVIEWED",
-                inputHash=APA.RUN.digest(intent), brief=normalized, projectLibraryPack=pack,
-                variants=output, nativeWriteCalls=0, executionPermission=False,
-                architecturalApproval="PENDING", engineeringApproved=False, normativeApproved=False)
+    report = dict(schemaVersion=SCHEMA, status="DESIGN_VARIANTS_REVIEWED",
+                  inputHash=APA.RUN.digest(intent), brief=normalized, projectLibraryPack=pack,
+                  variants=output, nativeWriteCalls=0, executionPermission=False,
+                  architecturalApproval="PENDING", engineeringApproved=False, normativeApproved=False)
+    if generation is not None:
+        report["generation"] = generation
+        if not output:
+            report.update(status="DESIGN_LAYOUT_STUDY_HAS_NO_CANDIDATE",
+                          requirements=[dict(req, status="NOT_EVALUATED", bimOperationIds=[])
+                                        for req in normalized["constraints"]])
+    return report, sources
 
 
 def select_variant(intent, variant_id):
-    report = compile_design(intent)
+    report, sources = _review_design(intent)
     result = next((row for row in report["variants"] if row["id"] == variant_id), None)
     if result is None or result["status"] != "DESIGN_CHECKS_REVIEWABLE":
         raise ValueError("APA_DESIGN_VARIANT_MISSING_OR_REQUIRED_CHECKS_OPEN")
     if report["brief"]["mode"] != "ADAPT_EXISTING":
         raise ValueError("APA_DESIGN_REQUIRES_EXACT_TEST_PLN_BRIEF_BEFORE_NATIVE_PREFLIGHT")
-    row = next(row for row in intent["variants"] if row["id"] == variant_id)
+    row = sources[variant_id]
     return dict(schemaVersion="apa-authored-project/1", projectId=report["brief"]["projectId"],
                 units="meters", brief=intent["brief"], cseCandidate=intent["cseCandidate"],
                 **{key: row[key] for key in row if key != "id"})
@@ -65,7 +85,8 @@ def select_variant(intent, variant_id):
 def changes_between(previous, current, variant):
     from archicad_local_modules import dependency_impact
 
-    reports = [compile_design(doc) for doc in (previous, current)]
+    runs = [_review_design(doc) for doc in (previous, current)]
+    reports = [report for report, _ in runs]
     if reports[0]["brief"]["projectId"] != reports[1]["brief"]["projectId"]:
         raise ValueError("APA_DESIGN_CHANGE_PROJECT_ID_MISMATCH")
     rows = [next((r for r in doc["variants"] if r["id"] == variant and "candidate" in r), None)
@@ -73,7 +94,7 @@ def changes_between(previous, current, variant):
     if any(row is None for row in rows):
         raise ValueError("APA_DESIGN_COMPARE_REQUIRES_TWO_VALID_VARIANT_INPUTS")
     before, after = [row["candidate"] for row in rows]
-    sources = [next(row for row in doc["variants"] if row["id"] == variant) for doc in (previous, current)]
+    sources = [variants[variant] for _, variants in runs]
     space_before, space_after = [
         SPATIAL.compile_spatial(doc["brief"], report["projectLibraryPack"], row["layout"])
         for doc, report, row in zip((previous, current), reports, sources)]
@@ -141,7 +162,8 @@ def read_request(path, template_path):
     return dict(status="GPT_INTERPRETATION_REQUIRED", sourceText=raw.decode("utf-8-sig"),
                 sourceSha256=hashlib.sha256(raw).hexdigest(),
                 exampleInput=json.loads(Path(template_path).read_text(encoding="utf-8")),
-                instructions=["Предложите явно заданные варианты. Сохраните исходный текст и идентификаторы требований.",
+                instructions=["Предложите явные варианты или layoutStudy для одного прямоугольного этажа. Сохраните исходный текст и идентификаторы требований.",
+                              "Для layoutStudy укажите подтверждённый габарит, высоту этажа и размеры стен и двери. APA предложит варианты на основе состава помещений и функциональных связей.",
                               "Если данных для вариантов мало, сначала верните только brief с openQuestions.",
                               "Задавайте тип и допуск площади только при известной методике.",
                               "Для маршрута через несколько помещений задайте ACCESS_PATH. Минимальную ширину проёма укажите только при наличии требования.",

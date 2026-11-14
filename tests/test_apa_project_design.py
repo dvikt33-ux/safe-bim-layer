@@ -23,6 +23,71 @@ class DesignTests(unittest.TestCase):
     def setUp(self):
         self.input = json.loads(INPUT.read_text(encoding="utf-8"))
 
+    def study(self):
+        row = self.input.pop("variants")[0]
+        self.input["layoutStudy"] = {
+            "outline": row["layout"]["outline"], "storyHeights": row["storyHeights"],
+            "wallThicknessMeters": .2, "door": {"width": .9, "height": 2.1},
+        }
+        return self.input
+
+    def test_layout_study_compiles_brief_without_explicit_room_geometry(self):
+        intent = self.study()
+        brief = intent["brief"]
+        brief["rooms"].insert(0, dict(id="study", name="Кабинет", storyId="level-1", minAreaM2=6))
+        brief["constraints"].append(dict(id="access-to-living", text="Путь снаружи в гостиную",
+            evidenceStatus="UNVERIFIED", priority="REQUIRED", sourceRef="ТЗ §4", criterion=dict(
+                kind="ACCESS_PATH", **{"from": "$outside", "to": "living"}, minimumOpeningWidthM=.8)))
+        report = design.compile_design(intent)
+        self.assertEqual(report["generation"]["status"], "CANDIDATES_GENERATED")
+        self.assertEqual([row["id"] for row in report["variants"]], ["strip-x", "strip-y"])
+        self.assertFalse(report["executionPermission"])
+        for variant in report["variants"]:
+            self.assertEqual(variant["status"], "DESIGN_CHECKS_REVIEWABLE")
+            candidate = variant["candidate"]
+            operations = {op["id"]: op for op in candidate["graph"]["operations"]}
+            self.assertEqual(candidate["plannedNativeCommands"], {"CreateSlabs": 1, "CreateWalls": 6, "CreateDoors": 2})
+            self.assertEqual(set(candidate["authoredRoomIds"]), {"hall", "living", "study"})
+            evidence = {row["id"]: row for row in candidate["requirements"]}
+            self.assertEqual(evidence["access-to-living"]["sourceRef"], "ТЗ §4")
+            self.assertEqual(len(evidence["access-to-living"]["bimOperationIds"]), 2)
+            self.assertTrue(all(operations[op]["command"] == "CreateDoors"
+                                for op in evidence["access-to-living"]["bimOperationIds"]))
+            self.assertEqual(evidence["gross-area"]["status"], "UNVERIFIED")
+            self.assertEqual(candidate["nativeWriteCalls"], 0)
+        self.assertNotEqual(report["variants"][0]["layout"], report["variants"][1]["layout"])
+
+    def test_generated_layout_can_be_selected_and_compared_in_existing_workflow(self):
+        initial = self.study()
+        initial["brief"].update(mode="ADAPT_EXISTING", targetProjectPath=core.RUN.APPROVED_ISOLATED_WRITER_PATH)
+        authored = design.select_variant(initial, "strip-x")
+        self.assertEqual(authored["brief"], initial["brief"])
+        self.assertEqual(authored["layout"], design.compile_design(initial)["variants"][0]["layout"])
+        changed = deepcopy(initial)
+        changed["layoutStudy"]["door"]["width"] = 1.0
+        impact = design.changes_between(initial, changed, "strip-x")
+        self.assertIn("requirement:front-door", impact["affected"])
+        self.assertIn("review:sections", impact["affected"])
+
+    def test_layout_study_reports_infeasible_footprint_and_keeps_unknown_requirements(self):
+        intent = self.study()
+        outline = intent["layoutStudy"]["outline"]
+        original = outline.copy()
+        outline.update(xMax=2, yMax=3)
+        report = design.compile_design(intent)
+        self.assertEqual(report["generation"]["status"], "NO_STRIP_LAYOUT_CANDIDATE")
+        self.assertEqual(report["variants"], [])
+        self.assertEqual(report["brief"]["constraints"], intent["brief"]["constraints"])
+        self.assertFalse(report["executionPermission"])
+
+        outline.update(original)
+        intent["brief"]["constraints"].append(dict(id="wide-access", text="Нужен проход шириной 1 м",
+            evidenceStatus="UNVERIFIED", priority="REQUIRED", sourceRef="ТЗ §4", criterion=dict(
+                kind="ACCESS_PATH", **{"from": "$outside", "to": "living"}, minimumOpeningWidthM=1)))
+        report = design.compile_design(intent)
+        self.assertTrue(all(row["status"] == "REQUIREMENTS_OPEN" for row in report["variants"]))
+        self.assertTrue(all(row["candidate"]["requiredOpenIds"] == ["wide-access"] for row in report["variants"]))
+
     def test_explicit_entrance_stays_linked_and_gross_area_remains_unknown(self):
         first, second = design.compile_design(self.input)["variants"]
         self.assertEqual(first["status"], "DESIGN_CHECKS_REVIEWABLE")

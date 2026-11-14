@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "apa-project-design/1",
+  "brief": {
+    "schemaVersion": "apa-semantic-project-brief/1",
+    "projectId": "rectangular-layout-study",
+    "mode": "GENERATE_FROM_ZERO",
+    "units": "meters",
+    "site": {"siteId": "demo-site", "region": null},
+    "stories": [{"id": "level-1", "label": "1 этаж", "level": 0}],
+    "rooms": [
+      {"id": "hall", "name": "Холл", "storyId": "level-1", "minAreaM2": 6},
+      {"id": "living", "name": "Гостиная", "storyId": "level-1", "minAreaM2": 16},
+      {"id": "study", "name": "Кабинет", "storyId": "level-1", "minAreaM2": 8}
+    ],
+    "constraints": [
+      {
+        "id": "front-door",
+        "text": "Вход снаружи в холл",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "REQUIRED",
+        "sourceRef": "Демонстрационное задание §1",
+        "criterion": {"kind": "ENTRANCE", "from": "$outside", "to": "hall"}
+      },
+      {
+        "id": "hall-living",
+        "text": "Прямой проход из холла в гостиную",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "REQUIRED",
+        "sourceRef": "Демонстрационное задание §2",
+        "criterion": {"kind": "ROOM_CONNECTION", "from": "hall", "to": "living"}
+      },
+      {
+        "id": "hall-study",
+        "text": "Прямой проход из холла в кабинет",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "REQUIRED",
+        "sourceRef": "Демонстрационное задание §3",
+        "criterion": {"kind": "ROOM_CONNECTION", "from": "hall", "to": "study"}
+      },
+      {
+        "id": "access-to-study",
+        "text": "Маршрут снаружи в кабинет с проёмами от 0,8 м",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "REQUIRED",
+        "sourceRef": "Демонстрационное задание §4",
+        "criterion": {"kind": "ACCESS_PATH", "from": "$outside", "to": "study", "minimumOpeningWidthM": 0.8}
+      },
+      {
+        "id": "gross-area",
+        "text": "Предпочтительная общая площадь 48 м²",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "PREFERENCE",
+        "sourceRef": "Демонстрационное задание §5",
+        "criterion": {"kind": "AREA_TARGET", "metric": "GROSS_BUILDING", "targetM2": 48, "toleranceM2": 2}
+      }
+    ]
+  },
+  "cseCandidate": {
+    "candidateId": "rc-basic-slab-v1",
+    "systemFamily": "reinforced-concrete-slab-provisional",
+    "role": "floor-slab",
+    "source": {
+      "sourceId": "apa-native-slab-readback-20261011",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr35-basic-slab-implementation-partial-20261011.md",
+      "gitBlobSha": "e4bf711bdc3322f594699b59ea34107cde0bcfdf",
+      "publisher": "APA",
+      "rights": "LINK_ONLY_RIGHTS_UNVERIFIED",
+      "status": "TECHNICAL_REFERENCE",
+      "licenseEvidenceUri": null,
+      "applicabilityNote": "Демонстрационный кандидат. Применимость материала и конструкции требует проверки."
+    },
+    "native": {
+      "attributeType": "BuildingMaterial",
+      "name": "Железобетон - Конструкционный",
+      "expectedProjectGuid": null
+    },
+    "thicknessMeters": 0.2,
+    "storyIds": ["level-1"],
+    "requiredInterfaceConditions": ["slab-wall-bearing"],
+    "selectedDetailIds": []
+  },
+  "layoutStudy": {
+    "outline": {"xMin": 0, "xMax": 8, "yMin": 0, "yMax": 6},
+    "storyHeights": {"level-1": 3},
+    "wallThicknessMeters": 0.2,
+    "door": {"width": 0.9, "height": 2.1}
+  }
+}
