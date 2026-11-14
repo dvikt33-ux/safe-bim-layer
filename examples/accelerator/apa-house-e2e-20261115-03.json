@@ -1,0 +1,380 @@
+{
+  "schemaVersion": "apa-project-design/1",
+  "brief": {
+    "schemaVersion": "apa-semantic-project-brief/1",
+    "projectId": "apa-compact-house-e2e-20261115",
+    "mode": "GENERATE_FROM_ZERO",
+    "units": "meters",
+    "site": {
+      "siteId": "isolated-test-site",
+      "region": null
+    },
+    "stories": [
+      {
+        "id": "level-1",
+        "label": "1 этаж",
+        "level": 0
+      }
+    ],
+    "rooms": [
+      {
+        "id": "hall",
+        "name": "Прихожая",
+        "storyId": "level-1",
+        "minAreaM2": 15
+      },
+      {
+        "id": "living",
+        "name": "Гостиная",
+        "storyId": "level-1",
+        "minAreaM2": 25
+      },
+      {
+        "id": "bedroom",
+        "name": "Спальня",
+        "storyId": "level-1",
+        "minAreaM2": 12
+      },
+      {
+        "id": "kitchen",
+        "name": "Кухня",
+        "storyId": "level-1",
+        "minAreaM2": 12
+      }
+    ],
+    "constraints": [
+      {
+        "id": "front-door",
+        "text": "Вход с улицы в прихожую",
+        "sourceRef": "APA native E2E test 2026-11-15 §1",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "REQUIRED",
+        "criterion": {
+          "kind": "ENTRANCE",
+          "from": "$outside",
+          "to": "hall"
+        }
+      },
+      {
+        "id": "hall-living",
+        "text": "Прямой проход из прихожей в гостиную",
+        "sourceRef": "APA native E2E test 2026-11-15 §2",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "REQUIRED",
+        "criterion": {
+          "kind": "ROOM_CONNECTION",
+          "from": "hall",
+          "to": "living"
+        }
+      },
+      {
+        "id": "living-bedroom",
+        "text": "Прямой проход из гостиной в спальню",
+        "sourceRef": "APA native E2E test 2026-11-15 §3",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "REQUIRED",
+        "criterion": {
+          "kind": "ROOM_CONNECTION",
+          "from": "living",
+          "to": "bedroom"
+        }
+      },
+      {
+        "id": "living-kitchen",
+        "text": "Прямой проход из гостиной в кухню",
+        "sourceRef": "APA native E2E test 2026-11-15 §4",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "REQUIRED",
+        "criterion": {
+          "kind": "ROOM_CONNECTION",
+          "from": "living",
+          "to": "kitchen"
+        }
+      },
+      {
+        "id": "area-target",
+        "text": "Целевая площадь по внешнему прямоугольнику 96 м2, методика общей площади не утверждена",
+        "sourceRef": "APA native E2E test 2026-11-15 §5",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "PREFERENCE",
+        "criterion": {
+          "kind": "AREA_TARGET",
+          "metric": "GROSS_BUILDING",
+          "targetM2": 96,
+          "toleranceM2": 2
+        }
+      }
+    ]
+  },
+  "cseCandidate": {
+    "candidateId": "rc-basic-slab-v1",
+    "systemFamily": "reinforced-concrete-slab-provisional",
+    "role": "floor-slab",
+    "source": {
+      "sourceId": "apa-native-slab-readback-20261011",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr35-basic-slab-implementation-partial-20261011.md",
+      "gitBlobSha": "e4bf711bdc3322f594699b59ea34107cde0bcfdf",
+      "publisher": "APA",
+      "rights": "LINK_ONLY_RIGHTS_UNVERIFIED",
+      "status": "TECHNICAL_REFERENCE",
+      "licenseEvidenceUri": null,
+      "applicabilityNote": "Illustrative only; engineering approval pending"
+    },
+    "native": {
+      "attributeType": "BuildingMaterial",
+      "name": "Железобетон - Конструкционный",
+      "expectedProjectGuid": null
+    },
+    "thicknessMeters": 0.2,
+    "storyIds": [
+      "level-1"
+    ],
+    "requiredInterfaceConditions": [
+      "slab-wall-bearing"
+    ],
+    "selectedDetailIds": []
+  },
+  "variants": [
+    {
+      "id": "variant-a",
+      "storyHeights": {
+        "level-1": 3
+      },
+      "layout": {
+        "schemaVersion": "apa-authored-spatial-layout/1",
+        "outline": {
+          "xMin": 400,
+          "xMax": 412,
+          "yMin": 400,
+          "yMax": 408
+        },
+        "rooms": [
+          {
+            "roomId": "hall",
+            "storyId": "level-1",
+            "rectangle": {
+              "xMin": 400,
+              "xMax": 403,
+              "yMin": 400,
+              "yMax": 408
+            }
+          },
+          {
+            "roomId": "living",
+            "storyId": "level-1",
+            "rectangle": {
+              "xMin": 403,
+              "xMax": 408,
+              "yMin": 400,
+              "yMax": 408
+            }
+          },
+          {
+            "roomId": "bedroom",
+            "storyId": "level-1",
+            "rectangle": {
+              "xMin": 408,
+              "xMax": 412,
+              "yMin": 400,
+              "yMax": 404
+            }
+          },
+          {
+            "roomId": "kitchen",
+            "storyId": "level-1",
+            "rectangle": {
+              "xMin": 408,
+              "xMax": 412,
+              "yMin": 404,
+              "yMax": 408
+            }
+          }
+        ],
+        "axes": [
+          {
+            "id": "axis-west",
+            "direction": "X",
+            "coordinate": 400
+          },
+          {
+            "id": "axis-hall",
+            "direction": "X",
+            "coordinate": 403
+          },
+          {
+            "id": "axis-eastrooms",
+            "direction": "X",
+            "coordinate": 408
+          },
+          {
+            "id": "axis-east",
+            "direction": "X",
+            "coordinate": 412
+          },
+          {
+            "id": "axis-south",
+            "direction": "Y",
+            "coordinate": 400
+          },
+          {
+            "id": "axis-bedkitchen",
+            "direction": "Y",
+            "coordinate": 404
+          },
+          {
+            "id": "axis-north",
+            "direction": "Y",
+            "coordinate": 408
+          }
+        ],
+        "bearingLines": [
+          {
+            "id": "wall-west",
+            "storyId": "level-1",
+            "axisId": "axis-west",
+            "fromCoordinate": 400,
+            "toCoordinate": 408,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-hall",
+            "storyId": "level-1",
+            "axisId": "axis-hall",
+            "fromCoordinate": 400,
+            "toCoordinate": 408,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-eastrooms",
+            "storyId": "level-1",
+            "axisId": "axis-eastrooms",
+            "fromCoordinate": 400,
+            "toCoordinate": 408,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-east",
+            "storyId": "level-1",
+            "axisId": "axis-east",
+            "fromCoordinate": 400,
+            "toCoordinate": 408,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-south",
+            "storyId": "level-1",
+            "axisId": "axis-south",
+            "fromCoordinate": 400,
+            "toCoordinate": 412,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-north",
+            "storyId": "level-1",
+            "axisId": "axis-north",
+            "fromCoordinate": 400,
+            "toCoordinate": 412,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-room",
+            "storyId": "level-1",
+            "axisId": "axis-bedkitchen",
+            "fromCoordinate": 408,
+            "toCoordinate": 412,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          }
+        ],
+        "loadPaths": [],
+        "passages": [
+          {
+            "id": "entry",
+            "kind": "DOOR",
+            "hostMemberId": "wall-west",
+            "centerOffset": 4,
+            "width": 1,
+            "height": 2.1,
+            "sillHeight": 0,
+            "connects": [
+              "$outside",
+              "hall"
+            ]
+          },
+          {
+            "id": "hall-living-door",
+            "kind": "DOOR",
+            "hostMemberId": "wall-hall",
+            "centerOffset": 4,
+            "width": 0.9,
+            "height": 2.1,
+            "sillHeight": 0,
+            "connects": [
+              "hall",
+              "living"
+            ]
+          },
+          {
+            "id": "bedroom-door",
+            "kind": "DOOR",
+            "hostMemberId": "wall-eastrooms",
+            "centerOffset": 2,
+            "width": 0.9,
+            "height": 2.1,
+            "sillHeight": 0,
+            "connects": [
+              "living",
+              "bedroom"
+            ]
+          },
+          {
+            "id": "kitchen-door",
+            "kind": "DOOR",
+            "hostMemberId": "wall-eastrooms",
+            "centerOffset": 6,
+            "width": 0.9,
+            "height": 2.1,
+            "sillHeight": 0,
+            "connects": [
+              "living",
+              "kitchen"
+            ]
+          },
+          {
+            "id": "bedroom-window",
+            "kind": "WINDOW",
+            "hostMemberId": "wall-east",
+            "centerOffset": 2,
+            "width": 1.4,
+            "height": 1.3,
+            "sillHeight": 0.9
+          },
+          {
+            "id": "kitchen-window",
+            "kind": "WINDOW",
+            "hostMemberId": "wall-east",
+            "centerOffset": 6,
+            "width": 1.4,
+            "height": 1.3,
+            "sillHeight": 0.9
+          },
+          {
+            "id": "living-window",
+            "kind": "WINDOW",
+            "hostMemberId": "wall-north",
+            "centerOffset": 5,
+            "width": 1.6,
+            "height": 1.3,
+            "sillHeight": 0.9
+          }
+        ]
+      }
+    }
+  ]
+}
