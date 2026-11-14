@@ -262,7 +262,7 @@ def preflight(job, m, port, pinned_runtime, *, local_listener=None):
     return dict(result, evidencePath=str(result_path))
 
 
-def execute(job, m, pinned_runtime, *, confirm_preflight=None):
+def execute(job, m, pinned_runtime, *, confirm_preflight=None, mailbox_execution=None):
     state = status(job, m)["status"]
     if state in {"LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN", "LIVE_ARCHITECTURE_SAVED_REOPENED_PASS"}:
         return dict(status="ALREADY_APPLIED", receipt=saved_record(job, m), newNativeWrites=0)
@@ -284,8 +284,9 @@ def execute(job, m, pinned_runtime, *, confirm_preflight=None):
     ledger.mkdir(exist_ok=True)
     lease = ScratchWriteLease(m["project"], job, m["initialSHA256"])
     lease.acquire()
+    mailbox_facts = {"mailboxExecution": mailbox_execution} if mailbox_execution is not None else {}
     write_new_json(job / "attempted.json", dict(jobId=job.name, atUTC=timestamp(),
-                   confirmHash=approval["confirmHash"], automaticReplay=False))
+                   confirmHash=approval["confirmHash"], automaticReplay=False, **mailbox_facts))
     result = A.run_project(read(job / "intent.json"), SCHEMA, job / "build", ledger,
                            mode="execute", transport=A.native_transport,
                            run_id=job.name, confirm_hash=approval["confirmHash"],
@@ -352,7 +353,7 @@ def execute(job, m, pinned_runtime, *, confirm_preflight=None):
                   finalBrepSHA256=group.fingerprint(model), wholeAssemblyReadback=True,
                   finalSignaturesSHA256=R.digest(signatures), addedByKind=dict(kinds),
                   bodyCountByAddedGuid=bodies, nativeModelWriteAttempts=result["modelWriteAttempts"],
-                  snapshotReceiptSHA256=sha256(job / "snapshot.json"), nativeSaveCalls=1)
+                  snapshotReceiptSHA256=sha256(job / "snapshot.json"), nativeSaveCalls=1, **mailbox_facts)
     if requirements is not None:
         result["requirementReadback"] = requirements
     write_new_json(job / "saved.json", result)

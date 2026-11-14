@@ -395,11 +395,11 @@ class Campaign:
                     baselineBrepSha256=self.manifest["baselineBrepSHA256"],
                     nativeWrites=0, saveReopenVerified=False, **facts)
 
-    def run_execute(self, session, preflight_sha=None):
+    def run_execute(self, session, preflight_sha=None, *, mailbox_execution=None):
         port = session["port"]
         require(listener(port) == session, "R03_MAILBOX_EXECUTE_PROCESS_DRIFT")
         if self.kind == "ARCHITECTURE":
-            options = {}
+            options = {"mailbox_execution": mailbox_execution} if mailbox_execution is not None else {}
             if self.is_authored:
                 approval_path = self.preflight_path()
                 require(preflight_sha is not None and sha256(approval_path) == preflight_sha
@@ -409,23 +409,59 @@ class Campaign:
             result = architecture.execute(self.state, self.manifest, self.pinned_runtime, **options)
             require(result["status"] == "LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN",
                     "R03_MAILBOX_ARCHITECTURE_INCOMPLETE:" + str(result.get("reason", result["status"])))
-            facts = dict(guidCount=result["elementCount"], addedGuids=result["addedGuids"],
-                         addedByKind=result["addedByKind"], bodyCountByAddedGuid=result["bodyCountByAddedGuid"],
-                         nativeModelWriteAttempts=result["nativeModelWriteAttempts"], saveCalls=result["nativeSaveCalls"])
         else:
             self.group_identity(port)
             result = group.execute(self.state, port=port)
             require(result["status"] == "GROUP_BATCH_SAVED_PENDING_REAL_REOPEN", "R03_MAILBOX_GROUP_INCOMPLETE")
+        require(listener(port) == session and self.saved()["savedSHA256"] == result["savedSHA256"],
+                "R03_MAILBOX_SAVED_PROCESS_OR_PLN_DRIFT")
+        return self.saved_response(result)
+
+    def saved_response(self, result):
+        if self.kind == "ARCHITECTURE":
+            facts = dict(guidCount=result["elementCount"], addedGuids=result["addedGuids"],
+                         addedByKind=result["addedByKind"], bodyCountByAddedGuid=result["bodyCountByAddedGuid"],
+                         nativeModelWriteAttempts=result["nativeModelWriteAttempts"], saveCalls=result["nativeSaveCalls"])
+        else:
             facts = dict(guidCount=result["finalGuidCount"], groupCount=result["groupCount"],
                          nativeCloneCalls=result["nativeCloneCalls"], saveCalls=result["saveCalls"],
                          addedGuids=sorted(result["nativeReadback"]["newRootGuids"]
                                            + result["nativeReadback"]["newSegmentGuids"]))
-        require(listener(port) == session and self.saved()["savedSHA256"] == result["savedSHA256"],
-                "R03_MAILBOX_SAVED_PROCESS_OR_PLN_DRIFT")
         return dict(jobStatus="WAITING_CLOSE_AND_REOPEN", saveReopenVerified=False,
                     savedSha256=result["savedSHA256"], guidSetSha256=result["finalGuidSetSHA256"],
                     brepSha256=result["finalBrepSHA256"], savedReceiptSha256=sha256(self.state / "saved.json"),
                     authorizedNativeExecution=True, **facts)
+
+    def recover_saved_execution(self, name, attempt):
+        """Recover only a verified save carrying this exact mailbox grant."""
+        if self.kind != "ARCHITECTURE" or not (self.state / "saved.json").is_file():
+            return None
+        grant_path = self.job_dir / "mailbox-local-grant.json"
+        try:
+            require(grant_path.resolve() == grant_path and sha256(grant_path) == attempt["grantSha256"],
+                    "R03_MAILBOX_RECOVERY_GRANT_DRIFT")
+            grant = read_json(grant_path)
+            job = grant["job"]
+            require(grant["schema"] == "APA_AC29_R03_LOCAL_GRANT_V1"
+                    and grant["jobBlobSha1"] == attempt["sourceBlob"]
+                    and grant["stageReceiptSha256"] == sha256(self.stage) == self.config["stageReceiptSha256"]
+                    and job["jobId"] == name and job["action"] == "EXECUTE" and job["target"] == self.target
+                    and job["releaseRevision"] == self.release["revision"]
+                    and job["bindingSha256"] == attempt["bindingSha256"]
+                    and job["projectSha256"] == attempt["projectSha256"] == self.initial_sha
+                    and job["preflightSha256"] == attempt["preflightSha256"] == sha256(self.preflight_path()),
+                    "R03_MAILBOX_RECOVERY_ATTEMPT_SCOPE_DRIFT")
+            self.planned_session()
+            authorization = dict(jobId=name, grantSHA256=attempt["grantSha256"])
+            original = read_json(self.state / "attempted.json")
+            saved = self.saved()
+            require(saved.get("mailboxExecution") == original.get("mailboxExecution") == authorization
+                    and original["jobId"] == self.state.name
+                    and saved["nativeSaveCalls"] == 1, "R03_MAILBOX_RECOVERY_SAVED_RECEIPT_NOT_BOUND")
+            return dict(self.saved_response(saved), recovery="VERIFIED_DURABLE_SAVE_NO_NATIVE_REPLAY",
+                        nativeReplayAttempted=False)
+        except (OSError, ValueError, KeyError, TypeError):
+            return None
 
     def run_closed(self, name, session):
         pid, port = session["pid"], session["port"]
@@ -561,9 +597,12 @@ class Campaign:
                     and attempt["bindingSha256"] == binding_sha and HEX40.fullmatch(attempt["sourceBlob"]),
                     "R03_MAILBOX_ATTEMPT_IDENTITY_DRIFT")
             if not (folder / "result.json").exists():
-                response = dict(common, jobStatus="STOPPED_RECONCILE_NO_AUTORETRY",
-                                nativeOutcome="UNKNOWN" if action == "EXECUTE" else "NO_MODEL_WRITE",
-                                saveReopenVerified=False, error="INTERRUPTED_AFTER_DURABLE_RESERVATION")
+                response = self.recover_saved_execution(name, attempt) if action == "EXECUTE" else None
+                if response is None:
+                    response = dict(jobStatus="STOPPED_RECONCILE_NO_AUTORETRY",
+                                    nativeOutcome="UNKNOWN" if action == "EXECUTE" else "NO_MODEL_WRITE",
+                                    saveReopenVerified=False, error="INTERRUPTED_AFTER_DURABLE_RESERVATION")
+                response.update(common)
                 bridge.durable_write(folder / "result.json",
                                      bridge.result_payload(name, action, attempt["sourceBlob"], response))
             recorded = read_json(folder / "result.json")
@@ -589,17 +628,21 @@ class Campaign:
         require(port is None or action in {"PLAN", "VERIFY_REOPEN"}, "R03_MAILBOX_PORT_FROM_LOCAL_PREFLIGHT")
         if action == "PLAN":
             require(type(port) is int and 19723 <= port <= 19743, "R03_MAILBOX_PLAN_REQUIRES_LOCAL_PORT")
+        execution = (dict(jobId=name, grantSHA256=sha256(self.job_dir / "mailbox-local-grant.json"))
+                     if action == "EXECUTE" and self.kind == "ARCHITECTURE" else None)
         self.history.mkdir(exist_ok=True)
         folder.mkdir()
         bridge.durable_write(folder / "attempted.json", dict(job=name, action=action, bindingSha256=binding_sha,
                              sourceBlob=blob, projectSha256=job["projectSha256"],
-                             startedAt=bridge.current_utc().isoformat(), automaticRetry=False))
+                             startedAt=bridge.current_utc().isoformat(), automaticRetry=False,
+                             **(dict(preflightSha256=job["preflightSha256"], grantSha256=execution["grantSHA256"])
+                                if execution else {})))
         try:
             if action == "PLAN":
                 response = self.run_plan(name, port)
             elif action == "EXECUTE":
-                response = (self.run_execute(session, job["preflightSha256"]) if self.is_authored
-                            else self.run_execute(session))
+                response = (self.run_execute(session, job["preflightSha256"], mailbox_execution=execution)
+                            if execution else self.run_execute(session))
             elif action == "CHECK_CLOSED":
                 response = self.run_closed(name, session)
             else:

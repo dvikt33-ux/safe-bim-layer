@@ -113,13 +113,13 @@ class MailboxContract(unittest.TestCase):
         brep_sha = "a" * 64
         saved = {}
 
-        def run(*_):
+        def run(*_, mailbox_execution):
             self.assertTrue((self.c.history / execute / "attempted.json").exists())
             self.project.write_bytes(b"changed fixture")
             saved.update(status="LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN", addedGuids=[guids[-1]],
                          savedSHA256=sha256(self.project), finalGuidSetSHA256=guid_sha, finalBrepSHA256=brep_sha,
                          elementCount=2, addedByKind={"Wall": 1}, bodyCountByAddedGuid={guids[-1]: 1},
-                         nativeModelWriteAttempts=1, nativeSaveCalls=1)
+                         nativeModelWriteAttempts=1, nativeSaveCalls=1, mailboxExecution=mailbox_execution)
             write_new_json(self.job / "saved.json", saved)
             return saved
 
@@ -226,7 +226,9 @@ class MailboxContract(unittest.TestCase):
             result = self.c.process(bridge, job)
             self.assertEqual(result["result"]["jobStatus"], "WAITING_CLOSE_AND_REOPEN")
             self.assertEqual(result, self.c.process(bridge, job))
-            execute.assert_called_once_with(self.job, self.c.manifest, self.pin, confirm_preflight=preflight_sha)
+            local_grant = sha256(self.job / "mailbox-local-grant.json")
+            execute.assert_called_once_with(self.job, self.c.manifest, self.pin, confirm_preflight=preflight_sha,
+                                            mailbox_execution={"jobId": job, "grantSHA256": local_grant})
             with self.assertRaisesRegex(ValueError, "AUTHORED_PREFLIGHT_HASH_DRIFT"):
                 self.c.run_execute(self.session, "0" * 64)
             self.assertEqual(execute.call_count, 1)
@@ -247,6 +249,38 @@ class MailboxContract(unittest.TestCase):
         self.assertEqual(result["result"]["jobStatus"], "STOPPED_RECONCILE_NO_AUTORETRY")
         self.assertEqual(len(self.puts), 1)
         run.assert_not_called()
+
+    def test_interrupted_execute_recovers_only_a_save_bound_to_its_exact_attempt(self):
+        preflight_sha = self.stage_plan()
+        name = self.submit("execute")
+        self.c.grant(bridge, name, create=True, confirm=preflight_sha)
+        grant_path = self.job / "mailbox-local-grant.json"
+        grant = json.loads(grant_path.read_bytes())
+        history = self.c.history / name
+        history.mkdir()
+        write_new_json(history / "attempted.json", dict(job=name, action="EXECUTE", sourceBlob=grant["jobBlobSha1"],
+                       bindingSha256=sha256(self.profile), projectSha256=self.initial,
+                       preflightSha256=preflight_sha, grantSha256=sha256(grant_path)))
+        self.project.write_bytes(b"verified saved fixture")
+        execution = {"jobId": name, "grantSHA256": sha256(grant_path)}
+        write_new_json(self.job / "attempted.json", dict(jobId=self.job.name, mailboxExecution=execution))
+        saved = dict(status="LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN", savedSHA256=sha256(self.project),
+                     elementCount=45, addedGuids=["one"], addedByKind={"Wall": 1}, bodyCountByAddedGuid={"one": 1},
+                     nativeModelWriteAttempts=1, nativeSaveCalls=1, finalGuidSetSHA256="b" * 64,
+                     finalBrepSHA256="c" * 64, mailboxExecution=execution)
+        write_new_json(self.job / "saved.json", saved)
+        with (patch.object(mailbox.architecture, "saved_record", return_value=saved),
+              patch.object(self.c, "run_execute") as dispatch):
+            completed = self.c.process(bridge, name)
+            self.assertEqual(completed, self.c.process(bridge, name))
+            dispatch.assert_not_called()
+        self.assertEqual(completed["result"]["jobStatus"], "WAITING_CLOSE_AND_REOPEN")
+        self.assertEqual(completed["result"]["recovery"], "VERIFIED_DURABLE_SAVE_NO_NATIVE_REPLAY")
+        self.assertEqual(completed["result"]["savedSha256"], saved["savedSHA256"])
+        self.assertEqual(len(self.puts), 2)
+        saved["mailboxExecution"] = dict(execution, jobId="another-job")
+        with patch.object(mailbox.architecture, "saved_record", return_value=saved):
+            self.assertIsNone(self.c.recover_saved_execution(name, json.loads((history / "attempted.json").read_bytes())))
 
     def test_remote_cannot_override_the_local_path_or_port(self):
         name = self.submit("plan", port=19729, path=str(self.donor))
@@ -274,7 +308,8 @@ class MailboxContract(unittest.TestCase):
               patch.object(self.c, "run_execute", return_value=dict(jobStatus="WAITING_CLOSE_AND_REOPEN")) as run):
             self.c.poll_job(bridge, execute)
             self.c.poll_job(bridge, execute)
-        run.assert_called_once_with(self.session)
+            run.assert_called_once_with(self.session, sha, mailbox_execution={
+                "jobId": execute, "grantSHA256": sha256(self.job / "mailbox-local-grant.json")})
         self.assertEqual(len(self.puts), 2)
 
     def test_persistent_dispatch_keeps_legacy_jobs_and_filters_unconfigured_campaigns(self):
