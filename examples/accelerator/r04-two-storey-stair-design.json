@@ -1,0 +1,258 @@
+{
+  "brief": {
+    "constraints": [
+      {
+        "criterion": {"from": "$outside", "kind": "ENTRANCE", "to": "hall"},
+        "evidenceStatus": "UNVERIFIED",
+        "id": "front-door",
+        "priority": "REQUIRED",
+        "sourceRef": "Исходное задание §1",
+        "text": "Вход снаружи в холл"
+      },
+      {
+        "criterion": {"from": "hall", "kind": "ROOM_CONNECTION", "to": "living"},
+        "evidenceStatus": "UNVERIFIED",
+        "id": "hall-living",
+        "priority": "REQUIRED",
+        "sourceRef": "Исходное задание §2",
+        "text": "Прямой проход из холла в гостиную"
+      },
+      {
+        "criterion": {"kind": "AREA_TARGET", "metric": "GROSS_BUILDING", "targetM2": 48, "toleranceM2": 2},
+        "evidenceStatus": "UNVERIFIED",
+        "id": "gross-area",
+        "priority": "PREFERENCE",
+        "sourceRef": "Исходное задание §3",
+        "text": "Целевая общая площадь 48 м². Методика ещё не задана."
+      },
+      {
+        "criterion": {"from": "$outside", "kind": "ACCESS_PATH", "minimumOpeningWidthM": 0.8, "to": "living"},
+        "evidenceStatus": "UNVERIFIED",
+        "id": "access-to-living",
+        "priority": "REQUIRED",
+        "sourceRef": "R04, сценарий проверки входного маршрута",
+        "text": "Пройти с улицы в гостиную через холл."
+      },
+      {
+        "criterion": {"kind": "STAIR_LINK", "lowerStoryId": "level-1", "upperStoryId": "level-2"},
+        "evidenceStatus": "UNVERIFIED",
+        "id": "stair-required",
+        "priority": "REQUIRED",
+        "sourceRef": "R04, сценарий независимой проверки лестницы",
+        "text": "Лестница с проёмом"
+      }
+    ],
+    "mode": "GENERATE_FROM_ZERO",
+    "projectId": "r04-stair-plan-example",
+    "rooms": [
+      {"id": "hall", "minAreaM2": 10, "name": "Холл", "storyId": "level-1"},
+      {"id": "living", "minAreaM2": 12, "name": "Гостиная", "storyId": "level-1"},
+      {"id": "bedroom", "minAreaM2": 10, "name": "Спальня", "storyId": "level-2"},
+      {"id": "upper-hall", "name": "Холл второго этажа", "minAreaM2": 12, "storyId": "level-2"}
+    ],
+    "schemaVersion": "apa-semantic-project-brief/1",
+    "site": {"region": null, "siteId": "demo-site"},
+    "stories": [{"id": "level-1", "label": "1 этаж", "level": 0}, {"id": "level-2", "label": "2 этаж", "level": 3}],
+    "units": "meters"
+  },
+  "cseCandidate": {
+    "candidateId": "rc-basic-slab-v1",
+    "native": {"attributeType": "BuildingMaterial", "expectedProjectGuid": null, "name": "Железобетон - Конструкционный"},
+    "requiredInterfaceConditions": ["slab-wall-bearing"],
+    "role": "floor-slab",
+    "selectedDetailIds": [],
+    "source": {
+      "applicabilityNote": "Иллюстративный кандидат. Пригодность для здания и привязка материала требуют проверки.",
+      "gitBlobSha": "e4bf711bdc3322f594699b59ea34107cde0bcfdf",
+      "licenseEvidenceUri": null,
+      "publisher": "APA",
+      "rights": "LINK_ONLY_RIGHTS_UNVERIFIED",
+      "sourceId": "apa-native-slab-readback-20261011",
+      "status": "TECHNICAL_REFERENCE",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr35-basic-slab-implementation-partial-20261011.md"
+    },
+    "storyIds": ["level-1", "level-2"],
+    "systemFamily": "reinforced-concrete-slab-provisional",
+    "thicknessMeters": 0.2
+  },
+  "schemaVersion": "apa-project-design/1",
+  "variants": [
+    {
+      "id": "variant-a",
+      "layout": {
+        "axes": [
+          {"coordinate": 400, "direction": "X", "id": "axis-west"},
+          {"coordinate": 403, "direction": "X", "id": "axis-mid"},
+          {"coordinate": 408, "direction": "X", "id": "axis-east"},
+          {"coordinate": 400, "direction": "Y", "id": "axis-south"},
+          {"coordinate": 409, "direction": "Y", "id": "axis-north"}
+        ],
+        "bearingLines": [
+          {
+            "axisId": "axis-west",
+            "cseCandidateId": null,
+            "fromCoordinate": 400,
+            "id": "wall-west",
+            "storyId": "level-1",
+            "toCoordinate": 409,
+            "wallThicknessMeters": 0.3
+          },
+          {
+            "axisId": "axis-mid",
+            "cseCandidateId": null,
+            "fromCoordinate": 400,
+            "id": "wall-mid",
+            "storyId": "level-1",
+            "toCoordinate": 409,
+            "wallThicknessMeters": 0.3
+          },
+          {
+            "axisId": "axis-east",
+            "cseCandidateId": null,
+            "fromCoordinate": 400,
+            "id": "wall-east",
+            "storyId": "level-1",
+            "toCoordinate": 409,
+            "wallThicknessMeters": 0.3
+          },
+          {
+            "axisId": "axis-south",
+            "cseCandidateId": null,
+            "fromCoordinate": 400,
+            "id": "wall-south",
+            "storyId": "level-1",
+            "toCoordinate": 408,
+            "wallThicknessMeters": 0.3
+          },
+          {
+            "axisId": "axis-north",
+            "cseCandidateId": null,
+            "fromCoordinate": 400,
+            "id": "wall-north",
+            "storyId": "level-1",
+            "toCoordinate": 408,
+            "wallThicknessMeters": 0.3
+          },
+          {
+            "axisId": "axis-west",
+            "cseCandidateId": null,
+            "fromCoordinate": 400,
+            "id": "wall-west-upper",
+            "storyId": "level-2",
+            "toCoordinate": 409,
+            "wallThicknessMeters": 0.3
+          },
+          {
+            "axisId": "axis-mid",
+            "cseCandidateId": null,
+            "fromCoordinate": 400,
+            "id": "wall-mid-upper",
+            "storyId": "level-2",
+            "toCoordinate": 409,
+            "wallThicknessMeters": 0.3
+          },
+          {
+            "axisId": "axis-east",
+            "cseCandidateId": null,
+            "fromCoordinate": 400,
+            "id": "wall-east-upper",
+            "storyId": "level-2",
+            "toCoordinate": 409,
+            "wallThicknessMeters": 0.3
+          },
+          {
+            "axisId": "axis-south",
+            "cseCandidateId": null,
+            "fromCoordinate": 400,
+            "id": "wall-south-upper",
+            "storyId": "level-2",
+            "toCoordinate": 408,
+            "wallThicknessMeters": 0.3
+          },
+          {
+            "axisId": "axis-north",
+            "cseCandidateId": null,
+            "fromCoordinate": 400,
+            "id": "wall-north-upper",
+            "storyId": "level-2",
+            "toCoordinate": 408,
+            "wallThicknessMeters": 0.3
+          }
+        ],
+        "loadPaths": [
+          {"lowerMemberId": "wall-west", "upperMemberId": "wall-west-upper"},
+          {"lowerMemberId": "wall-mid", "upperMemberId": "wall-mid-upper"},
+          {"lowerMemberId": "wall-east", "upperMemberId": "wall-east-upper"},
+          {"lowerMemberId": "wall-south", "upperMemberId": "wall-south-upper"},
+          {"lowerMemberId": "wall-north", "upperMemberId": "wall-north-upper"}
+        ],
+        "outline": {"xMax": 408, "xMin": 400, "yMax": 409, "yMin": 400},
+        "passages": [
+          {
+            "centerOffset": 2,
+            "connects": ["$outside", "hall"],
+            "height": 2.1,
+            "hostMemberId": "wall-west",
+            "id": "entry-door",
+            "kind": "DOOR",
+            "sillHeight": 0,
+            "width": 1
+          },
+          {
+            "centerOffset": 3,
+            "connects": ["hall", "living"],
+            "height": 2.1,
+            "hostMemberId": "wall-mid",
+            "id": "hall-door",
+            "kind": "DOOR",
+            "sillHeight": 0,
+            "width": 0.85
+          },
+          {
+            "centerOffset": 3,
+            "height": 1.3,
+            "hostMemberId": "wall-east",
+            "id": "living-window",
+            "kind": "WINDOW",
+            "sillHeight": 0.9,
+            "width": 1.4
+          }
+        ],
+        "rooms": [
+          {"rectangle": {"xMax": 403, "xMin": 400, "yMax": 409, "yMin": 400}, "roomId": "hall", "storyId": "level-1"},
+          {"rectangle": {"xMax": 408, "xMin": 403, "yMax": 409, "yMin": 400}, "roomId": "living", "storyId": "level-1"},
+          {"roomId": "bedroom", "storyId": "level-2", "rectangle": {"xMin": 400, "xMax": 403, "yMin": 400, "yMax": 409}},
+          {"roomId": "upper-hall", "storyId": "level-2", "rectangle": {"xMin": 406.4, "xMax": 408, "yMin": 400, "yMax": 409}}
+        ],
+        "schemaVersion": "apa-authored-spatial-layout/1"
+      },
+      "storyHeights": {"level-1": 3, "level-2": 3},
+      "floorPlans": {
+        "level-1": {
+          "polygonCoordinates": [{"x": 400, "y": 400}, {"x": 408, "y": 400}, {"x": 408, "y": 409}, {"x": 400, "y": 409}],
+          "holes": []
+        },
+        "level-2": {
+          "polygonCoordinates": [{"x": 400, "y": 400}, {"x": 408, "y": 400}, {"x": 408, "y": 409}, {"x": 400, "y": 409}],
+          "holes": [{"polygonCoordinates": [{"x": 404.5, "y": 401}, {"x": 404.5, "y": 408}, {"x": 405.5, "y": 408}, {"x": 405.5, "y": 401}]}]
+        }
+      },
+      "stairLinks": [
+        {
+          "requirementId": "stair-required",
+          "source": {
+            "ref": "APA-RUN-20261013-165220Z-native-spatial/native-stair-source-and-readback.json",
+            "sha256": "f2ed40b44c63c636cbd101dc3b964fdd66383824db022267dd40c2c3ff3bbd87"
+          },
+          "favoriteName": "Лестница Монолитная без Отделки",
+          "start": {"x": 404.5, "y": 401},
+          "stepCount": 20,
+          "widthM": 1.0,
+          "goingM": 0.35,
+          "lowerLandingDepthM": 0.8,
+          "upperLandingDepthM": 0.8
+        }
+      ]
+    }
+  ]
+}

@@ -123,6 +123,107 @@ class DesignTests(unittest.TestCase):
         self.assertEqual(facts["stairs"]["status"], "MISSING")
         self.assertEqual(set(candidate["requiredOpenIds"]), {"gross-area", "stairs"})
 
+    def stair_design(self):
+        intent = self.input
+        brief = intent["brief"]
+        brief["stories"].append(dict(id="level-2", label="2 этаж", level=3))
+        brief["rooms"].append(dict(id="bedroom", name="Спальня", storyId="level-2", minAreaM2=10))
+        brief["constraints"].append(dict(id="stairs", text="Лестница на второй этаж",
+            priority="REQUIRED", sourceRef="ТЗ §4", evidenceStatus="UNVERIFIED",
+            criterion=dict(kind="STAIR_LINK", lowerStoryId="level-1", upperStoryId="level-2")))
+        intent["cseCandidate"]["storyIds"].append("level-2")
+        row = intent["variants"][0]
+        intent["variants"] = [row]
+        row["storyHeights"]["level-2"] = 3
+        row["layout"]["rooms"].append(dict(roomId="bedroom", storyId="level-2",
+            rectangle=dict(xMin=0, xMax=3, yMin=0, yMax=6)))
+        row["layout"]["bearingLines"].extend(
+            dict(member, id=member["id"] + "-upper", storyId="level-2")
+            for member in list(row["layout"]["bearingLines"]) if member["id"] != "wall-east")
+        outer = [dict(x=x, y=y) for x, y in [(0, 0), (8, 0), (8, 6), (0, 6)]]
+        hole = [dict(x=x, y=y) for x, y in [(5, 1), (5, 5), (6, 5), (6, 1)]]
+        row["floorPlans"] = {"level-1": dict(polygonCoordinates=outer, holes=[]),
+                             "level-2": dict(polygonCoordinates=outer, holes=[dict(polygonCoordinates=hole)])}
+        row["stairLinks"] = [dict(requirementId="stairs", source=dict(ref="Чертёж Л-1", sha256="a" * 64),
+                                 favoriteName="Любимая лестница", start=dict(x=5, y=1), stepCount=16,
+                                 widthM=1, goingM=.25, lowerLandingDepthM=.8, upperLandingDepthM=.8)]
+        return intent, row
+
+    def test_stair_design_links_requirement_flight_and_both_slabs_in_bim_graph(self):
+        intent, row = self.stair_design()
+        result = design.compile_design(intent)["variants"][0]
+        self.assertEqual(result["status"], "REQUIREMENTS_OPEN")
+        plan = result["candidate"]
+        requirement = next(req for req in plan["requirements"] if req["id"] == "stairs")
+        self.assertEqual(requirement["status"], "PARTIAL")
+        self.assertEqual(requirement["sourceRef"], "ТЗ §4")
+        self.assertEqual(requirement["bimOperationIds"], ["native-stair-stairs", "native-slab-level-1", "native-slab-level-2"])
+        self.assertIn("stairs", plan["requiredOpenIds"])
+        operations = {op["id"]: op for op in plan["graph"]["operations"]}
+        stair = operations["native-stair-stairs"]
+        self.assertEqual(stair["command"], "CreateStairs")
+        self.assertEqual(stair["after"], requirement["bimOperationIds"][1:])
+        order = plan["executionOrder"]
+        self.assertTrue(all(order.index(slab) < order.index(stair["id"]) for slab in stair["after"]))
+        self.assertEqual(stair["params"]["stairsData"][0]["riserHeight"], 3 / 16)
+        self.assertTrue(core.RUN.compare_polygon(row["floorPlans"]["level-2"]["holes"][0]["polygonCoordinates"],
+            operations["native-slab-level-2"]["params"]["slabsData"][0]["holes"][0]["polygonCoordinates"]))
+        self.assertEqual(plan["stairConnections"][0]["source"], row["stairLinks"][0]["source"])
+        self.assertEqual(plan["stairConnections"][0]["nativeConnection"], "NOT_TESTED")
+        self.assertEqual(plan["nativeWriteCalls"], 0)
+        with self.assertRaisesRegex(ValueError, "REQUIRED_CHECKS_OPEN"):
+            design.select_variant(intent, "variant-a")
+
+    def test_stair_rejects_missing_opening_and_missing_solid_landing(self):
+        intent, row = self.stair_design()
+        holes = row["floorPlans"]["level-2"]["holes"]
+        hole = holes.pop()
+        result = design.compile_design(intent)["variants"][0]
+        self.assertEqual(result["reason"], "STAIR_FLIGHT_REQUIRES_MATCHING_UPPER_SLAB_VOID")
+        for point in hole["polygonCoordinates"]:
+            if point["y"] == 5:
+                point["y"] = 5.4
+        holes.append(hole)
+        result = design.compile_design(intent)["variants"][0]
+        self.assertEqual(result["reason"], "STAIR_UPPER_LANDING_REQUIRES_SOLID_SLAB")
+
+    def test_stair_checks_wall_thickness_beyond_the_wall_axis(self):
+        intent, row = self.stair_design()
+        row["stairLinks"][0]["start"]["x"] = 3.1
+        ring = row["floorPlans"]["level-2"]["holes"][0]["polygonCoordinates"]
+        for point in ring:
+            point["x"] -= 1.9
+        result = design.compile_design(intent)["variants"][0]
+        self.assertEqual(result["reason"], "STAIR_FLIGHT_OR_LANDING_INTERSECTS_WALL: wall-mid")
+
+    def test_stair_preference_stays_out_of_native_preflight(self):
+        intent, _ = self.stair_design()
+        intent["brief"].update(mode="ADAPT_EXISTING", targetProjectPath=core.RUN.APPROVED_ISOLATED_WRITER_PATH)
+        intent["brief"]["constraints"][-1]["priority"] = "PREFERENCE"
+        self.assertEqual(design.compile_design(intent)["variants"][0]["status"], "DESIGN_CHECKS_REVIEWABLE")
+        with self.assertRaisesRegex(ValueError, "STAIR_LINK_NATIVE_BINDING_AND_READBACK_REQUIRED"):
+            design.select_variant(intent, "variant-a")
+
+    def test_stair_reservations_reject_a_void_shared_by_two_flights(self):
+        intent, row = self.stair_design()
+        intent["brief"]["constraints"].append(dict(intent["brief"]["constraints"][-1], id="other-stair"))
+        row["stairLinks"].append(dict(row["stairLinks"][0], requirementId="other-stair"))
+        result = design.compile_design(intent)["variants"][0]
+        self.assertEqual(result["reason"], "STAIR_UPPER_SLAB_VOID_ALREADY_ASSIGNED")
+
+    def test_stair_changes_propagate_to_sections_and_its_requirement(self):
+        before, _ = self.stair_design()
+        changed = deepcopy(before)
+        row = changed["variants"][0]
+        row["stairLinks"][0]["start"]["x"] += .2
+        for point in row["floorPlans"]["level-2"]["holes"][0]["polygonCoordinates"]:
+            point["x"] += .2
+        impact = design.changes_between(before, changed, "variant-a")
+        self.assertIn("bim:native-stair-stairs", impact["changed"])
+        self.assertIn("bim:native-slab-level-2", impact["changed"])
+        self.assertIn("requirement:stairs", impact["affected"])
+        self.assertIn("review:sections", impact["affected"])
+
     def test_wrong_room_on_entrance_is_rejected_and_other_variant_is_kept(self):
         self.input["variants"][0]["layout"]["passages"][0]["connects"] = ["$outside", "living"]
         first, second = design.compile_design(self.input)["variants"]

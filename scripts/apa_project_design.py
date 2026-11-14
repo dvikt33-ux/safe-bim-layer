@@ -36,7 +36,7 @@ def _review_design(intent):
     output, sources = [], {}
     for row in variants:
         needed = {"id", "layout", "storyHeights"}
-        if not isinstance(row, dict) or not needed <= set(row) <= needed | {"floorPlans"}:
+        if not isinstance(row, dict) or not needed <= set(row) <= needed | {"floorPlans", "stairLinks"}:
             raise ValueError("APA_DESIGN_VARIANT_FIELDS_REQUIRED")
         variant = BRIEF._id(row["id"], "DESIGN_VARIANT_ID")
         if variant in sources:
@@ -47,7 +47,8 @@ def _review_design(intent):
             result.update(layout=row["layout"], storyHeights=row["storyHeights"])
         try:
             candidate = NATIVE.compile_candidate(brief, pack, row["layout"], row["storyHeights"],
-                                               None, floor_plans=row.get("floorPlans"), design_only=True)
+                                               None, floor_plans=row.get("floorPlans"),
+                                               stair_links=row.get("stairLinks"), design_only=True)
         except ValueError as exc:
             result.update(status="INVALID_VARIANT", reason=str(exc),
                           requirements=[dict(req, status="NOT_EVALUATED", bimOperationIds=[])
@@ -74,12 +75,14 @@ def select_variant(intent, variant_id):
     result = next((row for row in report["variants"] if row["id"] == variant_id), None)
     if result is None or result["status"] != "DESIGN_CHECKS_REVIEWABLE":
         raise ValueError("APA_DESIGN_VARIANT_MISSING_OR_REQUIRED_CHECKS_OPEN")
+    if result["candidate"].get("stairConnections"):
+        raise ValueError("STAIR_LINK_NATIVE_BINDING_AND_READBACK_REQUIRED")
     if report["brief"]["mode"] != "ADAPT_EXISTING":
         raise ValueError("APA_DESIGN_REQUIRES_EXACT_TEST_PLN_BRIEF_BEFORE_NATIVE_PREFLIGHT")
     row = sources[variant_id]
     return dict(schemaVersion="apa-authored-project/1", projectId=report["brief"]["projectId"],
                 units="meters", brief=intent["brief"], cseCandidate=intent["cseCandidate"],
-                **{key: row[key] for key in row if key != "id"})
+                **{key: value for key, value in row.items() if key not in {"id", "stairLinks"}})
 
 
 def changes_between(previous, current, variant):
@@ -126,6 +129,12 @@ def changes_between(previous, current, variant):
                 host = next(iter(operation["params"].values()))[0]["ownerWallId"]["guid"]["$createdGuid"]
                 edges.add(("bim:" + host, key))
             edges.update((key, "review:" + check) for check in ("facades", "sections", "documentation"))
+        for stair in candidate.get("stairConnections", []):
+            operation = "bim:" + stair["stairOperationId"]
+            key = "stair:" + stair["requirementId"]
+            facts[key] = stair
+            edges.add((key, operation))
+            edges.update(("bim:" + stair[field], operation) for field in ("lowerSlabOperationId", "upperSlabOperationId"))
         for req in candidate["requirements"]:
             key = "requirement:" + req["id"]
             facts[key] = req
@@ -167,5 +176,6 @@ def read_request(path, template_path):
                               "Если данных для вариантов мало, сначала верните только brief с openQuestions.",
                               "Задавайте тип и допуск площади только при известной методике.",
                               "Для маршрута через несколько помещений задайте ACCESS_PATH. Минимальную ширину проёма укажите только при наличии требования.",
+                              "Для прямой лестницы между соседними этажами задайте STAIR_LINK, stairLinks и floorPlans с проёмом. Оставьте источник размеров и глубины обеих площадок.",
                               "Отдельно зафиксируйте неизвестные площадки, зоны открывания и межэтажные связи."],
                 executionPermission=False, nativeWriteCalls=0)

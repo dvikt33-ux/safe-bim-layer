@@ -11,6 +11,7 @@ import copy
 import hashlib
 import math
 from pathlib import Path
+import re
 
 import archicad_semantic_spatial as SPATIAL
 import archicad_semantic_brief as BRIEF
@@ -21,11 +22,103 @@ import archicad_scene_run as RUN
 READS=frozenset({"GetProjectInfo","GetStories","GetAttributesByType"})
 
 
+def _compile_stair_links(links, doc, geometry, floors, operations):
+    """Plan straight +Y flights with an explicit left baseline and two landings."""
+    from shapely.geometry import Polygon, box
+
+    checks = {row["id"]: row for row in geometry["requirements"]
+              if row.get("criterion", {}).get("kind") == "STAIR_LINK"}
+    if not isinstance(links, list) or len(links) > len(checks):
+        raise ValueError("STAIR_LINKS_REQUIRE_DISTINCT_BRIEF_CRITERIA")
+    if links and not floors:
+        raise ValueError("STAIR_LINK_REQUIRES_AUTHORED_FLOOR_PLANS")
+    stories = {row["id"]: (ordinal, row["level"]) for ordinal, row in enumerate(doc["stories"])}
+    fields = {"requirementId", "start", "stepCount", "widthM", "goingM", "favoriteName",
+              "source", "lowerLandingDepthM", "upperLandingDepthM"}
+    links_by_requirement, occupied_holes, reservations = {}, set(), []
+    eps = SPATIAL.EPS
+    for link in links:
+        if not isinstance(link, dict) or set(link) != fields:
+            raise ValueError("STAIR_LINK_INPUT_FIELDS_REQUIRED")
+        rid = BRIEF._id(link["requirementId"], "STAIR_REQUIREMENT_ID")
+        if rid not in checks or rid in links_by_requirement:
+            raise ValueError("STAIR_LINKS_REQUIRE_DISTINCT_BRIEF_CRITERIA")
+        source = link["source"]
+        if (not isinstance(source, dict) or set(source) != {"ref", "sha256"}
+                or not isinstance(source["ref"], str) or not source["ref"].strip()
+                or not isinstance(source["sha256"], str) or not re.fullmatch(r"[a-f0-9]{64}", source["sha256"])):
+            raise ValueError("STAIR_SOURCE_REFERENCE_AND_SHA256_REQUIRED")
+        name = BRIEF._name(link["favoriteName"], "STAIR_FAVORITE_NAME")
+        count, start = link["stepCount"], link["start"]
+        if type(count) is not int or not 2 <= count <= 200 or not isinstance(start, dict) or set(start) != {"x", "y"}:
+            raise ValueError("STAIR_FAVORITE_START_AND_STEP_COUNT_REQUIRED")
+        width, going, lower_depth, upper_depth = (SPATIAL.number(link[key], key) for key in
+            ("widthM", "goingM", "lowerLandingDepthM", "upperLandingDepthM"))
+        if min(width, going, lower_depth, upper_depth) <= eps:
+            raise ValueError("STAIR_FLIGHT_AND_LANDINGS_REQUIRE_POSITIVE_DIMENSIONS")
+        x, y = (SPATIAL.number(start[key], "STAIR_START_" + key) for key in ("x", "y"))
+        right, end = x + width, y + count * going
+        bounds = geometry["outline"]
+        if not (bounds["xMin"] <= x < right <= bounds["xMax"]
+                and bounds["yMin"] <= y - lower_depth < y < end < end + upper_depth <= bounds["yMax"]):
+            raise ValueError("STAIR_FLIGHT_OR_LANDING_OUTSIDE_LAYOUT")
+        criterion = checks[rid]["criterion"]
+        lower, upper = criterion["lowerStoryId"], criterion["upperStoryId"]
+        index, level = stories[lower]
+        height = stories[upper][1] - level
+        lower_landing, upper_landing = box(x, y - lower_depth, right, y), box(x, end, right, end + upper_depth)
+        if not floors[lower].buffer(eps).covers(lower_landing):
+            raise ValueError("STAIR_LOWER_LANDING_REQUIRES_SOLID_SLAB")
+        if not floors[upper].buffer(eps).covers(upper_landing):
+            raise ValueError("STAIR_UPPER_LANDING_REQUIRES_SOLID_SLAB")
+        flight = box(x, y, right, end)
+        hole_index = next((i for i, ring in enumerate(floors[upper].interiors)
+                           if Polygon(ring).buffer(eps).covers(flight)), None)
+        if hole_index is None:
+            raise ValueError("STAIR_FLIGHT_REQUIRES_MATCHING_UPPER_SLAB_VOID")
+        hole_key = upper, hole_index
+        if hole_key in occupied_holes:
+            raise ValueError("STAIR_UPPER_SLAB_VOID_ALREADY_ASSIGNED")
+        reserves = {lower: box(x, y - lower_depth, right, end), upper: box(x, y, right, end + upper_depth)}
+        if any(shape.intersection(prior[story]).area > eps ** 2
+               for prior in reservations for story, shape in reserves.items() if story in prior):
+            raise ValueError("STAIR_FLIGHT_OR_LANDING_INTERSECTS_ANOTHER_STAIR")
+        for wall in geometry["bearingLines"]:
+            reserve = reserves.get(wall["storyId"])
+            if reserve is None:
+                continue
+            c, a, b = wall["constantCoordinate"], wall["fromCoordinate"], wall["toCoordinate"]
+            half = wall["thicknessMeters"] / 2
+            footprint = box(c - half, a, c + half, b) if wall["direction"] == "X" else box(a, c - half, b, c + half)
+            if footprint.intersection(reserve).area > eps ** 2:
+                raise ValueError("STAIR_FLIGHT_OR_LANDING_INTERSECTS_WALL: " + wall["id"])
+        occupied_holes.add(hole_key)
+        reservations.append(reserves)
+
+        sid = "native-stair-" + rid
+        if len(sid) > 64:
+            sid = "native-stair-" + hashlib.sha256(rid.encode("ascii")).hexdigest()[:40]
+        slabs = ["native-slab-" + story for story in (lower, upper)]
+        operation = BUILD.step(sid, "CreateStairs", dict(favoriteName=name, floorIndex=index,
+            zCoordinate=level, totalHeight=height, baseLinePoints=[dict(x=x, y=y), dict(x=x, y=end)],
+            flightWidth=width, stepNum=count, riserHeight=height / count, treadDepth=going, finishVisible=False))
+        operation["after"] = slabs
+        operations.append(operation)
+        links_by_requirement[rid] = dict(requirementId=rid, stairOperationId=sid,
+            lowerSlabOperationId=slabs[0], upperSlabOperationId=slabs[1], upperSlabHoleIndex=hole_index,
+            source=copy.deepcopy(source), sourceStatus="DECLARED", flightLengthM=count * going,
+            lowerLandingDepthM=lower_depth, upperLandingDepthM=upper_depth,
+            nativeConnection="NOT_TESTED", headroom="UNVERIFIED", engineeringApproval="UNVERIFIED")
+    return links_by_requirement
+
+
 def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junction_policy=None,
-                      floor_plans=None,design_only=False):
+                      floor_plans=None,stair_links=None,design_only=False):
     """Native-schema validated single DAG, but never executable by this adapter."""
     if not design_only and not callable(read_api):
         raise ValueError("EXPLICIT_READ_ONLY_NATIVE_SOURCE_REQUIRED")
+    if stair_links is not None and not design_only:
+        raise ValueError("STAIR_LINK_NATIVE_BINDING_AND_READBACK_REQUIRED")
     def api(cmd,params):
         if cmd not in READS:
             raise ValueError("READ_ONLY_API_COMMAND_DENIED")
@@ -79,6 +172,7 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
 
     story_map={b["architecturalStoryId"]:b for b in known}
     ops=[]
+    floor_shapes = {}
     bounds=geometry["outline"]
     polygon=[
         BUILD.xy(bounds["xMin"],bounds["yMin"]),
@@ -111,8 +205,9 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
             BUILD.xy(footprint['xMin'],footprint['yMax'])] if junction_policy else polygon
         authored_floor=None
         if floor_plans is not None:
-            from shapely.geometry import LineString,Point,box
+            from shapely.geometry import LineString,box
             authored_floor,shape=BUILD.source_floor_polygon(floor_plans[sid])
+            floor_shapes[sid] = shape
             envelope=box(bounds['xMin'],bounds['yMin'],bounds['xMax'],bounds['yMax']).buffer(.6)
             if not envelope.covers(shape):raise ValueError('SOURCE_FLOOR_OUTSIDE_DECLARED_ENVELOPE')
             for member in walls:
@@ -149,6 +244,7 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
         ops.append(BUILD.step("native-opening-" + opening["id"], kind,
             BUILD.opening("native-" + opening["hostMemberId"], opening["centerOffset"],
                           opening["width"], opening["height"], opening["sillHeight"])))
+    stairs = _compile_stair_links(stair_links, doc, geometry, floor_shapes, ops) if stair_links is not None else {}
     schema=Path(schema_path or RUN.DEFAULT_SCENE_SCHEMA)
     if not schema.is_file():
         raise ValueError("NATIVE_TAPIR_SCHEMA_MISSING")
@@ -171,6 +267,11 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
     for row in requirements:
         if row.get("criterion", {}).get("kind") in ("ENTRANCE", "ROOM_CONNECTION", "ACCESS_PATH"):
             row["bimOperationIds"] = ["native-opening-" + oid for oid in row["designObjectIds"]]
+        if row["id"] in stairs:
+            connection = stairs[row["id"]]
+            row.update(status="PARTIAL", reason="FLIGHT_VOID_AND_LANDINGS_PLANNED_NATIVE_READBACK_PENDING",
+                       bimOperationIds=[connection[key] for key in (
+                           "stairOperationId", "lowerSlabOperationId", "upperSlabOperationId")])
     requirements_pending = [row["id"] for row in requirements
                             if row.get("priority") == "REQUIRED" and row["status"] != "DESIGN_CHECKED"]
     return {
@@ -183,6 +284,7 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
         "authoredOutline":geometry["outline"],
         "authoredStoryHeightsMeters":{k:float(v) for k,v in heights.items()},
         "authoredFloorPlans":copy.deepcopy(floor_plans),
+        **({"stairConnections": list(stairs.values())} if stairs else {}),
         "slabBasicMaterialName":material_name,
         "graph":graph,"executionOrder":checked["executionOrder"],
         "sourcePlanHash":checked["sourcePlanHash"],
