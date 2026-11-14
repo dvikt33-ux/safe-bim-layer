@@ -195,7 +195,7 @@ def execute_operation(writer, scene_id, command, parameters, source_hash,
             raise ValueError('DOCUMENTATION_SAVED_FILE_HASH_CHANGED')
         if command == 'PublishPublisherSet':
             output = Path(parameters['outputPath'])
-            if output.is_symlink() or (output.exists() and
+            if output.resolve() != output or (output.exists() and
                     (not output.is_dir() or any(output.iterdir()))):
                 raise ValueError('DOCUMENTATION_EXPORT_REQUIRES_NEW_EMPTY_DIRECTORY')
         try:
@@ -232,6 +232,11 @@ def execute_operation(writer, scene_id, command, parameters, source_hash,
         return proof
 
     def after(reply, prior):
+        publication = None
+        if command == 'PublishPublisherSet':
+            from archicad_native_documentation import publication_files
+
+            publication = publication_files(Path(parameters['outputPath']))
         proof = verify_after(reply, prior)
         if not isinstance(proof, dict) or not str(proof.get('status', '')).endswith('PASS'):
             raise ValueError('DOCUMENTATION_NATIVE_READBACK_REQUIRED')
@@ -241,7 +246,10 @@ def execute_operation(writer, scene_id, command, parameters, source_hash,
             if str(exc)!='DOCUMENTATION_LAYOUT_MODEL_WINDOW_REQUIRED':raise
             retained_proof=restore_model_window(writer,scene_id+'-db-after',source_hash,
                 retained_signatures,authorization_ref,saved_sha256)
-        return {**proof, 'retained': retained_proof}
+        readback = {**proof, 'retained': retained_proof}
+        if publication is not None:
+            readback['publicationFiles'] = publication
+        return readback
 
     return writer.execute_bound_operation(preflight, scene_id, command, parameters,
         RUN.digest(intent), before, after)

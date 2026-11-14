@@ -111,8 +111,11 @@ behavior without pretending the GUID fields are equal.
 page. File bytes, pages, titles, drawing scale and rendered facade were checked,
 including after Save/Open. The views publisher produced65pages despite selecting
 only two items; that path is not accepted as a selected subset. Outputs require
-new empty local directories and independent file readback: the SDK's empty{}
-success reply alone proves no PDF. No global Publisher settings were edited.
+new empty local directories. The shared documentation writer now validates that files exist and
+records each relative path, byte count and SHA-256 in its SQLite readback. An empty or missing
+export remains unverified even if the provider and the caller report success. File evidence
+still needs a page and source-scope check for a selected Layout. No global Publisher settings
+were edited.
 
 `archicad_native_documentation` reads native owner coverage, associative anchors,
 Drawing fill contours, schedule definitions and actual exported files. Native

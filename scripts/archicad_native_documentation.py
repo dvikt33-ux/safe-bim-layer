@@ -124,15 +124,20 @@ def projection_span_check(expected_span, actual_coordinates, tolerance=1e-5):
         'requiresIndependentProjectionAxisAndSourceScope': True}
 
 def publication_files(folder):
-    root=Path(folder).resolve(strict=True)
-    files=[]
-    for file in sorted(root.rglob('*')):
+    root = Path(folder).absolute()
+    if root.resolve() != root:
+        raise ValueError('NATIVE_EXPORT_PATH_ESCAPE')
+    if not root.is_dir():
+        raise ValueError('NATIVE_EXPORT_NO_FILE')
+    files = []
+    for file in root.rglob('*'):
+        if file.resolve() != file:
+            raise ValueError('NATIVE_EXPORT_PATH_ESCAPE')
         if not file.is_file():continue
-        if file.is_symlink() or not file.resolve().is_relative_to(root):raise ValueError('NATIVE_EXPORT_PATH_ESCAPE')
         raw=file.read_bytes()
         if not raw:raise ValueError('NATIVE_EXPORT_EMPTY_FILE')
         files.append({'name':file.relative_to(root).as_posix(),'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),
             'pdfSignature':raw.startswith(b'%PDF-')})
     if not files:raise ValueError('NATIVE_EXPORT_NO_FILE')
-    return {'status':'NATIVE_FILE_BYTES_READBACK_PASS','files':files,
+    return {'status':'NATIVE_FILE_BYTES_READBACK_PASS','files':sorted(files, key=lambda row: row['name']),
         'selectedPublisherSubset':'NOT_VERIFIED_UNTIL_FILE_PAGES_ARE_CHECKED','readyDrawingAcceptance':'REQUIRES_RENDER_AND_SOURCE_SCOPE_CHECK'}

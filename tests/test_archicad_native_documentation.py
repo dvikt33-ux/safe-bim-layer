@@ -78,6 +78,47 @@ class NativeDocumentationTests(unittest.TestCase):
             file.write_bytes(b'')
             with self.assertRaisesRegex(ValueError, 'EMPTY_FILE'): N.publication_files(temp)
 
+    def test_publisher_requires_actual_output_even_if_provider_and_callback_report_success(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp).resolve()
+            project = root / 'test.pln'
+            project.write_bytes(b'isolated PLN fixture')
+            folder = root / 'export'
+            params = {'publisherSetName': 'one-layout', 'outputPath': str(folder),
+                      'selectedNavigatorItemIds': [{'navigatorItemId': {'guid': NEW}}]}
+            write_output = False
+            published = []
+
+            def api(command, payload):
+                self.assertEqual((command, payload), ('PublishPublisherSet', params))
+                published.append(payload)
+                if write_output:
+                    folder.mkdir()
+                    (folder / 'sheet.pdf').write_bytes(b'%PDF-fixture')
+                return {}
+
+            writer = D.RUN.SceneWriter(api, root / 'publication.sqlite')
+            with (patch.object(writer, 'guarded_binding', return_value={'path': str(project)}),
+                  patch.object(D, 'capture_full_model', return_value={}),
+                  patch.object(D.C, 'retained_geometry_signatures', return_value={OLD: 'sig'})):
+                def publish(scene):
+                    return D.execute_operation(writer, scene, 'PublishPublisherSet', params, 'source',
+                        {OLD: 'sig'}, lambda *_: {'status': 'TEST_CALLBACK_PASS'}, 'synthetic test',
+                        saved_sha256=hashlib.sha256(project.read_bytes()).hexdigest())
+
+                failed = publish('test-missing-export')
+                self.assertEqual(failed['status'], 'PARTIAL_OR_UNKNOWN_OUTCOME')
+                self.assertIn('NATIVE_EXPORT_NO_FILE', failed['reason'])
+                with self.assertRaisesRegex(ValueError, 'RESERVED_NEVER_RETRY'):
+                    publish('test-missing-export')
+                self.assertEqual(len(published), 1)
+                write_output = True
+                checked = publish('test-read-export')
+                self.assertEqual(checked['status'], 'PASS')
+                evidence = checked['readback']['publicationFiles']
+                self.assertEqual(evidence['files'][0]['sha256'], hashlib.sha256(b'%PDF-fixture').hexdigest())
+                self.assertIn('NOT_VERIFIED', evidence['selectedPublisherSubset'])
+
     def test_layout_error_is_precise_and_other_native_errors_fail_closed(self):
         calls = []
         def api(*_):
