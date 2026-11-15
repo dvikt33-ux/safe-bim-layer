@@ -284,6 +284,7 @@ def main(argv=None):
     try:
         routes = {"project-runtime": ("archicad_project_accelerator", "main"),
                   "ac30-native-read": ("apa_ac30_tapir20", "main"),
+                  "ac30-mcp": ("apa_ac30_mcp", "main"),
                   "ac30-wall-preflight": ("apa_ac30_wall_preflight", "main"),
                   "ac30-normalize-changes": ("apa_ac30_change_normalizer", "main"),
                   "connected-runtime": ("archicad_connected_components", "main"),
