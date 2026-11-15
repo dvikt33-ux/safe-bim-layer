@@ -199,26 +199,30 @@ class MailboxContract(unittest.TestCase):
                 self.c.process(bridge, name)
         run.assert_not_called()
 
-    def test_authored_mailbox_pins_the_project_design_and_passes_the_local_grant(self):
+    def test_authored_mailbox_pins_the_project_design_and_returns_two_storey_evidence(self):
         import apa_project_design as design
 
         self.profile.unlink()
-        source = "examples/accelerator/r04-project-design.json"
+        source = "examples/accelerator/r06-two-storey-design.json"
         raw = (ROOT / source).read_bytes()
         ref = "4" * 40
         self.remote[f"repos/{mailbox.SOURCE_REPO}/contents/{source}?ref={ref}"] = raw
-        proposal = json.loads(raw)
-        bound = dict(proposal, brief=dict(proposal["brief"], mode="ADAPT_EXISTING", targetProjectPath=str(self.project)))
-        bound["brief"]["stories"][0]["existingNativeLabel"] = "Первый Этаж"
-        selected = design.select_variant(bound, "variant-a")
+        stories = [dict(architecturalStoryId="level-1", label="1 этаж", nativeIndex=0,
+                        floorId=1, nativeLabel="Первый Этаж", level=0),
+                   dict(architecturalStoryId="level-2", label="2 этаж", nativeIndex=1,
+                        floorId=2, nativeLabel="", level=3)]
+        selected = design.bind_variant(json.loads(raw), "two-storeys", self.project, [
+            dict(id=row["architecturalStoryId"], existingNativeIndex=row["nativeIndex"],
+                 existingFloorId=row["floorId"], existingNativeLabel=row["nativeLabel"]) for row in stories])
         intent = self.job / "intent.json"
         intent.write_text(json.dumps(selected, ensure_ascii=False), encoding="utf-8")
         stage = self.job / "job.json"
         staged = json.loads(stage.read_bytes())
-        staged.update(authoredIntentHash=core.RUN.digest(selected), intentSHA256=sha256(intent))
+        staged.update(authoredIntentHash=core.RUN.digest(selected), intentSHA256=sha256(intent),
+                      authoredStoryBindings=stories)
         stage.write_text(json.dumps(staged), encoding="utf-8")
         binding = self.root / "design-binding.json"
-        write_new_json(binding, dict(ref=ref, path=source, variant="variant-a", blobSha1=bridge.git_sha(raw)))
+        write_new_json(binding, dict(ref=ref, path=source, variant="two-storeys", blobSha1=bridge.git_sha(raw)))
         wrong = self.root / "different-variant.json"
         write_new_json(wrong, dict(json.loads(binding.read_bytes()), variant="missing-variant"))
         with self.assertRaisesRegex(ValueError, "REQUIRED_CHECKS_OPEN"):
@@ -233,23 +237,35 @@ class MailboxContract(unittest.TestCase):
         def preflight_native(*_, local_listener):
             self.assertIs(local_listener, mailbox.listener)
             write_new_json(preflight, dict(confirmHash="approved", listener=self.session))
-            return dict(status="READY_FOR_EXPLICIT_TEST_RUN", metrics={"elementCount": 9})
+            return dict(status="READY_FOR_EXPLICIT_TEST_RUN", metrics={"elementCount": 17}, authoredStoryBindings=stories)
 
         with (patch.object(mailbox, "listener", return_value=self.session),
               patch.object(mailbox.architecture, "preflight", side_effect=preflight_native)):
-            self.c.process(bridge, self.submit("plan"), port=self.session["port"])
+            result = self.c.process(bridge, self.submit("plan"))
+        self.assertEqual(result["result"]["authoredStoryBindings"], stories)
         job = self.submit("execute")
         preflight_sha = sha256(preflight)
         self.c.grant(bridge, job, create=True, confirm=preflight_sha)
-        saved = dict(status="LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN", savedSHA256="a" * 64,
-                     elementCount=44, addedGuids=[], addedByKind={}, bodyCountByAddedGuid={},
-                     nativeModelWriteAttempts=0, nativeSaveCalls=0, finalGuidSetSHA256="b", finalBrepSHA256="c")
-        write_new_json(self.job / "saved.json", saved)
+        added = [f"fixture-{index:02d}" for index in range(17)]
+        counts = {"0": 9, "1": 8}
+        saved = dict(status="LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN",
+                     elementCount=61, addedGuids=added, addedByKind={"Wall": 10, "Door": 3, "Window": 2, "Slab": 2},
+                     bodyCountByAddedGuid={}, nativeModelWriteAttempts=17, nativeSaveCalls=1,
+                     finalGuidSetSHA256="b" * 64, finalBrepSHA256="c" * 64,
+                     authoredStoryBindings=stories, elementCountsByStory=counts)
+
+        def execute_native(*_args, **_kwargs):
+            self.project.write_bytes(b"saved two-storey fixture")
+            saved["savedSHA256"] = sha256(self.project)
+            write_new_json(self.job / "saved.json", saved)
+            return saved
+
         with (patch.object(mailbox, "listener", return_value=self.session),
               patch.object(self.c, "saved", return_value=saved),
-              patch.object(mailbox.architecture, "execute", return_value=saved) as execute):
+              patch.object(mailbox.architecture, "execute", side_effect=execute_native) as execute):
             result = self.c.process(bridge, job)
             self.assertEqual(result["result"]["jobStatus"], "WAITING_CLOSE_AND_REOPEN")
+            self.assertEqual(result["result"]["elementCountsByStory"], counts)
             self.assertEqual(result, self.c.process(bridge, job))
             local_grant = sha256(self.job / "mailbox-local-grant.json")
             execute.assert_called_once_with(self.job, self.c.manifest, self.pin, confirm_preflight=preflight_sha,
@@ -257,6 +273,46 @@ class MailboxContract(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "AUTHORED_PREFLIGHT_HASH_DRIFT"):
                 self.c.run_execute(self.session, "0" * 64)
             self.assertEqual(execute.call_count, 1)
+
+        with patch.object(self.c, "saved", return_value=dict(saved, elementCountsByStory={"0": 8, "1": 9})):
+            with self.assertRaisesRegex(ValueError, "R03_MAILBOX_PUBLISHED_STORY_EVIDENCE_DRIFT"):
+                self.c.require_saved_result(bridge)
+
+        def close(*_args, expected_listener):
+            row = dict(status="NATIVE_NO_OPEN_PROJECT_CONFIRMED", port=expected_listener["port"],
+                       pid=expected_listener["pid"])
+            write_new_json(self.job / "closed.json", row)
+            return row
+
+        reopened = dict(saved, reopenVerified=True, reopenedGuidSetSHA256=saved["finalGuidSetSHA256"],
+                        reopenedBrepSHA256=saved["finalBrepSHA256"], verificationNativeWrites=0,
+                        reopenedGuids=[f"baseline-{i}" for i in range(44)] + added,
+                        reopenedStoryBindingsVerified=True)
+
+        def reopen(*_args, expected_listener):
+            self.assertEqual(expected_listener, self.session)
+            write_new_json(self.job / "reopened.json", reopened)
+            return reopened
+
+        with (patch.object(mailbox, "listener", return_value=self.session),
+              patch.object(self.c, "saved", return_value=saved),
+              patch.object(mailbox, "reservation_owner_exited", return_value=False),
+              patch.object(mailbox.architecture, "check_closed", side_effect=close)):
+            self.c.process(bridge, self.submit("closed"))
+            with patch.object(mailbox.architecture, "verify_reopen",
+                              return_value=dict(reopened, reopenedStoryBindingsVerified=False)):
+                with self.assertRaisesRegex(ValueError, "R03_MAILBOX_REOPENED_STORY_EVIDENCE_MISMATCH"):
+                    self.c.run_reopen(self.session, self.session["port"])
+            with patch.object(mailbox.architecture, "verify_reopen", side_effect=reopen):
+                name = self.submit("reopen")
+                result = self.c.process(bridge, name)
+        published = json.loads(self.remote[self.endpoint + f"{bridge.RESULTS}/{name}.json?ref=main"])
+        self.assertEqual(published, result)
+        self.assertEqual(result["result"]["verification"], "SAVE_REOPEN_VERIFIED")
+        self.assertEqual(result["result"]["authoredStoryBindings"], stories)
+        self.assertEqual(result["result"]["elementCountsByStory"], counts)
+        self.assertTrue(result["result"]["reopenedStoryBindingsVerified"])
+        self.assertEqual(len(result["result"]["guids"]), 61)
         local = self.job / "mailbox-design-source.json"
         local.write_text("{}", encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "DESIGN_SOURCE_DRIFT"):

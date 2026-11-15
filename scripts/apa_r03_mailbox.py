@@ -343,8 +343,14 @@ class Campaign:
         name = f"{self.target}-execute"
         folder = self.history / name
         result = self.require_published_result(folder, "EXECUTE")
+        saved = self.saved()
         require(result["jobStatus"] == "WAITING_CLOSE_AND_REOPEN"
-                and result["savedSha256"] == self.saved()["savedSHA256"], "R03_MAILBOX_SAVE_NOT_PUBLISHED")
+                and result["savedSha256"] == saved["savedSHA256"], "R03_MAILBOX_SAVE_NOT_PUBLISHED")
+        stories = self.saved_story_facts(saved)
+        if stories:
+            require(result.get("savedReceiptSha256") == sha256(self.state / "saved.json")
+                    and all(result.get(key) == value for key, value in stories.items()),
+                    "R03_MAILBOX_PUBLISHED_STORY_EVIDENCE_DRIFT")
         bridge.upload_result(name, folder, verify_existing=True)
 
     def require_closed_result(self, bridge):
@@ -376,6 +382,11 @@ class Campaign:
                 return dict(jobStatus="BLOCKED", detail=result.get("reason"), nativeWrites=0)
             plan = read_json(self.preflight_path())
             facts = dict(confirmPlanHash=plan["confirmHash"], metrics=result["metrics"])
+            if "authoredStoryBindings" in self.manifest:
+                bindings = result.get("authoredStoryBindings")
+                require(bindings == self.manifest["authoredStoryBindings"],
+                        "R03_MAILBOX_PREFLIGHT_STORY_EVIDENCE_DRIFT")
+                facts["authoredStoryBindings"] = bindings
         else:
             runtime = self.group_identity(port)
             plan = group.plan(self.state, port=port)
@@ -415,11 +426,24 @@ class Campaign:
                 "R03_MAILBOX_SAVED_PROCESS_OR_PLN_DRIFT")
         return self.saved_response(result)
 
+    def saved_story_facts(self, saved):
+        bindings = self.manifest.get("authoredStoryBindings")
+        if bindings is None:
+            return {}
+        counts = saved.get("elementCountsByStory")
+        require(saved.get("authoredStoryBindings") == bindings and isinstance(counts, dict)
+                and counts.keys() == {str(row["nativeIndex"]) for row in bindings}
+                and all(type(count) is int and count > 0 for count in counts.values())
+                and sum(counts.values()) == len(saved["addedGuids"]),
+                "R03_MAILBOX_SAVED_STORY_EVIDENCE_DRIFT")
+        return dict(authoredStoryBindings=bindings, elementCountsByStory=counts)
+
     def saved_response(self, result):
         if self.kind == "ARCHITECTURE":
             facts = dict(guidCount=result["elementCount"], addedGuids=result["addedGuids"],
                          addedByKind=result["addedByKind"], bodyCountByAddedGuid=result["bodyCountByAddedGuid"],
                          nativeModelWriteAttempts=result["nativeModelWriteAttempts"], saveCalls=result["nativeSaveCalls"])
+            facts.update(self.saved_story_facts(result))
         else:
             facts = dict(guidCount=result["finalGuidCount"], groupCount=result["groupCount"],
                          nativeCloneCalls=result["nativeCloneCalls"], saveCalls=result["saveCalls"],
@@ -512,10 +536,16 @@ class Campaign:
                 and result["reopenedBrepSHA256"] == saved["finalBrepSHA256"]
                 and result["savedSHA256"] == saved["savedSHA256"] and result["verificationNativeWrites"] == 0,
                 "R03_MAILBOX_REOPEN_READBACK_MISMATCH")
+        stories = self.saved_story_facts(saved)
+        if stories:
+            require(result.get("reopenedStoryBindingsVerified") is True
+                    and all(result.get(key) == value for key, value in stories.items()),
+                    "R03_MAILBOX_REOPENED_STORY_EVIDENCE_MISMATCH")
+            stories["reopenedStoryBindingsVerified"] = True
         return dict(jobStatus="COMPLETE", verification="SAVE_REOPEN_VERIFIED", saveReopenVerified=True,
                     nativeWrites=0, savedSha256=result["savedSHA256"], guids=result["reopenedGuids"],
                     guidSetSha256=result["reopenedGuidSetSHA256"], brepSha256=result["reopenedBrepSHA256"],
-                    reopenedReceiptSha256=sha256(self.state / "reopened.json"))
+                    reopenedReceiptSha256=sha256(self.state / "reopened.json"), **stories)
 
     def poll_job(self, bridge, name):
         action = self.phase(name)
