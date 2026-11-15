@@ -127,6 +127,8 @@ def native_plan_hash(preview, graph_hash):
         binding['nativeLibraryExpectations']=preview['nativeLibraryExpectations']
     if preview.get('integrationBindings'):
         binding['integrationBindings']=preview['integrationBindings']
+    if len(preview.get('storyBindings') or []) > 1:
+        binding['storyBindings'] = preview['storyBindings']
     return digest(binding)
 
 
@@ -839,6 +841,8 @@ class SceneWriter:
         if target is not None and target != binding["path"]:
             raise ValueError("AUTHORED_TARGET_DIFFERS_FROM_WRITER_BINDING")
         if bindings:
+            from archicad_semantic_brief import native_story_name
+
             stories = self.api("GetStories", {}).get("stories")
             if not isinstance(stories, list):
                 raise ValueError("STORY_MAP_UNAVAILABLE")
@@ -847,7 +851,7 @@ class SceneWriter:
                                r.get("index") == binding_row["nativeIndex"]), None)
                 if (not actual or actual.get("floorId") != binding_row["floorId"]
                         or not close(actual.get("level"), binding_row["level"])
-                        or (actual.get("name") or actual.get("uName") or "") != binding_row["label"]):
+                        or native_story_name(actual) != binding_row["label"]):
                     raise ValueError("UNVERIFIED_NAMED_STORY: " + binding_row["label"])
         if preview["schemaVersion"] != binding["tapirVersion"]:
             raise ValueError("TAPIR_SCHEMA_VERSION_MISMATCH")

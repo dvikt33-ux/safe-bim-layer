@@ -1,5 +1,6 @@
 """Adapt existing coordination and knowledge inputs to the common application."""
 
+from collections import Counter
 import hashlib
 import json
 from pathlib import Path
@@ -146,6 +147,15 @@ def _verified_authored_job(job):
             "DESIGN_EVIDENCE_NATIVE_GUID_OR_BREP_DRIFT")
     signatures = architecture.C.retained_geometry_signatures(native, guids)
     require(digest(signatures) == saved["finalSignaturesSHA256"], "DESIGN_EVIDENCE_NATIVE_SIGNATURE_DRIFT")
+    if "authoredStoryBindings" in stage:
+        stories = stage["authoredStoryBindings"]
+        actual = {guid: elements[guid]["homeStory"] for guid in saved["addedGuids"]}
+        counts = {str(index): count for index, count in Counter(actual.values()).items()}
+        require(stories == result.get("authoredStoryBindings") == saved["authoredStoryBindings"]
+                and actual == result.get("bimHomeStories")
+                and counts == saved.get("elementCountsByStory")
+                and set(counts) == {str(row["nativeIndex"]) for row in stories},
+                "DESIGN_EVIDENCE_NATIVE_STORY_BINDING_DRIFT")
     provenance = dict(intentSha256=intent_sha, planSha256=manifest["plan.json"], resultSha256=manifest["result.json"],
                       nativeDumpSha256=native_sha, reopenedReceiptSha256=sha256(reopened_path),
                       savedPlnSha256=saved["savedSHA256"], guidSetSha256=saved["finalGuidSetSHA256"],
@@ -225,16 +235,31 @@ def document_reopened_job(job, destination, story=None):
     require(len(set(bound.values())) == len(bound) and set(bound.values()) | children == set(selected),
             "DOCUMENTATION_UNEXPLAINED_OPERATION_GUIDS")
 
-    snapshot = make_snapshot(native, selected)
-    occupied = sorted({row["storyIndex"] for row in snapshot["elements"]})
+    occupied = sorted({elements[guid]["homeStory"] for guid in selected})
     stories = occupied if story is None else [story]
     require(set(stories) <= set(occupied), "DOCUMENTATION_STORY_OUTSIDE_VERIFIED_ASSEMBLY")
+    story_indices = set(stories)
+    document_guids = [guid for guid in selected if elements[guid]["homeStory"] in story_indices]
+    document_guid_set = set(document_guids)
+    document_operations = {sid: guid for sid, guid in bound.items() if guid in document_guid_set}
+    requirements = requirement_readback(result)
+    if story is not None:
+        requirements = [row for row in requirements if row["operations"]
+                        and row["operations"].keys() <= document_operations.keys()]
+    snapshot = make_snapshot(native, document_guids)
     package = bundle(snapshot, stories[0])
     plans = {str(stories[0]): package["plan"]}
     plans.update({str(index): bundle(snapshot, index)["plan"] for index in stories[1:]})
     package.update(plansByStory=plans,
-                   projectId=intent["projectId"], operationGuids=bound,
-                   requirements=requirement_readback(result), provenance=provenance)
+                   projectId=intent["projectId"], operationGuids=document_operations,
+                   requirements=requirements, provenance=provenance)
+    if "authoredStoryBindings" in reopened:
+        package["authoredStoryBindings"] = [row for row in reopened["authoredStoryBindings"]
+                                            if row["nativeIndex"] in stories]
+        package["specificationsByStory"] = {
+            index: dict(sorted(Counter(row["nativeType"] for row in plan_row["elements"]).items()))
+            for index, plan_row in plans.items()
+        }
     if "wallSystems" in result:
         wall_systems = result["wallSystems"]
         require(reopened.get("reopenedWallSystemsVerified") is True
@@ -242,14 +267,19 @@ def document_reopened_job(job, destination, story=None):
                 and reopened.get("wallSystemPlanSHA256") == provenance["planSha256"]
                 and all(bound.get(sid) == row["guid"].lower() for sid, row in wall_systems["readback"].items()),
                 "DOCUMENTATION_REOPENED_WALL_SYSTEM_READBACK_REQUIRED")
-        package["wallSystems"] = wall_systems
-        package["wallDesignCoordination"] = plan["authoredCandidate"].get("wallCoordination", [])
+        package["wallSystems"] = dict(wall_systems, readback={sid: row for sid, row in wall_systems["readback"].items()
+                                                            if sid in document_operations})
+        coordination = plan["authoredCandidate"].get("wallCoordination", [])
+        package["wallDesignCoordination"] = (coordination if story is None else [row for row in coordination
+                                            if "native-" + row["wallMemberId"] in document_operations])
     write_package(package, destination)
     files = {path.name: sha256(path) for path in sorted(destination.iterdir())}
     receipt = dict(status="REOPENED_ASSEMBLY_DOCUMENTATION_WRITTEN", jobId=job.name,
-                   modelVersion=package["modelVersion"], stories=stories, elementCount=len(selected),
+                   modelVersion=package["modelVersion"], stories=stories, elementCount=len(document_guids),
                    specifications={key: row["count"] for key, row in package["specifications"].items()},
                    provenance=provenance, files=files, nativeCalls=0, modelWrites=0)
+    if "specificationsByStory" in package:
+        receipt["specificationsByStory"] = package["specificationsByStory"]
     write_new_json(destination / "receipt.json", receipt)
     return receipt
 

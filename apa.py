@@ -221,6 +221,7 @@ def parser():
     cmd = commands.add_parser("architecture-stage", help="Подготовить свежую тестовую копию для оболочки или выбранного варианта")
     cmd.add_argument("--job", type=Path, required=True)
     cmd.add_argument("--intent", type=Path, required=True)
+    cmd.add_argument("--variant", help="ID варианта в исходном проектном задании без привязки к PLN")
     cmd.add_argument("--donor", type=Path, required=True)
     cmd.add_argument("--donor-sha256", required=True)
     cmd.add_argument("--baseline-trace", type=Path, required=True)
@@ -395,7 +396,8 @@ def main(argv=None):
             from apa_r03_architecture import stage
 
             result = stage(args.job.resolve(), args.intent.resolve(strict=True), args.port,
-                           args.donor.resolve(strict=True), args.donor_sha256, args.baseline_trace.resolve(strict=True))
+                           args.donor.resolve(strict=True), args.donor_sha256, args.baseline_trace.resolve(strict=True),
+                           variant_id=args.variant)
         elif args.mode == "architecture-runtime":
             from contextlib import nullcontext
             from apa_ac29_autonomous_job_bridge import acquire_singleton

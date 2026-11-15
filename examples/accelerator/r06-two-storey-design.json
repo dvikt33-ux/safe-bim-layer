@@ -1,0 +1,386 @@
+{
+  "schemaVersion": "apa-project-design/1",
+  "brief": {
+    "schemaVersion": "apa-semantic-project-brief/1",
+    "projectId": "r06-two-storey-demo",
+    "mode": "GENERATE_FROM_ZERO",
+    "units": "meters",
+    "site": {
+      "siteId": "demo-site",
+      "region": null
+    },
+    "stories": [
+      {
+        "id": "level-1",
+        "label": "1 этаж",
+        "level": 0
+      },
+      {
+        "id": "level-2",
+        "label": "2 этаж",
+        "level": 3
+      }
+    ],
+    "rooms": [
+      {
+        "id": "hall",
+        "name": "Холл",
+        "storyId": "level-1",
+        "minAreaM2": 10
+      },
+      {
+        "id": "living",
+        "name": "Гостиная",
+        "storyId": "level-1",
+        "minAreaM2": 12
+      },
+      {
+        "id": "landing-upper",
+        "name": "Холл второго этажа",
+        "storyId": "level-2",
+        "minAreaM2": 10
+      },
+      {
+        "id": "study-upper",
+        "name": "Кабинет",
+        "storyId": "level-2",
+        "minAreaM2": 12
+      }
+    ],
+    "constraints": [
+      {
+        "id": "front-door",
+        "text": "Вход снаружи в холл",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "REQUIRED",
+        "sourceRef": "Исходное задание §1",
+        "criterion": {
+          "kind": "ENTRANCE",
+          "from": "$outside",
+          "to": "hall"
+        }
+      },
+      {
+        "id": "hall-living",
+        "text": "Прямой проход из холла в гостиную",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "REQUIRED",
+        "sourceRef": "Исходное задание §2",
+        "criterion": {
+          "kind": "ROOM_CONNECTION",
+          "from": "hall",
+          "to": "living"
+        }
+      },
+      {
+        "id": "upper-access",
+        "text": "Прямой проход из холла второго этажа в кабинет",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "REQUIRED",
+        "sourceRef": "Демонстрационное задание R06 §3",
+        "criterion": {
+          "kind": "ROOM_CONNECTION",
+          "from": "landing-upper",
+          "to": "study-upper"
+        }
+      }
+    ],
+    "openQuestions": [
+      "Проём и подъём на второй этаж проверяются отдельным сценарием с нативной лестницей."
+    ]
+  },
+  "cseCandidate": {
+    "candidateId": "rc-basic-slab-v1",
+    "systemFamily": "reinforced-concrete-slab-provisional",
+    "role": "floor-slab",
+    "source": {
+      "sourceId": "apa-native-slab-readback-20261011",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr35-basic-slab-implementation-partial-20261011.md",
+      "gitBlobSha": "e4bf711bdc3322f594699b59ea34107cde0bcfdf",
+      "publisher": "APA",
+      "rights": "LINK_ONLY_RIGHTS_UNVERIFIED",
+      "status": "TECHNICAL_REFERENCE",
+      "licenseEvidenceUri": null,
+      "applicabilityNote": "Иллюстративный кандидат. Пригодность для здания и привязка материала требуют проверки."
+    },
+    "native": {
+      "attributeType": "BuildingMaterial",
+      "name": "Железобетон - Конструкционный",
+      "expectedProjectGuid": null
+    },
+    "thicknessMeters": 0.2,
+    "storyIds": [
+      "level-1",
+      "level-2"
+    ],
+    "requiredInterfaceConditions": [
+      "slab-wall-bearing"
+    ],
+    "selectedDetailIds": []
+  },
+  "variants": [
+    {
+      "id": "two-storeys",
+      "storyHeights": {
+        "level-1": 3,
+        "level-2": 3
+      },
+      "layout": {
+        "schemaVersion": "apa-authored-spatial-layout/1",
+        "outline": {
+          "xMin": 400,
+          "xMax": 408,
+          "yMin": 400,
+          "yMax": 406
+        },
+        "rooms": [
+          {
+            "roomId": "hall",
+            "storyId": "level-1",
+            "rectangle": {
+              "xMin": 400,
+              "xMax": 403,
+              "yMin": 400,
+              "yMax": 406
+            }
+          },
+          {
+            "roomId": "living",
+            "storyId": "level-1",
+            "rectangle": {
+              "xMin": 403,
+              "xMax": 408,
+              "yMin": 400,
+              "yMax": 406
+            }
+          },
+          {
+            "roomId": "landing-upper",
+            "storyId": "level-2",
+            "rectangle": {
+              "xMin": 400,
+              "xMax": 403,
+              "yMin": 400,
+              "yMax": 406
+            }
+          },
+          {
+            "roomId": "study-upper",
+            "storyId": "level-2",
+            "rectangle": {
+              "xMin": 403,
+              "xMax": 408,
+              "yMin": 400,
+              "yMax": 406
+            }
+          }
+        ],
+        "axes": [
+          {
+            "id": "axis-west",
+            "direction": "X",
+            "coordinate": 400
+          },
+          {
+            "id": "axis-mid",
+            "direction": "X",
+            "coordinate": 403
+          },
+          {
+            "id": "axis-east",
+            "direction": "X",
+            "coordinate": 408
+          },
+          {
+            "id": "axis-south",
+            "direction": "Y",
+            "coordinate": 400
+          },
+          {
+            "id": "axis-north",
+            "direction": "Y",
+            "coordinate": 406
+          }
+        ],
+        "bearingLines": [
+          {
+            "id": "wall-west",
+            "storyId": "level-1",
+            "axisId": "axis-west",
+            "fromCoordinate": 400,
+            "toCoordinate": 406,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-mid",
+            "storyId": "level-1",
+            "axisId": "axis-mid",
+            "fromCoordinate": 400,
+            "toCoordinate": 406,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-east",
+            "storyId": "level-1",
+            "axisId": "axis-east",
+            "fromCoordinate": 400,
+            "toCoordinate": 406,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-south",
+            "storyId": "level-1",
+            "axisId": "axis-south",
+            "fromCoordinate": 400,
+            "toCoordinate": 408,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-north",
+            "storyId": "level-1",
+            "axisId": "axis-north",
+            "fromCoordinate": 400,
+            "toCoordinate": 408,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-west-upper",
+            "storyId": "level-2",
+            "axisId": "axis-west",
+            "fromCoordinate": 400,
+            "toCoordinate": 406,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-mid-upper",
+            "storyId": "level-2",
+            "axisId": "axis-mid",
+            "fromCoordinate": 400,
+            "toCoordinate": 406,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-east-upper",
+            "storyId": "level-2",
+            "axisId": "axis-east",
+            "fromCoordinate": 400,
+            "toCoordinate": 406,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-south-upper",
+            "storyId": "level-2",
+            "axisId": "axis-south",
+            "fromCoordinate": 400,
+            "toCoordinate": 408,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-north-upper",
+            "storyId": "level-2",
+            "axisId": "axis-north",
+            "fromCoordinate": 400,
+            "toCoordinate": 408,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          }
+        ],
+        "loadPaths": [
+          {
+            "upperMemberId": "wall-west-upper",
+            "lowerMemberId": "wall-west"
+          },
+          {
+            "upperMemberId": "wall-mid-upper",
+            "lowerMemberId": "wall-mid"
+          },
+          {
+            "upperMemberId": "wall-east-upper",
+            "lowerMemberId": "wall-east"
+          },
+          {
+            "upperMemberId": "wall-south-upper",
+            "lowerMemberId": "wall-south"
+          },
+          {
+            "upperMemberId": "wall-north-upper",
+            "lowerMemberId": "wall-north"
+          }
+        ],
+        "passages": [
+          {
+            "id": "entry-door",
+            "kind": "DOOR",
+            "hostMemberId": "wall-west",
+            "centerOffset": 2,
+            "width": 1,
+            "height": 2.1,
+            "sillHeight": 0,
+            "connects": [
+              "$outside",
+              "hall"
+            ]
+          },
+          {
+            "id": "hall-door",
+            "kind": "DOOR",
+            "hostMemberId": "wall-mid",
+            "centerOffset": 3,
+            "width": 0.85,
+            "height": 2.1,
+            "sillHeight": 0,
+            "connects": [
+              "hall",
+              "living"
+            ]
+          },
+          {
+            "id": "living-window",
+            "kind": "WINDOW",
+            "hostMemberId": "wall-east",
+            "centerOffset": 3,
+            "width": 1.4,
+            "height": 1.3,
+            "sillHeight": 0.9
+          },
+          {
+            "id": "hall-door-upper",
+            "kind": "DOOR",
+            "hostMemberId": "wall-mid-upper",
+            "centerOffset": 3,
+            "width": 0.85,
+            "height": 2.1,
+            "sillHeight": 0,
+            "connects": [
+              "landing-upper",
+              "study-upper"
+            ]
+          },
+          {
+            "id": "living-window-upper",
+            "kind": "WINDOW",
+            "hostMemberId": "wall-east-upper",
+            "centerOffset": 3,
+            "width": 1.4,
+            "height": 1.3,
+            "sillHeight": 0.9
+          }
+        ]
+      },
+      "junctionPolicy": {
+        "schema": "apa-native-junction-policy/1",
+        "slabFootprint": "OUTER_WALL_FACE",
+        "intermediateWallTop": "SLAB_UNDERSIDE"
+      }
+    }
+  ]
+}

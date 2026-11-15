@@ -190,6 +190,7 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
     ops=[]
     wall_bindings, roles = {}, {}
     floor_shapes = {}
+    wall_heights = {}
     bounds=geometry["outline"]
     polygon=[
         BUILD.xy(bounds["xMin"],bounds["yMin"]),
@@ -216,6 +217,7 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
             if story_number+1<len(doc['stories']):
                 wall_height-=slab['thicknessMeters']
                 if wall_height<=0:raise ValueError('SLAB_LEAVES_NO_CLEAR_WALL_HEIGHT')
+        wall_heights[sid] = wall_height
         slab_polygon=[BUILD.xy(footprint['xMin'],footprint['yMin']),
             BUILD.xy(footprint['xMax'],footprint['yMin']),
             BUILD.xy(footprint['xMax'],footprint['yMax']),
@@ -269,7 +271,7 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
             ops.append(BUILD.step(op, "CreateWalls", payload))
     for opening in geometry["openings"]:
         kind = "CreateDoors" if opening["kind"] == "DOOR" else "CreateWindows"
-        if opening["sillHeight"] + opening["height"] > float(heights[opening["storyId"]]) + SPATIAL.EPS:
+        if opening["sillHeight"] + opening["height"] > wall_heights[opening["storyId"]] + SPATIAL.EPS:
             raise ValueError("PASSAGE_EXCEEDS_STORY_HEIGHT")
         ops.append(BUILD.step("native-opening-" + opening["id"], kind,
             BUILD.opening("native-" + opening["hostMemberId"], opening["centerOffset"],

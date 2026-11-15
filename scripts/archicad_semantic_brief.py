@@ -246,20 +246,27 @@ def resolve_stories(normalized, api):
             or project.get("isUntitled") is not False or
             project.get("isTeamwork") is not False):
         raise ValueError("WRONG_ACTIVE_SINGLE_PLN")
-    state=read("GetStories")
+    return match_native_stories(normalized, read("GetStories"))
+
+
+def native_story_name(row):
+    return row["name"] if isinstance(row.get("name"), str) else (row.get("uName") or "")
+
+
+def native_story_at_level(row, level):
+    return (isinstance(row, dict) and type(row.get("index")) is int
+            and type(row.get("floorId")) is int and type(row.get("level")) in (int, float)
+            and math.isfinite(row["level"]) and abs(row["level"] - level) <= 1e-5)
+
+
+def match_native_stories(normalized, state):
     current=state.get("stories") if isinstance(state,dict) else None
     if not isinstance(current,list):
         raise ValueError("NATIVE_STORY_INVENTORY_UNAVAILABLE")
     bindings=[]
     for story in normalized["stories"]:
-        matches=[s for s in current if isinstance(s,dict)
-                 and (s.get("name") if isinstance(s.get("name"),str)
-                      else (s.get("uName") or ""))==story["existingNativeLabel"]
-                 and type(s.get("index")) is int
-                 and type(s.get("floorId")) is int
-                 and type(s.get("level")) in (int,float)
-                 and math.isfinite(s["level"])
-                 and abs(s["level"]-story["level"])<=1e-5
+        matches=[s for s in current if native_story_at_level(s, story["level"])
+                 and native_story_name(s)==story["existingNativeLabel"]
                  and (story["existingNativeIndex"] is None
                       or (s["index"]==story["existingNativeIndex"]
                           and s["floorId"]==story["existingFloorId"]))]

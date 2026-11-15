@@ -1,6 +1,7 @@
 """Orchestrate the existing brief, library pack, spatial checks and BIM compiler."""
 from __future__ import annotations
 
+from copy import deepcopy
 from pathlib import Path
 
 import archicad_authored_native_plan as NATIVE
@@ -10,6 +11,7 @@ import archicad_semantic_spatial as SPATIAL
 
 
 SCHEMA = "apa-project-design/1"
+NATIVE_STORY_FIELDS = {"existingNativeLabel", "existingNativeIndex", "existingFloorId"}
 
 
 def compile_design(intent):
@@ -36,7 +38,7 @@ def _review_design(intent):
     output, sources = [], {}
     for row in variants:
         needed = {"id", "layout", "storyHeights"}
-        if not isinstance(row, dict) or not needed <= set(row) <= needed | {"floorPlans", "stairLinks"}:
+        if not isinstance(row, dict) or not needed <= set(row) <= needed | {"floorPlans", "stairLinks", "junctionPolicy"}:
             raise ValueError("APA_DESIGN_VARIANT_FIELDS_REQUIRED")
         variant = BRIEF._id(row["id"], "DESIGN_VARIANT_ID")
         if variant in sources:
@@ -48,6 +50,7 @@ def _review_design(intent):
         try:
             candidate = NATIVE.compile_candidate(brief, pack, row["layout"], row["storyHeights"],
                                                None, floor_plans=row.get("floorPlans"),
+                                               junction_policy=row.get("junctionPolicy"),
                                                stair_links=row.get("stairLinks"), design_only=True)
         except ValueError as exc:
             result.update(status="INVALID_VARIANT", reason=str(exc),
@@ -85,6 +88,27 @@ def select_variant(intent, variant_id):
     return dict(schemaVersion="apa-authored-project/1", projectId=report["brief"]["projectId"],
                 units="meters", brief=intent["brief"], cseCandidate=intent["cseCandidate"],
                 **{key: value for key, value in row.items() if key not in {"id", "stairLinks"}})
+
+
+def bind_variant(intent, variant_id, project, local_stories):
+    """Bind an unbound GPT variant using only locally chosen target and floor identities."""
+    if not isinstance(intent, dict) or intent.get("schemaVersion") != SCHEMA:
+        raise ValueError("APA_AUTHORED_SOURCE_DESIGN_REQUIRED")
+    proposal = deepcopy(intent)
+    brief = proposal["brief"]
+    normalized = BRIEF.normalize(brief)
+    stories = brief["stories"]
+    if (normalized["mode"] != "GENERATE_FROM_ZERO" or "targetProjectPath" in brief
+            or any(NATIVE_STORY_FIELDS & row.keys() for row in stories)):
+        raise ValueError("APA_AUTHORED_SOURCE_REQUIRES_UNBOUND_DESIGN")
+    local = {row["id"]: row for row in local_stories}
+    if len(local) != len(local_stories) or local.keys() != {row["id"] for row in stories}:
+        raise ValueError("APA_AUTHORED_LOCAL_STORY_IDS_DO_NOT_MATCH_DESIGN")
+    brief.update(mode="ADAPT_EXISTING", targetProjectPath=str(project))
+    for row in stories:
+        native = local[row["id"]]
+        row.update({field: native[field] for field in NATIVE_STORY_FIELDS & native.keys()})
+    return select_variant(proposal, variant_id)
 
 
 def changes_between(previous, current, variant):

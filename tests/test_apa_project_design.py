@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import apa_project_design as design
 import apa_r03_architecture as architecture
+from apa_r03_mailbox import authored_source
 import archicad_project_accelerator as core
 import archicad_native_stair_connection as stairs
 from test_archicad_isolated_authored_execution import IsolatedNative
@@ -370,6 +371,64 @@ class DesignTests(unittest.TestCase):
                 bind.assert_not_called()
             self.assertFalse((job / "attempted.json").exists())
             self.assertFalse(Path(str(scratch) + ".apa-write.lock").exists())
+
+    def test_two_storey_variant_stays_bound_to_the_same_template_floors(self):
+        source = INPUT.with_name("r06-two-storey-design.json")
+        design_source = architecture.read(source)
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder).resolve()
+            job = root / "r03-two-storey-test"
+            donor = root / "donor.pln"
+            donor.write_bytes(b"fixture")
+            native = IsolatedNative()
+            stories = native("GetStories", {})
+            dump = {"stories": [dict(index=row["index"], elevation=row["level"], nativeStoryName=row["name"])
+                                for row in stories["stories"]]}
+            trace = root / "trace.jsonl"
+            trace.write_text(json.dumps(dict(command="GetStories", response=stories)) + "\n", encoding="utf-8")
+            with (patch.object(architecture.group, "accepted_baseline", return_value=(dump, [])),
+                  patch.object(architecture.group, "fingerprint", return_value="fixture-brep")):
+                staged = architecture.stage(job, source, 19723, donor, architecture.sha256(donor), trace,
+                                            variant_id="two-storeys")
+            selected = architecture.read(job / "intent.json")
+            bound = staged["authoredStoryBindings"]
+            self.assertEqual([(row["nativeIndex"], row["floorId"], row["nativeLabel"]) for row in bound],
+                             [(0, 1, "Первый Этаж"), (1, 2, "")])
+            authored_source(design_source, staged["project"], selected, "two-storeys")
+            changed = deepcopy(design_source)
+            changed["brief"]["stories"][1]["existingNativeIndex"] = 1
+            with self.assertRaisesRegex(ValueError, "REQUIRES_UNBOUND_DESIGN|EXPLICIT_NATIVE_STORY_IDENTITY_REQUIRED"):
+                authored_source(changed, staged["project"], selected, "two-storeys")
+
+            def drifted(command, params):
+                response = native(command, params)
+                if command == "GetStories":
+                    response["stories"][1]["floorId"] = 9
+                return response
+
+            output = root / "preflight"
+            ledger = root / "ledger"
+            with (patch.object(core.RUN, "EXPECTED_PATH", staged["project"]),
+                  patch.object(core.RUN, "EXPECTED_NAME", Path(staged["project"]).stem),
+                  patch.object(core.RUN, "authorized_authored_target", return_value=True)):
+                preflight = core.run_project(selected, architecture.SCHEMA, output, ledger,
+                                             mode="preflight", transport=native)
+                self.assertEqual(preflight["status"], "READY_FOR_EXPLICIT_TEST_RUN", preflight)
+                self.assertEqual(preflight["authoredStoryBindings"], bound)
+                args = dict(mode="execute", run_id=job.name, confirm_hash=preflight["confirmPlanHash"])
+                refused = core.run_project(selected, architecture.SCHEMA, root / "drift", ledger,
+                                           transport=drifted, **args)
+                self.assertEqual(refused["status"], "BLOCKED", refused)
+                self.assertEqual(refused["modelWriteAttempts"], 0)
+                self.assertFalse(ledger.exists())
+                ledger.mkdir()
+                result = core.run_project(selected, architecture.SCHEMA, root / "model", ledger,
+                                          transport=native, **args)
+                self.assertEqual(result["status"], "COMPLETE_UNSAVED", result)
+                self.assertEqual(len(result["addedGuids"]), 17)
+                self.assertEqual(list(result["bimHomeStories"].values()).count(1), 8)
+                upper_door = result["bimOperationReadback"]["native-opening-hall-door-upper"]["guid"]
+                self.assertEqual(result["bimHomeStories"][upper_door], 1)
 
     def test_access_path_tracks_both_doors_and_detects_insufficient_width(self):
         self.input["brief"]["constraints"].append(dict(id="access-to-living", text="Путь в гостиную",

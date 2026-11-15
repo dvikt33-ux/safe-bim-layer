@@ -22,17 +22,58 @@ def read(path):
     return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
-def stage(job, intent_path, port, donor, donor_sha, baseline_trace):
+def archived_story_inventory(trace, model):
+    rows = (json.loads(line) for line in trace.read_text(encoding="utf-8").splitlines())
+    inventories = [row["response"]["stories"] for row in rows if row.get("command") == "GetStories"
+                   and isinstance(row.get("response"), dict) and isinstance(row["response"].get("stories"), list)]
+    require(inventories and all(inventory == inventories[0] for inventory in inventories),
+            "APA_ARCHITECTURE_STABLE_ARCHIVED_GETSTORIES_REQUIRED")
+    import archicad_semantic_brief as brief
+
+    native = inventories[0]
+    actual = {row["index"]: (brief.native_story_name(row), row["level"]) for row in native
+              if isinstance(row, dict) and type(row.get("level")) in (int, float)
+              and brief.native_story_at_level(row, row["level"])}
+    expected = {row["index"]: (row["nativeStoryName"], row["elevation"]) for row in model["stories"]}
+    require(len(actual) == len(native) == len(expected) and actual.keys() == expected.keys()
+            and all(actual[index][0] == name and R.close(actual[index][1], level)
+                    for index, (name, level) in expected.items()),
+            "APA_ARCHITECTURE_ARCHIVED_STORIES_DIFFER_FROM_MODEL_DUMP")
+    return {"stories": native}
+
+
+def stage(job, intent_path, port, donor, donor_sha, baseline_trace, *, variant_id=None):
     require(19723 <= port <= 19743 and sha256(donor) == donor_sha,
             "APA_ARCHITECTURE_PINNED_DONOR_AND_PORT_REQUIRED")
-    intent_sha = sha256(intent_path)
+    source_sha = sha256(intent_path)
     intent = read(intent_path)
     scratch = job / "model" / MODEL
+    if variant_id is not None:
+        from apa_project_design import SCHEMA as DESIGN_SCHEMA, bind_variant
+        import archicad_semantic_brief as brief
+
+        require(intent.get("schemaVersion") == DESIGN_SCHEMA, "APA_ARCHITECTURE_VARIANT_SOURCE_REQUIRED")
+        trace_sha = sha256(baseline_trace)
+        baseline, ids = group.accepted_baseline(baseline_trace)
+        inventory = archived_story_inventory(baseline_trace, baseline)
+        local_stories = []
+        for row in brief.normalize(intent["brief"])["stories"]:
+            matches = [native for native in inventory["stories"]
+                       if brief.native_story_at_level(native, row["level"])]
+            require(len(matches) == 1, "APA_ARCHITECTURE_EXISTING_FLOOR_NOT_UNIQUE:" + row["id"])
+            native = matches[0]
+            local_stories.append(dict(id=row["id"], existingNativeIndex=native["index"],
+                                      existingFloorId=native["floorId"],
+                                      existingNativeLabel=brief.native_story_name(native)))
+        intent = bind_variant(intent, variant_id, scratch, local_stories)
     design = intent.get("schemaVersion") == "apa-authored-project/1"
+    story_bindings = None
     if design:
         from apa_project_design import SCHEMA as DESIGN_SCHEMA, compile_design
+        import archicad_semantic_brief as brief
 
-        variant_fields = {key: intent[key] for key in ("layout", "storyHeights", "floorPlans") if key in intent}
+        variant_fields = {key: intent[key] for key in ("layout", "storyHeights", "floorPlans", "junctionPolicy")
+                          if key in intent}
         proposal = dict(schemaVersion=DESIGN_SCHEMA, brief=intent["brief"],
                         cseCandidate=intent["cseCandidate"], variants=[dict(id="selected-variant", **variant_fields)])
         report = compile_design(proposal)
@@ -42,34 +83,53 @@ def stage(job, intent_path, port, donor, donor_sha, baseline_trace):
                 and intent["units"] == "meters" and intent["projectId"] == report["brief"]["projectId"]
                 and report["brief"]["mode"] == "ADAPT_EXISTING"
                 and intent["brief"]["targetProjectPath"] == str(scratch)
-                and len(report["brief"]["stories"]) == 1 and variant["status"] == "DESIGN_CHECKS_REVIEWABLE",
+                and variant["status"] == "DESIGN_CHECKS_REVIEWABLE",
                 "APA_ARCHITECTURE_AUTHORED_TEST_SCOPE_REQUIRED")
         compiled = variant["candidate"]
+        if len(report["brief"]["stories"]) > 1 or variant_id is not None:
+            if variant_id is None:
+                trace_sha = sha256(baseline_trace)
+                baseline, ids = group.accepted_baseline(baseline_trace)
+                inventory = archived_story_inventory(baseline_trace, baseline)
+            matched = brief.match_native_stories(report["brief"], inventory)
+            story_bindings = matched["nativeStoryBindings"]
+            require(matched["nativeResolution"] == "READY_FOR_ATTRIBUTE_RESOLUTION"
+                    and story_bindings[0]["nativeIndex"] == 0 and sha256(baseline_trace) == trace_sha,
+                    "APA_ARCHITECTURE_ARCHIVED_FLOOR_BINDING_REQUIRED")
     else:
         compiled = A.compile_intent(intent, SCHEMA)
         require(intent["components"][0]["primitive"] == "building-shell-v1",
                 "APA_ARCHITECTURE_UNSUPPORTED_INTENT")
     commands = {row["command"] for row in compiled["graph"]["operations"]}
-    require(commands <= MODEL_COMMANDS and sha256(intent_path) == intent_sha,
+    require(commands <= MODEL_COMMANDS and sha256(intent_path) == source_sha,
             "APA_ARCHITECTURE_UNSUPPORTED_INTENT")
-    baseline, ids = group.accepted_baseline(baseline_trace)
+    if story_bindings is None:
+        baseline, ids = group.accepted_baseline(baseline_trace)
     job.parent.mkdir(exist_ok=True)
     job.mkdir()
     model = job / "model"
     model.mkdir()
     copy_exclusive(donor, scratch)
     require(sha256(scratch) == sha256(donor) == donor_sha, "APA_ARCHITECTURE_COPY_SHA_DRIFT")
-    copy_exclusive(intent_path, job / "intent.json")
-    require(sha256(job / "intent.json") == intent_sha, "APA_ARCHITECTURE_INTENT_SHA_DRIFT")
+    local_intent = job / "intent.json"
+    if variant_id is None:
+        copy_exclusive(intent_path, local_intent)
+        require(sha256(local_intent) == source_sha, "APA_ARCHITECTURE_INTENT_SHA_DRIFT")
+    else:
+        write_new_json(local_intent, intent)
     record = dict(schema="APA_R03_ARCHITECTURE_JOB_V1", jobId=job.name, status="STAGED",
                   project=str(scratch), port=port, initialSHA256=donor_sha,
-                  original=str(donor), intentSHA256=intent_sha, offlinePlanHash=compiled["sourcePlanHash"],
+                  original=str(donor), intentSHA256=sha256(local_intent), offlinePlanHash=compiled["sourcePlanHash"],
                   baselineGuidSetSHA256=R.digest(ids), baselineBrepSHA256=group.fingerprint(baseline),
                   authorizationRef=f"USER_APPROVED_APA_R03_{job.name}", stagedAt=timestamp(),
                   authorization="APA R03 §11.1 / R03.1: newly created disposable test copy")
     if design:
         record.update(authoredIntentHash=R.digest(intent), authoredCommands=sorted(commands),
                       authorization="R04 TEST_REQUEST: local preflight grant pending")
+    if story_bindings is not None:
+        record.update(authoredStoryBindings=story_bindings, baselineTraceSHA256=trace_sha)
+    if variant_id is not None:
+        record.update(sourceDesignSHA256=source_sha, designVariantId=variant_id)
     write_new_json(job / "job.json", record)
     return record
 
@@ -98,7 +158,8 @@ def saved_record(job, m):
             and sha256(m["project"]) == sha256(job / "guarded-save.snapshot") == result["savedSHA256"]
             and sha256(job / "snapshot.json") == result["snapshotReceiptSHA256"]
             and snapshot.get("protectedSHA256") == {m["original"]: m["initialSHA256"]}
-            and sha256(m["original"]) == m["initialSHA256"],
+            and sha256(m["original"]) == m["initialSHA256"]
+            and result.get("authoredStoryBindings") == m.get("authoredStoryBindings"),
             "APA_ARCHITECTURE_SAVED_BYTES_DRIFT")
     return result
 
@@ -130,7 +191,10 @@ def status(job, m):
                     and reopened.get("reopenVerified") is True
                     and reopened.get("savedSHA256") == saved["savedSHA256"]
                     and reopened.get("reopenedGuidSetSHA256") == saved["finalGuidSetSHA256"]
-                    and reopened.get("reopenedBrepSHA256") == saved["finalBrepSHA256"],
+                    and reopened.get("reopenedBrepSHA256") == saved["finalBrepSHA256"]
+                    and ("authoredStoryBindings" not in saved or
+                         (reopened.get("reopenedStoryBindingsVerified") is True
+                          and reopened.get("authoredStoryBindings") == saved["authoredStoryBindings"])),
                     "APA_ARCHITECTURE_REOPEN_RECEIPT_DRIFT")
             state = reopened["status"]
     elif (job / "attempted.json").exists() or Path(m["project"] + ".apa-write.lock").exists():
@@ -229,6 +293,16 @@ def prove_retained(m, ids, native):
             "APA_ARCHITECTURE_BASELINE_GUID_OR_BREP_DRIFT")
 
 
+def verify_bound_stories(job, m, api):
+    import archicad_semantic_brief as brief
+
+    bound = m.get("authoredStoryBindings")
+    if bound is not None:
+        normalized = brief.normalize(read(job / "intent.json")["brief"])
+        actual = brief.resolve_stories(normalized, api)["nativeStoryBindings"]
+        require(actual == bound, "APA_ARCHITECTURE_STORY_BINDING_DRIFT")
+
+
 def preflight(job, m, port, pinned_runtime, *, local_listener=None):
     require(status(job, m)["status"] == "STAGED", "APA_ARCHITECTURE_ALREADY_PREFLIGHTED_OR_ATTEMPTED")
     before = local_listener(port) if local_listener else None
@@ -252,6 +326,9 @@ def preflight(job, m, port, pinned_runtime, *, local_listener=None):
             same_plan = compiled["sourcePlanHash"] == m["offlinePlanHash"]
         require(result["modelWriteAttempts"] == 0 and same_plan,
                 "APA_ARCHITECTURE_PREFLIGHT_DRIFT")
+        if "authoredStoryBindings" in m:
+            require(result.get("authoredStoryBindings") == m["authoredStoryBindings"],
+                    "APA_ARCHITECTURE_STORY_BINDING_DRIFT")
         if local_listener:
             require(local_listener(port) == before, "APA_ARCHITECTURE_PREFLIGHT_PROCESS_DRIFT")
         write_new_json(job / "approved-preflight.json", dict(
@@ -273,7 +350,10 @@ def execute(job, m, pinned_runtime, *, confirm_preflight=None, mailbox_execution
     if "authoredIntentHash" in m:
         require(confirm_preflight == hashlib.sha256(approval_bytes).hexdigest(),
                 "APA_ARCHITECTURE_AUTHORED_EXACT_PREFLIGHT_GRANT_REQUIRED")
-    approved_result(job, approval)
+    approved = approved_result(job, approval)
+    story_bindings = m.get("authoredStoryBindings")
+    if story_bindings is not None:
+        require(approved.get("authoredStoryBindings") == story_bindings, "APA_ARCHITECTURE_STORY_BINDING_DRIFT")
     require(bind(m, approval["port"], pinned_runtime) == approval["runtime"],
             "APA_ARCHITECTURE_APPROVED_PLAN_OR_RUNTIME_DRIFT")
     probe_shell_runtime(job, Path("registration-traces") / uuid4().hex)
@@ -306,6 +386,14 @@ def execute(job, m, pinned_runtime, *, confirm_preflight=None, mailbox_execution
     kinds = Counter(row["kind"] for row in result["scene"]["steps"].values())
     require(all(bodies[row["guid"].lower()] > 0 for row in result["scene"]["steps"].values()
                 if row["kind"] in {"Wall", "Slab"}), "APA_ARCHITECTURE_NEW_PHYSICAL_BREP_UNAVAILABLE")
+    if story_bindings is not None:
+        actual_stories = {row["guid"].lower(): row["homeStory"] for row in model["elements"]
+                          if row["guid"].lower() in added}
+        counts = Counter(actual_stories.values())
+        require(result.get("authoredStoryBindings") == story_bindings
+                and actual_stories == result.get("bimHomeStories")
+                and set(counts) == {row["nativeIndex"] for row in story_bindings},
+                "APA_ARCHITECTURE_ADDED_GUID_STORY_MISMATCH")
     write_new_json(job / "native-before-save.json", model)
     guard = GuardedSaveTransport(
         A.native_transport, R.bind_authorized_saved_copy, m["project"], m["original"],
@@ -325,6 +413,7 @@ def execute(job, m, pinned_runtime, *, confirm_preflight=None, mailbox_execution
     guard.enable_after_verified_copy()
 
     def before_save(live):
+        verify_bound_stories(job, m, live)
         current_ids, _, current_signatures = capture(m, live)
         require(lease.verify() and current_ids == ids and current_signatures == signatures
                 and sha256(m["project"]) == sha256(m["original"]) == m["initialSHA256"],
@@ -357,6 +446,9 @@ def execute(job, m, pinned_runtime, *, confirm_preflight=None, mailbox_execution
                   snapshotReceiptSHA256=sha256(job / "snapshot.json"), nativeSaveCalls=1, **mailbox_facts)
     if requirements is not None:
         result["requirementReadback"] = requirements
+    if story_bindings is not None:
+        result.update(authoredStoryBindings=story_bindings,
+                      elementCountsByStory={str(index): counts[index] for index in sorted(counts)})
     if wall_systems is not None:
         result["wallSystems"] = wall_systems
         result["wallSystemPlanSHA256"] = sha256(job / "build" / "plan.json")
@@ -425,6 +517,7 @@ def verify_reopen(job, m, pinned_runtime, port, *, expected_listener=None):
     folder.mkdir(parents=True)
     api = A.EvidenceAPI(A.native_transport, folder, execute=False)
     ids, model, signatures = capture(m, api)
+    verify_bound_stories(job, m, api)
     if "wallSystems" in saved:
         plan = job / "build" / "plan.json"
         require(sha256(plan) == saved["wallSystemPlanSHA256"]
@@ -444,6 +537,8 @@ def verify_reopen(job, m, pinned_runtime, port, *, expected_listener=None):
                   reopenListener=observed)
     if "wallSystems" in saved:
         result["reopenedWallSystemsVerified"] = True
+    if "authoredStoryBindings" in saved:
+        result["reopenedStoryBindingsVerified"] = True
     path = job / "reopened.json"
     if path.exists():
         previous = read(path)

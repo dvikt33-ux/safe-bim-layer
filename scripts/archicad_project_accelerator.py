@@ -850,7 +850,8 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
         if authored:
             candidate = compiled["authoredCandidate"]
             result.update(sourcePlanHash=candidate["sourcePlanHash"],
-                          requirements=candidate["requirements"], requiredOpenIds=candidate["requiredOpenIds"])
+                          requirements=candidate["requirements"], requiredOpenIds=candidate["requiredOpenIds"],
+                          authoredStoryBindings=candidate["storyBindings"])
             if candidate["requiredOpenIds"]:
                 result.update(status="BLOCKED", reason="AUTHORED_REQUIRED_DESIGN_CHECKS_OPEN")
                 return result
@@ -955,6 +956,7 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
             # Verify every element again after the complete assembly, not just its creation.
             created = {"__plan__": compiled["graph"], **{k: {"guid": v["guid"], "kind": v["kind"]}
                        for k, v in result["scene"]["steps"].items()}}
+            home_stories = {}
             for step in compiled["graph"]["operations"]:
                 if authored:
                     result["assemblyDiscrepancy"] = dict(operationId=step["id"], command=step["command"],
@@ -971,6 +973,7 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
                     expected_floor = parent_step["params"]["wallsData"][0]["floorIndex"]
                 else:
                     expected_floor = next(iter(params.values()))[0]["floorIndex"]
+                home_stories[created[step["id"]]["guid"].lower()] = expected_floor
                 adapter=typed_adapters.get(step['command'])
                 if adapter:
                     adapter.verify(api,created[step['id']]['guid'],params,
@@ -990,6 +993,8 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
             if project_binding() != binding:
                 raise ValueError("PROJECT_CHANGED_DURING_WHOLE_ASSEMBLY_READBACK")
             result["wholeAssemblyReadback"] = True
+            if authored:
+                result["bimHomeStories"] = home_stories
             result.pop("assemblyDiscrepancy", None)
             if authored and candidate.get('wallCseBindings'):
                 result['wallSystems'] = {

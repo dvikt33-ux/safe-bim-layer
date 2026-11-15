@@ -57,24 +57,12 @@ def staging(job_dir, kind):
 
 def authored_source(source, project, local_intent, variant):
     """A remote design may only reproduce the exact, already staged local intent."""
-    from copy import deepcopy
-    from apa_project_design import select_variant
+    from apa_project_design import bind_variant
 
     require(isinstance(source, dict) and source.get("schemaVersion") == "apa-project-design/1",
             "R03_MAILBOX_AUTHORED_SOURCE_DESIGN_REQUIRED")
-    proposal = deepcopy(source)
-    brief = proposal["brief"]
-    local = local_intent["brief"]
-    native_fields = ("existingNativeLabel", "existingNativeIndex", "existingFloorId")
-    require(brief["mode"] == "GENERATE_FROM_ZERO" and "targetProjectPath" not in brief
-            and len(brief["stories"]) == len(local["stories"]) == 1
-            and not any(field in brief["stories"][0] for field in native_fields),
-            "R03_MAILBOX_AUTHORED_SOURCE_REQUIRES_ONE_UNBOUND_STORY")
-    brief.update(mode="ADAPT_EXISTING", targetProjectPath=str(project))
-    for field in native_fields:
-        if field in local["stories"][0]:
-            brief["stories"][0][field] = local["stories"][0][field]
-    require(select_variant(proposal, variant) == local_intent, "R03_MAILBOX_DESIGN_DOES_NOT_MATCH_STAGED_INTENT")
+    bound = bind_variant(source, variant, project, local_intent["brief"]["stories"])
+    require(bound == local_intent, "R03_MAILBOX_DESIGN_DOES_NOT_MATCH_STAGED_INTENT")
 
 
 def validate_design_ref(ref):

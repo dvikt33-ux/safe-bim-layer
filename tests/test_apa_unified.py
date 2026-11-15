@@ -282,6 +282,41 @@ class UnifiedAcceptance(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "DESIGN_EVIDENCE_BUILD_HASHES_REQUIRED"):
                 services.design_evidence(root, self.work, self.work / "derived-index")
 
+    def test_reopened_documentation_exports_only_the_requested_storey(self):
+        from unittest.mock import patch
+
+        import apa_integrated_services as services
+
+        lower = "00000000-0000-4000-8000-000000000001"
+        upper = "00000000-0000-4000-8000-000000000002"
+        job = self.work / "source-job"
+        job.mkdir()
+        story_bindings = [dict(nativeIndex=0, floorId=1), dict(nativeIndex=1, floorId=2)]
+        native = {"stories": [dict(index=0, elevation=0), dict(index=1, elevation=3)], "materials": [],
+                  "elements": [dict(guid=guid, type="Wall", homeStory=index, bodies=[])
+                               for index, guid in enumerate((lower, upper))]}
+        plan = {"graph": {"operations": [dict(id=sid, command="CreateWalls") for sid in ("bottom", "top")]}}
+        result = dict(addedGuids=[lower, upper], requirements=[], bimOperationReadback={
+            "bottom": dict(guid=lower, status="PASS", kind="Wall"),
+            "top": dict(guid=upper, status="PASS", kind="Wall")})
+        reopened = dict(reopenedGuids=[lower, upper], authoredStoryBindings=story_bindings)
+        with patch.object(services, "_verified_authored_job", return_value=(
+                dict(projectId="r06-fixture"), plan, result, native, {lower: "a", upper: "b"}, reopened, {})):
+            all_floors = services.document_reopened_job(job, self.work / "all")
+            upper_floor = services.document_reopened_job(job, self.work / "upper", story=1)
+            with self.assertRaisesRegex(ValueError, "DOCUMENTATION_STORY_OUTSIDE_VERIFIED_ASSEMBLY"):
+                services.document_reopened_job(job, self.work / "invalid", story=2)
+        self.assertEqual(all_floors["specificationsByStory"], {"0": {"Wall": 1}, "1": {"Wall": 1}})
+        self.assertEqual(upper_floor["stories"], [1])
+        self.assertEqual(upper_floor["specifications"], {"Wall": 1})
+        document = apa.read_json(self.work / "upper" / "documentation.json")
+        self.assertEqual(document["operationGuids"], {"top": upper})
+        self.assertEqual(document["authoredStoryBindings"], story_bindings[1:])
+        csv_path = self.work / "upper" / "Wall.csv"
+        self.assertEqual(upper_floor["files"]["Wall.csv"], digest(csv_path))
+        self.assertIn(upper, csv_path.read_text(encoding="utf-8-sig"))
+        self.assertNotIn(lower, csv_path.read_text(encoding="utf-8-sig"))
+
     def test_native_dump_generates_same_revision_documentation_and_csv(self):
         sample = apa.ROOT / "examples/model_dump_v1.sample.json"
         ids = [e["guid"] for e in apa.read_json(sample)["elements"]]
