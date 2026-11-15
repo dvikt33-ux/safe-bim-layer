@@ -35,10 +35,14 @@
   "incident": {
     "id": "INC-20261115-CONNECTOR-LOSS-DURING-PROJECT-SWITCH",
     "observed": "Remote Desktop Commander stopped answering; alternate APA Windows connector reported tunnel-client did not poll; Archicad project-switch completion could not be read back",
-    "cause": "NOT_ESTABLISHED",
+    "cause": "USER_REPORTED_DEVICE_POWERED_OFF",
     "sideEffects": "UNKNOWN_AFTER_LAST_VERIFIED_READ",
     "lastConfirmedOperation": "Clicked Don't Save on older accepted expendable PLN after confirming its saved sha256 remained unchanged",
-    "recoveryRequirement": "Re-establish remote connection, READ current process window/port/current project and target PLN SHA before any retry; do not repeat EXECUTE or change canonical PLN"
+    "recoveryRequirement": "Re-establish remote connection, READ current process window/port/current project and target PLN SHA before any retry; do not repeat EXECUTE or change canonical PLN",
+    "clarification": "User reported they went to sleep and shut down the computer. Loss of connectivity is consistent with intentional shutdown; no connector or APA malfunction established.",
+    "failureAttribution": "RETRACTED: do not classify power-off as connector or APA defect",
+    "reportSource": "User clarification in chat, 2026-11-15",
+    "earlierObservationPreserved": true
   },
   "writeAuthorization": "No R05 native execute authorization or native write attempt was issued",
   "nextAcceptance": "Verify actual open isolated R05 PLN, run new PLAN, verify exact source and coordinate collision, then controlled EXECUTE and save-close-reopen plus brick material role and face-based pier checks"
