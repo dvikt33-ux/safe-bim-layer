@@ -1,0 +1,81 @@
+{
+  "schema": "APA_R05_INDEPENDENT_CHECKPOINT_V1",
+  "campaign": "r03-r05-near-1nf-partition-20261115-02",
+  "buildRevision": "2423ad561f1c4a59ca61292e25474060914c9186",
+  "result": "PARTIAL / NATIVE_ACCEPTANCE_PENDING",
+  "confirmed": {
+    "releaseHashManifest": {
+      "checked": 25,
+      "missing": 0,
+      "mismatch": 0,
+      "zipSha256": "67c6197df569b152d4bff068273d4f719d87b7e876fa5442239d42ca1714c483"
+    },
+    "independentDesign": {
+      "status": "DESIGN_CHECKS_REVIEWABLE",
+      "operations": 9,
+      "partitionThicknessMeters": 0.12,
+      "role": "internal-partition",
+      "normativePackDigest": "32b390d2291cb9510ebcbea373bd076fb42e0fdcbcddd9707fdfa9818a81ff17"
+    },
+    "negative815": {
+      "status": "REQUIREMENTS_OPEN"
+    },
+    "isolatedFixture": {
+      "gitCommit": "2b22c03faa4067a41b5d6259ec21e78c8d602841",
+      "gitBlobSha1": "8023d9e78c2c763f9065130506987411a2ec930c",
+      "outlineXM": [
+        12,
+        20
+      ],
+      "outlineYM": [
+        12,
+        18.09
+      ],
+      "operationCount": 9,
+      "partitionThicknessMeters": 0.12
+    },
+    "stagedPln": {
+      "initialSha256": "3a74d7cb17e460378eacfa8f933aeae29a5ca39fbf2bc73633115c9fee728750",
+      "sourceBaselineGuids": 44
+    },
+    "mailboxHealth": {
+      "status": "R03_MAILBOX_LOCAL_BINDING_VERIFIED",
+      "bindingSha256": "59a504fd7c1ef0e80e36e7947f6ba5314691b141e5fff39644b8b76087d512de"
+    },
+    "archicadBindingBeforeLostConnection": {
+      "processId": 585360,
+      "apiPort": 19728,
+      "projectContains": "r03-r05-near-1nf-partition-20261115-02",
+      "plnSha256": "3a74d7cb17e460378eacfa8f933aeae29a5ca39fbf2bc73633115c9fee728750"
+    },
+    "githubPlanJob": {
+      "commit": "1830b74e9f7b994ee8d6f6fafbda79ec57e07f1a",
+      "path": "safe-bim-mailbox/apa-ac29/jobs/r03-r05-near-1nf-partition-20261115-02-plan.json"
+    }
+  },
+  "incident": {
+    "id": "INC-APA-R05-20261115-REMOTE-CONNECTOR-TIMEOUT",
+    "status": "OPEN_UNCERTAIN_PLAN_EXECUTION",
+    "observed": "Desktop Commander start_process command to consume R05 PLAN timed out with 'no response from device'; subsequent list_directory also timed out; independent APA Windows MCP reported 'Tunnel-client did not poll after this request was enqueued'",
+    "rootCause": "NOT_ESTABLISHED",
+    "effect": "No local PLAN output or GitHub result receipt available at checkpoint",
+    "githubPlanResult": "NOT_FOUND_404_AT_LAST_CHECK",
+    "nativeWrites": "UNKNOWN_NOT_CLAIMED_ZERO",
+    "automaticRetry": "PROHIBITED_UNTIL_RECEIPT_AND_LOCAL_IDEMPOTENCY_STATE_CHECK",
+    "correctiveAction": "When Windows connector resumes, inspect local status and job receipt first. Do not retry original job ID. Verify exact cloned PLN, API project port, SHA and no writer side effects; if needed create a NEW PLAN job ID."
+  },
+  "priorIndependentRoofCampaign": {
+    "status": "NATIVE_SAVE_CLOSE_FRESH_PROCESS_REOPEN_PASS",
+    "modelCountAfter": 245,
+    "beamGuid": "B997B2EC-41C5-47A8-898B-AEE0D601F36E",
+    "evidenceSha256": "2ef8456d8c3634a0a111bf01498aa046f2cb18f2ed3a9de061232d3d9451a571",
+    "limit": "Only isolated source-derived Beam, not approved complete roof node"
+  },
+  "nextAcceptance": [
+    "Read local campaign state and GitHub receipt without repeating the PLAN",
+    "Validate native R05 120mm partition preflight in isolated PLN",
+    "Explicitly authorized one-shot EXECUTE and material/structuralFunction readback",
+    "Save, close, new-process reopen, compare GUID/BREP/material/role, inspect schedules"
+  ],
+  "reportIsIndependentVerification": true
+}
