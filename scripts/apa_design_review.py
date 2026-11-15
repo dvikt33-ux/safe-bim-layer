@@ -112,16 +112,15 @@ for(const story of data.stories){
   const point=(x,y)=>[x0+(x-xMin)*k,y0+(yMax-y)*k];
   const xy=p=>point(p.x,p.y);
   const rect=(a,b,c,d)=>[point(a,b),point(c,b),point(c,d),point(a,d)];
+  const flights=data.stairs.filter(stair=>stair.lowerStoryId===story.id||stair.upperStoryId===story.id);
   for(const slab of story.slabs){shape(ctx,slab.polygonCoordinates.map(xy),'#eef2ef','#b4c2bc');}
   for(const room of story.rooms){
     shape(ctx,rect(room.xMin,room.yMin,room.xMax,room.yMax),'#e0eeee','#adc4bf');
-    const [x,y]=point((room.xMin+room.xMax)/2,(room.yMin+room.yMax)/2);
-    label(ctx,room.name,x,y,(room.xMax-room.xMin)*k-10);
   }
   for(const slab of story.slabs)for(const hole of (slab.holes||[])){
     shape(ctx,hole.polygonCoordinates.map(xy),'#ffffff','#a95d22',[8,5]);
   }
-  for(const stair of data.stairs.filter(s=>s.lowerStoryId===story.id||s.upperStoryId===story.id)){
+  for(const stair of flights){
     shape(ctx,rect(...stair.flightBounds),story.id===stair.lowerStoryId?'#f2dbb7':null,'#a95d22',[8,4]);
     if(story.id===stair.lowerStoryId){
       const [a,b,c]=stair.flightBounds;
@@ -134,6 +133,20 @@ for(const story of data.stories){
   for(const op of story.openings){
     const [a,b]=op.ends.map(xy);line(ctx,a,b,'#fff',op.thickness*k+1);
     line(ctx,a,b,op.window?'#486d8d':'#328079',3);
+  }
+  for(const room of story.rooms){
+    const middle=(room.yMin+room.yMax)/2;
+    const candidates=[middle, room.yMin+(room.yMax-room.yMin)*.82, room.yMin+(room.yMax-room.yMin)*.18];
+    const clear=candidates.find(y=>flights.every(({flightBounds:[left,bottom,right,top]})=>
+      right<=room.xMin||left>=room.xMax||y<bottom-.18||y>top+.18));
+    const [x,y]=point((room.xMin+room.xMax)/2,clear??middle);
+    const maxWidth=(room.xMax-room.xMin)*k-10;
+    if(maxWidth<8) continue;
+    if(clear===undefined){
+      ctx.fillStyle='rgba(255,255,255,.9)';
+      ctx.fillRect(x-maxWidth/2,y-18,maxWidth,22);
+    }
+    label(ctx,room.name,x,y,maxWidth);
   }
   const length=Math.min(2,(xMax-xMin)/3);line(ctx,[x0,518],[x0+length*k,518],'#27363b',3);
   label(ctx,`${length.toFixed(1)} м`,x0+length*k/2,542,100);
