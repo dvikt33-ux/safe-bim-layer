@@ -139,3 +139,58 @@ def publication_files(folder):
     if not files:raise ValueError('NATIVE_EXPORT_NO_FILE')
     return {'status':'NATIVE_FILE_BYTES_READBACK_PASS','files':sorted(files, key=lambda row: row['name']),
         'selectedPublisherSubset':'NOT_VERIFIED_UNTIL_FILE_PAGES_ARE_CHECKED','readyDrawingAcceptance':'REQUIRES_RENDER_AND_SOURCE_SCOPE_CHECK'}
+
+
+def read_two_storey_sheet(folder, layout_name, story_labels):
+    """Read a one-sheet A2 export with two named vector plan panels."""
+    import unicodedata
+
+    import pymupdf
+
+    def canonical(text):
+        return " ".join(unicodedata.normalize("NFKC", text).casefold().split())
+
+    labels = [canonical(label) for label in story_labels]
+    title = canonical(layout_name)
+    if len(labels) != 2 or not all(labels) or len(set(labels)) != 2 or len(title) < 3:
+        raise ValueError("PUBLISHER_TWO_DISTINCT_STORY_LABELS_AND_LAYOUT_NAME_REQUIRED")
+    files = publication_files(folder)["files"]
+    if len(files) != 1 or not files[0]["pdfSignature"] or Path(files[0]["name"]).suffix.casefold() != ".pdf":
+        raise ValueError("PUBLISHER_ONE_EXPORTED_PDF_REQUIRED")
+    file = files[0]
+    basename = canonical(Path(file["name"]).stem)
+    if basename != title and not basename.endswith(" " + title):
+        raise ValueError("PUBLISHER_EXPORTED_LAYOUT_NAME_MISMATCH")
+    payload = (Path(folder).resolve() / file["name"]).read_bytes()
+    if hashlib.sha256(payload).hexdigest() != file["sha256"]:
+        raise ValueError("PUBLISHER_PDF_CHANGED_DURING_READBACK")
+    with pymupdf.open(stream=payload, filetype="pdf") as doc:
+        if not doc.is_pdf or doc.is_repaired or doc.needs_pass or doc.page_count != 1:
+            raise ValueError("PUBLISHER_EXACTLY_ONE_READABLE_PAGE_REQUIRED")
+        page = doc[0]
+        paper = [round(points * 25.4 / 72, 2) for points in (page.rect.width, page.rect.height)]
+        if any(abs(measured - expected) > 1 for measured, expected in zip(paper, [594, 420])):
+            raise ValueError("PUBLISHER_EXPECTED_LANDSCAPE_A2")
+        transform = page.rotation_matrix
+        lines = [(canonical("".join(span["text"] for span in line["spans"])),
+                  pymupdf.Rect(line["bbox"]) * transform)
+                 for block in page.get_text("dict", flags=pymupdf.TEXTFLAGS_DICT & ~pymupdf.TEXT_PRESERVE_IMAGES)["blocks"]
+                 for line in block.get("lines", [])]
+        vector = [item["rect"] * transform for item in page.get_drawings()
+                  if len(item["items"]) > 1 or any(segment[0] in {"re", "qu"} for segment in item["items"])]
+        midpoint = page.rect.x0 + page.rect.width / 2
+        panels = []
+        for index, label in enumerate(labels):
+            left, right = (page.rect.x0, midpoint) if index == 0 else (midpoint, page.rect.x1)
+            region = pymupdf.Rect(left, page.rect.y0, right, page.rect.y1)
+            marks = [bounds for text, bounds in lines if text == label]
+            if len(marks) != 1 or not region.contains(marks[0]):
+                raise ValueError("PUBLISHER_STORY_TITLE_MISSING_OR_OUTSIDE_PANEL: " + story_labels[index])
+            paths = {tuple(bounds) for bounds in vector if region.contains(bounds)
+                     and bounds.width >= 8 and bounds.height >= 8}
+            if len(paths) < 2:
+                raise ValueError("PUBLISHER_STORY_PANEL_VECTOR_CONTENT_REQUIRED: " + story_labels[index])
+            panels.append(dict(label=story_labels[index], vectorPathCount=len(paths)))
+    return dict(status="PUBLISHER_PDF_CONTENT_CHECKED", sourceFile=file, paperMM=paper, pageCount=1,
+                layoutName=layout_name, panels=panels,
+                drawingSourceVerification="REQUIRES_NATIVE_LAYOUT_AND_PUBLISHER_READBACK"), payload

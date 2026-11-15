@@ -33,6 +33,7 @@ def _compile_stair_links(links, doc, geometry, floors, operations):
     if links and not floors:
         raise ValueError("STAIR_LINK_REQUIRES_AUTHORED_FLOOR_PLANS")
     stories = {row["id"]: (ordinal, row["level"]) for ordinal, row in enumerate(doc["stories"])}
+    rooms = {row["id"]: row["rectangle"] for row in geometry["rooms"]}
     fields = {"requirementId", "start", "stepCount", "widthM", "goingM", "favoriteName",
               "source", "lowerLandingDepthM", "upperLandingDepthM"}
     links_by_requirement, occupied_holes, reservations = {}, set(), []
@@ -87,14 +88,27 @@ def _compile_stair_links(links, doc, geometry, floors, operations):
             reserve = reserves.get(wall["storyId"])
             if reserve is None:
                 continue
-            c, a, b = wall["constantCoordinate"], wall["fromCoordinate"], wall["toCoordinate"]
-            half = wall["thicknessMeters"] / 2
-            footprint = box(c - half, a, c + half, b) if wall["direction"] == "X" else box(a, c - half, b, c + half)
-            if footprint.intersection(reserve).area > eps ** 2:
+            if SPATIAL.wall_footprint(wall).intersection(reserve).area > eps ** 2:
                 raise ValueError("STAIR_FLIGHT_OR_LANDING_INTERSECTS_WALL: " + wall["id"])
+        landings = []
+        if "lowerRoomId" in criterion:
+            for key, shape in (("lowerRoomId", lower_landing), ("upperRoomId", upper_landing)):
+                room_id = criterion[key]
+                room = rooms[room_id]
+                room_shape = box(room["xMin"], room["yMin"], room["xMax"], room["yMax"])
+                if not room_shape.buffer(eps).covers(shape):
+                    raise ValueError("STAIR_LANDING_OUTSIDE_DECLARED_ROOM: " + room_id)
+                landings.append(dict(roomId=room_id, bounds=list(shape.bounds)))
         occupied_holes.add(hole_key)
         reservations.append(reserves)
 
+        measures = {"minimumWidthM": width, "minimumGoingM": going, "maximumRiserM": height / count,
+                    "minimumLandingDepthM": min(lower_depth, upper_depth)}
+        dimension_checks = {}
+        for key, limit in criterion.get("limits", {}).items():
+            measured = measures[key]
+            passed = measured <= limit + eps if key == "maximumRiserM" else measured + eps >= limit
+            dimension_checks[key] = dict(limitM=limit, measuredM=measured, meetsProjectLimit=passed)
         sid = "native-stair-" + rid
         if len(sid) > 64:
             sid = "native-stair-" + hashlib.sha256(rid.encode("ascii")).hexdigest()[:40]
@@ -106,6 +120,10 @@ def _compile_stair_links(links, doc, geometry, floors, operations):
         operations.append(operation)
         links_by_requirement[rid] = dict(requirementId=rid, stairOperationId=sid,
             lowerSlabOperationId=slabs[0], upperSlabOperationId=slabs[1], upperSlabHoleIndex=hole_index,
+            lowerStoryId=lower, upperStoryId=upper, flightBounds=list(flight.bounds),
+            widthM=width, landingRooms=landings, dimensionChecks=dimension_checks,
+            dimensionsMeetProjectLimits=(all(check["meetsProjectLimit"] for check in dimension_checks.values())
+                                         if dimension_checks else None),
             source=copy.deepcopy(source), sourceStatus="DECLARED", flightLengthM=count * going,
             lowerLandingDepthM=lower_depth, upperLandingDepthM=upper_depth,
             nativeConnection="NOT_TESTED", headroom="UNVERIFIED", engineeringApproval="UNVERIFIED")
@@ -301,9 +319,15 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
             row["bimOperationIds"] = ["native-opening-" + oid for oid in row["designObjectIds"]]
         if row["id"] in stairs:
             connection = stairs[row["id"]]
-            row.update(status="PARTIAL", reason="FLIGHT_VOID_AND_LANDINGS_PLANNED_NATIVE_READBACK_PENDING",
+            passed = connection["dimensionsMeetProjectLimits"] is not False
+            row.update(status="PARTIAL" if passed else "CONFLICT",
+                       reason=("FLIGHT_VOID_AND_LANDINGS_PLANNED_NATIVE_READBACK_PENDING" if passed
+                               else "STAIR_DIMENSIONS_OUTSIDE_PROJECT_LIMITS"),
                        bimOperationIds=[connection[key] for key in (
                            "stairOperationId", "lowerSlabOperationId", "upperSlabOperationId")])
+            if connection["dimensionChecks"]:
+                row["measurement"] = connection["dimensionChecks"]
+    SPATIAL.check_geometry_requirements(doc, geometry, floor_shapes, stairs.values(), requirements)
     requirements_pending = [row["id"] for row in requirements
                             if row.get("priority") == "REQUIRED" and row["status"] != "DESIGN_CHECKED"]
     design_evidence = {}

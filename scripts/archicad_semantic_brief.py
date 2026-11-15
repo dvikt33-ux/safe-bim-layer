@@ -16,6 +16,7 @@ SCHEMA = "apa-semantic-project-brief/1"
 MODES = frozenset({"GENERATE_FROM_ZERO", "ADAPT_EXISTING"})
 EXTERIOR = "$outside"
 AREA_METRICS = ("ROOM_RECTANGLE_SUM", "GROSS_BUILDING", "USABLE", "LIVING")
+STAIR_LIMITS = frozenset({"minimumWidthM", "minimumGoingM", "maximumRiserM", "minimumLandingDepthM"})
 _ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{2,79}$")
 
 
@@ -72,21 +73,43 @@ def normalize_constraint(row):
         if a == b or (EXTERIOR in (a, b)) != (kind == "ENTRANCE"):
             raise ValueError("INVALID_FUNCTIONAL_CONNECTION_ENDPOINTS")
     elif kind == "ACCESS_PATH" and {"kind", "from", "to"} <= set(criterion) <= {
-            "kind", "from", "to", "minimumOpeningWidthM"}:
+            "kind", "from", "to", "minimumOpeningWidthM", "minimumClearWidthM", "entryStoryId"}:
         a = criterion["from"] if criterion["from"] == EXTERIOR else _id(criterion["from"], "ACCESS_FROM")
         b = _id(criterion["to"], "ACCESS_TO")
         if a == b:
             raise ValueError("INVALID_ACCESS_PATH_ENDPOINTS")
-        if "minimumOpeningWidthM" in criterion:
-            width = _nonneg(criterion["minimumOpeningWidthM"], "ACCESS_OPENING_WIDTH")
-            if width <= 0:
-                raise ValueError("INVALID_ACCESS_OPENING_WIDTH")
-            result["criterion"] = dict(criterion, minimumOpeningWidthM=width)
-    elif kind == "STAIR_LINK" and set(criterion) == {"kind", "lowerStoryId", "upperStoryId"}:
+        limits = {}
+        for key, field in (("minimumOpeningWidthM", "ACCESS_OPENING_WIDTH"),
+                           ("minimumClearWidthM", "ACCESS_CLEAR_WIDTH")):
+            if key in criterion:
+                limits[key] = _nonneg(criterion[key], field)
+                if limits[key] <= 0:
+                    raise ValueError("INVALID_" + field)
+        result["criterion"] = dict(criterion, **limits)
+        if "entryStoryId" in criterion:
+            if a != EXTERIOR or "minimumClearWidthM" not in criterion:
+                raise ValueError("ENTRY_STORY_REQUIRES_CLEAR_EXTERIOR_PATH")
+            _id(criterion["entryStoryId"], "ENTRY_STORY_ID")
+    elif kind == "ROOM_CLEAR_AREA" and set(criterion) == {"kind", "roomId", "minimumAreaM2"}:
+        _id(criterion["roomId"], "AREA_ROOM_ID")
+        if _nonneg(criterion["minimumAreaM2"], "ROOM_CLEAR_AREA") <= 0:
+            raise ValueError("INVALID_ROOM_CLEAR_AREA")
+    elif kind == "STAIR_LINK" and {"kind", "lowerStoryId", "upperStoryId"} <= set(criterion) <= {
+            "kind", "lowerStoryId", "upperStoryId", "lowerRoomId", "upperRoomId", "limits"}:
         for key in ("lowerStoryId", "upperStoryId"):
             _id(criterion[key], "STAIR_STORY_ID")
         if criterion["lowerStoryId"] == criterion["upperStoryId"]:
             raise ValueError("DISTINCT_STAIR_STORIES_REQUIRED")
+        if {"lowerRoomId", "upperRoomId"} & criterion.keys():
+            if not {"lowerRoomId", "upperRoomId"} <= criterion.keys():
+                raise ValueError("STAIR_REQUIRES_BOTH_LANDING_ROOMS")
+            for key in ("lowerRoomId", "upperRoomId"):
+                _id(criterion[key], "STAIR_LANDING_ROOM_ID")
+        if "limits" in criterion:
+            limits = criterion["limits"]
+            if (not isinstance(limits, dict) or not limits or not limits.keys() <= STAIR_LIMITS
+                    or any(_nonneg(value, key) <= 0 for key, value in limits.items())):
+                raise ValueError("INVALID_STAIR_DIMENSION_LIMITS")
     else:
         raise ValueError("UNSUPPORTED_REQUIREMENT_CRITERION")
     return result
@@ -194,6 +217,7 @@ def normalize(doc):
     if not isinstance(constraints,list) or len(constraints)>100:
         raise ValueError("INVALID_CONSTRAINT_LIST")
     seen_cons=set(); checked_cons=[]
+    room_stories = {room["id"]: room["storyId"] for room in accepted}
     for row in constraints:
         item = normalize_constraint(row)
         cid = item["id"]
@@ -204,11 +228,18 @@ def normalize(doc):
         if criterion.get("kind") in ("ENTRANCE", "ROOM_CONNECTION", "ACCESS_PATH"):
             if {criterion["from"], criterion["to"]} - used_rooms - {EXTERIOR}:
                 raise ValueError("REQUIREMENT_REFERENCES_UNKNOWN_ROOM")
+            if "entryStoryId" in criterion and criterion["entryStoryId"] not in seen_ids:
+                raise ValueError("REQUIREMENT_REFERENCES_UNKNOWN_ENTRY_STORY")
+        if criterion.get("kind") == "ROOM_CLEAR_AREA" and criterion["roomId"] not in used_rooms:
+            raise ValueError("REQUIREMENT_REFERENCES_UNKNOWN_ROOM")
         if criterion.get("kind") == "STAIR_LINK":
             order = {story["id"]: i for i, story in enumerate(normalized)}
             lower, upper = criterion["lowerStoryId"], criterion["upperStoryId"]
             if lower not in order or upper not in order or order[upper] != order[lower] + 1:
                 raise ValueError("REQUIREMENT_STAIR_MUST_CONNECT_ADJACENT_STORIES")
+            if "lowerRoomId" in criterion and (room_stories.get(criterion["lowerRoomId"]) != lower
+                    or room_stories.get(criterion["upperRoomId"]) != upper):
+                raise ValueError("STAIR_LANDING_ROOM_STORY_MISMATCH")
         checked_cons.append(item)
     questions = doc.get("openQuestions", [])
     if not isinstance(questions, list) or len(questions) > 100:

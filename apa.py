@@ -176,6 +176,10 @@ def parser():
     cmd.add_argument("--current", type=Path, required=True)
     cmd.add_argument("--variant", required=True)
     cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("design-review", help="Показать планы, разрез по лестнице и результаты проверки требований")
+    cmd.add_argument("--intent", type=Path, required=True)
+    cmd.add_argument("--variant", required=True)
+    cmd.add_argument("--output", type=Path, required=True)
     cmd = commands.add_parser("design-evidence", help="Связать проверенную модель с источниками требований")
     cmd.add_argument("--job", type=Path, required=True)
     cmd.add_argument("--cache", type=Path, required=True)
@@ -208,6 +212,8 @@ def parser():
     selection.add_argument("--guids", type=Path)
     selection.add_argument("--all-dump-elements", action="store_true")
     cmd.add_argument("--story", type=int)
+    cmd.add_argument("--publisher-folder", type=Path, help="Папка нативного выпуска одного листа с двумя этажами")
+    cmd.add_argument("--layout-name", help="Название выбранного листа из Archicad")
     cmd.add_argument("--output", type=Path, required=True)
     cmd = commands.add_parser("detail-review", help="Сверить параметры узла с источником и сохранённым предварительным графом")
     cmd.add_argument("--detail-id", required=True)
@@ -321,6 +327,10 @@ def main(argv=None):
 
             result = changes_between(read_json(args.previous), read_json(args.current), args.variant)
             write_json(args.output, result)
+        elif args.mode == "design-review":
+            from apa_design_review import write_design_review
+
+            result = write_design_review(read_json(args.intent), args.variant, args.output)
         elif args.mode == "design-evidence":
             from apa_integrated_services import design_evidence
 
@@ -342,7 +352,8 @@ def main(argv=None):
 
             if args.guids is not None or args.all_dump_elements:
                 raise ValueError("Для задания состав элементов берётся из квитанции повторного открытия")
-            result = document_reopened_job(args.job, args.output, args.story)
+            result = document_reopened_job(args.job, args.output, args.story,
+                                           publisher_folder=args.publisher_folder, layout_name=args.layout_name)
         elif args.mode == "detail-review":
             from apa_integrated_services import detail_review
 
@@ -451,6 +462,8 @@ def main(argv=None):
             else:
                 from apa_file_providers import DOCUMENTATION
 
+                if args.publisher_folder is not None or args.layout_name is not None:
+                    raise ValueError("Для сверки листа Publisher нужно задание с подтверждённой PLN")
                 if args.story is None or (args.guids is None and not args.all_dump_elements):
                     raise ValueError("Для снимка укажите этаж и состав элементов")
                 result = run_local(router, DOCUMENTATION, {

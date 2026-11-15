@@ -196,7 +196,7 @@ def design_evidence(root, job, cache):
                 executionPermission=False, nativeCalls=0, **binding)
 
 
-def document_reopened_job(job, destination, story=None):
+def document_reopened_job(job, destination, story=None, *, publisher_folder=None, layout_name=None):
     """Publish existing BIM facts for the accepted operation GUIDs in one job."""
     from apa_ac29_save_isolation import require, write_new_json
     from archicad_bim_documentation import bundle, make_snapshot, write_package
@@ -204,6 +204,7 @@ def document_reopened_job(job, destination, story=None):
     from archicad_project_accelerator import requirement_readback
     from apa_high_density_readonly_v2 import STABLE
 
+    require((publisher_folder is None) == (layout_name is None), "DOCUMENTATION_PUBLISHER_FOLDER_AND_LAYOUT_REQUIRED")
     job, destination = job.resolve(strict=True), destination.resolve()
     require(destination.parent.is_dir() and not destination.exists()
             and not destination.is_relative_to(job) and not destination.is_relative_to(STABLE.resolve()),
@@ -272,14 +273,31 @@ def document_reopened_job(job, destination, story=None):
         coordination = plan["authoredCandidate"].get("wallCoordination", [])
         package["wallDesignCoordination"] = (coordination if story is None else [row for row in coordination
                                             if "native-" + row["wallMemberId"] in document_operations])
+    if publisher_folder is not None:
+        from archicad_native_documentation import read_two_storey_sheet
+
+        bindings = package.get("authoredStoryBindings", [])
+        require(story is None and len(stories) == len(bindings) == 2
+                and reopened.get("reopenedStoryBindingsVerified") is True,
+                "DOCUMENTATION_PUBLISHER_REQUIRES_TWO_REOPENED_STORIES")
+        labels = [row["label"] for row in sorted(bindings, key=lambda row: row["nativeIndex"])]
+        sheet, pdf = read_two_storey_sheet(publisher_folder, layout_name, labels)
+        package["publisherSheet"] = dict(sheet, file="лист.pdf")
     write_package(package, destination)
+    if publisher_folder is not None:
+        with (destination / "лист.pdf").open("xb") as handle:
+            handle.write(pdf)
     files = {path.name: sha256(path) for path in sorted(destination.iterdir())}
+    if publisher_folder is not None:
+        require(files["лист.pdf"] == sheet["sourceFile"]["sha256"], "DOCUMENTATION_PUBLISHER_COPY_SHA_DRIFT")
     receipt = dict(status="REOPENED_ASSEMBLY_DOCUMENTATION_WRITTEN", jobId=job.name,
                    modelVersion=package["modelVersion"], stories=stories, elementCount=len(document_guids),
                    specifications={key: row["count"] for key, row in package["specifications"].items()},
                    provenance=provenance, files=files, nativeCalls=0, modelWrites=0)
     if "specificationsByStory" in package:
         receipt["specificationsByStory"] = package["specificationsByStory"]
+    if "publisherSheet" in package:
+        receipt["publisherSheet"] = package["publisherSheet"]
     write_new_json(destination / "receipt.json", receipt)
     return receipt
 

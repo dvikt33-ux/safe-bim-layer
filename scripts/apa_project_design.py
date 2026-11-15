@@ -168,6 +168,7 @@ def changes_between(previous, current, variant):
             facts[key] = stair
             edges.add((key, operation))
             edges.update(("bim:" + stair[field], operation) for field in ("lowerSlabOperationId", "upperSlabOperationId"))
+            edges.update(("room:" + row["roomId"], key) for row in stair.get("landingRooms", []))
         for req in candidate["requirements"]:
             key = "requirement:" + req["id"]
             facts[key] = req
@@ -179,6 +180,10 @@ def changes_between(previous, current, variant):
             if req.get("criterion", {}).get("kind") in ("ENTRANCE", "ROOM_CONNECTION", "ACCESS_PATH"):
                 edges.update(("room:" + req["criterion"][slot], key) for slot in ("from", "to")
                              if req["criterion"][slot] != BRIEF.EXTERIOR)
+                edges.update(("room:" + room, key) for step in req.get("route", []) for room in step["rooms"]
+                             if room != BRIEF.EXTERIOR)
+            if req.get("criterion", {}).get("kind") == "ROOM_CLEAR_AREA":
+                edges.add(("room:" + req["criterion"]["roomId"], key))
         for target in ("areas", "facades", "sections", "documentation"):
             facts["review:" + target] = None
         node_facts.append((facts, edges))
@@ -208,7 +213,7 @@ def read_request(path, template_path):
                               "Для layoutStudy укажите подтверждённый габарит, высоту этажа и размеры стен и двери. APA предложит варианты на основе состава помещений и функциональных связей.",
                               "Если данных для вариантов мало, сначала верните только brief с openQuestions.",
                               "Задавайте тип и допуск площади только при известной методике.",
-                              "Для маршрута через несколько помещений задайте ACCESS_PATH. Минимальную ширину проёма укажите только при наличии требования.",
-                              "Для прямой лестницы между соседними этажами задайте STAIR_LINK, stairLinks и floorPlans с проёмом. Оставьте источник размеров и глубины обеих площадок.",
+                              "Для маршрута через помещения задайте ACCESS_PATH. При наличии требования к свободной ширине укажите minimumClearWidthM, а для входа снаружи укажите entryStoryId. Требование к чистой площади отдельного помещения находится в ROOM_CLEAR_AREA.",
+                              "Для прямой лестницы задайте STAIR_LINK, stairLinks и floorPlans с проёмом. Для межэтажного маршрута укажите lowerRoomId и upperRoomId. Зафиксируйте источник размеров, глубину обеих площадок и проектные пределы в limits.",
                               "Отдельно зафиксируйте неизвестные площадки, зоны открывания и межэтажные связи."],
                 executionPermission=False, nativeWriteCalls=0)

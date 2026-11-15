@@ -52,29 +52,164 @@ def overlap_area(a,b):
 
 
 def access_path(criterion, openings):
-    """Find one deterministic path through authored, hosted doors."""
+    """Find a path through doors and, when provided, connected free-space components."""
     source, destination = criterion["from"], criterion["to"]
     width = criterion.get("minimumOpeningWidthM", 0.0)
     links = defaultdict(list)
-    for door in sorted(openings, key=lambda row: row["id"]):
-        if "connects" not in door or door["width"] + EPS < width:
+
+    def room(node):
+        return node[0] if isinstance(node, tuple) else node
+
+    for edge in sorted(openings, key=lambda row: row["id"]):
+        if "connects" not in edge or (edge["kind"] == "DOOR" and edge["width"] + EPS < width):
             continue
-        a, b = door["connects"]
-        if BRIEF.EXTERIOR in (a, b) and source != BRIEF.EXTERIOR:
+        a, b = edge["connects"]
+        if BRIEF.EXTERIOR in (room(a), room(b)) and source != BRIEF.EXTERIOR:
             continue
-        links[a].append((b, door["id"]))
-        links[b].append((a, door["id"]))
-    pending = deque([(source, [])])
-    seen = {source}
+        links[a].append((b, edge["id"]))
+        links[b].append((a, edge["id"]))
+    starts = sorted(node for node in links if room(node) == source)
+    pending = deque((node, []) for node in starts)
+    seen = set(starts)
     while pending:
-        room, path = pending.popleft()
-        if room == destination:
+        node, path = pending.popleft()
+        if room(node) == destination:
             return path
-        for neighbor, door_id in links[room]:
+        for neighbor, edge_id in links[node]:
             if neighbor not in seen:
                 seen.add(neighbor)
-                pending.append((neighbor, path + [door_id]))
+                pending.append((neighbor, path + [edge_id]))
     return []
+
+
+def wall_footprint(wall):
+    from shapely.geometry import box
+
+    c, a, b = wall["constantCoordinate"], wall["fromCoordinate"], wall["toCoordinate"]
+    half = wall["thicknessMeters"] / 2
+    return box(c - half, a, c + half, b) if wall["direction"] == "X" else box(a, c - half, b, c + half)
+
+
+def clear_room_surfaces(geometry, floors, stairs):
+    """Horizontal floor allocated to each named room, minus modeled obstructions."""
+    from shapely.geometry import box
+    from shapely.ops import unary_union
+
+    obstacles = defaultdict(list)
+    for wall in geometry["bearingLines"]:
+        obstacles[wall["storyId"]].append(("native-" + wall["id"], wall_footprint(wall)))
+    for stair in stairs:
+        for story in (stair["lowerStoryId"], stair["upperStoryId"]):
+            obstacles[story].append((stair["stairOperationId"], box(*stair["flightBounds"])))
+    clear, operations = {}, {}
+    for room in geometry["rooms"]:
+        story = room["storyId"]
+        bounds = room["rectangle"]
+        extent = box(bounds["xMin"], bounds["yMin"], bounds["xMax"], bounds["yMax"])
+        surface = extent.intersection(floors[story]) if story in floors else extent
+        deductions = [(sid, shape) for sid, shape in obstacles[story] if extent.intersects(shape)]
+        clear[room["id"]] = surface.difference(unary_union([shape for _, shape in deductions]))
+        operations[room["id"]] = ["native-slab-" + story, *[sid for sid, _ in deductions]]
+    return clear, operations
+
+
+def clear_access_path(criterion, geometry, surfaces, stairs, first_story):
+    """Connect eroded room components using clear approaches to doors and landings."""
+    from shapely import get_parts
+    from shapely.geometry import Point, box
+
+    width = criterion["minimumClearWidthM"]
+    radius = width / 2
+    parts = {room: sorted((p for p in get_parts(surface.buffer(-radius))
+                          if p.geom_type == "Polygon" and not p.is_empty),
+                          key=lambda p: p.bounds) for room, surface in surfaces.items()}
+    rooms = {row["id"]: row for row in geometry["rooms"]}
+    walls = {row["id"]: row for row in geometry["bearingLines"]}
+    wall_shapes = {wid: wall_footprint(row) for wid, row in walls.items()}
+    entry = criterion.get("entryStoryId", first_story)
+    edges = {}
+
+    def component(room, x, y):
+        point = Point(x, y)
+        return next(((room, i) for i, polygon in enumerate(parts[room]) if polygon.covers(point)), None)
+
+    def approach(room, wall, center):
+        if room == BRIEF.EXTERIOR:
+            return (room, 0) if wall["storyId"] == entry else None
+        axes = wall["direction"].lower()
+        coordinate = wall["constantCoordinate"]
+        side = 1 if abs(rooms[room]["rectangle"][axes + "Min"] - coordinate) <= EPS else -1
+        face = coordinate + side * wall["thicknessMeters"] / 2
+        inside = face + side * (radius + 8 * EPS)
+        a, b = sorted((face, inside))
+        apron = (box(a, center - radius, b, center + radius) if axes == "x"
+                 else box(center - radius, a, center + radius, b))
+        if not surfaces[room].buffer(EPS).covers(apron):
+            return None
+        return component(room, inside, center) if axes == "x" else component(room, center, inside)
+
+    for door in geometry["openings"]:
+        if "connects" not in door or door["width"] + EPS < width:
+            continue
+        wall = walls[door["hostMemberId"]]
+        center = wall["fromCoordinate"] + door["centerOffset"]
+        c, half = wall["constantCoordinate"], wall["thicknessMeters"] / 2
+        throat = (box(c - half, center - radius, c + half, center + radius) if wall["direction"] == "X"
+                  else box(center - radius, c - half, center + radius, c + half))
+        if any(walls[wid]["storyId"] == wall["storyId"] and wid != wall["id"]
+               and shape.intersection(throat).area > EPS ** 2
+               for wid, shape in wall_shapes.items()):
+            continue
+        nodes = [approach(room, wall, center) for room in door["connects"]]
+        if all(node is not None for node in nodes):
+            sid = "native-opening-" + door["id"]
+            edges[sid] = dict(id=sid, sourceId=door["id"], kind="DOOR", width=door["width"], connects=nodes)
+
+    for stair in stairs:
+        landings = stair.get("landingRooms", [])
+        if not landings or stair["widthM"] + EPS < width or stair["dimensionsMeetProjectLimits"] is False:
+            continue
+        nodes = []
+        for landing in landings:
+            xmin, ymin, xmax, ymax = landing["bounds"]
+            nodes.append(component(landing["roomId"], (xmin + xmax) / 2, (ymin + ymax) / 2))
+        if all(node is not None for node in nodes):
+            sid = stair["stairOperationId"]
+            edges[sid] = dict(id=sid, sourceId=stair["requirementId"], kind="STAIR", width=stair["widthM"], connects=nodes)
+
+    path = access_path(criterion, edges.values())
+    return [dict(bimOperationId=sid, sourceId=edges[sid]["sourceId"], kind=edges[sid]["kind"],
+                 rooms=[node[0] for node in edges[sid]["connects"]]) for sid in path]
+
+
+def check_geometry_requirements(doc, geometry, floors, stairs, requirements):
+    """Check only explicitly requested clear areas and route widths."""
+    selected = [row for row in requirements if row.get("criterion", {}).get("kind") == "ROOM_CLEAR_AREA"
+                or "minimumClearWidthM" in row.get("criterion", {})]
+    if not selected:
+        return
+    surfaces, operations = clear_room_surfaces(geometry, floors, stairs)
+    first_story = doc["stories"][0]["id"]
+    for row in selected:
+        criterion = row["criterion"]
+        if criterion["kind"] == "ROOM_CLEAR_AREA":
+            room = criterion["roomId"]
+            area = surfaces[room].area
+            passed = area + EPS >= criterion["minimumAreaM2"]
+            row.update(status="DESIGN_CHECKED" if passed else "CONFLICT",
+                       reason="ROOM_CLEAR_AREA_MEETS_TARGET" if passed else "ROOM_CLEAR_AREA_BELOW_TARGET",
+                       measurement=dict(valueM2=round(area, 6), basis="AUTHORED_FLOOR_MINUS_WALLS_AND_STAIR_FLIGHT"),
+                       designObjectIds=[room], bimOperationIds=operations[room])
+            continue
+        path = clear_access_path(criterion, geometry, surfaces, stairs, first_story)
+        rooms = dict.fromkeys(room for step in path for room in step["rooms"] if room != BRIEF.EXTERIOR)
+        dependencies = list(dict.fromkeys([step["bimOperationId"] for step in path]
+                                         + [op for room in rooms for op in operations[room]]))
+        row.update(status="DESIGN_CHECKED" if path else "MISSING",
+                   reason="CLEAR_PATH_IN_AUTHORED_GEOMETRY" if path else "NO_CLEAR_PATH_IN_AUTHORED_GEOMETRY",
+                   measurement=dict(requiredWidthM=criterion["minimumClearWidthM"],
+                                    basis="CIRCULAR_FOOTPRINT_IN_AUTHORED_HORIZONTAL_CLEAR_SPACE"),
+                   route=path, designObjectIds=[step["sourceId"] for step in path], bimOperationIds=dependencies)
 
 
 def design_checks(doc, outline, rooms, members, passages):
@@ -171,10 +306,13 @@ def design_checks(doc, outline, rooms, members, passages):
                            reason="EXPLICIT_HOSTED_CONNECTION" if matches else "HOSTED_CONNECTION_REQUIRED",
                            designObjectIds=matches)
         if kind == "ACCESS_PATH":
-            path = access_path(criterion, openings)
-            finding.update(status="DESIGN_CHECKED" if path else "MISSING",
-                           reason="EXPLICIT_HOSTED_DOOR_PATH" if path else "HOSTED_DOOR_PATH_REQUIRED",
-                           designObjectIds=path)
+            if "minimumClearWidthM" in criterion:
+                finding.update(reason="AUTHORED_FLOOR_AND_CLEAR_APPROACH_CHECK_REQUIRED")
+            else:
+                path = access_path(criterion, openings)
+                finding.update(status="DESIGN_CHECKED" if path else "MISSING",
+                               reason="EXPLICIT_HOSTED_DOOR_PATH" if path else "HOSTED_DOOR_PATH_REQUIRED",
+                               designObjectIds=path)
         if kind == "STAIR_LINK":
             finding.update(status="MISSING", reason="SOURCE_BOUND_STAIR_AND_SLAB_VOID_REQUIRED")
         checks.append(dict({"priority": "UNSPECIFIED", "sourceRef": "brief.constraints#" + row["id"]},

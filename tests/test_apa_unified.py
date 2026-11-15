@@ -291,7 +291,8 @@ class UnifiedAcceptance(unittest.TestCase):
         upper = "00000000-0000-4000-8000-000000000002"
         job = self.work / "source-job"
         job.mkdir()
-        story_bindings = [dict(nativeIndex=0, floorId=1), dict(nativeIndex=1, floorId=2)]
+        story_bindings = [dict(nativeIndex=0, floorId=1, label="Первый этаж"),
+                          dict(nativeIndex=1, floorId=2, label="Второй этаж")]
         native = {"stories": [dict(index=0, elevation=0), dict(index=1, elevation=3)], "materials": [],
                   "elements": [dict(guid=guid, type="Wall", homeStory=index, bodies=[])
                                for index, guid in enumerate((lower, upper))]}
@@ -299,13 +300,27 @@ class UnifiedAcceptance(unittest.TestCase):
         result = dict(addedGuids=[lower, upper], requirements=[], bimOperationReadback={
             "bottom": dict(guid=lower, status="PASS", kind="Wall"),
             "top": dict(guid=upper, status="PASS", kind="Wall")})
-        reopened = dict(reopenedGuids=[lower, upper], authoredStoryBindings=story_bindings)
+        reopened = dict(reopenedGuids=[lower, upper], authoredStoryBindings=story_bindings,
+                        reopenedStoryBindingsVerified=True)
         with patch.object(services, "_verified_authored_job", return_value=(
                 dict(projectId="r06-fixture"), plan, result, native, {lower: "a", upper: "b"}, reopened, {})):
             all_floors = services.document_reopened_job(job, self.work / "all")
             upper_floor = services.document_reopened_job(job, self.work / "upper", story=1)
             with self.assertRaisesRegex(ValueError, "DOCUMENTATION_STORY_OUTSIDE_VERIFIED_ASSEMBLY"):
                 services.document_reopened_job(job, self.work / "invalid", story=2)
+            pdf = b"verified test PDF"
+            pdf_readback = dict(status="PUBLISHER_PDF_CONTENT_CHECKED",
+                                sourceFile=dict(sha256=hashlib.sha256(pdf).hexdigest()))
+            with patch("archicad_native_documentation.read_two_storey_sheet",
+                       return_value=(pdf_readback, pdf)) as read_sheet:
+                full_sheet = self.work / "publisher-package"
+                proof = services.document_reopened_job(job, full_sheet, publisher_folder=self.work, layout_name="Планы дома")
+                read_sheet.assert_called_once_with(self.work, "Планы дома", ["Первый этаж", "Второй этаж"])
+                self.assertEqual(proof["publisherSheet"]["file"], "лист.pdf")
+                self.assertEqual(proof["files"]["лист.pdf"], digest(full_sheet / "лист.pdf"))
+                with self.assertRaisesRegex(ValueError, "DOCUMENTATION_PUBLISHER_REQUIRES_TWO_REOPENED_STORIES"):
+                    services.document_reopened_job(job, self.work / "wrong-sheet", story=1,
+                                                   publisher_folder=self.work, layout_name="Планы дома")
         self.assertEqual(all_floors["specificationsByStory"], {"0": {"Wall": 1}, "1": {"Wall": 1}})
         self.assertEqual(upper_floor["stories"], [1])
         self.assertEqual(upper_floor["specifications"], {"Wall": 1})
@@ -316,6 +331,21 @@ class UnifiedAcceptance(unittest.TestCase):
         self.assertEqual(upper_floor["files"]["Wall.csv"], digest(csv_path))
         self.assertIn(upper, csv_path.read_text(encoding="utf-8-sig"))
         self.assertNotIn(lower, csv_path.read_text(encoding="utf-8-sig"))
+
+    def test_project_review_renders_both_plans_and_the_slab_void_on_the_stair_section(self):
+        source = apa.ROOT / "examples/accelerator/r07-two-storey-house.json"
+        output = self.work / "review.html"
+        receipt = self.invoke("design-review", "--intent", source, "--variant", "house-a", "--output", output)
+        self.assertEqual(receipt["status"], "DESIGN_REVIEW_WRITTEN")
+        self.assertEqual(receipt["requiredOpenIds"], ["stair-required"])
+        content = output.read_text(encoding="utf-8")
+        data = json.loads(content.split('id="plan-data">', 1)[1].split('</script>', 1)[0])
+        self.assertEqual([row["level"] for row in data["stories"]], [0, 3])
+        stair, = data["stairs"]
+        upper = sorted((segment["yMin"], segment["yMax"]) for segment in stair["slabs"] if segment["top"] == 3)
+        self.assertEqual(upper, [(400.0, 401.5), (407.1, 410.0)])
+        self.assertIn("35.89 м²", content)
+        self.assertIn("Разрез по лестнице", content)
 
     def test_native_dump_generates_same_revision_documentation_and_csv(self):
         sample = apa.ROOT / "examples/model_dump_v1.sample.json"

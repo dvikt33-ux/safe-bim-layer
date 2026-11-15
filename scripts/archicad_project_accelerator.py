@@ -788,7 +788,7 @@ def requirement_readback(result):
         else:
             state = "INCOMPLETE"
         provenance = {key: requirement[key] for key in ("text", "sourceRef", "priority", "evidenceStatus",
-                                                        "criterion", "measurement", "deltaM2")
+                                                        "criterion", "measurement", "deltaM2", "route")
                       if key in requirement}
         feedback.append(dict(provenance, requirementId=requirement["id"], designStatus=requirement["status"],
                              designReason=requirement.get("reason"), nativeReadback=state,

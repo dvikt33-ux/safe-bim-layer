@@ -137,6 +137,14 @@ No background watcher is introduced.
 
 ## Window and publication boundaries
 
+В Windows-приложении действие «Сверить лист Publisher и выпустить ведомости» собирает PDF и ведомости по сохранённой и повторно открытой двухэтажной модели. Исходный каталог должен содержать один PDF выбранного листа. Ожидается одна горизонтальная страница A2. Заголовки этажей из квитанции PLN должны встречаться по одному разу, в левой и правой половинах страницы, с векторным содержимым в обеих половинах. APA сверяет имя листа, сохраняет PDF в новом комплекте и проверяет SHA исходных и скопированных байтов.
+
+```powershell
+python -m apa documentation --job $Job --publisher-folder $Export --layout-name 'Планы дома' --output $Output
+```
+
+`PUBLISHER_PDF_CONTENT_CHECKED` подтверждает содержимое полученного файла в указанном объёме. Идентичность связи Drawing с каждым сохранённым видом и происхождение PDF подтверждаются отдельно по нативному листу и трассе Publisher. Для этого действия виды, лист и выпуск выполняются существующим механизмом Archicad.
+
 From a Layout, GetModelDumpV1 returns the precise ShowAllIn3D error
 -2130313109. The existing SceneWriter journals a view-only change to the actual
 floor0 ProjectMap item after exact project identity/saved-byte gates, then

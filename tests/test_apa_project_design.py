@@ -1,4 +1,5 @@
 from copy import deepcopy
+import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -225,6 +226,54 @@ class DesignTests(unittest.TestCase):
         self.assertIn("bim:native-slab-level-2", impact["changed"])
         self.assertIn("requirement:stairs", impact["affected"])
         self.assertIn("review:sections", impact["affected"])
+
+    def test_two_storey_house_clears_named_routes_areas_and_stair_dimensions(self):
+        source = INPUT.with_name("r07-two-storey-house.json")
+        intent = architecture.read(source)
+        candidate = design.compile_design(intent)["variants"][0]["candidate"]
+        facts = {row["id"]: row for row in candidate["requirements"]}
+        self.assertEqual(candidate["requiredOpenIds"], ["stair-required"])
+        self.assertEqual(facts["living-area"]["measurement"]["valueM2"], 35.89)
+        self.assertEqual(facts["stair-hall-area"]["measurement"]["valueM2"], 20.31)
+        route = facts["bedroom-route"]
+        self.assertEqual(route["status"], "DESIGN_CHECKED")
+        self.assertEqual([step["kind"] for step in route["route"]], ["DOOR", "DOOR", "STAIR", "DOOR"])
+        self.assertIn("native-stair-stair-required", route["bimOperationIds"])
+        self.assertIn("native-slab-level-2", route["bimOperationIds"])
+        stair = candidate["stairConnections"][0]
+        brief = source.with_name(stair["source"]["ref"])
+        self.assertEqual(stair["source"]["sha256"], hashlib.sha256(brief.read_bytes()).hexdigest())
+        self.assertTrue(stair["dimensionsMeetProjectLimits"])
+        self.assertEqual(stair["headroom"], "UNVERIFIED")
+
+        narrowed = deepcopy(intent)
+        layout = narrowed["variants"][0]["layout"]
+        next(row for row in layout["axes"] if row["id"] == "axis-hall")["coordinate"] = 403.5
+        for room in layout["rooms"]:
+            for key in ("xMin", "xMax"):
+                if room["rectangle"][key] == 403:
+                    room["rectangle"][key] = 403.5
+        self.assertEqual(layout["passages"], intent["variants"][0]["layout"]["passages"])
+        changes = design.changes_between(intent, narrowed, "house-a")
+        self.assertTrue({"requirement:bedroom-route", "review:facades", "review:sections",
+                         "review:documentation"} <= set(changes["affected"]))
+        variant = design.compile_design(narrowed)["variants"][0]["candidate"]
+        outcome = next(row for row in variant["requirements"] if row["id"] == "bedroom-route")
+        self.assertEqual(outcome["reason"], "NO_CLEAR_PATH_IN_AUTHORED_GEOMETRY")
+        self.assertTrue(variant["stairConnections"][0]["dimensionsMeetProjectLimits"])
+
+    def test_stair_limits_and_clear_room_targets_affect_working_requirements(self):
+        intent = architecture.read(INPUT.with_name("r07-two-storey-house.json"))
+        requirements = {row["id"]: row["criterion"] for row in intent["brief"]["constraints"]}
+        requirements["stair-required"]["limits"]["maximumRiserM"] = .14
+        requirements["living-area"]["minimumAreaM2"] = 36
+        candidate = design.compile_design(intent)["variants"][0]["candidate"]
+        facts = {row["id"]: row for row in candidate["requirements"]}
+        self.assertEqual(facts["stair-required"]["status"], "CONFLICT")
+        self.assertFalse(facts["stair-required"]["measurement"]["maximumRiserM"]["meetsProjectLimit"])
+        self.assertEqual(facts["entry-route"]["status"], "DESIGN_CHECKED")
+        self.assertEqual(facts["bedroom-route"]["status"], "MISSING")
+        self.assertEqual(facts["living-area"]["reason"], "ROOM_CLEAR_AREA_BELOW_TARGET")
 
     def test_stair_readback_reuses_native_connection_and_reports_solver_drift(self):
         intent, row = self.stair_design()

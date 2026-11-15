@@ -80,6 +80,33 @@ class NativeDocumentationTests(unittest.TestCase):
             file.write_bytes(b'')
             with self.assertRaisesRegex(ValueError, 'EMPTY_FILE'): N.publication_files(temp)
 
+    def test_two_storey_sheet_reads_real_pdf_bytes_and_rejects_extra_pages_or_missing_panel(self):
+        import pymupdf
+
+        for pages, upper, error in ((1, True, None), (2, True, "ONE_READABLE_PAGE"),
+                                    (1, False, "PANEL_VECTOR_CONTENT")):
+            with self.subTest(pages=pages, upper=upper), tempfile.TemporaryDirectory() as folder:
+                destination = Path(folder) / "A-01 House plans.pdf"
+                with pymupdf.open() as document:
+                    page = document.new_page(width=594 * 72 / 25.4, height=420 * 72 / 25.4)
+                    for offset, label in ((75, "First floor"), (950, "Second floor")):
+                        page.insert_text((offset, 50), label)
+                        if offset == 75 or upper:
+                            page.draw_rect(pymupdf.Rect(offset, 100, offset + 400, 600))
+                            page.draw_rect(pymupdf.Rect(offset + 15, 116, offset + 385, 585))
+                    if pages == 2:
+                        document.new_page()
+                    document.save(destination)
+                if error:
+                    with self.assertRaisesRegex(ValueError, error):
+                        N.read_two_storey_sheet(folder, "House plans", ["First floor", "Second floor"])
+                else:
+                    proof, raw = N.read_two_storey_sheet(folder, "House plans", ["First floor", "Second floor"])
+                    self.assertEqual(raw, destination.read_bytes())
+                    self.assertEqual(proof["sourceFile"]["sha256"], hashlib.sha256(raw).hexdigest())
+                    self.assertEqual(proof["paperMM"], [594, 420])
+                    self.assertEqual([row["label"] for row in proof["panels"]], ["First floor", "Second floor"])
+
     def test_publisher_requires_actual_output_even_if_provider_and_callback_report_success(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp).resolve()
