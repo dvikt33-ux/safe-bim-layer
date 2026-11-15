@@ -18,7 +18,7 @@ class TestAC30Guard(unittest.TestCase):
     def setUp(self):
         self.temporary=tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
-        self.base=Path(self.temporary.name)
+        self.base=Path(self.temporary.name).resolve()
         self.model=self.base/"model"
         self.model.mkdir()
         self.evidence=self.base/"evidence"

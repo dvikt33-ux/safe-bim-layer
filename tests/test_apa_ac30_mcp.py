@@ -17,7 +17,7 @@ class MCPControlTests(unittest.TestCase):
     def setUp(self):
         temporary=tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
-        base=Path(temporary.name)
+        base=Path(temporary.name).resolve()
         self.pln=base/"Test_Model.pln"
         backup=base/"Test_Model_Backup.pln"
         addon=base/"Tapir.apx"
