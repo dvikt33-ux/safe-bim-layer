@@ -63,6 +63,12 @@ class MailboxContract(unittest.TestCase):
         self.remote[f"repos/{mailbox.SOURCE_REPO}/contents/{self.source_path}?ref=" + "3" * 40] = self.source
         self.session = dict(port=19725, pid=10001, startedAt="test-start")
 
+        def discover_port(project):
+            self.assertEqual(project, self.project)
+            return self.session["port"]
+
+        self.discover_port = self.enterContext(patch.object(mailbox, "open_test_port", side_effect=discover_port))
+
     def member(self, name, data):
         path = self.package / name
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -91,19 +97,38 @@ class MailboxContract(unittest.TestCase):
         self.remote[self.endpoint + f"{bridge.INBOX}/{name}.json?ref=main"] = json.dumps(request | extra).encode()
         return name
 
-    def stage_plan(self):
+    def stage_plan(self, *, port_hint=None):
         name = self.submit("plan")
         path = self.c.preflight_path()
 
-        def preflight(*_):
+        def preflight(_job, _manifest, port, _runtime):
+            self.assertEqual(port, self.session["port"])
             write_new_json(path, dict(confirmHash="exact-local-native-plan"))
             return dict(status="READY_FOR_EXPLICIT_TEST_RUN", metrics={"elementCount": 10})
 
         with (patch.object(mailbox, "listener", return_value=self.session),
               patch.object(mailbox.architecture, "preflight", side_effect=preflight)):
-            result = self.c.process(bridge, name, port=self.session["port"])
+            result = self.c.process(bridge, name, port=port_hint)
         self.assertEqual(result["result"]["preflightSha256"], sha256(path))
         return sha256(path)
+
+    def test_stale_port_hint_uses_project_discovery_once_and_plan_readback_needs_no_open_project(self):
+        self.stage_plan(port_hint=19723)
+        self.discover_port.assert_called_once_with(self.project)
+        name = f"{self.job.name}-plan"
+        with patch.object(mailbox, "open_test_port", return_value=None) as discover:
+            self.assertEqual(self.c.process(bridge, name)["result"]["jobStatus"], "READY_FOR_EXPLICIT_TEST_RUN")
+        discover.assert_not_called()
+        self.assertEqual(len(self.puts), 1)
+
+    def test_absent_target_refuses_one_shot_before_reservation(self):
+        name = self.submit("plan")
+        with (patch.object(mailbox, "open_test_port", return_value=None),
+              patch.object(self.c, "fetch") as fetch):
+            with self.assertRaisesRegex(ValueError, "R03_MAILBOX_EXACT_PROJECT_NOT_OPEN"):
+                self.c.process(bridge, name, port=self.session["port"])
+        fetch.assert_not_called()
+        self.assertFalse(self.c.history.exists())
 
     def test_complete_transport_contract_uses_one_native_dispatch_and_reads_github_bytes(self):
         plan_sha = self.stage_plan()

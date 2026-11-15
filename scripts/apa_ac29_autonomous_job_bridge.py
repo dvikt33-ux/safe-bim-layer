@@ -130,18 +130,31 @@ def approved_guid_count():
 
 
 def gh_api(path, *, body=None, allow_missing=False):
+    """Make at most three attempts for transient GET failures."""
     cmd = ["gh", "api"]
-    if body is not None:
-        cmd += ["--method", "PUT", path, "--input", str(body)]
-    else:
+    reading = body is None
+    if reading:
         cmd.append(path)
-    p = subprocess.run(cmd, capture_output=True, timeout=50)
-    error = p.stderr.decode("utf-8", errors="replace")
-    if allow_missing and body is None and p.returncode != 0 and re.search(
-            r"(?m)^gh: .* \(HTTP 404\)\s*$", error):
-        return None
-    require(p.returncode == 0, "GITHUB_UNAVAILABLE:" + error[-250:])
-    return json.loads(p.stdout.decode("utf-8"))
+    else:
+        cmd += ["--method", "PUT", path, "--input", str(body)]
+    for delay in ((0.4, 0.8, 0) if reading else (0,)):
+        try:
+            response = subprocess.run(cmd, capture_output=True, timeout=50)
+        except subprocess.TimeoutExpired:
+            if not delay:
+                raise
+        else:
+            if response.returncode == 0:
+                return json.loads(response.stdout.decode("utf-8"))
+            error = response.stderr.decode("utf-8", errors="replace")
+            status = re.search(r"(?m)^gh: .* \(HTTP ([0-9]{3})\)\s*$", error)
+            if reading and allow_missing and status and status[1] == "404":
+                return None
+            if not delay or status or not re.search(
+                    r"\b(?:tls handshake timeout|eof|connection reset by peer|i/o timeout"
+                    r"|connection timed out|context deadline exceeded)\b", error, re.IGNORECASE):
+                raise ValueError("GITHUB_UNAVAILABLE:" + error[-250:])
+        time.sleep(delay)
 
 
 def remote_json(repo, filename, ref, expected_blob=None):
@@ -897,7 +910,7 @@ def main(argv=None):
     ap.add_argument("--authorize-job", help="Record a local grant for a GitHub EXECUTE blob already read back")
     ap.add_argument("--confirm-preflight", help="SHA-256 of the published and reviewed PLAN receipt")
     ap.add_argument("--job", help="Dispatch exactly one R03 inbox job")
-    ap.add_argument("--local-port", type=int, help="Observed local JSON API port for PLAN or VERIFY_REOPEN")
+    ap.add_argument("--local-port", type=int, help="Legacy PLAN / VERIFY_REOPEN hint; the exact PLN is discovered locally")
     args = ap.parse_args(argv)
     if any((args.r03_profile, args.prepare_r03_profile, args.kind, args.make_job, args.design_binding,
             args.authorize_job, args.confirm_preflight, args.job, args.local_port is not None)):

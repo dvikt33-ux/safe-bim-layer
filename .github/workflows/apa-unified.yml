@@ -76,6 +76,8 @@ jobs:
           test_r03_resume
           test_apa_archicad_startup
           test_apa_r03_mailbox
+          test_apa_r03_project_auto_port
+          test_apa_r05_gh_read_retry
           test_apa_tdk_trace
           test_apa_bdd_readonly_story_guard
           test_apa_bdd_existing_router_readback

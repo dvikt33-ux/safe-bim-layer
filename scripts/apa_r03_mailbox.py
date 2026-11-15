@@ -136,16 +136,26 @@ def project_ports(pid=None):
 
 def open_test_port(project):
     """Discover only loopback listeners that already report this exact test PLN."""
+    def matches_target(info):
+        return (isinstance(info, dict) and info.get("projectPath") == str(project)
+                and info.get("isUntitled") is False and info.get("isTeamwork") is False)
+
     matches = []
     for port in project_ports():
         try:
-            listener(port)
+            before = listener(port)
             info = group.R.tapir(port, "GetProjectInfo", {}, timeout=2)
         except (ValueError, RuntimeError, urllib.error.URLError, OSError):
             continue
-        if (info.get("projectPath") == str(project) and info.get("isUntitled") is False
-                and info.get("isTeamwork") is False):
-            matches.append(port)
+        if not matches_target(info):
+            continue
+        try:
+            current = group.R.tapir(port, "GetProjectInfo", {}, timeout=2)
+            after = listener(port)
+        except (ValueError, RuntimeError, urllib.error.URLError, OSError) as exc:
+            raise ValueError("R03_MAILBOX_PROJECT_CHANGED_DURING_DISCOVERY") from exc
+        require(matches_target(current) and before == after, "R03_MAILBOX_PROJECT_CHANGED_DURING_DISCOVERY")
+        matches.append(port)
     require(len(matches) <= 1, "R03_MAILBOX_EXACT_PROJECT_OPEN_IN_MULTIPLE_INSTANCES")
     return next(iter(matches), None)
 
@@ -534,10 +544,6 @@ class Campaign:
                 return
             if action == "VERIFY_REOPEN" and not self.closed_path.is_file():
                 return
-        self.fetch(bridge, name)
-        port = open_test_port(self.project) if action in {"PLAN", "VERIFY_REOPEN"} else None
-        if action in {"PLAN", "VERIFY_REOPEN"} and port is None:
-            return
         if action == "CHECK_CLOSED":
             session = self.planned_session()
             if not reservation_owner_exited(session["pid"]):
@@ -549,7 +555,7 @@ class Campaign:
                 except (ValueError, RuntimeError, OSError):
                     return
         self.verify_code()
-        return self.process(bridge, name, port=port)
+        return self.process(bridge, name, defer_if_not_open=True)
 
     def record_failure(self, bridge, folder, action, exc):
         error = type(exc).__name__ + ": " + str(exc)
@@ -572,7 +578,7 @@ class Campaign:
         return dict(jobStatus="STOPPED_RECONCILE_NO_AUTORETRY", nativeOutcome=outcome,
                     error=error.replace(str(self.job_dir), self.target)[:360], saveReopenVerified=False)
 
-    def process(self, bridge, name, *, port=None):
+    def process(self, bridge, name, *, port=None, defer_if_not_open=False):
         """Reserve once, dispatch to existing runtime, publish only durable results."""
         action = self.phase(name)
         binding_sha = sha256(self.path)
@@ -600,6 +606,12 @@ class Campaign:
             bridge.upload_result(name, folder, verify_existing=True)
             return recorded
 
+        require(port is None or action in {"PLAN", "VERIFY_REOPEN"}, "R03_MAILBOX_PORT_FROM_LOCAL_PREFLIGHT")
+        if action in {"PLAN", "VERIFY_REOPEN"}:
+            port = open_test_port(self.project)
+            if port is None and defer_if_not_open:
+                return None
+            require(port is not None, "R03_MAILBOX_EXACT_PROJECT_NOT_OPEN")
         if action == "EXECUTE":
             job, blob = self.grant(bridge, name)
             require(not (self.state / "attempted.json").exists()
@@ -613,9 +625,6 @@ class Campaign:
         require(bridge.gh_api(f"repos/{bridge.BRIDGE}/contents/{bridge.RESULTS}/{name}.json?ref=main",
                               allow_missing=True) is None, "R03_MAILBOX_REMOTE_RESULT_ALREADY_EXISTS")
         session = None if action == "PLAN" else self.planned_session()
-        require(port is None or action in {"PLAN", "VERIFY_REOPEN"}, "R03_MAILBOX_PORT_FROM_LOCAL_PREFLIGHT")
-        if action == "PLAN":
-            require(type(port) is int and 19723 <= port <= 19743, "R03_MAILBOX_PLAN_REQUIRES_LOCAL_PORT")
         execution = (dict(jobId=name, grantSHA256=sha256(self.job_dir / "mailbox-local-grant.json"))
                      if action == "EXECUTE" and self.kind == "ARCHITECTURE" else None)
         self.history.mkdir(exist_ok=True)
@@ -634,7 +643,7 @@ class Campaign:
             elif action == "CHECK_CLOSED":
                 response = self.run_closed(name, session)
             else:
-                response = self.run_reopen(session, port if port is not None else session["port"])
+                response = self.run_reopen(session, port)
         except Exception as exc:
             response = self.record_failure(bridge, folder, action, exc)
         response.update(common)
