@@ -1,0 +1,82 @@
+{
+  "schema": "APA_TAPIR_CATALOG_V1",
+  "archicadVersions": [
+    29
+  ],
+  "snapshot": {
+    "relativePath": "tapir-live-1.5.10/tapir-scene-live.json",
+    "sha256": "b355d2b1311b16d64a62e63c70c6eb5a01b7283a6675cfa2940ef5f247c1fa46"
+  },
+  "review": {
+    "operations": {
+      "GetAddOnVersion": {
+        "kind": "READ_ONLY",
+        "impact": "READ_ONLY",
+        "evidence": {
+          "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+          "sha256": "9b802e710c2cdd2b78abe5e395c550e2cd931043c1572bbc9335c83ae7e86a8f",
+          "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+          "effectConfidence": "DOCUMENTED_ONLY"
+        }
+      },
+      "GetDetailsOfElements": {
+        "kind": "READ_ONLY",
+        "impact": "READ_ONLY",
+        "evidence": {
+          "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+          "sha256": "a5b0b19d2e4252e97ddacd93885a5ef1de992fc029d1893faf97bb9a89d0d2db",
+          "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+          "effectConfidence": "DOCUMENTED_ONLY"
+        }
+      },
+      "GetElementsByType": {
+        "kind": "READ_ONLY",
+        "impact": "READ_ONLY",
+        "evidence": {
+          "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+          "sha256": "d8423330d150c128cc5dfc12ce80655000d1c21b690636abadd705bd08f35633",
+          "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+          "effectConfidence": "DOCUMENTED_ONLY"
+        }
+      },
+      "GetProjectInfo": {
+        "kind": "READ_ONLY",
+        "impact": "READ_ONLY",
+        "evidence": {
+          "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+          "sha256": "58c5f7995f5cea4c60ede32f748a18e68f9de4281a33e3bb1d7ca9c6753595c3",
+          "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+          "effectConfidence": "DOCUMENTED_ONLY"
+        }
+      },
+      "GetSelectedElements": {
+        "kind": "READ_ONLY",
+        "impact": "READ_ONLY",
+        "evidence": {
+          "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+          "sha256": "568de569ae4b2b3b706ccb7c23cd9dd45f07da446dd4025e90bf1b45a567ff11",
+          "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+          "effectConfidence": "DOCUMENTED_ONLY"
+        }
+      },
+      "GetStories": {
+        "kind": "READ_ONLY",
+        "impact": "READ_ONLY",
+        "evidence": {
+          "source": "Exact exported provider contract or installed official SDK description, operator effect review; NOT execution approval",
+          "sha256": "315858785d2a5c10ecef29758c7dc22f48400b1f295d8477423ef41f7681d33a",
+          "classificationBasis": "DOCUMENTED_EFFECT_NOT_COMMAND_NAME",
+          "effectConfidence": "DOCUMENTED_ONLY"
+        }
+      }
+    },
+    "contractHashes": {
+      "GetAddOnVersion": "2ac88bcab0d00840c4cf6c9ea1e7a07126f7ebd85f16b858dafeecff41949670",
+      "GetDetailsOfElements": "0a54cb98b2279758bea39db910233a75a7e71c41dd60ac1951b5a597cefedf55",
+      "GetElementsByType": "ac246ea3bc7cc4233b3b1f46e796c4e66bd694b700ad6166207f0d9f7e057f10",
+      "GetProjectInfo": "2ac53684432e7e8f86ec7b7244bd27db5af1d97ef35e28cc7c5f55b308b477fb",
+      "GetSelectedElements": "6d386a79c834200a16e6a003b64fc255007b6902af4ecca2a3d81a9702e8ecdc",
+      "GetStories": "a0bf03be5f70f5ea047ac0ab6253eb54b2359df27323232f86ef9f8b8462ff02"
+    }
+  }
+}

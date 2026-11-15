@@ -19,7 +19,7 @@ import sqlite3
 import sys
 import traceback
 
-from archicad_guarded_wall_probe import tapir
+from archicad_native_api import tapir
 import archicad_scene_v1 as SCENE
 
 PORT = 19723

@@ -26,6 +26,7 @@ HEX = re.compile(r"[a-f0-9]{64}")
 TEST_ID = re.compile(r"r03-(?:authored|gpt-shell)-mcp-[a-z0-9-]{4,40}")
 Operation = Literal["doctor", "plan", "native-read", "preflight", "write", "check-closed", "verify-reopen"]
 ReadKind = Literal["status", "job", "receipt"]
+TapirOperation = Literal["status", "catalog", "read"]
 Receipt = Literal["plan", "native-inventory", "stdout", "stderr"]
 ARTIFACTS = {"plan": "plan.json", "native-inventory": "native-inventory.json",
              "stdout": "stdout.txt", "stderr": "stderr.txt"}
@@ -62,7 +63,8 @@ class Control:
         config = json.loads(profile_bytes)
         self.release = read_release(self.root)
         self.release_sha = sha256(self.root / MANIFEST)
-        require(isinstance(config, dict) and set(config) == {"schema", "releaseManifestSha256", "campaigns"}
+        profile_fields = {"schema", "releaseManifestSha256", "campaigns"}
+        require(isinstance(config, dict) and set(config) in (profile_fields, profile_fields | {"tapirProfile"})
                 and config["schema"] == SCHEMA and config["releaseManifestSha256"] == self.release_sha
                 and isinstance(config["campaigns"], dict) and len(config["campaigns"]) <= 12,
                 "MCP_PROFILE_RELEASE_OR_SCHEMA_DRIFT")
@@ -74,6 +76,11 @@ class Control:
                     and type(row["writeEnabled"]) is bool, "MCP_CAMPAIGN_SCOPE_INVALID")
             self.campaign(target)
         self.check_release(full=True)
+        self.tapir = None
+        if "tapirProfile" in config:
+            from apa_tapir_bridge import TapirControl
+
+            self.tapir = TapirControl(exact_path(Path(config["tapirProfile"])))
         self.state = exact_path(self.profile.with_name(self.profile.stem + "-jobs"), exists=False)
         self.state.mkdir(exist_ok=True)
         if not worker:
@@ -340,44 +347,72 @@ class Control:
         return datetime.now(timezone.utc).isoformat()
 
 
-def server_for(control):
+def server_for(control=None, *, tapir=None, ac30_quantities=None):
     import anyio
     from mcp.server import MCPServer
 
     server = MCPServer("APA Windows")
 
-    def reply(row):
-        return CallToolResult(content=[TextContent(type="text", text=output_json(row))], structured_content=row)
+    def reply(row, error=False):
+        return CallToolResult(content=[TextContent(type="text", text=output_json(row))],
+                              structured_content=row, is_error=error)
 
-    async def call(function, *args):
+    async def call(function, *args, blocked_error=False):
         try:
-            return reply(await anyio.to_thread.run_sync(function, *args))
+            row = await anyio.to_thread.run_sync(function, *args)
+            return reply(row, blocked_error and row.get("status") == "BLOCKED")
         except (OSError, ValueError, KeyError, TypeError, RuntimeError) as exc:
             reason = str(exc)
             if not re.fullmatch(r"[A-Z][A-Z0-9_]{5,100}", reason):
                 reason = "MCP_REQUEST_BLOCKED_CHECK_LOCAL_DIAGNOSTICS"
             row = dict(status="BLOCKED", reason=reason)
-            return CallToolResult(content=[TextContent(type="text", text=output_json(row))],
-                                  structured_content=row, is_error=True)
+            return reply(row, error=True)
 
-    @server.tool(annotations=ToolAnnotations(readOnlyHint=True, openWorldHint=False))
-    async def apa_read(kind: ReadKind, job_id: str | None = None, artifact: Receipt | None = None,
-                       offset: int = 0) -> CallToolResult:
-        """Read APA revision, a named job or a page of its verified plan or inventory."""
-        return await call(control.read, kind, job_id, artifact, offset)
+    if control is not None:
+        @server.tool(annotations=ToolAnnotations(readOnlyHint=True, openWorldHint=False))
+        async def apa_read(kind: ReadKind, job_id: str | None = None, artifact: Receipt | None = None,
+                           offset: int = 0) -> CallToolResult:
+            """Read APA revision, a named job or a page of its verified plan or inventory."""
+            return await call(control.read, kind, job_id, artifact, offset)
 
-    @server.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=True,
-                                            idempotentHint=True, openWorldHint=False))
-    async def apa_execute(operation: Operation, job_id: str, target: str | None = None,
-                          intent: dict | None = None) -> CallToolResult:
-        """Queue an approved APA operation under an immutable job ID; use apa_read for the result.
+        @server.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=True,
+                                                idempotentHint=True, openWorldHint=False))
+        async def apa_execute(operation: Operation, job_id: str, target: str | None = None,
+                              intent: dict | None = None) -> CallToolResult:
+            """Queue an approved APA operation under an immutable job ID.
 
-        Plan accepts a semantic brief or project variants. Native operations require a named
-        local test campaign. Write additionally requires an exact local operator grant.
-        """
-        return await call(control.submit, operation, job_id, target, intent)
+            Plan accepts a semantic brief or variants. Native operations need a
+            named local test campaign. Write also needs an exact local operator grant.
+            Use apa_read for the result.
+            """
+            return await call(control.submit, operation, job_id, target, intent)
+
+        tapir = control.tapir
+
+    if tapir is not None:
+        @server.tool(annotations=ToolAnnotations(readOnlyHint=True, openWorldHint=False))
+        async def apa_tapir(operation: TapirOperation, command: str | None = None,
+                            parameters: dict | None = None, offset: int = 0,
+                            probe: bool = False) -> CallToolResult:
+            """Inspect the pinned Archicad/Tapir runtime, find a contract, or run a reviewed read."""
+            return await call(tapir.perform, operation, command, parameters, offset, probe, blocked_error=True)
+
+    if ac30_quantities is not None:
+        @server.tool(annotations=ToolAnnotations(readOnlyHint=True, openWorldHint=False))
+        async def apa_ac30_read(kind: Literal["status", "quantities"]) -> CallToolResult:
+            """Compatibility tool for a pinned inventory with independent typed quantity parity."""
+            return await call(ac30_quantities, kind)
 
     return server
+
+
+def run_server(server, port, *, max_request_body_size=MAX_INPUT):
+    if port is None:
+        server.run(transport="stdio")
+    else:
+        require(1024 <= port <= 65535, "MCP_INVALID_LOOPBACK_PORT")
+        server.run(transport="streamable-http", host="127.0.0.1", port=port,
+                   stateless_http=True, json_response=True, max_request_body_size=max_request_body_size)
 
 
 def main(argv=None):
@@ -389,6 +424,15 @@ def main(argv=None):
     args = parser.parse_args(argv)
     require(not (args.port and args.grant), "MCP_SELECT_ONE_MODE")
     profile = args.profile.absolute()
+    from archicad_tapir_profile import BRIDGE_SCHEMA, LEGACY_AC30_SCHEMA
+
+    config = file_json(profile)
+    if isinstance(config, dict) and config.get("schema") in {BRIDGE_SCHEMA, LEGACY_AC30_SCHEMA}:
+        from apa_tapir_bridge import TapirControl
+
+        require(not args.grant, "TAPIR_READ_PROFILE_CANNOT_GRANT_NATIVE_WRITE")
+        run_server(server_for(tapir=TapirControl(profile)), args.port)
+        return 0
     if args.grant:
         # A local operator grant may be added while the single MCP transport is running.
         control = Control(root, profile, worker=False)
@@ -406,13 +450,7 @@ def main(argv=None):
         return 0
     control = Control(root, profile)
     try:
-        server = server_for(control)
-        if args.port is None:
-            server.run(transport="stdio")
-        else:
-            require(1024 <= args.port <= 65535, "MCP_INVALID_LOOPBACK_PORT")
-            server.run(transport="streamable-http", host="127.0.0.1", port=args.port,
-                       stateless_http=True, json_response=True, max_request_body_size=MAX_INPUT)
+        run_server(server_for(control), args.port)
     finally:
         control.close()
     return 0

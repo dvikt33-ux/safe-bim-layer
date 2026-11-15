@@ -244,6 +244,7 @@ def parser():
     commands.add_parser("group-runtime", help="Действующий протокол нативных групп и сверки PLN")
     commands.add_parser("archicad-startup", help="Диагностика запуска проверенной тестовой копии Archicad")
     commands.add_parser("mcp-control", help="Приватный MCP для типизированных операций APA")
+    commands.add_parser("tapir", help="Определить среду Tapir, открыть каталог или выполнить проверенное чтение")
     commands.add_parser("source-batch", help="Существующий протокол пакетного создания по подтверждённым источникам")
     commands.add_parser("source-batch-reconcile", help="Сверка прерванного пакетного создания по источникам")
     commands.add_parser("mailbox", help="Приёмник APA с квитанциями и профилем чтения")
@@ -290,10 +291,15 @@ def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
     try:
         routes = {"project-runtime": ("archicad_project_accelerator", "main"),
+                  "ac30-native-read": ("apa_ac30_tapir20", "main"),
+                  "ac30-mcp": ("apa_ac30_mcp", "main"),
+                  "ac30-wall-preflight": ("apa_ac30_wall_preflight", "main"),
+                  "ac30-normalize-changes": ("apa_ac30_change_normalizer", "main"),
                   "connected-runtime": ("archicad_connected_components", "main"),
                   "group-runtime": ("apa_ac29_group_batch_oneshot", "main"),
                   "archicad-startup": ("apa_archicad_startup", "main"),
                   "mcp-control": ("apa_control_mcp", "main"),
+                  "tapir": ("apa_tapir_bridge", "main"),
                   "template-runtime": ("archicad_template_builder", "main"),
                   "source-batch": ("apa_source_qualified_native_batch", "cli"),
                   "source-batch-reconcile": ("apa_reconcile_source_batch_save", "cli"),

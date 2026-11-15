@@ -9,7 +9,6 @@ import re
 from pathlib import Path
 import statistics
 import time
-import urllib.request
 
 import archicad_project_accelerator as A
 
@@ -52,7 +51,7 @@ class ReadAdapter:
         if command not in READS:
             raise ValueError('READ_ADAPTER_REFUSED: ' + command)
         self.calls.append(command)
-        if self.provider == 'direct' and command != 'API.IsAddOnCommandAvailable':
+        if self.provider == 'direct':
             return A.native_transport(command, params)
         # Use installed connection's official gateway directly: .tapir() would
         # perform availability discovery before the exact identity check.
@@ -60,17 +59,7 @@ class ReadAdapter:
         payload_params = params if command.startswith('API.') else {
             'addOnCommandId': {'commandNamespace':'TapirCommand','commandName':command},
             'addOnCommandParameters':params}
-        if self.provider == 'alesdev88':
-            result = self.core.official(payload_command, payload_params)
-        else:
-            req = urllib.request.Request(f'http://127.0.0.1:{A.RUN.PORT}',
-                json.dumps({'command':payload_command,'parameters':payload_params}).encode('utf-8'),
-                {'Content-Type':'application/json'})
-            with urllib.request.urlopen(req, timeout=15) as response:
-                envelope = json.loads(response.read())
-            if envelope.get('succeeded') is not True:
-                raise ValueError('OFFICIAL_READ_FAILED: ' + str(envelope.get('error')))
-            result = envelope['result']
+        result = self.core.official(payload_command, payload_params)
         if not command.startswith('API.'):
             result = result.get('addOnCommandResponse')
         if not isinstance(result, dict) or 'error' in result:

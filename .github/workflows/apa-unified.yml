@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - integration/apa-r03-native-acceptance-20261113
+      - integration/apa-tapir-bridge-20261115
   pull_request:
     branches:
       - feature/apa-ac29-native-slab-copy-20261020
@@ -49,6 +50,12 @@ jobs:
           test_apa_unified
           test_apa_project_design
           test_apa_control_mcp
+          test_apa_tapir_bridge
+          test_archicad_native_api
+          test_apa_ac30_tapir20
+          test_apa_ac30_mcp
+          test_apa_ac30_change_normalizer
+          test_apa_ac30_wall_preflight
           test_archicad_functional_modules
           test_archicad_semantic_brief
           test_archicad_semantic_spatial

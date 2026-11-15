@@ -11,39 +11,11 @@ import json
 import os
 import sys
 import tempfile
-import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
 
-def tapir(port: int, command: str, params: dict | None = None, *, timeout: float = 15, namespace: str = 'TapirCommand') -> dict:
-    if not isinstance(namespace,str) or not namespace or '.' in namespace:raise ValueError('INVALID_ADDON_NAMESPACE')
-    request = {
-        "command": "API.ExecuteAddOnCommand",
-        "parameters": {
-            "addOnCommandId": {
-                "commandNamespace": namespace,
-                "commandName": command,
-            },
-            "addOnCommandParameters": params or {},
-        },
-    }
-    req = urllib.request.Request(
-        f"http://127.0.0.1:{port}",
-        data=json.dumps(request, ensure_ascii=False).encode("utf-8"),
-        headers={"Content-Type": "application/json; charset=utf-8"},
-        method="POST",
-    )
-    if type(timeout) not in (int, float) or not (0 < timeout <= 120):
-        raise ValueError("INVALID_HTTP_TIMEOUT")
-    with urllib.request.urlopen(req, timeout=timeout) as response:
-        result = json.loads(response.read().decode("utf-8"))
-    if result.get("succeeded") is not True:
-        raise RuntimeError(f"{command} failed: {result.get('error')!r}")
-    payload = result.get("result", {}).get("addOnCommandResponse")
-    if not isinstance(payload, dict):
-        raise RuntimeError(f"{command} returned no Tapir response")
-    return payload
+from archicad_native_api import tapir
 
 
 def guard(port: int, project_name: str, project_dir_hint: str) -> dict:

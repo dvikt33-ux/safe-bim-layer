@@ -299,7 +299,7 @@ class DynamicCommands:
         if self.registration.get(command) is False:raise ValueError('COMMAND_NOT_REGISTERED_IN_RUNTIME')
         if scope['hash']!=self.A.RUN.digest({k:v for k,v in scope.items() if k!='hash'}) or scope['ticket']['command']!=command or scope['ticket']['parameters']!=parameters or scope['ticket']['hash']!=source_hash or not scope.get('authorizationRef'):raise ValueError('DYNAMIC_OPERATION_SCOPE_DRIFT')
 
-    def read(self,api,ticket,reviewed_read_only=False):
+    def read(self,api,ticket,reviewed_read_only=False,*,project_guard=None):
         self.validate(ticket)
         blocker=self.catalog['commands'][ticket['command']].get('executionBlocker')
         if blocker:raise ValueError('COMMAND_RUNTIME_QUARANTINED:'+blocker)
@@ -310,14 +310,19 @@ class DynamicCommands:
             result=self.local_handlers[ticket['command']](**ticket['parameters']);self.validate_result(ticket['command'],result)
             self.callable[ticket['command']]=dict(kind='LOCAL_ANALYTICAL_RESULT_PASS',resultHash=self.A.RUN.digest(result));self.local_events.append(dict(command=ticket['command'],inputHash=ticket['hash'],resultHash=self.A.RUN.digest(result),versions=versions,elapsedSeconds=time.perf_counter()-start,nativeWrites=0))
             return result
-        self.A.RUN.guarded_project_for_read(api)
+        if project_guard is None:
+            self.A.RUN.guarded_project_for_read(api)
+        else:
+            binding = project_guard()
+            if binding["tapirVersion"] != CONTRACTS.source_version(self.catalog):
+                raise ValueError("TAPIR_CATALOG_RUNTIME_VERSION_MISMATCH")
         self.probe_runtime(api,ticket['command'])
         api.bind_dynamic_commands(self)
         with api.dynamic_call(ticket):result=api(ticket['command'],ticket['parameters'])
         self.validate_result(ticket['command'],result);self.callable[ticket['command']]=dict(kind='READ_SCHEMA_PASS',resultHash=self.A.RUN.digest(result))
         return result
 
-    def probe_runtime(self,api,command):
+    def probe_runtime(self,api,command,*,required=True):
         """Reacquire registration for each selected add-on command before call."""
         row=self.catalog['commands'][command]
         if row.get('api')=='local-python':
@@ -331,8 +336,9 @@ class DynamicCommands:
         api.allowed|={'API.IsAddOnCommandAvailable'}
         available=api('API.IsAddOnCommandAvailable',dict(addOnCommandId=dict(commandNamespace=namespace,commandName=name)))
         self.register_availability(command,available.get('available'))
-        if not self.registration[command]:raise ValueError('COMMAND_NOT_REGISTERED_IN_CURRENT_RUNTIME')
-        return dict(status='RUNTIME_AVAILABLE',namespace=namespace,command=name)
+        if not self.registration[command] and required:raise ValueError('COMMAND_NOT_REGISTERED_IN_CURRENT_RUNTIME')
+        return dict(status='RUNTIME_AVAILABLE' if self.registration[command] else 'RUNTIME_UNAVAILABLE',
+                    namespace=namespace,command=name)
 
     def _schema_at(self,schema,pointer):
         for token in pointer.strip('/').split('/') if pointer else []:

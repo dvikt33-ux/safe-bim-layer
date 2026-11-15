@@ -18,7 +18,6 @@ from pathlib import Path
 import re
 import sys
 import time
-import urllib.request
 
 import archicad_scene_run as RUN
 import archicad_scene_v1 as SCENE
@@ -27,6 +26,7 @@ import archicad_semantic_brief as BRIEF
 import archicad_project_library_pack as PACK
 import archicad_semantic_spatial as SPATIAL
 import archicad_authored_native_plan as AUTHORED_NATIVE
+from archicad_native_api import native_command
 
 READS = frozenset({"GetProjectInfo", "GetStories", "GetAddOnVersion",
                   "GetAllElements", "Get3DBoundingBoxes", "GetDetailsOfElements",
@@ -60,20 +60,7 @@ def write_json(path, value):
 
 
 def native_transport(command, params):
-    if command.startswith('AddOn.'):
-        parts=command.split('.')
-        if len(parts)!=3 or not all(parts):raise ValueError('INVALID_PROVIDER_COMMAND_ID')
-        return RUN.tapir(RUN.PORT,parts[2],params,namespace=parts[1])
-    if not command.startswith('API.'):
-        return RUN.tapir(RUN.PORT, command, params)
-    request = urllib.request.Request(f"http://127.0.0.1:{RUN.PORT}",
-        data=json.dumps({"command": command, "parameters": params}).encode("utf-8"),
-        headers={"Content-Type": "application/json"}, method="POST")
-    with urllib.request.urlopen(request, timeout=15) as response:
-        result = json.loads(response.read().decode("utf-8"))
-    if result.get("succeeded") is not True or not isinstance(result.get("result"), dict):
-        raise ValueError("ARCHICAD_PRODUCT_INFO_UNAVAILABLE" if command=='API.GetProductInfo' else 'ARCHICAD_CLASSIFICATION_INFO_UNAVAILABLE')
-    return result["result"]
+    return native_command(RUN.PORT, command, params)
 
 
 def archicad29(api):
@@ -84,12 +71,13 @@ def archicad29(api):
 
 
 def catalog_with_provenance(path):
-    """Require the modified live export, including untouched source JS hashes."""
+    """Verify a live export against its original documentation and runtime binding."""
     path = Path(path)
     doc = SCENE.GRAPH.CONTRACTS.load_catalog(path)
     meta = doc.get("_metadata", {})
     if (meta.get("origin") != "live TapirCommand.GenerateDocumentation"
-            or meta.get("provider_version") != RUN.EXPECTED_TAPIR):
+            or not isinstance(meta.get("provider_version"), str)
+            or meta.get("provider_version") != meta.get("binding", {}).get("tapirVersion")):
         raise ValueError("CURRENT_MODIFIED_TAPIR_EXPORT_REQUIRED")
     for name in ("command_definitions.js", "common_schema_definitions.js"):
         raw = (path.parent / name).read_bytes()
@@ -102,10 +90,16 @@ def catalog_with_provenance(path):
     return doc
 
 
-def parse_documentation(folder, binding):
+def parse_documentation(folder, binding, *, origin="live TapirCommand.GenerateDocumentation"):
     folder = Path(folder)
+    files = ("command_definitions.js", "common_schema_definitions.js")
+    content = {name: (folder / name).read_bytes() for name in files}
+    return documentation_catalog(content, binding, origin=origin)
+
+
+def documentation_catalog(content, binding, *, origin):
     def read(name, prefix):
-        raw = (folder / name).read_bytes()
+        raw = content[name]
         value = raw.decode("utf-8").strip()
         if not value.startswith(prefix) or not value.endswith(";"):
             raise ValueError("UNEXPECTED_DOCUMENTATION_FORMAT: " + name)
@@ -124,7 +118,7 @@ def parse_documentation(folder, binding):
                 element_types=common["ElementType"]["enum"],
                 _metadata=dict(format="archicad-mcp.tapir-snapshot/1", provider="tapir",
                                provider_version=binding["tapirVersion"],
-                               origin="live TapirCommand.GenerateDocumentation", binding=binding,
+                               origin=origin, binding=binding,
                                inputs={"command_definitions.js": ch, "common_schema_definitions.js": sh}))
 
 
@@ -632,7 +626,9 @@ def compile_authored_intent(intent, schema_path, read_api, router=None):
                 raise ValueError("AUTHORED_COLUMN_OUTSIDE_BUILDING")
     if additions or "wallBasicMaterialName" in intent:
         candidate["graph"]["operations"].extend(json.loads(RUN.canonical(additions)))
-        checked=SCENE.GRAPH.compile_graph(catalog_with_provenance(schema_path),candidate["graph"],runtime_version=RUN.EXPECTED_TAPIR)
+        catalog = catalog_with_provenance(schema_path)
+        checked = SCENE.GRAPH.compile_graph(catalog, candidate["graph"],
+                                          runtime_version=SCENE.GRAPH.CONTRACTS.source_version(catalog))
         if checked["status"]!="PLAN_VALIDATED_OFFLINE":
             raise ValueError("AUTHORED_COMPONENT_GRAPH_REFUSED: "+checked["status"])
         candidate.update(sourcePlanHash=checked["sourcePlanHash"],executionOrder=checked["executionOrder"],

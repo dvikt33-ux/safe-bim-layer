@@ -4,3 +4,5 @@
 schemas/tapir-live-1.5.10/*.js -text -whitespace
 docs/research/** -text
 examples/accelerator/r07-house-brief.md -text
+schemas/tapir-bridge/*.json -text
+schemas/tapir-bridge/2.0.0.json -diff

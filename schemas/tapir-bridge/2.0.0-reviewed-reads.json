@@ -1,0 +1,11 @@
+{
+  "GetAddOnVersion": "archicad-addon/Sources/ApplicationCommands.cpp",
+  "GetDetailsOfElements": "archicad-addon/Sources/ElementCommands.cpp",
+  "GetElementsByType": "archicad-addon/Sources/ElementCommands.cpp",
+  "GetGroupsOfElements": "archicad-addon/Sources/ElementGroupingCommands.cpp",
+  "GetProjectInfo": "archicad-addon/Sources/ProjectCommands.cpp",
+  "GetQuantitiesOfElements": "archicad-addon/Sources/ElementCommands.cpp",
+  "GetSelectedElements": "archicad-addon/Sources/ElementCommands.cpp",
+  "GetStories": "archicad-addon/Sources/ProjectCommands.cpp",
+  "GetSuspendGroupsMode": "archicad-addon/Sources/ElementGroupingCommands.cpp"
+}
