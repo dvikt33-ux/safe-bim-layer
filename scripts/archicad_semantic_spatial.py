@@ -12,10 +12,16 @@ import copy
 import math
 
 import archicad_semantic_brief as BRIEF
+from archicad_project_library_pack import WALL_ROLES
 
 SCHEMA="apa-authored-spatial-layout/1"
 LAYOUT_FIELDS = {"schemaVersion", "outline", "rooms", "axes", "bearingLines", "loadPaths"}
 EPS=1e-6
+LOAD_BEARING = "LoadBearingElement"
+NON_LOAD_BEARING = "NonLoadBearingElement"
+STRUCTURAL_FUNCTIONS = {LOAD_BEARING, NON_LOAD_BEARING}
+WALL_FIELDS = {"id", "storyId", "axisId", "fromCoordinate", "toCoordinate",
+               "wallThicknessMeters", "cseCandidateId"}
 
 
 def number(value, field):
@@ -251,9 +257,8 @@ def compile_spatial(brief,pack,layout):
         raise ValueError("AUTHORED_BEARING_LINES_REQUIRED")
     members={}
     for line in lines:
-        if not isinstance(line,dict) or set(line)!={
-                "id","storyId","axisId","fromCoordinate","toCoordinate",
-                "wallThicknessMeters","cseCandidateId"}:
+        if (not isinstance(line,dict) or not WALL_FIELDS <= line.keys()
+                <= WALL_FIELDS | {"structuralFunction", "coordinationEnds"}):
             raise ValueError("BEARING_LINE_SCHEMA")
         mid=BRIEF._id(line["id"],"BEARING_LINE_ID")
         sid=line["storyId"]
@@ -263,7 +268,29 @@ def compile_spatial(brief,pack,layout):
         start=number(line["fromCoordinate"],"BEARING_START")
         end=number(line["toCoordinate"],"BEARING_END")
         thick=number(line["wallThicknessMeters"],"WALL_THICKNESS")
-        if not .15<=thick<=.6 or end-start<1.0:
+        wall_cse = line["cseCandidateId"]
+        selected = None
+        structural = line.get("structuralFunction")
+        if "structuralFunction" in line and (not isinstance(structural, str) or structural not in STRUCTURAL_FUNCTIONS):
+            raise ValueError("AUTHORED_WALL_STRUCTURAL_FUNCTION_INVALID:" + mid)
+        if wall_cse is not None:
+            matching = [c for c in candidates if isinstance(c, dict) and c.get("id") == wall_cse
+                        and c.get("role") in WALL_ROLES]
+            if len(matching) != 1:
+                raise ValueError("BEARING_WALL_CSE_ROLE_NOT_MATCHED")
+            selected = matching[0]
+            if sid not in selected["storyIds"] or abs(thick - selected["thicknessMeters"]) > EPS:
+                raise ValueError("WALL_CSE_STORY_OR_THICKNESS_MISMATCH:" + mid)
+            assigned = {"internal-partition": NON_LOAD_BEARING,
+                        "internal-bearing-wall": LOAD_BEARING}.get(selected["role"])
+            if assigned is not None:
+                if structural is not None and structural != assigned:
+                    raise ValueError("WALL_CSE_STRUCTURAL_FUNCTION_MISMATCH:" + mid)
+                structural = assigned
+        thin_partition = selected is not None and structural == NON_LOAD_BEARING
+        minimum = .05 if thin_partition else .15
+        maximum = 1.5 if selected is not None else .6
+        if not minimum <= thick <= maximum or end-start < (EPS if thin_partition else 1.0):
             raise ValueError("INVALID_AUTHORED_WALL_ENVELOPE")
         lower=outline["yMin" if axis["direction"]=="X" else "xMin"]
         upper=outline["yMax" if axis["direction"]=="X" else "xMax"]
@@ -281,13 +308,6 @@ def compile_spatial(brief,pack,layout):
                 "yMin" if axis["direction"]=="X" else "xMin"]+EPS
             for r in rooms.values()):
             raise ValueError("BEARING_LINE_NOT_ON_AUTHORED_ROOM_BOUNDARY")
-        wall_cse=line["cseCandidateId"]
-        if wall_cse is not None:
-            matching=[c for c in candidates if isinstance(c,dict) and
-                      c.get("id")==wall_cse and c.get("role") in {
-                          "external-wall","internal-partition"}]
-            if len(matching)!=1:
-                raise ValueError("BEARING_WALL_CSE_ROLE_NOT_MATCHED")
         members[mid]={"id":mid,"storyId":sid,"axisId":axis["id"],
                       "direction":axis["direction"],
                       "constantCoordinate":axis["coordinate"],
@@ -295,6 +315,16 @@ def compile_spatial(brief,pack,layout):
                       "thicknessMeters":thick,
                       "wallCseCandidateId":wall_cse,
                       "structuralApproval":"UNVERIFIED"}
+        if structural is not None:
+            members[mid]["structuralFunction"] = structural
+        if "coordinationEnds" in line:
+            if selected is None or "coordination" not in selected:
+                raise ValueError("WALL_ENDS_REQUIRE_COORDINATION_PROFILE:" + mid)
+            ends = line["coordinationEnds"]
+            if (not isinstance(ends, dict) or ends.keys() != {"start", "end"}
+                    or any(not isinstance(end, str) or not end for end in ends.values())):
+                raise ValueError("WALL_COORDINATION_ENDS_INVALID:" + mid)
+            members[mid]["coordinationEnds"] = dict(ends)
     # Overlapping collinear native walls are not a valid plan.
     seq=list(members.values())
     for i,a in enumerate(seq):
@@ -318,6 +348,8 @@ def compile_spatial(brief,pack,layout):
         lower=members.get(link["lowerMemberId"])
         if upper is None or lower is None or upper["id"]==lower["id"]:
             raise ValueError("LOAD_PATH_UNKNOWN_SUPPORT")
+        if NON_LOAD_BEARING in (upper.get("structuralFunction"), lower.get("structuralFunction")):
+            raise ValueError("LOAD_PATH_CANNOT_INCLUDE_NON_LOAD_BEARING_WALL")
         pair=(upper["id"],lower["id"])
         if pair in visited:
             raise ValueError("DUPLICATE_LOAD_PATH")
@@ -335,6 +367,7 @@ def compile_spatial(brief,pack,layout):
                       "forceTransferProved":False})
     unlinked=[x["id"] for x in members.values()
               if mapping[x["storyId"]]>0 and
+              x.get("structuralFunction") != NON_LOAD_BEARING and
               not any(z["upperMemberId"]==x["id"] for z in links)]
     cse_missing=[x["id"] for x in members.values() if x["wallCseCandidateId"] is None]
     unresolved=pack.get("missingCriticalConditionIds",[])
@@ -343,6 +376,9 @@ def compile_spatial(brief,pack,layout):
     slab_stories=set(slab.get("storyIds",[]))
     missing_slabs=sorted(story_ids-slab_stories)
     design = design_checks(doc, outline, vals, seq, layout.get("passages", []))
+    from archicad_normative_bindings import wall_coordination_checks
+
+    coordination = wall_coordination_checks(members, candidates, design["openings"])
     return {
         "status":"AUTHORED_SPATIAL_GEOMETRY_CHECKED_ENGINEERING_PENDING",
         "schemaVersion":SCHEMA,"projectId":doc["projectId"],
@@ -350,6 +386,7 @@ def compile_spatial(brief,pack,layout):
         "outline":outline,
         "rooms":vals,"axes":list(by_axis.values()),
         "bearingLines":seq,"loadPaths":links,**design,
+        **({"wallCoordination": coordination} if coordination else {}),
         "floorSlabCseCandidateId":slab["id"],
         "floorSlabCandidateStoryIds":sorted(slab_stories),
         "unresolvedWallCseMemberIds":cse_missing,
@@ -360,7 +397,10 @@ def compile_spatial(brief,pack,layout):
         "bimEmissionAuthorized":False,
         "engineeringApproved":False,"normativeApproved":False,
         "nativeWriteCalls":0,
-        "summary":{"roomCount":len(vals),"authoredBearingLineCount":len(seq),
+        "summary":{"roomCount":len(vals),"authoredBearingLineCount":sum(
+                       m.get("structuralFunction") != NON_LOAD_BEARING for m in seq),
+                   "authoredNonLoadBearingWallCount":sum(
+                       m.get("structuralFunction") == NON_LOAD_BEARING for m in seq),
                    "alignedCandidateLoadPathCount":len(links),
                    "perStoryRoomCount":dict(Counter(x["storyId"] for x in vals))}
     }

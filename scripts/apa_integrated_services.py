@@ -52,6 +52,49 @@ def knowledge_query(root, cache, query, mode):
     return dict(result, releaseKnowledgeRevision=release["knowledgeRevision"], executionPermission=False)
 
 
+def detail_review(root, detail_id, observation=None, host_guid=None):
+    """Recompile a source-dimensioned Beam preview without acquiring a writer target."""
+    import archicad_connected_components as connected
+    from archicad_native_beam_details import source_cross_section
+
+    candidate = connected.details_candidate(root, detail_id)
+    report = dict(status="DETAIL_SOURCE_REVIEWED", source=candidate, nativeWrites=0,
+                  executionPermission=False, assemblyWriteAllowed=False)
+    if observation is None:
+        if host_guid is not None:
+            raise ValueError("DETAIL_HOST_REQUIRES_OBSERVATION")
+        return report
+
+    observed, source_sha = _matching_json(observation)
+    if (observed.get("schema") != "APA_LIVE_ROOF_SOURCE_SECTION_NONEXECUTABLE_PREVIEW"
+            or observed.get("sourceDetailId") != detail_id or observed.get("nativeWrites") != 0
+            or observed.get("sourceCommitAllowed") is not False
+            or observed.get("preflightAuthority") != "READ_ONLY_OBSERVED_PROJECT_NO_ACCEPTED_WRITE_RELEASE"):
+        raise ValueError("DETAIL_READ_ONLY_OBSERVATION_REQUIRED")
+    matches = [row for row in observed["rows"]
+               if row.get("beamPreviewStatus") == "OFFLINE_NATIVE_BEAM_SOURCE_GRAPH_PREPARED"
+               and (host_guid is None or row.get("hostGuid", "").casefold() == host_guid.casefold())]
+    if len(matches) != 1:
+        raise ValueError("DETAIL_OBSERVED_BEAM_HOST_NOT_UNIQUE")
+    row = matches[0]
+    if not connected.RUN._GUID.fullmatch(row.get("hostGuid", "")):
+        raise ValueError("DETAIL_OBSERVED_BEAM_HOST_INVALID")
+    section = source_cross_section(candidate, observed["entityId"], row["sourceFactId"])
+    params = row["beamParams"]
+    if section != row.get("sourceSection") or any(params.get(key) != value for key, value in section.items()):
+        raise ValueError("DETAIL_OBSERVED_BEAM_SECTION_MISMATCH")
+    graph = {"operations": [{"id": "detail-source-beam", "command": "CreateBeams", "params": {"beamsData": [params]}}]}
+    catalog = connected.A.catalog_with_provenance(connected.RUN.DEFAULT_SCENE_SCHEMA)
+    checked = connected.A.SCENE.GRAPH.compile_graph(catalog, graph, runtime_version=connected.RUN.EXPECTED_TAPIR)
+    if checked["status"] != "PLAN_VALIDATED_OFFLINE":
+        raise ValueError("DETAIL_OBSERVED_BEAM_GRAPH_REFUSED:" + checked["status"])
+    return dict(report, status="DETAIL_BEAM_PREVIEW_REVALIDATED", observationSha256=source_sha,
+                observedHostGuid=row["hostGuid"], sourceFactId=row["sourceFactId"], sourceSectionMeters=section,
+                observedHostStatus="ARCHIVED_READ_ONLY_OBSERVATION", graph=graph,
+                sourcePlanHash=checked["sourcePlanHash"], sourceAssemblyApplicability="UNVERIFIED",
+                nativeContactAndMaterials="PENDING_EXACT_PROJECT_READBACK")
+
+
 def _verified_authored_job(job):
     """Read the same intent, assembly and persisted geometry used for acceptance."""
     import apa_r03_architecture as architecture
@@ -192,6 +235,15 @@ def document_reopened_job(job, destination, story=None):
     package.update(plansByStory=plans,
                    projectId=intent["projectId"], operationGuids=bound,
                    requirements=requirement_readback(result), provenance=provenance)
+    if "wallSystems" in result:
+        wall_systems = result["wallSystems"]
+        require(reopened.get("reopenedWallSystemsVerified") is True
+                and wall_systems == reopened.get("wallSystems")
+                and reopened.get("wallSystemPlanSHA256") == provenance["planSha256"]
+                and all(bound.get(sid) == row["guid"].lower() for sid, row in wall_systems["readback"].items()),
+                "DOCUMENTATION_REOPENED_WALL_SYSTEM_READBACK_REQUIRED")
+        package["wallSystems"] = wall_systems
+        package["wallDesignCoordination"] = plan["authoredCandidate"].get("wallCoordination", [])
     write_package(package, destination)
     files = {path.name: sha256(path) for path in sorted(destination.iterdir())}
     receipt = dict(status="REOPENED_ASSEMBLY_DOCUMENTATION_WRITTEN", jobId=job.name,

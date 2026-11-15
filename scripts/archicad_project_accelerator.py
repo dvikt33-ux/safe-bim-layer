@@ -589,7 +589,11 @@ def compile_authored_intent(intent, schema_path, read_api, router=None):
         wall_guid = RUN.resolve_basic_slab_material(read_api,intent["wallBasicMaterialName"])
         for step in candidate["graph"]["operations"]:
             if step["command"] == "CreateWalls":
-                step["params"]["wallsData"][0]["buildingMaterialId"]={"guid":wall_guid}
+                wall = step["params"]["wallsData"][0]
+                material = wall.get("buildingMaterialId", {}).get("guid")
+                if material is not None and material.casefold() != wall_guid.casefold():
+                    raise ValueError("AUTHORED_DEFAULT_MATERIAL_CONFLICTS_WITH_WALL_CSE:" + step["id"])
+                wall["buildingMaterialId"] = {"guid": wall_guid}
     additions = intent.get("nativeComponents", [])
     if not isinstance(additions,list) or len(additions)>100:
         raise ValueError("INVALID_AUTHORED_NATIVE_COMPONENTS")
@@ -640,6 +644,18 @@ def compile_authored_intent(intent, schema_path, read_api, router=None):
             kinds[sid] not in {'CreateWalls','CreateSlabs','CreateRoofs'} or
             value not in {'LoadBearingElement','NonLoadBearingElement'} for sid,value in roles.items())):
         raise ValueError('AUTHORED_STRUCTURAL_FUNCTIONS_REQUIRE_EXPLICIT_ELEMENT_ROLES')
+    inferred = candidate.get('structuralFunctions', {})
+    if any(roles.get(sid, role) != role for sid, role in inferred.items()):
+        raise ValueError('AUTHORED_STRUCTURAL_FUNCTION_CONFLICTS_WITH_WALL_CSE')
+    wall_bindings = candidate.get('wallCseBindings', {})
+    for sid in roles.keys() & wall_bindings.keys():
+        wall_bindings[sid]['structuralFunction'] = roles[sid]
+    if inferred or roles:
+        candidate['structuralFunctions'] = {**inferred, **roles}
+    if inferred or roles.keys() & wall_bindings.keys():
+        from archicad_authored_extension import resolve_structural_function
+
+        candidate['structuralFunctionDefinition'] = resolve_structural_function(read_api)
     preview = AUTHORED_NATIVE.as_existing_scene_writer_preview(candidate)
     return {**preview, "status": "ACCELERATOR_COMPILED_OFFLINE",
             "intent": intent, "intentHash": RUN.digest(intent),
@@ -780,6 +796,34 @@ def requirement_readback(result):
     return feedback
 
 
+def verify_authored_wall_systems(api, plan, evidence):
+    """Read exact material, geometry and structural role from the persisted GUIDs."""
+    from archicad_authored_extension import read_structural_function, resolve_structural_function
+
+    candidate = plan['authoredCandidate']
+    expected = candidate['wallCseBindings']
+    if (expected.keys() != evidence['readback'].keys() or evidence['normativePackDigest']
+            != candidate.get('normative', {}).get('normativePackDigest')):
+        raise ValueError('AUTHORED_WALL_SYSTEM_BINDING_DRIFT')
+    steps = {step['id']: step for step in plan['graph']['operations']}
+    definition = resolve_structural_function(api) if any(row['structuralFunction'] for row in expected.values()) else None
+    if definition is not None and definition != candidate.get('structuralFunctionDefinition'):
+        raise ValueError('NATIVE_STRUCTURAL_FUNCTION_DEFINITION_CHANGED')
+    for sid, binding in expected.items():
+        row = evidence['readback'][sid]
+        guid = row['guid']
+        step = steps[sid]
+        wall = step['params']['wallsData'][0]
+        if row != dict(binding, guid=guid) or binding['materialGuid'] != wall['buildingMaterialId']['guid']:
+            raise ValueError('AUTHORED_WALL_SYSTEM_BINDING_DRIFT:' + sid)
+        floor = wall['floorIndex']
+        RUN.verify_readback('CreateWalls', step['params'], RUN.requested_details(api, guid),
+                            expected_floor=floor, expected_story_level=RUN.story_level_for_floor(plan['storyBindings'], floor))
+        if (binding['structuralFunction'] and read_structural_function(api, guid, definition)
+                != {'value': definition['displayValues'][binding['structuralFunction']]}):
+            raise ValueError('NATIVE_STRUCTURAL_FUNCTION_VALUE_MISMATCH:' + sid)
+
+
 def run_project(intent, schema, folder, state_dir, mode="offline", transport=None,
                 run_id=None, confirm_hash=None, *, allow_3d_view_for_write=False):
     """All evidence stays local. Execute requires an exact preflight approval hash."""
@@ -851,7 +895,8 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
             if not run_id or not confirm_hash or token != confirm_hash:
                 raise ValueError("EXPLICIT_EXECUTE_REQUIRES_RUN_ID_AND_MATCHING_CONFIRM_PLAN_HASH")
             protected=None
-            if authored and (intent.get('nativeRoofJunctions') or intent.get('structuralFunctions')):
+            roles = compiled.get('authoredCandidate', {}).get('structuralFunctions', {})
+            if authored and (intent.get('nativeRoofJunctions') or roles):
                 import archicad_connected_components as CONNECTED
                 try:
                     original=CONNECTED.G.normalize_dump(api('GetModelDumpV1',{}))
@@ -886,10 +931,10 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
                     ticket=completed['plan'];compiled['graph']=ticket['graph']
                     result['nativeRoofJunctions']={k:v for k,v in completed.items() if k!='plan'}
                     write_json(folder/'junction-completed-plan.json',ticket)
-                if intent.get('structuralFunctions'):
+                if roles:
                     api.allowed|={'SetPropertyValuesOfElements','GetPropertyValuesOfElements'}
                     result['structuralFunctions']=EXTENSION.assign_structural_functions(writer,ticket,owned,
-                        intent['structuralFunctions'],protected,run_id+'-roles',
+                        roles,protected,run_id+'-roles',
                         'Explicit source intent structuralFunctions; no engineering capacity inference',saved_hash)
         after = inventory_guids(api)
         write_json(folder / "inventory-after.json", after)
@@ -946,6 +991,12 @@ def run_project(intent, schema, folder, state_dir, mode="offline", transport=Non
                 raise ValueError("PROJECT_CHANGED_DURING_WHOLE_ASSEMBLY_READBACK")
             result["wholeAssemblyReadback"] = True
             result.pop("assemblyDiscrepancy", None)
+            if authored and candidate.get('wallCseBindings'):
+                result['wallSystems'] = {
+                    'normativePackDigest': candidate.get('normative', {}).get('normativePackDigest'),
+                    'readback': {sid: dict(info, guid=created[sid]['guid'])
+                                 for sid, info in candidate['wallCseBindings'].items()},
+                }
             if authored and intent.get('nativeGeometryAudit'):
                 import archicad_authored_geometry as GEOMETRY
                 result['nativeGeometry']=GEOMETRY.run(api,ticket,result['scene']['steps'],after,folder/'native-geometry')

@@ -54,13 +54,15 @@ def _review_design(intent):
                           requirements=[dict(req, status="NOT_EVALUATED", bimOperationIds=[])
                                         for req in normalized["constraints"]])
         else:
-            result.update(status="REQUIREMENTS_OPEN" if candidate["requiredOpenIds"] else "DESIGN_CHECKS_REVIEWABLE",
-                          candidate=candidate)
+            open_checks = candidate["requiredOpenIds"] or candidate.get("unresolvedWallCoordination")
+            result.update(status="REQUIREMENTS_OPEN" if open_checks else "DESIGN_CHECKS_REVIEWABLE", candidate=candidate)
         output.append(result)
     report = dict(schemaVersion=SCHEMA, status="DESIGN_VARIANTS_REVIEWED",
                   inputHash=APA.RUN.digest(intent), brief=normalized, projectLibraryPack=pack,
                   variants=output, nativeWriteCalls=0, executionPermission=False,
                   architecturalApproval="PENDING", engineeringApproved=False, normativeApproved=False)
+    if len(output) == 1:
+        report["projectLibraryPack"] = output[0].get("candidate", {}).get("projectLibraryPack", pack)
     if generation is not None:
         report["generation"] = generation
         if not output:
@@ -120,15 +122,22 @@ def changes_between(previous, current, variant):
             edges.add(("story:" + member["storyId"], key))
         for path in space["loadPaths"]:
             edges.add(("bim:native-" + path["lowerMemberId"], "bim:native-" + path["upperMemberId"]))
+        roles = candidate.get("structuralFunctions", {})
         for operation in candidate["graph"]["operations"]:
             key = "bim:" + operation["id"]
-            facts[key] = operation
+            binding = candidate.get("wallCseBindings", {}).get(operation["id"])
+            facts[key] = dict(operation=operation, binding=binding, structuralFunction=roles.get(operation["id"]))
             if operation["command"] == "CreateSlabs":
                 edges.add(("story:" + operation["id"].removeprefix("native-slab-"), key))
             if operation["command"] in ("CreateDoors", "CreateWindows"):
                 host = next(iter(operation["params"].values()))[0]["ownerWallId"]["guid"]["$createdGuid"]
                 edges.add(("bim:" + host, key))
             edges.update((key, "review:" + check) for check in ("facades", "sections", "documentation"))
+        for condition in candidate.get("wallCoordination", []):
+            key = "coordination:" + condition["wallMemberId"]
+            facts[key] = condition
+            edges.add(("bim:" + condition["bimOperationId"], key))
+            edges.update((key, "review:" + check) for check in ("sections", "documentation"))
         for stair in candidate.get("stairConnections", []):
             operation = "bim:" + stair["stairOperationId"]
             key = "stair:" + stair["requirementId"]

@@ -15,7 +15,8 @@ SCHEMA = "apa-project-library-pack/1"
 _SHA1 = re.compile(r"^[a-f0-9]{40}$")
 _SHA256 = re.compile(r"^[a-f0-9]{64}$")
 _GUID = re.compile(r"^[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
-ROLES = frozenset({"floor-slab", "external-wall", "internal-partition",
+WALL_ROLES = frozenset({"external-wall", "internal-bearing-wall", "internal-partition"})
+ROLES = WALL_ROLES | frozenset({"floor-slab",
                     "roof", "foundation", "opening-interface"})
 RIGHTS = frozenset({"LINK_ONLY_RIGHTS_UNVERIFIED"})
 SOURCE_STATES = frozenset({"PROJECT_NATIVE_READBACK", "TECHNICAL_REFERENCE",
@@ -51,18 +52,12 @@ def _id(v, field):
     return v
 
 
-def compile_pack(brief, candidate, *, api=None):
-    """Build a minimal source-anchored pack, never certify project adequacy.
-
-    The candidate is one actual geometry-enabling CSE candidate; additional
-    structural systems remain deliberately unselected until source-backed.
-    No user-provided SOURCE_VERIFIED flag can make details APPROVED.
-    """
-    doc = BRIEF.normalize(brief)
-    if not isinstance(candidate,dict) or set(candidate)!={
+def _prepare_candidate(doc, candidate):
+    fields = {
             "candidateId","systemFamily","role","source","native",
             "thicknessMeters","storyIds","requiredInterfaceConditions",
-            "selectedDetailIds"}:
+            "selectedDetailIds"}
+    if not isinstance(candidate, dict) or not fields <= candidate.keys() <= fields | {"coordination"}:
         raise ValueError("CSE_CANDIDATE_CONTRACT_MISMATCH")
     candidate_id=_id(candidate["candidateId"],"CANDIDATE_ID")
     family=_id(candidate["systemFamily"],"SYSTEM_FAMILY")
@@ -119,33 +114,60 @@ def compile_pack(brief, candidate, *, api=None):
     if details != []:
         # Details v2.12 are indexed references, NOT approved construction nodes.
         raise ValueError("DETAIL_BINDINGS_REQUIRE_INDEPENDENT_APPLICABILITY_AUDIT")
+    prepared = {
+        "id": candidate_id, "systemFamily": family, "role": role,
+        "storyIds": list(requested), "thicknessMeters": float(thickness),
+        "native": {"attributeType": "BuildingMaterial", "name": material_name, "guid": None},
+        "sourceId": source_id, "sourceTruthLevel": source["status"],
+        "engineeringApproved": False, "detailApproved": False,
+    }
+    if "coordination" in candidate:
+        from archicad_normative_bindings import wall_coordination_profile
+
+        if role not in WALL_ROLES:
+            raise ValueError("COORDINATION_REQUIRES_WALL_CSE")
+        prepared["coordination"] = wall_coordination_profile(candidate["coordination"], thickness)
+    reference = {
+        "id": source_id, "uri": uri, "gitBlobSha": sha,
+        "publisher": source["publisher"], "rights": source["rights"],
+        "licenseEvidenceUri": license_uri, "sourceTruthLevel": source["status"],
+        "applicabilityNote": source["applicabilityNote"],
+    }
+    return prepared, reference, required, expected
+
+
+def compile_pack(brief, candidate, *, api=None):
+    """Compile the legacy single CSE or a set of explicit project CSE selections."""
+    doc = BRIEF.normalize(brief)
+    choices = candidate if isinstance(candidate, list) else [candidate]
+    if not choices:
+        raise ValueError("CSE_PACK_EMPTY")
+    prepared = [_prepare_candidate(doc, choice) for choice in choices]
+    candidates, sources, conditions = {}, {}, {}
+    for entry, reference, required, _ in prepared:
+        if entry["id"] in candidates:
+            raise ValueError("DUPLICATE_CSE_CANDIDATE_ID")
+        if reference["id"] in sources and sources[reference["id"]] != reference:
+            raise ValueError("CSE_SOURCE_ID_HAS_CONFLICTING_PROVENANCE")
+        candidates[entry["id"]] = entry
+        sources[reference["id"]] = reference
+        conditions.update(dict.fromkeys(required))
     scope={
         "schemaVersion":SCHEMA,"projectId":doc["projectId"],
         "projectMode":doc["mode"],"site":doc["site"],
         "targetProjectPath":doc["targetProjectPath"],
         "catalogReferences":[dict(x) for x in CATALOG_REFERENCES],
-        "sourceLinksAndGitBlobHashes":[{
-            "id":source_id,"uri":uri,"gitBlobSha":sha,
-            "publisher":source["publisher"],"rights":source["rights"],
-            "licenseEvidenceUri":license_uri,"sourceTruthLevel":source["status"],
-            "applicabilityNote":source["applicabilityNote"]
-        }],
-        "selectedCseCandidates":[{
-            "id":candidate_id,"systemFamily":family,"role":role,
-            "storyIds":list(requested),"thicknessMeters":float(thickness),
-            "native":{"attributeType":"BuildingMaterial","name":material_name,
-                      "guid":None},"sourceId":source_id,
-            "sourceTruthLevel":source["status"],"engineeringApproved":False,
-            "detailApproved":False,
-        }],
+        "sourceLinksAndGitBlobHashes":list(sources.values()),
+        "selectedCseCandidates":list(candidates.values()),
         "requiredJunctionConditions":[{"id":x,"status":"UNVERIFIED",
-                                        "selectedDetailIds":[]} for x in required],
-        "missingCriticalConditionIds":list(required),
+                                        "selectedDetailIds":[]} for x in conditions],
+        "missingCriticalConditionIds":list(conditions),
         "importedLibraryObjects":[],
         "projectNativeFavoritesCompositesProfiles":[],
         "licenseAndStoragePermission":"NO_EXTERNAL_FILES_IMPORTED",
         "normativePackDigest":None,
-        "sourceRegistryRevision":sha,
+        "sourceRegistryRevision":(next(iter(sources.values()))["gitBlobSha"] if len(sources) == 1
+                                  else RUN.digest(list(sources.values()))),
         "status":"PROVISIONAL_CSE_AWAITING_NATIVE_BINDING",
         "nativeWriteCalls":0,
     }
@@ -159,13 +181,16 @@ def compile_pack(brief, candidate, *, api=None):
     if mapped["nativeResolution"]!="READY_FOR_ATTRIBUTE_RESOLUTION":
         return {**scope,"status":mapped["nativeResolution"]}
     before=safe("GetProjectInfo",{})
-    guid=RUN.resolve_basic_slab_material(safe,material_name)
+    guids = {name: RUN.resolve_basic_slab_material(safe, name)
+             for name in dict.fromkeys(entry["native"]["name"] for entry in candidates.values())}
     after=safe("GetProjectInfo",{})
     if before!=after:
         raise ValueError("PROJECT_IDENTITY_CHANGED_DURING_ATTRIBUTE_READ")
-    if expected is not None and guid.casefold()!=expected.casefold():
-        raise ValueError("PROJECT_BUILDING_MATERIAL_GUID_CHANGED")
-    scope["selectedCseCandidates"][0]["native"]["guid"]=guid
+    for entry, _, _, expected in prepared:
+        guid = guids[entry["native"]["name"]]
+        if expected is not None and guid.casefold() != expected.casefold():
+            raise ValueError("PROJECT_BUILDING_MATERIAL_GUID_CHANGED")
+        entry["native"]["guid"] = guid
     scope["nativeStoryBindings"]=mapped["nativeStoryBindings"]
     scope["status"]="PROJECT_NATIVE_MATERIAL_RESOLVED_NOT_ENGINEER_APPROVED"
     return scope

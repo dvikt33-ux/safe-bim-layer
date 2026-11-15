@@ -347,6 +347,7 @@ def execute(job, m, pinned_runtime, *, confirm_preflight=None, mailbox_execution
     require(outcome["status"] == "PASS" and api.calls["SaveProject"] == 1,
             "APA_ARCHITECTURE_SAVE_UNKNOWN_NO_REPLAY")
     requirements = result.get("requirementReadback")
+    wall_systems = result.get("wallSystems")
     result = dict(status="LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN", jobId=job.name,
                   savedSHA256=guard.new_saved_sha, elementCount=len(ids),
                   addedGuids=result["addedGuids"], finalGuidSetSHA256=R.digest(ids),
@@ -356,6 +357,9 @@ def execute(job, m, pinned_runtime, *, confirm_preflight=None, mailbox_execution
                   snapshotReceiptSHA256=sha256(job / "snapshot.json"), nativeSaveCalls=1, **mailbox_facts)
     if requirements is not None:
         result["requirementReadback"] = requirements
+    if wall_systems is not None:
+        result["wallSystems"] = wall_systems
+        result["wallSystemPlanSHA256"] = sha256(job / "build" / "plan.json")
     write_new_json(job / "saved.json", result)
     return result
 
@@ -421,6 +425,12 @@ def verify_reopen(job, m, pinned_runtime, port, *, expected_listener=None):
     folder.mkdir(parents=True)
     api = A.EvidenceAPI(A.native_transport, folder, execute=False)
     ids, model, signatures = capture(m, api)
+    if "wallSystems" in saved:
+        plan = job / "build" / "plan.json"
+        require(sha256(plan) == saved["wallSystemPlanSHA256"]
+                and {row["guid"].lower() for row in saved["wallSystems"]["readback"].values()} <= set(saved["addedGuids"]),
+                "APA_ARCHITECTURE_WALL_SYSTEM_PLAN_OR_GUID_DRIFT")
+        A.verify_authored_wall_systems(api, read(plan), saved["wallSystems"])
     guid_hash, brep_hash = R.digest(ids), group.fingerprint(model)
     require(len(ids) == saved["elementCount"] and guid_hash == saved["finalGuidSetSHA256"]
             and brep_hash == saved["finalBrepSHA256"]
@@ -432,6 +442,8 @@ def verify_reopen(job, m, pinned_runtime, port, *, expected_listener=None):
                   reopenedGuids=ids, reopenedGuidSetSHA256=guid_hash, reopenedBrepSHA256=brep_hash,
                   verificationNativeWrites=0, sourceUnchanged=True, reopenPort=port,
                   reopenListener=observed)
+    if "wallSystems" in saved:
+        result["reopenedWallSystemsVerified"] = True
     path = job / "reopened.json"
     if path.exists():
         previous = read(path)

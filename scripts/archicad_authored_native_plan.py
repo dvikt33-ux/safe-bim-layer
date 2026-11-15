@@ -124,6 +124,10 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
             raise ValueError("READ_ONLY_API_COMMAND_DENIED")
         return read_api(cmd,params)
     geometry=SPATIAL.compile_spatial(brief,pack,layout)
+    coordination = geometry.get("wallCoordination", [])
+    coordination_open = [row["wallMemberId"] for row in coordination if row["status"] != "DESIGN_MODULE_MATCH"]
+    if not design_only and coordination_open:
+        raise ValueError("WALL_COORDINATION_UNRESOLVED:" + ",".join(coordination_open))
     doc=BRIEF.normalize(brief)
     if floor_plans is not None and (not isinstance(floor_plans,dict) or set(floor_plans)!={s['id'] for s in doc['stories']}):
         raise ValueError('SOURCE_FLOOR_PLAN_REQUIRED_EVERY_STORY')
@@ -150,6 +154,9 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
             raise ValueError("PROJECT_STORY_MAPPING_CHANGED_SINCE_CSE_READ")
     candidates=pack["selectedCseCandidates"]
     slab=next(x for x in candidates if x.get("role")=="floor-slab")
+    by_cse = {row["id"]: row for row in candidates}
+    wall_cse_ids = dict.fromkeys(wall["wallCseCandidateId"] for wall in geometry["bearingLines"]
+                                 if wall["wallCseCandidateId"] is not None)
     if junction_policy is not None and junction_policy != {
             'schema': 'apa-native-junction-policy/1',
             'slabFootprint': 'OUTER_WALL_FACE',
@@ -159,9 +166,13 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
         raise ValueError("FLOOR_SLAB_CSE_REQUIRED_ALL_STORIES")
     material_name=slab["native"]["name"]
     actual_guid=None
+    materials = {}
     if not design_only:
         before=api("GetProjectInfo",{})
-        actual_guid=RUN.resolve_basic_slab_material(api,material_name)
+        material_candidates = [slab] + [by_cse[key] for key in wall_cse_ids]
+        names = dict.fromkeys(row["native"]["name"] for row in material_candidates)
+        materials = {name: RUN.resolve_basic_slab_material(api, name) for name in names}
+        actual_guid = materials[material_name]
         after=api("GetProjectInfo",{})
         if before!=after:
             raise ValueError("ACTIVE_PROJECT_IDENTITY_CHANGED")
@@ -169,9 +180,15 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
         if (not isinstance(expected_guid,str)
                 or actual_guid.casefold()!=expected_guid.casefold()):
             raise ValueError("PROJECT_SLAB_MATERIAL_CHANGED_AFTER_PACK_BINDING")
+        for key in wall_cse_ids:
+            native_material = by_cse[key]["native"]
+            guid = native_material.get("guid")
+            if not isinstance(guid, str) or guid.casefold() != materials[native_material["name"]].casefold():
+                raise ValueError("PROJECT_WALL_MATERIAL_CHANGED_AFTER_PACK_BINDING:" + key)
 
     story_map={b["architecturalStoryId"]:b for b in known}
     ops=[]
+    wall_bindings, roles = {}, {}
     floor_shapes = {}
     bounds=geometry["outline"]
     polygon=[
@@ -235,8 +252,21 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
             else:
                 p1=BUILD.xy(wall["fromCoordinate"],wall["constantCoordinate"])
                 p2=BUILD.xy(wall["toCoordinate"],wall["constantCoordinate"])
-            ops.append(BUILD.step("native-"+wall["id"],"CreateWalls",
-                BUILD.wall(p1,p2,native,wall_height,wall["thicknessMeters"])))
+            op = "native-" + wall["id"]
+            payload = BUILD.wall(p1, p2, native, wall_height, wall["thicknessMeters"])
+            if "structuralFunction" in wall:
+                roles[op] = wall["structuralFunction"]
+            if wall["wallCseCandidateId"] is not None:
+                system = by_cse[wall["wallCseCandidateId"]]
+                material = system["native"]["name"]
+                guid = materials.get(material)
+                wall_bindings[op] = dict(cseCandidateId=system["id"], sourceId=system["sourceId"],
+                                         role=system["role"], structuralFunction=roles.get(op),
+                                         storyId=sid, thicknessMeters=wall["thicknessMeters"],
+                                         materialName=material, materialGuid=guid)
+                if guid is not None:
+                    payload["buildingMaterialId"] = {"guid": guid}
+            ops.append(BUILD.step(op, "CreateWalls", payload))
     for opening in geometry["openings"]:
         kind = "CreateDoors" if opening["kind"] == "DOOR" else "CreateWindows"
         if opening["sillHeight"] + opening["height"] > float(heights[opening["storyId"]]) + SPATIAL.EPS:
@@ -274,6 +304,14 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
                            "stairOperationId", "lowerSlabOperationId", "upperSlabOperationId")])
     requirements_pending = [row["id"] for row in requirements
                             if row.get("priority") == "REQUIRED" and row["status"] != "DESIGN_CHECKED"]
+    design_evidence = {}
+    if coordination:
+        from archicad_normative_bindings import attach_to_project_pack, compile_normative_pack
+
+        wall_conditions = [dict(row, bimOperationId="native-" + row["wallMemberId"]) for row in coordination]
+        normative = compile_normative_pack(brief, pack, None, {}, [], design_coordination=wall_conditions)
+        design_evidence = dict(normative=normative, projectLibraryPack=attach_to_project_pack(pack, normative),
+                               wallCoordination=wall_conditions, unresolvedWallCoordination=coordination_open)
     return {
         "status":("BIM_GRAPH_PREVIEW_NEEDS_NATIVE_BINDINGS" if design_only
                   else "OFFLINE_EXISTING_BIM_GRAPH_COMPILED_NOT_AUTHORIZED"),
@@ -299,6 +337,9 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
         "areaMeasures": geometry["areaMeasures"],
         "areaBalance": geometry["areaBalance"],
         "plannedNativeCommands":dict(Counter(x["command"] for x in ops)),
+        **({"wallCseBindings": wall_bindings} if wall_bindings else {}),
+        **({"structuralFunctions": roles} if roles else {}),
+        **design_evidence,
         "unresolved":unresolved,
         "operationCount":len(ops),
         "graphValidator":"EXISTING_ARCHICAD_BIM_GRAPH_COMPILE_GRAPH",
@@ -371,6 +412,13 @@ def as_existing_scene_writer_preview(candidate):
     if any(type(v) not in (int,float) or not math.isfinite(v) or v<=0
            for v in dimensions.values()):
         raise ValueError("INVALID_AUTHORED_SCENE_DIMENSIONS")
+    wall_scope = {}
+    if candidate.get("wallCseBindings") or candidate.get("structuralFunctions"):
+        wall_scope = dict(walls=candidate.get("wallCseBindings", {}),
+                          roles=candidate.get("structuralFunctions", {}),
+                          normativePackDigest=candidate.get("normative", {}).get("normativePackDigest"))
+        if candidate.get("structuralFunctionDefinition"):
+            wall_scope["structuralFunctionDefinition"] = candidate["structuralFunctionDefinition"]
     return {
         "status":"SCENE_PREVIEW_OFFLINE",
         "nativeTargetProjectPath":candidate["nativeTargetProjectPath"],
@@ -383,6 +431,7 @@ def as_existing_scene_writer_preview(candidate):
         "storyBindings":native,
         "slabBasicMaterialName":candidate["slabBasicMaterialName"],
         "expectedPreflightSlabMaterialGuid":candidate["provisionalBasicSlabMaterialGuid"],
+        **({"integrationBindings": {"dependencies": {"authoredWallSystems": wall_scope}}} if wall_scope else {}),
         "slabLevelConvention":"PROJECT_ABSOLUTE",
         "envelope":{**outline,
                     "zMin":stories[0]["level"]-.3,

@@ -209,6 +209,11 @@ def parser():
     selection.add_argument("--all-dump-elements", action="store_true")
     cmd.add_argument("--story", type=int)
     cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("detail-review", help="Сверить параметры узла с источником и сохранённым предварительным графом")
+    cmd.add_argument("--detail-id", required=True)
+    cmd.add_argument("--observation", type=Path)
+    cmd.add_argument("--host-guid")
+    cmd.add_argument("--output", type=Path, required=True)
     commands.add_parser("template-check", help="Проверить локальные спецификации шаблона")
     commands.add_parser("template-runtime", help="Действующий интерфейс инвентаризации и настройки шаблона")
     commands.add_parser("project-runtime", help="Действующий интерфейс SceneWriter для проекта")
@@ -337,6 +342,11 @@ def main(argv=None):
             if args.guids is not None or args.all_dump_elements:
                 raise ValueError("Для задания состав элементов берётся из квитанции повторного открытия")
             result = document_reopened_job(args.job, args.output, args.story)
+        elif args.mode == "detail-review":
+            from apa_integrated_services import detail_review
+
+            result = detail_review(ROOT, args.detail_id, args.observation, args.host_guid)
+            write_json(args.output, result)
         elif args.mode == "template-check":
             from archicad_template_builder import validate_specs
 
