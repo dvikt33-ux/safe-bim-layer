@@ -283,6 +283,9 @@ def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
     try:
         routes = {"project-runtime": ("archicad_project_accelerator", "main"),
+                  "ac30-native-read": ("apa_ac30_tapir20", "main"),
+                  "ac30-wall-preflight": ("apa_ac30_wall_preflight", "main"),
+                  "ac30-normalize-changes": ("apa_ac30_change_normalizer", "main"),
                   "connected-runtime": ("archicad_connected_components", "main"),
                   "group-runtime": ("apa_ac29_group_batch_oneshot", "main"),
                   "archicad-startup": ("apa_archicad_startup", "main"),
