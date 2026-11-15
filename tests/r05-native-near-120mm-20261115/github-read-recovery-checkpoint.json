@@ -1,0 +1,37 @@
+{
+  "schema": "APA_R05_GITHUB_GET_RECOVERY_V1",
+  "date": "2026-11-15",
+  "basis": "83eb1b4c7b3c89332170c9d4727aadd3898d7f83",
+  "branch": "fix/r05-portless-github-recovery-20261115",
+  "status": "IMPLEMENTED_TESTED_DEPLOYMENT_PENDING",
+  "changed": [
+    "scripts/apa_ac29_autonomous_job_bridge.py",
+    "tests/test_apa_r05_gh_read_retry.py",
+    "tests/test_apa_r03_mailbox.py"
+  ],
+  "execution": {
+    "githubReadRetry": "Only GET operations, three attempts maximum, bounded backoff",
+    "githubWriteRetry": "Disabled; PUT never automatically retried",
+    "http404": "Not retried when allow_missing=True",
+    "http403": "Not retried",
+    "projectResolution": "Prior exact-PLN autoport patch preserved"
+  },
+  "evidence": {
+    "targetedNetworkTests": "8/8 PASS",
+    "autoPortTests": "6/6 PASS",
+    "autonomousBridgeTests": "15/15 PASS",
+    "mailboxContractTests": "11/11 PASS after fixture adaptation",
+    "totalTests": "40/40 PASS on Windows with Python 3.11",
+    "liveGithubRead": "gh api exact previously failed GitHub job: PASS via patched function",
+    "nativeModelWriteCount": 0
+  },
+  "boundaries": {
+    "originalR05Modified": false,
+    "installedRuntimeUpdated": false,
+    "liveNativeExecute": "NOT_RUN",
+    "liveSaveReopen": "NOT_RUN",
+    "localExecuteGrant": "NOT_CREATED",
+    "networkRootCause": "UNDETERMINED; intermittent failures possible",
+    "expiredExistingExecute": "NO_REPLAY; verify timestamp, local attempt, grant, PLN SHA before any new job"
+  }
+}

@@ -62,6 +62,14 @@ class MailboxContract(unittest.TestCase):
         self.addCleanup(self.patcher.stop)
         self.remote[f"repos/{mailbox.SOURCE_REPO}/contents/{self.source_path}?ref=" + "3" * 40] = self.source
         self.session = dict(port=19725, pid=10001, startedAt="test-start")
+        # This unit fixture has no running Archicad; auto-port selection is
+        # independently tested against exact project identity in its own suite.
+        def fixture_port(project):
+            self.assertEqual(project, self.c.project)
+            return self.session["port"]
+        self.port_patcher = patch.object(mailbox, "required_test_port", side_effect=fixture_port)
+        self.port_patcher.start()
+        self.addCleanup(self.port_patcher.stop)
 
     def member(self, name, data):
         path = self.package / name

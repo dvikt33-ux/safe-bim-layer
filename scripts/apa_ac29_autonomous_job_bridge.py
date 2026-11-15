@@ -130,18 +130,33 @@ def approved_guid_count():
 
 
 def gh_api(path, *, body=None, allow_missing=False):
+    """Retry transient GitHub transport failures on GET only; never replay PUT."""
     cmd = ["gh", "api"]
     if body is not None:
         cmd += ["--method", "PUT", path, "--input", str(body)]
     else:
         cmd.append(path)
-    p = subprocess.run(cmd, capture_output=True, timeout=50)
-    error = p.stderr.decode("utf-8", errors="replace")
-    if allow_missing and body is None and p.returncode != 0 and re.search(
-            r"(?m)^gh: .* \(HTTP 404\)\s*$", error):
-        return None
-    require(p.returncode == 0, "GITHUB_UNAVAILABLE:" + error[-250:])
-    return json.loads(p.stdout.decode("utf-8"))
+    for attempt in range(3 if body is None else 1):
+        try:
+            p = subprocess.run(cmd, capture_output=True, timeout=50)
+        except subprocess.TimeoutExpired:
+            if body is None and attempt < 2:
+                time.sleep(0.4 * (2 ** attempt))
+                continue
+            raise
+        error = p.stderr.decode("utf-8", errors="replace")
+        if allow_missing and body is None and p.returncode != 0 and re.search(
+                r"(?m)^gh: .* \(HTTP 404\)\s*$", error):
+            return None
+        if p.returncode == 0:
+            return json.loads(p.stdout.decode("utf-8"))
+        transient = re.search(
+            r"(?i)tls handshake timeout|unexpected eof|\beof\b|connection reset by peer"
+            r"|i/o timeout|connection timed out|context deadline exceeded", error)
+        if body is None and attempt < 2 and transient:
+            time.sleep(0.4 * (2 ** attempt))
+            continue
+        require(False, "GITHUB_UNAVAILABLE:" + error[-250:])
 
 
 def remote_json(repo, filename, ref, expected_blob=None):
