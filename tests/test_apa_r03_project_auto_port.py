@@ -59,7 +59,8 @@ class TestExactProjectPort(unittest.TestCase):
         class Halt(Exception):
             pass
         with TemporaryDirectory() as temp:
-            folder = Path(temp)
+            # GitHub Windows runners can resolve temporary paths through a junction.
+            folder = Path(temp).resolve()
             profile = folder / "mailbox-profile.json"
             profile.write_text("{}", encoding="utf-8")
             campaign = mailbox.Campaign.__new__(mailbox.Campaign)
