@@ -151,15 +151,29 @@ def open_test_port(project):
     matches = []
     for port in project_ports():
         try:
-            listener(port)
+            # Inspect project identity first. PowerShell listener checks are
+            # expensive and unnecessary for unrelated Archicad projects.
             info = group.R.tapir(port, "GetProjectInfo", {}, timeout=2)
+            if not (info.get("projectPath") == str(project) and info.get("isUntitled") is False
+                    and info.get("isTeamwork") is False):
+                continue
+            before = listener(port)
+            again = group.R.tapir(port, "GetProjectInfo", {}, timeout=2)
+            require(again.get("projectPath") == str(project)
+                    and again.get("isUntitled") is False and again.get("isTeamwork") is False
+                    and listener(port) == before, "R03_MAILBOX_PROJECT_CHANGED_DURING_DISCOVERY")
         except (ValueError, RuntimeError, urllib.error.URLError, OSError):
             continue
-        if (info.get("projectPath") == str(project) and info.get("isUntitled") is False
-                and info.get("isTeamwork") is False):
-            matches.append(port)
+        matches.append(port)
     require(len(matches) <= 1, "R03_MAILBOX_EXACT_PROJECT_OPEN_IN_MULTIPLE_INSTANCES")
     return next(iter(matches), None)
+
+
+def required_test_port(project):
+    """Resolve this exact PLN, regardless of a stale CLI --local-port."""
+    port = open_test_port(project)
+    require(port is not None, "R03_MAILBOX_EXACT_PROJECT_NOT_OPEN")
+    return port
 
 
 class Campaign:
@@ -611,6 +625,12 @@ class Campaign:
                     and recorded["result"]["bindingSha256"] == binding_sha, "R03_MAILBOX_RESULT_IDENTITY_DRIFT")
             bridge.upload_result(name, folder, verify_existing=True)
             return recorded
+
+        # A port supplied by a caller is only a hint, never project identity.
+        # PLAN / REOPEN always discover the exact open test PLN first. Historical
+        # result replay above remains independent from current window state.
+        if action in {"PLAN", "VERIFY_REOPEN"}:
+            port = required_test_port(self.project)
 
         if action == "EXECUTE":
             job, blob = self.grant(bridge, name)
