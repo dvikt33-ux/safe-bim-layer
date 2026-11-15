@@ -1,0 +1,45 @@
+{
+  "schema": "APA_R05_NATIVE_ACCEPTANCE_CHECKPOINT_V1",
+  "date": "2026-11-15",
+  "releaseRevision": "2423ad561f1c4a59ca61292e25474060914c9186",
+  "status": "PARTIAL_NATIVE_ACCEPTANCE_PENDING",
+  "notSuccess": "No native PLAN/EXECUTE/SAVE/REOPEN verified for R05",
+  "source": {
+    "path": "examples/accelerator/r05-1nf-partition-near-20261115.json",
+    "commit": "73491533cb7c68c88735095bd978b74279a5c1aa",
+    "blobSHA1": "e8c6dce8f5d3fbd76231ebd79f2480cfd6ac84f6",
+    "verifiedSemanticReadback": true
+  },
+  "offline": {
+    "handoffFileHashesVerified": 25,
+    "total": 25,
+    "releaseZipSha256": "67c6197df569b152d4bff068273d4f719d87b7e876fa5442239d42ca1714c483",
+    "independentDesignStatus": "DESIGN_CHECKS_REVIEWABLE",
+    "operations": 9,
+    "partitionThicknessM": 0.12,
+    "normativePackDigest": "32b390d2291cb9510ebcbea373bd076fb42e0fdcbcddd9707fdfa9818a81ff17",
+    "nearbyOutline": {
+      "xMin": 12,
+      "xMax": 20,
+      "yMin": 12,
+      "yMax": 18.09
+    }
+  },
+  "staged": {
+    "target": "r03-r05-1nf-partition-20261115-02",
+    "projectSha256": "3a74d7cb17e460378eacfa8f933aeae29a5ca39fbf2bc73633115c9fee728750",
+    "sourceBindingStatus": "R03_MAILBOX_LOCAL_BINDING_VERIFIED",
+    "sourceBindingSHA256": "945769cc527724e7580cc942310c066a7738385a69d741d7611315d1ef8a9b39",
+    "sourceIntentSHA256": "4058d389760679d3ae04ae6daeaa2464bd0a1a3d1075667c7f7a7a564f409859"
+  },
+  "incident": {
+    "id": "INC-20261115-CONNECTOR-LOSS-DURING-PROJECT-SWITCH",
+    "observed": "Remote Desktop Commander stopped answering; alternate APA Windows connector reported tunnel-client did not poll; Archicad project-switch completion could not be read back",
+    "cause": "NOT_ESTABLISHED",
+    "sideEffects": "UNKNOWN_AFTER_LAST_VERIFIED_READ",
+    "lastConfirmedOperation": "Clicked Don't Save on older accepted expendable PLN after confirming its saved sha256 remained unchanged",
+    "recoveryRequirement": "Re-establish remote connection, READ current process window/port/current project and target PLN SHA before any retry; do not repeat EXECUTE or change canonical PLN"
+  },
+  "writeAuthorization": "No R05 native execute authorization or native write attempt was issued",
+  "nextAcceptance": "Verify actual open isolated R05 PLN, run new PLAN, verify exact source and coordinate collision, then controlled EXECUTE and save-close-reopen plus brick material role and face-based pier checks"
+}
