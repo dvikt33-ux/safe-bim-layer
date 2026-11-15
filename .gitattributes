@@ -3,3 +3,4 @@
 # Generated JS has native trailing spaces; preserve its provenance bytes.
 schemas/tapir-live-1.5.10/*.js -text -whitespace
 docs/research/** -text
+examples/accelerator/r07-house-brief.md -text

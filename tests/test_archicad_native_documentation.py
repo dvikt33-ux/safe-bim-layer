@@ -72,11 +72,81 @@ class NativeDocumentationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             with self.assertRaisesRegex(ValueError, 'NO_FILE'): N.publication_files(temp)
             file = Path(temp) / 'native.pdf'; file.write_bytes(b'%PDF-test')
-            proof = N.publication_files(temp)
+            logical = Path(temp) / 'logical-root'
+            logical.mkdir()
+            proof = N.publication_files(logical / '..')
             self.assertTrue(proof['files'][0]['pdfSignature'])
             self.assertIn('NOT_VERIFIED', proof['selectedPublisherSubset'])
             file.write_bytes(b'')
             with self.assertRaisesRegex(ValueError, 'EMPTY_FILE'): N.publication_files(temp)
+
+    def test_two_storey_sheet_reads_real_pdf_bytes_and_rejects_extra_pages_or_missing_panel(self):
+        import pymupdf
+
+        for pages, upper, error in ((1, True, None), (2, True, "ONE_READABLE_PAGE"),
+                                    (1, False, "PANEL_VECTOR_CONTENT")):
+            with self.subTest(pages=pages, upper=upper), tempfile.TemporaryDirectory() as folder:
+                destination = Path(folder) / "A-01 House plans.pdf"
+                with pymupdf.open() as document:
+                    page = document.new_page(width=594 * 72 / 25.4, height=420 * 72 / 25.4)
+                    for offset, label in ((75, "First floor"), (950, "Second floor")):
+                        page.insert_text((offset, 50), label)
+                        if offset == 75 or upper:
+                            page.draw_rect(pymupdf.Rect(offset, 100, offset + 400, 600))
+                            page.draw_rect(pymupdf.Rect(offset + 15, 116, offset + 385, 585))
+                    if pages == 2:
+                        document.new_page()
+                    document.save(destination)
+                if error:
+                    with self.assertRaisesRegex(ValueError, error):
+                        N.read_two_storey_sheet(folder, "House plans", ["First floor", "Second floor"])
+                else:
+                    proof, raw = N.read_two_storey_sheet(folder, "House plans", ["First floor", "Second floor"])
+                    self.assertEqual(raw, destination.read_bytes())
+                    self.assertEqual(proof["sourceFile"]["sha256"], hashlib.sha256(raw).hexdigest())
+                    self.assertEqual(proof["paperMM"], [594, 420])
+                    self.assertEqual([row["label"] for row in proof["panels"]], ["First floor", "Second floor"])
+
+    def test_publisher_requires_actual_output_even_if_provider_and_callback_report_success(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp).resolve()
+            project = root / 'test.pln'
+            project.write_bytes(b'isolated PLN fixture')
+            folder = root / 'export'
+            params = {'publisherSetName': 'one-layout', 'outputPath': str(folder),
+                      'selectedNavigatorItemIds': [{'navigatorItemId': {'guid': NEW}}]}
+            write_output = False
+            published = []
+
+            def api(command, payload):
+                self.assertEqual((command, payload), ('PublishPublisherSet', params))
+                published.append(payload)
+                if write_output:
+                    folder.mkdir()
+                    (folder / 'sheet.pdf').write_bytes(b'%PDF-fixture')
+                return {}
+
+            writer = D.RUN.SceneWriter(api, root / 'publication.sqlite')
+            with (patch.object(writer, 'guarded_binding', return_value={'path': str(project)}),
+                  patch.object(D, 'capture_full_model', return_value={}),
+                  patch.object(D.C, 'retained_geometry_signatures', return_value={OLD: 'sig'})):
+                def publish(scene):
+                    return D.execute_operation(writer, scene, 'PublishPublisherSet', params, 'source',
+                        {OLD: 'sig'}, lambda *_: {'status': 'TEST_CALLBACK_PASS'}, 'synthetic test',
+                        saved_sha256=hashlib.sha256(project.read_bytes()).hexdigest())
+
+                failed = publish('test-missing-export')
+                self.assertEqual(failed['status'], 'PARTIAL_OR_UNKNOWN_OUTCOME')
+                self.assertIn('NATIVE_EXPORT_NO_FILE', failed['reason'])
+                with self.assertRaisesRegex(ValueError, 'RESERVED_NEVER_RETRY'):
+                    publish('test-missing-export')
+                self.assertEqual(len(published), 1)
+                write_output = True
+                checked = publish('test-read-export')
+                self.assertEqual(checked['status'], 'PASS')
+                evidence = checked['readback']['publicationFiles']
+                self.assertEqual(evidence['files'][0]['sha256'], hashlib.sha256(b'%PDF-fixture').hexdigest())
+                self.assertIn('NOT_VERIFIED', evidence['selectedPublisherSubset'])
 
     def test_layout_error_is_precise_and_other_native_errors_fail_closed(self):
         calls = []

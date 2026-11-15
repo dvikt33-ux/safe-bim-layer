@@ -37,6 +37,19 @@ class UnifiedAcceptance(unittest.TestCase):
         apa.write_json(path, value)
         return path
 
+    def test_plan_reports_validated_semantic_brief_without_native_resolution(self):
+        source = apa.read_json(apa.ROOT / "examples/accelerator/rectangular-layout-study.json")["brief"]
+        source["openQuestions"] = ["Уточнить исходную привязку и методику общей площади"]
+        intent = self.save("brief.json", source)
+        output = self.work / "plan.json"
+        result = self.invoke("plan", "--intent", intent, "--output", output)
+        self.assertEqual(result, apa.read_json(output))
+        self.assertEqual(result["status"], "SEMANTIC_BRIEF_VALIDATED")
+        self.assertEqual(result["inputSha256"], digest(intent))
+        self.assertEqual(result["nativeResolution"], "NEEDS_NEW_PROJECT_SETUP")
+        self.assertEqual(result["openQuestions"], source["openQuestions"])
+        self.assertFalse(result["executionPermission"])
+
     def test_dxf_preflight_layer_and_block_reports_read_back(self):
         source = self.work / "Разрез.dxf"
         drawing = ezdxf.new("R2018", units=6)
@@ -141,6 +154,199 @@ class UnifiedAcceptance(unittest.TestCase):
         self.assertEqual([op["command"] for op in steps], ["AddOn.TapirCommand.CloneNativeGroupV1"])
         self.assertEqual(len(steps[0]["params"]["translations"]), 32)
 
+    def test_arena_terminal_ack_binds_only_an_explicit_typed_input(self):
+        receipt = self.save("arena.json", {"protocol": 1, "kind": "terminal_ack", "turn_id": 87,
+            "ack_verified": True, "signal_status": "done", "signal_target": "NONE",
+            "signal_blob_sha": "a" * 40, "report_marker": "fixture"})
+        source = apa.ROOT / "examples/accelerator/r03-gpt-shell-e2e.intent.json"
+        output = self.work / "arena-plan.json"
+        result = self.invoke("arena-receipt", "--receipt", receipt, "--intent", source, "--output", output)
+        self.assertEqual(result["status"], "ARENA_APA_PLAN_PREPARED")
+        self.assertEqual(result["receiptSha256"], digest(receipt))
+        self.assertEqual(result["intentSha256"], digest(source))
+        self.assertEqual(result["plan"]["metrics"]["elementCount"], 10)
+        self.assertFalse(result["executionPermission"])
+        self.assertFalse(result["plan"]["executionPermission"])
+        self.assertEqual(result, apa.read_json(output))
+
+    def test_tdk_trace_delta_compiles_with_scene_writer_and_exact_wall_guid(self):
+        from types import SimpleNamespace
+        from apa_tdk_wall import trace_candidate
+
+        name = "AI_SOURCE_PACK"
+        wall, prop = "11111111-1111-4111-8111-111111111111", "22222222-2222-4222-8222-222222222222"
+        runtime = SimpleNamespace(trace_values=lambda *_: {name: "pack-02"}, properties={
+            name: dict(propertyId={"guid": prop}, propertyName=name, propertyGroupName="AI_TRACE",
+                       propertyCollectionType="Single", propertyValueType="String", propertyIsEditable=True)
+        })
+        decision = dict(status="WOULD_UPDATE_TRACE", dryRun=True, guid=wall,
+                        traceDelta={name: {"actual": "pack-01", "desired": "pack-02"}})
+        router = apa.load_router()
+        result = trace_candidate(router, runtime, {}, "unused-fixture", decision)
+        self.assertEqual(result["executor"], "SceneWriter")
+        self.assertFalse(result["executionPermission"])
+        operation, = result["workflow"]["graph"]["operations"]
+        self.assertEqual(operation["command"], "SetPropertyValuesOfElements")
+        self.assertEqual(operation["params"]["elementPropertyValues"],
+                         [dict(elementId={"guid": wall}, propertyId={"guid": prop},
+                               propertyValue={"value": "pack-02"})])
+        runtime.properties[name]["propertyGroupName"] = "Another group"
+        with self.assertRaisesRegex(ValueError, "TRACE_PROPERTY_DEFINITION_DRIFT"):
+            trace_candidate(router, runtime, {}, "unused-fixture", decision)
+
+    def test_design_evidence_joins_hosted_window_to_normative_and_knowledge_sources(self):
+        from copy import deepcopy
+        from unittest.mock import patch
+        import apa_integrated_services as services
+        import apa_r03_architecture as arch
+        from archicad_normative_bindings import CATALOG
+
+        root = apa.ROOT
+        proposal = apa.read_json(root / "examples/accelerator/r04-project-design.json")
+        plan = apa.compile_plan(None, proposal)["variants"][0]["candidate"]
+        intent = dict(schemaVersion="apa-authored-project/1", brief=proposal["brief"],
+                      cseCandidate=proposal["cseCandidate"], **{
+                          key: value for key, value in proposal["variants"][0].items() if key != "id"})
+        operation = next(step for step in plan["graph"]["operations"] if step["command"] == "CreateWindows")
+        host_id = operation["params"]["windowsData"][0]["ownerWallId"]["guid"]["$createdGuid"]
+        window, wall = "11111111-1111-4111-8111-111111111111", "22222222-2222-4222-8222-222222222222"
+        native = dict(units="m", coordinateSystem="ABSOLUTE_PROJECT_XYZ", elements=[
+            dict(guid=wall, type="Wall", homeStory=0, bodies=[{}]),
+            dict(guid=window, type="Window", homeStory=0, bodies=[{}], relationships={"hostGuid": wall}),
+        ])
+        path = self.save("intent.json", intent)
+        job = dict(authoredIntentHash=arch.R.digest(intent), intentSHA256=digest(path), original="unused",
+                   initialSHA256="unused", jobId=self.work.name, project=r"C:\test\saved.pln")
+        self.save("job.json", job)
+        build = self.work / "build"
+        build.mkdir()
+        graph = dict(intent=intent, intentHash=job["authoredIntentHash"], graph=plan["graph"],
+                     sourcePlanHash=plan["sourcePlanHash"], routes={}, authoredCandidate=plan)
+        preflight = dict(binding={}, graph=plan["graph"], sourcePlanHash="native-plan")
+        confirmation = arch.A.approval_hash(graph, preflight)
+        result = dict(status="COMPLETE_UNSAVED", evidenceKind="LIVE", wholeAssemblyReadback=True,
+                      intentHash=graph["intentHash"], sourcePlanHash=graph["sourcePlanHash"], binding={},
+                      confirmPlanHash=confirmation, addedGuids=sorted([window, wall]), requirements=plan["requirements"],
+                      bimOperationReadback={host_id: dict(guid=wall, status="PASS", kind="Wall"),
+                                            operation["id"]: dict(guid=window, status="PASS", kind="Window")})
+        files = {"plan.json": graph, "result.json": result, "preflight.json": preflight}
+        for name, value in files.items():
+            apa.write_json(build / name, value)
+        apa.write_json(build / "SHA256.json", {name: digest(build / name) for name in files})
+        self.save("approved-preflight.json", dict(confirmHash=confirmation))
+        native_path = self.save("native-before-save.json", native)
+        ids = sorted([wall, window])
+        signatures = {guid: "signature-" + guid for guid in ids}
+        saved = dict(status="LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN", savedSHA256="archived-pln",
+                     finalGuidSetSHA256=arch.R.digest(ids), finalBrepSHA256="fixture-brep",
+                     finalSignaturesSHA256=arch.R.digest(signatures), elementCount=2, addedGuids=ids)
+        self.save("saved.json", saved)
+        self.save("reopened.json", dict(saved, status="LIVE_ARCHITECTURE_SAVED_REOPENED_PASS",
+                                       reopenVerified=True, verificationNativeWrites=0))
+        references = {row["id"] for row in apa.read_json(CATALOG)["researchSources"]}
+
+        def knowledge(*args):
+            self.assertIn(args[2], references)
+            return dict(status="OK", retrieval="EXACT_ARTIFACT", plan_sha256="registry",
+                        releaseKnowledgeRevision="fixture", items=[{"id": args[2], "uri": "https://example.org/research"}])
+
+        with (patch.object(arch, "check", return_value=job), patch.object(arch, "saved_record", return_value=saved),
+              patch.object(arch, "approved_result"),
+              patch.object(arch, "status", return_value={"status": "LIVE_ARCHITECTURE_SAVED_REOPENED_PASS"}),
+              patch.object(arch.group, "fingerprint", return_value="fixture-brep"),
+              patch.object(arch.C, "retained_geometry_signatures", return_value=signatures),
+              patch.object(services, "knowledge_query", side_effect=knowledge)):
+            review = services.design_evidence(root, self.work, self.work / "derived-index")
+            junction, = review["nativeJunctions"]
+            self.assertEqual(junction["guids"], [wall, window])
+            self.assertEqual(junction["bimOperationIds"], [host_id, operation["id"]])
+            self.assertEqual(review["projectPack"]["normativePackDigest"], review["normative"]["normativePackDigest"])
+            self.assertEqual(review["provenance"]["nativeDumpSha256"], digest(native_path))
+            self.assertEqual(review["provenance"]["briefInputDigest"], arch.R.digest(arch.A.compile_project_brief(
+                proposal["brief"]) | {"nativeResolution": "NOT_ATTEMPTED"}))
+            self.assertEqual({ref["id"] for ref in review["knowledge"]["references"]}, references)
+            self.assertEqual(review["knowledge"]["status"], "REFERENCES_RESOLVED")
+            self.assertFalse(review["executionPermission"])
+            self.assertFalse(review["knowledge"]["normativeAuthority"])
+            self.assertFalse(review["normative"]["nativeWriteCalls"])
+            out = self.work.parent / (self.work.name + "-invalid-export")
+            with self.assertRaisesRegex(ValueError, "DOCUMENTATION_REOPENED_GUIDS_NOT_VERIFIED"):
+                services.document_reopened_job(self.work, out)
+            self.assertFalse(out.exists())
+            tampered = deepcopy(native)
+            tampered["elements"][1]["relationships"]["hostGuid"] = window
+            native_path.write_text(json.dumps(tampered), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "DESIGN_EVIDENCE_HOSTED_WINDOW_MISMATCH"):
+                services.design_evidence(root, self.work, self.work / "derived-index")
+            (build / "SHA256.json").write_text("{}", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "DESIGN_EVIDENCE_BUILD_HASHES_REQUIRED"):
+                services.design_evidence(root, self.work, self.work / "derived-index")
+
+    def test_reopened_documentation_exports_only_the_requested_storey(self):
+        from unittest.mock import patch
+
+        import apa_integrated_services as services
+
+        lower = "00000000-0000-4000-8000-000000000001"
+        upper = "00000000-0000-4000-8000-000000000002"
+        job = self.work / "source-job"
+        job.mkdir()
+        story_bindings = [dict(nativeIndex=0, floorId=1, label="Первый этаж"),
+                          dict(nativeIndex=1, floorId=2, label="Второй этаж")]
+        native = {"stories": [dict(index=0, elevation=0), dict(index=1, elevation=3)], "materials": [],
+                  "elements": [dict(guid=guid, type="Wall", homeStory=index, bodies=[])
+                               for index, guid in enumerate((lower, upper))]}
+        plan = {"graph": {"operations": [dict(id=sid, command="CreateWalls") for sid in ("bottom", "top")]}}
+        result = dict(addedGuids=[lower, upper], requirements=[], bimOperationReadback={
+            "bottom": dict(guid=lower, status="PASS", kind="Wall"),
+            "top": dict(guid=upper, status="PASS", kind="Wall")})
+        reopened = dict(reopenedGuids=[lower, upper], authoredStoryBindings=story_bindings,
+                        reopenedStoryBindingsVerified=True)
+        with patch.object(services, "_verified_authored_job", return_value=(
+                dict(projectId="r06-fixture"), plan, result, native, {lower: "a", upper: "b"}, reopened, {})):
+            all_floors = services.document_reopened_job(job, self.work / "all")
+            upper_floor = services.document_reopened_job(job, self.work / "upper", story=1)
+            with self.assertRaisesRegex(ValueError, "DOCUMENTATION_STORY_OUTSIDE_VERIFIED_ASSEMBLY"):
+                services.document_reopened_job(job, self.work / "invalid", story=2)
+            pdf = b"verified test PDF"
+            pdf_readback = dict(status="PUBLISHER_PDF_CONTENT_CHECKED",
+                                sourceFile=dict(sha256=hashlib.sha256(pdf).hexdigest()))
+            with patch("archicad_native_documentation.read_two_storey_sheet",
+                       return_value=(pdf_readback, pdf)) as read_sheet:
+                full_sheet = self.work / "publisher-package"
+                proof = services.document_reopened_job(job, full_sheet, publisher_folder=self.work, layout_name="Планы дома")
+                read_sheet.assert_called_once_with(self.work, "Планы дома", ["Первый этаж", "Второй этаж"])
+                self.assertEqual(proof["publisherSheet"]["file"], "лист.pdf")
+                self.assertEqual(proof["files"]["лист.pdf"], digest(full_sheet / "лист.pdf"))
+                with self.assertRaisesRegex(ValueError, "DOCUMENTATION_PUBLISHER_REQUIRES_TWO_REOPENED_STORIES"):
+                    services.document_reopened_job(job, self.work / "wrong-sheet", story=1,
+                                                   publisher_folder=self.work, layout_name="Планы дома")
+        self.assertEqual(all_floors["specificationsByStory"], {"0": {"Wall": 1}, "1": {"Wall": 1}})
+        self.assertEqual(upper_floor["stories"], [1])
+        self.assertEqual(upper_floor["specifications"], {"Wall": 1})
+        document = apa.read_json(self.work / "upper" / "documentation.json")
+        self.assertEqual(document["operationGuids"], {"top": upper})
+        self.assertEqual(document["authoredStoryBindings"], story_bindings[1:])
+        csv_path = self.work / "upper" / "Wall.csv"
+        self.assertEqual(upper_floor["files"]["Wall.csv"], digest(csv_path))
+        self.assertIn(upper, csv_path.read_text(encoding="utf-8-sig"))
+        self.assertNotIn(lower, csv_path.read_text(encoding="utf-8-sig"))
+
+    def test_project_review_renders_both_plans_and_the_slab_void_on_the_stair_section(self):
+        source = apa.ROOT / "examples/accelerator/r07-two-storey-house.json"
+        output = self.work / "review.html"
+        receipt = self.invoke("design-review", "--intent", source, "--variant", "house-a", "--output", output)
+        self.assertEqual(receipt["status"], "DESIGN_REVIEW_WRITTEN")
+        self.assertEqual(receipt["requiredOpenIds"], ["stair-required"])
+        content = output.read_text(encoding="utf-8")
+        data = json.loads(content.split('id="plan-data">', 1)[1].split('</script>', 1)[0])
+        self.assertEqual([row["level"] for row in data["stories"]], [0, 3])
+        stair, = data["stairs"]
+        upper = sorted((segment["yMin"], segment["yMax"]) for segment in stair["slabs"] if segment["top"] == 3)
+        self.assertEqual(upper, [(400.0, 401.5), (407.1, 410.0)])
+        self.assertIn("35.89 м²", content)
+        self.assertIn("Разрез по лестнице", content)
+
     def test_native_dump_generates_same_revision_documentation_and_csv(self):
         sample = apa.ROOT / "examples/model_dump_v1.sample.json"
         ids = [e["guid"] for e in apa.read_json(sample)["elements"]]
@@ -155,6 +361,15 @@ class UnifiedAcceptance(unittest.TestCase):
         self.assertEqual(proof["artifact"]["sha256"], digest(out / "documentation.json"))
         self.assertEqual(proof["specifications"], {"Morph": 1})
         self.assertIn(proof["modelVersion"], (out / "Morph.csv").read_text(encoding="utf-8-sig"))
+
+    def test_documentation_job_rejects_unverified_history_before_export(self):
+        job = self.work / "not-reopened"
+        job.mkdir()
+        output = self.work / "documents"
+        result = self.invoke("documentation", "--job", job, "--output", output, code=2)
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertIn("job.json", result["reason"])
+        self.assertFalse(output.exists())
 
     def test_graph_rejects_native_dispatch_before_first_local_artifact(self):
         graph = self.save("invalid.json", {"operations": [

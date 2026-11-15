@@ -111,8 +111,11 @@ behavior without pretending the GUID fields are equal.
 page. File bytes, pages, titles, drawing scale and rendered facade were checked,
 including after Save/Open. The views publisher produced65pages despite selecting
 only two items; that path is not accepted as a selected subset. Outputs require
-new empty local directories and independent file readback: the SDK's empty{}
-success reply alone proves no PDF. No global Publisher settings were edited.
+new empty local directories. The shared documentation writer now validates that files exist and
+records each relative path, byte count and SHA-256 in its SQLite readback. An empty or missing
+export remains unverified even if the provider and the caller report success. File evidence
+still needs a page and source-scope check for a selected Layout. No global Publisher settings
+were edited.
 
 `archicad_native_documentation` reads native owner coverage, associative anchors,
 Drawing fill contours, schedule definitions and actual exported files. Native
@@ -133,6 +136,14 @@ new view frames and new linked drawings are corrected and updated explicitly.
 No background watcher is introduced.
 
 ## Window and publication boundaries
+
+В Windows-приложении действие «Сверить лист Publisher и выпустить ведомости» собирает PDF и ведомости по сохранённой и повторно открытой двухэтажной модели. Исходный каталог должен содержать один PDF выбранного листа. Ожидается одна горизонтальная страница A2. Заголовки этажей из квитанции PLN должны встречаться по одному разу, в левой и правой половинах страницы, с векторным содержимым в обеих половинах. APA сверяет имя листа, сохраняет PDF в новом комплекте и проверяет SHA исходных и скопированных байтов.
+
+```powershell
+python -m apa documentation --job $Job --publisher-folder $Export --layout-name 'Планы дома' --output $Output
+```
+
+`PUBLISHER_PDF_CONTENT_CHECKED` подтверждает содержимое полученного файла в указанном объёме. Идентичность связи Drawing с каждым сохранённым видом и происхождение PDF подтверждаются отдельно по нативному листу и трассе Publisher. Для этого действия виды, лист и выпуск выполняются существующим механизмом Archicad.
 
 From a Layout, GetModelDumpV1 returns the precise ShowAllIn3D error
 -2130313109. The existing SceneWriter journals a view-only change to the actual

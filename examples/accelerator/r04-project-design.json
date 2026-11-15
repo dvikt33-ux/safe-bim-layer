@@ -1,0 +1,388 @@
+{
+  "schemaVersion": "apa-project-design/1",
+  "brief": {
+    "schemaVersion": "apa-semantic-project-brief/1",
+    "projectId": "r04-design-demo",
+    "mode": "GENERATE_FROM_ZERO",
+    "units": "meters",
+    "site": {
+      "siteId": "demo-site",
+      "region": null
+    },
+    "stories": [
+      {
+        "id": "level-1",
+        "label": "1 этаж",
+        "level": 0
+      }
+    ],
+    "rooms": [
+      {
+        "id": "hall",
+        "name": "Холл",
+        "storyId": "level-1",
+        "minAreaM2": 10
+      },
+      {
+        "id": "living",
+        "name": "Гостиная",
+        "storyId": "level-1",
+        "minAreaM2": 12
+      }
+    ],
+    "constraints": [
+      {
+        "id": "front-door",
+        "text": "Вход снаружи в холл",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "REQUIRED",
+        "sourceRef": "Исходное задание §1",
+        "criterion": {
+          "kind": "ENTRANCE",
+          "from": "$outside",
+          "to": "hall"
+        }
+      },
+      {
+        "id": "hall-living",
+        "text": "Прямой проход из холла в гостиную",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "REQUIRED",
+        "sourceRef": "Исходное задание §2",
+        "criterion": {
+          "kind": "ROOM_CONNECTION",
+          "from": "hall",
+          "to": "living"
+        }
+      },
+      {
+        "id": "gross-area",
+        "text": "Целевая общая площадь 48 м². Методика ещё не задана.",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "PREFERENCE",
+        "sourceRef": "Исходное задание §3",
+        "criterion": {
+          "kind": "AREA_TARGET",
+          "metric": "GROSS_BUILDING",
+          "targetM2": 48,
+          "toleranceM2": 2
+        }
+      }
+    ]
+  },
+  "cseCandidate": {
+    "candidateId": "rc-basic-slab-v1",
+    "systemFamily": "reinforced-concrete-slab-provisional",
+    "role": "floor-slab",
+    "source": {
+      "sourceId": "apa-native-slab-readback-20261011",
+      "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr35-basic-slab-implementation-partial-20261011.md",
+      "gitBlobSha": "e4bf711bdc3322f594699b59ea34107cde0bcfdf",
+      "publisher": "APA",
+      "rights": "LINK_ONLY_RIGHTS_UNVERIFIED",
+      "status": "TECHNICAL_REFERENCE",
+      "licenseEvidenceUri": null,
+      "applicabilityNote": "Иллюстративный кандидат. Пригодность для здания и привязка материала требуют проверки."
+    },
+    "native": {
+      "attributeType": "BuildingMaterial",
+      "name": "Железобетон - Конструкционный",
+      "expectedProjectGuid": null
+    },
+    "thicknessMeters": 0.2,
+    "storyIds": [
+      "level-1"
+    ],
+    "requiredInterfaceConditions": [
+      "slab-wall-bearing"
+    ],
+    "selectedDetailIds": []
+  },
+  "variants": [
+    {
+      "id": "variant-a",
+      "storyHeights": {
+        "level-1": 3
+      },
+      "layout": {
+        "schemaVersion": "apa-authored-spatial-layout/1",
+        "outline": {
+          "xMin": 0,
+          "xMax": 8,
+          "yMin": 0,
+          "yMax": 6
+        },
+        "rooms": [
+          {
+            "roomId": "hall",
+            "storyId": "level-1",
+            "rectangle": {
+              "xMin": 0,
+              "xMax": 3,
+              "yMin": 0,
+              "yMax": 6
+            }
+          },
+          {
+            "roomId": "living",
+            "storyId": "level-1",
+            "rectangle": {
+              "xMin": 3,
+              "xMax": 8,
+              "yMin": 0,
+              "yMax": 6
+            }
+          }
+        ],
+        "axes": [
+          {
+            "id": "axis-west",
+            "direction": "X",
+            "coordinate": 0
+          },
+          {
+            "id": "axis-mid",
+            "direction": "X",
+            "coordinate": 3
+          },
+          {
+            "id": "axis-east",
+            "direction": "X",
+            "coordinate": 8
+          },
+          {
+            "id": "axis-south",
+            "direction": "Y",
+            "coordinate": 0
+          },
+          {
+            "id": "axis-north",
+            "direction": "Y",
+            "coordinate": 6
+          }
+        ],
+        "bearingLines": [
+          {
+            "id": "wall-west",
+            "storyId": "level-1",
+            "axisId": "axis-west",
+            "fromCoordinate": 0,
+            "toCoordinate": 6,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-mid",
+            "storyId": "level-1",
+            "axisId": "axis-mid",
+            "fromCoordinate": 0,
+            "toCoordinate": 6,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-east",
+            "storyId": "level-1",
+            "axisId": "axis-east",
+            "fromCoordinate": 0,
+            "toCoordinate": 6,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-south",
+            "storyId": "level-1",
+            "axisId": "axis-south",
+            "fromCoordinate": 0,
+            "toCoordinate": 8,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-north",
+            "storyId": "level-1",
+            "axisId": "axis-north",
+            "fromCoordinate": 0,
+            "toCoordinate": 8,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          }
+        ],
+        "loadPaths": [],
+        "passages": [
+          {
+            "id": "entry-door",
+            "kind": "DOOR",
+            "hostMemberId": "wall-west",
+            "centerOffset": 2,
+            "width": 1,
+            "height": 2.1,
+            "sillHeight": 0,
+            "connects": [
+              "$outside",
+              "hall"
+            ]
+          },
+          {
+            "id": "hall-door",
+            "kind": "DOOR",
+            "hostMemberId": "wall-mid",
+            "centerOffset": 3,
+            "width": 0.85,
+            "height": 2.1,
+            "sillHeight": 0,
+            "connects": [
+              "hall",
+              "living"
+            ]
+          },
+          {
+            "id": "living-window",
+            "kind": "WINDOW",
+            "hostMemberId": "wall-east",
+            "centerOffset": 3,
+            "width": 1.4,
+            "height": 1.3,
+            "sillHeight": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "variant-b",
+      "storyHeights": {
+        "level-1": 3
+      },
+      "layout": {
+        "schemaVersion": "apa-authored-spatial-layout/1",
+        "outline": {
+          "xMin": 0,
+          "xMax": 8,
+          "yMin": 0,
+          "yMax": 6
+        },
+        "rooms": [
+          {
+            "roomId": "hall",
+            "storyId": "level-1",
+            "rectangle": {
+              "xMin": 0,
+              "xMax": 4,
+              "yMin": 0,
+              "yMax": 6
+            }
+          },
+          {
+            "roomId": "living",
+            "storyId": "level-1",
+            "rectangle": {
+              "xMin": 4,
+              "xMax": 8,
+              "yMin": 0,
+              "yMax": 6
+            }
+          }
+        ],
+        "axes": [
+          {
+            "id": "axis-west",
+            "direction": "X",
+            "coordinate": 0
+          },
+          {
+            "id": "axis-mid",
+            "direction": "X",
+            "coordinate": 4
+          },
+          {
+            "id": "axis-east",
+            "direction": "X",
+            "coordinate": 8
+          },
+          {
+            "id": "axis-south",
+            "direction": "Y",
+            "coordinate": 0
+          },
+          {
+            "id": "axis-north",
+            "direction": "Y",
+            "coordinate": 6
+          }
+        ],
+        "bearingLines": [
+          {
+            "id": "wall-west",
+            "storyId": "level-1",
+            "axisId": "axis-west",
+            "fromCoordinate": 0,
+            "toCoordinate": 6,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-mid",
+            "storyId": "level-1",
+            "axisId": "axis-mid",
+            "fromCoordinate": 0,
+            "toCoordinate": 6,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-east",
+            "storyId": "level-1",
+            "axisId": "axis-east",
+            "fromCoordinate": 0,
+            "toCoordinate": 6,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-south",
+            "storyId": "level-1",
+            "axisId": "axis-south",
+            "fromCoordinate": 0,
+            "toCoordinate": 8,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-north",
+            "storyId": "level-1",
+            "axisId": "axis-north",
+            "fromCoordinate": 0,
+            "toCoordinate": 8,
+            "wallThicknessMeters": 0.3,
+            "cseCandidateId": null
+          }
+        ],
+        "loadPaths": [],
+        "passages": [
+          {
+            "id": "hall-door",
+            "kind": "DOOR",
+            "hostMemberId": "wall-mid",
+            "centerOffset": 3,
+            "width": 0.85,
+            "height": 2.1,
+            "sillHeight": 0,
+            "connects": [
+              "hall",
+              "living"
+            ]
+          },
+          {
+            "id": "living-window",
+            "kind": "WINDOW",
+            "hostMemberId": "wall-east",
+            "centerOffset": 3,
+            "width": 1.4,
+            "height": 1.3,
+            "sillHeight": 0.9
+          }
+        ]
+      }
+    }
+  ]
+}

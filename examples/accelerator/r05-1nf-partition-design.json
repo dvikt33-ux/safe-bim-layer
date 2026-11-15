@@ -1,0 +1,292 @@
+{
+  "schemaVersion": "apa-project-design/1",
+  "brief": {
+    "schemaVersion": "apa-semantic-project-brief/1",
+    "projectId": "r05-1nf-partition-demo",
+    "mode": "GENERATE_FROM_ZERO",
+    "units": "meters",
+    "site": {
+      "siteId": "demo-site",
+      "region": null
+    },
+    "stories": [
+      {
+        "id": "level-1",
+        "label": "1 этаж",
+        "level": 0
+      }
+    ],
+    "rooms": [
+      {
+        "id": "hall",
+        "name": "Холл",
+        "storyId": "level-1",
+        "minAreaM2": 10
+      },
+      {
+        "id": "living",
+        "name": "Гостиная",
+        "storyId": "level-1",
+        "minAreaM2": 12
+      }
+    ],
+    "constraints": [
+      {
+        "id": "front-door",
+        "text": "Вход снаружи в холл",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "REQUIRED",
+        "sourceRef": "Исходное задание §1",
+        "criterion": {
+          "kind": "ENTRANCE",
+          "from": "$outside",
+          "to": "hall"
+        }
+      },
+      {
+        "id": "hall-living",
+        "text": "Прямой проход из холла в гостиную",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "REQUIRED",
+        "sourceRef": "Исходное задание §2",
+        "criterion": {
+          "kind": "ROOM_CONNECTION",
+          "from": "hall",
+          "to": "living"
+        }
+      },
+      {
+        "id": "gross-area",
+        "text": "Целевая общая площадь 48 м². Методика ещё не задана.",
+        "evidenceStatus": "UNVERIFIED",
+        "priority": "PREFERENCE",
+        "sourceRef": "Исходное задание §3",
+        "criterion": {
+          "kind": "AREA_TARGET",
+          "metric": "GROSS_BUILDING",
+          "targetM2": 48,
+          "toleranceM2": 2
+        }
+      }
+    ]
+  },
+  "cseCandidate": [
+    {
+      "candidateId": "rc-basic-slab-v1",
+      "systemFamily": "reinforced-concrete-slab-provisional",
+      "role": "floor-slab",
+      "source": {
+        "sourceId": "apa-native-slab-readback-20261011",
+        "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/research/apa-verified-results-hub-20261010/docs/research/apa-results/runs/2026-10-11/apa-p70-a03-s02-pr35-basic-slab-implementation-partial-20261011.md",
+        "gitBlobSha": "e4bf711bdc3322f594699b59ea34107cde0bcfdf",
+        "publisher": "APA",
+        "rights": "LINK_ONLY_RIGHTS_UNVERIFIED",
+        "status": "TECHNICAL_REFERENCE",
+        "licenseEvidenceUri": null,
+        "applicabilityNote": "Иллюстративный кандидат. Пригодность для здания и привязка материала требуют проверки."
+      },
+      "native": {
+        "attributeType": "BuildingMaterial",
+        "name": "Железобетон - Конструкционный",
+        "expectedProjectGuid": null
+      },
+      "thicknessMeters": 0.2,
+      "storyIds": [
+        "level-1"
+      ],
+      "requiredInterfaceConditions": [
+        "slab-wall-bearing"
+      ],
+      "selectedDetailIds": []
+    },
+    {
+      "candidateId": "brick-internal-partition",
+      "systemFamily": "ceramic-masonry-1nf",
+      "role": "internal-partition",
+      "source": {
+        "sourceId": "apa-p70-masonry-coordination-20261008",
+        "uri": "https://github.com/dvikt33-ux/safe-bim-layer/blob/4a0a79d3e921104fbac2830c681caf7877e03334/docs/research/architectural_ai_checkpoint_24_construction_systems_detail_first_selection_2026-10-08.md",
+        "gitBlobSha": "5a6391cb176d28aa0d91dda93dcea0efd9bd1e27",
+        "publisher": "APA",
+        "rights": "LINK_ONLY_RIGHTS_UNVERIFIED",
+        "status": "TECHNICAL_REFERENCE",
+        "licenseEvidenceUri": null,
+        "applicabilityNote": "Ссылка на архитектуру MasonrySystem. Размеры и швы заданы отдельным профилем координации. Прочность, перевязка и пригодность к строительству не подтверждены."
+      },
+      "storyIds": [
+        "level-1"
+      ],
+      "thicknessMeters": 0.12,
+      "requiredInterfaceConditions": [
+        "partition-head-restraint",
+        "partition-opening-lintel"
+      ],
+      "selectedDetailIds": [],
+      "native": {
+        "attributeType": "BuildingMaterial",
+        "name": "Кирпич",
+        "expectedProjectGuid": null
+      },
+      "coordination": {
+        "profileId": "ceramic-1nf-10-12",
+        "halfBrickUnitsAcross": 1
+      }
+    }
+  ],
+  "variants": [
+    {
+      "id": "variant-a",
+      "storyHeights": {
+        "level-1": 3.08
+      },
+      "layout": {
+        "schemaVersion": "apa-authored-spatial-layout/1",
+        "outline": {
+          "xMin": 400.0,
+          "xMax": 408.0,
+          "yMin": 400.0,
+          "yMax": 406.09
+        },
+        "rooms": [
+          {
+            "roomId": "hall",
+            "storyId": "level-1",
+            "rectangle": {
+              "xMin": 400.0,
+              "xMax": 403.0,
+              "yMin": 400.0,
+              "yMax": 406.09
+            }
+          },
+          {
+            "roomId": "living",
+            "storyId": "level-1",
+            "rectangle": {
+              "xMin": 403.0,
+              "xMax": 408.0,
+              "yMin": 400.0,
+              "yMax": 406.09
+            }
+          }
+        ],
+        "axes": [
+          {
+            "id": "axis-west",
+            "direction": "X",
+            "coordinate": 400.0
+          },
+          {
+            "id": "axis-mid",
+            "direction": "X",
+            "coordinate": 403.0
+          },
+          {
+            "id": "axis-east",
+            "direction": "X",
+            "coordinate": 408.0
+          },
+          {
+            "id": "axis-south",
+            "direction": "Y",
+            "coordinate": 400.0
+          },
+          {
+            "id": "axis-north",
+            "direction": "Y",
+            "coordinate": 406.09
+          }
+        ],
+        "bearingLines": [
+          {
+            "id": "wall-west",
+            "storyId": "level-1",
+            "axisId": "axis-west",
+            "fromCoordinate": 400.0,
+            "toCoordinate": 406.09,
+            "wallThicknessMeters": 0.25,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-mid",
+            "storyId": "level-1",
+            "axisId": "axis-mid",
+            "fromCoordinate": 400.0,
+            "toCoordinate": 406.09,
+            "wallThicknessMeters": 0.12,
+            "cseCandidateId": "brick-internal-partition",
+            "structuralFunction": "NonLoadBearingElement",
+            "coordinationEnds": {
+              "start": "wall-south",
+              "end": "wall-north"
+            }
+          },
+          {
+            "id": "wall-east",
+            "storyId": "level-1",
+            "axisId": "axis-east",
+            "fromCoordinate": 400.0,
+            "toCoordinate": 406.09,
+            "wallThicknessMeters": 0.25,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-south",
+            "storyId": "level-1",
+            "axisId": "axis-south",
+            "fromCoordinate": 400.0,
+            "toCoordinate": 408.0,
+            "wallThicknessMeters": 0.25,
+            "cseCandidateId": null
+          },
+          {
+            "id": "wall-north",
+            "storyId": "level-1",
+            "axisId": "axis-north",
+            "fromCoordinate": 400.0,
+            "toCoordinate": 408.0,
+            "wallThicknessMeters": 0.25,
+            "cseCandidateId": null
+          }
+        ],
+        "loadPaths": [],
+        "passages": [
+          {
+            "id": "entry-door",
+            "kind": "DOOR",
+            "hostMemberId": "wall-west",
+            "centerOffset": 2,
+            "width": 1,
+            "height": 2.1,
+            "sillHeight": 0,
+            "connects": [
+              "$outside",
+              "hall"
+            ]
+          },
+          {
+            "id": "hall-door",
+            "kind": "DOOR",
+            "hostMemberId": "wall-mid",
+            "centerOffset": 3.175,
+            "width": 0.92,
+            "height": 2.156,
+            "sillHeight": 0,
+            "connects": [
+              "hall",
+              "living"
+            ]
+          },
+          {
+            "id": "living-window",
+            "kind": "WINDOW",
+            "hostMemberId": "wall-east",
+            "centerOffset": 3,
+            "width": 1.4,
+            "height": 1.3,
+            "sillHeight": 0.9
+          }
+        ]
+      }
+    }
+  ]
+}

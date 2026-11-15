@@ -10,6 +10,7 @@ import sys
 
 
 ROOT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 
@@ -73,6 +74,12 @@ def compile_plan(router, intent):
     import archicad_project_accelerator as core
 
     schema = intent.get("schemaVersion")
+    if schema == "apa-semantic-project-brief/1":
+        return dict(core.compile_project_brief(intent), status="SEMANTIC_BRIEF_VALIDATED")
+    if schema == "apa-project-design/1":
+        from apa_project_design import compile_design
+
+        return compile_design(intent)
     if schema in {"archicad-project-intent/1", "apa-native-task/1"}:
         return core.compile_intent(intent, core.RUN.DEFAULT_SCENE_SCHEMA, router)
     if schema == "apa-native-optimizer/1":
@@ -157,6 +164,36 @@ def parser():
     cmd = commands.add_parser("plan", help="Подготовить BIM Graph или нативное задание")
     cmd.add_argument("--intent", type=Path, required=True)
     cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("design-request", help="Подготовить исходное текстовое задание для GPT")
+    cmd.add_argument("--source", type=Path, required=True)
+    cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("design-select", help="Выбрать проверенный проектный вариант для предконтроля")
+    cmd.add_argument("--intent", type=Path, required=True)
+    cmd.add_argument("--variant", required=True)
+    cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("design-diff", help="Определить, что требует сверки после изменения проектного варианта")
+    cmd.add_argument("--previous", type=Path, required=True)
+    cmd.add_argument("--current", type=Path, required=True)
+    cmd.add_argument("--variant", required=True)
+    cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("design-review", help="Показать планы, разрез по лестнице и результаты проверки требований")
+    cmd.add_argument("--intent", type=Path, required=True)
+    cmd.add_argument("--variant", required=True)
+    cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("design-evidence", help="Связать проверенную модель с источниками требований")
+    cmd.add_argument("--job", type=Path, required=True)
+    cmd.add_argument("--cache", type=Path, required=True)
+    cmd.add_argument("--output", type=Path, required=True)
+
+    cmd = commands.add_parser("design-stair-readback", help="Сверить лестницу и плиты с вариантом в открытой копии PLN")
+    cmd.add_argument("--intent", type=Path, required=True)
+    cmd.add_argument("--variant", required=True)
+    cmd.add_argument("--requirement", required=True)
+    cmd.add_argument("--bindings", type=Path, required=True, help="JSON с GUID stair, lowerSlab и upperSlab")
+    cmd.add_argument("--project", type=Path, required=True)
+    cmd.add_argument("--project-sha256", required=True)
+    cmd.add_argument("--port", type=int, required=True)
+    cmd.add_argument("--output", type=Path, required=True)
     cmd = commands.add_parser("run-local", help="Выполнить локальную аналитическую команду")
     cmd.add_argument("command")
     cmd.add_argument("--params", type=Path, required=True)
@@ -168,21 +205,45 @@ def parser():
     cmd.add_argument("--output", type=Path, required=True)
     cmd.add_argument("--page", type=int, default=1)
     cmd = commands.add_parser("documentation", help="Собрать документацию по снимку модели")
-    cmd.add_argument("--native-dump", type=Path, required=True)
-    selection = cmd.add_mutually_exclusive_group(required=True)
+    source = cmd.add_mutually_exclusive_group(required=True)
+    source.add_argument("--native-dump", type=Path)
+    source.add_argument("--job", type=Path, help="Каталог авторского задания с подтверждённым повторным открытием")
+    selection = cmd.add_mutually_exclusive_group()
     selection.add_argument("--guids", type=Path)
     selection.add_argument("--all-dump-elements", action="store_true")
-    cmd.add_argument("--story", type=int, required=True)
+    cmd.add_argument("--story", type=int)
+    cmd.add_argument("--publisher-folder", type=Path, help="Папка нативного выпуска одного листа с двумя этажами")
+    cmd.add_argument("--layout-name", help="Название выбранного листа из Archicad")
+    cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("detail-review", help="Сверить параметры узла с источником и сохранённым предварительным графом")
+    cmd.add_argument("--detail-id", required=True)
+    cmd.add_argument("--observation", type=Path)
+    cmd.add_argument("--host-guid")
     cmd.add_argument("--output", type=Path, required=True)
     commands.add_parser("template-check", help="Проверить локальные спецификации шаблона")
     commands.add_parser("template-runtime", help="Действующий интерфейс инвентаризации и настройки шаблона")
     commands.add_parser("project-runtime", help="Действующий интерфейс SceneWriter для проекта")
     commands.add_parser("connected-runtime", help="Существующие связные операции крыши и MEP через SceneWriter")
-    cmd = commands.add_parser("architecture-runtime", help="Операции оболочки на подготовленной изолированной копии")
-    cmd.add_argument("phase", choices=("status", "preflight", "execute"))
+    cmd = commands.add_parser("architecture-stage", help="Подготовить свежую тестовую копию для оболочки или выбранного варианта")
+    cmd.add_argument("--job", type=Path, required=True)
+    cmd.add_argument("--intent", type=Path, required=True)
+    cmd.add_argument("--variant", help="ID варианта в исходном проектном задании без привязки к PLN")
+    cmd.add_argument("--donor", type=Path, required=True)
+    cmd.add_argument("--donor-sha256", required=True)
+    cmd.add_argument("--baseline-trace", type=Path, required=True)
+    cmd.add_argument("--port", type=int, default=19723)
+    cmd = commands.add_parser("architecture-runtime", help="Операции на подготовленной изолированной копии")
+    cmd.add_argument("phase", choices=("status", "native-read", "preflight", "execute", "check-closed", "verify-reopen"))
     cmd.add_argument("--job", type=Path, required=True)
     cmd.add_argument("--port", type=int)
+    cmd.add_argument("--output", type=Path, help="Новый файл инвентаря для native-read")
+    cmd.add_argument("--shared-native-lock", action="store_true", help=argparse.SUPPRESS)
+    cmd.add_argument("--discover-test-port", action="store_true", help=argparse.SUPPRESS)
+    cmd.add_argument("--expected-stage-sha", help=argparse.SUPPRESS)
+    cmd.add_argument("--confirm-preflight", help="SHA-256 approved-preflight.json для записи авторского варианта")
     commands.add_parser("group-runtime", help="Действующий протокол нативных групп и сверки PLN")
+    commands.add_parser("archicad-startup", help="Диагностика запуска проверенной тестовой копии Archicad")
+    commands.add_parser("mcp-control", help="Приватный MCP для типизированных операций APA")
     commands.add_parser("source-batch", help="Существующий протокол пакетного создания по подтверждённым источникам")
     commands.add_parser("source-batch-reconcile", help="Сверка прерванного пакетного создания по источникам")
     commands.add_parser("mailbox", help="Приёмник APA с квитанциями и профилем чтения")
@@ -201,6 +262,14 @@ def parser():
     cmd.add_argument("--profile", type=Path)
     cmd.add_argument("--journal", type=Path)
     cmd.add_argument("--output", type=Path, required=True)
+    cmd = commands.add_parser("tdk-trace-stage", help="Подготовить новую копию PLN для испытания AI_TRACE")
+    cmd.add_argument("--source", type=Path, required=True)
+    cmd.add_argument("--payload", type=Path, required=True)
+    cmd.add_argument("--job", type=Path, required=True)
+    cmd = commands.add_parser("tdk-trace", help="Сверить или применить изменение AI_TRACE в тестовой копии")
+    cmd.add_argument("--job", type=Path, required=True)
+    cmd.add_argument("--port", type=int, required=True)
+    cmd.add_argument("--confirm-preflight", help="SHA-256 проверенного предконтроля для одной записи")
     cmd = commands.add_parser("library-pack", help="Подготовить привязанный к источнику комплект проекта")
     cmd.add_argument("--brief", type=Path, required=True)
     cmd.add_argument("--candidate", type=Path, required=True)
@@ -212,6 +281,7 @@ def parser():
     cmd.add_argument("--output", type=Path, required=True)
     cmd = commands.add_parser("arena-receipt", help="Прочитать локальную квитанцию завершения Arena")
     cmd.add_argument("--receipt", type=Path, required=True)
+    cmd.add_argument("--intent", type=Path, help="Отдельный типизированный вход APA для подготовки плана")
     cmd.add_argument("--output", type=Path, required=True)
     return cli
 
@@ -222,6 +292,8 @@ def main(argv=None):
         routes = {"project-runtime": ("archicad_project_accelerator", "main"),
                   "connected-runtime": ("archicad_connected_components", "main"),
                   "group-runtime": ("apa_ac29_group_batch_oneshot", "main"),
+                  "archicad-startup": ("apa_archicad_startup", "main"),
+                  "mcp-control": ("apa_control_mcp", "main"),
                   "template-runtime": ("archicad_template_builder", "main"),
                   "source-batch": ("apa_source_qualified_native_batch", "cli"),
                   "source-batch-reconcile": ("apa_reconcile_source_batch_save", "cli"),
@@ -238,6 +310,55 @@ def main(argv=None):
         if args.mode == "doctor":
             result = doctor()
             code = 0 if result["status"] == "LOCAL_ENV_READY" else 2
+        elif args.mode == "design-request":
+            from apa_project_design import read_request
+
+            result = read_request(args.source, ROOT / "examples/accelerator/r04-project-design.json")
+            write_json(args.output, result)
+        elif args.mode == "design-select":
+            from apa_project_design import select_variant
+
+            selected = select_variant(read_json(args.intent), args.variant)
+            write_json(args.output, selected)
+            result = dict(status="AUTHORED_INPUT_FOR_NATIVE_PREFLIGHT", variant=args.variant,
+                          executionPermission=False, output=str(args.output))
+        elif args.mode == "design-diff":
+            from apa_project_design import changes_between
+
+            result = changes_between(read_json(args.previous), read_json(args.current), args.variant)
+            write_json(args.output, result)
+        elif args.mode == "design-review":
+            from apa_design_review import write_design_review
+
+            result = write_design_review(read_json(args.intent), args.variant, args.output)
+        elif args.mode == "design-evidence":
+            from apa_integrated_services import design_evidence
+
+            job = args.job.resolve(strict=True)
+            if any(path.resolve().is_relative_to(job) for path in (args.output, args.cache)):
+                raise ValueError("Папка индекса и новый отчёт должны находиться вне исторического задания")
+            result = design_evidence(ROOT, job, args.cache)
+            write_json(args.output, result)
+        elif args.mode == "design-stair-readback":
+            from apa_integrated_services import design_stair_readback
+
+            result = design_stair_readback(ROOT, args.intent, args.variant, args.requirement, args.bindings,
+                                           args.project, args.project_sha256, args.port, args.output)
+            write_json(args.output, result)
+            if result["status"] == "NATIVE_STAIR_PLAN_NOT_VERIFIED":
+                code = 2
+        elif args.mode == "documentation" and args.job is not None:
+            from apa_integrated_services import document_reopened_job
+
+            if args.guids is not None or args.all_dump_elements:
+                raise ValueError("Для задания состав элементов берётся из квитанции повторного открытия")
+            result = document_reopened_job(args.job, args.output, args.story,
+                                           publisher_folder=args.publisher_folder, layout_name=args.layout_name)
+        elif args.mode == "detail-review":
+            from apa_integrated_services import detail_review
+
+            result = detail_review(ROOT, args.detail_id, args.observation, args.host_guid)
+            write_json(args.output, result)
         elif args.mode == "template-check":
             from archicad_template_builder import validate_specs
 
@@ -268,15 +389,38 @@ def main(argv=None):
             result = inspect_wall(ROOT, args.payload, args.profile, args.journal,
                                   args.output.with_suffix(".evidence"))
             write_json(args.output, result)
+        elif args.mode == "tdk-trace-stage":
+            from apa_tdk_wall import stage_trace
+
+            result = stage_trace(ROOT, args.job, args.source, args.payload)
+        elif args.mode == "tdk-trace":
+            from apa_tdk_wall import run_trace
+
+            result = run_trace(ROOT, args.job, args.port, confirm=args.confirm_preflight)
+            code = 2 if result["status"] == "STOPPED_RECONCILE_NO_AUTORETRY" else 0
         elif args.mode == "library-pack":
             from archicad_project_library_pack import compile_pack
 
             result = compile_pack(read_json(args.brief), read_json(args.candidate))
             write_json(args.output, result)
+        elif args.mode == "architecture-stage":
+            from apa_r03_architecture import stage
+
+            result = stage(args.job.resolve(), args.intent.resolve(strict=True), args.port,
+                           args.donor.resolve(strict=True), args.donor_sha256, args.baseline_trace.resolve(strict=True),
+                           variant_id=args.variant)
         elif args.mode == "architecture-runtime":
+            from contextlib import nullcontext
+            from apa_ac29_autonomous_job_bridge import acquire_singleton
             from apa_integrated_services import architecture_phase
 
-            result = architecture_phase(ROOT, args.job, args.phase, args.port)
+            if (args.output is not None) != (args.phase == "native-read"):
+                raise ValueError("APA_ARCHITECTURE_OUTPUT_ONLY_FOR_NATIVE_READ")
+            with acquire_singleton(shared=True) if args.shared_native_lock else nullcontext():
+                result = architecture_phase(ROOT, args.job, args.phase, args.port,
+                                            confirm_preflight=args.confirm_preflight, output=args.output,
+                                            discover_port=args.discover_test_port,
+                                            expected_stage_sha=args.expected_stage_sha)
             if args.phase == "preflight" and result.get("status") != "READY_FOR_EXPLICIT_TEST_RUN":
                 code = 2
         elif args.mode == "knowledge-query":
@@ -288,7 +432,7 @@ def main(argv=None):
         elif args.mode == "arena-receipt":
             from apa_integrated_services import arena_receipt
 
-            result = arena_receipt(args.receipt)
+            result = arena_receipt(args.receipt, args.intent)
             write_json(args.output, result)
         else:
             router = load_router(args.semantic_profile)
@@ -296,7 +440,13 @@ def main(argv=None):
                 result = catalog(router, args.query, args.contracts)
             elif args.mode == "plan":
                 raw = args.intent.read_bytes()
-                result = compile_plan(router, json.loads(raw.decode("utf-8-sig")))
+                try:
+                    intent = json.loads(raw.decode("utf-8-sig"))
+                except json.JSONDecodeError as exc:
+                    raise ValueError("Текстовое задание подайте через apa design-request") from exc
+                if not isinstance(intent, dict):
+                    raise ValueError("APA_PLAN_REQUIRES_JSON_OBJECT")
+                result = compile_plan(router, intent)
                 result = dict(result, inputSha256=hashlib.sha256(raw).hexdigest(), executionPermission=False)
                 write_json(args.output, result)
             elif args.mode == "run-local":
@@ -312,6 +462,10 @@ def main(argv=None):
             else:
                 from apa_file_providers import DOCUMENTATION
 
+                if args.publisher_folder is not None or args.layout_name is not None:
+                    raise ValueError("Для сверки листа Publisher нужно задание с подтверждённой PLN")
+                if args.story is None or (args.guids is None and not args.all_dump_elements):
+                    raise ValueError("Для снимка укажите этаж и состав элементов")
                 result = run_local(router, DOCUMENTATION, {
                     "a": str(args.native_dump), "guids": None if args.all_dump_elements else read_json(args.guids),
                     "story": args.story, "output": str(args.output),

@@ -76,14 +76,22 @@ def prepare_native_counterbatten(root,source,context,native,batten_guid,end_wall
     return prepare_beam(source,D.prepare_counterbatten_junction(root,source,context,native,batten_guid,end_wall_guid),translation_x,placement_authority)
 
 
+def source_cross_section(candidate, entity_id, fact_id):
+    rows = [row for row in candidate['resolvedFacts']
+            if row['entity'] == entity_id and row['fact']['fact_id'] == fact_id]
+    if (len(rows) != 1 or rows[0]['fact']['fact_kind'] != 'cross_section'
+            or rows[0]['fact']['normalized_unit'] != 'mm'):
+        raise ValueError('BEAM_SOURCE_FACT_INVALIDATED')
+    return {'width': rows[0]['values']['value_2'] / 1000, 'height': rows[0]['values']['value'] / 1000}
+
+
 def verify_beam_binding(api,params,binding):
     D.verify_source_section_binding(api,binding)
     fact=C.details_candidate(__import__('pathlib').Path(__file__).resolve().parents[1],
         binding['detailId'],{'guid':binding['hostGuid'],'kind':'Roof'})
-    rows=[r for r in fact['resolvedFacts'] if r['entity']==binding['entityId'] and r['fact']['fact_id']==binding['sourceFactId']]
-    if len(rows)!=1 or binding['archiveSha256']!=C.DETAILS_SHA:
+    if binding['archiveSha256'] != fact['archiveSha256']:
         raise ValueError('BEAM_SOURCE_FACT_INVALIDATED')
-    section={'width':rows[0]['values']['value_2']/1000,'height':rows[0]['values']['value']/1000}
+    section = source_cross_section(fact, binding['entityId'], binding['sourceFactId'])
     if section!=binding['sourceSectionMeters']:raise ValueError('BEAM_SOURCE_DIMENSION_INVALIDATED')
     if params!={'beamsData':[binding['expectedNativeBeamParameters']]}:
         raise ValueError('BEAM_SOURCE_PARAMETERS_MISMATCH')

@@ -279,24 +279,32 @@ def resolve_structural_function(api):
         'definitionHash':RUN.digest(definition),'engineeringCapacity':'NOT_VERIFIED'}
 
 
+def read_structural_function(api, guid, binding):
+    rows = api('GetPropertyValuesOfElements', {'elements': [{'elementId': {'guid': guid}}],
+               'properties': [{'propertyId': binding['propertyId']}]})['propertyValuesForElements']
+    if len(rows) != 1 or len(rows[0].get('propertyValues', [])) != 1:
+        raise ValueError('NATIVE_STRUCTURAL_FUNCTION_UNAVAILABLE')
+    return rows[0]['propertyValues'][0]['propertyValue']
+
+
 def assign_structural_functions(writer,plan,created,roles,retained_signatures,run_id,
                                 authorization_ref,saved_sha256):
     verify_model(writer.api,plan,created)
     binding=resolve_structural_function(writer.api);owned=[v['guid'] for v in created.values()]
+    expected_binding = plan.get('integrationBindings', {}).get('dependencies', {}).get(
+        'authoredWallSystems', {}).get('structuralFunctionDefinition')
+    if expected_binding is not None and expected_binding != binding:
+        raise ValueError('MODEL_STRUCTURAL_FUNCTION_DEFINITION_CHANGED')
     proof={};writes=[]
     for sid,role in roles.items():
         if sid not in created or created[sid]['kind'] not in {'Wall','Slab','Roof'} or role not in binding['displayValues']:
             raise ValueError('MODEL_ROLE_NOT_EXPLICIT_OWNED_STRUCTURAL_ELEMENT')
         guid=created[sid]['guid'];value={'value':binding['displayValues'][role]}
-        def read(g=guid):
-            return writer.api('GetPropertyValuesOfElements',{'elements':[{'elementId':{'guid':g}}],
-                'properties':[{'propertyId':binding['propertyId']}]})['propertyValuesForElements'][0]['propertyValues'][0]['propertyValue']
-        if read()==value:
+        if read_structural_function(writer.api, guid, binding) == value:
             proof[sid]={'role':role,'nativeDisplay':value['value'],'reused':True};continue
         params={'elementPropertyValues':[{'elementId':{'guid':guid},'propertyId':binding['propertyId'],'propertyValue':value}]}
         def verify(*_,g=guid,expected=value):
-            actual=writer.api('GetPropertyValuesOfElements',{'elements':[{'elementId':{'guid':g}}],
-                'properties':[{'propertyId':binding['propertyId']}]})['propertyValuesForElements'][0]['propertyValues'][0]['propertyValue']
+            actual=read_structural_function(writer.api, g, binding)
             if actual!=expected:raise ValueError('NATIVE_STRUCTURAL_FUNCTION_VALUE_MISMATCH')
             return {'status':'NATIVE_STRUCTURAL_FUNCTION_PASS','guid':g,'nativeValue':actual}
         result=execute_model_operation(writer,run_id+'-'+sid,'SetPropertyValuesOfElements',params,

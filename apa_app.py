@@ -16,6 +16,28 @@ ROOT = Path(__file__).resolve().parent
 WORKFLOWS = {
     "Подготовить BIM-задание": (["plan"],
         [("Файл задания", "--intent", "file", "")], "план.json"),
+    "Подготовить текстовое задание для GPT": (["design-request"],
+        [("Файл технического задания", "--source", "file", "")], "задание-для-gpt.json"),
+    "Выбрать проектный вариант для предконтроля": (["design-select"],
+        [("Файл вариантов", "--intent", "file", ""), ("ID варианта", "--variant", "text", "")], "проект.json"),
+    "Проверить планировку и показать эскиз": (["design-review"],
+        [("Файл вариантов", "--intent", "file", ""), ("ID варианта", "--variant", "text", "")], "эскиз.html"),
+    "Сравнить редакции планировки": (["design-diff"],
+        [("Предыдущий файл вариантов", "--previous", "file", ""),
+         ("Текущий файл вариантов", "--current", "file", ""), ("ID варианта", "--variant", "text", "")], "изменения.json"),
+    "Подготовить тестовую PLN по проектному варианту": (["architecture-stage"],
+        [("Файл вариантов", "--intent", "file", ""), ("ID варианта", "--variant", "text", ""),
+         ("Проверенный исходный PLN", "--donor", "file", ""), ("SHA-256 исходного PLN", "--donor-sha256", "text", ""),
+         ("Архив GetStories и GetModelDumpV1", "--baseline-trace", "file", ""),
+         ("Порт JSON API", "--port", "text", "19723")], None),
+    "Связать требования с проверенной моделью": (["design-evidence"],
+        [("Каталог задания с квитанцией reopened.json", "--job", "directory", "")], "доказательства-проекта.json"),
+    "Сверить лестницу и проём в тестовой PLN": (["design-stair-readback"],
+        [("Файл вариантов", "--intent", "file", ""), ("ID варианта", "--variant", "text", "variant-a"),
+         ("ID требования", "--requirement", "text", ""), ("Файл привязки GUID", "--bindings", "file", ""),
+         ("Открытая тестовая копия PLN", "--project", "file", ""),
+         ("SHA-256 сохранённой копии", "--project-sha256", "text", ""),
+         ("Порт JSON API", "--port", "text", "19723")], "сверка-лестницы.json"),
     "Выполнить предконтроль оболочки в тестовой PLN": (["architecture-runtime", "preflight"],
         [("Каталог подготовленного задания оболочки", "--job", "directory", ""),
          ("Порт JSON API", "--port", "text", "19723")], None),
@@ -25,6 +47,16 @@ WORKFLOWS = {
         [("Файл графа", "--graph", "file", "")], "результат-графа.json"),
     "Выпустить ведомости по снимку": (["documentation", "--all-dump-elements"],
         [("Снимок модели", "--native-dump", "file", ""), ("Номер этажа", "--story", "text", "0")], "документация"),
+    "Выпустить ведомости по проверенной PLN": (["documentation"],
+        [("Каталог задания с квитанцией reopened.json", "--job", "directory", ""),
+         ("Индекс этажа (пусто для всех)", "--story", "optional-text", "")], "документация"),
+    "Сверить лист Publisher и выпустить ведомости": (["documentation"],
+        [("Каталог задания с квитанцией reopened.json", "--job", "directory", ""),
+         ("Каталог экспорта Publisher", "--publisher-folder", "directory", ""),
+         ("Название листа в имени PDF", "--layout-name", "text", "")], "документация"),
+    "Сверить параметры строительного узла": (["detail-review"],
+        [("ID узла в Details v2.12", "--detail-id", "text", ""),
+         ("Диагностический отчёт о балке (если есть)", "--observation", "optional-file", "")], "сверка-узла.json"),
     "Проверить спецификации шаблона": (["template-check"], [], None),
     "Подготовить проектную библиотеку": (["library-pack"],
         [("Описание проекта", "--brief", "file", ""), ("Кандидат библиотеки", "--candidate", "file", "")], "библиотека.json"),
@@ -120,7 +152,7 @@ class Application:
             self.inputs.append((label, option, kind, value))
             ttk.Label(self.form, text=label).grid(row=index, column=0, sticky="w", padx=(0, 12), pady=3)
             ttk.Entry(self.form, textvariable=value).grid(row=index, column=1, sticky="ew", pady=3)
-            if kind != "text":
+            if kind in {"file", "optional-file", "directory"}:
                 ttk.Button(self.form, text="Выбрать…", command=lambda v=value, k=kind: self.choose(v, k)).grid(
                     row=index, column=2, padx=(8, 0), pady=3)
 
@@ -138,11 +170,11 @@ class Application:
             args = list(command)
             for label, option, kind, value in self.inputs:
                 value = value.get().strip()
-                if not value and kind == "optional-file":
+                if not value and kind in {"optional-file", "optional-text"}:
                     continue
                 if not value:
                     raise ValueError(f"Заполните поле «{label}»")
-                if kind != "text":
+                if kind in {"file", "optional-file", "directory"}:
                     value = str(Path(value).resolve(strict=True))
                 if option:
                     args.append(option)
@@ -154,7 +186,9 @@ class Application:
             self.job.mkdir(parents=True)
             if output:
                 args.extend(["--output", str(self.job / output)])
-            if command[0] == "knowledge-query":
+            if command[0] == "architecture-stage":
+                args.extend(["--job", str(self.job / ("r03-" + self.job.name))])
+            if command[0] in {"knowledge-query", "design-evidence"}:
                 args.extend(["--cache", str(workspace / ("Индекс-" + self.release["knowledgeRevision"][:10]))])
             python = Path(sys.executable).with_name("python.exe")
             with (self.job / "журнал.txt").open("xb") as log:

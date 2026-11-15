@@ -174,6 +174,7 @@ def execute_operation(writer, scene_id, command, parameters, source_hash,
         'integrationBindings': {'dependencies': {'documentationOperation': scope}}}
     intent = {'sceneId': scene_id, 'sourcePlanHash': source_hash, 'command': command,
               'parameters': parameters, 'target': preflight['binding']}
+    export = Path(parameters['outputPath']) if command == 'PublishPublisherSet' else None
 
     def retained():
         native = capture_full_model(writer.api, retained_signatures)
@@ -193,9 +194,9 @@ def execute_operation(writer, scene_id, command, parameters, source_hash,
         import hashlib
         if hashlib.sha256(Path(preflight['binding']['path']).read_bytes()).hexdigest() != saved_sha256:
             raise ValueError('DOCUMENTATION_SAVED_FILE_HASH_CHANGED')
-        if command == 'PublishPublisherSet':
-            output = Path(parameters['outputPath'])
-            if output.is_symlink() or (output.exists() and
+        if export is not None:
+            output = export.resolve()
+            if export.is_symlink() or str(output).startswith(('\\\\', '//')) or (output.exists() and
                     (not output.is_dir() or any(output.iterdir()))):
                 raise ValueError('DOCUMENTATION_EXPORT_REQUIRES_NEW_EMPTY_DIRECTORY')
         try:
@@ -204,6 +205,8 @@ def execute_operation(writer, scene_id, command, parameters, source_hash,
             if str(exc)!='DOCUMENTATION_LAYOUT_MODEL_WINDOW_REQUIRED':raise
             proof=restore_model_window(writer,scene_id+'-db-before',source_hash,
                 retained_signatures,authorization_ref,saved_sha256)
+        if export is not None:
+            proof['publicationDirectory'] = str(output)
         if activate_navigator_id is not None:
             if expected_window not in {'FloorPlan', 'Section', 'Elevation', 'InteriorElevation', 'Layout'}:
                 raise ValueError('DOCUMENTATION_EXPLICIT_WINDOW_BINDING_REQUIRED')
@@ -232,6 +235,14 @@ def execute_operation(writer, scene_id, command, parameters, source_hash,
         return proof
 
     def after(reply, prior):
+        publication = None
+        if export is not None:
+            from archicad_native_documentation import publication_files
+
+            output = Path(prior['publicationDirectory'])
+            if export.is_symlink() or export.resolve() != output:
+                raise ValueError('NATIVE_EXPORT_PATH_ESCAPE')
+            publication = publication_files(output)
         proof = verify_after(reply, prior)
         if not isinstance(proof, dict) or not str(proof.get('status', '')).endswith('PASS'):
             raise ValueError('DOCUMENTATION_NATIVE_READBACK_REQUIRED')
@@ -241,7 +252,10 @@ def execute_operation(writer, scene_id, command, parameters, source_hash,
             if str(exc)!='DOCUMENTATION_LAYOUT_MODEL_WINDOW_REQUIRED':raise
             retained_proof=restore_model_window(writer,scene_id+'-db-after',source_hash,
                 retained_signatures,authorization_ref,saved_sha256)
-        return {**proof, 'retained': retained_proof}
+        readback = {**proof, 'retained': retained_proof}
+        if publication is not None:
+            readback['publicationFiles'] = publication
+        return readback
 
     return writer.execute_bound_operation(preflight, scene_id, command, parameters,
         RUN.digest(intent), before, after)

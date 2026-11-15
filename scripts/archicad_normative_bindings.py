@@ -1,11 +1,127 @@
 """A02.S02: source/edition-aware requirement binding, no compliance solver."""
 import copy,json
+from collections import defaultdict
+from itertools import pairwise
 from pathlib import Path
 import archicad_semantic_brief as BRIEF
 import archicad_scene_run as RUN
 
 CATALOG=Path(__file__).resolve().parents[1]/'examples/accelerator/ru-junction-rulepack-20261012.json'
 SOURCE_CONDITIONS=CATALOG.with_name('verified-roof-source-conditions-20261012.json')
+
+CERAMIC_1NF = {
+    'profileId': 'ceramic-1nf-10-12',
+    'brickLengthMM': 250, 'brickWidthMM': 120, 'brickHeightMM': 65,
+    'verticalJointMM': 10, 'bedJointMM': 12,
+    'references': [
+        {'document': 'ГОСТ 530-2012', 'locator': 'Таблица 2, 1 НФ',
+         'uri': 'https://protect.gost.ru/gost/details/e3f3ca57-13cb-493c-a047-21814635e7fc'},
+        {'document': 'СП 70.13330.2012', 'locator': '9.2.4, до исключения изменением №8',
+         'uri': 'https://protect.gost.ru/sp/details/2239acf1-711f-4f1f-aaa7-902fa06a8a60',
+         'exclusionEffectiveDate': '2027-03-01'},
+    ],
+    'applicability': 'NOMINAL_COORDINATION_ONLY_PROJECT_NORMATIVE_APPLICABILITY_NOT_VERIFIED',
+}
+
+
+def wall_coordination_profile(selection, thickness):
+    """Pin the selected nominal module to independent source references."""
+    if (not isinstance(selection, dict) or selection.keys() != {'profileId', 'halfBrickUnitsAcross'}
+            or selection['profileId'] != CERAMIC_1NF['profileId']
+            or type(selection['halfBrickUnitsAcross']) is not int or selection['halfBrickUnitsAcross'] < 1):
+        raise ValueError('WALL_COORDINATION_PROFILE_NOT_SUPPORTED')
+    profile = copy.deepcopy(CERAMIC_1NF)
+    count = selection['halfBrickUnitsAcross']
+    plan = profile['brickWidthMM'] + profile['verticalJointMM']
+    expected = count * plan - profile['verticalJointMM']
+    mm = thickness * 1000
+    if round(mm) != expected or abs(mm - round(mm)) > .001:
+        raise ValueError('WALL_COORDINATION_THICKNESS_DOES_NOT_MATCH_PROFILE')
+    profile.update(halfBrickUnitsAcross=count, nominalThicknessMM=expected,
+                   planModuleMM=plan, courseModuleMM=profile['brickHeightMM'] + profile['bedJointMM'])
+    return dict(profile, profileDigest=RUN.digest(profile))
+
+
+def _wall_end_face(wall, members, coordinate_key, reference, *, sign):
+    coordinate = wall[coordinate_key]
+    if reference == '$wall-end':
+        return coordinate
+    host = members.get(reference, {})
+    fixed = wall['constantCoordinate']
+    clearance = wall['thicknessMeters'] / 2
+    if (host.get('storyId') != wall['storyId'] or host.get('direction') == wall['direction']
+            or abs(host['constantCoordinate'] - coordinate) > 1e-6
+            or host['fromCoordinate'] > fixed - clearance + 1e-6
+            or host['toCoordinate'] < fixed + clearance - 1e-6):
+        raise ValueError('WALL_COORDINATION_REFERENCE_FACE_INVALID:' + wall['id'])
+    return coordinate + sign * host['thicknessMeters'] / 2
+
+
+def _nominal_row(length, profile):
+    millimeters = length * 1000
+    rounded = round(millimeters)
+    modules, remainder = divmod(rounded + profile['verticalJointMM'], profile['planModuleMM'])
+    fits = modules > 0 and remainder == 0 and abs(rounded - millimeters) <= .001
+    return {'spanMM': round(millimeters, 3), 'status': 'NOMINAL_MODULE_MATCH' if fits else 'OFF_MODULE',
+            **({'fullBrickEquivalents': modules // 2, 'halfModuleRemainder': modules % 2,
+                'interiorJointEquivalents': (modules + 1) // 2 - 1} if fits else {})}
+
+
+def wall_coordination_checks(members, candidates, openings):
+    profiles = {row['id']: row['coordination'] for row in candidates if 'coordination' in row}
+    if not profiles:
+        return []
+    openings_by_host = defaultdict(list)
+    for opening in openings:
+        openings_by_host[opening['hostMemberId']].append(opening)
+    results = []
+    for wall in members.values():
+        candidate = wall['wallCseCandidateId']
+        if candidate not in profiles:
+            continue
+        profile = profiles[candidate]
+        row = dict(wallMemberId=wall['id'], cseCandidateId=candidate, profileDigest=profile['profileDigest'],
+                   faceBasis='AUTHORED_NOMINAL_WALL_FACES', bond='NOT_VERIFIED',
+                   lintels='NOT_VERIFIED', normativeApplicability='NOT_VERIFIED')
+        results.append(row)
+        if 'coordinationEnds' not in wall:
+            row.update(status='REFERENCE_FACES_REQUIRED', checks=[])
+            continue
+        ends = wall['coordinationEnds']
+        start = _wall_end_face(wall, members, 'fromCoordinate', ends['start'], sign=1)
+        end = _wall_end_face(wall, members, 'toCoordinate', ends['end'], sign=-1)
+        if end - start <= 1e-6:
+            raise ValueError('WALL_COORDINATION_EMPTY_FACE_SPAN:' + wall['id'])
+        checks = [dict(kind='WALL_FACE_SPAN', **_nominal_row(end - start, profile))]
+        cuts = []
+        for opening in openings_by_host[wall['id']]:
+            left = wall['fromCoordinate'] + opening['centerOffset'] - opening['width'] / 2
+            right = left + opening['width']
+            if left < start - 1e-6 or right > end + 1e-6:
+                raise ValueError('OPENING_OUTSIDE_COORDINATED_WALL_FACES:' + opening['id'])
+            sill = opening['sillHeight']
+            head = sill + opening['height']
+            for key, level in [('SILL', sill), ('HEAD', head)]:
+                mm = round(level * 1000)
+                status = ('NOMINAL_MODULE_MATCH' if mm % profile['courseModuleMM'] == 0
+                          and abs(level * 1000 - mm) <= .001 else 'OFF_MODULE')
+                checks.append(dict(kind=key, openingId=opening['id'], levelMM=level * 1000, status=status))
+            cuts.append((left, right, sill, head))
+        levels = sorted({level for _, _, sill, head in cuts for level in (sill, head)})
+        for low, high in pairwise(levels):
+            active = sorted((left, right) for left, right, sill, head in cuts if sill < high and head > low)
+            if not active:
+                continue
+            left_edges = [start] + [right for _, right in active]
+            right_edges = [left for left, _ in active] + [end]
+            for left, right in zip(left_edges, right_edges):
+                if right - left > 1e-6:
+                    checks.append(dict(kind='PIER_CLEAR_WIDTH', bandM=[low, high],
+                                       **_nominal_row(right - left, profile)))
+        row.update(status=('DESIGN_MODULE_MATCH' if all(c['status'] == 'NOMINAL_MODULE_MATCH' for c in checks)
+                           else 'DESIGN_MODULE_CONFLICT'), wallFaceRangeM=[start, end],
+                   endReferences=dict(ends), checks=checks)
+    return results
 
 
 def native_binding_signature(context,guids):
@@ -14,9 +130,12 @@ def native_binding_signature(context,guids):
     return RUN.digest([{'element':elements[g.lower()],'bodySignature':bodies.get(g.lower())} for g in guids])
 
 
-def compile_normative_pack(brief,project_pack,context,requirements,junctions):
+def compile_normative_pack(brief,project_pack,context,requirements,junctions,*,design_coordination=None):
     doc=BRIEF.normalize(brief)
-    if project_pack.get('projectId')!=doc['projectId'] or context.get('units')!='m' or context.get('coordinateSystem')!='ABSOLUTE_PROJECT_XYZ':
+    if (project_pack.get('projectId') != doc['projectId']
+            or (context is None and (not design_coordination or junctions))
+            or (context is not None and (context.get('units') != 'm'
+                                        or context.get('coordinateSystem') != 'ABSOLUTE_PROJECT_XYZ'))):
         raise ValueError('NORMATIVE_PROJECT_OR_NATIVE_CONTEXT_MISMATCH')
     if not isinstance(requirements,dict) or set(requirements)-{'jurisdiction','projectFacts','cseFacts','requestedEditions'}:
         raise ValueError('NORMATIVE_REQUIREMENTS_FIELDS_INVALID')
@@ -32,7 +151,7 @@ def compile_normative_pack(brief,project_pack,context,requirements,junctions):
     jurisdiction=jurisdiction_input.get('evidenceUri')
     facts=requirements.get('projectFacts',{});systems=requirements.get('cseFacts',{});editions=requirements.get('requestedEditions',{})
     if any(not isinstance(v,dict) for v in (facts,systems,editions)):raise ValueError('NORMATIVE_FACT_MAPS_REQUIRED')
-    elements={e['guid'].lower():e for e in context['elements'].values()};rows=[];seen=set()
+    elements={e['guid'].lower():e for e in (context or {}).get('elements', {}).values()};rows=[];seen=set()
     for target in junctions:
         if target['id'] in seen:raise ValueError('DUPLICATE_NORMATIVE_JUNCTION')
         seen.add(target['id']);guids=[g.lower() for g in target['guids']]
@@ -73,10 +192,14 @@ def compile_normative_pack(brief,project_pack,context,requirements,junctions):
     result={'schema':'APA_PROJECT_NORMATIVE_BINDINGS_V1','projectId':doc['projectId'],'nativeWriteCalls':0,
         'jurisdiction':copy.deepcopy(requirements.get('jurisdiction')),'registry':registry,
         'projectPackInputDigest':RUN.digest(project_pack),'briefInputDigest':RUN.digest(doc),
-        'nativeContextDigest':RUN.digest(context),'requirementsDigest':RUN.digest(requirements),
+        'nativeContextDigest':RUN.digest(context) if context is not None else None,
+        'requirementsDigest':RUN.digest(requirements),
         'junctionInputDigest':RUN.digest(junctions),'bindings':rows,
         'status':'SOURCE_LINKED_REQUIREMENTS_WITH_EXPLICIT_NOT_VERIFIED',
         'engineeringAcceptance':'ENGINEERING_NOT_VERIFIED'}
+    if design_coordination:
+        result['designCoordination'] = copy.deepcopy(design_coordination)
+        result['designEvaluation'] = 'NOMINAL_DIMENSIONS_CHECKED_NATIVE_AND_ENGINEERING_PENDING'
     result['normativePackDigest']=RUN.digest(result)
     return result
 

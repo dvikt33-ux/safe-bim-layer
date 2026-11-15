@@ -7,14 +7,21 @@ story indices, and feed existing archicad_bim_graph.compile_graph/SceneWriter.
 """
 from __future__ import annotations
 
-from collections import Counter
+from collections import Counter, defaultdict, deque
 import copy
 import math
 
 import archicad_semantic_brief as BRIEF
+from archicad_project_library_pack import WALL_ROLES
 
 SCHEMA="apa-authored-spatial-layout/1"
+LAYOUT_FIELDS = {"schemaVersion", "outline", "rooms", "axes", "bearingLines", "loadPaths"}
 EPS=1e-6
+LOAD_BEARING = "LoadBearingElement"
+NON_LOAD_BEARING = "NonLoadBearingElement"
+STRUCTURAL_FUNCTIONS = {LOAD_BEARING, NON_LOAD_BEARING}
+WALL_FIELDS = {"id", "storyId", "axisId", "fromCoordinate", "toCoordinate",
+               "wallThicknessMeters", "cseCandidateId"}
 
 
 def number(value, field):
@@ -44,6 +51,275 @@ def overlap_area(a,b):
         0,min(a["yMax"],b["yMax"])-max(a["yMin"],b["yMin"]))
 
 
+def access_path(criterion, openings):
+    """Find a path through doors and, when provided, connected free-space components."""
+    source, destination = criterion["from"], criterion["to"]
+    width = criterion.get("minimumOpeningWidthM", 0.0)
+    links = defaultdict(list)
+
+    def room(node):
+        return node[0] if isinstance(node, tuple) else node
+
+    for edge in sorted(openings, key=lambda row: row["id"]):
+        if "connects" not in edge or (edge["kind"] == "DOOR" and edge["width"] + EPS < width):
+            continue
+        a, b = edge["connects"]
+        if BRIEF.EXTERIOR in (room(a), room(b)) and source != BRIEF.EXTERIOR:
+            continue
+        links[a].append((b, edge["id"]))
+        links[b].append((a, edge["id"]))
+    starts = sorted(node for node in links if room(node) == source)
+    pending = deque((node, []) for node in starts)
+    seen = set(starts)
+    while pending:
+        node, path = pending.popleft()
+        if room(node) == destination:
+            return path
+        for neighbor, edge_id in links[node]:
+            if neighbor not in seen:
+                seen.add(neighbor)
+                pending.append((neighbor, path + [edge_id]))
+    return []
+
+
+def wall_footprint(wall):
+    from shapely.geometry import box
+
+    c, a, b = wall["constantCoordinate"], wall["fromCoordinate"], wall["toCoordinate"]
+    half = wall["thicknessMeters"] / 2
+    return box(c - half, a, c + half, b) if wall["direction"] == "X" else box(a, c - half, b, c + half)
+
+
+def clear_room_surfaces(geometry, floors, stairs):
+    """Horizontal floor allocated to each named room, minus modeled obstructions."""
+    from shapely.geometry import box
+    from shapely.ops import unary_union
+
+    obstacles = defaultdict(list)
+    for wall in geometry["bearingLines"]:
+        obstacles[wall["storyId"]].append(("native-" + wall["id"], wall_footprint(wall)))
+    for stair in stairs:
+        for story in (stair["lowerStoryId"], stair["upperStoryId"]):
+            obstacles[story].append((stair["stairOperationId"], box(*stair["flightBounds"])))
+    clear, operations = {}, {}
+    for room in geometry["rooms"]:
+        story = room["storyId"]
+        bounds = room["rectangle"]
+        extent = box(bounds["xMin"], bounds["yMin"], bounds["xMax"], bounds["yMax"])
+        surface = extent.intersection(floors[story]) if story in floors else extent
+        deductions = [(sid, shape) for sid, shape in obstacles[story] if extent.intersects(shape)]
+        clear[room["id"]] = surface.difference(unary_union([shape for _, shape in deductions]))
+        operations[room["id"]] = ["native-slab-" + story, *[sid for sid, _ in deductions]]
+    return clear, operations
+
+
+def clear_access_path(criterion, geometry, surfaces, stairs, first_story):
+    """Connect eroded room components using clear approaches to doors and landings."""
+    from shapely import get_parts
+    from shapely.geometry import Point, box
+
+    width = criterion["minimumClearWidthM"]
+    radius = width / 2
+    parts = {room: sorted((p for p in get_parts(surface.buffer(-radius))
+                          if p.geom_type == "Polygon" and not p.is_empty),
+                          key=lambda p: p.bounds) for room, surface in surfaces.items()}
+    rooms = {row["id"]: row for row in geometry["rooms"]}
+    walls = {row["id"]: row for row in geometry["bearingLines"]}
+    wall_shapes = {wid: wall_footprint(row) for wid, row in walls.items()}
+    entry = criterion.get("entryStoryId", first_story)
+    edges = {}
+
+    def component(room, x, y):
+        point = Point(x, y)
+        return next(((room, i) for i, polygon in enumerate(parts[room]) if polygon.covers(point)), None)
+
+    def approach(room, wall, center):
+        if room == BRIEF.EXTERIOR:
+            return (room, 0) if wall["storyId"] == entry else None
+        axes = wall["direction"].lower()
+        coordinate = wall["constantCoordinate"]
+        side = 1 if abs(rooms[room]["rectangle"][axes + "Min"] - coordinate) <= EPS else -1
+        face = coordinate + side * wall["thicknessMeters"] / 2
+        inside = face + side * (radius + 8 * EPS)
+        a, b = sorted((face, inside))
+        apron = (box(a, center - radius, b, center + radius) if axes == "x"
+                 else box(center - radius, a, center + radius, b))
+        if not surfaces[room].buffer(EPS).covers(apron):
+            return None
+        return component(room, inside, center) if axes == "x" else component(room, center, inside)
+
+    for door in geometry["openings"]:
+        if "connects" not in door or door["width"] + EPS < width:
+            continue
+        wall = walls[door["hostMemberId"]]
+        center = wall["fromCoordinate"] + door["centerOffset"]
+        c, half = wall["constantCoordinate"], wall["thicknessMeters"] / 2
+        throat = (box(c - half, center - radius, c + half, center + radius) if wall["direction"] == "X"
+                  else box(center - radius, c - half, center + radius, c + half))
+        if any(walls[wid]["storyId"] == wall["storyId"] and wid != wall["id"]
+               and shape.intersection(throat).area > EPS ** 2
+               for wid, shape in wall_shapes.items()):
+            continue
+        nodes = [approach(room, wall, center) for room in door["connects"]]
+        if all(node is not None for node in nodes):
+            sid = "native-opening-" + door["id"]
+            edges[sid] = dict(id=sid, sourceId=door["id"], kind="DOOR", width=door["width"], connects=nodes)
+
+    for stair in stairs:
+        landings = stair.get("landingRooms", [])
+        if not landings or stair["widthM"] + EPS < width or stair["dimensionsMeetProjectLimits"] is False:
+            continue
+        nodes = []
+        for landing in landings:
+            xmin, ymin, xmax, ymax = landing["bounds"]
+            nodes.append(component(landing["roomId"], (xmin + xmax) / 2, (ymin + ymax) / 2))
+        if all(node is not None for node in nodes):
+            sid = stair["stairOperationId"]
+            edges[sid] = dict(id=sid, sourceId=stair["requirementId"], kind="STAIR", width=stair["widthM"], connects=nodes)
+
+    path = access_path(criterion, edges.values())
+    return [dict(bimOperationId=sid, sourceId=edges[sid]["sourceId"], kind=edges[sid]["kind"],
+                 rooms=[node[0] for node in edges[sid]["connects"]]) for sid in path]
+
+
+def check_geometry_requirements(doc, geometry, floors, stairs, requirements):
+    """Check only explicitly requested clear areas and route widths."""
+    selected = [row for row in requirements if row.get("criterion", {}).get("kind") == "ROOM_CLEAR_AREA"
+                or "minimumClearWidthM" in row.get("criterion", {})]
+    if not selected:
+        return
+    surfaces, operations = clear_room_surfaces(geometry, floors, stairs)
+    first_story = doc["stories"][0]["id"]
+    for row in selected:
+        criterion = row["criterion"]
+        if criterion["kind"] == "ROOM_CLEAR_AREA":
+            room = criterion["roomId"]
+            area = surfaces[room].area
+            passed = area + EPS >= criterion["minimumAreaM2"]
+            row.update(status="DESIGN_CHECKED" if passed else "CONFLICT",
+                       reason="ROOM_CLEAR_AREA_MEETS_TARGET" if passed else "ROOM_CLEAR_AREA_BELOW_TARGET",
+                       measurement=dict(valueM2=round(area, 6), basis="AUTHORED_FLOOR_MINUS_WALLS_AND_STAIR_FLIGHT"),
+                       designObjectIds=[room], bimOperationIds=operations[room])
+            continue
+        path = clear_access_path(criterion, geometry, surfaces, stairs, first_story)
+        rooms = dict.fromkeys(room for step in path for room in step["rooms"] if room != BRIEF.EXTERIOR)
+        dependencies = list(dict.fromkeys([step["bimOperationId"] for step in path]
+                                         + [op for room in rooms for op in operations[room]]))
+        row.update(status="DESIGN_CHECKED" if path else "MISSING",
+                   reason="CLEAR_PATH_IN_AUTHORED_GEOMETRY" if path else "NO_CLEAR_PATH_IN_AUTHORED_GEOMETRY",
+                   measurement=dict(requiredWidthM=criterion["minimumClearWidthM"],
+                                    basis="CIRCULAR_FOOTPRINT_IN_AUTHORED_HORIZONTAL_CLEAR_SPACE"),
+                   route=path, designObjectIds=[step["sourceId"] for step in path], bimOperationIds=dependencies)
+
+
+def design_checks(doc, outline, rooms, members, passages):
+    """Trace authored geometry to source IDs without assigning BIM or code approval."""
+    room_by_id = {row["id"]: row for row in rooms}
+    member_by_id = {row["id"]: row for row in members}
+    envelope_area = (outline["xMax"] - outline["xMin"]) * (outline["yMax"] - outline["yMin"])
+    balance = []
+    for story in doc["stories"]:
+        sid = story["id"]
+        assigned = sum((row["rectangle"]["xMax"] - row["rectangle"]["xMin"])
+                       * (row["rectangle"]["yMax"] - row["rectangle"]["yMin"])
+                       for row in rooms if row["storyId"] == sid)
+        balance.append(dict(storyId=sid, outlineAreaM2=envelope_area, roomRectangleSumM2=assigned,
+                            unclassifiedAreaM2=max(0, envelope_area - assigned)))
+    measures = {
+        "ROOM_RECTANGLE_SUM": dict(valueM2=sum(row["roomRectangleSumM2"] for row in balance),
+                                   basis="SUM_OF_NONOVERLAPPING_AUTHORED_ROOM_RECTANGLES"),
+        **{key: dict(valueM2=None, basis="MEASUREMENT_METHOD_OR_EVIDENCE_REQUIRED")
+           for key in BRIEF.AREA_METRICS if key != "ROOM_RECTANGLE_SUM"},
+    }
+    if not isinstance(passages, list) or len(passages) > 100:
+        raise ValueError("INVALID_AUTHORED_PASSAGES")
+    openings, visited = [], set()
+    host_openings = defaultdict(list)
+    for row in passages:
+        fields = {"id", "kind", "hostMemberId", "centerOffset", "width", "height", "sillHeight"}
+        if (not isinstance(row, dict) or not fields <= row.keys()
+                or row.keys() - fields - {"connects"} or row["kind"] not in ("DOOR", "WINDOW")):
+            raise ValueError("INVALID_AUTHORED_PASSAGE")
+        oid = BRIEF._id(row["id"], "PASSAGE_ID")
+        if oid in visited or row["hostMemberId"] not in member_by_id:
+            raise ValueError("UNKNOWN_PASSAGE_HOST_OR_DUPLICATE_ID")
+        visited.add(oid)
+        wall = member_by_id[row["hostMemberId"]]
+        offset, width, height, sill = (number(row[key], "PASSAGE_" + key.upper())
+                                     for key in ("centerOffset", "width", "height", "sillHeight"))
+        half = width / 2
+        start = wall["fromCoordinate"] + offset - half
+        end = start + width
+        if (width <= 0 or height <= 0 or sill < 0
+                or start < wall["fromCoordinate"] - EPS or end > wall["toCoordinate"] + EPS):
+            raise ValueError("PASSAGE_OUTSIDE_STRAIGHT_HOST")
+        if any(min(end, prev_end) - max(start, prev_start) > EPS
+               and min(sill + height, prev_top) - max(sill, prev_sill) > EPS
+               for prev_start, prev_end, prev_sill, prev_top in host_openings[wall["id"]]):
+            raise ValueError("PASSAGES_OVERLAP_ON_HOST")
+        host_openings[wall["id"]].append((start, end, sill, sill + height))
+        if "connects" in row:
+            pair = row["connects"]
+            if (row["kind"] != "DOOR" or sill != 0 or not isinstance(pair, list) or len(pair) != 2
+                    or any(not isinstance(item, str) for item in pair) or pair[0] == pair[1]
+                    or set(pair) - room_by_id.keys() - {BRIEF.EXTERIOR}):
+                raise ValueError("INVALID_FUNCTIONAL_DOOR_CONNECTION")
+            fixed, along = ("x", "y") if wall["direction"] == "X" else ("y", "x")
+            coordinate = wall["constantCoordinate"]
+            sides = []
+            for space in pair:
+                outside = space == BRIEF.EXTERIOR
+                box = outline if outside else room_by_id[space]["rectangle"]
+                boundaries = [side for side in ("Min", "Max") if abs(box[fixed + side] - coordinate) <= EPS]
+                if (len(boundaries) != 1 or start < box[along + "Min"] - EPS
+                        or end > box[along + "Max"] + EPS
+                        or not outside and room_by_id[space]["storyId"] != wall["storyId"]):
+                    raise ValueError("DOOR_DOES_NOT_CROSS_DECLARED_ROOM_BOUNDARIES")
+                if outside:
+                    sides.append("Max" if boundaries[0] == "Min" else "Min")
+                else:
+                    sides.extend(boundaries)
+            if len(set(sides)) != 2:
+                raise ValueError("DOOR_ROOMS_MUST_BE_ON_OPPOSITE_SIDES")
+        openings.append(dict(row, storyId=wall["storyId"], centerOffset=offset,
+                             width=width, height=height, sillHeight=sill))
+
+    checks = []
+    for row in doc["constraints"]:
+        criterion = row.get("criterion")
+        kind = criterion["kind"] if criterion else None
+        finding = dict(status="UNVERIFIED", reason="TYPED_CRITERION_REQUIRED",
+                       designObjectIds=[], bimOperationIds=[])
+        if kind == "AREA_TARGET":
+            measure = measures[criterion["metric"]]
+            finding.update(measurement=measure, reason="MATCHING_AREA_MEASUREMENT_REQUIRED")
+            if measure["valueM2"] is not None:
+                delta = measure["valueM2"] - criterion["targetM2"]
+                matched = abs(delta) <= criterion["toleranceM2"] + EPS
+                finding.update(status="DESIGN_CHECKED" if matched else "CONFLICT",
+                               reason="AREA_WITHIN_TOLERANCE" if matched else "AREA_OUTSIDE_TOLERANCE",
+                               deltaM2=delta, designObjectIds=list(room_by_id))
+        if kind in ("ENTRANCE", "ROOM_CONNECTION"):
+            pair = {criterion["from"], criterion["to"]}
+            matches = [x["id"] for x in openings if set(x.get("connects", [])) == pair]
+            finding.update(status="DESIGN_CHECKED" if matches else "MISSING",
+                           reason="EXPLICIT_HOSTED_CONNECTION" if matches else "HOSTED_CONNECTION_REQUIRED",
+                           designObjectIds=matches)
+        if kind == "ACCESS_PATH":
+            if "minimumClearWidthM" in criterion:
+                finding.update(reason="AUTHORED_FLOOR_AND_CLEAR_APPROACH_CHECK_REQUIRED")
+            else:
+                path = access_path(criterion, openings)
+                finding.update(status="DESIGN_CHECKED" if path else "MISSING",
+                               reason="EXPLICIT_HOSTED_DOOR_PATH" if path else "HOSTED_DOOR_PATH_REQUIRED",
+                               designObjectIds=path)
+        if kind == "STAIR_LINK":
+            finding.update(status="MISSING", reason="SOURCE_BOUND_STAIR_AND_SLAB_VOID_REQUIRED")
+        checks.append(dict({"priority": "UNSPECIFIED", "sourceRef": "brief.constraints#" + row["id"]},
+                           **row) | finding)
+    return dict(requirements=checks, openings=openings, areaMeasures=measures, areaBalance=balance)
+
+
 def compile_spatial(brief,pack,layout):
     """Return proof-carrying spatial facts; ALWAYS no-native-writes and not engineered."""
     doc=BRIEF.normalize(brief)
@@ -63,8 +339,7 @@ def compile_spatial(brief,pack,layout):
     if (slab.get("engineeringApproved") is not False or
             slab.get("detailApproved") is not False):
         raise ValueError("UNTRUSTED_SELF_APPROVED_CSE")
-    if (not isinstance(layout,dict) or set(layout)!={
-            "schemaVersion","outline","rooms","axes","bearingLines","loadPaths"} or
+    if (not isinstance(layout,dict) or not LAYOUT_FIELDS <= set(layout) <= LAYOUT_FIELDS | {"passages"} or
             layout["schemaVersion"]!=SCHEMA):
         raise ValueError("SPATIAL_LAYOUT_SCHEMA_MISMATCH")
     outline=rectangle(layout["outline"],"OUTLINE")
@@ -120,9 +395,8 @@ def compile_spatial(brief,pack,layout):
         raise ValueError("AUTHORED_BEARING_LINES_REQUIRED")
     members={}
     for line in lines:
-        if not isinstance(line,dict) or set(line)!={
-                "id","storyId","axisId","fromCoordinate","toCoordinate",
-                "wallThicknessMeters","cseCandidateId"}:
+        if (not isinstance(line,dict) or not WALL_FIELDS <= line.keys()
+                <= WALL_FIELDS | {"structuralFunction", "coordinationEnds"}):
             raise ValueError("BEARING_LINE_SCHEMA")
         mid=BRIEF._id(line["id"],"BEARING_LINE_ID")
         sid=line["storyId"]
@@ -132,7 +406,29 @@ def compile_spatial(brief,pack,layout):
         start=number(line["fromCoordinate"],"BEARING_START")
         end=number(line["toCoordinate"],"BEARING_END")
         thick=number(line["wallThicknessMeters"],"WALL_THICKNESS")
-        if not .15<=thick<=.6 or end-start<1.0:
+        wall_cse = line["cseCandidateId"]
+        selected = None
+        structural = line.get("structuralFunction")
+        if "structuralFunction" in line and (not isinstance(structural, str) or structural not in STRUCTURAL_FUNCTIONS):
+            raise ValueError("AUTHORED_WALL_STRUCTURAL_FUNCTION_INVALID:" + mid)
+        if wall_cse is not None:
+            matching = [c for c in candidates if isinstance(c, dict) and c.get("id") == wall_cse
+                        and c.get("role") in WALL_ROLES]
+            if len(matching) != 1:
+                raise ValueError("BEARING_WALL_CSE_ROLE_NOT_MATCHED")
+            selected = matching[0]
+            if sid not in selected["storyIds"] or abs(thick - selected["thicknessMeters"]) > EPS:
+                raise ValueError("WALL_CSE_STORY_OR_THICKNESS_MISMATCH:" + mid)
+            assigned = {"internal-partition": NON_LOAD_BEARING,
+                        "internal-bearing-wall": LOAD_BEARING}.get(selected["role"])
+            if assigned is not None:
+                if structural is not None and structural != assigned:
+                    raise ValueError("WALL_CSE_STRUCTURAL_FUNCTION_MISMATCH:" + mid)
+                structural = assigned
+        thin_partition = selected is not None and structural == NON_LOAD_BEARING
+        minimum = .05 if thin_partition else .15
+        maximum = 1.5 if selected is not None else .6
+        if not minimum <= thick <= maximum or end-start < (EPS if thin_partition else 1.0):
             raise ValueError("INVALID_AUTHORED_WALL_ENVELOPE")
         lower=outline["yMin" if axis["direction"]=="X" else "xMin"]
         upper=outline["yMax" if axis["direction"]=="X" else "xMax"]
@@ -150,13 +446,6 @@ def compile_spatial(brief,pack,layout):
                 "yMin" if axis["direction"]=="X" else "xMin"]+EPS
             for r in rooms.values()):
             raise ValueError("BEARING_LINE_NOT_ON_AUTHORED_ROOM_BOUNDARY")
-        wall_cse=line["cseCandidateId"]
-        if wall_cse is not None:
-            matching=[c for c in candidates if isinstance(c,dict) and
-                      c.get("id")==wall_cse and c.get("role") in {
-                          "external-wall","internal-partition"}]
-            if len(matching)!=1:
-                raise ValueError("BEARING_WALL_CSE_ROLE_NOT_MATCHED")
         members[mid]={"id":mid,"storyId":sid,"axisId":axis["id"],
                       "direction":axis["direction"],
                       "constantCoordinate":axis["coordinate"],
@@ -164,6 +453,16 @@ def compile_spatial(brief,pack,layout):
                       "thicknessMeters":thick,
                       "wallCseCandidateId":wall_cse,
                       "structuralApproval":"UNVERIFIED"}
+        if structural is not None:
+            members[mid]["structuralFunction"] = structural
+        if "coordinationEnds" in line:
+            if selected is None or "coordination" not in selected:
+                raise ValueError("WALL_ENDS_REQUIRE_COORDINATION_PROFILE:" + mid)
+            ends = line["coordinationEnds"]
+            if (not isinstance(ends, dict) or ends.keys() != {"start", "end"}
+                    or any(not isinstance(end, str) or not end for end in ends.values())):
+                raise ValueError("WALL_COORDINATION_ENDS_INVALID:" + mid)
+            members[mid]["coordinationEnds"] = dict(ends)
     # Overlapping collinear native walls are not a valid plan.
     seq=list(members.values())
     for i,a in enumerate(seq):
@@ -187,6 +486,8 @@ def compile_spatial(brief,pack,layout):
         lower=members.get(link["lowerMemberId"])
         if upper is None or lower is None or upper["id"]==lower["id"]:
             raise ValueError("LOAD_PATH_UNKNOWN_SUPPORT")
+        if NON_LOAD_BEARING in (upper.get("structuralFunction"), lower.get("structuralFunction")):
+            raise ValueError("LOAD_PATH_CANNOT_INCLUDE_NON_LOAD_BEARING_WALL")
         pair=(upper["id"],lower["id"])
         if pair in visited:
             raise ValueError("DUPLICATE_LOAD_PATH")
@@ -204,6 +505,7 @@ def compile_spatial(brief,pack,layout):
                       "forceTransferProved":False})
     unlinked=[x["id"] for x in members.values()
               if mapping[x["storyId"]]>0 and
+              x.get("structuralFunction") != NON_LOAD_BEARING and
               not any(z["upperMemberId"]==x["id"] for z in links)]
     cse_missing=[x["id"] for x in members.values() if x["wallCseCandidateId"] is None]
     unresolved=pack.get("missingCriticalConditionIds",[])
@@ -211,13 +513,18 @@ def compile_spatial(brief,pack,layout):
         raise ValueError("CSE_UNRESOLVED_CONDITIONS_UNAVAILABLE")
     slab_stories=set(slab.get("storyIds",[]))
     missing_slabs=sorted(story_ids-slab_stories)
+    design = design_checks(doc, outline, vals, seq, layout.get("passages", []))
+    from archicad_normative_bindings import wall_coordination_checks
+
+    coordination = wall_coordination_checks(members, candidates, design["openings"])
     return {
         "status":"AUTHORED_SPATIAL_GEOMETRY_CHECKED_ENGINEERING_PENDING",
         "schemaVersion":SCHEMA,"projectId":doc["projectId"],
         "sourcePackStatus":pack["status"],
         "outline":outline,
         "rooms":vals,"axes":list(by_axis.values()),
-        "bearingLines":seq,"loadPaths":links,
+        "bearingLines":seq,"loadPaths":links,**design,
+        **({"wallCoordination": coordination} if coordination else {}),
         "floorSlabCseCandidateId":slab["id"],
         "floorSlabCandidateStoryIds":sorted(slab_stories),
         "unresolvedWallCseMemberIds":cse_missing,
@@ -228,7 +535,10 @@ def compile_spatial(brief,pack,layout):
         "bimEmissionAuthorized":False,
         "engineeringApproved":False,"normativeApproved":False,
         "nativeWriteCalls":0,
-        "summary":{"roomCount":len(vals),"authoredBearingLineCount":len(seq),
+        "summary":{"roomCount":len(vals),"authoredBearingLineCount":sum(
+                       m.get("structuralFunction") != NON_LOAD_BEARING for m in seq),
+                   "authoredNonLoadBearingWallCount":sum(
+                       m.get("structuralFunction") == NON_LOAD_BEARING for m in seq),
                    "alignedCandidateLoadPathCount":len(links),
                    "perStoryRoomCount":dict(Counter(x["storyId"] for x in vals))}
     }
@@ -244,9 +554,8 @@ def relocate_authored_xy(layout, dx, dy):
     """
     delta_x=number(dx,"TRANSLATION_X")
     delta_y=number(dy,"TRANSLATION_Y")
-    if not isinstance(layout,dict) or set(layout)!={
-            "schemaVersion","outline","rooms","axes","bearingLines","loadPaths"
-            } or layout["schemaVersion"]!=SCHEMA:
+    if (not isinstance(layout,dict) or not LAYOUT_FIELDS <= set(layout) <= LAYOUT_FIELDS | {"passages"}
+            or layout["schemaVersion"]!=SCHEMA):
         raise ValueError("AUTHORED_LAYOUT_REQUIRED_FOR_TRANSLATION")
     copied=copy.deepcopy(layout)
     def add(obj,key,delta):

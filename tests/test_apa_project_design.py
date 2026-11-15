@@ -1,0 +1,521 @@
+from copy import deepcopy
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import unittest
+from unittest.mock import patch
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+import apa_project_design as design
+import apa_r03_architecture as architecture
+from apa_r03_mailbox import authored_source
+import archicad_project_accelerator as core
+import archicad_native_stair_connection as stairs
+from test_archicad_isolated_authored_execution import IsolatedNative
+
+
+INPUT = ROOT / "examples/accelerator/r04-project-design.json"
+
+
+class DesignTests(unittest.TestCase):
+    def setUp(self):
+        self.input = json.loads(INPUT.read_text(encoding="utf-8"))
+
+    def study(self):
+        row = self.input.pop("variants")[0]
+        self.input["layoutStudy"] = {
+            "outline": row["layout"]["outline"], "storyHeights": row["storyHeights"],
+            "wallThicknessMeters": .2, "door": {"width": .9, "height": 2.1},
+        }
+        return self.input
+
+    def test_layout_study_compiles_brief_without_explicit_room_geometry(self):
+        intent = self.study()
+        brief = intent["brief"]
+        brief["rooms"].insert(0, dict(id="study", name="Кабинет", storyId="level-1", minAreaM2=6))
+        brief["constraints"].append(dict(id="access-to-living", text="Путь снаружи в гостиную",
+            evidenceStatus="UNVERIFIED", priority="REQUIRED", sourceRef="ТЗ §4", criterion=dict(
+                kind="ACCESS_PATH", **{"from": "$outside", "to": "living"}, minimumOpeningWidthM=.8)))
+        report = design.compile_design(intent)
+        self.assertEqual(report["generation"]["status"], "CANDIDATES_GENERATED")
+        self.assertEqual([row["id"] for row in report["variants"]], ["strip-x", "strip-y"])
+        self.assertFalse(report["executionPermission"])
+        for variant in report["variants"]:
+            self.assertEqual(variant["status"], "DESIGN_CHECKS_REVIEWABLE")
+            candidate = variant["candidate"]
+            operations = {op["id"]: op for op in candidate["graph"]["operations"]}
+            self.assertEqual(candidate["plannedNativeCommands"], {"CreateSlabs": 1, "CreateWalls": 6, "CreateDoors": 2})
+            self.assertEqual(set(candidate["authoredRoomIds"]), {"hall", "living", "study"})
+            evidence = {row["id"]: row for row in candidate["requirements"]}
+            self.assertEqual(evidence["access-to-living"]["sourceRef"], "ТЗ §4")
+            self.assertEqual(len(evidence["access-to-living"]["bimOperationIds"]), 2)
+            self.assertTrue(all(operations[op]["command"] == "CreateDoors"
+                                for op in evidence["access-to-living"]["bimOperationIds"]))
+            self.assertEqual(evidence["gross-area"]["status"], "UNVERIFIED")
+            self.assertEqual(candidate["nativeWriteCalls"], 0)
+        self.assertNotEqual(report["variants"][0]["layout"], report["variants"][1]["layout"])
+
+    def test_generated_layout_can_be_selected_and_compared_in_existing_workflow(self):
+        initial = self.study()
+        initial["brief"].update(mode="ADAPT_EXISTING", targetProjectPath=core.RUN.APPROVED_ISOLATED_WRITER_PATH)
+        authored = design.select_variant(initial, "strip-x")
+        self.assertEqual(authored["brief"], initial["brief"])
+        self.assertEqual(authored["layout"], design.compile_design(initial)["variants"][0]["layout"])
+        changed = deepcopy(initial)
+        changed["layoutStudy"]["door"]["width"] = 1.0
+        impact = design.changes_between(initial, changed, "strip-x")
+        self.assertIn("requirement:front-door", impact["affected"])
+        self.assertIn("review:sections", impact["affected"])
+
+    def test_layout_study_reports_infeasible_footprint_and_keeps_unknown_requirements(self):
+        intent = self.study()
+        outline = intent["layoutStudy"]["outline"]
+        original = outline.copy()
+        outline.update(xMax=2, yMax=3)
+        report = design.compile_design(intent)
+        self.assertEqual(report["generation"]["status"], "NO_STRIP_LAYOUT_CANDIDATE")
+        self.assertEqual(report["variants"], [])
+        self.assertEqual(report["brief"]["constraints"], intent["brief"]["constraints"])
+        self.assertFalse(report["executionPermission"])
+
+        outline.update(original)
+        intent["brief"]["constraints"].append(dict(id="wide-access", text="Нужен проход шириной 1 м",
+            evidenceStatus="UNVERIFIED", priority="REQUIRED", sourceRef="ТЗ §4", criterion=dict(
+                kind="ACCESS_PATH", **{"from": "$outside", "to": "living"}, minimumOpeningWidthM=1)))
+        report = design.compile_design(intent)
+        self.assertTrue(all(row["status"] == "REQUIREMENTS_OPEN" for row in report["variants"]))
+        self.assertTrue(all(row["candidate"]["requiredOpenIds"] == ["wide-access"] for row in report["variants"]))
+
+    def test_explicit_entrance_stays_linked_and_gross_area_remains_unknown(self):
+        first, second = design.compile_design(self.input)["variants"]
+        self.assertEqual(first["status"], "DESIGN_CHECKS_REVIEWABLE")
+        candidate = first["candidate"]
+        self.assertEqual(candidate["plannedNativeCommands"],
+                         {"CreateSlabs": 1, "CreateWalls": 5, "CreateDoors": 2, "CreateWindows": 1})
+        evidence = {row["id"]: row for row in candidate["requirements"]}
+        self.assertEqual(evidence["front-door"]["bimOperationIds"], ["native-opening-entry-door"])
+        self.assertEqual(evidence["front-door"]["sourceRef"], "Исходное задание §1")
+        self.assertEqual(evidence["gross-area"]["status"], "UNVERIFIED")
+        self.assertIsNone(evidence["gross-area"]["measurement"]["valueM2"])
+        self.assertEqual(candidate["areaMeasures"]["ROOM_RECTANGLE_SUM"]["valueM2"], 48)
+        self.assertEqual(candidate["storyBindings"], [])
+        self.assertFalse(candidate["liveWriteAuthorized"])
+        self.assertEqual(second["candidate"]["requiredOpenIds"], ["front-door"])
+
+    def test_comparable_areas_and_missing_stair_cannot_be_promoted(self):
+        brief = self.input["brief"]
+        gross = brief["constraints"][-1]
+        gross["criterion"].update(metric="ROOM_RECTANGLE_SUM", targetM2=43)
+        gross["priority"] = "REQUIRED"
+        brief["stories"].append(dict(id="level-2", label="2 этаж", level=3))
+        brief["constraints"].append(dict(id="stairs", text="Межэтажная лестница",
+            priority="REQUIRED", sourceRef="ТЗ §4", evidenceStatus="UNVERIFIED",
+            criterion=dict(kind="STAIR_LINK", lowerStoryId="level-1", upperStoryId="level-2")))
+        for variant in self.input["variants"]:
+            variant["storyHeights"]["level-2"] = 3
+        self.input["cseCandidate"]["storyIds"].append("level-2")
+        candidate = design.compile_design(self.input)["variants"][0]["candidate"]
+        facts = {row["id"]: row for row in candidate["requirements"]}
+        self.assertEqual(facts["gross-area"]["status"], "CONFLICT")
+        self.assertEqual(facts["gross-area"]["deltaM2"], 5)
+        self.assertEqual(facts["stairs"]["status"], "MISSING")
+        self.assertEqual(set(candidate["requiredOpenIds"]), {"gross-area", "stairs"})
+
+    def stair_design(self):
+        intent = self.input
+        brief = intent["brief"]
+        brief["stories"].append(dict(id="level-2", label="2 этаж", level=3))
+        brief["rooms"].append(dict(id="bedroom", name="Спальня", storyId="level-2", minAreaM2=10))
+        brief["constraints"].append(dict(id="stairs", text="Лестница на второй этаж",
+            priority="REQUIRED", sourceRef="ТЗ §4", evidenceStatus="UNVERIFIED",
+            criterion=dict(kind="STAIR_LINK", lowerStoryId="level-1", upperStoryId="level-2")))
+        intent["cseCandidate"]["storyIds"].append("level-2")
+        row = intent["variants"][0]
+        intent["variants"] = [row]
+        row["storyHeights"]["level-2"] = 3
+        row["layout"]["rooms"].append(dict(roomId="bedroom", storyId="level-2",
+            rectangle=dict(xMin=0, xMax=3, yMin=0, yMax=6)))
+        row["layout"]["bearingLines"].extend(
+            dict(member, id=member["id"] + "-upper", storyId="level-2")
+            for member in list(row["layout"]["bearingLines"]) if member["id"] != "wall-east")
+        outer = [dict(x=x, y=y) for x, y in [(0, 0), (8, 0), (8, 6), (0, 6)]]
+        hole = [dict(x=x, y=y) for x, y in [(5, 1), (5, 5), (6, 5), (6, 1)]]
+        row["floorPlans"] = {"level-1": dict(polygonCoordinates=outer, holes=[]),
+                             "level-2": dict(polygonCoordinates=outer, holes=[dict(polygonCoordinates=hole)])}
+        row["stairLinks"] = [dict(requirementId="stairs", source=dict(ref="Чертёж Л-1", sha256="a" * 64),
+                                 favoriteName="Любимая лестница", start=dict(x=5, y=1), stepCount=16,
+                                 widthM=1, goingM=.25, lowerLandingDepthM=.8, upperLandingDepthM=.8)]
+        return intent, row
+
+    def test_stair_design_links_requirement_flight_and_both_slabs_in_bim_graph(self):
+        intent, row = self.stair_design()
+        result = design.compile_design(intent)["variants"][0]
+        self.assertEqual(result["status"], "REQUIREMENTS_OPEN")
+        plan = result["candidate"]
+        requirement = next(req for req in plan["requirements"] if req["id"] == "stairs")
+        self.assertEqual(requirement["status"], "PARTIAL")
+        self.assertEqual(requirement["sourceRef"], "ТЗ §4")
+        self.assertEqual(requirement["bimOperationIds"], ["native-stair-stairs", "native-slab-level-1", "native-slab-level-2"])
+        self.assertIn("stairs", plan["requiredOpenIds"])
+        operations = {op["id"]: op for op in plan["graph"]["operations"]}
+        stair = operations["native-stair-stairs"]
+        self.assertEqual(stair["command"], "CreateStairs")
+        self.assertEqual(stair["after"], requirement["bimOperationIds"][1:])
+        order = plan["executionOrder"]
+        self.assertTrue(all(order.index(slab) < order.index(stair["id"]) for slab in stair["after"]))
+        self.assertEqual(stair["params"]["stairsData"][0]["riserHeight"], 3 / 16)
+        self.assertTrue(core.RUN.compare_polygon(row["floorPlans"]["level-2"]["holes"][0]["polygonCoordinates"],
+            operations["native-slab-level-2"]["params"]["slabsData"][0]["holes"][0]["polygonCoordinates"]))
+        self.assertEqual(plan["stairConnections"][0]["source"], row["stairLinks"][0]["source"])
+        self.assertEqual(plan["stairConnections"][0]["nativeConnection"], "NOT_TESTED")
+        self.assertEqual(plan["nativeWriteCalls"], 0)
+        with self.assertRaisesRegex(ValueError, "REQUIRED_CHECKS_OPEN"):
+            design.select_variant(intent, "variant-a")
+
+    def test_stair_rejects_missing_opening_and_missing_solid_landing(self):
+        intent, row = self.stair_design()
+        holes = row["floorPlans"]["level-2"]["holes"]
+        hole = holes.pop()
+        result = design.compile_design(intent)["variants"][0]
+        self.assertEqual(result["reason"], "STAIR_FLIGHT_REQUIRES_MATCHING_UPPER_SLAB_VOID")
+        for point in hole["polygonCoordinates"]:
+            if point["y"] == 5:
+                point["y"] = 5.4
+        holes.append(hole)
+        result = design.compile_design(intent)["variants"][0]
+        self.assertEqual(result["reason"], "STAIR_UPPER_LANDING_REQUIRES_SOLID_SLAB")
+
+    def test_stair_checks_wall_thickness_beyond_the_wall_axis(self):
+        intent, row = self.stair_design()
+        row["stairLinks"][0]["start"]["x"] = 3.1
+        ring = row["floorPlans"]["level-2"]["holes"][0]["polygonCoordinates"]
+        for point in ring:
+            point["x"] -= 1.9
+        result = design.compile_design(intent)["variants"][0]
+        self.assertEqual(result["reason"], "STAIR_FLIGHT_OR_LANDING_INTERSECTS_WALL: wall-mid")
+
+    def test_stair_preference_stays_out_of_native_preflight(self):
+        intent, _ = self.stair_design()
+        intent["brief"].update(mode="ADAPT_EXISTING", targetProjectPath=core.RUN.APPROVED_ISOLATED_WRITER_PATH)
+        intent["brief"]["constraints"][-1]["priority"] = "PREFERENCE"
+        self.assertEqual(design.compile_design(intent)["variants"][0]["status"], "DESIGN_CHECKS_REVIEWABLE")
+        with self.assertRaisesRegex(ValueError, "STAIR_LINK_NATIVE_BINDING_AND_READBACK_REQUIRED"):
+            design.select_variant(intent, "variant-a")
+
+    def test_stair_reservations_reject_a_void_shared_by_two_flights(self):
+        intent, row = self.stair_design()
+        intent["brief"]["constraints"].append(dict(intent["brief"]["constraints"][-1], id="other-stair"))
+        row["stairLinks"].append(dict(row["stairLinks"][0], requirementId="other-stair"))
+        result = design.compile_design(intent)["variants"][0]
+        self.assertEqual(result["reason"], "STAIR_UPPER_SLAB_VOID_ALREADY_ASSIGNED")
+
+    def test_stair_changes_propagate_to_sections_and_its_requirement(self):
+        before, _ = self.stair_design()
+        changed = deepcopy(before)
+        row = changed["variants"][0]
+        row["stairLinks"][0]["start"]["x"] += .2
+        for point in row["floorPlans"]["level-2"]["holes"][0]["polygonCoordinates"]:
+            point["x"] += .2
+        impact = design.changes_between(before, changed, "variant-a")
+        self.assertIn("bim:native-stair-stairs", impact["changed"])
+        self.assertIn("bim:native-slab-level-2", impact["changed"])
+        self.assertIn("requirement:stairs", impact["affected"])
+        self.assertIn("review:sections", impact["affected"])
+
+    def test_two_storey_house_clears_named_routes_areas_and_stair_dimensions(self):
+        source = INPUT.with_name("r07-two-storey-house.json")
+        intent = architecture.read(source)
+        candidate = design.compile_design(intent)["variants"][0]["candidate"]
+        facts = {row["id"]: row for row in candidate["requirements"]}
+        self.assertEqual(candidate["requiredOpenIds"], ["stair-required"])
+        self.assertEqual(facts["living-area"]["measurement"]["valueM2"], 35.89)
+        self.assertEqual(facts["stair-hall-area"]["measurement"]["valueM2"], 20.31)
+        route = facts["bedroom-route"]
+        self.assertEqual(route["status"], "DESIGN_CHECKED")
+        self.assertEqual([step["kind"] for step in route["route"]], ["DOOR", "DOOR", "STAIR", "DOOR"])
+        self.assertIn("native-stair-stair-required", route["bimOperationIds"])
+        self.assertIn("native-slab-level-2", route["bimOperationIds"])
+        stair = candidate["stairConnections"][0]
+        brief = source.with_name(stair["source"]["ref"])
+        self.assertEqual(stair["source"]["sha256"], hashlib.sha256(brief.read_bytes()).hexdigest())
+        self.assertTrue(stair["dimensionsMeetProjectLimits"])
+        self.assertEqual(stair["headroom"], "UNVERIFIED")
+
+        narrowed = deepcopy(intent)
+        layout = narrowed["variants"][0]["layout"]
+        next(row for row in layout["axes"] if row["id"] == "axis-hall")["coordinate"] = 403.5
+        for room in layout["rooms"]:
+            for key in ("xMin", "xMax"):
+                if room["rectangle"][key] == 403:
+                    room["rectangle"][key] = 403.5
+        self.assertEqual(layout["passages"], intent["variants"][0]["layout"]["passages"])
+        changes = design.changes_between(intent, narrowed, "house-a")
+        self.assertTrue({"requirement:bedroom-route", "review:facades", "review:sections",
+                         "review:documentation"} <= set(changes["affected"]))
+        variant = design.compile_design(narrowed)["variants"][0]["candidate"]
+        outcome = next(row for row in variant["requirements"] if row["id"] == "bedroom-route")
+        self.assertEqual(outcome["reason"], "NO_CLEAR_PATH_IN_AUTHORED_GEOMETRY")
+        self.assertTrue(variant["stairConnections"][0]["dimensionsMeetProjectLimits"])
+
+    def test_stair_limits_and_clear_room_targets_affect_working_requirements(self):
+        intent = architecture.read(INPUT.with_name("r07-two-storey-house.json"))
+        requirements = {row["id"]: row["criterion"] for row in intent["brief"]["constraints"]}
+        requirements["stair-required"]["limits"]["maximumRiserM"] = .14
+        requirements["living-area"]["minimumAreaM2"] = 36
+        candidate = design.compile_design(intent)["variants"][0]["candidate"]
+        facts = {row["id"]: row for row in candidate["requirements"]}
+        self.assertEqual(facts["stair-required"]["status"], "CONFLICT")
+        self.assertFalse(facts["stair-required"]["measurement"]["maximumRiserM"]["meetsProjectLimit"])
+        self.assertEqual(facts["entry-route"]["status"], "DESIGN_CHECKED")
+        self.assertEqual(facts["bedroom-route"]["status"], "MISSING")
+        self.assertEqual(facts["living-area"]["reason"], "ROOM_CLEAR_AREA_BELOW_TARGET")
+
+    def test_stair_readback_reuses_native_connection_and_reports_solver_drift(self):
+        intent, row = self.stair_design()
+        candidate = design.compile_design(intent)["variants"][0]["candidate"]
+        native_indices = {"level-1": 3, "level-2": 4}
+        guids = {slot: f"00000000-0000-4000-8000-{i:012d}"
+                 for i, slot in enumerate(("stair", "lowerSlab", "upperSlab"), 1)}
+        layouts = row["floorPlans"]
+        def read(command, params):
+            self.assertEqual(command, "GetDetailsOfElements")
+            lower = params["elements"][0]["elementId"]["guid"] == guids["lowerSlab"]
+            floor, level, story = (3, 0, "level-1") if lower else (4, 3, "level-2")
+            return {"detailsOfElements": [dict(type="Slab", floorIndex=floor, details=dict(
+                level=0, zCoordinate=level, thickness=.2, polygonOutline=layouts[story]["polygonCoordinates"],
+                holes=layouts[story]["holes"]))]}
+        proof = dict(status="NATIVE_STAIR_SLAB_CONNECTION_GEOMETRY_PASS",
+                     sourceGoingAcceptance="PASS", lowerSlabSurfaceContacts=[{"sharedAreaSquareMeters": .2}],
+                     lowerSlabVolumeCollisions=[], stair=dict(bounds=dict(xMin=5, xMax=6, yMin=1, yMax=5),
+                     nativePartCounts={"stairRisers": 16}))
+        with patch.object(stairs, "connection_readback", return_value=proof) as native:
+            result = stairs.verify_planned_connection(read, candidate, "stairs", guids, native_indices)
+            self.assertEqual(result["status"], "NATIVE_STAIR_PLAN_GEOMETRY_MATCH")
+            self.assertEqual(result["requirement"]["sourceRef"], "ТЗ §4")
+            self.assertEqual(result["bimOperationGuids"]["native-slab-level-2"], guids["upperSlab"])
+            self.assertEqual(native.call_args.args[2]["floorIndex"], 3)
+            proof["sourceGoingAcceptance"] = "NOT_VERIFIED_NATIVE_SOLVER_CHANGED_GOING"
+            result = stairs.verify_planned_connection(read, candidate, "stairs", guids, native_indices)
+            self.assertIn("STAIR_NATIVE_GOING_CHANGED", result["openChecks"])
+            self.assertEqual(result["status"], "NATIVE_STAIR_PLAN_PARTIAL")
+            layouts["level-2"]["holes"].clear()
+            with self.assertRaisesRegex(ValueError, "SLAB_HOLE_READBACK_COUNT_MISMATCH"):
+                stairs.verify_planned_connection(read, candidate, "stairs", guids, native_indices)
+
+    def test_stair_cli_refuses_unpinned_copy_before_native_read(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            folder = Path(temporary)
+            project = folder / "changed.pln"
+            project.write_bytes(b"different saved bytes")
+            command = [sys.executable, "-B", "-X", "utf8", "-m", "apa", "design-stair-readback",
+                       "--intent", INPUT, "--variant", "variant-a", "--requirement", "stairs",
+                       "--bindings", folder / "unused.json", "--project", project,
+                       "--project-sha256", "0" * 64, "--port", "19723", "--output", folder / "report.json"]
+            result = subprocess.run(command, cwd=ROOT, capture_output=True, encoding="utf-8", timeout=30)
+            self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
+            self.assertEqual(json.loads(result.stderr)["reason"], "STAIR_READBACK_EXACT_PLN_AND_NEW_OUTPUT_REQUIRED")
+            self.assertFalse((folder / "report.trace").exists())
+
+    def test_wrong_room_on_entrance_is_rejected_and_other_variant_is_kept(self):
+        self.input["variants"][0]["layout"]["passages"][0]["connects"] = ["$outside", "living"]
+        first, second = design.compile_design(self.input)["variants"]
+        self.assertEqual(first["status"], "INVALID_VARIANT")
+        self.assertEqual(first["reason"], "DOOR_DOES_NOT_CROSS_DECLARED_ROOM_BOUNDARIES")
+        self.assertEqual(second["status"], "REQUIREMENTS_OPEN")
+
+    def test_change_tracks_opening_host_and_documents(self):
+        changed = deepcopy(self.input)
+        row = changed["variants"][0]["layout"]
+        row["rooms"][0]["rectangle"]["xMax"] = 3.5
+        row["rooms"][1]["rectangle"]["xMin"] = 3.5
+        row["axes"][1]["coordinate"] = 3.5
+        impact = design.changes_between(self.input, changed, "variant-a")
+        self.assertIn("room:hall", impact["changed"])
+        self.assertIn("bim:native-opening-hall-door", impact["affected"])
+        self.assertIn("requirement:hall-living", impact["affected"])
+        self.assertIn("review:sections", impact["affected"])
+
+    def test_selected_variant_uses_original_writer_and_native_readback_ids(self):
+        for drift in (False, True):
+            with self.subTest(final_door_readback_drift=drift), tempfile.TemporaryDirectory() as folder:
+                data = deepcopy(self.input)
+                brief = data["brief"]
+                path = core.RUN.APPROVED_ISOLATED_WRITER_PATH
+                brief.update(mode="ADAPT_EXISTING", targetProjectPath=path)
+                brief["stories"][0]["existingNativeLabel"] = "Первый Этаж"
+                with self.assertRaisesRegex(ValueError, "REQUIRED_CHECKS_OPEN"):
+                    design.select_variant(data, "variant-b")
+                intent = design.select_variant(data, "variant-a")
+                native = IsolatedNative()
+                inventories = 0
+                root = Path(folder)
+                ledger = root / "ledger"
+                ledger.mkdir()
+
+                def transport(command, params):
+                    nonlocal inventories
+                    observed = native(command, params)
+                    if command == "GetAllElements" and len(native.created) == 9:
+                        inventories += 1
+                    if drift and command == "GetDetailsOfElements" and inventories:
+                        guid = params["elements"][0]["elementId"]["guid"]
+                        kind, source = native.created[guid]
+                        if kind == "CreateDoors" and source["doorsData"][0]["width"] == 1.0:
+                            observed["detailsOfElements"][0]["details"]["width"] = 1.25
+                    return observed
+
+                with (patch.object(core.RUN, "EXPECTED_PATH", path),
+                      patch.object(core.RUN, "EXPECTED_NAME", "APA_Isolated_Writer_Test_01")):
+                    args = (intent, core.RUN.DEFAULT_SCENE_SCHEMA)
+                    plan = core.run_project(*args, root / "plan", ledger, "preflight", transport)
+                    self.assertEqual(plan["status"], "READY_FOR_EXPLICIT_TEST_RUN", plan)
+                    result = core.run_project(*args, root / "run", ledger, "execute", transport,
+                                              "r04-unit-test", plan["confirmPlanHash"])
+                feedback = {row["requirementId"]: row for row in result["requirementReadback"]}
+                self.assertEqual(len(result["addedGuids"]), 9, result)
+                self.assertEqual(feedback["front-door"]["text"], "Вход снаружи в холл")
+                self.assertEqual(feedback["front-door"]["sourceRef"], "Исходное задание §1")
+                self.assertEqual(feedback["front-door"]["priority"], "REQUIRED")
+                self.assertEqual(feedback["front-door"]["criterion"],
+                                 {"kind": "ENTRANCE", "from": "$outside", "to": "hall"})
+                self.assertEqual(feedback["front-door"]["evidenceStatus"], "UNVERIFIED")
+                self.assertEqual(feedback["gross-area"]["nativeReadback"], "NO_LINKED_BIM_OPERATIONS")
+                if drift:
+                    self.assertEqual(result["status"], "PARTIAL_OR_UNKNOWN_OUTCOME", result)
+                    self.assertEqual(feedback["front-door"]["nativeReadback"], "MISMATCH")
+                else:
+                    self.assertEqual(result["status"], "COMPLETE_UNSAVED", result)
+                    self.assertEqual(feedback["front-door"]["nativeReadback"], "LINKED_ELEMENTS_READ_BACK")
+                self.assertIn(feedback["front-door"]["operations"]["native-opening-entry-door"]["guid"],
+                              result["addedGuids"])
+
+    def test_selected_variant_is_staged_on_a_distinct_copy_and_write_needs_exact_grant(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder).resolve()
+            job = root / "r03-authored-test"
+            donor = root / "donor.pln"
+            donor.write_bytes(b"untouched donor fixture")
+            brief = self.input["brief"]
+            brief.update(mode="ADAPT_EXISTING", targetProjectPath=str(job / "model" / architecture.MODEL))
+            brief["stories"][0]["existingNativeLabel"] = "Первый Этаж"
+            intent = root / "authored.json"
+            architecture.write_new_json(intent, design.select_variant(self.input, "variant-a"))
+            with (patch.object(architecture.group, "accepted_baseline", return_value=({}, [])),
+                  patch.object(architecture.group, "fingerprint", return_value="fixture-brep")):
+                m = architecture.stage(job, intent, 19723, donor, architecture.sha256(donor), root / "trace")
+            scratch = Path(m["project"])
+            self.assertFalse(scratch.samefile(donor))
+            self.assertEqual(architecture.sha256(scratch), architecture.sha256(donor))
+            self.assertEqual(m["authoredCommands"], ["CreateDoors", "CreateSlabs", "CreateWalls", "CreateWindows"])
+            architecture.write_new_json(job / "approved-preflight.json", {"fixture": True})
+            with (patch.object(architecture, "status", return_value={"status": "READY_FOR_EXPLICIT_TEST_RUN"}),
+                  patch.object(architecture, "bind") as bind):
+                with self.assertRaisesRegex(ValueError, "AUTHORED_EXACT_PREFLIGHT_GRANT_REQUIRED"):
+                    architecture.execute(job, m, ("revision", "identity"), confirm_preflight="wrong")
+                bind.assert_not_called()
+            self.assertFalse((job / "attempted.json").exists())
+            self.assertFalse(Path(str(scratch) + ".apa-write.lock").exists())
+
+    def test_two_storey_variant_stays_bound_to_the_same_template_floors(self):
+        source = INPUT.with_name("r06-two-storey-design.json")
+        design_source = architecture.read(source)
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder).resolve()
+            job = root / "r03-two-storey-test"
+            donor = root / "donor.pln"
+            donor.write_bytes(b"fixture")
+            native = IsolatedNative()
+            stories = native("GetStories", {})
+            dump = {"stories": [dict(index=row["index"], elevation=row["level"], nativeStoryName=row["name"])
+                                for row in stories["stories"]]}
+            trace = root / "trace.jsonl"
+            trace.write_text(json.dumps(dict(command="GetStories", response=stories)) + "\n", encoding="utf-8")
+            with (patch.object(architecture.group, "accepted_baseline", return_value=(dump, [])),
+                  patch.object(architecture.group, "fingerprint", return_value="fixture-brep")):
+                staged = architecture.stage(job, source, 19723, donor, architecture.sha256(donor), trace,
+                                            variant_id="two-storeys")
+            selected = architecture.read(job / "intent.json")
+            bound = staged["authoredStoryBindings"]
+            self.assertEqual([(row["nativeIndex"], row["floorId"], row["nativeLabel"]) for row in bound],
+                             [(0, 1, "Первый Этаж"), (1, 2, "")])
+            authored_source(design_source, staged["project"], selected, "two-storeys")
+            changed = deepcopy(design_source)
+            changed["brief"]["stories"][1]["existingNativeIndex"] = 1
+            with self.assertRaisesRegex(ValueError, "REQUIRES_UNBOUND_DESIGN|EXPLICIT_NATIVE_STORY_IDENTITY_REQUIRED"):
+                authored_source(changed, staged["project"], selected, "two-storeys")
+
+            def drifted(command, params):
+                response = native(command, params)
+                if command == "GetStories":
+                    response["stories"][1]["floorId"] = 9
+                return response
+
+            output = root / "preflight"
+            ledger = root / "ledger"
+            with (patch.object(core.RUN, "EXPECTED_PATH", staged["project"]),
+                  patch.object(core.RUN, "EXPECTED_NAME", Path(staged["project"]).stem),
+                  patch.object(core.RUN, "authorized_authored_target", return_value=True)):
+                preflight = core.run_project(selected, architecture.SCHEMA, output, ledger,
+                                             mode="preflight", transport=native)
+                self.assertEqual(preflight["status"], "READY_FOR_EXPLICIT_TEST_RUN", preflight)
+                self.assertEqual(preflight["authoredStoryBindings"], bound)
+                args = dict(mode="execute", run_id=job.name, confirm_hash=preflight["confirmPlanHash"])
+                refused = core.run_project(selected, architecture.SCHEMA, root / "drift", ledger,
+                                           transport=drifted, **args)
+                self.assertEqual(refused["status"], "BLOCKED", refused)
+                self.assertEqual(refused["modelWriteAttempts"], 0)
+                self.assertFalse(ledger.exists())
+                ledger.mkdir()
+                result = core.run_project(selected, architecture.SCHEMA, root / "model", ledger,
+                                          transport=native, **args)
+                self.assertEqual(result["status"], "COMPLETE_UNSAVED", result)
+                self.assertEqual(len(result["addedGuids"]), 17)
+                self.assertEqual(list(result["bimHomeStories"].values()).count(1), 8)
+                upper_door = result["bimOperationReadback"]["native-opening-hall-door-upper"]["guid"]
+                self.assertEqual(result["bimHomeStories"][upper_door], 1)
+
+    def test_access_path_tracks_both_doors_and_detects_insufficient_width(self):
+        self.input["brief"]["constraints"].append(dict(id="access-to-living", text="Путь в гостиную",
+            evidenceStatus="UNVERIFIED", priority="REQUIRED", sourceRef="ТЗ §4", criterion=dict(
+                kind="ACCESS_PATH", **{"from": "$outside", "to": "living"}, minimumOpeningWidthM=.8)))
+        before = deepcopy(self.input)
+        result = design.compile_design(before)["variants"][0]["candidate"]
+        req = next(row for row in result["requirements"] if row["id"] == "access-to-living")
+        self.assertEqual(req["bimOperationIds"], ["native-opening-entry-door", "native-opening-hall-door"])
+        self.input["variants"][0]["layout"]["passages"][1]["width"] = .75
+        after = design.compile_design(self.input)["variants"][0]
+        self.assertEqual(after["status"], "REQUIREMENTS_OPEN")
+        self.assertEqual(after["candidate"]["requiredOpenIds"], ["access-to-living"])
+        impact = design.changes_between(before, self.input, "variant-a")
+        self.assertIn("requirement:access-to-living", impact["affected"])
+
+    def test_openings_with_overlapping_footprints_or_excess_height_are_rejected(self):
+        layout = self.input["variants"][0]["layout"]
+        door = layout["passages"][0]
+        duplicate = dict(door, id="overlapping-door", centerOffset=door["centerOffset"]+.2)
+        layout["passages"].append(duplicate)
+        invalid = design.compile_design(self.input)["variants"][0]
+        self.assertEqual(invalid["reason"], "PASSAGES_OVERLAP_ON_HOST")
+        layout["passages"].pop()
+        layout["passages"][2]["height"] = 2.8
+        invalid = design.compile_design(self.input)["variants"][0]
+        self.assertEqual(invalid["reason"], "PASSAGE_EXCEEDS_STORY_HEIGHT")
+
+    def test_cli_reads_utf8_request_without_claiming_interpretation(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            source, result = root / "request.txt", root / "result.json"
+            source.write_text("Нужен вход из холла в гостиную.", encoding="utf-8")
+            process = subprocess.run([sys.executable, "-B", "-X", "utf8", "-m", "apa",
+                                      "design-request", "--source", source, "--output", result],
+                                     cwd=ROOT, text=True, encoding="utf-8", capture_output=True, timeout=40)
+            self.assertEqual(process.returncode, 0, process.stderr)
+            document = json.loads(result.read_text(encoding="utf-8"))
+            self.assertEqual(document["status"], "GPT_INTERPRETATION_REQUIRED")
+            self.assertEqual(document["sourceText"], source.read_text(encoding="utf-8"))
+            self.assertFalse(document["executionPermission"])

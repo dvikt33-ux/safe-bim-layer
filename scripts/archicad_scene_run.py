@@ -127,6 +127,8 @@ def native_plan_hash(preview, graph_hash):
         binding['nativeLibraryExpectations']=preview['nativeLibraryExpectations']
     if preview.get('integrationBindings'):
         binding['integrationBindings']=preview['integrationBindings']
+    if len(preview.get('storyBindings') or []) > 1:
+        binding['storyBindings'] = preview['storyBindings']
     return digest(binding)
 
 
@@ -211,6 +213,25 @@ def guarded_project_for_read(api):
                  "level": s["level"], "label": s.get("name") or s.get("uName") or ""}
                 for s in sorted(stories, key=lambda s: s["index"])
             ]}
+
+
+def guarded_scene_project(api, required_story=None, *, allow_3d_view_for_write=False):
+    if not allow_3d_view_for_write:
+        return guarded_project(api, required_story)
+    # The native BREP dump activates 3D. Only an exact, explicitly authorized
+    # saved copy can use this view, with the same pinned story-zero topology.
+    if _SAVED_COPY_AUTHORIZATION is None or not authorized_authored_target(EXPECTED_PATH):
+        raise ValueError("3D_WRITER_REQUIRES_EXACT_SAVED_COPY_AUTHORIZATION")
+    binding = guarded_project_for_read(api)
+    if binding["activeViewStoryIndex"] not in (0, -1):
+        raise ValueError("3D_WRITER_REQUIRES_3D_OR_STORY_ZERO")
+    first = next(story for story in binding["storyTopology"] if story["index"] == 0)
+    if required_story is not None and (
+            required_story["nativeIndex"] != 0 or required_story["floorId"] != first["floorId"]
+            or not close(required_story["level"], first["level"])
+            or required_story["label"] != first["label"]):
+        raise ValueError("3D_WRITER_NAMED_FIRST_STORY_MISMATCH")
+    return {key: binding[key] for key in ("path", "name", "port", "tapirVersion", "storyIndex")}
 
 
 def scan_for_existing_geometry(api, anchor_x, anchor_y, envelope=None):
@@ -651,22 +672,8 @@ class SceneWriter:
         return result
 
     def guarded_binding(self):
-        if not self.allow_3d_view_for_write:
-            return guarded_project(self.api, self.required_story)
-        # A native BREP dump regenerates the 3D view (actStory=-1). Under
-        # an EXACTLY hashed, explicitly authorized saved copy, permit only
-        # view 3D or the pinned first floor, not some other active story.
-        # This does not permit arbitrary PLN writes or bypass story topology.
-        if (self.required_story is not None or
-                _SAVED_COPY_AUTHORIZATION is None or
-                not authorized_authored_target(EXPECTED_PATH)):
-            raise ValueError('3D_WRITER_REQUIRES_EXACT_SAVED_COPY_AUTHORIZATION')
-        b = guarded_project_for_read(self.api)
-        if b['activeViewStoryIndex'] not in (0, -1):
-            raise ValueError('3D_WRITER_REQUIRES_3D_OR_STORY_ZERO')
-        return {'path':b['path'], 'name':b['name'],
-                'port':b['port'], 'tapirVersion':b['tapirVersion'],
-                'storyIndex':0}
+        return guarded_scene_project(self.api, self.required_story,
+            allow_3d_view_for_write=self.allow_3d_view_for_write)
 
     def verify_source_bindings(self,preflight):
         binding=preflight.get('integrationBindings',{}).get('dependencies',{}).get('sourceRoofTrimBinding')
@@ -834,6 +841,8 @@ class SceneWriter:
         if target is not None and target != binding["path"]:
             raise ValueError("AUTHORED_TARGET_DIFFERS_FROM_WRITER_BINDING")
         if bindings:
+            from archicad_semantic_brief import native_story_name
+
             stories = self.api("GetStories", {}).get("stories")
             if not isinstance(stories, list):
                 raise ValueError("STORY_MAP_UNAVAILABLE")
@@ -842,7 +851,7 @@ class SceneWriter:
                                r.get("index") == binding_row["nativeIndex"]), None)
                 if (not actual or actual.get("floorId") != binding_row["floorId"]
                         or not close(actual.get("level"), binding_row["level"])
-                        or (actual.get("name") or actual.get("uName") or "") != binding_row["label"]):
+                        or native_story_name(actual) != binding_row["label"]):
                     raise ValueError("UNVERIFIED_NAMED_STORY: " + binding_row["label"])
         if preview["schemaVersion"] != binding["tapirVersion"]:
             raise ValueError("TAPIR_SCHEMA_VERSION_MISMATCH")

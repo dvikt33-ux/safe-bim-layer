@@ -1,0 +1,31 @@
+{
+  "components": [
+    {
+      "anchor": {
+        "x": 400,
+        "y": 400
+      },
+      "id": "linked-shell",
+      "primitive": "building-shell-v1",
+      "specification": {
+        "depth": 6,
+        "roomBays": 2,
+        "slabBasicMaterialName": "Железобетон - Конструкционный",
+        "stories": [
+          {
+            "floorId": 1,
+            "label": "Первый Этаж",
+            "level": 0,
+            "nativeIndex": 0
+          }
+        ],
+        "storyHeight": 3,
+        "wallThickness": 0.3,
+        "width": 8
+      }
+    }
+  ],
+  "projectId": "r03-gpt-shell-e2e",
+  "schemaVersion": "archicad-project-intent/1",
+  "units": "meters"
+}

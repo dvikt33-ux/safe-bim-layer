@@ -24,6 +24,95 @@ def sample():
 
 
 class AuthoredNativePlanTests(unittest.TestCase):
+    def test_120mm_partition_pins_material_role_and_coordination_for_scene_writer(self):
+        from archicad_normative_bindings import _nominal_row, wall_coordination_profile
+        from test_archicad_project_library_pack import BM, BM_GUID
+
+        brick_name = 'Кирпич 1 НФ'
+        brick_guid = '11111111-1111-4111-8111-111111111111'
+        selection = {'profileId': 'ceramic-1nf-10-12', 'halfBrickUnitsAcross': 1}
+        partition = dict(specimen(), candidateId='brick-partition', role='internal-partition',
+                         thicknessMeters=.12, storyIds=['level-1'], coordination=selection,
+                         native={'attributeType': 'BuildingMaterial', 'name': brick_name,
+                                 'expectedProjectGuid': brick_guid})
+        b, geo = valid(), layout()
+        b['targetProjectPath'] = A.RUN.APPROVED_SCRATCH_PATH
+        geo['bearingLines'][0].update(cseCandidateId='brick-partition', wallThicknessMeters=.12,
+                                     toCoordinate=5.84, coordinationEnds={'start': '$wall-end', 'end': '$wall-end'})
+        geo['passages'] = [dict(id='door-check', kind='DOOR', hostMemberId='wall-west-first',
+                                centerOffset=3.05, width=.92, height=2.156, sillHeight=0)]
+
+        class Materials(NativeGetOnly):
+            def __call__(self, command, params):
+                if command == 'GetAttributesByType':
+                    self.calls.append(command)
+                    return {'attributes': [{'name': name, 'attributeId': {'guid': guid}}
+                                           for name, guid in ((BM, BM_GUID), (brick_name, brick_guid))]}
+                reply = super().__call__(command, params)
+                if command == 'GetProjectInfo':
+                    reply['projectPath'] = b['targetProjectPath']
+                return reply
+
+        native = Materials()
+        pack = A.compile_project_library_pack(b, [specimen(), partition], native)
+        with self.assertRaisesRegex(ValueError, 'LOAD_PATH_CANNOT_INCLUDE_NON_LOAD_BEARING_WALL'):
+            A.compile_authored_native_candidate(b, pack, geo, HEIGHTS, native)
+        geo['loadPaths'] = []
+        scoped = A.compile_authored_native_candidate(b, pack, geo, HEIGHTS, native)
+        wall = next(op for op in scoped['graph']['operations'] if op['id'] == 'native-wall-west-first')
+        self.assertEqual(wall['params']['wallsData'][0]['thickness'], .12)
+        self.assertEqual(wall['params']['wallsData'][0]['buildingMaterialId'], {'guid': brick_guid})
+        self.assertEqual(scoped['structuralFunctions'], {wall['id']: 'NonLoadBearingElement'})
+        self.assertEqual(scoped['projectLibraryPack']['normativePackDigest'], scoped['normative']['normativePackDigest'])
+        self.assertEqual(scoped['normative']['nativeContextDigest'], None)
+        checks = scoped['wallCoordination'][0]
+        self.assertEqual(checks['status'], 'DESIGN_MODULE_MATCH')
+        self.assertEqual([row['spanMM'] for row in checks['checks'] if row['kind'] == 'PIER_CLEAR_WIDTH'], [2590, 2330])
+
+        from archicad_authored_extension import resolve_structural_function
+
+        parameters = wall['params']['wallsData'][0]
+        roles = ('LoadBearingElement', 'NonLoadBearingElement')
+        definition = dict(isEditable=True, type='singleEnum', possibleEnumValues=[
+            {'enumValue': {'nonLocalizedValue': role, 'displayValue': role}} for role in roles])
+        actual = dict(parameters, geometryType='Straight', begThickness=.12, endThickness=.12,
+                      zCoordinate=scoped['storyBindings'][0]['level'])
+        observed_role = roles[1]
+
+        def readback(command, _):
+            if command == 'API.GetPropertyIds':
+                return {'properties': [{'propertyId': {'guid': brick_guid}}]}
+            if command == 'API.GetDetailsOfProperties':
+                return {'propertyDefinitions': [{'propertyDefinition': definition}]}
+            if command == 'GetPropertyValuesOfElements':
+                return {'propertyValuesForElements': [{'propertyValues': [{'propertyValue': {'value': observed_role}}]}]}
+            self.assertEqual(command, 'GetDetailsOfElements')
+            return {'detailsOfElements': [{'type': 'Wall', 'floorIndex': parameters['floorIndex'], 'details': actual}]}
+
+        scoped['structuralFunctionDefinition'] = resolve_structural_function(readback)
+        preview = A.AUTHORED_NATIVE.as_existing_scene_writer_preview(scoped)
+        self.assertEqual(preview['integrationBindings']['dependencies']['authoredWallSystems']['normativePackDigest'],
+                         scoped['normative']['normativePackDigest'])
+        proof = dict(normativePackDigest=scoped['normative']['normativePackDigest'],
+                     readback={wall['id']: dict(scoped['wallCseBindings'][wall['id']], guid=brick_guid)})
+        A.verify_authored_wall_systems(readback, dict(preview, authoredCandidate=scoped), proof)
+        observed_role = roles[0]
+        with self.assertRaisesRegex(ValueError, 'NATIVE_STRUCTURAL_FUNCTION_VALUE_MISMATCH'):
+            A.verify_authored_wall_systems(readback, dict(preview, authoredCandidate=scoped), proof)
+
+        profile = wall_coordination_profile(selection, .12)
+        for span, full, half, joints in [(770, 3, 0, 2), (1030, 4, 0, 3), (380, 1, 1, 1), (1160, 4, 1, 4)]:
+            row = _nominal_row(span / 1000, profile)
+            self.assertEqual((row['fullBrickEquivalents'], row['halfModuleRemainder'], row['interiorJointEquivalents']),
+                             (full, half, joints))
+        geo['passages'][0]['centerOffset'] = 1.275
+        with self.assertRaisesRegex(ValueError, 'WALL_COORDINATION_UNRESOLVED'):
+            A.compile_authored_native_candidate(b, pack, geo, HEIGHTS, native)
+        diagnostic = A.AUTHORED_NATIVE.compile_candidate(b, pack, geo, HEIGHTS, None, design_only=True)
+        self.assertIn({'kind': 'PIER_CLEAR_WIDTH', 'bandM': [0, 2.156], 'spanMM': 815.0, 'status': 'OFF_MODULE'},
+                      diagnostic['wallCoordination'][0]['checks'])
+        self.assertEqual(diagnostic['nativeWriteCalls'], 0)
+
     def test_actual_three_story_inventory_maps_only_two_authored_floors(self):
         b=valid()
         b["stories"][0].update({"existingNativeIndex":0,"existingFloorId":1})

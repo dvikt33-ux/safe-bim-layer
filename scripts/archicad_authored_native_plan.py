@@ -11,6 +11,7 @@ import copy
 import hashlib
 import math
 from pathlib import Path
+import re
 
 import archicad_semantic_spatial as SPATIAL
 import archicad_semantic_brief as BRIEF
@@ -21,15 +22,130 @@ import archicad_scene_run as RUN
 READS=frozenset({"GetProjectInfo","GetStories","GetAttributesByType"})
 
 
-def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junction_policy=None,floor_plans=None):
+def _compile_stair_links(links, doc, geometry, floors, operations):
+    """Plan straight +Y flights with an explicit left baseline and two landings."""
+    from shapely.geometry import Polygon, box
+
+    checks = {row["id"]: row for row in geometry["requirements"]
+              if row.get("criterion", {}).get("kind") == "STAIR_LINK"}
+    if not isinstance(links, list) or len(links) > len(checks):
+        raise ValueError("STAIR_LINKS_REQUIRE_DISTINCT_BRIEF_CRITERIA")
+    if links and not floors:
+        raise ValueError("STAIR_LINK_REQUIRES_AUTHORED_FLOOR_PLANS")
+    stories = {row["id"]: (ordinal, row["level"]) for ordinal, row in enumerate(doc["stories"])}
+    rooms = {row["id"]: row["rectangle"] for row in geometry["rooms"]}
+    fields = {"requirementId", "start", "stepCount", "widthM", "goingM", "favoriteName",
+              "source", "lowerLandingDepthM", "upperLandingDepthM"}
+    links_by_requirement, occupied_holes, reservations = {}, set(), []
+    eps = SPATIAL.EPS
+    for link in links:
+        if not isinstance(link, dict) or set(link) != fields:
+            raise ValueError("STAIR_LINK_INPUT_FIELDS_REQUIRED")
+        rid = BRIEF._id(link["requirementId"], "STAIR_REQUIREMENT_ID")
+        if rid not in checks or rid in links_by_requirement:
+            raise ValueError("STAIR_LINKS_REQUIRE_DISTINCT_BRIEF_CRITERIA")
+        source = link["source"]
+        if (not isinstance(source, dict) or set(source) != {"ref", "sha256"}
+                or not isinstance(source["ref"], str) or not source["ref"].strip()
+                or not isinstance(source["sha256"], str) or not re.fullmatch(r"[a-f0-9]{64}", source["sha256"])):
+            raise ValueError("STAIR_SOURCE_REFERENCE_AND_SHA256_REQUIRED")
+        name = BRIEF._name(link["favoriteName"], "STAIR_FAVORITE_NAME")
+        count, start = link["stepCount"], link["start"]
+        if type(count) is not int or not 2 <= count <= 200 or not isinstance(start, dict) or set(start) != {"x", "y"}:
+            raise ValueError("STAIR_FAVORITE_START_AND_STEP_COUNT_REQUIRED")
+        width, going, lower_depth, upper_depth = (SPATIAL.number(link[key], key) for key in
+            ("widthM", "goingM", "lowerLandingDepthM", "upperLandingDepthM"))
+        if min(width, going, lower_depth, upper_depth) <= eps:
+            raise ValueError("STAIR_FLIGHT_AND_LANDINGS_REQUIRE_POSITIVE_DIMENSIONS")
+        x, y = (SPATIAL.number(start[key], "STAIR_START_" + key) for key in ("x", "y"))
+        right, end = x + width, y + count * going
+        bounds = geometry["outline"]
+        if not (bounds["xMin"] <= x < right <= bounds["xMax"]
+                and bounds["yMin"] <= y - lower_depth < y < end < end + upper_depth <= bounds["yMax"]):
+            raise ValueError("STAIR_FLIGHT_OR_LANDING_OUTSIDE_LAYOUT")
+        criterion = checks[rid]["criterion"]
+        lower, upper = criterion["lowerStoryId"], criterion["upperStoryId"]
+        index, level = stories[lower]
+        height = stories[upper][1] - level
+        lower_landing, upper_landing = box(x, y - lower_depth, right, y), box(x, end, right, end + upper_depth)
+        if not floors[lower].buffer(eps).covers(lower_landing):
+            raise ValueError("STAIR_LOWER_LANDING_REQUIRES_SOLID_SLAB")
+        if not floors[upper].buffer(eps).covers(upper_landing):
+            raise ValueError("STAIR_UPPER_LANDING_REQUIRES_SOLID_SLAB")
+        flight = box(x, y, right, end)
+        hole_index = next((i for i, ring in enumerate(floors[upper].interiors)
+                           if Polygon(ring).buffer(eps).covers(flight)), None)
+        if hole_index is None:
+            raise ValueError("STAIR_FLIGHT_REQUIRES_MATCHING_UPPER_SLAB_VOID")
+        hole_key = upper, hole_index
+        if hole_key in occupied_holes:
+            raise ValueError("STAIR_UPPER_SLAB_VOID_ALREADY_ASSIGNED")
+        reserves = {lower: box(x, y - lower_depth, right, end), upper: box(x, y, right, end + upper_depth)}
+        if any(shape.intersection(prior[story]).area > eps ** 2
+               for prior in reservations for story, shape in reserves.items() if story in prior):
+            raise ValueError("STAIR_FLIGHT_OR_LANDING_INTERSECTS_ANOTHER_STAIR")
+        for wall in geometry["bearingLines"]:
+            reserve = reserves.get(wall["storyId"])
+            if reserve is None:
+                continue
+            if SPATIAL.wall_footprint(wall).intersection(reserve).area > eps ** 2:
+                raise ValueError("STAIR_FLIGHT_OR_LANDING_INTERSECTS_WALL: " + wall["id"])
+        landings = []
+        if "lowerRoomId" in criterion:
+            for key, shape in (("lowerRoomId", lower_landing), ("upperRoomId", upper_landing)):
+                room_id = criterion[key]
+                room = rooms[room_id]
+                room_shape = box(room["xMin"], room["yMin"], room["xMax"], room["yMax"])
+                if not room_shape.buffer(eps).covers(shape):
+                    raise ValueError("STAIR_LANDING_OUTSIDE_DECLARED_ROOM: " + room_id)
+                landings.append(dict(roomId=room_id, bounds=list(shape.bounds)))
+        occupied_holes.add(hole_key)
+        reservations.append(reserves)
+
+        measures = {"minimumWidthM": width, "minimumGoingM": going, "maximumRiserM": height / count,
+                    "minimumLandingDepthM": min(lower_depth, upper_depth)}
+        dimension_checks = {}
+        for key, limit in criterion.get("limits", {}).items():
+            measured = measures[key]
+            passed = measured <= limit + eps if key == "maximumRiserM" else measured + eps >= limit
+            dimension_checks[key] = dict(limitM=limit, measuredM=measured, meetsProjectLimit=passed)
+        sid = "native-stair-" + rid
+        if len(sid) > 64:
+            sid = "native-stair-" + hashlib.sha256(rid.encode("ascii")).hexdigest()[:40]
+        slabs = ["native-slab-" + story for story in (lower, upper)]
+        operation = BUILD.step(sid, "CreateStairs", dict(favoriteName=name, floorIndex=index,
+            zCoordinate=level, totalHeight=height, baseLinePoints=[dict(x=x, y=y), dict(x=x, y=end)],
+            flightWidth=width, stepNum=count, riserHeight=height / count, treadDepth=going, finishVisible=False))
+        operation["after"] = slabs
+        operations.append(operation)
+        links_by_requirement[rid] = dict(requirementId=rid, stairOperationId=sid,
+            lowerSlabOperationId=slabs[0], upperSlabOperationId=slabs[1], upperSlabHoleIndex=hole_index,
+            lowerStoryId=lower, upperStoryId=upper, flightBounds=list(flight.bounds),
+            widthM=width, landingRooms=landings, dimensionChecks=dimension_checks,
+            dimensionsMeetProjectLimits=(all(check["meetsProjectLimit"] for check in dimension_checks.values())
+                                         if dimension_checks else None),
+            source=copy.deepcopy(source), sourceStatus="DECLARED", flightLengthM=count * going,
+            lowerLandingDepthM=lower_depth, upperLandingDepthM=upper_depth,
+            nativeConnection="NOT_TESTED", headroom="UNVERIFIED", engineeringApproval="UNVERIFIED")
+    return links_by_requirement
+
+
+def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junction_policy=None,
+                      floor_plans=None,stair_links=None,design_only=False):
     """Native-schema validated single DAG, but never executable by this adapter."""
-    if not callable(read_api):
+    if not design_only and not callable(read_api):
         raise ValueError("EXPLICIT_READ_ONLY_NATIVE_SOURCE_REQUIRED")
+    if stair_links is not None and not design_only:
+        raise ValueError("STAIR_LINK_NATIVE_BINDING_AND_READBACK_REQUIRED")
     def api(cmd,params):
         if cmd not in READS:
             raise ValueError("READ_ONLY_API_COMMAND_DENIED")
         return read_api(cmd,params)
     geometry=SPATIAL.compile_spatial(brief,pack,layout)
+    coordination = geometry.get("wallCoordination", [])
+    coordination_open = [row["wallMemberId"] for row in coordination if row["status"] != "DESIGN_MODULE_MATCH"]
+    if not design_only and coordination_open:
+        raise ValueError("WALL_COORDINATION_UNRESOLVED:" + ",".join(coordination_open))
     doc=BRIEF.normalize(brief)
     if floor_plans is not None and (not isinstance(floor_plans,dict) or set(floor_plans)!={s['id'] for s in doc['stories']}):
         raise ValueError('SOURCE_FLOOR_PLAN_REQUIRED_EVERY_STORY')
@@ -44,16 +160,21 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
             if abs(story["level"]+h-next_level)>1e-5:
                 raise ValueError("STORY_HEIGHT_INCONSISTENT_WITH_LEVELS")
 
-    if pack.get("status")!="PROJECT_NATIVE_MATERIAL_RESOLVED_NOT_ENGINEER_APPROVED":
-        raise ValueError("PROJECT_NATIVE_CSE_BINDING_NOT_ESTABLISHED")
-    known=pack.get("nativeStoryBindings")
-    resolved=BRIEF.resolve_stories(doc,api)
-    if resolved["nativeResolution"]!="READY_FOR_ATTRIBUTE_RESOLUTION":
-        raise ValueError("REAL_STORY_MAP_UNRESOLVED")
-    if known!=resolved["nativeStoryBindings"]:
-        raise ValueError("PROJECT_STORY_MAPPING_CHANGED_SINCE_CSE_READ")
+    known=[]
+    if not design_only:
+        if pack.get("status")!="PROJECT_NATIVE_MATERIAL_RESOLVED_NOT_ENGINEER_APPROVED":
+            raise ValueError("PROJECT_NATIVE_CSE_BINDING_NOT_ESTABLISHED")
+        known=pack.get("nativeStoryBindings")
+        resolved=BRIEF.resolve_stories(doc,api)
+        if resolved["nativeResolution"]!="READY_FOR_ATTRIBUTE_RESOLUTION":
+            raise ValueError("REAL_STORY_MAP_UNRESOLVED")
+        if known!=resolved["nativeStoryBindings"]:
+            raise ValueError("PROJECT_STORY_MAPPING_CHANGED_SINCE_CSE_READ")
     candidates=pack["selectedCseCandidates"]
     slab=next(x for x in candidates if x.get("role")=="floor-slab")
+    by_cse = {row["id"]: row for row in candidates}
+    wall_cse_ids = dict.fromkeys(wall["wallCseCandidateId"] for wall in geometry["bearingLines"]
+                                 if wall["wallCseCandidateId"] is not None)
     if junction_policy is not None and junction_policy != {
             'schema': 'apa-native-junction-policy/1',
             'slabFootprint': 'OUTER_WALL_FACE',
@@ -62,18 +183,32 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
     if geometry["missingSlabCseStoryIds"]:
         raise ValueError("FLOOR_SLAB_CSE_REQUIRED_ALL_STORIES")
     material_name=slab["native"]["name"]
-    before=api("GetProjectInfo",{})
-    actual_guid=RUN.resolve_basic_slab_material(api,material_name)
-    after=api("GetProjectInfo",{})
-    if before!=after:
-        raise ValueError("ACTIVE_PROJECT_IDENTITY_CHANGED")
-    expected_guid=slab["native"].get("guid")
-    if (not isinstance(expected_guid,str)
-            or actual_guid.casefold()!=expected_guid.casefold()):
-        raise ValueError("PROJECT_SLAB_MATERIAL_CHANGED_AFTER_PACK_BINDING")
+    actual_guid=None
+    materials = {}
+    if not design_only:
+        before=api("GetProjectInfo",{})
+        material_candidates = [slab] + [by_cse[key] for key in wall_cse_ids]
+        names = dict.fromkeys(row["native"]["name"] for row in material_candidates)
+        materials = {name: RUN.resolve_basic_slab_material(api, name) for name in names}
+        actual_guid = materials[material_name]
+        after=api("GetProjectInfo",{})
+        if before!=after:
+            raise ValueError("ACTIVE_PROJECT_IDENTITY_CHANGED")
+        expected_guid=slab["native"].get("guid")
+        if (not isinstance(expected_guid,str)
+                or actual_guid.casefold()!=expected_guid.casefold()):
+            raise ValueError("PROJECT_SLAB_MATERIAL_CHANGED_AFTER_PACK_BINDING")
+        for key in wall_cse_ids:
+            native_material = by_cse[key]["native"]
+            guid = native_material.get("guid")
+            if not isinstance(guid, str) or guid.casefold() != materials[native_material["name"]].casefold():
+                raise ValueError("PROJECT_WALL_MATERIAL_CHANGED_AFTER_PACK_BINDING:" + key)
 
     story_map={b["architecturalStoryId"]:b for b in known}
     ops=[]
+    wall_bindings, roles = {}, {}
+    floor_shapes = {}
+    wall_heights = {}
     bounds=geometry["outline"]
     polygon=[
         BUILD.xy(bounds["xMin"],bounds["yMin"]),
@@ -83,7 +218,7 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
     ]
     for story_number,s in enumerate(doc["stories"]):
         sid=s["id"]
-        native=story_map[sid]["nativeIndex"]
+        native=story_number if design_only else story_map[sid]["nativeIndex"]
         # One authored footprint slab per storey; no guessed room partitions.
         step_id="native-slab-"+sid
         walls=sorted((m for m in geometry["bearingLines"]
@@ -100,14 +235,16 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
             if story_number+1<len(doc['stories']):
                 wall_height-=slab['thicknessMeters']
                 if wall_height<=0:raise ValueError('SLAB_LEAVES_NO_CLEAR_WALL_HEIGHT')
+        wall_heights[sid] = wall_height
         slab_polygon=[BUILD.xy(footprint['xMin'],footprint['yMin']),
             BUILD.xy(footprint['xMax'],footprint['yMin']),
             BUILD.xy(footprint['xMax'],footprint['yMax']),
             BUILD.xy(footprint['xMin'],footprint['yMax'])] if junction_policy else polygon
         authored_floor=None
         if floor_plans is not None:
-            from shapely.geometry import LineString,Point,box
+            from shapely.geometry import LineString,box
             authored_floor,shape=BUILD.source_floor_polygon(floor_plans[sid])
+            floor_shapes[sid] = shape
             envelope=box(bounds['xMin'],bounds['yMin'],bounds['xMax'],bounds['yMax']).buffer(.6)
             if not envelope.covers(shape):raise ValueError('SOURCE_FLOOR_OUTSIDE_DECLARED_ENVELOPE')
             for member in walls:
@@ -135,8 +272,29 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
             else:
                 p1=BUILD.xy(wall["fromCoordinate"],wall["constantCoordinate"])
                 p2=BUILD.xy(wall["toCoordinate"],wall["constantCoordinate"])
-            ops.append(BUILD.step("native-"+wall["id"],"CreateWalls",
-                BUILD.wall(p1,p2,native,wall_height,wall["thicknessMeters"])))
+            op = "native-" + wall["id"]
+            payload = BUILD.wall(p1, p2, native, wall_height, wall["thicknessMeters"])
+            if "structuralFunction" in wall:
+                roles[op] = wall["structuralFunction"]
+            if wall["wallCseCandidateId"] is not None:
+                system = by_cse[wall["wallCseCandidateId"]]
+                material = system["native"]["name"]
+                guid = materials.get(material)
+                wall_bindings[op] = dict(cseCandidateId=system["id"], sourceId=system["sourceId"],
+                                         role=system["role"], structuralFunction=roles.get(op),
+                                         storyId=sid, thicknessMeters=wall["thicknessMeters"],
+                                         materialName=material, materialGuid=guid)
+                if guid is not None:
+                    payload["buildingMaterialId"] = {"guid": guid}
+            ops.append(BUILD.step(op, "CreateWalls", payload))
+    for opening in geometry["openings"]:
+        kind = "CreateDoors" if opening["kind"] == "DOOR" else "CreateWindows"
+        if opening["sillHeight"] + opening["height"] > wall_heights[opening["storyId"]] + SPATIAL.EPS:
+            raise ValueError("PASSAGE_EXCEEDS_STORY_HEIGHT")
+        ops.append(BUILD.step("native-opening-" + opening["id"], kind,
+            BUILD.opening("native-" + opening["hostMemberId"], opening["centerOffset"],
+                          opening["width"], opening["height"], opening["sillHeight"])))
+    stairs = _compile_stair_links(stair_links, doc, geometry, floor_shapes, ops) if stair_links is not None else {}
     schema=Path(schema_path or RUN.DEFAULT_SCENE_SCHEMA)
     if not schema.is_file():
         raise ValueError("NATIVE_TAPIR_SCHEMA_MISSING")
@@ -155,14 +313,42 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
         "engineeringChecks":["STRUCTURAL_LOAD_PATH_UNVERIFIED",
                              "BUILDING_CODE_APPLICABILITY_UNVERIFIED"]
     }
+    requirements = copy.deepcopy(geometry["requirements"])
+    for row in requirements:
+        if row.get("criterion", {}).get("kind") in ("ENTRANCE", "ROOM_CONNECTION", "ACCESS_PATH"):
+            row["bimOperationIds"] = ["native-opening-" + oid for oid in row["designObjectIds"]]
+        if row["id"] in stairs:
+            connection = stairs[row["id"]]
+            passed = connection["dimensionsMeetProjectLimits"] is not False
+            row.update(status="PARTIAL" if passed else "CONFLICT",
+                       reason=("FLIGHT_VOID_AND_LANDINGS_PLANNED_NATIVE_READBACK_PENDING" if passed
+                               else "STAIR_DIMENSIONS_OUTSIDE_PROJECT_LIMITS"),
+                       bimOperationIds=[connection[key] for key in (
+                           "stairOperationId", "lowerSlabOperationId", "upperSlabOperationId")])
+            if connection["dimensionChecks"]:
+                row["measurement"] = connection["dimensionChecks"]
+    SPATIAL.check_geometry_requirements(doc, geometry, floor_shapes, stairs.values(), requirements)
+    requirements_pending = [row["id"] for row in requirements
+                            if row.get("priority") == "REQUIRED" and row["status"] != "DESIGN_CHECKED"]
+    design_evidence = {}
+    if coordination:
+        from archicad_normative_bindings import attach_to_project_pack, compile_normative_pack
+
+        wall_conditions = [dict(row, bimOperationId="native-" + row["wallMemberId"]) for row in coordination]
+        normative = compile_normative_pack(brief, pack, None, {}, [], design_coordination=wall_conditions)
+        design_evidence = dict(normative=normative, projectLibraryPack=attach_to_project_pack(pack, normative),
+                               wallCoordination=wall_conditions, unresolvedWallCoordination=coordination_open)
     return {
-        "status":"OFFLINE_EXISTING_BIM_GRAPH_COMPILED_NOT_AUTHORIZED",
+        "status":("BIM_GRAPH_PREVIEW_NEEDS_NATIVE_BINDINGS" if design_only
+                  else "OFFLINE_EXISTING_BIM_GRAPH_COMPILED_NOT_AUTHORIZED"),
+        "floorIndexBasis": "SEMANTIC_STORY_ORDINAL_PREVIEW_ONLY" if design_only else "NATIVE_STORY_READBACK",
         "projectId":doc["projectId"],"nativeTargetProjectPath":doc["targetProjectPath"],
         "sourceLayoutStatus":geometry["status"],
         "sourcePackStatus":pack["status"],
         "authoredOutline":geometry["outline"],
         "authoredStoryHeightsMeters":{k:float(v) for k,v in heights.items()},
         "authoredFloorPlans":copy.deepcopy(floor_plans),
+        **({"stairConnections": list(stairs.values())} if stairs else {}),
         "slabBasicMaterialName":material_name,
         "graph":graph,"executionOrder":checked["executionOrder"],
         "sourcePlanHash":checked["sourcePlanHash"],
@@ -172,12 +358,21 @@ def compile_candidate(brief,pack,layout,heights,read_api,*,schema_path=None,junc
         "provisionalBasicSlabMaterialGuid":actual_guid,
         "storyBindings":known,
         "authoredRoomIds":[r["id"] for r in geometry["rooms"]],
+        "requirements": requirements,
+        "requiredOpenIds": requirements_pending,
+        "areaMeasures": geometry["areaMeasures"],
+        "areaBalance": geometry["areaBalance"],
         "plannedNativeCommands":dict(Counter(x["command"] for x in ops)),
+        **({"wallCseBindings": wall_bindings} if wall_bindings else {}),
+        **({"structuralFunctions": roles} if roles else {}),
+        **design_evidence,
         "unresolved":unresolved,
         "operationCount":len(ops),
         "graphValidator":"EXISTING_ARCHICAD_BIM_GRAPH_COMPILE_GRAPH",
         "nativeWriter":"EXISTING_SCENE_WRITER_NOT_CALLED",
         "liveWriteAuthorized":False,
+        "engineeringApproved":False,
+        "normativeApproved":False,
         "sceneReservationCreated":False,
         "plnChanged":False,
         "nativeWriteCalls":0
@@ -243,6 +438,13 @@ def as_existing_scene_writer_preview(candidate):
     if any(type(v) not in (int,float) or not math.isfinite(v) or v<=0
            for v in dimensions.values()):
         raise ValueError("INVALID_AUTHORED_SCENE_DIMENSIONS")
+    wall_scope = {}
+    if candidate.get("wallCseBindings") or candidate.get("structuralFunctions"):
+        wall_scope = dict(walls=candidate.get("wallCseBindings", {}),
+                          roles=candidate.get("structuralFunctions", {}),
+                          normativePackDigest=candidate.get("normative", {}).get("normativePackDigest"))
+        if candidate.get("structuralFunctionDefinition"):
+            wall_scope["structuralFunctionDefinition"] = candidate["structuralFunctionDefinition"]
     return {
         "status":"SCENE_PREVIEW_OFFLINE",
         "nativeTargetProjectPath":candidate["nativeTargetProjectPath"],
@@ -255,6 +457,7 @@ def as_existing_scene_writer_preview(candidate):
         "storyBindings":native,
         "slabBasicMaterialName":candidate["slabBasicMaterialName"],
         "expectedPreflightSlabMaterialGuid":candidate["provisionalBasicSlabMaterialGuid"],
+        **({"integrationBindings": {"dependencies": {"authoredWallSystems": wall_scope}}} if wall_scope else {}),
         "slabLevelConvention":"PROJECT_ABSOLUTE",
         "envelope":{**outline,
                     "zMin":stories[0]["level"]-.3,

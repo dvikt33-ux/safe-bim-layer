@@ -14,6 +14,9 @@ import re
 
 SCHEMA = "apa-semantic-project-brief/1"
 MODES = frozenset({"GENERATE_FROM_ZERO", "ADAPT_EXISTING"})
+EXTERIOR = "$outside"
+AREA_METRICS = ("ROOM_RECTANGLE_SUM", "GROSS_BUILDING", "USABLE", "LIVING")
+STAIR_LIMITS = frozenset({"minimumWidthM", "minimumGoingM", "maximumRiserM", "minimumLandingDepthM"})
 _ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{2,79}$")
 
 
@@ -36,11 +39,87 @@ def _id(value, field):
     return value
 
 
+def normalize_constraint(row):
+    base = {"id", "text", "evidenceStatus"}
+    optional = {"priority", "sourceRef", "criterion"}
+    if not isinstance(row, dict) or not base <= set(row) <= base | optional:
+        raise ValueError("INVALID_CONSTRAINT_FIELDS")
+    cid = _id(row["id"], "CONSTRAINT_ID")
+    if row["evidenceStatus"] != "UNVERIFIED":
+        raise ValueError("DUPLICATE_OR_UNVERIFIED_PROVENANCE_CANNOT_ASSERT_RULE_PASS")
+    result = {**row, "id": cid, "text": _name(row["text"], "CONSTRAINT_TEXT")}
+    if optional & row.keys():
+        if (not {"priority", "sourceRef"} <= row.keys()
+                or row["priority"] not in ("REQUIRED", "PREFERENCE")):
+            raise ValueError("EXPLICIT_REQUIREMENT_PRIORITY_AND_SOURCE_REQUIRED")
+        _name(row["sourceRef"], "REQUIREMENT_SOURCE")
+    if "criterion" not in row:
+        return result
+    criterion = row["criterion"]
+    if not isinstance(criterion, dict):
+        raise ValueError("INVALID_REQUIREMENT_CRITERION")
+    kind = criterion.get("kind")
+    if kind == "AREA_TARGET" and set(criterion) == {"kind", "metric", "targetM2", "toleranceM2"}:
+        if criterion["metric"] not in AREA_METRICS:
+            raise ValueError("UNKNOWN_AREA_MEASUREMENT_DEFINITION")
+        target = _nonneg(criterion["targetM2"], "AREA_TARGET")
+        tolerance = _nonneg(criterion["toleranceM2"], "AREA_TOLERANCE")
+        if target <= 0 or tolerance < 0:
+            raise ValueError("INVALID_AREA_TARGET_OR_TOLERANCE")
+        result["criterion"] = dict(criterion, targetM2=target, toleranceM2=tolerance)
+    elif kind in ("ENTRANCE", "ROOM_CONNECTION") and set(criterion) == {"kind", "from", "to"}:
+        a, b = (criterion[key] if criterion[key] == EXTERIOR else _id(criterion[key], "CONNECTION_SPACE")
+                for key in ("from", "to"))
+        if a == b or (EXTERIOR in (a, b)) != (kind == "ENTRANCE"):
+            raise ValueError("INVALID_FUNCTIONAL_CONNECTION_ENDPOINTS")
+    elif kind == "ACCESS_PATH" and {"kind", "from", "to"} <= set(criterion) <= {
+            "kind", "from", "to", "minimumOpeningWidthM", "minimumClearWidthM", "entryStoryId"}:
+        a = criterion["from"] if criterion["from"] == EXTERIOR else _id(criterion["from"], "ACCESS_FROM")
+        b = _id(criterion["to"], "ACCESS_TO")
+        if a == b:
+            raise ValueError("INVALID_ACCESS_PATH_ENDPOINTS")
+        limits = {}
+        for key, field in (("minimumOpeningWidthM", "ACCESS_OPENING_WIDTH"),
+                           ("minimumClearWidthM", "ACCESS_CLEAR_WIDTH")):
+            if key in criterion:
+                limits[key] = _nonneg(criterion[key], field)
+                if limits[key] <= 0:
+                    raise ValueError("INVALID_" + field)
+        result["criterion"] = dict(criterion, **limits)
+        if "entryStoryId" in criterion:
+            if a != EXTERIOR or "minimumClearWidthM" not in criterion:
+                raise ValueError("ENTRY_STORY_REQUIRES_CLEAR_EXTERIOR_PATH")
+            _id(criterion["entryStoryId"], "ENTRY_STORY_ID")
+    elif kind == "ROOM_CLEAR_AREA" and set(criterion) == {"kind", "roomId", "minimumAreaM2"}:
+        _id(criterion["roomId"], "AREA_ROOM_ID")
+        if _nonneg(criterion["minimumAreaM2"], "ROOM_CLEAR_AREA") <= 0:
+            raise ValueError("INVALID_ROOM_CLEAR_AREA")
+    elif kind == "STAIR_LINK" and {"kind", "lowerStoryId", "upperStoryId"} <= set(criterion) <= {
+            "kind", "lowerStoryId", "upperStoryId", "lowerRoomId", "upperRoomId", "limits"}:
+        for key in ("lowerStoryId", "upperStoryId"):
+            _id(criterion[key], "STAIR_STORY_ID")
+        if criterion["lowerStoryId"] == criterion["upperStoryId"]:
+            raise ValueError("DISTINCT_STAIR_STORIES_REQUIRED")
+        if {"lowerRoomId", "upperRoomId"} & criterion.keys():
+            if not {"lowerRoomId", "upperRoomId"} <= criterion.keys():
+                raise ValueError("STAIR_REQUIRES_BOTH_LANDING_ROOMS")
+            for key in ("lowerRoomId", "upperRoomId"):
+                _id(criterion[key], "STAIR_LANDING_ROOM_ID")
+        if "limits" in criterion:
+            limits = criterion["limits"]
+            if (not isinstance(limits, dict) or not limits or not limits.keys() <= STAIR_LIMITS
+                    or any(_nonneg(value, key) <= 0 for key, value in limits.items())):
+                raise ValueError("INVALID_STAIR_DIMENSION_LIMITS")
+    else:
+        raise ValueError("UNSUPPORTED_REQUIREMENT_CRITERION")
+    return result
+
+
 def normalize(doc):
     """Validate user brief; never assign a native story index or BIM GUID."""
     fields={"schemaVersion","projectId","mode","units","site",
             "stories","rooms","constraints"}
-    if not isinstance(doc,dict) or not fields<=set(doc) or set(doc)-fields-{"targetProjectPath"}:
+    if not isinstance(doc,dict) or not fields<=set(doc) or set(doc)-fields-{"targetProjectPath", "openQuestions"}:
         raise ValueError("INVALID_SEMANTIC_BRIEF_FIELDS")
     if doc["schemaVersion"]!=SCHEMA or doc["units"]!="meters" or doc["mode"] not in MODES:
         raise ValueError("UNSUPPORTED_BRIEF_SCHEMA_MODE_OR_UNITS")
@@ -138,19 +217,39 @@ def normalize(doc):
     if not isinstance(constraints,list) or len(constraints)>100:
         raise ValueError("INVALID_CONSTRAINT_LIST")
     seen_cons=set(); checked_cons=[]
+    room_stories = {room["id"]: room["storyId"] for room in accepted}
     for row in constraints:
-        if not isinstance(row,dict) or set(row)!={"id","text","evidenceStatus"}:
-            raise ValueError("INVALID_CONSTRAINT_FIELDS")
-        cid=_id(row["id"],"CONSTRAINT_ID")
-        if cid in seen_cons or row["evidenceStatus"] != "UNVERIFIED":
+        item = normalize_constraint(row)
+        cid = item["id"]
+        if cid in seen_cons:
             raise ValueError("DUPLICATE_OR_UNVERIFIED_PROVENANCE_CANNOT_ASSERT_RULE_PASS")
         seen_cons.add(cid)
-        checked_cons.append({"id":cid,"text":_name(row["text"],"CONSTRAINT_TEXT"),
-                             "evidenceStatus":row["evidenceStatus"]})
+        criterion = item.get("criterion", {})
+        if criterion.get("kind") in ("ENTRANCE", "ROOM_CONNECTION", "ACCESS_PATH"):
+            if {criterion["from"], criterion["to"]} - used_rooms - {EXTERIOR}:
+                raise ValueError("REQUIREMENT_REFERENCES_UNKNOWN_ROOM")
+            if "entryStoryId" in criterion and criterion["entryStoryId"] not in seen_ids:
+                raise ValueError("REQUIREMENT_REFERENCES_UNKNOWN_ENTRY_STORY")
+        if criterion.get("kind") == "ROOM_CLEAR_AREA" and criterion["roomId"] not in used_rooms:
+            raise ValueError("REQUIREMENT_REFERENCES_UNKNOWN_ROOM")
+        if criterion.get("kind") == "STAIR_LINK":
+            order = {story["id"]: i for i, story in enumerate(normalized)}
+            lower, upper = criterion["lowerStoryId"], criterion["upperStoryId"]
+            if lower not in order or upper not in order or order[upper] != order[lower] + 1:
+                raise ValueError("REQUIREMENT_STAIR_MUST_CONNECT_ADJACENT_STORIES")
+            if "lowerRoomId" in criterion and (room_stories.get(criterion["lowerRoomId"]) != lower
+                    or room_stories.get(criterion["upperRoomId"]) != upper):
+                raise ValueError("STAIR_LANDING_ROOM_STORY_MISMATCH")
+        checked_cons.append(item)
+    questions = doc.get("openQuestions", [])
+    if not isinstance(questions, list) or len(questions) > 100:
+        raise ValueError("INVALID_BRIEF_OPEN_QUESTIONS")
+    questions = [_name(question, "OPEN_QUESTION") for question in questions]
     return {"schemaVersion":SCHEMA,"projectId":project,
             "mode":doc["mode"],"units":"meters",
             "site":dict(site),"stories":normalized,"rooms":accepted,
             "constraints":checked_cons,"targetProjectPath":target,
+            **({"openQuestions": questions} if "openQuestions" in doc else {}),
             "nativeStoryBindings":[],"nativeResolution":"NOT_ATTEMPTED",
             "nativeWriteCalls":0}
 
@@ -178,20 +277,27 @@ def resolve_stories(normalized, api):
             or project.get("isUntitled") is not False or
             project.get("isTeamwork") is not False):
         raise ValueError("WRONG_ACTIVE_SINGLE_PLN")
-    state=read("GetStories")
+    return match_native_stories(normalized, read("GetStories"))
+
+
+def native_story_name(row):
+    return row["name"] if isinstance(row.get("name"), str) else (row.get("uName") or "")
+
+
+def native_story_at_level(row, level):
+    return (isinstance(row, dict) and type(row.get("index")) is int
+            and type(row.get("floorId")) is int and type(row.get("level")) in (int, float)
+            and math.isfinite(row["level"]) and abs(row["level"] - level) <= 1e-5)
+
+
+def match_native_stories(normalized, state):
     current=state.get("stories") if isinstance(state,dict) else None
     if not isinstance(current,list):
         raise ValueError("NATIVE_STORY_INVENTORY_UNAVAILABLE")
     bindings=[]
     for story in normalized["stories"]:
-        matches=[s for s in current if isinstance(s,dict)
-                 and (s.get("name") if isinstance(s.get("name"),str)
-                      else (s.get("uName") or ""))==story["existingNativeLabel"]
-                 and type(s.get("index")) is int
-                 and type(s.get("floorId")) is int
-                 and type(s.get("level")) in (int,float)
-                 and math.isfinite(s["level"])
-                 and abs(s["level"]-story["level"])<=1e-5
+        matches=[s for s in current if native_story_at_level(s, story["level"])
+                 and native_story_name(s)==story["existingNativeLabel"]
                  and (story["existingNativeIndex"] is None
                       or (s["index"]==story["existingNativeIndex"]
                           and s["floorId"]==story["existingFloorId"]))]
