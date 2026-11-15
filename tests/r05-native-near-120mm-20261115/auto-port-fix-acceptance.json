@@ -1,0 +1,61 @@
+{
+  "schema": "APA_R05_AUTO_PORT_FIX_ACCEPTANCE_V1",
+  "date": "2026-11-15",
+  "status": "IMPLEMENTED_IN_BRANCH_TESTS_PASS_RELEASE_INSTALL_PENDING",
+  "scope": "Exact PLN automatically selects corresponding Archicad API port for PLAN and VERIFY_REOPEN; manual stale port ignored without weakening writer ownership checks",
+  "git": {
+    "code": "scripts/apa_r03_mailbox.py",
+    "tests": "tests/test_apa_r03_project_auto_port.py",
+    "branch": "test/r05-native-near-120mm-20261115"
+  },
+  "local": {
+    "originalR05ReleaseUnmodified": true,
+    "temporaryPatch": "R05-20261115/independent-near-120mm-20261115/apa_r03_mailbox_portfix.py",
+    "oneShotWrapper": "R05-20261115/independent-near-120mm-20261115/apa-portless-r05.py"
+  },
+  "evidence": {
+    "unitTests": {
+      "passed": 6,
+      "total": 6
+    },
+    "liveTests": [
+      {
+        "target": "r03-r05-near-1nf-partition-20261115-02",
+        "port": 19728,
+        "elapsedSeconds": 10.09
+      },
+      {
+        "target": "r03-r05-1nf-partition-20261115-02",
+        "port": 19723,
+        "elapsedSeconds": 10.22
+      }
+    ],
+    "realOneShotPlan": {
+      "job": "r03-r05-1nf-partition-20261115-02-plan",
+      "result": "READY_FOR_EXPLICIT_TEST_RUN",
+      "operations": 9,
+      "nativeWrites": 0,
+      "preflightSha256": "0d74cbeb182d383c243e84a404ad1d744023498c931bb00e7db334719cfe4b78",
+      "receipt": "https://github.com/dvikt33-ux/safe-bim-bridge/blob/main/safe-bim-mailbox/apa-ac29/results/r03-r05-1nf-partition-20261115-02-plan.json"
+    }
+  },
+  "nativeExecute": {
+    "envelopePublished": true,
+    "job": "r03-r05-1nf-partition-20261115-02-execute",
+    "grantAttempt": "GITHUB_UNAVAILABLE_EOF",
+    "localGrantVerified": false,
+    "executeDispatched": false,
+    "plnPostErrorState": "NOT_RECHECKED_REMOTE_UNAVAILABLE",
+    "reconciliation": "Before any retry check exact local grant, pending file, mailbox-jobs attempted/result, PLN SHA, and exact active project; do not replay write blindly"
+  },
+  "limitations": [
+    "Feature-branch code is not installed into immutable R05 release; new signed distribution/CI needed for canonical deployment",
+    "Immediate local portless wrapper is separate from immutable release but calls original release CLI with dynamically verified port",
+    "R05 save-close-reopen remains untested"
+  ],
+  "incident": {
+    "observed": "R05 local grant failed before authorization due GitHub API EOF; afterwards Windows remote connector returned fetch failure",
+    "cause": "NOT_ESTABLISHED",
+    "noAutomaticRetry": true
+  }
+}
