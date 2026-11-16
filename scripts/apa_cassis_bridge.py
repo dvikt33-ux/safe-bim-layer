@@ -122,7 +122,12 @@ class CassisControl:
                 (operation != "set_slider" and value is not None)):
             raise ValueError("CASSIS_ARGUMENTS_INVALID")
         if operation == "status":
-            return {"status": "CASSIS_READY", "readOnlyByDefault": True,
+            active = self._transport("getdocumentinfo", {})
+            if not active.get("ok"):
+                raise ValueError("CASSIS_SERVER_NOT_READY")
+            return {"status": "CASSIS_CONNECTED", "readOnlyByDefault": True,
+                    "activeDocumentPinned": bool(active.get("open") and
+                        Path(active.get("path", "")).resolve() == self.document),
                     "testDocument": str(self.document), "profileSha256": self.profile_hash}
         doc = self._guard(write=operation == "set_slider")
         if operation == "document":
