@@ -347,7 +347,7 @@ class Control:
         return datetime.now(timezone.utc).isoformat()
 
 
-def server_for(control=None, *, tapir=None, ac30_quantities=None):
+def server_for(control=None, *, tapir=None, ac30_quantities=None, cassis=None):
     import anyio
     from mcp.server import MCPServer
 
@@ -397,6 +397,21 @@ def server_for(control=None, *, tapir=None, ac30_quantities=None):
             """Inspect the pinned Archicad/Tapir runtime, find a contract, or run a reviewed read."""
             return await call(tapir.perform, operation, command, parameters, offset, probe, blocked_error=True)
 
+    if cassis is not None:
+        @server.tool(annotations=ToolAnnotations(readOnlyHint=True, openWorldHint=False))
+        async def apa_grasshopper_read(
+            operation: Literal["status", "document", "components", "connections", "output"],
+            component_id: str | None = None,
+        ) -> CallToolResult:
+            """Read the pinned, isolated Grasshopper test graph through Cassis."""
+            return await call(cassis.perform, operation, component_id, None, blocked_error=True)
+
+        @server.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False,
+                                                idempotentHint=False, openWorldHint=False))
+        async def apa_grasshopper_set_slider(component_id: str, value: int) -> CallToolResult:
+            """Set an explicitly pinned slider in the isolated GHX test; never writes to PLN."""
+            return await call(cassis.perform, "set_slider", component_id, value, blocked_error=True)
+
     if ac30_quantities is not None:
         @server.tool(annotations=ToolAnnotations(readOnlyHint=True, openWorldHint=False))
         async def apa_ac30_read(kind: Literal["status", "quantities"]) -> CallToolResult:
@@ -421,8 +436,15 @@ def main(argv=None):
     parser.add_argument("--profile", required=True, type=Path)
     parser.add_argument("--port", type=int, help="Optional HTTP port on 127.0.0.1. Default is stdio.")
     parser.add_argument("--grant", nargs=3, metavar=("JOB_ID", "TARGET", "PREFLIGHT_SHA256"))
+    parser.add_argument("--cassis-profile", type=Path, help="Opt-in isolated Grasshopper test profile")
     args = parser.parse_args(argv)
-    require(not (args.port and args.grant), "MCP_SELECT_ONE_MODE")
+    require(not (args.port and args.grant) and not (args.grant and args.cassis_profile),
+            "MCP_SELECT_ONE_MODE")
+    cassis = None
+    if args.cassis_profile is not None:
+        from apa_cassis_bridge import CassisControl
+
+        cassis = CassisControl(args.cassis_profile)
     profile = args.profile.absolute()
     from archicad_tapir_profile import BRIDGE_SCHEMA, LEGACY_AC30_SCHEMA
 
@@ -431,7 +453,7 @@ def main(argv=None):
         from apa_tapir_bridge import TapirControl
 
         require(not args.grant, "TAPIR_READ_PROFILE_CANNOT_GRANT_NATIVE_WRITE")
-        run_server(server_for(tapir=TapirControl(profile)), args.port)
+        run_server(server_for(tapir=TapirControl(profile), cassis=cassis), args.port)
         return 0
     if args.grant:
         # A local operator grant may be added while the single MCP transport is running.
@@ -450,7 +472,7 @@ def main(argv=None):
         return 0
     control = Control(root, profile)
     try:
-        run_server(server_for(control), args.port)
+        run_server(server_for(control, cassis=cassis), args.port)
     finally:
         control.close()
     return 0
