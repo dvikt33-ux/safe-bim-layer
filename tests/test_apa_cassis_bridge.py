@@ -44,6 +44,12 @@ class TestCassisScope(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
+    def test_status_checks_live_transport(self):
+        out = self.client.perform("status")
+        self.assertEqual(out["status"], "CASSIS_CONNECTED")
+        self.assertTrue(out["activeDocumentPinned"])
+        self.assertTrue(any(name == "getdocumentinfo" for name, _ in self.calls))
+
     def test_document_read(self):
         self.assertEqual(self.client.perform("document")["status"], "CASSIS_TEST_READ")
 
