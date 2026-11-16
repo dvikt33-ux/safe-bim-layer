@@ -65,3 +65,15 @@ An isolated experimental launcher may set up module search paths while this chan
 6. Reject whenever document ownership, project identity or add-on registration changes.
 
 **No native PASS** until these observations are recorded. Do not change the active stair/project PLNs.
+
+## ChatGPT R04.1 secure tunnel pilot — 2026-11-17
+
+The original signed APA R04.1 release is **not edited**. An isolated Windows overlay combines `Control` from the signed `APA-Windows` release with the branch `server_for(..., cassis=CassisControl(...))` at the existing tunnel backend URL `http://127.0.0.1:18787/mcp`.
+
+Executed live local MCP tests: initialize HTTP 200, four tools (`apa_read`, `apa_execute`, `apa_grasshopper_read`, `apa_grasshopper_set_slider`), `apa_read(kind=status) => MCP_APA_READY`, `apa_grasshopper_read(operation=status) => CASSIS_CONNECTED`, foreign active GH document => BLOCKED. The original release revision and manifest hash were read back.
+
+Verified existing `tunnel-client.exe` version 0.0.20 profiles `apa-r04` (backend `127.0.0.1:18787/mcp`) and `apa-powershell` (backend `127.0.0.1:18790/mcp`). The `doctor` command on both profiles failed solely on absent environment variable `CONTROL_PLANE_API_KEY`. Verified no key in Process/User/Machine environment for the tested account. Do not print, commit, or pass a raw key as a CLI argument.
+
+Local one-click launcher (kept in an isolated test directory, not in this repo) validates the four tools, starts the isolated APA overlay only if needed, asks for a restricted runtime key using Windows PowerShell `Read-Host -AsSecureString`, calls `tunnel-client doctor --config ...`, then `tunnel-client run --config ...`, and clears the key environment variable on exit. The `.ps1` file was encoded UTF-8 with BOM for PowerShell 5.1; AST parse errors: 0. The tunnel itself **has not been run with a credential yet**.
+
+**Final acceptance pending:** operator supplies a restricted key with Tunnels Read + Use locally, starts the tunnel, verifies `/readyz` and actual tool invocation from the existing ChatGPT plugin; if the existing app has stale tools, refresh its MCP discovery/connection. Only then may `ChatGPT → APA → Cassis` be called end-to-end PASS. Native AC30 Live Connection and PLN Save/Reopen are separate blocked acceptance gates.
