@@ -35,6 +35,9 @@ QUERY_READS = frozenset({
     'GetElementsOfGroups', 'GetSuspendGroupsMode', 'GetDetailsOfElements',
     'GetSubelementsOfHierarchicalElements',
 })
+PROJECT_INVENTORY_READS = frozenset({
+    'GetNavigatorItemTree', 'GetDatabaseIdFromNavigatorItemId', 'GetLibraryPartScripts',
+})
 POLICIES = {
     'CreateStairs': ('CREATE', 'MODEL', 'ExtendedElementCommands.cpp'),
     'CreateWalls': ('CREATE', 'MODEL', 'ExtendedElementCommands.cpp'),
@@ -112,9 +115,10 @@ def wall_parameters(recipe):
     return {'wallsWithDetails': [{'elementId': {'guid': recipe['wall']}, 'height': recipe['after']}]}
 
 
-def capture(api):
+def capture(api, *, verify_empty=None):
     guids = APA.inventory_guids(api)
-    model = DOC.capture_full_model(api, guids)
+    options = {'verify_empty': verify_empty} if verify_empty is not None else {}
+    model = DOC.capture_full_model(api, guids, **options)
     require(not model.get('unresolvedBodyOwners'), 'AC30_NATIVE_BREP_OWNER_UNVERIFIED')
     signatures = GEOMETRY.retained_geometry_signatures(model, guids)
     return model, signatures
@@ -173,6 +177,8 @@ class Job:
                                                          max_response=64 * 1024 * 1024)
         self.api = APA.EvidenceAPI(native, trace, execute=execute)
         self.api.allowed |= QUERY_READS | {'API.IsAddOnCommandAvailable'}
+        if self.kind == 'project':
+            self.api.allowed |= PROJECT_INVENTORY_READS
         self.binding = self.guard()
         return self.binding
 
@@ -254,7 +260,8 @@ class Job:
 
     def baseline(self):
         require(self.guard() == self.binding, 'AC30_JOB_BINDING_DRIFT')
-        model, signatures = capture(self.api)
+        verify_empty = PROJECT.verify_empty_model if self.kind == 'project' else None
+        model, signatures = capture(self.api, verify_empty=verify_empty)
         if self.kind == 'wall':
             facts = self.wall_facts(self.recipe['before'], model)
         elif self.kind in {'project', 'update'}:
@@ -271,6 +278,8 @@ class Job:
             if self.kind == 'project':
                 box = self.recipe['envelope']
                 facts['spatialScan'] = RUN.scan_for_existing_geometry(self.api, box['xMin'], box['yMin'], box)
+                if 'verifiedEmptyModel' in model:
+                    facts['verifiedEmptyModel'] = model['verifiedEmptyModel']
             else:
                 require(RUN.digest(signatures) == self.recipe['sourceSignaturesSha256'],
                         'AC30_UPDATE_COPY_DIFFERS_FROM_ACCEPTED_MODEL')
@@ -422,8 +431,9 @@ class Job:
         return self.save(proof)
 
     def save(self, proof):
-        _, signatures = capture(self.api)
+        model, signatures = capture(self.api)
         require(RUN.digest(signatures) == proof['signaturesSha256'], 'AC30_VERIFIED_RESULT_CHANGED_BEFORE_SAVE')
+        PROJECT.check_template_markers(model, proof.get('templateMarkerSignatures', {}))
 
         def rebind(port, path, name, saved_sha, authorization):
             self.disk_sha = saved_sha
@@ -436,7 +446,9 @@ class Job:
 
         def before(api):
             self.lease.verify()
-            require(capture(api)[1] == signatures, 'AC30_FINAL_BREP_CHANGED_BEFORE_SAVE')
+            current_model, current_signatures = capture(api)
+            require(current_signatures == signatures, 'AC30_FINAL_BREP_CHANGED_BEFORE_SAVE')
+            PROJECT.check_template_markers(current_model, proof.get('templateMarkerSignatures', {}))
             if self.kind == 'wall':
                 require(self.group_mode() is proof['restoredSuspendGroups'], 'AC30_GROUP_MODE_CHANGED_BEFORE_SAVE')
             return {'status': 'AC30_FINAL_BREP_PASS'}
@@ -503,6 +515,7 @@ class Job:
             require(result == {k: v for k, v in previous.items() if k not in {'addedGuids', 'signaturesSha256'}},
                     'AC30_REOPEN_STAIR_DRIFT')
         elif self.kind in {'project', 'update'}:
+            PROJECT.check_template_markers(model, previous.get('templateMarkerSignatures', {}))
             PROJECT.verify_design(self, {'graph': previous['boundGraph']}, model, previous['operationGuids'])
             result = previous
         else:

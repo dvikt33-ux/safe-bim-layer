@@ -261,22 +261,32 @@ def execute_operation(writer, scene_id, command, parameters, source_hash,
         RUN.digest(intent), before, after)
 
 
-def capture_full_model(api, retained_guids):
+def capture_full_model(api, retained_guids, *, verify_empty=None):
     """Installed dump first enumerates the active DB, then opens/regenerates 3D.
 
     A section/elevation DB can omit nonspatial floor-plan GUIDs on the first
     read. Re-read only this read operation once after the native 3D switch.
     Never cache missing identities or repeat Create/Modify as reconciliation.
     Callers must activate their target database AFTER this geometry barrier.
+    Zero bodies require an explicit reader that proves the complete inventory.
     """
     selected = {g.lower() for g in retained_guids}
-    raw=api('GetModelDumpV1', {})
-    if raw.get('error')=={'code':-2130313109,'message':'ShowAllIn3D'}:
-        raise ValueError('DOCUMENTATION_LAYOUT_MODEL_WINDOW_REQUIRED')
-    if 'error' in raw:raise ValueError('DOCUMENTATION_NATIVE_DUMP_REJECTED')
-    native=C.G.normalize_dump(raw)
+
+    def read():
+        raw = api('GetModelDumpV1', {})
+        if raw.get('error') == {'code': -2130313109, 'message': 'ShowAllIn3D'}:
+            raise ValueError('DOCUMENTATION_LAYOUT_MODEL_WINDOW_REQUIRED')
+        if 'error' in raw:
+            raise ValueError('DOCUMENTATION_NATIVE_DUMP_REJECTED')
+        if raw.get('nativeBodySlots') == 0 and verify_empty is not None:
+            native = C.G.normalize_dump(raw, allow_empty=True)
+            native['verifiedEmptyModel'] = verify_empty(api, native, selected)
+            return native
+        return C.G.normalize_dump(raw)
+
+    native = read()
     if not selected <= {e['guid'].lower() for e in native['elements']}:
-        native = C.G.normalize_dump(api('GetModelDumpV1', {}))
+        native = read()
     if not selected <= {e['guid'].lower() for e in native['elements']}:
         raise ValueError('DOCUMENTATION_COMPLETE_NATIVE_INVENTORY_UNAVAILABLE')
     return native

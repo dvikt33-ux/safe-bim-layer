@@ -23,6 +23,7 @@ RUNTIME = dict(contract='APA_NATIVE_RUNTIME_IDENTITY_V1', nativeModelWrites=0,
                sourceRevision='1' * 40, buildIdentity='2' * 64, sdkMajor=30,
                developerId=826567491, localId=368333322)
 DESIGNS = ROOT / 'examples' / 'accelerator'
+CAPTURE_FULL_MODEL = N.DOC.capture_full_model
 
 
 def elements(guids):
@@ -179,7 +180,7 @@ class AC30ProjectTests(unittest.TestCase):
             ('apa_ac30_native.open_test_port', lambda path: 19723 if path == self.project else None),
             ('apa_ac30_native.listener', lambda port, **_: dict(pid=self.pid, startedAt=str(self.pid), port=port)),
             ('apa_ac30_native.native_command', self.transport),
-            ('apa_ac30_native.DOC.capture_full_model', lambda *_: self.model()),
+            ('apa_ac30_native.DOC.capture_full_model', self.capture_model),
             ('apa_ac30_native.reservation_owner_exited', lambda *_: True),
         ):
             mock = patch(target, side_effect=effect)
@@ -203,6 +204,9 @@ class AC30ProjectTests(unittest.TestCase):
         return dict(stories=[{'index': s['index'], 'elevation': s['level']} for s in self.stories],
                     elements=[row['element'] for row in self.items.values()])
 
+    def capture_model(self, api, guids, **options):
+        return self.model() if self.items else CAPTURE_FULL_MODEL(api, guids, **options)
+
     def registered_read(self, command):
         return {
             'GetProjectInfo': dict(projectPath=str(self.project), projectName=self.project.stem,
@@ -211,7 +215,6 @@ class AC30ProjectTests(unittest.TestCase):
             'GetAddOnVersion': {'version': '2.0.0'},
             'GetAPARuntimeInfoV1': RUNTIME,
             'GetStories': {'stories': self.stories},
-            'GetAllElements': {'elements': elements(self.items)},
             'API.IsAddOnCommandAvailable': {'available': True},
             'GetAttributesByType': {'attributes': [
                 {'name': self.recipe['slabMaterial'], 'attributeId': {'guid': WALL}},
@@ -221,6 +224,18 @@ class AC30ProjectTests(unittest.TestCase):
         }.get(command)
 
     def transport(self, port, command, parameters, **kwargs):
+        if command == 'GetAllElements':
+            inventory = {'elements': elements(self.items)}
+            if parameters.get('databases'):
+                inventory['executionResultForDatabases'] = [{'success': True}]
+            return inventory
+        if command == 'GetModelDumpV1':
+            return dict(nativeBodySlots=0, regenerated3D=True, coordinateSystem='ABSOLUTE_PROJECT_XYZ',
+                        deletedBodySlots=[], elements=[], materials=[], bodies=[])
+        if command == 'GetNavigatorItemTree':
+            return {'navigatorItemTree': {'type': 'StoryItem', 'navigatorItemId': {'guid': OTHER}}}
+        if command == 'GetDatabaseIdFromNavigatorItemId':
+            return {'databases': [{'databaseId': {'guid': GROUP}}]}
         read = self.registered_read(command)
         if read is not None:
             return read
@@ -285,6 +300,7 @@ class AC30ProjectTests(unittest.TestCase):
         self.assertEqual(self.writes, [])
         self.assertEqual(len(ready['facts']['workflow']['executionOrder']), 17)
         self.assertEqual(ready['facts']['storyIndices'], [3, 4])
+        self.assertEqual(ready['facts']['verifiedEmptyModel']['nativeElementCount'], 0)
         base = self.save_reopen(job, ready)
         self.assertEqual(len(base['operationReadback']['operationGuids']), 17)
         self.assertEqual(N.Job(job.path).execute(ready['confirmSha256'])['status'], 'ALREADY_APPLIED')
@@ -322,3 +338,103 @@ class AC30ProjectTests(unittest.TestCase):
         self.assertEqual(ready['modelWrites'], 0)
         self.assertEqual(self.writes, [])
         self.assertFalse((job.path / 'attempted.json').exists())
+
+    def test_approved_empty_floor_is_rechecked_before_first_create(self):
+        job = self.stage('r06-two-storey-design.json', 'two-storeys')
+        ready = job.preflight()
+
+        def capture_with_late_body(api, guids, verify_empty=None):
+            if verify_empty is N.PROJECT.verify_empty_model:
+                return self.capture_model(api, guids, verify_empty=verify_empty)
+            # The later dump no longer qualifies as empty, while the default
+            # element listing and its signatures remain unchanged.
+            return self.model()
+
+        with patch('apa_ac30_native.DOC.capture_full_model', side_effect=capture_with_late_body):
+            with self.assertRaisesRegex(ValueError, 'AC30_APPROVED_EMPTY_FLOOR_PLAN_DRIFT'):
+                N.Job(job.path).execute(ready['confirmSha256'])
+        self.assertEqual(self.writes, [])
+
+
+class AC30ZeroBodySnapshotTests(unittest.TestCase):
+    def setUp(self):
+        self.part = '6a08ba99-6c84-4b6e-aa5a-c0caedc741a6'
+        self.parent = '9fabbd06-d663-4519-809e-76e90e5a6ba5'
+        self.full_part = '{' + self.part + '}-{f7b4967a-9e62-4392-b8dd-e93f566630f7}'
+        self.root = WALL
+        self.marker = OTHER
+        self.database = {'databaseId': {'guid': GROUP}}
+        self.complete_guids = [self.root, self.marker]
+        self.database_success = True
+        self.has_3d_script = False
+        self.raw = dict(nativeBodySlots=0, regenerated3D=True, coordinateSystem='ABSOLUTE_PROJECT_XYZ',
+                        deletedBodySlots=[], elements=[
+                            dict(guid=self.root, type='Elevation', homeStory=0),
+                            dict(guid=self.marker, type='Object', homeStory=0, relationships={'hostGuid': GROUP}),
+                        ], materials=[], bodies=[])
+
+    def api(self, command, parameters):
+        if command == 'GetModelDumpV1':
+            return deepcopy(self.raw)
+        if command == 'GetNavigatorItemTree':
+            return {'navigatorItemTree': {'type': 'StoryItem', 'navigatorItemId': {'guid': WALL}}}
+        if command == 'GetDatabaseIdFromNavigatorItemId':
+            return {'databases': [self.database]}
+        if command == 'GetAllElements':
+            self.assertEqual(parameters['databases'], [self.database])
+            include = parameters.get('filters') == ['IncludeSubElemObjects']
+            return dict(elements=elements(self.complete_guids if include else [self.root]),
+                        executionResultForDatabases=[{'success': self.database_success}])
+        if command == 'GetDetailsOfElements':
+            details = {
+                self.root: dict(type='Elevation', floorIndex=0, details={}),
+                self.marker: dict(type='Object', floorIndex=0,
+                    details=dict(libPart=dict(name='Built-in Elevation Marker', ownUnID={'guid': self.part},
+                                              parentUnID={'guid': self.parent}),
+                                 ownerElementId={'guid': GROUP})),
+            }
+            return {'detailsOfElements': [details[row['elementId']['guid']] for row in parameters['elements']]}
+        if command == 'GetLibraryPartScripts':
+            self.assertEqual(parameters, {'libraryParts': elements([self.marker]), 'scripts': ['3d']})
+            return {'libraryParts': [{'unID': self.full_part, 'scripts': {'3d': {'present': self.has_3d_script}}}]}
+        self.fail(f'Unexpected command {command}')
+
+    def snapshot(self):
+        return CAPTURE_FULL_MODEL(self.api, [self.root], verify_empty=N.PROJECT.verify_empty_model)
+
+    def test_zero_brep_is_allowed_only_with_a_verified_floor_inventory_and_marker(self):
+        with self.assertRaisesRegex(ValueError, 'zero bodies'):
+            CAPTURE_FULL_MODEL(self.api, [self.root])
+        snapshot = self.snapshot()
+        proof = snapshot['verifiedEmptyModel']
+        self.assertEqual(proof['nativeElementCount'], 2)
+        self.assertEqual(proof['nonSpatialRootGuids'], [self.root])
+        self.assertEqual(set(proof['markerSignatures']), {self.marker})
+        N.PROJECT.check_template_markers(snapshot, proof['markerSignatures'])
+        snapshot['elements'][1]['relationships']['ownerGuid'] = self.root
+        with self.assertRaisesRegex(ValueError, 'AC30_TEMPLATE_MARKER_READBACK_DRIFT'):
+            N.PROJECT.check_template_markers(snapshot, proof['markerSignatures'])
+
+    def test_zero_brep_cannot_hide_objects_omitted_from_the_current_view(self):
+        self.complete_guids.append(str(UUID(int=91)))
+        with self.assertRaisesRegex(ValueError, 'AC30_EMPTY_FLOOR_INVENTORY_MISMATCH'):
+            self.snapshot()
+
+    def test_zero_brep_rejects_unproved_database_inventory(self):
+        self.database_success = False
+        with self.assertRaisesRegex(ValueError, 'NATIVE_DATABASE_INVENTORY_UNVERIFIED'):
+            self.snapshot()
+
+    def test_marker_name_alone_cannot_qualify_a_library_object(self):
+        self.part = str(UUID(int=92))
+        with self.assertRaisesRegex(ValueError, 'AC30_EMPTY_UNVERIFIED_LIBRARY_OBJECT'):
+            self.snapshot()
+
+    def test_marker_with_a_different_revision_or_a_3d_script_is_rejected(self):
+        self.has_3d_script = True
+        with self.assertRaisesRegex(ValueError, 'AC30_EMPTY_MARKER_REVISION_OR_3D_SCRIPT_UNVERIFIED'):
+            self.snapshot()
+        self.has_3d_script = False
+        self.full_part = '{' + self.part + '}-{' + str(UUID(int=93)) + '}'
+        with self.assertRaisesRegex(ValueError, 'AC30_EMPTY_MARKER_REVISION_OR_3D_SCRIPT_UNVERIFIED'):
+            self.snapshot()

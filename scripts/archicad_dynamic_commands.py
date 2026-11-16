@@ -409,7 +409,7 @@ class DynamicCommands:
         if checked['status']!='PLAN_VALIDATED_OFFLINE':raise ValueError('BIM_GRAPH_DEPENDENCY_OR_SCHEMA_INVALID:'+str(checked))
         return dict(schema='APA_DYNAMIC_BIM_WORKFLOW_V1',graph=copy.deepcopy(graph),catalogHash=self.fingerprint,policyHash=self.A.RUN.digest(self.policies),sourcePlanHash=self.A.RUN.digest(graph),templatePlanHash=checked['sourcePlanHash'],executionOrder=checked['executionOrder'],dependencies=bindings,executionPermission=False)
 
-    def run_workflow(self,api,plan,writer=None,scopes=None,checkpoint=None):
+    def run_workflow(self,api,plan,writer=None,scopes=None,checkpoint=None,*, verify_empty=None):
         """Sequential graph reuse; each mutation uses the same writer/SQLite.
 
         No failed step is retried. External result bindings are resolved and
@@ -429,7 +429,7 @@ class DynamicCommands:
             else:
                 if writer is None or not callable(scopes) and sid not in (scopes or {}):raise ValueError('WORKFLOW_MUTATION_REQUIRES_EXACT_STEP_SCOPE')
                 scope=scopes(step,ticket,copy.deepcopy(results)) if callable(scopes) else scopes[sid]
-                outcome=self.execute(writer,scope['scene_id'],ticket,scope['affected'],scope['retained_signatures'],scope['saved_sha256'],scope['authorization'],scope['impact'],scope['verify_after'],verify_before=scope.get('verify_before'))
+                outcome=self.execute(writer,scope['scene_id'],ticket,scope['affected'],scope['retained_signatures'],scope['saved_sha256'],scope['authorization'],scope['impact'],scope['verify_after'],verify_before=scope.get('verify_before'),verify_empty=verify_empty)
                 if outcome['status']!='PASS':
                     stopped=dict(status='STOPPED_UNKNOWN_OUTCOME',stoppedAt=sid,outcome=outcome,completedSteps=trace,results=results,automaticRetry=False)
                     if checkpoint:checkpoint(copy.deepcopy(stopped))
@@ -1023,7 +1023,7 @@ class DynamicCommands:
             rows.append(dict(guid=guid,type=element['type'],homeStory=element['homeStory'],materials=element.get('materialBindings',{}),relationships=element.get('relationships',{}),bounds=bounds,geometryAuthority='ACTUAL_RESULTANT_NATIVE_BREP' if bounds else 'NATIVE_BODY_NOT_AVAILABLE',quantities=native_body_quantities(element),providerBounds=provider,providerBoundsDelta=delta,providerBoundsInterpretation='MATCH' if delta is not None and delta<1e-5 else 'DIFFERS_NOT_PHYSICAL_BODY_AUTHORITY' if delta is not None else 'NOT_QUERIED'))
         return dict(schema='APA_SHARED_NATIVE_FACTS_V1',sourcePlanHash=workflow['sourcePlanHash'],elements=rows,engineering='NOT_VERIFIED')
 
-    def execute(self,writer,scene_id,ticket,affected,retained_signatures,saved_sha256,authorization,impact,verify_after,verify_before=None):
+    def execute(self,writer,scene_id,ticket,affected,retained_signatures,saved_sha256,authorization,impact,verify_after,verify_before=None,*, verify_empty=None):
         """Delegate exactly one approved intent to the existing SceneWriter."""
         import hashlib
         import archicad_bim_documentation as D
@@ -1033,7 +1033,8 @@ class DynamicCommands:
         binding=writer.dynamic_binding();scope=self.scope(ticket,binding,affected,retained_signatures,authorization,impact)
         pre=dict(sourcePlanHash=ticket['hash'],binding=binding,integrationBindings=dict(dependencies=dict(dynamicOperation=scope)))
         def preserved():
-            model=D.capture_full_model(writer.api,retained_signatures)
+            options = {'verify_empty': verify_empty} if verify_empty is not None else {}
+            model=D.capture_full_model(writer.api,retained_signatures, **options)
             if C.retained_geometry_signatures(model,list(retained_signatures))!=retained_signatures:raise ValueError('DYNAMIC_RETAINED_MODEL_CHANGED')
         def before():
             if ticket['effect']!='READ_ONLY' and not (ticket['command']=='SaveProject' and ticket['parameters']=={}) and not callable(verify_before):raise ValueError('OPERATION_SPECIFIC_PREFLIGHT_REQUIRED')

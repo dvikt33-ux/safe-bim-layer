@@ -5,6 +5,8 @@ from copy import deepcopy
 
 from apa_ac29_save_isolation import require, sha256
 from apa_release import read_json
+import archicad_bim_documentation as DOC
+from archicad_connected_components import retained_geometry_signatures
 import archicad_project_accelerator as APA
 from archicad_native_stair_connection import prepare_ac30_stair, read_ac30_stair
 from apa_project_design import changes_between, compile_design_for_tapir2
@@ -13,6 +15,79 @@ from archicad_authored_extension import plan_parameter_operations
 
 RUN = APA.RUN
 CREATES = {'CreateWalls', 'CreateSlabs', 'CreateDoors', 'CreateWindows', 'CreateStairs'}
+# Native main ID, subtype ID and revision ID of the built-in Elevation and Story markers.
+_TEMPLATE_MARKERS = {
+    '6a08ba99-6c84-4b6e-aa5a-c0caedc741a6': (
+        '9fabbd06-d663-4519-809e-76e90e5a6ba5', 'f7b4967a-9e62-4392-b8dd-e93f566630f7'),
+    '19225d34-ba38-44fe-baf2-94d57b069fc9': (
+        '7a407b90-c976-40db-acd5-8c3142c93727', 'e96fc2e9-c3ab-4218-8265-dcddda27b34c'),
+}
+
+
+def verify_empty_model(api, native, selected):
+    """Prove the floor-plan inventory without relying on 3D view filters."""
+    require(type(native['nativeBodySlots']) is int and native['nativeBodySlots'] == 0
+            and not native['unresolvedBodyOwners'], 'AC30_EMPTY_DUMP_UNVERIFIED')
+    tree = api('GetNavigatorItemTree', {'navigatorMapId': 'ProjectMap'})
+    story = DOC.source_view(tree, 'StoryItem')
+    database = DOC.read_database(api, DOC.item_guid(story))
+    require(RUN._GUID.fullmatch(database['databaseId']['guid']), 'AC30_EMPTY_FLOOR_DATABASE_UNVERIFIED')
+    visible_inventory = set(APA.inventory_guids(api, database=database))
+    full_inventory = APA.inventory_guids(api, database=database, include_sub_elements=True)
+    nodes = {node['guid'].lower(): node for node in native['elements']}
+    require(visible_inventory == selected and set(full_inventory) == nodes.keys(),
+            'AC30_EMPTY_FLOOR_INVENTORY_MISMATCH')
+
+    references = [{'elementId': {'guid': guid}} for guid in full_inventory]
+    details = api('GetDetailsOfElements', {'elements': references})['detailsOfElements'] if references else []
+    require(len(details) == len(references), 'AC30_EMPTY_ELEMENT_DETAILS_INCOMPLETE')
+    roots, markers = set(), set()
+    prototype_refs = {}
+    for guid, detail in zip(full_inventory, details):
+        node = nodes[guid]
+        kind = node['type']
+        require(detail.get('type') == kind and detail.get('floorIndex') == node['homeStory'],
+                'AC30_EMPTY_ELEMENT_IDENTITY_UNVERIFIED: ' + guid)
+        if kind in RUN._NONSPATIAL_TYPES:
+            roots.add(guid)
+            continue
+        require(kind == 'Object', 'AC30_EMPTY_SPATIAL_ELEMENT_PRESENT: ' + guid)
+        properties = detail['details']
+        owner = (node['relationships'].get('ownerGuid') or '').lower()
+        library = properties.get('libPart', {})
+        part = library.get('ownUnID', {}).get('guid', '').lower()
+        parent = library.get('parentUnID', {}).get('guid', '').lower()
+        require(owner != '00000000-0000-0000-0000-000000000000' and RUN._GUID.fullmatch(owner)
+                and owner == properties.get('ownerElementId', {}).get('guid', '').lower()
+                and part in _TEMPLATE_MARKERS and parent == _TEMPLATE_MARKERS[part][0],
+                'AC30_EMPTY_UNVERIFIED_LIBRARY_OBJECT: ' + guid)
+        markers.add(guid)
+        prototype_refs.setdefault(part, {'elementId': {'guid': guid}})
+    require(roots == selected and markers == set(full_inventory) - selected,
+            'AC30_EMPTY_FLOOR_CLASSIFICATION_MISMATCH')
+
+    library_proof = []
+    if prototype_refs:
+        parts = api('GetLibraryPartScripts', {
+            'libraryParts': list(prototype_refs.values()), 'scripts': ['3d'],
+        })['libraryParts']
+        require(len(parts) == len(prototype_refs), 'AC30_EMPTY_LIBRARY_SCRIPT_COVERAGE_INCOMPLETE')
+        for part, row in zip(prototype_refs, parts):
+            expected = '{' + part + '}-{' + _TEMPLATE_MARKERS[part][1] + '}'
+            require(row.get('unID', '').lower() == expected
+                    and row.get('scripts', {}).get('3d') == {'present': False},
+                    'AC30_EMPTY_MARKER_REVISION_OR_3D_SCRIPT_UNVERIFIED: ' + part)
+            library_proof.append({'libraryPartId': expected, 'has3DScript': False})
+    return dict(status='AC30_EMPTY_FLOOR_PLAN_VERIFIED', database=database, nativeBodySlots=0,
+                nativeElementCount=len(full_inventory), nonSpatialRootGuids=sorted(roots),
+                libraryParts=library_proof, markerSignatures=retained_geometry_signatures(native, sorted(markers)))
+
+
+def check_template_markers(model, expected):
+    if expected:
+        available = {row['guid'].lower() for row in model['elements']}
+        require(expected.keys() <= available and retained_geometry_signatures(model, expected) == expected,
+                'AC30_TEMPLATE_MARKER_READBACK_DRIFT')
 
 
 def design_recipe(design, variant, router):
@@ -141,11 +216,23 @@ def execute_design(job, baseline, capture):
     created = {}
     steps = {step['id']: step for step in facts['graph']['operations']}
     stories = [{'nativeIndex': s['index'], 'level': s['level']} for s in job.binding['stories']]
+    empty_proof = facts.get('verifiedEmptyModel')
+    template_markers = empty_proof['markerSignatures'] if empty_proof else {}
+    empty_rechecked = False
+
+    def verify_before_first_create(api, native, selected):
+        nonlocal empty_rechecked
+        proof = verify_empty_model(api, native, selected)
+        require(proof == empty_proof, 'AC30_APPROVED_EMPTY_FLOOR_PLAN_DRIFT')
+        empty_rechecked = True
+        return proof
 
     def scopes(step, ticket, results):
         params = ticket['parameters']
 
         def before(api):
+            if empty_proof and not created:
+                require(empty_rechecked, 'AC30_APPROVED_EMPTY_FLOOR_PLAN_DRIFT')
             # A preceding create may affect native joins. Check the host of a
             # new opening immediately before dispatch as well as at creation.
             if step['command'] in {'CreateDoors', 'CreateWindows'}:
@@ -155,6 +242,7 @@ def execute_design(job, baseline, capture):
         def after(reply, _):
             guid = RUN.created_guid(reply).lower()
             live, signatures = capture(job.api)
+            check_template_markers(live, template_markers)
             new = set(signatures) - original.keys() - owned
             require(guid in new and (set(original) | owned) <= signatures.keys(),
                     'AC30_PROJECT_CREATED_GUID_OR_PRIOR_SCOPE_DRIFT')
@@ -168,7 +256,8 @@ def execute_design(job, baseline, capture):
                     retained_signatures=original, saved_sha256=job.disk_sha, authorization=job.authorization,
                     impact='MODEL', verify_before=before, verify_after=after)
 
-    result = job.router.run_workflow(job.api, facts['workflow'], writer=job.writer, scopes=scopes)
+    result = job.router.run_workflow(job.api, facts['workflow'], writer=job.writer, scopes=scopes,
+                                     verify_empty=verify_before_first_create if empty_proof else None)
     require(result['status'] == 'WORKFLOW_CALLABLE_VERIFIED', 'AC30_PROJECT_UNKNOWN_OUTCOME_NO_REPLAY')
     model, signatures = capture(job.api)
     require(set(signatures) == set(original) | owned
@@ -177,7 +266,8 @@ def execute_design(job, baseline, capture):
     guids = {sid: row['guid'] for sid, row in created.items()}
     verify_design(job, facts, model, guids)
     return dict(status='AC30_PROJECT_NATIVE_READBACK_PASS', operationGuids=guids, addedGuids=sorted(owned),
-                boundGraph=facts['graph'], signaturesSha256=RUN.digest(signatures))
+                boundGraph=facts['graph'], signaturesSha256=RUN.digest(signatures),
+                templateMarkerSignatures=template_markers)
 
 
 def update_recipe(previous, accepted, updated, new_design, source):
