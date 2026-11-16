@@ -7,8 +7,9 @@ The installed production APA release and its signed manifest were NOT modified.
 ## Architecture
 
 ```text
-Local MCP client (e.g. Codex)
-    -> launches APA MCP server (stdio, scripts/apa_cassis_entry.py)
+ChatGPT conversation
+    -> existing APA Windows ChatGPT plugin / authorized remote tunnel
+    -> APA server (apa_control_mcp.server_for)
     -> apa_grasshopper_read / apa_grasshopper_set_slider
     -> guarded scripts/apa_cassis_bridge.py
     -> Cassis 1.6.0 on 127.0.0.1:3003/mcp/
@@ -32,23 +33,13 @@ no Cassis tool is exposed unless that flag is supplied.
 - The underlying Cassis 3003 server has no authentication: never expose it on an untrusted network.
 - Cassis can host several Rhino windows. If the active GH document changes, the adapter blocks operations; it does not automatically steal focus.
 
-## Local start (stdio)
+## Target: ChatGPT -> APA Windows (not Codex)
 
-On the APA branch checkout with dependencies installed:
+The requested user-facing entry point is the **existing ChatGPT APA Windows plugin**.
+The plugin currently exposes a fixed set of APA Windows tools; new Grasshopper tools are **not yet available through it**. The remote APA tunnel is offline (tunnel-client has not been seen for 300 seconds).
+To complete the requested route: deploy the guarded tools in the server behind the existing plugin, restore the tunnel, refresh connector discovery/schema if required, then invoke and verify `apa_grasshopper_read` from the ChatGPT conversation. None of these steps may be reported as passed before executing them.
 
-```powershell
-python scripts/apa_cassis_entry.py --profile "D:\\path\\to\\cassis-profile.json"
-```
-
-Example Codex local MCP configuration:
-
-```toml
-[mcp_servers.apa_grasshopper]
-command = "C:\\path\\to\\python.exe"
-args = ["C:\\path\\to\\APA\\scripts\\apa_cassis_entry.py", "--profile", "D:\\path\\to\\cassis-profile.json"]
-startup_timeout_sec = 30
-tool_timeout_sec = 30
-```
+The `scripts/apa_cassis_entry.py` local stdio entry point remains a development-only test fixture for the MCP protocol. It is **not** the intended production client. The temporary Codex MCP registration was removed on 2026-11-17 and its removal verified.
 
 An isolated experimental launcher may set up module search paths while this change is pending release integration. It must not be substituted for a signed production release.
 
@@ -62,7 +53,7 @@ An isolated experimental launcher may set up module search paths while this chan
 - During pilot, another session changed active GHX to `APA_Cassis_Rectangle_5x4m_apa_mcp.ghx`; pinned-graph guard blocked access.
 - Windows has Grasshopper-Archicad Live Connection 30 R1 INT 30.0.0.3000 installed; **no live-link handshake or native BIM element creation was validated**.
 - There were multiple active Archicad 30 processes. An isolated PLN copy has been staged, not opened or written by this pilot.
-- The account-specific cloud APA Windows tunnel is offline; local Codex stdio integration does NOT on its own make this MCP available to the ChatGPT cloud session.
+- The account-specific cloud APA Windows tunnel is offline; working local MCP tests do NOT make these tools available in the ChatGPT conversation.
 
 ## Native write acceptance gate (not yet passed)
 
