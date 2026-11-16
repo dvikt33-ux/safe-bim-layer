@@ -10,7 +10,7 @@
 6. **Compact handoff.** Report the capability gained, direct run command, full working GitHub URLs and verified absolute local paths, native test evidence, precise remaining blockers and next usable task. Keep routine log detail in artifacts rather than expanding the user-facing report.
 7. **Safety is not reduced.** Live writes require exact project identity, authorized test-copy scope, current operator approval, idempotency/no-replay protection, independent native readback and preserved production PLN. CI PASS alone is not native acceptance. Never merge protected branches or modify originals without authorization.
 
-**Current feature priorities (not permanent gates):** complete safe AC30 native edit on an authorized test copy; implement and accept a genuine native Stair for the R07 two-storey house; complete R07 native model and associated plans, elevations, sections, schedules and publication using existing APA mechanisms. If a native step is blocked, continue independent code work for the next feature without pretending the blocked one is accepted.
+**Current product priority:** connect the full APA cycle for creating and continuing projects through the existing brief, graph, writer, validation and documentation interfaces. Develop primarily against AC30 / Tapir 2.0 and preserve the working AC29 / Tapir 1.5.10 routes. Use R07 and a distinct design to check the shared workflow. Stair, Wall, persistence and Publisher are acceptance scenarios. When a native operation is blocked, continue independent integration work and preserve the actual acceptance status.
 
 ---
  

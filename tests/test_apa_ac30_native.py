@@ -1,12 +1,14 @@
 """Exercise AC30 campaigns against the actual router and a temporary SQLite ledger."""
 from argparse import Namespace
 from contextlib import closing
+from copy import deepcopy
 from pathlib import Path
 import sqlite3
 import sys
 import tempfile
 import unittest
 from unittest.mock import patch
+from uuid import UUID
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
@@ -20,6 +22,7 @@ GROUP = '72a79740-3137-4bb5-9f83-b6e1ffbe56c1'
 RUNTIME = dict(contract='APA_NATIVE_RUNTIME_IDENTITY_V1', nativeModelWrites=0,
                sourceRevision='1' * 40, buildIdentity='2' * 64, sdkMajor=30,
                developerId=826567491, localId=368333322)
+DESIGNS = ROOT / 'examples' / 'accelerator'
 
 
 def elements(guids):
@@ -152,3 +155,170 @@ class AC30JobTests(unittest.TestCase):
             N.Job(self.job).execute(ready['confirmSha256'])
         self.assertFalse((self.job / 'attempted.json').exists())
         self.assertEqual(self.writes, [])
+
+
+class AC30ProjectTests(unittest.TestCase):
+    """Use real project inputs, catalog, workflow and ledger with a fake transport."""
+
+    def setUp(self):
+        temp = tempfile.TemporaryDirectory()
+        self.addCleanup(temp.cleanup)
+        self.root = Path(temp.name).resolve()
+        self.source = self.root / 'donor.pln'
+        self.source.write_bytes(b'Protected donor fixture')
+        self.addon = self.root / 'fixture.apx'
+        self.addon.write_bytes((RUNTIME['sourceRevision'] + RUNTIME['buildIdentity']).encode())
+        self.project = None
+        self.pid = 12345
+        self.writes = []
+        self.items = {}
+        self.stories = [dict(index=index, floorId=index + 4, level=level, name=name)
+                        for index, level, name in [(3, 0, 'Ground'), (4, 3, 'Upper')]]
+        self.recipe = None
+        for target, effect in (
+            ('apa_ac30_native.open_test_port', lambda path: 19723 if path == self.project else None),
+            ('apa_ac30_native.listener', lambda port, **_: dict(pid=self.pid, startedAt=str(self.pid), port=port)),
+            ('apa_ac30_native.native_command', self.transport),
+            ('apa_ac30_native.DOC.capture_full_model', lambda *_: self.model()),
+            ('apa_ac30_native.reservation_owner_exited', lambda *_: True),
+        ):
+            mock = patch(target, side_effect=effect)
+            mock.start()
+            self.addCleanup(mock.stop)
+
+    def stage(self, filename, variant, prior=None):
+        job = self.root / ('update' if prior else variant)
+        source = prior.project if prior else self.source
+        N.stage(Namespace(action='stage-update' if prior else 'stage-project', job=job, source=source,
+                          source_sha=N.sha256(source), addon=self.addon, addon_sha=N.sha256(self.addon),
+                          design=DESIGNS / filename, variant=variant, prior_job=prior.path if prior else None,
+                          build=3001, source_revision=RUNTIME['sourceRevision'],
+                          build_identity=RUNTIME['buildIdentity']))
+        prepared = N.Job(job)
+        self.project = prepared.project
+        self.recipe = prepared.recipe
+        return prepared
+
+    def model(self):
+        return dict(stories=[{'index': s['index'], 'elevation': s['level']} for s in self.stories],
+                    elements=[row['element'] for row in self.items.values()])
+
+    def registered_read(self, command):
+        return {
+            'GetProjectInfo': dict(projectPath=str(self.project), projectName=self.project.stem,
+                                   isUntitled=False, isTeamwork=False),
+            'API.GetProductInfo': dict(version=30, buildNumber=3001),
+            'GetAddOnVersion': {'version': '2.0.0'},
+            'GetAPARuntimeInfoV1': RUNTIME,
+            'GetStories': {'stories': self.stories},
+            'GetAllElements': {'elements': elements(self.items)},
+            'API.IsAddOnCommandAvailable': {'available': True},
+            'GetAttributesByType': {'attributes': [
+                {'name': self.recipe['slabMaterial'], 'attributeId': {'guid': WALL}},
+            ]},
+            'GetFavoritesByType': {'favorites': [p['operation']['params']['stairsData'][0]['favoriteName']
+                                                for p in self.recipe['stairPlans'].values()]},
+        }.get(command)
+
+    def transport(self, port, command, parameters, **kwargs):
+        read = self.registered_read(command)
+        if read is not None:
+            return read
+        if command == 'Get3DBoundingBoxes':
+            # The test's read-only admission starts with an empty fixture.
+            self.assertEqual(parameters['elements'], [])
+            return {'boundingBoxes3D': []}
+        if command == 'GetDetailsOfElements':
+            return {'detailsOfElements': [self.items[row['elementId']['guid']]['details']
+                                          for row in parameters['elements']]}
+        self.writes.append(command)
+        if command == 'SaveProject':
+            self.assertEqual(parameters, {})
+            self.project.write_bytes(('Saved fixture ' + str(len(self.writes))).encode())
+            return {'success': True}
+        if command == 'ModifyWindows':
+            edit, = parameters['windowsWithDetails']
+            item = self.items[edit['elementId']['guid']]
+            item['details']['details']['width'] = edit['width']
+            item['element']['bodies'][0]['vertices'][1][0] = edit['width']
+            host = item['details']['details']['ownerElementId']['guid']
+            self.items[host]['element']['bodies'][0]['vertices'][1][0] = edit['width']
+            return {'executionResults': [{'success': True}]}
+        if command in {'CreateWalls', 'CreateSlabs', 'CreateDoors', 'CreateWindows'}:
+            guid = str(UUID(int=len(self.items) + 1))
+            params, = next(iter(parameters.values()))
+            details = deepcopy(params)
+            floor = details.get('floorIndex')
+            if command == 'CreateWalls':
+                level = next(row['level'] for row in self.stories if row['index'] == floor)
+                details.update(geometryType='Straight', begThickness=params['thickness'],
+                               endThickness=params['thickness'], zCoordinate=level + params['zCoordinate'])
+            elif command == 'CreateSlabs':
+                level = next(row['level'] for row in self.stories if row['index'] == floor)
+                details.update(zCoordinate=params['level'], level=params['level'] - level,
+                               polygonOutline=params['polygonCoordinates'])
+            else:
+                host = self.items[params['ownerWallId']['guid']]
+                self.assertEqual(host['element']['type'], 'Wall')
+                floor = host['element']['homeStory']
+                details.update(ownerElementId=params['ownerWallId'], ownerElementType='Wall')
+            kind = command[6:-1]
+            self.items[guid] = dict(
+                details=dict(type=kind, floorIndex=floor, details=details),
+                element=dict(guid=guid, type=kind, homeStory=floor,
+                             bodies=[dict(vertices=[[0, 0, 0], [1, 1, 1]])]))
+            return {'elements': elements([guid])}
+        self.fail(f'Unexpected command {command}')
+
+    def save_reopen(self, job, ready):
+        saved = N.Job(job.path).execute(ready['confirmSha256'])
+        self.assertEqual(saved['status'], 'SAVED_PENDING_REAL_REOPEN')
+        N.Job(job.path).closed()
+        self.pid += 1
+        result = N.Job(job.path).reopened()
+        self.assertEqual(result['status'], 'SAVE_REOPEN_VERIFIED')
+        return result
+
+    def test_r06_graph_write_window_edit_and_two_story_documentation(self):
+        job = self.stage('r06-two-storey-design.json', 'two-storeys')
+        ready = job.preflight()
+        self.assertEqual(self.writes, [])
+        self.assertEqual(len(ready['facts']['workflow']['executionOrder']), 17)
+        self.assertEqual(ready['facts']['storyIndices'], [3, 4])
+        base = self.save_reopen(job, ready)
+        self.assertEqual(len(base['operationReadback']['operationGuids']), 17)
+        self.assertEqual(N.Job(job.path).execute(ready['confirmSha256'])['status'], 'ALREADY_APPLIED')
+        self.assertEqual(len(self.writes), 18)
+        self.assertEqual(self.writes.count('SaveProject'), 1)
+        docs = N.Job(job.path).documentation(self.root / 'documentation')
+        self.assertEqual(docs['stories'], [3, 4])
+        self.assertEqual(docs['publisherPdf'], 'NOT_TESTED')
+
+        design = N.read_json(DESIGNS / 'r06-two-storey-design.json')
+        design['brief'].update(mode='CONTINUE_EXISTING_PROJECT', targetProjectPath=str(job.project))
+        opening = next(row for row in design['variants'][0]['layout']['passages'] if row['id'] == 'living-window')
+        opening['width'] = 1.6
+        updated = self.root / 'changed-design.json'
+        N.write_new_json(updated, design)
+        update = self.stage(updated, 'two-storeys', prior=N.Job(job.path))
+        update_ready = update.preflight()
+        after = self.save_reopen(update, update_ready)
+        self.assertEqual(self.writes[18:], ['ModifyWindows', 'SaveProject'])
+        self.assertEqual(after['operationReadback']['operationGuids'], base['operationReadback']['operationGuids'])
+        self.assertEqual(after['documentationChange']['changedNativeModelGuids'], update.recipe['affectedGuids'])
+        new_docs = N.Job(update.path).documentation(self.root / 'updated-documentation')
+        self.assertNotEqual(docs['modelVersion'], new_docs['modelVersion'])
+        self.assertEqual(N.sha256(job.project), base['savedSha256'])
+        self.assertEqual(self.source.read_bytes(), b'Protected donor fixture')
+
+    def test_r07_uses_the_same_preflight_with_stair_dependencies(self):
+        job = self.stage('r07-two-storey-house.json', 'house-a')
+        ready = job.preflight()
+        facts = ready['facts']
+        stair = next(row for row in facts['graph']['operations'] if row['command'] == 'CreateStairs')
+        self.assertEqual(stair['params']['stairsData'][0]['floorIndex'], 3)
+        self.assertEqual(facts['workflow']['dependencies'][stair['id']], stair['after'])
+        self.assertEqual(len(facts['workflow']['executionOrder']), 22)
+        self.assertEqual(ready['modelWrites'], 0)
+        self.assertEqual(self.writes, [])
+        self.assertFalse((job.path / 'attempted.json').exists())

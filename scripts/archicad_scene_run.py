@@ -234,133 +234,185 @@ def guarded_scene_project(api, required_story=None, *, allow_3d_view_for_write=F
     return {key: binding[key] for key in ("path", "name", "port", "tapirVersion", "storyIndex")}
 
 
-def scan_for_existing_geometry(api, anchor_x, anchor_y, envelope=None):
-    """Conservatively refuse if an existing 3D body touches the scene envelope.
+_STAIR_PARTS = {
+    'Riser': ('stairRisers', 'risers'),
+    'Tread': ('stairTreads', 'treads'),
+    'StairStructure': ('stairStructures',),
+}
+_RAILING_PARTS = {
+    'RailingToprail': ('railingToprails',),
+    'RailingHandrail': ('railingHandrails',),
+    'RailingRail': ('railingRails',),
+    'RailingPost': ('railingPosts',),
+    'RailingInnerPost': ('railingInnerPosts',),
+    'RailingBaluster': ('railingBalusters',),
+    'RailingPanel': ('railingPanels',),
+    'RailingToprailEnd': ('railingToprailEnds',),
+    'RailingHandrailEnd': ('railingHandrailEnds',),
+    'RailingRailEnd': ('railingRailEnds',),
+    'RailingToprailConnection': ('railingToprailConnections',),
+    'RailingHandrailConnection': ('railingHandrailConnections',),
+    'RailingRailConnection': ('railingRailConnections',),
+}
 
-    Every existing element is scanned, not just selected Walls. Malformed,
-    unsupported or incomplete API responses block all scene writes.
-    """
-    all_elements = api("GetAllElements", {})
-    elements = all_elements.get("elements") if isinstance(all_elements, dict) else None
+
+def scan_for_existing_geometry(api, anchor_x, anchor_y, envelope=None):
+    """Check every existing element against the scope of proposed model writes."""
+    inventory = api("GetAllElements", {})
+    elements = inventory.get("elements") if isinstance(inventory, dict) else None
     if not isinstance(elements, list) or len(elements) > 50000:
         raise ValueError("SPATIAL_SCAN_UNAVAILABLE: missing/oversized native inventory")
+    keys = ("xMin", "xMax", "yMin", "yMax", "zMin", "zMax")
     if envelope is None:
         lowx, highx = anchor_x-.35, anchor_x+SCENE.WIDTH+.35
         lowy, highy = anchor_y-.35, anchor_y+SCENE.DEPTH+.35
         lowz, highz = -SCENE.SLAB_THICKNESS-.1, SCENE.HEIGHT+.1
     else:
-        if (not isinstance(envelope, dict) or set(envelope) !=
-                {"xMin", "xMax", "yMin", "yMax", "zMin", "zMax"}):
+        if (not isinstance(envelope, dict) or set(envelope) != set(keys)
+                or not all(type(envelope[k]) in (int, float) and math.isfinite(envelope[k]) for k in keys)):
             raise ValueError("INVALID_SCENE_ENVELOPE")
-        coordinates = [envelope[k] for k in
-                       ("xMin", "xMax", "yMin", "yMax", "zMin", "zMax")]
-        if any(type(n) not in (float, int) or not math.isfinite(n)
-               for n in coordinates):
-            raise ValueError("INVALID_SCENE_ENVELOPE")
-        if any(coordinates[i] >= coordinates[i+1] for i in (0, 2, 4)):
+        if any(envelope[axis+'Min'] >= envelope[axis+'Max'] for axis in 'xyz'):
             raise ValueError("INVERTED_SCENE_ENVELOPE")
-        lowx, highx, lowy, highy, lowz, highz = (
-            envelope["xMin"]-.35, envelope["xMax"]+.35,
-            envelope["yMin"]-.35, envelope["yMax"]+.35,
-            envelope["zMin"]-.1, envelope["zMax"]+.1)
-    checked = 0
-    nonspatial = 0
+        lowx, highx = envelope["xMin"]-.35, envelope["xMax"]+.35
+        lowy, highy = envelope["yMin"]-.35, envelope["yMax"]+.35
+        lowz, highz = envelope["zMin"]-.1, envelope["zMax"]+.1
+
+    def native_guid(row):
+        ref = row.get('elementId') if isinstance(row, dict) else None
+        value = ref.get('guid') if isinstance(ref, dict) else None
+        if not isinstance(value, str) or not _GUID.fullmatch(value):
+            raise ValueError("SPATIAL_SCAN_UNAVAILABLE: invalid element GUID row")
+        return value.lower()
+
+    guids = {native_guid(row) for row in elements}
+    if len(guids) != len(elements):
+        raise ValueError("SPATIAL_SCAN_UNAVAILABLE: duplicate inventory identity")
+
+    checked = nonspatial = 0
     native_dump = None
     native_elements = None
+    hierarchy = {}
     resultant_fallbacks = []
     bodyless_external = []
     bodyless_stair_parts = []
-    stair_members = {}
-    # Batch modestly; do not hold a massive JSON response in memory.
-    for i in range(0, len(elements), 100):
-        batch = elements[i:i+100]
-        if any(not isinstance(v, dict) or not _GUID.fullmatch(str(
-               v.get("elementId", {}).get("guid", ""))) for v in batch):
-            raise ValueError("SPATIAL_SCAN_UNAVAILABLE: invalid element GUID row")
+
+    def load_geometry():
+        nonlocal native_dump, native_elements
+        if native_elements is not None:
+            return
+        native_dump = api('GetModelDumpV1', {})
+        slots = native_dump.get('nativeBodySlots')
+        body_ids = [body.get('nativeBodyIndex') for body in native_dump.get('bodies', [])]
+        deleted = native_dump.get('deletedBodySlots', [])
+        indices = body_ids + deleted
+        if (type(slots) is not int or slots < 0 or native_dump.get('regenerated3D') is not True
+                or native_dump.get('coordinateSystem') != 'ABSOLUTE_PROJECT_XYZ'
+                or len(indices) != slots or any(type(index) is not int for index in indices)
+                or set(indices) != set(range(1, slots + 1))):
+            raise ValueError('SPATIAL_SCAN_UNAVAILABLE: incomplete native body slots')
+        import archicad_authored_geometry as GEOMETRY
+        snapshot = GEOMETRY.normalize_dump(native_dump)
+        native_elements = {row['guid'].lower(): row for row in snapshot['elements']}
+        if (snapshot.get('unresolvedBodyOwners') or len(native_elements) != len(snapshot['elements'])
+                or any(row['bodies'] for g, row in native_elements.items() if g not in guids)):
+            raise ValueError('SPATIAL_SCAN_UNAVAILABLE: native body ownership or inventory mismatch')
+
+    def check_parent(guid, element, kind, slots):
+        parent = (element.get('relationships', {}).get('hostGuid') or '').lower()
+        if parent not in guids or native_elements.get(parent, {}).get('type') != kind:
+            raise ValueError('SPATIAL_SCAN_UNAVAILABLE: hierarchical child owner unverified')
+        if parent not in hierarchy:
+            params = {'elements': [{'elementId': {'guid': parent}}]}
+            reply = api('GetSubelementsOfHierarchicalElements', params).get('subelements')
+            if not isinstance(reply, list) or len(reply) != 1 or not isinstance(reply[0], dict):
+                raise ValueError('SPATIAL_SCAN_UNAVAILABLE: hierarchical membership incomplete')
+            hierarchy[parent] = reply[0]
+        members = []
+        for slot in slots:
+            rows = hierarchy[parent].get(slot, [])
+            if not isinstance(rows, list):
+                raise ValueError('SPATIAL_SCAN_UNAVAILABLE: hierarchical membership malformed')
+            members.extend(native_guid(row) for row in rows)
+        if members.count(guid) != 1:
+            raise ValueError('SPATIAL_SCAN_UNAVAILABLE: hierarchical membership mismatch')
+
+    # Bounded queries preserve row association and avoid huge response payloads.
+    for offset in range(0, len(elements), 100):
+        batch = elements[offset:offset+100]
         boxes = api("Get3DBoundingBoxes", {"elements": batch})
         rows = boxes.get("boundingBoxes3D") if isinstance(boxes, dict) else None
         if not isinstance(rows, list) or len(rows) != len(batch):
             raise ValueError("SPATIAL_SCAN_UNAVAILABLE: incomplete 3D boxes")
-        # Some plan annotations have no 3D body. Their explicit native
-        # geometry errors can be ignored ONLY after typed native classification;
-        # unsupported 3D objects or unknown failures still stop all writes.
-        unavailable = []
-        keys = ("xMin", "xMax", "yMin", "yMax", "zMin", "zMax")
-        for index, item in enumerate(rows):
-            b = item.get("boundingBox3D") if isinstance(item, dict) else None
-            if b is None and isinstance(item, dict) and "error" in item:
-                unavailable.append(batch[index])
-                continue
-            if (not isinstance(b, dict) or not all(
-                    type(b.get(k)) in (int, float) and math.isfinite(b[k])
-                    for k in keys)):
-                raise ValueError("SPATIAL_SCAN_UNAVAILABLE: invalid 3D bbox")
-            if (b["xMin"] > b["xMax"] or b["yMin"] > b["yMax"]
-                    or b["zMin"] > b["zMax"]):
-                # The installed universal API returns empty sentinel XY extents
-                # for real Beam/Column segments. Use actual resultant bodies,
-                # not an invented box or a rewritten provider field.
-                if native_dump is None:
-                    native_dump = api('GetModelDumpV1', {})
-                    slots = native_dump.get('nativeBodySlots')
-                    body_ids = [v.get('nativeBodyIndex') for v in native_dump.get('bodies', [])]
-                    deleted = native_dump.get('deletedBodySlots', [])
-                    if (type(slots) is not int or native_dump.get('regenerated3D') is not True or
-                            native_dump.get('coordinateSystem') != 'ABSOLUTE_PROJECT_XYZ' or
-                            len(body_ids + deleted) != len(set(body_ids + deleted)) or
-                            set(body_ids + deleted) != set(range(1, slots + 1))):
-                        raise ValueError('SPATIAL_SCAN_UNAVAILABLE: incomplete native body slots')
-                    import archicad_authored_geometry as GEOMETRY
-                    native_elements = {e['guid'].lower(): e for e in
-                        GEOMETRY.normalize_dump(native_dump)['elements']}
-                guid = batch[index]['elementId']['guid'].lower()
+        missing = [i for i, item in enumerate(rows)
+                   if isinstance(item, dict) and 'error' in item and 'boundingBox3D' not in item]
+        types = {}
+        if missing:
+            reply = api('GetDetailsOfElements', {'elements': [batch[i] for i in missing]})
+            details = reply.get('detailsOfElements')
+            if not isinstance(details, list) or len(details) != len(missing):
+                raise ValueError('SPATIAL_SCAN_UNAVAILABLE: native type coverage missing')
+            types = {i: row.get('type') for i, row in zip(missing, details)
+                     if isinstance(row, dict) and 'error' not in row}
+
+        for i, item in enumerate(rows):
+            guid = native_guid(batch[i])
+            b = item.get('boundingBox3D') if isinstance(item, dict) else None
+            explicit = i in missing
+            native_type = types.get(i)
+            sentinel = False
+            if explicit:
+                if native_type in _NONSPATIAL_TYPES:
+                    nonspatial += 1
+                    continue
+                error = item['error']
+                # Tapir 2 reports this on some hierarchy members that do have
+                # resultant bodies. The code alone says nothing about occupancy.
+                if not native_type or not isinstance(error, dict) or error.get('code') != -2130313215:
+                    raise ValueError("SPATIAL_SCAN_UNAVAILABLE: unbounded 3D/unknown element")
+            else:
+                if (not isinstance(b, dict)
+                        or not all(type(b.get(k)) in (int, float) and math.isfinite(b[k]) for k in keys)):
+                    raise ValueError("SPATIAL_SCAN_UNAVAILABLE: invalid 3D bbox")
+                sentinel = any(b[a+'Min'] > b[a+'Max'] for a in 'xyz')
+
+            if explicit or sentinel:
+                load_geometry()
                 element = native_elements.get(guid)
-                if not element:raise ValueError('SPATIAL_SCAN_UNAVAILABLE: missing native identity')
-                vertices = [v for body in element['bodies'] for v in body['vertices']]
+                if element is None or (explicit and element.get('type') != native_type):
+                    raise ValueError('SPATIAL_SCAN_UNAVAILABLE: missing or mismatched native identity')
+                kind = element.get('type')
+                if kind in _STAIR_PARTS:
+                    check_parent(guid, element, 'Stair', _STAIR_PARTS[kind])
+                if kind in _RAILING_PARTS:
+                    check_parent(guid, element, 'Railing', _RAILING_PARTS[kind])
+                vertices = [vertex for body in element['bodies'] for vertex in body['vertices']]
                 if vertices:
-                    b = {axis + bound: fn(v[k] for v in vertices)
-                        for k, axis in enumerate(('x', 'y', 'z'))
-                        for bound, fn in [('Min', min), ('Max', max)]}
+                    b = {axis + suffix: fn(vertex[k] for vertex in vertices)
+                         for k, axis in enumerate('xyz') for suffix, fn in [('Min', min), ('Max', max)]}
                     resultant_fallbacks.append(guid)
-                elif (element.get('nativeTypeId') == 150 and
-                        all(b[a+'Min'] == 1e35 and b[a+'Max'] == -1e35 for a in ('x','y'))):
-                    # No semantic MEP/analytical classification is inferred.
-                    # Slot-complete native model and empty universal extent both
-                    # establish no available volumetric body. Preserve the GUID
-                    # and explicitly retain the native view/filter scope below.
+                elif kind in {'Riser', 'Tread'} and element.get('nativeTypeId') in {48, 49}:
+                    # The independently identified parent is also in the scan.
+                    bodyless_stair_parts.append(guid)
+                    nonspatial += 1
+                    continue
+                elif (sentinel and element.get('nativeTypeId') == 150
+                      and all(b[a+'Min'] == 1e35 and b[a+'Max'] == -1e35 for a in 'xy')):
                     bodyless_external.append(guid)
                     nonspatial += 1
                     continue
-                elif (element.get('type') in {'Riser','Tread'} and element.get('nativeTypeId') in {48,49}
-                        and all(b[a+'Min']==1e35 and b[a+'Max']==-1e35 for a in ('x','y'))):
-                    parent=element.get('relationships',{}).get('hostGuid','').lower()
-                    if native_elements.get(parent,{}).get('type')!='Stair':raise ValueError('SPATIAL_SCAN_UNAVAILABLE: stair child owner unverified')
-                    if parent not in stair_members:
-                        parts=api('GetSubelementsOfHierarchicalElements',{'elements':[{'elementId':{'guid':parent}}]})['subelements']
-                        if len(parts)!=1:raise ValueError('SPATIAL_SCAN_UNAVAILABLE: stair membership incomplete')
-                        stair_members[parent]={r.get('elementId',{}).get('guid','').lower() for values in parts[0].values() if isinstance(values,list) for r in values}
-                    if guid not in stair_members[parent]:raise ValueError('SPATIAL_SCAN_UNAVAILABLE: stair child membership mismatch')
-                    bodyless_stair_parts.append(guid);nonspatial+=1;continue
-                else:raise ValueError('SPATIAL_SCAN_UNAVAILABLE: inverted 3D bbox')
+                else:
+                    raise ValueError('SPATIAL_SCAN_UNAVAILABLE: unbounded 3D/unknown element: ' + guid)
             if (b["xMin"] <= highx and b["xMax"] >= lowx
                     and b["yMin"] <= highy and b["yMax"] >= lowy
                     and b["zMin"] <= highz and b["zMax"] >= lowz):
                 raise ValueError("SPATIAL_COLLISION: existing element inside scene envelope")
             checked += 1
-        if unavailable:
-            classified = api("GetDetailsOfElements", {"elements": unavailable})
-            types = classified.get("detailsOfElements") if isinstance(classified, dict) else None
-            if (not isinstance(types, list) or len(types) != len(unavailable)
-                    or any(not isinstance(t, dict)
-                           or t.get("type") not in _NONSPATIAL_TYPES for t in types)):
-                raise ValueError("SPATIAL_SCAN_UNAVAILABLE: unbounded 3D/unknown element")
-            nonspatial += len(unavailable)
     return {"nativeElementsInspected": checked+nonspatial,
             "volumetricBodiesChecked": checked,
             "nonSpatialElementsVerified": nonspatial - len(bodyless_external)-len(bodyless_stair_parts),
-            "bodylessNativeStairChildren": bodyless_stair_parts,
-            "resultantBodyBoundsFallbackGuids": resultant_fallbacks,
-            "bodylessExternalGuids": bodyless_external,
+            "bodylessNativeStairChildren": sorted(bodyless_stair_parts),
+            "resultantBodyBoundsFallbackGuids": sorted(resultant_fallbacks),
+            "bodylessExternalGuids": sorted(bodyless_external),
             "bodylessExternalSemantics": 'NOT_VERIFIED_NO_TYPE_INFERENCE',
             "geometryScope": native_dump.get('geometryScope') if native_dump else 'UNIVERSAL_NATIVE_BOUNDS'}
 
@@ -452,11 +504,10 @@ def verify_readback(command, params, row, owner_guid=None, expected_floor=0,
             wanted = expected.get(source, 0.0) if source in ('offset', 'arcAngle') else expected[source]
             if not close(details.get(target), wanted):
                 raise ValueError("WALL_SIZE_READBACK_MISMATCH: " + target)
-        # CreateWalls zCoordinate is a floor-local offset in the pinned graph;
-        # native GetDetailsOfElements returns absolute project Z in observed
-        # Archicad 29: story 1 at +3m => requested 0m, readback +3m.
-        if not close(details.get("zCoordinate"),
-                     expected_story_level + expected["zCoordinate"]):
+        # With an explicit floorIndex, CreateWalls uses a floor-local offset.
+        # GetDetailsOfElements reports the absolute project Z.
+        elevation = expected["zCoordinate"] + expected_story_level
+        if not close(details.get("zCoordinate"), elevation):
             raise ValueError("WALL_STORY_Z_READBACK_MISMATCH")
         if any(details.get(k) != v for k, v in (
             ("structureType", expected.get("structureType", "Basic")), ("referenceLineLocation", "Center"),

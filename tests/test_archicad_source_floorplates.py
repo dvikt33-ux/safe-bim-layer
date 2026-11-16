@@ -93,4 +93,59 @@ class BodylessStairScanTests(unittest.TestCase):
     def test_bodyless_child_does_not_hide_actual_parent_collision(self):
         with self.assertRaisesRegex(ValueError,'SPATIAL_COLLISION'):self.scan(parent_x=0)
 
+class AC30BoundingBoxErrorTests(unittest.TestCase):
+    def scan(self, *, rail_x=100, member=True, body=True, complete=True, code=-2130313215):
+        stair, riser, railing, rail = [
+            f'00000000-0000-4000-8000-00000000000{i}' for i in range(1, 5)
+        ]
+        roots = dict(xMin=100, xMax=101, yMin=0, yMax=1, zMin=0, zMax=3)
+        no_box = {'error': {'code': code}}
+        raw = dict(regenerated3D=True, coordinateSystem='ABSOLUTE_PROJECT_XYZ',
+                   nativeBodySlots=1 if complete else 2, bodies=[dict(nativeBodyIndex=1)],
+                   deletedBodySlots=[], geometryScope='TEST_NATIVE_FILTER_SCOPE')
+        normal = dict(elements=[
+            dict(guid=stair, type='Stair', nativeTypeId=47, bodies=[]),
+            dict(guid=railing, type='Railing', nativeTypeId=51, bodies=[]),
+            dict(guid=riser, type='Riser', nativeTypeId=48, bodies=[], relationships=dict(hostGuid=stair)),
+            dict(guid=rail, type='RailingRail', nativeTypeId=54, relationships=dict(hostGuid=railing),
+                 bodies=[dict(vertices=[[rail_x, 0, 0], [rail_x + 1, 1, 1]])] if body else []),
+        ])
+        def element(guid):
+            return dict(elementId=dict(guid=guid))
+        def api(command, params):
+            if command == 'GetAllElements':
+                return dict(elements=[element(g) for g in (stair, riser, railing, rail)])
+            if command == 'Get3DBoundingBoxes':
+                return dict(boundingBoxes3D=[dict(boundingBox3D=roots), no_box, dict(boundingBox3D=roots), no_box])
+            if command == 'GetDetailsOfElements':
+                return dict(detailsOfElements=[dict(type='Riser'), dict(type='RailingRail')])
+            if command == 'GetSubelementsOfHierarchicalElements':
+                owner = params['elements'][0]['elementId']['guid']
+                return dict(subelements=[dict(stairRisers=[element(riser)]) if owner == stair
+                                         else dict(railingRails=[element(rail)] if member else [])])
+            self.assertEqual(command, 'GetModelDumpV1')
+            return raw
+        with patch.object(G, 'normalize_dump', return_value=normal):
+            return A.RUN.scan_for_existing_geometry(api, 0, 0)
+
+    def test_ac30_recovers_rail_bounds_and_checks_bodyless_stair_membership(self):
+        result = self.scan()
+        self.assertEqual(result['nativeElementsInspected'], 4)
+        self.assertEqual(result['volumetricBodiesChecked'], 3)
+        self.assertEqual(len(result['resultantBodyBoundsFallbackGuids']), 1)
+        self.assertEqual(len(result['bodylessNativeStairChildren']), 1)
+
+    def test_ac30_actual_body_collision_is_blocked(self):
+        with self.assertRaisesRegex(ValueError, 'SPATIAL_COLLISION'):
+            self.scan(rail_x=0)
+
+    def test_ac30_missing_proof_remains_blocked(self):
+        for args, reason in (({'member': False}, 'membership mismatch'),
+                             ({'body': False}, 'unbounded 3D'),
+                             ({'complete': False}, 'incomplete native body slots'),
+                             ({'code': -1}, 'unbounded 3D')):
+            with self.subTest(args=args), self.assertRaisesRegex(ValueError, reason):
+                self.scan(**args)
+
+
 if __name__=='__main__':unittest.main()

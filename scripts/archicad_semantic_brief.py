@@ -121,6 +121,8 @@ def normalize(doc):
             "stories","rooms","constraints"}
     if not isinstance(doc,dict) or not fields<=set(doc) or set(doc)-fields-{"targetProjectPath", "openQuestions"}:
         raise ValueError("INVALID_SEMANTIC_BRIEF_FIELDS")
+    if doc["mode"] == "CONTINUE_EXISTING_PROJECT":
+        doc = dict(doc, mode="ADAPT_EXISTING")
     if doc["schemaVersion"]!=SCHEMA or doc["units"]!="meters" or doc["mode"] not in MODES:
         raise ValueError("UNSUPPORTED_BRIEF_SCHEMA_MODE_OR_UNITS")
     project=_id(doc["projectId"],"PROJECT_ID")

@@ -209,6 +209,12 @@ def document_reopened_job(job, destination, story=None, *, publisher_folder=None
     require(destination.parent.is_dir() and not destination.exists()
             and not destination.is_relative_to(job) and not destination.is_relative_to(STABLE.resolve()),
             "DOCUMENTATION_JOB_REQUIRES_NEW_DIRECTORY_OUTSIDE_HISTORY")
+    from apa_ac30_native import Job as AC30Job, SCHEMA as AC30_SCHEMA
+
+    manifest_path = job / "job.json"
+    if manifest_path.is_file() and read_json(manifest_path).get("schema") == AC30_SCHEMA:
+        require(publisher_folder is None, "AC30_PUBLISHER_LINKED_LAYOUT_NOT_QUALIFIED")
+        return AC30Job(job).documentation(destination, story)
     intent, plan, result, native, signatures, reopened, provenance = _verified_authored_job(job)
     require(reopened.get("reopenedGuids") == sorted(signatures), "DOCUMENTATION_REOPENED_GUIDS_NOT_VERIFIED")
     selected = result["addedGuids"]

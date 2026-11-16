@@ -26,7 +26,7 @@ class AC30StraightFlightTests(unittest.TestCase):
         self.assertEqual(plan['slabDependencies'], ['native-slab-level-1', 'native-slab-level-2'])
         self.assertIn('stair-required', self.candidate['requiredOpenIds'])
 
-    def test_tapir2_building_preview_converts_walls_and_keeps_dependencies(self):
+    def test_tapir2_building_preview_keeps_wall_offsets_and_slab_elevations(self):
         from apa_project_design import compile_design_for_tapir2
 
         variant = compile_design_for_tapir2(self.intent)['variants'][0]
@@ -39,7 +39,10 @@ class AC30StraightFlightTests(unittest.TestCase):
         for row in ops.values():
             if row['command'] == 'CreateWalls':
                 wall, = row['params']['wallsData']
-                self.assertEqual(wall['zCoordinate'], [0, 3][wall['floorIndex']])
+                self.assertEqual(wall['zCoordinate'], 0)
+            if row['command'] == 'CreateSlabs':
+                slab, = row['params']['slabsData']
+                self.assertEqual(slab['level'], [0, 3][slab['floorIndex']])
         self.assertEqual(ops['native-stair-stair-required']['after'], ['native-slab-level-1', 'native-slab-level-2'])
 
     def test_tread_spacing_is_measured_from_native_faces(self):

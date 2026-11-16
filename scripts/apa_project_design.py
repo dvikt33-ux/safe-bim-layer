@@ -19,7 +19,7 @@ def compile_design(intent):
 
 
 def compile_design_for_tapir2(intent):
-    """Prepare the existing authored graph in the Tapir 2 absolute Z convention."""
+    """Compile the authored graph to the Tapir 2 contracts."""
     from archicad_native_stair_connection import prepare_ac30_stair
     from archicad_tapir_catalog import load_for_runtime
 
@@ -37,9 +37,6 @@ def compile_design_for_tapir2(intent):
                 flight = prepare_ac30_stair(candidate, link['requirementId'], router.catalog)
                 flights[link['stairOperationId']] = flight['operation']['params']
         for operation in graph['operations']:
-            if operation['command'] == 'CreateWalls':
-                wall, = operation['params']['wallsData']
-                wall['zCoordinate'] += levels[wall['floorIndex']]
             if operation['id'] in flights:
                 operation['params'] = flights[operation['id']]
         compiled = APA.SCENE.GRAPH.compile_graph(router.catalog, graph, runtime_version='2.0.0')

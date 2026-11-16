@@ -182,8 +182,25 @@ def prepare_building_parameter_edit(api,old_plan,created,new_intent,schema_path)
         raise ValueError('MODEL_EDIT_REQUIRES_COMPLETE_AUTHORED_SOURCE')
     proposed=(A.compile_intent(new_intent,schema_path) if new_intent.get('schemaVersion')=='archicad-project-intent/1'
         else A.compile_authored_intent(new_intent,schema_path,api))
-    old={s['id']:s for s in old_plan['graph']['operations']}
-    new={s['id']:s for s in proposed['graph']['operations']}
+    operations = plan_parameter_operations(old_plan['graph'], proposed['graph'], verified)
+    if old_plan['storyBindings']!=proposed['storyBindings']:
+        raise ValueError('MODEL_EDIT_GLOBAL_STORIES_REQUIRE_SEPARATE_PROJECT_SCOPE')
+    next_plan=copy.deepcopy(old_plan)
+    next_plan.update(graph=proposed['graph'],intent=copy.deepcopy(new_intent),metrics=proposed['metrics'])
+    checked=A.SCENE.GRAPH.compile_graph(A.catalog_with_provenance(schema_path),
+        next_plan['graph'],runtime_version=RUN.EXPECTED_TAPIR)
+    next_plan['sourcePlanHash']=RUN.native_plan_hash(next_plan,checked['sourcePlanHash'])
+    payload={'schema':'APA_AUTHORED_MODEL_PARAMETER_EDIT_V1','oldPlanHash':old_plan['sourcePlanHash'],
+        'newPlan':next_plan,'created':verified,'operations':operations,'newCreates':0,
+        'guidPolicy':'PRESERVE_ALL_EXISTING','automaticRetry':False}
+    payload['sourceHash']=RUN.digest(payload)
+    return payload
+
+
+def plan_parameter_operations(before_graph, after_graph, created):
+    """Translate supported parameter changes while preserving native identities."""
+    old={s['id']:s for s in before_graph['operations']}
+    new={s['id']:s for s in after_graph['operations']}
     if old.keys()!=new.keys():raise ValueError('MODEL_EDIT_CANNOT_ADD_REMOVE_OR_RECREATE_ELEMENTS')
     operations=[]
     for sid,before in old.items():
@@ -206,18 +223,7 @@ def prepare_building_parameter_edit(api,old_plan,created,new_intent,schema_path)
         else:raise ValueError('MODEL_PARAMETER_EDIT_UNSUPPORTED:'+sid+':'+','.join(sorted(changed)))
         operations.append({'id':sid,'command':native,'parameters':params})
     if not operations:raise ValueError('MODEL_EDIT_NO_PARAMETER_CHANGE')
-    if old_plan['storyBindings']!=proposed['storyBindings']:
-        raise ValueError('MODEL_EDIT_GLOBAL_STORIES_REQUIRE_SEPARATE_PROJECT_SCOPE')
-    next_plan=copy.deepcopy(old_plan)
-    next_plan.update(graph=proposed['graph'],intent=copy.deepcopy(new_intent),metrics=proposed['metrics'])
-    checked=A.SCENE.GRAPH.compile_graph(A.catalog_with_provenance(schema_path),
-        next_plan['graph'],runtime_version=RUN.EXPECTED_TAPIR)
-    next_plan['sourcePlanHash']=RUN.native_plan_hash(next_plan,checked['sourcePlanHash'])
-    payload={'schema':'APA_AUTHORED_MODEL_PARAMETER_EDIT_V1','oldPlanHash':old_plan['sourcePlanHash'],
-        'newPlan':next_plan,'created':verified,'operations':operations,'newCreates':0,
-        'guidPolicy':'PRESERVE_ALL_EXISTING','automaticRetry':False}
-    payload['sourceHash']=RUN.digest(payload)
-    return payload
+    return operations
 
 
 def execute_model_operation(writer,scene_id,command,parameters,source_hash,owned_guids,

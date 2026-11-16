@@ -1,4 +1,4 @@
-"""Bounded AC30 Stair and Wall acceptance jobs over the shared SceneWriter."""
+"""Guarded AC30 project and acceptance jobs over the shared SceneWriter."""
 from __future__ import annotations
 
 import argparse
@@ -10,6 +10,7 @@ from uuid import uuid4
 from jsonschema import ValidationError
 
 import apa_ac30_wall_preflight as WALL
+import apa_ac30_project as PROJECT
 from apa_ac29_reusable_native_copy import GuardedSaveTransport
 from apa_ac29_save_isolation import (
     ScratchWriteLease, confirm_project_closed, copy_exclusive, preserve_guarded_save,
@@ -36,6 +37,11 @@ QUERY_READS = frozenset({
 })
 POLICIES = {
     'CreateStairs': ('CREATE', 'MODEL', 'ExtendedElementCommands.cpp'),
+    'CreateWalls': ('CREATE', 'MODEL', 'ExtendedElementCommands.cpp'),
+    'CreateSlabs': ('CREATE', 'MODEL', 'ElementCreationCommands.cpp'),
+    'CreateDoors': ('CREATE', 'MODEL', 'ExtendedElementCommands.cpp'),
+    'CreateWindows': ('CREATE', 'MODEL', 'ExtendedElementCommands.cpp'),
+    'ModifyWindows': ('MODIFY', 'MODEL', 'ExtendedElementCommands.cpp'),
     'ModifyWalls': ('MODIFY', 'MODEL', 'ExtendedElementCommands.cpp'),
     'SetSuspendGroupsMode': ('MODIFY', 'PROJECT', 'ElementGroupingCommands.cpp'),
     'SaveProject': ('TRANSACTION', 'PROJECT', 'ProjectCommands.cpp'),
@@ -63,6 +69,20 @@ def stage(args):
         require(variant is not None and 'candidate' in variant, 'AC30_VALID_DESIGN_VARIANT_REQUIRED')
         recipe = prepare_ac30_stair(variant['candidate'], args.requirement, router.catalog)
         recipe.update(kind='stair', design=str(intent), designSha256=sha256(intent), variant=args.variant)
+    elif args.action in {'stage-project', 'stage-update'}:
+        intent = exact_file(str(args.design.absolute()))
+        current = read_json(intent)
+        recipe = PROJECT.design_recipe(current, args.variant, router)
+        if args.action == 'stage-update':
+            previous = Job(args.prior_job)
+            accepted = previous.accepted_project()
+            require(previous.project == source and previous.recipe['variant'] == args.variant,
+                    'AC30_UPDATE_REQUIRES_EXACT_ACCEPTED_SOURCE_AND_VARIANT')
+            recipe = PROJECT.update_recipe(previous, accepted, recipe, current, source)
+        else:
+            require(recipe['projectMode'] == 'GENERATE_FROM_ZERO', 'AC30_PROJECT_CREATE_REQUIRES_NEW_PROJECT_BRIEF')
+            recipe['kind'] = 'project'
+        recipe.update(design=str(intent), designSha256=sha256(intent))
     else:
         candidate = read_json(args.candidate)
         require(candidate['originalSha256'] == args.source_sha, 'AC30_WALL_CANDIDATE_SOURCE_DRIFT')
@@ -111,14 +131,21 @@ class Job:
         self.project = exact_file(m['project'])
         self.source = exact_file(m['source'])
         self.addon = exact_file(m['addon'])
-        require(m['schema'] == SCHEMA and self.kind in {'stair', 'wall'}
+        require(m['schema'] == SCHEMA and self.kind in {'stair', 'wall', 'project', 'update'}
                 and self.project == self.path / 'model' / f'APA-AC30-{self.kind}-test.pln'
                 and self.project != self.source, 'AC30_EXACT_JOB_COPY_REQUIRED')
         self.disk_sha = m['initialSha256']
         self.lease = None
         self.router, catalog_sha = load_for_runtime({}, RUNTIME)
         require(m['catalogSha256'] == catalog_sha, 'AC30_JOB_CATALOG_DRIFT')
-        self.writes = {'CreateStairs'} if self.kind == 'stair' else {'ModifyWalls', 'SetSuspendGroupsMode'}
+        if self.kind == 'project':
+            self.writes = {step['command'] for step in self.recipe['graph']['operations']}
+            require(self.writes <= PROJECT.CREATES, 'AC30_PROJECT_MUTATION_NOT_APPROVED')
+        elif self.kind == 'update':
+            require(self.recipe['change']['command'] == 'ModifyWindows', 'AC30_UPDATE_MUTATION_NOT_APPROVED')
+            self.writes = {'ModifyWindows'}
+        else:
+            self.writes = {'CreateStairs'} if self.kind == 'stair' else {'ModifyWalls', 'SetSuspendGroupsMode'}
         self.writes.add('SaveProject')
         for command in sorted(self.writes):
             kind, impact, file = POLICIES[command]
@@ -188,9 +215,11 @@ class Job:
     def probe(self):
         commands = {'GetProjectInfo', 'GetStories', 'GetAddOnVersion', 'GetAllElements', 'GetDetailsOfElements'}
         commands |= self.writes
-        if self.kind == 'stair':
+        if self.kind in {'stair', 'project', 'update'}:
             commands |= {'GetFavoritesByType', 'Get3DBoundingBoxes', 'Get3DGeometryOfElements',
                          'GetSubelementsOfHierarchicalElements'}
+            if self.kind in {'project', 'update'}:
+                commands.add('GetAttributesByType')
         else:
             commands |= {'GetGroupsOfElements', 'GetElementsOfGroups', 'GetSuspendGroupsMode'}
         for command in sorted(commands):
@@ -228,6 +257,28 @@ class Job:
         model, signatures = capture(self.api)
         if self.kind == 'wall':
             facts = self.wall_facts(self.recipe['before'], model)
+        elif self.kind in {'project', 'update'}:
+            require(sha256(self.recipe['design']) == self.recipe['designSha256'], 'AC30_PROJECT_DESIGN_SOURCE_DRIFT')
+            current = PROJECT.design_recipe(read_json(self.recipe['design']), self.recipe['variant'], self.router)
+            require(all(self.recipe[key] == value for key, value in current.items()),
+                    'AC30_STAGED_PROJECT_PLAN_DRIFT')
+            facts = PROJECT.bind_design(self.recipe, self.binding['stories'], self.api, self.router)
+            if self.recipe['stairPlans']:
+                favorites = self.read('GetFavoritesByType', {'elementType': 'Stair'})['favorites']
+                require(all(step['params']['stairsData'][0]['favoriteName'] in favorites
+                            for step in facts['graph']['operations'] if step['command'] == 'CreateStairs'),
+                        'AC30_STAIR_FAVORITE_MISSING_IN_TEST_PLN')
+            if self.kind == 'project':
+                box = self.recipe['envelope']
+                facts['spatialScan'] = RUN.scan_for_existing_geometry(self.api, box['xMin'], box['yMin'], box)
+            else:
+                require(RUN.digest(signatures) == self.recipe['sourceSignaturesSha256'],
+                        'AC30_UPDATE_COPY_DIFFERS_FROM_ACCEPTED_MODEL')
+                PROJECT.verify_design(self, {'graph': self.recipe['beforeGraph']}, model,
+                                      self.recipe['operationGuids'])
+                self.router.prepare(self.recipe['change']['command'], self.recipe['change']['parameters'])
+                facts['change'] = self.recipe['change']
+                facts['affectedGuids'] = self.recipe['affectedGuids']
         else:
             data = self.recipe['operation']['params']['stairsData'][0]
             native_indices = self.stair_story_indices()
@@ -237,9 +288,9 @@ class Job:
                         'zMin': data['zCoordinate'], 'zMax': data['zCoordinate'] + data['totalHeight']}
             require(data['favoriteName'] in self.read('GetFavoritesByType', {'elementType': 'Stair'})['favorites'],
                     'AC30_STAIR_FAVORITE_MISSING_IN_TEST_PLN')
-            RUN.scan_for_existing_geometry(self.api, x0, y0, envelope)
+            spatial = RUN.scan_for_existing_geometry(self.api, x0, y0, envelope)
             facts = {'storyIndices': native_indices, 'placementEnvelope': envelope,
-                     'favoriteName': data['favoriteName']}
+                     'favoriteName': data['favoriteName'], 'spatialScan': spatial}
         require(self.guard() == self.binding, 'AC30_JOB_BINDING_DRIFT')
         return {'signatures': signatures, 'facts': facts}
 
@@ -264,8 +315,11 @@ class Job:
                 and not self.project.with_name(self.project.name + '.apa-write.lock').exists(),
                 'AC30_EXISTING_ATTEMPT_RECONCILE_WITH_READBACK_NO_REPLAY')
 
+    def scene_id(self, scene):
+        return 'AC30-' + self.manifest_sha[:20] + '-' + scene
+
     def dispatch(self, scene, command, params, affected, signatures, verify, before):
-        return self.router.execute(self.writer, 'AC30-' + self.manifest_sha[:20] + '-' + scene,
+        return self.router.execute(self.writer, self.scene_id(scene),
                                    self.router.prepare(command, params), affected,
                                    signatures, self.disk_sha, self.authorization,
                                    POLICIES[command][1], verify, verify_before=before)
@@ -351,6 +405,10 @@ class Job:
                                       dynamic_project_guard=self.guard)
         if self.kind == 'wall':
             proof = self.modify_wall(baseline)
+        elif self.kind == 'project':
+            proof = PROJECT.execute_design(self, baseline, capture)
+        elif self.kind == 'update':
+            proof = PROJECT.execute_update(self, baseline, capture)
         else:
             step = self.recipe['operation']
             params = json.loads(RUN.canonical(step['params']))
@@ -444,6 +502,9 @@ class Job:
             result = read_ac30_stair(self.read, previous['guid'], self.recipe, self.stair_story_indices())
             require(result == {k: v for k, v in previous.items() if k not in {'addedGuids', 'signaturesSha256'}},
                     'AC30_REOPEN_STAIR_DRIFT')
+        elif self.kind in {'project', 'update'}:
+            PROJECT.verify_design(self, {'graph': previous['boundGraph']}, model, previous['operationGuids'])
+            result = previous
         else:
             result = self.wall_facts(self.recipe['after'], model)
             require(all(result[key] == previous[key] for key in ('wallGuid', 'groupMembers', 'actualHeight', 'zMin', 'zMax')),
@@ -451,14 +512,72 @@ class Job:
         require(self.guard() == now and self.api.write_attempts == 0, 'AC30_REOPEN_NOT_READ_ONLY')
         record = dict(status='SAVE_REOPEN_VERIFIED', savedSha256=self.disk_sha, verifiedElementCount=len(signatures),
                       signaturesSha256=RUN.digest(signatures), operationReadback=result, verificationNativeWrites=0)
+        if self.kind in {'project', 'update'}:
+            guids = sorted(result['operationGuids'].values())
+            details = {guid: RUN.requested_details(self.api, guid) for guid in guids}
+            record['bimSnapshot'] = DOC.make_snapshot(model, guids, details)
+            if self.kind == 'update':
+                record['documentationChange'] = DOC.compare_versions(self.recipe['previousDocumentation'],
+                                                                     record['bimSnapshot'])
+            require(self.guard() == now and self.api.write_attempts == 0, 'AC30_DOCUMENTATION_CAPTURE_DRIFT')
         write_new_json(self.path / 'reopened.json', record)
         return record
+
+    def accepted_project(self):
+        require(self.kind in {'project', 'update'}, 'AC30_PROJECT_JOB_REQUIRED')
+        saved = self.saved()
+        reopened = read_json(self.path / 'reopened.json')
+        closed = read_json(self.path / 'closed.json')
+        require(closed.get('status') == 'AC30_REAL_CLOSE_CONFIRMED'
+                and closed.get('listener') == saved['binding']['listener']
+                and closed.get('savedReceiptSha256') == sha256(self.path / 'saved.json')
+                and reopened.get('status') == 'SAVE_REOPEN_VERIFIED'
+                and reopened.get('savedSha256') == saved['savedSha256']
+                and reopened.get('signaturesSha256') == RUN.digest(saved['signatures'])
+                and reopened.get('verificationNativeWrites') == 0
+                and reopened.get('operationReadback') == saved['operationReadback'],
+                'AC30_PROJECT_ACCEPTANCE_EVIDENCE_MISMATCH')
+        selected = set(saved['operationReadback']['operationGuids'].values())
+        snapshot = reopened['bimSnapshot']
+        require({row['guid']: row['bodySignature'] for row in snapshot['elements']}
+                == {guid: saved['signatures'][guid] for guid in selected}
+                and snapshot['modelVersion'] == RUN.digest({
+                    'stories': snapshot['stories'],
+                    'elementSignatures': {guid: saved['signatures'][guid] for guid in selected},
+                }), 'AC30_PROJECT_BIM_SNAPSHOT_DRIFT')
+        return reopened
+
+    def documentation(self, output, story=None):
+        target = output.resolve()
+        require(target.parent.is_dir() and not target.exists()
+                and not target.is_relative_to(self.path), 'AC30_DOCUMENTATION_REQUIRES_NEW_OUTPUT_OUTSIDE_JOB')
+        accepted = self.accepted_project()
+        snapshot = accepted['bimSnapshot']
+        occupied = sorted({row['storyIndex'] for row in snapshot['elements']})
+        require(story is None or story in occupied, 'AC30_DOCUMENTATION_STORY_OUTSIDE_MODEL')
+        stories = occupied if story is None else [story]
+        package = DOC.bundle(snapshot, stories[0])
+        package['plansByStory'] = {str(i): DOC.bundle(snapshot, i)['plan'] for i in stories}
+        package['savedPlnSha256'] = accepted['savedSha256']
+        package['reopenedReceiptSha256'] = sha256(self.path / 'reopened.json')
+        package['operationGuids'] = accepted['operationReadback']['operationGuids']
+        if self.kind == 'update':
+            package['documentationChange'] = accepted['documentationChange']
+        DOC.write_package(package, target)
+        result = dict(status='REOPENED_ASSEMBLY_DOCUMENTATION_WRITTEN', modelVersion=package['modelVersion'],
+                      savedPlnSha256=package['savedPlnSha256'],
+                      reopenedReceiptSha256=package['reopenedReceiptSha256'],
+                      stories=stories, elements=len(snapshot['elements']), nativeViews='NOT_TESTED',
+                      publisherPdf='NOT_TESTED', files={p.name: sha256(p) for p in target.iterdir()})
+        write_new_json(target / 'receipt.json', result)
+        return result
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='action', required=True)
-    for action in ('stage-stair', 'stage-wall', 'preflight', 'execute', 'verify-closed', 'verify-reopen'):
+    for action in ('stage-stair', 'stage-wall', 'stage-project', 'stage-update',
+                   'preflight', 'execute', 'verify-closed', 'verify-reopen'):
         sub = commands.add_parser(action)
         sub.add_argument('--job', type=Path, required=True)
         if action.startswith('stage-'):
@@ -468,10 +587,13 @@ def main(argv=None):
             sub.add_argument('--source-revision', required=True)
             sub.add_argument('--build-identity', required=True)
             sub.add_argument('--build', type=int, required=True)
-        if action == 'stage-stair':
+        if action in {'stage-stair', 'stage-project', 'stage-update'}:
             sub.add_argument('--design', type=Path, required=True)
             sub.add_argument('--variant', required=True)
+        if action == 'stage-stair':
             sub.add_argument('--requirement', required=True)
+        if action == 'stage-update':
+            sub.add_argument('--prior-job', type=Path, required=True)
         if action == 'stage-wall':
             sub.add_argument('--candidate', type=Path, required=True)
         if action == 'execute':
