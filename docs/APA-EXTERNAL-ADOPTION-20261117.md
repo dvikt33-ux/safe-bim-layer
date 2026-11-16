@@ -12,7 +12,7 @@
 | SzamosiMate Tapir MCP | REUSE PATTERN: компактный инструмент, каталог по запросу | DynamicCommands и `apa_tapir_bridge.py` уже существуют; НЕ устанавливать второй MCP |
 | Tapir 2.0 | REUSE: основной native backend | Каталог и защищённое чтение присутствуют; новая native запись в AC30 отдельно |
 | IfcTester | REUSE существующий `apa_ifc_reports_b1.py` | Код IDSReportODS и закреплённые версии 0.8.5 уже имеются; повторная приемка IFC/ODS требуется |
-| Archicad-MCP | BUILD GAP ONLY: YAML-правила без произвольного исполнения | Источник правил изучен частично; интеграция в текущей ветке не выполнена |
+| Archicad-MCP | ADAPT: безопасное подмножество YAML-правил на закреплённом снимке | Этот PR: `apa_rule_audit.py`, 12/12 offline tests, MCP `apa_bim_rules` PASS на синтетическом снимке; native PLN не испытан |
 | Cassis 1.6.0 | COMPOSE с APA MCP | Готов отдельный draft PR #217; безопасный локальный MCP проверен, облачный туннель не подключён |
 | Grasshopper Live Connection 30 | ADAPT только после привязки PLN | Установлен, но нативная запись и reopen НЕ испытаны |
 | Graphisoft Public MCP | REVIEW в контексте лицензии/preview | Не внедрён, не делать второй исполнитель без gap evidence |
@@ -47,3 +47,15 @@
 4. Интеграции с внешними алгоритмами — только после независимого сравнения с APA Spatial. Не утверждать общую приёмку дома по разным историческим тестам.
 
 **Общий статус этого PR:** `IMPLEMENTED / READ_ONLY_LIVE_PASS / RELEASE_PENDING`.
+
+## YAML-аудит BIM — опциональный read-only механизм
+
+`scripts/apa_rule_audit.py` поддерживает четыре типа правил: `property-required`, `classification-required`, `layer-compliance` (список допустимых слоёв) и `zone-number-required`. Это **подмножество** схемы Archicad-MCP, не импорт чужого Python-кода. Условия `where`, regex, произвольные расширения и нативные вызовы намеренно не разрешены.
+
+Входы: только `.json` снимок и `.yaml` набор правил в каталоге `experiments`, плюс локально подтверждённый профиль `APA_RULE_AUDIT_PROFILE_V1`, содержащий точные SHA-256 каждого файла. Снимок обязан явно перечислять прочитанные группы свойств/классификаций и флаги доступности слоёв/зон. Отсутствие прочитанных данных даёт `SKIPPED`, а не ложный `PASS` или `FAIL`. Перед и после работы проверяется SHA-256. Ни одна операция не пишет в Archicad.
+
+Доступ через существующий APA MCP: `--rule-audit-profile path` (opt-in), инструмент `apa_bim_rules(operation="audit"|"status")`.
+
+Проверка Windows 17.11.2026: `py_compile` PASS; 12/12 Python unittest PASS; HTTP MCP 127.0.0.1:18791 (тестовый процесс) инициализация 200, tool discovery, `apa_bim_rules status/audit` PASS; 3 успешных правила, `nativeCalls=0`, `modelWrites=0`, `liveModelVerified=false`. **Переход к нативному снимку отдельным шагом**, только после привязки точного проекта и подтверждения полноты данных.
+
+Проверка существующего APA B1 (17.11.2026): синтетический IFC4 + IDS прошёл через `apa_ifc_reports_b1.call("ids-ods",...)` в изолированном Python-процессе; `idsPassed=true`, ODS SHA readback соответствует, версии `ifcopenshell=ifctester=0.8.5`, `modelWrites=0`. В Fibery сохранён артефакт `APA-IFC-B1-IDS-ODS-20261117`. Реальный PLN/IFC не проверялся.
