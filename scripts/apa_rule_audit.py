@@ -121,9 +121,10 @@ def _missing(value):
 def _check(rule, snapshot):
     typ = rule["type"]
     scope = (rule.get("applies_to") or {}).get("element_type")
-    elements = [row for row in snapshot["elements"]
-                if row["element_type"] == "Zone" if typ == "zone-number-required"] if typ == "zone-number-required" else [
-                row for row in snapshot["elements"] if not scope or row["element_type"] == scope]
+    if typ == "zone-number-required":
+        elements = [row for row in snapshot["elements"] if row["element_type"] == "Zone"]
+    else:
+        elements = [row for row in snapshot["elements"] if not scope or row["element_type"] == scope]
     coverage = snapshot["coverage"]
     required = {
         "property-required": rule.get("property") in coverage["properties"],
@@ -163,9 +164,9 @@ class RuleAuditControl:
     def __init__(self, profile):
         self.profile = _path(str(profile), {".json"}, 8192)
         raw = json.loads(self.profile.read_text(encoding="utf-8-sig"))
-        if not isinstance(raw, dict) or set(raw) != {
+        if (not isinstance(raw, dict) or set(raw) != {
                 "schema", "snapshot", "snapshotSha256", "rules", "rulesSha256"} or
-                raw["schema"] != PROFILE_SCHEMA:
+                raw["schema"] != PROFILE_SCHEMA):
             raise ValueError("APA_RULE_PROFILE_INVALID")
         self.snapshot = _path(raw["snapshot"], {".json"}, 16 * 1024 * 1024)
         self.rules = _path(raw["rules"], {".yaml", ".yml"}, 128 * 1024)
