@@ -24,13 +24,15 @@ SCHEMA = "APA_MCP_PROFILE_V1"
 ID = re.compile(r"[a-z0-9][a-z0-9-]{2,63}")
 HEX = re.compile(r"[a-f0-9]{64}")
 TEST_ID = re.compile(r"r03-(?:authored|gpt-shell)-mcp-[a-z0-9-]{4,40}")
-Operation = Literal["doctor", "plan", "native-read", "preflight", "write", "check-closed", "verify-reopen"]
+Operation = Literal["doctor", "plan", "native-read", "preflight", "write", "check-closed", "verify-reopen",
+                    "gh-read", "gh-rectangle", "gh-verify"]
 ReadKind = Literal["status", "job", "receipt"]
 TapirOperation = Literal["status", "catalog", "read"]
 Receipt = Literal["plan", "native-inventory", "stdout", "stderr"]
 ARTIFACTS = {"plan": "plan.json", "native-inventory": "native-inventory.json",
              "stdout": "stdout.txt", "stderr": "stderr.txt"}
 NATIVE = {"native-read", "preflight", "write", "check-closed", "verify-reopen"}
+GH = {"gh-read", "gh-rectangle", "gh-verify"}
 PRE_SAVE = {"preflight", "write"}
 MAX_INPUT = 256_000
 MAX_ACTIVE = 8
@@ -64,7 +66,8 @@ class Control:
         self.release = read_release(self.root)
         self.release_sha = sha256(self.root / MANIFEST)
         profile_fields = {"schema", "releaseManifestSha256", "campaigns"}
-        require(isinstance(config, dict) and set(config) in (profile_fields, profile_fields | {"tapirProfile"})
+        require(isinstance(config, dict) and profile_fields <= set(config)
+                and set(config) <= profile_fields | {"tapirProfile", "cassisProfile"}
                 and config["schema"] == SCHEMA and config["releaseManifestSha256"] == self.release_sha
                 and isinstance(config["campaigns"], dict) and len(config["campaigns"]) <= 12,
                 "MCP_PROFILE_RELEASE_OR_SCHEMA_DRIFT")
@@ -76,6 +79,11 @@ class Control:
                     and type(row["writeEnabled"]) is bool, "MCP_CAMPAIGN_SCOPE_INVALID")
             self.campaign(target)
         self.check_release(full=True)
+        self.cassis_profile = None
+        if "cassisProfile" in config:
+            from apa_cassis_bridge import CassisBridge
+            self.cassis_profile = exact_path(Path(config["cassisProfile"]))
+            CassisBridge(self.cassis_profile)
         self.tapir = None
         if "tapirProfile" in config:
             from apa_tapir_bridge import TapirControl
@@ -149,8 +157,9 @@ class Control:
                 record = file_json(request)
                 if record["profileSha256"] != self.profile_sha:
                     continue
+                unknown = (folder / "running.json").exists() and record.get("operation") in ({"write"} | GH)
                 self.finish(folder, record, "INTERRUPTED_NO_AUTORETRY",
-                            nativeOutcome="UNKNOWN" if (folder / "running.json").exists() else "NOT_STARTED")
+                            nativeOutcome="UNKNOWN" if unknown else "NOT_STARTED")
 
     def finish(self, folder, request, status, **facts):
         from apa_ac29_autonomous_job_bridge import durable_write
@@ -161,17 +170,19 @@ class Control:
 
     def submit(self, operation, job_id, target=None, intent=None):
         self.check_release()
-        require(operation in {"doctor", "plan"} | NATIVE, "MCP_OPERATION_NOT_ALLOWED")
+        require(operation in {"doctor", "plan"} | NATIVE | GH, "MCP_OPERATION_NOT_ALLOWED")
         require((target is not None) == (operation in NATIVE)
-                and (intent is not None) == (operation == "plan"), "MCP_OPERATION_ARGUMENTS_INVALID")
+                and (intent is not None) == (operation == "plan" or operation in GH),
+                "MCP_OPERATION_ARGUMENTS_INVALID")
         if intent is not None:
             try:
                 size = len(output_json(intent).encode("utf-8"))
             except (RecursionError, ValueError) as exc:
                 raise ValueError("MCP_PLAN_INPUT_INVALID") from exc
-            require(isinstance(intent, dict) and intent.get("schemaVersion") in {
-                "apa-semantic-project-brief/1", "apa-project-design/1"}
-                and size <= MAX_INPUT // 4, "MCP_PLAN_INPUT_INVALID")
+            approved_schemas = ({"apa-gh-command/1"} if operation in GH else
+                                {"apa-semantic-project-brief/1", "apa-project-design/1"})
+            require(isinstance(intent, dict) and intent.get("schemaVersion") in approved_schemas
+                    and size <= MAX_INPUT // 4, "MCP_PLAN_INPUT_INVALID")
         folder = self.folder(job_id)
         request = dict(operation=operation, target=target, intent=intent, profileSha256=self.profile_sha)
         with self.submission:
@@ -190,6 +201,8 @@ class Control:
             return self.read("job", job_id=folder.name)
         if target is not None:
             require(target in self.campaigns, "MCP_TARGET_NOT_CONFIGURED")
+        if operation in GH:
+            require(self.cassis_profile is not None, "MCP_CASSIS_NOT_CONFIGURED")
         if operation == "write":
             self.local_grant(folder.name, target)
         active = sum((p / "request.json").is_file() and not (p / "result.json").is_file()
@@ -238,6 +251,14 @@ class Control:
                 source, result = folder / "intent.json", folder / "plan.json"
                 write_new_json(source, request["intent"])
                 args += ["plan", "--intent", str(source), "--output", str(result)]
+            elif operation in GH:
+                source = folder / "intent.json"
+                write_new_json(source, request["intent"])
+                args = [sys.executable, "-I", "-B", "-X", "utf8",
+                        str(self.root / "scripts/apa_cassis_bridge.py"),
+                        "--profile", str(self.cassis_profile), "--intent", str(source),
+                        "--operation", operation]
+                dispatched = operation != "gh-read"
             else:
                 args += self.native_args(folder, operation, target)
                 dispatched = True
@@ -245,12 +266,12 @@ class Control:
         except subprocess.TimeoutExpired as exc:
             facts = self.record_output(folder, exc.stdout or b"", exc.stderr or b"")
             return self.finish(folder, request, "TIMED_OUT_NO_AUTORETRY",
-                               nativeOutcome="UNKNOWN" if operation == "write" else "NO_MODEL_WRITE",
+                               nativeOutcome="UNKNOWN" if operation in ({"write"} | (GH - {"gh-read"})) else "NO_MODEL_WRITE",
                                exitCode=None, **facts)
         except (OSError, ValueError, KeyError, TypeError, RuntimeError, subprocess.SubprocessError) as exc:
             return self.finish(folder, request, "BLOCKED",
                                reason=str(exc).replace(str(self.root), "APA")[:260],
-                               nativeOutcome="UNKNOWN" if dispatched and operation == "write" else "NOT_DISPATCHED",
+                               nativeOutcome="UNKNOWN" if dispatched and operation in ({"write"} | GH) else "NOT_DISPATCHED",
                                exitCode=None)
 
     def native_args(self, folder, operation, target):
@@ -288,12 +309,19 @@ class Control:
             pass
         if request["operation"] == "write":
             ok = process.returncode == 0 and phase == "LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN"
+        elif request["operation"] in GH:
+            expected = {"gh-read": "GH_READ_VERIFIED",
+                        "gh-rectangle": "GH_RECTANGLE_SAVED_PENDING_REOPEN",
+                        "gh-verify": "GH_RECTANGLE_REOPEN_VERIFIED"}
+            ok = process.returncode == 0 and phase == expected[request["operation"]]
         else:
             ok = process.returncode == 0 and phase is not None
         return self.finish(folder, request, "COMPLETE" if ok else "FAILED",
                            phaseStatus=phase, exitCode=process.returncode,
-                           nativeOutcome=("RECORDED" if ok else "CHECK_NATIVE_JOURNAL_NO_REPLAY")
-                           if request["operation"] == "write" else "NO_MODEL_WRITE",
+                           nativeOutcome=(("RECORDED" if ok else "CHECK_NATIVE_JOURNAL_NO_REPLAY")
+                                          if request["operation"] == "write" else
+                                          ("GH_ONLY_NO_ARCHICAD_WRITE" if ok else "GH_RESULT_UNKNOWN_NO_REPLAY")
+                                          if request["operation"] in GH else "NO_MODEL_WRITE"),
                            receipt=receipt if isinstance(receipt, dict) and len(process.stdout) <= 8_000 else None,
                            **facts)
 
@@ -315,7 +343,8 @@ class Control:
             return dict(status="MCP_APA_READY", releaseRevision=self.release["revision"],
                         manifestSha256=self.release_sha, nativeRuntime="REQUEST_NATIVE_READ",
                         targets=[dict(id=target, writeEnabled=row["writeEnabled"])
-                                 for target, row in self.campaigns.items()])
+                                 for target, row in self.campaigns.items()],
+                        cassisConfigured=self.cassis_profile is not None)
         require(kind in {"job", "receipt"}, "MCP_READ_KIND_NOT_ALLOWED")
         folder = self.folder(job_id)
         require(folder.is_dir(), "MCP_UNKNOWN_JOB_ID")
