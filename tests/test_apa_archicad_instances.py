@@ -37,7 +37,7 @@ class InstanceTests(unittest.TestCase):
         self.assertFalse(result["nativeReadbackVerified"])
 
     def test_wrong_project_blocked(self):
-        self.assertEqual(self.client.perform("match", [19724], PROJECT + "_wrong", 30, "2.0.0")["status"], "BLOCKED")
+        self.assertEqual(self.client.perform("match", [19724], str((Path.cwd() / "OTHER.pln").resolve()), 30, "2.0.0")["status"], "BLOCKED")
 
     def test_wrong_version_blocked(self):
         self.assertEqual(self.client.perform("match", [19723], PROJECT, 29, "2.0.0")["reason"],
