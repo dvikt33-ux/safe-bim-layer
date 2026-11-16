@@ -347,7 +347,7 @@ class Control:
         return datetime.now(timezone.utc).isoformat()
 
 
-def server_for(control=None, *, tapir=None, ac30_quantities=None, instances=None):
+def server_for(control=None, *, tapir=None, ac30_quantities=None, instances=None, rules=None):
     import anyio
     from mcp.server import MCPServer
 
@@ -410,6 +410,12 @@ def server_for(control=None, *, tapir=None, ac30_quantities=None, instances=None
             return await call(instances.perform, operation, ports, expected_project,
                               expected_archicad_version, expected_tapir_version, blocked_error=True)
 
+    if rules is not None:
+        @server.tool(annotations=ToolAnnotations(readOnlyHint=True, openWorldHint=False))
+        async def apa_bim_rules(operation: Literal["status", "audit"]) -> CallToolResult:
+            """Audit a SHA-pinned offline BIM snapshot using a safe YAML rule subset."""
+            return await call(rules.perform, operation, blocked_error=True)
+
     if ac30_quantities is not None:
         @server.tool(annotations=ToolAnnotations(readOnlyHint=True, openWorldHint=False))
         async def apa_ac30_read(kind: Literal["status", "quantities"]) -> CallToolResult:
@@ -435,12 +441,18 @@ def main(argv=None):
     parser.add_argument("--port", type=int, help="Optional HTTP port on 127.0.0.1. Default is stdio.")
     parser.add_argument("--grant", nargs=3, metavar=("JOB_ID", "TARGET", "PREFLIGHT_SHA256"))
     parser.add_argument("--discover-instances", action="store_true", help="Opt-in read-only instance metadata")
+    parser.add_argument("--rule-audit-profile", type=Path, help="Opt-in pinned offline YAML audit")
     args = parser.parse_args(argv)
-    require(not (args.port and args.grant) and not (args.discover_instances and args.grant), "MCP_SELECT_ONE_MODE")
+    require(not (args.port and args.grant) and not (args.discover_instances and args.grant)
+            and not (args.rule_audit_profile and args.grant), "MCP_SELECT_ONE_MODE")
     instances = None
     if args.discover_instances:
         from apa_archicad_instances import ArchicadInstanceDiscovery
         instances = ArchicadInstanceDiscovery()
+    rules = None
+    if args.rule_audit_profile is not None:
+        from apa_rule_audit import RuleAuditControl
+        rules = RuleAuditControl(args.rule_audit_profile)
     profile = args.profile.absolute()
     from archicad_tapir_profile import BRIDGE_SCHEMA, LEGACY_AC30_SCHEMA
 
@@ -449,7 +461,7 @@ def main(argv=None):
         from apa_tapir_bridge import TapirControl
 
         require(not args.grant, "TAPIR_READ_PROFILE_CANNOT_GRANT_NATIVE_WRITE")
-        run_server(server_for(tapir=TapirControl(profile), instances=instances), args.port)
+        run_server(server_for(tapir=TapirControl(profile), instances=instances, rules=rules), args.port)
         return 0
     if args.grant:
         # A local operator grant may be added while the single MCP transport is running.
@@ -468,7 +480,7 @@ def main(argv=None):
         return 0
     control = Control(root, profile)
     try:
-        run_server(server_for(control, instances=instances), args.port)
+        run_server(server_for(control, instances=instances, rules=rules), args.port)
     finally:
         control.close()
     return 0
