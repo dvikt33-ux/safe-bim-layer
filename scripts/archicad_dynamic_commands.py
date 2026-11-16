@@ -1030,7 +1030,7 @@ class DynamicCommands:
         import archicad_connected_components as C
         self.validate(ticket);writer.api.bind_dynamic_commands(self)
         self.probe_runtime(writer.api,ticket['command'])
-        binding=writer.guarded_binding();scope=self.scope(ticket,binding,affected,retained_signatures,authorization,impact)
+        binding=writer.dynamic_binding();scope=self.scope(ticket,binding,affected,retained_signatures,authorization,impact)
         pre=dict(sourcePlanHash=ticket['hash'],binding=binding,integrationBindings=dict(dependencies=dict(dynamicOperation=scope)))
         def preserved():
             model=D.capture_full_model(writer.api,retained_signatures)

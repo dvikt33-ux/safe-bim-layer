@@ -8,6 +8,71 @@ import archicad_native_stair_connection as T
 G='00000000-0000-4000-8000-000000000001';CH='00000000-0000-4000-8000-000000000002';OLD='00000000-0000-4000-8000-000000000003'
 
 
+class AC30StraightFlightTests(unittest.TestCase):
+    def setUp(self):
+        import apa_project_design as design
+        from archicad_tapir_catalog import load_for_runtime
+
+        self.intent = json.loads((ROOT / 'examples/accelerator/r07-two-storey-house.json').read_bytes())
+        self.candidate = design.compile_design(self.intent)['variants'][0]['candidate']
+        self.router, _ = load_for_runtime({}, {'archicadVersion': 30, 'tapirVersion': '2.0.0'})
+
+    def test_r07_stair_uses_existing_graph_and_the_tapir2_contract(self):
+        plan = T.prepare_ac30_stair(self.candidate, 'stair-required', self.router.catalog)
+        row = plan['operation']['params']['stairsData'][0]
+        self.assertEqual((row['floorIndex'], row['totalHeight'], row['stepNum']), (0, 3, 20))
+        self.assertEqual((row['flightWidth'], row['riserHeight'], row['treadDepth']), (1.05, .15, .28))
+        self.assertEqual(row['baselinePosition'], 'Left')
+        self.assertEqual(plan['slabDependencies'], ['native-slab-level-1', 'native-slab-level-2'])
+        self.assertIn('stair-required', self.candidate['requiredOpenIds'])
+
+    def test_tapir2_building_preview_converts_walls_and_keeps_dependencies(self):
+        from apa_project_design import compile_design_for_tapir2
+
+        variant = compile_design_for_tapir2(self.intent)['variants'][0]
+        preview = variant['tapir2Preview']
+        self.assertEqual(preview['compilation']['status'], 'PLAN_VALIDATED_OFFLINE')
+        self.assertEqual(preview['compilation']['operationCount'], 22)
+        self.assertFalse(preview['executionPermission'])
+        self.assertEqual(variant['candidate']['requiredOpenIds'], ['stair-required'])
+        ops = {row['id']: row for row in preview['graph']['operations']}
+        for row in ops.values():
+            if row['command'] == 'CreateWalls':
+                wall, = row['params']['wallsData']
+                self.assertEqual(wall['zCoordinate'], [0, 3][wall['floorIndex']])
+        self.assertEqual(ops['native-stair-stair-required']['after'], ['native-slab-level-1', 'native-slab-level-2'])
+
+    def test_tread_spacing_is_measured_from_native_faces(self):
+        plan = T.prepare_ac30_stair(self.candidate, 'stair-required', self.router.catalog)
+        stair = plan['operation']['params']['stairsData'][0]
+        x, y = plan['flightBounds'][:2]
+        width, going, riser = (stair[key] for key in ('flightWidth', 'treadDepth', 'riserHeight'))
+        vertices, faces = [], []
+        for i in range(stair['stepNum']):
+            start, end, z = y + i * going, y + (i + 1) * going, (i + 1) * riser
+            faces.append({'vertexIds': list(range(len(vertices), len(vertices) + 4))})
+            vertices.extend(dict(x=px, y=py, z=z) for px, py in
+                            ((x, start), (x + width, start), (x + width, end), (x, end)))
+        vertices.append(dict(x=x, y=y, z=0))
+        bodies = [{'vertices': vertices, 'polygons': faces}]
+        actual = dict(stair, treadDepth=1)
+        responses = {
+            'GetDetailsOfElements': {'detailsOfElements': [{'type': 'Stair', 'floorIndex': 0, 'details': actual}]},
+            'Get3DGeometryOfElements': {'geometries3D': [{'bodies': bodies}]},
+            'GetSubelementsOfHierarchicalElements': {'subelements': [{'stairStructures': [{'elementId': {'guid': CH}}]}]},
+        }
+        proof = T.read_ac30_stair(lambda command, _: responses[command], G, plan, [0, 1])
+        measured = proof['geometry']
+        self.assertEqual(proof['nativeReportedTreadDepth'], 1)
+        self.assertEqual(proof['nativeType'], 'Stair')
+        self.assertEqual(measured['measuredTreadCount'], 20)
+        self.assertAlmostEqual(measured['minimumGoingM'], .28)
+        for vertex in vertices[4:8]:
+            vertex['y'] += .03
+        with self.assertRaisesRegex(ValueError, 'STAIR_PHYSICAL_GOING_MISMATCH'):
+            T.measure_ac30_straight_flight(bodies, stair, plan['flightBounds'])
+
+
 class StairTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup);self.root=Path(self.tmp.name)

@@ -57,6 +57,8 @@ jobs:
           test_apa_ac30_mcp
           test_apa_ac30_change_normalizer
           test_apa_ac30_wall_preflight
+          test_apa_ac30_native
+          test_archicad_native_stair_connection
           test_archicad_functional_modules
           test_archicad_semantic_brief
           test_archicad_semantic_spatial

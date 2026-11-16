@@ -604,8 +604,9 @@ def resolve_basic_slab_material(api, name):
 
 class SceneWriter:
     def __init__(self, api, journal_path, schema_path=None, preview_factory=None,
-                 adapters=None, allow_3d_view_for_write=False):
+                 adapters=None, allow_3d_view_for_write=False, *, dynamic_project_guard=None):
         self.api = api
+        self.dynamic_project_guard = dynamic_project_guard
         # Explicit opt-in only for an already SHA-authorized saved copy.
         # The default writer keeps the original active-story=0 guard.
         if type(allow_3d_view_for_write) is not bool:
@@ -675,6 +676,11 @@ class SceneWriter:
         return guarded_scene_project(self.api, self.required_story,
             allow_3d_view_for_write=self.allow_3d_view_for_write)
 
+    def dynamic_binding(self):
+        if self.dynamic_project_guard is not None:
+            return self.dynamic_project_guard()
+        return self.guarded_binding()
+
     def verify_source_bindings(self,preflight):
         binding=preflight.get('integrationBindings',{}).get('dependencies',{}).get('sourceRoofTrimBinding')
         if binding is not None:
@@ -700,6 +706,7 @@ class SceneWriter:
         if sum(x is not None for x in (documentation,model_scope,spatial_scope,dynamic_scope))>1:
             raise ValueError('EXACTLY_ONE_BOUNDED_OPERATION_SCOPE_REQUIRED')
         dynamic_command=dynamic_scope is not None
+        current_binding = self.dynamic_binding if dynamic_command else self.guarded_binding
         if dynamic_command:
             router=getattr(self.api,'dynamic_commands',None)
             if router is None:raise ValueError('DYNAMIC_COMMAND_ROUTER_NOT_BOUND')
@@ -770,7 +777,7 @@ class SceneWriter:
             checked=SCENE.GRAPH.CONTRACTS.compile_batch(SCENE.GRAPH.CONTRACTS.load_catalog(self.schema_path),
                 {'requests':[{'id':'operation','command':command,'params':parameters}]},runtime_version=EXPECTED_TAPIR)
         if checked['status']!='SCHEMA_VALID':raise ValueError('BOUNDED_OPERATION_SCHEMA_INVALID')
-        if self.guarded_binding()!=preflight['binding']:raise ValueError('BOUNDED_OPERATION_TARGET_DRIFT')
+        if current_binding()!=preflight['binding']:raise ValueError('BOUNDED_OPERATION_TARGET_DRIFT')
         self.verify_source_bindings(preflight)
         before=verify_before()
         result={'status':'BLOCKED','automaticRetry':False,'sceneId':scene_id,'command':command,'operationHash':expected_hash,'intent':intent}
@@ -784,7 +791,7 @@ class SceneWriter:
             db.execute('INSERT INTO scenes VALUES(?,?,?,?)',(scene_id,expected_hash,'STARTED',canonical(result)))
             db.execute('INSERT INTO steps VALUES(?,?,?,?,?)',(scene_id,'operation','ATTEMPTED',None,canonical({'intent':intent,'before':before})));db.commit()
             try:
-                if self.guarded_binding()!=preflight['binding']:raise ValueError('BOUNDED_OPERATION_TARGET_DRIFT')
+                if current_binding()!=preflight['binding']:raise ValueError('BOUNDED_OPERATION_TARGET_DRIFT')
                 if dynamic_command:
                     with self.api.dynamic_call(dynamic_scope['ticket'],journal_scope=dynamic_scope):reply=self.api(command,parameters)
                 else:reply=self.api(command,parameters)
@@ -818,7 +825,7 @@ class SceneWriter:
                 if command=='CreateOpenings' and not dynamic_command:
                     result['createdGuid']=created_guid(reply)
                     db.execute("UPDATE steps SET state='CREATED_UNVERIFIED',guid=? WHERE scene_id=? AND step_id='operation'",(result['createdGuid'],scene_id));db.commit()
-                if self.guarded_binding()!=preflight['binding']:raise ValueError('BOUNDED_OPERATION_AFTER_TARGET_DRIFT')
+                if current_binding()!=preflight['binding']:raise ValueError('BOUNDED_OPERATION_AFTER_TARGET_DRIFT')
                 result['readback']=verify_after(reply,before)
                 if not isinstance(result['readback'],dict) or not str(result['readback'].get('status','')).endswith('PASS'):
                     raise ValueError('BOUNDED_OPERATION_INDEPENDENT_READBACK_NOT_CONFIRMED')
