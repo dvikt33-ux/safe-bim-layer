@@ -429,7 +429,10 @@ class DynamicCommands:
             else:
                 if writer is None or not callable(scopes) and sid not in (scopes or {}):raise ValueError('WORKFLOW_MUTATION_REQUIRES_EXACT_STEP_SCOPE')
                 scope=scopes(step,ticket,copy.deepcopy(results)) if callable(scopes) else scopes[sid]
-                outcome=self.execute(writer,scope['scene_id'],ticket,scope['affected'],scope['retained_signatures'],scope['saved_sha256'],scope['authorization'],scope['impact'],scope['verify_after'],verify_before=scope.get('verify_before'),verify_empty=verify_empty)
+                verification = {'verify_before': scope.get('verify_before')}
+                if verify_empty is not None:
+                    verification['verify_empty'] = verify_empty
+                outcome=self.execute(writer,scope['scene_id'],ticket,scope['affected'],scope['retained_signatures'],scope['saved_sha256'],scope['authorization'],scope['impact'],scope['verify_after'],**verification)
                 if outcome['status']!='PASS':
                     stopped=dict(status='STOPPED_UNKNOWN_OUTCOME',stoppedAt=sid,outcome=outcome,completedSteps=trace,results=results,automaticRetry=False)
                     if checkpoint:checkpoint(copy.deepcopy(stopped))
