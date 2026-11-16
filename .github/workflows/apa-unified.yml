@@ -5,6 +5,7 @@ on:
     branches:
       - integration/apa-r03-native-acceptance-20261113
       - integration/apa-tapir-bridge-20261115
+      - integration/apa-scene-writer-20261116
   pull_request:
     branches:
       - feature/apa-ac29-native-slab-copy-20261020
