@@ -78,10 +78,13 @@ def stage(args):
         recipe = PROJECT.design_recipe(current, args.variant, router)
         if args.action == 'stage-update':
             previous = Job(args.prior_job)
-            accepted = previous.accepted_project()
-            require(previous.project == source and previous.recipe['variant'] == args.variant,
+            reopen_copy = getattr(args, 'prior_reopen_copy', None)
+            accepted = previous.accepted_project(reopen_copy)
+            require(previous.verification_project == source and previous.recipe['variant'] == args.variant,
                     'AC30_UPDATE_REQUIRES_EXACT_ACCEPTED_SOURCE_AND_VARIANT')
             recipe = PROJECT.update_recipe(previous, accepted, recipe, current, source)
+            if reopen_copy is not None:
+                recipe['sourceReopenReceiptSha256'] = sha256(previous.verification_directory / 'reopened.json')
         else:
             require(recipe['projectMode'] == 'GENERATE_FROM_ZERO', 'AC30_PROJECT_CREATE_REQUIRES_NEW_PROJECT_BRIEF')
             recipe['kind'] = 'project'
@@ -714,6 +717,7 @@ def main(argv=None):
             sub.add_argument('--requirement', required=True)
         if action == 'stage-update':
             sub.add_argument('--prior-job', type=Path, required=True)
+            sub.add_argument('--prior-reopen-copy', type=Path, help='Каталог проверенной копии сохранения исходного задания')
         if action == 'stage-wall':
             sub.add_argument('--candidate', type=Path, required=True)
         if action == 'execute':

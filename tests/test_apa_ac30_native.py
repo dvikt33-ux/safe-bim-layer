@@ -328,6 +328,25 @@ class AC30ProjectTests(unittest.TestCase):
         self.assertEqual(len(self.writes), 18)
         self.assertFalse((job.path / 'reopened.json').exists())
         self.assertEqual({path: N.sha256(path) for path in original_files}, original_files)
+
+        design = N.read_json(DESIGNS / 'r06-two-storey-design.json')
+        design['brief'].update(mode='CONTINUE_EXISTING_PROJECT', targetProjectPath=str(recovery_project))
+        window = next(row for row in design['variants'][0]['layout']['passages'] if row['id'] == 'living-window')
+        window['width'] = 1.6
+        updated = self.root / 'verified-copy-window-design.json'
+        N.write_new_json(updated, design)
+        staged_update = N.stage(Namespace(
+            action='stage-update', job=self.root / 'update-from-copy',
+            source=recovery_project, source_sha=saved['savedSha256'],
+            addon=self.addon, addon_sha=N.sha256(self.addon), design=updated, variant='two-storeys',
+            prior_job=job.path, prior_reopen_copy=recovery, build=3001,
+            source_revision=RUNTIME['sourceRevision'], build_identity=RUNTIME['buildIdentity']))
+        update = N.Job(Path(staged_update['job']))
+        self.assertEqual(N.sha256(update.project), saved['savedSha256'])
+        self.assertEqual(update.recipe['sourceReopenReceiptSha256'], N.sha256(recovery / 'reopened.json'))
+        self.assertEqual(update.recipe['change']['parameters']['windowsWithDetails'][0]['width'], 1.6)
+        self.assertEqual(len(self.writes), 18)
+
         recovery_project.write_bytes(b'No longer the verified saved model')
         with self.assertRaisesRegex(ValueError, 'PROTECTED_FILE_CHANGED'):
             document_reopened_job(job.path, self.root / 'invalid-docs', reopen_copy=recovery)
