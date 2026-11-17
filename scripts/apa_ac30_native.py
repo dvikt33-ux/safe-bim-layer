@@ -140,6 +140,8 @@ class Job:
                 and self.project != self.source, 'AC30_EXACT_JOB_COPY_REQUIRED')
         self.disk_sha = m['initialSha256']
         self.lease = None
+        self.verification_directory = self.path
+        self.verification_project = self.project
         self.router, catalog_sha = load_for_runtime({}, RUNTIME)
         require(m['catalogSha256'] == catalog_sha, 'AC30_JOB_CATALOG_DRIFT')
         if self.kind == 'project':
@@ -163,15 +165,18 @@ class Job:
         m = self.manifest
         require(sha256(self.manifest_path) == self.manifest_sha
                 and sha256(self.source) == m['initialSha256']
-                and sha256(self.project) == self.disk_sha and sha256(self.addon) == m['addonSha256'],
+                and sha256(self.verification_project) == self.disk_sha
+                and sha256(self.addon) == m['addonSha256'],
                 'AC30_JOB_OR_PROTECTED_FILE_CHANGED')
 
     def connect(self, phase, execute=False):
+        require(self.verification_project == self.project or (phase == 'reopen' and not execute),
+                'AC30_SAVED_COPY_IS_READ_ONLY')
         self.check_files()
-        self.port = open_test_port(self.project)
+        self.port = open_test_port(self.verification_project)
         require(self.port is not None, 'AC30_EXACT_TEST_PLN_NOT_OPEN_OR_API_UNAVAILABLE')
         self.identity = listener(self.port, addon=self.addon)
-        trace = self.path / (phase + '-' + uuid4().hex)
+        trace = self.verification_directory / (phase + '-' + uuid4().hex)
         trace.mkdir()
         native = lambda command, params: native_command(self.port, command, params, timeout=75,
                                                          max_response=64 * 1024 * 1024)
@@ -193,7 +198,8 @@ class Job:
         addon = self.api('GetAddOnVersion', {})
         runtime = self.api('GetAPARuntimeInfoV1', {})
         m = self.manifest
-        require(info.get('projectPath') == str(self.project) and info.get('projectName') == self.project.stem
+        target = self.verification_project
+        require(info.get('projectPath') == str(target) and info.get('projectName') == target.stem
                 and info.get('isTeamwork') is False and info.get('isUntitled') is False,
                 'AC30_EXACT_JOB_COPY_NOT_OPEN')
         require(product.get('version') == 30 and product.get('buildNumber') == m['archicadBuild']
@@ -208,7 +214,7 @@ class Job:
                 and all(type(row['index']) is int and type(row['floorId']) is int
                         and RUN.close(row['level'], row['level']) for row in stories),
                 'AC30_NATIVE_STORIES_INVALID')
-        return dict(path=str(self.project), name=self.project.stem, port=self.port, **RUNTIME,
+        return dict(path=str(target), name=target.stem, port=self.port, **RUNTIME,
                     archicadBuild=product['buildNumber'], addonSha256=m['addonSha256'], runtime=runtime,
                     listener=self.identity, stories=sorted(stories, key=lambda row: row['index']))
 
@@ -472,41 +478,128 @@ class Job:
         write_new_json(self.path / 'saved.json', record)
         return record
 
-    def saved(self):
+    def sealed_save(self):
         record = read_json(self.path / 'saved.json')
-        self.disk_sha = record['savedSha256']
-        self.check_files()
         snapshot = read_json(self.path / 'snapshot.json')
         require(record['status'] == 'SAVED_PENDING_REAL_REOPEN' and record['nativeSaveCalls'] == 1
                 and record['manifestSha256'] == self.manifest_sha
                 and sha256(self.path / 'snapshot.json') == record['snapshotSha256']
-                and snapshot['savedSHA256'] == self.disk_sha
-                and sha256(self.path / 'guarded-save.snapshot') == self.disk_sha,
+                and snapshot['savedSHA256'] == record['savedSha256']
+                and sha256(self.path / 'guarded-save.snapshot') == record['savedSha256'],
                 'AC30_SAVED_PERSISTENCE_EVIDENCE_DRIFT')
+        return record, snapshot
+
+    def saved(self):
+        record, _ = self.sealed_save()
+        self.disk_sha = record['savedSha256']
+        self.check_files()
         return record
 
-    def closed(self):
-        saved = self.saved()
+    def confirm_closed(self, saved):
         pinned = saved['binding']['listener']
         port = pinned['port']
         if not reservation_owner_exited(pinned['pid']):
             require(listener(port, addon=self.addon) == pinned, 'AC30_CLOSE_PROCESS_IDENTITY_DRIFT')
             confirm_project_closed(lambda command, params: native_command(port, command, params))
-        record = dict(status='AC30_REAL_CLOSE_CONFIRMED', listener=pinned,
-                      savedReceiptSha256=sha256(self.path / 'saved.json'), nativeWrites=0)
+        return self.close_receipt(saved)
+
+    def close_receipt(self, saved):
+        return dict(status='AC30_REAL_CLOSE_CONFIRMED', listener=saved['binding']['listener'],
+                    savedReceiptSha256=sha256(self.path / 'saved.json'), nativeWrites=0)
+
+    def closed(self):
+        record = self.confirm_closed(self.saved())
         write_new_json(self.path / 'closed.json', record)
         return record
+
+    def reopen_copy_lineage(self):
+        saved, snapshot = self.sealed_save()
+        preflight = self.path / 'preflight.json'
+        approval = read_json(preflight)
+        approval_sha = sha256(preflight)
+        attempted = self.path / 'attempted.json'
+        guarded = self.path / 'guarded-save.snapshot'
+        require(approval.get('status') == 'READY_FOR_EXPLICIT_TEST_RUN'
+                and approval.get('manifestSha256') == self.manifest_sha
+                and approval.get('executionPermission') is False
+                and approval.get('binding') == saved['binding']
+                and read_json(attempted) == {'confirmSha256': approval_sha, 'automaticReplay': False}
+                and saved['binding']['path'] == str(self.project)
+                and saved['operationReadback']['signaturesSha256'] == RUN.digest(saved['signatures']),
+                'AC30_SAVED_COPY_ATTEMPT_OR_APPROVAL_DRIFT')
+        require(snapshot.get('schema') == 'APA_SAVE_EXACT_SNAPSHOT_V1'
+                and snapshot.get('status') == 'BYTE_EXACT_GUARDED_SAVE_SNAPSHOT_CAPTURED'
+                and snapshot.get('snapshot') == str(guarded)
+                and snapshot.get('source') == str(self.project)
+                and snapshot.get('snapshotSHA256') == saved['savedSha256']
+                and snapshot.get('protectedSHA256') == {str(self.source): self.manifest['initialSha256']}
+                and sha256(self.source) == self.manifest['initialSha256']
+                and sha256(self.addon) == self.manifest['addonSha256'],
+                'AC30_SAVED_COPY_PROTECTED_PROVENANCE_DRIFT')
+        return saved, {
+            'sourceJob': str(self.path), 'manifestSha256': self.manifest_sha,
+            'preflightSha256': approval_sha, 'attemptReceiptSha256': sha256(attempted),
+            'savedReceiptSha256': sha256(self.path / 'saved.json'),
+            'snapshotReceiptSha256': saved['snapshotSha256'], 'savedSha256': saved['savedSha256'],
+            'ledgerSha256': sha256(self.path / 'scene-v1-attempts.sqlite3'),
+        }
+
+    def stage_reopen_copy(self, directory):
+        target = directory.resolve()
+        require(target.parent.is_dir() and not target.exists() and not target.is_relative_to(self.path),
+                'AC30_SAVED_COPY_REQUIRES_FRESH_DIRECTORY_OUTSIDE_JOB')
+        saved, lineage = self.reopen_copy_lineage()
+        close = self.confirm_closed(saved)
+        original_sha = sha256(self.project)
+        target.mkdir(exist_ok=False)
+        project = target / self.project.name
+        copy_exclusive(self.path / 'guarded-save.snapshot', project)
+        require(sha256(project) == saved['savedSha256'] and sha256(self.project) == original_sha
+                and self.reopen_copy_lineage()[1] == lineage, 'AC30_SAVED_COPY_SOURCE_OR_BYTES_DRIFT')
+        record = dict(schema='APA_AC30_SAVED_REOPEN_COPY_V1', lineage=lineage, sourceClose=close,
+                      sourceProjectSha256AtStage=original_sha, verificationProject=str(project),
+                      automaticReplay=False, modelWrites=0)
+        write_new_json(target / 'reopen-copy.json', record)
+        return dict(record, status='SAVED_COPY_READY_FOR_REOPEN')
+
+    def load_reopen_copy(self, directory):
+        target = directory.resolve(strict=True)
+        require(not target.is_relative_to(self.path), 'AC30_SAVED_COPY_REQUIRES_DIRECTORY_OUTSIDE_JOB')
+        saved, lineage = self.reopen_copy_lineage()
+        receipt_file = exact_file(str(target / 'reopen-copy.json'))
+        proof = read_json(receipt_file)
+        project = exact_file(str(target / self.project.name))
+        require(proof.get('schema') == 'APA_AC30_SAVED_REOPEN_COPY_V1'
+                and proof.get('lineage') == lineage and proof.get('sourceClose') == self.close_receipt(saved)
+                and proof.get('verificationProject') == str(project)
+                and proof.get('automaticReplay') is False and proof.get('modelWrites') == 0,
+                'AC30_SAVED_COPY_RECEIPT_DRIFT')
+        self.verification_directory = target
+        self.verification_project = project
+        self.disk_sha = lineage['savedSha256']
+        self.check_files()
+        return saved, {'verificationProject': str(project), 'copyReceiptSha256': sha256(receipt_file),
+                       'savedReceiptSha256': lineage['savedReceiptSha256']}
+
+    def verify_reopen_copy(self, directory):
+        saved, source = self.load_reopen_copy(directory)
+        return self.verify_reopened(saved, source)
 
     def reopened(self):
         saved = self.saved()
         closed = read_json(self.path / 'closed.json')
-        require(closed == dict(status='AC30_REAL_CLOSE_CONFIRMED', listener=saved['binding']['listener'],
-                              savedReceiptSha256=sha256(self.path / 'saved.json'), nativeWrites=0),
+        require(closed == self.close_receipt(saved),
                 'AC30_MATCHING_CLOSE_EVIDENCE_REQUIRED')
+        return self.verify_reopened(saved)
+
+    def verify_reopened(self, saved, source=None):
+        receipt = self.verification_directory / 'reopened.json'
+        require(not receipt.exists(), 'AC30_REOPEN_RECEIPT_ALREADY_EXISTS')
         now = self.connect('reopen')
         self.probe()
+        expected = dict(saved['binding'], path=str(self.verification_project))
         stable = ('path', 'name', 'runtime', 'archicadBuild', 'stories', 'addonSha256')
-        require(all(now[key] == saved['binding'][key] for key in stable), 'AC30_REOPEN_RUNTIME_OR_STORIES_DRIFT')
+        require(all(now[key] == expected[key] for key in stable), 'AC30_REOPEN_RUNTIME_OR_STORIES_DRIFT')
         model, signatures = capture(self.api)
         require(signatures == saved['signatures'], 'AC30_REOPEN_GUID_OR_BREP_DRIFT')
         previous = saved['operationReadback']
@@ -533,18 +626,26 @@ class Job:
                 record['documentationChange'] = DOC.compare_versions(self.recipe['previousDocumentation'],
                                                                      record['bimSnapshot'])
             require(self.guard() == now and self.api.write_attempts == 0, 'AC30_DOCUMENTATION_CAPTURE_DRIFT')
-        write_new_json(self.path / 'reopened.json', record)
+        if source is not None:
+            require(self.load_reopen_copy(self.verification_directory)[1] == source,
+                    'AC30_SAVED_COPY_RECEIPT_DRIFT')
+            record.update(source, status='SAVE_REOPEN_COPY_VERIFIED', verificationBinding=now)
+        write_new_json(receipt, record)
         return record
 
-    def accepted_project(self):
+    def accepted_project(self, reopen_copy=None):
         require(self.kind in {'project', 'update'}, 'AC30_PROJECT_JOB_REQUIRED')
-        saved = self.saved()
-        reopened = read_json(self.path / 'reopened.json')
-        closed = read_json(self.path / 'closed.json')
-        require(closed.get('status') == 'AC30_REAL_CLOSE_CONFIRMED'
-                and closed.get('listener') == saved['binding']['listener']
-                and closed.get('savedReceiptSha256') == sha256(self.path / 'saved.json')
-                and reopened.get('status') == 'SAVE_REOPEN_VERIFIED'
+        if reopen_copy is None:
+            saved = self.saved()
+            closed = read_json(self.path / 'closed.json')
+            require(closed == self.close_receipt(saved), 'AC30_PROJECT_ACCEPTANCE_EVIDENCE_MISMATCH')
+            status, lineage = 'SAVE_REOPEN_VERIFIED', {}
+        else:
+            saved, lineage = self.load_reopen_copy(reopen_copy)
+            status = 'SAVE_REOPEN_COPY_VERIFIED'
+        reopened = read_json(self.verification_directory / 'reopened.json')
+        require(reopened.get('status') == status
+                and all(reopened.get(key) == value for key, value in lineage.items())
                 and reopened.get('savedSha256') == saved['savedSha256']
                 and reopened.get('signaturesSha256') == RUN.digest(saved['signatures'])
                 and reopened.get('verificationNativeWrites') == 0
@@ -560,11 +661,11 @@ class Job:
                 }), 'AC30_PROJECT_BIM_SNAPSHOT_DRIFT')
         return reopened
 
-    def documentation(self, output, story=None):
+    def documentation(self, output, story=None, *, reopen_copy=None):
         target = output.resolve()
         require(target.parent.is_dir() and not target.exists()
                 and not target.is_relative_to(self.path), 'AC30_DOCUMENTATION_REQUIRES_NEW_OUTPUT_OUTSIDE_JOB')
-        accepted = self.accepted_project()
+        accepted = self.accepted_project(reopen_copy)
         snapshot = accepted['bimSnapshot']
         occupied = sorted({row['storyIndex'] for row in snapshot['elements']})
         require(story is None or story in occupied, 'AC30_DOCUMENTATION_STORY_OUTSIDE_MODEL')
@@ -572,8 +673,10 @@ class Job:
         package = DOC.bundle(snapshot, stories[0])
         package['plansByStory'] = {str(i): DOC.bundle(snapshot, i)['plan'] for i in stories}
         package['savedPlnSha256'] = accepted['savedSha256']
-        package['reopenedReceiptSha256'] = sha256(self.path / 'reopened.json')
+        package['reopenedReceiptSha256'] = sha256(self.verification_directory / 'reopened.json')
         package['operationGuids'] = accepted['operationReadback']['operationGuids']
+        if reopen_copy is not None:
+            package['verificationProject'] = accepted['verificationProject']
         if self.kind == 'update':
             package['documentationChange'] = accepted['documentationChange']
         DOC.write_package(package, target)
@@ -582,6 +685,9 @@ class Job:
                       reopenedReceiptSha256=package['reopenedReceiptSha256'],
                       stories=stories, elements=len(snapshot['elements']), nativeViews='NOT_TESTED',
                       publisherPdf='NOT_TESTED', files={p.name: sha256(p) for p in target.iterdir()})
+        if reopen_copy is not None:
+            result.update(verificationProject=accepted['verificationProject'], sourceJob=str(self.path),
+                          savedReceiptSha256=accepted['savedReceiptSha256'])
         write_new_json(target / 'receipt.json', result)
         return result
 
@@ -589,11 +695,12 @@ class Job:
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='action', required=True)
-    for action in ('stage-stair', 'stage-wall', 'stage-project', 'stage-update',
-                   'preflight', 'execute', 'verify-closed', 'verify-reopen'):
+    authoring = ('stage-stair', 'stage-wall', 'stage-project', 'stage-update')
+    reopen_copy = ('stage-reopen-copy', 'verify-reopen-copy')
+    for action in (*authoring, 'preflight', 'execute', 'verify-closed', 'verify-reopen', *reopen_copy):
         sub = commands.add_parser(action)
         sub.add_argument('--job', type=Path, required=True)
-        if action.startswith('stage-'):
+        if action in authoring:
             for name in ('source', 'addon'):
                 sub.add_argument('--' + name, type=Path, required=True)
                 sub.add_argument('--' + name + '-sha', required=True)
@@ -611,14 +718,20 @@ def main(argv=None):
             sub.add_argument('--candidate', type=Path, required=True)
         if action == 'execute':
             sub.add_argument('--confirm-preflight', required=True)
+        if action in reopen_copy:
+            sub.add_argument('--copy', type=Path, required=True, help='Каталог точной копии сохранения')
     args = parser.parse_args(argv)
     try:
-        if args.action.startswith('stage-'):
+        if args.action in authoring:
             result = stage(args)
         else:
             job = Job(args.job)
             if args.action == 'execute':
                 result = job.execute(args.confirm_preflight)
+            elif args.action == 'stage-reopen-copy':
+                result = job.stage_reopen_copy(args.copy)
+            elif args.action == 'verify-reopen-copy':
+                result = job.verify_reopen_copy(args.copy)
             else:
                 result = {'preflight': job.preflight, 'verify-closed': job.closed,
                           'verify-reopen': job.reopened}[args.action]()

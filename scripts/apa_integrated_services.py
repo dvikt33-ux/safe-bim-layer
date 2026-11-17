@@ -196,7 +196,8 @@ def design_evidence(root, job, cache):
                 executionPermission=False, nativeCalls=0, **binding)
 
 
-def document_reopened_job(job, destination, story=None, *, publisher_folder=None, layout_name=None):
+def document_reopened_job(job, destination, story=None, *, publisher_folder=None, layout_name=None,
+                          reopen_copy=None):
     """Publish existing BIM facts for the accepted operation GUIDs in one job."""
     from apa_ac29_save_isolation import require, write_new_json
     from archicad_bim_documentation import bundle, make_snapshot, write_package
@@ -214,7 +215,8 @@ def document_reopened_job(job, destination, story=None, *, publisher_folder=None
     manifest_path = job / "job.json"
     if manifest_path.is_file() and read_json(manifest_path).get("schema") == AC30_SCHEMA:
         require(publisher_folder is None, "AC30_PUBLISHER_LINKED_LAYOUT_NOT_QUALIFIED")
-        return AC30Job(job).documentation(destination, story)
+        return AC30Job(job).documentation(destination, story, reopen_copy=reopen_copy)
+    require(reopen_copy is None, "DOCUMENTATION_REOPEN_COPY_REQUIRES_AC30_JOB")
     intent, plan, result, native, signatures, reopened, provenance = _verified_authored_job(job)
     require(reopened.get("reopenedGuids") == sorted(signatures), "DOCUMENTATION_REOPENED_GUIDS_NOT_VERIFIED")
     selected = result["addedGuids"]

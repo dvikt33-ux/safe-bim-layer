@@ -294,6 +294,56 @@ class AC30ProjectTests(unittest.TestCase):
         self.assertEqual(result['status'], 'SAVE_REOPEN_VERIFIED')
         return result
 
+    def test_verified_copy_of_saved_r06_reopens_and_exports_without_replay(self):
+        job = self.stage('r06-two-storey-design.json', 'two-storeys')
+        ready = job.preflight()
+        saved = N.Job(job.path).execute(ready['confirmSha256'])
+        job.project.write_bytes(b'Drifted copy after the verified native save')
+        original_files = {
+            str(path): N.sha256(path)
+            for path in [job.project, job.source, *(job.path / name for name in (
+                'job.json', 'preflight.json', 'attempted.json', 'saved.json',
+                'guarded-save.snapshot', 'scene-v1-attempts.sqlite3'))]
+        }
+        recovery = self.root / 'reopen-saved-r06'
+        staged = N.Job(job.path).stage_reopen_copy(recovery)
+        recovery_project = recovery / job.project.name
+        self.assertEqual(N.sha256(recovery_project), saved['savedSha256'])
+        self.assertEqual(staged['verificationProject'], str(recovery_project))
+        with self.assertRaisesRegex(ValueError, 'EXACT_TEST_PLN_NOT_OPEN'):
+            N.Job(job.path).verify_reopen_copy(recovery)
+        self.project = recovery_project
+        self.pid += 1
+        verified = N.Job(job.path).verify_reopen_copy(recovery)
+        self.assertEqual(verified['status'], 'SAVE_REOPEN_COPY_VERIFIED')
+        self.assertEqual(verified['verificationNativeWrites'], 0)
+        self.assertEqual(verified['operationReadback'], saved['operationReadback'])
+        from apa_integrated_services import document_reopened_job
+
+        report = document_reopened_job(job.path, self.root / 'bim-docs', reopen_copy=recovery)
+        self.assertEqual(report['stories'], [3, 4])
+        self.assertEqual(report['elements'], 17)
+        self.assertEqual(report['verificationProject'], str(recovery_project))
+        self.assertEqual(report['publisherPdf'], 'NOT_TESTED')
+        self.assertEqual(len(self.writes), 18)
+        self.assertFalse((job.path / 'reopened.json').exists())
+        self.assertEqual({path: N.sha256(path) for path in original_files}, original_files)
+        recovery_project.write_bytes(b'No longer the verified saved model')
+        with self.assertRaisesRegex(ValueError, 'PROTECTED_FILE_CHANGED'):
+            document_reopened_job(job.path, self.root / 'invalid-docs', reopen_copy=recovery)
+        self.assertFalse((self.root / 'invalid-docs').exists())
+
+    def test_recovery_rejects_unsealed_save_before_creating_a_copy(self):
+        job = self.stage('r06-two-storey-design.json', 'two-storeys')
+        ready = job.preflight()
+        N.Job(job.path).execute(ready['confirmSha256'])
+        (job.path / 'guarded-save.snapshot').write_bytes(b'Changed after capture')
+        recovery = self.root / 'invalid-copy'
+        with self.assertRaisesRegex(ValueError, 'PERSISTENCE_EVIDENCE_DRIFT'):
+            N.Job(job.path).stage_reopen_copy(recovery)
+        self.assertFalse(recovery.exists())
+        self.assertEqual(self.writes.count('SaveProject'), 1)
+
     def test_r06_graph_write_window_edit_and_two_story_documentation(self):
         job = self.stage('r06-two-storey-design.json', 'two-storeys')
         ready = job.preflight()

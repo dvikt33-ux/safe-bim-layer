@@ -209,6 +209,7 @@ def parser():
     source = cmd.add_mutually_exclusive_group(required=True)
     source.add_argument("--native-dump", type=Path)
     source.add_argument("--job", type=Path, help="Каталог авторского задания с подтверждённым повторным открытием")
+    cmd.add_argument("--reopen-copy", type=Path, help="Проверенная отдельная копия сохранения задания AC30")
     selection = cmd.add_mutually_exclusive_group()
     selection.add_argument("--guids", type=Path)
     selection.add_argument("--all-dump-elements", action="store_true")
@@ -314,6 +315,8 @@ def main(argv=None):
             module, entry = routes[argv[0]]
             return getattr(import_module(module), entry)(argv[1:])
         args = parser().parse_args(argv)
+        if args.mode == "documentation" and args.reopen_copy is not None and args.job is None:
+            raise ValueError("--reopen-copy требует указать --job")
         code = 0
         if args.mode == "doctor":
             result = doctor()
@@ -361,7 +364,8 @@ def main(argv=None):
             if args.guids is not None or args.all_dump_elements:
                 raise ValueError("Для задания состав элементов берётся из квитанции повторного открытия")
             result = document_reopened_job(args.job, args.output, args.story,
-                                           publisher_folder=args.publisher_folder, layout_name=args.layout_name)
+                                           publisher_folder=args.publisher_folder, layout_name=args.layout_name,
+                                           reopen_copy=args.reopen_copy)
         elif args.mode == "detail-review":
             from apa_integrated_services import detail_review
 
