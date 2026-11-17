@@ -11,6 +11,7 @@ from jsonschema import ValidationError
 
 import apa_ac30_wall_preflight as WALL
 import apa_ac30_project as PROJECT
+import apa_room_layout as ROOM_LAYOUT
 from apa_ac29_reusable_native_copy import GuardedSaveTransport
 from apa_ac29_save_isolation import (
     ScratchWriteLease, confirm_project_closed, copy_exclusive, preserve_guarded_save,
@@ -43,6 +44,7 @@ POLICIES = {
     'CreateWalls': ('CREATE', 'MODEL', 'ExtendedElementCommands.cpp'),
     'CreateSlabs': ('CREATE', 'MODEL', 'ElementCreationCommands.cpp'),
     'CreateDoors': ('CREATE', 'MODEL', 'ExtendedElementCommands.cpp'),
+    'CreateZones': ('CREATE', 'MODEL', 'ElementCreationCommands.cpp'),
     'CreateWindows': ('CREATE', 'MODEL', 'ExtendedElementCommands.cpp'),
     'ModifyWindows': ('MODIFY', 'MODEL', 'ExtendedElementCommands.cpp'),
     'ModifyWalls': ('MODIFY', 'MODEL', 'ExtendedElementCommands.cpp'),
@@ -72,6 +74,10 @@ def stage(args):
         require(variant is not None and 'candidate' in variant, 'AC30_VALID_DESIGN_VARIANT_REQUIRED')
         recipe = prepare_ac30_stair(variant['candidate'], args.requirement, router.catalog)
         recipe.update(kind='stair', design=str(intent), designSha256=sha256(intent), variant=args.variant)
+    elif args.action == 'stage-layout':
+        intent = exact_file(str(args.design.absolute()))
+        recipe = ROOM_LAYOUT.compile_layout(read_json(intent), router)
+        recipe.update(design=str(intent), designSha256=sha256(intent))
     elif args.action in {'stage-project', 'stage-update'}:
         intent = exact_file(str(args.design.absolute()))
         current = read_json(intent)
@@ -118,8 +124,8 @@ def wall_parameters(recipe):
     return {'wallsWithDetails': [{'elementId': {'guid': recipe['wall']}, 'height': recipe['after']}]}
 
 
-def capture(api, *, verify_empty=None):
-    guids = APA.inventory_guids(api)
+def capture(api, *, verify_empty=None, database=None):
+    guids = APA.inventory_guids(api) if database is None else APA.inventory_guids(api, database=database)
     options = {'verify_empty': verify_empty} if verify_empty is not None else {}
     model = DOC.capture_full_model(api, guids, **options)
     require(not model.get('unresolvedBodyOwners'), 'AC30_NATIVE_BREP_OWNER_UNVERIFIED')
@@ -138,7 +144,7 @@ class Job:
         self.project = exact_file(m['project'])
         self.source = exact_file(m['source'])
         self.addon = exact_file(m['addon'])
-        require(m['schema'] == SCHEMA and self.kind in {'stair', 'wall', 'project', 'update'}
+        require(m['schema'] == SCHEMA and self.kind in {'stair', 'wall', 'project', 'update', 'layout'}
                 and self.project == self.path / 'model' / f'APA-AC30-{self.kind}-test.pln'
                 and self.project != self.source, 'AC30_EXACT_JOB_COPY_REQUIRED')
         self.disk_sha = m['initialSha256']
@@ -147,9 +153,10 @@ class Job:
         self.verification_project = self.project
         self.router, catalog_sha = load_for_runtime({}, RUNTIME)
         require(m['catalogSha256'] == catalog_sha, 'AC30_JOB_CATALOG_DRIFT')
-        if self.kind == 'project':
+        if self.kind in {'project', 'layout'}:
             self.writes = {step['command'] for step in self.recipe['graph']['operations']}
-            require(self.writes <= PROJECT.CREATES, 'AC30_PROJECT_MUTATION_NOT_APPROVED')
+            types = ROOM_LAYOUT.OUTPUT_TYPES if self.kind == 'layout' else PROJECT.CREATES
+            require(self.writes <= types, 'AC30_PROJECT_MUTATION_NOT_APPROVED')
         elif self.kind == 'update':
             require(self.recipe['change']['command'] == 'ModifyWindows', 'AC30_UPDATE_MUTATION_NOT_APPROVED')
             self.writes = {'ModifyWindows'}
@@ -185,10 +192,20 @@ class Job:
                                                          max_response=64 * 1024 * 1024)
         self.api = APA.EvidenceAPI(native, trace, execute=execute)
         self.api.allowed |= QUERY_READS | {'API.IsAddOnCommandAvailable'}
-        if self.kind == 'project':
+        if self.kind in {'project', 'layout'}:
             self.api.allowed |= PROJECT_INVENTORY_READS
+        if self.kind == 'layout':
+            self.api.allowed |= {'GetQuantitiesOfElements'}
         self.binding = self.guard()
         return self.binding
+
+    def model_snapshot(self, api, *, verify_empty=None):
+        if self.kind != 'layout':
+            return capture(api, verify_empty=verify_empty) if verify_empty is not None else capture(api)
+        tree = api('GetNavigatorItemTree', {'navigatorMapId': 'ProjectMap'})
+        floor = DOC.source_view(tree, 'StoryItem')
+        database = DOC.read_database(api, DOC.item_guid(floor))
+        return capture(api, verify_empty=verify_empty, database=database)
 
     def guard(self):
         self.check_files()
@@ -222,7 +239,9 @@ class Job:
                     listener=self.identity, stories=sorted(stories, key=lambda row: row['index']))
 
     def read(self, command, parameters=None):
-        require(command in QUERY_READS, 'AC30_JOB_READ_COMMAND_NOT_ALLOWED')
+        require(command in QUERY_READS
+                or (self.kind == 'layout' and command in {'GetQuantitiesOfElements', 'GetAttributesByType'}),
+                'AC30_JOB_READ_COMMAND_NOT_ALLOWED')
         args = {} if parameters is None else parameters
         self.router.prepare(command, args)
         return self.router.validate_result(command, self.api(command, args))
@@ -230,11 +249,13 @@ class Job:
     def probe(self):
         commands = {'GetProjectInfo', 'GetStories', 'GetAddOnVersion', 'GetAllElements', 'GetDetailsOfElements'}
         commands |= self.writes
-        if self.kind in {'stair', 'project', 'update'}:
+        if self.kind in {'stair', 'project', 'update', 'layout'}:
             commands |= {'GetFavoritesByType', 'Get3DBoundingBoxes', 'Get3DGeometryOfElements',
                          'GetSubelementsOfHierarchicalElements'}
-            if self.kind in {'project', 'update'}:
+            if self.kind in {'project', 'update', 'layout'}:
                 commands.add('GetAttributesByType')
+            if self.kind == 'layout':
+                commands.add('GetQuantitiesOfElements')
         else:
             commands |= {'GetGroupsOfElements', 'GetElementsOfGroups', 'GetSuspendGroupsMode'}
         for command in sorted(commands):
@@ -269,13 +290,15 @@ class Job:
 
     def baseline(self):
         require(self.guard() == self.binding, 'AC30_JOB_BINDING_DRIFT')
-        verify_empty = PROJECT.verify_empty_model if self.kind == 'project' else None
-        model, signatures = capture(self.api, verify_empty=verify_empty)
+        verify_empty = PROJECT.verify_empty_model if self.kind in {'project', 'layout'} else None
+        model, signatures = self.model_snapshot(self.api, verify_empty=verify_empty)
         if self.kind == 'wall':
             facts = self.wall_facts(self.recipe['before'], model)
-        elif self.kind in {'project', 'update'}:
+        elif self.kind in {'project', 'update', 'layout'}:
             require(sha256(self.recipe['design']) == self.recipe['designSha256'], 'AC30_PROJECT_DESIGN_SOURCE_DRIFT')
-            current = PROJECT.design_recipe(read_json(self.recipe['design']), self.recipe['variant'], self.router)
+            intent = read_json(self.recipe['design'])
+            current = (ROOM_LAYOUT.compile_layout(intent, self.router) if self.kind == 'layout'
+                       else PROJECT.design_recipe(intent, self.recipe['variant'], self.router))
             require(all(self.recipe[key] == value for key, value in current.items()),
                     'AC30_STAGED_PROJECT_PLAN_DRIFT')
             facts = PROJECT.bind_design(self.recipe, self.binding['stories'], self.api, self.router)
@@ -284,9 +307,21 @@ class Job:
                 require(all(step['params']['stairsData'][0]['favoriteName'] in favorites
                             for step in facts['graph']['operations'] if step['command'] == 'CreateStairs'),
                         'AC30_STAIR_FAVORITE_MISSING_IN_TEST_PLN')
-            if self.kind == 'project':
-                box = self.recipe['envelope']
-                facts['spatialScan'] = RUN.scan_for_existing_geometry(self.api, box['xMin'], box['yMin'], box)
+            if self.kind in {'project', 'layout'}:
+                if self.kind == 'layout':
+                    facts['spatialScan'] = {key: RUN.scan_for_existing_geometry(self.api, box['xMin'], box['yMin'], box)
+                                            for key, box in self.recipe['regions'].items()}
+                    markers = model.get('verifiedEmptyModel', {}).get('markerSignatures', {})
+                    facts['retainedDetailsSha256'] = PROJECT.retained_details_digest(self.api, set(signatures) | markers.keys())
+                    doors = [step['params']['doorsData'][0] for step in facts['graph']['operations']
+                             if step['command'] == 'CreateDoors']
+                    if any(door.get('favoriteName') for door in doors):
+                        favorites = self.read('GetFavoritesByType', {'elementType': 'Door'})['favorites']
+                        require(all(not door.get('favoriteName') or door['favoriteName'] in favorites for door in doors),
+                                'LAYOUT_DOOR_FAVORITE_MISSING_IN_TEST_PLN')
+                else:
+                    box = self.recipe['envelope']
+                    facts['spatialScan'] = RUN.scan_for_existing_geometry(self.api, box['xMin'], box['yMin'], box)
                 if 'verifiedEmptyModel' in model:
                     facts['verifiedEmptyModel'] = model['verifiedEmptyModel']
             else:
@@ -423,8 +458,8 @@ class Job:
                                       dynamic_project_guard=self.guard)
         if self.kind == 'wall':
             proof = self.modify_wall(baseline)
-        elif self.kind == 'project':
-            proof = PROJECT.execute_design(self, baseline, capture)
+        elif self.kind in {'project', 'layout'}:
+            proof = PROJECT.execute_design(self, baseline, self.model_snapshot)
         elif self.kind == 'update':
             proof = PROJECT.execute_update(self, baseline, capture)
         else:
@@ -440,7 +475,7 @@ class Job:
         return self.save(proof)
 
     def save(self, proof):
-        model, signatures = capture(self.api)
+        model, signatures = self.model_snapshot(self.api)
         require(RUN.digest(signatures) == proof['signaturesSha256'], 'AC30_VERIFIED_RESULT_CHANGED_BEFORE_SAVE')
         PROJECT.check_template_markers(model, proof.get('templateMarkerSignatures', {}))
 
@@ -603,16 +638,16 @@ class Job:
         expected = dict(saved['binding'], path=str(self.verification_project))
         stable = ('path', 'name', 'runtime', 'archicadBuild', 'stories', 'addonSha256')
         require(all(now[key] == expected[key] for key in stable), 'AC30_REOPEN_RUNTIME_OR_STORIES_DRIFT')
-        model, signatures = capture(self.api)
+        model, signatures = self.model_snapshot(self.api)
         require(signatures == saved['signatures'], 'AC30_REOPEN_GUID_OR_BREP_DRIFT')
         previous = saved['operationReadback']
         if self.kind == 'stair':
             result = read_ac30_stair(self.read, previous['guid'], self.recipe, self.stair_story_indices())
             require(result == {k: v for k, v in previous.items() if k not in {'addedGuids', 'signaturesSha256'}},
                     'AC30_REOPEN_STAIR_DRIFT')
-        elif self.kind in {'project', 'update'}:
+        elif self.kind in {'project', 'update', 'layout'}:
             PROJECT.check_template_markers(model, previous.get('templateMarkerSignatures', {}))
-            PROJECT.verify_design(self, {'graph': previous['boundGraph']}, model, previous['operationGuids'])
+            zones = PROJECT.verify_design(self, {'graph': previous['boundGraph']}, model, previous['operationGuids'])
             result = previous
         else:
             result = self.wall_facts(self.recipe['after'], model)
@@ -621,6 +656,11 @@ class Job:
         require(self.guard() == now and self.api.write_attempts == 0, 'AC30_REOPEN_NOT_READ_ONLY')
         record = dict(status='SAVE_REOPEN_VERIFIED', savedSha256=self.disk_sha, verifiedElementCount=len(signatures),
                       signaturesSha256=RUN.digest(signatures), operationReadback=result, verificationNativeWrites=0)
+        if self.kind == 'layout':
+            retained = set(signatures) | previous.get('templateMarkerSignatures', {}).keys()
+            require(PROJECT.retained_details_digest(self.api, retained) == previous['retainedDetailsAfterExperiment'],
+                    'LAYOUT_REOPEN_EDITABLE_PARAMETERS_DRIFT')
+            record['roomReadback'] = zones
         if self.kind in {'project', 'update'}:
             guids = sorted(result['operationGuids'].values())
             details = {guid: RUN.requested_details(self.api, guid) for guid in guids}
@@ -635,6 +675,36 @@ class Job:
             record.update(source, status='SAVE_REOPEN_COPY_VERIFIED', verificationBinding=now)
         write_new_json(receipt, record)
         return record
+
+    def verify_inclusion(self):
+        require(self.kind == 'layout', 'LAYOUT_JOB_REQUIRED')
+        saved = self.saved()
+        binding = self.connect('verify-inclusion')
+        stable = ('path', 'name', 'runtime', 'archicadBuild', 'stories', 'addonSha256')
+        require(all(binding[key] == saved['binding'][key] for key in stable), 'LAYOUT_INCLUSION_BINDING_DRIFT')
+        model, signatures = self.model_snapshot(self.api)
+        PROJECT.check_template_markers(model, saved['operationReadback'].get('templateMarkerSignatures', {}))
+        proof = PROJECT.verify_layout_inclusion(self, saved, model, signatures)
+        require(self.guard() == binding and self.api.write_attempts == 0, 'LAYOUT_INCLUSION_MUST_BE_READ_ONLY')
+        receipt = dict(proof, status='LAYOUT_USER_COPY_VERIFIED', savedReceiptSha256=sha256(self.path / 'saved.json'),
+                       verificationNativeWrites=0, executionPermission=False)
+        path = self.path / 'inclusion.json'
+        if path.exists():
+            require(read_json(path) == receipt, 'LAYOUT_INCLUSION_PRIOR_RECEIPT_DRIFT')
+        else:
+            write_new_json(path, receipt)
+        return receipt
+
+    def layout_attributes(self):
+        require(self.kind == 'layout', 'LAYOUT_JOB_REQUIRED')
+        binding = self.connect('layout-attributes')
+        names = {}
+        for kind in ('BuildingMaterial', 'ZoneCategory'):
+            rows = self.read('GetAttributesByType', {'attributeType': kind})['attributes']
+            names[kind] = sorted(row['name'] for row in rows if isinstance(row.get('name'), str))
+        require(self.guard() == binding and self.api.write_attempts == 0, 'LAYOUT_ATTRIBUTES_MUST_BE_READ_ONLY')
+        return dict(status='LAYOUT_NATIVE_ATTRIBUTES_READ', project=binding['path'], attributes=names,
+                    executionPermission=False)
 
     def accepted_project(self, reopen_copy=None):
         require(self.kind in {'project', 'update'}, 'AC30_PROJECT_JOB_REQUIRED')
@@ -698,9 +768,13 @@ class Job:
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='action', required=True)
-    authoring = ('stage-stair', 'stage-wall', 'stage-project', 'stage-update')
+    authoring = ('stage-stair', 'stage-wall', 'stage-project', 'stage-update', 'stage-layout')
     reopen_copy = ('stage-reopen-copy', 'verify-reopen-copy')
-    for action in (*authoring, 'preflight', 'execute', 'verify-closed', 'verify-reopen', *reopen_copy):
+    plan = commands.add_parser('layout-plan')
+    plan.add_argument('--intent', type=Path, required=True)
+    plan.add_argument('--output', type=Path, required=True)
+    for action in (*authoring, 'preflight', 'execute', 'verify-closed', 'verify-reopen', 'verify-inclusion',
+                   'layout-attributes', *reopen_copy):
         sub = commands.add_parser(action)
         sub.add_argument('--job', type=Path, required=True)
         if action in authoring:
@@ -713,6 +787,8 @@ def main(argv=None):
         if action in {'stage-stair', 'stage-project', 'stage-update'}:
             sub.add_argument('--design', type=Path, required=True)
             sub.add_argument('--variant', required=True)
+        if action == 'stage-layout':
+            sub.add_argument('--design', type=Path, required=True)
         if action == 'stage-stair':
             sub.add_argument('--requirement', required=True)
         if action == 'stage-update':
@@ -726,7 +802,22 @@ def main(argv=None):
             sub.add_argument('--copy', type=Path, required=True, help='Каталог точной копии сохранения')
     args = parser.parse_args(argv)
     try:
-        if args.action in authoring:
+        if args.action == 'layout-plan':
+            router, _ = load_for_runtime({}, RUNTIME)
+            intent = read_json(args.intent)
+            questions = ROOM_LAYOUT.unanswered(intent)
+            if questions:
+                result = dict(status='LAYOUT_INPUT_REQUIRED', missingInputs=questions, executionPermission=False)
+                write_new_json(args.output, result)
+                print(json.dumps(result, ensure_ascii=False, allow_nan=False, indent=2))
+                return 0
+            planned = ROOM_LAYOUT.compile_layout(intent, router)
+            write_new_json(args.output, planned)
+            result = dict(status=planned['status'], operations=len(planned['graph']['operations']),
+                          rooms=planned['roomFacts'], routes=planned['routes'], regions=planned['regions'],
+                          inclusionMode=planned['inclusionMode'], translationMM=planned['copyTranslationMM'],
+                          sourcePlanHash=planned['sourcePlanHash'], executionPermission=False)
+        elif args.action in authoring:
             result = stage(args)
         else:
             job = Job(args.job)
@@ -738,9 +829,11 @@ def main(argv=None):
                 result = job.verify_reopen_copy(args.copy)
             else:
                 result = {'preflight': job.preflight, 'verify-closed': job.closed,
-                          'verify-reopen': job.reopened}[args.action]()
+                          'verify-reopen': job.reopened, 'verify-inclusion': job.verify_inclusion,
+                          'layout-attributes': job.layout_attributes}[args.action]()
     except (OSError, ValueError, RuntimeError, KeyError, TypeError, ValidationError) as exc:
-        status = 'RECONCILIATION_REQUIRED' if (args.job / 'attempted.json').exists() else 'BLOCKED'
+        job_path = getattr(args, 'job', None)
+        status = 'RECONCILIATION_REQUIRED' if job_path is not None and (job_path / 'attempted.json').exists() else 'BLOCKED'
         print(json.dumps(dict(status=status, reason=str(exc), automaticReplay=False), ensure_ascii=False))
         return 2
     print(json.dumps(result, ensure_ascii=False, allow_nan=False, indent=2))

@@ -176,6 +176,7 @@ class AC30ProjectTests(unittest.TestCase):
         self.stories = [dict(index=index, floorId=index + 4, level=level, name=name)
                         for index, level, name in [(3, 0, 'Ground'), (4, 3, 'Upper')]]
         self.recipe = None
+        self.zone_area_delta = 0
         for target, effect in (
             ('apa_ac30_native.open_test_port', lambda path: 19723 if path == self.project else None),
             ('apa_ac30_native.listener', lambda port, **_: dict(pid=self.pid, startedAt=str(self.pid), port=port)),
@@ -236,6 +237,11 @@ class AC30ProjectTests(unittest.TestCase):
             return {'navigatorItemTree': {'type': 'StoryItem', 'navigatorItemId': {'guid': OTHER}}}
         if command == 'GetDatabaseIdFromNavigatorItemId':
             return {'databases': [{'databaseId': {'guid': GROUP}}]}
+        if command == 'GetAttributesByType' and self.recipe['kind'] == 'layout':
+            if parameters['attributeType'] == 'ZoneCategory':
+                return {'attributes': [{'name': 'Жилые помещения', 'attributeId': {'guid': GROUP}}]}
+            return {'attributes': [{'name': name, 'attributeId': {'guid': WALL}}
+                                   for name in sorted(set(self.recipe['wallMaterials'].values()))]}
         read = self.registered_read(command)
         if read is not None:
             return read
@@ -244,8 +250,22 @@ class AC30ProjectTests(unittest.TestCase):
             self.assertEqual(parameters['elements'], [])
             return {'boundingBoxes3D': []}
         if command == 'GetDetailsOfElements':
-            return {'detailsOfElements': [self.items[row['elementId']['guid']]['details']
-                                          for row in parameters['elements']]}
+            return {'detailsOfElements': [
+                dict(self.items[row['elementId']['guid']]['details'], elementId=row['elementId'])
+                for row in parameters['elements']]}
+        if command == 'GetQuantitiesOfElements':
+            quantities = []
+            for element in parameters['elements']:
+                detail = self.items[element['elementId']['guid']]['details']['details']
+                polygon = detail['polygonOutline']
+                width = polygon[1]['x'] - polygon[0]['x']
+                depth = polygon[2]['y'] - polygon[1]['y']
+                area = width * depth + self.zone_area_delta
+                data = dict.fromkeys(('netArea', 'perimeter', 'netPerimeter', 'volume', 'height',
+                                      'wallsPerimeter', 'wallsSurface', 'doorsSurface', 'windowsSurface'), 0)
+                data.update(area=area, calculatedArea=area, netArea=area)
+                quantities.append(dict(type='Zone', quantities=data, composites=[]))
+            return {'quantitiesOfElements': quantities}
         self.writes.append(command)
         if command == 'SaveProject':
             self.assertEqual(parameters, {})
@@ -259,6 +279,18 @@ class AC30ProjectTests(unittest.TestCase):
             host = item['details']['details']['ownerElementId']['guid']
             self.items[host]['element']['bodies'][0]['vertices'][1][0] = edit['width']
             return {'executionResults': [{'success': True}]}
+        if command == 'CreateZones':
+            guid = str(UUID(int=len(self.items) + 1))
+            row, = parameters['zonesData']
+            floor = row['floorIndex']
+            level = next(story['level'] for story in self.stories if story['index'] == floor)
+            details = {key: row[key] for key in ('name', 'numberStr', 'categoryAttributeId', 'height',
+                                                'bottomOffset', 'stampPosition')}
+            details.update(isManual=True, polygonOutline=row['geometry']['polygonCoordinates'],
+                           relativeTopStory=0, zCoordinate=level)
+            self.items[guid] = dict(details=dict(type='Zone', floorIndex=floor, details=details),
+                                    element=dict(guid=guid, type='Zone', homeStory=floor, bodies=[]))
+            return {'elements': elements([guid])}
         if command in {'CreateWalls', 'CreateSlabs', 'CreateDoors', 'CreateWindows'}:
             guid = str(UUID(int=len(self.items) + 1))
             params, = next(iter(parameters.values()))
@@ -277,11 +309,19 @@ class AC30ProjectTests(unittest.TestCase):
                 self.assertEqual(host['element']['type'], 'Wall')
                 floor = host['element']['homeStory']
                 details.update(ownerElementId=params['ownerWallId'], ownerElementType='Wall')
+                details.pop('ownerWallId')
+            vertices = [[0, 0, 0], [1, 1, 1]]
+            if command == 'CreateWalls' and self.recipe['kind'] == 'layout':
+                start, end = params['begCoordinate'], params['endCoordinate']
+                side = params['thickness'] / 2
+                xmin, ymin = (start['x'] - side, start['y']) if start['x'] == end['x'] else (start['x'], start['y'] - side)
+                xmax, ymax = (end['x'] + side, end['y']) if start['x'] == end['x'] else (end['x'], end['y'] + side)
+                vertices = [[xmin, ymin, details['zCoordinate']], [xmax, ymax, details['zCoordinate'] + params['height']]]
             kind = command[6:-1]
             self.items[guid] = dict(
                 details=dict(type=kind, floorIndex=floor, details=details),
                 element=dict(guid=guid, type=kind, homeStory=floor,
-                             bodies=[dict(vertices=[[0, 0, 0], [1, 1, 1]])]))
+                             bodies=[dict(vertices=vertices)]))
             return {'elements': elements([guid])}
         self.fail(f'Unexpected command {command}')
 
@@ -407,6 +447,87 @@ class AC30ProjectTests(unittest.TestCase):
         self.assertEqual(ready['modelWrites'], 0)
         self.assertEqual(self.writes, [])
         self.assertFalse((job.path / 'attempted.json').exists())
+
+    def stage_layout(self):
+        from tests.test_apa_room_layout import sample
+
+        intent = self.root / 'rooms.json'
+        N.write_new_json(intent, sample())
+        path = self.root / 'layout-mcp-rooms'
+        record = N.stage(Namespace(action='stage-layout', job=path, source=self.source,
+                                   source_sha=N.sha256(self.source), addon=self.addon,
+                                   addon_sha=N.sha256(self.addon), design=intent, build=3001,
+                                   source_revision=RUNTIME['sourceRevision'], build_identity=RUNTIME['buildIdentity']))
+        job = N.Job(path)
+        self.project = job.project
+        self.recipe = job.recipe
+        self.assertEqual(record['nativeWrites'], 0)
+        return job
+
+    def test_layout_experiment_reopen_and_manual_inclusion(self):
+        job = self.stage_layout()
+        ready = job.preflight()
+        self.assertEqual(set(ready['facts']['spatialScan']), {'experiment', 'acceptance'})
+        self.assertEqual(self.writes, [])
+        reopened = self.save_reopen(job, ready)
+        proof = reopened['operationReadback']
+        first = proof['operationGuids']
+        self.assertEqual(len(first), 9)
+        self.assertEqual(len(set(first.values())), 9)
+        self.assertTrue(all(key.startswith('exp-') for key in first))
+        self.assertEqual(self.writes.count('CreateZones'), 2)
+        self.assertAlmostEqual(reopened['roomReadback']['exp-zone-hall']['measuredAreaM2'], 8.3916)
+        self.assertEqual(self.writes.count('SaveProject'), 1)
+        self.assertEqual(self.source.read_bytes(), b'Protected donor fixture')
+        with self.assertRaisesRegex(ValueError, 'UNEXPECTED_GUID_COUNT'):
+            N.Job(job.path).verify_inclusion()
+
+        # Inject the result of a user copy via the simulated transport. No
+        # acceptance-area operation is dispatched by the real APA workflow.
+        recipe = dict(job.recipe, graph=job.recipe['inclusionGraph'],
+                      wallMaterials={key.replace('exp-', 'accept-', 1): value
+                                     for key, value in job.recipe['wallMaterials'].items()})
+        graph = N.PROJECT.bind_design(recipe, self.stories,
+            lambda command, args: self.transport(19723, command, args), job.router)['graph']
+        new = {}
+        for step in graph['operations']:
+            params = N.RUN.resolve_params(step, new)
+            reply = self.transport(19723, step['command'], params)
+            new[step['id']] = dict(guid=N.RUN.created_guid(reply).lower(),
+                                   kind=N.APA.SCENE.GRAPH.CREATES[step['command']])
+        before = list(self.writes)
+        verified = N.Job(job.path).verify_inclusion()
+        self.assertEqual(verified['addedGuidCount'], 9)
+        self.assertEqual(verified['retainedGuidCount'], 9)
+        self.assertEqual(verified['operationGuids'], {key: row['guid'] for key, row in new.items()})
+        self.assertAlmostEqual(verified['roomReadback']['accept-zone-hall']['measuredAreaM2'], 8.3916)
+        self.assertEqual(self.writes, before)
+        copied = self.items[new['accept-door-entry']['guid']]['details']
+        copied['layerIndex'] = 99
+        with self.assertRaisesRegex(ValueError, 'EDITABLE_PARAMETERS_DRIFT:accept-door-entry'):
+            N.Job(job.path).verify_inclusion()
+        del copied['layerIndex']
+        self.items[first['exp-zone-hall']]['details']['details']['name'] = 'Изменённое исходное помещение'
+        with self.assertRaisesRegex(ValueError, 'CHANGED_EXISTING_PARAMETERS'):
+            N.Job(job.path).verify_inclusion()
+
+    def test_layout_blocks_acceptance_area_on_failed_experiment(self):
+        job = self.stage_layout()
+        ready = job.preflight()
+        self.zone_area_delta = .4
+        with self.assertRaisesRegex(ValueError, 'NO_REPLAY'):
+            N.Job(job.path).execute(ready['confirmSha256'])
+        self.assertEqual(self.writes.count('CreateZones'), 1)
+        self.assertEqual(self.writes.count('CreateWalls'), 5)
+        self.assertNotIn('SaveProject', self.writes)
+        writes = list(self.writes)
+        self.assertTrue(all(item['details']['details']['begCoordinate']['x'] < 6
+                            for item in self.items.values() if item['element']['type'] == 'Wall'))
+        with self.assertRaisesRegex(ValueError, 'NO_REPLAY'):
+            N.Job(job.path).execute(ready['confirmSha256'])
+        self.assertEqual(self.writes, writes)
+        self.assertEqual(ready['modelWrites'], 0)
+        self.assertTrue((job.path / 'attempted.json').is_file())
 
     def test_approved_empty_floor_is_rechecked_before_first_create(self):
         job = self.stage('r06-two-storey-design.json', 'two-storeys')

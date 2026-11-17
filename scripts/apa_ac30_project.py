@@ -8,6 +8,7 @@ from apa_release import read_json
 import archicad_bim_documentation as DOC
 from archicad_connected_components import retained_geometry_signatures
 import archicad_project_accelerator as APA
+from apa_room_layout import verify_native_zone, verify_wall_body
 from archicad_native_stair_connection import prepare_ac30_stair, read_ac30_stair
 from apa_project_design import changes_between, compile_design_for_tapir2
 from archicad_authored_extension import plan_parameter_operations
@@ -154,8 +155,15 @@ def bind_design(recipe, native_stories, read, router):
                     and match['name'] == story['existingNativeLabel'], 'AC30_PROJECT_PINNED_STORY_DRIFT')
         story_map[i] = match['index']
 
-    names = {recipe['slabMaterial'], *recipe['wallMaterials'].values()}
+    names = {recipe['slabMaterial'], *recipe['wallMaterials'].values()} - {None}
     materials = {name: RUN.resolve_basic_slab_material(read, name) for name in sorted(names)}
+    category = None
+    if recipe.get('zoneCategory') is not None:
+        rows = read('GetAttributesByType', {'attributeType': 'ZoneCategory'}).get('attributes', [])
+        matches = [r.get('attributeId', {}).get('guid') for r in rows if r.get('name') == recipe['zoneCategory']]
+        require(len(matches) == 1 and isinstance(matches[0], str) and RUN._GUID.fullmatch(matches[0]),
+                'LAYOUT_ZONE_CATEGORY_MISSING_OR_AMBIGUOUS')
+        category = matches[0]
     for step in graph['operations']:
         params, = next(iter(step['params'].values()))
         if 'floorIndex' in params:
@@ -164,6 +172,9 @@ def bind_design(recipe, native_stories, read, router):
             params.update(structureType='Basic', buildingMaterialId={'guid': materials[recipe['slabMaterial']]})
         if step['id'] in recipe['wallMaterials']:
             params['buildingMaterialId'] = {'guid': materials[recipe['wallMaterials'][step['id']]]}
+        if step['command'] == 'CreateZones':
+            require(category is not None, 'LAYOUT_NATIVE_ZONE_CATEGORY_NOT_BOUND')
+            params['categoryAttributeId'] = {'guid': category}
 
     checked = APA.SCENE.GRAPH.compile_graph(router.catalog, graph, runtime_version='2.0.0')
     require(checked['status'] == 'PLAN_VALIDATED_OFFLINE', 'AC30_BOUND_PROJECT_GRAPH_INVALID')
@@ -177,7 +188,7 @@ def bind_design(recipe, native_stories, read, router):
                 materials=materials, boundGraphSha256=checked['sourcePlanHash'])
 
 
-def read_created(job, step, params, guid, model):
+def read_created(job, step, params, guid, model, zone_facts=None):
     row, = next(iter(params.values()))
     nodes = {e['guid'].lower(): e for e in model['elements']}
     require(guid in nodes, 'AC30_PROJECT_CREATED_GUID_MISSING')
@@ -194,19 +205,123 @@ def read_created(job, step, params, guid, model):
     floor = nodes[owner.lower()]['homeStory'] if owner else row['floorIndex']
     story_level = next((s['level'] for s in job.binding['stories'] if s['index'] == floor), None)
     require(story_level is not None and element['homeStory'] == floor, 'AC30_PROJECT_NATIVE_STORY_DRIFT')
+    details = RUN.requested_details(job.api, guid)
+    if step['command'] == 'CreateZones':
+        require(element['type'] == 'Zone', 'LAYOUT_NATIVE_ZONE_TYPE_DRIFT')
+        quantities, = job.read('GetQuantitiesOfElements', {'elements': [{'elementId': {'guid': guid}}]})[
+            'quantitiesOfElements']
+        measurement = verify_native_zone(row, details, quantities, story_level)
+        room_id = step['id'].split('-zone-', 1)[1]
+        require(measurement['measuredAreaM2'] + 1e-9 >= job.recipe['roomFacts'][room_id]['minAreaM2'],
+                'LAYOUT_NATIVE_ROOM_MINIMUM_AREA')
+        if zone_facts is not None:
+            zone_facts[step['id']] = dict(measurement, guid=guid)
+        return set()
     material = row.get('buildingMaterialId', {}).get('guid')
-    RUN.verify_readback(step['command'], params, RUN.requested_details(job.api, guid), owner_guid=owner,
+    RUN.verify_readback(step['command'], params, details, owner_guid=owner,
                         expected_floor=floor, expected_slab_material_guid=material,
                         expected_story_level=story_level, slab_level_is_absolute=True)
     require(any(body['vertices'] for body in element['bodies']), 'AC30_PROJECT_CREATED_BREP_MISSING:' + guid)
+    if job.kind == 'layout' and step['command'] == 'CreateWalls':
+        verify_wall_body(row, element, story_level + row['zCoordinate'])
     return set()
 
 
 def verify_design(job, facts, model, guids):
     bound = {step['id']: {'guid': guids[step['id']], 'kind': APA.SCENE.GRAPH.CREATES[step['command']]}
              for step in facts['graph']['operations']}
+    zones = {}
     for step in facts['graph']['operations']:
-        read_created(job, step, RUN.resolve_params(step, bound), guids[step['id']], model)
+        read_created(job, step, RUN.resolve_params(step, bound), guids[step['id']], model, zones)
+    return zones
+
+
+def editable_details(api, guids):
+    ids = sorted(guids)
+    proof = {}
+    for offset in range(0, len(ids), 200):
+        chunk = ids[offset:offset + 200]
+        response = api('GetDetailsOfElements', {
+            'elements': [{'elementId': {'guid': guid}} for guid in chunk],
+            'fields': ['elementId', 'type', 'id', 'floorIndex', 'layerIndex', 'libraryPartUnId',
+                       'infoString', 'details'],
+        })
+        rows = response.get('detailsOfElements', [])
+        require(len(rows) == len(chunk), 'LAYOUT_RETAINED_DETAILS_INCOMPLETE')
+        for guid, row in zip(chunk, rows):
+            require(not row.get('error') and isinstance(row.get('type'), str)
+                    and row.get('elementId', {}).get('guid', '').lower() == guid,
+                    'LAYOUT_RETAINED_DETAILS_IDENTITY_DRIFT')
+            proof[guid] = row
+    return proof
+
+
+def retained_details_digest(api, guids):
+    """Fingerprint editable fields so geometry parity alone cannot pass retention."""
+    return RUN.digest(editable_details(api, guids))
+
+
+def transferable_fields(row):
+    # Position and host identity are proved separately against the translated
+    # graph. Archicad generates new element identifiers for native copies.
+    moved = {
+        'Wall': {'begCoordinate', 'endCoordinate', 'polygonOutline'},
+        'Door': {'ownerElementId'},
+        'Zone': {'polygonOutline', 'referencePosition', 'stampPosition'},
+    }
+    return dict(type=row['type'], floorIndex=row.get('floorIndex'), layerIndex=row.get('layerIndex'),
+                libraryPartUnId=row.get('libraryPartUnId'), infoString=row.get('infoString'),
+                details={key: value for key, value in row['details'].items() if key not in moved[row['type']]})
+
+
+def verify_layout_inclusion(job, saved, model, signatures):
+    """Match a user-copied fragment by typed geometry, properties and new GUIDs."""
+    old = saved['signatures']
+    require(old.keys() <= signatures.keys() and all(signatures[guid] == sig for guid, sig in old.items()),
+            'LAYOUT_INCLUSION_CHANGED_EXISTING_GEOMETRY')
+    previous = saved['operationReadback']
+    markers = previous.get('templateMarkerSignatures', {})
+    details = editable_details(job.api, set(signatures) | markers.keys())
+    require(RUN.digest({guid: details[guid] for guid in set(old) | markers.keys()})
+            == previous['retainedDetailsAfterExperiment'],
+            'LAYOUT_INCLUSION_CHANGED_EXISTING_PARAMETERS')
+    verify_design(job, {'graph': previous['boundGraph']}, model, previous['operationGuids'])
+
+    recipe = dict(job.recipe, graph=job.recipe['inclusionGraph'],
+                  wallMaterials={name.replace('exp-', 'accept-', 1): value
+                                 for name, value in job.recipe['wallMaterials'].items()})
+    bound = bind_design(recipe, job.binding['stories'], job.api, job.router)
+    steps = bound['graph']['operations']
+    new = set(signatures) - old.keys()
+    require(len(new) == len(steps), 'LAYOUT_INCLUSION_UNEXPECTED_GUID_COUNT')
+    types = {row['guid'].lower(): row['type'] for row in model['elements']}
+    created, remaining = {}, set(new)
+    for step in steps:
+        kind = APA.SCENE.GRAPH.CREATES[step['command']]
+        params = RUN.resolve_params(step, created)
+        matching = []
+        for guid in sorted(remaining):
+            if types[guid] != kind:
+                continue
+            try:
+                read_created(job, step, params, guid, model)
+            except ValueError:
+                continue
+            matching.append(guid)
+        require(len(matching) == 1, 'LAYOUT_INCLUSION_MISSING_OR_AMBIGUOUS:' + step['id'])
+        guid, = matching
+        created[step['id']] = {'guid': guid, 'kind': kind}
+        remaining.remove(guid)
+    require(not remaining, 'LAYOUT_INCLUSION_UNEXPLAINED_GUIDS')
+    operation_guids = {name: row['guid'] for name, row in created.items()}
+    for name, guid in operation_guids.items():
+        source = previous['operationGuids']['exp-' + name.removeprefix('accept-')]
+        require(transferable_fields(details[guid]) == transferable_fields(details[source]),
+                'LAYOUT_INCLUSION_EDITABLE_PARAMETERS_DRIFT:' + name)
+    return dict(operationGuids=operation_guids, roomReadback=verify_design(job, bound, model, operation_guids),
+                retainedGuidCount=len(old), addedGuidCount=len(new), copyTranslationMM=job.recipe['copyTranslationMM'],
+                signaturesSha256=RUN.digest(signatures), savedOriginalSha256=saved['savedSha256'],
+                inclusionGraphSha256=recipe['inclusionGraphSha256'])
 
 
 def execute_design(job, baseline, capture):
@@ -264,10 +379,19 @@ def execute_design(job, baseline, capture):
             and all(signatures[guid] == value for guid, value in original.items()),
             'AC30_PROJECT_BASELINE_DRIFT_BEFORE_SAVE')
     guids = {sid: row['guid'] for sid, row in created.items()}
-    verify_design(job, facts, model, guids)
-    return dict(status='AC30_PROJECT_NATIVE_READBACK_PASS', operationGuids=guids, addedGuids=sorted(owned),
-                boundGraph=facts['graph'], signaturesSha256=RUN.digest(signatures),
-                templateMarkerSignatures=template_markers)
+    zones = verify_design(job, facts, model, guids)
+    proof = dict(status='AC30_PROJECT_NATIVE_READBACK_PASS', operationGuids=guids, addedGuids=sorted(owned),
+                 boundGraph=facts['graph'], signaturesSha256=RUN.digest(signatures),
+                 templateMarkerSignatures=template_markers)
+    if job.kind == 'layout':
+        require(retained_details_digest(job.api, set(original) | template_markers.keys()) == facts['retainedDetailsSha256'],
+                'LAYOUT_EXPERIMENT_CHANGED_EXISTING_PARAMETERS')
+        proof.update(roomReadback=zones, regions=job.recipe['regions'], routes=job.recipe['routes'],
+                     roomDependencies=job.recipe['roomDependencies'], masonryChecks=job.recipe['masonryChecks'],
+                     copyTranslationMM=job.recipe['copyTranslationMM'],
+                     retainedDetailsAfterExperiment=retained_details_digest(job.api, set(signatures) | template_markers.keys()),
+                     inclusionMode='USER_COPY_THEN_READBACK', normativeApplicability='NOT_VERIFIED')
+    return proof
 
 
 def update_recipe(previous, accepted, updated, new_design, source):

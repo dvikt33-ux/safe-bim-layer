@@ -1,4 +1,5 @@
 from concurrent.futures import ThreadPoolExecutor
+from argparse import Namespace
 import json
 from pathlib import Path
 import shutil
@@ -30,7 +31,8 @@ class ControlTransportTests(unittest.TestCase):
             shutil.copyfile(ROOT / name, self.build / name)
         for name in ("scripts", "schemas", "archicad-addon"):
             shutil.copytree(ROOT / name, self.build / name, ignore=shutil.ignore_patterns("__pycache__"))
-        tracked = ["apa.py", "apa_release.py", "scripts/apa_control_mcp.py"]
+        tracked = sorted(path.relative_to(self.build).as_posix()
+                         for path in self.build.rglob("*") if path.is_file())
         write_new_json(self.build / MANIFEST, dict(schema="APA_WINDOWS_RELEASE_V1", revision="a"*40,
             files={name: dict(bytes=(self.build / name).stat().st_size,
                               sha256=sha256(self.build / name)) for name in tracked}))
@@ -100,6 +102,74 @@ class ControlTransportTests(unittest.TestCase):
                                                              artifact="../../outside.txt"))
                 self.assertTrue(bad.is_error)
         anyio.run(run)
+
+    def test_room_layout_plan_via_existing_mcp_tools(self):
+        from tests.test_apa_room_layout import sample
+
+        async def run():
+            async with self.client() as client:
+                job = "mcp-plan-layout"
+                await self.value(client, "apa_execute", dict(operation="plan", job_id=job, intent=sample()))
+                result = await self.complete(client, job)
+                self.assertEqual(result["phaseStatus"], "LAYOUT_PLAN_VALIDATED_OFFLINE")
+                self.assertEqual(result["receipt"]["operations"], 9)
+                self.assertEqual(result["receipt"]["inclusionMode"], "USER_COPY_THEN_READBACK")
+                self.assertFalse(result["receipt"]["executionPermission"])
+                replay = await self.value(client, "apa_execute", dict(operation="plan", job_id=job, intent=sample()))
+                self.assertEqual(replay, result)
+                await self.value(client, "apa_execute", dict(operation="plan", job_id="mcp-layout-input-needed",
+                                 intent={"schemaVersion": "apa-room-layout/1"}))
+                missing = await self.complete(client, "mcp-layout-input-needed")
+                self.assertEqual(missing["phaseStatus"], "LAYOUT_INPUT_REQUIRED")
+                self.assertIn("minPierMM", missing["receipt"]["missingInputs"])
+                self.assertFalse(missing["receipt"]["executionPermission"])
+        anyio.run(run)
+
+    def test_layout_route_requires_a_local_grant_bound_to_exact_preflight(self):
+        from apa_ac30_native import Job, stage
+        from tests.test_apa_room_layout import sample
+
+        donor = self.root / "donor.pln"
+        addon = self.root / "tapir.apx"
+        intent = self.root / "layout.json"
+        target = self.root / "layout-mcp-fixture"
+        donor.write_bytes(b"Original donor")
+        revision, identity = "a" * 40, "b" * 64
+        addon.write_bytes(revision.encode() + identity.encode())
+        write_new_json(intent, sample())
+        stage(Namespace(action="stage-layout", job=target, source=donor, source_sha=sha256(donor),
+                        addon=addon, addon_sha=sha256(addon), source_revision=revision,
+                        build_identity=identity, build=3001, design=intent))
+        job = Job(target)
+        profile = self.root / "layout-profile.json"
+        row = dict(job=str(target), stageSha256=job.manifest_sha, writeEnabled=True)
+        write_new_json(profile, dict(schema=SCHEMA, releaseManifestSha256=sha256(self.build / MANIFEST),
+                                     campaigns={target.name: row}))
+        control = Control(self.build, profile, worker=False)
+        self.assertEqual(control.native_args(control.folder("preflight-room"), "preflight", target.name)[:2],
+                         ["ac30-native", "preflight"])
+        self.assertEqual(control.native_args(control.folder("verify-copy"), "verify-inclusion", target.name)[:2],
+                         ["ac30-native", "verify-inclusion"])
+        with self.assertRaises(FileNotFoundError):
+            control.local_grant("write-room", target.name)
+        preflight = job.path / "preflight.json"
+        write_new_json(preflight, dict(status="READY_FOR_EXPLICIT_TEST_RUN", manifestSha256=job.manifest_sha,
+                                     recipe=job.recipe, binding=dict(path=str(job.project), listener=dict(pid=1)),
+                                     modelWrites=0, executionPermission=False))
+        with self.assertRaisesRegex(ValueError, "EXPLICIT_LOCAL_GRANT"):
+            control.local_grant("write-room", target.name)
+        with self.assertRaisesRegex(ValueError, "PREFLIGHT_SHA_MISMATCH"):
+            control.grant_record("write-room", target.name, "0" * 64)
+        grant_path, grant = control.grant_record("write-room", target.name, sha256(preflight))
+        write_new_json(grant_path, grant)
+        self.assertEqual(control.native_args(control.folder("write-room"), "write", target.name),
+                         ["ac30-native", "execute", "--job", str(target), "--confirm-preflight", sha256(preflight)])
+        with self.assertRaisesRegex(ValueError, "EXPLICIT_LOCAL_GRANT"):
+            control.local_grant("different-write-id", target.name)
+        write_new_json(job.path / "attempted.json", {"automaticReplay": False})
+        with self.assertRaisesRegex(ValueError, "NO_REPLAY"):
+            control.local_grant("write-room", target.name)
+        self.assertEqual(donor.read_bytes(), b"Original donor")
 
     def test_same_job_concurrent_replay_and_interruption(self):
         with tempfile.TemporaryDirectory() as external:

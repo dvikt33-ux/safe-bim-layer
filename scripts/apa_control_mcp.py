@@ -24,13 +24,16 @@ SCHEMA = "APA_MCP_PROFILE_V1"
 ID = re.compile(r"[a-z0-9][a-z0-9-]{2,63}")
 HEX = re.compile(r"[a-f0-9]{64}")
 TEST_ID = re.compile(r"r03-(?:authored|gpt-shell)-mcp-[a-z0-9-]{4,40}")
-Operation = Literal["doctor", "plan", "native-read", "preflight", "write", "check-closed", "verify-reopen"]
+LAYOUT_TEST_ID = re.compile(r"layout-mcp-[a-z0-9-]{3,40}")
+LAYOUT_SCHEMA = "apa-room-layout/1"
+Operation = Literal["doctor", "plan", "native-read", "preflight", "write", "check-closed", "verify-reopen",
+                    "verify-inclusion"]
 ReadKind = Literal["status", "job", "receipt"]
 TapirOperation = Literal["status", "catalog", "read"]
 Receipt = Literal["plan", "native-inventory", "stdout", "stderr"]
 ARTIFACTS = {"plan": "plan.json", "native-inventory": "native-inventory.json",
              "stdout": "stdout.txt", "stderr": "stderr.txt"}
-NATIVE = {"native-read", "preflight", "write", "check-closed", "verify-reopen"}
+NATIVE = {"native-read", "preflight", "write", "check-closed", "verify-reopen", "verify-inclusion"}
 PRE_SAVE = {"preflight", "write"}
 MAX_INPUT = 256_000
 MAX_ACTIVE = 8
@@ -50,6 +53,16 @@ def file_json(path, limit=MAX_INPUT):
 
 def output_json(value):
     return json.dumps(value, ensure_ascii=False, allow_nan=False, sort_keys=True)
+
+
+def layout_campaign(job, record):
+    from apa_ac30_native import Job, SCHEMA as native_schema
+
+    require(record.get("schema") == native_schema and record.get("recipe", {}).get("kind") == "layout"
+            and LAYOUT_TEST_ID.fullmatch(job.name), "MCP_LAYOUT_REQUIRES_LOCAL_TEST_CAMPAIGN")
+    checked = Job(job)
+    require(checked.manifest == record, "MCP_CAMPAIGN_MANIFEST_DRIFT")
+    return checked
 
 
 class Control:
@@ -119,10 +132,15 @@ class Control:
         job = exact_path(Path(row["job"]))
         stage = exact_path(job / "job.json")
         record = file_json(stage)
-        require(record.get("jobId") == job.name and not job.is_relative_to(self.root)
+        require(not job.is_relative_to(self.root)
                 and not job.is_relative_to(PROTECTED_RUNTIME.resolve())
-                and not self.profile.is_relative_to(job)
-                and (not row["writeEnabled"] or TEST_ID.fullmatch(job.name)), "MCP_CAMPAIGN_SCOPE_INVALID")
+                and not self.profile.is_relative_to(job) and sha256(stage) == row["stageSha256"],
+                "MCP_CAMPAIGN_SCOPE_INVALID")
+        if record.get("recipe", {}).get("kind") == "layout":
+            layout_campaign(job, record)
+            return job, record, row
+        require(record.get("jobId") == job.name and (not row["writeEnabled"] or TEST_ID.fullmatch(job.name)),
+                "MCP_CAMPAIGN_SCOPE_INVALID")
         from apa_r03_architecture import check
 
         manifest = check(job, exact_path(Path(record["original"])), record["initialSHA256"])
@@ -170,7 +188,7 @@ class Control:
             except (RecursionError, ValueError) as exc:
                 raise ValueError("MCP_PLAN_INPUT_INVALID") from exc
             require(isinstance(intent, dict) and intent.get("schemaVersion") in {
-                "apa-semantic-project-brief/1", "apa-project-design/1"}
+                "apa-semantic-project-brief/1", "apa-project-design/1", LAYOUT_SCHEMA}
                 and size <= MAX_INPUT // 4, "MCP_PLAN_INPUT_INVALID")
         folder = self.folder(job_id)
         request = dict(operation=operation, target=target, intent=intent, profileSha256=self.profile_sha)
@@ -204,21 +222,38 @@ class Control:
     def grant_record(self, job_id, target, confirm=None):
         folder = self.folder(job_id)
         job, stage, row = self.campaign(target)
-        require(row["writeEnabled"] and "authoredIntentHash" in stage, "MCP_NATIVE_WRITE_DISABLED")
-        approval = exact_path(job / "approved-preflight.json")
+        layout = stage.get("recipe", {}).get("kind") == "layout"
+        require(row["writeEnabled"] and (layout or "authoredIntentHash" in stage), "MCP_NATIVE_WRITE_DISABLED")
+        approval = exact_path(job / ("preflight.json" if layout else "approved-preflight.json"))
         actual = sha256(approval)
         if confirm is not None:
             require(confirm == actual, "MCP_PREFLIGHT_SHA_MISMATCH")
-        from apa_r03_architecture import approved_result, status
 
         approved = file_json(approval)
-        approved_result(job, approved)
-        require(status(job, stage)["status"] == "READY_FOR_EXPLICIT_TEST_RUN"
-                and isinstance(approved.get("listener"), dict), "MCP_EXACT_PREFLIGHT_REQUIRED")
+        if layout:
+            checked = layout_campaign(job, stage)
+            checked.check_files()
+            checked.unattempted()
+            binding = approved.get("binding", {})
+            require(approved.get("status") == "READY_FOR_EXPLICIT_TEST_RUN"
+                    and approved.get("manifestSha256") == row["stageSha256"]
+                    and approved.get("recipe") == stage["recipe"]
+                    and approved.get("executionPermission") is False and approved.get("modelWrites") == 0
+                    and binding.get("path") == str(checked.project), "MCP_EXACT_PREFLIGHT_REQUIRED")
+            listener = binding.get("listener")
+            intent_sha, initial_sha = stage["recipe"]["designSha256"], stage["initialSha256"]
+        else:
+            from apa_r03_architecture import approved_result, status
+
+            approved_result(job, approved)
+            require(status(job, stage)["status"] == "READY_FOR_EXPLICIT_TEST_RUN", "MCP_EXACT_PREFLIGHT_REQUIRED")
+            listener = approved.get("listener")
+            intent_sha, initial_sha = stage["intentSHA256"], stage["initialSHA256"]
+        require(isinstance(listener, dict), "MCP_EXACT_PREFLIGHT_REQUIRED")
         require(sha256(approval) == actual, "MCP_PREFLIGHT_CHANGED_DURING_APPROVAL")
         return folder.with_suffix(".grant.json"), dict(jobId=job_id, target=target, stageSha256=row["stageSha256"],
-                    profileSha256=self.profile_sha, preflightSha256=actual, intentSha256=stage["intentSHA256"],
-                    initialPlnSha256=stage["initialSHA256"], listener=approved["listener"])
+                    profileSha256=self.profile_sha, preflightSha256=actual, intentSha256=intent_sha,
+                    initialPlnSha256=initial_sha, listener=listener)
 
     def local_grant(self, job_id, target):
         path, expected = self.grant_record(job_id, target)
@@ -237,7 +272,8 @@ class Control:
             elif operation == "plan":
                 source, result = folder / "intent.json", folder / "plan.json"
                 write_new_json(source, request["intent"])
-                args += ["plan", "--intent", str(source), "--output", str(result)]
+                route = ["ac30-native", "layout-plan"] if request["intent"].get("schemaVersion") == LAYOUT_SCHEMA else ["plan"]
+                args += [*route, "--intent", str(source), "--output", str(result)]
             else:
                 args += self.native_args(folder, operation, target)
                 dispatched = True
@@ -254,9 +290,17 @@ class Control:
                                exitCode=None)
 
     def native_args(self, folder, operation, target):
+        job, manifest, _ = self.campaign(target)
+        if manifest.get("recipe", {}).get("kind") == "layout":
+            actions = {"native-read": "layout-attributes", "preflight": "preflight", "write": "execute", "check-closed": "verify-closed",
+                       "verify-reopen": "verify-reopen", "verify-inclusion": "verify-inclusion"}
+            args = ["ac30-native", actions[operation], "--job", str(job)]
+            if operation == "write":
+                args += ["--confirm-preflight", self.local_grant(folder.name, target)["preflightSha256"]]
+            return args
+        require(operation != "verify-inclusion", "MCP_LAYOUT_TARGET_REQUIRED")
         from apa_r03_architecture import status
 
-        job, manifest, _ = self.campaign(target)
         stage_status = status(job, manifest)["status"]
         if operation in PRE_SAVE:
             require(stage_status in {"STAGED", "READY_FOR_EXPLICIT_TEST_RUN"}, "MCP_CAMPAIGN_ALREADY_ATTEMPTED")
@@ -287,7 +331,9 @@ class Control:
         except ValueError:
             pass
         if request["operation"] == "write":
-            ok = process.returncode == 0 and phase == "LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN"
+            expected = ("SAVED_PENDING_REAL_REOPEN" if "ac30-native" in args
+                        else "LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN")
+            ok = process.returncode == 0 and phase == expected
         else:
             ok = process.returncode == 0 and phase is not None
         return self.finish(folder, request, "COMPLETE" if ok else "FAILED",
@@ -381,8 +427,8 @@ def server_for(control=None, *, tapir=None, ac30_quantities=None):
                               intent: dict | None = None) -> CallToolResult:
             """Queue an approved APA operation under an immutable job ID.
 
-            Plan accepts a semantic brief or variants. Native operations need a
-            named local test campaign. Write also needs an exact local operator grant.
+            Plan accepts a semantic brief, variants, or apa-room-layout/1.
+            Native operations need a named local test campaign. Write also needs an exact local operator grant.
             Use apa_read for the result.
             """
             return await call(control.submit, operation, job_id, target, intent)
@@ -421,9 +467,25 @@ def main(argv=None):
     parser.add_argument("--profile", required=True, type=Path)
     parser.add_argument("--port", type=int, help="Optional HTTP port on 127.0.0.1. Default is stdio.")
     parser.add_argument("--grant", nargs=3, metavar=("JOB_ID", "TARGET", "PREFLIGHT_SHA256"))
+    parser.add_argument("--prepare-layout", type=Path, metavar="JOB", help="Create a local MCP profile for a staged room-layout copy")
     args = parser.parse_args(argv)
-    require(not (args.port and args.grant), "MCP_SELECT_ONE_MODE")
+    require(sum(bool(x) for x in (args.port, args.grant, args.prepare_layout)) <= 1, "MCP_SELECT_ONE_MODE")
     profile = args.profile.absolute()
+    if args.prepare_layout is not None:
+        profile = exact_path(profile, exists=False)
+        job = exact_path(args.prepare_layout.absolute())
+        record = file_json(job / "job.json")
+        checked = layout_campaign(job, record)
+        checked.check_files()
+        checked.unattempted()
+        read_release(root)
+        require(not job.is_relative_to(root) and not job.is_relative_to(PROTECTED_RUNTIME.resolve())
+                and not profile.is_relative_to(job), "MCP_CAMPAIGN_SCOPE_INVALID")
+        write_new_json(profile, dict(schema=SCHEMA, releaseManifestSha256=sha256(root / MANIFEST),
+            campaigns={job.name: dict(job=str(job), stageSha256=checked.manifest_sha, writeEnabled=True)}))
+        print(output_json(dict(status="MCP_LAYOUT_PROFILE_CREATED", target=job.name, profile=str(profile),
+                               executionPermission=False)))
+        return 0
     from archicad_tapir_profile import BRIDGE_SCHEMA, LEGACY_AC30_SCHEMA
 
     config = file_json(profile)
