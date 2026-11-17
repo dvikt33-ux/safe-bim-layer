@@ -8,7 +8,7 @@ from apa_release import read_json
 import archicad_bim_documentation as DOC
 from archicad_connected_components import retained_geometry_signatures
 import archicad_project_accelerator as APA
-from apa_room_layout import verify_native_zone, verify_wall_body
+from apa_room_layout import resolve_zone_categories, verify_native_zone, verify_wall_body
 from archicad_native_stair_connection import prepare_ac30_stair, read_ac30_stair
 from apa_project_design import changes_between, compile_design_for_tapir2
 from archicad_authored_extension import plan_parameter_operations
@@ -157,13 +157,10 @@ def bind_design(recipe, native_stories, read, router):
 
     names = {recipe['slabMaterial'], *recipe['wallMaterials'].values()} - {None}
     materials = {name: RUN.resolve_basic_slab_material(read, name) for name in sorted(names)}
-    category = None
-    if recipe.get('zoneCategory') is not None:
-        rows = read('GetAttributesByType', {'attributeType': 'ZoneCategory'}).get('attributes', [])
-        matches = [r.get('attributeId', {}).get('guid') for r in rows if r.get('name') == recipe['zoneCategory']]
-        require(len(matches) == 1 and isinstance(matches[0], str) and RUN._GUID.fullmatch(matches[0]),
-                'LAYOUT_ZONE_CATEGORY_MISSING_OR_AMBIGUOUS')
-        category = matches[0]
+    categories = {}
+    if any(step['command'] == 'CreateZones' for step in graph['operations']):
+        rows = read('GetAttributesByType', {'attributeType': 'ZoneCategory'})['attributes']
+        categories = resolve_zone_categories(recipe, rows)
     for step in graph['operations']:
         params, = next(iter(step['params'].values()))
         if 'floorIndex' in params:
@@ -173,8 +170,8 @@ def bind_design(recipe, native_stories, read, router):
         if step['id'] in recipe['wallMaterials']:
             params['buildingMaterialId'] = {'guid': materials[recipe['wallMaterials'][step['id']]]}
         if step['command'] == 'CreateZones':
-            require(category is not None, 'LAYOUT_NATIVE_ZONE_CATEGORY_NOT_BOUND')
-            params['categoryAttributeId'] = {'guid': category}
+            room_id = step['id'].split('-zone-', 1)[1]
+            params['categoryAttributeId'] = {'guid': categories[room_id]['guid']}
 
     checked = APA.SCENE.GRAPH.compile_graph(router.catalog, graph, runtime_version='2.0.0')
     require(checked['status'] == 'PLAN_VALIDATED_OFFLINE', 'AC30_BOUND_PROJECT_GRAPH_INVALID')
@@ -184,8 +181,11 @@ def bind_design(recipe, native_stories, read, router):
             params, = next(iter(step['params'].values()))
             parent = params['ownerWallId']['guid']['$createdGuid']
             params['ownerWallId']['guid'] = {'$result': {'step': parent, 'pointer': '/elements/0/elementId/guid'}}
-    return dict(graph=graph, workflow=router.prepare_workflow(native_graph), storyIndices=list(story_map.values()),
-                materials=materials, boundGraphSha256=checked['sourcePlanHash'])
+    result = dict(graph=graph, workflow=router.prepare_workflow(native_graph), storyIndices=list(story_map.values()),
+                  materials=materials, boundGraphSha256=checked['sourcePlanHash'])
+    if categories:
+        result['zoneCategories'] = categories
+    return result
 
 
 def read_created(job, step, params, guid, model, zone_facts=None):
@@ -246,13 +246,19 @@ def editable_details(api, guids):
             'fields': ['elementId', 'type', 'id', 'floorIndex', 'layerIndex', 'libraryPartUnId',
                        'infoString', 'details'],
         })
-        rows = response.get('detailsOfElements', [])
-        require(len(rows) == len(chunk), 'LAYOUT_RETAINED_DETAILS_INCOMPLETE')
+        rows = response.get('detailsOfElements') if isinstance(response, dict) else None
+        require(isinstance(rows, list) and len(rows) == len(chunk), 'LAYOUT_RETAINED_DETAILS_INCOMPLETE')
         for guid, row in zip(chunk, rows):
-            require(not row.get('error') and isinstance(row.get('type'), str)
-                    and row.get('elementId', {}).get('guid', '').lower() == guid,
+            require(isinstance(row, dict) and not row.get('error') and isinstance(row.get('type'), str),
                     'LAYOUT_RETAINED_DETAILS_IDENTITY_DRIFT')
-            proof[guid] = row
+            identity = row.get('elementId')
+            # GetDetailsOfElements can wrap its selected elementId in an ElementIdArrayItem.
+            if isinstance(identity, dict) and identity.keys() == {'elementId'}:
+                identity = identity['elementId']
+            reported = identity['guid'] if isinstance(identity, dict) and identity.keys() == {'guid'} else None
+            require(isinstance(reported, str) and RUN._GUID.fullmatch(reported)
+                    and reported.lower() == guid.lower(), 'LAYOUT_RETAINED_DETAILS_IDENTITY_DRIFT')
+            proof[guid] = dict(row, elementId={'guid': reported.lower()})
     return proof
 
 
@@ -386,7 +392,8 @@ def execute_design(job, baseline, capture):
     if job.kind == 'layout':
         require(retained_details_digest(job.api, set(original) | template_markers.keys()) == facts['retainedDetailsSha256'],
                 'LAYOUT_EXPERIMENT_CHANGED_EXISTING_PARAMETERS')
-        proof.update(roomReadback=zones, regions=job.recipe['regions'], routes=job.recipe['routes'],
+        proof.update(roomReadback=zones, zoneCategories=facts['zoneCategories'], regions=job.recipe['regions'],
+                     routes=job.recipe['routes'],
                      roomDependencies=job.recipe['roomDependencies'], masonryChecks=job.recipe['masonryChecks'],
                      copyTranslationMM=job.recipe['copyTranslationMM'],
                      retainedDetailsAfterExperiment=retained_details_digest(job.api, set(signatures) | template_markers.keys()),

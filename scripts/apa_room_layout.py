@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 from itertools import pairwise
+import re
+import unicodedata
 
 import archicad_bim_graph as GRAPH
 import archicad_normative_bindings as NORM
@@ -14,8 +16,23 @@ from apa_ac29_save_isolation import require
 SCHEMA = "apa-room-layout/1"
 REGIONS = {"experiment": "exp", "acceptance": "accept"}
 OUTPUT_TYPES = {"CreateWalls", "CreateDoors", "CreateZones"}
-INPUT_FIELDS = ("schemaVersion", "projectId", "storyLevelMM", "depthMM", "wall", "zoneCategoryName",
+INPUT_FIELDS = ("schemaVersion", "projectId", "storyLevelMM", "depthMM", "wall",
                 "minPierMM", "originsMM", "rooms", "doors")
+ZONE_PURPOSES = {
+    "circulation": (("транзитные помещения", "circulation"),
+                    ("холл", "прихожая", "коридор", "тамбур", "вестибюль", "транзитное помещение",
+                     "hall", "hallway", "corridor", "lobby")),
+    "residential": (("жилье и отдых", "жилые помещения", "residential", "residential and recreation"),
+                    ("гостиная", "спальня", "детская комната", "жилая комната", "жилое помещение",
+                     "living room", "bedroom")),
+    "office": (("офисные помещения",), ("офис", "офисное помещение")),
+    "education": (("образование и культура",), ("учебный класс", "учебная аудитория")),
+    "medical": (("медицинское обслуживание",), ("смотровая", "процедурная", "больничная палата")),
+    "retail_storage": (("торговые и складские помещения",), ("торговый зал", "склад")),
+    "technical": (("техническое оборудование",), ("техническое помещение", "котельная", "венткамера")),
+    "production_research": (("производство и исследование",),
+                            ("производственный цех", "исследовательская лаборатория")),
+}
 
 
 def fields(value, required, reason, optional=()):
@@ -34,6 +51,40 @@ def point(value):
 
 def xy(x, y):
     return {"x": x / 1000, "y": y / 1000}
+
+
+def category_text(text):
+    return " ".join(unicodedata.normalize("NFC", text).casefold().replace("ё", "е").split())
+
+
+def room_purpose(room):
+    name = room.get("purpose") if room.get("purpose") is not None else room.get("name")
+    if not isinstance(name, str):
+        return None
+    name = re.sub(r"\s+(?:№\s*)?\d+$", "", category_text(name))
+    return next((purpose for purpose, (categories, aliases) in ZONE_PURPOSES.items()
+                 if name in (purpose, *categories, *aliases)), None)
+
+
+def resolve_zone_categories(recipe, attributes):
+    """Bind each room to one existing attribute of the exact target PLN."""
+    legacy = recipe.get("zoneCategory")
+    result = {}
+    for room_id, room in recipe["roomFacts"].items():
+        purpose = "legacy_shared" if legacy else room["purpose"]
+        names = (legacy,) if legacy else ZONE_PURPOSES[purpose][0]
+        matches = [row for row in attributes if isinstance(row.get("name"), str)
+                   and (row["name"] if legacy else category_text(row["name"])) in names]
+        location = f"{room_id}:{purpose}"
+        require(matches, f"LAYOUT_ZONE_CATEGORY_MISSING:{location}")
+        require(len(matches) == 1, f"LAYOUT_ZONE_CATEGORY_AMBIGUOUS:{location}")
+        match, = matches
+        identity = match.get("attributeId")
+        guid = identity.get("guid") if isinstance(identity, dict) else None
+        require(isinstance(guid, str) and RUN._GUID.fullmatch(guid),
+                f"LAYOUT_ZONE_CATEGORY_INVALID_GUID:{location}")
+        result[room_id] = dict(purpose=purpose, name=match["name"], guid=guid.lower())
+    return result
 
 
 def semantic_brief(value, rooms):
@@ -201,7 +252,6 @@ def unanswered(value):
         "storyLevelMM": "Отметка выбранного этажа в миллиметрах",
         "depthMM": "Общая чистая глубина помещений в миллиметрах",
         "wall": "Материал, толщина, высота и подтверждённый профиль кладки",
-        "zoneCategoryName": "Точное имя категории Zone в целевом PLN",
         "minPierMM": "Минимальный простенок по проектному заданию в миллиметрах",
         "originsMM": "Координаты начала экспериментальной и принимаемой областей",
         "rooms": "Назначение, чистая ширина и минимальная площадь каждого помещения",
@@ -217,11 +267,19 @@ def unanswered(value):
         if isinstance(value.get(section), dict):
             questions.update({f"{section}.{key}": prompt for key, prompt in names.items()
                               if value[section].get(key) is None})
+    rooms = value.get("rooms")
+    if value.get("zoneCategoryName") is None and isinstance(rooms, list):
+        for i, room in enumerate(rooms):
+            if isinstance(room, dict) and room_purpose(room) is None:
+                questions[f"rooms[{i}].purpose"] = (
+                    f"Уточните назначение помещения «{room.get('name') or i + 1}», "
+                    "например гостиная, холл или офис."
+                )
     return questions
 
 
 def compile_layout(value, router):
-    fields(value, INPUT_FIELDS, "LAYOUT_INPUT_FIELDS", ("constraints", "windows"))
+    fields(value, INPUT_FIELDS, "LAYOUT_INPUT_FIELDS", ("constraints", "windows", "zoneCategoryName"))
     require(value["schemaVersion"] == SCHEMA, "LAYOUT_SCHEMA_REQUIRED")
     require(value.get("windows", []) == [], "LAYOUT_NATIVE_WINDOWS_NOT_SUPPORTED_IN_THIS_VARIANT")
     fields(value["wall"], ("materialName", "thicknessMM", "heightMM", "coordination"), "LAYOUT_WALL_FIELDS")
@@ -229,16 +287,24 @@ def compile_layout(value, router):
     rooms = value["rooms"]
     require(isinstance(rooms, list) and 2 <= len(rooms) <= 5, "LAYOUT_REQUIRES_TWO_TO_FIVE_ROOMS")
     for room in rooms:
-        fields(room, ("id", "name", "widthMM", "minAreaM2"), "LAYOUT_ROOM_FIELDS")
+        fields(room, ("id", "name", "widthMM", "minAreaM2"), "LAYOUT_ROOM_FIELDS", ("purpose",))
     brief = semantic_brief(value, rooms)
     wall = value["wall"]
     material = BRIEF._name(wall["materialName"], "WALL_MATERIAL_NAME")
-    category = BRIEF._name(value["zoneCategoryName"], "ZONE_CATEGORY_NAME")
+    category = value.get("zoneCategoryName")
+    if category is not None:
+        # Preserve reproducibility of existing isolated geometry-only jobs.
+        category = BRIEF._name(category, "ZONE_CATEGORY_NAME")
     thickness = millimeters(wall["thicknessMM"], "WALL_THICKNESS", minimum=1)
     height = millimeters(wall["heightMM"], "WALL_HEIGHT", minimum=1)
     depth = millimeters(value["depthMM"], "ROOM_DEPTH", minimum=1)
     level = millimeters(value["storyLevelMM"], "STORY_LEVEL", minimum=-10_000_000)
     room_facts, span = room_dimensions(rooms, depth, thickness)
+    if category is None:
+        for room in rooms:
+            purpose = room_purpose(room)
+            require(purpose is not None, "LAYOUT_ROOM_PURPOSE_REQUIRED:" + room["id"])
+            room_facts[room["id"]]["purpose"] = purpose
     walls = wall_paths(room_facts, span, depth, thickness)
     doors = qualified_doors(value, room_facts, walls, height)
     profile, checks = masonry_checks(walls, wall, doors, thickness, height)

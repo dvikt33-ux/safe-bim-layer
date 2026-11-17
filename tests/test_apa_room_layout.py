@@ -64,12 +64,24 @@ class RoomLayoutTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, reason):
                     compile_layout(value, self.router)
 
+    def test_layout_asks_for_room_purpose_when_name_cannot_be_classified(self):
+        from apa_room_layout import compile_layout, unanswered
+
+        value = sample()
+        value["rooms"][0]["name"] = "Помещение А"
+        questions = unanswered(value)
+        self.assertEqual(set(questions), {"rooms[0].purpose"})
+        value["rooms"][0]["purpose"] = "транзитное помещение"
+        self.assertEqual(unanswered(value), {})
+        result = compile_layout(value, self.router)
+        self.assertEqual(result["roomFacts"]["hall"]["purpose"], "circulation")
+
     def test_five_rooms_reuse_the_same_pipeline(self):
         from apa_room_layout import compile_layout
 
         value = sample()
         for i in range(3, 6):
-            value["rooms"].append({"id": f"room-{i}", "name": f"Комната {i}", "widthMM": 2610, "minAreaM2": 8})
+            value["rooms"].append({"id": f"room-{i}", "name": f"Спальня {i}", "widthMM": 2610, "minAreaM2": 8})
             value["doors"].append({"id": f"door-{i}", "from": "living" if i == 3 else f"room-{i-1}",
                                    "to": f"room-{i}", "fromFaceMM": 900, "widthMM": 1050, "heightMM": 2079})
         value["originsMM"]["acceptance"] = [26000, 0]

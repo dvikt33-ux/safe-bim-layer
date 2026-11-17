@@ -30,6 +30,36 @@ def elements(guids):
     return [{'elementId': {'guid': guid}} for guid in guids]
 
 
+class LayoutDetailsReadbackTests(unittest.TestCase):
+    def test_live_nested_element_id_matches_same_guid_in_direct_format(self):
+        def api_for(wrapped):
+            def reply(command, arguments):
+                self.assertEqual(command, 'GetDetailsOfElements')
+                self.assertEqual(arguments['elements'], elements([WALL]))
+                self.assertIn('elementId', arguments['fields'])
+                element_id = {'guid': WALL.upper()}
+                if wrapped:
+                    element_id = {'elementId': element_id}
+                return {'detailsOfElements': [{'elementId': element_id, 'type': 'Wall',
+                                               'floorIndex': 3, 'details': {'height': 2.772}}]}
+            return reply
+
+        direct = N.PROJECT.retained_details_digest(api_for(False), [WALL])
+        self.assertEqual(N.PROJECT.retained_details_digest(api_for(True), [WALL]), direct)
+
+    def test_retained_details_rejects_foreign_ambiguous_or_missing_guid(self):
+        for identity in (
+            None, {'guid': OTHER}, {'elementId': {'guid': OTHER}}, {'elementId': {'guid': 123}},
+            {'guid': WALL, 'elementId': {'guid': OTHER}}, {'other': {'guid': WALL}},
+        ):
+            with self.subTest(identity=identity):
+                def reply(*_):
+                    return {'detailsOfElements': [{'elementId': identity, 'type': 'Wall'}]}
+
+                with self.assertRaisesRegex(ValueError, 'LAYOUT_RETAINED_DETAILS_IDENTITY_DRIFT'):
+                    N.PROJECT.editable_details(reply, [WALL])
+
+
 class AC30JobTests(unittest.TestCase):
     def setUp(self):
         temp = tempfile.TemporaryDirectory()
@@ -177,6 +207,10 @@ class AC30ProjectTests(unittest.TestCase):
                         for index, level, name in [(3, 0, 'Ground'), (4, 3, 'Upper')]]
         self.recipe = None
         self.zone_area_delta = 0
+        self.zone_categories = [
+            {'name': 'Жилье и Отдых', 'attributeId': {'guid': GROUP.upper()}},
+            {'name': 'Транзитные Помещения', 'attributeId': {'guid': OTHER.upper()}},
+        ]
         for target, effect in (
             ('apa_ac30_native.open_test_port', lambda path: 19723 if path == self.project else None),
             ('apa_ac30_native.listener', lambda port, **_: dict(pid=self.pid, startedAt=str(self.pid), port=port)),
@@ -239,9 +273,12 @@ class AC30ProjectTests(unittest.TestCase):
             return {'databases': [{'databaseId': {'guid': GROUP}}]}
         if command == 'GetAttributesByType' and self.recipe['kind'] == 'layout':
             if parameters['attributeType'] == 'ZoneCategory':
-                return {'attributes': [{'name': 'Жилые помещения', 'attributeId': {'guid': GROUP}}]}
-            return {'attributes': [{'name': name, 'attributeId': {'guid': WALL}}
-                                   for name in sorted(set(self.recipe['wallMaterials'].values()))]}
+                rows = self.zone_categories
+            else:
+                rows = [{'name': name, 'attributeId': {'guid': WALL}}
+                        for name in sorted(set(self.recipe['wallMaterials'].values()))]
+            return {'attributes': [dict(row, index=i, folderPath=[], modificationTime=1)
+                                   for i, row in enumerate(rows, 1)]}
         read = self.registered_read(command)
         if read is not None:
             return read
@@ -250,9 +287,14 @@ class AC30ProjectTests(unittest.TestCase):
             self.assertEqual(parameters['elements'], [])
             return {'boundingBoxes3D': []}
         if command == 'GetDetailsOfElements':
-            return {'detailsOfElements': [
-                dict(self.items[row['elementId']['guid']]['details'], elementId=row['elementId'])
-                for row in parameters['elements']]}
+            rows = []
+            for element in parameters['elements']:
+                guid = element['elementId']['guid']
+                fields = dict(self.items[guid]['details'])
+                if 'elementId' in parameters.get('fields', ()):
+                    fields['elementId'] = {'elementId': {'guid': guid.upper()}}
+                rows.append(fields)
+            return {'detailsOfElements': rows}
         if command == 'GetQuantitiesOfElements':
             quantities = []
             for element in parameters['elements']:
@@ -463,6 +505,41 @@ class AC30ProjectTests(unittest.TestCase):
         self.recipe = job.recipe
         self.assertEqual(record['nativeWrites'], 0)
         return job
+
+    def test_layout_binds_distinct_native_categories_from_room_names(self):
+        job = self.stage_layout()
+        attributes = job.layout_attributes()
+        self.assertEqual(attributes['status'], 'LAYOUT_NATIVE_ATTRIBUTES_READ')
+        self.assertEqual(attributes['zoneCategorySelection']['mode'], 'BY_ROOM_PURPOSE')
+        self.assertEqual(attributes['modelWrites'], 0)
+        mapped = attributes['zoneCategorySelection']['rooms']
+        self.assertEqual(mapped['hall']['name'], 'Транзитные Помещения')
+        self.assertEqual(mapped['living']['name'], 'Жилье и Отдых')
+        result = job.preflight()
+        self.assertEqual(result['facts']['zoneCategories'], mapped)
+        bound = {s['id']: s['params']['zonesData'][0]['categoryAttributeId']['guid']
+                 for s in result['facts']['graph']['operations'] if s['command'] == 'CreateZones'}
+        self.assertEqual(bound, {'exp-zone-hall': OTHER, 'exp-zone-living': GROUP})
+        self.assertEqual(result['modelWrites'], 0)
+        self.assertEqual(self.writes, [])
+
+    def test_layout_blocks_missing_and_ambiguous_native_zone_category(self):
+        job = self.stage_layout()
+        transit = self.zone_categories.pop()
+        for reason, extra_rows in (
+            ('LAYOUT_ZONE_CATEGORY_MISSING:hall', []),
+            ('LAYOUT_ZONE_CATEGORY_AMBIGUOUS:hall', [
+                transit, {'name': 'транзитные помещения', 'attributeId': {'guid': WALL}}]),
+        ):
+            with self.subTest(reason=reason):
+                self.zone_categories[1:] = extra_rows
+                selection = job.layout_attributes()['zoneCategorySelection']
+                self.assertEqual(selection['status'], 'BLOCKED')
+                self.assertIn(reason, selection['reason'])
+                with self.assertRaisesRegex(ValueError, reason):
+                    job.preflight()
+                self.assertFalse((job.path / 'preflight.json').exists())
+                self.assertEqual(self.writes, [])
 
     def test_layout_experiment_reopen_and_manual_inclusion(self):
         job = self.stage_layout()

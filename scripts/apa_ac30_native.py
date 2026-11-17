@@ -698,13 +698,19 @@ class Job:
     def layout_attributes(self):
         require(self.kind == 'layout', 'LAYOUT_JOB_REQUIRED')
         binding = self.connect('layout-attributes')
-        names = {}
-        for kind in ('BuildingMaterial', 'ZoneCategory'):
-            rows = self.read('GetAttributesByType', {'attributeType': kind})['attributes']
-            names[kind] = sorted(row['name'] for row in rows if isinstance(row.get('name'), str))
+        attributes = {kind: self.read('GetAttributesByType', {'attributeType': kind})['attributes']
+                      for kind in ('BuildingMaterial', 'ZoneCategory')}
+        names = {kind: sorted(row['name'] for row in rows if isinstance(row.get('name'), str))
+                 for kind, rows in attributes.items()}
+        try:
+            selected = ROOM_LAYOUT.resolve_zone_categories(self.recipe, attributes['ZoneCategory'])
+            mode = 'EXPLICIT_LEGACY_SHARED' if self.recipe.get('zoneCategory') else 'BY_ROOM_PURPOSE'
+            selection = dict(status='RESOLVED', mode=mode, rooms=selected)
+        except ValueError as exc:
+            selection = dict(status='BLOCKED', reason=str(exc))
         require(self.guard() == binding and self.api.write_attempts == 0, 'LAYOUT_ATTRIBUTES_MUST_BE_READ_ONLY')
         return dict(status='LAYOUT_NATIVE_ATTRIBUTES_READ', project=binding['path'], attributes=names,
-                    executionPermission=False)
+                    zoneCategorySelection=selection, modelWrites=0, executionPermission=False)
 
     def accepted_project(self, reopen_copy=None):
         require(self.kind in {'project', 'update'}, 'AC30_PROJECT_JOB_REQUIRED')

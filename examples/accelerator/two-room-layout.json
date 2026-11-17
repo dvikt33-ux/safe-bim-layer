@@ -9,7 +9,6 @@
     "heightMM": 2772,
     "coordination": {"profileId": "ceramic-1nf-10-12", "halfBrickUnitsAcross": 1}
   },
-  "zoneCategoryName": "Жилые помещения",
   "minPierMM": 380,
   "originsMM": {"experiment": [0, 0], "acceptance": [13000, 0]},
   "rooms": [
