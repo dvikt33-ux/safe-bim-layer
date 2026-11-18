@@ -24,10 +24,20 @@ RUNTIME = dict(contract='APA_NATIVE_RUNTIME_IDENTITY_V1', nativeModelWrites=0,
                developerId=826567491, localId=368333322)
 DESIGNS = ROOT / 'examples' / 'accelerator'
 CAPTURE_FULL_MODEL = N.DOC.capture_full_model
+WALL_LAYER = '43f067bd-8bb4-4e06-a6a8-bb27c3cd2589'
 
 
 def elements(guids):
     return [{'elementId': {'guid': guid}} for guid in guids]
+
+
+def wall_body(bounds):
+    xmin, ymin, zmin, xmax, ymax, zmax = bounds
+    vertices = [[x, y, z] for z in (zmin, zmax)
+                for x, y in ((xmin, ymin), (xmax, ymin), (xmax, ymax), (xmin, ymax))]
+    faces = [[0, 3, 2, 1], [4, 5, 6, 7], [0, 1, 5, 4],
+             [1, 2, 6, 5], [2, 3, 7, 6], [3, 0, 4, 7]]
+    return dict(vertices=vertices, faces=[dict(contours=[face]) for face in faces])
 
 
 class LayoutDetailsReadbackTests(unittest.TestCase):
@@ -207,6 +217,8 @@ class AC30ProjectTests(unittest.TestCase):
                         for index, level, name in [(3, 0, 'Ground'), (4, 3, 'Upper')]]
         self.recipe = None
         self.zone_area_delta = 0
+        self.partial_wall_batch = False
+        self.wall_layer_group = 1
         self.zone_categories = [
             {'name': 'Жилье и Отдых', 'attributeId': {'guid': GROUP.upper()}},
             {'name': 'Транзитные Помещения', 'attributeId': {'guid': OTHER.upper()}},
@@ -259,6 +271,14 @@ class AC30ProjectTests(unittest.TestCase):
         }.get(command)
 
     def transport(self, port, command, parameters, **kwargs):
+        if command == 'GetLayerOfElementDefaults':
+            return {'layersOfElementDefaults': [dict(elementType='Wall', layerId={'guid': WALL_LAYER}, layerName='Стены')]}
+        if command == 'GetLayers':
+            return {'layers': [dict(attributeId={'guid': WALL_LAYER}, index=33, name='Стены',
+                                    intersectionGroupNr=self.wall_layer_group, isHidden=False, isLocked=False)]}
+        if command == 'GetBuildingMaterials':
+            return {'buildingMaterials': [dict(attributeId=row['attributeId'], index=i, name='Кирпич',
+                                               connPriority=600) for i, row in enumerate(parameters['attributeIds'], 1)]}
         if command == 'GetAllElements':
             inventory = {'elements': elements(self.items)}
             if parameters.get('databases'):
@@ -308,6 +328,13 @@ class AC30ProjectTests(unittest.TestCase):
                 data.update(area=area, calculatedArea=area, netArea=area)
                 quantities.append(dict(type='Zone', quantities=data, composites=[]))
             return {'quantitiesOfElements': quantities}
+        if command == 'CreateWalls' and len(parameters['wallsData']) > 1:
+            start = len(self.writes)
+            result = []
+            for row in parameters['wallsData']:
+                result.extend(self.transport(port, command, {'wallsData': [row]})['elements'])
+            self.writes[start:] = [command]
+            return {'elements': result[:-1] if self.partial_wall_batch else result}
         self.writes.append(command)
         if command == 'SaveProject':
             self.assertEqual(parameters, {})
@@ -352,18 +379,26 @@ class AC30ProjectTests(unittest.TestCase):
                 floor = host['element']['homeStory']
                 details.update(ownerElementId=params['ownerWallId'], ownerElementType='Wall')
                 details.pop('ownerWallId')
-            vertices = [[0, 0, 0], [1, 1, 1]]
+            body = dict(vertices=[[0, 0, 0], [1, 1, 1]])
+            layer = {}
             if command == 'CreateWalls' and self.recipe['kind'] == 'layout':
                 start, end = params['begCoordinate'], params['endCoordinate']
                 side = params['thickness'] / 2
                 xmin, ymin = (start['x'] - side, start['y']) if start['x'] == end['x'] else (start['x'], start['y'] - side)
                 xmax, ymax = (end['x'] + side, end['y']) if start['x'] == end['x'] else (end['x'], end['y'] + side)
-                vertices = [[xmin, ymin, details['zCoordinate']], [xmax, ymax, details['zCoordinate'] + params['height']]]
+                if 'wallJunctions' in self.recipe:
+                    if start['x'] == end['x']:
+                        ymin += params['thickness']
+                        ymax -= params['thickness']
+                    details['junctionSequence'] = 5000
+                    layer['layerIndex'] = params['layerIndex']
+                body = wall_body((xmin, ymin, details['zCoordinate'], xmax, ymax,
+                                  details['zCoordinate'] + params['height']))
             kind = command[6:-1]
             self.items[guid] = dict(
-                details=dict(type=kind, floorIndex=floor, details=details),
+                details=dict(type=kind, floorIndex=floor, details=details, **layer),
                 element=dict(guid=guid, type=kind, homeStory=floor,
-                             bodies=[dict(vertices=vertices)]))
+                             bodies=[body]))
             return {'elements': elements([guid])}
         self.fail(f'Unexpected command {command}')
 
@@ -545,6 +580,11 @@ class AC30ProjectTests(unittest.TestCase):
         job = self.stage_layout()
         ready = job.preflight()
         self.assertEqual(set(ready['facts']['spatialScan']), {'experiment', 'acceptance'})
+        strategy = ready['facts']['wallStrategy']
+        self.assertEqual(strategy['selectedStrategyId'], 'native_create_walls_batch')
+        self.assertEqual(strategy['optimumStatus'], 'OPTIMUM_NOT_PROVEN')
+        self.assertEqual(strategy['candidates'][0]['plannedNativeCalls'], 5)
+        self.assertEqual(strategy['candidates'][1]['plannedNativeCalls'], 1)
         self.assertEqual(self.writes, [])
         reopened = self.save_reopen(job, ready)
         proof = reopened['operationReadback']
@@ -552,7 +592,16 @@ class AC30ProjectTests(unittest.TestCase):
         self.assertEqual(len(first), 9)
         self.assertEqual(len(set(first.values())), 9)
         self.assertTrue(all(key.startswith('exp-') for key in first))
+        self.assertEqual(self.writes.count('CreateWalls'), 1)
+        batch, = [row for row in proof['executionTrace'] if row['command'] == 'CreateWalls']
+        self.assertEqual(batch['bulkMetrics']['itemCount'], 5)
+        self.assertEqual(batch['bulkMetrics']['nativeSceneWriterCalls'], 1)
+        self.assertEqual(self.items[first['exp-door-entry']]['details']['details']['ownerElementId']['guid'],
+                         first['exp-wall-bottom'])
+        self.assertEqual(self.items[first['exp-door-passage']]['details']['details']['ownerElementId']['guid'],
+                         first['exp-wall-part-1'])
         self.assertEqual(self.writes.count('CreateZones'), 2)
+        self.assertEqual([j['kind'] for j in reopened['wallSystem']['joints']], ['L'] * 4 + ['T'] * 2)
         self.assertAlmostEqual(reopened['roomReadback']['exp-zone-hall']['measuredAreaM2'], 8.3916)
         self.assertEqual(self.writes.count('SaveProject'), 1)
         self.assertEqual(self.source.read_bytes(), b'Protected donor fixture')
@@ -575,6 +624,7 @@ class AC30ProjectTests(unittest.TestCase):
         before = list(self.writes)
         verified = N.Job(job.path).verify_inclusion()
         self.assertEqual(verified['addedGuidCount'], 9)
+        self.assertEqual(verified['wallSystem']['status'], 'WALL_JUNCTION_BREP_CHECK_PASS')
         self.assertEqual(verified['retainedGuidCount'], 9)
         self.assertEqual(verified['operationGuids'], {key: row['guid'] for key, row in new.items()})
         self.assertAlmostEqual(verified['roomReadback']['accept-zone-hall']['measuredAreaM2'], 8.3916)
@@ -595,7 +645,7 @@ class AC30ProjectTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'NO_REPLAY'):
             N.Job(job.path).execute(ready['confirmSha256'])
         self.assertEqual(self.writes.count('CreateZones'), 1)
-        self.assertEqual(self.writes.count('CreateWalls'), 5)
+        self.assertEqual(self.writes.count('CreateWalls'), 1)
         self.assertNotIn('SaveProject', self.writes)
         writes = list(self.writes)
         self.assertTrue(all(item['details']['details']['begCoordinate']['x'] < 6
@@ -605,6 +655,26 @@ class AC30ProjectTests(unittest.TestCase):
         self.assertEqual(self.writes, writes)
         self.assertEqual(ready['modelWrites'], 0)
         self.assertTrue((job.path / 'attempted.json').is_file())
+
+    def test_layout_partial_wall_batch_stops_before_openings_or_save_without_replay(self):
+        job = self.stage_layout()
+        ready = job.preflight()
+        self.partial_wall_batch = True
+        with self.assertRaisesRegex(ValueError, 'NO_REPLAY'):
+            N.Job(job.path).execute(ready['confirmSha256'])
+        self.assertEqual(self.writes, ['CreateWalls'])
+        self.assertFalse((job.path / 'saved.json').exists())
+        with self.assertRaisesRegex(ValueError, 'NO_REPLAY'):
+            N.Job(job.path).execute(ready['confirmSha256'])
+        self.assertEqual(self.writes, ['CreateWalls'])
+
+    def test_layout_blocks_zero_layer_intersection_group(self):
+        job = self.stage_layout()
+        self.wall_layer_group = 0
+        with self.assertRaisesRegex(ValueError, 'LAYOUT_WALL_LAYER_INTERSECTION_NOT_QUALIFIED'):
+            job.preflight()
+        self.assertEqual(self.writes, [])
+        self.assertFalse((job.path / 'preflight.json').exists())
 
     def test_approved_empty_floor_is_rechecked_before_first_create(self):
         job = self.stage('r06-two-storey-design.json', 'two-storeys')

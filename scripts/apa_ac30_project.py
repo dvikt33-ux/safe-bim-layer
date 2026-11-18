@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from itertools import combinations
+import math
 
 from apa_ac29_save_isolation import require, sha256
 from apa_release import read_json
@@ -10,11 +12,13 @@ from archicad_connected_components import retained_geometry_signatures
 import archicad_project_accelerator as APA
 from apa_room_layout import resolve_zone_categories, verify_native_zone, verify_wall_body
 from archicad_native_stair_connection import prepare_ac30_stair, read_ac30_stair
+from archicad_strategy_discovery import source_data_hash
 from apa_project_design import changes_between, compile_design_for_tapir2
 from archicad_authored_extension import plan_parameter_operations
 
 
 RUN = APA.RUN
+WALL_ATTRIBUTE_READS = frozenset({'GetLayerOfElementDefaults', 'GetLayers', 'GetBuildingMaterials'})
 CREATES = {'CreateWalls', 'CreateSlabs', 'CreateDoors', 'CreateWindows', 'CreateStairs'}
 # Native main ID, subtype ID and revision ID of the built-in Elevation and Story markers.
 _TEMPLATE_MARKERS = {
@@ -143,7 +147,36 @@ def design_recipe(design, variant, router):
                 wallMaterials={k: v['materialName'] for k, v in candidate.get('wallCseBindings', {}).items()})
 
 
-def bind_design(recipe, native_stories, read, router):
+def wall_attributes(read, router, material_guids, layer_guid=None):
+    """Read real intersection settings and pin the layer and material IDs."""
+    def checked(command, params):
+        router.prepare(command, params)
+        return router.validate_result(command, read(command, params))
+
+    if layer_guid is None:
+        defaults, = checked('GetLayerOfElementDefaults', {'elementTypes': ['Wall']})['layersOfElementDefaults']
+        require(defaults.get('elementType') == 'Wall' and 'layerId' in defaults, 'LAYOUT_NATIVE_WALL_LAYER_UNAVAILABLE')
+        layer_guid = defaults['layerId']['guid']
+    layer, = checked('GetLayers', {'attributeIds': [{'attributeId': {'guid': layer_guid}}]})['layers']
+    require(layer.get('attributeId', {}).get('guid', '').lower() == layer_guid.lower()
+            and type(layer.get('index')) is int and type(layer.get('intersectionGroupNr')) is int
+            and layer['intersectionGroupNr'] > 0 and layer.get('isHidden') is False and layer.get('isLocked') is False,
+            'LAYOUT_WALL_LAYER_INTERSECTION_NOT_QUALIFIED')
+    requested = sorted({guid.lower() for guid in material_guids})
+    rows = checked('GetBuildingMaterials', {'attributeIds': [
+        {'attributeId': {'guid': guid}} for guid in requested]})['buildingMaterials']
+    priorities = {}
+    for row in rows:
+        guid = row.get('attributeId', {}).get('guid', '').lower()
+        require(guid in requested and guid not in priorities and type(row.get('connPriority')) is int,
+                'LAYOUT_NATIVE_BUILDING_MATERIAL_PRIORITY_UNAVAILABLE')
+        priorities[guid] = dict(name=row['name'], priority=row['connPriority'])
+    require(set(priorities) == set(requested), 'LAYOUT_NATIVE_BUILDING_MATERIALS_INCOMPLETE')
+    return dict(layer=dict(guid=layer_guid.lower(), index=layer['index'], name=layer['name'],
+                           intersectionGroup=layer['intersectionGroupNr']), materials=priorities)
+
+
+def bind_design(recipe, native_stories, read, router, *, layer_guid=None):
     graph = deepcopy(recipe['graph'])
     story_map = {}
     for i, story in enumerate(recipe['stories']):
@@ -157,6 +190,7 @@ def bind_design(recipe, native_stories, read, router):
 
     names = {recipe['slabMaterial'], *recipe['wallMaterials'].values()} - {None}
     materials = {name: RUN.resolve_basic_slab_material(read, name) for name in sorted(names)}
+    joins = wall_attributes(read, router, materials.values(), layer_guid) if 'wallJunctions' in recipe else None
     categories = {}
     if any(step['command'] == 'CreateZones' for step in graph['operations']):
         rows = read('GetAttributesByType', {'attributeType': 'ZoneCategory'})['attributes']
@@ -169,6 +203,8 @@ def bind_design(recipe, native_stories, read, router):
             params.update(structureType='Basic', buildingMaterialId={'guid': materials[recipe['slabMaterial']]})
         if step['id'] in recipe['wallMaterials']:
             params['buildingMaterialId'] = {'guid': materials[recipe['wallMaterials'][step['id']]]}
+            if joins is not None:
+                params['layerIndex'] = joins['layer']['index']
         if step['command'] == 'CreateZones':
             room_id = step['id'].split('-zone-', 1)[1]
             params['categoryAttributeId'] = {'guid': categories[room_id]['guid']}
@@ -185,7 +221,84 @@ def bind_design(recipe, native_stories, read, router):
                   materials=materials, boundGraphSha256=checked['sourcePlanHash'])
     if categories:
         result['zoneCategories'] = categories
+    if joins is not None:
+        result['wallJunctionAttributes'] = joins
     return result
+
+
+def select_layout_wall_workflow(facts, story_level, router, binding, evidence_ref):
+    """Use discovery V2 on the already validated and model-bound Wall rows."""
+    graph = deepcopy(facts['workflow']['graph'])
+    walls = [step for step in graph['operations'] if step['command'] == 'CreateWalls']
+    wall_ids = [step['id'] for step in walls]
+    require(2 <= len(walls) <= 200 and all(set(step.get('after', [])) <= set(wall_ids) for step in walls),
+            'LAYOUT_WALL_BATCH_HAS_EXTERNAL_DEPENDENCIES_OR_UNSUPPORTED_SIZE')
+    targets = []
+    for step in walls:
+        row, = step['params']['wallsData']
+        target = dict(type='Wall', familySignature=RUN.digest(row), storyIndex=row['floorIndex'],
+                      storyElevation=story_level, anchor=dict(row['begCoordinate'], z=story_level + row['zCoordinate']),
+                      sourceRef=evidence_ref + '#' + step['id'], nativeCreateData=row)
+        target['sourceVerification'] = dict(status='SOURCE_VERIFIED', evidenceRef=target['sourceRef'],
+                                             dataHash=source_data_hash(target))
+        targets.append(target)
+    require(router.registration.get('CreateWalls') is True, 'LAYOUT_WALL_COMMAND_NOT_RUNTIME_REGISTERED')
+    selection = APA.prepare_auto_optimized_native_task(router, {
+        'schemaVersion': 'apa-native-auto/2', 'request': 'Создать проектные стены R02',
+        'existing': [], 'targets': targets, 'benchmarks': {},
+    })
+    selected = selection.get('selectedNativeTaskPreview')
+    require(selected is not None and selection.get('nativeWritePermission') is False,
+            'LAYOUT_WALL_DISCOVERY:' + selection['status'])
+    batch, = selected['workflow']['graph']['operations']
+    require(batch['command'] == 'CreateWalls' and batch['params']['wallsData'] ==
+            [target['nativeCreateData'] for target in targets], 'LAYOUT_SELECTED_WALL_BATCH_CHANGED_INPUTS')
+
+    indexes = {wall_id: i for i, wall_id in enumerate(wall_ids)}
+    operations = [batch]
+    for step in graph['operations']:
+        if step['id'] in indexes:
+            continue
+        step['after'] = list(dict.fromkeys(batch['id'] if dep in indexes else dep
+                                          for dep in step.get('after', [])))
+        if step['command'] in {'CreateDoors', 'CreateWindows'}:
+            row, = next(iter(step['params'].values()))
+            host = row['ownerWallId']['guid']['$result']
+            if host['step'] in indexes:
+                host.update(step=batch['id'], pointer=f"/elements/{indexes[host['step']]}/elementId/guid")
+        operations.append(step)
+    workflow = router.prepare_workflow({'operations': operations})
+    discovery = selection['discovery']
+    receipt = dict(
+        schema='APA_R02_WALL_STRATEGY_V1', requestSchema='apa-room-layout/1',
+        source=evidence_ref, project=binding['path'], runtime=binding['runtime'],
+        archicadBuild=binding['archicadBuild'], tapirVersion=binding['tapirVersion'],
+        addonSha256=binding['addonSha256'], catalogueSha256=router.fingerprint,
+        capabilities={name: {'cataloguePresent': name in router.catalog['commands'],
+                             'registered': router.registration.get(name)}
+                      for name in ('CreateWalls', 'MoveElements', 'CreateGroups', 'CreateHotlinkInstances')},
+        wallContractSha256=router.contract_hash('CreateWalls'),
+        selectedStrategyId=selection['selectedStrategyId'], method=selection['selectionMethod'],
+        discoverySchema=discovery['schema'], catalogueCommandCount=discovery['catalogCommandCount'],
+        calibrationStatus=selection['calibrationStatus'],
+        candidates=[
+            dict(command='CreateWalls', mode='ONE_WALL_PER_CALL', plannedNativeCalls=len(walls),
+                 qualification='SAME_TYPED_GRAPH_VALIDATED', elapsedMs='NOT_MEASURED'),
+            dict(command='CreateWalls', mode='WALLS_DATA_ARRAY', plannedNativeCalls=1,
+                 qualification=selection['status'], elapsedMs='NOT_MEASURED'),
+        ],
+        rejected=discovery['rejectedStrategies'] + [
+            dict(command='CreateGroups', reason='GROUPING_REQUIRES_EXISTING_MEMBERS_AND_DOES_NOT_CREATE_WALLS'),
+            dict(command='CreateHotlinkInstances', reason='NO_QUALIFIED_DONOR_AND_EDITABLE_LOCAL_WALLS_REQUIRED'),
+            dict(command='Rectangle Wall (GUI)', reason='NO_SEPARATE_REGISTERED_COMMAND_IN_CHECKED_CATALOGUE'),
+        ],
+        plannedWorkflowCalls=len(operations), previousSingleWorkflowCalls=len(graph['operations']),
+        workflowSha256=workflow['sourcePlanHash'], targetWorkloadSha256=discovery['benchmarkWorkloadHash'],
+        optimumStatus='OPTIMUM_NOT_PROVEN', elapsedMs='NOT_MEASURED',
+        fallback='SEPARATE_REVIEW_BEFORE_DISPATCH_ONLY', automaticRetry=False,
+        requiredEvidence=['AC30_BATCH_READBACK', 'SAVE_CLOSE_REOPEN', 'COMPARABLE_NATIVE_END_TO_END_TIMINGS'],
+    )
+    facts.update(workflow=workflow, wallStrategy=receipt, wallBatch={'step': batch['id'], 'members': wall_ids})
 
 
 def read_created(job, step, params, guid, model, zone_facts=None):
@@ -223,7 +336,7 @@ def read_created(job, step, params, guid, model, zone_facts=None):
                         expected_story_level=story_level, slab_level_is_absolute=True)
     require(any(body['vertices'] for body in element['bodies']), 'AC30_PROJECT_CREATED_BREP_MISSING:' + guid)
     if job.kind == 'layout' and step['command'] == 'CreateWalls':
-        verify_wall_body(row, element, story_level + row['zCoordinate'])
+        verify_wall_body(row, element, story_level + row['zCoordinate'], joined='wallJunctions' in job.recipe)
     return set()
 
 
@@ -267,6 +380,91 @@ def retained_details_digest(api, guids):
     return RUN.digest(editable_details(api, guids))
 
 
+def wall_system_geometry(walls, native_by_step, joints, priorities, top, openings=()):
+    """Verify actual BREP against the complete straight Basic Wall system."""
+    from shapely.geometry import LineString, Point
+    from shapely.ops import unary_union
+    from archicad_authored_geometry import horizontal_caps, shared_surfaces
+
+    tolerance = 0.001
+    shafts = {}
+    for sid, row in walls.items():
+        line = [(row[k]['x'], row[k]['y']) for k in ('begCoordinate', 'endCoordinate')]
+        shafts[sid] = LineString(line).buffer(row['thickness'] / 2, cap_style='flat')
+    expected = unary_union(list(shafts.values())).difference(unary_union(list(openings)))
+    measured = {sid: horizontal_caps(native_by_step[sid], top) for sid in walls}
+    actual = unary_union(list(measured.values()))
+    require(expected.difference(actual.buffer(tolerance)).is_empty, 'LAYOUT_WALL_JUNCTION_BREP_GAP')
+    require(actual.difference(expected.buffer(tolerance)).is_empty, 'LAYOUT_WALL_JUNCTION_BREP_PROTRUSION')
+    for a, b in combinations(measured.values(), 2):
+        require(a.intersection(b).buffer(-tolerance / 2).is_empty, 'LAYOUT_WALL_JUNCTION_DOUBLE_BODY')
+    contacts = shared_surfaces(native_by_step, {sid: sid for sid in walls}, vertical_only=True)
+    areas = {tuple(c['guids']): c['sharedAreaSquareMeters'] for c in contacts}
+    proofs = []
+    for joint in joints:
+        left, right = joint['walls']
+        pair = ':' + left + ':' + right
+        x, y = (p / 1000 for p in joint['pointMM'])
+        core = shafts[left].intersection(shafts[right])
+        require(core.area > 0 and core.buffer(tolerance).covers(Point(x, y)),
+                'LAYOUT_WALL_JUNCTION_EXPECTED_CORE_MISSING' + pair)
+        area = areas.get(tuple(sorted((left, right))), 0)
+        require(area > tolerance ** 2, 'LAYOUT_WALL_JUNCTION_NO_SHARED_BREP_FACE' + pair)
+        winner = None
+        if priorities[left] != priorities[right]:
+            winner = max((left, right), key=priorities.__getitem__)
+            require(core.difference(measured[winner].buffer(tolerance)).is_empty,
+                    'LAYOUT_WALL_JUNCTION_MATERIAL_PRIORITY_DRIFT' + pair)
+        proofs.append(dict(joint, sharedAreaM2=area, materialPriorities=[priorities[left], priorities[right]],
+                           higherPriorityWall=winner))
+    return dict(status='WALL_JUNCTION_BREP_CHECK_PASS', toleranceMM=1, measuredCapZM=top, joints=proofs,
+                expectedCapAreaM2=expected.area, actualCapAreaM2=actual.area,
+                visualAndEngineeringAcceptance='PENDING_USER_NATIVE_TEST')
+
+
+def verify_layout_wall_system(job, facts, model, guids, *, region='experiment', openings_created=True):
+    settings = facts['wallJunctionAttributes']
+    current = wall_attributes(job.api, job.router, settings['materials'], settings['layer']['guid'])
+    require(current == settings, 'LAYOUT_WALL_INTERSECTION_ATTRIBUTES_CHANGED')
+    graph = facts['graph']['operations']
+    walls = {s['id']: s['params']['wallsData'][0] for s in graph if s['command'] == 'CreateWalls'}
+    found = {e['guid'].lower(): e for e in model['elements']}
+    entities = {sid: found[guids[sid]] for sid in walls}
+    rows = editable_details(job.api, {guids[sid] for sid in walls})
+    orders, priorities, tops = {}, {}, set()
+    for sid, wall in walls.items():
+        row = rows[guids[sid]]
+        expected = wall['buildingMaterialId']['guid'].lower()
+        details = row['details']
+        require(row.get('layerIndex') == settings['layer']['index']
+                and details.get('buildingMaterialId', {}).get('guid', '').lower() == expected
+                and type(details.get('junctionSequence')) is int, 'LAYOUT_WALL_JUNCTION_ATTRIBUTE_READBACK_DRIFT')
+        orders[sid] = details['junctionSequence']
+        priorities[sid] = settings['materials'][expected]['priority']
+        tops.add(job.recipe['stories'][0]['level'] + wall['zCoordinate'] + wall['height'])
+    require(len(tops) == 1, 'LAYOUT_WALL_JUNCTION_REQUIRES_COMMON_TOP')
+    openings = []
+    if openings_created:
+        from shapely.geometry import LineString
+
+        for step in graph:
+            if step['command'] != 'CreateDoors':
+                continue
+            door, = step['params']['doorsData']
+            host = walls[door['ownerWallId']['guid']['$createdGuid']]
+            if door['sillHeight'] + door['height'] < host['height'] - 1e-6:
+                continue
+            start, end = host['begCoordinate'], host['endCoordinate']
+            length = math.hypot(end['x'] - start['x'], end['y'] - start['y'])
+            offsets = (door['centerOffset'] - door['width'] / 2, door['centerOffset'] + door['width'] / 2)
+            opening_axis = [tuple(start[k] + (end[k] - start[k]) * offset / length for k in 'xy')
+                            for offset in offsets]
+            openings.append(LineString(opening_axis).buffer(host['thickness'] / 2, cap_style='flat'))
+    return dict(wall_system_geometry(walls, entities, job.recipe['wallJunctions'][region], priorities,
+                                     next(iter(tops)), openings),
+                junctionOrder=orders, attributes=settings)
+
+
 def transferable_fields(row):
     # Position and host identity are proved separately against the translated
     # graph. Archicad generates new element identifiers for native copies.
@@ -296,7 +494,9 @@ def verify_layout_inclusion(job, saved, model, signatures):
     recipe = dict(job.recipe, graph=job.recipe['inclusionGraph'],
                   wallMaterials={name.replace('exp-', 'accept-', 1): value
                                  for name, value in job.recipe['wallMaterials'].items()})
-    bound = bind_design(recipe, job.binding['stories'], job.api, job.router)
+    source_system = previous.get('wallSystem')
+    layer_guid = source_system['attributes']['layer']['guid'] if source_system else None
+    bound = bind_design(recipe, job.binding['stories'], job.api, job.router, layer_guid=layer_guid)
     steps = bound['graph']['operations']
     new = set(signatures) - old.keys()
     require(len(new) == len(steps), 'LAYOUT_INCLUSION_UNEXPECTED_GUID_COUNT')
@@ -324,10 +524,15 @@ def verify_layout_inclusion(job, saved, model, signatures):
         source = previous['operationGuids']['exp-' + name.removeprefix('accept-')]
         require(transferable_fields(details[guid]) == transferable_fields(details[source]),
                 'LAYOUT_INCLUSION_EDITABLE_PARAMETERS_DRIFT:' + name)
-    return dict(operationGuids=operation_guids, roomReadback=verify_design(job, bound, model, operation_guids),
-                retainedGuidCount=len(old), addedGuidCount=len(new), copyTranslationMM=job.recipe['copyTranslationMM'],
-                signaturesSha256=RUN.digest(signatures), savedOriginalSha256=saved['savedSha256'],
-                inclusionGraphSha256=recipe['inclusionGraphSha256'])
+    proof = dict(operationGuids=operation_guids, roomReadback=verify_design(job, bound, model, operation_guids),
+                 retainedGuidCount=len(old), addedGuidCount=len(new), copyTranslationMM=job.recipe['copyTranslationMM'],
+                 signaturesSha256=RUN.digest(signatures), savedOriginalSha256=saved['savedSha256'],
+                 inclusionGraphSha256=recipe['inclusionGraphSha256'])
+    if source_system:
+        require(bound['wallJunctionAttributes'] == source_system['attributes'],
+                'LAYOUT_WALL_INTERSECTION_ATTRIBUTES_CHANGED')
+        proof['wallSystem'] = verify_layout_wall_system(job, bound, model, operation_guids, region='acceptance')
+    return proof
 
 
 def execute_design(job, baseline, capture):
@@ -336,6 +541,7 @@ def execute_design(job, baseline, capture):
     owned = set()
     created = {}
     steps = {step['id']: step for step in facts['graph']['operations']}
+    batch = facts.get('wallBatch', {})
     stories = [{'nativeIndex': s['index'], 'level': s['level']} for s in job.binding['stories']]
     empty_proof = facts.get('verifiedEmptyModel')
     template_markers = empty_proof['markerSignatures'] if empty_proof else {}
@@ -350,6 +556,7 @@ def execute_design(job, baseline, capture):
 
     def scopes(step, ticket, results):
         params = ticket['parameters']
+        is_batch = step['id'] == batch.get('step')
 
         def before(api):
             if empty_proof and not created:
@@ -361,10 +568,23 @@ def execute_design(job, baseline, capture):
             return {'status': 'AC30_PROJECT_STEP_SCOPE_PASS'}
 
         def after(reply, _):
-            guid = RUN.created_guid(reply).lower()
             live, signatures = capture(job.api)
             check_template_markers(live, template_markers)
             new = set(signatures) - original.keys() - owned
+            if is_batch:
+                guids = [RUN.created_guid({'elements': [row]}).lower() for row in reply['elements']]
+                require(new == set(guids) and (set(original) | owned) <= signatures.keys(),
+                        'LAYOUT_BATCH_GUID_SCOPE_DRIFT')
+                for sid, guid in zip(batch['members'], guids, strict=True):
+                    item = steps[sid]
+                    read_created(job, item, item['params'], guid, live)
+                    created[sid] = {'guid': guid, 'kind': 'Wall'}
+                if 'wallJunctions' in job.recipe:
+                    verify_layout_wall_system(job, facts, live, {sid: row['guid'] for sid, row in created.items()},
+                                              openings_created=False)
+                owned.update(new)
+                return dict(status='LAYOUT_WALL_BATCH_READBACK_PASS', addedGuids=sorted(new))
+            guid = RUN.created_guid(reply).lower()
             require(guid in new and (set(original) | owned) <= signatures.keys(),
                     'AC30_PROJECT_CREATED_GUID_OR_PRIOR_SCOPE_DRIFT')
             children = read_created(job, step, params, guid, live)
@@ -375,7 +595,7 @@ def execute_design(job, baseline, capture):
 
         return dict(scene_id=job.scene_id('Project-' + RUN.digest(step['id'])[:12]), affected=sorted(owned),
                     retained_signatures=original, saved_sha256=job.disk_sha, authorization=job.authorization,
-                    impact='MODEL', verify_before=before, verify_after=after)
+                    impact='MODEL', verify_before=before, verify_after=after, batch=is_batch)
 
     result = job.router.run_workflow(job.api, facts['workflow'], writer=job.writer, scopes=scopes,
                                      verify_empty=verify_before_first_create if empty_proof else None)
@@ -398,6 +618,10 @@ def execute_design(job, baseline, capture):
                      copyTranslationMM=job.recipe['copyTranslationMM'],
                      retainedDetailsAfterExperiment=retained_details_digest(job.api, set(signatures) | template_markers.keys()),
                      inclusionMode='USER_COPY_THEN_READBACK', normativeApplicability='NOT_VERIFIED')
+        if batch:
+            proof.update(wallStrategy=facts['wallStrategy'], executionTrace=result['trace'])
+        if 'wallJunctions' in job.recipe:
+            proof['wallSystem'] = verify_layout_wall_system(job, facts, model, guids)
     return proof
 
 

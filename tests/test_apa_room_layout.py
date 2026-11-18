@@ -35,7 +35,11 @@ class RoomLayoutTests(unittest.TestCase):
         interior = by_id["exp-door-passage"]["params"]["doorsData"][0]
         self.assertEqual(interior["ownerWallId"]["guid"]["$createdGuid"], "exp-wall-part-1")
         self.assertEqual(interior["width"], 1.05)
-        self.assertEqual(interior["centerOffset"], 1.425)
+        self.assertEqual(interior["centerOffset"], 1.545)
+        partition = by_id["exp-wall-part-1"]["params"]["wallsData"][0]
+        self.assertEqual((partition["begCoordinate"]["y"], partition["endCoordinate"]["y"]), (-.12, 3.36))
+        self.assertAlmostEqual(partition["begCoordinate"]["y"] + interior["centerOffset"], 1.425)
+        self.assertEqual([j["kind"] for j in result["wallJunctions"]["experiment"]], ["L"] * 4 + ["T"] * 2)
         self.assertEqual(result["roomFacts"]["hall"]["areaM2"], 8.3916)
         self.assertEqual(result["routes"]["living"], ["entry", "passage"])
         self.assertTrue(all(row["status"] == "DESIGN_MODULE_MATCH" for row in result["masonryChecks"]))
@@ -44,6 +48,76 @@ class RoomLayoutTests(unittest.TestCase):
         self.assertEqual(result["copyTranslationMM"], [13000, 0])
         self.assertIn("exp-wall-part-1", result["roomDependencies"]["hall"]["walls"])
         self.assertTrue(result["executionPermission"] is False)
+
+    def test_wall_junction_far_faces_vary_with_angle_thickness_and_role(self):
+        from apa_room_layout import wall_paths
+
+        thicknesses = {"a": 100, "b": 200}
+        for kind, runs, roles in (
+            ("L", {"a": (0, 0, 1000, 0), "b": (0, 0, 1000, 1000)}, ("start", "start")),
+            ("T", {"a": (-1000, 0, 1000, 0), "b": (-1000, -1000, 0, 0)}, ("through", "end")),
+            ("X", {"a": (-1000, 0, 1000, 0), "b": (-1000, -1000, 1000, 1000)}, ("through", "through")),
+        ):
+            with self.subTest(kind=kind):
+                corrected, nodes = wall_paths(runs, thicknesses, [(kind, "a", roles[0], "b", roles[1])])
+                self.assertEqual(nodes[0]["pointMM"], [0, 0])
+                if kind == "L":
+                    self.assertAlmostEqual(corrected["a"][0], -100 * 2 ** .5)
+                    self.assertEqual(corrected["b"][:2], (-50, -50))
+                elif kind == "T":
+                    self.assertEqual(corrected["a"], runs["a"])
+                    self.assertEqual(corrected["b"][2:], (50, 50))
+                else:
+                    self.assertEqual(corrected, runs)
+        with self.assertRaisesRegex(ValueError, "THROUGH_WALL_TOO_SHORT"):
+            wall_paths({"a": (-20, 0, 20, 0), "b": (0, -1000, 0, 1000)}, thicknesses,
+                       [("X", "a", "through", "b", "through")])
+
+    def test_wall_brep_checks_gap_protrusion_double_body_and_material_priority(self):
+        from apa_ac30_project import wall_system_geometry
+        from tests.test_apa_ac30_native import wall_body
+
+        walls = {
+            "a": {"begCoordinate": {"x": -.1, "y": 0}, "endCoordinate": {"x": 1, "y": 0}, "thickness": .2},
+            "b": {"begCoordinate": {"x": 0, "y": -.1}, "endCoordinate": {"x": 0, "y": 1}, "thickness": .2},
+        }
+        joints = [{"kind": "L", "walls": ["a", "b"], "pointMM": [0, 0]}]
+
+        def evaluate(ymin, xmax, priority):
+            model = {
+                "a": {"guid": "a", "bodies": [wall_body((-.1, -.1, 0, xmax, .1, 2.7))]},
+                "b": {"guid": "b", "bodies": [wall_body((-.1, ymin, 0, .1, 1, 2.7))]},
+            }
+            return wall_system_geometry(walls, model, joints, priority, 2.7)
+
+        strong = {"a": 700, "b": 500}
+        self.assertEqual(evaluate(.1, 1, strong)["joints"][0]["higherPriorityWall"], "a")
+        for ymin, xmax, priority, error in (
+            (.12, 1, strong, "BREP_GAP"),
+            (.1, 1.02, strong, "BREP_PROTRUSION"),
+            (-.1, 1, strong, "DOUBLE_BODY"),
+            (.1, 1, {"a": 500, "b": 700}, "MATERIAL_PRIORITY_DRIFT"),
+        ):
+            with self.subTest(error=error), self.assertRaisesRegex(ValueError, error):
+                evaluate(ymin, xmax, priority)
+
+    def test_crossing_walls_accept_two_bodies_of_lower_priority(self):
+        from apa_ac30_project import wall_system_geometry
+        from tests.test_apa_ac30_native import wall_body
+
+        walls = {
+            'x': dict(begCoordinate={'x': -2, 'y': 0}, endCoordinate={'x': 2, 'y': 0}, thickness=.24),
+            'y': dict(begCoordinate={'x': 0, 'y': -2}, endCoordinate={'x': 0, 'y': 2}, thickness=.12),
+        }
+        model = {
+            'x': dict(guid='x', bodies=[wall_body((-2, -.12, 0, 2, .12, 2.772))]),
+            'y': dict(guid='y', bodies=[wall_body((-.06, -2, 0, .06, -.12, 2.772)),
+                                       wall_body((-.06, .12, 0, .06, 2, 2.772))]),
+        }
+        joints = [dict(kind='X', walls=['x', 'y'], pointMM=[0, 0])]
+        proof = wall_system_geometry(walls, model, joints, {'x': 700, 'y': 500}, 2.772)
+        self.assertEqual(proof['joints'][0]['higherPriorityWall'], 'x')
+        self.assertAlmostEqual(proof['joints'][0]['sharedAreaM2'], 2 * .12 * 2.772)
 
     def test_invalid_layouts_are_rejected_before_graph_execution(self):
         from apa_room_layout import compile_layout

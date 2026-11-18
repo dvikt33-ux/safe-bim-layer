@@ -425,6 +425,7 @@ class DynamicCommands:
             return value
         for sid in plan['executionOrder']:
             step=steps[sid];ticket=self.prepare(step['command'],resolve(step['params']))
+            bulk_metrics = None
             if ticket['effect']=='READ_ONLY':reply=self.read(api,ticket,reviewed_read_only=True)
             else:
                 if writer is None or not callable(scopes) and sid not in (scopes or {}):raise ValueError('WORKFLOW_MUTATION_REQUIRES_EXACT_STEP_SCOPE')
@@ -432,20 +433,27 @@ class DynamicCommands:
                 verification = {'verify_before': scope.get('verify_before')}
                 if verify_empty is not None:
                     verification['verify_empty'] = verify_empty
-                outcome=self.execute(writer,scope['scene_id'],ticket,scope['affected'],scope['retained_signatures'],scope['saved_sha256'],scope['authorization'],scope['impact'],scope['verify_after'],**verification)
+                if scope.get('batch'):
+                    items, = ticket['parameters'].values()
+                    outcome=self.execute_batch(writer,scope['scene_id'],step['command'],items,scope['affected'],scope['retained_signatures'],scope['saved_sha256'],scope['authorization'],scope['impact'],scope['verify_after'],**verification)
+                    bulk_metrics = outcome['bulkMetrics']
+                else:
+                    outcome=self.execute(writer,scope['scene_id'],ticket,scope['affected'],scope['retained_signatures'],scope['saved_sha256'],scope['authorization'],scope['impact'],scope['verify_after'],**verification)
                 if outcome['status']!='PASS':
                     stopped=dict(status='STOPPED_UNKNOWN_OUTCOME',stoppedAt=sid,outcome=outcome,completedSteps=trace,results=results,automaticRetry=False)
                     if checkpoint:checkpoint(copy.deepcopy(stopped))
                     return stopped
                 reply=outcome['nativeResponse']
             results[sid]=reply;trace.append(dict(id=sid,command=step['command'],resultHash=self.A.RUN.digest(reply),status='CALLABLE_VERIFIED'))
+            if bulk_metrics is not None:
+                trace[-1]['bulkMetrics'] = bulk_metrics
             self.callable[step['command']]=dict(kind='LOCAL_ANALYTICAL_RESULT_PASS' if self.catalog['commands'][step['command']].get('api')=='local-python' else 'WORKFLOW_SCHEMA_PASS',resultHash=self.A.RUN.digest(reply))
             if checkpoint:checkpoint(dict(status='WORKFLOW_CHECKPOINT',sourcePlanHash=plan['sourcePlanHash'],trace=copy.deepcopy(trace),results=copy.deepcopy(results),automaticRetry=False))
         return dict(status='WORKFLOW_CALLABLE_VERIFIED',sourcePlanHash=plan['sourcePlanHash'],trace=trace,results=results,automaticRetry=False)
 
     def execute_batch(self, writer, scene_id, command, items, affected,
                       retained_signatures, saved_sha256, authorization,
-                      impact, verify_after, verify_before=None):
+                      impact, verify_after, verify_before=None, *, verify_empty=None):
         """ONE native provider call for a source-verified group of BIM creates.
 
         Reuses prepare() -> execute() -> SceneWriter.execute_bound_operation()
@@ -518,10 +526,13 @@ class DynamicCommands:
             return dict(proof, nativeBatchCount=len(guids),
                         nativeBatchGuids=guids)
         started = time.perf_counter()
+        checks = {'verify_before': verify_before}
+        if verify_empty is not None:
+            checks['verify_empty'] = verify_empty
         outcome = self.execute(
             writer, scene_id, ticket, affected, retained_signatures,
             saved_sha256, authorization, impact,
-            validated_after, verify_before=verify_before)
+            validated_after, **checks)
         seconds = time.perf_counter() - started
         # Metrics are empirical. Offline single-call packing is not a claim
         # of 100x actual Archicad wall-clock performance.

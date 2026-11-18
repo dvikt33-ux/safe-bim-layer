@@ -77,7 +77,7 @@ def stage(args):
     elif args.action == 'stage-layout':
         intent = exact_file(str(args.design.absolute()))
         recipe = ROOM_LAYOUT.compile_layout(read_json(intent), router)
-        recipe.update(design=str(intent), designSha256=sha256(intent))
+        recipe.update(design=str(intent), designSha256=sha256(intent), wallRouting='DISCOVERY_V2')
     elif args.action in {'stage-project', 'stage-update'}:
         intent = exact_file(str(args.design.absolute()))
         current = read_json(intent)
@@ -196,6 +196,8 @@ class Job:
             self.api.allowed |= PROJECT_INVENTORY_READS
         if self.kind == 'layout':
             self.api.allowed |= {'GetQuantitiesOfElements'}
+            if 'wallJunctions' in self.recipe:
+                self.api.allowed |= PROJECT.WALL_ATTRIBUTE_READS
         self.binding = self.guard()
         return self.binding
 
@@ -256,6 +258,8 @@ class Job:
                 commands.add('GetAttributesByType')
             if self.kind == 'layout':
                 commands.add('GetQuantitiesOfElements')
+                if 'wallJunctions' in self.recipe:
+                    commands |= PROJECT.WALL_ATTRIBUTE_READS
         else:
             commands |= {'GetGroupsOfElements', 'GetElementsOfGroups', 'GetSuspendGroupsMode'}
         for command in sorted(commands):
@@ -297,7 +301,8 @@ class Job:
         elif self.kind in {'project', 'update', 'layout'}:
             require(sha256(self.recipe['design']) == self.recipe['designSha256'], 'AC30_PROJECT_DESIGN_SOURCE_DRIFT')
             intent = read_json(self.recipe['design'])
-            current = (ROOM_LAYOUT.compile_layout(intent, self.router) if self.kind == 'layout'
+            current = (ROOM_LAYOUT.compile_layout(intent, self.router, joined='wallJunctions' in self.recipe)
+                       if self.kind == 'layout'
                        else PROJECT.design_recipe(intent, self.recipe['variant'], self.router))
             require(all(self.recipe[key] == value for key, value in current.items()),
                     'AC30_STAGED_PROJECT_PLAN_DRIFT')
@@ -311,6 +316,10 @@ class Job:
                 if self.kind == 'layout':
                     facts['spatialScan'] = {key: RUN.scan_for_existing_geometry(self.api, box['xMin'], box['yMin'], box)
                                             for key, box in self.recipe['regions'].items()}
+                    if self.recipe.get('wallRouting') == 'DISCOVERY_V2':
+                        PROJECT.select_layout_wall_workflow(
+                            facts, self.recipe['stories'][0]['level'], self.router, self.binding,
+                            self.recipe['design'] + '@' + self.recipe['designSha256'])
                     markers = model.get('verifiedEmptyModel', {}).get('markerSignatures', {})
                     facts['retainedDetailsSha256'] = PROJECT.retained_details_digest(self.api, set(signatures) | markers.keys())
                     doors = [step['params']['doorsData'][0] for step in facts['graph']['operations']
@@ -661,6 +670,13 @@ class Job:
             require(PROJECT.retained_details_digest(self.api, retained) == previous['retainedDetailsAfterExperiment'],
                     'LAYOUT_REOPEN_EDITABLE_PARAMETERS_DRIFT')
             record['roomReadback'] = zones
+            if 'wallSystem' in previous:
+                result = PROJECT.verify_layout_wall_system(
+                    self, {'graph': previous['boundGraph'], 'wallJunctionAttributes': previous['wallSystem']['attributes']},
+                    model, previous['operationGuids'])
+                require(result == previous['wallSystem'], 'LAYOUT_REOPEN_WALL_SYSTEM_DRIFT')
+                require(self.guard() == now and self.api.write_attempts == 0, 'LAYOUT_REOPEN_WALL_SYSTEM_NOT_READ_ONLY')
+                record['wallSystem'] = result
         if self.kind in {'project', 'update'}:
             guids = sorted(result['operationGuids'].values())
             details = {guid: RUN.requested_details(self.api, guid) for guid in guids}
@@ -822,7 +838,8 @@ def main(argv=None):
             result = dict(status=planned['status'], operations=len(planned['graph']['operations']),
                           rooms=planned['roomFacts'], routes=planned['routes'], regions=planned['regions'],
                           inclusionMode=planned['inclusionMode'], translationMM=planned['copyTranslationMM'],
-                          sourcePlanHash=planned['sourcePlanHash'], executionPermission=False)
+                          sourcePlanHash=planned['sourcePlanHash'], wallJunctions=planned['wallJunctions'],
+                          executionPermission=False)
         elif args.action in authoring:
             result = stage(args)
         else:

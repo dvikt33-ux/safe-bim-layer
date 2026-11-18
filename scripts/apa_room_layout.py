@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from itertools import pairwise
+import math
 import re
 import unicodedata
 
@@ -113,9 +114,9 @@ def room_dimensions(rooms, depth, thickness):
     return facts, start - thickness
 
 
-def wall_paths(rooms, span, depth, thickness):
-    # Full-width horizontal walls and vertical walls that meet their inner faces.
-    # Half thickness is applied once, to move the native axis off the wall face.
+def masonry_runs(rooms, span, depth, thickness):
+    # Keep the clear masonry runs and the doorway datum immune to changes
+    # in the native reference-line endpoints within junctions.
     half = thickness / 2
     paths = {
         "wall-bottom": (-thickness, -half, span + thickness, -half),
@@ -127,6 +128,65 @@ def wall_paths(rooms, span, depth, thickness):
         x = room["xEndMM"] + half
         paths[f"wall-part-{i}"] = (x, 0, x, depth)
     return paths
+
+
+def wall_paths(runs, thicknesses, connections):
+    """Extend named ends to the other wall's far face (coordinates in mm)."""
+    axes = {}
+    extents = {}
+    for name, (x0, y0, x1, y1) in runs.items():
+        length = math.hypot(x1 - x0, y1 - y0)
+        require(length > 0 and thicknesses[name] > 0, 'LAYOUT_JUNCTION_INVALID_WALL:' + name)
+        axes[name] = (x0, y0, (x1 - x0) / length, (y1 - y0) / length, length)
+        extents[name] = [0, length]
+    nodes, through, assigned = [], [], set()
+    for kind, first, first_end, second, second_end in connections:
+        roles = (first_end, second_end)
+        require(all(role in {'start', 'end', 'through'} for role in roles)
+                and roles.count('through') == {'L': 0, 'T': 1, 'X': 2}.get(kind),
+                'LAYOUT_JUNCTION_INVALID_TOPOLOGY')
+        x, y, ux, uy, _ = axes[first]
+        vx, vy, wx, wy, _ = axes[second]
+        cross = ux * wy - uy * wx
+        require(abs(cross) > 1e-6, 'LAYOUT_JUNCTION_PARALLEL_OR_UNSTABLE')
+        s = ((vx - x) * wy - (vy - y) * wx) / cross
+        t = ((vx - x) * uy - (vy - y) * ux) / cross
+        for name, role, along, neighbour in ((first, first_end, s, second), (second, second_end, t, first)):
+            reach = thicknesses[neighbour] / (2 * abs(cross))
+            if role == 'through':
+                through.append((name, along, reach))
+                continue
+            require((name, role) not in assigned, 'LAYOUT_JUNCTION_ENDPOINT_ASSIGNED_TWICE')
+            end_index = int(role == 'end')
+            location = axes[name][-1] if end_index else 0
+            require(abs(location - along) <= reach + 1e-6, 'LAYOUT_JUNCTION_REMOTE_ENDPOINT:' + name)
+            extents[name][end_index] = along + (reach if end_index else -reach)
+            assigned.add((name, role))
+        nodes.append(dict(kind=kind, walls=[first, second], roles=list(roles),
+                          pointMM=[round(x + s * ux, 9), round(y + s * uy, 9)]))
+    for name, along, reach in through:
+        start, end = extents[name]
+        require(start <= along - reach + 1e-6 and end >= along + reach - 1e-6,
+                'LAYOUT_JUNCTION_THROUGH_WALL_TOO_SHORT:' + name)
+    paths = {}
+    for name, (x, y, ux, uy, _) in axes.items():
+        start, end = extents[name]
+        require(start < end, 'LAYOUT_JUNCTION_REVERSED_WALL:' + name)
+        paths[name] = tuple(round(value, 9) for value in (x + start * ux, y + start * uy,
+                                                        x + end * ux, y + end * uy))
+    return paths, nodes
+
+
+def room_junctions(room_count):
+    return [
+        ('L', 'wall-bottom', 'start', 'wall-left', 'start'),
+        ('L', 'wall-bottom', 'end', 'wall-right', 'start'),
+        ('L', 'wall-top', 'start', 'wall-left', 'end'),
+        ('L', 'wall-top', 'end', 'wall-right', 'end'),
+        *((kind, f'wall-part-{i}', end, host, 'through')
+          for i in range(1, room_count)
+          for kind, end, host in (('T', 'start', 'wall-bottom'), ('T', 'end', 'wall-top'))),
+    ]
 
 
 def qualified_doors(value, rooms, walls, height):
@@ -213,7 +273,7 @@ def region_bounds(origin, span, depth, thickness, level, height):
                 zMin=level / 1000, zMax=(level + height) / 1000)
 
 
-def region_operations(prefix, origin, walls, rooms, doors, thickness, height, depth, project_id):
+def region_operations(prefix, origin, walls, runs, rooms, doors, thickness, height, depth, project_id):
     ox, oy = origin
     steps = []
     for name, (x0, y0, x1, y1) in walls.items():
@@ -224,8 +284,12 @@ def region_operations(prefix, origin, walls, rooms, doors, thickness, height, de
         after = [] if not steps else [steps[0]["id"]]
         steps.append(dict(id=identifier, command="CreateWalls", params={"wallsData": [args]}, after=after))
     for door in doors:
-        host = f"{prefix}-{door['hostMemberId']}"
+        member = door['hostMemberId']
+        host = f"{prefix}-{member}"
         args = {k: door[k] for k in ("width", "height", "centerOffset", "sillHeight")}
+        # The door's requested location is on the original masonry datum.
+        start_shift = math.dist(runs[member][:2], walls[member][:2])
+        args["centerOffset"] = round(args["centerOffset"] + start_shift / 1000, 12)
         if "favoriteName" in door:
             args["favoriteName"] = door["favoriteName"]
         args["ownerWallId"] = {"guid": {"$createdGuid": host}}
@@ -278,7 +342,7 @@ def unanswered(value):
     return questions
 
 
-def compile_layout(value, router):
+def compile_layout(value, router, *, joined=True):
     fields(value, INPUT_FIELDS, "LAYOUT_INPUT_FIELDS", ("constraints", "windows", "zoneCategoryName"))
     require(value["schemaVersion"] == SCHEMA, "LAYOUT_SCHEMA_REQUIRED")
     require(value.get("windows", []) == [], "LAYOUT_NATIVE_WINDOWS_NOT_SUPPORTED_IN_THIS_VARIANT")
@@ -305,9 +369,11 @@ def compile_layout(value, router):
             purpose = room_purpose(room)
             require(purpose is not None, "LAYOUT_ROOM_PURPOSE_REQUIRED:" + room["id"])
             room_facts[room["id"]]["purpose"] = purpose
-    walls = wall_paths(room_facts, span, depth, thickness)
-    doors = qualified_doors(value, room_facts, walls, height)
-    profile, checks = masonry_checks(walls, wall, doors, thickness, height)
+    runs = masonry_runs(room_facts, span, depth, thickness)
+    walls, joints = (wall_paths(runs, dict.fromkeys(runs, thickness), room_junctions(len(rooms)))
+                     if joined else (runs, []))
+    doors = qualified_doors(value, room_facts, runs, height)
+    profile, checks = masonry_checks(runs, wall, doors, thickness, height)
     routes = verify_requirements(brief, room_facts, doors)
     origins = {name: point(value["originsMM"][name]) for name in REGIONS}
     bounds = {name: region_bounds(origin, span, depth, thickness, level, height) for name, origin in origins.items()}
@@ -316,7 +382,7 @@ def compile_layout(value, router):
                 for axis in "xy"), "LAYOUT_REGIONS_OVERLAP_OR_TOUCH")
     require(all((a - b) % profile["planModuleMM"] == 0
                 for a, b in zip(origins["experiment"], origins["acceptance"])), "LAYOUT_REGION_MODULE_ORIGIN_CONFLICT")
-    graphs = {name: {"operations": region_operations(prefix, origins[name], walls, room_facts, doors,
+    graphs = {name: {"operations": region_operations(prefix, origins[name], walls, runs, room_facts, doors,
               thickness, height, depth, brief["projectId"])} for name, prefix in REGIONS.items()}
     reports = {name: GRAPH.compile_graph(router.catalog, graph, runtime_version="2.0.0")
                for name, graph in graphs.items()}
@@ -333,7 +399,7 @@ def compile_layout(value, router):
         }
         for i, rid in enumerate(room_facts)
     }
-    return dict(kind="layout", status="LAYOUT_PLAN_VALIDATED_OFFLINE", projectId=brief["projectId"],
+    result = dict(kind="layout", status="LAYOUT_PLAN_VALIDATED_OFFLINE", projectId=brief["projectId"],
                 stories=[dict(id="fragment", level=level / 1000)], graph=graph,
                 sourcePlanHash=reports["experiment"]["sourcePlanHash"],
                 inclusionGraph=graphs["acceptance"], inclusionGraphSha256=reports["acceptance"]["sourcePlanHash"],
@@ -344,6 +410,12 @@ def compile_layout(value, router):
                 zoneCategory=category, roomFacts=room_facts, doors=doors, routes=routes,
                 regions=bounds, masonryProfile=profile, masonryChecks=checks, executionPermission=False,
                 precisionMM=1, normativeApplicability="NOT_VERIFIED")
+    if joined:
+        result["wallJunctions"] = {name: [
+            dict(joint, walls=[f"{prefix}-{wall_id}" for wall_id in joint["walls"]],
+                 pointMM=[value + shift for value, shift in zip(joint["pointMM"], origins[name])])
+            for joint in joints] for name, prefix in REGIONS.items()}
+    return result
 
 
 def verify_native_zone(expected, row, quantities, expected_level):
@@ -381,7 +453,7 @@ def verify_native_zone(expected, row, quantities, expected_level):
             "heightM": actual["height"], "categoryGuid": category}
 
 
-def verify_wall_body(row, element, level):
+def verify_wall_body(row, element, level, *, joined=False):
     """Check the realised solid against the authored orthogonal wall faces."""
     start, end = row["begCoordinate"], row["endCoordinate"]
     half = row["thickness"] / 2
@@ -393,6 +465,11 @@ def verify_wall_body(row, element, level):
     vertices = [vertex for body in element["bodies"] for vertex in body["vertices"]]
     require(vertices, "LAYOUT_NATIVE_WALL_BODY_MISSING")
     for i, (lower, upper) in enumerate(expected):
-        require(RUN.close(min(v[i] for v in vertices), lower, tolerance=0.001)
-                and RUN.close(max(v[i] for v in vertices), upper, tolerance=0.001),
+        actual_min = min(v[i] for v in vertices)
+        actual_max = max(v[i] for v in vertices)
+        # Native cleanup can trim Wall ends. The joint proof checks the
+        # resultant footprint against the entire wall system.
+        trimmed = joined and i < 2 and start["xy"[i]] != end["xy"[i]]
+        require((trimmed and actual_min >= lower - .001 and actual_max <= upper + .001)
+                or (RUN.close(actual_min, lower, tolerance=.001) and RUN.close(actual_max, upper, tolerance=.001)),
                 "LAYOUT_NATIVE_WALL_FACE_OR_EXTENT_DRIFT")
