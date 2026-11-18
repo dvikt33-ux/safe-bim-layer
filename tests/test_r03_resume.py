@@ -155,6 +155,24 @@ class ArchitectureReopenListenerTests(unittest.TestCase):
                       pid=self.session["pid"], savedSHA256=self.saved["savedSHA256"], nativeWrites=0)
         arch.write_new_json(self.job / "closed.json", record | fields)
 
+    def test_saved_status_requires_real_close_receipt_before_claiming_reopen(self):
+        manifest = dict(self.manifest, project=str(self.job / "test.pln"), port=self.session["port"])
+        saved = dict(self.saved, jobId=self.job.name, status="LIVE_ARCHITECTURE_SAVED_PENDING_REAL_REOPEN")
+        arch.write_new_json(self.job / "saved.json", saved)
+        with patch.object(arch, "saved_record", return_value=saved):
+            self.assertEqual(arch.status(self.job, manifest)["status"], saved["status"])
+            reopened = dict(saved, status="LIVE_ARCHITECTURE_SAVED_REOPENED_PASS",
+                            reopenVerified=True, reopenedGuidSetSHA256=saved["finalGuidSetSHA256"],
+                            reopenedBrepSHA256=saved["finalBrepSHA256"], verificationNativeWrites=0)
+            arch.write_new_json(self.job / "reopened.json", reopened)
+            with self.assertRaisesRegex(ValueError, "ARCHITECTURE_REAL_CLOSE_REQUIRED"):
+                arch.status(self.job, manifest)
+            self.close_receipt()
+            self.assertEqual(arch.status(self.job, manifest)["status"], reopened["status"])
+            arch.A.write_json(self.job / "closed.json", {"savedSHA256": "unrelated-copy"})
+            with self.assertRaisesRegex(ValueError, "ARCHITECTURE_REAL_CLOSE_REQUIRED"):
+                arch.status(self.job, manifest)
+
     def test_same_port_without_same_session_cannot_prove_reopen(self):
         self.close_receipt()
         with (patch.object(arch, "saved_record", return_value=self.saved),

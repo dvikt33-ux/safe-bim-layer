@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "apa-room-layout/1",
+  "projectId": "plan-demo",
+  "storyLevelMM": 0,
+  "depthMM": 3240,
+  "wall": {
+    "materialName": "Кирпич",
+    "thicknessMM": 120,
+    "heightMM": 2772,
+    "coordination": {"profileId": "ceramic-1nf-10-12", "halfBrickUnitsAcross": 1}
+  },
+  "minPierMM": 380,
+  "originsMM": {"experiment": [0, 0], "acceptance": [13000, 0]},
+  "rooms": [
+    {"id": "hall", "name": "Холл", "widthMM": 2590, "minAreaM2": 8},
+    {"id": "living", "name": "Гостиная", "widthMM": 2630, "minAreaM2": 8}
+  ],
+  "doors": [
+    {"id": "entry", "from": "$outside", "to": "hall", "fromFaceMM": 900, "widthMM": 1050, "heightMM": 2079},
+    {"id": "passage", "from": "hall", "to": "living", "fromFaceMM": 900, "widthMM": 1050, "heightMM": 2079}
+  ]
+}

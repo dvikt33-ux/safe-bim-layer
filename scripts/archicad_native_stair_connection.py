@@ -8,6 +8,118 @@ import archicad_connected_components as C
 RUN=A.RUN
 
 
+def prepare_ac30_stair(candidate, requirement_id, catalog):
+    """Qualify the already planned straight flight as one isolated Tapir 2 operation."""
+    link = next((row for row in candidate.get('stairConnections', ())
+                 if row['requirementId'] == requirement_id), None)
+    if link is None or link['dimensionsMeetProjectLimits'] is not True:
+        raise ValueError('STAIR_REQUIRES_COMPILED_LINK_AND_REVIEWED_PROJECT_LIMITS')
+    original = next(row for row in candidate['graph']['operations'] if row['id'] == link['stairOperationId'])
+    if original['command'] != 'CreateStairs' or len(original['params']['stairsData']) != 1:
+        raise ValueError('STAIR_REQUIRES_ONE_COMPILED_NATIVE_FLIGHT')
+    operation = copy.deepcopy(original)
+    operation['after'] = []  # The test qualifies the flight before using it in the building graph.
+    data = operation['params']['stairsData'][0]
+    data.update(baselinePosition='Left', extraTopTread=True, totalHeightLocked=True)
+    checked = A.SCENE.GRAPH.compile_graph(catalog, {'operations': [operation]}, runtime_version='2.0.0')
+    if checked['status'] != 'PLAN_VALIDATED_OFFLINE':
+        raise ValueError('AC30_STAIR_TAPIR_GRAPH_INVALID: ' + str(checked.get('errors', checked['status'])))
+    return dict(operation=operation, graphHash=checked['sourcePlanHash'], flightBounds=link['flightBounds'],
+                slabDependencies=original['after'], requirementId=requirement_id, source=link['source'],
+                dimensionChecks=link['dimensionChecks'],
+                landingDepthsM=[link['lowerLandingDepthM'], link['upperLandingDepthM']])
+
+
+def measure_ac30_straight_flight(bodies, data, bounds):
+    """Measure each going from successive top-face nosings along the +Y flight."""
+    from shapely.geometry import LineString, Polygon
+
+    tolerance = 1e-5
+    x0, y0, x1, y1 = bounds
+    start_z = data['zCoordinate']
+    end_z = start_z + data['totalHeight']
+    count = data['stepNum']
+    riser = data['riserHeight']
+    center = (x0 + x1) / 2
+    walking_axis = LineString([(center, y0 - tolerance), (center, y1 + tolerance)])
+    vertices = [point for body in bodies for point in body['vertices']]
+    if not vertices or any(type(p[axis]) not in (int, float) or not math.isfinite(p[axis])
+                           for p in vertices for axis in 'xyz'):
+        raise ValueError('STAIR_PHYSICAL_BREP_REQUIRED')
+    extent = {axis + suffix: fn(p[axis] for p in vertices)
+              for axis in 'xyz' for suffix, fn in [('Min', min), ('Max', max)]}
+    if (extent['zMin'] > start_z + tolerance
+            or not all(RUN.close(extent[key], target, tolerance) for key, target in
+                       dict(xMin=x0, yMin=y0, xMax=x1, yMax=y1, zMax=end_z).items())):
+        raise ValueError('STAIR_PHYSICAL_FLIGHT_OR_TOP_MISMATCH')
+
+    nosings = {}
+    for body in bodies:
+        points = body['vertices']
+        for face in body['polygons']:
+            contours = [face['vertexIds'], *(hole['vertexIds'] for hole in face.get('holes', []))]
+            if any(len(indices) < 3 or any(type(index) is not int or not 0 <= index < len(points)
+                                           for index in indices) for indices in contours):
+                raise ValueError('STAIR_PHYSICAL_FACE_INDEX_INVALID')
+            ring = [points[index] for index in contours[0]]
+            height = ring[0]['z']
+            step = round((height - start_z) / riser)
+            if not 1 <= step <= count or any(not RUN.close(p['z'], height, tolerance) for p in ring):
+                continue
+            outer = [(p['x'], p['y']) for p in ring]
+            polygon = Polygon(outer, [[(points[i]['x'], points[i]['y']) for i in hole] for hole in contours[1:]])
+            if not polygon.exterior.is_ccw or not polygon.is_valid:
+                continue
+            cut = polygon.intersection(walking_axis)
+            if cut.length > tolerance:
+                if not RUN.close(height, start_z + step * riser, tolerance):
+                    raise ValueError('STAIR_PHYSICAL_RISER_MISMATCH')
+                nosings[step] = min(cut.bounds[1], nosings.get(step, math.inf))
+    if len(nosings) != count:
+        raise ValueError('STAIR_PHYSICAL_TREAD_COVERAGE_INCOMPLETE')
+    goings = [nosings[i + 1] - nosings[i] for i in range(1, count)]
+    if (not RUN.close(nosings[1], y0, tolerance)
+            or not all(RUN.close(value, data['treadDepth'], tolerance) for value in goings)):
+        raise ValueError('STAIR_PHYSICAL_GOING_MISMATCH')
+    return dict(bounds=extent, measuredTreadCount=len(nosings), minimumGoingM=min(goings),
+                maximumGoingM=max(goings), goingsM=goings, precisionM=tolerance)
+
+
+def read_ac30_stair(call, guid, flight, native_indices):
+    """Read the root and physical treads independently of the creation response."""
+    data = flight['operation']['params']['stairsData'][0]
+    target = {'elements': [{'elementId': {'guid': guid}}]}
+    fields = ['type', 'id', 'floorIndex', 'layerIndex', 'drawIndex', 'details']
+    details = call('GetDetailsOfElements', dict(target, fields=fields))['detailsOfElements']
+    if len(details) != 1 or details[0].get('type') != 'Stair' or details[0].get('floorIndex') != native_indices[0]:
+        raise ValueError('STAIR_NATIVE_TYPE_OR_HOME_STORY_MISMATCH')
+    actual = details[0]['details']
+    expected = ('flightWidth', 'totalHeight', 'riserHeight', 'zCoordinate')
+    if (actual.get('stepNum') != data['stepNum']
+            or any(not RUN.close(actual.get(key), data[key]) for key in expected)):
+        raise ValueError('STAIR_NATIVE_DIMENSIONS_CHANGED')
+    points = actual.get('baseLinePoints', [])
+    if (actual.get('baseLineArcs') or len(points) != 2
+            or any(not RUN.close(p.get(axis), q[axis]) for p, q in zip(points, data['baseLinePoints']) for axis in 'xy')):
+        raise ValueError('STAIR_NATIVE_BASELINE_CHANGED')
+    geometry = call('Get3DGeometryOfElements', target)['geometries3D']
+    if len(geometry) != 1:
+        raise ValueError('STAIR_PHYSICAL_BREP_REQUIRED')
+    measured = measure_ac30_straight_flight(geometry[0]['bodies'], data, flight['flightBounds'])
+    hierarchy = call('GetSubelementsOfHierarchicalElements', target)['subelements']
+    if len(hierarchy) != 1 or not hierarchy[0].get('stairStructures'):
+        raise ValueError('STAIR_NATIVE_HIERARCHY_REQUIRED')
+    children = [entry['elementId']['guid'].lower() for key in ('stairRisers', 'stairTreads', 'stairStructures')
+                for entry in hierarchy[0].get(key, [])]
+    if guid.lower() in children or len(set(children)) != len(children) or any(not RUN._GUID.fullmatch(g) for g in children):
+        raise ValueError('STAIR_NATIVE_HIERARCHY_GUID_MISMATCH')
+    return dict(status='AC30_STAIR_PHYSICAL_READBACK_PASS', guid=guid.lower(), childGuids=sorted(children),
+                storyIndices=native_indices, nativeType='Stair', nativeStepCount=actual['stepNum'],
+                nativeParameters={key: actual[key] for key in expected}, nativeReportedTreadDepth=actual.get('treadDepth'),
+                nativeReportedFinishVisible=actual.get('finishVisible'), geometry=measured,
+                landings='PROJECT_GEOMETRY_ONLY', slabConnection='UNVERIFIED', headroom='UNVERIFIED')
+
+
 def compatible_native_step_counts(height, going, rules):
     """Native configured limits only; no building-code or engineering verdict."""
     if any(type(v) not in (int,float) or not math.isfinite(v) or v<=0 for v in (height,going)):

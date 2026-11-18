@@ -27,14 +27,32 @@ def preflight(config, wall_guid, group_guid, expected_height, new_height, transp
         fail("NO_HEIGHT_CHANGE")
     session=AC30ReadSession(config,transport=transport)
     before=session.guard()
-    detail=session.call("GetDetailsOfElements",{
+    result = read_grouped_wall(session.call, wall_guid, group_guid, expected_height)
+    after=session.guard()
+    if before!=after:
+        fail("NATIVE_IDENTITY_CHANGED_DURING_PREFLIGHT")
+    return {"status":"AC30_GROUPED_WALL_PREFLIGHT_PASS",
+            "scope":"ISOLATED_AC30_TEST_COPY_ONLY",
+            "session":before, "desiredHeight":new_height, **result,
+            "requiredTransaction":["verify exact pinned PLN and active GUID immediately before write",
+                                   "temporarily enable Suspend Groups when required",
+                                   "ModifyWalls exact authorized wall only",
+                                   "read back new height and returned element status",
+                                   "restore exact prior group mode in finally",
+                                   "on failure inspect state, then reconcile without automatic retry"],
+            "modelWrites":0,"executionPermission":False,
+            "note":"This is preflight only, not a native modification or an approval to execute."}
+
+
+def read_grouped_wall(call, wall_guid, group_guid, expected_height):
+    detail=call("GetDetailsOfElements",{
         "elements":[{"elementId":{"guid":wall_guid}}]}).get("detailsOfElements")
     if not isinstance(detail,list) or len(detail)!=1 or detail[0].get("type")!="Wall":
         fail("EXPECTED_WALL_NOT_FOUND")
     actual=detail[0].get("details",{}).get("height")
     if type(actual) not in (float,int) or not math.isclose(actual,expected_height,abs_tol=1e-7):
         fail("HEIGHT_BASELINE_DRIFT")
-    groups=session.call("GetGroupsOfElements",{
+    groups=call("GetGroupsOfElements",{
         "elements":[{"elementId":{"guid":wall_guid}}]}).get("groupGuids")
     if not isinstance(groups,list):
         fail("GROUP_READBACK_MISSING")
@@ -46,27 +64,14 @@ def preflight(config, wall_guid, group_guid, expected_height, new_height, transp
             fail("GROUP_READBACK_MALFORMED")
     if group_guid.upper() not in linked:
         fail("EXPECTED_GROUP_MISSING")
-    mode=session.call("GetSuspendGroupsMode")
+    mode=call("GetSuspendGroupsMode")
     if type(mode.get("suspendGroups")) is not bool:
         fail("SUSPEND_GROUPS_UNKNOWN")
-    after=session.guard()
-    if before!=after:
-        fail("NATIVE_IDENTITY_CHANGED_DURING_PREFLIGHT")
-    return {"status":"AC30_GROUPED_WALL_PREFLIGHT_PASS",
-            "scope":"ISOLATED_AC30_TEST_COPY_ONLY",
-            "session":before,"wallGuid":wall_guid,"groupGuid":group_guid,
-            "actualHeight":actual,"desiredHeight":new_height,
+    return {"wallGuid":wall_guid,"groupGuid":group_guid,
+            "actualHeight":actual,
             "groupMembership":sorted(set(linked)),
             "suspendGroupsBefore":mode["suspendGroups"],
-            "requiresSuspendGroups":not mode["suspendGroups"],
-            "requiredTransaction":["verify exact pinned PLN and active GUID immediately before write",
-                                   "temporarily enable Suspend Groups when required",
-                                   "ModifyWalls exact authorized wall only",
-                                   "read back new height and returned element status",
-                                   "restore exact prior group mode in finally",
-                                   "on failure inspect state, then reconcile without automatic retry"],
-            "modelWrites":0,"executionPermission":False,
-            "note":"This is preflight only, not a native modification or an approval to execute."}
+            "requiresSuspendGroups":not mode["suspendGroups"]}
 
 def main(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)

@@ -181,14 +181,28 @@ def approved_result(job, approval):
     return result
 
 
+def closed_record(job, m, saved):
+    path = job / "closed.json"
+    require(path.is_file(), "APA_ARCHITECTURE_REAL_CLOSE_REQUIRED")
+    record = read(path)
+    require(record.get("status") in {"NATIVE_NO_OPEN_PROJECT_CONFIRMED", "ARCHICAD_TEST_PROCESS_EXIT_CONFIRMED"}
+            and record.get("jobId") == m["jobId"]
+            and record.get("savedSHA256") == saved["savedSHA256"]
+            and record.get("nativeWrites") == 0, "APA_ARCHITECTURE_REAL_CLOSE_REQUIRED")
+    return record
+
+
 def status(job, m):
     if (job / "saved.json").is_file():
         saved = saved_record(job, m)
         state = saved["status"]
         if (job / "reopened.json").is_file():
+            closed_record(job, m, saved)
             reopened = read(job / "reopened.json")
             require(reopened.get("status") == "LIVE_ARCHITECTURE_SAVED_REOPENED_PASS"
+                    and reopened.get("jobId") == m["jobId"]
                     and reopened.get("reopenVerified") is True
+                    and reopened.get("verificationNativeWrites") == 0
                     and reopened.get("savedSHA256") == saved["savedSHA256"]
                     and reopened.get("reopenedGuidSetSHA256") == saved["finalGuidSetSHA256"]
                     and reopened.get("reopenedBrepSHA256") == saved["finalBrepSHA256"]
@@ -493,7 +507,7 @@ def verify_reopen(job, m, pinned_runtime, port, *, expected_listener=None):
     from apa_r03_mailbox import listener
 
     saved = saved_record(job, m)
-    closed = read(job / "closed.json")
+    closed = closed_record(job, m, saved)
     approval = read(job / "approved-preflight.json")
     approved_result(job, approval)
     planned = approval.get("listener", expected_listener)
@@ -503,11 +517,10 @@ def verify_reopen(job, m, pinned_runtime, port, *, expected_listener=None):
     native_close = closed["status"] == "NATIVE_NO_OPEN_PROJECT_CONFIRMED" and port == approval["port"]
     process_exit = (closed["status"] == "ARCHICAD_TEST_PROCESS_EXIT_CONFIRMED"
                     and closed.get("pid") == planned["pid"] and reservation_owner_exited(planned["pid"]))
-    require((native_close or process_exit) and closed["jobId"] == m["jobId"]
+    require((native_close or process_exit)
             and closed.get("pid", planned["pid"]) == planned["pid"]
             and closed.get("listener", planned) == planned
-            and closed["port"] == approval["port"]
-            and closed["savedSHA256"] == saved["savedSHA256"] and closed["nativeWrites"] == 0,
+            and closed["port"] == approval["port"],
             "APA_ARCHITECTURE_REAL_CLOSE_REQUIRED")
     observed = listener(port)
     require(not native_close or observed == planned, "APA_ARCHITECTURE_REOPEN_PROCESS_DRIFT")

@@ -102,7 +102,7 @@ def prepare_profile(root, job_dir, kind, *, design_binding=None, bridge=None):
     return profile.health() | {"profile": str(path), "bindingSha256": sha256(path)}
 
 
-def listener(port):
+def listener(port, *, addon=None):
     """Resolve the Windows listener to one Archicad process and start time."""
     require(type(port) is int and 19723 <= port <= 19743, "R03_MAILBOX_ARCHICAD_PORT_REQUIRED")
     script = (
@@ -111,10 +111,15 @@ def listener(port):
         "if ($c.Count -ne 1) { exit 2 }\n"
         "$p = Get-Process -Id $c[0] -ErrorAction Stop\n"
         "if ($p.ProcessName -ne 'Archicad') { exit 3 }\n"
-        "@{pid=$p.Id; startedAt=$p.StartTime.ToUniversalTime().ToString('o')} | ConvertTo-Json -Compress"
     )
+    if addon is not None:
+        script += ("$m = @($p.Modules | Where-Object { $_.FileName -ieq $env:APA_BOUND_APX })\n"
+                   "if ($m.Count -ne 1) { exit 4 }\n")
+    script += "@{pid=$p.Id; startedAt=$p.StartTime.ToUniversalTime().ToString('o')} | ConvertTo-Json -Compress"
+    options = {} if addon is None else {'env': dict(os.environ, APA_BOUND_APX=str(addon))}
     response = subprocess.run(["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", script],
-                              capture_output=True, timeout=20)
+                              capture_output=True, timeout=20, **options)
+    require(response.returncode != 4, "APA_PINNED_APX_NOT_VISIBLE_IN_ARCHICAD_PROCESS")
     require(response.returncode == 0, "R03_MAILBOX_ARCHICAD_LISTENER_NOT_FOUND")
     return dict(json.loads(response.stdout), port=port)
 

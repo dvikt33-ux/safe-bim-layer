@@ -1,7 +1,7 @@
 # Canonical project goal and story convention (2026-10-08)
 
 Status: ACTIVE, applies to every subsequent research and development chat for Safe BIM Layer.
-Target runtime: installed **Archicad 29.2.1 (5101) RUS FULL (x86-64)** (Archicad 29 generation, confirmed 2026-10-09; see `docs/ARCHICAD_RUNTIME_CURRENT.md`). Archicad 30 adaptation only after the AC29 working solution is complete.
+Current delivery priority (2026-11-16): **Archicad 30 build 3001 / Tapir 2.0.0** on Windows. Preserve the existing **Archicad 29.2.1 build 5101 / Tapir 1.5.10** workflow and its acceptance evidence. The exact open PLN and loaded runtime are determined by the test profile and live readback.
 
 ## Non-negotiable end goal
 
@@ -35,7 +35,7 @@ Stop initial prebuild only when critical coverage obligations are satisfied or e
 - Its level in the normal project baseline = **±0,000 m**, which is an elevation, NOT an architectural story number.
 - Do not label this storey «0 этаж».
 - **Never hardcode Tapir floorIndex=0 or =1** for this purpose.
-- Obtain real story map from the sole currently open AC29 project with GetStories / native StorySettings: `API_StoryInfo` (`firstStory`, `lastStory`, `skipNullFloor`) + `API_StoryType` (`index`, `floorId`, `level`, `uName`).
+- Obtain the real story map from the exact bound project with GetStories / native StorySettings: `API_StoryInfo` (`firstStory`, `lastStory`, `skipNullFloor`) + `API_StoryType` (`index`, `floorId`, `level`, `uName`).
 - `skipNullFloor` can cause displayed/indexed stories to start with 1 rather than 0. The same actual first architectural floor can be represented by a native 0 or 1 depending on settings. The human label and elevation must be authoritative for design, while native index is a resolved transport field.
 - For new projects: explicitly create/rename first floor `1 этаж` at `0.0 m`, then subsequent floors by approved elevations, basements separately. Never insert fictitious "zero storey".
 - For existing projects: NEVER renumber silently; map the existing story names/levels, ask about conflicts instead.

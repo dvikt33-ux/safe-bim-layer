@@ -164,6 +164,7 @@ def parser():
     cmd = commands.add_parser("plan", help="Подготовить BIM Graph или нативное задание")
     cmd.add_argument("--intent", type=Path, required=True)
     cmd.add_argument("--output", type=Path, required=True)
+    cmd.add_argument("--tapir2", action="store_true", help="Подготовить проектный граф для Tapir 2 в Archicad 30")
     cmd = commands.add_parser("design-request", help="Подготовить исходное текстовое задание для GPT")
     cmd.add_argument("--source", type=Path, required=True)
     cmd.add_argument("--output", type=Path, required=True)
@@ -208,6 +209,7 @@ def parser():
     source = cmd.add_mutually_exclusive_group(required=True)
     source.add_argument("--native-dump", type=Path)
     source.add_argument("--job", type=Path, help="Каталог авторского задания с подтверждённым повторным открытием")
+    cmd.add_argument("--reopen-copy", type=Path, help="Проверенная отдельная копия сохранения задания AC30")
     selection = cmd.add_mutually_exclusive_group()
     selection.add_argument("--guids", type=Path)
     selection.add_argument("--all-dump-elements", action="store_true")
@@ -292,6 +294,7 @@ def main(argv=None):
     try:
         routes = {"project-runtime": ("archicad_project_accelerator", "main"),
                   "ac30-native-read": ("apa_ac30_tapir20", "main"),
+                  "ac30-native": ("apa_ac30_native", "main"),
                   "ac30-mcp": ("apa_ac30_mcp", "main"),
                   "ac30-wall-preflight": ("apa_ac30_wall_preflight", "main"),
                   "ac30-normalize-changes": ("apa_ac30_change_normalizer", "main"),
@@ -312,6 +315,8 @@ def main(argv=None):
             module, entry = routes[argv[0]]
             return getattr(import_module(module), entry)(argv[1:])
         args = parser().parse_args(argv)
+        if args.mode == "documentation" and args.reopen_copy is not None and args.job is None:
+            raise ValueError("--reopen-copy требует указать --job")
         code = 0
         if args.mode == "doctor":
             result = doctor()
@@ -359,7 +364,8 @@ def main(argv=None):
             if args.guids is not None or args.all_dump_elements:
                 raise ValueError("Для задания состав элементов берётся из квитанции повторного открытия")
             result = document_reopened_job(args.job, args.output, args.story,
-                                           publisher_folder=args.publisher_folder, layout_name=args.layout_name)
+                                           publisher_folder=args.publisher_folder, layout_name=args.layout_name,
+                                           reopen_copy=args.reopen_copy)
         elif args.mode == "detail-review":
             from apa_integrated_services import detail_review
 
@@ -452,7 +458,12 @@ def main(argv=None):
                     raise ValueError("Текстовое задание подайте через apa design-request") from exc
                 if not isinstance(intent, dict):
                     raise ValueError("APA_PLAN_REQUIRES_JSON_OBJECT")
-                result = compile_plan(router, intent)
+                if args.tapir2:
+                    from apa_project_design import compile_design_for_tapir2
+
+                    result = compile_design_for_tapir2(intent)
+                else:
+                    result = compile_plan(router, intent)
                 result = dict(result, inputSha256=hashlib.sha256(raw).hexdigest(), executionPermission=False)
                 write_json(args.output, result)
             elif args.mode == "run-local":

@@ -47,7 +47,7 @@ def planar_faces(native):
                 'nativeFaceIndex':face.get('nativeFaceIndex'),'points':points}
 
 
-def shared_surfaces(elements, owners):
+def shared_surfaces(elements, owners, *, vertical_only=False):
     """Compare actual coplanar BREP face contours, preserving polygon holes.
 
     Surface contact is distinct from native body intersection and load transfer.
@@ -57,6 +57,8 @@ def shared_surfaces(elements, owners):
     for native_guid,parent in owners.items():
         for face in planar_faces(elements[native_guid]):
             normal,distance,polygon,drop=(face[k] for k in ('normal','distance','polygon','drop'))
+            if vertical_only and abs(normal[2]) > 1e-8:
+                continue
             key=tuple(round(v,6) for v in normal)+(round(distance,6),)
             for other,previous in planes.get(key,[]):
                 if other==parent:continue
@@ -66,6 +68,17 @@ def shared_surfaces(elements, owners):
             planes.setdefault(key,[]).append((parent,polygon))
     return [{'guids':list(pair),'sharedAreaSquareMeters':area,
              'evidence':'resultant-native-BREP-coplanar-surface'} for pair,area in sorted(areas.items())]
+
+
+def horizontal_caps(element, level):
+    """Measure a horizontal cap from the existing native BREP contours."""
+    from shapely.ops import unary_union
+
+    caps = [face['polygon'] for face in planar_faces(element)
+            if face['drop'] == 2 and all(abs(p[2] - level) <= 1e-6 for p in face['points'])]
+    if not caps:
+        raise ValueError('LAYOUT_WALL_HORIZONTAL_CAP_UNAVAILABLE:' + element['guid'])
+    return unary_union(caps)
 
 
 def analyze(normalized, plan, created, children, volume_pairs, surface_pairs):

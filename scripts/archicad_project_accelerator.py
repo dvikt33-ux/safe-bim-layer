@@ -716,8 +716,16 @@ class EvidenceAPI:
                 f.write(RUN.canonical(record) + "\n")
 
 
-def inventory_guids(api):
-    rows = api("GetAllElements", {}).get("elements")
+def inventory_guids(api, *, database=None, include_sub_elements=False):
+    parameters = {}
+    if database is not None:
+        parameters["databases"] = [database]
+    if include_sub_elements:
+        parameters["filters"] = ["IncludeSubElemObjects"]
+    result = api("GetAllElements", parameters)
+    if database is not None and result.get("executionResultForDatabases") != [{"success": True}]:
+        raise ValueError("NATIVE_DATABASE_INVENTORY_UNVERIFIED")
+    rows = result.get("elements")
     if not isinstance(rows, list):
         raise ValueError("INVALID_INVENTORY")
     guids = [r.get("elementId", {}).get("guid") for r in rows]

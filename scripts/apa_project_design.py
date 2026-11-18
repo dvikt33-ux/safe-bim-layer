@@ -18,6 +18,34 @@ def compile_design(intent):
     return _review_design(intent)[0]
 
 
+def compile_design_for_tapir2(intent):
+    """Compile the authored graph to the Tapir 2 contracts."""
+    from archicad_native_stair_connection import prepare_ac30_stair
+    from archicad_tapir_catalog import load_for_runtime
+
+    report = compile_design(intent)
+    router, digest = load_for_runtime({}, {'archicadVersion': 30, 'tapirVersion': '2.0.0'})
+    levels = [row['level'] for row in report['brief']['stories']]
+    for row in report['variants']:
+        candidate = row.get('candidate')
+        if candidate is None:
+            continue
+        graph = deepcopy(candidate['graph'])
+        flights = {}
+        for link in candidate.get('stairConnections', ()):
+            if link['dimensionsMeetProjectLimits'] is True:
+                flight = prepare_ac30_stair(candidate, link['requirementId'], router.catalog)
+                flights[link['stairOperationId']] = flight['operation']['params']
+        for operation in graph['operations']:
+            if operation['id'] in flights:
+                operation['params'] = flights[operation['id']]
+        compiled = APA.SCENE.GRAPH.compile_graph(router.catalog, graph, runtime_version='2.0.0')
+        row['tapir2Preview'] = dict(graph=graph, compilation=compiled, sourceCatalogSHA256=digest,
+                                   plannedStoryLevelsM=levels, nativeStoryBindings='UNVERIFIED',
+                                   nativeAcceptance='NOT_TESTED', executionPermission=False)
+    return report
+
+
 def _review_design(intent):
     fields = {"schemaVersion", "brief", "cseCandidate"}
     if (not isinstance(intent, dict) or set(intent) not in (fields | {"variants"}, fields | {"layoutStudy"})
