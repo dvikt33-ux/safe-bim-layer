@@ -1,6 +1,6 @@
 # APA Windows → Grasshopper through the existing ChatGPT tools
 
-**Implementation state (2026-11-22):** source and offline CI on a draft branch.
+**Implementation state (2026-11-23):** guarded gateway and routine adapter in source; offline CI is required for acceptance.
 **NOT DEPLOYED** to the user's Windows machine. No claim of a successful end-to-end ChatGPT → Grasshopper model change or Archicad PLN write.
 
 ## Why this route
@@ -27,6 +27,68 @@ Cassis reported an active `D:\GHWallNative_20261121\GH_NATIVE_WALL_SINGLE_COMPOS
 document with 18 components, 10 parameters and 31 connections. Its
 `mod=true` flag means the current graph has unsaved changes.
 **Do not close, replace, resave or steal focus from that document.**
+
+## Replace the APPROVE-every-command workflow
+
+The previous `APA_PowerShell_Bridge_20261114` forces a local `APPROVE` for
+arbitrary PowerShell scripts. Its source has not been obtained, so this branch
+**does not claim to patch or remove that protection**. Instead, routine work
+no longer needs to use the PowerShell bridge at all.
+
+This gateway retains the *existing* plugin-facing tools `apa_execute` and
+`apa_read`, and exposes a new, narrowly scoped operation:
+
+```json
+{
+  "operation": "routine-read",
+  "job_id": "r-read-20261123-001",
+  "target": null,
+  "intent": {
+    "kind": "ports",
+    "parameters": {"ports": [3003, 18787, 19723]}
+  }
+}
+```
+
+Supported `kind` values: `status`, `ports`, `processes`, `directory`,
+`file-stat`, `text-read`. Process discovery uses the Windows Toolhelp API
+through `ctypes` (no PowerShell subprocess, no command string); ports are
+restricted to known local service ports. Files may be read only in the
+operator-selected `--routine-root` directory, with path traversal and symlink
+escapes blocked. No command execution, process termination, environment
+editing, native PLN/Grasshopper changes or arbitrary file writes are exposed
+by `routine-read`.
+
+Example Grasshopper command (also uses existing ChatGPT plugin tool names):
+
+```json
+{
+  "operation": "gh-read",
+  "job_id": "gh-read-20261123-001",
+  "target": null,
+  "intent": {"tool": "get_componentcount", "arguments": {}}
+}
+```
+
+A `gh-write` call requires a locally pinned *experimental GHX* profile.
+Subsequent permitted graph edits **do not require a per-command `APPROVE`**.
+This is different from enabling arbitrary writing to any open Rhino document.
+Native Archicad model changes still require the separate APA native-write
+acceptance gate.
+
+Startup now supports optional `--routine-root "ABSOLUTE_WORKSPACE_PATH"`.
+Omitting it limits routine reads to the selected `--gh-workdir`; supplying
+an approved work folder enables diagnostics within that folder. The gateway
+must first be installed and the existing secure tunnel deliberately switched
+to it: no source-only change can make the currently running Windows server
+acquire new methods. There is no claim of deployment while the laptop's
+connected remote services are unavailable.
+
+**Acceptance:** both the original 15 Cassis isolation tests and 19 routine
+tests pass, the running backend exposes no new plugin tool names, and the
+first live calls to `apa_execute` with `routine-read` and `gh-read` are read
+back from the ChatGPT conversation. No model changes are necessary to verify
+this.
 
 ## Operator-controlled deployment procedure
 
