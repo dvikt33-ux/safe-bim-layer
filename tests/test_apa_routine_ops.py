@@ -54,8 +54,9 @@ class TestRoutineRead(unittest.TestCase):
         ])
 
     def test_process_name_injection_rejected(self):
-        with self.assertRaisesRegex(ValueError, "ROUTINE_PROCESS_NOT_ALLOWED"):
-            self.run_read("r-read-003", "processes", names=["Rhino.exe; Remove-Item C:\\"])
+        r = self.run_read("r-read-003", "processes", names=["Rhino.exe; Remove-Item C:\\"])
+        self.assertEqual(r["status"], "BLOCKED")
+        self.assertEqual(r["reason"], "ROUTINE_PROCESS_NOT_ALLOWED")
 
     def test_ports_are_pinned_and_not_arbitrary(self):
         r = self.run_read("r-read-004", "ports", ports=[3003, 18787])
@@ -66,8 +67,9 @@ class TestRoutineRead(unittest.TestCase):
         self.assertEqual(self.calls, [3003, 18787])
 
     def test_unknown_port_rejected(self):
-        with self.assertRaisesRegex(ValueError, "ROUTINE_PORT_NOT_ALLOWED"):
-            self.run_read("r-read-005", "ports", ports=[22])
+        r = self.run_read("r-read-005", "ports", ports=[22])
+        self.assertEqual(r["status"], "BLOCKED")
+        self.assertEqual(r["reason"], "ROUTINE_PORT_NOT_ALLOWED")
 
     def test_directory_listing_only_in_workspace(self):
         r = self.run_read("r-read-006", "directory", relativePath="experiments")
