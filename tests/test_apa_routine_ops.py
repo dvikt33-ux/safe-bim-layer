@@ -1,6 +1,7 @@
 """Offline regression tests for approval-free, typed APA routine workstation reads."""
 import hashlib
 import importlib.util
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -134,6 +135,12 @@ class TestRoutineRead(unittest.TestCase):
     def test_extra_arguments_are_blocked(self):
         r = self.run_read("r-read-017", "status", arbitrary="command")
         self.assertEqual(r["status"], "BLOCKED")
+
+    def test_native_windows_process_enumeration_without_powershell(self):
+        if os.name != "nt":
+            self.skipTest("Windows Toolhelp APIs require Windows")
+        rows = routine.RoutineRead._windows_tasklist()
+        self.assertTrue(any(r[0].lower() == "python.exe" for r in rows))
 
     def test_symlink_cannot_escape_workspace(self):
         with tempfile.TemporaryDirectory() as external:
