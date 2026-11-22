@@ -21,7 +21,7 @@ class FakeTransport:
 
     def call(self, name, arguments):
         self.calls.append((name, arguments))
-        if self.fail_next:
+        if self.fail_next and name != "getdocumentinfo":
             self.fail_next = False
             raise TimeoutError("simulated lost response after dispatch")
         if name == "getdocumentinfo":
@@ -148,6 +148,8 @@ class TestCompatibilityGateway(unittest.TestCase):
         again = self.bridge.perform("gh-write", "gh-write-011", intent=intent)
         self.assertEqual(again["status"], "UNKNOWN_NO_AUTORETRY")
         self.assertEqual(first_count, sum(n == "addcomponent" for n, _ in self.fake.calls))
+        with self.assertRaisesRegex(ValueError, "GH_PREVIOUS_WRITE_NOT_RECONCILED"):
+            self.bridge.perform("gh-write", "gh-write-after-unknown", intent=intent)
 
     def test_incomplete_previous_write_blocks_new_one(self):
         folder = self.bridge.store / "gh-write-pending"
