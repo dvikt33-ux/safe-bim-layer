@@ -292,6 +292,9 @@ def main(argv=None):
         raise ValueError("GH_GATEWAY_PORT_INVALID")
 
     root = args.release_root.resolve(strict=True)
+    # The compatibility modules live beside this isolated sidecar, not inside
+    # the signed APA release. Python -I does not add the script directory.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
     sys.path.insert(0, str(root))
     sys.path.insert(0, str(root / "scripts"))
     from apa_control_mcp import Control, output_json
