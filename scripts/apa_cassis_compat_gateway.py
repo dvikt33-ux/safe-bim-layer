@@ -141,6 +141,8 @@ class GrasshopperGate:
                 raise ValueError("GH_TEST_DOCUMENT_NOT_EXPERIMENTAL")
             if doc != Path(cfg["testDocument"]):
                 raise ValueError("GH_TEST_DOCUMENT_REDIRECTED")
+            if not doc.is_relative_to(self.workdir):
+                raise ValueError("GH_TEST_DOCUMENT_OUTSIDE_WORKDIR")
             if self.allow_writes and not doc.is_file():
                 raise ValueError("GH_TEST_DOCUMENT_MISSING")
             if not re.fullmatch(r"[a-f0-9]{64}", cfg["documentSha256"]):
@@ -237,11 +239,16 @@ class GrasshopperGate:
                 f.write(_safe_json(request))
             try:
                 result = self.transport.call(tool, arguments)
+                if isinstance(result, dict) and result.get("success") is False:
+                    raise ValueError("GH_TOOL_REPORTED_FAILURE")
                 if operation == "gh-write":
-                    self._verify_write()
                     if tool == "savedocument":
-                        # Explicit save changes only our exact experimental document.
+                        # A save changes the on-disk hash, but not the pinned path.
+                        document = self._active()
+                        if Path(document.get("path", "")).resolve() != self.test_document:
+                            raise ValueError("GH_DOCUMENT_CHANGED_DURING_SAVE")
                         self.expected_hash = _file_hash(self.test_document)
+                    self._verify_write()
                 row = {"status": "COMPLETE", "jobId": job_id, "operation": operation,
                        "tool": tool, "result": result,
                        "document": str(self.test_document) if self.test_document else None}
