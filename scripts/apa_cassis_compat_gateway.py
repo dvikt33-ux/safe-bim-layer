@@ -283,6 +283,8 @@ def main(argv=None):
     parser.add_argument("--release-root", type=Path, required=True)
     parser.add_argument("--apa-profile", type=Path, required=True)
     parser.add_argument("--gh-workdir", type=Path, required=True)
+    parser.add_argument("--routine-root", type=Path,
+                        help="Operator-authorized folder for approval-free typed reads")
     parser.add_argument("--gh-profile", type=Path)
     parser.add_argument("--port", type=int, default=18789)
     args = parser.parse_args(argv)
@@ -293,12 +295,14 @@ def main(argv=None):
     sys.path.insert(0, str(root))
     sys.path.insert(0, str(root / "scripts"))
     from apa_control_mcp import Control, output_json
+    from apa_routine_ops import RoutineRead
     from mcp.server import MCPServer
     from mcp.types import CallToolResult, TextContent, ToolAnnotations
     import anyio
 
     control = Control(root, args.apa_profile.resolve(strict=True))
     gh = GrasshopperGate(workdir=args.gh_workdir, profile=args.gh_profile)
+    routine = RoutineRead(root=args.routine_root or args.gh_workdir)
     app = MCPServer("APA Windows")
     def reply(row, error=False):
         return CallToolResult(content=[TextContent(type="text", text=output_json(row))],
@@ -313,6 +317,9 @@ def main(argv=None):
                 cached = await anyio.to_thread.run_sync(gh.read_job, job_id)
                 if cached is not None:
                     return reply(cached)
+                cached = await anyio.to_thread.run_sync(routine.read_job, job_id)
+                if cached is not None:
+                    return reply(cached)
             row = await anyio.to_thread.run_sync(control.read, kind, job_id, artifact, offset)
             return reply(row)
         except Exception:
@@ -322,10 +329,12 @@ def main(argv=None):
                                          idempotentHint=True, openWorldHint=False))
     async def apa_execute(operation: str, job_id: str, target: str | None = None,
                           intent: dict | None = None) -> CallToolResult:
-        """Preserve APA operations; add gh-read / gh-write for scoped Cassis operations."""
+        """Preserve APA operations; add GH tools and typed, approval-free routine reads."""
         try:
             if operation in {"gh-read", "gh-write"}:
                 row = await anyio.to_thread.run_sync(gh.perform, operation, job_id, target, intent)
+            elif operation == "routine-read":
+                row = await anyio.to_thread.run_sync(routine.perform, job_id, target, intent)
             else:
                 row = await anyio.to_thread.run_sync(control.submit, operation, job_id, target, intent)
             return reply(row, error=row.get("status") in {"BLOCKED", "FAILED"})
