@@ -201,9 +201,13 @@ class GrasshopperGate:
                 continue
             request = entry / "request.json"
             result = entry / "result.json"
-            if request.is_file() and not result.is_file():
+            if request.is_file():
                 try:
-                    if json.loads(request.read_text("utf-8")).get("operation") == "gh-write":
+                    if json.loads(request.read_text("utf-8")).get("operation") != "gh-write":
+                        continue
+                    if not result.is_file():
+                        return True
+                    if json.loads(result.read_text("utf-8")).get("status") == "UNKNOWN_NO_AUTORETRY":
                         return True
                 except (OSError, ValueError):
                     return True
