@@ -6,15 +6,14 @@ The local Windows user opts in to a workspace root when starting the gateway.
 """
 from __future__ import annotations
 
-import csv
+import ctypes
+from ctypes import wintypes
 import hashlib
-import io
 import json
 import os
 from pathlib import Path
 import re
 import socket
-import subprocess
 from threading import Lock
 
 JOB_ID = re.compile(r"[a-z0-9][a-z0-9-]{2,63}\Z")
@@ -64,18 +63,54 @@ class RoutineRead:
 
     @staticmethod
     def _windows_tasklist():
+        """Enumerate processes using Windows Toolhelp APIs: no shell or child process."""
         if os.name != "nt":
             raise ValueError("ROUTINE_PROCESS_LIST_WINDOWS_ONLY")
-        # Exactly one fixed executable and fixed flags. There is no user string
-        # interpolation into a shell command and no shell=True.
-        completed = subprocess.run(
-            ["tasklist.exe", "/fo", "csv", "/nh"], shell=False,
-            capture_output=True, text=True, encoding="utf-8", errors="replace",
-            timeout=7, check=True,
-        )
-        if len(completed.stdout) > 2_000_000:
-            raise ValueError("ROUTINE_TASKLIST_TOO_LARGE")
-        return list(csv.reader(io.StringIO(completed.stdout)))
+
+        class PROCESSENTRY32W(ctypes.Structure):
+            _fields_ = [
+                ("dwSize", wintypes.DWORD),
+                ("cntUsage", wintypes.DWORD),
+                ("th32ProcessID", wintypes.DWORD),
+                ("th32DefaultHeapID", ctypes.c_void_p),
+                ("th32ModuleID", wintypes.DWORD),
+                ("cntThreads", wintypes.DWORD),
+                ("th32ParentProcessID", wintypes.DWORD),
+                ("pcPriClassBase", wintypes.LONG),
+                ("dwFlags", wintypes.DWORD),
+                ("szExeFile", wintypes.WCHAR * 260),
+            ]
+
+        api = ctypes.WinDLL("kernel32", use_last_error=True)
+        create = api.CreateToolhelp32Snapshot
+        create.argtypes = (wintypes.DWORD, wintypes.DWORD)
+        create.restype = wintypes.HANDLE
+        first = api.Process32FirstW
+        first.argtypes = (wintypes.HANDLE, ctypes.POINTER(PROCESSENTRY32W))
+        first.restype = wintypes.BOOL
+        next_entry = api.Process32NextW
+        next_entry.argtypes = (wintypes.HANDLE, ctypes.POINTER(PROCESSENTRY32W))
+        next_entry.restype = wintypes.BOOL
+        close = api.CloseHandle
+        close.argtypes = (wintypes.HANDLE,)
+        close.restype = wintypes.BOOL
+
+        handle = create(0x00000002, 0)
+        if handle == ctypes.c_void_p(-1).value or handle is None:
+            raise OSError("ROUTINE_PROCESS_SNAPSHOT_FAILED")
+        rows = []
+        try:
+            entry = PROCESSENTRY32W()
+            entry.dwSize = ctypes.sizeof(PROCESSENTRY32W)
+            if not first(handle, ctypes.byref(entry)):
+                raise OSError("ROUTINE_PROCESS_ENUMERATION_FAILED")
+            while True:
+                rows.append([entry.szExeFile, str(entry.th32ProcessID)])
+                if not next_entry(handle, ctypes.byref(entry)):
+                    break
+        finally:
+            close(handle)
+        return rows
 
     @staticmethod
     def _port_check(port):
@@ -183,7 +218,7 @@ class RoutineRead:
                 output = {"status": "COMPLETE", "jobId": job_id,
                           "operation": "routine-read", "kind": kind, "result": result,
                           "modelWrites": 0, "requiresApprove": False}
-            except (OSError, ValueError, subprocess.SubprocessError) as error:
+            except (OSError, ValueError) as error:
                 output = {"status": "BLOCKED", "jobId": job_id,
                           "operation": "routine-read", "reason": str(error)[:160],
                           "modelWrites": 0, "requiresApprove": False}
