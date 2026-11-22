@@ -1,0 +1,42 @@
+name: APA Cassis compatibility gateway (offline)
+on:
+  push:
+    branches:
+      - feature/apa-cassis-existing-tool-bridge-20261122
+    paths:
+      - scripts/apa_cassis_compat_gateway.py
+      - tests/test_apa_cassis_compat_gateway.py
+      - scripts/apa_routine_ops.py
+      - tests/test_apa_routine_ops.py
+      - .github/workflows/apa-cassis-compat-gateway.yml
+  pull_request:
+    paths:
+      - scripts/apa_cassis_compat_gateway.py
+      - tests/test_apa_cassis_compat_gateway.py
+      - scripts/apa_routine_ops.py
+      - tests/test_apa_routine_ops.py
+      - .github/workflows/apa-cassis-compat-gateway.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  guard-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Syntax
+        run: python -m py_compile scripts/apa_cassis_compat_gateway.py scripts/apa_routine_ops.py
+      - name: Guard and replay tests (offline; no Rhino or Windows)
+        run: |
+          python -m unittest discover -s tests -p 'test_apa_cassis_compat_gateway.py' -v
+          python -m unittest discover -s tests -p 'test_apa_routine_ops.py' -v
